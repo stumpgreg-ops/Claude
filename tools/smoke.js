@@ -29,6 +29,13 @@ var srv = http.createServer(function (req, res) {
   await page.goto(base + "index.html", { waitUntil: "load" });
   await page.waitForTimeout(800);
   check(await page.isVisible("#state-screen"), "gateway shows first");
+  /* the gateway also comes first on a Chromebook that already chose a state */
+  await page.evaluate(function () { localStorage.setItem("afterHours.v1.state", "VA"); });
+  await page.reload({ waitUntil: "load" }); await page.waitForTimeout(800);
+  check(await page.isVisible("#state-screen") && !(await page.isVisible("#title-screen")), "gateway still first with a saved state");
+  check(await page.isVisible('#state-screen .card.selected[data-state="VA"]'), "saved state is pre-highlighted");
+  await page.evaluate(function () { localStorage.removeItem("afterHours.v1.state"); });
+  await page.reload({ waitUntil: "load" }); await page.waitForTimeout(800);
   await shot("01-gateway");
   await page.click('#state-screen .card[data-state="NJ"]');
   await page.waitForTimeout(200);
@@ -143,6 +150,23 @@ var srv = http.createServer(function (req, res) {
   if (await page.isVisible("#read-go")) await page.click("#read-go");
   await page.waitForTimeout(800);
   await shot("12-night-play");
+
+  /* a wrong letter costs a life: three wrong grabs end the night */
+  var strikeRun = await page.evaluate(function () {
+    var sc = window.SolScene, out = { before: sc.strikes, hud: [], ended: false };
+    for (var i = 0; i < 3; i++) {
+      sc.iframeMs = 0; sc.stunMs = 0;
+      sc.flagWrongAlarm({ x: sc.player.x, y: sc.player.y });
+      out.hud.push(document.getElementById("strike-pip").textContent.split(" · ")[0]);
+    }
+    out.after = sc.strikes; out.ended = !!sc.ended; out.tag = sc.caughtFlashTag ? sc.caughtFlashTag.text : "";
+    out.msg = document.getElementById("win-msg").textContent; out.title = document.getElementById("win-title").textContent;
+    return out;
+  });
+  console.log("wrong-letter strikes", JSON.stringify(strikeRun));
+  check(strikeRun.after === strikeRun.before + 3 && strikeRun.ended && /wrong letter/i.test(strikeRun.msg) && strikeRun.title === "Run over", "three wrong letters end the night");
+  await page.waitForTimeout(500);
+  await shot("13-run-over-wrong");
 
   /* adaptive + coins through the scene API */
   var adapt = await page.evaluate(function () {

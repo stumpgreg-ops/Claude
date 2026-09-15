@@ -3364,7 +3364,7 @@
       },
       {
         title: "Right answer, real reward",
-        body: "A correct letter calls Sol's CHARIOT — for a few seconds you can run straight over the wolves. A wrong letter sets off the alarm instead."
+        body: "A correct letter calls Sol's CHARIOT — for a few seconds you can run straight over the wolves. A wrong letter sets off the alarm and costs you a life, just like a catch."
       },
       {
         title: "The Hati hunt you",
@@ -4335,6 +4335,7 @@
          Sweep every destroyed GameObject reference here, before preload/create,
          so the lazy creators see `undefined` again and rebuild. */
       this.dropDestroyedRefs();
+      window.SolScene = this;   /* v4.9.1: the live night scene, for the headless smoke test and console debugging */
       this.family = (data && data.family) || cfg.family || "ALL";
       this.strand = (data && data.strand) || cfg.strand || "ALL";
       this.night = clamp((data && data.night) || cfg.night || 1, 1, 100);
@@ -7394,7 +7395,7 @@
         return;
       }
       if ((this.alarmMs || 0) > 0) {
-        this.setCarryFlagText("ALARM — wrong letter / mat. Get clear!", "prio-alarm");
+        this.setCarryFlagText("ALARM — wrong letter costs a life. Get clear!", "prio-alarm");
         return;
       }
       if ((this.bellTripFlash || 0) > 0) {
@@ -15155,6 +15156,25 @@
       this.claimWrong = (this.claimWrong || 0) + 1;
       this.nightWrong = (this.nightWrong || 0) + 1;
       adaptEvent(this, "wrong", this.claim);
+      /* v4.9.1: a wrong answer choice costs a life, exactly like a catch (a 1UP spare life is spent first) */
+      var spendSpare = (this.spareLives || 0) > 0;
+      if (spendSpare) {
+        this.spareLives -= 1;
+        this.oneUpFlash = Math.max(this.oneUpFlash || 0, 1800);
+        this.scoreToastMs = Math.max(this.scoreToastMs || 0, 1800);
+        this.scoreToastMsg = "1UP spent — wrong letter, strike blocked!";
+      } else {
+        this.strikes += 1;
+        this.lastStrikeReason = "wrong";
+      }
+      if (this.caughtFlashTag) {
+        var camW = this.cameras && this.cameras.main, livesLeftW = Math.max(0, (this.needStrikes || 3) - (this.strikes || 0));
+        this.caughtFlashTag.setText(spendSpare ? "WRONG LETTER · 1UP saved you" : (livesLeftW > 0 ? "WRONG LETTER · " + livesLeftW + " left" : "WRONG LETTER"));
+        this.caughtFlashTag.setPosition((camW && camW.width ? camW.width : 1280) / 2, (camW && camW.height ? camW.height : 720) * 0.38);
+        this.caughtFlashTag.setAlpha(1);
+        this.caughtFlashTag.setVisible(true);
+        this.caughtFlashMs = 1400;
+      }
       if (this.player.carrying) this.dropCarry(true);
       this.pendingShuffle = true;
       this.shuffleChaseSeen = false;
@@ -15192,6 +15212,7 @@
         }
       }
       this.paintHud();
+      if (this.strikes >= this.needStrikes && !this.ended) this.endRun(false);
     }
 
     playerEscapedForShuffle() {
@@ -17163,6 +17184,7 @@
         this.scoreToastMsg = "1UP spent — strike blocked!";
       } else {
         this.strikes += 1;
+        this.lastStrikeReason = "caught";
       }
       this.iframeMs = Math.max(this.iframeMax, 700);
       this.stunMs = STUN;
@@ -17256,7 +17278,8 @@
       } else {
         writeSavedNight(this.night);
         document.getElementById("win-title").textContent = "Run over";
-        document.getElementById("win-msg").textContent = "Caught in the cone. Retry this night — the campaign stays here.";
+        document.getElementById("win-msg").textContent = (this.lastStrikeReason === "wrong" ? "That wrong letter used your last life. " : "Caught in the cone. ") +
+          "Wrong letters and catches both cost a life. Retry this night — the campaign stays here.";
         retryBtn.classList.remove("hidden");
         retryBtn.textContent = "Retry this night";
       }
@@ -27369,12 +27392,16 @@
     }
     var strand = localStorage.getItem(LS_STRAND);
     if (strand) cfg.strand = strand;
+    /* v4.9.1: the gateway is always the first screen; the last choice is only pre-highlighted. */
     var savedState = localStorage.getItem(LS_STATE);
-    if (savedState && STATE_DEFS[savedState]) applyState(savedState);
-    else if (fam === "NJ5") applyState("NJ");
-    else if (fam) applyState("VA");
+    if (!(savedState && STATE_DEFS[savedState])) savedState = fam === "NJ5" ? "NJ" : (fam ? "VA" : null);
+    if (savedState) {
+      applyState(savedState, true);
+      cfg.state = null;
+      document.querySelectorAll("#state-screen .card[data-state]").forEach(function (c) { c.classList.toggle("selected", c.getAttribute("data-state") === savedState); });
+    }
   } catch (e) {}
-  if (!cfg.state) showStateScreen();
+  showStateScreen();
 
   bindPads();
   bindVisibilityResume();

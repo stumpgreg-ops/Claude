@@ -9,6 +9,9 @@ Progress saves in this browser profile (`afterHours.v1.night`). Itch login does 
 
 Question packs: `js/content.js` and `js/content2.js` (the v4 Virginia packs) plus `js/content3.js`–`js/content11.js` (v4.9 Virginia) and `js/content12.js`–`js/content17.js` (v4.9 New Jersey grade 5). Format and writing rules: `tools/CONTENT-GUIDE.md`. Check every file with `node tools/validate-content.js`. Headless smoke test of the gateway, builder, shop and a night: `node tools/smoke.js` (screenshots in `tools/shots/`).
 
+## v4.9.1 (2026-09-15)
+- **A wrong letter costs a life.** Grabbing a wrong tile (or carrying one to EXIT) now takes a strike, the same as a catch; a 1UP spare life is spent first. The on-screen tag says "WRONG LETTER · 2 left", and the run-over card says whether the last life went to a catch or a wrong letter.
+
 ## v4.9 (2026-09-15)
 - **State gateway.** The first screen asks New Jersey or Virginia (saved on the Chromebook; "change" button on the title screen). Virginia keeps the Grade 9 / 10 / 11 cards. New Jersey shows one Grade 5 card with Literature, Informational, Vocabulary, Paired texts and All.
 - **Grade 5 NJSLA-ELA pool.** 48 original packs (288 questions) written to the 2023 NJSLS-ELA codes (RL.CI.5.2, RI.AA.5.7, L.VL.5.2 …). Every pack carries Evidence-Based Selected Response pairs: a Part A question is always followed by its Part B ("Which sentence best supports…"), and the HUD and reading pop-up label them.
