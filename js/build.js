@@ -358,6 +358,14 @@
     for (i = 0; i < rs.length; i++) if (overlaps(cx, cy, n, rs[i])) return false;
     return true;
   }
+  /* A piece may only be dropped where it is free AND touches another piece (so the estate stays one building). */
+  function spotOk(cx, cy, n, ignore) {
+    var rs = rectsOf(ignore), i;
+    if (!spotFree(cx, cy, n, ignore)) return false;
+    if (!rs.length) return true;
+    for (i = 0; i < rs.length; i++) if (touches(cx, cy, n, rs[i])) return true;
+    return false;
+  }
   /* Nearest free spot that touches an existing piece (or the origin for the first piece). */
   function autoPlace(n, ignore) {
     var rs = rectsOf(ignore), i, ring, cx, cy, best = null, bd = Infinity, sumx = 0, sumy = 0, d;
@@ -453,10 +461,11 @@
       minX = Math.min(minX, l); maxX = Math.max(maxX, l + w); minY = Math.min(minY, tp); maxY = Math.max(maxY, tp + h);
     });
     if (!items.length) { minX = -100; maxX = 100; minY = -60; maxY = 40; }
-    pad = (cur && (step === "place" || cur.arrange)) ? cellPx() * base * 2.5 : cellPx() * base * 0.5;
+    var moving = !!(cur && (step === "place" || step === "done" || cur.arrange));
+    pad = moving ? cellPx() * base * 1.5 : cellPx() * base * 0.6;
     minX -= pad; maxX += pad; minY -= pad * 0.5; maxY += pad * 0.5;
     var bw = Math.max(1, maxX - minX), bh = Math.max(1, maxY - minY);
-    var maxS = (W / ((data && data.sceneW) || 1120)) * 1.0;
+    var maxS = (W / ((data && data.sceneW) || 1120)) * (moving ? 2.6 : 1.8);   /* small estates are drawn big, not lost in the field */
     sc = Math.min(maxS, (W * 0.94) / bw, (H * 0.9) / bh);
     ox = W / 2 - ((minX + maxX) / 2) * sc; oy = H * 0.52 - ((minY + maxY) / 2) * sc;
     return { s: sc * base, ox: ox, oy: oy, base: base };
@@ -520,12 +529,12 @@
     });
     return bestFoot || bestBox;
   }
-  function draggable(pk) { return !!pk && ((step === "place" && cur && cur.placedKey === pk) || (cur && cur.arrange)); }
+  function draggable(pk) { return !!pk && (((step === "place" || step === "done") && cur && cur.placedKey === pk) || (cur && cur.arrange)); }
   function onPointerDown(e) {
-    if (!cur || !lastFit || !(step === "place" || cur.arrange)) return;
+    if (!cur || !lastFit || !(step === "place" || step === "done" || cur.arrange)) return;
     var pt = canvasScenePt(e); if (!pt) return;
     var pk = hitPick(pt);
-    if (!draggable(pk)) { if (step === "place" && cur.placedKey && pk !== cur.placedKey) ui.note.textContent = "Drag the glowing piece."; return; }
+    if (!draggable(pk)) { if ((step === "place" || step === "done") && cur.placedKey && pk !== cur.placedKey) ui.note.textContent = "Drag the glowing piece."; return; }
     var cell = pxToCell(pt.x, pt.y);
     cur.drag = { pk: pk, id: e.pointerId, du: cell.u - pk.cx, dv: cell.v - pk.cy, cx: pk.cx, cy: pk.cy, ok: true };
     try { ui.canvas.setPointerCapture(e.pointerId); } catch (err) {}
@@ -538,7 +547,7 @@
     var cell = pxToCell(pt.x, pt.y), d = cur.drag, p = pieceById(d.pk.piece), n = cellsOf(p);
     var cx = Math.round(cell.u - d.du), cy = Math.round(cell.v - d.dv);
     if (cx === d.cx && cy === d.cy) return;
-    d.cx = cx; d.cy = cy; d.ok = spotFree(cx, cy, n, d.pk);
+    d.cx = cx; d.cy = cy; d.ok = spotOk(cx, cy, n, d.pk);
     e.preventDefault();
     redraw();
   }
@@ -547,7 +556,9 @@
     var d = cur.drag; cur.drag = null;
     try { ui.canvas.releasePointerCapture(e.pointerId); } catch (err) {}
     if (d.ok && (d.cx !== d.pk.cx || d.cy !== d.pk.cy)) { d.pk.cx = d.cx; d.pk.cy = d.cy; persist(); ui.note.textContent = joinedNote(d.pk); }
-    else if (!d.ok) ui.note.textContent = "That spot is taken — the piece went back.";
+    else if (!d.ok) ui.note.textContent = spotFree(d.cx, d.cy, cellsOf(pieceById(d.pk.piece)), d.pk)
+      ? "Pieces must touch your " + themeName(save.theme).toLowerCase() + " — it went back. Drop it right against another piece."
+      : "That spot is taken — the piece went back.";
     redraw();
   }
   function joinedNote(pk) {
@@ -706,7 +717,7 @@
         cur.arrange = !cur.arrange; cur.drag = null; fillGallery();
       } });
     }
-    if (cur.arrange) { ui.sub.textContent = "Drag any piece to a free spot. Snap it against another piece to join them. Walls and fences move by themselves."; show(ui.note, true); ui.note.textContent = ui.note.textContent || "Tap and drag a piece."; }
+    if (cur.arrange) { ui.sub.textContent = "Drag any piece to a new spot that touches another piece. Walls and fences move by themselves."; show(ui.note, true); ui.note.textContent = ui.note.textContent || "Tap and drag a piece."; }
     else show(ui.note, false);
     setButtons(buttons);
     layoutCanvas(); redraw();
@@ -751,7 +762,7 @@
       fillStyles(); layoutCanvas(); redraw();
     } else if (s === "place") {
       ui.title.textContent = "Where does the " + name + " go?";
-      ui.sub.textContent = "It has joined your " + tn.toLowerCase() + ". Drag it (finger or mouse) to any free spot — snap it against another piece to join them — then tap Keep it here.";
+      ui.sub.textContent = "It has joined your " + tn.toLowerCase() + ". Drag it (finger or mouse) to any spot that touches another piece, then tap Keep it here.";
       ui.note.textContent = cur.placedKey ? joinedNote(cur.placedKey) : "";
       setButtons([{ label: "Keep it here", primary: true, onTap: function () { showStep("done"); } }]);
       layoutCanvas(); redraw();

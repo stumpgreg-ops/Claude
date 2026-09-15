@@ -6902,7 +6902,7 @@
         for (i = 0; i < pool.length; i++) {
           var c = claims[pool[i]];
           w = Math.exp(-Math.abs((c.level || 2) - target) * 1.3);
-          if (c.words) w *= Math.exp(-Math.abs(c.words - wantWords) / (0.3 * wantWords));
+          if (c.words) w *= Math.exp(-Math.abs(c.words - wantWords) / (0.18 * wantWords));
           if (allStrands && a) {
             rec = a.strands[c.strand || "RL"];
             acc = rec ? (rec.r + 1) / (rec.r + rec.w + 2) : 0.5;

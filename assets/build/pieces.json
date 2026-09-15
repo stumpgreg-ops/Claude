@@ -344,7 +344,7 @@
    "ay": 0.769,
    "unitPx": 30,
    "price": 40,
-   "cells": 3
+   "cells": 2
   },
   {
    "id": "stone-cottage",
@@ -376,7 +376,7 @@
    "ay": 0.7588,
    "unitPx": 30,
    "price": 40,
-   "cells": 4
+   "cells": 3
   },
   {
    "id": "stall",
@@ -436,7 +436,7 @@
    ],
    "unitPx": 30,
    "price": 40,
-   "cells": 3
+   "cells": 2
   },
   {
    "id": "stone-wing",
@@ -475,7 +475,7 @@
    ],
    "unitPx": 30,
    "price": 80,
-   "cells": 4
+   "cells": 3
   },
   {
    "id": "house-wing",
@@ -495,7 +495,7 @@
    ],
    "unitPx": 30,
    "price": 80,
-   "cells": 4
+   "cells": 3
   },
   {
    "id": "bakery",
@@ -654,7 +654,7 @@
    ],
    "unitPx": 30,
    "price": 140,
-   "cells": 6
+   "cells": 5
   },
   {
    "id": "harbour",
@@ -714,7 +714,7 @@
    ],
    "unitPx": 30,
    "price": 220,
-   "cells": 5
+   "cells": 4
   },
   {
    "id": "bell-tower",
@@ -801,7 +801,7 @@
    "ay": 0.7011,
    "unitPx": 17,
    "price": 40,
-   "cells": 3
+   "cells": 2
   },
   {
    "id": "hall",
@@ -837,7 +837,7 @@
    ],
    "unitPx": 17,
    "price": 40,
-   "cells": 3
+   "cells": 2
   },
   {
    "id": "tower-short",
@@ -858,7 +858,7 @@
    ],
    "unitPx": 17,
    "price": 40,
-   "cells": 3
+   "cells": 2
   },
   {
    "id": "gate",
@@ -938,7 +938,7 @@
    ],
    "unitPx": 17,
    "price": 80,
-   "cells": 3
+   "cells": 2
   },
   {
    "id": "gatehouse",
@@ -957,7 +957,7 @@
    ],
    "unitPx": 17,
    "price": 80,
-   "cells": 3
+   "cells": 2
   },
   {
    "id": "tower-pair",
@@ -1037,7 +1037,7 @@
    ],
    "unitPx": 17,
    "price": 140,
-   "cells": 6
+   "cells": 5
   },
   {
    "id": "grand-keep",
@@ -1139,7 +1139,7 @@
    "ay": 0.7153,
    "unitPx": 30,
    "nostyle": true,
-   "cells": 2
+   "cells": 1
   },
   {
    "id": "lamp",
@@ -1258,7 +1258,7 @@
    "ay": 0.6339,
    "unitPx": 30,
    "nostyle": true,
-   "cells": 3
+   "cells": 2
   },
   {
    "id": "signpost",
@@ -1428,7 +1428,7 @@
    "ay": 0.661,
    "unitPx": 30,
    "nostyle": true,
-   "cells": 2
+   "cells": 1
   }
  ],
  "decoLots": [

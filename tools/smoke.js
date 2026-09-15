@@ -175,7 +175,7 @@ var srv = http.createServer(function (req, res) {
   var afterMove = await page.evaluate(function () { return JSON.parse(localStorage.getItem("afterHours.v1.build")).picks.map(function (p) { return p.cx + "," + p.cy; }).join(" "); });
   var noteTxt = await page.textContent(".build-note");
   console.log("arrange:", beforeMove === afterMove ? "no move (" + noteTxt + ")" : "moved (" + noteTxt + ")");
-  check(beforeMove !== afterMove || /taken/i.test(noteTxt), "arrange mode moves a dragged piece or reports the spot taken: " + noteTxt);
+  check(beforeMove !== afterMove || /taken|must touch/i.test(noteTxt), "arrange mode moves a dragged piece or bounces it back with a reason: " + noteTxt);
   await shot("09b-arrange");
   await page.click("text=Done arranging");
   await page.keyboard.press("Escape");
