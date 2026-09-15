@@ -1,6 +1,6 @@
 # Credits
 
-SOL Labyrinth is built with Phaser 3 (MIT). Written for NNPS students practising the VA EOC Reading SOL.
+SOL Labyrinth is built with Phaser 3.80.1 (MIT, shipped in `js/vendor/phaser.min.js`) and PeerJS 1.5.4 (MIT, `js/vendor/peerjs.min.js`). Written for NNPS students practising the VA EOC Reading SOL.
 
 ## Music
 All background music is from **Game Background Music Pack** by **EpsilonGamesOfficial** (itch.io, name-your-own-price):
@@ -16,12 +16,12 @@ The reward pieces in `assets/build/` are 2D sprites pre-rendered from two 3D pac
 - **Modular Village Pack** by **Keith at Fertile Soil Productions** (itch.io, name-your-own-price):
   https://fertile-soil-productions.itch.io/modular-village-pack
   License: Creative Commons Zero v1.0 Universal (CC0). No attribution required; credited with thanks.
-  Used for the 29 Town pieces (cottages, houses, well, carts, market stalls, dock, windmill, watermill, bell tower, market square…).
+  Used for the Town pieces (cottages, houses, well, carts, market stalls, dock, windmill, watermill, bell tower, market square…). The Slate and Thatch style variants in `assets/build/styles/` are recolours of these renders.
 
 - **FREE Castle and Fort Builder Pack** by **MCSTEEG** (itch.io, name-your-own-price):
   https://mcsteeg.itch.io/castle-and-fort-builder-pack
   Terms (from the itch page): "You may use this asset in your animation or game projects, both personally and commercially. DO NOT redistribute this asset as your own."
-  Used for the 23 Castle pieces (walls, ramparts, gates, towers, keep, halls, citadel).
+  Used for the Castle pieces (walls, gates, towers, keep, halls, citadel). The Sandstone and Whitestone style variants in `assets/build/styles/` are recolours of these renders.
 
 ## Characters, interiors and props
 - **Mana Seed Character Base** by Seliel the Shaper (free demo) — Sol's character sheets.

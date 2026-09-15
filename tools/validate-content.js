@@ -33,7 +33,10 @@ packs.forEach(function (p, pi) {
   var where = (p.id || ("pack#" + pi));
   if (!p.id || typeof p.id !== "string") errors.push(where + ": missing id");
   if (ids[p.id]) errors.push(where + ": duplicate pack id"); ids[p.id] = true;
-  if (!/^(G9|G10|G11)$/.test(p.family)) errors.push(where + ": family must be G9/G10/G11, got " + p.family);
+  if (!/^(G9|G10|G11|NJ5)$/.test(p.family)) errors.push(where + ": family must be G9/G10/G11/NJ5, got " + p.family);
+  var isNJ = p.family === "NJ5";
+  if (p.level != null && !(p.level === 1 || p.level === 2 || p.level === 3)) errors.push(where + ": level must be 1, 2 or 3");
+  if (p.level == null) warnings.push(where + ": no level (1 easy, 2 medium, 3 hard) — it will be estimated from readability");
   if (!p.title) errors.push(where + ": missing title");
   if (!p.kind) errors.push(where + ": missing kind");
   if (!p.passage || typeof p.passage !== "string") { errors.push(where + ": missing passage"); return; }
@@ -51,11 +54,22 @@ packs.forEach(function (p, pi) {
     var w = where + ":" + (c.id || ("claim#" + ci));
     if (!c.id) errors.push(w + ": missing claim id");
     if (p.claims.filter(function (x) { return x.id === c.id; }).length > 1) errors.push(w + ": duplicate claim id in pack");
-    if (!c.sol || !strandOf(c.sol)) errors.push(w + ": bad sol code " + c.sol);
+    if (isNJ) {
+      if (!/^(RL|RI|L|W|SL)\.[A-Z]{1,3}\.5\.\d+[a-z]?$/.test(c.sol || "")) errors.push(w + ": NJSLS code should look like RL.CI.5.2 / RI.CR.5.1 / L.VL.5.2, got " + c.sol);
+      if (!/^(RL|RI|RV|DSR)$/.test(c.strand || "")) errors.push(w + ": NJ5 claims need strand: RL | RI | RV | DSR");
+      else stats[p.family + "." + c.strand] = (stats[p.family + "." + c.strand] || 0) + 1;
+    } else if (!c.sol || !strandOf(c.sol)) errors.push(w + ": bad sol code " + c.sol);
     else {
       var g = parseInt(c.sol, 10), fam = parseInt(p.family.slice(1), 10);
       if (g > fam) errors.push(w + ": sol grade " + g + " above family " + p.family);
       var s = strandOf(c.sol); stats[p.family + "." + s] = (stats[p.family + "." + s] || 0) + 1;
+    }
+    if (c.partB != null) {
+      var pb = p.claims.filter(function (x) { return x.id === c.partB; })[0];
+      if (!pb) errors.push(w + ": partB points at missing claim " + c.partB);
+      else if (pb === c) errors.push(w + ": partB points at itself");
+      else if (pb.partB) errors.push(w + ": a Part B claim cannot have its own partB");
+      else if (!/part b/i.test(pb.stem)) warnings.push(w + ": the Part B stem should start with 'Part B'");
     }
     if (!c.stem || typeof c.stem !== "string") errors.push(w + ": missing stem");
     var sk = (c.stem || "").toLowerCase().replace(/\s+/g, " ").trim();

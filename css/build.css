@@ -99,3 +99,28 @@
   .build-opt .pic { height: 72px; }
   .build-theme canvas { max-height: 110px; object-fit: cover; }
 }
+
+/* v4.9: style choice cards (same look as the option cards) */
+.build-styles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.build-styles .build-opt { min-height: 0; }
+.build-styles .build-opt .pic { height: 84px; }
+.build-opt .match {
+  font: 700 11px/1.2 "Trebuchet MS", sans-serif; letter-spacing: .04em; color: #ffe08a;
+  border: 1px solid rgba(255,224,138,.5); border-radius: 999px; padding: 4px 8px; align-self: flex-start;
+}
+@media (max-width: 720px) { .build-styles { grid-template-columns: 1fr; } }
+
+/* v4.9: coin shop */
+.build-tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+.build-tab {
+  appearance: none; border: 1px solid #3a4150; background: #0f121a; color: var(--dim); border-radius: 999px;
+  padding: 8px 14px; font: 700 13px "Trebuchet MS", sans-serif; cursor: pointer; touch-action: manipulation;
+}
+.build-tab.selected { border-color: var(--gold); color: var(--gold); background: #1b1f2c; }
+.build-shop .build-opt { position: relative; }
+.build-opt .price {
+  font: 700 12px/1 "Trebuchet MS", sans-serif; color: #10141c; background: var(--gold); border-radius: 999px; padding: 5px 9px; align-self: flex-start;
+}
+.build-opt .price.short { background: #3a4150; color: var(--dim); }
+.build-shop .build-opt .pic { height: 78px; }
+@media (max-height: 640px) { .build-shop .build-opt .pic { height: 60px; } }

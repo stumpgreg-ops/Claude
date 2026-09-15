@@ -1440,8 +1440,12 @@
     { id: "G9", label: "Selection 1 · Grade 9", meta: "9.RL / 9.RI / 9.RV / 9.DSR. An item never repeats until the pack is used up." },
     { id: "G10", label: "Selection 2 · Grade 10", meta: "9th + 10th skills. Mix literary, informational, vocab, and paired evidence." },
     { id: "G11", label: "Selection 3 · Grade 11", meta: "All skills 9–11. Heavier analysis, tone, organization, and Select TWO." },
-    { id: "ALL", label: "All skills", meta: "Legacy Grade 9 mix — same pool as Selection 1." }
+    { id: "ALL", label: "All skills", meta: "Legacy Grade 9 mix — same pool as Selection 1." },
+    { id: "NJ5", label: "New Jersey · Grade 5", meta: "NJSLA-ELA grade 5: literature, informational, vocabulary and paired texts, with Part A / Part B evidence pairs." }
   ];
+  /* Which pack families feed each selection. Virginia selections are cumulative
+     (the Grade 10 card promises "Grade 9 and Grade 10 skills mixed"). */
+  var FAMILY_POOL = { G9: ["G9"], G10: ["G9", "G10"], G11: ["G9", "G10", "G11"], NJ5: ["NJ5"], ALL: ["G9"] };
 
   function wordCount(s) {
     return String(s).replace(/<[^>]+>/g, " ").trim().split(/\s+/).filter(Boolean).length;
@@ -1471,29 +1475,65 @@
     return correctList(claim).length > 1;
   }
 
-  function strandMatch(sol, strand) {
+  function strandOf(claim) {
+    if (claim && claim.strand) return String(claim.strand).toUpperCase();
+    var sol = String((claim && claim.sol) || "");
+    var m = /(?:^|\.)(RL|RI|RV|DSR)(?:\.|$)/.exec(sol);          /* Virginia: 9.RL.1.A */
+    if (m) return m[1];
+    if (/^L\./.test(sol)) return "RV";                               /* NJSLS language standards */
+    if (/^(RL|RI)\.CT\./.test(sol)) return "DSR";                   /* NJSLS compare-texts standards */
+    m = /^(RL|RI)\./.exec(sol);
+    return m ? m[1] : "RL";
+  }
+  function strandMatch(claim, strand) {
     strand = String(strand || "ALL").toUpperCase();
     if (!strand || strand === "ALL" || strand === "NULL") return true;
     if (!/^(RL|RI|RV|DSR)$/.test(strand)) return true;
-    /* Match strand letters in sol (e.g. 9.RL.1.A / 10.RI.2.C) — ignore grade digit. */
-    return new RegExp("\\." + strand + "(?:\\.|$)").test(String(sol || ""));
+    return strandOf(claim) === strand;
+  }
+
+  /* Reading level 1–3 for the adaptive picker: the pack's own `level` tag, or an
+     estimate from sentence length and long words when a pack has none. */
+  function syllables(word) {
+    word = word.toLowerCase().replace(/[^a-z]/g, "");
+    if (!word) return 0;
+    if (word.length <= 3) return 1;
+    var v = word.replace(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/, "").replace(/^y/, "").match(/[aeiouy]{1,2}/g);
+    return v ? v.length : 1;
+  }
+  function readingGrade(html) {
+    var text = String(html).replace(/<[^>]+>/g, " ").replace(/\(\d+\)/g, " ");
+    var words = text.split(/\s+/).filter(Boolean), sents = text.split(/[.!?]+\s/).filter(Boolean).length || 1, syl = 0;
+    if (!words.length) return 5;
+    words.forEach(function (w) { syl += syllables(w); });
+    return 0.39 * (words.length / sents) + 11.8 * (syl / words.length) - 15.59;   /* Flesch–Kincaid grade */
+  }
+  function packLevel(p) {
+    if (p.level === 1 || p.level === 2 || p.level === 3) return p.level;
+    var g = readingGrade(p.passage || ""), nj = p.family === "NJ5";
+    if (nj) return g < 4.5 ? 1 : g < 6.5 ? 2 : 3;
+    return g < 7.5 ? 1 : g < 10 ? 2 : 3;
   }
 
   function buildPack(family, strand) {
     family = family || "ALL";
     strand = String(strand == null ? "ALL" : strand).toUpperCase();
     if (!strand || strand === "NULL") strand = "ALL";
-    var want = family === "ALL" ? "G9" : family;
+    var pool = FAMILY_POOL[family] || FAMILY_POOL.G9;
     var src = PACKS.filter(function (p) {
-      return p.family === want;
+      return pool.indexOf(p.family) !== -1;
     });
     if (!src.length) src = PACKS.filter(function (p) { return p.family === "G9"; });
     if (!src.length) src = PACKS.slice();
     var slips = [];
     var claims = [];
     src.forEach(function (p) {
+      var lvl = packLevel(p);
       p.claims.forEach(function (c) {
-        if (!strandMatch(c.sol, strand)) return;
+        /* A Part B item is only ever asked right after its Part A, so the strand
+           filter follows the Part A and Part B is never drawn on its own. */
+        var isPartB = p.claims.some(function (o) { return o.partB === c.id; });
+        if (!isPartB && !strandMatch(c, strand)) return;
         var choices = (c.choices || []).map(function (ch, i) {
           return {
             letter: ch.letter,
@@ -1503,7 +1543,12 @@
         });
         claims.push({
           id: p.id + ":" + c.id,
+          packId: p.id,
           sol: c.sol,
+          strand: strandOf(c),
+          level: lvl,
+          partB: c.partB ? p.id + ":" + c.partB : null,
+          isPartB: isPartB,
           stem: c.stem,
           doThis: c.stem,
           claim: c.stem,
@@ -1536,5 +1581,7 @@
   global.heistWordCount = wordCount;
   global.heistBuildPack = buildPack;
   global.heistCorrectList = correctList;
+  global.heistStrandOf = strandOf;
+  global.heistPackLevel = packLevel;
   global.heistIsMulti = isMulti;
 })(typeof window !== "undefined" ? window : global);

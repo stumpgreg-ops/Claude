@@ -10,8 +10,27 @@
 </head>
 <body>
   <div id="app">
+    <section id="state-screen" class="screen hidden">
+      <p class="kicker">Reading practice · 100 nights</p>
+      <h1>SOL Labyrinth</h1>
+      <p class="tag">Where do you go to school? Your state picks the test the questions practise.</p>
+      <div class="packs state-packs">
+        <button type="button" class="card state-card" data-state="NJ">
+          <span class="kind">NJSLA-ELA</span>
+          <span class="name">New Jersey</span>
+          <span class="meta">Grade 5 reading: literature, informational text, vocabulary and paired texts, with Part A / Part B evidence questions.</span>
+        </button>
+        <button type="button" class="card state-card" data-state="VA">
+          <span class="kind">VA 2024 EOC Reading SOL</span>
+          <span class="name">Virginia</span>
+          <span class="meta">Grades 9, 10 and 11: literary, informational, vocabulary and paired-text skills.</span>
+        </button>
+      </div>
+      <p class="howto">You can change this any time from the title screen. Progress, coins and your town or castle stay on this Chromebook.</p>
+    </section>
+
     <section id="title-screen" class="screen">
-      <p class="kicker">NNPS · VA 2024 EOC Reading practice skills · 100 nights</p>
+      <p class="kicker" id="title-kicker">NNPS · VA 2024 EOC Reading practice skills · 100 nights</p>
       <h1>SOL Labyrinth</h1>
       <p class="tag">Tap a grade to pick your skill focus. Read the passage in the side panel. Grab the matching letter. Walk it to EXIT · SAFE. The janitor does not know the answer — only you do.</p>
       <p id="save-line" class="save-line">No night saved on this Chromebook yet.</p>
@@ -32,9 +51,15 @@
           <span class="name">Grade 11</span>
           <span class="meta">All skills — Grade 9, 10, and 11. Same short passage length for Chromebook play.</span>
         </button>
+        <button type="button" class="card hidden" data-family="NJ5">
+          <span class="kind">NJSLA-ELA</span>
+          <span class="name">Grade 5</span>
+          <span class="meta">Literature, informational text, vocabulary and paired texts. Questions adapt to how you play, and Part B evidence questions follow Part A.</span>
+        </button>
       </div>
 
       <div class="row title-tools">
+        <button type="button" class="btn" id="btn-state" title="Pick a different state">Virginia · change</button>
         <button type="button" class="btn" id="btn-town" title="See the town or castle you have built">My Town</button>
         <button type="button" class="btn" id="btn-music" aria-pressed="true" title="Background music on/off">♪ Music on</button>
       </div>
@@ -93,7 +118,7 @@
             <div class="scores">
               <span class="pip gold" id="score-pip">Extracts 0 / 5</span>
               <span class="pip strike" id="strike-pip">Strikes 0 / 3</span>
-              <span class="pip bonus" id="bonus-pip">Bonus 0</span>
+              <span class="pip bonus" id="bonus-pip">Coins 0</span>
               <span class="pip" id="token-pip">Token N001E0S0</span>
             </div>
           </div>
@@ -140,6 +165,7 @@
         <div class="row">
           <button type="button" class="btn primary hidden" id="btn-next">Next night</button>
           <button type="button" class="btn primary hidden" id="btn-retry">Retry this night</button>
+          <button type="button" class="btn hidden" id="btn-shop" data-night="1">Shop</button>
           <button type="button" class="btn" id="btn-again">Title</button>
         </div>
       </div>
@@ -228,10 +254,25 @@
     try { console.error("[SOL]", (e && e.message) || "error", e && e.error && e.error.stack ? e.error.stack : ""); } catch (x) {}
   });
   </script>
-  <script src="https://unpkg.com/phaser@3.80.1/dist/phaser.min.js"></script>
-  <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
+  <script src="js/vendor/phaser.min.js"></script>
+  <script src="js/vendor/peerjs.min.js"></script>
   <script src="js/content.js"></script>
   <script src="js/content2.js"></script>
+  <script src="js/content3.js"></script>
+  <script src="js/content4.js"></script>
+  <script src="js/content5.js"></script>
+  <script src="js/content6.js"></script>
+  <script src="js/content7.js"></script>
+  <script src="js/content8.js"></script>
+  <script src="js/content9.js"></script>
+  <script src="js/content10.js"></script>
+  <script src="js/content11.js"></script>
+  <script src="js/content12.js"></script>
+  <script src="js/content13.js"></script>
+  <script src="js/content14.js"></script>
+  <script src="js/content15.js"></script>
+  <script src="js/content16.js"></script>
+  <script src="js/content17.js"></script>
   <script src="js/audio.js"></script>
   <script src="js/music.js"></script>
   <script src="js/net.js"></script>

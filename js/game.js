@@ -29,12 +29,19 @@
   var LS_FAMILY = "afterHours.v1.family";
   var LS_STRAND = "afterHours.v1.strand";
   var LS_CHAR = "afterHours.v1.charPreset";
+  var LS_STATE = "afterHours.v1.state";
+  var LS_ADAPT = "afterHours.v1.adapt.";
+  /* v4.9: the gateway screen picks a state; each state has its own grade cards. */
+  var STATE_DEFS = {
+    VA: { name: "Virginia", kicker: "NNPS · VA 2024 EOC Reading practice skills · 100 nights", families: ["G9", "G10", "G11"], def: "G9", hud: "Teacher" },
+    NJ: { name: "New Jersey", kicker: "NJSLA-ELA · Grade 5 reading practice · 100 nights", families: ["NJ5"], def: "NJ5", hud: "NJSLS" }
+  };
 
   var Input = { ax: 0, ay: 0, act: false, actEdge: false, sprint: false, shutterEdge: false };
   var keysHeld = { n: 0, s: 0, w: 0, e: 0 };
   var gameRef = null;
   var playScene = null;
-  var cfg = { family: "G9", strand: "ALL", night: 1 };
+  var cfg = { family: "G9", strand: "ALL", night: 1, state: null };
   var pendingNight = 1;
 
   /* Mana Seed school presets (fstr/pfpn only — never undi/boxr) */
@@ -2946,6 +2953,31 @@
     usedMem[key] = (arr || []).slice();
     try { localStorage.setItem(LS_USED + key, JSON.stringify(usedMem[key])); } catch (e) {}
   }
+  /* ── v4.9 adaptive reading model ─────────────────────────────────────────
+     One record per family. ability 1..3 is the reading level the picker aims
+     for; it climbs when a question is answered with no wrong tile grabbed and
+     drops when a wrong tile is picked up. Per-strand right/wrong counts let
+     "All skills" nights lean toward the weaker strands. */
+  function loadAdapt(family) {
+    try {
+      var a = JSON.parse(localStorage.getItem(LS_ADAPT + family) || "null");
+      if (a && typeof a === "object" && a.v === 1 && a.ability >= 1 && a.ability <= 3) { a.strands = a.strands || {}; return a; }
+    } catch (e) {}
+    return { v: 1, ability: 1.6, strands: {}, seen: 0 };
+  }
+  function saveAdapt(family, a) { try { localStorage.setItem(LS_ADAPT + family, JSON.stringify(a)); } catch (e) {} }
+  function adaptEvent(scene, kind, claim) {
+    var a = scene.adapt;
+    if (!a) return;
+    var st = (claim && claim.strand) || "RL";
+    var rec = a.strands[st] || (a.strands[st] = { r: 0, w: 0 });
+    if (kind === "wrong") { rec.w++; a.ability = Math.max(1, a.ability - 0.18); }
+    else if (kind === "clean") { rec.r++; a.ability = Math.min(3, a.ability + 0.12); }
+    else rec.r++;                                   /* right after a wrong grab: no level change */
+    a.seen++;
+    saveAdapt(scene.family, a);
+  }
+  function adaptLevelLabel(a) { var v = a ? a.ability : 1.6; return v < 1.5 ? 1 : v < 2.5 ? 2 : 3; }
   function trapSeen(key) {
     try { return localStorage.getItem(key) === "1"; } catch (e) { return false; }
   }
@@ -4488,6 +4520,11 @@
       this.strikes = 0;
       this.round = 1;
       this.usedClaims = loadUsedClaims(this.family, this.strand);
+      this.adapt = loadAdapt(this.family);
+      this.nightPacks = [];
+      this.nightWrong = 0;
+      this.nightCoins = 0;
+      this.claimWrong = 0;
       this.extracted = [];
       this.trapOpen = false;
       this.alarmMs = 0;
@@ -6839,18 +6876,43 @@
     nextClaim() {
       var claims = (this.pack && this.pack.claims) || [];
       if (!claims.length) return;
-      var pool = [];
-      var i;
-      for (i = 0; i < claims.length; i++) {
-        if (this.usedClaims.indexOf(claims[i].id) === -1) pool.push(i);
+      var i, pick = -1, self = this;
+      var unused = function (c) { return self.usedClaims.indexOf(c.id) === -1; };
+      /* v4.9: an NJSLA Part B (evidence) item always follows its Part A. */
+      if (this.claim && this.claim.partB) {
+        for (i = 0; i < claims.length; i++) if (claims[i].id === this.claim.partB && unused(claims[i])) { pick = i; break; }
       }
-      if (!pool.length) {
-        this.usedClaims = [];
-        saveUsedClaims(this.family, this.strand, this.usedClaims);
-        for (i = 0; i < claims.length; i++) pool.push(i);
+      if (pick < 0) {
+        var pool = [];
+        for (i = 0; i < claims.length; i++) if (!claims[i].isPartB && unused(claims[i]) && this.nightPacks.indexOf(claims[i].packId) === -1) pool.push(i);
+        if (!pool.length) for (i = 0; i < claims.length; i++) if (!claims[i].isPartB && unused(claims[i])) pool.push(i);   /* same passage again is better than none */
+        if (!pool.length) {
+          /* Pool spent: start over, but keep the most recent 20 out so the same items never come straight back. */
+          this.usedClaims = this.usedClaims.slice(-20);
+          saveUsedClaims(this.family, this.strand, this.usedClaims);
+          for (i = 0; i < claims.length; i++) if (!claims[i].isPartB && unused(claims[i])) pool.push(i);
+          if (!pool.length) for (i = 0; i < claims.length; i++) if (!claims[i].isPartB) pool.push(i);
+        }
+        /* Adaptive weighting: items near the student's level, and (on All-skills nights) weaker strands. */
+        var a = this.adapt, target = a ? a.ability : 1.6, allStrands = String(this.strand || "ALL").toUpperCase() === "ALL";
+        var weights = [], total = 0, w, rec, acc;
+        for (i = 0; i < pool.length; i++) {
+          var c = claims[pool[i]];
+          w = Math.exp(-Math.abs((c.level || 2) - target) * 1.3);
+          if (allStrands && a) {
+            rec = a.strands[c.strand || "RL"];
+            acc = rec ? (rec.r + 1) / (rec.r + rec.w + 2) : 0.5;
+            w *= 1 + (1 - acc) * 0.9;
+          }
+          weights.push(w); total += w;
+        }
+        var r = Math.random() * total;
+        for (i = 0; i < pool.length; i++) { r -= weights[i]; if (r <= 0) break; }
+        pick = pool[Math.min(i, pool.length - 1)];
       }
-      var pick = pool[Math.floor(Math.random() * pool.length)];
       this.claim = claims[pick];
+      if (this.claim.packId && this.nightPacks.indexOf(this.claim.packId) === -1) this.nightPacks.push(this.claim.packId);
+      this.claimWrong = 0;
       this._hudClaimId = null; /* force passage panel refresh */
       this.usedClaims.push(this.claim.id);
       saveUsedClaims(this.family, this.strand, this.usedClaims);
@@ -7163,7 +7225,8 @@
       var claimChanged = this._hudClaimId !== c.id;
       this._hudClaimId = c.id;
       var tok = makeToken(this.night, this.score, this.strikes);
-      document.getElementById("job-sol").textContent = "Teacher · " + (c.sol || "");
+      var hudLabel = (STATE_DEFS[cfg.state] && STATE_DEFS[cfg.state].hud) || "Teacher";
+      document.getElementById("job-sol").textContent = hudLabel + " · " + (c.sol || "") + " · Level " + adaptLevelLabel(this.adapt) + (c.isPartB ? " · Part B" : c.partB ? " · Part A" : "");
       document.getElementById("round-flag").textContent = "Night " + this.night + " / 100 · " + nightTheme(this.night).name;
       var juice = this.scoreJuice || 0;
       document.getElementById("score-pip").textContent = "Extracts " + this.score + " / " + this.needExtracts;
@@ -7198,7 +7261,11 @@
       if (this.autoGreen) strikeTxt += ((this.autoGreen.closed) ? " · AUTO LOCKED" : " · AUTO OPEN"); /* engage-1350 */
       document.getElementById("strike-pip").textContent = strikeTxt;
       var bonusEl = document.getElementById("bonus-pip");
-      if (bonusEl) bonusEl.textContent = "Bonus " + juice;
+      if (bonusEl) {
+        var coinsNow = 0;
+        try { if (window.SolBuild && SolBuild.coins) coinsNow = SolBuild.coins(); } catch (eCo) {}
+        bonusEl.textContent = "Coins " + coinsNow + ((this.nightCoins || 0) > 0 ? " (+" + this.nightCoins + ")" : "");
+      }
       var tokenEl = document.getElementById("token-pip");
       if (tokenEl) tokenEl.textContent = "Token " + tok;
       /* Only rewrite reading-passage chrome when the claim changes — tips must not fight the lesson UI */
@@ -7868,6 +7935,21 @@
       this.setCarryFlagText("Flashlight sees you. Walk in the dark. Sprint is noisy.", "");
     }
 
+    /* v4.9: the coin economy lives in assets/build/pieces.json (SolBuild.economy) */
+    coinEconomy() {
+      try { if (window.SolBuild && SolBuild.economy) return SolBuild.economy(); } catch (e) {}
+      return { answer: 10, perfectNight: 25, bonusMin: 3, bonusMax: 12, bonusPer: 500 };
+    }
+    giveCoins(n, why) {
+      n = Math.max(0, Math.round(n || 0));
+      if (!n) return 0;
+      this.nightCoins = (this.nightCoins || 0) + n;
+      try { if (window.SolBuild && SolBuild.addCoins) SolBuild.addCoins(n, why); } catch (e) {}
+      this.scoreToastMs = Math.max(this.scoreToastMs || 0, 2400);
+      this.scoreToastMsg = "+" + n + " coin" + (n === 1 ? "" : "s") + (why ? " · " + why : "");
+      this.paintHud();
+      return n;
+    }
     awardBonusPoints(pts, toastMsg) {
       pts = pts || 0;
       if ((this.heartMultMs || 0) > 0 && pts > 0) {
@@ -7876,12 +7958,17 @@
       }
       this.scoreJuice = (this.scoreJuice || 0) + pts;
       this._lastFruitPts = pts;
+      /* v4.9: fruit and the other pickups pay coins, not points */
+      var ec = this.coinEconomy();
+      var coins = Math.max(ec.bonusMin, Math.min(ec.bonusMax, ec.bonusMin + Math.floor(pts / ec.bonusPer)));
+      this.nightCoins = (this.nightCoins || 0) + coins;
+      try { if (window.SolBuild && SolBuild.addCoins) SolBuild.addCoins(coins, "bonus"); } catch (eC) {}
       this.scoreToastMs = Math.max(this.scoreToastMs || 0, 2400);
-      this.scoreToastMsg = toastMsg || ("+" + pts + " bonus points!");
+      this.scoreToastMsg = "+" + coins + " coins" + (toastMsg ? " · " + String(toastMsg).replace(/^\+\d+\s*/, "") : "!");
       if (this.player && this.add) {
         try {
           var tx = this.player.x, ty = this.player.y - 36;
-          var tag = this.add.text(tx, ty, "+" + pts, {
+          var tag = this.add.text(tx, ty, "+" + coins + " coins", {
             fontFamily: "Trebuchet MS", fontSize: 22, color: "#9aefc0", fontStyle: "bold",
             stroke: "#0a1814", strokeThickness: 5
           }).setOrigin(0.5).setDepth(40);
@@ -15064,6 +15151,10 @@
     }
 
     flagWrongAlarm(slipAt) {
+      /* v4.9: a wrong tile is the adaptive signal (and breaks the perfect-night bonus) */
+      this.claimWrong = (this.claimWrong || 0) + 1;
+      this.nightWrong = (this.nightWrong || 0) + 1;
+      adaptEvent(this, "wrong", this.claim);
       if (this.player.carrying) this.dropCarry(true);
       this.pendingShuffle = true;
       this.shuffleChaseSeen = false;
@@ -16888,6 +16979,9 @@
       }
       if (done) {
         this.score += 1;
+        /* v4.9: coins for every correct answer; the level climbs only when no wrong tile was grabbed */
+        adaptEvent(this, this.claimWrong ? "struggled" : "clean", this.claim);
+        this.giveCoins(this.coinEconomy().answer, "Correct answer");
         pingTeacher(this, "playing");
         if (this.score >= this.needExtracts) {
           this.paintHud();
@@ -17146,6 +17240,15 @@
           writeSavedNight(this.night + 1);
           document.getElementById("win-title").textContent = "Night cleared";
           document.getElementById("win-msg").textContent = "Night " + this.night + " is done. Same skill pack. Next night is waiting on this Chromebook.";
+        }
+        /* v4.9: perfect night = every question banked with no wrong tile grabbed */
+        var winMsgEl = document.getElementById("win-msg");
+        if ((this.nightWrong || 0) === 0) {
+          var perfect = this.giveCoins(this.coinEconomy().perfectNight, "Perfect night");
+          winMsgEl.textContent += " Perfect night — no wrong letters: +" + perfect + " bonus coins!";
+        }
+        winMsgEl.textContent += " You earned " + (this.nightCoins || 0) + " coins tonight.";
+        if (this.night < 100) {
           nextBtn.textContent = "Next night";
           nextBtn.classList.remove("hidden");
           nextBtn.dataset.goto = String(this.night + 1);
@@ -17159,9 +17262,18 @@
       }
       /* v4.8: every 5th night won opens the Town & Castle reward pop-up first;
          the "Night cleared" overlay follows once the student has placed the piece. */
+      var self = this;
       var showEndOverlay = function () {
         document.getElementById("overlay").classList.remove("hidden");
         if (window.SolMusic) { try { SolMusic.setChase(false); SolMusic.play("menu"); } catch (eM) {} }
+        /* v4.9: the coin shop is open after every night once the student has a town or castle */
+        var shopBtn = document.getElementById("btn-shop"), canShop = false, coinsNow = 0;
+        try { if (window.SolBuild && SolBuild.state) { var bs = SolBuild.state(); canShop = !!bs.canShop; coinsNow = bs.coins || 0; } } catch (eS) {}
+        if (shopBtn) {
+          shopBtn.classList.toggle("hidden", !canShop);
+          shopBtn.textContent = "Shop · " + coinsNow + " coins";
+          shopBtn.dataset.night = String(self.night);
+        }
       };
       var rewardShown = false;
       if (win && window.SolBuild && SolBuild.rewardDue && SolBuild.rewardDue(this.night)) {
@@ -25606,7 +25718,7 @@
         var ol = document.getElementById("read-choices");
         var hint = document.getElementById("read-hint");
         var scroll = document.getElementById("read-scroll");
-        if (kick) kick.textContent = (reason === "start" ? "Read first · Night " : "Next question · Night ") + this.night + " · " + (c.sol || "");
+        if (kick) kick.textContent = (reason === "start" ? "Read first · Night " : "Next question · Night ") + this.night + " · " + (c.sol || "") + (c.isPartB ? " · Part B (evidence)" : c.partB ? " · Part A" : "");
         if (title) title.textContent = c.packTitle || "Passage";
         if (pass) pass.innerHTML = c.passage || "";
         if (stem) stem.textContent = c.stem || c.doThis || "";
@@ -26432,6 +26544,9 @@
         night: scene.night,
         extracts: scene.score,
         strikes: scene.strikes,
+        level: adaptLevelLabel(scene.adapt),
+        coins: scene.nightCoins || 0,
+        wrong: scene.nightWrong || 0,
         status: status || "playing"
       });
     }
@@ -26441,6 +26556,11 @@
     document.getElementById("title-screen").classList.toggle("hidden", on);
     var skill = document.getElementById("skill-screen");
     if (skill) skill.classList.add("hidden");
+    var stateScreen = document.getElementById("state-screen");
+    if (stateScreen) {
+      if (!on && !cfg.state) { stateScreen.classList.remove("hidden"); document.getElementById("title-screen").classList.add("hidden"); }
+      else stateScreen.classList.add("hidden");
+    }
     hideCharOverlay();
     document.getElementById("play").classList.toggle("hidden", !on);
     document.getElementById("overlay").classList.add("hidden");
@@ -26483,15 +26603,58 @@
     ]
   };
 
+  SKILL_DEFS.NJ5 = [
+    { strand: "RL", kind: "RL.5", name: "Literature", meta: "Stories, poems and plays: theme, characters, and how a text is built." },
+    { strand: "RI", kind: "RI.5", name: "Informational", meta: "Articles and real-world texts: main idea, evidence, structure." },
+    { strand: "RV", kind: "L.5", name: "Vocabulary", meta: "Word meaning from context, word parts, and figurative language." },
+    { strand: "DSR", kind: "RL/RI.5", name: "Paired texts", meta: "Two texts on one topic — compare, connect, and cite both." },
+    { strand: "ALL", kind: "All skills", name: "All", meta: "Everything mixed, leaning toward the skills you miss most." }
+  ];
+
   function gradeLabel(family) {
+    if (family === "NJ5") return "New Jersey · Grade 5";
     if (family === "G10") return "Selection 2 · Grade 10";
     if (family === "G11") return "Selection 3 · Grade 11";
     return "Selection 1 · Grade 9";
   }
 
   function selectedFamily() {
-    var el = document.querySelector("#title-screen .card.selected[data-family]");
-    return (el && el.getAttribute("data-family")) || "G9";
+    var el = document.querySelector("#title-screen .card.selected[data-family]:not(.hidden)");
+    var st = STATE_DEFS[cfg.state];
+    return (el && el.getAttribute("data-family")) || (st && st.def) || "G9";
+  }
+
+  /* v4.9: state gateway (New Jersey / Virginia). Chooses which grade cards the title screen shows. */
+  function applyState(st, silent) {
+    if (!STATE_DEFS[st]) st = "VA";
+    cfg.state = st;
+    try { localStorage.setItem(LS_STATE, st); } catch (e) {}
+    var def = STATE_DEFS[st], any = false;
+    document.querySelectorAll("#title-screen .card[data-family]").forEach(function (c) {
+      var fam = c.getAttribute("data-family"), ok = def.families.indexOf(fam) !== -1;
+      c.classList.toggle("hidden", !ok);
+      if (!ok) c.classList.remove("selected");
+      if (ok && c.classList.contains("selected")) any = true;
+    });
+    if (!any || def.families.indexOf(cfg.family) === -1) {
+      cfg.family = def.def;
+      document.querySelectorAll("#title-screen .card[data-family]").forEach(function (c) { c.classList.toggle("selected", c.getAttribute("data-family") === cfg.family); });
+    }
+    var kick = document.getElementById("title-kicker");
+    if (kick) kick.textContent = def.kicker;
+    var sw = document.getElementById("btn-state");
+    if (sw) sw.textContent = def.name + " · change";
+    var stateScreen = document.getElementById("state-screen"), title = document.getElementById("title-screen");
+    if (!silent) {
+      if (stateScreen) stateScreen.classList.add("hidden");
+      if (title) title.classList.remove("hidden");
+    }
+  }
+  function showStateScreen() {
+    var stateScreen = document.getElementById("state-screen"), title = document.getElementById("title-screen"), skill = document.getElementById("skill-screen");
+    if (title) title.classList.add("hidden");
+    if (skill) skill.classList.add("hidden");
+    if (stateScreen) stateScreen.classList.remove("hidden");
   }
 
   function selectedStrand() {
@@ -27130,6 +27293,22 @@
     el.addEventListener("pointerup", go);
   }
 
+  /* v4.9: state gateway */
+  document.querySelectorAll("#state-screen .card[data-state]").forEach(function (card) {
+    bindTap(card, function () { applyState(card.getAttribute("data-state")); refreshSaveLine(); });
+  });
+  var btnState = document.getElementById("btn-state");
+  if (btnState) bindTap(btnState, function () { showStateScreen(); });
+  var btnShop = document.getElementById("btn-shop");
+  if (btnShop) bindTap(btnShop, function () {
+    if (!window.SolBuild || !SolBuild.showShop) return;
+    if (window.SolMusic) { try { SolMusic.play("builder"); } catch (e1) {} }
+    SolBuild.showShop(parseInt(btnShop.dataset.night || cfg.night || "1", 10), function () {
+      if (window.SolMusic) { try { SolMusic.play("menu"); } catch (e2) {} }
+      try { var bs = SolBuild.state(); btnShop.textContent = "Shop · " + (bs.coins || 0) + " coins"; } catch (e3) {}
+    });
+  });
+
   /* Title Start/Continue removed — grade card opens skill screen. */
   bindTap(document.getElementById("btn-skill-back"), function () { hideSkillScreen(); });
   document.querySelectorAll("#title-screen .card[data-family]").forEach(function (card) {
@@ -27190,7 +27369,12 @@
     }
     var strand = localStorage.getItem(LS_STRAND);
     if (strand) cfg.strand = strand;
+    var savedState = localStorage.getItem(LS_STATE);
+    if (savedState && STATE_DEFS[savedState]) applyState(savedState);
+    else if (fam === "NJ5") applyState("NJ");
+    else if (fam) applyState("VA");
   } catch (e) {}
+  if (!cfg.state) showStateScreen();
 
   bindPads();
   bindVisibilityResume();

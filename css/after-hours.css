@@ -34,6 +34,7 @@ html, body {
   padding: 16px; overflow: auto; touch-action: pan-y;
 }
 #title-screen { z-index: 20; }
+#state-screen { z-index: 22; }
 
 #skill-screen { z-index: 21; }
 #skill-screen .packs { margin-top: 4px; }
@@ -619,3 +620,9 @@ h1 { font-size: clamp(36px, 6vw, 64px); margin: 0; letter-spacing: .02em; }
   .codex-head h2 { font-size: 20px; }
   .codex-list { grid-template-columns: 1fr; }
 }
+
+/* v4.9: state gateway cards */
+.state-packs { margin-top: 6px; }
+.state-card { width: min(360px, 92vw); min-height: 120px; }
+.state-card .name { font-size: 24px; }
+#btn-state { color: var(--dim); }
