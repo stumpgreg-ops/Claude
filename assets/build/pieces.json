@@ -1,0 +1,890 @@
+{
+    "v":  1,
+    "sceneW":  1120,
+    "sceneH":  630,
+    "drawScale":  0.8,
+    "themes":  {
+                   "village":  {
+                                   "name":  "Town",
+                                   "desc":  "Cottages, mills and a market along a winding road.",
+                                   "unitPx":  30,
+                                   "drawScale":  0.8,
+                                   "slots":  [
+                                                 {
+                                                     "id":  "s1",
+                                                     "x":  0.12,
+                                                     "y":  0.86,
+                                                     "tier":  1
+                                                 },
+                                                 {
+                                                     "id":  "s2",
+                                                     "x":  0.3,
+                                                     "y":  0.92,
+                                                     "tier":  1
+                                                 },
+                                                 {
+                                                     "id":  "s3",
+                                                     "x":  0.52,
+                                                     "y":  0.9,
+                                                     "tier":  1
+                                                 },
+                                                 {
+                                                     "id":  "s4",
+                                                     "x":  0.72,
+                                                     "y":  0.93,
+                                                     "tier":  1
+                                                 },
+                                                 {
+                                                     "id":  "s5",
+                                                     "x":  0.9,
+                                                     "y":  0.85,
+                                                     "tier":  1
+                                                 },
+                                                 {
+                                                     "id":  "s6",
+                                                     "x":  0.1,
+                                                     "y":  0.7,
+                                                     "tier":  2
+                                                 },
+                                                 {
+                                                     "id":  "s7",
+                                                     "x":  0.28,
+                                                     "y":  0.76,
+                                                     "tier":  2
+                                                 },
+                                                 {
+                                                     "id":  "s8",
+                                                     "x":  0.5,
+                                                     "y":  0.74,
+                                                     "tier":  2
+                                                 },
+                                                 {
+                                                     "id":  "s9",
+                                                     "x":  0.7,
+                                                     "y":  0.77,
+                                                     "tier":  2
+                                                 },
+                                                 {
+                                                     "id":  "s10",
+                                                     "x":  0.9,
+                                                     "y":  0.7,
+                                                     "tier":  2
+                                                 },
+                                                 {
+                                                     "id":  "s11",
+                                                     "x":  0.14,
+                                                     "y":  0.55,
+                                                     "tier":  3
+                                                 },
+                                                 {
+                                                     "id":  "s12",
+                                                     "x":  0.34,
+                                                     "y":  0.6,
+                                                     "tier":  3
+                                                 },
+                                                 {
+                                                     "id":  "s13",
+                                                     "x":  0.56,
+                                                     "y":  0.58,
+                                                     "tier":  3
+                                                 },
+                                                 {
+                                                     "id":  "s14",
+                                                     "x":  0.78,
+                                                     "y":  0.61,
+                                                     "tier":  3
+                                                 },
+                                                 {
+                                                     "id":  "s15",
+                                                     "x":  0.94,
+                                                     "y":  0.52,
+                                                     "tier":  3
+                                                 },
+                                                 {
+                                                     "id":  "s16",
+                                                     "x":  0.2,
+                                                     "y":  0.4,
+                                                     "tier":  4
+                                                 },
+                                                 {
+                                                     "id":  "s17",
+                                                     "x":  0.42,
+                                                     "y":  0.44,
+                                                     "tier":  4
+                                                 },
+                                                 {
+                                                     "id":  "s18",
+                                                     "x":  0.62,
+                                                     "y":  0.42,
+                                                     "tier":  4
+                                                 },
+                                                 {
+                                                     "id":  "s19",
+                                                     "x":  0.82,
+                                                     "y":  0.45,
+                                                     "tier":  4
+                                                 },
+                                                 {
+                                                     "id":  "s20",
+                                                     "x":  0.5,
+                                                     "y":  0.3,
+                                                     "tier":  4
+                                                 }
+                                             ]
+                               },
+                   "castle":  {
+                                  "name":  "Castle",
+                                  "desc":  "Walls, towers and a keep on the hill.",
+                                  "unitPx":  17,
+                                  "drawScale":  1.05,
+                                  "slots":  [
+                                                {
+                                                    "id":  "s1",
+                                                    "x":  0.18,
+                                                    "y":  0.9,
+                                                    "tier":  1
+                                                },
+                                                {
+                                                    "id":  "s2",
+                                                    "x":  0.38,
+                                                    "y":  0.93,
+                                                    "tier":  1
+                                                },
+                                                {
+                                                    "id":  "s3",
+                                                    "x":  0.62,
+                                                    "y":  0.93,
+                                                    "tier":  1
+                                                },
+                                                {
+                                                    "id":  "s4",
+                                                    "x":  0.82,
+                                                    "y":  0.9,
+                                                    "tier":  1
+                                                },
+                                                {
+                                                    "id":  "s5",
+                                                    "x":  0.06,
+                                                    "y":  0.93,
+                                                    "tier":  1
+                                                },
+                                                {
+                                                    "id":  "s6",
+                                                    "x":  0.1,
+                                                    "y":  0.8,
+                                                    "tier":  2
+                                                },
+                                                {
+                                                    "id":  "s7",
+                                                    "x":  0.3,
+                                                    "y":  0.83,
+                                                    "tier":  2
+                                                },
+                                                {
+                                                    "id":  "s8",
+                                                    "x":  0.5,
+                                                    "y":  0.82,
+                                                    "tier":  2
+                                                },
+                                                {
+                                                    "id":  "s9",
+                                                    "x":  0.7,
+                                                    "y":  0.83,
+                                                    "tier":  2
+                                                },
+                                                {
+                                                    "id":  "s10",
+                                                    "x":  0.9,
+                                                    "y":  0.8,
+                                                    "tier":  2
+                                                },
+                                                {
+                                                    "id":  "s11",
+                                                    "x":  0.16,
+                                                    "y":  0.72,
+                                                    "tier":  3
+                                                },
+                                                {
+                                                    "id":  "s12",
+                                                    "x":  0.36,
+                                                    "y":  0.74,
+                                                    "tier":  3
+                                                },
+                                                {
+                                                    "id":  "s13",
+                                                    "x":  0.64,
+                                                    "y":  0.74,
+                                                    "tier":  3
+                                                },
+                                                {
+                                                    "id":  "s14",
+                                                    "x":  0.84,
+                                                    "y":  0.72,
+                                                    "tier":  3
+                                                },
+                                                {
+                                                    "id":  "s15",
+                                                    "x":  0.5,
+                                                    "y":  0.7,
+                                                    "tier":  3
+                                                },
+                                                {
+                                                    "id":  "s16",
+                                                    "x":  0.28,
+                                                    "y":  0.64,
+                                                    "tier":  4
+                                                },
+                                                {
+                                                    "id":  "s17",
+                                                    "x":  0.72,
+                                                    "y":  0.64,
+                                                    "tier":  4
+                                                },
+                                                {
+                                                    "id":  "s18",
+                                                    "x":  0.38,
+                                                    "y":  0.6,
+                                                    "tier":  4
+                                                },
+                                                {
+                                                    "id":  "s19",
+                                                    "x":  0.62,
+                                                    "y":  0.6,
+                                                    "tier":  4
+                                                },
+                                                {
+                                                    "id":  "s20",
+                                                    "x":  0.5,
+                                                    "y":  0.56,
+                                                    "tier":  4
+                                                }
+                                            ]
+                              }
+               },
+    "pieces":  [
+                   {
+                       "id":  "well",
+                       "theme":  "village",
+                       "name":  "Village well",
+                       "tier":  1,
+                       "desc":  "Every town starts with water.",
+                       "img":  "assets/build/village-well.png",
+                       "w":  69,
+                       "h":  84,
+                       "ax":  0.4928,
+                       "ay":  0.7153
+                   },
+                   {
+                       "id":  "hay-cart",
+                       "theme":  "village",
+                       "name":  "Hay cart",
+                       "tier":  1,
+                       "desc":  "A farmer\u0027s cart full of hay.",
+                       "img":  "assets/build/village-hay-cart.png",
+                       "w":  126,
+                       "h":  112,
+                       "ax":  0.4983,
+                       "ay":  0.6397
+                   },
+                   {
+                       "id":  "barrels",
+                       "theme":  "village",
+                       "name":  "Barrel stack",
+                       "tier":  1,
+                       "desc":  "Three barrels by the road.",
+                       "img":  "assets/build/village-barrels.png",
+                       "w":  51,
+                       "h":  61,
+                       "ax":  0.4929,
+                       "ay":  0.6947
+                   },
+                   {
+                       "id":  "crates",
+                       "theme":  "village",
+                       "name":  "Crates and hay",
+                       "tier":  1,
+                       "desc":  "Supplies for the first settlers.",
+                       "img":  "assets/build/village-crates.png",
+                       "w":  95,
+                       "h":  112,
+                       "ax":  0.4983,
+                       "ay":  0.7226
+                   },
+                   {
+                       "id":  "lamp",
+                       "theme":  "village",
+                       "name":  "Street lamp",
+                       "tier":  1,
+                       "desc":  "A little light for the path.",
+                       "img":  "assets/build/village-lamp.png",
+                       "w":  43,
+                       "h":  62,
+                       "ax":  0.4895,
+                       "ay":  0.7436
+                   },
+                   {
+                       "id":  "fence",
+                       "theme":  "village",
+                       "name":  "Wooden fence",
+                       "tier":  1,
+                       "desc":  "Posts and rails along the lane.",
+                       "img":  "assets/build/village-fence.png",
+                       "w":  87,
+                       "h":  82,
+                       "ax":  0.4999,
+                       "ay":  0.6456
+                   },
+                   {
+                       "id":  "haystacks",
+                       "theme":  "village",
+                       "name":  "Haystacks",
+                       "tier":  1,
+                       "desc":  "Harvest piled high.",
+                       "img":  "assets/build/village-haystacks.png",
+                       "w":  85,
+                       "h":  84,
+                       "ax":  0.4957,
+                       "ay":  0.661
+                   },
+                   {
+                       "id":  "cobbles",
+                       "theme":  "village",
+                       "name":  "Cobbled corner",
+                       "tier":  1,
+                       "desc":  "The first paved patch of road.",
+                       "img":  "assets/build/village-cobbles.png",
+                       "w":  103,
+                       "h":  91,
+                       "ax":  0.4999,
+                       "ay":  0.6339
+                   },
+                   {
+                       "id":  "cottage",
+                       "theme":  "village",
+                       "name":  "Cottage",
+                       "tier":  2,
+                       "desc":  "A small stucco home with a red roof.",
+                       "img":  "assets/build/village-cottage.png",
+                       "w":  106,
+                       "h":  149,
+                       "ax":  0.4978,
+                       "ay":  0.769
+                   },
+                   {
+                       "id":  "stall",
+                       "theme":  "village",
+                       "name":  "Market stall",
+                       "tier":  2,
+                       "desc":  "A canopy, crates and goods to sell.",
+                       "img":  "assets/build/village-stall.png",
+                       "w":  98,
+                       "h":  118,
+                       "ax":  0.4953,
+                       "ay":  0.726
+                   },
+                   {
+                       "id":  "dock",
+                       "theme":  "village",
+                       "name":  "Boat dock",
+                       "tier":  2,
+                       "desc":  "A wooden pier with a rowing boat.",
+                       "img":  "assets/build/village-dock.png",
+                       "w":  162,
+                       "h":  125,
+                       "ax":  0.4974,
+                       "ay":  0.5959
+                   },
+                   {
+                       "id":  "steps",
+                       "theme":  "village",
+                       "name":  "Stone steps",
+                       "tier":  2,
+                       "desc":  "Steps with a railing up the hill.",
+                       "img":  "assets/build/village-steps.png",
+                       "w":  85,
+                       "h":  85,
+                       "ax":  0.4997,
+                       "ay":  0.6601
+                   },
+                   {
+                       "id":  "signpost",
+                       "theme":  "village",
+                       "name":  "Sign post",
+                       "tier":  2,
+                       "desc":  "Which way to the market?",
+                       "img":  "assets/build/village-signpost.png",
+                       "w":  71,
+                       "h":  104,
+                       "ax":  0.4979,
+                       "ay":  0.7671
+                   },
+                   {
+                       "id":  "lamp-path",
+                       "theme":  "village",
+                       "name":  "Lamp-lit lane",
+                       "tier":  2,
+                       "desc":  "Cobbles and two lamps.",
+                       "img":  "assets/build/village-lamp-path.png",
+                       "w":  144,
+                       "h":  131,
+                       "ax":  0.4975,
+                       "ay":  0.6509
+                   },
+                   {
+                       "id":  "barrel-cart",
+                       "theme":  "village",
+                       "name":  "Merchant cart",
+                       "tier":  2,
+                       "desc":  "Barrels bound for market.",
+                       "img":  "assets/build/village-barrel-cart.png",
+                       "w":  126,
+                       "h":  112,
+                       "ax":  0.4983,
+                       "ay":  0.6397
+                   },
+                   {
+                       "id":  "stone-cottage",
+                       "theme":  "village",
+                       "name":  "Stone cottage",
+                       "tier":  2,
+                       "desc":  "Thick stone walls, one storey.",
+                       "img":  "assets/build/village-stone-cottage.png",
+                       "w":  113,
+                       "h":  153,
+                       "ax":  0.4998,
+                       "ay":  0.763
+                   },
+                   {
+                       "id":  "house",
+                       "theme":  "village",
+                       "name":  "Two-storey house",
+                       "tier":  3,
+                       "desc":  "Windows upstairs and a chimney.",
+                       "img":  "assets/build/village-house.png",
+                       "w":  148,
+                       "h":  193,
+                       "ax":  0.4999,
+                       "ay":  0.7588
+                   },
+                   {
+                       "id":  "tavern",
+                       "theme":  "village",
+                       "name":  "Tavern",
+                       "tier":  3,
+                       "desc":  "A sign, a lamp and a warm door.",
+                       "img":  "assets/build/village-tavern.png",
+                       "w":  171,
+                       "h":  187,
+                       "ax":  0.4987,
+                       "ay":  0.7137
+                   },
+                   {
+                       "id":  "chapel",
+                       "theme":  "village",
+                       "name":  "Chapel",
+                       "tier":  3,
+                       "desc":  "A bell over the door.",
+                       "img":  "assets/build/village-chapel.png",
+                       "w":  113,
+                       "h":  178,
+                       "ax":  0.4998,
+                       "ay":  0.7962
+                   },
+                   {
+                       "id":  "arch",
+                       "theme":  "village",
+                       "name":  "Stone arch",
+                       "tier":  3,
+                       "desc":  "The old gate into town.",
+                       "img":  "assets/build/village-arch.png",
+                       "w":  112,
+                       "h":  146,
+                       "ax":  0.4976,
+                       "ay":  0.7548
+                   },
+                   {
+                       "id":  "windmill",
+                       "theme":  "village",
+                       "name":  "Windmill",
+                       "tier":  3,
+                       "desc":  "Sails turning over the fields.",
+                       "img":  "assets/build/village-windmill.png",
+                       "w":  129,
+                       "h":  212,
+                       "ax":  0.4978,
+                       "ay":  0.8051
+                   },
+                   {
+                       "id":  "watermill",
+                       "theme":  "village",
+                       "name":  "Watermill",
+                       "tier":  3,
+                       "desc":  "A wheel turned by the stream.",
+                       "img":  "assets/build/village-watermill.png",
+                       "w":  190,
+                       "h":  229,
+                       "ax":  0.4983,
+                       "ay":  0.7413
+                   },
+                   {
+                       "id":  "bakery",
+                       "theme":  "village",
+                       "name":  "Bakery",
+                       "tier":  3,
+                       "desc":  "Round windows, big chimney, fresh bread.",
+                       "img":  "assets/build/village-bakery.png",
+                       "w":  157,
+                       "h":  198,
+                       "ax":  0.4981,
+                       "ay":  0.752
+                   },
+                   {
+                       "id":  "manor",
+                       "theme":  "village",
+                       "name":  "Manor house",
+                       "tier":  4,
+                       "desc":  "Three storeys of stucco and red tile.",
+                       "img":  "assets/build/village-manor.png",
+                       "w":  199,
+                       "h":  247,
+                       "ax":  0.4996,
+                       "ay":  0.7516
+                   },
+                   {
+                       "id":  "town-hall",
+                       "theme":  "village",
+                       "name":  "Town hall",
+                       "tier":  4,
+                       "desc":  "Steps, a bell and an ornate door.",
+                       "img":  "assets/build/village-town-hall.png",
+                       "w":  183,
+                       "h":  224,
+                       "ax":  0.4992,
+                       "ay":  0.745
+                   },
+                   {
+                       "id":  "harbour",
+                       "theme":  "village",
+                       "name":  "Harbour",
+                       "tier":  4,
+                       "desc":  "Two boats, a long pier and a lamp.",
+                       "img":  "assets/build/village-harbour.png",
+                       "w":  216,
+                       "h":  180,
+                       "ax":  0.4989,
+                       "ay":  0.6289
+                   },
+                   {
+                       "id":  "square",
+                       "theme":  "village",
+                       "name":  "Market square",
+                       "tier":  4,
+                       "desc":  "Cobbles, two stalls and the old well.",
+                       "img":  "assets/build/village-square.png",
+                       "w":  222,
+                       "h":  197,
+                       "ax":  0.4986,
+                       "ay":  0.6548
+                   },
+                   {
+                       "id":  "bell-tower",
+                       "theme":  "village",
+                       "name":  "Bell tower",
+                       "tier":  4,
+                       "desc":  "The tallest thing in town.",
+                       "img":  "assets/build/village-bell-tower.png",
+                       "w":  99,
+                       "h":  220,
+                       "ax":  0.4966,
+                       "ay":  0.8531
+                   },
+                   {
+                       "id":  "grand-mill",
+                       "theme":  "village",
+                       "name":  "Grand windmill",
+                       "tier":  4,
+                       "desc":  "A stone mill with huge sails.",
+                       "img":  "assets/build/village-grand-mill.png",
+                       "w":  174,
+                       "h":  289,
+                       "ax":  0.4992,
+                       "ay":  0.8114
+                   },
+                   {
+                       "id":  "ruin-wall",
+                       "theme":  "castle",
+                       "name":  "Old wall",
+                       "tier":  1,
+                       "desc":  "A ruined wall to build upon.",
+                       "img":  "assets/build/castle-ruin-wall.png",
+                       "w":  69,
+                       "h":  75,
+                       "ax":  0.4992,
+                       "ay":  0.6805
+                   },
+                   {
+                       "id":  "scaffold",
+                       "theme":  "castle",
+                       "name":  "Scaffolding",
+                       "tier":  1,
+                       "desc":  "Builders at work.",
+                       "img":  "assets/build/castle-scaffold.png",
+                       "w":  73,
+                       "h":  73,
+                       "ax":  0.4994,
+                       "ay":  0.6583
+                   },
+                   {
+                       "id":  "wall-short",
+                       "theme":  "castle",
+                       "name":  "Short wall",
+                       "tier":  1,
+                       "desc":  "Two paces of stone.",
+                       "img":  "assets/build/castle-wall-short.png",
+                       "w":  45,
+                       "h":  61,
+                       "ax":  0.4983,
+                       "ay":  0.7222
+                   },
+                   {
+                       "id":  "ruin-tower",
+                       "theme":  "castle",
+                       "name":  "Ruined tower",
+                       "tier":  1,
+                       "desc":  "Half a tower, all of the history.",
+                       "img":  "assets/build/castle-ruin-tower.png",
+                       "w":  64,
+                       "h":  72,
+                       "ax":  0.499,
+                       "ay":  0.6886
+                   },
+                   {
+                       "id":  "gate-frame",
+                       "theme":  "castle",
+                       "name":  "Gate frame",
+                       "tier":  1,
+                       "desc":  "An arch with no door yet.",
+                       "img":  "assets/build/castle-gate-frame.png",
+                       "w":  71,
+                       "h":  77,
+                       "ax":  0.4983,
+                       "ay":  0.679
+                   },
+                   {
+                       "id":  "wall-long",
+                       "theme":  "castle",
+                       "name":  "Long wall",
+                       "tier":  1,
+                       "desc":  "Four paces of stone.",
+                       "img":  "assets/build/castle-wall-long.png",
+                       "w":  69,
+                       "h":  75,
+                       "ax":  0.4992,
+                       "ay":  0.6805
+                   },
+                   {
+                       "id":  "rampart",
+                       "theme":  "castle",
+                       "name":  "Rampart",
+                       "tier":  2,
+                       "desc":  "A wall with a walkway on top.",
+                       "img":  "assets/build/castle-rampart.png",
+                       "w":  79,
+                       "h":  80,
+                       "ax":  0.4969,
+                       "ay":  0.6729
+                   },
+                   {
+                       "id":  "tower-short",
+                       "theme":  "castle",
+                       "name":  "Small tower",
+                       "tier":  2,
+                       "desc":  "A round tower with a pointed roof.",
+                       "img":  "assets/build/castle-tower-short.png",
+                       "w":  80,
+                       "h":  137,
+                       "ax":  0.4956,
+                       "ay":  0.8068
+                   },
+                   {
+                       "id":  "gate",
+                       "theme":  "castle",
+                       "name":  "Iron gate",
+                       "tier":  2,
+                       "desc":  "A gate with iron doors.",
+                       "img":  "assets/build/castle-gate.png",
+                       "w":  71,
+                       "h":  77,
+                       "ax":  0.4983,
+                       "ay":  0.679
+                   },
+                   {
+                       "id":  "wall-corner",
+                       "theme":  "castle",
+                       "name":  "Wall corner",
+                       "tier":  2,
+                       "desc":  "Where two ramparts meet.",
+                       "img":  "assets/build/castle-wall-corner.png",
+                       "w":  93,
+                       "h":  89,
+                       "ax":  0.4996,
+                       "ay":  0.6519
+                   },
+                   {
+                       "id":  "wall-beveled",
+                       "theme":  "castle",
+                       "name":  "Carved wall",
+                       "tier":  2,
+                       "desc":  "A wall with bevelled stone.",
+                       "img":  "assets/build/castle-wall-beveled.png",
+                       "w":  79,
+                       "h":  80,
+                       "ax":  0.4969,
+                       "ay":  0.6729
+                   },
+                   {
+                       "id":  "storehouse",
+                       "theme":  "castle",
+                       "name":  "Storehouse",
+                       "tier":  2,
+                       "desc":  "A stone hut with a tiled roof.",
+                       "img":  "assets/build/castle-storehouse.png",
+                       "w":  77,
+                       "h":  87,
+                       "ax":  0.4956,
+                       "ay":  0.7011
+                   },
+                   {
+                       "id":  "watchtower",
+                       "theme":  "castle",
+                       "name":  "Watchtower",
+                       "tier":  3,
+                       "desc":  "Four storeys and a cone roof.",
+                       "img":  "assets/build/castle-watchtower.png",
+                       "w":  80,
+                       "h":  165,
+                       "ax":  0.4956,
+                       "ay":  0.8376
+                   },
+                   {
+                       "id":  "keep",
+                       "theme":  "castle",
+                       "name":  "Keep",
+                       "tier":  3,
+                       "desc":  "The heart of the castle.",
+                       "img":  "assets/build/castle-keep.png",
+                       "w":  98,
+                       "h":  100,
+                       "ax":  0.4987,
+                       "ay":  0.6814
+                   },
+                   {
+                       "id":  "gatehouse",
+                       "theme":  "castle",
+                       "name":  "Gatehouse",
+                       "tier":  3,
+                       "desc":  "A gate with a rampart above.",
+                       "img":  "assets/build/castle-gatehouse.png",
+                       "w":  80,
+                       "h":  109,
+                       "ax":  0.4965,
+                       "ay":  0.7502
+                   },
+                   {
+                       "id":  "wall-double",
+                       "theme":  "castle",
+                       "name":  "Double rampart",
+                       "tier":  3,
+                       "desc":  "Eight paces of walkway wall.",
+                       "img":  "assets/build/castle-wall-double.png",
+                       "w":  127,
+                       "h":  108,
+                       "ax":  0.4984,
+                       "ay":  0.6278
+                   },
+                   {
+                       "id":  "hall",
+                       "theme":  "castle",
+                       "name":  "Great hall",
+                       "tier":  3,
+                       "desc":  "Where the feasts are held.",
+                       "img":  "assets/build/castle-hall.png",
+                       "w":  125,
+                       "h":  116,
+                       "ax":  0.4973,
+                       "ay":  0.654
+                   },
+                   {
+                       "id":  "tower-pair",
+                       "theme":  "castle",
+                       "name":  "Twin towers",
+                       "tier":  3,
+                       "desc":  "Two small towers and a wall.",
+                       "img":  "assets/build/castle-tower-pair.png",
+                       "w":  152,
+                       "h":  179,
+                       "ax":  0.4981,
+                       "ay":  0.7345
+                   },
+                   {
+                       "id":  "grand-keep",
+                       "theme":  "castle",
+                       "name":  "Grand keep",
+                       "tier":  4,
+                       "desc":  "A keep flanked by two watchtowers.",
+                       "img":  "assets/build/castle-grand-keep.png",
+                       "w":  157,
+                       "h":  210,
+                       "ax":  0.4975,
+                       "ay":  0.7645
+                   },
+                   {
+                       "id":  "great-gate",
+                       "theme":  "castle",
+                       "name":  "Great gatehouse",
+                       "tier":  4,
+                       "desc":  "Iron doors between two watchtowers.",
+                       "img":  "assets/build/castle-great-gate.png",
+                       "w":  152,
+                       "h":  207,
+                       "ax":  0.4981,
+                       "ay":  0.7689
+                   },
+                   {
+                       "id":  "royal-hall",
+                       "theme":  "castle",
+                       "name":  "Royal hall",
+                       "tier":  4,
+                       "desc":  "Two halls, glass windows, a tower.",
+                       "img":  "assets/build/castle-royal-hall.png",
+                       "w":  176,
+                       "h":  221,
+                       "ax":  0.4994,
+                       "ay":  0.7522
+                   },
+                   {
+                       "id":  "fortress-corner",
+                       "theme":  "castle",
+                       "name":  "Fortress corner",
+                       "tier":  4,
+                       "desc":  "A watchtower with walls on two sides.",
+                       "img":  "assets/build/castle-fortress-corner.png",
+                       "w":  168,
+                       "h":  217,
+                       "ax":  0.4996,
+                       "ay":  0.7554
+                   },
+                   {
+                       "id":  "citadel",
+                       "theme":  "castle",
+                       "name":  "Citadel",
+                       "tier":  4,
+                       "desc":  "Hall, keep and towers all together.",
+                       "img":  "assets/build/castle-citadel.png",
+                       "w":  186,
+                       "h":  227,
+                       "ax":  0.4975,
+                       "ay":  0.7442
+                   }
+               ]
+}
