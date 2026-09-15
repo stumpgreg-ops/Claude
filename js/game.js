@@ -6896,10 +6896,13 @@
         }
         /* Adaptive weighting: items near the student's level, and (on All-skills nights) weaker strands. */
         var a = this.adapt, target = a ? a.ability : 1.6, allStrands = String(this.strand || "ALL").toUpperCase() === "ALL";
+        /* v4.9.2 stamina: prefer passages near tonight's target length (short early, longer every couple of nights) */
+        var wantWords = (typeof heistTargetWords === "function") ? heistTargetWords(this.night) : 250;
         var weights = [], total = 0, w, rec, acc;
         for (i = 0; i < pool.length; i++) {
           var c = claims[pool[i]];
           w = Math.exp(-Math.abs((c.level || 2) - target) * 1.3);
+          if (c.words) w *= Math.exp(-Math.abs(c.words - wantWords) / (0.3 * wantWords));
           if (allStrands && a) {
             rec = a.strands[c.strand || "RL"];
             acc = rec ? (rec.r + 1) / (rec.r + rec.w + 2) : 0.5;
@@ -25741,7 +25744,7 @@
         var ol = document.getElementById("read-choices");
         var hint = document.getElementById("read-hint");
         var scroll = document.getElementById("read-scroll");
-        if (kick) kick.textContent = (reason === "start" ? "Read first · Night " : "Next question · Night ") + this.night + " · " + (c.sol || "") + (c.isPartB ? " · Part B (evidence)" : c.partB ? " · Part A" : "");
+        if (kick) kick.textContent = (reason === "start" ? "Read first · Night " : "Next question · Night ") + this.night + " · " + (c.sol || "") + (c.isPartB ? " · Part B (evidence)" : c.partB ? " · Part A" : "") + (c.words ? " · " + c.words + " words" : "");
         if (title) title.textContent = c.packTitle || "Passage";
         if (pass) pass.innerHTML = c.passage || "";
         if (stem) stem.textContent = c.stem || c.doThis || "";

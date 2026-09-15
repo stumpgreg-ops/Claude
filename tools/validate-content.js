@@ -43,12 +43,12 @@ packs.forEach(function (p, pi) {
   var wc = words(p.passage);
   var isPoem = /poem/i.test(p.passage.slice(0, 40)) || /Poetry/i.test(p.kind);
   var isPaired = /Paired/i.test(p.kind);
-  var lo = isPoem ? 70 : 140, hi = isPaired ? 420 : 330;
+  var lo = isPoem ? 30 : 45, hi = isPaired ? 800 : 720;   /* tiny packs ~50 words, epic packs up to ~650 */
   if (wc < lo || wc > hi) warnings.push(where + ": passage is " + wc + " words (expected " + lo + "-" + hi + ")");
   var key = p.passage.replace(/<[^>]+>/g, "").slice(0, 120);
   if (passages[key]) errors.push(where + ": passage text duplicates " + passages[key]); passages[key] = where;
   if (!Array.isArray(p.claims) || !p.claims.length) { errors.push(where + ": no claims"); return; }
-  if (p.claims.length < 5) warnings.push(where + ": only " + p.claims.length + " claims (aim for 6)");
+  if (p.claims.length < 4 || (p.claims.length < 5 && wc > 100)) warnings.push(where + ": only " + p.claims.length + " claims (aim for 6; 4–5 on a tiny pack)");
   var letterCount = {};
   p.claims.forEach(function (c, ci) {
     var w = where + ":" + (c.id || ("claim#" + ci));

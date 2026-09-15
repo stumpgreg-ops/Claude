@@ -82,12 +82,33 @@ Part A is a normal claim with `partB: "<id of the Part B claim>"`; Part B is a s
 whose stem starts with `Part B:` and asks which sentence/detail best supports the Part A
 answer (its `sol` is usually `RL.CR.5.1` / `RI.CR.5.1`). The game asks Part B right after Part A.
 
+## Passage length tiers (stamina)
+
+The game raises the target passage length as nights go by (about 60 words on night 1,
++10 words every 2 nights, ~550 by night 99) and picks packs close to that target. So the
+pool needs every length, and the early nights need genuinely tiny texts. Aim for these
+bands (word counts exclude the sentence numbers):
+
+| tier   | nights   | prose words | poems      | paired texts (each) | questions |
+|--------|----------|-------------|------------|---------------------|-----------|
+| tiny   | 1–8      | 50–90       | 6–8 lines  | 35–45               | 4–5       |
+| short  | 9–20     | 100–150     | 8–10 lines | 60–80               | 5–6       |
+| medium | 20–45    | 170–260     | 12–16      | 110–150             | 6         |
+| long   | 55–90    | 380–520     | 20–28      | 200–260             | 7–8       |
+| epic   | 90–100   | 540–650     | —          | 280–330             | 8         |
+
+A tiny pack is still a complete text: one small scene or one clear idea in 4–7 sentences,
+with questions that only need those sentences (main idea, a detail, a word in context, why
+the author included a sentence). Long and epic passages read like a real test passage:
+several paragraphs, a clear beginning-middle-end (stories) or sections with a through-line
+(articles), and questions that reach across the whole text (a detail from paragraph 1 used
+in a paragraph 4 question, a structure item, a summary item).
+
 ## Writing rules
 
 - **Original text only.** No real book, article, song, speech or published poem. No real
   people. Do not imitate a specific copyrighted work.
-- **Length.** Grades 9–11 prose 170–260 words; NJ grade 5 prose 180–260 words; poems 12–16 lines;
-  paired texts 2 × 110–150 words. Grade 5 sentences are shorter and the vocabulary is
+- **Length.** Follow the tier table above. Grade 5 sentences are shorter and the vocabulary is
   grade-appropriate; grades 9–11 read like real EOC passages.
 - **Topics** students recognise: school, sports, jobs, family, neighbourhood, science fair,
   animals, weather, inventions, community, small mysteries. Vary settings and names across

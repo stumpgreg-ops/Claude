@@ -151,6 +151,21 @@ var srv = http.createServer(function (req, res) {
   await page.waitForTimeout(800);
   await shot("12-night-play");
 
+  /* stamina: night 1 draws a tiny passage, night 90 a long one */
+  var stamina = await page.evaluate(async function () {
+    function wordsNow() { return window.SolScene && SolScene.claim ? SolScene.claim.words : 0; }
+    var out = { target1: heistTargetWords(1), target90: heistTargetWords(90), n1: [], n90: [] };
+    var sc = window.SolScene;
+    for (var i = 0; i < 5; i++) { sc.nextClaim(); out.n1.push(wordsNow()); }
+    sc.night = 90; sc.nightPacks = [];
+    for (var j = 0; j < 5; j++) { sc.nextClaim(); out.n90.push(wordsNow()); }
+    sc.night = 1;
+    return out;
+  });
+  console.log("stamina", JSON.stringify(stamina));
+  var avg = function (a) { return a.reduce(function (x, y) { return x + y; }, 0) / a.length; };
+  check(avg(stamina.n1) < 130 && avg(stamina.n90) > 300, "night 1 passages are much shorter than night 90 passages");
+
   /* a wrong letter costs a life: three wrong grabs end the night */
   var strikeRun = await page.evaluate(function () {
     var sc = window.SolScene, out = { before: sc.strikes, hud: [], ended: false };

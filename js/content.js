@@ -1508,6 +1508,20 @@
     words.forEach(function (w) { syl += syllables(w); });
     return 0.39 * (words.length / sents) + 11.8 * (syl / words.length) - 15.59;   /* Flesch–Kincaid grade */
   }
+  function passageWords(p) {
+    if (p._words) return p._words;
+    var text = String(p.passage || "").replace(/<[^>]+>/g, " ").replace(/\(\d+\)/g, " ");
+    p._words = text.split(/\s+/).filter(Boolean).length;
+    return p._words;
+  }
+  /* Stamina schedule: the passage length the picker aims for on a given night.
+     Night 1 targets ~60 words (a few sentences); every 2 nights the target grows
+     by 10 words, reaching ~550 words by night 99. Tune in STAMINA. */
+  var STAMINA = { start: 60, step: 10, every: 2, max: 650 };
+  function targetWords(night) {
+    night = Math.max(1, parseInt(night, 10) || 1);
+    return Math.min(STAMINA.max, STAMINA.start + STAMINA.step * Math.floor((night - 1) / STAMINA.every));
+  }
   function packLevel(p) {
     if (p.level === 1 || p.level === 2 || p.level === 3) return p.level;
     var g = readingGrade(p.passage || ""), nj = p.family === "NJ5";
@@ -1547,6 +1561,7 @@
           sol: c.sol,
           strand: strandOf(c),
           level: lvl,
+          words: passageWords(p),
           partB: c.partB ? p.id + ":" + c.partB : null,
           isPartB: isPartB,
           stem: c.stem,
@@ -1583,5 +1598,7 @@
   global.heistCorrectList = correctList;
   global.heistStrandOf = strandOf;
   global.heistPackLevel = packLevel;
+  global.heistTargetWords = targetWords;
+  global.heistStamina = STAMINA;
   global.heistIsMulti = isMulti;
 })(typeof window !== "undefined" ? window : global);
