@@ -23,6 +23,9 @@ The reward pieces in `assets/build/` are 2D sprites pre-rendered from two 3D pac
   Terms (from the itch page): "You may use this asset in your animation or game projects, both personally and commercially. DO NOT redistribute this asset as your own."
   Used for the Castle pieces (walls, gates, towers, keep, halls, citadel). The Sandstone and Whitestone style variants in `assets/build/styles/` are recolours of these renders.
 
+## Castle tile kit
+The castle in the reward builder is built from **Castle Kit 1.0** by **Kenney** (www.kenney.nl), Creative Commons Zero (CC0). The isometric renders live in `assets/build/kit/`; the Crimson, Forest and Gold sets are recolours of Kenney's blue accents made by `tools/make-castle-kit.py`. No attribution required; credited with thanks.
+
 ## Characters, interiors and props
 - **Mana Seed Character Base** by Seliel the Shaper (free demo) — Sol's character sheets.
 - **Modern Interiors** by LimeZu (free version) — floor and interior tiles.

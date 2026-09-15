@@ -286,47 +286,126 @@
   },
   "castle": {
    "name": "Castle",
-   "desc": "A keep that grows into a fortress: towers, halls and a great gate.",
-   "drawScale": 1.05,
-   "pitch": 125,
+   "desc": "A keep that grows into a real castle: walls that turn corners, towers, gates, flags in your colour.",
+   "kit": true,
+   "cell": 151,
+   "cellH": 87.2,
+   "unitPx": 1,
+   "drawScale": 1,
    "wallLevel": 8,
    "styles": [
     {
-     "id": "stone",
-     "name": "Grey Stone",
-     "desc": "Dark grey masonry and slate roofs.",
+     "id": "blue",
+     "name": "Royal Blue",
+     "desc": "Blue roofs, flags and bands.",
      "dir": "",
      "pairs": [
-      "white"
+      "gold"
      ]
     },
     {
-     "id": "sand",
-     "name": "Sandstone",
-     "desc": "Warm golden stone and brown shingles.",
-     "dir": "styles/sand/",
+     "id": "red",
+     "name": "Crimson",
+     "desc": "Red roofs, flags and bands.",
+     "dir": "red/",
      "pairs": [
-      "stone"
+      "gold"
      ]
     },
     {
-     "id": "white",
-     "name": "Whitestone",
-     "desc": "Pale limestone and blue slate.",
-     "dir": "styles/white/",
+     "id": "green",
+     "name": "Forest",
+     "desc": "Green roofs, flags and bands.",
+     "dir": "green/",
      "pairs": [
-      "sand"
+      "blue"
+     ]
+    },
+    {
+     "id": "gold",
+     "name": "Gold",
+     "desc": "Gold roofs, flags and bands.",
+     "dir": "gold/",
+     "pairs": [
+      "red"
      ]
     }
    ],
-   "ring": {
-    "seg": "wall-long",
-    "corner": "wall-corner",
-    "gate": "wall-gate",
-    "extent": 3.75
-   },
-   "cell": 30,
-   "unitPx": 17
+   "ranks": [
+    [
+     0,
+     "Camp"
+    ],
+    [
+     120,
+     "Fort"
+    ],
+    [
+     300,
+     "Stronghold"
+    ],
+    [
+     600,
+     "Castle"
+    ],
+    [
+     1000,
+     "Fortress"
+    ],
+    [
+     1600,
+     "Citadel"
+    ],
+    [
+     2400,
+     "Royal Seat"
+    ]
+   ],
+   "packs": [
+    {
+     "id": "walls",
+     "name": "Wall pack",
+     "desc": "Four lengths of curtain wall, 25% off. They turn corners by themselves.",
+     "items": [
+      "wall",
+      "wall",
+      "wall",
+      "wall"
+     ],
+     "discount": 0.25
+    },
+    {
+     "id": "gatehouse",
+     "name": "Gatehouse pack",
+     "desc": "A gate with a square tower either side, 15% off.",
+     "items": [
+      "square-tower",
+      "gate",
+      "square-tower"
+     ],
+     "discount": 0.15
+    },
+    {
+     "id": "tower",
+     "name": "Tower pack",
+     "desc": "A round tower with a flag on top, 15% off.",
+     "items": [
+      "round-tower",
+      "flag"
+     ],
+     "discount": 0.15
+    },
+    {
+     "id": "siege",
+     "name": "Siege pack",
+     "desc": "A catapult and a ballista for the courtyard, 20% off.",
+     "items": [
+      "catapult",
+      "ballista"
+     ],
+     "discount": 0.2
+    }
+   ]
   }
  },
  "pieces": [
@@ -772,359 +851,6 @@
    "cells": 2
   },
   {
-   "id": "keep",
-   "theme": "castle",
-   "name": "Keep",
-   "role": "core",
-   "tier": 1,
-   "desc": "The heart of the castle, with a hall inside.",
-   "img": "assets/build/castle-keep.png",
-   "w": 98,
-   "h": 100,
-   "ax": 0.4987,
-   "ay": 0.6814,
-   "unitPx": 17,
-   "price": 40,
-   "cells": 3
-  },
-  {
-   "id": "storehouse",
-   "theme": "castle",
-   "name": "Stone lodge",
-   "role": "core",
-   "tier": 1,
-   "desc": "A stone hut with a tiled roof and a hearth.",
-   "img": "assets/build/castle-storehouse.png",
-   "w": 77,
-   "h": 87,
-   "ax": 0.4956,
-   "ay": 0.7011,
-   "unitPx": 17,
-   "price": 40,
-   "cells": 2
-  },
-  {
-   "id": "hall",
-   "theme": "castle",
-   "name": "Great hall",
-   "role": "core",
-   "tier": 1,
-   "desc": "A long hall for feasts.",
-   "img": "assets/build/castle-hall.png",
-   "w": 125,
-   "h": 116,
-   "ax": 0.4973,
-   "ay": 0.654,
-   "unitPx": 17,
-   "price": 40,
-   "cells": 4
-  },
-  {
-   "id": "lodge-wing",
-   "theme": "castle",
-   "name": "Lodge wing",
-   "role": "module",
-   "tier": 1,
-   "desc": "A stone room joined to the keep.",
-   "img": "assets/build/castle-storehouse.png",
-   "w": 77,
-   "h": 87,
-   "ax": 0.4956,
-   "ay": 0.7011,
-   "fits": [
-    "side",
-    "back"
-   ],
-   "unitPx": 17,
-   "price": 40,
-   "cells": 2
-  },
-  {
-   "id": "tower-short",
-   "theme": "castle",
-   "name": "Small tower",
-   "role": "module",
-   "tier": 1,
-   "desc": "A round tower with a pointed roof.",
-   "img": "assets/build/castle-tower-short.png",
-   "w": 80,
-   "h": 137,
-   "ax": 0.4956,
-   "ay": 0.8068,
-   "fits": [
-    "side",
-    "back",
-    "far"
-   ],
-   "unitPx": 17,
-   "price": 40,
-   "cells": 2
-  },
-  {
-   "id": "gate",
-   "theme": "castle",
-   "name": "Iron gate",
-   "role": "module",
-   "tier": 1,
-   "desc": "A gate with iron doors at the front.",
-   "img": "assets/build/castle-gate.png",
-   "w": 71,
-   "h": 77,
-   "ax": 0.4983,
-   "ay": 0.679,
-   "fits": [
-    "front"
-   ],
-   "unitPx": 17,
-   "price": 40,
-   "cells": 2
-  },
-  {
-   "id": "hall-wing",
-   "theme": "castle",
-   "name": "Hall wing",
-   "role": "module",
-   "tier": 2,
-   "desc": "A great hall added on.",
-   "img": "assets/build/castle-hall.png",
-   "w": 125,
-   "h": 116,
-   "ax": 0.4973,
-   "ay": 0.654,
-   "fits": [
-    "side",
-    "back"
-   ],
-   "unitPx": 17,
-   "price": 80,
-   "cells": 4
-  },
-  {
-   "id": "keep-wing",
-   "theme": "castle",
-   "name": "Second keep",
-   "role": "module",
-   "tier": 2,
-   "desc": "Another keep beside the first.",
-   "img": "assets/build/castle-keep.png",
-   "w": 98,
-   "h": 100,
-   "ax": 0.4987,
-   "ay": 0.6814,
-   "fits": [
-    "side",
-    "back"
-   ],
-   "unitPx": 17,
-   "price": 80,
-   "cells": 3
-  },
-  {
-   "id": "watchtower",
-   "theme": "castle",
-   "name": "Watchtower",
-   "role": "module",
-   "tier": 2,
-   "desc": "Four storeys and a cone roof.",
-   "img": "assets/build/castle-watchtower.png",
-   "w": 80,
-   "h": 165,
-   "ax": 0.4956,
-   "ay": 0.8376,
-   "fits": [
-    "side",
-    "back",
-    "far"
-   ],
-   "unitPx": 17,
-   "price": 80,
-   "cells": 2
-  },
-  {
-   "id": "gatehouse",
-   "theme": "castle",
-   "name": "Gatehouse",
-   "role": "module",
-   "tier": 2,
-   "desc": "A gate with a rampart above it.",
-   "img": "assets/build/castle-gatehouse.png",
-   "w": 80,
-   "h": 109,
-   "ax": 0.4965,
-   "ay": 0.7502,
-   "fits": [
-    "front"
-   ],
-   "unitPx": 17,
-   "price": 80,
-   "cells": 2
-  },
-  {
-   "id": "tower-pair",
-   "theme": "castle",
-   "name": "Twin towers",
-   "role": "module",
-   "tier": 3,
-   "desc": "Two towers joined by a wall.",
-   "img": "assets/build/castle-tower-pair.png",
-   "w": 152,
-   "h": 179,
-   "ax": 0.4981,
-   "ay": 0.7345,
-   "fits": [
-    "side",
-    "back",
-    "far"
-   ],
-   "unitPx": 17,
-   "price": 140,
-   "cells": 5
-  },
-  {
-   "id": "royal-hall",
-   "theme": "castle",
-   "name": "Royal hall",
-   "role": "module",
-   "tier": 3,
-   "desc": "Two halls, glass windows, a tower.",
-   "img": "assets/build/castle-royal-hall.png",
-   "w": 176,
-   "h": 221,
-   "ax": 0.4994,
-   "ay": 0.7522,
-   "fits": [
-    "side",
-    "back"
-   ],
-   "unitPx": 17,
-   "price": 140,
-   "cells": 6
-  },
-  {
-   "id": "great-gate",
-   "theme": "castle",
-   "name": "Great gatehouse",
-   "role": "module",
-   "tier": 3,
-   "desc": "Iron doors between two watchtowers.",
-   "img": "assets/build/castle-great-gate.png",
-   "w": 152,
-   "h": 207,
-   "ax": 0.4981,
-   "ay": 0.7689,
-   "fits": [
-    "front"
-   ],
-   "unitPx": 17,
-   "price": 140,
-   "cells": 5
-  },
-  {
-   "id": "fortress-corner",
-   "theme": "castle",
-   "name": "Fortress corner",
-   "role": "module",
-   "tier": 3,
-   "desc": "A watchtower with walls on two sides.",
-   "img": "assets/build/castle-fortress-corner.png",
-   "w": 168,
-   "h": 217,
-   "ax": 0.4996,
-   "ay": 0.7554,
-   "fits": [
-    "side",
-    "far"
-   ],
-   "unitPx": 17,
-   "price": 140,
-   "cells": 5
-  },
-  {
-   "id": "grand-keep",
-   "theme": "castle",
-   "name": "Grand keep",
-   "role": "module",
-   "tier": 4,
-   "desc": "A keep flanked by two watchtowers.",
-   "img": "assets/build/castle-grand-keep.png",
-   "w": 157,
-   "h": 210,
-   "ax": 0.4975,
-   "ay": 0.7645,
-   "fits": [
-    "back",
-    "far"
-   ],
-   "unitPx": 17,
-   "price": 220,
-   "cells": 5
-  },
-  {
-   "id": "citadel",
-   "theme": "castle",
-   "name": "Citadel",
-   "role": "module",
-   "tier": 4,
-   "desc": "Hall, keep and towers all together.",
-   "img": "assets/build/castle-citadel.png",
-   "w": 186,
-   "h": 227,
-   "ax": 0.4975,
-   "ay": 0.7442,
-   "fits": [
-    "back",
-    "far"
-   ],
-   "unitPx": 17,
-   "price": 220,
-   "cells": 6
-  },
-  {
-   "id": "wall-long",
-   "theme": "castle",
-   "name": "Long wall",
-   "role": "wall",
-   "tier": 0,
-   "desc": "Four paces of stone.",
-   "img": "assets/build/castle-wall-long.png",
-   "w": 69,
-   "h": 75,
-   "ax": 0.4992,
-   "ay": 0.6805,
-   "unitPx": 17,
-   "cells": 2
-  },
-  {
-   "id": "wall-corner",
-   "theme": "castle",
-   "name": "Wall corner",
-   "role": "wall",
-   "tier": 0,
-   "desc": "Where two walls meet.",
-   "img": "assets/build/castle-wall-corner.png",
-   "w": 93,
-   "h": 89,
-   "ax": 0.4996,
-   "ay": 0.6519,
-   "unitPx": 17,
-   "cells": 3
-  },
-  {
-   "id": "wall-gate",
-   "theme": "castle",
-   "name": "Wall gate",
-   "role": "wall",
-   "tier": 0,
-   "desc": "The gate in the outer wall.",
-   "img": "assets/build/castle-gate.png",
-   "w": 71,
-   "h": 77,
-   "ax": 0.4983,
-   "ay": 0.679,
-   "unitPx": 17,
-   "cells": 2
-  },
-  {
    "id": "well",
    "theme": "village",
    "name": "Village well",
@@ -1278,157 +1004,567 @@
    "cells": 2
   },
   {
-   "id": "c-scaffold",
+   "id": "keep",
    "theme": "castle",
-   "name": "Builders' scaffold",
-   "role": "deco",
-   "tier": 0,
-   "price": 20,
-   "desc": "Masons at work on the next tower.",
-   "img": "assets/build/castle-scaffold.png",
-   "w": 73,
-   "h": 73,
-   "ax": 0.4994,
-   "ay": 0.6583,
-   "unitPx": 17,
-   "nostyle": true,
-   "cells": 2
+   "name": "Keep",
+   "desc": "A square keep with windows and a high roof \u2014 the heart of the castle.",
+   "role": "core",
+   "kind": "core",
+   "tier": 1,
+   "price": 80,
+   "score": 60,
+   "cells": 1,
+   "parts": [
+    "towerSquareBaseColor_NE",
+    "towerSquareMidWindows_NE",
+    "towerSquareTopRoofHigh_NE"
+   ],
+   "img": "assets/build/kit/towerSquareBaseColor_NE.png",
+   "nostyle": false
   },
   {
-   "id": "c-ruin-tower",
+   "id": "round-keep",
    "theme": "castle",
-   "name": "Old ruin",
-   "role": "deco",
-   "tier": 0,
-   "price": 25,
-   "desc": "Half a tower, all of the history.",
-   "img": "assets/build/castle-ruin-tower.png",
-   "w": 64,
-   "h": 72,
-   "ax": 0.499,
-   "ay": 0.6886,
-   "unitPx": 17,
-   "nostyle": true,
-   "cells": 2
+   "name": "Round keep",
+   "desc": "A tall round tower with a pointed roof.",
+   "role": "core",
+   "kind": "core",
+   "tier": 1,
+   "price": 80,
+   "score": 60,
+   "cells": 1,
+   "parts": [
+    "towerBase_NE",
+    "towerBase_NE",
+    "towerTop_NE",
+    "towerTopRoof_NE"
+   ],
+   "img": "assets/build/kit/towerBase_NE.png",
+   "nostyle": false
   },
   {
-   "id": "c-gate-frame",
+   "id": "watch-keep",
    "theme": "castle",
-   "name": "Stone arch",
-   "role": "deco",
-   "tier": 0,
-   "price": 20,
-   "desc": "An arch in the courtyard.",
-   "img": "assets/build/castle-gate-frame.png",
-   "w": 71,
-   "h": 77,
-   "ax": 0.4983,
-   "ay": 0.679,
-   "unitPx": 17,
-   "nostyle": true,
-   "cells": 2
+   "name": "Watch keep",
+   "desc": "An open-topped tower with a lookout platform.",
+   "role": "core",
+   "kind": "core",
+   "tier": 1,
+   "price": 80,
+   "score": 55,
+   "cells": 1,
+   "parts": [
+    "towerSquareBase_NE",
+    "towerSquareMidOpen_NE",
+    "towerSquareTop_NE",
+    "towerSquarePoles_NE"
+   ],
+   "img": "assets/build/kit/towerSquareBase_NE.png",
+   "nostyle": false
   },
   {
-   "id": "c-well",
+   "id": "wall",
    "theme": "castle",
-   "name": "Courtyard well",
-   "role": "deco",
-   "tier": 0,
+   "name": "Wall",
+   "desc": "One length of curtain wall. It turns corners by itself.",
+   "role": "module",
+   "kind": "wall",
+   "tier": 1,
+   "price": 15,
+   "score": 8,
+   "cells": 1,
+   "auto": {
+    "u": "wall_NE",
+    "v": "wall_NW",
+    "corner": {
+     "-u+v": "wallCorner_NE",
+     "-u-v": "wallCorner_SE",
+     "+u-v": "wallCorner_SW",
+     "+u+v": "wallCorner_NW"
+    }
+   },
+   "img": "assets/build/kit/wall_NE.png",
+   "nostyle": false
+  },
+  {
+   "id": "gate",
+   "theme": "castle",
+   "name": "Gate",
+   "desc": "A wall with an iron portcullis.",
+   "role": "module",
+   "kind": "wall",
+   "tier": 1,
    "price": 30,
-   "desc": "Water for the garrison.",
-   "img": "assets/build/village-well.png",
-   "w": 69,
-   "h": 84,
-   "ax": 0.4928,
-   "ay": 0.7153,
-   "unitPx": 30,
-   "nostyle": true,
-   "cells": 1
+   "score": 14,
+   "cells": 1,
+   "auto": {
+    "u": [
+     "wallDoor_NE",
+     "metalGate_NE"
+    ],
+    "v": [
+     "wallDoor_NW",
+     "metalGate_NW"
+    ]
+   },
+   "img": "assets/build/kit/wallDoor_NE.png",
+   "nostyle": false
   },
   {
-   "id": "c-barrels",
+   "id": "stairs-wall",
    "theme": "castle",
-   "name": "Barrel stack",
-   "role": "deco",
-   "tier": 0,
-   "price": 15,
-   "desc": "Provisions by the gate.",
-   "img": "assets/build/village-barrels.png",
-   "w": 51,
-   "h": 61,
-   "ax": 0.4929,
-   "ay": 0.6947,
-   "unitPx": 30,
-   "nostyle": true,
-   "cells": 1
-  },
-  {
-   "id": "c-crates",
-   "theme": "castle",
-   "name": "Supply crates",
-   "role": "deco",
-   "tier": 0,
-   "price": 20,
-   "desc": "Crates for the storeroom.",
-   "img": "assets/build/village-crates.png",
-   "w": 95,
-   "h": 112,
-   "ax": 0.4983,
-   "ay": 0.7226,
-   "unitPx": 30,
-   "nostyle": true,
-   "cells": 2
-  },
-  {
-   "id": "c-hay-cart",
-   "theme": "castle",
-   "name": "Hay cart",
-   "role": "deco",
-   "tier": 0,
+   "name": "Wall stairs",
+   "desc": "A wall with steps up to the walkway.",
+   "role": "module",
+   "kind": "wall",
+   "tier": 2,
    "price": 25,
-   "desc": "Feed for the stables.",
-   "img": "assets/build/village-hay-cart.png",
-   "w": 126,
-   "h": 112,
-   "ax": 0.4983,
-   "ay": 0.6397,
-   "unitPx": 30,
-   "nostyle": true,
-   "cells": 2
+   "score": 10,
+   "cells": 1,
+   "auto": {
+    "u": "wallNarrowStairs_NE",
+    "v": "wallNarrowStairs_NW"
+   },
+   "img": "assets/build/kit/wallNarrowStairs_NE.png",
+   "nostyle": false
   },
   {
-   "id": "c-lamp",
+   "id": "corner-tower",
    "theme": "castle",
-   "name": "Lantern post",
+   "name": "Corner turret",
+   "desc": "A turret built into a corner of the wall.",
+   "role": "module",
+   "kind": "wall",
+   "tier": 2,
+   "price": 40,
+   "score": 18,
+   "cells": 1,
+   "auto": {
+    "u": "wallCornerHalfTower_NE",
+    "v": "wallCornerHalfTower_NW",
+    "corner": {
+     "-u+v": "wallCornerHalfTower_NE",
+     "-u-v": "wallCornerHalfTower_SE",
+     "+u-v": "wallCornerHalfTower_SW",
+     "+u+v": "wallCornerHalfTower_NW"
+    }
+   },
+   "img": "assets/build/kit/wallCornerHalfTower_NE.png",
+   "nostyle": false
+  },
+  {
+   "id": "round-tower",
+   "theme": "castle",
+   "name": "Round tower",
+   "desc": "A round tower with a pointed roof.",
+   "role": "module",
+   "kind": "tower",
+   "tier": 1,
+   "price": 45,
+   "score": 25,
+   "cells": 1,
+   "parts": [
+    "towerBase_NE",
+    "towerTop_NE",
+    "towerTopRoof_NE"
+   ],
+   "img": "assets/build/kit/towerBase_NE.png",
+   "nostyle": false
+  },
+  {
+   "id": "square-tower",
+   "theme": "castle",
+   "name": "Square tower",
+   "desc": "A square tower with battlements.",
+   "role": "module",
+   "kind": "tower",
+   "tier": 1,
+   "price": 45,
+   "score": 25,
+   "cells": 1,
+   "parts": [
+    "towerSquareBase_NE",
+    "towerSquareTop_NE"
+   ],
+   "img": "assets/build/kit/towerSquareBase_NE.png",
+   "nostyle": false
+  },
+  {
+   "id": "roof-tower",
+   "theme": "castle",
+   "name": "Roofed tower",
+   "desc": "A square tower with a tiled roof.",
+   "role": "module",
+   "kind": "tower",
+   "tier": 2,
+   "price": 70,
+   "score": 35,
+   "cells": 1,
+   "parts": [
+    "towerSquareBase_NE",
+    "towerSquareMid_NE",
+    "towerSquareTopRoof_NE"
+   ],
+   "img": "assets/build/kit/towerSquareBase_NE.png",
+   "nostyle": false
+  },
+  {
+   "id": "balcony-tower",
+   "theme": "castle",
+   "name": "Balcony tower",
+   "desc": "A round tower with a balcony under the roof.",
+   "role": "module",
+   "kind": "tower",
+   "tier": 2,
+   "price": 70,
+   "score": 35,
+   "cells": 1,
+   "parts": [
+    "towerBase_NE",
+    "towerBalcony_NE",
+    "towerTopRoof_NE"
+   ],
+   "img": "assets/build/kit/towerBase_NE.png",
+   "nostyle": false
+  },
+  {
+   "id": "watchtower",
+   "theme": "castle",
+   "name": "Watchtower",
+   "desc": "A tall open tower with a lookout deck.",
+   "role": "module",
+   "kind": "tower",
+   "tier": 2,
+   "price": 75,
+   "score": 38,
+   "cells": 1,
+   "parts": [
+    "towerSquareBase_NE",
+    "towerSquareMid_NE",
+    "towerSquareTop_NE",
+    "towerSquarePoles_NE"
+   ],
+   "img": "assets/build/kit/towerSquareBase_NE.png",
+   "nostyle": false
+  },
+  {
+   "id": "grand-tower",
+   "theme": "castle",
+   "name": "Grand tower",
+   "desc": "Three storeys with coloured bands and a high roof.",
+   "role": "module",
+   "kind": "tower",
+   "tier": 3,
+   "price": 120,
+   "score": 60,
+   "cells": 1,
+   "parts": [
+    "towerSquareBaseColor_NE",
+    "towerSquareMidColor_NE",
+    "towerSquareMidWindows_NE",
+    "towerSquareTopRoofHigh_NE"
+   ],
+   "img": "assets/build/kit/towerSquareBaseColor_NE.png",
+   "nostyle": false
+  },
+  {
+   "id": "arch-tower",
+   "theme": "castle",
+   "name": "Archway tower",
+   "desc": "A tower with a covered archway at its foot.",
+   "role": "module",
+   "kind": "tower",
+   "tier": 3,
+   "price": 110,
+   "score": 55,
+   "cells": 1,
+   "parts": [
+    "towerSquareArch_NE",
+    "towerSquareMidOpen_NE",
+    "towerSquareTopColor_NE"
+   ],
+   "img": "assets/build/kit/towerSquareArch_NE.png",
+   "nostyle": false
+  },
+  {
+   "id": "great-tower",
+   "theme": "castle",
+   "name": "Great round tower",
+   "desc": "The tallest round tower, four storeys high.",
+   "role": "module",
+   "kind": "tower",
+   "tier": 4,
+   "price": 160,
+   "score": 80,
+   "cells": 1,
+   "parts": [
+    "towerBase_NE",
+    "towerBase_NE",
+    "towerBalcony_NE",
+    "towerTop_NE",
+    "towerTopRoof_NE"
+   ],
+   "img": "assets/build/kit/towerBase_NE.png",
+   "nostyle": false
+  },
+  {
+   "id": "royal-tower",
+   "theme": "castle",
+   "name": "Royal tower",
+   "desc": "Five storeys with a roof to see for miles.",
+   "role": "module",
+   "kind": "tower",
+   "tier": 4,
+   "price": 180,
+   "score": 90,
+   "cells": 1,
+   "parts": [
+    "towerSquareBaseColor_NE",
+    "towerSquareMidWindows_NE",
+    "towerSquareMidColor_NE",
+    "towerSquareMidWindows_NE",
+    "towerSquareTopRoofHigh_NE"
+   ],
+   "img": "assets/build/kit/towerSquareBaseColor_NE.png",
+   "nostyle": false
+  },
+  {
+   "id": "flag",
+   "theme": "castle",
+   "name": "Flag",
+   "desc": "A flag in your colour on top of a tower.",
    "role": "deco",
-   "tier": 0,
+   "kind": "topper",
+   "tier": 1,
+   "price": 12,
+   "score": 6,
+   "cells": 1,
+   "parts": [
+    "flagBlue_NE"
+   ],
+   "img": "assets/build/kit/flagBlue_NE.png",
+   "nostyle": false
+  },
+  {
+   "id": "flag-wide",
+   "theme": "castle",
+   "name": "Wide flag",
+   "desc": "A big banner flag for the tallest tower.",
+   "role": "deco",
+   "kind": "topper",
+   "tier": 2,
+   "price": 18,
+   "score": 8,
+   "cells": 1,
+   "parts": [
+    "flagBlueWide_NE"
+   ],
+   "img": "assets/build/kit/flagBlueWide_NE.png",
+   "nostyle": false
+  },
+  {
+   "id": "banner-long",
+   "theme": "castle",
+   "name": "Long banner",
+   "desc": "A long hanging banner.",
+   "role": "deco",
+   "kind": "topper",
+   "tier": 2,
+   "price": 18,
+   "score": 8,
+   "cells": 1,
+   "parts": [
+    "flagBannerLong_NE"
+   ],
+   "img": "assets/build/kit/flagBannerLong_NE.png",
+   "nostyle": false
+  },
+  {
+   "id": "banner-short",
+   "theme": "castle",
+   "name": "Short banner",
+   "desc": "A short hanging banner.",
+   "role": "deco",
+   "kind": "topper",
+   "tier": 1,
+   "price": 12,
+   "score": 6,
+   "cells": 1,
+   "parts": [
+    "flagBannerShort_NE"
+   ],
+   "img": "assets/build/kit/flagBannerShort_NE.png",
+   "nostyle": false
+  },
+  {
+   "id": "bridge",
+   "theme": "castle",
+   "name": "Bridge",
+   "desc": "A wooden bridge over the moat.",
+   "role": "deco",
+   "kind": "prop",
+   "tier": 1,
+   "price": 25,
+   "score": 10,
+   "cells": 1,
+   "parts": [
+    "bridge_NE"
+   ],
+   "img": "assets/build/kit/bridge_NE.png",
+   "nostyle": false
+  },
+  {
+   "id": "stone-stairs",
+   "theme": "castle",
+   "name": "Stone stairs",
+   "desc": "Stone steps up to a doorway.",
+   "role": "deco",
+   "kind": "prop",
+   "tier": 1,
    "price": 15,
-   "desc": "A lantern for the courtyard.",
-   "img": "assets/build/village-lamp.png",
-   "w": 43,
-   "h": 62,
-   "ax": 0.4895,
-   "ay": 0.7436,
-   "unitPx": 30,
-   "nostyle": true,
-   "cells": 1
+   "score": 6,
+   "cells": 1,
+   "parts": [
+    "stairsStone_NE"
+   ],
+   "img": "assets/build/kit/stairsStone_NE.png",
+   "nostyle": false
   },
   {
-   "id": "c-haystacks",
+   "id": "knight",
    "theme": "castle",
-   "name": "Haystacks",
+   "name": "Knight",
+   "desc": "A knight of your colour standing guard.",
    "role": "deco",
-   "tier": 0,
+   "kind": "prop",
+   "tier": 1,
    "price": 20,
-   "desc": "Fodder for the horses.",
-   "img": "assets/build/village-haystacks.png",
-   "w": 85,
-   "h": 84,
-   "ax": 0.4957,
-   "ay": 0.661,
-   "unitPx": 30,
-   "nostyle": true,
-   "cells": 1
+   "score": 8,
+   "cells": 1,
+   "parts": [
+    "knightBlue_NE"
+   ],
+   "img": "assets/build/kit/knightBlue_NE.png",
+   "nostyle": false
+  },
+  {
+   "id": "knight-red",
+   "theme": "castle",
+   "name": "Red knight",
+   "desc": "A knight in red on patrol.",
+   "role": "deco",
+   "kind": "prop",
+   "tier": 2,
+   "price": 20,
+   "score": 8,
+   "cells": 1,
+   "parts": [
+    "knightRed_NE"
+   ],
+   "img": "assets/build/kit/knightRed_NE.png",
+   "nostyle": false
+  },
+  {
+   "id": "king",
+   "theme": "castle",
+   "name": "The king",
+   "desc": "The king himself, come to inspect the castle.",
+   "role": "deco",
+   "kind": "prop",
+   "tier": 3,
+   "price": 60,
+   "score": 25,
+   "cells": 1,
+   "parts": [
+    "king_NE"
+   ],
+   "img": "assets/build/kit/king_NE.png",
+   "nostyle": false
+  },
+  {
+   "id": "ballista",
+   "theme": "castle",
+   "name": "Ballista",
+   "desc": "A giant crossbow on the walls.",
+   "role": "deco",
+   "kind": "prop",
+   "tier": 2,
+   "price": 45,
+   "score": 18,
+   "cells": 1,
+   "parts": [
+    "siegeBallista_NE"
+   ],
+   "img": "assets/build/kit/siegeBallista_NE.png",
+   "nostyle": false
+  },
+  {
+   "id": "catapult",
+   "theme": "castle",
+   "name": "Catapult",
+   "desc": "A catapult in the courtyard.",
+   "role": "deco",
+   "kind": "prop",
+   "tier": 2,
+   "price": 55,
+   "score": 22,
+   "cells": 1,
+   "parts": [
+    "siegeCatapult_NE"
+   ],
+   "img": "assets/build/kit/siegeCatapult_NE.png",
+   "nostyle": false
+  },
+  {
+   "id": "ram",
+   "theme": "castle",
+   "name": "Battering ram",
+   "desc": "A covered battering ram.",
+   "role": "deco",
+   "kind": "prop",
+   "tier": 3,
+   "price": 60,
+   "score": 24,
+   "cells": 1,
+   "parts": [
+    "siegeRam_NE"
+   ],
+   "img": "assets/build/kit/siegeRam_NE.png",
+   "nostyle": false
+  },
+  {
+   "id": "trebuchet",
+   "theme": "castle",
+   "name": "Trebuchet",
+   "desc": "The biggest siege engine of all.",
+   "role": "deco",
+   "kind": "prop",
+   "tier": 3,
+   "price": 90,
+   "score": 40,
+   "cells": 1,
+   "parts": [
+    "siegeTrebuchet_NE"
+   ],
+   "img": "assets/build/kit/siegeTrebuchet_NE.png",
+   "nostyle": false
+  },
+  {
+   "id": "siege-tower",
+   "theme": "castle",
+   "name": "Siege tower",
+   "desc": "A rolling tower for storming walls.",
+   "role": "deco",
+   "kind": "prop",
+   "tier": 4,
+   "price": 110,
+   "score": 45,
+   "cells": 1,
+   "parts": [
+    "siegeTower_NE"
+   ],
+   "img": "assets/build/kit/siegeTower_NE.png",
+   "nostyle": false
   }
  ],
  "decoLots": [
@@ -1667,5 +1803,318 @@
   "bonusMin": 3,
   "bonusMax": 12,
   "bonusPer": 500
+ },
+ "kit": {
+  "dir": "assets/build/kit/",
+  "cellW": 151,
+  "cellH": 87.2,
+  "sprites": {
+   "wall_NE": {
+    "w": 151,
+    "h": 206,
+    "lift": 119,
+    "coloured": true
+   },
+   "wall_NW": {
+    "w": 151,
+    "h": 206,
+    "lift": 119,
+    "coloured": true
+   },
+   "wallCorner_NE": {
+    "w": 151,
+    "h": 202,
+    "lift": 115,
+    "coloured": true
+   },
+   "wallCorner_NW": {
+    "w": 151,
+    "h": 206,
+    "lift": 119,
+    "coloured": true
+   },
+   "wallCorner_SE": {
+    "w": 151,
+    "h": 202,
+    "lift": 115,
+    "coloured": true
+   },
+   "wallCorner_SW": {
+    "w": 151,
+    "h": 206,
+    "lift": 119,
+    "coloured": true
+   },
+   "wallDoor_NE": {
+    "w": 113,
+    "h": 169,
+    "lift": 104,
+    "coloured": true
+   },
+   "wallDoor_NW": {
+    "w": 114,
+    "h": 179,
+    "lift": 113,
+    "coloured": true
+   },
+   "metalGate_NE": {
+    "w": 55,
+    "h": 91,
+    "lift": 59,
+    "coloured": true
+   },
+   "metalGate_NW": {
+    "w": 55,
+    "h": 92,
+    "lift": 60,
+    "coloured": true
+   },
+   "wallNarrowStairs_NE": {
+    "w": 148,
+    "h": 169,
+    "lift": 84,
+    "coloured": true
+   },
+   "wallNarrowStairs_NW": {
+    "w": 149,
+    "h": 204,
+    "lift": 118,
+    "coloured": true
+   },
+   "wallCornerHalfTower_NE": {
+    "w": 205,
+    "h": 206,
+    "lift": 88,
+    "coloured": true
+   },
+   "wallCornerHalfTower_NW": {
+    "w": 151,
+    "h": 234,
+    "lift": 147,
+    "coloured": true
+   },
+   "wallCornerHalfTower_SE": {
+    "w": 204,
+    "h": 206,
+    "lift": 88,
+    "coloured": true
+   },
+   "wallCornerHalfTower_SW": {
+    "w": 151,
+    "h": 243,
+    "lift": 156,
+    "coloured": true
+   },
+   "wallHalf_NE": {
+    "w": 151,
+    "h": 196,
+    "lift": 109,
+    "coloured": true
+   },
+   "wallHalf_NW": {
+    "w": 151,
+    "h": 206,
+    "lift": 119,
+    "coloured": true
+   },
+   "towerBase_NE": {
+    "w": 107,
+    "h": 174,
+    "lift": 112,
+    "coloured": true
+   },
+   "towerTop_NE": {
+    "w": 107,
+    "h": 85,
+    "lift": 23,
+    "coloured": true
+   },
+   "towerTopRoof_NE": {
+    "w": 120,
+    "h": 116,
+    "lift": 47,
+    "coloured": true
+   },
+   "towerBalcony_NE": {
+    "w": 142,
+    "h": 174,
+    "lift": 92,
+    "coloured": true
+   },
+   "towerSquareBase_NE": {
+    "w": 151,
+    "h": 180,
+    "lift": 93,
+    "coloured": true
+   },
+   "towerSquareBaseColor_NE": {
+    "w": 151,
+    "h": 180,
+    "lift": 93,
+    "coloured": true
+   },
+   "towerSquareMid_NE": {
+    "w": 140,
+    "h": 175,
+    "lift": 94,
+    "coloured": true
+   },
+   "towerSquareMidWindows_NE": {
+    "w": 140,
+    "h": 175,
+    "lift": 94,
+    "coloured": true
+   },
+   "towerSquareMidOpen_NE": {
+    "w": 140,
+    "h": 175,
+    "lift": 94,
+    "coloured": true
+   },
+   "towerSquareMidColor_NE": {
+    "w": 141,
+    "h": 115,
+    "lift": 34,
+    "coloured": true
+   },
+   "towerSquareArch_NE": {
+    "w": 140,
+    "h": 175,
+    "lift": 94,
+    "coloured": true
+   },
+   "towerSquareTop_NE": {
+    "w": 151,
+    "h": 126,
+    "lift": 39,
+    "coloured": true
+   },
+   "towerSquareTopRoof_NE": {
+    "w": 151,
+    "h": 129,
+    "lift": 42,
+    "coloured": true
+   },
+   "towerSquareTopRoofHigh_NE": {
+    "w": 151,
+    "h": 155,
+    "lift": 68,
+    "coloured": true
+   },
+   "towerSquareTopColor_NE": {
+    "w": 151,
+    "h": 132,
+    "lift": 45,
+    "coloured": true
+   },
+   "towerSquareRoof_NE": {
+    "w": 151,
+    "h": 209,
+    "lift": 122,
+    "coloured": true
+   },
+   "towerSquarePoles_NE": {
+    "w": 140,
+    "h": 175,
+    "lift": 94,
+    "coloured": true
+   },
+   "flagBlue_NE": {
+    "w": 42,
+    "h": 79,
+    "lift": 55,
+    "coloured": true
+   },
+   "flagBlueWide_NE": {
+    "w": 31,
+    "h": 76,
+    "lift": 58,
+    "coloured": true
+   },
+   "flagBannerLong_NE": {
+    "w": 51,
+    "h": 183,
+    "lift": 154,
+    "coloured": true
+   },
+   "flagBannerShort_NE": {
+    "w": 51,
+    "h": 78,
+    "lift": 49,
+    "coloured": true
+   },
+   "shieldBlue_NE": {
+    "w": 23,
+    "h": 27,
+    "lift": 14,
+    "coloured": true
+   },
+   "bridge_NE": {
+    "w": 138,
+    "h": 101,
+    "lift": 21,
+    "coloured": true
+   },
+   "bridge_NW": {
+    "w": 138,
+    "h": 102,
+    "lift": 22,
+    "coloured": true
+   },
+   "stairsStone_NE": {
+    "w": 80,
+    "h": 67,
+    "lift": 21,
+    "coloured": true
+   },
+   "king_NE": {
+    "w": 45,
+    "h": 67,
+    "lift": 41,
+    "coloured": true
+   },
+   "knightBlue_NE": {
+    "w": 45,
+    "h": 67,
+    "lift": 41,
+    "coloured": true
+   },
+   "knightRed_NE": {
+    "w": 45,
+    "h": 67,
+    "lift": 41,
+    "coloured": true
+   },
+   "siegeBallista_NE": {
+    "w": 135,
+    "h": 129,
+    "lift": 51,
+    "coloured": true
+   },
+   "siegeCatapult_NE": {
+    "w": 182,
+    "h": 186,
+    "lift": 81,
+    "coloured": true
+   },
+   "siegeRam_NE": {
+    "w": 173,
+    "h": 169,
+    "lift": 69,
+    "coloured": true
+   },
+   "siegeTower_NE": {
+    "w": 202,
+    "h": 277,
+    "lift": 160,
+    "coloured": true
+   },
+   "siegeTrebuchet_NE": {
+    "w": 199,
+    "h": 245,
+    "lift": 130,
+    "coloured": true
+   }
+  }
  }
 }

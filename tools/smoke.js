@@ -64,7 +64,7 @@ var srv = http.createServer(function (req, res) {
     await page.waitForSelector("#build-overlay:not(.hidden)", { timeout: 5000 });
     if (night === 5) {
       await page.waitForSelector(".build-theme");
-      await page.click(".build-theme:nth-child(" + (Math.random() < 0.5 ? 1 : 2) + ")");
+      await page.click(".build-theme:nth-child(2)");   /* the castle kit is the path under test; the town gets a short pass below */
       await page.click("#build-overlay .btn.primary");
     }
     await page.waitForSelector(".build-options .build-opt");
@@ -103,15 +103,18 @@ var srv = http.createServer(function (req, res) {
     /* every building must touch at least one other building (the estate is one joined structure) */
     var s = JSON.parse(localStorage.getItem("afterHours.v1.build")), cells = {}, ok = true;
     var P = null; var xhr = new XMLHttpRequest(); xhr.open("GET", "assets/build/pieces.json", false); xhr.send(); P = JSON.parse(xhr.responseText).pieces;
-    function n(id) { var p = P.filter(function (x) { return x.id === id; })[0]; return p ? p.cells : 1; }
-    var rs = s.picks.map(function (pk) { return { cx: pk.cx, cy: pk.cy, n: n(pk.piece) }; });
+    function pc(id) { return P.filter(function (x) { return x.id === id; })[0]; }
+    var rs = s.picks.filter(function (pk) { var p = pc(pk.piece); return p && p.kind !== "topper"; }).map(function (pk) { return { cx: pk.cx, cy: pk.cy, n: pc(pk.piece).cells || 1 }; });
     function touches(a, b) { var sx = (a.cx + a.n === b.cx || b.cx + b.n === a.cx) && a.cy < b.cy + b.n && a.cy + a.n > b.cy; var sy = (a.cy + a.n === b.cy || b.cy + b.n === a.cy) && a.cx < b.cx + b.n && a.cx + a.n > b.cx; return sx || sy; }
     function overlaps(a, b) { return a.cx < b.cx + b.n && a.cx + a.n > b.cx && a.cy < b.cy + b.n && a.cy + a.n > b.cy; }
     var lonely = 0, overlap = 0;
     rs.forEach(function (a, i) { var t = false; rs.forEach(function (b, j) { if (i !== j) { if (touches(a, b)) t = true; if (overlaps(a, b)) overlap++; } }); if (!t) lonely++; });
     return { pieces: rs.length, lonely: lonely, overlap: overlap };
   });
-  check(joined.pieces === 20 && joined.lonely === 0 && joined.overlap === 0, "all 20 pieces are joined with no overlaps: " + JSON.stringify(joined));
+  check(joined.pieces >= 20 && joined.lonely === 0 && joined.overlap === 0, "all pieces are joined with no overlaps: " + JSON.stringify(joined));
+  var rt0 = await page.evaluate(function () { return SolBuild.state().rating; });
+  console.log("rating", JSON.stringify(rt0));
+  check(rt0 && rt0.score > 200, "castle rating computed");
   var st = await page.evaluate(function () { return SolBuild.state(); });
   check(st.count === 20 && st.walls === true, "20 reward pieces placed and walls up: " + JSON.stringify(st));
 
@@ -146,10 +149,31 @@ var srv = http.createServer(function (req, res) {
   var rt = await page.evaluate(function () {
     var code = SolBuild.exportCode(), before = JSON.stringify(SolBuild.state());
     localStorage.removeItem("afterHours.v1.build");
-    var r = SolBuild.importCode(code);
-    return { ok: r.ok, count: r.count, same: JSON.stringify(SolBuild.state()) === before };
+    var r = SolBuild.importCode(code), after = JSON.stringify(SolBuild.state()), bo = JSON.parse(before), ao = JSON.parse(after), diff = {};
+    Object.keys(bo).forEach(function (k) { if (JSON.stringify(bo[k]) !== JSON.stringify(ao[k])) diff[k] = [bo[k], ao[k]]; });
+    return { ok: r.ok, count: r.count, same: after === before, diff: diff };
   });
   check(rt.ok && rt.same, "build code round trip " + JSON.stringify(rt));
+
+  /* short town pass: three rewards on the village theme still work */
+  await page.evaluate(function () { localStorage.setItem("smoke.castleCode", SolBuild.exportCode()); localStorage.removeItem("afterHours.v1.build"); });
+  await page.reload({ waitUntil: "load" }); await page.waitForTimeout(800);
+  await page.click('#state-screen .card[data-state="NJ"]'); await page.waitForTimeout(200);
+  for (var tn = 5; tn <= 15; tn += 5) {
+    await page.evaluate(function (n) { window.__done = false; SolBuild.showReward(n, function () { window.__done = true; }); }, tn);
+    await page.waitForSelector("#build-overlay:not(.hidden)", { timeout: 5000 });
+    if (tn === 5) { await page.waitForSelector(".build-theme"); await page.click(".build-theme:nth-child(1)"); await page.click("#build-overlay .btn.primary"); }
+    await page.waitForSelector(".build-options .build-opt"); await page.click(".build-options .build-opt:nth-child(1)"); await page.click("#build-overlay .btn.primary");
+    await page.waitForSelector(".build-styles .build-opt"); await page.click(".build-styles .build-opt:nth-child(1)"); await page.click("#build-overlay .btn.primary");
+    await page.waitForSelector(".build-note:not(.hidden)"); await page.click("#build-overlay .btn.primary"); await page.waitForSelector(".build-note:not(.hidden)");
+    await page.click("#build-overlay .btn.primary"); await page.waitForFunction(function () { return window.__done === true; });
+  }
+  var townSt = await page.evaluate(function () { return SolBuild.state(); });
+  check(townSt.theme === "village" && townSt.buildings === 3, "town theme still builds: " + JSON.stringify({ theme: townSt.theme, b: townSt.buildings }));
+  await shot("09c-town");
+  await page.evaluate(function () { SolBuild.importCode(localStorage.getItem("smoke.castleCode")); });
+  await page.reload({ waitUntil: "load" }); await page.waitForTimeout(800);
+  await page.click('#state-screen .card[data-state="NJ"]'); await page.waitForTimeout(200);
 
   /* gallery */
   await page.evaluate(function () { SolBuild.showGallery(); });

@@ -101,7 +101,7 @@
 }
 
 /* v4.9: style choice cards (same look as the option cards) */
-.build-styles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.build-styles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
 .build-styles .build-opt { min-height: 0; }
 .build-styles .build-opt .pic { height: 84px; }
 .build-opt .match {
