@@ -105,8 +105,13 @@ var srv = http.createServer(function (req, res) {
     check(nOpt === 3, "night " + night + ": three pieces offered");
     if (night === 5) {
       var names = await page.$$eval(".build-options .build-opt .name", function (l) { return l.map(function (e) { return e.textContent; }); });
-      check(!/wall|fence|scaffold|ruin/i.test(names.join(" ")), "first offer is buildings, not walls: " + names.join(", "));
+      check(!/wall|fence|scaffold|ruin|tower/i.test(names.join(" ")), "first offer is modest keeps: " + names.join(", "));
       await shot("03-first-building");
+    }
+    if (night === 10 || night === 15 || night === 20 || night === 25) {
+      /* v4.9.8: rewards 2-5 offer only towers and gate pieces */
+      var ids = await page.$$eval(".build-options .build-opt .name", function (l) { return l.map(function (e) { return e.textContent; }); });
+      check(ids.every(function (nm) { return /tower|gate/i.test(nm); }), "level " + night + " offers towers and gates only: " + ids.join(", "));
     }
     await page.click(".build-options .build-opt:nth-child(" + (1 + Math.floor(Math.random() * 3)) + ")");
     await page.click("#build-overlay .btn.primary");
@@ -147,6 +152,8 @@ var srv = http.createServer(function (req, res) {
   check(joined.pieces >= 20 && joined.lonely === 0 && joined.overlap === 0, "all pieces are joined with no overlaps: " + JSON.stringify(joined));
   var rt0 = await page.evaluate(function () { return SolBuild.state().rating; });
   console.log("rating", JSON.stringify(rt0));
+  var stage = await page.evaluate(function () { return SolBuild._coreStage(); });
+  check(stage === 3, "the keep has grown to its final stage after 20 rewards (stage " + stage + ")");
   check(rt0 && rt0.score > 200, "castle rating computed");
   var st = await page.evaluate(function () { return SolBuild.state(); });
   check(st.count === 20 && st.walls === true, "20 reward pieces placed and walls up: " + JSON.stringify(st));
@@ -213,9 +220,8 @@ var srv = http.createServer(function (req, res) {
   await page.waitForSelector("#build-overlay:not(.hidden)");
   await page.waitForTimeout(500);
   await shot("09-gallery");
-  /* Arrange mode: drag the core piece a long way to the right and check it moved to a free cell (or bounced back if blocked) */
-  await page.click("text=Arrange pieces");
-  await page.waitForTimeout(300);
+  /* v4.9.8: no arrange mode — any piece drags at any time. Drag the core piece a long way to the right and check it moved (or bounced back with a reason) */
+  check(!(await page.isVisible("text=Arrange pieces")), "gallery has no separate arrange mode");
   var cv = await page.$eval("#build-overlay .build-scene canvas", function (c) { var r = c.getBoundingClientRect(); return { x: r.left, y: r.top, w: r.width, h: r.height }; });
   var beforeMove = await page.evaluate(function () { return JSON.parse(localStorage.getItem("afterHours.v1.build")).picks.map(function (p) { return p.cx + "," + p.cy; }).join(" "); });
   var p0 = await page.evaluate(function () { return SolBuild._pickScreen(0); });
@@ -232,9 +238,8 @@ var srv = http.createServer(function (req, res) {
   var afterMove = await page.evaluate(function () { return JSON.parse(localStorage.getItem("afterHours.v1.build")).picks.map(function (p) { return p.cx + "," + p.cy; }).join(" "); });
   var noteTxt = await page.textContent(".build-note");
   console.log("arrange:", beforeMove === afterMove ? "no move (" + noteTxt + ")" : "moved (" + noteTxt + ")");
-  check(beforeMove !== afterMove || /taken|must touch/i.test(noteTxt), "arrange mode moves a dragged piece or bounces it back with a reason: " + noteTxt);
+  check(beforeMove !== afterMove || /taken|must touch/i.test(noteTxt), "gallery drag moves a piece or bounces it back with a reason: " + noteTxt);
   await shot("09b-arrange");
-  await page.click("text=Done arranging");
   await page.keyboard.press("Escape");
 
   /* start a Grade 5 night */

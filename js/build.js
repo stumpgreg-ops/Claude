@@ -239,7 +239,6 @@
       shuffle(pool.filter(function (p) { return (p.tier || 1) === band; }), r).concat(shuffle(pool.filter(function (p) { return (p.tier || 1) < band; }), r))
         .forEach(function (p) { if (out.length < OPTIONS && !kinds[p.kind + ":" + p.id] && (out.length < 2 || !kinds[p.kind])) { out.push(p); kinds[p.kind] = true; kinds[p.kind + ":" + p.id] = true; } });
       shuffle(pool.slice(), r).forEach(function (p) { if (out.length < OPTIONS && out.indexOf(p) === -1) out.push(p); });   /* top up when only two kinds exist */
-      if (!out.some(function (p) { return p.kind === "wall"; }) && pieceById("wall")) out[out.length - 1] = pieceById("wall");
       return out;
     }
     save.picks.forEach(function (p) { owned[p.piece] = true; });
@@ -406,8 +405,15 @@
     return Array.isArray(out) ? out : [out];
   }
   /* Sprite stack for a kit pick: [{name, lift}], lifts accumulate up the stack. */
+  /* The keep grows a storey at each theme.growAt building count (rewards + shop pieces, not the auto walls). */
+  function grownCount() { return buildingPicks().filter(function (pk) { return pk.src !== "auto"; }).length; }
+  function coreStage() {
+    var t = themeDef(save.theme), at = (t && t.growAt) || [1, 4, 8, 13], n = grownCount(), st = 0, i;
+    for (i = 0; i < at.length; i++) if (n >= at[i]) st = i;
+    return st;
+  }
   function partsFor(p, cx, cy, ignore) {
-    var names = p.auto ? wallParts(p, cx, cy, ignore) : (p.parts || []), out = [], lift = 0, i, sp;
+    var names = p.auto ? wallParts(p, cx, cy, ignore) : (p.grow ? (p.grow[Math.min(coreStage(), p.grow.length - 1)] || p.parts) : (p.parts || [])), out = [], lift = 0, i, sp;
     for (i = 0; i < names.length; i++) {
       sp = kitSprite(names[i]);
       out.push({ name: names[i], lift: lift, w: sp.w, h: sp.h });
@@ -581,7 +587,7 @@
       minX = Math.min(minX, l); maxX = Math.max(maxX, l + w); minY = Math.min(minY, tp); maxY = Math.max(maxY, tp + h);
     });
     if (!items.length) { minX = -100; maxX = 100; minY = -60; maxY = 40; }
-    var moving = !!(cur && (step === "place" || step === "done" || cur.arrange));
+    var moving = !!(cur && (step === "place" || step === "done"));
     pad = moving ? cellPx() * base * 1.5 : cellPx() * base * 0.6;
     minX -= pad; maxX += pad; minY -= pad * 0.5; maxY += pad * 0.5;
     var bw = Math.max(1, maxX - minX), bh = Math.max(1, maxY - minY);
@@ -599,7 +605,7 @@
   function drawKitPiece(ctx, it, fit) {
     var s = fit.s / fit.base, x = fit.ox + it.x * s, y0 = fit.oy + it.y * s, i, pt, c, dw, dh;
     ctx.save(); ctx.globalAlpha = it.a;
-    if (it.ghost || (cur && cur.arrange)) drawFootprint(ctx, it, fit);
+    if (it.ghost) drawFootprint(ctx, it, fit);
     for (i = 0; i < it.parts.length; i++) {
       pt = it.parts[i]; c = getImg(kitImg(pt.name, it.style));
       dw = pt.w * s; dh = pt.h * s;
@@ -613,7 +619,7 @@
     var p = it.p, src = imgFor(p, it.style), c = getImg(src), s = fit.s * unitScale(p), x = fit.ox + it.x * fit.s / fit.base, y = fit.oy + it.y * fit.s / fit.base;
     var w = (p.w || 60) * s / fit.base, h = (p.h || 60) * s / fit.base, ax = p.ax != null ? p.ax : 0.5, ay = p.ay != null ? p.ay : 1, iw, ih, dw, dh;
     ctx.save(); ctx.globalAlpha = it.a;
-    if (it.n && (it.ghost || (cur && cur.arrange))) drawFootprint(ctx, it, fit);   /* footprint diamond under a movable piece */
+    if (it.n && it.ghost) drawFootprint(ctx, it, fit);   /* footprint diamond under the piece being placed or dragged */
     if (c.ok) {
       iw = c.img.naturalWidth || p.w || 1; ih = c.img.naturalHeight || p.h || 1; dw = iw * s / fit.base; dh = ih * s / fit.base;
       if (!it.flip) { ctx.fillStyle = "rgba(0,0,0,.16)"; ellipse(ctx, x, y + 2, dw * 0.4, dw * 0.1); }
@@ -670,12 +676,14 @@
     });
     return bestFoot || bestBox;
   }
-  function draggable(pk) { return !!pk && (((step === "place" || step === "done") && cur && cur.placedKey === pk) || (cur && cur.arrange)); }
+  /* v4.9.8: every piece is movable whenever the scene is on screen (gallery, shop, placing a new piece) */
+  function dragStep() { return step === "place" || step === "done" || step === "gallery" || step === "shop"; }
+  function draggable(pk) { return !!pk && !!cur && dragStep(); }
   function onPointerDown(e) {
-    if (!cur || !lastFit || !(step === "place" || step === "done" || cur.arrange)) return;
+    if (!cur || !lastFit || !dragStep()) return;
     var pt = canvasScenePt(e); if (!pt) return;
     var pk = hitPick(pt);
-    if (!draggable(pk)) { if ((step === "place" || step === "done") && cur.placedKey && pk !== cur.placedKey) ui.note.textContent = "Drag the glowing piece."; return; }
+    if (!draggable(pk)) return;
     var cell = pxToCell(pt.x, pt.y);
     cur.drag = { pk: pk, id: e.pointerId, du: cell.u - pk.cx, dv: cell.v - pk.cy, cx: pk.cx, cy: pk.cy, ok: true };
     try { ui.canvas.setPointerCapture(e.pointerId); } catch (err) {}
@@ -696,7 +704,7 @@
     if (!cur || !cur.drag || cur.drag.id !== e.pointerId) return;
     var d = cur.drag; cur.drag = null;
     try { ui.canvas.releasePointerCapture(e.pointerId); } catch (err) {}
-    if (d.ok && (d.cx !== d.pk.cx || d.cy !== d.pk.cy)) { d.pk.cx = d.cx; d.pk.cy = d.cy; persist(); ui.note.textContent = joinedNote(d.pk); }
+    if (d.ok && (d.cx !== d.pk.cx || d.cy !== d.pk.cy)) { d.pk.cx = d.cx; d.pk.cy = d.cy; persist(); ui.note.textContent = joinedNote(d.pk); if (step === "gallery") ui.badge.textContent = galleryBadge(); }
     else if (!d.ok) ui.note.textContent = isTopper(pieceById(d.pk.piece)) ? "Flags and banners go on top of a tower that has none — it went back."
       : spotFree(d.cx, d.cy, cellsOf(pieceById(d.pk.piece)), d.pk)
       ? "Pieces must touch your " + themeName(save.theme).toLowerCase() + " — it went back. Drop it right against another piece."
@@ -845,6 +853,10 @@
     stylesOf().forEach(function (s) { if (count[s.id]) parts.push(count[s.id] + " " + s.name); });
     return parts.join(" · ");
   }
+  function galleryBadge() {
+    var n = Math.min(save.picks.length, TOTAL), rt = save.theme && loadState === "ok" ? rating() : null;
+    return (isKit() && rt ? rt.rank + " · " + rt.score + " pts · " : n + " / " + TOTAL + " · ") + coinLabel();
+  }
   function fillGallery() {
     var n = Math.min(save.picks.length, TOTAL), next = nextRewardNight(), lvl = wallLevel();
     ui.kicker.textContent = "Reward gallery"; ui.badge.textContent = n + " / " + TOTAL;
@@ -855,19 +867,15 @@
       (wallsUp() ? (save.theme === "castle" ? "walls up" : "fence up") : (save.theme === "castle" ? "walls" : "fence") + " at piece " + lvl) + " · " +
       (next ? "next reward after level " + next : "your build is complete!");
     ui.codeOut.value = exportCode(); ui.codeIn.value = ""; ui.codeMsg.textContent = ""; ui.loadBtn.textContent = "Load";
-    var rt = rating();
-    ui.badge.textContent = (isKit() ? rt.rank + " · " + rt.score + " pts · " : n + " / " + TOTAL + " · ") + coinLabel();
+    ui.badge.textContent = galleryBadge();
     var buttons = [{ label: "Close", primary: true, onTap: function () { var cb = cur && cur.onClose; closeOverlay(); if (cb) cb(); } }];
     if (loadState === "ok") {
       buttons.unshift({ label: "Shop (" + coinLabel() + ")", onTap: function () {
         cur.shop = true; cur.night = cur.night || 1; cur.tab = "build"; mode = "shop";
         showStep(save.theme && themeDef(save.theme) ? "shop" : "theme");
       } });
-      if (save.theme && save.picks.length) buttons.unshift({ label: cur.arrange ? "Done arranging" : "Arrange pieces", onTap: function () {
-        cur.arrange = !cur.arrange; cur.drag = null; fillGallery();
-      } });
     }
-    if (cur.arrange) { ui.sub.textContent = "Drag any piece to a new spot that touches another piece. Walls and fences move by themselves."; show(ui.note, true); ui.note.textContent = ui.note.textContent || "Tap and drag a piece."; }
+    if (save.theme && save.picks.length) { show(ui.note, true); ui.note.textContent = ui.note.textContent || "Drag any piece to move it — drop it against another piece. Walls turn corners by themselves."; }
     else show(ui.note, false);
     setButtons(buttons);
     layoutCanvas(); redraw();
@@ -916,7 +924,7 @@
       fillStyles(); layoutCanvas(); redraw();
     } else if (s === "place") {
       ui.title.textContent = "Where does the " + name + " go?";
-      ui.sub.textContent = "It has joined your " + tn.toLowerCase() + ". Drag it (finger or mouse) to any spot that touches another piece, then tap Keep it here.";
+      ui.sub.textContent = "It has joined your " + tn.toLowerCase() + ". Drag it (finger or mouse) to any spot that touches another piece — you can move the other pieces too — then tap Keep it here.";
       ui.note.textContent = cur.placedKey ? joinedNote(cur.placedKey) : "";
       setButtons([{ label: "Keep it here", primary: true, onTap: function () { showStep("done"); } }]);
       layoutCanvas(); redraw();
@@ -926,6 +934,7 @@
       ui.sub.textContent = cur.shop ? "Bought for " + priceOf(cur.piece) + " coins. " + coinLabel() + " left."
         : "Piece " + cur.k + " of " + TOTAL + " is in place." + (cur.k < TOTAL ? " Next reward after level " + (cur.night + EVERY) + "." : " Your build is complete!");
       ui.note.textContent = cur.wallsRaised ? "The curtain walls went up around your castle — drag any wall to reshape them!"
+        : cur.keepGrew ? "Your keep grew a storey — " + grownCount() + " pieces strong!"
         : nb === wallLevel() && cur.lot === nb && !cur.shop ? (save.theme === "castle" ? "The castle walls went up around your estate!" : "A fence now rings your town!")
         : nb === wallLevel() - 1 ? "One more building and the " + (save.theme === "castle" ? "walls go up." : "fence goes up.")
         : "Added to your " + tn + "!";
@@ -957,7 +966,9 @@
     cur.lot = nextLot(cur.piece.role === "core");
     var pos = autoPlace(cellsOf(cur.piece), null, cur.piece) || autoPlace(1, null, null);
     var pk = { night: cur.night, piece: cur.piece.id, style: cur.stylePick || defaultStyle(), lot: cur.lot, src: cur.shop ? "shop" : "reward", deco: false, ord: save.picks.length, cx: pos.cx, cy: pos.cy };
+    var stageBefore = isKit() ? coreStage() : 0;
     save.picks.push(pk); cur.placedKey = pk;
+    cur.keepGrew = isKit() && coreStage() > stageBefore && buildingPicks().length > 1;
     cur.wallsRaised = raiseCastleWalls();
     persist();
     showStep("place");
@@ -980,7 +991,8 @@
   /* Castle rating: piece scores, plus 12 per courtyard cell fully enclosed by walls and towers (capped), plus flags. */
   function rating() {
     var total = 0, t = themeDef(save.theme), rs = rectsOf(), b = bboxCells(), blocked = {}, seen = {}, enclosed = 0, q, key, x, y, i;
-    save.picks.forEach(function (pk) { var p = pieceById(pk.piece); if (p) total += p.score || Math.round(priceOf(p) / 3); });
+    var stage = isKit() ? coreStage() : 0;
+    save.picks.forEach(function (pk) { var p = pieceById(pk.piece); if (p) total += (p.score || Math.round(priceOf(p) / 3)) + (p.grow ? stage * 20 : 0); });
     if (isKit() && b && rs.length > 3) {
       rs.forEach(function (r) { if (r.p.kind !== "prop") blocked[r.cx + "," + r.cy] = true; });
       var u0 = b.u0 - 1, v0 = b.v0 - 1, u1 = b.u1, v1 = b.v1;
@@ -1230,6 +1242,7 @@
     exportCode: exportCode, importCode: importCode, state: state,
     LS_KEY: LS_KEY, version: 3,
     _offer: function (night) { return offerFor(night, nextLot(!hasCore())).map(function (p) { return p.id; }); },
+    _coreStage: function () { return isKit() ? coreStage() : null; },
     _hitAt: function (clientX, clientY) { var pt = canvasScenePt({ clientX: clientX, clientY: clientY }); var pk = pt && hitPick(pt); return { pt: pt && { x: pt.x, y: pt.y, sx: pt.sx, sy: pt.sy }, cell: pt && pxToCell(pt.x, pt.y), pick: pk ? pk.piece + "@" + pk.cx + "," + pk.cy : null, step: step, arrange: !!(cur && cur.arrange), draggable: draggable(pk) };
     },
     /* test hook: canvas-space centre of the i-th pick (used by tools/smoke.js to drag pieces) */

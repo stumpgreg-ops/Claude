@@ -9,6 +9,12 @@ Progress saves in this browser profile (`afterHours.v1.night`). Itch login does 
 
 Question packs: `js/content.js` and `js/content2.js` (the v4 Virginia packs) plus `js/content3.js`–`js/content11.js` (v4.9 Virginia) and `js/content12.js`–`js/content17.js` (v4.9 New Jersey grade 5). Format and writing rules: `tools/CONTENT-GUIDE.md`. Check every file with `node tools/validate-content.js`. Headless smoke test of the gateway, builder, shop and a night: `node tools/smoke.js` (screenshots in `tools/shots/`).
 
+## v4.9.8 (2026-09-15)
+- **A modest keep that grows.** Reward 1 offers three small keeps (Keep, Round keep, Watch keep: two sprites high). The keep gains a storey at 4, 8 and 13 buildings, ending as a five-storey royal keep with coloured bands and a high roof, and its score rises with each stage. The end-of-reward card says when it grew.
+- **Towers and gates first.** Rewards 2–5 offer only tier-1 towers and gate pieces (Round tower, Square tower, Gate tower, Portcullis gate, Open gate). Walls, wall stairs, corner turrets and the Gatehouse tower arrive at tier 2, grand and royal towers later. The forced wall in every reward offer is gone; walls stay in the shop from level 1 and the curtain wall still rises at the 8th building.
+- **Every piece is movable at any time.** No more Arrange mode: in the gallery, in the shop and while placing a new piece, any piece drags to a new spot that touches another piece. Footprints show only under the piece being moved. The gallery badge updates as pieces move.
+- `tools/make-castle-kit.py` carries the new module list and the theme's `growAt` stages.
+
 ## v4.9.7 (2026-09-15)
 - **The shop is open from night 1.** The Shop button shows on every end-of-night card, win or lose, and in the gallery, even before the first reward. A student with no build yet is asked Town or Castle first (the same permanent choice the first reward makes), then the shop opens. Lot 1 stays reserved for the core building, so walls or towers bought before level 5 never take the keep's place and the first reward still offers keeps.
 - **Nights are now levels.** Every player-facing "night" reads "level" (Level 12 / 100, Level cleared, Next level, Retry this level, Continue Level 7, perfect level, 100 levels) on the title, skill, HUD, end-of-level, reward, shop and gallery screens and in the teacher monitor. Save keys and code identifiers are unchanged, so existing progress carries over.

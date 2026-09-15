@@ -97,18 +97,32 @@ def main():
         return m
     S = lambda name, o="NE": name + "_" + o
     modules = [
-        # cores (reward 1): a real keep, not a hut
-        M("keep", "Keep", "A square keep with windows and a high roof — the heart of the castle.", "core", 1, 80, 60,
-          [S("towerSquareBaseColor"), S("towerSquareMidWindows"), S("towerSquareTopRoofHigh")]),
-        M("round-keep", "Round keep", "A tall round tower with a pointed roof.", "core", 1, 80, 60,
-          [S("towerBase"), S("towerBase"), S("towerTop"), S("towerTopRoof")]),
-        M("watch-keep", "Watch keep", "An open-topped tower with a lookout platform.", "core", 1, 80, 55,
-          [S("towerSquareBase"), S("towerSquareMidOpen"), S("towerSquareTop"), S("towerSquarePoles")]),
-        # walls (auto-tiled: straight / corner / gate from their neighbours)
-        M("wall", "Wall", "One length of curtain wall. It turns corners by itself.", "wall", 1, 15, 8, None, None,
+        # cores (reward 1): a modest keep that grows a storey as the castle grows (theme.growAt = building counts per stage)
+        M("keep", "Keep", "A modest square keep with a tiled roof. It grows taller as your castle grows.", "core", 1, 80, 40,
+          [S("towerSquareBase"), S("towerSquareTopRoof")], None,
+          {"grow": [[S("towerSquareBase"), S("towerSquareTopRoof")],
+                    [S("towerSquareBase"), S("towerSquareMidWindows"), S("towerSquareTopRoof")],
+                    [S("towerSquareBaseColor"), S("towerSquareMidWindows"), S("towerSquareMidColor"), S("towerSquareTopRoofHigh")],
+                    [S("towerSquareBaseColor"), S("towerSquareMidWindows"), S("towerSquareMidColor"), S("towerSquareMidWindows"), S("towerSquareTopRoofHigh")]]}),
+        M("round-keep", "Round keep", "A small round keep with a pointed roof. It grows taller as your castle grows.", "core", 1, 80, 40,
+          [S("towerBase"), S("towerTopRoof")], None,
+          {"grow": [[S("towerBase"), S("towerTopRoof")],
+                    [S("towerBase"), S("towerTop"), S("towerTopRoof")],
+                    [S("towerBase"), S("towerBase"), S("towerBalcony"), S("towerTopRoof")],
+                    [S("towerBase"), S("towerBase"), S("towerBalcony"), S("towerTop"), S("towerTopRoof")]]}),
+        M("watch-keep", "Watch keep", "A squat keep with battlements. It grows a lookout as your castle grows.", "core", 1, 80, 38,
+          [S("towerSquareBase"), S("towerSquareTop")], None,
+          {"grow": [[S("towerSquareBase"), S("towerSquareTop")],
+                    [S("towerSquareBase"), S("towerSquareMidOpen"), S("towerSquareTop")],
+                    [S("towerSquareBase"), S("towerSquareMid"), S("towerSquareMidOpen"), S("towerSquareTop"), S("towerSquarePoles")],
+                    [S("towerSquareBaseColor"), S("towerSquareMidColor"), S("towerSquareMidOpen"), S("towerSquareMidWindows"), S("towerSquareTop"), S("towerSquarePoles")]]}),
+        # walls (auto-tiled: straight / corner / gate from their neighbours). Rewards 2-5 offer only towers and gate pieces (tier 1).
+        M("wall", "Wall", "One length of curtain wall. It turns corners by itself.", "wall", 2, 15, 8, None, None,
           {"auto": {"u": S("wall", "NE"), "v": S("wall", "NW"), "corner": {"-u+v": S("wallCorner", "NE"), "-u-v": S("wallCorner", "SE"), "+u-v": S("wallCorner", "SW"), "+u+v": S("wallCorner", "NW")}}}),
-        M("gate", "Gate", "A wall with an iron portcullis.", "wall", 1, 30, 14, None, None,
+        M("gate", "Portcullis gate", "A wall with an iron portcullis.", "wall", 1, 30, 14, None, None,
           {"auto": {"u": [S("wallDoor", "NE"), S("metalGate", "NE")], "v": [S("wallDoor", "NW"), S("metalGate", "NW")]}}),
+        M("doorway", "Open gate", "A wall with an open archway through it.", "wall", 1, 25, 12, None, None,
+          {"auto": {"u": S("wallDoor", "NE"), "v": S("wallDoor", "NW")}}),
         M("stairs-wall", "Wall stairs", "A wall with steps up to the walkway.", "wall", 2, 25, 10, None, None,
           {"auto": {"u": S("wallNarrowStairs", "NE"), "v": S("wallNarrowStairs", "NW")}}),
         M("corner-tower", "Corner turret", "A turret built into a corner of the wall.", "wall", 2, 40, 18, None, None,
@@ -116,11 +130,12 @@ def main():
         # towers
         M("round-tower", "Round tower", "A round tower with a pointed roof.", "tower", 1, 45, 25, [S("towerBase"), S("towerTop"), S("towerTopRoof")]),
         M("square-tower", "Square tower", "A square tower with battlements.", "tower", 1, 45, 25, [S("towerSquareBase"), S("towerSquareTop")]),
+        M("gate-tower", "Gate tower", "A tower with an archway through its foot — a gate with battlements.", "tower", 1, 50, 28, [S("towerSquareArch"), S("towerSquareTop")]),
         M("roof-tower", "Roofed tower", "A square tower with a tiled roof.", "tower", 2, 70, 35, [S("towerSquareBase"), S("towerSquareMid"), S("towerSquareTopRoof")]),
         M("balcony-tower", "Balcony tower", "A round tower with a balcony under the roof.", "tower", 2, 70, 35, [S("towerBase"), S("towerBalcony"), S("towerTopRoof")]),
         M("watchtower", "Watchtower", "A tall open tower with a lookout deck.", "tower", 2, 75, 38, [S("towerSquareBase"), S("towerSquareMid"), S("towerSquareTop"), S("towerSquarePoles")]),
         M("grand-tower", "Grand tower", "Three storeys with coloured bands and a high roof.", "tower", 3, 120, 60, [S("towerSquareBaseColor"), S("towerSquareMidColor"), S("towerSquareMidWindows"), S("towerSquareTopRoofHigh")]),
-        M("arch-tower", "Archway tower", "A tower with a covered archway at its foot.", "tower", 3, 110, 55, [S("towerSquareArch"), S("towerSquareMidOpen"), S("towerSquareTopColor")]),
+        M("arch-tower", "Gatehouse tower", "A tall gate tower with an open gallery above the archway.", "tower", 2, 110, 55, [S("towerSquareArch"), S("towerSquareMidOpen"), S("towerSquareTopColor")]),
         M("great-tower", "Great round tower", "The tallest round tower, four storeys high.", "tower", 4, 160, 80, [S("towerBase"), S("towerBase"), S("towerBalcony"), S("towerTop"), S("towerTopRoof")]),
         M("royal-tower", "Royal tower", "Five storeys with a roof to see for miles.", "tower", 4, 180, 90, [S("towerSquareBaseColor"), S("towerSquareMidWindows"), S("towerSquareMidColor"), S("towerSquareMidWindows"), S("towerSquareTopRoofHigh")]),
         # toppers: sit on top of a tower or keep
@@ -149,8 +164,9 @@ def main():
     d["pieces"] = [p for p in d["pieces"] if p["theme"] != "castle"] + modules
     d["kit"] = {"dir": "assets/build/kit/", "cellW": CELL_W, "cellH": CELL_H, "sprites": sprites}
     d["themes"]["castle"] = {
-        "name": "Castle", "desc": "A keep that grows into a real castle: walls that turn corners, towers, gates, flags in your colour.",
+        "name": "Castle", "desc": "A modest keep that grows into a grand castle: towers and gates first, walls that turn corners, flags in your colour.",
         "kit": True, "cell": CELL_W, "cellH": CELL_H, "unitPx": 1, "drawScale": 1, "wallLevel": 8,
+        "growAt": [1, 4, 8, 13],   # buildings (rewards + shop, not the auto walls) at which the keep reaches growth stage 0..3
         "styles": [
             {"id": "blue", "name": "Royal Blue", "desc": "Blue roofs, flags and bands.", "dir": "", "pairs": ["gold"]},
             {"id": "red", "name": "Crimson", "desc": "Red roofs, flags and bands.", "dir": "red/", "pairs": ["gold"]},

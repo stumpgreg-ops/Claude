@@ -286,13 +286,19 @@
   },
   "castle": {
    "name": "Castle",
-   "desc": "A keep that grows into a real castle: walls that turn corners, towers, gates, flags in your colour.",
+   "desc": "A modest keep that grows into a grand castle: towers and gates first, walls that turn corners, flags in your colour.",
    "kit": true,
    "cell": 151,
    "cellH": 87.2,
    "unitPx": 1,
    "drawScale": 1,
    "wallLevel": 8,
+   "growAt": [
+    1,
+    4,
+    8,
+    13
+   ],
    "styles": [
     {
      "id": "blue",
@@ -1007,37 +1013,82 @@
    "id": "keep",
    "theme": "castle",
    "name": "Keep",
-   "desc": "A square keep with windows and a high roof \u2014 the heart of the castle.",
+   "desc": "A modest square keep with a tiled roof. It grows taller as your castle grows.",
    "role": "core",
    "kind": "core",
    "tier": 1,
    "price": 80,
-   "score": 60,
+   "score": 40,
    "cells": 1,
    "parts": [
-    "towerSquareBaseColor_NE",
-    "towerSquareMidWindows_NE",
-    "towerSquareTopRoofHigh_NE"
+    "towerSquareBase_NE",
+    "towerSquareTopRoof_NE"
    ],
-   "img": "assets/build/kit/towerSquareBaseColor_NE.png",
+   "grow": [
+    [
+     "towerSquareBase_NE",
+     "towerSquareTopRoof_NE"
+    ],
+    [
+     "towerSquareBase_NE",
+     "towerSquareMidWindows_NE",
+     "towerSquareTopRoof_NE"
+    ],
+    [
+     "towerSquareBaseColor_NE",
+     "towerSquareMidWindows_NE",
+     "towerSquareMidColor_NE",
+     "towerSquareTopRoofHigh_NE"
+    ],
+    [
+     "towerSquareBaseColor_NE",
+     "towerSquareMidWindows_NE",
+     "towerSquareMidColor_NE",
+     "towerSquareMidWindows_NE",
+     "towerSquareTopRoofHigh_NE"
+    ]
+   ],
+   "img": "assets/build/kit/towerSquareBase_NE.png",
    "nostyle": false
   },
   {
    "id": "round-keep",
    "theme": "castle",
    "name": "Round keep",
-   "desc": "A tall round tower with a pointed roof.",
+   "desc": "A small round keep with a pointed roof. It grows taller as your castle grows.",
    "role": "core",
    "kind": "core",
    "tier": 1,
    "price": 80,
-   "score": 60,
+   "score": 40,
    "cells": 1,
    "parts": [
     "towerBase_NE",
-    "towerBase_NE",
-    "towerTop_NE",
     "towerTopRoof_NE"
+   ],
+   "grow": [
+    [
+     "towerBase_NE",
+     "towerTopRoof_NE"
+    ],
+    [
+     "towerBase_NE",
+     "towerTop_NE",
+     "towerTopRoof_NE"
+    ],
+    [
+     "towerBase_NE",
+     "towerBase_NE",
+     "towerBalcony_NE",
+     "towerTopRoof_NE"
+    ],
+    [
+     "towerBase_NE",
+     "towerBase_NE",
+     "towerBalcony_NE",
+     "towerTop_NE",
+     "towerTopRoof_NE"
+    ]
    ],
    "img": "assets/build/kit/towerBase_NE.png",
    "nostyle": false
@@ -1046,18 +1097,42 @@
    "id": "watch-keep",
    "theme": "castle",
    "name": "Watch keep",
-   "desc": "An open-topped tower with a lookout platform.",
+   "desc": "A squat keep with battlements. It grows a lookout as your castle grows.",
    "role": "core",
    "kind": "core",
    "tier": 1,
    "price": 80,
-   "score": 55,
+   "score": 38,
    "cells": 1,
    "parts": [
     "towerSquareBase_NE",
-    "towerSquareMidOpen_NE",
-    "towerSquareTop_NE",
-    "towerSquarePoles_NE"
+    "towerSquareTop_NE"
+   ],
+   "grow": [
+    [
+     "towerSquareBase_NE",
+     "towerSquareTop_NE"
+    ],
+    [
+     "towerSquareBase_NE",
+     "towerSquareMidOpen_NE",
+     "towerSquareTop_NE"
+    ],
+    [
+     "towerSquareBase_NE",
+     "towerSquareMid_NE",
+     "towerSquareMidOpen_NE",
+     "towerSquareTop_NE",
+     "towerSquarePoles_NE"
+    ],
+    [
+     "towerSquareBaseColor_NE",
+     "towerSquareMidColor_NE",
+     "towerSquareMidOpen_NE",
+     "towerSquareMidWindows_NE",
+     "towerSquareTop_NE",
+     "towerSquarePoles_NE"
+    ]
    ],
    "img": "assets/build/kit/towerSquareBase_NE.png",
    "nostyle": false
@@ -1069,7 +1144,7 @@
    "desc": "One length of curtain wall. It turns corners by itself.",
    "role": "module",
    "kind": "wall",
-   "tier": 1,
+   "tier": 2,
    "price": 15,
    "score": 8,
    "cells": 1,
@@ -1089,7 +1164,7 @@
   {
    "id": "gate",
    "theme": "castle",
-   "name": "Gate",
+   "name": "Portcullis gate",
    "desc": "A wall with an iron portcullis.",
    "role": "module",
    "kind": "wall",
@@ -1106,6 +1181,24 @@
      "wallDoor_NW",
      "metalGate_NW"
     ]
+   },
+   "img": "assets/build/kit/wallDoor_NE.png",
+   "nostyle": false
+  },
+  {
+   "id": "doorway",
+   "theme": "castle",
+   "name": "Open gate",
+   "desc": "A wall with an open archway through it.",
+   "role": "module",
+   "kind": "wall",
+   "tier": 1,
+   "price": 25,
+   "score": 12,
+   "cells": 1,
+   "auto": {
+    "u": "wallDoor_NE",
+    "v": "wallDoor_NW"
    },
    "img": "assets/build/kit/wallDoor_NE.png",
    "nostyle": false
@@ -1190,6 +1283,24 @@
    "nostyle": false
   },
   {
+   "id": "gate-tower",
+   "theme": "castle",
+   "name": "Gate tower",
+   "desc": "A tower with an archway through its foot \u2014 a gate with battlements.",
+   "role": "module",
+   "kind": "tower",
+   "tier": 1,
+   "price": 50,
+   "score": 28,
+   "cells": 1,
+   "parts": [
+    "towerSquareArch_NE",
+    "towerSquareTop_NE"
+   ],
+   "img": "assets/build/kit/towerSquareArch_NE.png",
+   "nostyle": false
+  },
+  {
    "id": "roof-tower",
    "theme": "castle",
    "name": "Roofed tower",
@@ -1270,11 +1381,11 @@
   {
    "id": "arch-tower",
    "theme": "castle",
-   "name": "Archway tower",
-   "desc": "A tower with a covered archway at its foot.",
+   "name": "Gatehouse tower",
+   "desc": "A tall gate tower with an open gallery above the archway.",
    "role": "module",
    "kind": "tower",
-   "tier": 3,
+   "tier": 2,
    "price": 110,
    "score": 55,
    "cells": 1,
