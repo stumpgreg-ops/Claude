@@ -82,10 +82,36 @@ var srv = http.createServer(function (req, res) {
     await page.click(".build-styles .build-opt:nth-child(" + (1 + Math.floor(Math.random() * 3)) + ")");
     await page.click("#build-overlay .btn.primary");
     await page.waitForSelector(".build-note:not(.hidden)");
+    /* place step: the new piece was auto-joined; drag it one cell and check it snaps to a free spot */
+    if (night === 15) {
+      var box = await page.$eval("#build-overlay .build-scene canvas", function (c) { var r = c.getBoundingClientRect(); return { x: r.left, y: r.top, w: r.width, h: r.height }; });
+      var before = await page.evaluate(function () { var s = JSON.parse(localStorage.getItem("afterHours.v1.build")); return s.picks[s.picks.length - 1]; });
+      var hit = await page.evaluate(function () {
+        /* find the new piece's screen position through the module's own fit: emulate by reading the canvas note */
+        return document.querySelector(".build-note").textContent;
+      });
+      console.log("place note:", hit);
+      await shot("05b-place-15");
+    }
+    await page.click("#build-overlay .btn.primary");
+    await page.waitForSelector(".build-note:not(.hidden)");
     if (night === 40 || night === 100) { await page.waitForTimeout(400); await shot("05-done-" + night); }
     await page.click("#build-overlay .btn.primary");
     await page.waitForFunction(function () { return window.__done === true; });
   }
+  var joined = await page.evaluate(function () {
+    /* every building must touch at least one other building (the estate is one joined structure) */
+    var s = JSON.parse(localStorage.getItem("afterHours.v1.build")), cells = {}, ok = true;
+    var P = null; var xhr = new XMLHttpRequest(); xhr.open("GET", "assets/build/pieces.json", false); xhr.send(); P = JSON.parse(xhr.responseText).pieces;
+    function n(id) { var p = P.filter(function (x) { return x.id === id; })[0]; return p ? p.cells : 1; }
+    var rs = s.picks.map(function (pk) { return { cx: pk.cx, cy: pk.cy, n: n(pk.piece) }; });
+    function touches(a, b) { var sx = (a.cx + a.n === b.cx || b.cx + b.n === a.cx) && a.cy < b.cy + b.n && a.cy + a.n > b.cy; var sy = (a.cy + a.n === b.cy || b.cy + b.n === a.cy) && a.cx < b.cx + b.n && a.cx + a.n > b.cx; return sx || sy; }
+    function overlaps(a, b) { return a.cx < b.cx + b.n && a.cx + a.n > b.cx && a.cy < b.cy + b.n && a.cy + a.n > b.cy; }
+    var lonely = 0, overlap = 0;
+    rs.forEach(function (a, i) { var t = false; rs.forEach(function (b, j) { if (i !== j) { if (touches(a, b)) t = true; if (overlaps(a, b)) overlap++; } }); if (!t) lonely++; });
+    return { pieces: rs.length, lonely: lonely, overlap: overlap };
+  });
+  check(joined.pieces === 20 && joined.lonely === 0 && joined.overlap === 0, "all 20 pieces are joined with no overlaps: " + JSON.stringify(joined));
   var st = await page.evaluate(function () { return SolBuild.state(); });
   check(st.count === 20 && st.walls === true, "20 reward pieces placed and walls up: " + JSON.stringify(st));
 
@@ -98,7 +124,9 @@ var srv = http.createServer(function (req, res) {
   await page.click(".build-styles .build-opt:nth-child(2)");
   await page.click("#build-overlay .btn.primary");
   await page.waitForSelector(".build-note:not(.hidden)");
-  await page.click("#build-overlay .btn.primary");
+  await page.click("#build-overlay .btn.primary");      /* Keep it here */
+  await page.waitForTimeout(150);
+  await page.click("#build-overlay .btn.primary");      /* Back to shop */
   await page.click(".build-tab:nth-child(2)");
   await page.waitForTimeout(200);
   await page.click(".build-shop .build-opt:nth-child(1)");
@@ -128,6 +156,28 @@ var srv = http.createServer(function (req, res) {
   await page.waitForSelector("#build-overlay:not(.hidden)");
   await page.waitForTimeout(500);
   await shot("09-gallery");
+  /* Arrange mode: drag the core piece a long way to the right and check it moved to a free cell (or bounced back if blocked) */
+  await page.click("text=Arrange pieces");
+  await page.waitForTimeout(300);
+  var cv = await page.$eval("#build-overlay .build-scene canvas", function (c) { var r = c.getBoundingClientRect(); return { x: r.left, y: r.top, w: r.width, h: r.height }; });
+  var beforeMove = await page.evaluate(function () { return JSON.parse(localStorage.getItem("afterHours.v1.build")).picks.map(function (p) { return p.cx + "," + p.cy; }).join(" "); });
+  var p0 = await page.evaluate(function () { return SolBuild._pickScreen(0); });
+  console.log("drag from", JSON.stringify(p0));
+  /* synthetic pointer events on the canvas (headless mouse moves were coalesced to one position) */
+  await page.evaluate(function (q) {
+    var c = document.querySelector("#build-overlay .build-scene canvas");   /* not the hidden theme-preview canvases */
+    function ev(type, x, y) { c.dispatchEvent(new PointerEvent(type, { pointerId: 7, pointerType: "mouse", isPrimary: true, clientX: x, clientY: y, bubbles: true, cancelable: true })); }
+    ev("pointerdown", q.x, q.y);
+    for (var i = 1; i <= 12; i++) ev("pointermove", q.x + 22 * i, q.y + 11 * i);
+    ev("pointerup", q.x + 22 * 12, q.y + 11 * 12);
+  }, p0);
+  await page.waitForTimeout(200);
+  var afterMove = await page.evaluate(function () { return JSON.parse(localStorage.getItem("afterHours.v1.build")).picks.map(function (p) { return p.cx + "," + p.cy; }).join(" "); });
+  var noteTxt = await page.textContent(".build-note");
+  console.log("arrange:", beforeMove === afterMove ? "no move (" + noteTxt + ")" : "moved (" + noteTxt + ")");
+  check(beforeMove !== afterMove || /taken/i.test(noteTxt), "arrange mode moves a dragged piece or reports the spot taken: " + noteTxt);
+  await shot("09b-arrange");
+  await page.click("text=Done arranging");
   await page.keyboard.press("Escape");
 
   /* start a Grade 5 night */

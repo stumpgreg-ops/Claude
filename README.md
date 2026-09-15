@@ -10,6 +10,7 @@ Progress saves in this browser profile (`afterHours.v1.night`). Itch login does 
 Question packs: `js/content.js` and `js/content2.js` (the v4 Virginia packs) plus `js/content3.js`–`js/content11.js` (v4.9 Virginia) and `js/content12.js`–`js/content17.js` (v4.9 New Jersey grade 5). Format and writing rules: `tools/CONTENT-GUIDE.md`. Check every file with `node tools/validate-content.js`. Headless smoke test of the gateway, builder, shop and a night: `node tools/smoke.js` (screenshots in `tools/shots/`).
 
 ## v4.9.2 (2026-09-15)
+- **Pieces join.** The estate is now a snap-to-grid tile map: every piece has a footprint (`cells` in pieces.json), a new piece is auto-placed touching the building, and the student can drag it (finger or mouse) to any free spot before tapping "Keep it here". "Arrange pieces" in the gallery lets them move any piece later; the fence or wall ring re-wraps the estate by itself. Build code v4 carries positions; older codes load and get auto-placed.
 - **Stamina: passages grow with the nights.** Night 1 aims for about 60 words (a few sentences); the target rises by 10 words every 2 nights to about 550 by night 99 (`STAMINA` in `js/content.js`). The picker weights every candidate by how close its length is to tonight's target, on top of the adaptive level. New packs at every length feed it: tiny (50–90 words), short (100–150), long (380–520) and epic (540–650) for each grade (`js/content18.js`–`content25.js`); the guide's tier table is in `tools/CONTENT-GUIDE.md`. The reading pop-up shows the word count.
 
 ## v4.9.1 (2026-09-15)

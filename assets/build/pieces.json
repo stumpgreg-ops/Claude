@@ -280,7 +280,9 @@
     "corner": null,
     "gate": null,
     "extent": 3.75
-   }
+   },
+   "cell": 40,
+   "unitPx": 30
   },
   "castle": {
    "name": "Castle",
@@ -322,7 +324,9 @@
     "corner": "wall-corner",
     "gate": "wall-gate",
     "extent": 3.75
-   }
+   },
+   "cell": 30,
+   "unitPx": 17
   }
  },
  "pieces": [
@@ -339,7 +343,8 @@
    "ax": 0.4978,
    "ay": 0.769,
    "unitPx": 30,
-   "price": 40
+   "price": 40,
+   "cells": 3
   },
   {
    "id": "stone-cottage",
@@ -354,7 +359,8 @@
    "ax": 0.4998,
    "ay": 0.763,
    "unitPx": 30,
-   "price": 40
+   "price": 40,
+   "cells": 3
   },
   {
    "id": "house",
@@ -369,7 +375,8 @@
    "ax": 0.4999,
    "ay": 0.7588,
    "unitPx": 30,
-   "price": 40
+   "price": 40,
+   "cells": 4
   },
   {
    "id": "stall",
@@ -388,7 +395,8 @@
     "side"
    ],
    "unitPx": 30,
-   "price": 40
+   "price": 40,
+   "cells": 2
   },
   {
    "id": "steps",
@@ -407,7 +415,8 @@
     "side"
    ],
    "unitPx": 30,
-   "price": 40
+   "price": 40,
+   "cells": 2
   },
   {
    "id": "cottage-wing",
@@ -426,7 +435,8 @@
     "back"
    ],
    "unitPx": 30,
-   "price": 40
+   "price": 40,
+   "cells": 3
   },
   {
    "id": "stone-wing",
@@ -445,7 +455,8 @@
     "back"
    ],
    "unitPx": 30,
-   "price": 40
+   "price": 40,
+   "cells": 3
   },
   {
    "id": "lamp-path",
@@ -463,7 +474,8 @@
     "front"
    ],
    "unitPx": 30,
-   "price": 80
+   "price": 80,
+   "cells": 4
   },
   {
    "id": "house-wing",
@@ -482,7 +494,8 @@
     "back"
    ],
    "unitPx": 30,
-   "price": 80
+   "price": 80,
+   "cells": 4
   },
   {
    "id": "bakery",
@@ -501,7 +514,8 @@
     "back"
    ],
    "unitPx": 30,
-   "price": 80
+   "price": 80,
+   "cells": 4
   },
   {
    "id": "dock",
@@ -520,7 +534,8 @@
     "side"
    ],
    "unitPx": 30,
-   "price": 80
+   "price": 80,
+   "cells": 4
   },
   {
    "id": "chapel",
@@ -540,7 +555,8 @@
     "far"
    ],
    "unitPx": 30,
-   "price": 80
+   "price": 80,
+   "cells": 3
   },
   {
    "id": "arch",
@@ -558,7 +574,8 @@
     "front"
    ],
    "unitPx": 30,
-   "price": 80
+   "price": 80,
+   "cells": 3
   },
   {
    "id": "tavern",
@@ -577,7 +594,8 @@
     "back"
    ],
    "unitPx": 30,
-   "price": 140
+   "price": 140,
+   "cells": 4
   },
   {
    "id": "windmill",
@@ -596,7 +614,8 @@
     "far"
    ],
    "unitPx": 30,
-   "price": 140
+   "price": 140,
+   "cells": 3
   },
   {
    "id": "watermill",
@@ -615,7 +634,8 @@
     "far"
    ],
    "unitPx": 30,
-   "price": 140
+   "price": 140,
+   "cells": 5
   },
   {
    "id": "square",
@@ -633,7 +653,8 @@
     "front"
    ],
    "unitPx": 30,
-   "price": 140
+   "price": 140,
+   "cells": 6
   },
   {
    "id": "harbour",
@@ -652,7 +673,8 @@
     "side"
    ],
    "unitPx": 30,
-   "price": 140
+   "price": 140,
+   "cells": 5
   },
   {
    "id": "manor",
@@ -671,7 +693,8 @@
     "back"
    ],
    "unitPx": 30,
-   "price": 220
+   "price": 220,
+   "cells": 5
   },
   {
    "id": "town-hall",
@@ -690,7 +713,8 @@
     "far"
    ],
    "unitPx": 30,
-   "price": 220
+   "price": 220,
+   "cells": 5
   },
   {
    "id": "bell-tower",
@@ -709,7 +733,8 @@
     "far"
    ],
    "unitPx": 30,
-   "price": 220
+   "price": 220,
+   "cells": 2
   },
   {
    "id": "grand-mill",
@@ -728,7 +753,8 @@
     "far"
    ],
    "unitPx": 30,
-   "price": 220
+   "price": 220,
+   "cells": 4
   },
   {
    "id": "fence",
@@ -742,7 +768,8 @@
    "h": 82,
    "ax": 0.4999,
    "ay": 0.6456,
-   "unitPx": 30
+   "unitPx": 30,
+   "cells": 2
   },
   {
    "id": "keep",
@@ -757,7 +784,8 @@
    "ax": 0.4987,
    "ay": 0.6814,
    "unitPx": 17,
-   "price": 40
+   "price": 40,
+   "cells": 3
   },
   {
    "id": "storehouse",
@@ -772,7 +800,8 @@
    "ax": 0.4956,
    "ay": 0.7011,
    "unitPx": 17,
-   "price": 40
+   "price": 40,
+   "cells": 3
   },
   {
    "id": "hall",
@@ -787,7 +816,8 @@
    "ax": 0.4973,
    "ay": 0.654,
    "unitPx": 17,
-   "price": 40
+   "price": 40,
+   "cells": 4
   },
   {
    "id": "lodge-wing",
@@ -806,7 +836,8 @@
     "back"
    ],
    "unitPx": 17,
-   "price": 40
+   "price": 40,
+   "cells": 3
   },
   {
    "id": "tower-short",
@@ -826,7 +857,8 @@
     "far"
    ],
    "unitPx": 17,
-   "price": 40
+   "price": 40,
+   "cells": 3
   },
   {
    "id": "gate",
@@ -844,7 +876,8 @@
     "front"
    ],
    "unitPx": 17,
-   "price": 40
+   "price": 40,
+   "cells": 2
   },
   {
    "id": "hall-wing",
@@ -863,7 +896,8 @@
     "back"
    ],
    "unitPx": 17,
-   "price": 80
+   "price": 80,
+   "cells": 4
   },
   {
    "id": "keep-wing",
@@ -882,7 +916,8 @@
     "back"
    ],
    "unitPx": 17,
-   "price": 80
+   "price": 80,
+   "cells": 3
   },
   {
    "id": "watchtower",
@@ -902,7 +937,8 @@
     "far"
    ],
    "unitPx": 17,
-   "price": 80
+   "price": 80,
+   "cells": 3
   },
   {
    "id": "gatehouse",
@@ -920,7 +956,8 @@
     "front"
    ],
    "unitPx": 17,
-   "price": 80
+   "price": 80,
+   "cells": 3
   },
   {
    "id": "tower-pair",
@@ -940,7 +977,8 @@
     "far"
    ],
    "unitPx": 17,
-   "price": 140
+   "price": 140,
+   "cells": 5
   },
   {
    "id": "royal-hall",
@@ -959,7 +997,8 @@
     "back"
    ],
    "unitPx": 17,
-   "price": 140
+   "price": 140,
+   "cells": 6
   },
   {
    "id": "great-gate",
@@ -977,7 +1016,8 @@
     "front"
    ],
    "unitPx": 17,
-   "price": 140
+   "price": 140,
+   "cells": 5
   },
   {
    "id": "fortress-corner",
@@ -996,7 +1036,8 @@
     "far"
    ],
    "unitPx": 17,
-   "price": 140
+   "price": 140,
+   "cells": 6
   },
   {
    "id": "grand-keep",
@@ -1015,7 +1056,8 @@
     "far"
    ],
    "unitPx": 17,
-   "price": 220
+   "price": 220,
+   "cells": 5
   },
   {
    "id": "citadel",
@@ -1034,7 +1076,8 @@
     "far"
    ],
    "unitPx": 17,
-   "price": 220
+   "price": 220,
+   "cells": 6
   },
   {
    "id": "wall-long",
@@ -1048,7 +1091,8 @@
    "h": 75,
    "ax": 0.4992,
    "ay": 0.6805,
-   "unitPx": 17
+   "unitPx": 17,
+   "cells": 2
   },
   {
    "id": "wall-corner",
@@ -1062,7 +1106,8 @@
    "h": 89,
    "ax": 0.4996,
    "ay": 0.6519,
-   "unitPx": 17
+   "unitPx": 17,
+   "cells": 3
   },
   {
    "id": "wall-gate",
@@ -1076,7 +1121,8 @@
    "h": 77,
    "ax": 0.4983,
    "ay": 0.679,
-   "unitPx": 17
+   "unitPx": 17,
+   "cells": 2
   },
   {
    "id": "well",
@@ -1092,7 +1138,8 @@
    "ax": 0.4928,
    "ay": 0.7153,
    "unitPx": 30,
-   "nostyle": true
+   "nostyle": true,
+   "cells": 2
   },
   {
    "id": "lamp",
@@ -1108,7 +1155,8 @@
    "ax": 0.4895,
    "ay": 0.7436,
    "unitPx": 30,
-   "nostyle": true
+   "nostyle": true,
+   "cells": 1
   },
   {
    "id": "barrels",
@@ -1124,7 +1172,8 @@
    "ax": 0.4929,
    "ay": 0.6947,
    "unitPx": 30,
-   "nostyle": true
+   "nostyle": true,
+   "cells": 1
   },
   {
    "id": "crates",
@@ -1140,7 +1189,8 @@
    "ax": 0.4983,
    "ay": 0.7226,
    "unitPx": 30,
-   "nostyle": true
+   "nostyle": true,
+   "cells": 2
   },
   {
    "id": "hay-cart",
@@ -1156,7 +1206,8 @@
    "ax": 0.4983,
    "ay": 0.6397,
    "unitPx": 30,
-   "nostyle": true
+   "nostyle": true,
+   "cells": 3
   },
   {
    "id": "barrel-cart",
@@ -1172,7 +1223,8 @@
    "ax": 0.4983,
    "ay": 0.6397,
    "unitPx": 30,
-   "nostyle": true
+   "nostyle": true,
+   "cells": 3
   },
   {
    "id": "haystacks",
@@ -1188,7 +1240,8 @@
    "ax": 0.4957,
    "ay": 0.661,
    "unitPx": 30,
-   "nostyle": true
+   "nostyle": true,
+   "cells": 2
   },
   {
    "id": "cobbles",
@@ -1204,7 +1257,8 @@
    "ax": 0.4999,
    "ay": 0.6339,
    "unitPx": 30,
-   "nostyle": true
+   "nostyle": true,
+   "cells": 3
   },
   {
    "id": "signpost",
@@ -1220,7 +1274,8 @@
    "ax": 0.4979,
    "ay": 0.7671,
    "unitPx": 30,
-   "nostyle": true
+   "nostyle": true,
+   "cells": 2
   },
   {
    "id": "c-scaffold",
@@ -1236,7 +1291,8 @@
    "ax": 0.4994,
    "ay": 0.6583,
    "unitPx": 17,
-   "nostyle": true
+   "nostyle": true,
+   "cells": 2
   },
   {
    "id": "c-ruin-tower",
@@ -1252,7 +1308,8 @@
    "ax": 0.499,
    "ay": 0.6886,
    "unitPx": 17,
-   "nostyle": true
+   "nostyle": true,
+   "cells": 2
   },
   {
    "id": "c-gate-frame",
@@ -1268,7 +1325,8 @@
    "ax": 0.4983,
    "ay": 0.679,
    "unitPx": 17,
-   "nostyle": true
+   "nostyle": true,
+   "cells": 2
   },
   {
    "id": "c-well",
@@ -1284,7 +1342,8 @@
    "ax": 0.4928,
    "ay": 0.7153,
    "unitPx": 30,
-   "nostyle": true
+   "nostyle": true,
+   "cells": 1
   },
   {
    "id": "c-barrels",
@@ -1300,7 +1359,8 @@
    "ax": 0.4929,
    "ay": 0.6947,
    "unitPx": 30,
-   "nostyle": true
+   "nostyle": true,
+   "cells": 1
   },
   {
    "id": "c-crates",
@@ -1316,7 +1376,8 @@
    "ax": 0.4983,
    "ay": 0.7226,
    "unitPx": 30,
-   "nostyle": true
+   "nostyle": true,
+   "cells": 2
   },
   {
    "id": "c-hay-cart",
@@ -1332,7 +1393,8 @@
    "ax": 0.4983,
    "ay": 0.6397,
    "unitPx": 30,
-   "nostyle": true
+   "nostyle": true,
+   "cells": 2
   },
   {
    "id": "c-lamp",
@@ -1348,7 +1410,8 @@
    "ax": 0.4895,
    "ay": 0.7436,
    "unitPx": 30,
-   "nostyle": true
+   "nostyle": true,
+   "cells": 1
   },
   {
    "id": "c-haystacks",
@@ -1364,7 +1427,8 @@
    "ax": 0.4957,
    "ay": 0.661,
    "unitPx": 30,
-   "nostyle": true
+   "nostyle": true,
+   "cells": 2
   }
  ],
  "decoLots": [

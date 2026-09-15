@@ -73,8 +73,10 @@
       var n = p && typeof p === "object" ? parseInt(p.night, 10) : NaN, src = p && p.src === "shop" ? "shop" : "reward";
       if (!(n >= 1 && n <= EVERY * TOTAL) || typeof p.piece !== "string") return;
       if (src === "reward") { if (n % EVERY || seenReward[n]) return; seenReward[n] = true; }
-      out.push({ night: n, piece: p.piece, style: typeof p.style === "string" ? p.style : "", lot: parseInt(p.lot, 10) || 0,
-        src: src, deco: !!p.deco, ord: order++ });
+      var pk = { night: n, piece: p.piece, style: typeof p.style === "string" ? p.style : "", lot: parseInt(p.lot, 10) || 0,
+        src: src, deco: !!p.deco, ord: order++ };
+      if (p.cx != null && p.cy != null && isFinite(parseInt(p.cx, 10)) && isFinite(parseInt(p.cy, 10))) { pk.cx = parseInt(p.cx, 10); pk.cy = parseInt(p.cy, 10); }
+      out.push(pk);
     });
     return out;
   }
@@ -111,12 +113,13 @@
       var k = p.lot, pc = pieceById(p.piece), ok;
       if (p.deco) { ok = pc && pc.theme === save.theme && pc.role === "deco"; if (!ok) { p.piece = defaultDeco(i); changed = true; } return; }
       if (k === 1) ok = pc && pc.theme === save.theme && pc.role === "core";
-      else ok = pc && pc.theme === save.theme && pc.role === "module" && fitsLot(pc, lotFor(k));
+      else ok = pc && pc.theme === save.theme && pc.role === "module";
       if (!ok) { p.piece = defaultPiece(k, i); changed = true; }
       if (!styleDef(p.style)) { p.style = defaultStyle(); changed = true; }
     });
     if (save.migrate) { delete save.migrate; changed = true; }
     if (changed) persist();
+    ensurePositions();
   }
   function persist() {
     save.picks.sort(function (a, b) { return (a.night - b.night) || ((a.ord || 0) - (b.ord || 0)); });
@@ -224,15 +227,15 @@
     return out;
   }
 
-  /* ── build codes: base64url("3|theme|salt|coins|night:piece:style:lot:flags,…") + 2-char checksum
-     flags: r = reward, s = shop, d = decoration. v1 and v2 codes still load. */
+  /* ── build codes: base64url("4|theme|salt|coins|night:piece:style:lot:flags:cx,cy…") + 2-char checksum
+     flags: r = reward, s = shop, d = decoration; cx,cy = grid cell. v1–v3 codes still load (pieces get auto-placed). */
   function b64url(s) { return btoa(unescape(encodeURIComponent(s))).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, ""); }
   function unb64url(s) { s = s.replace(/-/g, "+").replace(/_/g, "/"); while (s.length % 4) s += "="; return decodeURIComponent(escape(atob(s))); }
   function checksum(s) { var h = 7, i; for (i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) % 1296; return ("0" + h.toString(36)).slice(-2); }
   function exportCode() {
     if (!save) save = loadSave();
-    var list = save.picks.map(function (p) { return p.night + ":" + p.piece + ":" + (p.style || "") + ":" + (p.lot || 0) + ":" + (p.src === "shop" ? "s" : "r") + (p.deco ? "d" : ""); }).join(",");
-    var body = b64url("3|" + (save.theme || "") + "|" + save.salt + "|" + (save.coins || 0) + "|" + list);
+    var list = save.picks.map(function (p) { return p.night + ":" + p.piece + ":" + (p.style || "") + ":" + (p.lot || 0) + ":" + (p.src === "shop" ? "s" : "r") + (p.deco ? "d" : "") + ":" + (p.cx != null ? p.cx + "," + p.cy : ""); }).join(",;").replace(/,;/g, ";");
+    var body = b64url("4|" + (save.theme || "") + "|" + save.salt + "|" + (save.coins || 0) + "|" + list);
     return body + checksum(body);
   }
   function parseCode(str) {
@@ -241,18 +244,20 @@
     if (checksum(body) !== s.slice(-2)) return { ok: false, error: "That code has a typo — check every letter and try again." };
     try { raw = unb64url(body); } catch (e) { return { ok: false, error: "That is not a build code." }; }
     parts = raw.split("|"); ver = parts[0];
-    if (!((ver === "1" || ver === "2") && parts.length === 4) && !(ver === "3" && parts.length === 5)) return { ok: false, error: "That build code is from a different version." };
+    if (!((ver === "1" || ver === "2") && parts.length === 4) && !((ver === "3" || ver === "4") && parts.length === 5)) return { ok: false, error: "That build code is from a different version." };
     theme = parts[1] || null; salt = parseInt(parts[2], 10);
-    if (ver === "3") { coins = Math.max(0, parseInt(parts[3], 10) || 0); listStr = parts[4]; } else listStr = parts[3];
+    if (ver === "3" || ver === "4") { coins = Math.max(0, parseInt(parts[3], 10) || 0); listStr = parts[4]; } else listStr = parts[3];
     if (theme && data && !themeDef(theme)) return { ok: false, error: "Unknown build type: " + theme };
     if (!(salt > 0)) return { ok: false, error: "That build code is damaged." };
-    if (listStr) listStr.split(",").forEach(function (item) {
-      var f = item.split(":"), night = parseInt(f[0], 10), flags = ver === "3" ? (f[4] || "r") : "r", shop = flags.indexOf("s") !== -1;
+    if (listStr) listStr.split(ver === "4" ? ";" : ",").forEach(function (item) {
+      var f = item.split(":"), night = parseInt(f[0], 10), flags = (ver === "3" || ver === "4") ? (f[4] || "r") : "r", shop = flags.indexOf("s") !== -1, pos, pk;
       if (bad) return;
       if (f.length < 3 || !f[1] || !(night >= 1 && night <= EVERY * TOTAL)) { bad = "bad pick list"; return; }
       if (!shop) { if (night % EVERY || seen[night]) { bad = "bad pick list"; return; } seen[night] = true; }
-      picks.push({ night: night, piece: f[1], style: ver === "1" ? "" : (f[2] || ""), lot: ver === "1" ? night / EVERY : (parseInt(f[3], 10) || 0),
-        src: shop ? "shop" : "reward", deco: flags.indexOf("d") !== -1 });
+      pk = { night: night, piece: f[1], style: ver === "1" ? "" : (f[2] || ""), lot: ver === "1" ? night / EVERY : (parseInt(f[3], 10) || 0),
+        src: shop ? "shop" : "reward", deco: flags.indexOf("d") !== -1 };
+      if (ver === "4" && f[5]) { pos = f[5].split(","); if (pos.length === 2 && isFinite(parseInt(pos[0], 10))) { pk.cx = parseInt(pos[0], 10); pk.cy = parseInt(pos[1], 10); } }
+      picks.push(pk);
     });
     if (bad) return { ok: false, error: "That build code is damaged (" + bad + ")." };
     if (picks.length && !theme) return { ok: false, error: "That build code is damaged (no build type)." };
@@ -323,86 +328,149 @@
     return c;
   }
   function scheduleDraw() { if (drawQueued) return; drawQueued = true; requestAnimationFrame(function () { drawQueued = false; redraw(); }); }
-  function pitch() { var t = themeDef(save.theme); return (t && t.pitch) || 140; }
-  /* lot (u,v) → scene px (unscaled). Isometric: +u runs down-right, +v runs down-left. */
-  function lotXY(u, v) { var P = pitch(); return { x: (u - v) * P, y: (u + v) * P * 0.5 }; }
-
-  /* Everything to draw, in scene px: {p:piece, style, x, y, a:alpha, flip, ghost} */
-  function sceneItems(ghost) {
-    var items = [], t = themeDef(save.theme), dom = dominantStyle();
+  /* ── the estate grid ──────────────────────────────────────────────────────
+     Pieces sit on an isometric grid of square cells (theme.cell px per cell,
+     scene px). A piece covers n×n cells (piece.cells) from its top-left cell
+     (cx, cy); +cx runs down-right on screen, +cy down-left. New pieces are
+     auto-placed touching the building; students can drag any piece to a free
+     spot (the "place" step and the gallery's Arrange mode). */
+  function cellPx() { var t = themeDef(save.theme); return (t && t.cell) || 36; }
+  function cellsOf(p) { return Math.max(1, (p && p.cells) || 1); }
+  function cellXY(cx, cy) { var C = cellPx(); return { x: (cx - cy) * C / 2, y: (cx + cy) * C / 4 }; }
+  function pxToCell(x, y) { var C = cellPx(); return { u: (x / (C / 2) + y / (C / 4)) / 2, v: (y / (C / 4) - x / (C / 2)) / 2 }; }
+  function rectsOf(ignore) {
+    var out = [];
     save.picks.forEach(function (pk) {
-      var p = pieceById(pk.piece), lot, xy;
-      if (!p) return;
-      lot = pk.deco ? decoLotFor(pk.lot || 1) : lotFor(pk.lot || 1);
-      xy = lotXY(lot.u, lot.v);
-      items.push({ p: p, style: pk.style || dom, x: xy.x, y: xy.y, a: 1, key: (pk.deco ? "d" : "k") + lot.k });
+      var p = pieceById(pk.piece);
+      if (!p || pk === ignore || pk.cx == null) return;
+      out.push({ cx: pk.cx, cy: pk.cy, n: cellsOf(p), pk: pk });
     });
-    if (ghost && ghost.piece) {
-      var lot = lotFor(ghost.k), xy = lotXY(lot.u, lot.v);
-      items.push({ p: ghost.piece, style: ghost.style || dom, x: xy.x, y: xy.y, a: ghost.alpha == null ? 1 : ghost.alpha, key: "k" + lot.k, ghost: true });
+    return out;
+  }
+  function overlaps(cx, cy, n, r) { return cx < r.cx + r.n && cx + n > r.cx && cy < r.cy + r.n && cy + n > r.cy; }
+  function touches(cx, cy, n, r) {
+    var sideX = (cx + n === r.cx || r.cx + r.n === cx) && cy < r.cy + r.n && cy + n > r.cy;
+    var sideY = (cy + n === r.cy || r.cy + r.n === cy) && cx < r.cx + r.n && cx + n > r.cx;
+    return sideX || sideY;
+  }
+  function spotFree(cx, cy, n, ignore) {
+    var rs = rectsOf(ignore), i;
+    for (i = 0; i < rs.length; i++) if (overlaps(cx, cy, n, rs[i])) return false;
+    return true;
+  }
+  /* Nearest free spot that touches an existing piece (or the origin for the first piece). */
+  function autoPlace(n, ignore) {
+    var rs = rectsOf(ignore), i, ring, cx, cy, best = null, bd = Infinity, sumx = 0, sumy = 0, d;
+    if (!rs.length) return { cx: -Math.floor(n / 2), cy: -Math.floor(n / 2) };
+    rs.forEach(function (r) { sumx += r.cx + r.n / 2; sumy += r.cy + r.n / 2; });
+    var mx = sumx / rs.length, my = sumy / rs.length, R = 14;
+    for (ring = 0; ring <= R; ring++) {
+      for (cx = Math.round(mx) - ring; cx <= Math.round(mx) + ring; cx++) for (cy = Math.round(my) - ring; cy <= Math.round(my) + ring; cy++) {
+        if (Math.max(Math.abs(cx - Math.round(mx)), Math.abs(cy - Math.round(my))) !== ring) continue;
+        if (!spotFree(cx, cy, n, ignore)) continue;
+        var adj = false;
+        for (i = 0; i < rs.length; i++) if (touches(cx, cy, n, rs[i])) { adj = true; break; }
+        if (!adj) continue;
+        d = Math.abs(cx + n / 2 - mx) + Math.abs(cy + n / 2 - my) + (cx + cy) * 0.01;   /* tiny bias toward the front */
+        if (d < bd) { bd = d; best = { cx: cx, cy: cy }; }
+      }
+      if (best) return best;
     }
-    if (t && t.ring && (wallsUp() || (ghost && ghost.walls))) ringItems(t.ring, dom).forEach(function (it) { items.push(it); });
+    return { cx: Math.round(mx) + R, cy: Math.round(my) + R };
+  }
+  /* Every pick gets a position (older saves and pack purchases are placed here). */
+  function ensurePositions() {
+    var changed = false;
+    save.picks.filter(function (pk) { return !pk.deco; }).concat(save.picks.filter(function (pk) { return pk.deco; })).forEach(function (pk) {
+      var p = pieceById(pk.piece);
+      if (!p || (pk.cx != null && pk.cy != null)) return;
+      var pos = autoPlace(cellsOf(p)); pk.cx = pos.cx; pk.cy = pos.cy; changed = true;
+    });
+    if (changed) persist();
+  }
+  function bboxCells(ignore) {
+    var rs = rectsOf(ignore), b = null;
+    rs.forEach(function (r) {
+      if (!b) b = { u0: r.cx, v0: r.cy, u1: r.cx + r.n, v1: r.cy + r.n };
+      else { b.u0 = Math.min(b.u0, r.cx); b.v0 = Math.min(b.v0, r.cy); b.u1 = Math.max(b.u1, r.cx + r.n); b.v1 = Math.max(b.v1, r.cy + r.n); }
+    });
+    return b;
+  }
+  function itemFor(p, pk, cx, cy, style, extra) {
+    var n = cellsOf(p), c = cellXY(cx + n / 2, cy + n / 2), it = { p: p, pk: pk, style: style, x: c.x, y: c.y, a: 1, depth: cx + cy + n, cx: cx, cy: cy, n: n };
+    var k; if (extra) for (k in extra) it[k] = extra[k];
+    return it;
+  }
+  /* Everything to draw, in scene px. */
+  function sceneItems() {
+    var items = [], t = themeDef(save.theme), dom = dominantStyle(), drag = cur && cur.drag;
+    ensurePositions();
+    save.picks.forEach(function (pk) {
+      var p = pieceById(pk.piece);
+      if (!p) return;
+      if (drag && drag.pk === pk) {
+        items.push(itemFor(p, pk, drag.cx, drag.cy, pk.style || dom, { a: drag.ok ? 0.85 : 0.45, bad: !drag.ok, ghost: true }));
+        return;
+      }
+      items.push(itemFor(p, pk, pk.cx, pk.cy, pk.style || dom, { ghost: cur && cur.placedKey === pk }));
+    });
+    if (t && t.ring && wallsUp()) ringItems(t.ring, dom).forEach(function (it) { items.push(it); });
     return items;
   }
-  /* The wall/fence ring: a diamond of extent E lot-units around the core.
-     Edges: back-right (v=-E), front-right (u=+E), front-left (v=+E), back-left (u=-E).
-     A segment sprite is rendered once (running along +u); the v-edges use its mirror. */
+  /* The wall/fence ring hugs the estate one cell out; segments are 2 cells long so they join. */
   function ringItems(ring, style) {
     var seg = pieceById(ring.seg), corner = ring.corner ? pieceById(ring.corner) : null, gate = ring.gate ? pieceById(ring.gate) : null;
-    var items = [], segW, n, i, f, u, v, xy, edges, mid, E, maxUV = 0, P = pitch();
-    if (!seg) return items;
-    /* The ring hugs the buildings: 0.85 lot beyond the outermost lot in use, growing as the estate grows. */
-    buildingPicks().forEach(function (pk) { var lot = lotFor(pk.lot || 1); maxUV = Math.max(maxUV, Math.abs(lot.u), Math.abs(lot.v)); });
-    E = Math.max(1.85, Math.min(ring.extent || 3.75, maxUV + 0.85));
-    segW = Math.max(20, (seg.w || 60) * unitScale(seg));
-    var edgeLen = E * P * Math.sqrt(5);                  /* screen length of one edge (scene px) */
-    n = Math.max(3, Math.round(edgeLen / (segW * 0.72)));  /* segments overlap a little so the wall reads as one run */
-    /* The wall sprite runs lower-left → upper-right, i.e. along the v axis; u-edges use its mirror. */
-    edges = [
-      { along: "u", fixed: -E, flip: true, front: false },    /* back-right  */
-      { along: "v", fixed: E, flip: false, front: true },     /* front-right */
-      { along: "u", fixed: E, flip: true, front: true },      /* front-left  */
-      { along: "v", fixed: -E, flip: false, front: false }    /* back-left   */
-    ];
-    edges.forEach(function (ed, ei) {
-      for (i = 0; i < n; i++) {
-        f = -E + (i + 0.5) * (2 * E / n);
-        u = ed.along === "u" ? f : ed.fixed; v = ed.along === "v" ? f : ed.fixed;
-        xy = lotXY(u, v);
-        mid = ei === 1 && Math.abs(f) < (E / n);            /* the gate sits mid front-right edge */
-        if (mid) {
-          if (gate) items.push({ p: gate, style: style, x: xy.x, y: xy.y, a: 1, flip: false, key: "gate" });
-          continue;                                          /* no gate piece: leave the gap open */
-        }
-        items.push({ p: seg, style: style, x: xy.x, y: xy.y, a: ed.front ? 0.94 : 1, flip: ed.flip, key: "w" + ei + "-" + i });
-      }
-    });
-    if (corner) [[-E, -E], [E, -E], [E, E], [-E, E]].forEach(function (c, ci) {
-      xy = lotXY(c[0], c[1]); items.push({ p: corner, style: style, x: xy.x, y: xy.y, a: 1, key: "c" + ci });
-    });
+    var b = bboxCells(), items = [], len, u0, v0, u1, v1, i, c, nseg, gateAt;
+    if (!seg || !b) return items;
+    len = Math.max(1, cellsOf(seg));
+    u0 = b.u0 - 1; v0 = b.v0 - 1; u1 = b.u1 + 1; v1 = b.v1 + 1;   /* outer corners */
+    var span = Math.max(u1 - u0, v1 - v0); u1 = u0 + span; v1 = v0 + span;   /* square ring */
+    nseg = Math.ceil(span / len);
+    gateAt = Math.floor(nseg / 2);
+    function push(p, cx, cy, flip, key, front) {
+      c = cellXY(cx, cy);
+      items.push({ p: p, style: style, x: c.x, y: c.y, a: front ? 0.94 : 1, depth: cx + cy, flip: flip, key: key, ring: true });
+    }
+    for (i = 0; i < nseg; i++) {
+      var f = Math.min(u0 + i * len + len / 2, u1 - len / 2), g = Math.min(v0 + i * len + len / 2, v1 - len / 2);
+      push(seg, f, v0 + 0.5, true, "wb" + i, false);                         /* back-left edge (along u) */
+      push(seg, u0 + 0.5, g, false, "wl" + i, false);                        /* back-right edge (along v) */
+      push(seg, f, v1 + 0.5, true, "wf" + i, true);                          /* front-left edge (along u) */
+      if (i === gateAt && gate) push(gate, u1 + 0.5, g, false, "gate", true);
+      else if (i !== gateAt || gate) push(seg, u1 + 0.5, g, false, "wr" + i, true);   /* front-right edge, gap when no gate piece */
+    }
+    if (corner) [[u0 + 0.5, v0 + 0.5], [u1 + 0.5, v0 + 0.5], [u1 + 0.5, v1 + 0.5], [u0 + 0.5, v1 + 0.5]].forEach(function (q, ci) { push(corner, q[0], q[1], false, "c" + ci, ci >= 2); });
     return items;
   }
   function sceneScale1() { var t = themeDef(save.theme); return (t && t.drawScale) || (data && data.drawScale) || 1; }
   function unitScale(p) { var t = themeDef(save.theme), tu = (t && t.unitPx) || p.unitPx || 1, pu = p.unitPx || tu; return pu ? tu / pu : 1; }
-  /* Fit: bounding box of every sprite (scene px) → scale + offset for a W×H canvas. */
+  /* Fit: bounding box of every sprite (scene px), padded when the student may drag, → scale + offset. */
   function fitScene(items, W, H) {
-    var minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity, base = sceneScale1(), sc, ox, oy;
+    var minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity, base = sceneScale1(), sc, ox, oy, pad;
     items.forEach(function (it) {
       var us = unitScale(it.p), w = (it.p.w || 60) * base * us, h = (it.p.h || 60) * base * us, ax = it.p.ax != null ? it.p.ax : 0.5, ay = it.p.ay != null ? it.p.ay : 1;
       var l = it.x * base - w * ax, tp = it.y * base - h * ay;
       minX = Math.min(minX, l); maxX = Math.max(maxX, l + w); minY = Math.min(minY, tp); maxY = Math.max(maxY, tp + h);
     });
     if (!items.length) { minX = -100; maxX = 100; minY = -60; maxY = 40; }
+    pad = (cur && (step === "place" || cur.arrange)) ? cellPx() * base * 2.5 : cellPx() * base * 0.5;
+    minX -= pad; maxX += pad; minY -= pad * 0.5; maxY += pad * 0.5;
     var bw = Math.max(1, maxX - minX), bh = Math.max(1, maxY - minY);
     var maxS = (W / ((data && data.sceneW) || 1120)) * 1.0;
-    sc = Math.min(maxS, (W * 0.9) / bw, (H * 0.8) / bh);
-    ox = W / 2 - ((minX + maxX) / 2) * sc; oy = H * 0.56 - ((minY + maxY) / 2) * sc;
+    sc = Math.min(maxS, (W * 0.94) / bw, (H * 0.9) / bh);
+    ox = W / 2 - ((minX + maxX) / 2) * sc; oy = H * 0.52 - ((minY + maxY) / 2) * sc;
     return { s: sc * base, ox: ox, oy: oy, base: base };
   }
   function drawPiece(ctx, it, fit) {
     var p = it.p, src = imgFor(p, it.style), c = getImg(src), s = fit.s * unitScale(p), x = fit.ox + it.x * fit.s / fit.base, y = fit.oy + it.y * fit.s / fit.base;
     var w = (p.w || 60) * s / fit.base, h = (p.h || 60) * s / fit.base, ax = p.ax != null ? p.ax : 0.5, ay = p.ay != null ? p.ay : 1, iw, ih, dw, dh;
     ctx.save(); ctx.globalAlpha = it.a;
+    if (it.n && (it.ghost || (cur && cur.arrange))) {                       /* footprint diamond under a movable piece */
+      var C = cellPx() * fit.s / fit.base, q = [cellXY(it.cx, it.cy), cellXY(it.cx + it.n, it.cy), cellXY(it.cx + it.n, it.cy + it.n), cellXY(it.cx, it.cy + it.n)];
+      ctx.beginPath(); q.forEach(function (pt, i) { var px = fit.ox + pt.x * fit.s / fit.base, py = fit.oy + pt.y * fit.s / fit.base; if (i) ctx.lineTo(px, py); else ctx.moveTo(px, py); });
+      ctx.closePath(); ctx.fillStyle = it.bad ? "rgba(255,90,90,.35)" : it.ghost ? "rgba(245,200,66,.35)" : "rgba(245,200,66,.12)"; ctx.fill();
+      ctx.lineWidth = Math.max(1, C * 0.04); ctx.strokeStyle = it.bad ? "#ff6b6b" : "rgba(245,200,66,.85)"; ctx.stroke();
+    }
     if (c.ok) {
       iw = c.img.naturalWidth || p.w || 1; ih = c.img.naturalHeight || p.h || 1; dw = iw * s / fit.base; dh = ih * s / fit.base;
       if (!it.flip) { ctx.fillStyle = "rgba(0,0,0,.16)"; ellipse(ctx, x, y + 2, dw * 0.4, dw * 0.1); }
@@ -416,25 +484,76 @@
       ctx.fillStyle = "#e8e6df"; ctx.font = "700 " + Math.max(9, Math.round(w * 0.14)) + "px 'Trebuchet MS', sans-serif";
       ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText(p.name || p.id, x, y - h / 2, w - 4);
     }
-    if (it.ghost && it.a >= 1) {                          /* halo under the newest piece */
-      ctx.globalAlpha = 1; ctx.beginPath(); ctx.ellipse(x, y + 2, Math.max(30, w * 0.55), Math.max(12, w * 0.22), 0, 0, Math.PI * 2);
-      ctx.lineWidth = 3; ctx.strokeStyle = "rgba(245,200,66,.9)"; ctx.stroke();
-    }
     ctx.restore();
   }
+  var lastFit = null;
   function redraw() {
     if (!ui || !mode) return;
-    var cv = ui.canvas, ctx = cv.getContext("2d"), W = cv._w || 1, H = cv._h || 1, items, fit, ghost = null;
+    var cv = ui.canvas, ctx = cv.getContext("2d"), W = cv._w || 1, H = cv._h || 1, items, fit;
     ctx.setTransform(cv._dpr || 1, 0, 0, cv._dpr || 1, 0, 0);
     ctx.clearRect(0, 0, W, H);
     paintBg(ctx, W, H, save.theme || "village");
-    if (!save.theme) { banner(ctx, W, H, loadState === "ok" ? "Win Night 5 to start building" : "Build data not available"); return; }
-    if (cur && step === "style" && cur.piece)
-      ghost = { piece: cur.piece, style: cur.stylePick || dominantStyle(), k: nextLot(), alpha: 0.85, walls: buildingPicks().length + 1 >= wallLevel() };
-    items = sceneItems(ghost);
-    if (step === "done" && cur && cur.piece) items.forEach(function (it) { if (it.key === "k" + cur.lot && !it.ghost) it.ghost = true; });
-    fit = fitScene(items, W, H);
-    items.sort(function (a, b) { return (a.y - b.y) || (a.x - b.x); }).forEach(function (it) { drawPiece(ctx, it, fit); });
+    if (!save.theme) { banner(ctx, W, H, loadState === "ok" ? "Win Night 5 to start building" : "Build data not available"); lastFit = null; return; }
+    items = sceneItems();
+    fit = lastFit = fitScene(items, W, H);
+    items.sort(function (a, b) { return (a.depth - b.depth) || (a.y - b.y) || (a.x - b.x); }).forEach(function (it) { drawPiece(ctx, it, fit); });
+  }
+
+  /* ── dragging pieces ─────────────────────────────────────────────────────── */
+  function canvasScenePt(e) {
+    var r = ui.canvas.getBoundingClientRect(), fit = lastFit;
+    if (!fit) return null;
+    var x = (e.clientX - r.left) * (ui.canvas._w / (r.width || 1)), y = (e.clientY - r.top) * (ui.canvas._h / (r.height || 1));
+    return { x: (x - fit.ox) * fit.base / fit.s, y: (y - fit.oy) * fit.base / fit.s, sx: x, sy: y, fit: fit };
+  }
+  function hitPick(pt) {
+    /* The footprint under the cursor wins; only if no footprint is hit do we accept a sprite's image box (tall towers). */
+    var cell = pxToCell(pt.x, pt.y), cu = Math.floor(cell.u), cvv = Math.floor(cell.v), fit = pt.fit;
+    var bestFoot = null, bfd = -Infinity, bestBox = null, bbd = -Infinity;
+    rectsOf().forEach(function (r) {
+      var depth = r.cx + r.cy + r.n, p = pieceById(r.pk.piece);
+      if (cu >= r.cx && cu < r.cx + r.n && cvv >= r.cy && cvv < r.cy + r.n) { if (depth > bfd) { bfd = depth; bestFoot = r.pk; } return; }
+      if (!p) return;
+      var it = itemFor(p, r.pk, r.cx, r.cy, ""), us = unitScale(p), sc = fit.s * us / fit.base, w = (p.w || 60) * sc, h = (p.h || 60) * sc;
+      var x = fit.ox + it.x * fit.s / fit.base, y = fit.oy + it.y * fit.s / fit.base, ax = p.ax != null ? p.ax : 0.5, ay = p.ay != null ? p.ay : 1;
+      if (pt.sx >= x - w * ax && pt.sx <= x - w * ax + w && pt.sy >= y - h * ay && pt.sy <= y - h * ay + h && depth > bbd) { bbd = depth; bestBox = r.pk; }
+    });
+    return bestFoot || bestBox;
+  }
+  function draggable(pk) { return !!pk && ((step === "place" && cur && cur.placedKey === pk) || (cur && cur.arrange)); }
+  function onPointerDown(e) {
+    if (!cur || !lastFit || !(step === "place" || cur.arrange)) return;
+    var pt = canvasScenePt(e); if (!pt) return;
+    var pk = hitPick(pt);
+    if (!draggable(pk)) { if (step === "place" && cur.placedKey && pk !== cur.placedKey) ui.note.textContent = "Drag the glowing piece."; return; }
+    var cell = pxToCell(pt.x, pt.y);
+    cur.drag = { pk: pk, id: e.pointerId, du: cell.u - pk.cx, dv: cell.v - pk.cy, cx: pk.cx, cy: pk.cy, ok: true };
+    try { ui.canvas.setPointerCapture(e.pointerId); } catch (err) {}
+    e.preventDefault();
+    redraw();
+  }
+  function onPointerMove(e) {
+    if (!cur || !cur.drag || cur.drag.id !== e.pointerId) return;
+    var pt = canvasScenePt(e); if (!pt) return;
+    var cell = pxToCell(pt.x, pt.y), d = cur.drag, p = pieceById(d.pk.piece), n = cellsOf(p);
+    var cx = Math.round(cell.u - d.du), cy = Math.round(cell.v - d.dv);
+    if (cx === d.cx && cy === d.cy) return;
+    d.cx = cx; d.cy = cy; d.ok = spotFree(cx, cy, n, d.pk);
+    e.preventDefault();
+    redraw();
+  }
+  function onPointerUp(e) {
+    if (!cur || !cur.drag || cur.drag.id !== e.pointerId) return;
+    var d = cur.drag; cur.drag = null;
+    try { ui.canvas.releasePointerCapture(e.pointerId); } catch (err) {}
+    if (d.ok && (d.cx !== d.pk.cx || d.cy !== d.pk.cy)) { d.pk.cx = d.cx; d.pk.cy = d.cy; persist(); ui.note.textContent = joinedNote(d.pk); }
+    else if (!d.ok) ui.note.textContent = "That spot is taken — the piece went back.";
+    redraw();
+  }
+  function joinedNote(pk) {
+    var p = pieceById(pk.piece), rs = rectsOf(pk), i, n = cellsOf(p);
+    for (i = 0; i < rs.length; i++) if (touches(pk.cx, pk.cy, n, rs[i])) return (p.name || "Piece") + " joined to the " + (pieceById(rs[i].pk.piece) || {}).name + ".";
+    return (p.name || "Piece") + " placed on its own. Drag it against another piece to join them.";
   }
 
   /* 16:9 canvas sized to the card and the height left over by the other rows; devicePixelRatio aware. */
@@ -485,6 +604,10 @@
     document.body.appendChild(ui.overlay);
 
     ui.overlay.addEventListener("pointerdown", function (e) { if (e.target === ui.overlay) e.preventDefault(); });
+    ui.canvas.addEventListener("pointerdown", onPointerDown);
+    ui.canvas.addEventListener("pointermove", onPointerMove);
+    ui.canvas.addEventListener("pointerup", onPointerUp);
+    ui.canvas.addEventListener("pointercancel", onPointerUp);
     ui.copyBtn.addEventListener("click", copyCode);
     ui.loadBtn.addEventListener("click", doLoad);
     ui.codeIn.addEventListener("input", function () { if (cur) cur.confirmLoad = false; ui.loadBtn.textContent = "Load"; ui.codeMsg.textContent = ""; });
@@ -575,9 +698,16 @@
     ui.codeOut.value = exportCode(); ui.codeIn.value = ""; ui.codeMsg.textContent = ""; ui.loadBtn.textContent = "Load";
     ui.badge.textContent = n + " / " + TOTAL + " · " + coinLabel();
     var buttons = [{ label: "Close", primary: true, onTap: function () { var cb = cur && cur.onClose; closeOverlay(); if (cb) cb(); } }];
-    if (save.theme && loadState === "ok") buttons.unshift({ label: "Shop (" + coinLabel() + ")", onTap: function () {
-      cur.shop = true; cur.night = cur.night || 1; cur.tab = "build"; mode = "shop"; showStep("shop");
-    } });
+    if (save.theme && loadState === "ok") {
+      buttons.unshift({ label: "Shop (" + coinLabel() + ")", onTap: function () {
+        cur.shop = true; cur.night = cur.night || 1; cur.tab = "build"; mode = "shop"; showStep("shop");
+      } });
+      if (save.picks.length) buttons.unshift({ label: cur.arrange ? "Done arranging" : "Arrange pieces", onTap: function () {
+        cur.arrange = !cur.arrange; cur.drag = null; fillGallery();
+      } });
+    }
+    if (cur.arrange) { ui.sub.textContent = "Drag any piece to a free spot. Snap it against another piece to join them. Walls and fences move by themselves."; show(ui.note, true); ui.note.textContent = ui.note.textContent || "Tap and drag a piece."; }
+    else show(ui.note, false);
     setButtons(buttons);
     layoutCanvas(); redraw();
   }
@@ -588,8 +718,9 @@
     var name = cur && cur.piece ? (cur.piece.name || cur.piece.id) : "", lot, tn;
     show(ui.themes, s === "theme"); show(ui.options, s === "pick"); show(ui.styles, s === "style");
     show(ui.tabs, s === "shop"); show(ui.shop, s === "shop");
-    show(ui.sceneWrap, s === "style" || s === "done" || s === "gallery" || s === "shop");
-    show(ui.note, s === "done" || s === "shop"); show(ui.codeWrap, s === "gallery");
+    show(ui.sceneWrap, s === "style" || s === "place" || s === "done" || s === "gallery" || s === "shop");
+    show(ui.note, s === "place" || s === "done" || s === "shop"); show(ui.codeWrap, s === "gallery");
+    if (cur) { cur.drag = null; if (s !== "place" && s !== "done") cur.placedKey = null; }
     ui.note.textContent = "";
     if (s === "gallery") { fillGallery(); return; }
     if (s === "shop") { fillShop(); return; }
@@ -613,17 +744,23 @@
       fillOptions();
     } else if (s === "style") {
       ui.title.textContent = "Which style for the " + name + "?";
-      ui.sub.textContent = cur.lot === 1 ? "Pieces in the same style match; the game will also suggest a style that goes with yours."
+      ui.sub.textContent = nextLot() === 1 ? "Pieces in the same style match; the game will also suggest a style that goes with yours."
         : "Keep your look, or mix in a second style that matches." + (cur.shop ? " Costs " + priceOf(cur.piece) + " coins." : "");
       setButtons([{ label: "Back", onTap: function () { showStep(cur.shop ? "shop" : "pick"); } },
         { label: cur.shop ? "Buy and build it" : "Build it", primary: true, disabled: !cur.stylePick, onTap: place }]);
       fillStyles(); layoutCanvas(); redraw();
+    } else if (s === "place") {
+      ui.title.textContent = "Where does the " + name + " go?";
+      ui.sub.textContent = "It has joined your " + tn.toLowerCase() + ". Drag it (finger or mouse) to any free spot — snap it against another piece to join them — then tap Keep it here.";
+      ui.note.textContent = cur.placedKey ? joinedNote(cur.placedKey) : "";
+      setButtons([{ label: "Keep it here", primary: true, onTap: function () { showStep("done"); } }]);
+      layoutCanvas(); redraw();
     } else if (s === "done") {
       var nb = buildingPicks().length;
       ui.title.textContent = name + " built in " + styleName(cur.stylePick) + "!";
       ui.sub.textContent = cur.shop ? "Bought for " + priceOf(cur.piece) + " coins. " + coinLabel() + " left."
         : "Piece " + cur.k + " of " + TOTAL + " is in place." + (cur.k < TOTAL ? " Next reward after night " + (cur.night + EVERY) + "." : " Your build is complete!");
-      ui.note.textContent = nb === wallLevel() && cur.lot === nb ? (save.theme === "castle" ? "The castle walls went up around your estate!" : "A fence now rings your town!")
+      ui.note.textContent = nb === wallLevel() && cur.lot === nb && !cur.shop ? (save.theme === "castle" ? "The castle walls went up around your estate!" : "A fence now rings your town!")
         : nb === wallLevel() - 1 ? "One more building and the " + (save.theme === "castle" ? "walls go up." : "fence goes up.")
         : "Added to your " + tn + "!";
       setButtons(cur.shop ? [{ label: "Back to shop", primary: true, onTap: function () { cur.piece = null; cur.stylePick = null; showStep("shop"); } }]
@@ -652,9 +789,11 @@
       save.coins -= cost;
     } else if (pickFor(cur.night)) return;
     cur.lot = nextLot();
-    save.picks.push({ night: cur.night, piece: cur.piece.id, style: cur.stylePick || defaultStyle(), lot: cur.lot, src: cur.shop ? "shop" : "reward", deco: false, ord: save.picks.length });
+    var pos = autoPlace(cellsOf(cur.piece));
+    var pk = { night: cur.night, piece: cur.piece.id, style: cur.stylePick || defaultStyle(), lot: cur.lot, src: cur.shop ? "shop" : "reward", deco: false, ord: save.picks.length, cx: pos.cx, cy: pos.cy };
+    save.picks.push(pk); cur.placedKey = pk;
     persist();
-    showStep("done");
+    showStep("place");
   }
   function coinLabel() { return (save.coins || 0) + " coin" + (save.coins === 1 ? "" : "s"); }
 
@@ -681,7 +820,8 @@
     var cost = priceOf(p);
     if (save.coins < cost) { ui.note.textContent = "Not enough coins for the " + p.name + "."; return false; }
     save.coins -= cost;
-    save.picks.push({ night: cur.night, piece: p.id, style: "", lot: nextDecoLot(), src: "shop", deco: true, ord: save.picks.length });
+    var pos = autoPlace(cellsOf(p));
+    save.picks.push({ night: cur.night, piece: p.id, style: "", lot: nextDecoLot(), src: "shop", deco: true, ord: save.picks.length, cx: pos.cx, cy: pos.cy });
     persist(); return true;
   }
   function buyPack(pk, off) {
@@ -689,12 +829,12 @@
     if (save.coins < cost) { ui.note.textContent = "Not enough coins for the " + pk.name + "."; return; }
     save.coins -= cost;
     if (pk.kind !== "deco") for (i = 0; i < pk.count; i++) {
-      var b = off.builds[i % off.builds.length];
-      save.picks.push({ night: cur.night, piece: b.id, style: dom, lot: nextLot(), src: "shop", deco: false, ord: save.picks.length });
+      var b = off.builds[i % off.builds.length], bp = autoPlace(cellsOf(b));
+      save.picks.push({ night: cur.night, piece: b.id, style: dom, lot: nextLot(), src: "shop", deco: false, ord: save.picks.length, cx: bp.cx, cy: bp.cy });
     }
     for (i = 0; i < (pk.kind === "deco" ? pk.count : (pk.decos || 0)); i++) {
-      var d = off.decos[i % off.decos.length];
-      save.picks.push({ night: cur.night, piece: d.id, style: "", lot: nextDecoLot(), src: "shop", deco: true, ord: save.picks.length });
+      var d = off.decos[i % off.decos.length], dp = autoPlace(cellsOf(d));
+      save.picks.push({ night: cur.night, piece: d.id, style: "", lot: nextDecoLot(), src: "shop", deco: true, ord: save.picks.length, cx: dp.cx, cy: dp.cy });
     }
     persist();
     ui.note.textContent = pk.name + " bought: " + packContents(pk, off) + ". " + coinLabel() + " left.";
@@ -863,6 +1003,15 @@
     addCoins: addCoins, coins: coins, economy: economy,
     close: closeOverlay, isOpen: function () { return !!mode; },
     exportCode: exportCode, importCode: importCode, state: state,
-    LS_KEY: LS_KEY, version: 3
+    LS_KEY: LS_KEY, version: 3,
+    _hitAt: function (clientX, clientY) { var pt = canvasScenePt({ clientX: clientX, clientY: clientY }); var pk = pt && hitPick(pt); return { pt: pt && { x: pt.x, y: pt.y, sx: pt.sx, sy: pt.sy }, cell: pt && pxToCell(pt.x, pt.y), pick: pk ? pk.piece + "@" + pk.cx + "," + pk.cy : null, step: step, arrange: !!(cur && cur.arrange), draggable: draggable(pk) };
+    },
+    /* test hook: canvas-space centre of the i-th pick (used by tools/smoke.js to drag pieces) */
+    _pickScreen: function (i) {
+      var pk = save && save.picks[i], p = pk && pieceById(pk.piece), fit = lastFit;
+      if (!pk || !p || !fit || pk.cx == null) return null;
+      var it = itemFor(p, pk, pk.cx, pk.cy, ""), r = ui.canvas.getBoundingClientRect();
+      return { x: r.left + (fit.ox + it.x * fit.s / fit.base) * (r.width / ui.canvas._w), y: r.top + (fit.oy + it.y * fit.s / fit.base) * (r.height / ui.canvas._h) - 4, cx: pk.cx, cy: pk.cy };
+    }
   };
 })();
