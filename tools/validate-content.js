@@ -44,7 +44,7 @@ packs.forEach(function (p, pi) {
   if (wc < lo || wc > hi) warnings.push(where + ": passage is " + wc + " words (expected " + lo + "-" + hi + ")");
   var key = p.passage.replace(/<[^>]+>/g, "").slice(0, 120);
   if (passages[key]) errors.push(where + ": passage text duplicates " + passages[key]); passages[key] = where;
-  if (!(p.claims instanceof Array) || !p.claims.length) { errors.push(where + ": no claims"); return; }
+  if (!Array.isArray(p.claims) || !p.claims.length) { errors.push(where + ": no claims"); return; }
   if (p.claims.length < 5) warnings.push(where + ": only " + p.claims.length + " claims (aim for 6)");
   var letterCount = {};
   p.claims.forEach(function (c, ci) {
@@ -60,7 +60,7 @@ packs.forEach(function (p, pi) {
     if (!c.stem || typeof c.stem !== "string") errors.push(w + ": missing stem");
     var sk = (c.stem || "").toLowerCase().replace(/\s+/g, " ").trim();
     if (stems[sk] && stems[sk] !== where) warnings.push(w + ": stem repeats one in " + stems[sk]); stems[sk] = where;
-    if (!(c.choices instanceof Array) || c.choices.length !== 4) { errors.push(w + ": needs exactly 4 choices"); return; }
+    if (!Array.isArray(c.choices) || c.choices.length !== 4) { errors.push(w + ": needs exactly 4 choices"); return; }
     var letters = c.choices.map(function (ch) { return ch.letter; }).join("");
     if (letters !== "ABCD") errors.push(w + ": choice letters must be A,B,C,D in order (got " + letters + ")");
     var texts = {};
@@ -69,7 +69,7 @@ packs.forEach(function (p, pi) {
       var t = String(ch.text).trim().toLowerCase();
       if (texts[t]) errors.push(w + ": duplicate choice text"); texts[t] = true;
     });
-    var corr = c.correct instanceof Array ? c.correct : [c.correct];
+    var corr = Array.isArray(c.correct) ? c.correct : [c.correct];
     if (!corr.length || corr.length > 2) errors.push(w + ": correct must be one letter or an array of two");
     corr.forEach(function (L) { if (!/^[ABCD]$/.test(String(L))) errors.push(w + ": correct letter " + L + " not in A-D"); letterCount[L] = (letterCount[L] || 0) + 1; });
     if (corr.length === 2 && !/TWO/i.test(c.stem)) warnings.push(w + ": two correct answers but the stem does not say 'Select TWO'");
