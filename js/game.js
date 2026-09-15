@@ -1,4 +1,13 @@
 (function () {
+  /* v4.9.6: the state gateway is the first thing on screen on every visit. It is shown
+     before anything else in this file runs, so a slow load or an error further down can
+     never leave the title screen up first. index.html also ships with the gateway visible. */
+  try {
+    var _gw = document.getElementById("state-screen"), _ts = document.getElementById("title-screen"), _ss = document.getElementById("skill-screen");
+    if (_gw) _gw.classList.remove("hidden");
+    if (_ts) _ts.classList.add("hidden");
+    if (_ss) _ss.classList.add("hidden");
+  } catch (eGw) {}
   var WORLD_W = 2400;
   var WORLD_H = 2000;
   var WALK = 268;
@@ -6898,6 +6907,11 @@
         var a = this.adapt, target = a ? a.ability : 1.6, allStrands = String(this.strand || "ALL").toUpperCase() === "ALL";
         /* v4.9.2 stamina: prefer passages near tonight's target length (short early, longer every couple of nights) */
         var wantWords = (typeof heistTargetWords === "function") ? heistTargetWords(this.night) : 250;
+        /* v4.9.6: when the pool has enough passages inside the night's length band (60%–160% of the
+           target) only those are drawn, so night 90 never serves a 250-word text; thin pools fall back. */
+        var band = [], loW = wantWords * 0.6, hiW = wantWords * 1.6;
+        for (i = 0; i < pool.length; i++) { var cw = claims[pool[i]].words; if (!cw || (cw >= loW && cw <= hiW)) band.push(pool[i]); }
+        if (band.length >= 12) pool = band;
         var weights = [], total = 0, w, rec, acc;
         for (i = 0; i < pool.length; i++) {
           var c = claims[pool[i]];
@@ -27107,8 +27121,14 @@
     window.addEventListener("focus", function () {
       if (!document.hidden) resumeAfterTab();
     });
-    window.addEventListener("pageshow", function () {
+    window.addEventListener("pageshow", function (ev) {
       if (!document.hidden) resumeAfterTab();
+      /* v4.9.6: coming back to the page from the browser's back-forward cache counts as
+         opening it again — outside a night, the state gateway comes first. */
+      try {
+        var playEl = document.getElementById("play");
+        if (ev && ev.persisted && (!playEl || playEl.classList.contains("hidden"))) { cfg.state = null; showStateScreen(); }
+      } catch (ePs) {}
     });
   }
   function unlockAudioEverywhere() {

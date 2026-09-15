@@ -65,7 +65,7 @@
   var drawQueued = false;
 
   /* ── save record ─────────────────────────────────────────────────────────── */
-  function freshSave() { return { v: 3, theme: null, salt: Math.floor(Math.random() * 900000000) + 1, coins: 0, picks: [], code: "" }; }
+  function freshSave() { return { v: 3, theme: null, salt: Math.floor(Math.random() * 900000000) + 1, coins: 0, kit: 2, picks: [], code: "" }; }
   /* Keep only well-formed picks. Reward picks: one per reward night. Shop picks: any night 1..100. */
   function cleanPicks(list) {
     var out = [], seenReward = {}, order = 0;
@@ -109,7 +109,10 @@
         "keep-wing": "square-tower", watchtower: "watchtower", gatehouse: "gate", "tower-pair": "roof-tower", "royal-hall": "grand-tower", "great-gate": "gate",
         "fortress-corner": "corner-tower", "grand-keep": "great-tower", citadel: "royal-tower" };
       var STYLE = { stone: "blue", sand: "gold", white: "red" };
-      save.picks.forEach(function (p) {
+      /* v4.9.6: a castle whose pieces are already kit pieces (a v4.9.5 save or build code that never
+         recorded its kit version) keeps every position; only a genuinely old castle is re-placed. */
+      var legacy = save.picks.some(function (p) { return !pieceById(p.piece) || !!STYLE[p.style]; });
+      if (legacy) save.picks.forEach(function (p) {
         if (!pieceById(p.piece)) { p.piece = MAP[p.piece] || (p.deco ? "knight" : "wall"); }
         if (p.deco && !isTopper(pieceById(p.piece)) && pieceById(p.piece).kind !== "prop") p.deco = false;
         p.style = STYLE[p.style] || p.style; delete p.cx; delete p.cy;
@@ -887,7 +890,7 @@
       ui.title.textContent = "Build a Town or a Castle?";
       ui.sub.textContent = "You add a new piece every 5 nights, all the way to night 100. This choice is permanent.";
       setButtons([{ label: "Tap one to choose", primary: true, disabled: true, onTap: function () {
-        if (!cur.themePick) return; save.theme = cur.themePick; persist(); beginPick();
+        if (!cur.themePick) return; save.theme = cur.themePick; save.kit = 2; persist(); beginPick();
       } }]);
       fillThemes();
     } else if (s === "pick") {
