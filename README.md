@@ -9,6 +9,10 @@ Progress saves in this browser profile (`afterHours.v1.night`). Itch login does 
 
 Question packs: `js/content.js` and `js/content2.js` (the v4 Virginia packs) plus `js/content3.js`–`js/content11.js` (v4.9 Virginia) and `js/content12.js`–`js/content17.js` (v4.9 New Jersey grade 5). Format and writing rules: `tools/CONTENT-GUIDE.md`. Check every file with `node tools/validate-content.js`. Headless smoke test of the gateway, builder, shop and a night: `node tools/smoke.js` (screenshots in `tools/shots/`).
 
+## v4.9.4 (2026-09-15)
+- **Letter tiles never land on a trap or a power-up.** A shared `spotBlocked` check keeps tiles at least 76 px from wet floors, alarm mats, cameras, zap/mushroom/fire/tar pads, the auto door, colour doors, skulls and every live pickup; the same check keeps pads, skulls and pickups off the tiles and off each other.
+- **Skulls no longer send a Hati back to the Wolf Pen.** A wolf that steps on a skull is poison-stunned where it stands for about 3 seconds (still +coins), then carries on. The touch radius is wider so the skull actually triggers, and a fresh set of skulls is guaranteed on the floor once the tiles are down.
+
 ## v4.9.3 (2026-09-15)
 - **Placing pieces, after the recording.** The estate is drawn up to 2.6× larger while a piece is being placed or arranged, so pieces are big enough to grab on a Chromebook. A piece can only be dropped where it touches another piece; anywhere else (the sky, the far field) it bounces back with a note. Footprints were tightened so joined sprites sit flush against each other, and the new piece can still be dragged on the "built" card after Keep it here.
 - The length picker is sharper: night 1 now draws 50–90 word texts and night 90 draws 450–520 word texts in testing.

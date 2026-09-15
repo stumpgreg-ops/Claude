@@ -216,6 +216,41 @@ var srv = http.createServer(function (req, res) {
   var avg = function (a) { return a.reduce(function (x, y) { return x + y; }, 0) / a.length; };
   check(avg(stamina.n1) < 130 && avg(stamina.n90) > 300, "night 1 passages are much shorter than night 90 passages");
 
+  /* letter tiles never sit on a hazard or a pickup (checked on several nights); a skull stuns a Hati in place */
+  var hazardCheck = await page.evaluate(async function () {
+    var out = { nights: [], worst: 0, skull: null };
+    function dist(a, b) { return Math.hypot(a.x - b.x, a.y - b.y); }
+    function checkNight(sc) {
+      var bad = 0, min = 1e9, pts = [];
+      (sc.puddles || []).concat(sc.mats || []).forEach(function (b) { pts.push({ x: b.x, y: b.y, r: Math.max(b.w, b.h) / 2 }); });
+      (sc.secCams || []).forEach(function (c) { pts.push({ x: c.x, y: c.y, r: 0 }); });
+      (sc.skulls || []).forEach(function (k) { if (k.live) pts.push({ x: k.x, y: k.y, r: 0 }); });
+      ["zapPad", "mushPad", "firePad", "tarPad"].forEach(function (k) { if (sc[k] && sc[k].active) pts.push({ x: sc[k].x, y: sc[k].y, r: 0 }); });
+      if (sc.autoGreen) pts.push({ x: sc.autoGreen.x, y: sc.autoGreen.y, r: Math.max(sc.autoGreen.w || 0, sc.autoGreen.h || 0) / 2 });
+      (sc.slips || []).forEach(function (s) { pts.forEach(function (p) { var d = dist(s, p) - p.r; min = Math.min(min, d); if (d < 40) bad++; }); });
+      return { night: sc.night, slips: (sc.slips || []).length, hazards: pts.length, bad: bad, minGap: Math.round(min) };
+    }
+    var sc = window.SolScene;
+    out.nights.push(checkNight(sc));
+    for (var n of [12, 30, 55]) {
+      sc.scene.restart({ family: "NJ5", strand: "ALL", night: n });
+      await new Promise(function (r) { setTimeout(r, 2500); });
+      sc = window.SolScene;
+      out.nights.push(checkNight(sc));
+    }
+    /* skull: a Hati on a skull is frozen where it is, not sent home */
+    var j = sc.janitors && sc.janitors[0], k = (sc.skulls || []).filter(function (x) { return x.live; })[0];
+    if (j && k) { var bx = j.x, by = j.y; sc.skullKillHati(j, k); out.skull = { frozen: j.trogFreezeMs > 0, eyes: j.eyesMs || 0, moved: Math.hypot(j.x - bx, j.y - by) > 1, skullGone: !k.live }; }
+    sc.scene.restart({ family: "NJ5", strand: "ALL", night: 1 });
+    await new Promise(function (r) { setTimeout(r, 2500); });
+    return out;
+  });
+  console.log("hazards", JSON.stringify(hazardCheck));
+  check(hazardCheck.nights.every(function (n) { return n.bad === 0 && n.slips === 4; }), "letter tiles sit clear of every hazard and pickup on nights 1/12/30/55");
+  check(hazardCheck.skull && hazardCheck.skull.frozen && !hazardCheck.skull.eyes && !hazardCheck.skull.moved && hazardCheck.skull.skullGone, "a skull stuns a Hati in place: " + JSON.stringify(hazardCheck.skull));
+  for (var w = 0; w < 10; w++) { if (await page.isVisible("#read-go")) { await page.click("#read-go"); break; } await page.waitForTimeout(300); }
+  await page.waitForTimeout(500);
+
   /* a wrong letter costs a life: three wrong grabs end the night */
   var strikeRun = await page.evaluate(function () {
     var sc = window.SolScene, out = { before: sc.strikes, hud: [], ended: false };

@@ -6975,8 +6975,34 @@
       return this.carriedSlips().map(function (s) { return s.letter; }).join(" + ");
     }
 
+    /* v4.9.4: true when (x, y) is within r px of any trap, pad, door, camera, skull or live pickup.
+       Letter tiles use it so they never land on a hazard or a power-up; hazard and pickup spawners
+       use it so nothing lands on a letter tile or on each other. */
+    spotBlocked(x, y, r) {
+      r = r || 70;
+      var i, o, rects = [], pts = [], k;
+      var inRect = function (b) { return b && x >= b.x - b.w / 2 - r && x <= b.x + b.w / 2 + r && y >= b.y - b.h / 2 - r && y <= b.y + b.h / 2 + r; };
+      var near = function (o2, rr) { return o2 && (o2.active !== false) && o2.x != null && hypot(o2.x - x, o2.y - y) < (rr || r); };
+      (this.puddles || []).forEach(function (b) { rects.push(b); });
+      (this.mats || []).forEach(function (b) { rects.push(b); });
+      if (this.autoGreen) rects.push(this.autoGreen);
+      (this.colorDoors || []).forEach(function (b) { rects.push(b); });
+      for (i = 0; i < rects.length; i++) if (inRect(rects[i])) return true;
+      (this.secCams || []).forEach(function (c) { pts.push(c); });
+      (this.skulls || []).forEach(function (sk) { if (sk && sk.live) pts.push(sk); });
+      (this.slips || []).forEach(function (sl) { if (sl && sl.visible && sl.active) pts.push(sl); });
+      ["zapPad", "mushPad", "firePad", "tarPad", "wheelSpr", "fruitBonus", "iceBonus", "hotFootBonus", "heartBonus", "moneyBagBonus",
+       "horseshoeBonus", "chiliBonus", "veggieBonus", "ivyBonus", "boneBonus", "extraBonus", "specialBonus", "treasureBonus", "lockPadBonus",
+       "pineappleBonus", "springBonus", "colorDoorBonus", "superBonus", "maskBonus", "signalBonus", "shinyBonus", "bellTrip"].forEach(function (k2) {
+        if (this[k2]) pts.push(this[k2]);
+      }, this);
+      for (k = 0; k < pts.length; k++) { o = pts[k]; if (near(o, r)) return true; }
+      return false;
+    }
+
     slipSpotBad(x, y, used) {
       if (nearExit(x, y) || inExitCluster(x, y) || inStartCluster(x, y) || inSafeZone(x, y)) return true;
+      if (this.spotBlocked(x, y, 76)) return true;
       if (hypot(x - EXIT_X, y - EXIT_Y) < SLIP_EXIT_R) return true;
       if (hypot(x - START_X, y - START_Y) < Math.max(SLIP_PLACE_R, 180)) return true;
       if (hitsSolid(x, y, 28)) return true;
@@ -7221,6 +7247,9 @@
       if (this.spawnFirePad) this.spawnFirePad(); /* engage-1302 — stay live after slip reshuffle */
       if (this.spawnTarPad) this.spawnTarPad(); /* engage-1342 — stay live after slip reshuffle */
       if (this.spawnAutoGreen) this.spawnAutoGreen(); /* engage-1350 — stay live after slip reshuffle */
+      /* v4.9.4: skulls are seeded before the maze's spread points exist on some paths, so make sure
+         a fresh set is on the floor (clear of the new tiles) whenever none are left. */
+      if (this.spawnSkulls && !(this.skulls || []).some(function (k) { return k && k.live; })) this.spawnSkulls();
     }
 
     paintHud() {
@@ -8483,6 +8512,7 @@
 
     fruitSpotOk(x, y) {
       if (hitsSolid(x, y, 36)) return false;
+      if (this.spotBlocked(x, y, 76)) return false;
       if (hypot(x - START_X, y - START_Y) < 280) return false;
       if (hypot(x - EXIT_X, y - EXIT_Y) < SLIP_EXIT_R) return false;
       if (inExitCluster(x, y) || inStartCluster(x, y)) return false;
@@ -9061,7 +9091,7 @@
     }
 
     /* engage-0255: SKULL — Lady Bug poison skull bait.
-     * Mid-hall skulls: Hati that touch return to Wolf Pen (+200). Sol is safe (classroom fair).
+     * Mid-hall skulls: Hati that touch are poison-stunned in place for ~3 s (+200). Sol is safe (classroom fair).
      * Sticky chase / catch-on-contact elsewhere unchanged. Night-only place (not per extract). */
     clearSkulls(silent) {
       var i, s;
@@ -9086,6 +9116,7 @@
       for (i = 0; i < cands.length; i++) {
         p = cands[i];
         if (hitsSolid(p[0], p[1], 36)) continue;
+        if (this.spotBlocked(p[0], p[1], 76)) continue;
         if (inSafeZone(p[0], p[1])) continue;
         if (hypot(p[0] - START_X, p[1] - START_Y) < 300) continue;
         if (hypot(p[0] - EXIT_X, p[1] - EXIT_Y) < SLIP_EXIT_R) continue;
@@ -9166,19 +9197,17 @@
         offerTrapIntro(this, {
           key: LS_TRAP_SKULL,
           title: "Poison skull",
-          body: "Purple SKULL marks in the hall. Sol can walk over them safely — lure a chasing Hati onto one to send that wolf back to the Wolf Pen (+200)."
+          body: "Purple SKULL marks in the hall. Sol can walk over them safely — lure a chasing Hati onto one and the poison stuns that wolf in its tracks for a few seconds (+200)."
         });
         this.skullFlash = Math.max(this.skullFlash || 0, 1800);
         this.paintHud();
       }
     }
 
+    /* v4.9.4: a poisoned Hati is stunned where it stands (about 3 s) — it no longer goes back to the Wolf Pen. */
     skullKillHati(j, skull) {
       if (!j || (j.eatenMs || 0) > 0 || (j.eyesMs || 0) > 0) return;
       if (!skull || !skull.live) return;
-      var pen = (MAZE && MAZE.ghostHouse) || null;
-      var px = pen ? pen.cx : ((MAZE && MAZE.vHallXC) || WORLD_W / 2);
-      var py = pen ? pen.cy : ((MAZE && MAZE.hallYC) || WORLD_H / 2);
       j.chasing = false;
       j.chaseMs = 0;
       j.chaseFor = 0;
@@ -9187,12 +9216,9 @@
       j.detFill = 0;
       j.radioMs = 0;
       j.radioSent = false;
-      j.eatenMs = 0;
-      j.eyesMs = 2800;
-      j.penX = px;
-      j.penY = py;
+      j.trogFreezeMs = Math.max(j.trogFreezeMs || 0, 3200);
       j.setVelocity(0, 0);
-      try { j.setAlpha(0.55); j.setTint(0xc8a0e8); } catch (e) {}
+      try { j.setAlpha(0.7); j.setTint(0xc8a0e8); } catch (e) {}
       safeCamFlash();
       skull.live = false;
       try { if (skull.spr) skull.spr.destroy(); } catch (e3) {}
@@ -9202,7 +9228,7 @@
       skull.spr = skull.ring = skull.floor = skull.label = null;
       if (window.AfterHoursAudio && AfterHoursAudio.skullChime) AfterHoursAudio.skullChime();
       else if (window.AfterHoursAudio && AfterHoursAudio.fruitChime) AfterHoursAudio.fruitChime();
-      this.awardBonusPoints(200, "SKULL! Hati poisoned — Wolf Pen!");
+      this.awardBonusPoints(200, "SKULL! Hati poisoned — stunned!");
       this.skullFlash = Math.max(this.skullFlash || 0, 1800);
       if (this.clearAmbientHudFlashes) this.clearAmbientHudFlashes();
       if (this.player && this.add) {
@@ -9246,7 +9272,7 @@
         for (ji = 0; ji < this.janitors.length; ji++) {
           j = this.janitors[ji];
           if (!j || (j.eatenMs || 0) > 0 || (j.eyesMs || 0) > 0) continue;
-          if (hypot(j.x - s.x, j.y - s.y) < 34) {
+          if (hypot(j.x - s.x, j.y - s.y) < 60) {
             this.skullKillHati(j, s);
             break;
           }
@@ -13022,6 +13048,7 @@
       for (i = 0; i < cands.length; i++) {
         p = cands[i];
         if (hitsSolid(p[0], p[1], 36)) continue;
+        if (this.spotBlocked(p[0], p[1], 76)) continue;
         if (inSafeZone(p[0], p[1])) continue;
         if (hypot(p[0] - START_X, p[1] - START_Y) < 320) continue;
         if (hypot(p[0] - EXIT_X, p[1] - EXIT_Y) < SLIP_EXIT_R) continue;
@@ -13254,6 +13281,7 @@
       for (i = 0; i < cands.length; i++) {
         p = cands[i];
         if (hitsSolid(p[0], p[1], 36)) continue;
+        if (this.spotBlocked(p[0], p[1], 76)) continue;
         if (inSafeZone(p[0], p[1])) continue;
         if (hypot(p[0] - START_X, p[1] - START_Y) < 320) continue;
         if (hypot(p[0] - EXIT_X, p[1] - EXIT_Y) < SLIP_EXIT_R) continue;
@@ -13651,6 +13679,7 @@
       for (i = 0; i < cands.length; i++) {
         p = cands[i];
         if (hitsSolid(p[0], p[1], 36)) continue;
+        if (this.spotBlocked(p[0], p[1], 76)) continue;
         if (inSafeZone(p[0], p[1])) continue;
         if (hypot(p[0] - START_X, p[1] - START_Y) < 320) continue;
         if (hypot(p[0] - EXIT_X, p[1] - EXIT_Y) < SLIP_EXIT_R) continue;
@@ -13872,6 +13901,7 @@
       for (i = 0; i < cands.length; i++) {
         p = cands[i];
         if (hitsSolid(p[0], p[1], 36)) continue;
+        if (this.spotBlocked(p[0], p[1], 76)) continue;
         if (inSafeZone(p[0], p[1])) continue;
         if (hypot(p[0] - START_X, p[1] - START_Y) < 320) continue;
         if (hypot(p[0] - EXIT_X, p[1] - EXIT_Y) < SLIP_EXIT_R) continue;
@@ -14112,6 +14142,7 @@
       for (i = 0; i < cands.length; i++) {
         p = cands[i];
         if (hitsSolid(p[0], p[1], 40)) continue;
+        if (this.spotBlocked(p[0], p[1], 90)) continue;
         if (inSafeZone(p[0], p[1])) continue;
         if (hypot(p[0] - START_X, p[1] - START_Y) < 360) continue;
         if (hypot(p[0] - EXIT_X, p[1] - EXIT_Y) < SLIP_EXIT_R) continue;
