@@ -97,7 +97,9 @@
   }
   function buildingPicks() { return save.picks.filter(function (p) { return !p.deco; }); }
   function decoPicks() { return save.picks.filter(function (p) { return p.deco; }); }
-  function nextLot() { var used = {}, k = 1; buildingPicks().forEach(function (p) { used[p.lot] = true; }); while (used[k]) k++; return k; }
+  /* Lot 1 belongs to the core building (the first home or keep); shop pieces bought before the first reward start at lot 2. */
+  function nextLot(core) { var used = {}, k = core ? 1 : 2; buildingPicks().forEach(function (p) { used[p.lot] = true; }); while (used[k]) k++; return k; }
+  function hasCore() { return buildingPicks().some(function (p) { var pc = pieceById(p.piece); return pc && pc.role === "core"; }); }
   function nextDecoLot() { var used = {}, k = 1; decoPicks().forEach(function (p) { used[p.lot] = true; }); while (used[k]) k++; return k; }
   /* Once pieces.json is in: turn v1 picks (scattered props) into default modular picks. */
   function migrateIfNeeded() {
@@ -124,7 +126,7 @@
       var pc = pieceById(p.piece);
       if (pc && pc.role === "deco" && !p.deco) { p.deco = true; changed = true; }
       if (p.deco) { if (!(p.lot > 0) || usedDeco[p.lot]) { p.lot = 1; while (usedDeco[p.lot]) p.lot++; changed = true; } usedDeco[p.lot] = true; }
-      else { if (!(p.lot > 0) || usedLots[p.lot]) { p.lot = 1; while (usedLots[p.lot]) p.lot++; changed = true; } usedLots[p.lot] = true; }
+      else { if (!(p.lot > 0) || usedLots[p.lot]) { p.lot = (pc && pc.role === "core") ? 1 : 2; while (usedLots[p.lot]) p.lot++; changed = true; } usedLots[p.lot] = true; }
     });
     save.picks.forEach(function (p, i) {
       var k = p.lot, pc = pieceById(p.piece), ok;
@@ -634,7 +636,7 @@
     ctx.setTransform(cv._dpr || 1, 0, 0, cv._dpr || 1, 0, 0);
     ctx.clearRect(0, 0, W, H);
     paintBg(ctx, W, H, save.theme || "village");
-    if (!save.theme) { banner(ctx, W, H, loadState === "ok" ? "Win Night 5 to start building" : "Build data not available"); lastFit = null; return; }
+    if (!save.theme) { banner(ctx, W, H, loadState === "ok" ? "Win Level 5 to start building" : "Build data not available"); lastFit = null; return; }
     items = sceneItems();
     fit = lastFit = fitScene(items, W, H);
     items.sort(function (a, b) { return (a.depth - b.depth) || (a.y - b.y) || (a.x - b.x); }).forEach(function (it) { drawPiece(ctx, it, fit); });
@@ -815,7 +817,7 @@
   }
   function fillStyles() {
     ui.styles.innerHTML = "";
-    var dom = dominantStyle(), partner = partnerStyle(dom), first = nextLot() === 1;
+    var dom = dominantStyle(), partner = partnerStyle(dom), first = !buildingPicks().length;
     stylesOf().forEach(function (st) {
       var meta = st.desc || "", tag = "";
       if (!first && st.id === dom) tag = "Same as most of your " + themeName(save.theme).toLowerCase();
@@ -848,19 +850,20 @@
     ui.kicker.textContent = "Reward gallery"; ui.badge.textContent = n + " / " + TOTAL;
     ui.title.textContent = save.theme ? "My " + themeName(save.theme) : "My build";
     ui.sub.textContent = loadState !== "ok" ? "Build data could not be loaded on this page." :
-      !save.theme ? "Win Night 5 to choose a Town or a Castle. You add a new piece every 5 nights." :
+      !save.theme ? "Win Level 5 to choose a Town or a Castle. You add a new piece every 5 levels." :
       n + " of " + TOTAL + " pieces" + (styleSummary() ? " (" + styleSummary() + ")" : "") + " · " +
       (wallsUp() ? (save.theme === "castle" ? "walls up" : "fence up") : (save.theme === "castle" ? "walls" : "fence") + " at piece " + lvl) + " · " +
-      (next ? "next reward after night " + next : "your build is complete!");
+      (next ? "next reward after level " + next : "your build is complete!");
     ui.codeOut.value = exportCode(); ui.codeIn.value = ""; ui.codeMsg.textContent = ""; ui.loadBtn.textContent = "Load";
     var rt = rating();
     ui.badge.textContent = (isKit() ? rt.rank + " · " + rt.score + " pts · " : n + " / " + TOTAL + " · ") + coinLabel();
     var buttons = [{ label: "Close", primary: true, onTap: function () { var cb = cur && cur.onClose; closeOverlay(); if (cb) cb(); } }];
-    if (save.theme && loadState === "ok") {
+    if (loadState === "ok") {
       buttons.unshift({ label: "Shop (" + coinLabel() + ")", onTap: function () {
-        cur.shop = true; cur.night = cur.night || 1; cur.tab = "build"; mode = "shop"; showStep("shop");
+        cur.shop = true; cur.night = cur.night || 1; cur.tab = "build"; mode = "shop";
+        showStep(save.theme && themeDef(save.theme) ? "shop" : "theme");
       } });
-      if (save.picks.length) buttons.unshift({ label: cur.arrange ? "Done arranging" : "Arrange pieces", onTap: function () {
+      if (save.theme && save.picks.length) buttons.unshift({ label: cur.arrange ? "Done arranging" : "Arrange pieces", onTap: function () {
         cur.arrange = !cur.arrange; cur.drag = null; fillGallery();
       } });
     }
@@ -884,14 +887,18 @@
     if (s === "shop") { fillShop(); return; }
     tn = themeName(save.theme || (cur && cur.themePick) || "village");
     ui.badge.textContent = cur.shop ? coinLabel() : "REWARD";
-    ui.kicker.textContent = cur.shop ? "Night " + cur.night + " · shop" : "Night " + cur.night + " reward · piece " + cur.k + " of " + TOTAL;
+    ui.kicker.textContent = cur.shop ? "Level " + cur.night + " · shop" : "Level " + cur.night + " reward · piece " + cur.k + " of " + TOTAL;
     if (s === "theme") {
-      ui.kicker.textContent = "Night " + cur.night + " reward · your first building";
+      ui.kicker.textContent = cur.shop ? "Level " + cur.night + " · shop" : "Level " + cur.night + " reward · your first building";
       ui.title.textContent = "Build a Town or a Castle?";
-      ui.sub.textContent = "You add a new piece every 5 nights, all the way to night 100. This choice is permanent.";
-      setButtons([{ label: "Tap one to choose", primary: true, disabled: true, onTap: function () {
-        if (!cur.themePick) return; save.theme = cur.themePick; save.kit = 2; persist(); beginPick();
-      } }]);
+      ui.sub.textContent = cur.shop ? "Your coins buy pieces for one build, and you earn a free reward piece every 5 levels, all the way to level 100. This choice is permanent."
+        : "You add a new piece every 5 levels, all the way to level 100. This choice is permanent.";
+      var themeBtns = [{ label: "Tap one to choose", primary: true, disabled: true, onTap: function () {
+        if (!cur.themePick) return; save.theme = cur.themePick; save.kit = 2; persist();
+        if (cur.shop) { cur.tab = "build"; showStep("shop"); } else beginPick();
+      } }];
+      if (cur.shop) themeBtns.push({ label: "Not now", onTap: function () { var cb = cur && cur.onClose; closeOverlay(); if (cb) cb(); } });
+      setButtons(themeBtns);
       fillThemes();
     } else if (s === "pick") {
       lot = lotFor(cur.k);
@@ -902,7 +909,7 @@
       fillOptions();
     } else if (s === "style") {
       ui.title.textContent = "Which style for the " + name + "?";
-      ui.sub.textContent = nextLot() === 1 ? "Pieces in the same style match; the game will also suggest a style that goes with yours."
+      ui.sub.textContent = !buildingPicks().length ? "Pieces in the same style match; the game will also suggest a style that goes with yours."
         : "Keep your look, or mix in a second style that matches." + (cur.shop ? " Costs " + priceOf(cur.piece) + " coins." : "");
       setButtons([{ label: "Back", onTap: function () { showStep(cur.shop ? "shop" : "pick"); } },
         { label: cur.shop ? "Buy and build it" : "Build it", primary: true, disabled: !cur.stylePick, onTap: place }]);
@@ -917,7 +924,7 @@
       var nb = buildingPicks().length;
       ui.title.textContent = name + " built in " + styleName(cur.stylePick) + "!" + (isKit() ? " " + rating().rank + " · " + rating().score + " pts" : "");
       ui.sub.textContent = cur.shop ? "Bought for " + priceOf(cur.piece) + " coins. " + coinLabel() + " left."
-        : "Piece " + cur.k + " of " + TOTAL + " is in place." + (cur.k < TOTAL ? " Next reward after night " + (cur.night + EVERY) + "." : " Your build is complete!");
+        : "Piece " + cur.k + " of " + TOTAL + " is in place." + (cur.k < TOTAL ? " Next reward after level " + (cur.night + EVERY) + "." : " Your build is complete!");
       ui.note.textContent = cur.wallsRaised ? "The curtain walls went up around your castle — drag any wall to reshape them!"
         : nb === wallLevel() && cur.lot === nb && !cur.shop ? (save.theme === "castle" ? "The castle walls went up around your estate!" : "A fence now rings your town!")
         : nb === wallLevel() - 1 ? "One more building and the " + (save.theme === "castle" ? "walls go up." : "fence goes up.")
@@ -929,7 +936,7 @@
     if (ui.primary && !ui.primary.disabled) { try { ui.primary.focus(); } catch (e) {} }
   }
   function beginPick() {
-    cur.lot = nextLot();
+    cur.lot = nextLot(!hasCore());
     cur.offer = offerFor(cur.night, cur.lot);
     if (!cur.offer.length) { console.warn("[SolBuild] no pieces for theme " + save.theme); finish(); return; }
     showStep("pick");
@@ -947,7 +954,7 @@
       if (save.coins < cost) { ui.note.textContent = "Not enough coins."; return; }
       save.coins -= cost;
     } else if (pickFor(cur.night)) return;
-    cur.lot = nextLot();
+    cur.lot = nextLot(cur.piece.role === "core");
     var pos = autoPlace(cellsOf(cur.piece), null, cur.piece) || autoPlace(1, null, null);
     var pk = { night: cur.night, piece: cur.piece.id, style: cur.stylePick || defaultStyle(), lot: cur.lot, src: cur.shop ? "shop" : "reward", deco: false, ord: save.picks.length, cx: pos.cx, cy: pos.cy };
     save.picks.push(pk); cur.placedKey = pk;
@@ -1059,9 +1066,9 @@
   function fillShop(keepNote) {
     var off = shopOffers(), tab = cur.tab || "build", tn = themeName(save.theme);
     ui.badge.textContent = coinLabel();
-    ui.kicker.textContent = "Night " + cur.night + " · shop";
+    ui.kicker.textContent = "Level " + cur.night + " · shop";
     ui.title.textContent = "Spend coins on your " + tn;
-    ui.sub.textContent = "Coins come from correct answers (" + economy().answer + " each), a perfect night (+" + economy().perfectNight + ") and bonus pickups. Free reward pieces still come every 5 nights.";
+    ui.sub.textContent = "Coins come from correct answers (" + economy().answer + " each), a perfect level (+" + economy().perfectNight + ") and bonus pickups. Free reward pieces still come every 5 levels.";
     if (!keepNote) ui.note.textContent = "";
     ui.tabs.innerHTML = "";
     SHOP_TABS.forEach(function (t) {
@@ -1188,11 +1195,12 @@
     init();
     whenReady(function () {
       if (mode === "reward") return;
-      if (loadState !== "ok" || !save.theme || !themeDef(save.theme)) { if (onClose) onClose(); return; }
+      if (loadState !== "ok") { if (onClose) onClose(); return; }
       buildDom();
-      cur = { onClose: onClose || null, night: night, shop: true, tab: "build", piece: null, stylePick: null };
+      cur = { onClose: onClose || null, night: night, shop: true, tab: "build", piece: null, stylePick: null, themePick: null };
       openOverlay("shop");
-      showStep("shop");
+      /* v4.9.7: the shop is open from night 1 — a student with no build yet picks Town or Castle first */
+      showStep(save.theme && themeDef(save.theme) ? "shop" : "theme");
     });
   }
   function addCoins(n, why) {
@@ -1208,7 +1216,7 @@
     if (!save) save = loadSave();
     var nm = save.theme ? themeName(save.theme) : null, nb = save.picks.filter(function (p) { return !p.deco; }).length;
     return { theme: save.theme, themeName: nm, count: Math.min(save.picks.filter(function (p) { return p.src !== "shop"; }).length, TOTAL), total: TOTAL,
-      buildings: nb, decorations: save.picks.length - nb, coins: save.coins || 0, canShop: !!save.theme && loadState === "ok",
+      buildings: nb, decorations: save.picks.length - nb, coins: save.coins || 0, canShop: loadState === "ok",
       nextNight: nextRewardNight(), label: "My " + (nm || "Town"), loaded: loadState, walls: !!save.theme && nb >= wallLevel(), style: save.theme ? dominantStyle() : null,
       rating: save.theme && loadState === "ok" ? rating() : null };
   }
@@ -1221,7 +1229,7 @@
     close: closeOverlay, isOpen: function () { return !!mode; },
     exportCode: exportCode, importCode: importCode, state: state,
     LS_KEY: LS_KEY, version: 3,
-    _offer: function (night) { return offerFor(night, nextLot()).map(function (p) { return p.id; }); },
+    _offer: function (night) { return offerFor(night, nextLot(!hasCore())).map(function (p) { return p.id; }); },
     _hitAt: function (clientX, clientY) { var pt = canvasScenePt({ clientX: clientX, clientY: clientY }); var pk = pt && hitPick(pt); return { pt: pt && { x: pt.x, y: pt.y, sx: pt.sx, sy: pt.sy }, cell: pt && pxToCell(pt.x, pt.y), pick: pk ? pk.piece + "@" + pk.cx + "," + pk.cy : null, step: step, arrange: !!(cur && cur.arrange), draggable: draggable(pk) };
     },
     /* test hook: canvas-space centre of the i-th pick (used by tools/smoke.js to drag pieces) */

@@ -42,8 +42,8 @@
   var LS_ADAPT = "afterHours.v1.adapt.";
   /* v4.9: the gateway screen picks a state; each state has its own grade cards. */
   var STATE_DEFS = {
-    VA: { name: "Virginia", kicker: "NNPS · VA 2024 EOC Reading practice skills · 100 nights", families: ["G9", "G10", "G11"], def: "G9", hud: "Teacher" },
-    NJ: { name: "New Jersey", kicker: "NJSLA-ELA · Grade 5 reading practice · 100 nights", families: ["NJ5"], def: "NJ5", hud: "NJSLS" }
+    VA: { name: "Virginia", kicker: "NNPS · VA 2024 EOC Reading practice skills · 100 levels", families: ["G9", "G10", "G11"], def: "G9", hud: "Teacher" },
+    NJ: { name: "New Jersey", kicker: "NJSLA-ELA · Grade 5 reading practice · 100 levels", families: ["NJ5"], def: "NJ5", hud: "NJSLS" }
   };
 
   var Input = { ax: 0, ay: 0, act: false, actEdge: false, sprint: false, shutterEdge: false };
@@ -3369,7 +3369,7 @@
       },
       {
         title: "Carry it to the EXIT",
-        body: "Take your letter to the green EXIT · SAFE booth. That banks one extract. You need " + need + " to finish the night."
+        body: "Take your letter to the green EXIT · SAFE booth. That banks one extract. You need " + need + " to finish the level."
       },
       {
         title: "Right answer, real reward",
@@ -3377,7 +3377,7 @@
       },
       {
         title: "The Hati hunt you",
-        body: "Wolves patrol the halls. If one catches you, that is a strike. " + strikes + " strikes and the night is over."
+        body: "Wolves patrol the halls. If one catches you, that is a strike. " + strikes + " strikes and the level is over."
       },
       {
         title: "Two safe booths",
@@ -3540,7 +3540,7 @@
     var h = '<div class="codex-item" style="border-left-color:' + c.hue + '">';
     h += '<div class="row1"><span class="cicon">' + (e.icon || "•") + "</span>";
     h += '<span class="cname">' + e.name + "</span>" + codexCatChip(e.cat);
-    if (lockedNight) h += '<span class="cunlock">Night ' + lockedNight + "</span>";
+    if (lockedNight) h += '<span class="cunlock">Level ' + lockedNight + "</span>";
     h += "</div>";
     if (!lockedNight) {
       h += '<p class="ceffect">' + e.effect + "</p>";
@@ -3673,7 +3673,7 @@
       effect: "Freezes every Hati on the map for about 4 seconds.",
       tip: "Save it for when you are already being chased." },
     { key: "fruit", name: "Sun Fruit", cat: "SCORE", icon: "🍒",
-      effect: "Bonus points. Worth more on later nights.",
+      effect: "Bonus points. Worth more on later levels.",
       tip: "It bounces along a path — cut it off, don't chase it." },
     { key: "hotFoot", name: "Hot Foot", cat: "BOOST", icon: "👟",
       effect: "Short speed burst, and it stays quiet.",
@@ -3685,7 +3685,7 @@
       effect: "You breathe fire in front of you for 3 seconds. Any Hati in the cone goes back to the pen.",
       tip: "You have to aim it — face the wolf before you walk on." },
     { key: "treasure", name: "Stage Treasure", cat: "SCORE", icon: "🎁",
-      effect: "Bonus points that grow each night.",
+      effect: "Bonus points that grow each level.",
       tip: "Points only. Don't take a risk for it." },
     { key: "moneyBag", name: "Money Bag", cat: "FREEZE", icon: "💰",
       effect: "Freezes only the Hati near you, and pays more each time you chain it.",
@@ -3698,7 +3698,7 @@
       tip: "Breaks a chase, but they search YOUR spot — keep moving after." },
     { key: "bone", name: "Dog Bone", cat: "SMASH", icon: "🦴",
       effect: "Banks a bone (up to 3). Press SPACE to spend one: for 4 seconds, touching a Hati sends it to the pen.",
-      tip: "The only power you choose when to use. Bones carry to later nights." },
+      tip: "The only power you choose when to use. Bones carry to later levels." },
     { key: "lockGate", name: "Lock Gate", cat: "MAZE", icon: "🚧",
       effect: "Seals a bar across the hall for about 4 seconds. Hati have to go around.",
       tip: "It blocks you too. Don't seal yourself into a dead end." },
@@ -3826,7 +3826,7 @@
     if (n >= 40) iframe = Math.min(iframe, 700);
     return {
       n: n,
-      name: "Night " + n,
+      name: "Level " + n,
       extracts: extracts,
       strikes: strikes,
       startLanes: startLanes,
@@ -4332,7 +4332,7 @@
     constructor() { super("night"); }
 
     init(data) {
-      /* BUGFIX — "game locks up after Retry / Next night once I leave the safe zone".
+      /* BUGFIX — "game locks up after Retry / Next level once I leave the safe zone".
          scene.restart() destroys every game object on the display list, but the
          NightScene instance itself survives, so any object we cached lazily on
          `this` (darkOverlay, the *CheckGfx graphics, chiliConeGfx, ...) is now a
@@ -4803,7 +4803,7 @@
       this._releaseRimWasOn = false;
       this._releaseRimProg = 0;
       /* engage-1855 creative: TURNSTILE — Lady Bug school swing gates.
-         BUGFIX (v4.1, "night 2 has no path to EXIT"): seedHazards() above has
+         BUGFIX (v4.1, "level 2 has no path to EXIT"): seedHazards() above has
          ALREADY spawned the gates and section doors. Resetting these arrays here
          orphaned them — solid colliders with no record, so a bump could never
          rotate them and a gate on the only route sealed the maze. Keep the
@@ -6433,7 +6433,7 @@
           this.clearAutoGreen();
           if (this.exitReachableNow()) return true;
         }
-        try { console.warn("[SOL] EXIT unreachable after clearing gates — night " + this.night); } catch (eW) {}
+        try { console.warn("[SOL] EXIT unreachable after clearing gates — level " + this.night); } catch (eW) {}
       } catch (eR) {}
       return false;
     }
@@ -7273,8 +7273,8 @@
       this._hudClaimId = c.id;
       var tok = makeToken(this.night, this.score, this.strikes);
       var hudLabel = (STATE_DEFS[cfg.state] && STATE_DEFS[cfg.state].hud) || "Teacher";
-      document.getElementById("job-sol").textContent = hudLabel + " · " + (c.sol || "") + " · Level " + adaptLevelLabel(this.adapt) + (c.isPartB ? " · Part B" : c.partB ? " · Part A" : "");
-      document.getElementById("round-flag").textContent = "Night " + this.night + " / 100 · " + nightTheme(this.night).name;
+      document.getElementById("job-sol").textContent = hudLabel + " · " + (c.sol || "") + " · Reading level " + adaptLevelLabel(this.adapt) + (c.isPartB ? " · Part B" : c.partB ? " · Part A" : "");
+      document.getElementById("round-flag").textContent = "Level " + this.night + " / 100 · " + nightTheme(this.night).name;
       var juice = this.scoreJuice || 0;
       document.getElementById("score-pip").textContent = "Extracts " + this.score + " / " + this.needExtracts;
       var strikeTxt = "Strikes " + this.strikes + " / " + this.needStrikes;
@@ -7573,7 +7573,7 @@
       }
       /* engage-2235: Pac-Man FRIGHT SHORT toast */
       if ((this.frightShortFlash || 0) > 0) {
-        this.setCarryFlagText("FRIGHT SHORT — CHARIOT window shrinks each night. Smash fast!", "prio-chariot");
+        this.setCarryFlagText("FRIGHT SHORT — CHARIOT window shrinks each level. Smash fast!", "prio-chariot");
         return;
       }
       /* engage-2214: Pac-Man SCATTER ROLE toast */
@@ -7866,11 +7866,11 @@
         return;
       }
       if ((this._exitFixedFlash || 0) > 0) {
-        this.setCarryFlagText("Slips reshuffle — same floor plan until next night. EXIT south / START west.", "");
+        this.setCarryFlagText("Slips reshuffle — same floor plan until next level. EXIT south / START west.", "");
         return;
       }
       if ((this.frightShortFlash || 0) > 0) {
-        this.setCarryFlagText("FRIGHT SHORT — CHARIOT window shrinks each night. Smash fast!", "");
+        this.setCarryFlagText("FRIGHT SHORT — CHARIOT window shrinks each level. Smash fast!", "");
         return;
       }
       if ((this.scatterRoleFlash || 0) > 0) {
@@ -8685,7 +8685,7 @@
       offerTrapIntro(this, {
         key: LS_TRAP_FRUIT,
         title: "Sun fruit ladder",
-        body: "Bouncing hall fruit. Points climb by night (cherry 100 → key 5000) like Pac-Man — not a power. Cut it off before the tour ends."
+        body: "Bouncing hall fruit. Points climb by level (cherry 100 → key 5000) like Pac-Man — not a power. Cut it off before the tour ends."
       });
       this.paintHud();
     }
@@ -9839,7 +9839,7 @@
       offerTrapIntro(this, {
         key: LS_TRAP_BONE,
         title: "Dog Bone",
-        body: "Bank a BONE (cap 3). When you are clear of letter slips, tap DOG / Space to go dog ~4s and smash Hati. Bones carry to later nights."
+        body: "Bank a BONE (cap 3). When you are clear of letter slips, tap DOG / Space to go dog ~4s and smash Hati. Bones carry to later levels."
       });
       this.paintHud();
     }
@@ -11550,7 +11550,7 @@
       offerTrapIntro(this, {
         key: LS_TRAP_TREASURE,
         title: "Stage treasure",
-        body: "A Lock 'n' Chase vault treasure chest. Walk onto it for night-scaled bonus points (HAT→HEART). Points only — not a power. Catch still real."
+        body: "A Lock 'n' Chase vault treasure chest. Walk onto it for level-scaled bonus points (HAT→HEART). Points only — not a power. Catch still real."
       });
       this.paintHud();
     }
@@ -16308,7 +16308,7 @@
       /* Do NOT call rebuildFloorPlan mid-night — that swapped the whole maze after every correct answer. */
       this._exitFixedFlash = 3400;
       this._floorPlanFlash = 0;
-      var tip = "Slips reshuffle — same floor plan until next night. EXIT south / START west.";
+      var tip = "Slips reshuffle — same floor plan until next level. EXIT south / START west.";
       try {
         var flag = document.getElementById("carry-flag");
         if (flag) flag.textContent = tip;
@@ -17301,25 +17301,25 @@
       if (win) {
         pingTeacher(this, "cleared");
         if (this.night >= 100) {
-          document.getElementById("win-title").textContent = "All 100 nights";
+          document.getElementById("win-title").textContent = "All 100 levels";
           document.getElementById("win-msg").textContent = "Campaign complete on this Chromebook. Itch login does not store progress.";
-          nextBtn.textContent = "Play again from Night 1";
+          nextBtn.textContent = "Play again from Level 1";
           nextBtn.classList.remove("hidden");
           nextBtn.dataset.goto = "1";
         } else {
           writeSavedNight(this.night + 1);
-          document.getElementById("win-title").textContent = "Night cleared";
-          document.getElementById("win-msg").textContent = "Night " + this.night + " is done. Same skill pack. Next night is waiting on this Chromebook.";
+          document.getElementById("win-title").textContent = "Level cleared";
+          document.getElementById("win-msg").textContent = "Level " + this.night + " is done. Same skill pack. Next level is waiting on this Chromebook.";
         }
         /* v4.9: perfect night = every question banked with no wrong tile grabbed */
         var winMsgEl = document.getElementById("win-msg");
         if ((this.nightWrong || 0) === 0) {
-          var perfect = this.giveCoins(this.coinEconomy().perfectNight, "Perfect night");
-          winMsgEl.textContent += " Perfect night — no wrong letters: +" + perfect + " bonus coins!";
+          var perfect = this.giveCoins(this.coinEconomy().perfectNight, "Perfect level");
+          winMsgEl.textContent += " Perfect level — no wrong letters: +" + perfect + " bonus coins!";
         }
-        winMsgEl.textContent += " You earned " + (this.nightCoins || 0) + " coins tonight.";
+        winMsgEl.textContent += " You earned " + (this.nightCoins || 0) + " coins this level.";
         if (this.night < 100) {
-          nextBtn.textContent = "Next night";
+          nextBtn.textContent = "Next level";
           nextBtn.classList.remove("hidden");
           nextBtn.dataset.goto = String(this.night + 1);
         }
@@ -17327,17 +17327,17 @@
         writeSavedNight(this.night);
         document.getElementById("win-title").textContent = "Run over";
         document.getElementById("win-msg").textContent = (this.lastStrikeReason === "wrong" ? "That wrong letter used your last life. " : "Caught in the cone. ") +
-          "Wrong letters and catches both cost a life. Retry this night — the campaign stays here.";
+          "Wrong letters and catches both cost a life. Retry this level — the campaign stays here.";
         retryBtn.classList.remove("hidden");
-        retryBtn.textContent = "Retry this night";
+        retryBtn.textContent = "Retry this level";
       }
       /* v4.8: every 5th night won opens the Town & Castle reward pop-up first;
-         the "Night cleared" overlay follows once the student has placed the piece. */
+         the "Level cleared" overlay follows once the student has placed the piece. */
       var self = this;
       var showEndOverlay = function () {
         document.getElementById("overlay").classList.remove("hidden");
         if (window.SolMusic) { try { SolMusic.setChase(false); SolMusic.play("menu"); } catch (eM) {} }
-        /* v4.9: the coin shop is open after every night once the student has a town or castle */
+        /* v4.9: the coin shop is open after every night (v4.9.7: from night 1 — with no build yet it asks Town or Castle first) */
         var shopBtn = document.getElementById("btn-shop"), canShop = false, coinsNow = 0;
         try { if (window.SolBuild && SolBuild.state) { var bs = SolBuild.state(); canShop = !!bs.canShop; coinsNow = bs.coins || 0; } } catch (eS) {}
         if (shopBtn) {
@@ -25724,7 +25724,7 @@
       if (skip) skip.classList.remove("hidden");
       /* Show progress so the player knows how much is left — the old single card
          just said "Tap to play" with no sense of length. */
-      if (hint) hint.textContent = (step >= total) ? "Tap to start Night 1" : "Tap to continue";
+      if (hint) hint.textContent = (step >= total) ? "Tap to start Level 1" : "Tap to continue";
     }
     advanceTut() {
       if (tutClosed || this.tutDone) { hideTut(); return; }
@@ -25789,7 +25789,7 @@
         var ol = document.getElementById("read-choices");
         var hint = document.getElementById("read-hint");
         var scroll = document.getElementById("read-scroll");
-        if (kick) kick.textContent = (reason === "start" ? "Read first · Night " : "Next question · Night ") + this.night + " · " + (c.sol || "") + (c.isPartB ? " · Part B (evidence)" : c.partB ? " · Part A" : "") + (c.words ? " · " + c.words + " words" : "");
+        if (kick) kick.textContent = (reason === "start" ? "Read first · Level " : "Next question · Level ") + this.night + " · " + (c.sol || "") + (c.isPartB ? " · Part B (evidence)" : c.partB ? " · Part A" : "") + (c.words ? " · " + c.words + " words" : "");
         if (title) title.textContent = c.packTitle || "Passage";
         if (pass) pass.innerHTML = c.passage || "";
         if (stem) stem.textContent = c.stem || c.doThis || "";
@@ -25931,7 +25931,7 @@
     }
 
     _updateInner(t, dt) {
-      /* BUGFIX — "the entire game locks up on every new night / retry".
+      /* BUGFIX — "the entire game locks up on every new level / retry".
          This early return halts EVERYTHING: Sol, the Hati, the cones, the HUD.
          _tabHidden is set by the window "blur" listener but was only ever cleared
          by a window "focus" event. Clicking a DOM button — Next night, Retry this
@@ -26739,12 +26739,12 @@
     var cont = document.getElementById("btn-skill-continue");
     if (!line || !cont) return;
     if (!localStorage.getItem(LS_NIGHT)) {
-      line.textContent = "No night saved on this Chromebook yet. Start Night 1.";
+      line.textContent = "No level saved on this Chromebook yet. Start Level 1.";
       cont.classList.add("hidden");
       return;
     }
-    line.textContent = "Night " + n + " saved on this Chromebook. Itch login does not store progress.";
-    cont.textContent = n > 1 ? ("Continue Night " + n) : "Continue";
+    line.textContent = "Level " + n + " saved on this Chromebook. Itch login does not store progress.";
+    cont.textContent = n > 1 ? ("Continue Level " + n) : "Continue";
     cont.classList.toggle("hidden", n <= 1 && !localStorage.getItem(LS_NIGHT));
   }
 
@@ -26969,7 +26969,7 @@
     var skip = document.getElementById("tut-skip");
     var kicker = document.getElementById("tut-kicker");
     var hint = document.getElementById("tut-hint");
-    if (kicker) kicker.textContent = "Night 1 · How to play";
+    if (kicker) kicker.textContent = "Level 1 · How to play";
     if (title && card) title.textContent = card.title;
     if (body && card) body.textContent = card.body;
     if (skip) skip.classList.remove("hidden");
@@ -27197,13 +27197,13 @@
     var cont = document.getElementById("btn-continue");
     if (!line) return;
     if (!localStorage.getItem(LS_NIGHT)) {
-      line.textContent = "No night saved on this Chromebook yet. Tap a grade to start Night 1. Itch login does not store progress.";
+      line.textContent = "No level saved on this Chromebook yet. Tap a grade to start Level 1. Itch login does not store progress.";
       if (cont) cont.classList.add("hidden");
       return;
     }
-    line.textContent = "Night " + n + " saved on this Chromebook. Tap a grade, then Continue on the skill screen. Itch login does not store progress.";
+    line.textContent = "Level " + n + " saved on this Chromebook. Tap a grade, then Continue on the skill screen. Itch login does not store progress.";
     if (cont) {
-      cont.textContent = n > 1 ? ("Continue Night " + n) : "Continue";
+      cont.textContent = n > 1 ? ("Continue Level " + n) : "Continue";
       cont.classList.toggle("hidden", n <= 1 && !localStorage.getItem(LS_NIGHT));
     }
   }

@@ -6,13 +6,13 @@
   <meta name="color-scheme" content="dark" />
   <meta http-equiv="Cache-Control" content="no-cache" />
   <title>SOL Labyrinth</title>
-  <link rel="stylesheet" href="css/after-hours.css?v=4.9.6" />
-  <link rel="stylesheet" href="css/build.css?v=4.9.6" />
+  <link rel="stylesheet" href="css/after-hours.css?v=4.9.7" />
+  <link rel="stylesheet" href="css/build.css?v=4.9.7" />
 </head>
 <body>
   <div id="app">
     <section id="state-screen" class="screen">
-      <p class="kicker">Reading practice · 100 nights</p>
+      <p class="kicker">Reading practice · 100 levels</p>
       <h1>SOL Labyrinth</h1>
       <p class="tag state-tag">Tap your state to start.</p>
       <div class="packs state-packs">
@@ -31,10 +31,10 @@
     </section>
 
     <section id="title-screen" class="screen hidden">
-      <p class="kicker" id="title-kicker">NNPS · VA 2024 EOC Reading practice skills · 100 nights</p>
+      <p class="kicker" id="title-kicker">NNPS · VA 2024 EOC Reading practice skills · 100 levels</p>
       <h1>SOL Labyrinth</h1>
       <p class="tag">Tap a grade to pick your skill focus. Read the passage in the side panel. Grab the matching letter. Walk it to EXIT · SAFE. The janitor does not know the answer — only you do.</p>
-      <p id="save-line" class="save-line">No night saved on this Chromebook yet.</p>
+      <p id="save-line" class="save-line">No level saved on this Chromebook yet.</p>
 
       <div class="packs">
         <button type="button" class="card selected" data-family="G9">
@@ -75,11 +75,11 @@
       </div>
 
       <p class="howto">
-        <strong>100 nights of stealth extract — not a quiz skin.</strong>
+        <strong>100 levels of stealth extract — not a quiz skin.</strong>
         Tap Grade 9, 10, or 11 — then choose a skill (or All) and start.
         Move quiet, grab the right letter on the map, extract at EXIT · SAFE. Correct letters call Sol's CHARIOT.
         START · SAFE is where you spawn; EXIT · SAFE is where you extract and read. Hati cannot see you in either booth.
-        Catches and wrong letters both cost a life; three (then two) end a night. Win to unlock the next night on this Chromebook.
+        Catches and wrong letters both cost a life; three (then two) end a level. Win to unlock the next level on this Chromebook.
         Itch login does not store progress. Solo works without a class code.
       </p>
     </section>
@@ -87,8 +87,8 @@
     <section id="skill-screen" class="screen hidden">
       <p class="kicker" id="skill-kicker">Selection · skill focus</p>
       <h1>Pick a skill</h1>
-      <p class="tag">Choose a skill focus for this night, or play with all skills mixed.</p>
-      <p id="skill-save-line" class="save-line">No night saved on this Chromebook yet.</p>
+      <p class="tag">Choose a skill focus for this level, or play with all skills mixed.</p>
+      <p id="skill-save-line" class="save-line">No level saved on this Chromebook yet.</p>
 
       <div class="packs" id="skill-packs">
         <!-- filled by game.js -->
@@ -105,7 +105,7 @@
 
       <div class="row">
         <button type="button" class="btn" id="btn-skill-back">Back</button>
-        <button type="button" class="btn primary" id="btn-skill-start">New game (Night 1)</button>
+        <button type="button" class="btn primary" id="btn-skill-start">New game (Level 1)</button>
         <button type="button" class="btn primary hidden" id="btn-skill-continue">Continue</button>
       </div>
     </section>
@@ -115,7 +115,7 @@
         <div class="eoc">
           <div class="eoc-bar">
             <p class="sol" id="job-sol">Teacher · 9.RI.1.C</p>
-            <p class="round" id="round-flag">Night 1 / 100</p>
+            <p class="round" id="round-flag">Level 1 / 100</p>
             <div class="scores">
               <span class="pip gold" id="score-pip">Extracts 0 / 5</span>
               <span class="pip strike" id="strike-pip">Strikes 0 / 3</span>
@@ -164,8 +164,8 @@
         <h2 id="win-title">Set</h2>
         <p id="win-msg"></p>
         <div class="row">
-          <button type="button" class="btn primary hidden" id="btn-next">Next night</button>
-          <button type="button" class="btn primary hidden" id="btn-retry">Retry this night</button>
+          <button type="button" class="btn primary hidden" id="btn-next">Next level</button>
+          <button type="button" class="btn primary hidden" id="btn-retry">Retry this level</button>
           <button type="button" class="btn hidden" id="btn-shop" data-night="1">Shop</button>
           <button type="button" class="btn" id="btn-again">Title</button>
         </div>
@@ -255,37 +255,37 @@
     try { console.error("[SOL]", (e && e.message) || "error", e && e.error && e.error.stack ? e.error.stack : ""); } catch (x) {}
   });
   </script>
-  <script src="js/vendor/phaser.min.js?v=4.9.6"></script>
-  <script src="js/vendor/peerjs.min.js?v=4.9.6"></script>
-  <script src="js/content.js?v=4.9.6"></script>
-  <script src="js/content2.js?v=4.9.6"></script>
-  <script src="js/content3.js?v=4.9.6"></script>
-  <script src="js/content4.js?v=4.9.6"></script>
-  <script src="js/content5.js?v=4.9.6"></script>
-  <script src="js/content6.js?v=4.9.6"></script>
-  <script src="js/content7.js?v=4.9.6"></script>
-  <script src="js/content8.js?v=4.9.6"></script>
-  <script src="js/content9.js?v=4.9.6"></script>
-  <script src="js/content10.js?v=4.9.6"></script>
-  <script src="js/content11.js?v=4.9.6"></script>
-  <script src="js/content12.js?v=4.9.6"></script>
-  <script src="js/content13.js?v=4.9.6"></script>
-  <script src="js/content14.js?v=4.9.6"></script>
-  <script src="js/content15.js?v=4.9.6"></script>
-  <script src="js/content16.js?v=4.9.6"></script>
-  <script src="js/content17.js?v=4.9.6"></script>
-  <script src="js/content18.js?v=4.9.6"></script>
-  <script src="js/content19.js?v=4.9.6"></script>
-  <script src="js/content20.js?v=4.9.6"></script>
-  <script src="js/content21.js?v=4.9.6"></script>
-  <script src="js/content22.js?v=4.9.6"></script>
-  <script src="js/content23.js?v=4.9.6"></script>
-  <script src="js/content24.js?v=4.9.6"></script>
-  <script src="js/content25.js?v=4.9.6"></script>
-  <script src="js/audio.js?v=4.9.6"></script>
-  <script src="js/music.js?v=4.9.6"></script>
-  <script src="js/net.js?v=4.9.6"></script>
-  <script src="js/build.js?v=4.9.6"></script>
-  <script src="js/game.js?v=4.9.6"></script>
+  <script src="js/vendor/phaser.min.js?v=4.9.7"></script>
+  <script src="js/vendor/peerjs.min.js?v=4.9.7"></script>
+  <script src="js/content.js?v=4.9.7"></script>
+  <script src="js/content2.js?v=4.9.7"></script>
+  <script src="js/content3.js?v=4.9.7"></script>
+  <script src="js/content4.js?v=4.9.7"></script>
+  <script src="js/content5.js?v=4.9.7"></script>
+  <script src="js/content6.js?v=4.9.7"></script>
+  <script src="js/content7.js?v=4.9.7"></script>
+  <script src="js/content8.js?v=4.9.7"></script>
+  <script src="js/content9.js?v=4.9.7"></script>
+  <script src="js/content10.js?v=4.9.7"></script>
+  <script src="js/content11.js?v=4.9.7"></script>
+  <script src="js/content12.js?v=4.9.7"></script>
+  <script src="js/content13.js?v=4.9.7"></script>
+  <script src="js/content14.js?v=4.9.7"></script>
+  <script src="js/content15.js?v=4.9.7"></script>
+  <script src="js/content16.js?v=4.9.7"></script>
+  <script src="js/content17.js?v=4.9.7"></script>
+  <script src="js/content18.js?v=4.9.7"></script>
+  <script src="js/content19.js?v=4.9.7"></script>
+  <script src="js/content20.js?v=4.9.7"></script>
+  <script src="js/content21.js?v=4.9.7"></script>
+  <script src="js/content22.js?v=4.9.7"></script>
+  <script src="js/content23.js?v=4.9.7"></script>
+  <script src="js/content24.js?v=4.9.7"></script>
+  <script src="js/content25.js?v=4.9.7"></script>
+  <script src="js/audio.js?v=4.9.7"></script>
+  <script src="js/music.js?v=4.9.7"></script>
+  <script src="js/net.js?v=4.9.7"></script>
+  <script src="js/build.js?v=4.9.7"></script>
+  <script src="js/game.js?v=4.9.7"></script>
 </body>
 </html>

@@ -57,8 +57,41 @@ var srv = http.createServer(function (req, res) {
   console.log("pools", JSON.stringify(pools));
   check(pools.NJ5.all > 250 && pools.G9.all > 180 && pools.G11.all > 500, "question pools are large");
 
-  /* reward builder over 20 rewards (random choices) */
+  /* v4.9.7: the shop is open from night 1 — with no build yet it asks Town or Castle first, and a wall
+     bought before the first reward must not steal lot 1 from the keep */
   await page.evaluate(function () { localStorage.removeItem("afterHours.v1.build"); SolBuild.init(); });
+  var early = await page.evaluate(function () { return SolBuild.state(); });
+  check(early.canShop === true && early.theme === null, "shop is open before the first reward: " + JSON.stringify(early));
+  await page.evaluate(function () { SolBuild.addCoins(60, "test"); window.__closed = false; SolBuild.showShop(1, function () { window.__closed = true; }); });
+  await page.waitForSelector(".build-theme");
+  check(/Town or a Castle/.test(await page.textContent("#build-overlay h2")), "night-1 shop asks Town or Castle first");
+  await shot("02b-shop-theme");
+  await page.click(".build-theme:nth-child(2)");
+  await page.click("#build-overlay .btn.primary");
+  await page.waitForSelector(".build-shop .build-opt");
+  await page.click(".build-shop .build-opt:nth-child(1)");           /* Wall, 15 coins */
+  await page.waitForSelector(".build-styles .build-opt");
+  await page.click(".build-styles .build-opt:nth-child(1)");
+  await page.click("#build-overlay .btn.primary");
+  await page.waitForSelector(".build-note:not(.hidden)");
+  await page.click("#build-overlay .btn.primary");
+  await page.waitForTimeout(150);
+  var earlyBuy = await page.evaluate(function () {
+    var s = JSON.parse(localStorage.getItem("afterHours.v1.build"));
+    return { theme: s.theme, kit: s.kit, picks: s.picks.map(function (p) { return p.piece + "@" + p.lot; }), coins: s.coins, offer: SolBuild._offer(5) };
+  });
+  console.log("early shop", JSON.stringify(earlyBuy));
+  check(earlyBuy.theme === "castle" && earlyBuy.picks.length === 1 && earlyBuy.picks[0] === "wall@2" && earlyBuy.coins === 45, "a wall bought on night 1 takes lot 2 and costs 15 coins");
+  check(earlyBuy.offer.length === 3 && !/wall|gate|tower/.test(earlyBuy.offer.join(" ")), "first reward still offers keeps after an early purchase: " + earlyBuy.offer.join(", "));
+  await page.click("#build-overlay .btn.primary");                    /* Back to shop */
+  await page.waitForTimeout(150);
+  await page.click("#build-overlay .btn.primary");                    /* Done */
+  await page.waitForFunction(function () { return window.__closed === true; });
+
+  /* reward builder over 20 rewards (random choices) — a reload gives the builder a fresh save */
+  await page.evaluate(function () { localStorage.removeItem("afterHours.v1.build"); });
+  await page.reload({ waitUntil: "load" }); await page.waitForTimeout(800);
+  await page.click('#state-screen .card[data-state="NJ"]'); await page.waitForTimeout(200);
   for (var night = 5; night <= 100; night += 5) {
     await page.evaluate(function (n) { window.__done = false; SolBuild.showReward(n, function () { window.__done = true; }); }, night);
     await page.waitForSelector("#build-overlay:not(.hidden)", { timeout: 5000 });
@@ -217,7 +250,7 @@ var srv = http.createServer(function (req, res) {
   await page.waitForTimeout(1500);
   var hud = await page.evaluate(function () { return { sol: document.getElementById("job-sol").textContent, coins: document.getElementById("bonus-pip").textContent, stem: document.getElementById("eoc-stem").textContent, kick: document.getElementById("read-kicker") && document.getElementById("read-kicker").textContent }; });
   console.log("hud", JSON.stringify(hud));
-  check(/Level [123]/.test(hud.sol), "HUD shows the adaptive level");
+  check(/Reading level [123]/.test(hud.sol), "HUD shows the adaptive reading level");
   check(/^Coins/.test(hud.coins), "HUD shows coins");
   check(hud.stem.length > 10, "a question is loaded");
   await shot("11-night-read");
