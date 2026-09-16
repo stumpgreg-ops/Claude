@@ -451,17 +451,48 @@ def main():
     d["v"] = 2
     json.dump(d, open(pj, "w"), indent=1)
     print("castle modules:", len(modules), "→", pj)
-    # ── shrink: flat-shaded sprites lose nothing visible as 256-colour palette PNGs (about a third of the size) ──
-    before = after = 0
-    for dp, _, fs in os.walk(OUT):
-        for f in fs:
-            if not f.endswith(".png"):
-                continue
-            fp = os.path.join(dp, f); before += os.path.getsize(fp)
-            im = Image.open(fp).convert("RGBA")
-            im.quantize(256, method=Image.Quantize.FASTOCTREE).save(fp, optimize=True)
-            after += os.path.getsize(fp)
-    print("kit sprites: %.1f MB -> %.1f MB" % (before / 1e6, after / 1e6))
+    # ── atlas: pack every directory's sprites into a few 2048² sheets (itch.io allows 1000 files per build; one request per
+    # sheet instead of one per sprite). Sheets are 256-colour palette PNGs — flat-shaded art loses nothing visible. ──
+    atlas, sheets_by_dir = {}, {}
+    for sub in [""] + [c + "/" for c in COLORS]:
+        dp = os.path.join(OUT, sub)
+        if not os.path.isdir(dp):
+            continue
+        files = sorted(f for f in os.listdir(dp) if f.endswith(".png") and not f.startswith("atlas-"))
+        items = []
+        for f in files:
+            im = Image.open(os.path.join(dp, f)).convert("RGBA")
+            items.append((f[:-4], im))
+        items.sort(key=lambda t: (-t[1].height, -t[1].width))
+        SIZE, PAD = 2048, 2
+        sheets, placed = [], {}
+        for name, im in items:
+            w, h = im.size
+            done = False
+            for si, sh in enumerate(sheets):
+                for shelf in sh["shelves"]:
+                    if shelf["x"] + w + PAD <= SIZE and h <= shelf["h"]:
+                        placed[name] = [si, shelf["x"], shelf["y"]]; sh["img"].alpha_composite(im, (shelf["x"], shelf["y"])); shelf["x"] += w + PAD; done = True; break
+                if done: break
+                if sh["y"] + h + PAD <= SIZE:
+                    shelf = {"x": 0, "y": sh["y"], "h": h + PAD}; sh["shelves"].append(shelf); sh["y"] += h + PAD
+                    placed[name] = [si, shelf["x"], shelf["y"]]; sh["img"].alpha_composite(im, (shelf["x"], shelf["y"])); shelf["x"] += w + PAD; done = True; break
+            if not done:
+                sh = {"img": Image.new("RGBA", (SIZE, SIZE), (0, 0, 0, 0)), "shelves": [], "y": 0}; sheets.append(sh)
+                shelf = {"x": 0, "y": 0, "h": h + PAD}; sh["shelves"].append(shelf); sh["y"] = h + PAD
+                placed[name] = [len(sheets) - 1, 0, 0]; sh["img"].alpha_composite(im, (0, 0)); shelf["x"] = w + PAD
+        for si, sh in enumerate(sheets):
+            used_h = sh["y"]
+            sh["img"].crop((0, 0, SIZE, min(SIZE, used_h))).quantize(256, method=Image.Quantize.FASTOCTREE).save(os.path.join(dp, "atlas-%d.png" % si), optimize=True)
+        for f in files:
+            os.remove(os.path.join(dp, f))
+        atlas[sub] = placed; sheets_by_dir[sub] = len(sheets)
+        print("atlas %-6s %3d sprites -> %d sheet(s)" % (sub or "base", len(items), len(sheets)))
+    d["kit"]["atlas"] = atlas
+    d["kit"]["sheets"] = sheets_by_dir
+    for m in d["pieces"]:
+        if m.get("theme") == "castle": m["img"] = ""
+    json.dump(d, open(pj, "w"), indent=1)
 
 if __name__ == "__main__":
     main()

@@ -445,6 +445,21 @@
     var k = kitData(), st = styleDef(style), sp = k.sprites[name];
     return k.dir + ((st && st.dir && sp && sp.coloured) ? st.dir : "") + name + ".png";
   }
+  /* v5.1: sprites live in atlas sheets (kit.atlas[dir][name] = [sheet, x, y]); {src, x, y} for a sprite in a style.
+     Without an atlas (older data) each sprite is its own file. */
+  function spriteRef(name, style) {
+    var k = kitData(), st = styleDef(style), sp = k.sprites[name], dir = (st && st.dir && sp && sp.coloured) ? st.dir : "", a = k.atlas;
+    if (!a) return { src: kitImg(name, style), x: 0, y: 0, whole: true };
+    var m = (a[dir] && a[dir][name]) || (a[""] && a[""][name]);
+    if (!m) return { src: "", x: 0, y: 0, whole: true };
+    if (!(a[dir] && a[dir][name])) dir = "";
+    return { src: k.dir + dir + "atlas-" + m[0] + ".png", x: m[1], y: m[2], whole: false };
+  }
+  function drawSprite(ctx, name, style, w, h, dx, dy, dw, dh) {
+    var ref = spriteRef(name, style), c = getImg(ref.src);
+    if (c.ok) { if (ref.whole) ctx.drawImage(c.img, dx, dy, dw, dh); else ctx.drawImage(c.img, ref.x, ref.y, w, h, dx, dy, dw, dh); return true; }
+    return c.ok;                                                            /* null: still loading; false: missing */
+  }
   function isTopper(p) { return !!p && p.kind === "topper"; }
   function isHost(p) { return !!p && (p.kind === "tower" || p.kind === "core"); }
   function isSolid(p) { return !!p && (p.kind === "tower" || p.kind === "core" || p.kind === "house"); }
@@ -668,10 +683,10 @@
     ctx.save(); ctx.globalAlpha = it.a;
     if (it.ghost || it.sel) drawFootprint(ctx, it, fit);
     for (i = 0; i < it.parts.length; i++) {
-      pt = it.parts[i]; c = getImg(kitImg(pt.name, it.style));
+      pt = it.parts[i];
       dw = pt.w * s; dh = pt.h * s; bottom = y0 - (it.base + pt.lift - pt.oy) * s;
-      if (c.ok) ctx.drawImage(c.img, x - dw / 2, bottom - dh, dw, dh);
-      else if (c.ok === false) { ctx.fillStyle = "rgba(58,65,80,.9)"; ctx.fillRect(x - dw / 2, bottom - dh, dw, dh); }
+      c = drawSprite(ctx, pt.name, it.style, pt.w, pt.h, x - dw / 2, bottom - dh, dw, dh);
+      if (c === false) { ctx.fillStyle = "rgba(58,65,80,.9)"; ctx.fillRect(x - dw / 2, bottom - dh, dw, dh); }
     }
     ctx.restore();
   }
@@ -717,9 +732,8 @@
     for (i = 0; i < names.length; i++) { sp = kitSprite(names[i]); parts.push({ name: names[i], lift: lift, w: sp.w, h: sp.h, oy: sp.oy || 0 }); if (!p.auto) lift += sp.lift || 0; maxW = Math.max(maxW, sp.w); top = Math.max(top, lift + sp.h - (sp.oy || 0)); }
     var sc = Math.min((W - 8) / maxW, (H - 8) / Math.max(1, top)), x = W / 2, y0 = H - 4;
     for (i = 0; i < parts.length; i++) {
-      var pt = parts[i], c = getImg(kitImg(pt.name, style)), dw = pt.w * sc, dh = pt.h * sc, bottom = y0 - (pt.lift - pt.oy) * sc;
-      if (c.ok) ctx.drawImage(c.img, x - dw / 2, bottom - dh, dw, dh);
-      else if (c.ok === null) ready = false;
+      var pt = parts[i], dw = pt.w * sc, dh = pt.h * sc, bottom = y0 - (pt.lift - pt.oy) * sc;
+      if (drawSprite(ctx, pt.name, style, pt.w, pt.h, x - dw / 2, bottom - dh, dw, dh) === null) ready = false;
     }
     return ready;
   }
