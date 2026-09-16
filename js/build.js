@@ -1,57 +1,54 @@
 /*
- * SOL Labyrinth — "Town & Castle" reward builder (v2, modular).   window.SolBuild
+ * SOL Labyrinth — "Town & Castle" reward builder (v5).   window.SolBuild
  *
- * Every 5 nights won (5, 10, … 100 = 20 rewards) a pop-up covers the game.
- * Reward 1: the student picks a Town or a Castle (permanent), then a livable
- *           starting building (cottage / stone cottage / house, or keep / lodge /
- *           great hall) and a STYLE for it.
- * Rewards 2–20: the game offers three building pieces that fit the next lot of
- *           the estate (a wing, a tower, a bakery, a gatehouse…); the student
- *           picks one, then picks its style. Pieces attach to fixed lots around
- *           the core so the estate reads as one growing building.
- * Walls:    at reward `wallLevel` (pieces.json, 8 = night 40) a ring of walls
- *           (castle) or fences (town) goes up around the whole estate by itself.
+ * Every 5 levels won (5, 10, … 100 = 20 rewards) a pop-up covers the game and
+ * the student picks one of three pieces (reward 1: a Town or a Castle, then a
+ * modest starting building). Coins from the maze buy more pieces in the shop.
  *
- * Styles (pieces.json themes.*.styles): three per theme, sprites pre-recoloured
- * under assets/build/styles/<style>/. Each style names a partner style that
- * "matches" it, so the style step can suggest a complement.
+ * v5 model: a piece, once earned or bought, is UNLOCKED for good (save.owned)
+ * and can be placed as many times as the student likes from the palette in the
+ * full-screen editor ("My Castle"). Placed copies (save.picks) can be dragged
+ * anywhere on the grid, joined or not, deleted, duplicated or recoloured at
+ * any time. The scene rotates in 90° steps, zooms and pans.
  *
- * Coins:    the game awards coins (SolBuild.addCoins) for correct answers, a
- *           perfect night and bonus pickups. SolBuild.showShop opens the shop
- *           after any night: buildings for the next lot, decorations, and packs.
+ * Castle theme: Kenney Castle Kit tiles on a true-isometric grid (one cell per
+ * piece). Walls, hedges and fences auto-tile from their neighbours; towers,
+ * keeps and houses are sprite stacks; the keep grows a storey as the castle
+ * grows (theme.growAt); a curtain wall rises by itself at the 8th building.
+ * Town theme: the older Modular Village sprites on the same grid.
  *
  * Public API
  *   SolBuild.init()                     load assets/build/pieces.json + saved build
- *   SolBuild.rewardDue(night)           true when night % 5 === 0 and no pick for that night
- *   SolBuild.showReward(night, onDone)  full-screen reward flow; onDone() when Continue is tapped
- *   SolBuild.showGallery(onClose)       "My Town" / "My Castle" viewer with build-code Copy / Load
- *   SolBuild.showShop(night, onClose)   coin shop (buildings, decorations, packs)
+ *   SolBuild.rewardDue(night)           true when night % 5 === 0 and that reward is not taken
+ *   SolBuild.showReward(night, onDone)  reward flow; onDone() when Continue is tapped
+ *   SolBuild.showGallery(onClose)       the full-screen editor with palette, build code Copy / Load
+ *   SolBuild.showShop(night, onClose)   coin shop (unlock buildings, decorations, packs)
  *   SolBuild.addCoins(n, why)           add (or spend, n<0) coins; returns the balance
  *   SolBuild.coins() / economy()        balance / {answer, perfectNight, bonusMin, bonusMax, bonusPer}
  *   SolBuild.close() / isOpen() / exportCode() / importCode(str) / state()
  *
  * Save record (localStorage "afterHours.v1.build"):
- *   {v:3, theme:"village"|"castle"|null, salt:<int>, coins:<int>,
- *    picks:[{night:5, piece:"keep", style:"stone", lot:1, src:"reward"|"shop", deco:false}], code:"…"}
- *   Building lot 1 is the core; lot k (2..) is pieces.json lots[k-2]; a decoration's
- *   lot indexes pieces.json decoLots. Reward picks are one per reward night.
- *   A v1 record ({v:1, picks:[{night,piece,slot}]}) is migrated on load: the
- *   theme is kept and every reward already earned becomes a default piece in
- *   the theme's first style, so the reward calendar is unchanged.
+ *   {v:4, theme:"village"|"castle"|null, salt, coins, kit:2,
+ *    owned:{pieceId:1}, rewards:{"5":"keep", …},
+ *    picks:[{piece, style, cx, cy, src:"reward"|"shop"|"auto"|"free", night, deco}],
+ *    view:{r:0..3, z:1, px:0, py:0}, code:"…"}
+ *   v1–v3 records and v1–v4 build codes still load.
  */
 (function () {
   "use strict";
 
   var LS_KEY = "afterHours.v1.build";
   var DATA_URL = "assets/build/pieces.json";
-  var EVERY = 5;                          /* a reward every 5 nights            */
-  var TOTAL = 20;                         /* 20 rewards = nights 5..100          */
-  var OPTIONS = 3;                        /* pieces offered per reward           */
+  var EVERY = 5;                          /* a reward every 5 levels             */
+  var TOTAL = 20;                         /* 20 rewards = levels 5..100           */
+  var OPTIONS = 3;                        /* pieces offered per reward            */
   var THEME_ORDER = ["village", "castle"];
   var THEME_BLURB = { village: "A cottage that grows into a whole town.", castle: "A keep that grows into a fortress." };
   var SHOP_TABS = [["build", "Buildings"], ["deco", "Decorations"], ["pack", "Packs"]];
   var KIND_HINT = { side: "This piece joins the side of your building.", back: "This piece goes behind your building.",
     front: "This piece goes out front, by the entrance.", far: "This piece stands at the back of the estate." };
+  var DUP_FULL = 4;                       /* copies of one piece that score in full; later copies score a quarter */
+  var ZMIN = 0.35, ZMAX = 4;
 
   var data = null;                        /* parsed pieces.json                  */
   var loadState = "idle";                 /* idle | loading | ok | fail          */
@@ -59,89 +56,103 @@
   var save = null;                        /* the build record (see header)       */
   var imgCache = {};                      /* src -> {img, ok:null|true|false}    */
   var ui = null;                          /* DOM refs, created once              */
-  var mode = null;                        /* "reward" | "gallery" | null=closed  */
-  var step = null;                        /* theme | pick | style | done | gallery | shop */
+  var mode = null;                        /* "reward" | "gallery" | "shop" | null */
+  var step = null;                        /* theme | pick | style | place | done | gallery | shop */
   var cur = null;                         /* live state of the open overlay      */
   var drawQueued = false;
+  var thumbs = [];                        /* stack thumbnails waiting for images */
 
   /* ── save record ─────────────────────────────────────────────────────────── */
-  function freshSave() { return { v: 3, theme: null, salt: Math.floor(Math.random() * 900000000) + 1, coins: 0, kit: 2, picks: [], code: "" }; }
-  /* Keep only well-formed picks. Reward picks: one per reward night. Shop picks: any night 1..100. */
+  function freshView() { return { r: 0, z: 1, px: 0, py: 0 }; }
+  function freshSave() { return { v: 4, theme: null, salt: Math.floor(Math.random() * 900000000) + 1, coins: 0, kit: 2, owned: {}, rewards: {}, picks: [], view: freshView(), code: "" }; }
   function cleanPicks(list) {
-    var out = [], seenReward = {}, order = 0;
+    var out = [], order = 0;
     (Array.isArray(list) ? list : []).forEach(function (p) {
-      var n = p && typeof p === "object" ? parseInt(p.night, 10) : NaN, src = p && (p.src === "shop" || p.src === "auto") ? "shop" : "reward";
-      if (!(n >= 1 && n <= EVERY * TOTAL) || typeof p.piece !== "string") return;
-      if (src === "reward") { if (n % EVERY || seenReward[n]) return; seenReward[n] = true; }
-      var pk = { night: n, piece: p.piece, style: typeof p.style === "string" ? p.style : "", lot: parseInt(p.lot, 10) || 0,
-        src: src, deco: !!p.deco, ord: order++ };
-      if (p.src === "auto") pk.src = "auto";
+      if (!p || typeof p !== "object" || typeof p.piece !== "string") return;
+      var n = parseInt(p.night, 10), src = p.src === "shop" || p.src === "auto" || p.src === "free" ? p.src : "reward";
+      if (!(n >= 1 && n <= EVERY * TOTAL)) n = 1;
+      var pk = { night: n, piece: p.piece, style: typeof p.style === "string" ? p.style : "", src: src, deco: !!p.deco, ord: order++ };
       if (p.cx != null && p.cy != null && isFinite(parseInt(p.cx, 10)) && isFinite(parseInt(p.cy, 10))) { pk.cx = parseInt(p.cx, 10); pk.cy = parseInt(p.cy, 10); }
       out.push(pk);
     });
     return out;
   }
+  function cleanView(v) {
+    var o = freshView();
+    if (v && typeof v === "object") {
+      o.r = (parseInt(v.r, 10) || 0) & 3;
+      o.z = Math.max(ZMIN, Math.min(ZMAX, parseFloat(v.z) || 1));
+      o.px = parseFloat(v.px) || 0; o.py = parseFloat(v.py) || 0;
+    }
+    return o;
+  }
   function loadSave() {
     var s = null;
     try { s = JSON.parse(localStorage.getItem(LS_KEY) || "null"); } catch (e) { s = null; }
-    if (!s || typeof s !== "object" || !(s.v >= 1 && s.v <= 3)) s = freshSave();
+    if (!s || typeof s !== "object" || !(s.v >= 1 && s.v <= 4)) s = freshSave();
     if (s.v === 1) s = { v: 3, theme: s.theme, salt: s.salt, picks: s.picks, code: "", migrate: true };
+    var old = s.v < 4;
     s.kit = parseInt(s.kit, 10) || 0;
     s.picks = cleanPicks(s.picks);
     s.salt = parseInt(s.salt, 10); if (!(s.salt > 0)) s.salt = freshSave().salt;
     s.coins = Math.max(0, parseInt(s.coins, 10) || 0);
     if (typeof s.theme !== "string") s.theme = null;
     if (typeof s.code !== "string") s.code = "";
-    s.v = 3;
+    s.owned = (s.owned && typeof s.owned === "object") ? s.owned : {};
+    s.rewards = (s.rewards && typeof s.rewards === "object") ? s.rewards : {};
+    s.view = cleanView(s.view);
+    if (old) {                                                                 /* v3: every placed piece was earned; reward picks mark their level */
+      s.picks.forEach(function (p) { s.owned[p.piece] = 1; if (p.src === "reward" && p.night % EVERY === 0) s.rewards[p.night] = p.piece; });
+    }
+    s.picks.forEach(function (p) { s.owned[p.piece] = 1; });
+    s.v = 4;
     return s;
   }
   function buildingPicks() { return save.picks.filter(function (p) { return !p.deco; }); }
-  function decoPicks() { return save.picks.filter(function (p) { return p.deco; }); }
-  /* Lot 1 belongs to the core building (the first home or keep); shop pieces bought before the first reward start at lot 2. */
-  function nextLot(core) { var used = {}, k = core ? 1 : 2; buildingPicks().forEach(function (p) { used[p.lot] = true; }); while (used[k]) k++; return k; }
+  function grownCount() { return buildingPicks().filter(function (pk) { return pk.src !== "auto"; }).length; }
   function hasCore() { return buildingPicks().some(function (p) { var pc = pieceById(p.piece); return pc && pc.role === "core"; }); }
-  function nextDecoLot() { var used = {}, k = 1; decoPicks().forEach(function (p) { used[p.lot] = true; }); while (used[k]) k++; return k; }
-  /* Once pieces.json is in: turn v1 picks (scattered props) into default modular picks. */
+  function rewardsTaken() { return Object.keys(save.rewards).filter(function (k) { return !!save.rewards[k]; }).length; }
+  function owned(id) { return !!(save.owned && save.owned[id]); }
+  function unlock(id) { if (!save.owned) save.owned = {}; save.owned[id] = 1; }
+  /* Once pieces.json is in: old castles map to kit pieces; picks that no longer exist are dropped. */
   function migrateIfNeeded() {
     if (!save || !data) return;
     var changed = false;
-    if (save.theme && !themeDef(save.theme)) { save.theme = null; save.picks = []; changed = true; }
+    if (save.theme && !themeDef(save.theme)) { save.theme = null; save.picks = []; save.owned = {}; changed = true; }
     if (save.theme === "castle" && isKit() && save.kit !== 2) {                /* v4.9.5: the old scattered castle becomes a kit castle */
       var MAP = { keep: "keep", storehouse: "watch-keep", hall: "round-keep", "lodge-wing": "wall", "tower-short": "round-tower", gate: "gate", "hall-wing": "wall",
         "keep-wing": "square-tower", watchtower: "watchtower", gatehouse: "gate", "tower-pair": "roof-tower", "royal-hall": "grand-tower", "great-gate": "gate",
         "fortress-corner": "corner-tower", "grand-keep": "great-tower", citadel: "royal-tower" };
       var STYLE = { stone: "blue", sand: "gold", white: "red" };
-      /* v4.9.6: a castle whose pieces are already kit pieces (a v4.9.5 save or build code that never
-         recorded its kit version) keeps every position; only a genuinely old castle is re-placed. */
       var legacy = save.picks.some(function (p) { return !pieceById(p.piece) || !!STYLE[p.style]; });
-      if (legacy) save.picks.forEach(function (p) {
-        if (!pieceById(p.piece)) { p.piece = MAP[p.piece] || (p.deco ? "knight" : "wall"); }
-        if (p.deco && !isTopper(pieceById(p.piece)) && pieceById(p.piece).kind !== "prop") p.deco = false;
-        p.style = STYLE[p.style] || p.style; delete p.cx; delete p.cy;
-      });
+      if (legacy) {
+        save.picks.forEach(function (p) {
+          if (!pieceById(p.piece)) { p.piece = MAP[p.piece] || (p.deco ? "knight" : "wall"); }
+          p.style = STYLE[p.style] || p.style; delete p.cx; delete p.cy;
+        });
+        Object.keys(save.rewards).forEach(function (k) { if (!pieceById(save.rewards[k])) save.rewards[k] = MAP[save.rewards[k]] || "wall"; });
+        save.owned = {};
+      }
       save.kit = 2; changed = true;
     }
-    var usedLots = {}, usedDeco = {};
+    var keep = [];
     save.picks.forEach(function (p) {
       var pc = pieceById(p.piece);
-      if (pc && pc.role === "deco" && !p.deco) { p.deco = true; changed = true; }
-      if (p.deco) { if (!(p.lot > 0) || usedDeco[p.lot]) { p.lot = 1; while (usedDeco[p.lot]) p.lot++; changed = true; } usedDeco[p.lot] = true; }
-      else { if (!(p.lot > 0) || usedLots[p.lot]) { p.lot = (pc && pc.role === "core") ? 1 : 2; while (usedLots[p.lot]) p.lot++; changed = true; } usedLots[p.lot] = true; }
+      if (!pc || pc.theme !== save.theme) { changed = true; return; }
+      if (!!p.deco !== (pc.role === "deco")) { p.deco = pc.role === "deco"; changed = true; }
+      if (p.style && !styleDef(p.style)) { p.style = defaultStyle(); changed = true; }
+      keep.push(p);
     });
-    save.picks.forEach(function (p, i) {
-      var k = p.lot, pc = pieceById(p.piece), ok;
-      if (p.deco) { ok = pc && pc.theme === save.theme && pc.role === "deco"; if (!ok) { p.piece = defaultDeco(i); changed = true; } return; }
-      if (k === 1) ok = pc && pc.theme === save.theme && pc.role === "core";
-      else ok = pc && pc.theme === save.theme && pc.role === "module";
-      if (!ok) { p.piece = defaultPiece(k, i); changed = true; }
-      if (!styleDef(p.style)) { p.style = defaultStyle(); changed = true; }
-    });
+    save.picks = keep;
+    save.picks.forEach(function (p) { if (!owned(p.piece)) { unlock(p.piece); changed = true; } });
+    Object.keys(save.rewards).forEach(function (k) { if (save.rewards[k] && !owned(save.rewards[k]) && pieceById(save.rewards[k])) { unlock(save.rewards[k]); changed = true; } });
     if (save.migrate) { delete save.migrate; changed = true; }
     if (changed) persist();
     ensurePositions();
   }
   function persist() {
-    save.picks.sort(function (a, b) { return (a.night - b.night) || ((a.ord || 0) - (b.ord || 0)); });
+    save.picks.sort(function (a, b) { return (a.ord || 0) - (b.ord || 0); });
+    save.picks.forEach(function (p, i) { p.ord = i; });
     save.code = exportCode();
     try { localStorage.setItem(LS_KEY, JSON.stringify(save)); } catch (e) {}
     refreshButton();
@@ -155,43 +166,49 @@
   function styleDef(id) { var s = stylesOf(), i; for (i = 0; i < s.length; i++) if (s[i].id === id) return s[i]; return null; }
   function styleName(id) { var s = styleDef(id); return s ? s.name : ""; }
   function defaultStyle() { var s = stylesOf(); return s.length ? s[0].id : ""; }
-  function pieceById(id) { var p = (data && data.pieces) || [], i; for (i = 0; i < p.length; i++) if (p[i].id === id) return p[i]; return null; }
-  function piecesOf(theme, role) { return ((data && data.pieces) || []).filter(function (p) { return p.theme === theme && p.role === role; }); }
+  function pieceById(id) {
+    var p = (data && data.pieces) || [], i, other = null, th = save && save.theme;
+    for (i = 0; i < p.length; i++) if (p[i].id === id) { if (!th || p[i].theme === th) return p[i]; if (!other) other = p[i]; }
+    return other;
+  }
+  function piecesOf(theme, role) { return ((data && data.pieces) || []).filter(function (p) { return p.theme === theme && (!role || p.role === role); }); }
+  function catOf(p) { return p.cat || (p.role === "deco" ? "deco" : p.role === "core" ? "core" : "module"); }
+  function themeTabs() {
+    var t = themeDef(save.theme);
+    if (t && t.tabs) return t.tabs;
+    return [["core", "Home"], ["module", "Buildings"], ["deco", "Decorations"]];
+  }
   function lotFor(k) { var L = (data && data.lots) || [], i; for (i = 0; i < L.length; i++) if (L[i].k === k) return L[i]; return k === 1 ? { k: 1, u: 0, v: 0, kind: "core" } : { k: k, u: k, v: k, kind: "side" }; }
   function fitsLot(p, lot) { return !p.fits || p.fits.indexOf(lot.kind) !== -1; }
-  function decoLotFor(k) { var L = (data && data.decoLots) || [], i; for (i = 0; i < L.length; i++) if (L[i].k === k) return L[i]; return { k: k, u: 0.5 + (k % 5), v: 0.5 + Math.floor(k / 5) }; }
   function packsList() { return (data && data.packs) || []; }
   function economy() { var e = (data && data.economy) || {}; return { answer: e.answer || 10, perfectNight: e.perfectNight || 25, bonusMin: e.bonusMin || 3, bonusMax: e.bonusMax || 12, bonusPer: e.bonusPer || 500 }; }
   function priceOf(p) { return p ? (p.price || [0, 40, 80, 140, 220][p.tier || 1] || 40) : 0; }
-  function defaultDeco(i) { var list = piecesOf(save.theme, "deco"); return list.length ? list[(i || 0) % list.length].id : ""; }
-  function pickFor(night) { var i; for (i = 0; i < save.picks.length; i++) if (save.picks[i].night === night && save.picks[i].src !== "shop") return save.picks[i]; return null; }
   function bandFor(k) { return Math.max(1, Math.min(4, Math.ceil(k / 5))); }   /* reward 1-5 → tier 1 … 16-20 → tier 4 */
-  function nextRewardNight() { var n; for (n = EVERY; n <= EVERY * TOTAL; n += EVERY) if (!pickFor(n)) return n; return null; }
+  function nextRewardNight() { var n; for (n = EVERY; n <= EVERY * TOTAL; n += EVERY) if (!save.rewards[n]) return n; return null; }
   function wallLevel() { var t = themeDef(save.theme); return (t && t.wallLevel) || 8; }
-  function wallsUp() { return !!save.theme && buildingPicks().length >= wallLevel(); }
-  /* The style the student has used most (ties → the core's style). */
+  function wallsUp() { return !!save.theme && (isKit() ? save.picks.some(function (p) { return p.src === "auto"; }) : buildingPicks().length >= wallLevel()); }
+  /* The style the student has used most (ties → the first building's style). */
   function dominantStyle() {
-    var count = {}, best = null, bn = -1;
-    buildingPicks().forEach(function (p) { count[p.style] = (count[p.style] || 0) + 1; });
-    if (buildingPicks().length && count[buildingPicks()[0].style]) count[buildingPicks()[0].style] += 0.5;
+    var count = {}, best = null, bn = -1, bp = buildingPicks();
+    bp.forEach(function (p) { count[p.style] = (count[p.style] || 0) + 1; });
+    if (bp.length && count[bp[0].style]) count[bp[0].style] += 0.5;
     Object.keys(count).forEach(function (k) { if (count[k] > bn && styleDef(k)) { bn = count[k]; best = k; } });
     return best || defaultStyle();
   }
   function partnerStyle(id) { var s = styleDef(id); return (s && s.pairs && s.pairs[0]) || null; }
   function imgFor(piece, style) {
     if (piece && (piece.parts || piece.auto)) {
-      var first = piece.parts ? piece.parts[piece.parts.length - 1] : (Array.isArray(piece.auto.u) ? piece.auto.u[0] : piece.auto.u);
+      var parts = staticParts(piece), first = parts[parts.length - 1];
       return kitImg(first, style);
     }
     var s = styleDef(style), dir = (s && s.dir) || "", src = piece.img || "";
     if (!dir || piece.nostyle) return src;
     return src.replace(/^(.*\/)?([^\/]+)$/, function (m, d, f) { return (d || "") + dir + f; });
   }
-  function defaultPiece(k, i) {
-    var lot = lotFor(k), list = k === 1 ? piecesOf(save.theme, "core")
-      : piecesOf(save.theme, "module").filter(function (p) { return fitsLot(p, lot) && (p.tier || 1) <= bandFor(k); });
-    if (!list.length) list = piecesOf(save.theme, k === 1 ? "core" : "module");
-    return list.length ? list[(i || 0) % list.length].id : "";
+  function styleable(p) {
+    if (!p) return false;
+    if (!isKit()) return stylesOf().length > 0 && !p.nostyle;
+    return staticParts(p).some(function (nm) { var sp = kitData().sprites[nm]; return !!(sp && sp.coloured); });
   }
 
   function load() {
@@ -227,29 +244,27 @@
   }
   function shuffle(arr, r) { var i, j, t; for (i = arr.length - 1; i > 0; i--) { j = Math.floor(r() * (i + 1)); t = arr[i]; arr[i] = arr[j]; arr[j] = t; } return arr; }
 
-  /* Three pieces for reward k. Reward 1 offers every core building. Otherwise:
-     modules that fit the lot's kind, unowned first, the current band's tier
-     first, then lower tiers; each group shuffled with seed = night + salt so a
-     reload before picking shows the same three while students differ. */
-  function offerFor(night, kLot, bandOverride) {
-    var k = kLot || nextLot(), band = bandOverride || bandFor(Math.min(k, TOTAL)), lot = lotFor(k), owned = {}, r = rng(night * 7 + k + save.salt), out = [], wantOwned, t;
-    if (k === 1) return piecesOf(save.theme, "core");
+  /* Three pieces for reward k. Reward 1 offers the core buildings; later rewards prefer pieces not yet
+     unlocked, the band's tier first. Seeded by level + salt so a reload shows the same three. */
+  function offerFor(night, k, bandOverride) {
+    var band = bandOverride || bandFor(Math.min(k, TOTAL)), lot = lotFor(k), r = rng(night * 7 + k + save.salt), out = [], wantOwned, t;
+    if (k === 1 || !hasCore()) return piecesOf(save.theme, "core");
     if (isKit()) {
       var pool = piecesOf(save.theme, "module").filter(function (p) { return (p.tier || 1) <= band; }), kinds = {};
-      shuffle(pool.filter(function (p) { return (p.tier || 1) === band; }), r).concat(shuffle(pool.filter(function (p) { return (p.tier || 1) < band; }), r))
-        .forEach(function (p) { if (out.length < OPTIONS && !kinds[p.kind + ":" + p.id] && (out.length < 2 || !kinds[p.kind])) { out.push(p); kinds[p.kind] = true; kinds[p.kind + ":" + p.id] = true; } });
-      shuffle(pool.slice(), r).forEach(function (p) { if (out.length < OPTIONS && out.indexOf(p) === -1) out.push(p); });   /* top up when only two kinds exist */
+      var fresh = pool.filter(function (p) { return !owned(p.id); }), known = pool.filter(function (p) { return owned(p.id); });
+      shuffle(fresh.filter(function (p) { return (p.tier || 1) === band; }), r).concat(shuffle(fresh.filter(function (p) { return (p.tier || 1) < band; }), r))
+        .forEach(function (p) { if (out.length < OPTIONS && (out.length < 2 || !kinds[p.kind])) { out.push(p); kinds[p.kind] = true; } });
+      shuffle(known.slice(), r).forEach(function (p) { if (out.length < OPTIONS && out.indexOf(p) === -1) out.push(p); });
+      shuffle(pool.slice(), r).forEach(function (p) { if (out.length < OPTIONS && out.indexOf(p) === -1) out.push(p); });
       return out;
     }
-    save.picks.forEach(function (p) { owned[p.piece] = true; });
     var mods = piecesOf(save.theme, "module").filter(function (p) { return fitsLot(p, lot); });
     for (wantOwned = 0; wantOwned < 2 && out.length < OPTIONS; wantOwned++) {
       for (t = band; t >= 1 && out.length < OPTIONS; t--) {
-        shuffle(mods.filter(function (p) { return (p.tier || 1) === t && !!owned[p.id] === !!wantOwned; }), r)
+        shuffle(mods.filter(function (p) { return (p.tier || 1) === t && owned(p.id) === !!wantOwned; }), r)
           .forEach(function (p) { if (out.length < OPTIONS && out.indexOf(p) === -1) out.push(p); });
       }
     }
-    /* Thin lots (a "far" lot at band 1 has one or two candidates): borrow from the next tiers up, then from any module. */
     for (t = band + 1; t <= 4 && out.length < OPTIONS; t++) {
       shuffle(mods.filter(function (p) { return (p.tier || 1) === t; }), r).forEach(function (p) { if (out.length < OPTIONS && out.indexOf(p) === -1) out.push(p); });
     }
@@ -257,50 +272,71 @@
     return out;
   }
 
-  /* ── build codes: base64url("4|theme|salt|coins|night:piece:style:lot:flags:cx,cy…") + 2-char checksum
-     flags: r = reward, s = shop, d = decoration; cx,cy = grid cell. v1–v3 codes still load (pieces get auto-placed). */
+  /* ── build codes ──────────────────────────────────────────────────────────
+     v5: base64url("5|theme|salt|coins|kit|owned,…|night=piece;…|piece:style:src:cx,cy;…") + 2-char checksum.
+     v1–v4 codes still load. */
   function b64url(s) { return btoa(unescape(encodeURIComponent(s))).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, ""); }
   function unb64url(s) { s = s.replace(/-/g, "+").replace(/_/g, "/"); while (s.length % 4) s += "="; return decodeURIComponent(escape(atob(s))); }
   function checksum(s) { var h = 7, i; for (i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) % 1296; return ("0" + h.toString(36)).slice(-2); }
+  var SRC_FLAG = { reward: "r", shop: "s", auto: "a", free: "f" }, FLAG_SRC = { r: "reward", s: "shop", a: "auto", f: "free" };
   function exportCode() {
     if (!save) save = loadSave();
-    var list = save.picks.map(function (p) { return p.night + ":" + p.piece + ":" + (p.style || "") + ":" + (p.lot || 0) + ":" + (p.src === "auto" ? "a" : p.src === "shop" ? "s" : "r") + (p.deco ? "d" : "") + ":" + (p.cx != null ? p.cx + "," + p.cy : ""); }).join(",;").replace(/,;/g, ";");
-    var body = b64url("4|" + (save.theme || "") + "|" + save.salt + "|" + (save.coins || 0) + "|" + (save.kit || 0) + "|" + list);
+    var ownedList = Object.keys(save.owned || {}).filter(function (k) { return save.owned[k]; }).join(",");
+    var rewards = Object.keys(save.rewards || {}).filter(function (k) { return save.rewards[k]; }).map(function (k) { return k + "=" + save.rewards[k]; }).join(",");
+    var list = save.picks.map(function (p) { return p.piece + ":" + (p.style || "") + ":" + (SRC_FLAG[p.src] || "f") + (p.deco ? "d" : "") + ":" + (p.cx != null ? p.cx + "," + p.cy : ""); }).join(";");
+    var body = b64url("5|" + (save.theme || "") + "|" + save.salt + "|" + (save.coins || 0) + "|" + (save.kit || 0) + "|" + ownedList + "|" + rewards + "|" + list);
     return body + checksum(body);
   }
   function parseCode(str) {
-    var s = String(str || "").replace(/\s+/g, ""), body = s.slice(0, -2), raw, parts, theme, salt, coins = 0, picks = [], seen = {}, bad = null, ver, listStr;
+    var s = String(str || "").replace(/\s+/g, ""), body = s.slice(0, -2), raw, parts, theme, salt, coins = 0, picks = [], bad = null, ver, listStr, kitv = 0, rec;
     if (s.length < 4) return { ok: false, error: "Paste a build code first." };
     if (checksum(body) !== s.slice(-2)) return { ok: false, error: "That code has a typo — check every letter and try again." };
     try { raw = unb64url(body); } catch (e) { return { ok: false, error: "That is not a build code." }; }
     parts = raw.split("|"); ver = parts[0];
-    var kitv = 0;
-    if (!((ver === "1" || ver === "2") && parts.length === 4) && !(ver === "3" && parts.length === 5) && !(ver === "4" && (parts.length === 5 || parts.length === 6))) return { ok: false, error: "That build code is from a different version." };
     theme = parts[1] || null; salt = parseInt(parts[2], 10);
-    if (ver === "4" && parts.length === 6) { coins = Math.max(0, parseInt(parts[3], 10) || 0); kitv = parseInt(parts[4], 10) || 0; listStr = parts[5]; }
-    else if (ver === "3" || ver === "4") { coins = Math.max(0, parseInt(parts[3], 10) || 0); listStr = parts[4]; } else listStr = parts[3];
     if (theme && data && !themeDef(theme)) return { ok: false, error: "Unknown build type: " + theme };
     if (!(salt > 0)) return { ok: false, error: "That build code is damaged." };
-    if (listStr) listStr.split(ver === "4" ? ";" : ",").forEach(function (item) {
-      var f = item.split(":"), night = parseInt(f[0], 10), flags = (ver === "3" || ver === "4") ? (f[4] || "r") : "r", shop = flags.indexOf("s") !== -1 || flags.indexOf("a") !== -1, pos, pk;
-      if (bad) return;
-      if (f.length < 3 || !f[1] || !(night >= 1 && night <= EVERY * TOTAL)) { bad = "bad pick list"; return; }
-      if (!shop) { if (night % EVERY || seen[night]) { bad = "bad pick list"; return; } seen[night] = true; }
-      pk = { night: night, piece: f[1], style: ver === "1" ? "" : (f[2] || ""), lot: ver === "1" ? night / EVERY : (parseInt(f[3], 10) || 0),
-        src: flags.indexOf("a") !== -1 ? "auto" : shop ? "shop" : "reward", deco: flags.indexOf("d") !== -1 };
-      if (ver === "4" && f[5]) { pos = f[5].split(","); if (pos.length === 2 && isFinite(parseInt(pos[0], 10))) { pk.cx = parseInt(pos[0], 10); pk.cy = parseInt(pos[1], 10); } }
-      picks.push(pk);
-    });
+    rec = freshSave(); rec.theme = theme; rec.salt = salt;
+    if (ver === "5" && parts.length === 8) {
+      rec.coins = Math.max(0, parseInt(parts[3], 10) || 0); rec.kit = parseInt(parts[4], 10) || 0;
+      if (parts[5]) parts[5].split(",").forEach(function (id) { if (id) rec.owned[id] = 1; });
+      if (parts[6]) parts[6].split(",").forEach(function (kv) { var f = kv.split("="), n = parseInt(f[0], 10); if (n % EVERY === 0 && n >= EVERY && n <= EVERY * TOTAL && f[1]) rec.rewards[n] = f[1]; });
+      if (parts[7]) parts[7].split(";").forEach(function (item) {
+        var f = item.split(":"), flags = f[2] || "f", pos;
+        if (bad) return;
+        if (f.length < 3 || !f[0]) { bad = "bad piece list"; return; }
+        var pk = { night: 1, piece: f[0], style: f[1] || "", src: FLAG_SRC[flags.charAt(0)] || "free", deco: flags.indexOf("d") !== -1 };
+        if (f[3]) { pos = f[3].split(","); if (pos.length === 2 && isFinite(parseInt(pos[0], 10))) { pk.cx = parseInt(pos[0], 10); pk.cy = parseInt(pos[1], 10); } }
+        picks.push(pk);
+      });
+    } else if (((ver === "1" || ver === "2") && parts.length === 4) || (ver === "3" && parts.length === 5) || (ver === "4" && (parts.length === 5 || parts.length === 6))) {
+      if (ver === "4" && parts.length === 6) { coins = Math.max(0, parseInt(parts[3], 10) || 0); kitv = parseInt(parts[4], 10) || 0; listStr = parts[5]; }
+      else if (ver === "3" || ver === "4") { coins = Math.max(0, parseInt(parts[3], 10) || 0); listStr = parts[4]; } else listStr = parts[3];
+      rec.coins = coins; rec.kit = kitv;
+      if (listStr) listStr.split(ver === "4" ? ";" : ",").forEach(function (item) {
+        var f = item.split(":"), night = parseInt(f[0], 10), flags = (ver === "3" || ver === "4") ? (f[4] || "r") : "r", shop = flags.indexOf("s") !== -1 || flags.indexOf("a") !== -1, pos, pk;
+        if (bad) return;
+        if (f.length < 3 || !f[1] || !(night >= 1 && night <= EVERY * TOTAL)) { bad = "bad pick list"; return; }
+        pk = { night: night, piece: f[1], style: ver === "1" ? "" : (f[2] || ""), src: flags.indexOf("a") !== -1 ? "auto" : shop ? "shop" : "reward", deco: flags.indexOf("d") !== -1 };
+        if (ver === "4" && f[5]) { pos = f[5].split(","); if (pos.length === 2 && isFinite(parseInt(pos[0], 10))) { pk.cx = parseInt(pos[0], 10); pk.cy = parseInt(pos[1], 10); } }
+        if (pk.src === "reward" && night % EVERY === 0) rec.rewards[night] = pk.piece;
+        rec.owned[pk.piece] = 1;
+        picks.push(pk);
+      });
+    } else return { ok: false, error: "That build code is from a different version." };
     if (bad) return { ok: false, error: "That build code is damaged (" + bad + ")." };
     if (picks.length && !theme) return { ok: false, error: "That build code is damaged (no build type)." };
-    return { ok: true, rec: { v: 3, theme: theme, salt: salt, coins: coins, kit: kitv, picks: picks, code: "" } };
+    rec.picks = picks;
+    return { ok: true, rec: rec };
   }
   function importCode(str) {
     if (!save) save = loadSave();
     var r = parseCode(str);
     if (!r.ok) return r;
-    save = r.rec; save.picks = cleanPicks(save.picks);
+    save = r.rec; save.picks = cleanPicks(save.picks); save.view = freshView();
+    save.picks.forEach(function (p) { save.owned[p.piece] = 1; });
     migrateIfNeeded(); persist();
+    if (cur) cur.sel = null;
     if (mode) { if (step === "gallery") fillGallery(); else redraw(); }
     return { ok: true, count: save.picks.length };
   }
@@ -319,7 +355,7 @@
     ellipse(ctx, W * 0.18, hz + H * 0.03, W * 0.38, H * 0.13); ellipse(ctx, W * 0.78, hz + H * 0.03, W * 0.42, H * 0.11);
     g = ctx.createLinearGradient(0, hz, 0, H); g.addColorStop(0, "#82c45e"); g.addColorStop(1, "#3e8b2f");
     ctx.fillStyle = g; ctx.fillRect(0, hz, W, H - hz);
-    ctx.fillStyle = "rgba(120,160,80,.35)"; ellipse(ctx, W * 0.5, H * 0.68, W * 0.42, H * 0.27);   /* the estate's meadow */
+    ctx.fillStyle = "rgba(120,160,80,.35)"; ellipse(ctx, W * 0.5, H * 0.68, W * 0.42, H * 0.27);
     for (i = 0; i < 40; i++) {
       ctx.fillStyle = i % 3 ? "#fff59a" : "#ff9ab8";
       ellipse(ctx, r() * W, hz + H * 0.06 + r() * (H - hz - H * 0.06), 2.2, 2.2);
@@ -348,7 +384,7 @@
     ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText(text, W / 2, H * 0.5, W * 0.9);
   }
 
-  /* ── canvas: the estate ──────────────────────────────────────────────────── */
+  /* ── images ──────────────────────────────────────────────────────────────── */
   function getImg(src) {
     var c = imgCache[src];
     if (c) return c;
@@ -359,24 +395,27 @@
     c.img.src = src;
     return c;
   }
-  function scheduleDraw() { if (drawQueued) return; drawQueued = true; requestAnimationFrame(function () { drawQueued = false; redraw(); }); }
-  /* ── the estate grid ──────────────────────────────────────────────────────
-     Pieces sit on an isometric grid of square cells (theme.cell px per cell,
-     scene px). A piece covers n×n cells (piece.cells) from its top-left cell
-     (cx, cy); +cx runs down-right on screen, +cy down-left. New pieces are
-     auto-placed touching the building; students can drag any piece to a free
-     spot (the "place" step and the gallery's Arrange mode). */
+  function scheduleDraw() { if (drawQueued) return; drawQueued = true; requestAnimationFrame(function () { drawQueued = false; redraw(); refreshThumbs(); }); }
+
+  /* ── the estate grid and the view ─────────────────────────────────────────
+     Pieces sit on an isometric grid of square cells (theme.cell px per cell). A piece covers n×n cells
+     from its top-left cell (cx, cy) in WORLD coordinates. The view rotates the world in 90° steps:
+     world (cx, cy) → view (u, v); +u runs down-right on screen, +v down-left. Everything that touches
+     the screen (drawing, hit tests, auto-tiling of walls) works in view space; the save stays in world. */
   function cellPx() { var t = themeDef(save.theme); return (t && t.cell) || 36; }
   function cellH() { var t = themeDef(save.theme); return (t && t.cellH) || cellPx() / 2; }
   function isKit() { var t = themeDef(save.theme); return !!(t && t.kit); }
   function cellsOf(p) { return Math.max(1, (p && p.cells) || 1); }
-  function cellXY(cx, cy) { var C = cellPx(), H = cellH(); return { x: (cx - cy) * C / 2, y: (cx + cy) * H / 2 }; }
+  function cellXY(u, v) { var C = cellPx(), H = cellH(); return { x: (u - v) * C / 2, y: (u + v) * H / 2 }; }
   function pxToCell(x, y) { var C = cellPx(), H = cellH(); return { u: (x / (C / 2) + y / (H / 2)) / 2, v: (y / (H / 2) - x / (C / 2)) / 2 }; }
-  /* ── the castle kit (Kenney Castle Kit tiles) ─────────────────────────────
-     A kit piece is a stack of sprites on one cell: piece.parts = [sprite, …] drawn
-     bottom-up (each lifted by the sprite below), or piece.auto = wall variants
-     picked from the neighbouring cells (straight along u or v, a corner, a gate).
-     kind: core | wall | tower | topper (sits on a tower) | prop (ground). */
+  function view() { if (!save.view) save.view = freshView(); return save.view; }
+  function rot() { return (view().r || 0) & 3; }
+  function toView(cx, cy, n) { n = n || 1; var r = rot(); if (r === 1) return { u: -cy - n, v: cx }; if (r === 2) return { u: -cx - n, v: -cy - n }; if (r === 3) return { u: cy, v: -cx - n }; return { u: cx, v: cy }; }
+  function fromView(u, v, n) { n = n || 1; var r = rot(); if (r === 1) return { cx: v, cy: -u - n }; if (r === 2) return { cx: -u - n, cy: -v - n }; if (r === 3) return { cx: -v - n, cy: u }; return { cx: u, cy: v }; }
+  function pointToView(x, y) { var r = rot(); if (r === 1) return { u: -y, v: x }; if (r === 2) return { u: -x, v: -y }; if (r === 3) return { u: y, v: -x }; return { u: x, v: y }; }
+  function viewDirToWorld(du, dv) { var r = rot(); if (r === 1) return [dv, -du]; if (r === 2) return [-du, -dv]; if (r === 3) return [-dv, du]; return [du, dv]; }
+
+  /* ── the castle kit (Kenney tiles) ──────────────────────────────────────── */
   function kitData() { return (data && data.kit) || { dir: "assets/build/kit/", sprites: {} }; }
   function kitSprite(name) { return kitData().sprites[name] || { w: 151, h: 151, lift: 64 }; }
   function kitImg(name, style) {
@@ -385,6 +424,7 @@
   }
   function isTopper(p) { return !!p && p.kind === "topper"; }
   function isHost(p) { return !!p && (p.kind === "tower" || p.kind === "core"); }
+  function isSolid(p) { return !!p && (p.kind === "tower" || p.kind === "core" || p.kind === "house"); }
   function pickAt(cx, cy, ignore, pred) {
     var i, pk, p;
     for (i = 0; i < save.picks.length; i++) {
@@ -394,19 +434,25 @@
     }
     return null;
   }
-  /* Which way a wall runs: from the four neighbours that are walls, towers or the keep. */
+  /* Which way a run (wall / hedge / fence) goes, from its four neighbours in VIEW space: a run joins runs of
+     its own category and solid buildings. */
   function wallParts(p, cx, cy, ignore) {
-    var conn = function (x, y) { return !!pickAt(x, y, ignore, function (q) { return !isTopper(q) && q.kind !== "prop"; }); };
-    var mu = conn(cx - 1, cy), pu = conn(cx + 1, cy), mv = conn(cx, cy - 1), pv = conn(cx, cy + 1), a = p.auto, key = null, out;
+    var pred = function (q) { return q.auto ? catOf(q) === catOf(p) : isSolid(q); };
+    var conn = function (du, dv) { var d = viewDirToWorld(du, dv); return !!pickAt(cx + d[0], cy + d[1], ignore, pred); };
+    var mu = conn(-1, 0), pu = conn(1, 0), mv = conn(0, -1), pv = conn(0, 1), a = p.auto, key = null, out;
     if ((mu || pu) && !(mv || pv)) out = a.u;
     else if ((mv || pv) && !(mu || pu)) out = a.v;
     else if (a.corner && ((mu ? 1 : 0) + (pu ? 1 : 0)) === 1 && ((mv ? 1 : 0) + (pv ? 1 : 0)) === 1) { key = (mu ? "-u" : "+u") + (mv ? "-v" : "+v"); out = a.corner[key] || a.u; }
     else out = a.u;
     return Array.isArray(out) ? out : [out];
   }
-  /* Sprite stack for a kit pick: [{name, lift}], lifts accumulate up the stack. */
+  /* Sprite names of a piece with no neighbours (thumbnails, the option cards). */
+  function staticParts(p) {
+    if (p.auto) return Array.isArray(p.auto.u) ? p.auto.u : [p.auto.u];
+    if (p.grow) return p.grow[0] || p.parts || [];
+    return p.parts || [];
+  }
   /* The keep grows a storey at each theme.growAt building count (rewards + shop pieces, not the auto walls). */
-  function grownCount() { return buildingPicks().filter(function (pk) { return pk.src !== "auto"; }).length; }
   function coreStage() {
     var t = themeDef(save.theme), at = (t && t.growAt) || [1, 4, 8, 13], n = grownCount(), st = 0, i;
     for (i = 0; i < at.length; i++) if (n >= at[i]) st = i;
@@ -416,7 +462,7 @@
     var names = p.auto ? wallParts(p, cx, cy, ignore) : (p.grow ? (p.grow[Math.min(coreStage(), p.grow.length - 1)] || p.parts) : (p.parts || [])), out = [], lift = 0, i, sp;
     for (i = 0; i < names.length; i++) {
       sp = kitSprite(names[i]);
-      out.push({ name: names[i], lift: lift, w: sp.w, h: sp.h });
+      out.push({ name: names[i], lift: lift, w: sp.w, h: sp.h, oy: sp.oy || 0 });
       if (!p.auto) lift += sp.lift || 0;              /* gate overlays sit on the wall's own base */
     }
     return out;
@@ -442,33 +488,29 @@
     for (i = 0; i < rs.length; i++) if (overlaps(cx, cy, n, rs[i])) return false;
     return true;
   }
-  /* A piece may only be dropped where it is free AND touches another piece (so the estate stays one building). */
+  function touchesAny(cx, cy, n, ignore) { var rs = rectsOf(ignore), i; for (i = 0; i < rs.length; i++) if (touches(cx, cy, n, rs[i])) return true; return false; }
+  /* v5: a piece may go anywhere that is free; flags and banners need a tower with no flag yet. */
   function spotOk(cx, cy, n, ignore, piece) {
-    var rs = rectsOf(ignore), i;
     if (piece && isTopper(piece)) return !!hostFor(cx, cy, ignore);
-    if (!spotFree(cx, cy, n, ignore)) return false;
-    if (!rs.length) return true;
-    for (i = 0; i < rs.length; i++) if (touches(cx, cy, n, rs[i])) return true;
-    return false;
+    return spotFree(cx, cy, n, ignore);
   }
-  /* A tower/keep at (cx, cy) with no flag on it yet. */
   function hostFor(cx, cy, ignore) {
     var host = pickAt(cx, cy, ignore, function (q) { return isHost(q); });
     if (!host) return null;
     return pickAt(cx, cy, ignore, function (q) { return isTopper(q); }) ? null : host;
   }
-  /* Nearest free spot that touches an existing piece (or the origin for the first piece).
-     Walls prefer to continue a straight run; toppers go on the tallest free tower. */
-  function autoPlace(n, ignore, piece) {
-    var rs = rectsOf(ignore), i, ring, cx, cy, best = null, bd = Infinity, sumx = 0, sumy = 0, d;
+  /* Nearest free spot that touches an existing piece (a new piece joins the build by default); walls
+     prefer to continue a straight run; toppers go on the tallest free tower. Falls back to any free cell. */
+  function autoPlace(n, ignore, piece, near) {
+    var rs = rectsOf(ignore), i, ring, cx, cy, best = null, bd = Infinity, sumx = 0, sumy = 0, d, mx, my, R = 16;
     if (piece && isTopper(piece)) {
       var hosts = rs.filter(function (r) { return isHost(r.p) && hostFor(r.cx, r.cy, ignore); })
         .sort(function (a, b) { return stackHeight(b.p, b.cx, b.cy) - stackHeight(a.p, a.cx, a.cy); });
       return hosts.length ? { cx: hosts[0].cx, cy: hosts[0].cy } : null;
     }
     if (!rs.length) return { cx: -Math.floor(n / 2), cy: -Math.floor(n / 2) };
-    if (piece && piece.kind === "wall") {                                  /* extend a wall line */
-      var walls = rs.filter(function (r) { return r.p.kind === "wall"; }), ends = [];
+    if (piece && piece.kind === "wall" && !near) {                         /* extend a run of the same kind */
+      var walls = rs.filter(function (r) { return r.p.kind === "wall" && catOf(r.p) === catOf(piece); }), ends = [];
       walls.forEach(function (w) {
         [[1, 0], [-1, 0], [0, 1], [0, -1]].forEach(function (dv) {
           var x = w.cx + dv[0], y = w.cy + dv[1], back = pickAt(w.cx - dv[0], w.cy - dv[1], ignore);
@@ -479,30 +521,26 @@
       ends.sort(function (a, b) { return a.s - b.s; });
       if (ends.length) return { cx: ends[0].cx, cy: ends[0].cy };
     }
-    rs.forEach(function (r) { sumx += r.cx + r.n / 2; sumy += r.cy + r.n / 2; });
-    var mx = sumx / rs.length, my = sumy / rs.length, R = 14;
+    if (near) { mx = near.cx; my = near.cy; }
+    else { rs.forEach(function (r) { sumx += r.cx + r.n / 2; sumy += r.cy + r.n / 2; }); mx = sumx / rs.length; my = sumy / rs.length; }
     for (ring = 0; ring <= R; ring++) {
       for (cx = Math.round(mx) - ring; cx <= Math.round(mx) + ring; cx++) for (cy = Math.round(my) - ring; cy <= Math.round(my) + ring; cy++) {
         if (Math.max(Math.abs(cx - Math.round(mx)), Math.abs(cy - Math.round(my))) !== ring) continue;
         if (!spotFree(cx, cy, n, ignore)) continue;
-        var adj = false;
-        for (i = 0; i < rs.length; i++) if (touches(cx, cy, n, rs[i])) { adj = true; break; }
-        if (!adj) continue;
-        d = Math.abs(cx + n / 2 - mx) + Math.abs(cy + n / 2 - my) + (cx + cy) * 0.01;   /* tiny bias toward the front */
+        var adj = touchesAny(cx, cy, n, ignore);
+        d = Math.abs(cx + n / 2 - mx) + Math.abs(cy + n / 2 - my) + (adj ? 0 : 6) + (cx + cy) * 0.01;
         if (d < bd) { bd = d; best = { cx: cx, cy: cy }; }
       }
-      if (best) return best;
+      if (best && ring >= 1) return best;
     }
-    return { cx: Math.round(mx) + R, cy: Math.round(my) + R };
+    return best || { cx: Math.round(mx) + R, cy: Math.round(my) + R };
   }
-  /* Every pick gets a position (older saves and pack purchases are placed here). */
   function ensurePositions() {
     var changed = false;
     save.picks.filter(function (pk) { return !pk.deco; }).concat(save.picks.filter(function (pk) { return pk.deco; })).forEach(function (pk) {
       var p = pieceById(pk.piece);
       if (!p || (pk.cx != null && pk.cy != null)) return;
-      var pos = autoPlace(cellsOf(p), null, p);
-      if (!pos) { pos = autoPlace(1, null, null); }                          /* a flag with no tower: park it on the ground */
+      var pos = autoPlace(cellsOf(p), null, p) || autoPlace(1, null, null);
       pk.cx = pos.cx; pk.cy = pos.cy; changed = true;
     });
     if (changed) persist();
@@ -516,68 +554,67 @@
     return b;
   }
   function itemFor(p, pk, cx, cy, style, extra, ignore) {
-    var n = cellsOf(p), c, it, k, host, base = 0;
+    var n = cellsOf(p), vw = toView(cx, cy, n), c, it, k, host, base = 0;
     if (isKit()) {
-      c = cellXY(cx + 1, cy + 1);                                            /* the cell's front apex */
+      c = cellXY(vw.u + 1, vw.v + 1);                                        /* the cell's front apex */
       if (isTopper(p)) { host = hostFor(cx, cy, pk) || pickAt(cx, cy, pk, function (q) { return isHost(q); }); if (host) base = stackHeight(pieceById(host.piece), cx, cy); }
-      it = { p: p, pk: pk, style: style, x: c.x, y: c.y, a: 1, depth: cx + cy + (isTopper(p) ? 0.5 : 0), cx: cx, cy: cy, n: 1, kit: true, base: base, parts: partsFor(p, cx, cy, ignore) };
+      it = { p: p, pk: pk, style: style, x: c.x, y: c.y, a: 1, depth: vw.u + vw.v + (isTopper(p) ? 0.5 : 0), u: vw.u, v: vw.v, n: 1, kit: true, base: base, parts: partsFor(p, cx, cy, ignore) };
     } else {
-      c = cellXY(cx + n / 2, cy + n / 2);
-      it = { p: p, pk: pk, style: style, x: c.x, y: c.y, a: 1, depth: cx + cy + n, cx: cx, cy: cy, n: n };
+      c = cellXY(vw.u + n / 2, vw.v + n / 2);
+      it = { p: p, pk: pk, style: style, x: c.x, y: c.y, a: 1, depth: vw.u + vw.v + n, u: vw.u, v: vw.v, n: n };
     }
     if (extra) for (k in extra) it[k] = extra[k];
     return it;
   }
-  /* Everything to draw, in scene px. */
   function sceneItems() {
-    var items = [], t = themeDef(save.theme), dom = dominantStyle(), drag = cur && cur.drag;
+    var items = [], t = themeDef(save.theme), dom = dominantStyle(), drag = cur && cur.drag, sel = cur && cur.sel;
     ensurePositions();
     save.picks.forEach(function (pk) {
       var p = pieceById(pk.piece);
       if (!p) return;
-      if (drag && drag.pk === pk) {
+      if (drag && drag.pk === pk && drag.moved) {
         items.push(itemFor(p, pk, drag.cx, drag.cy, pk.style || dom, { a: drag.ok ? 0.85 : 0.45, bad: !drag.ok, ghost: true }, pk));
         return;
       }
-      items.push(itemFor(p, pk, pk.cx, pk.cy, pk.style || dom, { ghost: cur && cur.placedKey === pk }, drag ? drag.pk : null));
+      items.push(itemFor(p, pk, pk.cx, pk.cy, pk.style || dom, { ghost: cur && cur.placedKey === pk, sel: sel === pk }, drag ? drag.pk : null));
     });
     if (t && t.ring && wallsUp()) ringItems(t.ring, dom).forEach(function (it) { items.push(it); });
     return items;
   }
-  /* The wall/fence ring hugs the estate one cell out; segments are 2 cells long so they join. */
+  /* Town: the fence ring hugs the estate one cell out; segments are 2 cells long so they join. */
   function ringItems(ring, style) {
     var seg = pieceById(ring.seg), corner = ring.corner ? pieceById(ring.corner) : null, gate = ring.gate ? pieceById(ring.gate) : null;
-    var b = bboxCells(), items = [], len, u0, v0, u1, v1, i, c, nseg, gateAt;
+    var b = bboxCells(), items = [], len, u0, v0, u1, v1, i, c, nseg, gateAt, odd = rot() % 2 === 1;
     if (!seg || !b) return items;
     len = Math.max(1, cellsOf(seg));
-    u0 = b.u0 - 1; v0 = b.v0 - 1; u1 = b.u1 + 1; v1 = b.v1 + 1;   /* outer corners */
-    var span = Math.max(u1 - u0, v1 - v0); u1 = u0 + span; v1 = v0 + span;   /* square ring */
+    u0 = b.u0 - 1; v0 = b.v0 - 1; u1 = b.u1 + 1; v1 = b.v1 + 1;
+    var span = Math.max(u1 - u0, v1 - v0); u1 = u0 + span; v1 = v0 + span;
     nseg = Math.ceil(span / len);
     gateAt = Math.floor(nseg / 2);
     function push(p, cx, cy, flip, key, front) {
-      c = cellXY(cx, cy);
-      items.push({ p: p, style: style, x: c.x, y: c.y, a: front ? 0.94 : 1, depth: cx + cy, flip: flip, key: key, ring: true });
+      var pv = pointToView(cx, cy); c = cellXY(pv.u, pv.v);
+      items.push({ p: p, style: style, x: c.x, y: c.y, a: front ? 0.94 : 1, depth: pv.u + pv.v, flip: flip !== odd, key: key, ring: true });
     }
     for (i = 0; i < nseg; i++) {
       var f = Math.min(u0 + i * len + len / 2, u1 - len / 2), g = Math.min(v0 + i * len + len / 2, v1 - len / 2);
-      push(seg, f, v0 + 0.5, true, "wb" + i, false);                         /* back-left edge (along u) */
-      push(seg, u0 + 0.5, g, false, "wl" + i, false);                        /* back-right edge (along v) */
-      push(seg, f, v1 + 0.5, true, "wf" + i, true);                          /* front-left edge (along u) */
+      push(seg, f, v0 + 0.5, true, "wb" + i, false);
+      push(seg, u0 + 0.5, g, false, "wl" + i, false);
+      push(seg, f, v1 + 0.5, true, "wf" + i, true);
       if (i === gateAt && gate) push(gate, u1 + 0.5, g, false, "gate", true);
-      else if (i !== gateAt || gate) push(seg, u1 + 0.5, g, false, "wr" + i, true);   /* front-right edge, gap when no gate piece */
+      else if (i !== gateAt || gate) push(seg, u1 + 0.5, g, false, "wr" + i, true);
     }
     if (corner) [[u0 + 0.5, v0 + 0.5], [u1 + 0.5, v0 + 0.5], [u1 + 0.5, v1 + 0.5], [u0 + 0.5, v1 + 0.5]].forEach(function (q, ci) { push(corner, q[0], q[1], false, "c" + ci, ci >= 2); });
     return items;
   }
   function sceneScale1() { var t = themeDef(save.theme); return (t && t.drawScale) || (data && data.drawScale) || 1; }
   function unitScale(p) { var t = themeDef(save.theme), tu = (t && t.unitPx) || p.unitPx || 1, pu = p.unitPx || tu; return pu ? tu / pu : 1; }
-  /* Fit: bounding box of every sprite (scene px), padded when the student may drag, → scale + offset. */
+  /* Fit: bounding box of every sprite → scale + offset; then the student's zoom and pan on top. */
   function fitScene(items, W, H) {
-    var minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity, base = sceneScale1(), sc, ox, oy, pad;
+    var minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity, base = sceneScale1(), sc, ox, oy, pad, vw = view();
     items.forEach(function (it) {
       if (it.kit) {
         (it.parts || []).forEach(function (pt) {
-          var l = it.x * base - pt.w * base / 2, bottom = (it.y - it.base - pt.lift) * base, tp = bottom - pt.h * base;
+          var l = it.x * base - pt.w * base / 2, bottom = (it.y - it.base - pt.lift + pt.oy) * base, tp = bottom - pt.h * base;
           minX = Math.min(minX, l); maxX = Math.max(maxX, l + pt.w * base); minY = Math.min(minY, tp); maxY = Math.max(maxY, bottom);
         });
         return;
@@ -587,30 +624,30 @@
       minX = Math.min(minX, l); maxX = Math.max(maxX, l + w); minY = Math.min(minY, tp); maxY = Math.max(maxY, tp + h);
     });
     if (!items.length) { minX = -100; maxX = 100; minY = -60; maxY = 40; }
-    var moving = !!(cur && (step === "place" || step === "done"));
-    pad = moving ? cellPx() * base * 1.5 : cellPx() * base * 0.6;
+    pad = cellPx() * base * 1.2;
     minX -= pad; maxX += pad; minY -= pad * 0.5; maxY += pad * 0.5;
     var bw = Math.max(1, maxX - minX), bh = Math.max(1, maxY - minY);
-    var maxS = (W / ((data && data.sceneW) || 1120)) * (moving ? 2.6 : 1.8);   /* small estates are drawn big, not lost in the field */
-    sc = Math.min(maxS, (W * 0.94) / bw, (H * 0.9) / bh);
-    ox = W / 2 - ((minX + maxX) / 2) * sc; oy = H * 0.52 - ((minY + maxY) / 2) * sc;
+    var maxS = (W / ((data && data.sceneW) || 1120)) * 2.2;                   /* small estates are drawn big, not lost in the field */
+    sc = Math.min(maxS, (W * 0.94) / bw, (H * 0.9) / bh) * (vw.z || 1);
+    ox = W / 2 - ((minX + maxX) / 2) * sc + (vw.px || 0); oy = H * 0.52 - ((minY + maxY) / 2) * sc + (vw.py || 0);
     return { s: sc * base, ox: ox, oy: oy, base: base };
   }
   function drawFootprint(ctx, it, fit) {
-    var C = cellPx() * fit.s / fit.base, q = [cellXY(it.cx, it.cy), cellXY(it.cx + it.n, it.cy), cellXY(it.cx + it.n, it.cy + it.n), cellXY(it.cx, it.cy + it.n)];
+    var C = cellPx() * fit.s / fit.base, q = [cellXY(it.u, it.v), cellXY(it.u + it.n, it.v), cellXY(it.u + it.n, it.v + it.n), cellXY(it.u, it.v + it.n)];
     ctx.beginPath(); q.forEach(function (pt, i) { var px = fit.ox + pt.x * fit.s / fit.base, py = fit.oy + pt.y * fit.s / fit.base; if (i) ctx.lineTo(px, py); else ctx.moveTo(px, py); });
-    ctx.closePath(); ctx.fillStyle = it.bad ? "rgba(255,90,90,.35)" : it.ghost ? "rgba(245,200,66,.35)" : "rgba(245,200,66,.12)"; ctx.fill();
-    ctx.lineWidth = Math.max(1, C * 0.04); ctx.strokeStyle = it.bad ? "#ff6b6b" : "rgba(245,200,66,.85)"; ctx.stroke();
+    ctx.closePath();
+    ctx.fillStyle = it.bad ? "rgba(255,90,90,.35)" : it.sel ? "rgba(120,220,255,.35)" : it.ghost ? "rgba(245,200,66,.35)" : "rgba(245,200,66,.12)"; ctx.fill();
+    ctx.lineWidth = Math.max(1, C * 0.04); ctx.strokeStyle = it.bad ? "#ff6b6b" : it.sel ? "#8ee0ff" : "rgba(245,200,66,.85)"; ctx.stroke();
   }
   function drawKitPiece(ctx, it, fit) {
-    var s = fit.s / fit.base, x = fit.ox + it.x * s, y0 = fit.oy + it.y * s, i, pt, c, dw, dh;
+    var s = fit.s / fit.base, x = fit.ox + it.x * s, y0 = fit.oy + it.y * s, i, pt, c, dw, dh, bottom;
     ctx.save(); ctx.globalAlpha = it.a;
-    if (it.ghost) drawFootprint(ctx, it, fit);
+    if (it.ghost || it.sel) drawFootprint(ctx, it, fit);
     for (i = 0; i < it.parts.length; i++) {
       pt = it.parts[i]; c = getImg(kitImg(pt.name, it.style));
-      dw = pt.w * s; dh = pt.h * s;
-      if (c.ok) ctx.drawImage(c.img, x - dw / 2, y0 - (it.base + pt.lift) * s - dh, dw, dh);
-      else if (c.ok === false) { ctx.fillStyle = "rgba(58,65,80,.9)"; ctx.fillRect(x - dw / 2, y0 - (it.base + pt.lift) * s - dh, dw, dh); }
+      dw = pt.w * s; dh = pt.h * s; bottom = y0 - (it.base + pt.lift - pt.oy) * s;
+      if (c.ok) ctx.drawImage(c.img, x - dw / 2, bottom - dh, dw, dh);
+      else if (c.ok === false) { ctx.fillStyle = "rgba(58,65,80,.9)"; ctx.fillRect(x - dw / 2, bottom - dh, dw, dh); }
     }
     ctx.restore();
   }
@@ -619,7 +656,7 @@
     var p = it.p, src = imgFor(p, it.style), c = getImg(src), s = fit.s * unitScale(p), x = fit.ox + it.x * fit.s / fit.base, y = fit.oy + it.y * fit.s / fit.base;
     var w = (p.w || 60) * s / fit.base, h = (p.h || 60) * s / fit.base, ax = p.ax != null ? p.ax : 0.5, ay = p.ay != null ? p.ay : 1, iw, ih, dw, dh;
     ctx.save(); ctx.globalAlpha = it.a;
-    if (it.n && it.ghost) drawFootprint(ctx, it, fit);   /* footprint diamond under the piece being placed or dragged */
+    if (it.n && (it.ghost || it.sel)) drawFootprint(ctx, it, fit);
     if (c.ok) {
       iw = c.img.naturalWidth || p.w || 1; ih = c.img.naturalHeight || p.h || 1; dw = iw * s / fit.base; dh = ih * s / fit.base;
       if (!it.flip) { ctx.fillStyle = "rgba(0,0,0,.16)"; ellipse(ctx, x, y + 2, dw * 0.4, dw * 0.1); }
@@ -642,13 +679,36 @@
     ctx.setTransform(cv._dpr || 1, 0, 0, cv._dpr || 1, 0, 0);
     ctx.clearRect(0, 0, W, H);
     paintBg(ctx, W, H, save.theme || "village");
-    if (!save.theme) { banner(ctx, W, H, loadState === "ok" ? "Win Level 5 to start building" : "Build data not available"); lastFit = null; return; }
+    if (!save.theme) { banner(ctx, W, H, loadState === "ok" ? "Choose a Town or a Castle to start building" : "Build data not available"); lastFit = null; return; }
     items = sceneItems();
     fit = lastFit = fitScene(items, W, H);
     items.sort(function (a, b) { return (a.depth - b.depth) || (a.y - b.y) || (a.x - b.x); }).forEach(function (it) { drawPiece(ctx, it, fit); });
   }
 
-  /* ── dragging pieces ─────────────────────────────────────────────────────── */
+  /* ── stack thumbnails (palette, shop and option cards) ───────────────────── */
+  function drawStackInto(cv, p, style) {
+    var ctx = cv.getContext("2d"), W = cv.width, H = cv.height, names = staticParts(p), parts = [], lift = 0, i, sp, maxW = 1, top = 0, ready = true;
+    ctx.clearRect(0, 0, W, H);
+    for (i = 0; i < names.length; i++) { sp = kitSprite(names[i]); parts.push({ name: names[i], lift: lift, w: sp.w, h: sp.h, oy: sp.oy || 0 }); if (!p.auto) lift += sp.lift || 0; maxW = Math.max(maxW, sp.w); top = Math.max(top, lift + sp.h - (sp.oy || 0)); }
+    var sc = Math.min((W - 8) / maxW, (H - 8) / Math.max(1, top)), x = W / 2, y0 = H - 4;
+    for (i = 0; i < parts.length; i++) {
+      var pt = parts[i], c = getImg(kitImg(pt.name, style)), dw = pt.w * sc, dh = pt.h * sc, bottom = y0 - (pt.lift - pt.oy) * sc;
+      if (c.ok) ctx.drawImage(c.img, x - dw / 2, bottom - dh, dw, dh);
+      else if (c.ok === null) ready = false;
+    }
+    return ready;
+  }
+  function stackThumb(p, style, w, h) {
+    var cv = el("canvas"); cv.width = w || 120; cv.height = h || 96; cv.className = "thumb";
+    if (!drawStackInto(cv, p, style)) thumbs.push({ cv: cv, p: p, style: style });
+    return cv;
+  }
+  function refreshThumbs() {
+    if (!thumbs.length) return;
+    thumbs = thumbs.filter(function (t) { return document.body.contains(t.cv) && !drawStackInto(t.cv, t.p, t.style); });
+  }
+
+  /* ── dragging, selecting and panning ─────────────────────────────────────── */
   function canvasScenePt(e) {
     var r = ui.canvas.getBoundingClientRect(), fit = lastFit;
     if (!fit) return null;
@@ -656,14 +716,13 @@
     return { x: (x - fit.ox) * fit.base / fit.s, y: (y - fit.oy) * fit.base / fit.s, sx: x, sy: y, fit: fit };
   }
   function hitPick(pt) {
-    /* The footprint under the cursor wins; only if no footprint is hit do we accept a sprite's image box (tall towers). */
     var cell = pxToCell(pt.x, pt.y), cu = Math.floor(cell.u), cvv = Math.floor(cell.v), fit = pt.fit;
     var bestFoot = null, bfd = -Infinity, bestBox = null, bbd = -Infinity;
     var all = rectsOf();
     save.picks.forEach(function (pk) { var p = pieceById(pk.piece); if (p && isTopper(p) && pk.cx != null) all.push({ cx: pk.cx, cy: pk.cy, n: 1, pk: pk, p: p, topper: true }); });
     all.forEach(function (r) {
-      var depth = r.cx + r.cy + r.n + (r.topper ? 0.5 : 0), p = pieceById(r.pk.piece);
-      if (!r.topper && cu >= r.cx && cu < r.cx + r.n && cvv >= r.cy && cvv < r.cy + r.n) { if (depth > bfd) { bfd = depth; bestFoot = r.pk; } return; }
+      var vw = toView(r.cx, r.cy, r.n), depth = vw.u + vw.v + r.n + (r.topper ? 0.5 : 0), p = pieceById(r.pk.piece);
+      if (!r.topper && cu >= vw.u && cu < vw.u + r.n && cvv >= vw.v && cvv < vw.v + r.n) { if (depth > bfd) { bfd = depth; bestFoot = r.pk; } return; }
       if (!p) return;
       var it = itemFor(p, r.pk, r.cx, r.cy, ""), x = fit.ox + it.x * fit.s / fit.base, y = fit.oy + it.y * fit.s / fit.base, w, h, ax, ay, sc;
       if (it.kit) {
@@ -676,55 +735,117 @@
     });
     return bestFoot || bestBox;
   }
-  /* v4.9.8: every piece is movable whenever the scene is on screen (gallery, shop, placing a new piece) */
   function dragStep() { return step === "place" || step === "done" || step === "gallery" || step === "shop"; }
   function draggable(pk) { return !!pk && !!cur && dragStep(); }
   function onPointerDown(e) {
-    if (!cur || !lastFit || !dragStep()) return;
+    if (!cur || !lastFit || !dragStep() || !save.theme) return;
     var pt = canvasScenePt(e); if (!pt) return;
-    var pk = hitPick(pt);
-    if (!draggable(pk)) return;
-    var cell = pxToCell(pt.x, pt.y);
-    cur.drag = { pk: pk, id: e.pointerId, du: cell.u - pk.cx, dv: cell.v - pk.cy, cx: pk.cx, cy: pk.cy, ok: true };
+    var pk = hitPick(pt), cell = pxToCell(pt.x, pt.y);
+    if (pk) {
+      var vw = toView(pk.cx, pk.cy, cellsOf(pieceById(pk.piece)));
+      cur.drag = { pk: pk, id: e.pointerId, du: cell.u - vw.u, dv: cell.v - vw.v, cx: pk.cx, cy: pk.cy, ok: true, moved: false, sx: e.clientX, sy: e.clientY };
+    } else {
+      cur.pan = { id: e.pointerId, sx: e.clientX, sy: e.clientY, px: view().px || 0, py: view().py || 0, moved: false };
+    }
     try { ui.canvas.setPointerCapture(e.pointerId); } catch (err) {}
     e.preventDefault();
     redraw();
   }
   function onPointerMove(e) {
-    if (!cur || !cur.drag || cur.drag.id !== e.pointerId) return;
+    if (!cur) return;
+    if (cur.pan && cur.pan.id === e.pointerId) {
+      var r = ui.canvas.getBoundingClientRect(), k = ui.canvas._w / (r.width || 1), pn = cur.pan;
+      var dx = (e.clientX - pn.sx) * k, dy = (e.clientY - pn.sy) * k;
+      if (Math.abs(e.clientX - pn.sx) + Math.abs(e.clientY - pn.sy) > 4) pn.moved = true;
+      if (!pn.moved) return;
+      view().px = pn.px + dx; view().py = pn.py + dy;
+      e.preventDefault(); redraw(); return;
+    }
+    if (!cur.drag || cur.drag.id !== e.pointerId) return;
     var pt = canvasScenePt(e); if (!pt) return;
     var cell = pxToCell(pt.x, pt.y), d = cur.drag, p = pieceById(d.pk.piece), n = cellsOf(p);
-    var cx = Math.round(cell.u - d.du), cy = Math.round(cell.v - d.dv);
-    if (cx === d.cx && cy === d.cy) return;
-    d.cx = cx; d.cy = cy; d.ok = spotOk(cx, cy, n, d.pk, p);
+    if (Math.abs(e.clientX - d.sx) + Math.abs(e.clientY - d.sy) > 4) d.moved = true;
+    var w = fromView(Math.round(cell.u - d.du), Math.round(cell.v - d.dv), n);
+    if (w.cx === d.cx && w.cy === d.cy) return;
+    d.cx = w.cx; d.cy = w.cy; d.ok = spotOk(w.cx, w.cy, n, d.pk, p); d.moved = true;
     e.preventDefault();
     redraw();
   }
   function onPointerUp(e) {
-    if (!cur || !cur.drag || cur.drag.id !== e.pointerId) return;
-    var d = cur.drag; cur.drag = null;
+    if (!cur) return;
     try { ui.canvas.releasePointerCapture(e.pointerId); } catch (err) {}
+    if (cur.pan && cur.pan.id === e.pointerId) {
+      var pn = cur.pan; cur.pan = null;
+      if (pn.moved) persist(); else if (cur.sel) { cur.sel = null; fillPieceBar(); }
+      redraw(); return;
+    }
+    if (!cur.drag || cur.drag.id !== e.pointerId) return;
+    var d = cur.drag; cur.drag = null;
+    if (!d.moved) { cur.sel = cur.sel === d.pk ? null : d.pk; fillPieceBar(); redraw(); return; }
     if (d.ok && (d.cx !== d.pk.cx || d.cy !== d.pk.cy)) { d.pk.cx = d.cx; d.pk.cy = d.cy; persist(); ui.note.textContent = joinedNote(d.pk); if (step === "gallery") ui.badge.textContent = galleryBadge(); }
-    else if (!d.ok) ui.note.textContent = isTopper(pieceById(d.pk.piece)) ? "Flags and banners go on top of a tower that has none — it went back."
-      : spotFree(d.cx, d.cy, cellsOf(pieceById(d.pk.piece)), d.pk)
-      ? "Pieces must touch your " + themeName(save.theme).toLowerCase() + " — it went back. Drop it right against another piece."
-      : "That spot is taken — the piece went back.";
+    else if (!d.ok) ui.note.textContent = isTopper(pieceById(d.pk.piece)) ? "Flags and banners go on top of a tower that has none — it went back." : "That spot is taken — the piece went back.";
     redraw();
+  }
+  function onWheel(e) {
+    if (!cur || !dragStep() || !save.theme) return;
+    e.preventDefault();
+    zoomBy(e.deltaY < 0 ? 1.12 : 1 / 1.12);
   }
   function joinedNote(pk) {
     var p = pieceById(pk.piece), rs = rectsOf(pk), i, n = cellsOf(p), host;
     if (isTopper(p)) { host = pickAt(pk.cx, pk.cy, pk, function (q) { return isHost(q); }); return (p.name || "Flag") + (host ? " flies from the " + (pieceById(host.piece) || {}).name + "." : " is waiting for a tower."); }
     for (i = 0; i < rs.length; i++) if (touches(pk.cx, pk.cy, n, rs[i])) return (p.name || "Piece") + " joined to the " + (pieceById(rs[i].pk.piece) || {}).name + ".";
-    return (p.name || "Piece") + " placed on its own. Drag it against another piece to join them.";
+    return (p.name || "Piece") + " placed on its own.";
   }
 
-  /* 16:9 canvas sized to the card and the height left over by the other rows; devicePixelRatio aware. */
+  /* ── view controls ───────────────────────────────────────────────────────── */
+  function rotateView(dir) { view().r = (rot() + (dir < 0 ? 3 : 1)) & 3; persist(); redraw(); }
+  function zoomBy(k) { view().z = Math.max(ZMIN, Math.min(ZMAX, (view().z || 1) * k)); persist(); redraw(); }
+  function resetView() { save.view = freshView(); persist(); redraw(); }
+
+  /* ── selection: recolour, copy, delete ───────────────────────────────────── */
+  function selectPick(pk) { if (!cur) return; cur.sel = pk || null; fillPieceBar(); redraw(); }
+  function deleteSelected() {
+    if (!cur || !cur.sel) return;
+    var pk = cur.sel, p = pieceById(pk.piece), i = save.picks.indexOf(pk);
+    if (i !== -1) save.picks.splice(i, 1);
+    cur.sel = null; if (cur.placedKey === pk) cur.placedKey = null;
+    persist(); fillPieceBar(); redraw();
+    ui.note.textContent = (p ? p.name : "Piece") + " removed. It stays in your palette — add it back any time.";
+    if (step === "gallery") { ui.badge.textContent = galleryBadge(); fillPalette(); }
+  }
+  function duplicateSelected() {
+    if (!cur || !cur.sel) return;
+    var pk = cur.sel, p = pieceById(pk.piece);
+    if (!p) return;
+    addPiece(p, pk.style, "free", { cx: pk.cx, cy: pk.cy });
+  }
+  function recolourSelected(styleId) {
+    if (!cur || !cur.sel) return;
+    cur.sel.style = styleId; persist(); fillPieceBar(); redraw();
+  }
+  /* Place a copy of an unlocked piece (palette, duplicate, shop re-use). Returns the pick or null. */
+  function addPiece(p, style, src, near) {
+    var pos = autoPlace(cellsOf(p), null, p, near);
+    if (!pos) { ui.note.textContent = "Flags and banners need a tower with no flag yet — build a tower first."; return null; }
+    var stageBefore = isKit() ? coreStage() : 0;
+    var pk = { night: (cur && cur.night) || 1, piece: p.id, style: style != null ? style : (styleable(p) ? dominantStyle() : ""), src: src || "free", deco: p.role === "deco", ord: save.picks.length, cx: pos.cx, cy: pos.cy };
+    save.picks.push(pk); unlock(p.id);
+    var grew = isKit() && !pk.deco && coreStage() > stageBefore && buildingPicks().length > 1;
+    var walls = raiseCastleWalls();
+    persist();
+    if (cur) { cur.sel = pk; fillPieceBar(); }
+    redraw();
+    ui.note.textContent = walls ? "The curtain walls went up around your castle — drag any wall to reshape them!"
+      : grew ? "Your keep grew a storey — " + grownCount() + " pieces strong!"
+      : (p.name || "Piece") + " placed — drag it anywhere, or tap it to recolour, copy or remove it.";
+    if (step === "gallery") ui.badge.textContent = galleryBadge();
+    return pk;
+  }
+
+  /* ── canvas sizing: the scene fills whatever space the layout leaves it ───── */
   function layoutCanvas() {
-    var cv = ui.canvas, wrap = ui.sceneWrap, kids = ui.card.children, used = 0, i, maxH, w, h, dpr;
-    for (i = 0; i < kids.length; i++) if (kids[i] !== wrap && !kids[i].classList.contains("hidden")) used += kids[i].offsetHeight + 8;
-    maxH = Math.max(150, Math.floor(window.innerHeight * 0.94 - 64 - used));
-    w = wrap.clientWidth || 600; h = Math.round(w * 9 / 16);
-    if (h > maxH) { h = maxH; w = Math.round(h * 16 / 9); }
+    var cv = ui.canvas, wrap = ui.sceneWrap, r = wrap.getBoundingClientRect(), w = Math.max(160, Math.floor(r.width)), h = Math.max(120, Math.floor(r.height)), dpr;
     dpr = Math.min(2, window.devicePixelRatio || 1);
     cv.style.width = w + "px"; cv.style.height = h + "px";
     cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr);
@@ -734,7 +855,7 @@
   /* ── DOM (built once, appended to body) ──────────────────────────────────── */
   function el(tag, cls, text) { var n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; }
   function show(n, on) { n.classList.toggle("hidden", !on); }
-  function btn(cls, label) { var b = el("button", cls, label); b.type = "button"; return b; }
+  function btn(cls, label, title) { var b = el("button", cls, label); b.type = "button"; if (title) b.title = title; return b; }
   function buildDom() {
     if (ui) return;
     ui = {};
@@ -750,7 +871,19 @@
     ui.styles = el("div", "build-styles hidden");
     ui.tabs = el("div", "build-tabs hidden");
     ui.shop = el("div", "build-options build-shop hidden");
-    ui.sceneWrap = el("div", "build-scene hidden"); ui.canvas = el("canvas"); ui.sceneWrap.appendChild(ui.canvas);
+    /* main area: the scene (with view tools and the piece bar floating on it) + the palette */
+    ui.main = el("div", "build-main hidden");
+    ui.sceneWrap = el("div", "build-scene"); ui.canvas = el("canvas"); ui.sceneWrap.appendChild(ui.canvas);
+    ui.tools = el("div", "build-tools");
+    [["⟲", "Rotate left", function () { rotateView(-1); }], ["⟳", "Rotate right", function () { rotateView(1); }],
+     ["−", "Zoom out", function () { zoomBy(1 / 1.25); }], ["+", "Zoom in", function () { zoomBy(1.25); }], ["⤢", "Fit the whole build", resetView]]
+      .forEach(function (t) { var b = btn("build-tool", t[0], t[1]); b.setAttribute("aria-label", t[1]); b.addEventListener("click", function (e) { e.preventDefault(); t[2](); }); ui.tools.appendChild(b); });
+    ui.sceneWrap.appendChild(ui.tools);
+    ui.pbar = el("div", "build-pbar hidden"); ui.sceneWrap.appendChild(ui.pbar);
+    ui.side = el("div", "build-side hidden");
+    ui.ptabs = el("div", "build-ptabs"); ui.plist = el("div", "build-plist");
+    ui.side.appendChild(ui.ptabs); ui.side.appendChild(ui.plist);
+    ui.main.appendChild(ui.sceneWrap); ui.main.appendChild(ui.side);
     ui.note = el("p", "build-note hidden");
     ui.codeWrap = el("div", "build-code hidden");
     codeLab = el("label", "lab", "Build code"); ui.codeOut = el("input"); ui.codeOut.readOnly = true; ui.codeOut.id = "build-code-out"; codeLab.htmlFor = ui.codeOut.id;
@@ -761,7 +894,7 @@
     ui.codeMsg = el("p", "build-msg");
     [codeLab, ui.codeOut, ui.copyBtn, loadLab, ui.codeIn, ui.loadBtn, ui.codeMsg].forEach(function (n) { ui.codeWrap.appendChild(n); });
     ui.row = el("div", "row build-row");
-    [head, ui.sub, ui.themes, ui.options, ui.styles, ui.tabs, ui.shop, ui.sceneWrap, ui.note, ui.codeWrap, ui.row].forEach(function (n) { ui.card.appendChild(n); });
+    [head, ui.sub, ui.themes, ui.options, ui.styles, ui.tabs, ui.shop, ui.main, ui.note, ui.codeWrap, ui.row].forEach(function (n) { ui.card.appendChild(n); });
     ui.overlay.appendChild(ui.card);
     document.body.appendChild(ui.overlay);
 
@@ -770,10 +903,11 @@
     ui.canvas.addEventListener("pointermove", onPointerMove);
     ui.canvas.addEventListener("pointerup", onPointerUp);
     ui.canvas.addEventListener("pointercancel", onPointerUp);
+    ui.canvas.addEventListener("wheel", onWheel, { passive: false });
     ui.copyBtn.addEventListener("click", copyCode);
     ui.loadBtn.addEventListener("click", doLoad);
     ui.codeIn.addEventListener("input", function () { if (cur) cur.confirmLoad = false; ui.loadBtn.textContent = "Load"; ui.codeMsg.textContent = ""; });
-    window.addEventListener("resize", function () { if (mode && !ui.sceneWrap.classList.contains("hidden")) { layoutCanvas(); redraw(); } });
+    window.addEventListener("resize", function () { if (mode && !ui.main.classList.contains("hidden")) { layoutCanvas(); redraw(); } });
   }
   function setButtons(list) {
     ui.row.innerHTML = ""; ui.primary = null;
@@ -803,11 +937,17 @@
       ui.themes.appendChild(b);
     });
   }
-  function optionCard(p, style, name, meta) {
-    var b = btn("build-opt"), pic = el("div", "pic"), img = new Image();
+  function picFor(p, style) {
+    var pic = el("div", "pic");
+    if (isKit() && (p.parts || p.auto || p.grow)) { pic.appendChild(stackThumb(p, style)); return pic; }
+    var img = new Image(), name = p.name || p.id;
     img.alt = ""; img.onerror = function () { pic.innerHTML = ""; pic.appendChild(el("span", "ph", name)); };
     img.src = imgFor(p, style); pic.appendChild(img);
-    b.appendChild(pic); b.appendChild(el("span", "name", name)); b.appendChild(el("span", "meta", meta || ""));
+    return pic;
+  }
+  function optionCard(p, style, name, meta) {
+    var b = btn("build-opt");
+    b.appendChild(picFor(p, style)); b.appendChild(el("span", "name", name)); if (meta) b.appendChild(el("span", "meta", meta));
     return b;
   }
   function fillOptions() {
@@ -831,16 +971,13 @@
       if (!first && st.id === dom) tag = "Same as most of your " + themeName(save.theme).toLowerCase();
       else if (!first && st.id === partner) tag = "Matches your " + styleName(dom);
       var swatch = cur.piece;
-      if (isKit()) {
-        var firstImg = imgFor(cur.piece, st.id), plainImg = imgFor(cur.piece, defaultStyle());
-        if (firstImg === plainImg && kitData().sprites["towerSquareTopRoofHigh_NE"]) swatch = { parts: ["towerSquareTopRoofHigh_NE"], name: cur.piece.name };
-      }
+      if (isKit() && !styleable(cur.piece) && kitData().sprites["towerSquareTopRoofHigh_NE"]) swatch = { parts: ["towerSquareTopRoofHigh_NE"], name: cur.piece.name };
       var b = optionCard(swatch, st.id, st.name, meta + (tag ? " · " + tag : ""));
       if (tag) b.appendChild(el("span", "match", tag));
       b.addEventListener("click", function () {
         if (step !== "style" || !cur || !ui.primary) return;
         cur.stylePick = st.id; selectIn(ui.styles, b);
-        ui.primary.disabled = false; ui.primary.textContent = "Build it in " + st.name;
+        ui.primary.disabled = false; ui.primary.textContent = (cur.shop ? "Buy and build it in " : "Build it in ") + st.name;
         redraw();
       });
       ui.styles.appendChild(b);
@@ -854,29 +991,83 @@
     return parts.join(" · ");
   }
   function galleryBadge() {
-    var n = Math.min(save.picks.length, TOTAL), rt = save.theme && loadState === "ok" ? rating() : null;
-    return (isKit() && rt ? rt.rank + " · " + rt.score + " pts · " : n + " / " + TOTAL + " · ") + coinLabel();
+    var rt = save.theme && loadState === "ok" ? rating() : null;
+    return (isKit() && rt ? rt.rank + " · " + rt.score + " pts · " : rewardsTaken() + " / " + TOTAL + " · ") + coinLabel();
+  }
+
+  /* ── the editor (gallery): palette, piece bar ────────────────────────────── */
+  function paletteItems(tab) {
+    return piecesOf(save.theme).filter(function (p) { return catOf(p) === tab; })
+      .sort(function (a, b) { return (owned(b.id) - owned(a.id)) || ((a.tier || 1) - (b.tier || 1)) || priceOf(a) - priceOf(b); });
+  }
+  function fillPalette() {
+    if (!save.theme) { ui.ptabs.innerHTML = ""; ui.plist.innerHTML = ""; return; }
+    var tabs = themeTabs(), tab = cur.ptab, dom = dominantStyle();
+    if (!tabs.some(function (t) { return t[0] === tab; })) tab = cur.ptab = tabs[0][0];
+    ui.ptabs.innerHTML = "";
+    tabs.forEach(function (t) {
+      var n = paletteItems(t[0]).filter(function (p) { return owned(p.id); }).length;
+      var b = btn("build-tab" + (t[0] === tab ? " selected" : ""), t[1] + (n ? " · " + n : ""));
+      b.addEventListener("click", function () { cur.ptab = t[0]; fillPalette(); });
+      ui.ptabs.appendChild(b);
+    });
+    ui.plist.innerHTML = "";
+    var items = paletteItems(tab);
+    if (!items.length) ui.plist.appendChild(el("p", "build-pempty", "Nothing here yet."));
+    items.forEach(function (p) {
+      var have = owned(p.id), b = btn("build-pitem" + (have ? "" : " locked"));
+      b.appendChild(picFor(p, dom)); b.appendChild(el("span", "name", p.name || p.id));
+      b.appendChild(el("span", "tag", have ? "Tap to place" : priceOf(p) + " coins"));
+      b.title = p.desc || "";
+      b.addEventListener("click", function () {
+        if (step !== "gallery") return;
+        if (have) { addPiece(p, null, "free"); return; }
+        ui.note.textContent = (p.name || "That") + " is in the shop for " + priceOf(p) + " coins. Buy it once, place it as often as you like.";
+        openShopFromGallery(p.role === "deco" ? "deco" : "build");
+      });
+      ui.plist.appendChild(b);
+    });
+  }
+  function fillPieceBar() {
+    var pk = cur && cur.sel, p = pk && pieceById(pk.piece);
+    ui.pbar.innerHTML = "";
+    if (!pk || !p || !dragStep()) { show(ui.pbar, false); return; }
+    ui.pbar.appendChild(el("span", "name", p.name || p.id));
+    if (styleable(p)) stylesOf().forEach(function (st) {
+      var c = btn("build-chip" + (pk.style === st.id ? " selected" : ""), "", st.name);
+      c.setAttribute("aria-label", st.name); c.setAttribute("data-style", st.id);
+      var sw = el("span", "sw"); sw.style.background = STYLE_SWATCH[st.id] || "#8ee0ff"; c.appendChild(sw);
+      c.addEventListener("click", function (e) { e.preventDefault(); recolourSelected(st.id); });
+      ui.pbar.appendChild(c);
+    });
+    var copy = btn("btn small", "Copy", "Place another one next to it"), del = btn("btn small danger", "Remove", "Take it off the field (it stays in your palette)"), ok = btn("btn small", "Done");
+    copy.addEventListener("click", function (e) { e.preventDefault(); duplicateSelected(); });
+    del.addEventListener("click", function (e) { e.preventDefault(); deleteSelected(); });
+    ok.addEventListener("click", function (e) { e.preventDefault(); selectPick(null); });
+    ui.pbar.appendChild(copy); ui.pbar.appendChild(del); ui.pbar.appendChild(ok);
+    show(ui.pbar, true);
+  }
+  var STYLE_SWATCH = { blue: "#3d6fd6", red: "#d6403d", green: "#3fa050", gold: "#e0b23a", tile: "#b5452f", slate: "#5c6a7a", thatch: "#c9a453" };
+  function openShopFromGallery(tab) {
+    cur.shop = true; cur.night = cur.night || 1; cur.tab = tab || "build"; cur.fromGallery = true; cur.sel = null; mode = "shop";
+    showStep(save.theme && themeDef(save.theme) ? "shop" : "theme");
   }
   function fillGallery() {
-    var n = Math.min(save.picks.length, TOTAL), next = nextRewardNight(), lvl = wallLevel();
-    ui.kicker.textContent = "Reward gallery"; ui.badge.textContent = n + " / " + TOTAL;
-    ui.title.textContent = save.theme ? "My " + themeName(save.theme) : "My build";
+    var next = nextRewardNight(), n = rewardsTaken();
+    ui.kicker.textContent = "My build · full-screen editor"; ui.title.textContent = save.theme ? "My " + themeName(save.theme) : "My build";
     ui.sub.textContent = loadState !== "ok" ? "Build data could not be loaded on this page." :
-      !save.theme ? "Win Level 5 to choose a Town or a Castle. You add a new piece every 5 levels." :
-      n + " of " + TOTAL + " pieces" + (styleSummary() ? " (" + styleSummary() + ")" : "") + " · " +
-      (wallsUp() ? (save.theme === "castle" ? "walls up" : "fence up") : (save.theme === "castle" ? "walls" : "fence") + " at piece " + lvl) + " · " +
-      (next ? "next reward after level " + next : "your build is complete!");
+      !save.theme ? "Tap Shop to choose a Town or a Castle and start building — or win Level 5 for your first free piece." :
+      save.picks.length + " pieces on the field · " + Object.keys(save.owned).length + " kinds unlocked · " + n + " of " + TOTAL + " rewards" +
+      (styleSummary() ? " (" + styleSummary() + ")" : "") + " · " + (next ? "next reward after level " + next : "every reward earned!");
     ui.codeOut.value = exportCode(); ui.codeIn.value = ""; ui.codeMsg.textContent = ""; ui.loadBtn.textContent = "Load";
     ui.badge.textContent = galleryBadge();
     var buttons = [{ label: "Close", primary: true, onTap: function () { var cb = cur && cur.onClose; closeOverlay(); if (cb) cb(); } }];
-    if (loadState === "ok") {
-      buttons.unshift({ label: "Shop (" + coinLabel() + ")", onTap: function () {
-        cur.shop = true; cur.night = cur.night || 1; cur.tab = "build"; mode = "shop";
-        showStep(save.theme && themeDef(save.theme) ? "shop" : "theme");
-      } });
-    }
-    if (save.theme && save.picks.length) { show(ui.note, true); ui.note.textContent = ui.note.textContent || "Drag any piece to move it — drop it against another piece. Walls turn corners by themselves."; }
-    else show(ui.note, false);
+    if (loadState === "ok") buttons.unshift({ label: "Shop (" + coinLabel() + ")", onTap: function () { openShopFromGallery("build"); } });
+    show(ui.side, !!save.theme);
+    show(ui.note, true);
+    if (save.theme) ui.note.textContent = ui.note.textContent || "Tap a palette piece to place it. Drag pieces anywhere. Tap a piece to recolour, copy or remove it. Drag the ground to pan; scroll or use + − to zoom; ⟲ ⟳ rotate the view.";
+    else ui.note.textContent = "";
+    fillPalette(); fillPieceBar();
     setButtons(buttons);
     layoutCanvas(); redraw();
   }
@@ -885,12 +1076,16 @@
   function showStep(s) {
     step = s;
     var name = cur && cur.piece ? (cur.piece.name || cur.piece.id) : "", lot, tn;
+    ui.card.className = "build-card step-" + s;
     show(ui.themes, s === "theme"); show(ui.options, s === "pick"); show(ui.styles, s === "style");
     show(ui.tabs, s === "shop"); show(ui.shop, s === "shop");
-    show(ui.sceneWrap, s === "style" || s === "place" || s === "done" || s === "gallery" || s === "shop");
-    show(ui.note, s === "place" || s === "done" || s === "shop"); show(ui.codeWrap, s === "gallery");
-    if (cur) { cur.drag = null; if (s !== "place" && s !== "done") cur.placedKey = null; }
+    show(ui.main, s === "pick" || s === "style" || s === "place" || s === "done" || s === "gallery" || s === "shop");
+    show(ui.side, s === "gallery" && !!save.theme);
+    show(ui.tools, s === "gallery" || s === "shop" || s === "place" || s === "done");
+    show(ui.note, s === "place" || s === "done" || s === "shop" || s === "gallery"); show(ui.codeWrap, s === "gallery");
+    if (cur) { cur.drag = null; cur.pan = null; if (s !== "place" && s !== "done") cur.placedKey = null; if (!dragStep()) cur.sel = null; }
     ui.note.textContent = "";
+    fillPieceBar();
     if (s === "gallery") { fillGallery(); return; }
     if (s === "shop") { fillShop(); return; }
     tn = themeName(save.theme || (cur && cur.themePick) || "village");
@@ -902,42 +1097,41 @@
       ui.sub.textContent = cur.shop ? "Your coins buy pieces for one build, and you earn a free reward piece every 5 levels, all the way to level 100. This choice is permanent."
         : "You add a new piece every 5 levels, all the way to level 100. This choice is permanent.";
       var themeBtns = [{ label: "Tap one to choose", primary: true, disabled: true, onTap: function () {
-        if (!cur.themePick) return; save.theme = cur.themePick; save.kit = 2; persist();
+        if (!cur.themePick) return; save.theme = cur.themePick; save.kit = 2; save.view = freshView(); persist();
         if (cur.shop) { cur.tab = "build"; showStep("shop"); } else beginPick();
       } }];
-      if (cur.shop) themeBtns.push({ label: "Not now", onTap: function () { var cb = cur && cur.onClose; closeOverlay(); if (cb) cb(); } });
+      if (cur.shop) themeBtns.push({ label: "Not now", onTap: function () { if (cur.fromGallery) { mode = "gallery"; cur.shop = false; showStep("gallery"); return; } var cb = cur && cur.onClose; closeOverlay(); if (cb) cb(); } });
       setButtons(themeBtns);
       fillThemes();
     } else if (s === "pick") {
       lot = lotFor(cur.k);
       ui.title.textContent = cur.k === 1 ? "Choose your first building" : "Add a piece to your " + tn;
-      ui.sub.textContent = cur.k === 1 ? "Every " + tn.toLowerCase() + " starts with a home. You pick its style next, and every new piece can match it or mix it up."
-        : (KIND_HINT[lot.kind] || "") + " Tap one of the three, then pick its style.";
+      ui.sub.textContent = cur.k === 1 ? "Every " + tn.toLowerCase() + " starts with a home. You pick its style next; once earned, a piece can be placed as often as you like."
+        : (isKit() ? "" : (KIND_HINT[lot.kind] || "") + " ") + "Tap one of the three, then pick its style. Earned pieces stay in your palette for good.";
       setButtons([{ label: "Tap a piece first", primary: true, disabled: true, onTap: beginStyle }]);
-      fillOptions();
+      fillOptions(); if (save.theme) { layoutCanvas(); redraw(); }
     } else if (s === "style") {
       ui.title.textContent = "Which style for the " + name + "?";
       ui.sub.textContent = !buildingPicks().length ? "Pieces in the same style match; the game will also suggest a style that goes with yours."
-        : "Keep your look, or mix in a second style that matches." + (cur.shop ? " Costs " + priceOf(cur.piece) + " coins." : "");
+        : "Keep your look, or mix in a second style that matches." + (cur.shop ? " Costs " + priceOf(cur.piece) + " coins once — then place it as often as you like." : "");
       setButtons([{ label: "Back", onTap: function () { showStep(cur.shop ? "shop" : "pick"); } },
         { label: cur.shop ? "Buy and build it" : "Build it", primary: true, disabled: !cur.stylePick, onTap: place }]);
       fillStyles(); layoutCanvas(); redraw();
     } else if (s === "place") {
       ui.title.textContent = "Where does the " + name + " go?";
-      ui.sub.textContent = "It has joined your " + tn.toLowerCase() + ". Drag it (finger or mouse) to any spot that touches another piece — you can move the other pieces too — then tap Keep it here.";
+      ui.sub.textContent = "Drag it (finger or mouse) anywhere — joined to the rest or on its own. You can move, recolour or remove any other piece too. Tap Keep it here when you like it.";
       ui.note.textContent = cur.placedKey ? joinedNote(cur.placedKey) : "";
       setButtons([{ label: "Keep it here", primary: true, onTap: function () { showStep("done"); } }]);
       layoutCanvas(); redraw();
     } else if (s === "done") {
       var nb = buildingPicks().length;
-      ui.title.textContent = name + " built in " + styleName(cur.stylePick) + "!" + (isKit() ? " " + rating().rank + " · " + rating().score + " pts" : "");
-      ui.sub.textContent = cur.shop ? "Bought for " + priceOf(cur.piece) + " coins. " + coinLabel() + " left."
-        : "Piece " + cur.k + " of " + TOTAL + " is in place." + (cur.k < TOTAL ? " Next reward after level " + (cur.night + EVERY) + "." : " Your build is complete!");
+      ui.title.textContent = name + (cur.stylePick && styleable(cur.piece) ? " built in " + styleName(cur.stylePick) : " built") + "!" + (isKit() ? " " + rating().rank + " · " + rating().score + " pts" : "");
+      ui.sub.textContent = cur.shop ? "Bought for " + priceOf(cur.piece) + " coins. " + coinLabel() + " left. It is unlocked — place more copies from your palette any time."
+        : "Reward " + cur.k + " of " + TOTAL + " is in place and unlocked in your palette." + (cur.k < TOTAL ? " Next reward after level " + (cur.night + EVERY) + "." : " Every reward earned!");
       ui.note.textContent = cur.wallsRaised ? "The curtain walls went up around your castle — drag any wall to reshape them!"
         : cur.keepGrew ? "Your keep grew a storey — " + grownCount() + " pieces strong!"
-        : nb === wallLevel() && cur.lot === nb && !cur.shop ? (save.theme === "castle" ? "The castle walls went up around your estate!" : "A fence now rings your town!")
-        : nb === wallLevel() - 1 ? "One more building and the " + (save.theme === "castle" ? "walls go up." : "fence goes up.")
-        : "Added to your " + tn + "!";
+        : nb === wallLevel() - 1 && isKit() ? "One more building and the walls go up."
+        : "Added to your " + tn + "! Open My " + tn + " from the title screen to keep building.";
       setButtons(cur.shop ? [{ label: "Back to shop", primary: true, onTap: function () { cur.piece = null; cur.stylePick = null; showStep("shop"); } }]
         : [{ label: "Continue", primary: true, onTap: finish }]);
       layoutCanvas(); redraw();
@@ -945,29 +1139,30 @@
     if (ui.primary && !ui.primary.disabled) { try { ui.primary.focus(); } catch (e) {} }
   }
   function beginPick() {
-    cur.lot = nextLot(!hasCore());
-    cur.offer = offerFor(cur.night, cur.lot);
+    cur.offer = offerFor(cur.night, cur.k);
     if (!cur.offer.length) { console.warn("[SolBuild] no pieces for theme " + save.theme); finish(); return; }
     showStep("pick");
   }
   function beginStyle() {
     if (!cur || !cur.piece) return;
-    if (!stylesOf().length) { cur.stylePick = ""; place(); return; }
+    if (!stylesOf().length || !styleable(cur.piece)) { cur.stylePick = styleable(cur.piece) ? cur.stylePick : ""; place(); return; }
     if (!cur.stylePick) cur.stylePick = dominantStyle();
     showStep("style");
   }
   function place() {
     if (!cur || !cur.piece) return;
     if (cur.shop) {
-      var cost = priceOf(cur.piece);
-      if (save.coins < cost) { ui.note.textContent = "Not enough coins."; return; }
-      save.coins -= cost;
-    } else if (pickFor(cur.night)) return;
-    cur.lot = nextLot(cur.piece.role === "core");
-    var pos = autoPlace(cellsOf(cur.piece), null, cur.piece) || autoPlace(1, null, null);
-    var pk = { night: cur.night, piece: cur.piece.id, style: cur.stylePick || defaultStyle(), lot: cur.lot, src: cur.shop ? "shop" : "reward", deco: false, ord: save.picks.length, cx: pos.cx, cy: pos.cy };
+      if (!owned(cur.piece.id)) {
+        var cost = priceOf(cur.piece);
+        if (save.coins < cost) { ui.note.textContent = "Not enough coins."; return; }
+        save.coins -= cost;
+      }
+    } else if (save.rewards[cur.night]) return;
     var stageBefore = isKit() ? coreStage() : 0;
-    save.picks.push(pk); cur.placedKey = pk;
+    var pos = autoPlace(cellsOf(cur.piece), null, cur.piece) || autoPlace(1, null, null);
+    var pk = { night: cur.night, piece: cur.piece.id, style: cur.stylePick || (styleable(cur.piece) ? defaultStyle() : ""), src: cur.shop ? "shop" : "reward", deco: cur.piece.role === "deco", ord: save.picks.length, cx: pos.cx, cy: pos.cy };
+    save.picks.push(pk); cur.placedKey = pk; unlock(cur.piece.id);
+    if (!cur.shop) save.rewards[cur.night] = cur.piece.id;
     cur.keepGrew = isKit() && coreStage() > stageBefore && buildingPicks().length > 1;
     cur.wallsRaised = raiseCastleWalls();
     persist();
@@ -975,24 +1170,32 @@
   }
   /* Castle: at the wall level a curtain wall (real, movable wall picks with one gate) goes up one cell out from everything built so far. */
   function raiseCastleWalls() {
-    if (!isKit() || buildingPicks().length < wallLevel() || save.picks.some(function (pk) { return pk.src === "auto"; })) return false;
+    if (!isKit() || grownCount() < wallLevel() || save.picks.some(function (pk) { return pk.src === "auto"; })) return false;
     var b = bboxCells(), wall = pieceById("wall"), gate = pieceById("gate"), dom = dominantStyle(), u, v, n = 0;
     if (!b || !wall) return false;
     var u0 = b.u0 - 1, v0 = b.v0 - 1, u1 = b.u1, v1 = b.v1, gateAt = Math.floor((v0 + v1) / 2);
     function add(cx, cy, piece) {
       if (!spotFree(cx, cy, 1, null)) return;
-      save.picks.push({ night: cur ? cur.night : 1, piece: piece.id, style: dom, lot: 0, src: "auto", deco: false, ord: save.picks.length, cx: cx, cy: cy }); n++;
+      save.picks.push({ night: cur ? cur.night : 1, piece: piece.id, style: dom, src: "auto", deco: false, ord: save.picks.length, cx: cx, cy: cy }); n++;
     }
     for (u = u0; u <= u1; u++) { add(u, v0, wall); add(u, v1, wall); }
     for (v = v0 + 1; v < v1; v++) { add(u0, v, wall); add(u1, v, (gate && v === gateAt) ? gate : wall); }
+    if (n) { unlock("wall"); if (gate) unlock("gate"); }
     return n > 0;
   }
   function coinLabel() { return (save.coins || 0) + " coin" + (save.coins === 1 ? "" : "s"); }
-  /* Castle rating: piece scores, plus 12 per courtyard cell fully enclosed by walls and towers (capped), plus flags. */
+  /* Castle rating: piece scores (the first few copies of a piece count in full, more copies a quarter),
+     plus 12 per courtyard cell fully enclosed by walls and towers (capped), plus the keep's growth. */
   function rating() {
-    var total = 0, t = themeDef(save.theme), rs = rectsOf(), b = bboxCells(), blocked = {}, seen = {}, enclosed = 0, q, key, x, y, i;
+    var total = 0, t = themeDef(save.theme), rs = rectsOf(), b = bboxCells(), blocked = {}, seen = {}, enclosed = 0, q, key, x, y, i, counts = {};
     var stage = isKit() ? coreStage() : 0;
-    save.picks.forEach(function (pk) { var p = pieceById(pk.piece); if (p) total += (p.score || Math.round(priceOf(p) / 3)) + (p.grow ? stage * 20 : 0); });
+    save.picks.forEach(function (pk) {
+      var p = pieceById(pk.piece); if (!p) return;
+      counts[p.id] = (counts[p.id] || 0) + 1;
+      var sc = (p.score || Math.round(priceOf(p) / 3)) + (p.grow ? stage * 20 : 0);
+      total += counts[p.id] <= DUP_FULL ? sc : sc * 0.25;
+    });
+    total = Math.round(total);
     if (isKit() && b && rs.length > 3) {
       rs.forEach(function (r) { if (r.p.kind !== "prop") blocked[r.cx + "," + r.cy] = true; });
       var u0 = b.u0 - 1, v0 = b.v0 - 1, u1 = b.u1, v1 = b.v1;
@@ -1013,74 +1216,61 @@
     return { score: total, rank: name, enclosed: enclosed };
   }
 
-  /* ── the shop ────────────────────────────────────────────────────────────── */
+  /* ── the shop: buy a piece once, place it forever ────────────────────────── */
+  /* v5: the shop sells every piece from level 1 — coins are the only gate (tiers only shape the free reward offers). */
+  function shopBand() { return 4; }
   function shopOffers() {
-    var lot = nextLot(), band = Math.max(1, Math.min(4, Math.ceil((cur.night || 1) / 25))), t = themeDef(save.theme), builds, decos;
+    var band = shopBand(), t = themeDef(save.theme), builds, decos;
+    var order = function (a, b) { return ((a.tier || 1) - (b.tier || 1)) || (priceOf(a) - priceOf(b)) || (a.name > b.name ? 1 : -1); };
     if (isKit()) {
-      var r = rng(cur.night * 13 + save.salt), tb = Math.max(band, bandFor(Math.min(lot, TOTAL)));
-      builds = [pieceById("wall"), pieceById("gate")].filter(Boolean).concat(shuffle(piecesOf(save.theme, "module").filter(function (p) { return p.id !== "wall" && p.id !== "gate" && (p.tier || 1) <= tb; }), r).slice(0, 4));
-      decos = shuffle(piecesOf(save.theme, "deco").filter(function (p) { return (p.tier || 1) <= tb; }), r).slice(0, 6);
+      builds = [pieceById("wall"), pieceById("gate")].filter(Boolean)
+        .concat(piecesOf(save.theme, "module").filter(function (p) { return p.id !== "wall" && p.id !== "gate" && (p.tier || 1) <= band; }).sort(order))
+        .concat(piecesOf(save.theme, "core").filter(function (p) { return !owned(p.id); }));
+      decos = piecesOf(save.theme, "deco").filter(function (p) { return (p.tier || 1) <= band; }).sort(order);
     } else {
-      builds = offerFor(cur.night, lot, Math.max(band, bandFor(Math.min(lot, TOTAL))));
-      decos = shuffle(piecesOf(save.theme, "deco").slice(), rng(cur.night * 13 + save.salt)).slice(0, 6);
+      builds = piecesOf(save.theme, "module").filter(function (p) { return (p.tier || 1) <= band; }).sort(order);
+      decos = piecesOf(save.theme, "deco").slice().sort(order);
     }
     return { builds: builds, decos: decos, packs: (t && t.packs) || packsList() };
   }
   function packItems(pk) { return (pk.items || []).map(pieceById).filter(Boolean); }
-  function packPrice(pk, off) {
-    var total = 0, i;
-    if (pk.items) { packItems(pk).forEach(function (p) { total += priceOf(p); }); return Math.max(5, Math.round(total * (1 - (pk.discount || 0)) / 5) * 5); }
-    if (pk.kind === "deco") for (i = 0; i < pk.count; i++) total += priceOf(off.decos[i % off.decos.length]);
-    else { for (i = 0; i < pk.count; i++) total += priceOf(off.builds[i % off.builds.length]); for (i = 0; i < (pk.decos || 0); i++) total += priceOf(off.decos[i % off.decos.length]); }
+  function packPrice(pk) {
+    var total = 0;
+    packItems(pk).forEach(function (p) { if (!owned(p.id)) total += priceOf(p); });
+    if (!total) return 0;
     return Math.max(5, Math.round(total * (1 - (pk.discount || 0)) / 5) * 5);
   }
-  function packContents(pk, off) {
-    var names = [], i;
-    if (pk.items) return packItems(pk).map(function (p) { return p.name; }).join(" + ");
-    if (pk.kind === "deco") for (i = 0; i < pk.count; i++) names.push(off.decos[i % off.decos.length].name);
-    else { for (i = 0; i < pk.count; i++) names.push(off.builds[i % off.builds.length].name); for (i = 0; i < (pk.decos || 0); i++) names.push(off.decos[i % off.decos.length].name); }
-    return names.join(" + ");
-  }
+  function packContents(pk) { return packItems(pk).map(function (p) { return p.name; }).join(" + "); }
   function buyDeco(p) {
+    if (owned(p.id)) { var pk = addPiece(p, null, "free"); return !!pk; }
     var cost = priceOf(p);
     if (save.coins < cost) { ui.note.textContent = "Not enough coins for the " + p.name + "."; return false; }
     var pos = autoPlace(cellsOf(p), null, p);
     if (!pos) { ui.note.textContent = "Every tower already has a flag — build another tower first."; return false; }
     save.coins -= cost;
-    save.picks.push({ night: cur.night, piece: p.id, style: "", lot: nextDecoLot(), src: "shop", deco: true, ord: save.picks.length, cx: pos.cx, cy: pos.cy });
-    persist(); return true;
+    save.picks.push({ night: cur.night, piece: p.id, style: styleable(p) ? dominantStyle() : "", src: "shop", deco: true, ord: save.picks.length, cx: pos.cx, cy: pos.cy });
+    unlock(p.id); persist(); return true;
   }
-  function buyPack(pk, off) {
-    var cost = packPrice(pk, off), i, dom = dominantStyle();
+  function buyPack(pk) {
+    var cost = packPrice(pk), dom = dominantStyle();
+    if (!cost) { ui.note.textContent = "You already own everything in the " + pk.name + " — place them from your palette."; return; }
     if (save.coins < cost) { ui.note.textContent = "Not enough coins for the " + pk.name + "."; return; }
     save.coins -= cost;
-    if (pk.items) {
-      packItems(pk).forEach(function (p) {
-        var pos = autoPlace(cellsOf(p), null, p) || autoPlace(1, null, null), dec = p.role === "deco";
-        save.picks.push({ night: cur.night, piece: p.id, style: dom, lot: dec ? nextDecoLot() : nextLot(), src: "shop", deco: dec, ord: save.picks.length, cx: pos.cx, cy: pos.cy });
-      });
-      raiseCastleWalls(); persist();
-      ui.note.textContent = pk.name + " bought: " + packContents(pk, off) + ". " + coinLabel() + " left.";
-      fillShop(true); return;
-    }
-    if (pk.kind !== "deco") for (i = 0; i < pk.count; i++) {
-      var b = off.builds[i % off.builds.length], bp = autoPlace(cellsOf(b));
-      save.picks.push({ night: cur.night, piece: b.id, style: dom, lot: nextLot(), src: "shop", deco: false, ord: save.picks.length, cx: bp.cx, cy: bp.cy });
-    }
-    for (i = 0; i < (pk.kind === "deco" ? pk.count : (pk.decos || 0)); i++) {
-      var d = off.decos[i % off.decos.length], dp = autoPlace(cellsOf(d));
-      save.picks.push({ night: cur.night, piece: d.id, style: "", lot: nextDecoLot(), src: "shop", deco: true, ord: save.picks.length, cx: dp.cx, cy: dp.cy });
-    }
-    persist();
-    ui.note.textContent = pk.name + " bought: " + packContents(pk, off) + ". " + coinLabel() + " left.";
+    packItems(pk).forEach(function (p) {
+      var pos = autoPlace(cellsOf(p), null, p) || autoPlace(1, null, null), dec = p.role === "deco";
+      unlock(p.id);
+      save.picks.push({ night: cur.night, piece: p.id, style: styleable(p) ? dom : "", src: "shop", deco: dec, ord: save.picks.length, cx: pos.cx, cy: pos.cy });
+    });
+    raiseCastleWalls(); persist();
+    ui.note.textContent = pk.name + " bought and unlocked: " + packContents(pk) + ". " + coinLabel() + " left.";
     fillShop(true);
   }
   function fillShop(keepNote) {
-    var off = shopOffers(), tab = cur.tab || "build", tn = themeName(save.theme);
+    var off = shopOffers(), tab = cur.tab || "build", tn = themeName(save.theme), lastCat = null;
     ui.badge.textContent = coinLabel();
     ui.kicker.textContent = "Level " + cur.night + " · shop";
     ui.title.textContent = "Spend coins on your " + tn;
-    ui.sub.textContent = "Coins come from correct answers (" + economy().answer + " each), a perfect level (+" + economy().perfectNight + ") and bonus pickups. Free reward pieces still come every 5 levels.";
+    ui.sub.textContent = "Buy a piece once and place it as often as you like. Coins come from correct answers (" + economy().answer + " each), a perfect level (+" + economy().perfectNight + ") and bonus pickups. Free reward pieces still come every 5 levels.";
     if (!keepNote) ui.note.textContent = "";
     ui.tabs.innerHTML = "";
     SHOP_TABS.forEach(function (t) {
@@ -1090,36 +1280,42 @@
     });
     ui.shop.innerHTML = "";
     var dom = dominantStyle();
-    function card(p, style, name, meta, price, onBuy) {
-      var b = optionCard(p, style, name, meta), tag = el("span", "price", price + " coins");
-      if (save.coins < price) { tag.classList.add("short"); }
+    function heading(p) { var c = catOf(p), lab = null, tabs = themeTabs(), i; if (c === lastCat) return; lastCat = c; for (i = 0; i < tabs.length; i++) if (tabs[i][0] === c) lab = tabs[i][1]; if (lab) ui.shop.appendChild(el("h3", "build-shop-h", lab)); }
+    function card(p, style, name, meta, price, have, onBuy) {
+      var b = optionCard(p, style, name, meta), tag = el("span", "price" + (have ? " own" : save.coins < price ? " short" : ""), have ? "Owned · tap to place" : price + " coins");
       b.appendChild(tag);
       b.addEventListener("click", function () { if (step === "shop") onBuy(); });
       ui.shop.appendChild(b);
     }
     if (tab === "build") {
-      var lot = lotFor(nextLot());
-      ui.note.textContent = ui.note.textContent || (isKit() ? "Walls turn corners by themselves. Tap a piece to buy it and choose its colour." : (KIND_HINT[lot.kind] || "") + " Tap a building to buy it and choose its style.");
+      ui.note.textContent = ui.note.textContent || (isKit() ? "Walls, hedges and fences turn corners by themselves. Tap a piece to buy it (once) and choose its colour." : "Tap a building to buy it and choose its style.");
       off.builds.forEach(function (p) {
-        card(p, dom, p.name, p.desc, priceOf(p), function () {
+        if (isKit()) heading(p);
+        card(p, dom, p.name, p.desc, priceOf(p), owned(p.id), function () {
+          if (owned(p.id)) { if (addPiece(p, null, "free")) fillShop(true); return; }
           if (save.coins < priceOf(p)) { ui.note.textContent = "Not enough coins for the " + p.name + " (" + priceOf(p) + ")."; return; }
-          cur.piece = p; cur.stylePick = dom; showStep("style");
+          cur.piece = p; cur.stylePick = dom; if (styleable(p)) showStep("style"); else place();
         });
       });
     } else if (tab === "deco") {
-      ui.note.textContent = ui.note.textContent || (isKit() ? "Flags and banners fly from your towers; knights, the king and siege engines stand in the courtyard." : "Decorations go in the yard between your buildings.");
+      ui.note.textContent = ui.note.textContent || (isKit() ? "Flags fly from towers. Trees, flowers, statues, animals and village life go anywhere on the field." : "Decorations go in the yard between your buildings.");
       off.decos.forEach(function (p) {
-        card(p, isKit() ? dom : "", p.name, p.desc, priceOf(p), function () { if (buyDeco(p)) { ui.note.textContent = p.name + " added. " + coinLabel() + " left."; fillShop(true); } });
+        if (isKit()) heading(p);
+        card(p, isKit() ? dom : "", p.name, p.desc, priceOf(p), owned(p.id), function () { if (buyDeco(p)) { if (!owned(p.id)) ui.note.textContent = p.name + " added and unlocked. " + coinLabel() + " left."; fillShop(true); } });
       });
     } else {
-      ui.note.textContent = ui.note.textContent || "Packs bundle pieces at a discount. Buildings in a pack use your main style.";
+      ui.note.textContent = ui.note.textContent || "Packs unlock several pieces at a discount. Pieces you already own are free, so a pack only charges for the new ones.";
       off.packs.forEach(function (pk) {
-        var first = pk.items ? packItems(pk)[0] : (pk.kind === "deco" ? off.decos[0] : off.builds[0]);
+        var first = packItems(pk)[0];
         if (!first) return;
-        card(first, dom, pk.name, pk.desc + (pk.items ? "" : " Today: " + packContents(pk, off) + "."), packPrice(pk, off), function () { buyPack(pk, off); });
+        var price = packPrice(pk);
+        card(first, dom, pk.name, pk.desc + " " + packContents(pk) + ".", price, price === 0, function () { buyPack(pk); });
       });
     }
-    setButtons([{ label: "Done", primary: true, onTap: function () { var cb = cur && cur.onClose; closeOverlay(); if (cb) cb(); } }]);
+    setButtons([{ label: cur.fromGallery ? "Back to my " + tn : "Done", primary: true, onTap: function () {
+      if (cur.fromGallery) { mode = "gallery"; cur.shop = false; cur.fromGallery = false; showStep("gallery"); return; }
+      var cb = cur && cur.onClose; closeOverlay(); if (cb) cb();
+    } }]);
     layoutCanvas(); redraw();
   }
   function finish() { var cb = cur && cur.onDone; closeOverlay(); if (cb) cb(); }
@@ -1129,16 +1325,18 @@
     if (ui) { ui.overlay.classList.add("hidden"); ui.overlay.setAttribute("aria-hidden", "true"); }
   }
 
-  /* Keys: during a reward Escape is swallowed (Continue is the only way out); in the gallery Escape closes. */
+  /* Keys: during a reward Escape is swallowed; in the editor Escape closes, Delete removes the selected piece. */
   function onKey(e) {
     if (!mode) return;
-    var k = e.key || e.code, esc = k === "Escape" || k === "Esc", cb;
+    var k = e.key || e.code, esc = k === "Escape" || k === "Esc", cb, inInput = e.target === ui.codeIn || e.target === ui.codeOut;
     if (mode === "gallery" || mode === "shop") {
-      if (esc) { e.preventDefault(); e.stopPropagation(); cb = cur && cur.onClose; closeOverlay(); if (cb) cb(); }
+      if (esc) { e.preventDefault(); e.stopPropagation(); if (cur && cur.sel) { selectPick(null); return; } if (cur && cur.fromGallery) { mode = "gallery"; cur.shop = false; cur.fromGallery = false; showStep("gallery"); return; } cb = cur && cur.onClose; closeOverlay(); if (cb) cb(); }
       else if (k === "Enter" && e.target === ui.codeIn) { e.preventDefault(); e.stopPropagation(); doLoad(); }
+      else if ((k === "Delete" || k === "Backspace") && !inInput && cur && cur.sel) { e.preventDefault(); e.stopPropagation(); deleteSelected(); }
       return;
     }
     if (esc) e.preventDefault();
+    if ((k === "Delete" || k === "Backspace") && !inInput && cur && cur.sel && dragStep()) { e.preventDefault(); e.stopPropagation(); deleteSelected(); return; }
     if (esc || k === " " || k === "Enter" || k === "Tab") { e.stopPropagation(); if (e.stopImmediatePropagation) e.stopImmediatePropagation(); }
   }
 
@@ -1178,7 +1376,7 @@
   function rewardDue(night) {
     night = parseInt(night, 10);
     if (!save) save = loadSave();
-    return night > 0 && night % EVERY === 0 && night <= EVERY * TOTAL && !pickFor(night);
+    return night > 0 && night % EVERY === 0 && night <= EVERY * TOTAL && !save.rewards[night];
   }
   function showReward(night, onDone) {
     night = parseInt(night, 10);
@@ -1186,8 +1384,8 @@
     whenReady(function () {
       if (mode || loadState !== "ok" || !rewardDue(night)) { if (onDone) onDone(); return; }
       buildDom();
-      cur = { night: night, k: night / EVERY, lot: 1, band: bandFor(night / EVERY), onDone: onDone || null,
-        offer: null, piece: null, stylePick: null, themePick: null, shop: false };
+      cur = { night: night, k: night / EVERY, band: bandFor(night / EVERY), onDone: onDone || null,
+        offer: null, piece: null, stylePick: null, themePick: null, shop: false, sel: null };
       openOverlay("reward");
       if (save.theme && themeDef(save.theme)) beginPick(); else showStep("theme");
     });
@@ -1197,7 +1395,7 @@
     whenReady(function () {
       if (mode === "reward") return;
       buildDom();
-      cur = { onClose: onClose || null, confirmLoad: false };
+      cur = { onClose: onClose || null, confirmLoad: false, night: 1, sel: null, ptab: null };
       openOverlay("gallery");
       showStep("gallery");
     });
@@ -1209,9 +1407,8 @@
       if (mode === "reward") return;
       if (loadState !== "ok") { if (onClose) onClose(); return; }
       buildDom();
-      cur = { onClose: onClose || null, night: night, shop: true, tab: "build", piece: null, stylePick: null, themePick: null };
+      cur = { onClose: onClose || null, night: night, shop: true, tab: "build", piece: null, stylePick: null, themePick: null, sel: null };
       openOverlay("shop");
-      /* v4.9.7: the shop is open from night 1 — a student with no build yet picks Town or Castle first */
       showStep(save.theme && themeDef(save.theme) ? "shop" : "theme");
     });
   }
@@ -1220,17 +1417,17 @@
     n = parseInt(n, 10) || 0;
     save.coins = Math.max(0, (save.coins || 0) + n);
     persist();
-    if (mode && ui) ui.badge.textContent = mode === "reward" ? ui.badge.textContent : coinLabel();
+    if (mode && ui) ui.badge.textContent = mode === "reward" ? ui.badge.textContent : (step === "gallery" ? galleryBadge() : coinLabel());
     return save.coins;
   }
   function coins() { if (!save) save = loadSave(); return save.coins || 0; }
   function state() {
     if (!save) save = loadSave();
     var nm = save.theme ? themeName(save.theme) : null, nb = save.picks.filter(function (p) { return !p.deco; }).length;
-    return { theme: save.theme, themeName: nm, count: Math.min(save.picks.filter(function (p) { return p.src !== "shop"; }).length, TOTAL), total: TOTAL,
-      buildings: nb, decorations: save.picks.length - nb, coins: save.coins || 0, canShop: loadState === "ok",
-      nextNight: nextRewardNight(), label: "My " + (nm || "Town"), loaded: loadState, walls: !!save.theme && nb >= wallLevel(), style: save.theme ? dominantStyle() : null,
-      rating: save.theme && loadState === "ok" ? rating() : null };
+    return { theme: save.theme, themeName: nm, count: rewardsTaken(), total: TOTAL,
+      buildings: nb, decorations: save.picks.length - nb, owned: Object.keys(save.owned || {}).length, coins: save.coins || 0, canShop: loadState === "ok",
+      nextNight: nextRewardNight(), label: "My " + (nm || "Town"), loaded: loadState, walls: wallsUp(), style: save.theme ? dominantStyle() : null,
+      view: { r: rot(), z: view().z }, rating: save.theme && loadState === "ok" ? rating() : null };
   }
 
   document.addEventListener("keydown", onKey, true);
@@ -1240,12 +1437,17 @@
     addCoins: addCoins, coins: coins, economy: economy,
     close: closeOverlay, isOpen: function () { return !!mode; },
     exportCode: exportCode, importCode: importCode, state: state,
-    LS_KEY: LS_KEY, version: 3,
-    _offer: function (night) { return offerFor(night, nextLot(!hasCore())).map(function (p) { return p.id; }); },
+    LS_KEY: LS_KEY, version: 5,
+    /* test hooks (tools/smoke.js) */
+    _offer: function (night) { return offerFor(night, night / EVERY).map(function (p) { return p.id; }); },
     _coreStage: function () { return isKit() ? coreStage() : null; },
-    _hitAt: function (clientX, clientY) { var pt = canvasScenePt({ clientX: clientX, clientY: clientY }); var pk = pt && hitPick(pt); return { pt: pt && { x: pt.x, y: pt.y, sx: pt.sx, sy: pt.sy }, cell: pt && pxToCell(pt.x, pt.y), pick: pk ? pk.piece + "@" + pk.cx + "," + pk.cy : null, step: step, arrange: !!(cur && cur.arrange), draggable: draggable(pk) };
-    },
-    /* test hook: canvas-space centre of the i-th pick (used by tools/smoke.js to drag pieces) */
+    _owned: function () { return Object.keys(save.owned || {}).filter(function (k) { return save.owned[k]; }); },
+    _place: function (id) { var p = pieceById(id); return p && cur ? !!addPiece(p, null, "free") : false; },
+    _select: function (i) { if (!cur) return false; selectPick(save.picks[i] || null); return !!cur.sel; },
+    _delete: function () { deleteSelected(); return save.picks.length; },
+    _rotate: function (d) { rotateView(d); return rot(); },
+    _zoom: function (k) { zoomBy(k); return view().z; },
+    _hitAt: function (clientX, clientY) { var pt = canvasScenePt({ clientX: clientX, clientY: clientY }); var pk = pt && hitPick(pt); return { pt: pt && { x: pt.x, y: pt.y, sx: pt.sx, sy: pt.sy }, cell: pt && pxToCell(pt.x, pt.y), pick: pk ? pk.piece + "@" + pk.cx + "," + pk.cy : null, step: step, draggable: draggable(pk) }; },
     _pickScreen: function (i) {
       var pk = save && save.picks[i], p = pk && pieceById(pk.piece), fit = lastFit;
       if (!pk || !p || !fit || pk.cx == null) return null;

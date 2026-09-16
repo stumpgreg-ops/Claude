@@ -20,6 +20,7 @@ var srv = http.createServer(function (req, res) {
   var browser = await chromium.launch({ executablePath: "/opt/pw-browsers/chromium/chrome-linux/chrome" }).catch(function () { return chromium.launch(); });
   var page = await browser.newPage({ viewport: { width: 1280, height: 720 } });
   var errors = [];
+  page.on("response", function (r) { if (r.status() === 404) console.log("404", r.url()); });
   page.on("pageerror", function (e) { errors.push("pageerror: " + e.message); });
   page.on("console", function (m) { if (m.type() === "error" || m.type() === "warning") { var t = m.text(); if (!/favicon|net::ERR|Autoplay|AudioContext|unpkg|peerjs|phaser|WebGL|GL Driver|swiftshader/i.test(t)) errors.push(m.type() + ": " + t); } });
   var fails = [];
@@ -69,7 +70,7 @@ var srv = http.createServer(function (req, res) {
   await page.click(".build-theme:nth-child(2)");
   await page.click("#build-overlay .btn.primary");
   await page.waitForSelector(".build-shop .build-opt");
-  await page.click(".build-shop .build-opt:nth-child(1)");           /* Wall, 15 coins */
+  await page.click(".build-shop .build-opt >> nth=0");           /* Wall, 15 coins */
   await page.waitForSelector(".build-styles .build-opt");
   await page.click(".build-styles .build-opt:nth-child(1)");
   await page.click("#build-overlay .btn.primary");
@@ -78,10 +79,10 @@ var srv = http.createServer(function (req, res) {
   await page.waitForTimeout(150);
   var earlyBuy = await page.evaluate(function () {
     var s = JSON.parse(localStorage.getItem("afterHours.v1.build"));
-    return { theme: s.theme, kit: s.kit, picks: s.picks.map(function (p) { return p.piece + "@" + p.lot; }), coins: s.coins, offer: SolBuild._offer(5) };
+    return { theme: s.theme, kit: s.kit, picks: s.picks.map(function (p) { return p.piece; }), owned: Object.keys(s.owned), coins: s.coins, offer: SolBuild._offer(5) };
   });
   console.log("early shop", JSON.stringify(earlyBuy));
-  check(earlyBuy.theme === "castle" && earlyBuy.picks.length === 1 && earlyBuy.picks[0] === "wall@2" && earlyBuy.coins === 45, "a wall bought on night 1 takes lot 2 and costs 15 coins");
+  check(earlyBuy.theme === "castle" && earlyBuy.picks.length === 1 && earlyBuy.picks[0] === "wall" && earlyBuy.owned.indexOf("wall") !== -1 && earlyBuy.coins === 45, "a wall bought on level 1 is placed, unlocked and costs 15 coins");
   check(earlyBuy.offer.length === 3 && !/wall|gate|tower/.test(earlyBuy.offer.join(" ")), "first reward still offers keeps after an early purchase: " + earlyBuy.offer.join(", "));
   await page.click("#build-overlay .btn.primary");                    /* Back to shop */
   await page.waitForTimeout(150);
@@ -115,10 +116,13 @@ var srv = http.createServer(function (req, res) {
     }
     await page.click(".build-options .build-opt:nth-child(" + (1 + Math.floor(Math.random() * 3)) + ")");
     await page.click("#build-overlay .btn.primary");
-    await page.waitForSelector(".build-styles .build-opt");
-    if (night === 5 || night === 10) await shot("04-style-" + night);
-    await page.click(".build-styles .build-opt:nth-child(" + (1 + Math.floor(Math.random() * 3)) + ")");
-    await page.click("#build-overlay .btn.primary");
+    /* pieces with no coloured parts (houses, most props) skip the style step and go straight to placing */
+    await page.waitForSelector(".build-styles:not(.hidden) .build-opt, .build-note:not(.hidden)");
+    if (await page.isVisible(".build-styles:not(.hidden) .build-opt")) {
+      if (night === 5 || night === 10) await shot("04-style-" + night);
+      await page.click(".build-styles .build-opt:nth-child(" + (1 + Math.floor(Math.random() * 3)) + ")");
+      await page.click("#build-overlay .btn.primary");
+    }
     await page.waitForSelector(".build-note:not(.hidden)");
     /* place step: the new piece was auto-joined; drag it one cell and check it snaps to a free spot */
     if (night === 15) {
@@ -142,42 +146,45 @@ var srv = http.createServer(function (req, res) {
     var s = JSON.parse(localStorage.getItem("afterHours.v1.build")), cells = {}, ok = true;
     var P = null; var xhr = new XMLHttpRequest(); xhr.open("GET", "assets/build/pieces.json", false); xhr.send(); P = JSON.parse(xhr.responseText).pieces;
     function pc(id) { return P.filter(function (x) { return x.id === id; })[0]; }
-    var rs = s.picks.filter(function (pk) { var p = pc(pk.piece); return p && p.kind !== "topper"; }).map(function (pk) { return { cx: pk.cx, cy: pk.cy, n: pc(pk.piece).cells || 1 }; });
+    var rs = s.picks.filter(function (pk) { var p = pc(pk.piece); return p && p.kind !== "topper"; }).map(function (pk) { return { id: pk.piece, cx: pk.cx, cy: pk.cy, n: pc(pk.piece).cells || 1 }; });
     function touches(a, b) { var sx = (a.cx + a.n === b.cx || b.cx + b.n === a.cx) && a.cy < b.cy + b.n && a.cy + a.n > b.cy; var sy = (a.cy + a.n === b.cy || b.cy + b.n === a.cy) && a.cx < b.cx + b.n && a.cx + a.n > b.cx; return sx || sy; }
     function overlaps(a, b) { return a.cx < b.cx + b.n && a.cx + a.n > b.cx && a.cy < b.cy + b.n && a.cy + a.n > b.cy; }
-    var lonely = 0, overlap = 0;
-    rs.forEach(function (a, i) { var t = false; rs.forEach(function (b, j) { if (i !== j) { if (touches(a, b)) t = true; if (overlaps(a, b)) overlap++; } }); if (!t) lonely++; });
-    return { pieces: rs.length, lonely: lonely, overlap: overlap };
+    var lonely = 0, overlap = 0, pairs = [];
+    rs.forEach(function (a, i) { var t = false; rs.forEach(function (b, j) { if (i !== j) { if (touches(a, b)) t = true; if (overlaps(a, b)) { overlap++; if (i < j) pairs.push(a.id + "@" + a.cx + "," + a.cy + "/" + b.id); } } }); if (!t) lonely++; });
+    return { pieces: rs.length, lonely: lonely, overlap: overlap, pairs: pairs.slice(0, 6) };
   });
-  check(joined.pieces >= 20 && joined.lonely === 0 && joined.overlap === 0, "all pieces are joined with no overlaps: " + JSON.stringify(joined));
+  check(joined.pieces >= 20 && joined.overlap === 0, "no two pieces overlap (auto-placed pieces join the build): " + JSON.stringify(joined));
   var rt0 = await page.evaluate(function () { return SolBuild.state().rating; });
   console.log("rating", JSON.stringify(rt0));
   var stage = await page.evaluate(function () { return SolBuild._coreStage(); });
   check(stage === 3, "the keep has grown to its final stage after 20 rewards (stage " + stage + ")");
   check(rt0 && rt0.score > 200, "castle rating computed");
   var st = await page.evaluate(function () { return SolBuild.state(); });
-  check(st.count === 20 && st.walls === true, "20 reward pieces placed and walls up: " + JSON.stringify(st));
+  check(st.count === 20 && st.walls === true && st.owned >= 8, "20 rewards taken, walls up, pieces unlocked: " + JSON.stringify(st));
 
   /* shop: coins, buildings, decorations, packs */
   await page.evaluate(function () { SolBuild.addCoins(600, "test"); window.__closed = false; SolBuild.showShop(41, function () { window.__closed = true; }); });
   await page.waitForSelector(".build-shop .build-opt");
   await shot("06-shop-buildings");
-  await page.click(".build-shop .build-opt:nth-child(1)");
-  await page.waitForSelector(".build-styles .build-opt");
-  await page.click(".build-styles .build-opt:nth-child(2)");
-  await page.click("#build-overlay .btn.primary");
+  /* buy a building the student does not own yet (owned ones just place a free copy) */
+  await page.click(".build-shop .build-opt:has(.price:not(.own)) >> nth=0");
+  await page.waitForSelector(".build-styles:not(.hidden) .build-opt, .build-note:not(.hidden)");
+  if (await page.isVisible(".build-styles:not(.hidden) .build-opt")) {
+    await page.click(".build-styles .build-opt:nth-child(2)");
+    await page.click("#build-overlay .btn.primary");
+  }
   await page.waitForSelector(".build-note:not(.hidden)");
   await page.click("#build-overlay .btn.primary");      /* Keep it here */
   await page.waitForTimeout(150);
   await page.click("#build-overlay .btn.primary");      /* Back to shop */
   await page.click(".build-tab:nth-child(2)");
   await page.waitForTimeout(200);
-  await page.click(".build-shop .build-opt:nth-child(1)");
+  await page.click(".build-shop .build-opt:has(.price:not(.own)) >> nth=0");
   await page.waitForTimeout(200);
   await page.click(".build-tab:nth-child(3)");
   await page.waitForTimeout(200);
   await shot("07-shop-packs");
-  await page.click(".build-shop .build-opt:nth-child(1)");
+  await page.click(".build-shop .build-opt >> nth=0");
   await page.waitForTimeout(400);
   var st2 = await page.evaluate(function () { return SolBuild.state(); });
   check(st2.buildings >= 21 && st2.decorations >= 1 && st2.coins < 600, "shop purchases landed: " + JSON.stringify(st2));
@@ -238,8 +245,29 @@ var srv = http.createServer(function (req, res) {
   var afterMove = await page.evaluate(function () { return JSON.parse(localStorage.getItem("afterHours.v1.build")).picks.map(function (p) { return p.cx + "," + p.cy; }).join(" "); });
   var noteTxt = await page.textContent(".build-note");
   console.log("arrange:", beforeMove === afterMove ? "no move (" + noteTxt + ")" : "moved (" + noteTxt + ")");
-  check(beforeMove !== afterMove || /taken|must touch/i.test(noteTxt), "gallery drag moves a piece or bounces it back with a reason: " + noteTxt);
+  check(beforeMove !== afterMove || /taken/i.test(noteTxt), "gallery drag moves a piece anywhere free (or reports the spot is taken): " + noteTxt);
   await shot("09b-arrange");
+  /* v5 editor: palette placement of unlocked pieces, selection bar, delete, rotate, zoom, code round trip after a rotation */
+  var pal = await page.$$eval(".build-plist .build-pitem", function (l) { return { total: l.length, locked: l.filter(function (b) { return b.classList.contains("locked"); }).length }; });
+  check(pal.total > 0 && pal.locked > 0 && pal.locked < pal.total, "palette lists unlocked and locked pieces: " + JSON.stringify(pal));
+  var edit = await page.evaluate(function () {
+    var out = {}, s0 = SolBuild.state();
+    out.placed = SolBuild._place("wall"); out.afterPlace = SolBuild.state().buildings - s0.buildings;
+    out.barVisible = !document.querySelector(".build-pbar").classList.contains("hidden");
+    SolBuild._delete(); out.afterDelete = SolBuild.state().buildings - s0.buildings;
+    out.ownedStill = SolBuild._owned().indexOf("wall") !== -1;
+    out.rot = [SolBuild._rotate(1), SolBuild._rotate(1)]; out.zoom = SolBuild._zoom(1.25);
+    var code = SolBuild.exportCode(), before = JSON.stringify(SolBuild.state().rating);
+    SolBuild.importCode(code); out.rtSame = JSON.stringify(SolBuild.state().rating) === before;
+    out.rotAfter = SolBuild.state().view.r;
+    return out;
+  });
+  console.log("editor", JSON.stringify(edit));
+  check(edit.placed && edit.afterPlace === 1 && edit.barVisible && edit.afterDelete === 0 && edit.ownedStill, "palette places a free copy, selection bar shows, delete keeps the piece unlocked");
+  check(edit.rot[0] === 1 && edit.rot[1] === 2 && edit.zoom > 1 && edit.rtSame, "view rotates and zooms; the build code survives a rotated view");
+  await page.waitForTimeout(400);
+  await shot("09d-rotated");
+  await page.evaluate(function () { SolBuild._rotate(-1); SolBuild._rotate(-1); SolBuild._zoom(0.8); });
   await page.keyboard.press("Escape");
 
   /* start a Grade 5 night */

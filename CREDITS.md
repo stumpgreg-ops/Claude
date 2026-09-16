@@ -33,3 +33,10 @@ The castle in the reward builder is built from **Castle Kit 1.0** by **Kenney** 
 
 ## Sound effects
 All in-game sound effects (grab, alarm, camera beep, catch, chime…) are synthesised at runtime in `js/audio.js`; no sample files.
+
+## Extra castle decorations (v5)
+- **Kenney Fantasy Town Kit** (CC0) — house walls and roofs, market stalls, carts, hedges, fences, fountains, lanterns, windmill, water wheel, trees, rocks. https://kenney.nl/assets/fantasy-town-kit
+- **Kenney Nature Kit** (CC0) — trees, flowers, bushes, mushrooms, rocks, statues, obelisk, column, campfire, tent, crops, bridge. https://kenney.nl/assets/nature-kit
+- **Kenney Graveyard Kit** (CC0) — benches, lamp posts, urns, pillars and the great column. https://kenney.nl/assets/graveyard-kit
+- **Kenney Animal Pack Redux** (CC0) — the cow, horse, pig, goat, chicken, dog, rabbit, duck and owl stand-ups. https://kenney.nl/assets/animal-pack-redux
+All are cropped, re-anchored and scaled to the castle kit's cell by `tools/make-castle-kit.py`; the stone knight and king are desaturated Castle Kit figures.
