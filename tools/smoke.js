@@ -256,18 +256,22 @@ var srv = http.createServer(function (req, res) {
     out.barVisible = !document.querySelector(".build-pbar").classList.contains("hidden");
     SolBuild._delete(); out.afterDelete = SolBuild.state().buildings - s0.buildings;
     out.ownedStill = SolBuild._owned().indexOf("wall") !== -1;
-    out.rot = [SolBuild._rotate(1), SolBuild._rotate(1)]; out.zoom = SolBuild._zoom(1.25);
+    out.rot = [SolBuild._rotate(90), SolBuild._rotate(90)]; out.zoom = SolBuild._zoom(1.25);
+    SolBuild._rotate(37); out.angle = SolBuild._angle();                     /* one-degree turning: 217° */
+    out.turned = (SolBuild._place("square-tower"), SolBuild._turn());         /* right-click / Turn: a quarter turn on one piece */
     var code = SolBuild.exportCode(), before = JSON.stringify(SolBuild.state().rating);
     SolBuild.importCode(code); out.rtSame = JSON.stringify(SolBuild.state().rating) === before;
+    out.rotKept = JSON.parse(localStorage.getItem("afterHours.v1.build")).picks.some(function (p) { return p.rot === 1; });
     out.rotAfter = SolBuild.state().view.r;
     return out;
   });
   console.log("editor", JSON.stringify(edit));
   check(edit.placed && edit.afterPlace === 1 && edit.barVisible && edit.afterDelete === 0 && edit.ownedStill, "palette places a free copy, selection bar shows, delete keeps the piece unlocked");
-  check(edit.rot[0] === 1 && edit.rot[1] === 2 && edit.zoom > 1 && edit.rtSame, "view rotates and zooms; the build code survives a rotated view");
+  check(edit.rot[0] === 1 && edit.rot[1] === 2 && Math.abs(edit.angle - 217) < 0.01 && edit.zoom > 1 && edit.rtSame, "view turns by degrees and zooms; the build code survives a rotated view");
+  check(edit.turned === 1 && edit.rotKept, "a piece turns a quarter turn and its turn survives the build code");
   await page.waitForTimeout(400);
   await shot("09d-rotated");
-  await page.evaluate(function () { SolBuild._rotate(-1); SolBuild._rotate(-1); SolBuild._zoom(0.8); });
+  await page.evaluate(function () { SolBuild._rotate(-217); SolBuild._zoom(0.8); });
   await page.keyboard.press("Escape");
 
   /* start a Grade 5 night */

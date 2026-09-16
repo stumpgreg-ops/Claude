@@ -63,7 +63,7 @@
   var thumbs = [];                        /* stack thumbnails waiting for images */
 
   /* ── save record ─────────────────────────────────────────────────────────── */
-  function freshView() { return { r: 0, z: 1, px: 0, py: 0 }; }
+  function freshView() { return { a: 0, z: 1, px: 0, py: 0 }; }
   function freshSave() { return { v: 4, theme: null, salt: Math.floor(Math.random() * 900000000) + 1, coins: 0, kit: 2, owned: {}, rewards: {}, picks: [], view: freshView(), code: "" }; }
   function cleanPicks(list) {
     var out = [], order = 0;
@@ -71,7 +71,7 @@
       if (!p || typeof p !== "object" || typeof p.piece !== "string") return;
       var n = parseInt(p.night, 10), src = p.src === "shop" || p.src === "auto" || p.src === "free" ? p.src : "reward";
       if (!(n >= 1 && n <= EVERY * TOTAL)) n = 1;
-      var pk = { night: n, piece: p.piece, style: typeof p.style === "string" ? p.style : "", src: src, deco: !!p.deco, ord: order++ };
+      var pk = { night: n, piece: p.piece, style: typeof p.style === "string" ? p.style : "", src: src, deco: !!p.deco, ord: order++, rot: (parseInt(p.rot, 10) || 0) & 3 };
       if (p.cx != null && p.cy != null && isFinite(parseInt(p.cx, 10)) && isFinite(parseInt(p.cy, 10))) { pk.cx = parseInt(p.cx, 10); pk.cy = parseInt(p.cy, 10); }
       out.push(pk);
     });
@@ -80,7 +80,7 @@
   function cleanView(v) {
     var o = freshView();
     if (v && typeof v === "object") {
-      o.r = (parseInt(v.r, 10) || 0) & 3;
+      o.a = v.a != null ? ((parseFloat(v.a) || 0) % 360 + 360) % 360 : (((parseInt(v.r, 10) || 0) & 3) * 90);
       o.z = Math.max(ZMIN, Math.min(ZMAX, parseFloat(v.z) || 1));
       o.px = parseFloat(v.px) || 0; o.py = parseFloat(v.py) || 0;
     }
@@ -283,7 +283,7 @@
     if (!save) save = loadSave();
     var ownedList = Object.keys(save.owned || {}).filter(function (k) { return save.owned[k]; }).join(",");
     var rewards = Object.keys(save.rewards || {}).filter(function (k) { return save.rewards[k]; }).map(function (k) { return k + "=" + save.rewards[k]; }).join(",");
-    var list = save.picks.map(function (p) { return p.piece + ":" + (p.style || "") + ":" + (SRC_FLAG[p.src] || "f") + (p.deco ? "d" : "") + ":" + (p.cx != null ? p.cx + "," + p.cy : ""); }).join(";");
+    var list = save.picks.map(function (p) { return p.piece + ":" + (p.style || "") + ":" + (SRC_FLAG[p.src] || "f") + (p.deco ? "d" : "") + ":" + (p.cx != null ? p.cx + "," + p.cy : "") + (p.rot ? ":" + p.rot : ""); }).join(";");
     var body = b64url("5|" + (save.theme || "") + "|" + save.salt + "|" + (save.coins || 0) + "|" + (save.kit || 0) + "|" + ownedList + "|" + rewards + "|" + list);
     return body + checksum(body);
   }
@@ -305,7 +305,7 @@
         var f = item.split(":"), flags = f[2] || "f", pos;
         if (bad) return;
         if (f.length < 3 || !f[0]) { bad = "bad piece list"; return; }
-        var pk = { night: 1, piece: f[0], style: f[1] || "", src: FLAG_SRC[flags.charAt(0)] || "free", deco: flags.indexOf("d") !== -1 };
+        var pk = { night: 1, piece: f[0], style: f[1] || "", src: FLAG_SRC[flags.charAt(0)] || "free", deco: flags.indexOf("d") !== -1, rot: (parseInt(f[4], 10) || 0) & 3 };
         if (f[3]) { pos = f[3].split(","); if (pos.length === 2 && isFinite(parseInt(pos[0], 10))) { pk.cx = parseInt(pos[0], 10); pk.cy = parseInt(pos[1], 10); } }
         picks.push(pk);
       });
@@ -344,22 +344,18 @@
   /* ── canvas: painted backgrounds (no images) ─────────────────────────────── */
   function ellipse(ctx, x, y, rx, ry) { ctx.beginPath(); ctx.ellipse(x, y, rx, ry, 0, 0, Math.PI * 2); ctx.fill(); }
   function paintBg(ctx, W, H, theme) { if (theme === "castle") paintCastle(ctx, W, H); else paintVillage(ctx, W, H); }
+  /* v5.1: a flat field under a sky — no dome. The build sits on a flat grid drawn by drawGround. */
   function paintVillage(ctx, W, H) {
-    var hz = H * 0.36, g, i, r = rng(4242);
+    var hz = H * 0.34, g;
     g = ctx.createLinearGradient(0, 0, 0, hz); g.addColorStop(0, "#4f9fe6"); g.addColorStop(1, "#d6ecfb");
     ctx.fillStyle = g; ctx.fillRect(0, 0, W, hz);
     ctx.fillStyle = "#fff3b0"; ellipse(ctx, W * 0.84, H * 0.11, W * 0.045, W * 0.045);
     ctx.fillStyle = "rgba(255,255,255,.75)";
     ellipse(ctx, W * 0.2, H * 0.14, W * 0.09, H * 0.045); ellipse(ctx, W * 0.55, H * 0.09, W * 0.07, H * 0.035);
     ctx.fillStyle = "#8fc47f";
-    ellipse(ctx, W * 0.18, hz + H * 0.03, W * 0.38, H * 0.13); ellipse(ctx, W * 0.78, hz + H * 0.03, W * 0.42, H * 0.11);
-    g = ctx.createLinearGradient(0, hz, 0, H); g.addColorStop(0, "#82c45e"); g.addColorStop(1, "#3e8b2f");
+    ellipse(ctx, W * 0.18, hz + H * 0.01, W * 0.38, H * 0.06); ellipse(ctx, W * 0.78, hz + H * 0.01, W * 0.42, H * 0.05);
+    g = ctx.createLinearGradient(0, hz, 0, H); g.addColorStop(0, "#5fa848"); g.addColorStop(1, "#4d9a3c");
     ctx.fillStyle = g; ctx.fillRect(0, hz, W, H - hz);
-    ctx.fillStyle = "rgba(120,160,80,.35)"; ellipse(ctx, W * 0.5, H * 0.68, W * 0.42, H * 0.27);
-    for (i = 0; i < 40; i++) {
-      ctx.fillStyle = i % 3 ? "#fff59a" : "#ff9ab8";
-      ellipse(ctx, r() * W, hz + H * 0.06 + r() * (H - hz - H * 0.06), 2.2, 2.2);
-    }
   }
   function paintCastle(ctx, W, H) {
     var g, i;
@@ -371,12 +367,26 @@
     [[0.1, 0.5], [0.22, 0.62], [0.35, 0.44], [0.5, 0.58], [0.62, 0.4], [0.78, 0.6], [0.9, 0.48], [1, 0.66]]
       .forEach(function (p) { ctx.lineTo(W * p[0], H * p[1]); });
     ctx.lineTo(W, H * 0.8); ctx.lineTo(0, H * 0.8); ctx.fill();
-    g = ctx.createLinearGradient(0, H * 0.4, 0, H); g.addColorStop(0, "#8ccf68"); g.addColorStop(1, "#3c8a30");
-    ctx.fillStyle = g; ctx.beginPath(); ctx.moveTo(0, H); ctx.lineTo(0, H * 0.74);
-    ctx.quadraticCurveTo(W * 0.5, H * 0.1, W, H * 0.74); ctx.lineTo(W, H); ctx.fill();
-    ctx.fillStyle = "rgba(60,110,50,.35)"; ellipse(ctx, W * 0.5, H * 0.68, W * 0.42, H * 0.27);
+    g = ctx.createLinearGradient(0, H * 0.6, 0, H); g.addColorStop(0, "#4f9a3e"); g.addColorStop(1, "#3c8a30");
+    ctx.fillStyle = g; ctx.fillRect(0, H * 0.62, W, H * 0.38);                 /* a flat plain in front of the mountains */
     ctx.fillStyle = "#2f7a2a";
-    for (i = 0; i < 9; i++) ellipse(ctx, W * (0.04 + i * 0.115), H * (0.96 + (i % 2) * 0.02), W * 0.045, H * 0.04);
+    for (i = 0; i < 9; i++) ellipse(ctx, W * (0.04 + i * 0.115), H * (0.62 + (i % 2) * 0.01), W * 0.06, H * 0.02);
+  }
+  /* The flat ground the build stands on: a square of grass cells around everything built, turning with the view. */
+  function drawGround(ctx, fit) {
+    var b = bboxCells() || { u0: -1, v0: -1, u1: 1, v1: 1 }, mx = (b.u0 + b.u1) / 2, my = (b.v0 + b.v1) / 2;
+    var R = Math.max(5, Math.ceil(Math.max(b.u1 - b.u0, b.v1 - b.v0) / 2) + 3), x0 = Math.floor(mx - R), x1 = Math.ceil(mx + R), y0 = Math.floor(my - R), y1 = Math.ceil(my + R), x, y;
+    function S(px, py) { var c = worldPx(px, py); return { x: fit.ox + c.x * fit.s / fit.base, y: fit.oy + c.y * fit.s / fit.base }; }
+    function poly(pts) { ctx.beginPath(); pts.forEach(function (q, i) { if (i) ctx.lineTo(q.x, q.y); else ctx.moveTo(q.x, q.y); }); ctx.closePath(); }
+    var corners = [S(x0, y0), S(x1, y0), S(x1, y1), S(x0, y1)];
+    ctx.save();
+    ctx.fillStyle = "rgba(20,60,20,.18)"; poly(corners.map(function (q) { return { x: q.x, y: q.y + 6 }; })); ctx.fill();   /* a hair of drop shadow so the field reads as a slab */
+    ctx.fillStyle = save.theme === "castle" ? "#79c463" : "#86c96a"; poly(corners); ctx.fill();
+    ctx.lineWidth = 1; ctx.strokeStyle = "rgba(0,0,0,.09)";
+    for (x = x0 + 1; x < x1; x++) { var a = S(x, y0), bq = S(x, y1); ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(bq.x, bq.y); ctx.stroke(); }
+    for (y = y0 + 1; y < y1; y++) { var a2 = S(x0, y), b2 = S(x1, y); ctx.beginPath(); ctx.moveTo(a2.x, a2.y); ctx.lineTo(b2.x, b2.y); ctx.stroke(); }
+    ctx.lineWidth = 2; ctx.strokeStyle = "rgba(40,90,30,.55)"; poly(corners); ctx.stroke();
+    ctx.restore();
   }
   function banner(ctx, W, H, text) {
     ctx.fillStyle = "rgba(8,10,14,.55)"; ctx.fillRect(0, H * 0.42, W, H * 0.16);
@@ -408,12 +418,25 @@
   function cellsOf(p) { return Math.max(1, (p && p.cells) || 1); }
   function cellXY(u, v) { var C = cellPx(), H = cellH(); return { x: (u - v) * C / 2, y: (u + v) * H / 2 }; }
   function pxToCell(x, y) { var C = cellPx(), H = cellH(); return { u: (x / (C / 2) + y / (H / 2)) / 2, v: (y / (H / 2) - x / (C / 2)) / 2 }; }
-  function view() { if (!save.view) save.view = freshView(); return save.view; }
-  function rot() { return (view().r || 0) & 3; }
-  function toView(cx, cy, n) { n = n || 1; var r = rot(); if (r === 1) return { u: -cy - n, v: cx }; if (r === 2) return { u: -cx - n, v: -cy - n }; if (r === 3) return { u: cy, v: -cx - n }; return { u: cx, v: cy }; }
-  function fromView(u, v, n) { n = n || 1; var r = rot(); if (r === 1) return { cx: v, cy: -u - n }; if (r === 2) return { cx: -u - n, cy: -v - n }; if (r === 3) return { cx: -v - n, cy: u }; return { cx: u, cy: v }; }
-  function pointToView(x, y) { var r = rot(); if (r === 1) return { u: -y, v: x }; if (r === 2) return { u: -x, v: -y }; if (r === 3) return { u: y, v: -x }; return { u: x, v: y }; }
+  function view() { if (!save.view) save.view = freshView(); if (save.view.a == null) save.view.a = 0; return save.view; }
+  /* v5.1: the view turns by any angle. Positions rotate continuously on the ground plane; sprites (which only
+     exist in four orientations) snap to the nearest quarter turn, rot(), which also drives wall auto-tiling. */
+  function ang() { return ((view().a || 0) % 360 + 360) % 360; }
+  function rot() { return Math.round(ang() / 90) % 4; }
+  function rotPt(x, y) { var t = ang() * Math.PI / 180, c = Math.cos(t), sn = Math.sin(t); return { u: x * c - y * sn, v: x * sn + y * c }; }
+  function unrotPt(u, v) { var t = -ang() * Math.PI / 180, c = Math.cos(t), sn = Math.sin(t); return { x: u * c - v * sn, y: u * sn + v * c }; }
+  function worldPx(x, y) { var p = rotPt(x, y); return cellXY(p.u, p.v); }
   function viewDirToWorld(du, dv) { var r = rot(); if (r === 1) return [dv, -du]; if (r === 2) return [-du, -dv]; if (r === 3) return [-dv, du]; return [du, dv]; }
+  /* sprite orientation: NE → SE → SW → NW is one quarter turn clockwise; a piece's own rot adds to the view's */
+  var ORD = ["NE", "SE", "SW", "NW"];
+  function orientName(name, shift) {
+    shift = ((shift || 0) % 4 + 4) % 4;
+    if (!shift) return name;
+    var m = /^(.*)_(NE|SE|SW|NW)$/.exec(name);
+    if (!m) return name;
+    var nn = m[1] + "_" + ORD[(ORD.indexOf(m[2]) + shift) % 4];
+    return kitData().sprites[nn] ? nn : name;
+  }
 
   /* ── the castle kit (Kenney tiles) ──────────────────────────────────────── */
   function kitData() { return (data && data.kit) || { dir: "assets/build/kit/", sprites: {} }; }
@@ -458,16 +481,18 @@
     for (i = 0; i < at.length; i++) if (n >= at[i]) st = i;
     return st;
   }
-  function partsFor(p, cx, cy, ignore) {
-    var names = p.auto ? wallParts(p, cx, cy, ignore) : (p.grow ? (p.grow[Math.min(coreStage(), p.grow.length - 1)] || p.parts) : (p.parts || [])), out = [], lift = 0, i, sp;
+  function partsFor(p, cx, cy, ignore, prot) {
+    var names = p.auto ? wallParts(p, cx, cy, ignore) : (p.grow ? (p.grow[Math.min(coreStage(), p.grow.length - 1)] || p.parts) : (p.parts || [])), out = [], lift = 0, i, sp, nm;
+    /* auto-tiled runs already picked their sprite in view space, so only the piece's own turn applies to them */
+    var shift = (p.auto ? 0 : rot()) + (prot || 0);
     for (i = 0; i < names.length; i++) {
-      sp = kitSprite(names[i]);
-      out.push({ name: names[i], lift: lift, w: sp.w, h: sp.h, oy: sp.oy || 0 });
+      nm = orientName(names[i], shift); sp = kitSprite(nm);
+      out.push({ name: nm, lift: lift, w: sp.w, h: sp.h, oy: sp.oy || 0 });
       if (!p.auto) lift += sp.lift || 0;              /* gate overlays sit on the wall's own base */
     }
     return out;
   }
-  function stackHeight(p, cx, cy) { var ps = partsFor(p, cx, cy), last = ps[ps.length - 1]; return last ? last.lift + (kitSprite(last.name).lift || 0) : 0; }
+  function stackHeight(p, cx, cy, prot) { var ps = partsFor(p, cx, cy, null, prot), last = ps[ps.length - 1]; return last ? last.lift + (kitSprite(last.name).lift || 0) : 0; }
   function rectsOf(ignore) {
     var out = [];
     save.picks.forEach(function (pk) {
@@ -505,7 +530,7 @@
     var rs = rectsOf(ignore), i, ring, cx, cy, best = null, bd = Infinity, sumx = 0, sumy = 0, d, mx, my, R = 16;
     if (piece && isTopper(piece)) {
       var hosts = rs.filter(function (r) { return isHost(r.p) && hostFor(r.cx, r.cy, ignore); })
-        .sort(function (a, b) { return stackHeight(b.p, b.cx, b.cy) - stackHeight(a.p, a.cx, a.cy); });
+        .sort(function (a, b) { return stackHeight(b.p, b.cx, b.cy, b.pk.rot) - stackHeight(a.p, a.cx, a.cy, a.pk.rot); });
       return hosts.length ? { cx: hosts[0].cx, cy: hosts[0].cy } : null;
     }
     if (!rs.length) return { cx: -Math.floor(n / 2), cy: -Math.floor(n / 2) };
@@ -554,14 +579,13 @@
     return b;
   }
   function itemFor(p, pk, cx, cy, style, extra, ignore) {
-    var n = cellsOf(p), vw = toView(cx, cy, n), c, it, k, host, base = 0;
+    var n = cellsOf(p), ctr = rotPt(cx + n / 2, cy + n / 2), c = cellXY(ctr.u, ctr.v), it, k, host, base = 0;
     if (isKit()) {
-      c = cellXY(vw.u + 1, vw.v + 1);                                        /* the cell's front apex */
-      if (isTopper(p)) { host = hostFor(cx, cy, pk) || pickAt(cx, cy, pk, function (q) { return isHost(q); }); if (host) base = stackHeight(pieceById(host.piece), cx, cy); }
-      it = { p: p, pk: pk, style: style, x: c.x, y: c.y, a: 1, depth: vw.u + vw.v + (isTopper(p) ? 0.5 : 0), u: vw.u, v: vw.v, n: 1, kit: true, base: base, parts: partsFor(p, cx, cy, ignore) };
+      /* the sprite's bottom-centre is the cell's front apex: half a diamond below the cell centre */
+      if (isTopper(p)) { host = hostFor(cx, cy, pk) || pickAt(cx, cy, pk, function (q) { return isHost(q); }); if (host) base = stackHeight(pieceById(host.piece), cx, cy, host.rot); }
+      it = { p: p, pk: pk, style: style, x: c.x, y: c.y + cellH() / 2, a: 1, depth: ctr.u + ctr.v + (isTopper(p) ? 0.5 : 0), cx: cx, cy: cy, n: 1, kit: true, base: base, parts: partsFor(p, cx, cy, ignore, pk ? pk.rot : 0) };
     } else {
-      c = cellXY(vw.u + n / 2, vw.v + n / 2);
-      it = { p: p, pk: pk, style: style, x: c.x, y: c.y, a: 1, depth: vw.u + vw.v + n, u: vw.u, v: vw.v, n: n };
+      it = { p: p, pk: pk, style: style, x: c.x, y: c.y, a: 1, depth: ctr.u + ctr.v + n, cx: cx, cy: cy, n: n };
     }
     if (extra) for (k in extra) it[k] = extra[k];
     return it;
@@ -592,7 +616,7 @@
     nseg = Math.ceil(span / len);
     gateAt = Math.floor(nseg / 2);
     function push(p, cx, cy, flip, key, front) {
-      var pv = pointToView(cx, cy); c = cellXY(pv.u, pv.v);
+      var pv = rotPt(cx, cy); c = cellXY(pv.u, pv.v);
       items.push({ p: p, style: style, x: c.x, y: c.y, a: front ? 0.94 : 1, depth: pv.u + pv.v, flip: flip !== odd, key: key, ring: true });
     }
     for (i = 0; i < nseg; i++) {
@@ -633,7 +657,7 @@
     return { s: sc * base, ox: ox, oy: oy, base: base };
   }
   function drawFootprint(ctx, it, fit) {
-    var C = cellPx() * fit.s / fit.base, q = [cellXY(it.u, it.v), cellXY(it.u + it.n, it.v), cellXY(it.u + it.n, it.v + it.n), cellXY(it.u, it.v + it.n)];
+    var C = cellPx() * fit.s / fit.base, q = [worldPx(it.cx, it.cy), worldPx(it.cx + it.n, it.cy), worldPx(it.cx + it.n, it.cy + it.n), worldPx(it.cx, it.cy + it.n)];
     ctx.beginPath(); q.forEach(function (pt, i) { var px = fit.ox + pt.x * fit.s / fit.base, py = fit.oy + pt.y * fit.s / fit.base; if (i) ctx.lineTo(px, py); else ctx.moveTo(px, py); });
     ctx.closePath();
     ctx.fillStyle = it.bad ? "rgba(255,90,90,.35)" : it.sel ? "rgba(120,220,255,.35)" : it.ghost ? "rgba(245,200,66,.35)" : "rgba(245,200,66,.12)"; ctx.fill();
@@ -682,6 +706,7 @@
     if (!save.theme) { banner(ctx, W, H, loadState === "ok" ? "Choose a Town or a Castle to start building" : "Build data not available"); lastFit = null; return; }
     items = sceneItems();
     fit = lastFit = fitScene(items, W, H);
+    drawGround(ctx, fit);
     items.sort(function (a, b) { return (a.depth - b.depth) || (a.y - b.y) || (a.x - b.x); }).forEach(function (it) { drawPiece(ctx, it, fit); });
   }
 
@@ -716,13 +741,13 @@
     return { x: (x - fit.ox) * fit.base / fit.s, y: (y - fit.oy) * fit.base / fit.s, sx: x, sy: y, fit: fit };
   }
   function hitPick(pt) {
-    var cell = pxToCell(pt.x, pt.y), cu = Math.floor(cell.u), cvv = Math.floor(cell.v), fit = pt.fit;
+    var cell = pxToCell(pt.x, pt.y), wpt = unrotPt(cell.u, cell.v), cu = Math.floor(wpt.x), cvv = Math.floor(wpt.y), fit = pt.fit;
     var bestFoot = null, bfd = -Infinity, bestBox = null, bbd = -Infinity;
     var all = rectsOf();
     save.picks.forEach(function (pk) { var p = pieceById(pk.piece); if (p && isTopper(p) && pk.cx != null) all.push({ cx: pk.cx, cy: pk.cy, n: 1, pk: pk, p: p, topper: true }); });
     all.forEach(function (r) {
-      var vw = toView(r.cx, r.cy, r.n), depth = vw.u + vw.v + r.n + (r.topper ? 0.5 : 0), p = pieceById(r.pk.piece);
-      if (!r.topper && cu >= vw.u && cu < vw.u + r.n && cvv >= vw.v && cvv < vw.v + r.n) { if (depth > bfd) { bfd = depth; bestFoot = r.pk; } return; }
+      var ctr = rotPt(r.cx + r.n / 2, r.cy + r.n / 2), depth = ctr.u + ctr.v + (r.topper ? 0.5 : 0), p = pieceById(r.pk.piece);
+      if (!r.topper && cu >= r.cx && cu < r.cx + r.n && cvv >= r.cy && cvv < r.cy + r.n) { if (depth > bfd) { bfd = depth; bestFoot = r.pk; } return; }
       if (!p) return;
       var it = itemFor(p, r.pk, r.cx, r.cy, ""), x = fit.ox + it.x * fit.s / fit.base, y = fit.oy + it.y * fit.s / fit.base, w, h, ax, ay, sc;
       if (it.kit) {
@@ -740,10 +765,10 @@
   function onPointerDown(e) {
     if (!cur || !lastFit || !dragStep() || !save.theme) return;
     var pt = canvasScenePt(e); if (!pt) return;
-    var pk = hitPick(pt), cell = pxToCell(pt.x, pt.y);
+    if (e.button === 2) return;                                             /* right button: contextmenu turns the piece */
+    var pk = hitPick(pt), cell = pxToCell(pt.x, pt.y), wpt = unrotPt(cell.u, cell.v);
     if (pk) {
-      var vw = toView(pk.cx, pk.cy, cellsOf(pieceById(pk.piece)));
-      cur.drag = { pk: pk, id: e.pointerId, du: cell.u - vw.u, dv: cell.v - vw.v, cx: pk.cx, cy: pk.cy, ok: true, moved: false, sx: e.clientX, sy: e.clientY };
+      cur.drag = { pk: pk, id: e.pointerId, du: wpt.x - pk.cx, dv: wpt.y - pk.cy, cx: pk.cx, cy: pk.cy, ok: true, moved: false, sx: e.clientX, sy: e.clientY };
     } else {
       cur.pan = { id: e.pointerId, sx: e.clientX, sy: e.clientY, px: view().px || 0, py: view().py || 0, moved: false };
     }
@@ -763,11 +788,11 @@
     }
     if (!cur.drag || cur.drag.id !== e.pointerId) return;
     var pt = canvasScenePt(e); if (!pt) return;
-    var cell = pxToCell(pt.x, pt.y), d = cur.drag, p = pieceById(d.pk.piece), n = cellsOf(p);
+    var cell = pxToCell(pt.x, pt.y), wpt = unrotPt(cell.u, cell.v), d = cur.drag, p = pieceById(d.pk.piece), n = cellsOf(p);
     if (Math.abs(e.clientX - d.sx) + Math.abs(e.clientY - d.sy) > 4) d.moved = true;
-    var w = fromView(Math.round(cell.u - d.du), Math.round(cell.v - d.dv), n);
-    if (w.cx === d.cx && w.cy === d.cy) return;
-    d.cx = w.cx; d.cy = w.cy; d.ok = spotOk(w.cx, w.cy, n, d.pk, p); d.moved = true;
+    var ncx = Math.round(wpt.x - d.du), ncy = Math.round(wpt.y - d.dv);
+    if (ncx === d.cx && ncy === d.cy) return;
+    d.cx = ncx; d.cy = ncy; d.ok = spotOk(ncx, ncy, n, d.pk, p); d.moved = true;
     e.preventDefault();
     redraw();
   }
@@ -789,7 +814,27 @@
   function onWheel(e) {
     if (!cur || !dragStep() || !save.theme) return;
     e.preventDefault();
-    zoomBy(e.deltaY < 0 ? 1.12 : 1 / 1.12);
+    if (e.ctrlKey || e.metaKey) { zoomBy(e.deltaY < 0 ? 1.12 : 1 / 1.12); return; }
+    var notch = e.deltaMode === 1 ? 1 : (Math.abs(e.deltaY) / 100);
+    rotateView((e.deltaY > 0 ? 1 : -1) * Math.max(1, Math.round(3 * Math.min(4, notch))));   /* about 3° per wheel notch: fast turning */
+    settleView();
+  }
+  /* right-click (or the Turn button / R key) turns one piece a quarter turn so it faces the way you want */
+  function onContextMenu(e) {
+    if (!cur || !lastFit || !dragStep() || !save.theme) { if (cur) e.preventDefault(); return; }
+    e.preventDefault();
+    var pt = canvasScenePt(e); if (!pt) return;
+    var pk = hitPick(pt);
+    if (!pk) return;
+    cur.drag = null; cur.pan = null;
+    turnPick(pk);
+  }
+  function turnPick(pk) {
+    if (!pk) return;
+    pk.rot = ((pk.rot || 0) + 1) & 3;
+    cur.sel = pk; persist(); fillPieceBar(); redraw();
+    var p = pieceById(pk.piece);
+    ui.note.textContent = (p ? p.name : "Piece") + " turned" + (p && p.auto ? " — walls, hedges and fences still follow their neighbours, this nudges the corner or run" : "") + ". Right-click (or Turn) again for the next quarter turn.";
   }
   function joinedNote(pk) {
     var p = pieceById(pk.piece), rs = rectsOf(pk), i, n = cellsOf(p), host;
@@ -799,7 +844,17 @@
   }
 
   /* ── view controls ───────────────────────────────────────────────────────── */
-  function rotateView(dir) { view().r = (rot() + (dir < 0 ? 3 : 1)) & 3; persist(); redraw(); }
+  function rotateView(deg) { view().a = ((ang() + (deg || 0)) % 360 + 360) % 360; persist(); redraw(); }
+  var settleTimer = null;
+  /* after fast turning (wheel, held button) a view within 4° of a quarter turn settles onto it, where every wall and hedge lines up */
+  function settleView() {
+    if (settleTimer) clearTimeout(settleTimer);
+    settleTimer = setTimeout(function () {
+      settleTimer = null;
+      var a = ang(), q = Math.round(a / 90) * 90, d = a - q;
+      if (d !== 0 && Math.abs(d) <= 4) rotateView(-d);
+    }, 450);
+  }
   function zoomBy(k) { view().z = Math.max(ZMIN, Math.min(ZMAX, (view().z || 1) * k)); persist(); redraw(); }
   function resetView() { save.view = freshView(); persist(); redraw(); }
 
@@ -818,7 +873,8 @@
     if (!cur || !cur.sel) return;
     var pk = cur.sel, p = pieceById(pk.piece);
     if (!p) return;
-    addPiece(p, pk.style, "free", { cx: pk.cx, cy: pk.cy });
+    var np = addPiece(p, pk.style, "free", { cx: pk.cx, cy: pk.cy });
+    if (np && pk.rot) { np.rot = pk.rot; persist(); redraw(); }
   }
   function recolourSelected(styleId) {
     if (!cur || !cur.sel) return;
@@ -829,7 +885,7 @@
     var pos = autoPlace(cellsOf(p), null, p, near);
     if (!pos) { ui.note.textContent = "Flags and banners need a tower with no flag yet — build a tower first."; return null; }
     var stageBefore = isKit() ? coreStage() : 0;
-    var pk = { night: (cur && cur.night) || 1, piece: p.id, style: style != null ? style : (styleable(p) ? dominantStyle() : ""), src: src || "free", deco: p.role === "deco", ord: save.picks.length, cx: pos.cx, cy: pos.cy };
+    var pk = { night: (cur && cur.night) || 1, piece: p.id, style: style != null ? style : (styleable(p) ? dominantStyle() : ""), src: src || "free", deco: p.role === "deco", ord: save.picks.length, cx: pos.cx, cy: pos.cy, rot: 0 };
     save.picks.push(pk); unlock(p.id);
     var grew = isKit() && !pk.deco && coreStage() > stageBefore && buildingPicks().length > 1;
     var walls = raiseCastleWalls();
@@ -875,9 +931,18 @@
     ui.main = el("div", "build-main hidden");
     ui.sceneWrap = el("div", "build-scene"); ui.canvas = el("canvas"); ui.sceneWrap.appendChild(ui.canvas);
     ui.tools = el("div", "build-tools");
-    [["⟲", "Rotate left", function () { rotateView(-1); }], ["⟳", "Rotate right", function () { rotateView(1); }],
-     ["−", "Zoom out", function () { zoomBy(1 / 1.25); }], ["+", "Zoom in", function () { zoomBy(1.25); }], ["⤢", "Fit the whole build", resetView]]
-      .forEach(function (t) { var b = btn("build-tool", t[0], t[1]); b.setAttribute("aria-label", t[1]); b.addEventListener("click", function (e) { e.preventDefault(); t[2](); }); ui.tools.appendChild(b); });
+    [["⟲", "Turn left 1° (hold to keep turning; mouse wheel turns faster)", function () { rotateView(-1); }, true], ["⟳", "Turn right 1° (hold to keep turning; mouse wheel turns faster)", function () { rotateView(1); }, true],
+     ["−", "Zoom out (Ctrl + wheel)", function () { zoomBy(1 / 1.25); }], ["+", "Zoom in (Ctrl + wheel)", function () { zoomBy(1.25); }], ["⤢", "Fit the whole build and face front", resetView]]
+      .forEach(function (t) {
+        var b = btn("build-tool", t[0], t[1]), timer = null, held = false; b.setAttribute("aria-label", t[1]);
+        if (t[3]) {                                                             /* press and hold: keeps turning about 40° a second */
+          b.addEventListener("pointerdown", function (e) { e.preventDefault(); held = false; timer = setTimeout(function () { held = true; timer = setInterval(function () { t[2](); }, 25); }, 260); });
+          var stop = function () { if (timer) { clearTimeout(timer); clearInterval(timer); timer = null; if (held) settleView(); } };
+          b.addEventListener("pointerup", stop); b.addEventListener("pointerleave", stop); b.addEventListener("pointercancel", stop);
+          b.addEventListener("click", function (e) { e.preventDefault(); if (!held) t[2](); held = false; });
+        } else b.addEventListener("click", function (e) { e.preventDefault(); t[2](); });
+        ui.tools.appendChild(b);
+      });
     ui.sceneWrap.appendChild(ui.tools);
     ui.pbar = el("div", "build-pbar hidden"); ui.sceneWrap.appendChild(ui.pbar);
     ui.side = el("div", "build-side hidden");
@@ -904,6 +969,7 @@
     ui.canvas.addEventListener("pointerup", onPointerUp);
     ui.canvas.addEventListener("pointercancel", onPointerUp);
     ui.canvas.addEventListener("wheel", onWheel, { passive: false });
+    ui.canvas.addEventListener("contextmenu", onContextMenu);
     ui.copyBtn.addEventListener("click", copyCode);
     ui.loadBtn.addEventListener("click", doLoad);
     ui.codeIn.addEventListener("input", function () { if (cur) cur.confirmLoad = false; ui.loadBtn.textContent = "Load"; ui.codeMsg.textContent = ""; });
@@ -1040,7 +1106,9 @@
       c.addEventListener("click", function (e) { e.preventDefault(); recolourSelected(st.id); });
       ui.pbar.appendChild(c);
     });
-    var copy = btn("btn small", "Copy", "Place another one next to it"), del = btn("btn small danger", "Remove", "Take it off the field (it stays in your palette)"), ok = btn("btn small", "Done");
+    var turn = btn("btn small", "Turn ↻", "Turn it a quarter turn (right-click or R)"), copy = btn("btn small", "Copy", "Place another one next to it"), del = btn("btn small danger", "Remove", "Take it off the field (it stays in your palette)"), ok = btn("btn small", "Done");
+    turn.addEventListener("click", function (e) { e.preventDefault(); turnPick(cur.sel); });
+    ui.pbar.appendChild(turn);
     copy.addEventListener("click", function (e) { e.preventDefault(); duplicateSelected(); });
     del.addEventListener("click", function (e) { e.preventDefault(); deleteSelected(); });
     ok.addEventListener("click", function (e) { e.preventDefault(); selectPick(null); });
@@ -1065,7 +1133,7 @@
     if (loadState === "ok") buttons.unshift({ label: "Shop (" + coinLabel() + ")", onTap: function () { openShopFromGallery("build"); } });
     show(ui.side, !!save.theme);
     show(ui.note, true);
-    if (save.theme) ui.note.textContent = ui.note.textContent || "Tap a palette piece to place it. Drag pieces anywhere. Tap a piece to recolour, copy or remove it. Drag the ground to pan; scroll or use + − to zoom; ⟲ ⟳ rotate the view.";
+    if (save.theme) ui.note.textContent = ui.note.textContent || "Tap a palette piece to place it, drag pieces anywhere, right-click a piece to turn it. Tap a piece to recolour, copy or remove it. Mouse wheel or ⟲ ⟳ turn the view (hold to keep turning), Ctrl + wheel or + − zoom, drag the ground to pan.";
     else ui.note.textContent = "";
     fillPalette(); fillPieceBar();
     setButtons(buttons);
@@ -1333,6 +1401,8 @@
       if (esc) { e.preventDefault(); e.stopPropagation(); if (cur && cur.sel) { selectPick(null); return; } if (cur && cur.fromGallery) { mode = "gallery"; cur.shop = false; cur.fromGallery = false; showStep("gallery"); return; } cb = cur && cur.onClose; closeOverlay(); if (cb) cb(); }
       else if (k === "Enter" && e.target === ui.codeIn) { e.preventDefault(); e.stopPropagation(); doLoad(); }
       else if ((k === "Delete" || k === "Backspace") && !inInput && cur && cur.sel) { e.preventDefault(); e.stopPropagation(); deleteSelected(); }
+      else if ((k === "r" || k === "R") && !inInput && cur && cur.sel) { e.preventDefault(); e.stopPropagation(); turnPick(cur.sel); }
+      else if ((k === "ArrowLeft" || k === "ArrowRight") && !inInput && dragStep()) { e.preventDefault(); e.stopPropagation(); rotateView((k === "ArrowLeft" ? -1 : 1) * (e.shiftKey ? 15 : 1)); }
       return;
     }
     if (esc) e.preventDefault();
@@ -1427,7 +1497,7 @@
     return { theme: save.theme, themeName: nm, count: rewardsTaken(), total: TOTAL,
       buildings: nb, decorations: save.picks.length - nb, owned: Object.keys(save.owned || {}).length, coins: save.coins || 0, canShop: loadState === "ok",
       nextNight: nextRewardNight(), label: "My " + (nm || "Town"), loaded: loadState, walls: wallsUp(), style: save.theme ? dominantStyle() : null,
-      view: { r: rot(), z: view().z }, rating: save.theme && loadState === "ok" ? rating() : null };
+      view: { r: rot(), a: ang(), z: view().z }, rating: save.theme && loadState === "ok" ? rating() : null };
   }
 
   document.addEventListener("keydown", onKey, true);
@@ -1445,7 +1515,9 @@
     _place: function (id) { var p = pieceById(id); return p && cur ? !!addPiece(p, null, "free") : false; },
     _select: function (i) { if (!cur) return false; selectPick(save.picks[i] || null); return !!cur.sel; },
     _delete: function () { deleteSelected(); return save.picks.length; },
-    _rotate: function (d) { rotateView(d); return rot(); },
+    _rotate: function (deg) { rotateView(deg); return rot(); },
+    _angle: function () { return ang(); },
+    _turn: function () { turnPick(cur && cur.sel); return cur && cur.sel ? cur.sel.rot : null; },
     _zoom: function (k) { zoomBy(k); return view().z; },
     _hitAt: function (clientX, clientY) { var pt = canvasScenePt({ clientX: clientX, clientY: clientY }); var pk = pt && hitPick(pt); return { pt: pt && { x: pt.x, y: pt.y, sx: pt.sx, sy: pt.sy }, cell: pt && pxToCell(pt.x, pt.y), pick: pk ? pk.piece + "@" + pk.cx + "," + pk.cy : null, step: step, draggable: draggable(pk) }; },
     _pickScreen: function (i) {

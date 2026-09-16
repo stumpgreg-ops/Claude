@@ -43,17 +43,46 @@ COLORS = {          # hue in degrees for the blue accents (flags, roofs, colour 
 ORIENTS = ["NE", "NW", "SE", "SW"]
 
 # sprites we ship (name -> orientations)
-SPRITES = {
-    "wall": ["NE", "NW"], "wallCorner": ORIENTS, "wallDoor": ["NE", "NW"], "metalGate": ["NE", "NW"],
-    "wallNarrowStairs": ["NE", "NW"], "wallCornerHalfTower": ORIENTS, "wallHalf": ["NE", "NW"],
-    "towerBase": ["NE"], "towerTop": ["NE"], "towerTopRoof": ["NE"], "towerBalcony": ["NE"],
-    "towerSquareBase": ["NE"], "towerSquareBaseColor": ["NE"], "towerSquareMid": ["NE"], "towerSquareMidWindows": ["NE"],
-    "towerSquareMidOpen": ["NE"], "towerSquareMidColor": ["NE"], "towerSquareArch": ["NE"], "towerSquareTop": ["NE"],
-    "towerSquareTopRoof": ["NE"], "towerSquareTopRoofHigh": ["NE"], "towerSquareTopColor": ["NE"], "towerSquareRoof": ["NE"],
-    "towerSquarePoles": ["NE"],
-    "flagBlue": ["NE"], "flagBlueWide": ["NE"], "flagBannerLong": ["NE"], "flagBannerShort": ["NE"], "shieldBlue": ["NE"],
-    "bridge": ["NE", "NW"], "stairsStone": ["NE"], "king": ["NE"], "knightBlue": ["NE"], "knightRed": ["NE"],
-    "siegeBallista": ["NE"], "siegeCatapult": ["NE"], "siegeRam": ["NE"], "siegeTower": ["NE"], "siegeTrebuchet": ["NE"],
+SPRITES = {  # v5.1: every sprite in all four orientations so pieces can be turned
+    "wall": ORIENTS,
+    "wallCorner": ORIENTS,
+    "wallDoor": ORIENTS,
+    "metalGate": ORIENTS,
+    "wallNarrowStairs": ORIENTS,
+    "wallCornerHalfTower": ORIENTS,
+    "wallHalf": ORIENTS,
+    "towerBase": ORIENTS,
+    "towerTop": ORIENTS,
+    "towerTopRoof": ORIENTS,
+    "towerBalcony": ORIENTS,
+    "towerSquareBase": ORIENTS,
+    "towerSquareBaseColor": ORIENTS,
+    "towerSquareMid": ORIENTS,
+    "towerSquareMidWindows": ORIENTS,
+    "towerSquareMidOpen": ORIENTS,
+    "towerSquareMidColor": ORIENTS,
+    "towerSquareArch": ORIENTS,
+    "towerSquareTop": ORIENTS,
+    "towerSquareTopRoof": ORIENTS,
+    "towerSquareTopRoofHigh": ORIENTS,
+    "towerSquareTopColor": ORIENTS,
+    "towerSquareRoof": ORIENTS,
+    "towerSquarePoles": ORIENTS,
+    "flagBlue": ORIENTS,
+    "flagBlueWide": ORIENTS,
+    "flagBannerLong": ORIENTS,
+    "flagBannerShort": ORIENTS,
+    "shieldBlue": ORIENTS,
+    "bridge": ORIENTS,
+    "stairsStone": ORIENTS,
+    "king": ORIENTS,
+    "knightBlue": ORIENTS,
+    "knightRed": ORIENTS,
+    "siegeBallista": ORIENTS,
+    "siegeCatapult": ORIENTS,
+    "siegeRam": ORIENTS,
+    "siegeTower": ORIENTS,
+    "siegeTrebuchet": ORIENTS,
 }
 
 def is_blue(h, s, v):
@@ -190,26 +219,19 @@ def main():
         return out
     if have_extra:
         # town kit: house blocks and roofs (stackable), village props, hedges and fences (all four orientations)
-        for nm in ["wallBlock", "wallWoodBlock", "roofGable", "roofHigh", "roofHighPoint", "roofPoint", "roofHighGable", "roof", "roofHighWindow"]:
-            X("t", nm)
-        for nm in ["stallRed", "stallGreen", "cart", "cartHigh", "lantern", "fountainRound", "fountainSquare",
-                   "tree", "treeHigh", "treeHighRound", "rockLarge", "pillarStone", "planks"]:
-            X("t", nm)
-        X("t", "windmill", base=True); X("t", "watermill", base=True)
-        for nm in ["hedge", "hedgeGate", "fence", "fenceGate"]:
-            X("t", nm, "NE"); X("t", nm, "NW")
-        for nm in ["hedgeCurved", "fenceCurved"]:
+        for nm in ["wallBlock", "wallWoodBlock", "roofGable", "roofHigh", "roofHighPoint", "roofPoint", "roofHighGable", "roof", "roofHighWindow",
+                   "stallRed", "stallGreen", "cart", "cartHigh", "lantern", "fountainRound", "fountainSquare",
+                   "tree", "treeHigh", "treeHighRound", "rockLarge", "pillarStone", "planks", "hedge", "hedgeGate", "fence", "fenceGate", "hedgeCurved", "fenceCurved"]:
             for o in ORIENTS: X("t", nm, o)
+        for o in ORIENTS: X("t", "windmill", o, base=True); X("t", "watermill", o, base=True)
         # nature kit
         for nm in ["tree_oak", "tree_pineDefaultA", "tree_default_fall", "tree_detailed", "tree_small", "tree_tall", "tree_pineRoundA",
                    "plant_bush", "plant_bushLarge", "mushroom_redGroup", "mushroom_tanGroup", "rock_largeA", "rock_smallA", "rock_tallA",
                    "statue_column", "statue_obelisk", "statue_head", "statue_ring", "log_stack", "campfire_stones", "tent_detailedOpen",
-                   "sign", "pot_large", "crops_wheatStageB", "crop_pumpkin", "bridge_wood", "path_stone", "lily_large", "stump_round"]:
-            X("n", nm)
-        X("n", "statue_block", lift=34)                                                   # a pedestal: figures stand on it
-        for nm in ["fence_simple", "fence_gate"]:
-            X("n", nm, "NE"); X("n", nm, "NW")
-        for o in ORIENTS: X("n", "fence_corner", o)
+                   "sign", "pot_large", "crops_wheatStageB", "crop_pumpkin", "bridge_wood", "path_stone", "lily_large", "stump_round",
+                   "fence_simple", "fence_gate", "fence_corner"]:
+            for o in ORIENTS: X("n", nm, o)
+        for o in ORIENTS: X("n", "statue_block", o, lift=34)                             # a pedestal: figures stand on it
         # flower beds: six flowers of one colour (or mixed) scattered on the cell, scaled up so they read
         beds = {"red": ["flower_redA", "flower_redB", "flower_redC"], "purple": ["flower_purpleA", "flower_purpleB", "flower_purpleC"],
                 "yellow": ["flower_yellowA", "flower_yellowB", "flower_yellowC"],
@@ -220,13 +242,15 @@ def main():
         X("n", "plant_bush", out="n_bushes", k=1.3, offsets=[(-22, 2), (24, -8), (0, 12)], variants=["plant_bush", "plant_bushLarge", "plant_bushSmall"])
         # graveyard kit: benches, lamp posts, urns, a big column
         for nm in ["bench", "lightpostSingle", "lightpostDouble", "urn", "columnLarge", "lanternGlass", "pillarObelisk"]:
-            X("g", nm)
+            for o in ORIENTS: X("g", nm, o)
         # animals (flat stand-ups)
         for nm in ["cow", "horse", "pig", "goat", "chicken", "dog", "rabbit", "duck", "owl"]:
             sprites["a_" + nm] = import_animal(nm); sprites["a_" + nm]["coloured"] = False
         # stone statues of the castle figures
-        for nm, src_name in [("s_knight", "knightBlue_NE"), ("s_king", "king_NE")]:
-            sprites[nm] = to_stone(os.path.join(OUT, src_name + ".png"), nm); sprites[nm]["coloured"] = False
+        for base_name, src_name in [("s_knight", "knightBlue"), ("s_king", "king")]:
+            for o in ORIENTS:
+                nm = base_name + "_" + o
+                sprites[nm] = to_stone(os.path.join(OUT, src_name + "_" + o + ".png"), nm); sprites[nm]["coloured"] = False
         print("wrote extra sprites:", sum(1 for k in sprites if k[:2] in ("t_", "n_", "g_", "a_", "s_")))
 
     # ── modules ──────────────────────────────────────────────────────────────
@@ -376,8 +400,8 @@ def main():
             P("stone-head", "Stone head", "A giant carved head.", "n_statue_head_NE", 3, 60, 26, "statue"),
             P("stone-ring", "Stone ring", "A ring of carved stone.", "n_statue_ring_NE", 3, 55, 24, "statue"),
             P("pedestal", "Pedestal", "A stone pedestal.", "n_statue_block_NE", 1, 15, 6, "statue"),
-            P("knight-statue", "Knight statue", "A stone knight on a pedestal.", "n_statue_block_NE", 2, 50, 22, "statue", ["n_statue_block_NE", "s_knight"]),
-            P("king-statue", "King statue", "A stone king on a pedestal.", "n_statue_block_NE", 3, 80, 34, "statue", ["n_statue_block_NE", "s_king"]),
+            P("knight-statue", "Knight statue", "A stone knight on a pedestal.", "n_statue_block_NE", 2, 50, 22, "statue", ["n_statue_block_NE", "s_knight_NE"]),
+            P("king-statue", "King statue", "A stone king on a pedestal.", "n_statue_block_NE", 3, 80, 34, "statue", ["n_statue_block_NE", "s_king_NE"]),
             P("stone-pillar", "Stone pillar", "A slim stone pillar.", "t_pillarStone_NE", 1, 15, 6, "statue"),
             P("small-obelisk", "Small obelisk", "A small pointed pillar.", "g_pillarObelisk_NE", 2, 30, 12, "statue"),
             P("glass-lantern", "Glass lantern", "A lantern in a glass case.", "g_lanternGlass_NE", 1, 12, 5, "village"),

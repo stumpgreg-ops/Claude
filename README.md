@@ -9,6 +9,11 @@ Progress saves in this browser profile (`afterHours.v1.night`). Itch login does 
 
 Question packs: `js/content.js` and `js/content2.js` (the v4 Virginia packs) plus `js/content3.js`–`js/content11.js` (v4.9 Virginia) and `js/content12.js`–`js/content17.js` (v4.9 New Jersey grade 5). Format and writing rules: `tools/CONTENT-GUIDE.md`. Check every file with `node tools/validate-content.js`. Headless smoke test of the gateway, builder, shop and a night: `node tools/smoke.js` (screenshots in `tools/shots/`).
 
+## v5.1 (2026-09-16)
+- **Turn any piece.** Right-click a piece (or tap it and use Turn, or press R) to turn it a quarter turn, so gates, stalls, benches, houses and towers face the way you want and join up. Every kit sprite now ships in all four orientations. Turned pieces keep their turn in the save and the build code, and Copy keeps it too.
+- **Turn the view by the degree.** ⟲ ⟳ turn the whole scene 1° per tap; hold them to keep turning (about 40° a second). The mouse wheel turns faster (about 3° a notch); Ctrl + wheel zooms; ← → also turn (Shift for 15°). Positions rotate smoothly on the ground; the art itself only exists in four directions, so sprites snap to the nearest quarter turn and straight runs of wall or hedge show their seams in between. A view that stops within 4° of a quarter turn settles onto it.
+- **A flat field.** The dome is gone: the build stands on a flat square of grass cells with a faint grid that turns with the view, on a plain that runs to the mountains.
+
 ## v5.0 (2026-09-16) — the full-screen castle editor
 - **Full screen.** "My Castle" / "My Town", the shop and every reward step now fill the whole screen; the scene takes all the room the palette and buttons leave.
 - **Own it once, place it forever.** A piece earned as a reward or bought in the shop is unlocked for good. The palette on the right lists every unlocked piece by category (Keep, Towers, Walls & gates, Buildings, Nature, Statues, Village, Animals, People & siege, Flags); tap one to place another copy, as many times as you like. Locked pieces show their price and open the shop. Packs charge only for pieces you do not own yet.
