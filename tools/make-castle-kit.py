@@ -451,6 +451,17 @@ def main():
     d["v"] = 2
     json.dump(d, open(pj, "w"), indent=1)
     print("castle modules:", len(modules), "→", pj)
+    # ── shrink: flat-shaded sprites lose nothing visible as 256-colour palette PNGs (about a third of the size) ──
+    before = after = 0
+    for dp, _, fs in os.walk(OUT):
+        for f in fs:
+            if not f.endswith(".png"):
+                continue
+            fp = os.path.join(dp, f); before += os.path.getsize(fp)
+            im = Image.open(fp).convert("RGBA")
+            im.quantize(256, method=Image.Quantize.FASTOCTREE).save(fp, optimize=True)
+            after += os.path.getsize(fp)
+    print("kit sprites: %.1f MB -> %.1f MB" % (before / 1e6, after / 1e6))
 
 if __name__ == "__main__":
     main()
