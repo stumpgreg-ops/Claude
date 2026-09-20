@@ -3,6 +3,8 @@ Solo Chromebook maze-chase extract. 100 nights. Virginia 2024 EOC Reading SOL (g
 
 **Theme (Norse × SOL):** You are **Sol**, the Norse sun goddess, collecting letter slips in a Pac-like school labyrinth. Ravenous wolves — **Hati** — patrol the corridors. Grab the **correct** letter to summon Sol's **CHARIOT** and smash Hati by contact (they return from the Wolf Pen). Wrong letter alarms. Fruit = bonus points only. Ice = brief escape freeze. **Only one power/effect active at a time.**
 
+**Regenerating the castle kit (v5.3).** `node tools/render-kaykit.js <KayKit Assets/gltf> <renders>` then `python3 tools/make-castle-kit.py <kenney mirror> --kaykit <renders>`; three.js is fetched from GitHub into `tools/three/` on first run.
+
 **Two games, one codebase (v5.2).** `node tools/build-games.js` writes `dist/nj/` (New Jersey, Grade 5 NJSLA-ELA) and `dist/va/` (Virginia, Grades 9–11 EOC Reading SOL) and zips each as `dist/SOLLabyrinth-NJ-v<version>.zip` and `dist/SOLLabyrinth-VA-v<version>.zip`, ready for two itch.io projects. Each build opens on its own title screen with only its grade cards, carries only its question files, and has no state gateway. The root `index.html` stays the combined development build with the New Jersey / Virginia gateway.
 
 Play (combined dev build): `index.html`. Teacher monitor: `admin.html` (PIN lock; FERPA nicknames only).
@@ -10,6 +12,12 @@ Play (combined dev build): `index.html`. Teacher monitor: `admin.html` (PIN lock
 Progress saves in this browser profile (`afterHours.v1.night`). Itch login does not store progress.
 
 Question packs: `js/content.js` and `js/content2.js` (the v4 Virginia packs) plus `js/content3.js`–`js/content11.js` (v4.9 Virginia) and `js/content12.js`–`js/content17.js` (v4.9 New Jersey grade 5). Format and writing rules: `tools/CONTENT-GUIDE.md`. Check every file with `node tools/validate-content.js`. Headless smoke test of the gateway, builder, shop, a night and the two built games: `node tools/smoke.js` (screenshots in `tools/shots/`).
+
+## v5.3 (2026-09-21) — the KayKit castle
+- **A base-builder castle.** 57 new castle pieces from Kay Lousberg's **KayKit Medieval Hexagon Pack** (CC0): a three-cell Great castle with a tower at every corner, a Town hall, Barracks, Archery range, Market hall, Mine, Shipyard, Stables, Workshop, Army tent (two cells each), a Blacksmith, Church, Small and Tall house, Lumber mill, Shrine, Inn, Water mill and Stone windmill, six stone and timber towers (a Squat tower and a Wooden watchtower take flags), a Stone well, a Grain field, a Building site, Ruins, stages, barrels, crates, supplies, hay, a wheelbarrow, an archery target, a weapon rack, a trough, cannonballs, a camp tent, carts, a wheeled catapult, a cannon, a warhorse, a soldier, a war banner and a ground flag in your colour, two trees, two groves and rocks. Every coloured piece comes in Royal Blue, Crimson, Forest and Gold, straight from the pack's four team colours. Town, Garrison, Mill and Stone tower packs in the shop.
+- **Grey stone walls.** Kenney's beige wall and tower tiles are tinted to grey stone so they sit with the new buildings (`greystone` in the generator); the blue accents still recolour.
+- **Multi-cell pieces.** The builder anchors and depth-sorts 2×2 and 3×3 pieces from the front apex of the whole footprint.
+- **Rendering pipeline.** `tools/render-kaykit.js` (Playwright + three.js in headless Chromium, WebGL through SwiftShader) renders the pack's glTF models in true isometric onto Kenney-convention canvases in four directions and four colours, fitting each model by its rendered width (hexagonal bases are narrower than their bounding box); `tools/make-castle-kit.py --kaykit <renders>` imports them like any other extra kit (1-, 2- and 3-cell reference tiles). The KayKit glTF folder and the renders are not in the repo; the atlases are.
 
 ## v5.2.1 (2026-09-20)
 - **Turning a wall or gate.** A wall, portcullis gate, open gate, hedge, hedge gate, fence, fence gate or rail fence looks the same from behind, so it only has two ways to face; before, two of every four right-clicks looked like nothing happened. Turn now switches such a piece between its two ways and says "now runs the other way". Towers, houses, stairs and corner turrets still turn through all four quarter turns.

@@ -598,7 +598,8 @@
     if (isKit()) {
       /* the sprite's bottom-centre is the cell's front apex: half a diamond below the cell centre */
       if (isTopper(p)) { host = hostFor(cx, cy, pk) || pickAt(cx, cy, pk, function (q) { return isHost(q); }); if (host) base = stackHeight(pieceById(host.piece), cx, cy, host.rot); }
-      it = { p: p, pk: pk, style: style, x: c.x, y: c.y + cellH() / 2, a: 1, depth: ctr.u + ctr.v + (isTopper(p) ? 0.5 : 0), cx: cx, cy: cy, n: 1, kit: true, base: base, parts: partsFor(p, cx, cy, ignore, pk ? pk.rot : 0) };
+      /* v5.3: an n×n piece's sprite hangs from the front apex of the whole footprint, n half-diamonds below its centre */
+      it = { p: p, pk: pk, style: style, x: c.x, y: c.y + n * cellH() / 2, a: 1, depth: ctr.u + ctr.v + n - 1 + (isTopper(p) ? 0.5 : 0), cx: cx, cy: cy, n: n, kit: true, base: base, parts: partsFor(p, cx, cy, ignore, pk ? pk.rot : 0) };
     } else {
       it = { p: p, pk: pk, style: style, x: c.x, y: c.y, a: 1, depth: ctr.u + ctr.v + n, cx: cx, cy: cy, n: n };
     }
