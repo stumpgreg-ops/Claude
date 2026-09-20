@@ -599,7 +599,7 @@
       /* the sprite's bottom-centre is the cell's front apex: half a diamond below the cell centre */
       if (isTopper(p)) { host = hostFor(cx, cy, pk) || pickAt(cx, cy, pk, function (q) { return isHost(q); }); if (host) base = stackHeight(pieceById(host.piece), cx, cy, host.rot); }
       /* v5.3: an n×n piece's sprite hangs from the front apex of the whole footprint, n half-diamonds below its centre */
-      it = { p: p, pk: pk, style: style, x: c.x, y: c.y + n * cellH() / 2, a: 1, depth: ctr.u + ctr.v + n - 1 + (isTopper(p) ? 0.5 : 0), cx: cx, cy: cy, n: n, kit: true, base: base, parts: partsFor(p, cx, cy, ignore, pk ? pk.rot : 0) };
+      it = { p: p, pk: pk, style: style, x: c.x, y: c.y + n * cellH() / 2, a: 1, depth: ctr.u + ctr.v + n - 1 + (isTopper(p) ? 0.5 : 0), cx: cx, cy: cy, n: n, kit: true, base: base, ign: ignore || null, parts: partsFor(p, cx, cy, ignore, pk ? pk.rot : 0) };
     } else {
       it = { p: p, pk: pk, style: style, x: c.x, y: c.y, a: 1, depth: ctr.u + ctr.v + n, cx: cx, cy: cy, n: n };
     }
@@ -679,8 +679,156 @@
     ctx.fillStyle = it.bad ? "rgba(255,90,90,.35)" : it.sel ? "rgba(120,220,255,.35)" : it.ghost ? "rgba(245,200,66,.35)" : "rgba(245,200,66,.12)"; ctx.fill();
     ctx.lineWidth = Math.max(1, C * 0.04); ctx.strokeStyle = it.bad ? "#ff6b6b" : it.sel ? "#8ee0ff" : "rgba(245,200,66,.85)"; ctx.stroke();
   }
+  /* ── v5.4: walls, gates, hedges and fences are drawn as geometry, not sprites ──────────────
+     A run piece (auto-tiled) is a box, or an L / T / cross of boxes, built from its cell's corners in
+     WORLD space and projected through the view, so a run stays one continuous wall at every view
+     angle. Sprites only exist in four directions, which broke a run into staggered blocks in between
+     the quarter turns. Neighbours are read in world space too (same category, or a solid building). */
+  var RUN_STYLE = {
+    wall: { kind: "stone", t: 0.5, h: 1.15, merlons: true },
+    gate: { kind: "stone", t: 0.5, h: 1.15, merlons: true, arch: true, bars: true },
+    doorway: { kind: "stone", t: 0.5, h: 1.15, merlons: true, arch: true },
+    "stairs-wall": { kind: "stone", t: 0.5, h: 1.15, merlons: true, stairs: true },
+    "corner-tower": { kind: "stone", t: 0.5, h: 1.15, merlons: true, turret: true },
+    hedge: { kind: "hedge", t: 0.56, h: 0.6 },
+    "hedge-gate": { kind: "hedge", t: 0.56, h: 0.6, gap: true },
+    "c-fence": { kind: "wood", t: 0.07, h: 0.55, fence: true, rails: 2 },
+    "fence-gate": { kind: "wood", t: 0.07, h: 0.6, fence: true, rails: 3, gate: true },
+    "rail-fence": { kind: "wood", t: 0.06, h: 0.45, fence: true, rails: 2 }
+  };
+  var RUN_COLS = {
+    stone: { top: "#aeb4bb", light: "#8f969e", dark: "#687079", hole: "#33373b", bar: "#b8bcc0" },
+    hedge: { top: "#5cab45", light: "#48943b", dark: "#33712c" },
+    wood: { top: "#c39463", light: "#aa7c4f", dark: "#7f5a38" }
+  };
+  function isRun(p) { return !!(p && p.auto && RUN_STYLE[p.id]); }
+  /* the world directions a run piece at (cx, cy) joins: the same category of run, or a solid building */
+  function runDirs(p, cx, cy, ignore) {
+    var pred = function (q) { return q.auto ? catOf(q) === catOf(p) : isSolid(q); }, out = [];
+    [[1, 0], [-1, 0], [0, 1], [0, -1]].forEach(function (d) { if (pickAt(cx + d[0], cy + d[1], ignore, pred)) out.push(d); });
+    return out;
+  }
+  function drawRun(ctx, it, fit) {
+    var p = it.p, st = RUN_STYLE[p.id], cols = RUN_COLS[st.kind], s = fit.s / fit.base, cx = it.cx, cy = it.cy, H = cellH();
+    function P(x, y, z) { var g = worldPx(x, y); return { x: fit.ox + g.x * s, y: fit.oy + (g.y - (z || 0) * H) * s }; }
+    function poly(pts) { ctx.beginPath(); pts.forEach(function (q, i) { if (i) ctx.lineTo(q.x, q.y); else ctx.moveTo(q.x, q.y); }); ctx.closePath(); }
+    /* a box over world [x0,x1]×[y0,y1], from height z0 to z1: the two near side faces, then the top */
+    function box(x0, y0, x1, y1, z0, z1, c, mode) {
+      c = c || cols;
+      var b = [P(x0, y0, z0), P(x1, y0, z0), P(x1, y1, z0), P(x0, y1, z0)], t = [P(x0, y0, z1), P(x1, y0, z1), P(x1, y1, z1), P(x0, y1, z1)];
+      var ctr = P((x0 + x1) / 2, (y0 + y1) / 2, z0), i, j, m;
+      if (mode !== "top") for (i = 0; i < 4; i++) {
+        j = (i + 1) & 3; m = { x: (b[i].x + b[j].x) / 2, y: (b[i].y + b[j].y) / 2 };
+        if (m.y > ctr.y + 0.01) { ctx.fillStyle = m.x < ctr.x ? c.light : c.dark; poly([b[i], b[j], t[j], t[i]]); ctx.fill(); }
+      }
+      if (mode !== "sides") { ctx.fillStyle = c.top; poly(t); ctx.fill(); }
+    }
+    function screenY(x, y) { return P(x, y, 0).y; }
+    /* which way the run goes, from WORLD neighbours; a lone piece follows its own turn */
+    var dirs = runDirs(p, cx, cy, it.ign), rot = (it.pk && it.pk.rot) || 0, side = (rot & 1) ? -1 : 1;
+    if (!dirs.length) dirs = (rot & 1) ? [[0, 1], [0, -1]] : [[1, 0], [-1, 0]];
+    else if (dirs.length === 1) dirs.push([-dirs[0][0], -dirs[0][1]]);
+    var has = function (dx, dy) { return dirs.some(function (d) { return d[0] === dx && d[1] === dy; }); };
+    var mx = cx + 0.5, my = cy + 0.5, t = st.t, ht = t / 2, E = 0.02, h = st.h, parts = [], tops = [];
+    /* the boxes: a full straight box for an opposite pair, half boxes for the other arms */
+    var straightX = has(1, 0) && has(-1, 0), straightY = has(0, 1) && has(0, -1), main = null;
+    if (straightX) { parts.push({ x0: cx - E, x1: cx + 1 + E, y0: my - ht, y1: my + ht, axis: "x" }); main = parts[parts.length - 1]; }
+    if (straightY) { parts.push({ x0: mx - ht, x1: mx + ht, y0: cy - E, y1: cy + 1 + E, axis: "y" }); if (!main) main = parts[parts.length - 1]; }
+    dirs.forEach(function (d) {
+      if ((d[0] && straightX) || (d[1] && straightY)) return;
+      if (d[0]) parts.push({ x0: d[0] > 0 ? mx - ht : cx - E, x1: d[0] > 0 ? cx + 1 + E : mx + ht, y0: my - ht, y1: my + ht, axis: "x" });
+      else parts.push({ x0: mx - ht, x1: mx + ht, y0: d[1] > 0 ? my - ht : cy - E, y1: d[1] > 0 ? cy + 1 + E : my + ht, axis: "y" });
+    });
+    if (!main) main = parts[0];
+    if (st.gap && main) {                              /* a gap in the middle of a hedge */
+      var g = 0.2, keep = [];
+      parts.forEach(function (b) {
+        if (b !== main) { keep.push(b); return; }
+        if (b.axis === "x") { keep.push({ x0: b.x0, x1: mx - g, y0: b.y0, y1: b.y1, axis: "x" }); keep.push({ x0: mx + g, x1: b.x1, y0: b.y0, y1: b.y1, axis: "x" }); }
+        else { keep.push({ x0: b.x0, x1: b.x1, y0: b.y0, y1: my - g, axis: "y" }); keep.push({ x0: b.x0, x1: b.x1, y0: my + g, y1: b.y1, axis: "y" }); }
+      });
+      parts = keep;
+    }
+    ctx.save(); ctx.globalAlpha = it.a;
+    if (st.fence) {
+      /* posts at the cell edges and the centre, rails between them */
+      var posts = [], rails = [], pw = 0.08, i, k, n = st.rails || 2;
+      parts.forEach(function (b) {
+        if (b.axis === "x") { posts.push([b.x0 + E, my]); posts.push([b.x1 - E, my]); for (k = 0; k < n; k++) rails.push({ x0: b.x0, x1: b.x1, y0: my - t / 2, y1: my + t / 2, z0: 0.14 + k * (h - 0.2) / Math.max(1, n - 1), z1: 0.14 + k * (h - 0.2) / Math.max(1, n - 1) + 0.06 }); }
+        else { posts.push([mx, b.y0 + E]); posts.push([mx, b.y1 - E]); for (k = 0; k < n; k++) rails.push({ x0: mx - t / 2, x1: mx + t / 2, y0: b.y0, y1: b.y1, z0: 0.14 + k * (h - 0.2) / Math.max(1, n - 1), z1: 0.14 + k * (h - 0.2) / Math.max(1, n - 1) + 0.06 }); }
+      });
+      if (st.gate) posts.push([mx, my]);
+      var all = rails.map(function (r) { return { kind: "rail", r: r, y: screenY((r.x0 + r.x1) / 2, (r.y0 + r.y1) / 2) }; })
+        .concat(posts.map(function (q) { return { kind: "post", q: q, y: screenY(q[0], q[1]) }; }));
+      all.sort(function (a, b) { return a.y - b.y; });
+      all.forEach(function (o) {
+        if (o.kind === "rail") box(o.r.x0, o.r.y0, o.r.x1, o.r.y1, o.r.z0, o.r.z1);
+        else box(o.q[0] - pw / 2, o.q[1] - pw / 2, o.q[0] + pw / 2, o.q[1] + pw / 2, 0, h);
+      });
+      ctx.restore(); return;
+    }
+    /* solid runs: boxes back to front, then merlons, arches, stairs, turret */
+    /* all the side faces, then all the tops: the boxes share one height, so where arms overlap (a corner, T or cross) no seam shows */
+    parts.forEach(function (b) { box(b.x0, b.y0, b.x1, b.y1, 0, h, null, "sides"); });
+    parts.forEach(function (b) { box(b.x0, b.y0, b.x1, b.y1, 0, h, null, "top"); });
+    if (st.stairs && main) {                            /* three steps up against one long face (turning the piece swaps the side) */
+      var k2, sw = 0.22, sd = 0.24, e0 = side > 0 ? ht : -ht - sd, e1 = e0 + sd;
+      for (k2 = 0; k2 < 3; k2++) {
+        if (main.axis === "x") box(mx - 0.33 + k2 * sw, my + e0, mx - 0.33 + (k2 + 1) * sw, my + e1, 0, 0.3 * (k2 + 1));
+        else box(mx + e0, my - 0.33 + k2 * sw, mx + e1, my - 0.33 + (k2 + 1) * sw, 0, 0.3 * (k2 + 1));
+      }
+    }
+    if (st.arch && main) {                              /* an archway through the near long face (and iron bars for the portcullis) */
+      var face = null, a, pts = [], u0, u1, um, k3, z;
+      if (main.axis === "x") { face = screenY(mx, my + ht) > screenY(mx, my - ht) ? my + ht : my - ht; um = mx; }
+      else { face = screenY(mx + ht, my) > screenY(mx - ht, my) ? mx + ht : mx - ht; um = my; }
+      u0 = um - 0.2; u1 = um + 0.2;
+      var F = function (u, z) { return main.axis === "x" ? P(u, face, z) : P(face, u, z); };
+      pts.push(F(u0, 0)); pts.push(F(u0, 0.55));
+      for (k3 = 0; k3 <= 10; k3++) { a = Math.PI - k3 * Math.PI / 10; pts.push(F(um + 0.2 * Math.cos(a), 0.55 + 0.2 * Math.sin(a))); }
+      pts.push(F(u1, 0));
+      ctx.fillStyle = cols.hole; poly(pts); ctx.fill();
+      if (st.bars) {
+        ctx.strokeStyle = cols.bar; ctx.lineWidth = Math.max(1, 2 * s);
+        for (k3 = -2; k3 <= 2; k3++) { var q0 = F(um + k3 * 0.08, 0), q1 = F(um + k3 * 0.08, 0.72); ctx.beginPath(); ctx.moveTo(q0.x, q0.y); ctx.lineTo(q1.x, q1.y); ctx.stroke(); }
+        for (z = 0.15; z < 0.72; z += 0.18) { var r0 = F(u0 + 0.03, z), r1 = F(u1 - 0.03, z); ctx.beginPath(); ctx.moveTo(r0.x, r0.y); ctx.lineTo(r1.x, r1.y); ctx.stroke(); }
+      }
+    }
+    if (st.merlons) {                                   /* battlements along both long edges of every box */
+      var ms = [], mw = 0.12, md = 0.13, mh = 0.22;
+      parts.forEach(function (b) {
+        var len = b.axis === "x" ? b.x1 - b.x0 : b.y1 - b.y0, n2 = Math.max(1, Math.round(len / 0.25)), k4, u;
+        for (k4 = 0; k4 < n2; k4++) {
+          u = (b.axis === "x" ? b.x0 : b.y0) + (k4 + 0.5) * len / n2 - mw / 2;
+          if (b.axis === "x") { ms.push({ x0: u, x1: u + mw, y0: b.y0, y1: b.y0 + md }); ms.push({ x0: u, x1: u + mw, y0: b.y1 - md, y1: b.y1 }); }
+          else { ms.push({ x0: b.x0, x1: b.x0 + md, y0: u, y1: u + mw }); ms.push({ x0: b.x1 - md, x1: b.x1, y0: u, y1: u + mw }); }
+        }
+      });
+      ms.sort(function (a, b) { return screenY((a.x0 + a.x1) / 2, (a.y0 + a.y1) / 2) - screenY((b.x0 + b.x1) / 2, (b.y0 + b.y1) / 2); });
+      ms.forEach(function (m) { box(m.x0, m.y0, m.x1, m.y1, h, h + mh); });
+    }
+    if (st.turret) {                                    /* a round turret on the corner: shaded cylinder, flat top, a ring of merlons */
+      var r = 0.36, th = h + 0.45, N = 24, ring = [], top = [], k5, ang2, q, c0 = P(mx, my, 0), lo = null, hi = null;
+      for (k5 = 0; k5 < N; k5++) { ang2 = k5 * 2 * Math.PI / N; q = { x: mx + r * Math.cos(ang2), y: my + r * Math.sin(ang2) }; ring.push({ b: P(q.x, q.y, 0), t: P(q.x, q.y, th) }); }
+      /* the near half of the cylinder: from the leftmost to the rightmost silhouette point through the front */
+      ring.forEach(function (o, i) { if (!lo || o.b.x < ring[lo].b.x) lo = i; if (!hi || o.b.x > ring[hi].b.x) hi = i; });
+      var seq = [], i2 = lo, guard = 0;
+      while (guard++ < N + 1) { seq.push(i2); if (i2 === hi) break; i2 = (i2 + 1) % N; }
+      if (seq.length && ring[seq[Math.floor(seq.length / 2)]].b.y < c0.y) { seq = []; i2 = lo; guard = 0; while (guard++ < N + 1) { seq.push(i2); if (i2 === hi) break; i2 = (i2 - 1 + N) % N; } }
+      var bodyPts = seq.map(function (i) { return ring[i].b; }).concat(seq.slice().reverse().map(function (i) { return ring[i].t; }));
+      var gr = ctx.createLinearGradient(ring[lo].b.x, 0, ring[hi].b.x, 0); gr.addColorStop(0, cols.light); gr.addColorStop(0.45, cols.light); gr.addColorStop(1, cols.dark);
+      ctx.fillStyle = gr; poly(bodyPts); ctx.fill();
+      ctx.fillStyle = cols.top; poly(ring.map(function (o) { return o.t; })); ctx.fill();
+      var mer = [];
+      for (k5 = 0; k5 < 8; k5++) { ang2 = k5 * Math.PI / 4; q = { x: mx + (r - 0.07) * Math.cos(ang2), y: my + (r - 0.07) * Math.sin(ang2) }; mer.push({ x0: q.x - 0.06, x1: q.x + 0.06, y0: q.y - 0.06, y1: q.y + 0.06 }); }
+      mer.sort(function (a, b) { return screenY((a.x0 + a.x1) / 2, (a.y0 + a.y1) / 2) - screenY((b.x0 + b.x1) / 2, (b.y0 + b.y1) / 2); });
+      mer.forEach(function (m) { box(m.x0, m.y0, m.x1, m.y1, th, th + 0.18); });
+    }
+    ctx.restore();
+  }
   function drawKitPiece(ctx, it, fit) {
     var s = fit.s / fit.base, x = fit.ox + it.x * s, y0 = fit.oy + it.y * s, i, pt, c, dw, dh, bottom;
+    if (isRun(it.p)) { if (it.ghost || it.sel) { ctx.save(); ctx.globalAlpha = it.a; drawFootprint(ctx, it, fit); ctx.restore(); } drawRun(ctx, it, fit); return; }
     ctx.save(); ctx.globalAlpha = it.a;
     if (it.ghost || it.sel) drawFootprint(ctx, it, fit);
     for (i = 0; i < it.parts.length; i++) {
@@ -852,8 +1000,10 @@
     var p = pieceById(pk.piece), two = !!(p && p.auto && TWO_WAY[p.id]);
     pk.rot = two ? ((pk.rot || 0) + 1) & 1 : ((pk.rot || 0) + 1) & 3;
     cur.sel = pk; persist(); fillPieceBar(); redraw();
-    ui.note.textContent = two
-      ? (p.name + " now runs the other way. A wall or gate looks the same from behind, so it has two ways to face; right-click (or Turn) again to switch back.")
+    var joined = two && isRun(p) && runDirs(p, pk.cx, pk.cy, pk).length > 0;
+    ui.note.textContent = joined
+      ? (p.name + " follows the pieces it joins, so it keeps its line" + (p.id === "stairs-wall" ? "; its stairs moved to the other side." : ". Move it away from them to run it the other way."))
+      : two ? (p.name + " now runs the other way. A wall or gate looks the same from behind, so it has two ways to face; right-click (or Turn) again to switch back.")
       : ((p ? p.name : "Piece") + " turned. Right-click (or Turn) again for the next quarter turn.");
   }
   function joinedNote(pk) {
