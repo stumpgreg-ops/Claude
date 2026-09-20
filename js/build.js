@@ -843,12 +843,17 @@
     cur.drag = null; cur.pan = null;
     turnPick(pk);
   }
+  /* v5.2: a wall, gate, hedge or fence looks the same from behind, so it only has two ways to face;
+     turning it a half turn looked like nothing happened. Those pieces switch between the two ways. */
+  var TWO_WAY = { wall: 1, gate: 1, doorway: 1, hedge: 1, "hedge-gate": 1, "c-fence": 1, "fence-gate": 1, "rail-fence": 1 };
   function turnPick(pk) {
     if (!pk) return;
-    pk.rot = ((pk.rot || 0) + 1) & 3;
+    var p = pieceById(pk.piece), two = !!(p && p.auto && TWO_WAY[p.id]);
+    pk.rot = two ? ((pk.rot || 0) + 1) & 1 : ((pk.rot || 0) + 1) & 3;
     cur.sel = pk; persist(); fillPieceBar(); redraw();
-    var p = pieceById(pk.piece);
-    ui.note.textContent = (p ? p.name : "Piece") + " turned" + (p && p.auto ? " — walls, hedges and fences still follow their neighbours, this nudges the corner or run" : "") + ". Right-click (or Turn) again for the next quarter turn.";
+    ui.note.textContent = two
+      ? (p.name + " now runs the other way. A wall or gate looks the same from behind, so it has two ways to face; right-click (or Turn) again to switch back.")
+      : ((p ? p.name : "Piece") + " turned. Right-click (or Turn) again for the next quarter turn.");
   }
   function joinedNote(pk) {
     var p = pieceById(pk.piece), rs = rectsOf(pk), i, n = cellsOf(p), host;
