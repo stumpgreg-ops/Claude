@@ -367,6 +367,38 @@ var srv = http.createServer(function (req, res) {
     var sc = null; try { sc = window.__scene || null; } catch (e) {}
     return sc ? "scene" : "no";
   });
+  /* v5.2: the two standalone builds (node tools/build-games.js). Each is one state with no
+     gateway, only its grade cards, only its packs, and no "change state" button. */
+  var distRoot = path.join(root, "dist");
+  var builds = { nj: { st: "NJ", fam: "NJ5", other: ["G9", "G10", "G11"], cards: 1 }, va: { st: "VA", fam: "G9", other: ["NJ5"], cards: 3 } };
+  for (var bk in builds) {
+    var b = builds[bk], bdir = path.join(distRoot, bk);
+    if (!fs.existsSync(path.join(bdir, "index.html"))) { console.log("skip  dist/" + bk + " (run node tools/build-games.js)"); continue; }
+    root = bdir;
+    await page.evaluate(function () { localStorage.clear(); });
+    await page.goto(base + "index.html", { waitUntil: "load" }); await page.waitForTimeout(800);
+    var lockInfo = await page.evaluate(function (o) {
+      /* count packs by family straight from the pool: heistBuildPack falls back to every pack when a family is empty */
+      var pools = {}; ["G9", "G10", "G11", "NJ5"].forEach(function (f) { pools[f] = window.HEIST_PACKS.filter(function (p) { return p.family === f; }).length; });
+      return { state: window.SOL_STATE, title: document.title, gateway: !document.getElementById("state-screen").classList.contains("hidden"),
+        titleShown: !document.getElementById("title-screen").classList.contains("hidden"),
+        cards: Array.prototype.filter.call(document.querySelectorAll('#title-screen .card[data-family]'), function (c) { return !c.classList.contains("hidden"); }).map(function (c) { return c.getAttribute("data-family"); }),
+        btnState: !!document.getElementById("btn-state"), kicker: document.getElementById("title-kicker").textContent, pools: pools,
+        families: Array.prototype.map.call(document.querySelectorAll("#title-screen .card[data-family]"), function (c) { return c.getAttribute("data-family"); }) };
+    }, b);
+    console.log("dist/" + bk, JSON.stringify(lockInfo));
+    check(lockInfo.state === b.st && !lockInfo.gateway && lockInfo.titleShown, "dist/" + bk + ": title screen first, no gateway");
+    check(lockInfo.cards.length === b.cards && lockInfo.cards.indexOf(b.fam) !== -1 && !lockInfo.btnState, "dist/" + bk + ": only its grade cards, no change-state button");
+    check(lockInfo.pools[b.fam] > 40 && b.other.every(function (f) { return lockInfo.pools[f] === 0; }), "dist/" + bk + ": only its packs in the pool");
+    /* pick the grade and reach the skill screen; the gateway must never come back */
+    await page.click('#title-screen .card[data-family="' + b.fam + '"]'); await page.waitForTimeout(300);
+    check(await page.isVisible("#skill-screen"), "dist/" + bk + ": skill screen opens");
+    await page.click("#btn-skill-back"); await page.waitForTimeout(300);
+    check(await page.isVisible("#title-screen") && !(await page.isVisible("#state-screen")), "dist/" + bk + ": back goes to the title, not the gateway");
+    await shot("14-dist-" + bk);
+  }
+  root = path.join(__dirname, "..");
+
   console.log("errors:", errors.length ? errors : "none");
   check(errors.length === 0, "no page errors");
   await browser.close(); srv.close();

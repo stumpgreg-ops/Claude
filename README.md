@@ -3,11 +3,18 @@ Solo Chromebook maze-chase extract. 100 nights. Virginia 2024 EOC Reading SOL (g
 
 **Theme (Norse × SOL):** You are **Sol**, the Norse sun goddess, collecting letter slips in a Pac-like school labyrinth. Ravenous wolves — **Hati** — patrol the corridors. Grab the **correct** letter to summon Sol's **CHARIOT** and smash Hati by contact (they return from the Wolf Pen). Wrong letter alarms. Fruit = bonus points only. Ice = brief escape freeze. **Only one power/effect active at a time.**
 
-Play: `index.html`. Teacher monitor: `admin.html` (PIN lock; FERPA nicknames only).
+**Two games, one codebase (v5.2).** `node tools/build-games.js` writes `dist/nj/` (New Jersey, Grade 5 NJSLA-ELA) and `dist/va/` (Virginia, Grades 9–11 EOC Reading SOL) and zips each as `dist/SOLLabyrinth-NJ-v<version>.zip` and `dist/SOLLabyrinth-VA-v<version>.zip`, ready for two itch.io projects. Each build opens on its own title screen with only its grade cards, carries only its question files, and has no state gateway. The root `index.html` stays the combined development build with the New Jersey / Virginia gateway.
+
+Play (combined dev build): `index.html`. Teacher monitor: `admin.html` (PIN lock; FERPA nicknames only).
 
 Progress saves in this browser profile (`afterHours.v1.night`). Itch login does not store progress.
 
-Question packs: `js/content.js` and `js/content2.js` (the v4 Virginia packs) plus `js/content3.js`–`js/content11.js` (v4.9 Virginia) and `js/content12.js`–`js/content17.js` (v4.9 New Jersey grade 5). Format and writing rules: `tools/CONTENT-GUIDE.md`. Check every file with `node tools/validate-content.js`. Headless smoke test of the gateway, builder, shop and a night: `node tools/smoke.js` (screenshots in `tools/shots/`).
+Question packs: `js/content.js` and `js/content2.js` (the v4 Virginia packs) plus `js/content3.js`–`js/content11.js` (v4.9 Virginia) and `js/content12.js`–`js/content17.js` (v4.9 New Jersey grade 5). Format and writing rules: `tools/CONTENT-GUIDE.md`. Check every file with `node tools/validate-content.js`. Headless smoke test of the gateway, builder, shop, a night and the two built games: `node tools/smoke.js` (screenshots in `tools/shots/`).
+
+## v5.2 (2026-09-20) — New Jersey and Virginia as separate games
+- **Two builds.** `node tools/build-games.js [version]` produces a New Jersey game and a Virginia game from the one codebase. In each, `index.html` sets `window.SOL_STATE`, starts on that state's title screen (the gateway section is hidden in the markup, so it is right even with JavaScript off), shows only that state's grade cards, has no "change state" button, and loads only that state's content files (`content.js`, which holds the pack engine, ships in both and `game.js` prunes the other state's packs from it at start-up). `tools/` is left out of the zips; both are about 23 MB and under 300 files.
+- **Locked state in `game.js`.** With `SOL_STATE` set, the gateway never shows (not on load, not on the back-forward cache, not after a level), `applyState` always resolves to the built state, and the page title reads "SOL Labyrinth · New Jersey" or "· Virginia". Saves stay under the same keys, so progress carries over from the combined build.
+- `tools/smoke.js` loads each built game and checks: title first, no gateway, only its cards, only its packs, back from the skill screen returns to the title.
 
 ## v5.1 (2026-09-16)
 - **Turn any piece.** Right-click a piece (or tap it and use Turn, or press R) to turn it a quarter turn, so gates, stalls, benches, houses and towers face the way you want and join up. Every kit sprite now ships in all four orientations. Turned pieces keep their turn in the save and the build code, and Copy keeps it too.

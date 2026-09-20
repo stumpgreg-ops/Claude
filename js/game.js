@@ -2,10 +2,13 @@
   /* v4.9.6: the state gateway is the first thing on screen on every visit. It is shown
      before anything else in this file runs, so a slow load or an error further down can
      never leave the title screen up first. index.html also ships with the gateway visible. */
+  /* v5.2: a build made for one state (tools/build-games.js sets window.SOL_STATE) has no
+     gateway at all — the title screen for that state is the first thing on screen. */
   try {
     var _gw = document.getElementById("state-screen"), _ts = document.getElementById("title-screen"), _ss = document.getElementById("skill-screen");
-    if (_gw) _gw.classList.remove("hidden");
-    if (_ts) _ts.classList.add("hidden");
+    var _locked = !!(typeof window !== "undefined" && window.SOL_STATE);
+    if (_gw) _gw.classList.toggle("hidden", _locked);
+    if (_ts) _ts.classList.toggle("hidden", !_locked);
     if (_ss) _ss.classList.add("hidden");
   } catch (eGw) {}
   var WORLD_W = 2400;
@@ -45,6 +48,21 @@
     VA: { name: "Virginia", kicker: "NNPS · VA 2024 EOC Reading practice skills · 100 levels", families: ["G9", "G10", "G11"], def: "G9", hud: "Teacher" },
     NJ: { name: "New Jersey", kicker: "NJSLA-ELA · Grade 5 reading practice · 100 levels", families: ["NJ5"], def: "NJ5", hud: "NJSLS" }
   };
+  /* v5.2: the New Jersey and Virginia games are separate builds. tools/build-games.js writes
+     window.SOL_STATE into each build's index.html; that build never shows the gateway, never
+     offers the other state, and drops the other state's packs from the pool (the per-state
+     content files are left out of the build, and content.js is pruned here). */
+  var LOCKED_STATE = (typeof window !== "undefined" && window.SOL_STATE && STATE_DEFS[window.SOL_STATE]) ? String(window.SOL_STATE) : null;
+  if (LOCKED_STATE) {
+    try {
+      var _lockFams = STATE_DEFS[LOCKED_STATE].families, _lockPacks = window.HEIST_PACKS;
+      if (_lockPacks && _lockPacks.length) {
+        for (var _lp = _lockPacks.length - 1; _lp >= 0; _lp--) {
+          if (_lockFams.indexOf(_lockPacks[_lp].family) === -1) _lockPacks.splice(_lp, 1);
+        }
+      }
+    } catch (eLock) {}
+  }
 
   var Input = { ax: 0, ay: 0, act: false, actEdge: false, sprint: false, shutterEdge: false };
   var keysHeld = { n: 0, s: 0, w: 0, e: 0 };
@@ -26629,9 +26647,10 @@
     if (skill) skill.classList.add("hidden");
     var stateScreen = document.getElementById("state-screen");
     if (stateScreen) {
-      if (!on && !cfg.state) { stateScreen.classList.remove("hidden"); document.getElementById("title-screen").classList.add("hidden"); }
+      if (!on && !cfg.state && !LOCKED_STATE) { stateScreen.classList.remove("hidden"); document.getElementById("title-screen").classList.add("hidden"); }
       else stateScreen.classList.add("hidden");
     }
+    if (!on && LOCKED_STATE && !cfg.state) applyState(LOCKED_STATE);
     hideCharOverlay();
     document.getElementById("play").classList.toggle("hidden", !on);
     document.getElementById("overlay").classList.add("hidden");
@@ -26697,6 +26716,7 @@
 
   /* v4.9: state gateway (New Jersey / Virginia). Chooses which grade cards the title screen shows. */
   function applyState(st, silent) {
+    if (LOCKED_STATE) st = LOCKED_STATE;
     if (!STATE_DEFS[st]) st = "VA";
     cfg.state = st;
     try { localStorage.setItem(LS_STATE, st); } catch (e) {}
@@ -26714,7 +26734,7 @@
     var kick = document.getElementById("title-kicker");
     if (kick) kick.textContent = def.kicker;
     var sw = document.getElementById("btn-state");
-    if (sw) sw.textContent = def.name + " · change";
+    if (sw) { sw.textContent = def.name + " · change"; sw.classList.toggle("hidden", !!LOCKED_STATE); }
     var stateScreen = document.getElementById("state-screen"), title = document.getElementById("title-screen");
     if (!silent) {
       if (stateScreen) stateScreen.classList.add("hidden");
@@ -26723,6 +26743,7 @@
   }
   function showStateScreen() {
     var stateScreen = document.getElementById("state-screen"), title = document.getElementById("title-screen"), skill = document.getElementById("skill-screen");
+    if (LOCKED_STATE) { if (skill) skill.classList.add("hidden"); if (stateScreen) stateScreen.classList.add("hidden"); applyState(LOCKED_STATE); return; }
     if (title) title.classList.add("hidden");
     if (skill) skill.classList.add("hidden");
     if (stateScreen) stateScreen.classList.remove("hidden");
@@ -27127,7 +27148,7 @@
          opening it again — outside a night, the state gateway comes first. */
       try {
         var playEl = document.getElementById("play");
-        if (ev && ev.persisted && (!playEl || playEl.classList.contains("hidden"))) { cfg.state = null; showStateScreen(); }
+        if (ev && ev.persisted && !LOCKED_STATE && (!playEl || playEl.classList.contains("hidden"))) { cfg.state = null; showStateScreen(); }
       } catch (ePs) {}
     });
   }
@@ -27449,6 +27470,7 @@
     /* v4.9.1: the gateway is always the first screen; the last choice is only pre-highlighted. */
     var savedState = localStorage.getItem(LS_STATE);
     if (!(savedState && STATE_DEFS[savedState])) savedState = fam === "NJ5" ? "NJ" : (fam ? "VA" : null);
+    if (LOCKED_STATE) savedState = null;
     if (savedState) {
       applyState(savedState, true);
       cfg.state = null;
@@ -27456,6 +27478,7 @@
     }
   } catch (e) {}
   showStateScreen();
+  if (LOCKED_STATE) { try { document.title = "SOL Labyrinth · " + STATE_DEFS[LOCKED_STATE].name; } catch (eT) {} }
 
   bindPads();
   bindVisibilityResume();
