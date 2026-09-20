@@ -67,6 +67,8 @@ function rewriteIndex(html, st) {
     if (ok && fam === def.def) c.push("selected");
     return '<button type="button" class="' + c.join(" ") + '" data-family="' + fam + '">';
   });
+  /* the how-to names this state's grades */
+  if (st === "NJ") must(/Tap Grade 9, 10, or 11 — then choose a skill/, "Tap Grade 5 — then choose a skill", "how-to grade line");
   /* no "change state" button */
   must(/\s*<button type="button" class="btn" id="btn-state"[^>]*>[^<]*<\/button>/, "", "btn-state");
   /* only this state's content files */
