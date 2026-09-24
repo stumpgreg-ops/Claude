@@ -14,7 +14,7 @@ Progress saves in this browser profile (`afterHours.v1.night`). Itch login does 
 Question packs: `js/content.js` and `js/content2.js` (the v4 Virginia packs) plus `js/content3.js`–`js/content11.js` (v4.9 Virginia) and `js/content12.js`–`js/content17.js` (v4.9 New Jersey grade 5). Format and writing rules: `tools/CONTENT-GUIDE.md`. Check every file with `node tools/validate-content.js`. Headless smoke test of the gateway, builder, shop, a night and the two built games: `node tools/smoke.js` (screenshots in `tools/shots/`).
 
 ## v5.5.1 (2026-09-24) — the logo
-- **Sol's Labyrinth logo.** The game's logo (`assets/logo/`: the full mark on transparency, a 512 px copy for the start screens, the sun emblem alone, favicons at 32, 64 and 180 px and a 1920 × 640 banner for a website header) replaces the text title on the state gateway and the title screen, and the sun is the browser tab's icon.
+- **Sol's Labyrinth logo.** The game's logo replaces the text title (`assets/logo/`: a 512 px copy for the start screens and favicons at 32, 64 and 180 px; `tools/pages/assets/`: the full mark on transparency, the sun emblem alone and a 1920 × 640 banner for a website header, kept out of the game builds) on the state gateway and the title screen, and the sun is the browser tab's icon.
 - **Publishing to GitHub Pages.** `sh tools/publish-pages.sh` builds both games and pushes them with a landing page (`tools/pages/index.html`) to the `gh-pages` branch as a single commit: `https://stumpgreg-ops.github.io/Claude/` links to `nj/` and `va/`. Turn Pages on once under the repository's Settings → Pages (branch `gh-pages`, folder `/ (root)`). A school site (Google Sites, Wix) links to or embeds those addresses.
 
 ## v5.5 (2026-09-24) — the castle in 3D

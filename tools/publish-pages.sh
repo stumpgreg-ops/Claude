@@ -9,9 +9,9 @@ node tools/build-games.js "$@"
 site=$(mktemp -d)
 cp -r dist/nj "$site/nj"; cp -r dist/va "$site/va"
 mkdir -p "$site/assets"; cp tools/pages/index.html "$site/index.html"
-cp assets/logo/sols-labyrinth.png assets/logo/favicon-64.png assets/logo/favicon-180.png "$site/assets/"
+cp tools/pages/assets/sols-labyrinth.png assets/logo/favicon-64.png assets/logo/favicon-180.png "$site/assets/"
 touch "$site/.nojekyll"
-idx=$(mktemp)
+idx=$(mktemp -u)
 export GIT_INDEX_FILE="$idx"
 git --work-tree="$site" add -A .
 tree=$(git write-tree)
@@ -20,5 +20,5 @@ commit=$(printf 'Publish Sol'"'"'s Labyrinth v%s to GitHub Pages\n\nCo-Authored-
 unset GIT_INDEX_FILE
 git update-ref refs/heads/gh-pages "$commit"
 git push --force -u origin gh-pages
-rm -rf "$site" "$idx"
+rm -rf "$site"; rm -f "$idx"
 echo "published $commit ($ver): https://stumpgreg-ops.github.io/Claude/"
