@@ -51,6 +51,7 @@ html, body {
   pointer-events: none !important;
 }
 
+.ver { color: var(--dim); font-size: 12px; letter-spacing: .08em; margin: -4px 0 10px; text-align: center; }   /* v5.4.1: the build's version, so a screen recording says which build it is */
 .kicker { letter-spacing: .14em; text-transform: uppercase; color: var(--gold); font-size: 12px; margin: 0 0 8px; }
 h1 { font-size: clamp(36px, 6vw, 64px); margin: 0; letter-spacing: .02em; }
 .tag { color: var(--dim); margin: 6px 0 18px; max-width: 640px; text-align: center; }

@@ -55,6 +55,7 @@ function rewriteIndex(html, st) {
   }
   must(/<title>[^<]*<\/title>/, "<title>SOL Labyrinth · " + def.name + "</title>", "<title>");
   out = out.replace(/\?v=[0-9.]+/g, "?v=" + version);
+  out = out.replace(/(<p class="ver">)v[0-9.]+/g, "$1v" + version);   /* the version label on the title screen */
   /* the state is set before any script runs */
   must(/<\/head>/, '  <script>window.SOL_STATE = "' + st + '";</script>\n</head>', "</head>");
   /* the gateway starts hidden, the title screen visible (also right with JavaScript off) */
