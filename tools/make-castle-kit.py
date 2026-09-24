@@ -51,6 +51,10 @@ COLORS = {          # hue in degrees for the blue accents (flags, roofs, colour 
     "gold":  (44, 1.1, 1.08),
 }
 ORIENTS = ["NE", "NW", "SE", "SW"]
+# v5.5: --ne-only packs each sprite facing one way. The builder draws pieces in 3D (js/build3d.js) and the sprites only serve the
+# palette and shop thumbnails, the upright stand-ins for pieces without a model, and the 2D drawing on a Chromebook with no WebGL
+# (which then shows every piece facing front). The atlases shrink to a quarter.
+if "--ne-only" in sys.argv: ORIENTS = ["NE"]
 
 # sprites we ship (name -> orientations)
 SPRITES = {  # v5.1: every sprite in all four orientations so pieces can be turned

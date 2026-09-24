@@ -593,13 +593,21 @@
     });
     return b;
   }
+  /* v5.5: a stable key per placed piece for the 3D view's cache (picks are plain saved objects, so the key lives beside them) */
+  var pickKeys = typeof WeakMap === "function" ? new WeakMap() : null, keySeq = 0;
+  function keyOf(pk) {
+    if (!pk) return "";
+    if (!pickKeys) { if (!pk._k) pk._k = "p" + (++keySeq); return pk._k; }
+    var k = pickKeys.get(pk); if (!k) { k = "p" + (++keySeq); pickKeys.set(pk, k); } return k;
+  }
   function itemFor(p, pk, cx, cy, style, extra, ignore) {
     var n = cellsOf(p), ctr = rotPt(cx + n / 2, cy + n / 2), c = cellXY(ctr.u, ctr.v), it, k, host, base = 0;
     if (isKit()) {
       /* the sprite's bottom-centre is the cell's front apex: half a diamond below the cell centre */
       if (isTopper(p)) { host = hostFor(cx, cy, pk) || pickAt(cx, cy, pk, function (q) { return isHost(q); }); if (host) base = stackHeight(pieceById(host.piece), cx, cy, host.rot); }
       /* v5.3: an n×n piece's sprite hangs from the front apex of the whole footprint, n half-diamonds below its centre */
-      it = { p: p, pk: pk, style: style, x: c.x, y: c.y + n * cellH() / 2, a: 1, depth: ctr.u + ctr.v + n - 1 + (isTopper(p) ? 0.5 : 0), cx: cx, cy: cy, n: n, kit: true, base: base, ign: ignore || null, parts: partsFor(p, cx, cy, ignore, pk ? pk.rot : 0) };
+      it = { p: p, pk: pk, style: style, x: c.x, y: c.y + n * cellH() / 2, a: 1, depth: ctr.u + ctr.v + n - 1 + (isTopper(p) ? 0.5 : 0), cx: cx, cy: cy, n: n, kit: true, base: base, ign: ignore || null, parts: partsFor(p, cx, cy, ignore, pk ? pk.rot : 0),
+        key: keyOf(pk) || ("g" + cx + "," + cy), prot: pk ? (pk.rot || 0) : 0, run: isRun(p), hostKey: host ? keyOf(host) : "" };
     } else {
       it = { p: p, pk: pk, style: style, x: c.x, y: c.y, a: 1, depth: ctr.u + ctr.v + n, cx: cx, cy: cy, n: n };
     }
@@ -697,9 +705,9 @@
     "rail-fence": { kind: "wood", t: 0.06, h: 0.45, fence: true, rails: 2 }
   };
   var RUN_COLS = {
-    stone: { top: "#aeb4bb", light: "#8f969e", dark: "#687079", hole: "#33373b", bar: "#b8bcc0" },
-    hedge: { top: "#5cab45", light: "#48943b", dark: "#33712c" },
-    wood: { top: "#c39463", light: "#aa7c4f", dark: "#7f5a38" }
+    stone: { top: "#aeb4bb", light: "#8f969e", dark: "#687079", hole: "#33373b", bar: "#b8bcc0", body: "#8e949c", merlon: "#8e949c" },
+    hedge: { top: "#5cab45", light: "#48943b", dark: "#33712c", body: "#4a9a3c" },
+    wood: { top: "#c39463", light: "#aa7c4f", dark: "#7f5a38", body: "#a57b4e" }
   };
   function isRun(p) { return !!(p && p.auto && RUN_STYLE[p.id]); }
   /* the world directions a run piece at (cx, cy) joins: the same category of run, or a solid building */
@@ -708,29 +716,16 @@
     [[1, 0], [-1, 0], [0, 1], [0, -1]].forEach(function (d) { if (pickAt(cx + d[0], cy + d[1], ignore, pred)) out.push(d); });
     return out;
   }
-  function drawRun(ctx, it, fit) {
-    var p = it.p, st = RUN_STYLE[p.id], cols = RUN_COLS[st.kind], s = fit.s / fit.base, cx = it.cx, cy = it.cy, H = cellH();
-    function P(x, y, z) { var g = worldPx(x, y); return { x: fit.ox + g.x * s, y: fit.oy + (g.y - (z || 0) * H) * s }; }
-    function poly(pts) { ctx.beginPath(); pts.forEach(function (q, i) { if (i) ctx.lineTo(q.x, q.y); else ctx.moveTo(q.x, q.y); }); ctx.closePath(); }
-    /* a box over world [x0,x1]×[y0,y1], from height z0 to z1: the two near side faces, then the top */
-    function box(x0, y0, x1, y1, z0, z1, c, mode) {
-      c = c || cols;
-      var b = [P(x0, y0, z0), P(x1, y0, z0), P(x1, y1, z0), P(x0, y1, z0)], t = [P(x0, y0, z1), P(x1, y0, z1), P(x1, y1, z1), P(x0, y1, z1)];
-      var ctr = P((x0 + x1) / 2, (y0 + y1) / 2, z0), i, j, m;
-      if (mode !== "top") for (i = 0; i < 4; i++) {
-        j = (i + 1) & 3; m = { x: (b[i].x + b[j].x) / 2, y: (b[i].y + b[j].y) / 2 };
-        if (m.y > ctr.y + 0.01) { ctx.fillStyle = m.x < ctr.x ? c.light : c.dark; poly([b[i], b[j], t[j], t[i]]); ctx.fill(); }
-      }
-      if (mode !== "sides") { ctx.fillStyle = c.top; poly(t); ctx.fill(); }
-    }
-    function screenY(x, y) { return P(x, y, 0).y; }
+  /* the plan of a run cell: which boxes make it (a straight box for an opposite pair of joins, half boxes for the other arms,
+     a gap in a hedge gate), shared by the 2D drawing here and the 3D view (js/build3d.js) */
+  function runPlan(it) {
+    var p = it.p, st = RUN_STYLE[p.id], cols = RUN_COLS[st.kind], cx = it.cx, cy = it.cy;
     /* which way the run goes, from WORLD neighbours; a lone piece follows its own turn */
     var dirs = runDirs(p, cx, cy, it.ign), rot = (it.pk && it.pk.rot) || 0, side = (rot & 1) ? -1 : 1;
     if (!dirs.length) dirs = (rot & 1) ? [[0, 1], [0, -1]] : [[1, 0], [-1, 0]];
     else if (dirs.length === 1) dirs.push([-dirs[0][0], -dirs[0][1]]);
     var has = function (dx, dy) { return dirs.some(function (d) { return d[0] === dx && d[1] === dy; }); };
-    var mx = cx + 0.5, my = cy + 0.5, t = st.t, ht = t / 2, E = 0.02, h = st.h, parts = [], tops = [];
-    /* the boxes: a full straight box for an opposite pair, half boxes for the other arms */
+    var mx = cx + 0.5, my = cy + 0.5, t = st.t, ht = t / 2, E = 0.02, h = st.h, parts = [];
     var straightX = has(1, 0) && has(-1, 0), straightY = has(0, 1) && has(0, -1), main = null;
     if (straightX) { parts.push({ x0: cx - E, x1: cx + 1 + E, y0: my - ht, y1: my + ht, axis: "x" }); main = parts[parts.length - 1]; }
     if (straightY) { parts.push({ x0: mx - ht, x1: mx + ht, y0: cy - E, y1: cy + 1 + E, axis: "y" }); if (!main) main = parts[parts.length - 1]; }
@@ -749,6 +744,25 @@
       });
       parts = keep;
     }
+    return { st: st, cols: cols, parts: parts, main: main, side: side, dirs: dirs, mx: mx, my: my, cx: cx, cy: cy, t: t, ht: ht, h: h, E: E };
+  }
+  function drawRun(ctx, it, fit) {
+    var pl = runPlan(it), st = pl.st, cols = pl.cols, s = fit.s / fit.base, H = cellH();
+    var side = pl.side, mx = pl.mx, my = pl.my, t = pl.t, ht = pl.ht, E = pl.E, h = pl.h, parts = pl.parts, main = pl.main;
+    function P(x, y, z) { var g = worldPx(x, y); return { x: fit.ox + g.x * s, y: fit.oy + (g.y - (z || 0) * H) * s }; }
+    function poly(pts) { ctx.beginPath(); pts.forEach(function (q, i) { if (i) ctx.lineTo(q.x, q.y); else ctx.moveTo(q.x, q.y); }); ctx.closePath(); }
+    /* a box over world [x0,x1]×[y0,y1], from height z0 to z1: the two near side faces, then the top */
+    function box(x0, y0, x1, y1, z0, z1, c, mode) {
+      c = c || cols;
+      var b = [P(x0, y0, z0), P(x1, y0, z0), P(x1, y1, z0), P(x0, y1, z0)], t = [P(x0, y0, z1), P(x1, y0, z1), P(x1, y1, z1), P(x0, y1, z1)];
+      var ctr = P((x0 + x1) / 2, (y0 + y1) / 2, z0), i, j, m;
+      if (mode !== "top") for (i = 0; i < 4; i++) {
+        j = (i + 1) & 3; m = { x: (b[i].x + b[j].x) / 2, y: (b[i].y + b[j].y) / 2 };
+        if (m.y > ctr.y + 0.01) { ctx.fillStyle = m.x < ctr.x ? c.light : c.dark; poly([b[i], b[j], t[j], t[i]]); ctx.fill(); }
+      }
+      if (mode !== "sides") { ctx.fillStyle = c.top; poly(t); ctx.fill(); }
+    }
+    function screenY(x, y) { return P(x, y, 0).y; }
     ctx.save(); ctx.globalAlpha = it.a;
     if (st.fence) {
       /* posts at the cell edges and the centre, rails between them */
@@ -871,6 +885,15 @@
     items = sceneItems();
     fit = lastFit = fitScene(items, W, H);
     drawGround(ctx, fit);
+    /* v5.5: a kit theme draws its pieces in 3D when it can (js/build3d.js), so they turn with the map by the degree */
+    var td = window.SolBuild3D, use3d = isKit() && td && td.ready() && !redraw.force2d;
+    if (use3d) {
+      items.forEach(function (it) { if (it.kit && (it.ghost || it.sel)) { ctx.save(); ctx.globalAlpha = it.a; drawFootprint(ctx, it, fit); ctx.restore(); } });
+      var drawn = false;
+      try { drawn = td.render({ canvas: ui.canvas3d, W: W, H: H, dpr: cv._dpr || 1, fit: fit, items: items }); } catch (err) { drawn = false; if (window.console) console.warn("build3d", err); }
+      if (drawn) { ui.canvas3d.style.display = ""; return; }
+    }
+    ui.canvas3d.style.display = "none";
     items.sort(function (a, b) { return (a.depth - b.depth) || (a.y - b.y) || (a.x - b.x); }).forEach(function (it) { drawPiece(ctx, it, fit); });
   }
 
@@ -1076,6 +1099,7 @@
     cv.style.width = w + "px"; cv.style.height = h + "px";
     cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr);
     cv._w = w; cv._h = h; cv._dpr = dpr;
+    if (ui.canvas3d) { ui.canvas3d.style.width = w + "px"; ui.canvas3d.style.height = h + "px"; }
   }
 
   /* ── DOM (built once, appended to body) ──────────────────────────────────── */
@@ -1100,6 +1124,7 @@
     /* main area: the scene (with view tools and the piece bar floating on it) + the palette */
     ui.main = el("div", "build-main hidden");
     ui.sceneWrap = el("div", "build-scene"); ui.canvas = el("canvas"); ui.sceneWrap.appendChild(ui.canvas);
+    ui.canvas3d = el("canvas", "build-3d"); ui.canvas3d.style.pointerEvents = "none"; ui.sceneWrap.appendChild(ui.canvas3d);   /* v5.5: the WebGL view, over the 2D sky, ground and footprints */
     ui.tools = el("div", "build-tools");
     [["⟲", "Turn left 1° (hold to keep turning; mouse wheel turns faster)", function () { rotateView(-1); }, true], ["⟳", "Turn right 1° (hold to keep turning; mouse wheel turns faster)", function () { rotateView(1); }, true],
      ["−", "Zoom out (Ctrl + wheel)", function () { zoomBy(1 / 1.25); }], ["+", "Zoom in (Ctrl + wheel)", function () { zoomBy(1.25); }], ["⤢", "Fit the whole build and face front", resetView]]
@@ -1612,7 +1637,14 @@
   }
 
   /* ── public API ──────────────────────────────────────────────────────────── */
-  function init() { if (!save) save = loadSave(); load(); refreshButton(); }
+  function init() {
+    if (!save) save = loadSave(); load(); refreshButton();
+    if (window.SolBuild3D && !init.td) {
+      init.td = true;
+      window.SolBuild3D.init({ modelsUrl: "assets/build/models/models.json", cellPx: cellPx, cellH: cellH, angle: ang, kitSprite: kitSprite, spriteRef: spriteRef, getImg: getImg,
+        styleDef: styleDef, runPlan: runPlan, redraw: scheduleDraw });
+    }
+  }
   function rewardDue(night) {
     night = parseInt(night, 10);
     if (!save) save = loadSave();
@@ -1687,6 +1719,9 @@
     _delete: function () { deleteSelected(); return save.picks.length; },
     _rotate: function (deg) { rotateView(deg); return rot(); },
     _angle: function () { return ang(); },
+    _probe: function (x, y, z) { var f = lastFit, c = worldPx(x, y), td = window.SolBuild3D; if (!f) return null; return { x2: f.ox + (c.x) * f.s / f.base, y2: f.oy + (c.y - (z || 0) * cellH()) * f.s / f.base, p3: td ? td.project(x, y, z || 0) : null, use3d: !!(td && td.ready() && ui.canvas3d.style.display !== "none") }; },
+    _loads3d: function () { return window.SolBuild3D ? window.SolBuild3D._loads() : null; },
+    _force2d: function (on) { redraw.force2d = !!on; redraw(); return !!redraw.force2d; },
     _turn: function () { turnPick(cur && cur.sel); return cur && cur.sel ? cur.sel.rot : null; },
     _zoom: function (k) { zoomBy(k); return view().z; },
     _hitAt: function (clientX, clientY) { var pt = canvasScenePt({ clientX: clientX, clientY: clientY }); var pk = pt && hitPick(pt); return { pt: pt && { x: pt.x, y: pt.y, sx: pt.sx, sy: pt.sy }, cell: pt && pxToCell(pt.x, pt.y), pick: pk ? pk.piece + "@" + pk.cx + "," + pk.cy : null, step: step, draggable: draggable(pk) }; },

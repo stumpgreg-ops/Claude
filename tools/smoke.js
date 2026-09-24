@@ -17,7 +17,9 @@ var srv = http.createServer(function (req, res) {
 (async function () {
   await new Promise(function (r) { srv.listen(0, r); });
   var base = "http://127.0.0.1:" + srv.address().port + "/";
-  var browser = await chromium.launch({ executablePath: "/opt/pw-browsers/chromium/chrome-linux/chrome" }).catch(function () { return chromium.launch(); });
+  /* v5.5: WebGL through SwiftShader so the builder's 3D view runs headless */
+  var glArgs = { args: ["--use-gl=angle", "--use-angle=swiftshader", "--enable-unsafe-swiftshader"] };
+  var browser = await chromium.launch(Object.assign({ executablePath: "/opt/pw-browsers/chromium/chrome-linux/chrome" }, glArgs)).catch(function () { return chromium.launch(glArgs); });
   var page = await browser.newPage({ viewport: { width: 1280, height: 720 } });
   var errors = [];
   page.on("response", function (r) { if (r.status() === 404) console.log("404", r.url()); });
@@ -225,8 +227,13 @@ var srv = http.createServer(function (req, res) {
   /* gallery */
   await page.evaluate(function () { SolBuild.showGallery(); });
   await page.waitForSelector("#build-overlay:not(.hidden)");
-  await page.waitForTimeout(500);
+  await page.waitForTimeout(2500);
   await shot("09-gallery");
+  /* v5.5: the castle draws in 3D, lined up with the 2D layer's projection, and every model it asked for arrived */
+  var td = await page.evaluate(function () { return { probe: SolBuild._probe(3, 2, 1), loads: SolBuild._loads3d() }; });
+  console.log("3d", JSON.stringify(td));
+  check(td.probe && td.probe.use3d && td.probe.p3 && Math.abs(td.probe.p3.x - td.probe.x2) < 0.5 && Math.abs(td.probe.p3.y - td.probe.y2) < 0.5, "the 3D view is on and its projection matches the 2D layer");
+  check(td.loads && td.loads.models === "ok" && td.loads.failed === 0 && td.loads.loaded === td.loads.total && td.loads.total > 3, "every 3D model the castle needs loaded: " + JSON.stringify(td.loads));
   /* v4.9.8: no arrange mode — any piece drags at any time. Drag the core piece a long way to the right and check it moved (or bounced back with a reason) */
   check(!(await page.isVisible("text=Arrange pieces")), "gallery has no separate arrange mode");
   var cv = await page.$eval("#build-overlay .build-scene canvas", function (c) { var r = c.getBoundingClientRect(); return { x: r.left, y: r.top, w: r.width, h: r.height }; });
@@ -269,8 +276,10 @@ var srv = http.createServer(function (req, res) {
   check(edit.placed && edit.afterPlace === 1 && edit.barVisible && edit.afterDelete === 0 && edit.ownedStill, "palette places a free copy, selection bar shows, delete keeps the piece unlocked");
   check(edit.rot[0] === 1 && edit.rot[1] === 2 && Math.abs(edit.angle - 217) < 0.01 && edit.zoom > 1 && edit.rtSame, "view turns by degrees and zooms; the build code survives a rotated view");
   check(edit.turned === 1 && edit.rotKept, "a piece turns a quarter turn and its turn survives the build code");
-  await page.waitForTimeout(400);
+  await page.waitForTimeout(1200);
   await shot("09d-rotated");
+  var td2 = await page.evaluate(function () { return { probe: SolBuild._probe(-2, 4, 0), loads: SolBuild._loads3d() }; });
+  check(td2.probe.use3d && Math.abs(td2.probe.p3.x - td2.probe.x2) < 0.5 && Math.abs(td2.probe.p3.y - td2.probe.y2) < 0.5 && td2.loads.failed === 0, "the 3D view still lines up at 217° after placing and turning pieces");
   await page.evaluate(function () { SolBuild._rotate(-217); SolBuild._zoom(0.8); });
   await page.keyboard.press("Escape");
 

@@ -4585,46 +4585,10 @@
     "lift": 119,
     "coloured": true
    },
-   "wall_NW": {
-    "w": 151,
-    "h": 206,
-    "lift": 119,
-    "coloured": true
-   },
-   "wall_SE": {
-    "w": 151,
-    "h": 202,
-    "lift": 115,
-    "coloured": true
-   },
-   "wall_SW": {
-    "w": 151,
-    "h": 203,
-    "lift": 116,
-    "coloured": true
-   },
    "wallCorner_NE": {
     "w": 151,
     "h": 202,
     "lift": 115,
-    "coloured": true
-   },
-   "wallCorner_NW": {
-    "w": 151,
-    "h": 206,
-    "lift": 119,
-    "coloured": true
-   },
-   "wallCorner_SE": {
-    "w": 151,
-    "h": 202,
-    "lift": 115,
-    "coloured": true
-   },
-   "wallCorner_SW": {
-    "w": 151,
-    "h": 206,
-    "lift": 119,
     "coloured": true
    },
    "wallDoor_NE": {
@@ -4633,44 +4597,8 @@
     "lift": 104,
     "coloured": true
    },
-   "wallDoor_NW": {
-    "w": 114,
-    "h": 179,
-    "lift": 113,
-    "coloured": true
-   },
-   "wallDoor_SE": {
-    "w": 114,
-    "h": 175,
-    "lift": 109,
-    "coloured": true
-   },
-   "wallDoor_SW": {
-    "w": 113,
-    "h": 170,
-    "lift": 105,
-    "coloured": true
-   },
    "metalGate_NE": {
     "w": 55,
-    "h": 91,
-    "lift": 59,
-    "coloured": true
-   },
-   "metalGate_NW": {
-    "w": 55,
-    "h": 92,
-    "lift": 60,
-    "coloured": true
-   },
-   "metalGate_SE": {
-    "w": 56,
-    "h": 91,
-    "lift": 59,
-    "coloured": true
-   },
-   "metalGate_SW": {
-    "w": 56,
     "h": 91,
     "lift": 59,
     "coloured": true
@@ -4681,67 +4609,13 @@
     "lift": 84,
     "coloured": true
    },
-   "wallNarrowStairs_NW": {
-    "w": 149,
-    "h": 204,
-    "lift": 118,
-    "coloured": true
-   },
-   "wallNarrowStairs_SE": {
-    "w": 149,
-    "h": 200,
-    "lift": 114,
-    "coloured": true
-   },
-   "wallNarrowStairs_SW": {
-    "w": 148,
-    "h": 182,
-    "lift": 97,
-    "coloured": true
-   },
    "wallCornerHalfTower_NE": {
     "w": 205,
     "h": 206,
     "lift": 88,
     "coloured": true
    },
-   "wallCornerHalfTower_NW": {
-    "w": 151,
-    "h": 234,
-    "lift": 147,
-    "coloured": true
-   },
-   "wallCornerHalfTower_SE": {
-    "w": 204,
-    "h": 206,
-    "lift": 88,
-    "coloured": true
-   },
-   "wallCornerHalfTower_SW": {
-    "w": 151,
-    "h": 243,
-    "lift": 156,
-    "coloured": true
-   },
    "wallHalf_NE": {
-    "w": 151,
-    "h": 196,
-    "lift": 109,
-    "coloured": true
-   },
-   "wallHalf_NW": {
-    "w": 151,
-    "h": 206,
-    "lift": 119,
-    "coloured": true
-   },
-   "wallHalf_SE": {
-    "w": 151,
-    "h": 202,
-    "lift": 115,
-    "coloured": true
-   },
-   "wallHalf_SW": {
     "w": 151,
     "h": 196,
     "lift": 109,
@@ -4753,67 +4627,13 @@
     "lift": 112,
     "coloured": true
    },
-   "towerBase_NW": {
-    "w": 107,
-    "h": 175,
-    "lift": 113,
-    "coloured": true
-   },
-   "towerBase_SE": {
-    "w": 107,
-    "h": 175,
-    "lift": 113,
-    "coloured": true
-   },
-   "towerBase_SW": {
-    "w": 107,
-    "h": 175,
-    "lift": 113,
-    "coloured": true
-   },
    "towerTop_NE": {
     "w": 107,
     "h": 85,
     "lift": 23,
     "coloured": true
    },
-   "towerTop_NW": {
-    "w": 107,
-    "h": 86,
-    "lift": 24,
-    "coloured": true
-   },
-   "towerTop_SE": {
-    "w": 107,
-    "h": 86,
-    "lift": 24,
-    "coloured": true
-   },
-   "towerTop_SW": {
-    "w": 107,
-    "h": 86,
-    "lift": 24,
-    "coloured": true
-   },
    "towerTopRoof_NE": {
-    "w": 120,
-    "h": 116,
-    "lift": 47,
-    "coloured": true
-   },
-   "towerTopRoof_NW": {
-    "w": 120,
-    "h": 116,
-    "lift": 47,
-    "coloured": true
-   },
-   "towerTopRoof_SE": {
-    "w": 120,
-    "h": 115,
-    "lift": 46,
-    "coloured": true
-   },
-   "towerTopRoof_SW": {
     "w": 120,
     "h": 116,
     "lift": 47,
@@ -4825,43 +4645,7 @@
     "lift": 92,
     "coloured": true
    },
-   "towerBalcony_NW": {
-    "w": 142,
-    "h": 175,
-    "lift": 93,
-    "coloured": true
-   },
-   "towerBalcony_SE": {
-    "w": 142,
-    "h": 175,
-    "lift": 93,
-    "coloured": true
-   },
-   "towerBalcony_SW": {
-    "w": 142,
-    "h": 175,
-    "lift": 93,
-    "coloured": true
-   },
    "towerSquareBase_NE": {
-    "w": 151,
-    "h": 180,
-    "lift": 93,
-    "coloured": true
-   },
-   "towerSquareBase_NW": {
-    "w": 151,
-    "h": 180,
-    "lift": 93,
-    "coloured": true
-   },
-   "towerSquareBase_SE": {
-    "w": 151,
-    "h": 179,
-    "lift": 92,
-    "coloured": true
-   },
-   "towerSquareBase_SW": {
     "w": 151,
     "h": 180,
     "lift": 93,
@@ -4873,44 +4657,8 @@
     "lift": 93,
     "coloured": true
    },
-   "towerSquareBaseColor_NW": {
-    "w": 151,
-    "h": 180,
-    "lift": 93,
-    "coloured": true
-   },
-   "towerSquareBaseColor_SE": {
-    "w": 151,
-    "h": 179,
-    "lift": 92,
-    "coloured": true
-   },
-   "towerSquareBaseColor_SW": {
-    "w": 151,
-    "h": 180,
-    "lift": 93,
-    "coloured": true
-   },
    "towerSquareMid_NE": {
     "w": 140,
-    "h": 175,
-    "lift": 94,
-    "coloured": true
-   },
-   "towerSquareMid_NW": {
-    "w": 140,
-    "h": 176,
-    "lift": 95,
-    "coloured": true
-   },
-   "towerSquareMid_SE": {
-    "w": 141,
-    "h": 175,
-    "lift": 94,
-    "coloured": true
-   },
-   "towerSquareMid_SW": {
-    "w": 141,
     "h": 175,
     "lift": 94,
     "coloured": true
@@ -4921,67 +4669,13 @@
     "lift": 94,
     "coloured": true
    },
-   "towerSquareMidWindows_NW": {
-    "w": 140,
-    "h": 176,
-    "lift": 95,
-    "coloured": true
-   },
-   "towerSquareMidWindows_SE": {
-    "w": 141,
-    "h": 175,
-    "lift": 94,
-    "coloured": true
-   },
-   "towerSquareMidWindows_SW": {
-    "w": 141,
-    "h": 175,
-    "lift": 94,
-    "coloured": true
-   },
    "towerSquareMidOpen_NE": {
     "w": 140,
     "h": 175,
     "lift": 94,
     "coloured": true
    },
-   "towerSquareMidOpen_NW": {
-    "w": 140,
-    "h": 176,
-    "lift": 95,
-    "coloured": true
-   },
-   "towerSquareMidOpen_SE": {
-    "w": 141,
-    "h": 175,
-    "lift": 94,
-    "coloured": true
-   },
-   "towerSquareMidOpen_SW": {
-    "w": 141,
-    "h": 175,
-    "lift": 94,
-    "coloured": true
-   },
    "towerSquareMidColor_NE": {
-    "w": 141,
-    "h": 115,
-    "lift": 34,
-    "coloured": true
-   },
-   "towerSquareMidColor_NW": {
-    "w": 141,
-    "h": 115,
-    "lift": 34,
-    "coloured": true
-   },
-   "towerSquareMidColor_SE": {
-    "w": 141,
-    "h": 115,
-    "lift": 34,
-    "coloured": true
-   },
-   "towerSquareMidColor_SW": {
     "w": 141,
     "h": 115,
     "lift": 34,
@@ -4993,43 +4687,7 @@
     "lift": 94,
     "coloured": true
    },
-   "towerSquareArch_NW": {
-    "w": 140,
-    "h": 176,
-    "lift": 95,
-    "coloured": true
-   },
-   "towerSquareArch_SE": {
-    "w": 141,
-    "h": 175,
-    "lift": 94,
-    "coloured": true
-   },
-   "towerSquareArch_SW": {
-    "w": 141,
-    "h": 175,
-    "lift": 94,
-    "coloured": true
-   },
    "towerSquareTop_NE": {
-    "w": 151,
-    "h": 126,
-    "lift": 39,
-    "coloured": true
-   },
-   "towerSquareTop_NW": {
-    "w": 151,
-    "h": 126,
-    "lift": 39,
-    "coloured": true
-   },
-   "towerSquareTop_SE": {
-    "w": 151,
-    "h": 126,
-    "lift": 39,
-    "coloured": true
-   },
-   "towerSquareTop_SW": {
     "w": 151,
     "h": 126,
     "lift": 39,
@@ -5041,43 +4699,7 @@
     "lift": 42,
     "coloured": true
    },
-   "towerSquareTopRoof_NW": {
-    "w": 151,
-    "h": 129,
-    "lift": 42,
-    "coloured": true
-   },
-   "towerSquareTopRoof_SE": {
-    "w": 151,
-    "h": 130,
-    "lift": 43,
-    "coloured": true
-   },
-   "towerSquareTopRoof_SW": {
-    "w": 151,
-    "h": 129,
-    "lift": 42,
-    "coloured": true
-   },
    "towerSquareTopRoofHigh_NE": {
-    "w": 151,
-    "h": 155,
-    "lift": 68,
-    "coloured": true
-   },
-   "towerSquareTopRoofHigh_NW": {
-    "w": 151,
-    "h": 156,
-    "lift": 69,
-    "coloured": true
-   },
-   "towerSquareTopRoofHigh_SE": {
-    "w": 151,
-    "h": 156,
-    "lift": 69,
-    "coloured": true
-   },
-   "towerSquareTopRoofHigh_SW": {
     "w": 151,
     "h": 155,
     "lift": 68,
@@ -5089,43 +4711,7 @@
     "lift": 45,
     "coloured": true
    },
-   "towerSquareTopColor_NW": {
-    "w": 151,
-    "h": 132,
-    "lift": 45,
-    "coloured": true
-   },
-   "towerSquareTopColor_SE": {
-    "w": 151,
-    "h": 132,
-    "lift": 45,
-    "coloured": true
-   },
-   "towerSquareTopColor_SW": {
-    "w": 151,
-    "h": 132,
-    "lift": 45,
-    "coloured": true
-   },
    "towerSquareRoof_NE": {
-    "w": 151,
-    "h": 209,
-    "lift": 122,
-    "coloured": true
-   },
-   "towerSquareRoof_NW": {
-    "w": 151,
-    "h": 209,
-    "lift": 122,
-    "coloured": true
-   },
-   "towerSquareRoof_SE": {
-    "w": 151,
-    "h": 209,
-    "lift": 122,
-    "coloured": true
-   },
-   "towerSquareRoof_SW": {
     "w": 151,
     "h": 209,
     "lift": 122,
@@ -5137,46 +4723,10 @@
     "lift": 94,
     "coloured": true
    },
-   "towerSquarePoles_NW": {
-    "w": 140,
-    "h": 176,
-    "lift": 95,
-    "coloured": true
-   },
-   "towerSquarePoles_SE": {
-    "w": 141,
-    "h": 175,
-    "lift": 94,
-    "coloured": true
-   },
-   "towerSquarePoles_SW": {
-    "w": 141,
-    "h": 175,
-    "lift": 94,
-    "coloured": true
-   },
    "flagBlue_NE": {
     "w": 42,
     "h": 79,
     "lift": 55,
-    "coloured": true
-   },
-   "flagBlue_NW": {
-    "w": 41,
-    "h": 80,
-    "lift": 56,
-    "coloured": true
-   },
-   "flagBlue_SE": {
-    "w": 42,
-    "h": 63,
-    "lift": 39,
-    "coloured": true
-   },
-   "flagBlue_SW": {
-    "w": 42,
-    "h": 63,
-    "lift": 39,
     "coloured": true
    },
    "flagBlueWide_NE": {
@@ -5185,43 +4735,7 @@
     "lift": 58,
     "coloured": true
    },
-   "flagBlueWide_NW": {
-    "w": 31,
-    "h": 76,
-    "lift": 58,
-    "coloured": true
-   },
-   "flagBlueWide_SE": {
-    "w": 31,
-    "h": 63,
-    "lift": 45,
-    "coloured": true
-   },
-   "flagBlueWide_SW": {
-    "w": 31,
-    "h": 63,
-    "lift": 45,
-    "coloured": true
-   },
    "flagBannerLong_NE": {
-    "w": 51,
-    "h": 183,
-    "lift": 154,
-    "coloured": true
-   },
-   "flagBannerLong_NW": {
-    "w": 51,
-    "h": 183,
-    "lift": 154,
-    "coloured": true
-   },
-   "flagBannerLong_SE": {
-    "w": 51,
-    "h": 182,
-    "lift": 153,
-    "coloured": true
-   },
-   "flagBannerLong_SW": {
     "w": 51,
     "h": 183,
     "lift": 154,
@@ -5233,43 +4747,7 @@
     "lift": 49,
     "coloured": true
    },
-   "flagBannerShort_NW": {
-    "w": 51,
-    "h": 79,
-    "lift": 50,
-    "coloured": true
-   },
-   "flagBannerShort_SE": {
-    "w": 51,
-    "h": 77,
-    "lift": 48,
-    "coloured": true
-   },
-   "flagBannerShort_SW": {
-    "w": 51,
-    "h": 78,
-    "lift": 49,
-    "coloured": true
-   },
    "shieldBlue_NE": {
-    "w": 23,
-    "h": 27,
-    "lift": 14,
-    "coloured": true
-   },
-   "shieldBlue_NW": {
-    "w": 23,
-    "h": 28,
-    "lift": 15,
-    "coloured": true
-   },
-   "shieldBlue_SE": {
-    "w": 23,
-    "h": 28,
-    "lift": 15,
-    "coloured": true
-   },
-   "shieldBlue_SW": {
     "w": 23,
     "h": 27,
     "lift": 14,
@@ -5281,67 +4759,13 @@
     "lift": 21,
     "coloured": true
    },
-   "bridge_NW": {
-    "w": 138,
-    "h": 102,
-    "lift": 22,
-    "coloured": true
-   },
-   "bridge_SE": {
-    "w": 139,
-    "h": 102,
-    "lift": 22,
-    "coloured": true
-   },
-   "bridge_SW": {
-    "w": 139,
-    "h": 101,
-    "lift": 21,
-    "coloured": true
-   },
    "stairsStone_NE": {
     "w": 80,
     "h": 67,
     "lift": 21,
     "coloured": true
    },
-   "stairsStone_NW": {
-    "w": 79,
-    "h": 67,
-    "lift": 21,
-    "coloured": true
-   },
-   "stairsStone_SE": {
-    "w": 80,
-    "h": 107,
-    "lift": 61,
-    "coloured": true
-   },
-   "stairsStone_SW": {
-    "w": 80,
-    "h": 108,
-    "lift": 62,
-    "coloured": true
-   },
    "king_NE": {
-    "w": 45,
-    "h": 67,
-    "lift": 41,
-    "coloured": true
-   },
-   "king_NW": {
-    "w": 45,
-    "h": 67,
-    "lift": 41,
-    "coloured": true
-   },
-   "king_SE": {
-    "w": 45,
-    "h": 67,
-    "lift": 41,
-    "coloured": true
-   },
-   "king_SW": {
     "w": 45,
     "h": 67,
     "lift": 41,
@@ -5353,43 +4777,7 @@
     "lift": 41,
     "coloured": true
    },
-   "knightBlue_NW": {
-    "w": 45,
-    "h": 67,
-    "lift": 41,
-    "coloured": true
-   },
-   "knightBlue_SE": {
-    "w": 45,
-    "h": 67,
-    "lift": 41,
-    "coloured": true
-   },
-   "knightBlue_SW": {
-    "w": 45,
-    "h": 67,
-    "lift": 41,
-    "coloured": true
-   },
    "knightRed_NE": {
-    "w": 45,
-    "h": 67,
-    "lift": 41,
-    "coloured": true
-   },
-   "knightRed_NW": {
-    "w": 45,
-    "h": 67,
-    "lift": 41,
-    "coloured": true
-   },
-   "knightRed_SE": {
-    "w": 45,
-    "h": 67,
-    "lift": 41,
-    "coloured": true
-   },
-   "knightRed_SW": {
     "w": 45,
     "h": 67,
     "lift": 41,
@@ -5401,68 +4789,14 @@
     "lift": 51,
     "coloured": true
    },
-   "siegeBallista_NW": {
-    "w": 135,
-    "h": 132,
-    "lift": 54,
-    "coloured": true
-   },
-   "siegeBallista_SE": {
-    "w": 136,
-    "h": 129,
-    "lift": 50,
-    "coloured": true
-   },
-   "siegeBallista_SW": {
-    "w": 136,
-    "h": 132,
-    "lift": 53,
-    "coloured": true
-   },
    "siegeCatapult_NE": {
     "w": 182,
     "h": 186,
     "lift": 81,
     "coloured": true
    },
-   "siegeCatapult_NW": {
-    "w": 182,
-    "h": 186,
-    "lift": 81,
-    "coloured": true
-   },
-   "siegeCatapult_SE": {
-    "w": 182,
-    "h": 185,
-    "lift": 80,
-    "coloured": true
-   },
-   "siegeCatapult_SW": {
-    "w": 182,
-    "h": 185,
-    "lift": 80,
-    "coloured": true
-   },
    "siegeRam_NE": {
     "w": 173,
-    "h": 169,
-    "lift": 69,
-    "coloured": true
-   },
-   "siegeRam_NW": {
-    "w": 173,
-    "h": 169,
-    "lift": 69,
-    "coloured": true
-   },
-   "siegeRam_SE": {
-    "w": 174,
-    "h": 169,
-    "lift": 69,
-    "coloured": true
-   },
-   "siegeRam_SW": {
-    "w": 174,
     "h": 169,
     "lift": 69,
     "coloured": true
@@ -5473,70 +4807,13 @@
     "lift": 160,
     "coloured": true
    },
-   "siegeTower_NW": {
-    "w": 202,
-    "h": 298,
-    "lift": 181,
-    "coloured": true
-   },
-   "siegeTower_SE": {
-    "w": 202,
-    "h": 276,
-    "lift": 159,
-    "coloured": true
-   },
-   "siegeTower_SW": {
-    "w": 202,
-    "h": 298,
-    "lift": 181,
-    "coloured": true
-   },
    "siegeTrebuchet_NE": {
     "w": 199,
     "h": 245,
     "lift": 130,
     "coloured": true
    },
-   "siegeTrebuchet_NW": {
-    "w": 199,
-    "h": 228,
-    "lift": 113,
-    "coloured": true
-   },
-   "siegeTrebuchet_SE": {
-    "w": 198,
-    "h": 244,
-    "lift": 130,
-    "coloured": true
-   },
-   "siegeTrebuchet_SW": {
-    "w": 198,
-    "h": 228,
-    "lift": 114,
-    "coloured": true
-   },
    "t_wallBlock_NE": {
-    "w": 151,
-    "h": 168,
-    "lift": 81,
-    "oy": 0,
-    "coloured": false
-   },
-   "t_wallBlock_NW": {
-    "w": 151,
-    "h": 168,
-    "lift": 81,
-    "oy": 0,
-    "coloured": false
-   },
-   "t_wallBlock_SE": {
-    "w": 151,
-    "h": 168,
-    "lift": 81,
-    "oy": 0,
-    "coloured": false
-   },
-   "t_wallBlock_SW": {
     "w": 151,
     "h": 168,
     "lift": 81,
@@ -5550,49 +4827,7 @@
     "oy": 0,
     "coloured": false
    },
-   "t_wallWoodBlock_NW": {
-    "w": 151,
-    "h": 168,
-    "lift": 81,
-    "oy": 0,
-    "coloured": false
-   },
-   "t_wallWoodBlock_SE": {
-    "w": 151,
-    "h": 168,
-    "lift": 81,
-    "oy": 0,
-    "coloured": false
-   },
-   "t_wallWoodBlock_SW": {
-    "w": 151,
-    "h": 168,
-    "lift": 81,
-    "oy": 0,
-    "coloured": false
-   },
    "t_roofGable_NE": {
-    "w": 165,
-    "h": 114,
-    "lift": 27,
-    "oy": 2,
-    "coloured": false
-   },
-   "t_roofGable_NW": {
-    "w": 165,
-    "h": 114,
-    "lift": 27,
-    "oy": 2,
-    "coloured": false
-   },
-   "t_roofGable_SE": {
-    "w": 165,
-    "h": 114,
-    "lift": 27,
-    "oy": 2,
-    "coloured": false
-   },
-   "t_roofGable_SW": {
     "w": 165,
     "h": 114,
     "lift": 27,
@@ -5606,49 +4841,7 @@
     "oy": 5,
     "coloured": false
    },
-   "t_roofHigh_NW": {
-    "w": 163,
-    "h": 186,
-    "lift": 99,
-    "oy": 5,
-    "coloured": false
-   },
-   "t_roofHigh_SE": {
-    "w": 163,
-    "h": 143,
-    "lift": 56,
-    "oy": 0,
-    "coloured": false
-   },
-   "t_roofHigh_SW": {
-    "w": 163,
-    "h": 143,
-    "lift": 56,
-    "oy": 0,
-    "coloured": false
-   },
    "t_roofHighPoint_NE": {
-    "w": 158,
-    "h": 143,
-    "lift": 56,
-    "oy": 2,
-    "coloured": false
-   },
-   "t_roofHighPoint_NW": {
-    "w": 158,
-    "h": 143,
-    "lift": 56,
-    "oy": 2,
-    "coloured": false
-   },
-   "t_roofHighPoint_SE": {
-    "w": 158,
-    "h": 143,
-    "lift": 56,
-    "oy": 2,
-    "coloured": false
-   },
-   "t_roofHighPoint_SW": {
     "w": 158,
     "h": 143,
     "lift": 56,
@@ -5662,49 +4855,7 @@
     "oy": 2,
     "coloured": false
    },
-   "t_roofPoint_NW": {
-    "w": 158,
-    "h": 98,
-    "lift": 11,
-    "oy": 2,
-    "coloured": false
-   },
-   "t_roofPoint_SE": {
-    "w": 158,
-    "h": 98,
-    "lift": 11,
-    "oy": 2,
-    "coloured": false
-   },
-   "t_roofPoint_SW": {
-    "w": 158,
-    "h": 98,
-    "lift": 11,
-    "oy": 2,
-    "coloured": false
-   },
    "t_roofHighGable_NE": {
-    "w": 170,
-    "h": 168,
-    "lift": 81,
-    "oy": 7,
-    "coloured": false
-   },
-   "t_roofHighGable_NW": {
-    "w": 170,
-    "h": 168,
-    "lift": 81,
-    "oy": 7,
-    "coloured": false
-   },
-   "t_roofHighGable_SE": {
-    "w": 170,
-    "h": 168,
-    "lift": 81,
-    "oy": 7,
-    "coloured": false
-   },
-   "t_roofHighGable_SW": {
     "w": 170,
     "h": 168,
     "lift": 81,
@@ -5718,27 +4869,6 @@
     "oy": 3,
     "coloured": false
    },
-   "t_roof_NW": {
-    "w": 160,
-    "h": 137,
-    "lift": 50,
-    "oy": 3,
-    "coloured": false
-   },
-   "t_roof_SE": {
-    "w": 160,
-    "h": 96,
-    "lift": 9,
-    "oy": 0,
-    "coloured": false
-   },
-   "t_roof_SW": {
-    "w": 160,
-    "h": 96,
-    "lift": 9,
-    "oy": 0,
-    "coloured": false
-   },
    "t_roofHighWindow_NE": {
     "w": 163,
     "h": 186,
@@ -5746,49 +4876,7 @@
     "oy": 5,
     "coloured": false
    },
-   "t_roofHighWindow_NW": {
-    "w": 163,
-    "h": 186,
-    "lift": 99,
-    "oy": 5,
-    "coloured": false
-   },
-   "t_roofHighWindow_SE": {
-    "w": 163,
-    "h": 144,
-    "lift": 57,
-    "oy": 0,
-    "coloured": false
-   },
-   "t_roofHighWindow_SW": {
-    "w": 163,
-    "h": 144,
-    "lift": 57,
-    "oy": 0,
-    "coloured": false
-   },
    "t_stallRed_NE": {
-    "w": 151,
-    "h": 172,
-    "lift": 85,
-    "oy": 0,
-    "coloured": false
-   },
-   "t_stallRed_NW": {
-    "w": 151,
-    "h": 172,
-    "lift": 85,
-    "oy": 0,
-    "coloured": false
-   },
-   "t_stallRed_SE": {
-    "w": 151,
-    "h": 172,
-    "lift": 85,
-    "oy": 0,
-    "coloured": false
-   },
-   "t_stallRed_SW": {
     "w": 151,
     "h": 172,
     "lift": 85,
@@ -5802,52 +4890,10 @@
     "oy": 0,
     "coloured": false
    },
-   "t_stallGreen_NW": {
-    "w": 151,
-    "h": 172,
-    "lift": 85,
-    "oy": 0,
-    "coloured": false
-   },
-   "t_stallGreen_SE": {
-    "w": 151,
-    "h": 172,
-    "lift": 85,
-    "oy": 0,
-    "coloured": false
-   },
-   "t_stallGreen_SW": {
-    "w": 151,
-    "h": 172,
-    "lift": 85,
-    "oy": 0,
-    "coloured": false
-   },
    "t_cart_NE": {
     "w": 153,
     "h": 112,
     "lift": 25,
-    "oy": 0,
-    "coloured": false
-   },
-   "t_cart_NW": {
-    "w": 153,
-    "h": 125,
-    "lift": 38,
-    "oy": 0,
-    "coloured": false
-   },
-   "t_cart_SE": {
-    "w": 153,
-    "h": 112,
-    "lift": 25,
-    "oy": 0,
-    "coloured": false
-   },
-   "t_cart_SW": {
-    "w": 153,
-    "h": 125,
-    "lift": 38,
     "oy": 0,
     "coloured": false
    },
@@ -5858,49 +4904,7 @@
     "oy": 0,
     "coloured": false
    },
-   "t_cartHigh_NW": {
-    "w": 153,
-    "h": 148,
-    "lift": 61,
-    "oy": 0,
-    "coloured": false
-   },
-   "t_cartHigh_SE": {
-    "w": 153,
-    "h": 132,
-    "lift": 45,
-    "oy": 0,
-    "coloured": false
-   },
-   "t_cartHigh_SW": {
-    "w": 153,
-    "h": 148,
-    "lift": 61,
-    "oy": 0,
-    "coloured": false
-   },
    "t_lantern_NE": {
-    "w": 26,
-    "h": 185,
-    "lift": 98,
-    "oy": 0,
-    "coloured": false
-   },
-   "t_lantern_NW": {
-    "w": 26,
-    "h": 185,
-    "lift": 98,
-    "oy": 0,
-    "coloured": false
-   },
-   "t_lantern_SE": {
-    "w": 26,
-    "h": 185,
-    "lift": 98,
-    "oy": 0,
-    "coloured": false
-   },
-   "t_lantern_SW": {
     "w": 26,
     "h": 185,
     "lift": 98,
@@ -5914,49 +4918,7 @@
     "oy": 16,
     "coloured": false
    },
-   "t_fountainRound_NW": {
-    "w": 214,
-    "h": 134,
-    "lift": 47,
-    "oy": 16,
-    "coloured": false
-   },
-   "t_fountainRound_SE": {
-    "w": 214,
-    "h": 134,
-    "lift": 47,
-    "oy": 16,
-    "coloured": false
-   },
-   "t_fountainRound_SW": {
-    "w": 214,
-    "h": 134,
-    "lift": 47,
-    "oy": 16,
-    "coloured": false
-   },
    "t_fountainSquare_NE": {
-    "w": 302,
-    "h": 175,
-    "lift": 88,
-    "oy": 37,
-    "coloured": false
-   },
-   "t_fountainSquare_NW": {
-    "w": 302,
-    "h": 175,
-    "lift": 88,
-    "oy": 37,
-    "coloured": false
-   },
-   "t_fountainSquare_SE": {
-    "w": 302,
-    "h": 175,
-    "lift": 88,
-    "oy": 37,
-    "coloured": false
-   },
-   "t_fountainSquare_SW": {
     "w": 302,
     "h": 175,
     "lift": 88,
@@ -5970,49 +4932,7 @@
     "oy": 0,
     "coloured": false
    },
-   "t_tree_NW": {
-    "w": 109,
-    "h": 260,
-    "lift": 173,
-    "oy": 0,
-    "coloured": false
-   },
-   "t_tree_SE": {
-    "w": 109,
-    "h": 260,
-    "lift": 173,
-    "oy": 0,
-    "coloured": false
-   },
-   "t_tree_SW": {
-    "w": 109,
-    "h": 260,
-    "lift": 173,
-    "oy": 0,
-    "coloured": false
-   },
    "t_treeHigh_NE": {
-    "w": 109,
-    "h": 311,
-    "lift": 224,
-    "oy": 0,
-    "coloured": false
-   },
-   "t_treeHigh_NW": {
-    "w": 109,
-    "h": 311,
-    "lift": 224,
-    "oy": 0,
-    "coloured": false
-   },
-   "t_treeHigh_SE": {
-    "w": 109,
-    "h": 311,
-    "lift": 224,
-    "oy": 0,
-    "coloured": false
-   },
-   "t_treeHigh_SW": {
     "w": 109,
     "h": 311,
     "lift": 224,
@@ -6026,27 +4946,6 @@
     "oy": 0,
     "coloured": false
    },
-   "t_treeHighRound_NW": {
-    "w": 109,
-    "h": 296,
-    "lift": 209,
-    "oy": 0,
-    "coloured": false
-   },
-   "t_treeHighRound_SE": {
-    "w": 109,
-    "h": 296,
-    "lift": 209,
-    "oy": 0,
-    "coloured": false
-   },
-   "t_treeHighRound_SW": {
-    "w": 109,
-    "h": 296,
-    "lift": 209,
-    "oy": 0,
-    "coloured": false
-   },
    "t_rockLarge_NE": {
     "w": 181,
     "h": 167,
@@ -6054,49 +4953,7 @@
     "oy": 7,
     "coloured": false
    },
-   "t_rockLarge_NW": {
-    "w": 184,
-    "h": 163,
-    "lift": 76,
-    "oy": 8,
-    "coloured": false
-   },
-   "t_rockLarge_SE": {
-    "w": 184,
-    "h": 163,
-    "lift": 76,
-    "oy": 0,
-    "coloured": false
-   },
-   "t_rockLarge_SW": {
-    "w": 181,
-    "h": 164,
-    "lift": 77,
-    "oy": 8,
-    "coloured": false
-   },
    "t_pillarStone_NE": {
-    "w": 21,
-    "h": 135,
-    "lift": 48,
-    "oy": 0,
-    "coloured": false
-   },
-   "t_pillarStone_NW": {
-    "w": 21,
-    "h": 135,
-    "lift": 48,
-    "oy": 0,
-    "coloured": false
-   },
-   "t_pillarStone_SE": {
-    "w": 21,
-    "h": 135,
-    "lift": 48,
-    "oy": 0,
-    "coloured": false
-   },
-   "t_pillarStone_SW": {
     "w": 21,
     "h": 135,
     "lift": 48,
@@ -6110,52 +4967,10 @@
     "oy": 0,
     "coloured": false
    },
-   "t_planks_NW": {
-    "w": 151,
-    "h": 81,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "t_planks_SE": {
-    "w": 151,
-    "h": 81,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "t_planks_SW": {
-    "w": 151,
-    "h": 81,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
    "t_hedge_NE": {
     "w": 151,
     "h": 95,
     "lift": 8,
-    "oy": 0,
-    "coloured": false
-   },
-   "t_hedge_NW": {
-    "w": 151,
-    "h": 95,
-    "lift": 8,
-    "oy": 0,
-    "coloured": false
-   },
-   "t_hedge_SE": {
-    "w": 151,
-    "h": 67,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "t_hedge_SW": {
-    "w": 151,
-    "h": 67,
-    "lift": 0,
     "oy": 0,
     "coloured": false
    },
@@ -6166,52 +4981,10 @@
     "oy": 0,
     "coloured": false
    },
-   "t_hedgeGate_NW": {
-    "w": 151,
-    "h": 95,
-    "lift": 8,
-    "oy": 0,
-    "coloured": false
-   },
-   "t_hedgeGate_SE": {
-    "w": 151,
-    "h": 67,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "t_hedgeGate_SW": {
-    "w": 151,
-    "h": 67,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
    "t_fence_NE": {
     "w": 151,
     "h": 110,
     "lift": 23,
-    "oy": 0,
-    "coloured": false
-   },
-   "t_fence_NW": {
-    "w": 151,
-    "h": 110,
-    "lift": 23,
-    "oy": 0,
-    "coloured": false
-   },
-   "t_fence_SE": {
-    "w": 151,
-    "h": 77,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "t_fence_SW": {
-    "w": 151,
-    "h": 77,
-    "lift": 0,
     "oy": 0,
     "coloured": false
    },
@@ -6222,51 +4995,9 @@
     "oy": 0,
     "coloured": false
    },
-   "t_fenceGate_NW": {
-    "w": 151,
-    "h": 110,
-    "lift": 23,
-    "oy": 0,
-    "coloured": false
-   },
-   "t_fenceGate_SE": {
-    "w": 151,
-    "h": 77,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "t_fenceGate_SW": {
-    "w": 151,
-    "h": 77,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
    "t_hedgeCurved_NE": {
     "w": 151,
     "h": 84,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "t_hedgeCurved_NW": {
-    "w": 107,
-    "h": 95,
-    "lift": 8,
-    "oy": 0,
-    "coloured": false
-   },
-   "t_hedgeCurved_SE": {
-    "w": 107,
-    "h": 95,
-    "lift": 8,
-    "oy": 0,
-    "coloured": false
-   },
-   "t_hedgeCurved_SW": {
-    "w": 151,
-    "h": 67,
     "lift": 0,
     "oy": 0,
     "coloured": false
@@ -6275,27 +5006,6 @@
     "w": 151,
     "h": 100,
     "lift": 13,
-    "oy": 0,
-    "coloured": false
-   },
-   "t_fenceCurved_NW": {
-    "w": 107,
-    "h": 110,
-    "lift": 23,
-    "oy": 0,
-    "coloured": false
-   },
-   "t_fenceCurved_SE": {
-    "w": 107,
-    "h": 110,
-    "lift": 23,
-    "oy": 0,
-    "coloured": false
-   },
-   "t_fenceCurved_SW": {
-    "w": 151,
-    "h": 77,
-    "lift": 0,
     "oy": 0,
     "coloured": false
    },
@@ -6313,70 +5023,7 @@
     "oy": 0,
     "coloured": false
    },
-   "t_windmill_NW": {
-    "w": 235,
-    "h": 340,
-    "lift": 253,
-    "oy": 0,
-    "coloured": false
-   },
-   "t_watermill_NW": {
-    "w": 186,
-    "h": 215,
-    "lift": 128,
-    "oy": 0,
-    "coloured": false
-   },
-   "t_windmill_SE": {
-    "w": 235,
-    "h": 361,
-    "lift": 274,
-    "oy": 0,
-    "coloured": false
-   },
-   "t_watermill_SE": {
-    "w": 186,
-    "h": 215,
-    "lift": 128,
-    "oy": 0,
-    "coloured": false
-   },
-   "t_windmill_SW": {
-    "w": 235,
-    "h": 340,
-    "lift": 253,
-    "oy": 0,
-    "coloured": false
-   },
-   "t_watermill_SW": {
-    "w": 186,
-    "h": 215,
-    "lift": 128,
-    "oy": 0,
-    "coloured": false
-   },
    "n_tree_oak_NE": {
-    "w": 77,
-    "h": 159,
-    "lift": 72,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_tree_oak_NW": {
-    "w": 77,
-    "h": 159,
-    "lift": 72,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_tree_oak_SE": {
-    "w": 77,
-    "h": 159,
-    "lift": 72,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_tree_oak_SW": {
     "w": 77,
     "h": 159,
     "lift": 72,
@@ -6390,49 +5037,7 @@
     "oy": 0,
     "coloured": false
    },
-   "n_tree_pineDefaultA_NW": {
-    "w": 58,
-    "h": 180,
-    "lift": 93,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_tree_pineDefaultA_SE": {
-    "w": 58,
-    "h": 180,
-    "lift": 93,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_tree_pineDefaultA_SW": {
-    "w": 58,
-    "h": 180,
-    "lift": 93,
-    "oy": 0,
-    "coloured": false
-   },
    "n_tree_default_fall_NE": {
-    "w": 79,
-    "h": 195,
-    "lift": 108,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_tree_default_fall_NW": {
-    "w": 79,
-    "h": 195,
-    "lift": 108,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_tree_default_fall_SE": {
-    "w": 79,
-    "h": 195,
-    "lift": 108,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_tree_default_fall_SW": {
     "w": 79,
     "h": 195,
     "lift": 108,
@@ -6446,49 +5051,7 @@
     "oy": 0,
     "coloured": false
    },
-   "n_tree_detailed_NW": {
-    "w": 93,
-    "h": 173,
-    "lift": 86,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_tree_detailed_SE": {
-    "w": 93,
-    "h": 173,
-    "lift": 86,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_tree_detailed_SW": {
-    "w": 88,
-    "h": 173,
-    "lift": 86,
-    "oy": 0,
-    "coloured": false
-   },
    "n_tree_small_NE": {
-    "w": 44,
-    "h": 141,
-    "lift": 54,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_tree_small_NW": {
-    "w": 44,
-    "h": 141,
-    "lift": 54,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_tree_small_SE": {
-    "w": 44,
-    "h": 141,
-    "lift": 54,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_tree_small_SW": {
     "w": 44,
     "h": 141,
     "lift": 54,
@@ -6502,49 +5065,7 @@
     "oy": 0,
     "coloured": false
    },
-   "n_tree_tall_NW": {
-    "w": 49,
-    "h": 197,
-    "lift": 110,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_tree_tall_SE": {
-    "w": 49,
-    "h": 197,
-    "lift": 110,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_tree_tall_SW": {
-    "w": 49,
-    "h": 197,
-    "lift": 110,
-    "oy": 0,
-    "coloured": false
-   },
    "n_tree_pineRoundA_NE": {
-    "w": 74,
-    "h": 166,
-    "lift": 79,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_tree_pineRoundA_NW": {
-    "w": 74,
-    "h": 166,
-    "lift": 79,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_tree_pineRoundA_SE": {
-    "w": 74,
-    "h": 166,
-    "lift": 79,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_tree_pineRoundA_SW": {
     "w": 74,
     "h": 166,
     "lift": 79,
@@ -6558,51 +5079,9 @@
     "oy": 0,
     "coloured": false
    },
-   "n_plant_bush_NW": {
-    "w": 33,
-    "h": 69,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_plant_bush_SE": {
-    "w": 33,
-    "h": 69,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_plant_bush_SW": {
-    "w": 33,
-    "h": 69,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
    "n_plant_bushLarge_NE": {
     "w": 39,
     "h": 67,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_plant_bushLarge_NW": {
-    "w": 39,
-    "h": 71,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_plant_bushLarge_SE": {
-    "w": 39,
-    "h": 67,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_plant_bushLarge_SW": {
-    "w": 39,
-    "h": 70,
     "lift": 0,
     "oy": 0,
     "coloured": false
@@ -6614,51 +5093,9 @@
     "oy": 0,
     "coloured": false
    },
-   "n_mushroom_redGroup_NW": {
-    "w": 37,
-    "h": 64,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_mushroom_redGroup_SE": {
-    "w": 37,
-    "h": 60,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_mushroom_redGroup_SW": {
-    "w": 35,
-    "h": 60,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
    "n_mushroom_tanGroup_NE": {
     "w": 35,
     "h": 64,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_mushroom_tanGroup_NW": {
-    "w": 37,
-    "h": 64,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_mushroom_tanGroup_SE": {
-    "w": 37,
-    "h": 60,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_mushroom_tanGroup_SW": {
-    "w": 35,
-    "h": 60,
     "lift": 0,
     "oy": 0,
     "coloured": false
@@ -6670,51 +5107,9 @@
     "oy": 0,
     "coloured": false
    },
-   "n_rock_largeA_NW": {
-    "w": 125,
-    "h": 79,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_rock_largeA_SE": {
-    "w": 125,
-    "h": 71,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_rock_largeA_SW": {
-    "w": 100,
-    "h": 84,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
    "n_rock_smallA_NE": {
     "w": 46,
     "h": 60,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_rock_smallA_NW": {
-    "w": 44,
-    "h": 60,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_rock_smallA_SE": {
-    "w": 44,
-    "h": 59,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_rock_smallA_SW": {
-    "w": 46,
-    "h": 57,
     "lift": 0,
     "oy": 0,
     "coloured": false
@@ -6726,49 +5121,7 @@
     "oy": 0,
     "coloured": false
    },
-   "n_rock_tallA_NW": {
-    "w": 98,
-    "h": 128,
-    "lift": 41,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_rock_tallA_SE": {
-    "w": 98,
-    "h": 144,
-    "lift": 57,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_rock_tallA_SW": {
-    "w": 102,
-    "h": 138,
-    "lift": 51,
-    "oy": 0,
-    "coloured": false
-   },
    "n_statue_column_NE": {
-    "w": 46,
-    "h": 138,
-    "lift": 51,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_statue_column_NW": {
-    "w": 46,
-    "h": 138,
-    "lift": 51,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_statue_column_SE": {
-    "w": 46,
-    "h": 138,
-    "lift": 51,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_statue_column_SW": {
     "w": 46,
     "h": 138,
     "lift": 51,
@@ -6782,27 +5135,6 @@
     "oy": 0,
     "coloured": false
    },
-   "n_statue_obelisk_NW": {
-    "w": 46,
-    "h": 118,
-    "lift": 31,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_statue_obelisk_SE": {
-    "w": 46,
-    "h": 118,
-    "lift": 31,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_statue_obelisk_SW": {
-    "w": 46,
-    "h": 118,
-    "lift": 31,
-    "oy": 0,
-    "coloured": false
-   },
    "n_statue_head_NE": {
     "w": 72,
     "h": 137,
@@ -6810,49 +5142,7 @@
     "oy": 0,
     "coloured": false
    },
-   "n_statue_head_NW": {
-    "w": 72,
-    "h": 137,
-    "lift": 50,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_statue_head_SE": {
-    "w": 72,
-    "h": 142,
-    "lift": 55,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_statue_head_SW": {
-    "w": 72,
-    "h": 142,
-    "lift": 55,
-    "oy": 0,
-    "coloured": false
-   },
    "n_statue_ring_NE": {
-    "w": 77,
-    "h": 115,
-    "lift": 28,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_statue_ring_NW": {
-    "w": 77,
-    "h": 115,
-    "lift": 28,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_statue_ring_SE": {
-    "w": 77,
-    "h": 115,
-    "lift": 28,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_statue_ring_SW": {
     "w": 77,
     "h": 115,
     "lift": 28,
@@ -6866,27 +5156,6 @@
     "oy": 0,
     "coloured": false
    },
-   "n_log_stack_NW": {
-    "w": 84,
-    "h": 82,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_log_stack_SE": {
-    "w": 84,
-    "h": 82,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_log_stack_SW": {
-    "w": 84,
-    "h": 87,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
    "n_campfire_stones_NE": {
     "w": 63,
     "h": 55,
@@ -6894,49 +5163,7 @@
     "oy": 0,
     "coloured": false
    },
-   "n_campfire_stones_NW": {
-    "w": 58,
-    "h": 58,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_campfire_stones_SE": {
-    "w": 58,
-    "h": 55,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_campfire_stones_SW": {
-    "w": 63,
-    "h": 58,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
    "n_tent_detailedOpen_NE": {
-    "w": 109,
-    "h": 101,
-    "lift": 14,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_tent_detailedOpen_NW": {
-    "w": 109,
-    "h": 101,
-    "lift": 14,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_tent_detailedOpen_SE": {
-    "w": 109,
-    "h": 101,
-    "lift": 14,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_tent_detailedOpen_SW": {
     "w": 109,
     "h": 101,
     "lift": 14,
@@ -6950,49 +5177,7 @@
     "oy": 0,
     "coloured": false
    },
-   "n_sign_NW": {
-    "w": 33,
-    "h": 81,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_sign_SE": {
-    "w": 33,
-    "h": 78,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_sign_SW": {
-    "w": 33,
-    "h": 78,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
    "n_pot_large_NE": {
-    "w": 58,
-    "h": 71,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_pot_large_NW": {
-    "w": 58,
-    "h": 71,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_pot_large_SE": {
-    "w": 58,
-    "h": 71,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_pot_large_SW": {
     "w": 58,
     "h": 71,
     "lift": 0,
@@ -7006,49 +5191,7 @@
     "oy": 0,
     "coloured": false
    },
-   "n_crops_wheatStageB_NW": {
-    "w": 58,
-    "h": 96,
-    "lift": 9,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_crops_wheatStageB_SE": {
-    "w": 58,
-    "h": 94,
-    "lift": 7,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_crops_wheatStageB_SW": {
-    "w": 65,
-    "h": 95,
-    "lift": 8,
-    "oy": 0,
-    "coloured": false
-   },
    "n_crop_pumpkin_NE": {
-    "w": 51,
-    "h": 71,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_crop_pumpkin_NW": {
-    "w": 51,
-    "h": 71,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_crop_pumpkin_SE": {
-    "w": 51,
-    "h": 71,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_crop_pumpkin_SW": {
     "w": 51,
     "h": 71,
     "lift": 0,
@@ -7062,27 +5205,6 @@
     "oy": 0,
     "coloured": false
    },
-   "n_bridge_wood_NW": {
-    "w": 158,
-    "h": 114,
-    "lift": 27,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_bridge_wood_SE": {
-    "w": 158,
-    "h": 114,
-    "lift": 27,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_bridge_wood_SW": {
-    "w": 158,
-    "h": 114,
-    "lift": 27,
-    "oy": 0,
-    "coloured": false
-   },
    "n_path_stone_NE": {
     "w": 95,
     "h": 69,
@@ -7090,49 +5212,7 @@
     "oy": 0,
     "coloured": false
    },
-   "n_path_stone_NW": {
-    "w": 112,
-    "h": 66,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_path_stone_SE": {
-    "w": 112,
-    "h": 67,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_path_stone_SW": {
-    "w": 95,
-    "h": 66,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
    "n_lily_large_NE": {
-    "w": 33,
-    "h": 50,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_lily_large_NW": {
-    "w": 33,
-    "h": 50,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_lily_large_SE": {
-    "w": 33,
-    "h": 50,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_lily_large_SW": {
     "w": 33,
     "h": 50,
     "lift": 0,
@@ -7146,52 +5226,10 @@
     "oy": 0,
     "coloured": false
    },
-   "n_stump_round_NW": {
-    "w": 39,
-    "h": 64,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_stump_round_SE": {
-    "w": 39,
-    "h": 64,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_stump_round_SW": {
-    "w": 39,
-    "h": 64,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
    "n_fence_simple_NE": {
     "w": 151,
     "h": 108,
     "lift": 21,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_fence_simple_NW": {
-    "w": 151,
-    "h": 108,
-    "lift": 21,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_fence_simple_SE": {
-    "w": 151,
-    "h": 73,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_fence_simple_SW": {
-    "w": 151,
-    "h": 73,
-    "lift": 0,
     "oy": 0,
     "coloured": false
    },
@@ -7202,27 +5240,6 @@
     "oy": 0,
     "coloured": false
    },
-   "n_fence_gate_NW": {
-    "w": 151,
-    "h": 108,
-    "lift": 21,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_fence_gate_SE": {
-    "w": 151,
-    "h": 73,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_fence_gate_SW": {
-    "w": 151,
-    "h": 73,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
    "n_fence_corner_NE": {
     "w": 151,
     "h": 108,
@@ -7230,49 +5247,7 @@
     "oy": 0,
     "coloured": false
    },
-   "n_fence_corner_NW": {
-    "w": 151,
-    "h": 108,
-    "lift": 21,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_fence_corner_SE": {
-    "w": 151,
-    "h": 73,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_fence_corner_SW": {
-    "w": 151,
-    "h": 108,
-    "lift": 21,
-    "oy": 0,
-    "coloured": false
-   },
    "n_statue_block_NE": {
-    "w": 53,
-    "h": 86,
-    "lift": 34,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_statue_block_NW": {
-    "w": 53,
-    "h": 86,
-    "lift": 34,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_statue_block_SE": {
-    "w": 53,
-    "h": 86,
-    "lift": 34,
-    "oy": 0,
-    "coloured": false
-   },
-   "n_statue_block_SW": {
     "w": 53,
     "h": 86,
     "lift": 34,
@@ -7321,27 +5296,6 @@
     "oy": 0,
     "coloured": false
    },
-   "g_bench_NW": {
-    "w": 147,
-    "h": 139,
-    "lift": 52,
-    "oy": 0,
-    "coloured": false
-   },
-   "g_bench_SE": {
-    "w": 147,
-    "h": 159,
-    "lift": 72,
-    "oy": 0,
-    "coloured": false
-   },
-   "g_bench_SW": {
-    "w": 147,
-    "h": 159,
-    "lift": 72,
-    "oy": 0,
-    "coloured": false
-   },
    "g_lightpostSingle_NE": {
     "w": 97,
     "h": 257,
@@ -7349,49 +5303,7 @@
     "oy": 0,
     "coloured": false
    },
-   "g_lightpostSingle_NW": {
-    "w": 97,
-    "h": 257,
-    "lift": 170,
-    "oy": 0,
-    "coloured": false
-   },
-   "g_lightpostSingle_SE": {
-    "w": 97,
-    "h": 246,
-    "lift": 159,
-    "oy": 0,
-    "coloured": false
-   },
-   "g_lightpostSingle_SW": {
-    "w": 97,
-    "h": 246,
-    "lift": 159,
-    "oy": 0,
-    "coloured": false
-   },
    "g_lightpostDouble_NE": {
-    "w": 97,
-    "h": 257,
-    "lift": 170,
-    "oy": 0,
-    "coloured": false
-   },
-   "g_lightpostDouble_NW": {
-    "w": 97,
-    "h": 257,
-    "lift": 170,
-    "oy": 0,
-    "coloured": false
-   },
-   "g_lightpostDouble_SE": {
-    "w": 97,
-    "h": 257,
-    "lift": 170,
-    "oy": 0,
-    "coloured": false
-   },
-   "g_lightpostDouble_SW": {
     "w": 97,
     "h": 257,
     "lift": 170,
@@ -7405,49 +5317,7 @@
     "oy": 0,
     "coloured": false
    },
-   "g_urn_NW": {
-    "w": 46,
-    "h": 103,
-    "lift": 16,
-    "oy": 0,
-    "coloured": false
-   },
-   "g_urn_SE": {
-    "w": 46,
-    "h": 103,
-    "lift": 16,
-    "oy": 0,
-    "coloured": false
-   },
-   "g_urn_SW": {
-    "w": 46,
-    "h": 103,
-    "lift": 16,
-    "oy": 0,
-    "coloured": false
-   },
    "g_columnLarge_NE": {
-    "w": 97,
-    "h": 226,
-    "lift": 139,
-    "oy": 0,
-    "coloured": false
-   },
-   "g_columnLarge_NW": {
-    "w": 97,
-    "h": 226,
-    "lift": 139,
-    "oy": 0,
-    "coloured": false
-   },
-   "g_columnLarge_SE": {
-    "w": 97,
-    "h": 226,
-    "lift": 139,
-    "oy": 0,
-    "coloured": false
-   },
-   "g_columnLarge_SW": {
     "w": 97,
     "h": 226,
     "lift": 139,
@@ -7461,52 +5331,10 @@
     "oy": 0,
     "coloured": false
    },
-   "g_lanternGlass_NW": {
-    "w": 39,
-    "h": 87,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "g_lanternGlass_SE": {
-    "w": 39,
-    "h": 87,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "g_lanternGlass_SW": {
-    "w": 39,
-    "h": 87,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
    "g_pillarObelisk_NE": {
     "w": 54,
     "h": 188,
     "lift": 101,
-    "oy": 0,
-    "coloured": false
-   },
-   "g_pillarObelisk_NW": {
-    "w": 105,
-    "h": 201,
-    "lift": 114,
-    "oy": 0,
-    "coloured": false
-   },
-   "g_pillarObelisk_SE": {
-    "w": 105,
-    "h": 201,
-    "lift": 114,
-    "oy": 0,
-    "coloured": false
-   },
-   "g_pillarObelisk_SW": {
-    "w": 54,
-    "h": 215,
-    "lift": 128,
     "oy": 0,
     "coloured": false
    },
@@ -7579,43 +5407,7 @@
     "lift": 41,
     "coloured": false
    },
-   "s_knight_NW": {
-    "w": 45,
-    "h": 67,
-    "lift": 41,
-    "coloured": false
-   },
-   "s_knight_SE": {
-    "w": 45,
-    "h": 67,
-    "lift": 41,
-    "coloured": false
-   },
-   "s_knight_SW": {
-    "w": 45,
-    "h": 67,
-    "lift": 41,
-    "coloured": false
-   },
    "s_king_NE": {
-    "w": 45,
-    "h": 67,
-    "lift": 41,
-    "coloured": false
-   },
-   "s_king_NW": {
-    "w": 45,
-    "h": 67,
-    "lift": 41,
-    "coloured": false
-   },
-   "s_king_SE": {
-    "w": 45,
-    "h": 67,
-    "lift": 41,
-    "coloured": false
-   },
-   "s_king_SW": {
     "w": 45,
     "h": 67,
     "lift": 41,
@@ -7628,53 +5420,11 @@
     "oy": 0,
     "coloured": true
    },
-   "k_castle_NW": {
-    "w": 451,
-    "h": 817,
-    "lift": 730,
-    "oy": 0,
-    "coloured": true
-   },
-   "k_castle_SE": {
-    "w": 451,
-    "h": 811,
-    "lift": 724,
-    "oy": 0,
-    "coloured": true
-   },
-   "k_castle_SW": {
-    "w": 451,
-    "h": 811,
-    "lift": 724,
-    "oy": 0,
-    "coloured": true
-   },
    "k_townhall_NE": {
     "w": 383,
     "h": 404,
     "lift": 317,
     "oy": 8,
-    "coloured": true
-   },
-   "k_townhall_NW": {
-    "w": 386,
-    "h": 412,
-    "lift": 325,
-    "oy": 8,
-    "coloured": true
-   },
-   "k_townhall_SE": {
-    "w": 388,
-    "h": 411,
-    "lift": 324,
-    "oy": 24,
-    "coloured": true
-   },
-   "k_townhall_SW": {
-    "w": 383,
-    "h": 460,
-    "lift": 373,
-    "oy": 23,
     "coloured": true
    },
    "k_barracks_NE": {
@@ -7684,53 +5434,11 @@
     "oy": 6,
     "coloured": true
    },
-   "k_barracks_NW": {
-    "w": 372,
-    "h": 404,
-    "lift": 317,
-    "oy": 6,
-    "coloured": true
-   },
-   "k_barracks_SE": {
-    "w": 372,
-    "h": 404,
-    "lift": 317,
-    "oy": 15,
-    "coloured": true
-   },
-   "k_barracks_SW": {
-    "w": 372,
-    "h": 404,
-    "lift": 317,
-    "oy": 15,
-    "coloured": true
-   },
    "k_archeryrange_NE": {
     "w": 383,
     "h": 339,
     "lift": 252,
     "oy": 0,
-    "coloured": true
-   },
-   "k_archeryrange_NW": {
-    "w": 355,
-    "h": 410,
-    "lift": 323,
-    "oy": 23,
-    "coloured": true
-   },
-   "k_archeryrange_SE": {
-    "w": 355,
-    "h": 310,
-    "lift": 223,
-    "oy": 1,
-    "coloured": true
-   },
-   "k_archeryrange_SW": {
-    "w": 383,
-    "h": 365,
-    "lift": 278,
-    "oy": 7,
     "coloured": true
    },
    "k_market_NE": {
@@ -7740,53 +5448,11 @@
     "oy": 1,
     "coloured": true
    },
-   "k_market_NW": {
-    "w": 335,
-    "h": 295,
-    "lift": 208,
-    "oy": 17,
-    "coloured": true
-   },
-   "k_market_SE": {
-    "w": 335,
-    "h": 240,
-    "lift": 153,
-    "oy": 12,
-    "coloured": true
-   },
-   "k_market_SW": {
-    "w": 365,
-    "h": 245,
-    "lift": 158,
-    "oy": 9,
-    "coloured": true
-   },
    "k_mine_NE": {
     "w": 355,
     "h": 331,
     "lift": 244,
     "oy": 12,
-    "coloured": true
-   },
-   "k_mine_NW": {
-    "w": 365,
-    "h": 338,
-    "lift": 251,
-    "oy": 16,
-    "coloured": true
-   },
-   "k_mine_SE": {
-    "w": 365,
-    "h": 304,
-    "lift": 217,
-    "oy": 15,
-    "coloured": true
-   },
-   "k_mine_SW": {
-    "w": 355,
-    "h": 310,
-    "lift": 223,
-    "oy": 19,
     "coloured": true
    },
    "k_shipyard_NE": {
@@ -7796,52 +5462,10 @@
     "oy": 14,
     "coloured": true
    },
-   "k_shipyard_NW": {
-    "w": 386,
-    "h": 301,
-    "lift": 214,
-    "oy": 21,
-    "coloured": true
-   },
-   "k_shipyard_SE": {
-    "w": 386,
-    "h": 266,
-    "lift": 179,
-    "oy": 0,
-    "coloured": true
-   },
-   "k_shipyard_SW": {
-    "w": 395,
-    "h": 310,
-    "lift": 223,
-    "oy": 0,
-    "coloured": true
-   },
    "k_stables_NE": {
     "w": 407,
     "h": 292,
     "lift": 205,
-    "oy": 29,
-    "coloured": true
-   },
-   "k_stables_NW": {
-    "w": 404,
-    "h": 279,
-    "lift": 192,
-    "oy": 1,
-    "coloured": true
-   },
-   "k_stables_SE": {
-    "w": 404,
-    "h": 247,
-    "lift": 160,
-    "oy": 30,
-    "coloured": true
-   },
-   "k_stables_SW": {
-    "w": 407,
-    "h": 274,
-    "lift": 187,
     "oy": 29,
     "coloured": true
    },
@@ -7852,53 +5476,11 @@
     "oy": 15,
     "coloured": true
    },
-   "k_tent_NW": {
-    "w": 390,
-    "h": 268,
-    "lift": 181,
-    "oy": 10,
-    "coloured": true
-   },
-   "k_tent_SE": {
-    "w": 390,
-    "h": 288,
-    "lift": 201,
-    "oy": 9,
-    "coloured": true
-   },
-   "k_tent_SW": {
-    "w": 367,
-    "h": 279,
-    "lift": 192,
-    "oy": 0,
-    "coloured": true
-   },
    "k_workshop_NE": {
     "w": 360,
     "h": 302,
     "lift": 215,
     "oy": 0,
-    "coloured": true
-   },
-   "k_workshop_NW": {
-    "w": 353,
-    "h": 351,
-    "lift": 264,
-    "oy": 14,
-    "coloured": true
-   },
-   "k_workshop_SE": {
-    "w": 353,
-    "h": 286,
-    "lift": 199,
-    "oy": 7,
-    "coloured": true
-   },
-   "k_workshop_SW": {
-    "w": 360,
-    "h": 289,
-    "lift": 202,
-    "oy": 10,
     "coloured": true
    },
    "k_blacksmith_NE": {
@@ -7908,27 +5490,6 @@
     "oy": 7,
     "coloured": true
    },
-   "k_blacksmith_NW": {
-    "w": 235,
-    "h": 188,
-    "lift": 101,
-    "oy": 2,
-    "coloured": true
-   },
-   "k_blacksmith_SE": {
-    "w": 235,
-    "h": 152,
-    "lift": 65,
-    "oy": 10,
-    "coloured": true
-   },
-   "k_blacksmith_SW": {
-    "w": 190,
-    "h": 178,
-    "lift": 91,
-    "oy": 14,
-    "coloured": true
-   },
    "k_church_NE": {
     "w": 195,
     "h": 203,
@@ -7936,52 +5497,10 @@
     "oy": 0,
     "coloured": true
    },
-   "k_church_NW": {
-    "w": 195,
-    "h": 203,
-    "lift": 116,
-    "oy": 0,
-    "coloured": true
-   },
-   "k_church_SE": {
-    "w": 195,
-    "h": 238,
-    "lift": 151,
-    "oy": 5,
-    "coloured": true
-   },
-   "k_church_SW": {
-    "w": 195,
-    "h": 238,
-    "lift": 151,
-    "oy": 5,
-    "coloured": true
-   },
    "k_home_A_NE": {
     "w": 188,
     "h": 196,
     "lift": 109,
-    "oy": 0,
-    "coloured": true
-   },
-   "k_home_A_NW": {
-    "w": 188,
-    "h": 196,
-    "lift": 109,
-    "oy": 0,
-    "coloured": true
-   },
-   "k_home_A_SE": {
-    "w": 188,
-    "h": 173,
-    "lift": 86,
-    "oy": 0,
-    "coloured": true
-   },
-   "k_home_A_SW": {
-    "w": 186,
-    "h": 173,
-    "lift": 86,
     "oy": 0,
     "coloured": true
    },
@@ -7992,53 +5511,11 @@
     "oy": 8,
     "coloured": true
    },
-   "k_home_B_NW": {
-    "w": 195,
-    "h": 251,
-    "lift": 164,
-    "oy": 0,
-    "coloured": true
-   },
-   "k_home_B_SE": {
-    "w": 195,
-    "h": 228,
-    "lift": 141,
-    "oy": 8,
-    "coloured": true
-   },
-   "k_home_B_SW": {
-    "w": 197,
-    "h": 229,
-    "lift": 142,
-    "oy": 8,
-    "coloured": true
-   },
    "k_lumbermill_NE": {
     "w": 204,
     "h": 237,
     "lift": 150,
     "oy": 0,
-    "coloured": true
-   },
-   "k_lumbermill_NW": {
-    "w": 209,
-    "h": 223,
-    "lift": 136,
-    "oy": 0,
-    "coloured": true
-   },
-   "k_lumbermill_SE": {
-    "w": 209,
-    "h": 253,
-    "lift": 166,
-    "oy": 9,
-    "coloured": true
-   },
-   "k_lumbermill_SW": {
-    "w": 204,
-    "h": 244,
-    "lift": 157,
-    "oy": 14,
     "coloured": true
    },
    "k_shrine_NE": {
@@ -8048,53 +5525,11 @@
     "oy": 12,
     "coloured": true
    },
-   "k_shrine_NW": {
-    "w": 190,
-    "h": 172,
-    "lift": 85,
-    "oy": 10,
-    "coloured": true
-   },
-   "k_shrine_SE": {
-    "w": 190,
-    "h": 134,
-    "lift": 47,
-    "oy": 5,
-    "coloured": true
-   },
-   "k_shrine_SW": {
-    "w": 188,
-    "h": 142,
-    "lift": 55,
-    "oy": 7,
-    "coloured": true
-   },
    "k_tavern_NE": {
     "w": 184,
     "h": 227,
     "lift": 140,
     "oy": 7,
-    "coloured": true
-   },
-   "k_tavern_NW": {
-    "w": 188,
-    "h": 211,
-    "lift": 124,
-    "oy": 6,
-    "coloured": true
-   },
-   "k_tavern_SE": {
-    "w": 188,
-    "h": 225,
-    "lift": 138,
-    "oy": 9,
-    "coloured": true
-   },
-   "k_tavern_SW": {
-    "w": 184,
-    "h": 207,
-    "lift": 120,
-    "oy": 5,
     "coloured": true
    },
    "k_tower_A_NE": {
@@ -8104,52 +5539,10 @@
     "oy": 6,
     "coloured": true
    },
-   "k_tower_A_NW": {
-    "w": 179,
-    "h": 340,
-    "lift": 253,
-    "oy": 6,
-    "coloured": true
-   },
-   "k_tower_A_SE": {
-    "w": 179,
-    "h": 336,
-    "lift": 249,
-    "oy": 1,
-    "coloured": true
-   },
-   "k_tower_A_SW": {
-    "w": 179,
-    "h": 336,
-    "lift": 249,
-    "oy": 1,
-    "coloured": true
-   },
    "k_tower_B_NE": {
     "w": 177,
     "h": 319,
     "lift": 232,
-    "oy": 0,
-    "coloured": true
-   },
-   "k_tower_B_NW": {
-    "w": 177,
-    "h": 317,
-    "lift": 230,
-    "oy": 0,
-    "coloured": true
-   },
-   "k_tower_B_SE": {
-    "w": 177,
-    "h": 315,
-    "lift": 228,
-    "oy": 0,
-    "coloured": true
-   },
-   "k_tower_B_SW": {
-    "w": 177,
-    "h": 315,
-    "lift": 228,
     "oy": 0,
     "coloured": true
    },
@@ -8160,53 +5553,11 @@
     "oy": 7,
     "coloured": true
    },
-   "k_tower_base_NW": {
-    "w": 179,
-    "h": 310,
-    "lift": 223,
-    "oy": 7,
-    "coloured": true
-   },
-   "k_tower_base_SE": {
-    "w": 179,
-    "h": 304,
-    "lift": 217,
-    "oy": 5,
-    "coloured": true
-   },
-   "k_tower_base_SW": {
-    "w": 179,
-    "h": 304,
-    "lift": 217,
-    "oy": 5,
-    "coloured": true
-   },
    "k_tower_cannon_NE": {
     "w": 179,
     "h": 354,
     "lift": 267,
     "oy": 7,
-    "coloured": true
-   },
-   "k_tower_cannon_NW": {
-    "w": 179,
-    "h": 354,
-    "lift": 267,
-    "oy": 7,
-    "coloured": true
-   },
-   "k_tower_cannon_SE": {
-    "w": 179,
-    "h": 366,
-    "lift": 279,
-    "oy": 5,
-    "coloured": true
-   },
-   "k_tower_cannon_SW": {
-    "w": 179,
-    "h": 366,
-    "lift": 279,
-    "oy": 5,
     "coloured": true
    },
    "k_tower_catapult_NE": {
@@ -8216,52 +5567,10 @@
     "oy": 10,
     "coloured": true
    },
-   "k_tower_catapult_NW": {
-    "w": 190,
-    "h": 345,
-    "lift": 258,
-    "oy": 10,
-    "coloured": true
-   },
-   "k_tower_catapult_SE": {
-    "w": 190,
-    "h": 325,
-    "lift": 238,
-    "oy": 0,
-    "coloured": true
-   },
-   "k_tower_catapult_SW": {
-    "w": 190,
-    "h": 325,
-    "lift": 238,
-    "oy": 0,
-    "coloured": true
-   },
    "k_watchtower_NE": {
     "w": 179,
     "h": 217,
     "lift": 130,
-    "oy": 0,
-    "coloured": true
-   },
-   "k_watchtower_NW": {
-    "w": 179,
-    "h": 214,
-    "lift": 127,
-    "oy": 0,
-    "coloured": true
-   },
-   "k_watchtower_SE": {
-    "w": 179,
-    "h": 214,
-    "lift": 127,
-    "oy": 0,
-    "coloured": true
-   },
-   "k_watchtower_SW": {
-    "w": 179,
-    "h": 214,
-    "lift": 127,
     "oy": 0,
     "coloured": true
    },
@@ -8272,52 +5581,10 @@
     "oy": 0,
     "coloured": true
    },
-   "k_watermill_NW": {
-    "w": 179,
-    "h": 218,
-    "lift": 131,
-    "oy": 9,
-    "coloured": true
-   },
-   "k_watermill_SE": {
-    "w": 179,
-    "h": 236,
-    "lift": 149,
-    "oy": 0,
-    "coloured": true
-   },
-   "k_watermill_SW": {
-    "w": 200,
-    "h": 230,
-    "lift": 143,
-    "oy": 0,
-    "coloured": true
-   },
    "k_well_NE": {
     "w": 181,
     "h": 202,
     "lift": 115,
-    "oy": 0,
-    "coloured": true
-   },
-   "k_well_NW": {
-    "w": 181,
-    "h": 200,
-    "lift": 113,
-    "oy": 0,
-    "coloured": true
-   },
-   "k_well_SE": {
-    "w": 181,
-    "h": 202,
-    "lift": 115,
-    "oy": 0,
-    "coloured": true
-   },
-   "k_well_SW": {
-    "w": 181,
-    "h": 200,
-    "lift": 113,
     "oy": 0,
     "coloured": true
    },
@@ -8328,49 +5595,7 @@
     "oy": 0,
     "coloured": true
    },
-   "k_windmill_NW": {
-    "w": 181,
-    "h": 221,
-    "lift": 134,
-    "oy": 2,
-    "coloured": true
-   },
-   "k_windmill_SE": {
-    "w": 184,
-    "h": 260,
-    "lift": 173,
-    "oy": 5,
-    "coloured": true
-   },
-   "k_windmill_SW": {
-    "w": 184,
-    "h": 256,
-    "lift": 169,
-    "oy": 0,
-    "coloured": true
-   },
    "k_soldier_NE": {
-    "w": 63,
-    "h": 139,
-    "lift": 52,
-    "oy": 0,
-    "coloured": true
-   },
-   "k_soldier_NW": {
-    "w": 63,
-    "h": 139,
-    "lift": 52,
-    "oy": 0,
-    "coloured": true
-   },
-   "k_soldier_SE": {
-    "w": 63,
-    "h": 139,
-    "lift": 52,
-    "oy": 0,
-    "coloured": true
-   },
-   "k_soldier_SW": {
     "w": 63,
     "h": 139,
     "lift": 52,
@@ -8384,27 +5609,6 @@
     "oy": 0,
     "coloured": true
    },
-   "k_banner_NW": {
-    "w": 58,
-    "h": 196,
-    "lift": 109,
-    "oy": 0,
-    "coloured": true
-   },
-   "k_banner_SE": {
-    "w": 58,
-    "h": 196,
-    "lift": 109,
-    "oy": 0,
-    "coloured": true
-   },
-   "k_banner_SW": {
-    "w": 58,
-    "h": 196,
-    "lift": 109,
-    "oy": 0,
-    "coloured": true
-   },
    "k_flag_NE": {
     "w": 60,
     "h": 107,
@@ -8412,49 +5616,7 @@
     "oy": 0,
     "coloured": true
    },
-   "k_flag_NW": {
-    "w": 60,
-    "h": 105,
-    "lift": 18,
-    "oy": 0,
-    "coloured": true
-   },
-   "k_flag_SE": {
-    "w": 60,
-    "h": 122,
-    "lift": 35,
-    "oy": 0,
-    "coloured": true
-   },
-   "k_flag_SW": {
-    "w": 60,
-    "h": 122,
-    "lift": 35,
-    "oy": 0,
-    "coloured": true
-   },
    "k_grain_NE": {
-    "w": 332,
-    "h": 216,
-    "lift": 129,
-    "oy": 1,
-    "coloured": false
-   },
-   "k_grain_NW": {
-    "w": 332,
-    "h": 216,
-    "lift": 129,
-    "oy": 1,
-    "coloured": false
-   },
-   "k_grain_SE": {
-    "w": 332,
-    "h": 216,
-    "lift": 129,
-    "oy": 1,
-    "coloured": false
-   },
-   "k_grain_SW": {
     "w": 332,
     "h": 216,
     "lift": 129,
@@ -8468,53 +5630,11 @@
     "oy": 6,
     "coloured": false
    },
-   "k_scaffolding_NW": {
-    "w": 335,
-    "h": 355,
-    "lift": 268,
-    "oy": 13,
-    "coloured": false
-   },
-   "k_scaffolding_SE": {
-    "w": 335,
-    "h": 257,
-    "lift": 170,
-    "oy": 8,
-    "coloured": false
-   },
-   "k_scaffolding_SW": {
-    "w": 351,
-    "h": 341,
-    "lift": 254,
-    "oy": 1,
-    "coloured": false
-   },
    "k_destroyed_NE": {
     "w": 365,
     "h": 329,
     "lift": 242,
     "oy": 14,
-    "coloured": false
-   },
-   "k_destroyed_NW": {
-    "w": 355,
-    "h": 357,
-    "lift": 270,
-    "oy": 13,
-    "coloured": false
-   },
-   "k_destroyed_SE": {
-    "w": 355,
-    "h": 303,
-    "lift": 216,
-    "oy": 6,
-    "coloured": false
-   },
-   "k_destroyed_SW": {
-    "w": 365,
-    "h": 351,
-    "lift": 264,
-    "oy": 0,
     "coloured": false
    },
    "k_stage_A_NE": {
@@ -8524,53 +5644,11 @@
     "oy": 10,
     "coloured": false
    },
-   "k_stage_A_NW": {
-    "w": 269,
-    "h": 139,
-    "lift": 52,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_stage_A_SE": {
-    "w": 269,
-    "h": 138,
-    "lift": 51,
-    "oy": 14,
-    "coloured": false
-   },
-   "k_stage_A_SW": {
-    "w": 204,
-    "h": 173,
-    "lift": 86,
-    "oy": 31,
-    "coloured": false
-   },
    "k_stage_C_NE": {
     "w": 167,
     "h": 213,
     "lift": 126,
     "oy": 3,
-    "coloured": false
-   },
-   "k_stage_C_NW": {
-    "w": 207,
-    "h": 179,
-    "lift": 92,
-    "oy": 2,
-    "coloured": false
-   },
-   "k_stage_C_SE": {
-    "w": 207,
-    "h": 192,
-    "lift": 105,
-    "oy": 3,
-    "coloured": false
-   },
-   "k_stage_C_SW": {
-    "w": 167,
-    "h": 170,
-    "lift": 83,
-    "oy": 15,
     "coloured": false
    },
    "k_barrels_NE": {
@@ -8580,51 +5658,9 @@
     "oy": 0,
     "coloured": false
    },
-   "k_barrels_NW": {
-    "w": 74,
-    "h": 84,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_barrels_SE": {
-    "w": 74,
-    "h": 89,
-    "lift": 2,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_barrels_SW": {
-    "w": 72,
-    "h": 91,
-    "lift": 4,
-    "oy": 0,
-    "coloured": false
-   },
    "k_crates_NE": {
     "w": 81,
     "h": 81,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_crates_NW": {
-    "w": 77,
-    "h": 84,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_crates_SE": {
-    "w": 77,
-    "h": 87,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_crates_SW": {
-    "w": 81,
-    "h": 78,
     "lift": 0,
     "oy": 0,
     "coloured": false
@@ -8636,51 +5672,9 @@
     "oy": 0,
     "coloured": false
    },
-   "k_supplies_NW": {
-    "w": 84,
-    "h": 94,
-    "lift": 7,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_supplies_SE": {
-    "w": 84,
-    "h": 91,
-    "lift": 4,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_supplies_SW": {
-    "w": 100,
-    "h": 85,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
    "k_haybales_NE": {
     "w": 86,
     "h": 76,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_haybales_NW": {
-    "w": 56,
-    "h": 85,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_haybales_SE": {
-    "w": 56,
-    "h": 85,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_haybales_SW": {
-    "w": 86,
-    "h": 77,
     "lift": 0,
     "oy": 0,
     "coloured": false
@@ -8692,52 +5686,10 @@
     "oy": 0,
     "coloured": false
    },
-   "k_wheelbarrow_NW": {
-    "w": 93,
-    "h": 94,
-    "lift": 7,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_wheelbarrow_SE": {
-    "w": 93,
-    "h": 82,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_wheelbarrow_SW": {
-    "w": 95,
-    "h": 82,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
    "k_target_NE": {
     "w": 67,
     "h": 120,
     "lift": 33,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_target_NW": {
-    "w": 67,
-    "h": 120,
-    "lift": 33,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_target_SE": {
-    "w": 67,
-    "h": 121,
-    "lift": 34,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_target_SW": {
-    "w": 67,
-    "h": 121,
-    "lift": 34,
     "oy": 0,
     "coloured": false
    },
@@ -8748,49 +5700,7 @@
     "oy": 0,
     "coloured": false
    },
-   "k_weaponrack_NW": {
-    "w": 60,
-    "h": 112,
-    "lift": 25,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_weaponrack_SE": {
-    "w": 60,
-    "h": 102,
-    "lift": 15,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_weaponrack_SW": {
-    "w": 60,
-    "h": 101,
-    "lift": 14,
-    "oy": 0,
-    "coloured": false
-   },
    "k_trough_NE": {
-    "w": 74,
-    "h": 84,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_trough_NW": {
-    "w": 74,
-    "h": 84,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_trough_SE": {
-    "w": 74,
-    "h": 84,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_trough_SW": {
     "w": 74,
     "h": 84,
     "lift": 0,
@@ -8804,49 +5714,7 @@
     "oy": 0,
     "coloured": false
    },
-   "k_cannonballs_NW": {
-    "w": 60,
-    "h": 84,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_cannonballs_SE": {
-    "w": 60,
-    "h": 84,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_cannonballs_SW": {
-    "w": 60,
-    "h": 84,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
    "k_small_tent_NE": {
-    "w": 93,
-    "h": 107,
-    "lift": 20,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_small_tent_NW": {
-    "w": 93,
-    "h": 107,
-    "lift": 20,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_small_tent_SE": {
-    "w": 93,
-    "h": 107,
-    "lift": 20,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_small_tent_SW": {
     "w": 93,
     "h": 107,
     "lift": 20,
@@ -8860,49 +5728,7 @@
     "oy": 0,
     "coloured": false
    },
-   "k_bucket_NW": {
-    "w": 35,
-    "h": 76,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_bucket_SE": {
-    "w": 35,
-    "h": 76,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_bucket_SW": {
-    "w": 35,
-    "h": 76,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
    "k_pallet_NE": {
-    "w": 67,
-    "h": 73,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_pallet_NW": {
-    "w": 67,
-    "h": 73,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_pallet_SE": {
-    "w": 67,
-    "h": 73,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_pallet_SW": {
     "w": 67,
     "h": 73,
     "lift": 0,
@@ -8916,52 +5742,10 @@
     "oy": 0,
     "coloured": false
    },
-   "k_cart_NW": {
-    "w": 125,
-    "h": 137,
-    "lift": 50,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_cart_SE": {
-    "w": 125,
-    "h": 120,
-    "lift": 33,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_cart_SW": {
-    "w": 125,
-    "h": 120,
-    "lift": 33,
-    "oy": 0,
-    "coloured": false
-   },
    "k_merchant_cart_NE": {
     "w": 130,
     "h": 156,
     "lift": 69,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_merchant_cart_NW": {
-    "w": 130,
-    "h": 154,
-    "lift": 67,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_merchant_cart_SE": {
-    "w": 130,
-    "h": 144,
-    "lift": 57,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_merchant_cart_SW": {
-    "w": 130,
-    "h": 144,
-    "lift": 57,
     "oy": 0,
     "coloured": false
    },
@@ -8972,52 +5756,10 @@
     "oy": 0,
     "coloured": false
    },
-   "k_catapult_NW": {
-    "w": 149,
-    "h": 120,
-    "lift": 33,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_catapult_SE": {
-    "w": 149,
-    "h": 127,
-    "lift": 40,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_catapult_SW": {
-    "w": 149,
-    "h": 127,
-    "lift": 40,
-    "oy": 0,
-    "coloured": false
-   },
    "k_cannon_NE": {
     "w": 125,
     "h": 114,
     "lift": 27,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_cannon_NW": {
-    "w": 125,
-    "h": 114,
-    "lift": 27,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_cannon_SE": {
-    "w": 125,
-    "h": 127,
-    "lift": 40,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_cannon_SW": {
-    "w": 125,
-    "h": 127,
-    "lift": 40,
     "oy": 0,
     "coloured": false
    },
@@ -9028,27 +5770,6 @@
     "oy": 0,
     "coloured": false
    },
-   "k_horse_NW": {
-    "w": 91,
-    "h": 115,
-    "lift": 28,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_horse_SE": {
-    "w": 91,
-    "h": 141,
-    "lift": 54,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_horse_SW": {
-    "w": 91,
-    "h": 141,
-    "lift": 54,
-    "oy": 0,
-    "coloured": false
-   },
    "k_tree_A_NE": {
     "w": 170,
     "h": 302,
@@ -9056,49 +5777,7 @@
     "oy": 0,
     "coloured": false
    },
-   "k_tree_A_NW": {
-    "w": 170,
-    "h": 302,
-    "lift": 215,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_tree_A_SE": {
-    "w": 172,
-    "h": 308,
-    "lift": 221,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_tree_A_SW": {
-    "w": 170,
-    "h": 308,
-    "lift": 221,
-    "oy": 0,
-    "coloured": false
-   },
    "k_tree_B_NE": {
-    "w": 151,
-    "h": 257,
-    "lift": 170,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_tree_B_NW": {
-    "w": 151,
-    "h": 257,
-    "lift": 170,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_tree_B_SE": {
-    "w": 151,
-    "h": 257,
-    "lift": 170,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_tree_B_SW": {
     "w": 151,
     "h": 257,
     "lift": 170,
@@ -9112,52 +5791,10 @@
     "oy": 0,
     "coloured": false
    },
-   "k_grove_A_NW": {
-    "w": 337,
-    "h": 287,
-    "lift": 200,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_grove_A_SE": {
-    "w": 337,
-    "h": 305,
-    "lift": 218,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_grove_A_SW": {
-    "w": 339,
-    "h": 285,
-    "lift": 198,
-    "oy": 0,
-    "coloured": false
-   },
    "k_grove_B_NE": {
     "w": 355,
     "h": 294,
     "lift": 207,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_grove_B_NW": {
-    "w": 318,
-    "h": 307,
-    "lift": 220,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_grove_B_SE": {
-    "w": 318,
-    "h": 311,
-    "lift": 224,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_grove_B_SW": {
-    "w": 355,
-    "h": 310,
-    "lift": 223,
     "oy": 0,
     "coloured": false
    },
@@ -9168,49 +5805,7 @@
     "oy": 0,
     "coloured": false
    },
-   "k_rock_NW": {
-    "w": 91,
-    "h": 96,
-    "lift": 9,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_rock_SE": {
-    "w": 91,
-    "h": 96,
-    "lift": 9,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_rock_SW": {
-    "w": 77,
-    "h": 89,
-    "lift": 2,
-    "oy": 0,
-    "coloured": false
-   },
    "k_rocks_NE": {
-    "w": 86,
-    "h": 79,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_rocks_NW": {
-    "w": 84,
-    "h": 81,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_rocks_SE": {
-    "w": 84,
-    "h": 73,
-    "lift": 0,
-    "oy": 0,
-    "coloured": false
-   },
-   "k_rocks_SW": {
     "w": 86,
     "h": 79,
     "lift": 0,
@@ -9225,3430 +5820,910 @@
      0,
      0
     ],
-    "k_castle_NW": [
+    "k_townhall_NE": [
      0,
      453,
      0
     ],
-    "k_castle_SE": [
-     0,
-     906,
-     0
-    ],
-    "k_castle_SW": [
-     0,
-     1359,
-     0
-    ],
-    "k_townhall_SW": [
-     0,
-     0,
-     820
-    ],
-    "k_townhall_NW": [
-     0,
-     385,
-     820
-    ],
-    "k_townhall_SE": [
-     0,
-     773,
-     820
-    ],
-    "k_archeryrange_NW": [
-     0,
-     1163,
-     820
-    ],
-    "k_townhall_NE": [
-     0,
-     1520,
-     820
-    ],
     "k_barracks_NE": [
      0,
-     0,
-     1282
-    ],
-    "k_barracks_NW": [
-     0,
-     374,
-     1282
-    ],
-    "k_barracks_SE": [
-     0,
-     748,
-     1282
-    ],
-    "k_barracks_SW": [
-     0,
-     1122,
-     1282
-    ],
-    "k_tower_cannon_SE": [
-     0,
-     1812,
+     838,
      0
-    ],
-    "k_tower_cannon_SW": [
-     0,
-     1496,
-     1282
-    ],
-    "k_archeryrange_SW": [
-     1,
-     0,
-     0
-    ],
-    "t_windmill_SE": [
-     0,
-     1677,
-     1282
     ],
     "t_windmill_NE": [
-     1,
-     385,
+     0,
+     1212,
      0
-    ],
-    "k_destroyed_NW": [
-     0,
-     0,
-     1688
-    ],
-    "k_scaffolding_NW": [
-     0,
-     357,
-     1688
     ],
     "k_tower_cannon_NE": [
      0,
-     694,
-     1688
-    ],
-    "k_tower_cannon_NW": [
-     0,
-     875,
-     1688
-    ],
-    "k_destroyed_SW": [
-     0,
-     1056,
-     1688
-    ],
-    "k_workshop_NW": [
-     0,
-     1423,
-     1688
+     1449,
+     0
     ],
     "k_grove_A_NE": [
-     1,
-     622,
+     0,
+     1630,
      0
     ],
     "k_tower_catapult_NE": [
      0,
-     1778,
-     1688
-    ],
-    "k_tower_catapult_NW": [
-     1,
-     963,
-     0
-    ],
-    "k_scaffolding_SW": [
-     1,
-     1155,
-     0
-    ],
-    "t_windmill_NW": [
-     1,
-     1508,
-     0
-    ],
-    "t_windmill_SW": [
-     1,
-     1745,
-     0
+     0,
+     820
     ],
     "k_tower_A_NE": [
-     1,
      0,
-     367
-    ],
-    "k_tower_A_NW": [
-     1,
-     181,
-     367
+     192,
+     820
     ],
     "k_archeryrange_NE": [
-     1,
-     362,
-     367
-    ],
-    "k_mine_NW": [
-     1,
-     747,
-     367
-    ],
-    "k_tower_A_SE": [
-     1,
-     1114,
-     367
-    ],
-    "k_tower_A_SW": [
-     1,
-     1295,
-     367
+     0,
+     373,
+     820
     ],
     "k_mine_NE": [
-     1,
-     1476,
-     367
+     0,
+     758,
+     820
     ],
     "k_destroyed_NE": [
-     1,
      0,
-     709
-    ],
-    "k_tower_catapult_SE": [
-     1,
-     1833,
-     367
-    ],
-    "k_tower_catapult_SW": [
-     1,
-     367,
-     709
+     1115,
+     820
     ],
     "k_tower_B_NE": [
-     1,
-     559,
-     709
-    ],
-    "k_tower_B_NW": [
-     1,
-     738,
-     709
-    ],
-    "k_tower_B_SE": [
-     1,
-     917,
-     709
-    ],
-    "k_tower_B_SW": [
-     1,
-     1096,
-     709
-    ],
-    "k_grove_B_SE": [
-     1,
-     1275,
-     709
+     0,
+     1482,
+     820
     ],
     "t_treeHigh_NE": [
      0,
-     1905,
+     1661,
      820
     ],
-    "t_treeHigh_NW": [
-     0,
-     1914,
-     1282
-    ],
-    "t_treeHigh_SE": [
-     1,
-     1595,
-     709
-    ],
-    "t_treeHigh_SW": [
-     1,
-     1706,
-     709
-    ],
-    "k_shipyard_SW": [
-     1,
-     0,
-     1040
-    ],
-    "k_archeryrange_SE": [
-     1,
-     397,
-     1040
-    ],
-    "k_grove_B_SW": [
-     1,
-     754,
-     1040
-    ],
-    "k_mine_SW": [
-     1,
-     1111,
-     1040
-    ],
     "k_tower_base_NE": [
-     1,
-     1817,
-     709
-    ],
-    "k_tower_base_NW": [
-     1,
-     1468,
-     1040
-    ],
-    "k_tree_A_SE": [
-     1,
-     1649,
-     1040
-    ],
-    "k_tree_A_SW": [
-     1,
-     1823,
-     1040
-    ],
-    "k_grove_B_NW": [
-     1,
      0,
-     1352
-    ],
-    "k_grove_A_SE": [
-     1,
-     320,
-     1352
-    ],
-    "k_mine_SE": [
-     1,
-     659,
-     1352
-    ],
-    "k_tower_base_SE": [
-     1,
-     1026,
-     1352
-    ],
-    "k_tower_base_SW": [
-     1,
-     1207,
-     1352
-    ],
-    "k_destroyed_SE": [
-     1,
-     1388,
-     1352
+     1772,
+     820
     ],
     "k_workshop_NE": [
-     1,
      0,
-     1661
+     0,
+     1167
     ],
     "k_tree_A_NE": [
-     1,
-     1745,
-     1352
-    ],
-    "k_tree_A_NW": [
-     1,
+     0,
      362,
-     1661
-    ],
-    "k_shipyard_NW": [
-     1,
-     534,
-     1661
-    ],
-    "siegeTower_NW": [
-     1,
-     922,
-     1661
-    ],
-    "siegeTower_SW": [
-     1,
-     1126,
-     1661
+     1167
     ],
     "t_treeHighRound_NE": [
-     1,
-     1917,
-     1352
-    ],
-    "t_treeHighRound_NW": [
-     1,
-     1330,
-     1661
-    ],
-    "t_treeHighRound_SE": [
-     1,
-     1441,
-     1661
-    ],
-    "t_treeHighRound_SW": [
-     1,
-     1552,
-     1661
-    ],
-    "k_market_NW": [
-     1,
-     1663,
-     1661
+     0,
+     534,
+     1167
     ],
     "k_grove_B_NE": [
-     2,
      0,
-     0
+     645,
+     1167
     ],
     "k_scaffolding_NE": [
-     2,
-     357,
-     0
+     0,
+     1002,
+     1167
     ],
     "k_stables_NE": [
-     2,
-     710,
-     0
-    ],
-    "k_workshop_SW": [
-     2,
-     1119,
-     0
-    ],
-    "k_tent_SE": [
-     2,
-     1481,
-     0
-    ],
-    "k_grove_A_NW": [
-     2,
      0,
-     296
-    ],
-    "k_workshop_SE": [
-     2,
-     339,
-     296
-    ],
-    "k_grove_A_SW": [
-     2,
-     694,
-     296
-    ],
-    "k_stables_NW": [
-     2,
-     1035,
-     296
-    ],
-    "k_tent_SW": [
-     2,
-     1441,
-     296
+     1355,
+     1167
     ],
     "siegeTower_NE": [
-     2,
-     1810,
-     296
-    ],
-    "siegeTower_SE": [
-     2,
      0,
-     585
-    ],
-    "k_stables_SW": [
-     2,
-     204,
-     585
+     1764,
+     1167
     ],
     "k_tent_NE": [
-     2,
-     613,
-     585
-    ],
-    "k_tent_NW": [
-     2,
-     982,
-     585
+     0,
+     0,
+     1471
     ],
     "k_market_NE": [
-     2,
-     1374,
-     585
+     0,
+     369,
+     1471
     ],
     "k_shipyard_NE": [
-     2,
      0,
-     863
-    ],
-    "k_shipyard_SE": [
-     2,
-     397,
-     863
-    ],
-    "k_windmill_SE": [
-     2,
-     1741,
-     585
+     736,
+     1471
     ],
     "t_tree_NE": [
-     2,
-     1873,
-     0
-    ],
-    "t_tree_NW": [
-     2,
-     1927,
-     585
-    ],
-    "t_tree_SE": [
-     2,
-     785,
-     863
-    ],
-    "t_tree_SW": [
-     2,
-     896,
-     863
-    ],
-    "k_scaffolding_SE": [
-     2,
-     1007,
-     863
+     0,
+     1133,
+     1471
     ],
     "k_tree_B_NE": [
-     2,
-     1344,
-     863
-    ],
-    "k_tree_B_NW": [
-     2,
-     1497,
-     863
-    ],
-    "k_tree_B_SE": [
-     2,
-     1650,
-     863
-    ],
-    "k_tree_B_SW": [
-     2,
-     1803,
-     863
+     0,
+     1244,
+     1471
     ],
     "g_lightpostDouble_NE": [
-     2,
      0,
-     1132
-    ],
-    "g_lightpostDouble_NW": [
-     2,
-     99,
-     1132
-    ],
-    "g_lightpostDouble_SE": [
-     2,
-     198,
-     1132
-    ],
-    "g_lightpostDouble_SW": [
-     2,
-     297,
-     1132
+     1397,
+     1471
     ],
     "g_lightpostSingle_NE": [
-     2,
-     396,
-     1132
-    ],
-    "g_lightpostSingle_NW": [
-     2,
-     495,
-     1132
-    ],
-    "k_windmill_SW": [
-     2,
-     594,
-     1132
-    ],
-    "k_lumbermill_SE": [
-     2,
-     780,
-     1132
-    ],
-    "k_home_B_NW": [
-     2,
-     991,
-     1132
-    ],
-    "k_stables_SE": [
-     2,
-     1188,
-     1132
-    ],
-    "g_lightpostSingle_SE": [
-     2,
-     1594,
-     1132
-    ],
-    "g_lightpostSingle_SW": [
-     2,
-     1693,
-     1132
-    ],
-    "k_market_SW": [
-     2,
      0,
-     1391
+     1496,
+     1471
     ],
     "siegeTrebuchet_NE": [
-     2,
-     1792,
-     1132
-    ],
-    "k_lumbermill_SW": [
-     2,
-     367,
-     1391
-    ],
-    "siegeTrebuchet_SE": [
-     2,
-     573,
-     1391
-    ],
-    "wallCornerHalfTower_SW": [
-     2,
-     773,
-     1391
+     0,
+     1595,
+     1471
     ],
     "k_home_B_NE": [
-     2,
-     926,
-     1391
-    ],
-    "k_market_SE": [
-     2,
-     1125,
-     1391
-    ],
-    "k_church_SE": [
-     2,
-     1462,
-     1391
-    ],
-    "k_church_SW": [
-     2,
-     1659,
-     1391
+     0,
+     1796,
+     1471
     ],
     "k_lumbermill_NE": [
-     2,
      0,
-     1638
-    ],
-    "k_watermill_SE": [
-     2,
-     1856,
-     1391
-    ],
-    "wallCornerHalfTower_NW": [
-     2,
-     206,
-     1638
-    ],
-    "k_watermill_SW": [
-     2,
-     359,
-     1638
-    ],
-    "k_home_B_SW": [
-     2,
-     561,
-     1638
-    ],
-    "siegeTrebuchet_NW": [
-     2,
-     760,
-     1638
-    ],
-    "siegeTrebuchet_SW": [
-     2,
-     961,
-     1638
-    ],
-    "k_home_B_SE": [
-     2,
-     1161,
-     1638
+     0,
+     1746
     ],
     "k_tavern_NE": [
-     2,
-     1358,
-     1638
+     0,
+     206,
+     1746
     ],
     "g_columnLarge_NE": [
-     2,
-     1544,
-     1638
-    ],
-    "g_columnLarge_NW": [
-     2,
-     1643,
-     1638
-    ],
-    "g_columnLarge_SE": [
-     2,
-     1742,
-     1638
-    ],
-    "g_columnLarge_SW": [
-     2,
-     1841,
-     1638
-    ],
-    "k_tavern_SE": [
-     3,
      0,
-     0
-    ],
-    "k_lumbermill_NW": [
-     3,
-     190,
-     0
-    ],
-    "k_windmill_NW": [
-     3,
-     401,
-     0
+     392,
+     1746
     ],
     "k_windmill_NE": [
-     3,
-     584,
-     0
-    ],
-    "k_watermill_NW": [
-     3,
-     770,
-     0
+     0,
+     491,
+     1746
     ],
     "k_watchtower_NE": [
-     3,
-     951,
-     0
+     0,
+     677,
+     1746
     ],
     "k_grain_NE": [
-     3,
-     1132,
-     0
-    ],
-    "k_grain_NW": [
-     3,
-     1466,
-     0
-    ],
-    "k_grain_SE": [
-     3,
      0,
-     227
-    ],
-    "k_grain_SW": [
-     3,
-     334,
-     227
+     858,
+     1746
     ],
     "k_watermill_NE": [
-     3,
-     1800,
-     0
+     0,
+     1192,
+     1746
     ],
     "t_watermill_NE": [
-     3,
-     668,
-     227
-    ],
-    "t_watermill_NW": [
-     3,
-     856,
-     227
-    ],
-    "t_watermill_SE": [
-     3,
-     1044,
-     227
-    ],
-    "t_watermill_SW": [
-     3,
-     1232,
-     227
-    ],
-    "g_pillarObelisk_SW": [
      0,
-     1970,
-     1688
-    ],
-    "k_watchtower_NW": [
-     3,
-     1420,
-     227
-    ],
-    "k_watchtower_SE": [
-     3,
-     1601,
-     227
-    ],
-    "k_watchtower_SW": [
-     3,
-     1782,
-     227
+     1394,
+     1746
     ],
     "k_stage_C_NE": [
-     3,
      0,
-     445
-    ],
-    "k_tavern_NW": [
-     3,
-     169,
-     445
+     1582,
+     1746
     ],
     "towerSquareRoof_NE": [
-     3,
-     359,
-     445
-    ],
-    "towerSquareRoof_NW": [
-     3,
-     512,
-     445
-    ],
-    "towerSquareRoof_SE": [
-     3,
-     665,
-     445
-    ],
-    "towerSquareRoof_SW": [
-     3,
-     818,
-     445
-    ],
-    "k_tavern_SW": [
-     3,
-     971,
-     445
+     0,
+     1751,
+     1746
     ],
     "wallCornerHalfTower_NE": [
-     3,
-     1157,
-     445
-    ],
-    "wallCornerHalfTower_SE": [
-     3,
-     1364,
-     445
-    ],
-    "wallCorner_NW": [
-     3,
-     1570,
-     445
-    ],
-    "wallCorner_SW": [
-     3,
-     1723,
-     445
-    ],
-    "wallHalf_NW": [
-     3,
-     1876,
-     445
+     1,
+     0,
+     0
     ],
     "wall_NE": [
-     3,
-     0,
-     660
-    ],
-    "wall_NW": [
-     3,
-     153,
-     660
-    ],
-    "wallNarrowStairs_NW": [
-     3,
-     306,
-     660
+     1,
+     207,
+     0
     ],
     "k_church_NE": [
-     3,
-     457,
-     660
-    ],
-    "k_church_NW": [
-     3,
-     654,
-     660
-    ],
-    "wall_SW": [
-     3,
-     851,
-     660
+     1,
+     360,
+     0
     ],
     "k_well_NE": [
-     3,
-     1004,
-     660
-    ],
-    "k_well_SE": [
-     3,
-     1187,
-     660
+     1,
+     557,
+     0
     ],
     "wallCorner_NE": [
-     3,
-     1370,
-     660
-    ],
-    "wallCorner_SE": [
-     3,
-     1523,
-     660
-    ],
-    "wallHalf_SE": [
-     3,
-     1676,
-     660
-    ],
-    "wall_SE": [
-     3,
-     1829,
-     660
-    ],
-    "g_pillarObelisk_NW": [
-     2,
-     1940,
-     1638
-    ],
-    "g_pillarObelisk_SE": [
-     3,
-     0,
-     868
-    ],
-    "k_well_NW": [
-     3,
-     107,
-     868
-    ],
-    "k_well_SW": [
-     3,
-     290,
-     868
-    ],
-    "wallNarrowStairs_SE": [
-     3,
-     473,
-     868
+     1,
+     740,
+     0
     ],
     "n_tree_tall_NE": [
      0,
-     1993,
-     0
-    ],
-    "n_tree_tall_NW": [
-     1,
-     1982,
-     0
-    ],
-    "n_tree_tall_SE": [
-     1,
-     1995,
-     1040
-    ],
-    "n_tree_tall_SW": [
-     2,
-     1984,
+     1971,
      0
     ],
     "k_home_A_NE": [
-     3,
-     624,
-     868
-    ],
-    "k_home_A_NW": [
-     3,
-     814,
-     868
+     1,
+     893,
+     0
     ],
     "wallHalf_NE": [
-     3,
-     1004,
-     868
-    ],
-    "wallHalf_SW": [
-     3,
-     1157,
-     868
+     1,
+     1083,
+     0
     ],
     "k_banner_NE": [
-     2,
-     1956,
-     863
-    ],
-    "k_banner_NW": [
-     3,
-     1963,
-     227
-    ],
-    "k_banner_SE": [
-     3,
-     1982,
-     660
-    ],
-    "k_banner_SW": [
-     3,
-     1310,
-     868
+     0,
+     1953,
+     820
     ],
     "n_tree_default_fall_NE": [
-     3,
-     1370,
-     868
-    ],
-    "n_tree_default_fall_NW": [
-     3,
-     1451,
-     868
-    ],
-    "n_tree_default_fall_SE": [
-     3,
-     1532,
-     868
-    ],
-    "n_tree_default_fall_SW": [
-     3,
-     1613,
-     868
-    ],
-    "k_stage_C_SE": [
-     3,
-     1694,
-     868
-    ],
-    "k_blacksmith_NW": [
-     3,
      0,
-     1071
+     1904,
+     1746
     ],
     "g_pillarObelisk_NE": [
-     3,
-     1903,
-     868
+     0,
+     1968,
+     1167
     ],
     "siegeCatapult_NE": [
-     3,
-     237,
-     1071
-    ],
-    "siegeCatapult_NW": [
-     3,
-     421,
-     1071
+     1,
+     1236,
+     0
     ],
     "t_roofHighWindow_NE": [
-     3,
-     605,
-     1071
-    ],
-    "t_roofHighWindow_NW": [
-     3,
-     770,
-     1071
+     1,
+     1420,
+     0
     ],
     "t_roofHigh_NE": [
-     3,
-     935,
-     1071
-    ],
-    "t_roofHigh_NW": [
-     3,
-     1100,
-     1071
-    ],
-    "siegeCatapult_SE": [
-     3,
-     1265,
-     1071
-    ],
-    "siegeCatapult_SW": [
-     3,
-     1449,
-     1071
+     1,
+     1585,
+     0
     ],
     "t_lantern_NE": [
      0,
-     2016,
+     2013,
      820
     ],
-    "t_lantern_NW": [
-     1,
-     1998,
-     709
-    ],
-    "t_lantern_SE": [
-     1,
-     2000,
-     1661
-    ],
-    "t_lantern_SW": [
-     2,
-     2014,
-     296
-    ],
     "flagBannerLong_NE": [
-     2,
-     1993,
-     1132
-    ],
-    "flagBannerLong_NW": [
-     3,
-     1959,
-     868
-    ],
-    "flagBannerLong_SW": [
-     3,
-     1633,
-     1071
-    ],
-    "wallNarrowStairs_SW": [
-     3,
-     1686,
-     1071
-    ],
-    "flagBannerLong_SE": [
-     3,
-     1836,
-     1071
+     0,
+     1995,
+     1471
     ],
     "towerSquareBaseColor_NE": [
-     3,
-     1889,
-     1071
-    ],
-    "towerSquareBaseColor_NW": [
-     3,
-     0,
-     1261
-    ],
-    "towerSquareBaseColor_SW": [
-     3,
-     153,
-     1261
+     1,
+     1750,
+     0
     ],
     "towerSquareBase_NE": [
-     3,
-     306,
-     1261
-    ],
-    "towerSquareBase_NW": [
-     3,
-     459,
-     1261
-    ],
-    "towerSquareBase_SW": [
-     3,
-     612,
-     1261
+     1,
+     0,
+     208
     ],
     "n_tree_pineDefaultA_NE": [
-     3,
-     765,
-     1261
-    ],
-    "n_tree_pineDefaultA_NW": [
-     3,
-     825,
-     1261
-    ],
-    "n_tree_pineDefaultA_SE": [
-     3,
-     885,
-     1261
-    ],
-    "n_tree_pineDefaultA_SW": [
-     3,
-     945,
-     1261
-    ],
-    "k_stage_C_NW": [
-     3,
-     1005,
-     1261
-    ],
-    "towerSquareBaseColor_SE": [
-     3,
-     1214,
-     1261
-    ],
-    "towerSquareBase_SE": [
-     3,
-     1367,
-     1261
-    ],
-    "wallDoor_NW": [
-     3,
-     1520,
-     1261
-    ],
-    "k_blacksmith_SW": [
-     3,
-     1636,
-     1261
-    ],
-    "towerSquareArch_NW": [
-     3,
-     1828,
-     1261
-    ],
-    "towerSquareMidOpen_NW": [
-     3,
      0,
-     1443
-    ],
-    "towerSquareMidWindows_NW": [
-     3,
-     142,
-     1443
-    ],
-    "towerSquareMid_NW": [
-     3,
-     284,
-     1443
-    ],
-    "towerSquarePoles_NW": [
-     3,
-     426,
-     1443
+     1985,
+     1746
     ],
     "t_fountainSquare_NE": [
-     3,
-     568,
-     1443
-    ],
-    "t_fountainSquare_NW": [
-     3,
-     872,
-     1443
-    ],
-    "t_fountainSquare_SE": [
-     3,
-     1176,
-     1443
-    ],
-    "t_fountainSquare_SW": [
-     3,
-     1480,
-     1443
-    ],
-    "towerBalcony_NW": [
-     3,
-     1784,
-     1443
-    ],
-    "towerBalcony_SE": [
-     3,
-     0,
-     1621
-    ],
-    "towerBalcony_SW": [
-     3,
-     144,
-     1621
-    ],
-    "towerSquareArch_SE": [
-     3,
-     288,
-     1621
-    ],
-    "towerSquareArch_SW": [
-     3,
-     431,
-     1621
-    ],
-    "towerSquareMidOpen_SE": [
-     3,
-     574,
-     1621
-    ],
-    "towerSquareMidOpen_SW": [
-     3,
-     717,
-     1621
-    ],
-    "towerSquareMidWindows_SE": [
-     3,
-     860,
-     1621
-    ],
-    "towerSquareMidWindows_SW": [
-     3,
-     1003,
-     1621
-    ],
-    "towerSquareMid_SE": [
-     3,
-     1146,
-     1621
-    ],
-    "towerSquareMid_SW": [
-     3,
-     1289,
-     1621
-    ],
-    "towerSquarePoles_SE": [
-     3,
-     1432,
-     1621
-    ],
-    "towerSquarePoles_SW": [
-     3,
-     1575,
-     1621
+     1,
+     153,
+     208
     ],
     "towerSquareArch_NE": [
-     3,
-     1718,
-     1621
+     1,
+     1903,
+     0
     ],
     "towerSquareMidOpen_NE": [
-     3,
-     1860,
-     1621
+     1,
+     457,
+     208
     ],
     "towerSquareMidWindows_NE": [
-     3,
-     0,
-     1798
+     1,
+     599,
+     208
     ],
     "towerSquareMid_NE": [
-     3,
-     142,
-     1798
+     1,
+     741,
+     208
     ],
     "towerSquarePoles_NE": [
-     3,
-     284,
-     1798
-    ],
-    "wallDoor_SE": [
-     3,
-     1928,
-     1443
-    ],
-    "towerBase_NW": [
-     3,
-     426,
-     1798
-    ],
-    "towerBase_SE": [
-     3,
-     535,
-     1798
-    ],
-    "towerBase_SW": [
-     3,
-     644,
-     1798
+     1,
+     883,
+     208
     ],
     "towerBalcony_NE": [
-     3,
-     753,
-     1798
+     1,
+     1025,
+     208
     ],
     "towerBase_NE": [
-     3,
-     897,
-     1798
-    ],
-    "k_stage_A_SW": [
-     3,
-     1006,
-     1798
-    ],
-    "k_home_A_SE": [
-     3,
-     1212,
-     1798
-    ],
-    "k_home_A_SW": [
-     3,
-     1402,
-     1798
-    ],
-    "n_tree_detailed_NW": [
-     3,
-     1590,
-     1798
-    ],
-    "n_tree_detailed_SE": [
-     3,
-     1685,
-     1798
+     1,
+     1169,
+     208
     ],
     "n_tree_detailed_NE": [
-     3,
-     1780,
-     1798
-    ],
-    "n_tree_detailed_SW": [
-     3,
-     1870,
-     1798
+     1,
+     1278,
+     208
     ],
     "k_blacksmith_NE": [
-     4,
-     0,
-     0
-    ],
-    "k_shrine_NW": [
-     4,
-     192,
-     0
+     1,
+     1368,
+     208
     ],
     "t_stallGreen_NE": [
-     4,
-     384,
-     0
-    ],
-    "t_stallGreen_NW": [
-     4,
-     537,
-     0
-    ],
-    "t_stallGreen_SE": [
-     4,
-     690,
-     0
-    ],
-    "t_stallGreen_SW": [
-     4,
-     843,
-     0
+     1,
+     1560,
+     208
     ],
     "t_stallRed_NE": [
-     4,
-     996,
-     0
-    ],
-    "t_stallRed_NW": [
-     4,
-     1149,
-     0
-    ],
-    "t_stallRed_SE": [
-     4,
-     1302,
-     0
-    ],
-    "t_stallRed_SW": [
-     4,
-     1455,
-     0
-    ],
-    "k_stage_C_SW": [
-     4,
-     1608,
-     0
-    ],
-    "wallDoor_SW": [
-     4,
-     1777,
-     0
-    ],
-    "siegeRam_SE": [
-     2,
-     0,
-     1877
-    ],
-    "siegeRam_SW": [
-     2,
-     176,
-     1877
+     1,
+     1713,
+     208
     ],
     "siegeRam_NE": [
-     2,
-     352,
-     1877
-    ],
-    "siegeRam_NW": [
-     2,
-     527,
-     1877
+     1,
+     1866,
+     208
     ],
     "wallNarrowStairs_NE": [
-     2,
-     702,
-     1877
+     1,
+     0,
+     390
     ],
     "wallDoor_NE": [
-     2,
-     852,
-     1877
+     1,
+     150,
+     390
     ],
     "t_roofHighGable_NE": [
-     2,
-     967,
-     1877
-    ],
-    "t_roofHighGable_NW": [
-     2,
-     1139,
-     1877
-    ],
-    "t_roofHighGable_SE": [
-     2,
-     1311,
-     1877
-    ],
-    "t_roofHighGable_SW": [
-     2,
-     1483,
-     1877
+     1,
+     265,
+     390
     ],
     "t_wallBlock_NE": [
-     2,
-     1655,
-     1877
-    ],
-    "t_wallBlock_NW": [
-     2,
-     1808,
-     1877
-    ],
-    "t_wallBlock_SE": [
-     4,
-     1892,
-     0
-    ],
-    "t_wallBlock_SW": [
-     4,
-     0,
-     174
+     1,
+     437,
+     390
     ],
     "t_wallWoodBlock_NE": [
-     4,
-     153,
-     174
-    ],
-    "t_wallWoodBlock_NW": [
-     4,
-     306,
-     174
-    ],
-    "t_wallWoodBlock_SE": [
-     4,
-     459,
-     174
-    ],
-    "t_wallWoodBlock_SW": [
-     4,
-     612,
-     174
+     1,
+     590,
+     390
     ],
     "k_shrine_NE": [
-     4,
-     765,
-     174
+     1,
+     743,
+     390
     ],
     "t_rockLarge_NE": [
-     4,
-     955,
-     174
+     1,
+     933,
+     390
     ],
     "n_tree_pineRoundA_NE": [
-     2,
-     1961,
-     1877
-    ],
-    "n_tree_pineRoundA_NW": [
-     3,
-     1970,
-     1261
-    ],
-    "n_tree_pineRoundA_SE": [
-     3,
-     1960,
-     1798
-    ],
-    "n_tree_pineRoundA_SW": [
-     4,
-     1138,
-     174
-    ],
-    "t_rockLarge_SW": [
-     4,
-     1214,
-     174
-    ],
-    "t_rockLarge_NW": [
-     4,
-     1397,
-     174
-    ],
-    "t_rockLarge_SE": [
-     4,
-     1583,
-     174
+     1,
+     1116,
+     390
     ],
     "k_stage_A_NE": [
-     4,
-     1769,
-     174
-    ],
-    "g_bench_SE": [
-     4,
-     0,
-     344
-    ],
-    "g_bench_SW": [
-     4,
-     149,
-     344
+     1,
+     1192,
+     390
     ],
     "n_tree_oak_NE": [
-     4,
-     298,
-     344
-    ],
-    "n_tree_oak_NW": [
-     4,
-     377,
-     344
-    ],
-    "n_tree_oak_SE": [
-     4,
-     456,
-     344
-    ],
-    "n_tree_oak_SW": [
-     4,
-     535,
-     344
-    ],
-    "towerSquareTopRoofHigh_NW": [
-     4,
-     614,
-     344
-    ],
-    "towerSquareTopRoofHigh_SE": [
-     4,
-     767,
-     344
+     1,
+     1398,
+     390
     ],
     "k_merchant_cart_NE": [
-     4,
-     920,
-     344
+     1,
+     1477,
+     390
     ],
     "towerSquareTopRoofHigh_NE": [
-     4,
-     1052,
-     344
-    ],
-    "towerSquareTopRoofHigh_SW": [
-     4,
-     1205,
-     344
-    ],
-    "k_merchant_cart_NW": [
-     4,
-     1358,
-     344
-    ],
-    "k_blacksmith_SE": [
-     4,
-     1490,
-     344
-    ],
-    "t_cartHigh_NW": [
-     4,
-     1727,
-     344
-    ],
-    "t_cartHigh_SW": [
-     4,
-     1882,
-     344
-    ],
-    "t_roofHighWindow_SE": [
-     4,
-     0,
-     505
-    ],
-    "t_roofHighWindow_SW": [
-     4,
-     165,
-     505
-    ],
-    "k_merchant_cart_SE": [
-     4,
-     330,
-     505
-    ],
-    "k_merchant_cart_SW": [
-     4,
-     462,
-     505
-    ],
-    "n_rock_tallA_SE": [
-     4,
-     594,
-     505
-    ],
-    "t_roofHigh_SE": [
-     4,
-     694,
-     505
-    ],
-    "t_roofHigh_SW": [
-     4,
-     859,
-     505
+     1,
+     1609,
+     390
     ],
     "t_roofHighPoint_NE": [
-     4,
-     1024,
-     505
-    ],
-    "t_roofHighPoint_NW": [
-     4,
-     1184,
-     505
-    ],
-    "t_roofHighPoint_SE": [
-     4,
-     1344,
-     505
-    ],
-    "t_roofHighPoint_SW": [
-     4,
-     1504,
-     505
-    ],
-    "k_shrine_SW": [
-     4,
-     1664,
-     505
-    ],
-    "n_statue_head_SE": [
-     4,
-     1854,
-     505
-    ],
-    "n_statue_head_SW": [
-     4,
-     1928,
-     505
-    ],
-    "k_horse_SE": [
-     4,
-     0,
-     651
-    ],
-    "k_horse_SW": [
-     4,
-     93,
-     651
+     1,
+     1762,
+     390
     ],
     "n_tree_small_NE": [
-     3,
-     2002,
-     0
-    ],
-    "n_tree_small_NW": [
-     3,
-     2002,
-     1621
-    ],
-    "n_tree_small_SE": [
-     4,
-     1975,
-     174
-    ],
-    "n_tree_small_SW": [
-     4,
-     2002,
-     505
-    ],
-    "k_stage_A_NW": [
-     4,
-     186,
-     651
+     1,
+     1922,
+     390
     ],
     "g_bench_NE": [
-     4,
-     457,
-     651
-    ],
-    "g_bench_NW": [
-     4,
-     606,
-     651
+     1,
+     0,
+     561
     ],
     "k_soldier_NE": [
-     4,
-     755,
-     651
-    ],
-    "k_soldier_NW": [
-     4,
-     820,
-     651
-    ],
-    "k_soldier_SE": [
-     4,
-     885,
-     651
-    ],
-    "k_soldier_SW": [
-     4,
-     950,
-     651
-    ],
-    "k_stage_A_SE": [
-     4,
-     1015,
-     651
-    ],
-    "n_rock_tallA_SW": [
-     4,
-     1286,
-     651
+     1,
+     1968,
+     390
     ],
     "n_statue_column_NE": [
-     4,
-     1390,
-     651
-    ],
-    "n_statue_column_NW": [
-     4,
-     1438,
-     651
-    ],
-    "n_statue_column_SE": [
-     4,
-     1486,
-     651
-    ],
-    "n_statue_column_SW": [
-     4,
-     1534,
-     651
+     1,
+     149,
+     561
     ],
     "t_roof_NE": [
-     4,
-     1582,
-     651
-    ],
-    "t_roof_NW": [
-     4,
-     1744,
-     651
+     1,
+     197,
+     561
     ],
     "k_cart_NE": [
-     4,
-     1906,
-     651
-    ],
-    "k_cart_NW": [
-     4,
-     0,
-     794
+     1,
+     359,
+     561
     ],
     "n_statue_head_NE": [
-     4,
-     127,
-     794
-    ],
-    "n_statue_head_NW": [
-     4,
-     201,
-     794
+     1,
+     486,
+     561
     ],
     "n_rock_tallA_NE": [
-     4,
-     275,
-     794
+     1,
+     560,
+     561
     ],
     "t_pillarStone_NE": [
      0,
-     2025,
-     1282
-    ],
-    "t_pillarStone_NW": [
-     1,
-     2025,
-     367
-    ],
-    "t_pillarStone_SE": [
-     2,
-     2016,
-     863
-    ],
-    "t_pillarStone_SW": [
-     3,
-     2023,
-     227
+     2022,
+     0
     ],
     "t_fountainRound_NE": [
-     4,
-     379,
-     794
-    ],
-    "t_fountainRound_NW": [
-     4,
-     595,
-     794
-    ],
-    "t_fountainRound_SE": [
-     4,
-     811,
-     794
-    ],
-    "t_fountainRound_SW": [
-     4,
-     1027,
-     794
-    ],
-    "k_shrine_SE": [
-     4,
-     1243,
-     794
+     1,
+     664,
+     561
     ],
     "t_cartHigh_NE": [
-     4,
-     1435,
-     794
-    ],
-    "t_cartHigh_SE": [
-     4,
-     1590,
-     794
+     1,
+     880,
+     561
     ],
     "towerSquareTopColor_NE": [
-     4,
-     1745,
-     794
-    ],
-    "towerSquareTopColor_NW": [
-     4,
-     0,
-     933
-    ],
-    "towerSquareTopColor_SE": [
-     4,
-     153,
-     933
-    ],
-    "towerSquareTopColor_SW": [
-     4,
-     306,
-     933
-    ],
-    "siegeBallista_SW": [
-     4,
-     1898,
-     794
-    ],
-    "siegeBallista_NW": [
-     4,
-     459,
-     933
-    ],
-    "towerSquareTopRoof_SE": [
-     4,
-     596,
-     933
+     1,
+     1035,
+     561
     ],
     "towerSquareTopRoof_NE": [
-     4,
-     749,
-     933
-    ],
-    "towerSquareTopRoof_NW": [
-     4,
-     902,
-     933
-    ],
-    "towerSquareTopRoof_SW": [
-     4,
-     1055,
-     933
-    ],
-    "siegeBallista_SE": [
-     4,
-     1208,
-     933
+     1,
+     1188,
+     561
     ],
     "siegeBallista_NE": [
-     4,
-     1346,
-     933
-    ],
-    "n_rock_tallA_NW": [
-     4,
-     1483,
-     933
-    ],
-    "k_catapult_SE": [
-     4,
-     1583,
-     933
-    ],
-    "k_catapult_SW": [
-     4,
-     1734,
-     933
-    ],
-    "k_cannon_SE": [
-     4,
-     1885,
-     933
-    ],
-    "k_cannon_SW": [
-     4,
-     0,
-     1067
+     1,
+     1341,
+     561
     ],
     "towerSquareTop_NE": [
-     4,
-     127,
-     1067
-    ],
-    "towerSquareTop_NW": [
-     4,
-     280,
-     1067
-    ],
-    "towerSquareTop_SE": [
-     4,
-     433,
-     1067
-    ],
-    "towerSquareTop_SW": [
-     4,
-     586,
-     1067
-    ],
-    "t_cart_NW": [
-     4,
-     739,
-     1067
-    ],
-    "t_cart_SW": [
-     4,
-     894,
-     1067
-    ],
-    "k_flag_SE": [
-     4,
-     1049,
-     1067
-    ],
-    "k_flag_SW": [
-     4,
-     1111,
-     1067
-    ],
-    "k_target_SE": [
-     4,
-     1173,
-     1067
-    ],
-    "k_target_SW": [
-     4,
-     1242,
-     1067
+     1,
+     1478,
+     561
     ],
     "k_catapult_NE": [
-     4,
-     1311,
-     1067
-    ],
-    "k_catapult_NW": [
-     4,
-     1462,
-     1067
-    ],
-    "k_cart_SE": [
-     4,
-     1613,
-     1067
-    ],
-    "k_cart_SW": [
-     4,
-     1740,
-     1067
+     1,
+     1631,
+     561
     ],
     "k_target_NE": [
-     4,
-     1867,
-     1067
-    ],
-    "k_target_NW": [
-     4,
-     1936,
-     1067
+     1,
+     1782,
+     561
     ],
     "n_statue_obelisk_NE": [
-     4,
-     0,
-     1196
-    ],
-    "n_statue_obelisk_NW": [
-     4,
-     48,
-     1196
-    ],
-    "n_statue_obelisk_SE": [
-     4,
-     96,
-     1196
-    ],
-    "n_statue_obelisk_SW": [
-     4,
-     144,
-     1196
+     1,
+     1851,
+     561
     ],
     "towerTopRoof_NE": [
-     4,
-     192,
-     1196
-    ],
-    "towerTopRoof_NW": [
-     4,
-     314,
-     1196
-    ],
-    "towerTopRoof_SW": [
-     4,
-     436,
-     1196
+     1,
+     1899,
+     561
     ],
     "towerSquareMidColor_NE": [
-     4,
-     558,
-     1196
-    ],
-    "towerSquareMidColor_NW": [
-     4,
-     701,
-     1196
-    ],
-    "towerSquareMidColor_SE": [
-     4,
-     844,
-     1196
-    ],
-    "towerSquareMidColor_SW": [
-     4,
-     987,
-     1196
-    ],
-    "towerTopRoof_SE": [
-     4,
-     1130,
-     1196
+     1,
+     0,
+     702
     ],
     "k_horse_NE": [
-     4,
-     1252,
-     1196
-    ],
-    "k_horse_NW": [
-     4,
-     1345,
-     1196
+     1,
+     143,
+     702
     ],
     "n_statue_ring_NE": [
-     4,
-     1438,
-     1196
-    ],
-    "n_statue_ring_NW": [
-     4,
-     1517,
-     1196
-    ],
-    "n_statue_ring_SE": [
-     4,
-     1596,
-     1196
-    ],
-    "n_statue_ring_SW": [
-     4,
-     1675,
-     1196
+     1,
+     236,
+     702
     ],
     "t_roofGable_NE": [
-     4,
-     1754,
-     1196
-    ],
-    "t_roofGable_NW": [
-     4,
-     0,
-     1316
-    ],
-    "t_roofGable_SE": [
-     4,
-     167,
-     1316
-    ],
-    "t_roofGable_SW": [
-     4,
-     334,
-     1316
+     1,
+     315,
+     702
     ],
     "n_bridge_wood_NE": [
-     4,
-     501,
-     1316
-    ],
-    "n_bridge_wood_NW": [
-     4,
-     661,
-     1316
-    ],
-    "n_bridge_wood_SE": [
-     4,
-     821,
-     1316
-    ],
-    "n_bridge_wood_SW": [
-     4,
-     981,
-     1316
+     1,
+     482,
+     702
     ],
     "k_cannon_NE": [
-     4,
-     1921,
-     1196
-    ],
-    "k_cannon_NW": [
-     4,
-     1141,
-     1316
+     1,
+     642,
+     702
     ],
     "t_cart_NE": [
-     4,
-     1268,
-     1316
-    ],
-    "t_cart_SE": [
-     4,
-     1423,
-     1316
+     1,
+     769,
+     702
     ],
     "n_flowerbed_mixed": [
-     4,
-     1578,
-     1316
+     1,
+     924,
+     702
     ],
     "n_flowerbed_red": [
-     4,
-     1694,
-     1316
-    ],
-    "k_weaponrack_NW": [
-     4,
-     1810,
-     1316
+     1,
+     1040,
+     702
     ],
     "t_fenceGate_NE": [
-     4,
-     1872,
-     1316
-    ],
-    "t_fenceGate_NW": [
-     4,
-     0,
-     1432
+     1,
+     1156,
+     702
     ],
     "t_fence_NE": [
-     4,
-     153,
-     1432
-    ],
-    "t_fence_NW": [
-     4,
-     306,
-     1432
-    ],
-    "t_fenceCurved_NW": [
-     4,
-     459,
-     1432
-    ],
-    "t_fenceCurved_SE": [
-     4,
-     568,
-     1432
+     1,
+     1309,
+     702
     ],
     "k_weaponrack_NE": [
-     4,
-     677,
-     1432
+     1,
+     1462,
+     702
     ],
     "n_fence_corner_NE": [
-     4,
-     739,
-     1432
-    ],
-    "n_fence_corner_NW": [
-     4,
-     892,
-     1432
-    ],
-    "n_fence_corner_SW": [
-     4,
-     1045,
-     1432
+     1,
+     1524,
+     702
     ],
     "n_fence_gate_NE": [
-     4,
-     1198,
-     1432
-    ],
-    "n_fence_gate_NW": [
-     4,
-     1351,
-     1432
+     1,
+     1677,
+     702
     ],
     "n_fence_simple_NE": [
-     4,
-     1504,
-     1432
-    ],
-    "n_fence_simple_NW": [
-     4,
-     1657,
-     1432
-    ],
-    "stairsStone_SW": [
-     4,
-     1810,
-     1432
+     1,
+     1830,
+     702
     ],
     "k_small_tent_NE": [
-     4,
-     1892,
-     1432
-    ],
-    "k_small_tent_NW": [
-     4,
+     1,
      0,
-     1544
-    ],
-    "k_small_tent_SE": [
-     4,
-     95,
-     1544
-    ],
-    "k_small_tent_SW": [
-     4,
-     190,
-     1544
-    ],
-    "stairsStone_SE": [
-     4,
-     285,
-     1544
+     819
     ],
     "k_flag_NE": [
-     4,
-     367,
-     1544
-    ],
-    "k_flag_NW": [
-     4,
-     429,
-     1544
+     1,
+     1983,
+     702
     ],
     "n_flowerbed_purple": [
-     4,
-     491,
-     1544
+     1,
+     95,
+     819
     ],
     "g_urn_NE": [
-     4,
-     1987,
-     1432
-    ],
-    "g_urn_NW": [
-     4,
-     607,
-     1544
-    ],
-    "g_urn_SE": [
-     4,
-     655,
-     1544
-    ],
-    "g_urn_SW": [
-     4,
-     703,
-     1544
-    ],
-    "bridge_SE": [
-     4,
-     751,
-     1544
-    ],
-    "bridge_NW": [
-     4,
-     892,
-     1544
+     1,
+     211,
+     819
     ],
     "a_rabbit": [
-     4,
-     1032,
-     1544
-    ],
-    "k_weaponrack_SE": [
-     4,
-     1112,
-     1544
-    ],
-    "bridge_SW": [
-     4,
-     1174,
-     1544
+     1,
+     259,
+     819
     ],
     "bridge_NE": [
-     4,
-     1315,
-     1544
+     1,
+     339,
+     819
     ],
     "n_tent_detailedOpen_NE": [
-     4,
-     1455,
-     1544
-    ],
-    "n_tent_detailedOpen_NW": [
-     4,
-     1566,
-     1544
-    ],
-    "n_tent_detailedOpen_SE": [
-     4,
-     1677,
-     1544
-    ],
-    "n_tent_detailedOpen_SW": [
-     4,
-     1788,
-     1544
-    ],
-    "k_weaponrack_SW": [
-     4,
-     1899,
-     1544
+     1,
+     479,
+     819
     ],
     "t_fenceCurved_NE": [
-     4,
-     0,
-     1653
+     1,
+     590,
+     819
     ],
     "t_roofPoint_NE": [
-     4,
-     153,
-     1653
-    ],
-    "t_roofPoint_NW": [
-     4,
-     313,
-     1653
-    ],
-    "t_roofPoint_SE": [
-     4,
-     473,
-     1653
-    ],
-    "t_roofPoint_SW": [
-     4,
-     633,
-     1653
-    ],
-    "t_roof_SE": [
-     4,
-     793,
-     1653
-    ],
-    "t_roof_SW": [
-     4,
-     955,
-     1653
+     1,
+     743,
+     819
     ],
     "n_flowerbed_yellow": [
-     4,
-     1117,
-     1653
-    ],
-    "k_rock_NW": [
-     4,
-     1233,
-     1653
-    ],
-    "k_rock_SE": [
-     4,
-     1326,
-     1653
-    ],
-    "n_crops_wheatStageB_NW": [
-     4,
-     1961,
-     1544
+     1,
+     903,
+     819
     ],
     "t_hedgeGate_NE": [
-     4,
-     1419,
-     1653
-    ],
-    "t_hedgeGate_NW": [
-     4,
-     1572,
-     1653
+     1,
+     1019,
+     819
     ],
     "t_hedge_NE": [
-     4,
-     1725,
-     1653
-    ],
-    "t_hedge_NW": [
-     4,
-     1878,
-     1653
-    ],
-    "t_hedgeCurved_NW": [
-     4,
-     0,
-     1755
-    ],
-    "t_hedgeCurved_SE": [
-     4,
-     109,
-     1755
-    ],
-    "n_crops_wheatStageB_SW": [
-     4,
-     218,
-     1755
+     1,
+     1172,
+     819
     ],
     "k_wheelbarrow_NE": [
-     4,
-     285,
-     1755
-    ],
-    "k_wheelbarrow_NW": [
-     4,
-     380,
-     1755
-    ],
-    "k_supplies_NW": [
-     4,
-     475,
-     1755
+     1,
+     1325,
+     819
     ],
     "k_rock_NE": [
-     4,
-     561,
-     1755
-    ],
-    "n_crops_wheatStageB_SE": [
-     4,
-     640,
-     1755
+     1,
+     1420,
+     819
     ],
     "a_dog": [
-     4,
-     700,
-     1755
+     1,
+     1499,
+     819
     ],
     "n_crops_wheatStageB_NE": [
-     4,
-     780,
-     1755
-    ],
-    "metalGate_NW": [
-     4,
-     847,
-     1755
-    ],
-    "k_supplies_SE": [
-     4,
-     904,
-     1755
-    ],
-    "k_barrels_SW": [
-     4,
-     990,
-     1755
-    ],
-    "metalGate_SE": [
-     4,
-     1064,
-     1755
-    ],
-    "metalGate_SW": [
-     4,
-     1122,
-     1755
+     1,
+     1579,
+     819
     ],
     "metalGate_NE": [
-     4,
-     1180,
-     1755
+     1,
+     1646,
+     819
     ],
     "n_bushes": [
-     4,
-     1237,
-     1755
-    ],
-    "k_rock_SW": [
-     4,
-     1353,
-     1755
-    ],
-    "k_barrels_SE": [
-     4,
-     1432,
-     1755
+     1,
+     1703,
+     819
     ],
     "n_log_stack_NE": [
-     4,
-     1508,
-     1755
-    ],
-    "n_log_stack_SW": [
-     4,
-     1594,
-     1755
+     1,
+     1819,
+     819
     ],
     "a_chicken": [
-     4,
-     1680,
-     1755
-    ],
-    "k_crates_SE": [
-     4,
-     1760,
-     1755
+     1,
+     1905,
+     819
     ],
     "g_lanternGlass_NE": [
-     4,
-     2005,
-     1067
-    ],
-    "g_lanternGlass_NW": [
-     4,
-     1839,
-     1755
-    ],
-    "g_lanternGlass_SE": [
-     4,
-     1880,
-     1755
-    ],
-    "g_lanternGlass_SW": [
-     4,
-     1921,
-     1755
-    ],
-    "towerTop_NW": [
-     4,
-     0,
-     1852
-    ],
-    "towerTop_SE": [
-     4,
-     109,
-     1852
-    ],
-    "towerTop_SW": [
-     4,
-     218,
-     1852
+     1,
+     1985,
+     819
     ],
     "n_statue_block_NE": [
-     4,
-     1962,
-     1755
-    ],
-    "n_statue_block_NW": [
-     4,
-     327,
-     1852
-    ],
-    "n_statue_block_SE": [
-     4,
-     382,
-     1852
-    ],
-    "n_statue_block_SW": [
-     4,
-     437,
-     1852
+     1,
+     0,
+     928
     ],
     "towerTop_NE": [
-     4,
-     492,
-     1852
-    ],
-    "k_supplies_SW": [
-     4,
-     601,
-     1852
+     1,
+     55,
+     928
     ],
     "k_barrels_NE": [
-     4,
-     703,
-     1852
-    ],
-    "k_haybales_NW": [
-     4,
-     777,
-     1852
-    ],
-    "k_haybales_SE": [
-     4,
-     835,
-     1852
+     1,
+     164,
+     928
     ],
     "t_hedgeCurved_NE": [
-     4,
-     893,
-     1852
+     1,
+     238,
+     928
     ],
     "k_supplies_NE": [
-     4,
-     1046,
-     1852
-    ],
-    "n_rock_largeA_SW": [
-     4,
-     1148,
-     1852
+     1,
+     391,
+     928
     ],
     "a_horse": [
-     4,
-     1250,
-     1852
-    ],
-    "k_crates_NW": [
-     4,
-     1330,
-     1852
-    ],
-    "k_barrels_NW": [
-     4,
-     1409,
-     1852
+     1,
+     493,
+     928
     ],
     "k_trough_NE": [
-     4,
-     1485,
-     1852
-    ],
-    "k_trough_NW": [
-     4,
-     1561,
-     1852
-    ],
-    "k_trough_SE": [
-     4,
-     1637,
-     1852
-    ],
-    "k_trough_SW": [
-     4,
-     1713,
-     1852
+     1,
+     573,
+     928
     ],
     "k_cannonballs_NE": [
-     4,
-     1789,
-     1852
-    ],
-    "k_cannonballs_NW": [
-     4,
-     1851,
-     1852
-    ],
-    "k_cannonballs_SE": [
-     4,
-     1913,
-     1852
-    ],
-    "k_cannonballs_SW": [
-     4,
-     1975,
-     1852
-    ],
-    "k_wheelbarrow_SW": [
-     4,
-     0,
-     1940
-    ],
-    "k_wheelbarrow_SE": [
-     4,
-     97,
-     1940
-    ],
-    "n_log_stack_NW": [
-     4,
-     192,
-     1940
-    ],
-    "n_log_stack_SE": [
-     4,
-     278,
-     1940
+     1,
+     649,
+     928
     ],
     "t_planks_NE": [
      1,
-     0,
-     1965
-    ],
-    "t_planks_NW": [
-     1,
-     153,
-     1965
-    ],
-    "t_planks_SE": [
-     1,
-     306,
-     1965
-    ],
-    "t_planks_SW": [
-     1,
-     459,
-     1965
-    ],
-    "k_rocks_NW": [
-     1,
-     612,
-     1965
+     711,
+     928
     ],
     "k_crates_NE": [
      1,
-     698,
-     1965
+     864,
+     928
     ],
     "n_sign_NE": [
      1,
-     781,
-     1965
-    ],
-    "n_sign_NW": [
-     1,
-     816,
-     1965
+     947,
+     928
     ],
     "n_rock_largeA_NE": [
      1,
-     851,
-     1965
-    ],
-    "flagBlue_NW": [
-     1,
-     953,
-     1965
-    ],
-    "n_rock_largeA_NW": [
-     1,
-     996,
-     1965
+     982,
+     928
     ],
     "k_rocks_NE": [
      1,
-     1123,
-     1965
-    ],
-    "k_rocks_SW": [
-     1,
-     1211,
-     1965
-    ],
-    "flagBannerShort_NW": [
-     1,
-     1299,
-     1965
+     1084,
+     928
     ],
     "flagBlue_NE": [
      1,
-     1352,
-     1965
-    ],
-    "k_crates_SW": [
-     1,
-     1396,
-     1965
+     1172,
+     928
     ],
     "a_owl": [
      1,
-     1479,
-     1965
+     1216,
+     928
     ],
     "flagBannerShort_NE": [
      1,
-     1559,
-     1965
-    ],
-    "flagBannerShort_SW": [
-     1,
-     1612,
-     1965
-    ],
-    "n_sign_SE": [
-     1,
-     1665,
-     1965
-    ],
-    "n_sign_SW": [
-     1,
-     1700,
-     1965
-    ],
-    "t_fenceCurved_SW": [
-     1,
-     1735,
-     1965
-    ],
-    "t_fenceGate_SE": [
-     1,
-     1888,
-     1965
-    ],
-    "t_fenceGate_SW": [
-     4,
-     364,
-     1940
-    ],
-    "t_fence_SE": [
-     4,
-     517,
-     1940
-    ],
-    "t_fence_SW": [
-     4,
-     670,
-     1940
-    ],
-    "k_haybales_SW": [
-     4,
-     823,
-     1940
+     1296,
+     928
     ],
     "a_duck": [
-     4,
-     911,
-     1940
-    ],
-    "flagBannerShort_SE": [
-     4,
-     991,
-     1940
+     1,
+     1349,
+     928
     ],
     "k_haybales_NE": [
-     4,
-     1044,
-     1940
+     1,
+     1429,
+     928
     ],
     "k_bucket_NE": [
-     4,
-     1132,
-     1940
-    ],
-    "k_bucket_NW": [
-     4,
-     1169,
-     1940
-    ],
-    "k_bucket_SE": [
-     4,
-     1206,
-     1940
-    ],
-    "k_bucket_SW": [
-     4,
-     1243,
-     1940
+     1,
+     1517,
+     928
     ],
     "flagBlueWide_NE": [
-     3,
-     2012,
-     868
-    ],
-    "flagBlueWide_NW": [
-     4,
-     2012,
-     933
-    ],
-    "n_fence_corner_SE": [
-     4,
-     1280,
-     1940
-    ],
-    "n_fence_gate_SE": [
-     4,
-     1433,
-     1940
-    ],
-    "n_fence_gate_SW": [
-     4,
-     1586,
-     1940
-    ],
-    "n_fence_simple_SE": [
-     4,
-     1739,
-     1940
-    ],
-    "n_fence_simple_SW": [
-     4,
-     1892,
-     1940
-    ],
-    "k_rocks_SE": [
-     5,
-     0,
-     0
+     1,
+     1554,
+     928
     ],
     "a_goat": [
-     5,
-     86,
-     0
+     1,
+     1587,
+     928
     ],
     "k_pallet_NE": [
-     5,
-     166,
-     0
-    ],
-    "k_pallet_NW": [
-     5,
-     235,
-     0
-    ],
-    "k_pallet_SE": [
-     5,
-     304,
-     0
-    ],
-    "k_pallet_SW": [
-     5,
-     373,
-     0
-    ],
-    "n_rock_largeA_SE": [
-     3,
-     0,
-     1975
+     1,
+     1667,
+     928
     ],
     "a_pig": [
-     3,
-     127,
-     1975
+     1,
+     1736,
+     928
     ],
     "n_pot_large_NE": [
-     3,
-     207,
-     1975
-    ],
-    "n_pot_large_NW": [
-     3,
-     267,
-     1975
-    ],
-    "n_pot_large_SE": [
-     3,
-     327,
-     1975
-    ],
-    "n_pot_large_SW": [
-     3,
-     387,
-     1975
+     1,
+     1816,
+     928
     ],
     "n_crop_pumpkin_NE": [
-     3,
-     447,
-     1975
-    ],
-    "n_crop_pumpkin_NW": [
-     3,
-     500,
-     1975
-    ],
-    "n_crop_pumpkin_SE": [
-     3,
-     553,
-     1975
-    ],
-    "n_crop_pumpkin_SW": [
-     3,
-     606,
-     1975
-    ],
-    "n_plant_bushLarge_NW": [
-     3,
-     659,
-     1975
+     1,
+     1876,
+     928
     ],
     "a_cow": [
-     3,
-     700,
-     1975
-    ],
-    "n_plant_bushLarge_SW": [
-     3,
-     780,
-     1975
+     1,
+     1929,
+     928
     ],
     "n_path_stone_NE": [
-     3,
-     821,
-     1975
+     1,
+     0,
+     1016
     ],
     "n_plant_bush_NE": [
-     3,
-     918,
-     1975
-    ],
-    "n_plant_bush_NW": [
-     3,
-     953,
-     1975
-    ],
-    "n_plant_bush_SE": [
-     3,
-     988,
-     1975
-    ],
-    "n_plant_bush_SW": [
-     3,
-     1023,
-     1975
-    ],
-    "t_hedgeCurved_SW": [
-     3,
-     1058,
-     1975
-    ],
-    "t_hedgeGate_SE": [
-     3,
-     1211,
-     1975
-    ],
-    "t_hedgeGate_SW": [
-     3,
-     1364,
-     1975
-    ],
-    "t_hedge_SE": [
-     3,
-     1517,
-     1975
-    ],
-    "t_hedge_SW": [
-     3,
-     1670,
-     1975
-    ],
-    "n_path_stone_SE": [
-     3,
-     1823,
-     1975
+     1,
+     2009,
+     928
     ],
     "stairsStone_NE": [
-     3,
-     1937,
-     1975
-    ],
-    "stairsStone_NW": [
-     5,
-     442,
-     0
+     1,
+     97,
+     1016
     ],
     "king_NE": [
-     5,
-     523,
-     0
-    ],
-    "king_NW": [
-     5,
-     570,
-     0
-    ],
-    "king_SE": [
-     5,
-     617,
-     0
-    ],
-    "king_SW": [
-     5,
-     664,
-     0
+     1,
+     179,
+     1016
     ],
     "knightBlue_NE": [
-     5,
-     711,
-     0
-    ],
-    "knightBlue_NW": [
-     5,
-     758,
-     0
-    ],
-    "knightBlue_SE": [
-     5,
-     805,
-     0
-    ],
-    "knightBlue_SW": [
-     5,
-     852,
-     0
+     1,
+     226,
+     1016
     ],
     "knightRed_NE": [
-     5,
-     899,
-     0
-    ],
-    "knightRed_NW": [
-     5,
-     946,
-     0
-    ],
-    "knightRed_SE": [
-     5,
-     993,
-     0
-    ],
-    "knightRed_SW": [
-     5,
-     1040,
-     0
+     1,
+     273,
+     1016
     ],
     "s_king_NE": [
-     5,
-     1087,
-     0
-    ],
-    "s_king_NW": [
-     5,
-     1134,
-     0
-    ],
-    "s_king_SE": [
-     5,
-     1181,
-     0
-    ],
-    "s_king_SW": [
-     5,
-     1228,
-     0
+     1,
+     320,
+     1016
     ],
     "s_knight_NE": [
-     5,
-     1275,
-     0
-    ],
-    "s_knight_NW": [
-     5,
-     1322,
-     0
-    ],
-    "s_knight_SE": [
-     5,
-     1369,
-     0
-    ],
-    "s_knight_SW": [
-     5,
-     1416,
-     0
+     1,
+     367,
+     1016
     ],
     "n_plant_bushLarge_NE": [
-     5,
-     1463,
-     0
-    ],
-    "n_plant_bushLarge_SE": [
-     5,
-     1504,
-     0
-    ],
-    "n_path_stone_NW": [
-     5,
-     1545,
-     0
-    ],
-    "n_path_stone_SW": [
-     5,
-     1659,
-     0
+     1,
+     414,
+     1016
     ],
     "n_stump_round_NE": [
-     5,
-     1756,
-     0
-    ],
-    "n_stump_round_NW": [
-     5,
-     1797,
-     0
-    ],
-    "n_stump_round_SE": [
-     5,
-     1838,
-     0
-    ],
-    "n_stump_round_SW": [
-     5,
-     1879,
-     0
-    ],
-    "n_mushroom_redGroup_NW": [
-     5,
-     1920,
-     0
-    ],
-    "n_mushroom_tanGroup_NW": [
-     5,
-     1959,
-     0
+     1,
+     455,
+     1016
     ],
     "n_mushroom_redGroup_NE": [
-     5,
-     1998,
-     0
+     1,
+     496,
+     1016
     ],
     "n_mushroom_tanGroup_NE": [
-     5,
-     0,
-     75
-    ],
-    "flagBlue_SE": [
-     5,
-     37,
-     75
-    ],
-    "flagBlue_SW": [
-     5,
-     81,
-     75
-    ],
-    "flagBlueWide_SE": [
-     5,
-     125,
-     75
-    ],
-    "flagBlueWide_SW": [
-     5,
-     158,
-     75
+     1,
+     533,
+     1016
     ],
     "n_rock_smallA_NE": [
-     5,
-     191,
-     75
-    ],
-    "n_rock_smallA_NW": [
-     5,
-     239,
-     75
-    ],
-    "n_mushroom_redGroup_SE": [
-     5,
-     285,
-     75
-    ],
-    "n_mushroom_tanGroup_SE": [
-     5,
-     324,
-     75
-    ],
-    "n_mushroom_redGroup_SW": [
-     5,
-     363,
-     75
-    ],
-    "n_mushroom_tanGroup_SW": [
-     5,
-     400,
-     75
-    ],
-    "n_rock_smallA_SE": [
-     5,
-     437,
-     75
-    ],
-    "n_campfire_stones_SW": [
-     5,
-     483,
-     75
-    ],
-    "n_campfire_stones_NW": [
-     5,
-     548,
-     75
-    ],
-    "n_rock_smallA_SW": [
-     5,
-     608,
-     75
+     0,
+     0,
+     1985
     ],
     "n_campfire_stones_NE": [
-     5,
-     656,
-     75
-    ],
-    "n_campfire_stones_SE": [
-     5,
-     721,
-     75
+     0,
+     48,
+     1985
     ],
     "n_lily_large_NE": [
-     5,
-     781,
-     75
-    ],
-    "n_lily_large_NW": [
-     5,
-     816,
-     75
-    ],
-    "n_lily_large_SE": [
-     5,
-     851,
-     75
-    ],
-    "n_lily_large_SW": [
-     5,
-     886,
-     75
-    ],
-    "shieldBlue_NW": [
-     3,
-     2019,
-     1975
-    ],
-    "shieldBlue_SE": [
-     4,
-     2021,
-     174
+     0,
+     113,
+     1985
     ],
     "shieldBlue_NE": [
-     4,
-     2021,
-     1544
-    ],
-    "shieldBlue_SW": [
-     4,
-     2017,
-     1755
+     0,
+     148,
+     1985
     ]
    },
    "red/": {
@@ -12657,1360 +6732,340 @@
      0,
      0
     ],
-    "k_castle_NW": [
+    "k_townhall_NE": [
      0,
      453,
      0
     ],
-    "k_castle_SE": [
-     0,
-     906,
-     0
-    ],
-    "k_castle_SW": [
-     0,
-     1359,
-     0
-    ],
-    "k_townhall_SW": [
-     0,
-     0,
-     820
-    ],
-    "k_townhall_NW": [
-     0,
-     385,
-     820
-    ],
-    "k_townhall_SE": [
-     0,
-     773,
-     820
-    ],
-    "k_archeryrange_NW": [
-     0,
-     1163,
-     820
-    ],
-    "k_townhall_NE": [
-     0,
-     1520,
-     820
-    ],
     "k_barracks_NE": [
      0,
-     0,
-     1282
-    ],
-    "k_barracks_NW": [
-     0,
-     374,
-     1282
-    ],
-    "k_barracks_SE": [
-     0,
-     748,
-     1282
-    ],
-    "k_barracks_SW": [
-     0,
-     1122,
-     1282
-    ],
-    "k_tower_cannon_SE": [
-     0,
-     1812,
-     0
-    ],
-    "k_tower_cannon_SW": [
-     0,
-     1496,
-     1282
-    ],
-    "k_archeryrange_SW": [
-     1,
-     0,
+     838,
      0
     ],
     "k_tower_cannon_NE": [
      0,
-     1677,
-     1282
-    ],
-    "k_tower_cannon_NW": [
-     0,
-     1858,
-     1282
-    ],
-    "k_workshop_NW": [
-     0,
-     0,
-     1688
+     1212,
+     0
     ],
     "k_tower_catapult_NE": [
      0,
-     355,
-     1688
-    ],
-    "k_tower_catapult_NW": [
-     0,
-     547,
-     1688
+     1393,
+     0
     ],
     "k_tower_A_NE": [
      0,
-     739,
-     1688
-    ],
-    "k_tower_A_NW": [
-     0,
-     920,
-     1688
+     1585,
+     0
     ],
     "k_archeryrange_NE": [
      0,
-     1101,
-     1688
-    ],
-    "k_mine_NW": [
      0,
-     1486,
-     1688
-    ],
-    "k_tower_A_SE": [
-     0,
-     1853,
-     1688
-    ],
-    "k_tower_A_SW": [
-     1,
-     385,
-     0
+     820
     ],
     "k_mine_NE": [
-     1,
-     566,
-     0
-    ],
-    "k_tower_catapult_SE": [
-     1,
-     923,
-     0
-    ],
-    "k_tower_catapult_SW": [
-     1,
-     1115,
-     0
+     0,
+     385,
+     820
     ],
     "k_tower_B_NE": [
-     1,
-     1307,
-     0
-    ],
-    "k_tower_B_NW": [
-     1,
-     1486,
-     0
-    ],
-    "k_tower_B_SE": [
-     1,
-     1665,
-     0
-    ],
-    "k_tower_B_SW": [
-     1,
-     1844,
-     0
-    ],
-    "k_shipyard_SW": [
-     1,
      0,
-     367
-    ],
-    "k_archeryrange_SE": [
-     1,
-     397,
-     367
-    ],
-    "k_mine_SW": [
-     1,
-     754,
-     367
+     1766,
+     0
     ],
     "k_tower_base_NE": [
-     1,
-     1111,
-     367
-    ],
-    "k_tower_base_NW": [
-     1,
-     1292,
-     367
-    ],
-    "k_mine_SE": [
-     1,
-     1473,
-     367
-    ],
-    "k_tower_base_SE": [
-     1,
-     1840,
-     367
-    ],
-    "k_tower_base_SW": [
-     1,
      0,
-     679
+     742,
+     820
     ],
     "k_workshop_NE": [
-     1,
-     181,
-     679
-    ],
-    "k_shipyard_NW": [
-     1,
-     543,
-     679
-    ],
-    "siegeTower_NW": [
-     1,
-     931,
-     679
-    ],
-    "siegeTower_SW": [
-     1,
-     1135,
-     679
-    ],
-    "k_market_NW": [
-     1,
-     1339,
-     679
+     0,
+     923,
+     820
     ],
     "k_stables_NE": [
-     1,
      0,
-     985
-    ],
-    "k_workshop_SW": [
-     1,
-     1676,
-     679
-    ],
-    "k_tent_SE": [
-     1,
-     409,
-     985
-    ],
-    "k_workshop_SE": [
-     1,
-     801,
-     985
-    ],
-    "k_stables_NW": [
-     1,
-     1156,
-     985
-    ],
-    "k_tent_SW": [
-     1,
-     1562,
-     985
+     1285,
+     820
     ],
     "siegeTower_NE": [
-     1,
      0,
-     1279
-    ],
-    "siegeTower_SE": [
-     1,
-     204,
-     1279
-    ],
-    "k_stables_SW": [
-     1,
-     408,
-     1279
+     1694,
+     820
     ],
     "k_tent_NE": [
-     1,
-     817,
-     1279
-    ],
-    "k_tent_NW": [
-     1,
-     1186,
-     1279
+     0,
+     0,
+     1161
     ],
     "k_market_NE": [
-     1,
-     1578,
-     1279
+     0,
+     369,
+     1161
     ],
     "k_shipyard_NE": [
-     1,
      0,
-     1558
-    ],
-    "k_shipyard_SE": [
-     1,
-     397,
-     1558
-    ],
-    "k_windmill_SE": [
-     1,
-     785,
-     1558
-    ],
-    "k_windmill_SW": [
-     1,
-     971,
-     1558
-    ],
-    "k_lumbermill_SE": [
-     1,
-     1157,
-     1558
-    ],
-    "k_home_B_NW": [
-     1,
-     1368,
-     1558
-    ],
-    "k_stables_SE": [
-     1,
-     1565,
-     1558
-    ],
-    "k_market_SW": [
-     2,
-     0,
-     0
+     736,
+     1161
     ],
     "siegeTrebuchet_NE": [
-     2,
-     367,
-     0
-    ],
-    "k_lumbermill_SW": [
-     2,
-     568,
-     0
-    ],
-    "siegeTrebuchet_SE": [
-     2,
-     774,
-     0
-    ],
-    "wallCornerHalfTower_SW": [
-     2,
-     974,
-     0
+     0,
+     1133,
+     1161
     ],
     "k_home_B_NE": [
-     2,
-     1127,
-     0
-    ],
-    "k_market_SE": [
-     2,
-     1326,
-     0
-    ],
-    "k_church_SE": [
-     2,
-     1663,
-     0
-    ],
-    "k_church_SW": [
-     2,
      0,
-     247
+     1334,
+     1161
     ],
     "k_lumbermill_NE": [
-     2,
-     197,
-     247
-    ],
-    "k_watermill_SE": [
-     2,
-     1860,
-     0
-    ],
-    "wallCornerHalfTower_NW": [
-     2,
-     403,
-     247
-    ],
-    "k_watermill_SW": [
-     2,
-     556,
-     247
-    ],
-    "k_home_B_SW": [
-     2,
-     758,
-     247
-    ],
-    "siegeTrebuchet_NW": [
-     2,
-     957,
-     247
-    ],
-    "siegeTrebuchet_SW": [
-     2,
-     1158,
-     247
-    ],
-    "k_home_B_SE": [
-     2,
-     1358,
-     247
+     0,
+     1533,
+     1161
     ],
     "k_tavern_NE": [
-     2,
-     1555,
-     247
-    ],
-    "k_tavern_SE": [
-     2,
-     1741,
-     247
-    ],
-    "k_lumbermill_NW": [
-     2,
      0,
-     487
-    ],
-    "k_windmill_NW": [
-     2,
-     211,
-     487
+     1739,
+     1161
     ],
     "k_windmill_NE": [
-     2,
-     394,
-     487
-    ],
-    "k_watermill_NW": [
-     1,
      0,
-     1827
+     0,
+     1436
     ],
     "k_watchtower_NE": [
-     1,
-     181,
-     1827
+     0,
+     186,
+     1436
     ],
     "k_watermill_NE": [
-     1,
-     362,
-     1827
-    ],
-    "k_watchtower_NW": [
-     1,
-     564,
-     1827
-    ],
-    "k_watchtower_SE": [
-     1,
-     745,
-     1827
-    ],
-    "k_watchtower_SW": [
-     1,
-     926,
-     1827
-    ],
-    "k_tavern_NW": [
-     1,
-     1107,
-     1827
+     0,
+     367,
+     1436
     ],
     "towerSquareRoof_NE": [
-     1,
-     1297,
-     1827
-    ],
-    "towerSquareRoof_NW": [
-     1,
-     1450,
-     1827
-    ],
-    "towerSquareRoof_SE": [
-     1,
-     1603,
-     1827
-    ],
-    "towerSquareRoof_SW": [
-     1,
-     1756,
-     1827
-    ],
-    "k_tavern_SW": [
-     2,
-     580,
-     487
+     0,
+     569,
+     1436
     ],
     "wallCornerHalfTower_NE": [
-     2,
-     766,
-     487
-    ],
-    "wallCornerHalfTower_SE": [
-     2,
-     973,
-     487
-    ],
-    "wallCorner_NW": [
-     2,
-     1179,
-     487
-    ],
-    "wallCorner_SW": [
-     2,
-     1332,
-     487
-    ],
-    "wallHalf_NW": [
-     2,
-     1485,
-     487
+     0,
+     722,
+     1436
     ],
     "wall_NE": [
-     2,
-     1638,
-     487
-    ],
-    "wall_NW": [
-     2,
-     1791,
-     487
-    ],
-    "wallNarrowStairs_NW": [
-     2,
      0,
-     712
+     929,
+     1436
     ],
     "k_church_NE": [
-     2,
-     151,
-     712
-    ],
-    "k_church_NW": [
-     2,
-     348,
-     712
-    ],
-    "wall_SW": [
-     2,
-     545,
-     712
+     0,
+     1082,
+     1436
     ],
     "k_well_NE": [
-     2,
-     698,
-     712
-    ],
-    "k_well_SE": [
-     2,
-     881,
-     712
+     0,
+     1279,
+     1436
     ],
     "wallCorner_NE": [
-     2,
-     1064,
-     712
-    ],
-    "wallCorner_SE": [
-     2,
-     1217,
-     712
-    ],
-    "wallHalf_SE": [
-     2,
-     1370,
-     712
-    ],
-    "wall_SE": [
-     2,
-     1523,
-     712
-    ],
-    "k_well_NW": [
-     2,
-     1676,
-     712
-    ],
-    "k_well_SW": [
-     2,
-     1859,
-     712
-    ],
-    "wallNarrowStairs_SE": [
-     2,
      0,
-     918
+     1462,
+     1436
     ],
     "k_home_A_NE": [
-     2,
-     151,
-     918
-    ],
-    "k_home_A_NW": [
-     2,
-     341,
-     918
+     0,
+     1615,
+     1436
     ],
     "wallHalf_NE": [
-     2,
-     531,
-     918
-    ],
-    "wallHalf_SW": [
-     2,
-     684,
-     918
+     0,
+     1805,
+     1436
     ],
     "k_banner_NE": [
      0,
-     1905,
-     820
-    ],
-    "k_banner_NW": [
-     0,
-     1965,
-     820
-    ],
-    "k_banner_SE": [
-     1,
-     1931,
-     985
-    ],
-    "k_banner_SW": [
-     1,
      1945,
-     1279
-    ],
-    "k_blacksmith_NW": [
-     2,
-     837,
-     918
+     0
     ],
     "siegeCatapult_NE": [
-     2,
-     1074,
-     918
-    ],
-    "siegeCatapult_NW": [
-     2,
-     1258,
-     918
-    ],
-    "siegeCatapult_SE": [
-     2,
-     1442,
-     918
-    ],
-    "siegeCatapult_SW": [
-     2,
-     1626,
-     918
+     0,
+     0,
+     1658
     ],
     "flagBannerLong_NE": [
      0,
-     1993,
-     0
-    ],
-    "flagBannerLong_NW": [
-     1,
-     1991,
-     985
-    ],
-    "flagBannerLong_SW": [
-     1,
-     1971,
-     1558
-    ],
-    "wallNarrowStairs_SW": [
-     2,
-     1810,
-     918
-    ],
-    "flagBannerLong_SE": [
-     1,
-     1909,
-     1827
+     1898,
+     820
     ],
     "towerSquareBaseColor_NE": [
-     2,
      0,
-     1120
-    ],
-    "towerSquareBaseColor_NW": [
-     2,
-     153,
-     1120
-    ],
-    "towerSquareBaseColor_SW": [
-     2,
-     306,
-     1120
+     184,
+     1658
     ],
     "towerSquareBase_NE": [
-     2,
-     459,
-     1120
-    ],
-    "towerSquareBase_NW": [
-     2,
-     612,
-     1120
-    ],
-    "towerSquareBase_SW": [
-     2,
-     765,
-     1120
-    ],
-    "towerSquareBaseColor_SE": [
-     2,
-     918,
-     1120
-    ],
-    "towerSquareBase_SE": [
-     2,
-     1071,
-     1120
-    ],
-    "wallDoor_NW": [
-     2,
-     1931,
-     247
-    ],
-    "k_blacksmith_SW": [
-     2,
-     1224,
-     1120
-    ],
-    "towerSquareArch_NW": [
-     2,
-     1416,
-     1120
-    ],
-    "towerSquareMidOpen_NW": [
-     2,
-     1558,
-     1120
-    ],
-    "towerSquareMidWindows_NW": [
-     2,
-     1700,
-     1120
-    ],
-    "towerSquareMid_NW": [
-     2,
-     1842,
-     1120
-    ],
-    "towerSquarePoles_NW": [
-     2,
      0,
-     1302
-    ],
-    "towerBalcony_NW": [
-     2,
-     142,
-     1302
-    ],
-    "towerBalcony_SE": [
-     2,
-     286,
-     1302
-    ],
-    "towerBalcony_SW": [
-     2,
-     430,
-     1302
-    ],
-    "towerSquareArch_SE": [
-     2,
-     574,
-     1302
-    ],
-    "towerSquareArch_SW": [
-     2,
-     717,
-     1302
-    ],
-    "towerSquareMidOpen_SE": [
-     2,
-     860,
-     1302
-    ],
-    "towerSquareMidOpen_SW": [
-     2,
-     1003,
-     1302
-    ],
-    "towerSquareMidWindows_SE": [
-     2,
-     1146,
-     1302
-    ],
-    "towerSquareMidWindows_SW": [
-     2,
-     1289,
-     1302
-    ],
-    "towerSquareMid_SE": [
-     2,
-     1432,
-     1302
-    ],
-    "towerSquareMid_SW": [
-     2,
-     1575,
-     1302
-    ],
-    "towerSquarePoles_SE": [
-     2,
-     1718,
-     1302
-    ],
-    "towerSquarePoles_SW": [
-     2,
-     1861,
-     1302
+     337,
+     1658
     ],
     "towerSquareArch_NE": [
-     2,
      0,
-     1480
+     490,
+     1658
     ],
     "towerSquareMidOpen_NE": [
-     2,
-     142,
-     1480
+     0,
+     632,
+     1658
     ],
     "towerSquareMidWindows_NE": [
-     2,
-     284,
-     1480
+     0,
+     774,
+     1658
     ],
     "towerSquareMid_NE": [
-     2,
-     426,
-     1480
+     0,
+     916,
+     1658
     ],
     "towerSquarePoles_NE": [
-     2,
-     568,
-     1480
-    ],
-    "wallDoor_SE": [
-     2,
-     710,
-     1480
-    ],
-    "towerBase_NW": [
-     2,
-     826,
-     1480
-    ],
-    "towerBase_SE": [
-     2,
-     935,
-     1480
-    ],
-    "towerBase_SW": [
-     2,
-     1044,
-     1480
+     0,
+     1058,
+     1658
     ],
     "towerBalcony_NE": [
-     2,
-     1153,
-     1480
+     0,
+     1200,
+     1658
     ],
     "towerBase_NE": [
-     2,
-     1297,
-     1480
-    ],
-    "k_home_A_SE": [
-     2,
-     1406,
-     1480
-    ],
-    "k_home_A_SW": [
-     2,
-     1596,
-     1480
+     0,
+     1925,
+     1161
     ],
     "k_blacksmith_NE": [
-     2,
-     1784,
-     1480
-    ],
-    "k_shrine_NW": [
-     2,
      0,
-     1657
-    ],
-    "wallDoor_SW": [
-     2,
-     192,
-     1657
-    ],
-    "siegeRam_SE": [
-     2,
-     307,
-     1657
-    ],
-    "siegeRam_SW": [
-     2,
-     483,
-     1657
+     1344,
+     1658
     ],
     "siegeRam_NE": [
-     2,
-     659,
-     1657
-    ],
-    "siegeRam_NW": [
-     2,
-     834,
-     1657
+     0,
+     1536,
+     1658
     ],
     "wallNarrowStairs_NE": [
-     2,
-     1009,
-     1657
+     0,
+     1711,
+     1658
     ],
     "wallDoor_NE": [
-     2,
-     1159,
-     1657
+     0,
+     1861,
+     1658
     ],
     "k_shrine_NE": [
-     2,
-     1274,
-     1657
-    ],
-    "towerSquareTopRoofHigh_NW": [
-     2,
-     1464,
-     1657
-    ],
-    "towerSquareTopRoofHigh_SE": [
-     2,
-     1617,
-     1657
+     0,
+     0,
+     1846
     ],
     "towerSquareTopRoofHigh_NE": [
-     2,
-     1770,
-     1657
-    ],
-    "towerSquareTopRoofHigh_SW": [
-     2,
      0,
-     1831
-    ],
-    "k_blacksmith_SE": [
-     2,
-     153,
-     1831
-    ],
-    "k_shrine_SW": [
-     2,
-     390,
-     1831
+     190,
+     1846
     ],
     "k_soldier_NE": [
-     1,
-     1962,
-     1827
-    ],
-    "k_soldier_NW": [
-     2,
-     1944,
-     487
-    ],
-    "k_soldier_SE": [
-     2,
-     1960,
-     918
-    ],
-    "k_soldier_SW": [
-     2,
-     1976,
-     1480
-    ],
-    "k_shrine_SE": [
-     2,
-     580,
-     1831
+     0,
+     1951,
+     820
     ],
     "towerSquareTopColor_NE": [
-     2,
-     772,
-     1831
-    ],
-    "towerSquareTopColor_NW": [
-     2,
-     925,
-     1831
-    ],
-    "towerSquareTopColor_SE": [
-     2,
-     1078,
-     1831
-    ],
-    "towerSquareTopColor_SW": [
-     2,
-     1231,
-     1831
-    ],
-    "siegeBallista_SW": [
-     2,
-     1384,
-     1831
-    ],
-    "siegeBallista_NW": [
-     2,
-     1522,
-     1831
-    ],
-    "towerSquareTopRoof_SE": [
-     2,
-     1659,
-     1831
+     0,
+     343,
+     1846
     ],
     "towerSquareTopRoof_NE": [
-     2,
-     1812,
-     1831
-    ],
-    "towerSquareTopRoof_NW": [
-     3,
      0,
-     0
-    ],
-    "towerSquareTopRoof_SW": [
-     3,
-     153,
-     0
-    ],
-    "siegeBallista_SE": [
-     3,
-     306,
-     0
+     496,
+     1846
     ],
     "siegeBallista_NE": [
-     3,
-     444,
-     0
+     0,
+     649,
+     1846
     ],
     "towerSquareTop_NE": [
-     3,
-     581,
-     0
-    ],
-    "towerSquareTop_NW": [
-     3,
-     734,
-     0
-    ],
-    "towerSquareTop_SE": [
-     3,
-     887,
-     0
-    ],
-    "towerSquareTop_SW": [
-     3,
-     1040,
-     0
-    ],
-    "k_flag_SE": [
-     2,
-     1984,
-     1120
-    ],
-    "k_flag_SW": [
-     2,
-     1923,
-     1657
+     0,
+     786,
+     1846
     ],
     "towerTopRoof_NE": [
-     3,
-     1193,
-     0
-    ],
-    "towerTopRoof_NW": [
-     3,
-     1315,
-     0
-    ],
-    "towerTopRoof_SW": [
-     3,
-     1437,
-     0
+     0,
+     939,
+     1846
     ],
     "towerSquareMidColor_NE": [
-     3,
-     1559,
-     0
-    ],
-    "towerSquareMidColor_NW": [
-     3,
-     1702,
-     0
-    ],
-    "towerSquareMidColor_SE": [
-     3,
-     1845,
-     0
-    ],
-    "towerSquareMidColor_SW": [
-     3,
      0,
-     131
-    ],
-    "towerTopRoof_SE": [
-     3,
-     143,
-     131
-    ],
-    "stairsStone_SW": [
-     2,
-     1965,
-     1831
-    ],
-    "stairsStone_SE": [
-     3,
-     265,
-     131
+     1061,
+     1846
     ],
     "k_flag_NE": [
-     2,
-     1985,
-     1657
-    ],
-    "k_flag_NW": [
-     3,
-     347,
-     131
-    ],
-    "bridge_SE": [
-     3,
-     409,
-     131
-    ],
-    "bridge_NW": [
-     3,
-     550,
-     131
-    ],
-    "bridge_SW": [
-     3,
-     690,
-     131
+     0,
+     1958,
+     1436
     ],
     "bridge_NE": [
-     3,
-     831,
-     131
-    ],
-    "metalGate_NW": [
-     3,
-     1988,
-     0
-    ],
-    "metalGate_SE": [
-     3,
-     971,
-     131
-    ],
-    "metalGate_SW": [
-     3,
-     1029,
-     131
+     0,
+     1204,
+     1846
     ],
     "metalGate_NE": [
-     3,
-     1087,
-     131
-    ],
-    "towerTop_NW": [
-     3,
-     1144,
-     131
-    ],
-    "towerTop_SE": [
-     3,
-     1253,
-     131
-    ],
-    "towerTop_SW": [
-     3,
-     1362,
-     131
+     0,
+     1976,
+     1658
     ],
     "towerTop_NE": [
-     3,
-     1471,
-     131
-    ],
-    "flagBlue_NW": [
-     1,
-     2005,
-     1279
-    ],
-    "flagBannerShort_NW": [
-     3,
-     1580,
-     131
+     0,
+     1344,
+     1846
     ],
     "flagBlue_NE": [
-     2,
-     2004,
-     1302
+     0,
+     1453,
+     1846
     ],
     "flagBannerShort_NE": [
-     3,
-     1633,
-     131
-    ],
-    "flagBannerShort_SW": [
-     3,
-     1686,
-     131
-    ],
-    "flagBannerShort_SE": [
-     3,
-     1739,
-     131
+     0,
+     1497,
+     1846
     ],
     "flagBlueWide_NE": [
-     2,
-     2009,
-     487
-    ],
-    "flagBlueWide_NW": [
-     3,
-     1792,
-     131
-    ],
-    "stairsStone_NE": [
-     3,
-     1825,
-     131
-    ],
-    "stairsStone_NW": [
-     3,
-     1907,
-     131
-    ],
-    "king_NE": [
-     3,
-     1988,
-     131
-    ],
-    "king_NW": [
-     3,
      0,
-     248
-    ],
-    "king_SE": [
-     3,
-     47,
-     248
-    ],
-    "king_SW": [
-     3,
-     94,
-     248
-    ],
-    "knightBlue_NE": [
-     3,
-     141,
-     248
-    ],
-    "knightBlue_NW": [
-     3,
-     188,
-     248
-    ],
-    "knightBlue_SE": [
-     3,
-     235,
-     248
-    ],
-    "knightBlue_SW": [
-     3,
-     282,
-     248
-    ],
-    "knightRed_NE": [
-     3,
-     329,
-     248
-    ],
-    "knightRed_NW": [
-     3,
-     376,
-     248
-    ],
-    "knightRed_SE": [
-     3,
-     423,
-     248
-    ],
-    "knightRed_SW": [
-     3,
-     470,
-     248
-    ],
-    "flagBlue_SE": [
-     3,
-     517,
-     248
-    ],
-    "flagBlue_SW": [
-     3,
-     561,
-     248
-    ],
-    "flagBlueWide_SE": [
-     3,
-     605,
-     248
-    ],
-    "flagBlueWide_SW": [
-     3,
-     638,
-     248
-    ],
-    "shieldBlue_NW": [
-     1,
-     2023,
+     2005,
      0
     ],
-    "shieldBlue_SE": [
-     1,
-     2021,
-     367
+    "stairsStone_NE": [
+     0,
+     1550,
+     1846
+    ],
+    "king_NE": [
+     0,
+     1632,
+     1846
+    ],
+    "knightBlue_NE": [
+     0,
+     1679,
+     1846
+    ],
+    "knightRed_NE": [
+     0,
+     1726,
+     1846
     ],
     "shieldBlue_NE": [
-     2,
      0,
-     1988
-    ],
-    "shieldBlue_SW": [
-     2,
-     25,
-     1988
+     2016,
+     820
     ]
    },
    "green/": {
@@ -14019,1360 +7074,340 @@
      0,
      0
     ],
-    "k_castle_NW": [
+    "k_townhall_NE": [
      0,
      453,
      0
     ],
-    "k_castle_SE": [
-     0,
-     906,
-     0
-    ],
-    "k_castle_SW": [
-     0,
-     1359,
-     0
-    ],
-    "k_townhall_SW": [
-     0,
-     0,
-     820
-    ],
-    "k_townhall_NW": [
-     0,
-     385,
-     820
-    ],
-    "k_townhall_SE": [
-     0,
-     773,
-     820
-    ],
-    "k_archeryrange_NW": [
-     0,
-     1163,
-     820
-    ],
-    "k_townhall_NE": [
-     0,
-     1520,
-     820
-    ],
     "k_barracks_NE": [
      0,
-     0,
-     1282
-    ],
-    "k_barracks_NW": [
-     0,
-     374,
-     1282
-    ],
-    "k_barracks_SE": [
-     0,
-     748,
-     1282
-    ],
-    "k_barracks_SW": [
-     0,
-     1122,
-     1282
-    ],
-    "k_tower_cannon_SE": [
-     0,
-     1812,
-     0
-    ],
-    "k_tower_cannon_SW": [
-     0,
-     1496,
-     1282
-    ],
-    "k_archeryrange_SW": [
-     1,
-     0,
+     838,
      0
     ],
     "k_tower_cannon_NE": [
      0,
-     1677,
-     1282
-    ],
-    "k_tower_cannon_NW": [
-     0,
-     1858,
-     1282
-    ],
-    "k_workshop_NW": [
-     0,
-     0,
-     1688
+     1212,
+     0
     ],
     "k_tower_catapult_NE": [
      0,
-     355,
-     1688
-    ],
-    "k_tower_catapult_NW": [
-     0,
-     547,
-     1688
+     1393,
+     0
     ],
     "k_tower_A_NE": [
      0,
-     739,
-     1688
-    ],
-    "k_tower_A_NW": [
-     0,
-     920,
-     1688
+     1585,
+     0
     ],
     "k_archeryrange_NE": [
      0,
-     1101,
-     1688
-    ],
-    "k_mine_NW": [
      0,
-     1486,
-     1688
-    ],
-    "k_tower_A_SE": [
-     0,
-     1853,
-     1688
-    ],
-    "k_tower_A_SW": [
-     1,
-     385,
-     0
+     820
     ],
     "k_mine_NE": [
-     1,
-     566,
-     0
-    ],
-    "k_tower_catapult_SE": [
-     1,
-     923,
-     0
-    ],
-    "k_tower_catapult_SW": [
-     1,
-     1115,
-     0
+     0,
+     385,
+     820
     ],
     "k_tower_B_NE": [
-     1,
-     1307,
-     0
-    ],
-    "k_tower_B_NW": [
-     1,
-     1486,
-     0
-    ],
-    "k_tower_B_SE": [
-     1,
-     1665,
-     0
-    ],
-    "k_tower_B_SW": [
-     1,
-     1844,
-     0
-    ],
-    "k_shipyard_SW": [
-     1,
      0,
-     367
-    ],
-    "k_archeryrange_SE": [
-     1,
-     397,
-     367
-    ],
-    "k_mine_SW": [
-     1,
-     754,
-     367
+     1766,
+     0
     ],
     "k_tower_base_NE": [
-     1,
-     1111,
-     367
-    ],
-    "k_tower_base_NW": [
-     1,
-     1292,
-     367
-    ],
-    "k_mine_SE": [
-     1,
-     1473,
-     367
-    ],
-    "k_tower_base_SE": [
-     1,
-     1840,
-     367
-    ],
-    "k_tower_base_SW": [
-     1,
      0,
-     679
+     742,
+     820
     ],
     "k_workshop_NE": [
-     1,
-     181,
-     679
-    ],
-    "k_shipyard_NW": [
-     1,
-     543,
-     679
-    ],
-    "siegeTower_NW": [
-     1,
-     931,
-     679
-    ],
-    "siegeTower_SW": [
-     1,
-     1135,
-     679
-    ],
-    "k_market_NW": [
-     1,
-     1339,
-     679
+     0,
+     923,
+     820
     ],
     "k_stables_NE": [
-     1,
      0,
-     985
-    ],
-    "k_workshop_SW": [
-     1,
-     1676,
-     679
-    ],
-    "k_tent_SE": [
-     1,
-     409,
-     985
-    ],
-    "k_workshop_SE": [
-     1,
-     801,
-     985
-    ],
-    "k_stables_NW": [
-     1,
-     1156,
-     985
-    ],
-    "k_tent_SW": [
-     1,
-     1562,
-     985
+     1285,
+     820
     ],
     "siegeTower_NE": [
-     1,
      0,
-     1279
-    ],
-    "siegeTower_SE": [
-     1,
-     204,
-     1279
-    ],
-    "k_stables_SW": [
-     1,
-     408,
-     1279
+     1694,
+     820
     ],
     "k_tent_NE": [
-     1,
-     817,
-     1279
-    ],
-    "k_tent_NW": [
-     1,
-     1186,
-     1279
+     0,
+     0,
+     1161
     ],
     "k_market_NE": [
-     1,
-     1578,
-     1279
+     0,
+     369,
+     1161
     ],
     "k_shipyard_NE": [
-     1,
      0,
-     1558
-    ],
-    "k_shipyard_SE": [
-     1,
-     397,
-     1558
-    ],
-    "k_windmill_SE": [
-     1,
-     785,
-     1558
-    ],
-    "k_windmill_SW": [
-     1,
-     971,
-     1558
-    ],
-    "k_lumbermill_SE": [
-     1,
-     1157,
-     1558
-    ],
-    "k_home_B_NW": [
-     1,
-     1368,
-     1558
-    ],
-    "k_stables_SE": [
-     1,
-     1565,
-     1558
-    ],
-    "k_market_SW": [
-     2,
-     0,
-     0
+     736,
+     1161
     ],
     "siegeTrebuchet_NE": [
-     2,
-     367,
-     0
-    ],
-    "k_lumbermill_SW": [
-     2,
-     568,
-     0
-    ],
-    "siegeTrebuchet_SE": [
-     2,
-     774,
-     0
-    ],
-    "wallCornerHalfTower_SW": [
-     2,
-     974,
-     0
+     0,
+     1133,
+     1161
     ],
     "k_home_B_NE": [
-     2,
-     1127,
-     0
-    ],
-    "k_market_SE": [
-     2,
-     1326,
-     0
-    ],
-    "k_church_SE": [
-     2,
-     1663,
-     0
-    ],
-    "k_church_SW": [
-     2,
      0,
-     247
+     1334,
+     1161
     ],
     "k_lumbermill_NE": [
-     2,
-     197,
-     247
-    ],
-    "k_watermill_SE": [
-     2,
-     1860,
-     0
-    ],
-    "wallCornerHalfTower_NW": [
-     2,
-     403,
-     247
-    ],
-    "k_watermill_SW": [
-     2,
-     556,
-     247
-    ],
-    "k_home_B_SW": [
-     2,
-     758,
-     247
-    ],
-    "siegeTrebuchet_NW": [
-     2,
-     957,
-     247
-    ],
-    "siegeTrebuchet_SW": [
-     2,
-     1158,
-     247
-    ],
-    "k_home_B_SE": [
-     2,
-     1358,
-     247
+     0,
+     1533,
+     1161
     ],
     "k_tavern_NE": [
-     2,
-     1555,
-     247
-    ],
-    "k_tavern_SE": [
-     2,
-     1741,
-     247
-    ],
-    "k_lumbermill_NW": [
-     2,
      0,
-     487
-    ],
-    "k_windmill_NW": [
-     2,
-     211,
-     487
+     1739,
+     1161
     ],
     "k_windmill_NE": [
-     2,
-     394,
-     487
-    ],
-    "k_watermill_NW": [
-     1,
      0,
-     1827
+     0,
+     1436
     ],
     "k_watchtower_NE": [
-     1,
-     181,
-     1827
+     0,
+     186,
+     1436
     ],
     "k_watermill_NE": [
-     1,
-     362,
-     1827
-    ],
-    "k_watchtower_NW": [
-     1,
-     564,
-     1827
-    ],
-    "k_watchtower_SE": [
-     1,
-     745,
-     1827
-    ],
-    "k_watchtower_SW": [
-     1,
-     926,
-     1827
-    ],
-    "k_tavern_NW": [
-     1,
-     1107,
-     1827
+     0,
+     367,
+     1436
     ],
     "towerSquareRoof_NE": [
-     1,
-     1297,
-     1827
-    ],
-    "towerSquareRoof_NW": [
-     1,
-     1450,
-     1827
-    ],
-    "towerSquareRoof_SE": [
-     1,
-     1603,
-     1827
-    ],
-    "towerSquareRoof_SW": [
-     1,
-     1756,
-     1827
-    ],
-    "k_tavern_SW": [
-     2,
-     580,
-     487
+     0,
+     569,
+     1436
     ],
     "wallCornerHalfTower_NE": [
-     2,
-     766,
-     487
-    ],
-    "wallCornerHalfTower_SE": [
-     2,
-     973,
-     487
-    ],
-    "wallCorner_NW": [
-     2,
-     1179,
-     487
-    ],
-    "wallCorner_SW": [
-     2,
-     1332,
-     487
-    ],
-    "wallHalf_NW": [
-     2,
-     1485,
-     487
+     0,
+     722,
+     1436
     ],
     "wall_NE": [
-     2,
-     1638,
-     487
-    ],
-    "wall_NW": [
-     2,
-     1791,
-     487
-    ],
-    "wallNarrowStairs_NW": [
-     2,
      0,
-     712
+     929,
+     1436
     ],
     "k_church_NE": [
-     2,
-     151,
-     712
-    ],
-    "k_church_NW": [
-     2,
-     348,
-     712
-    ],
-    "wall_SW": [
-     2,
-     545,
-     712
+     0,
+     1082,
+     1436
     ],
     "k_well_NE": [
-     2,
-     698,
-     712
-    ],
-    "k_well_SE": [
-     2,
-     881,
-     712
+     0,
+     1279,
+     1436
     ],
     "wallCorner_NE": [
-     2,
-     1064,
-     712
-    ],
-    "wallCorner_SE": [
-     2,
-     1217,
-     712
-    ],
-    "wallHalf_SE": [
-     2,
-     1370,
-     712
-    ],
-    "wall_SE": [
-     2,
-     1523,
-     712
-    ],
-    "k_well_NW": [
-     2,
-     1676,
-     712
-    ],
-    "k_well_SW": [
-     2,
-     1859,
-     712
-    ],
-    "wallNarrowStairs_SE": [
-     2,
      0,
-     918
+     1462,
+     1436
     ],
     "k_home_A_NE": [
-     2,
-     151,
-     918
-    ],
-    "k_home_A_NW": [
-     2,
-     341,
-     918
+     0,
+     1615,
+     1436
     ],
     "wallHalf_NE": [
-     2,
-     531,
-     918
-    ],
-    "wallHalf_SW": [
-     2,
-     684,
-     918
+     0,
+     1805,
+     1436
     ],
     "k_banner_NE": [
      0,
-     1905,
-     820
-    ],
-    "k_banner_NW": [
-     0,
-     1965,
-     820
-    ],
-    "k_banner_SE": [
-     1,
-     1931,
-     985
-    ],
-    "k_banner_SW": [
-     1,
      1945,
-     1279
-    ],
-    "k_blacksmith_NW": [
-     2,
-     837,
-     918
+     0
     ],
     "siegeCatapult_NE": [
-     2,
-     1074,
-     918
-    ],
-    "siegeCatapult_NW": [
-     2,
-     1258,
-     918
-    ],
-    "siegeCatapult_SE": [
-     2,
-     1442,
-     918
-    ],
-    "siegeCatapult_SW": [
-     2,
-     1626,
-     918
+     0,
+     0,
+     1658
     ],
     "flagBannerLong_NE": [
      0,
-     1993,
-     0
-    ],
-    "flagBannerLong_NW": [
-     1,
-     1991,
-     985
-    ],
-    "flagBannerLong_SW": [
-     1,
-     1971,
-     1558
-    ],
-    "wallNarrowStairs_SW": [
-     2,
-     1810,
-     918
-    ],
-    "flagBannerLong_SE": [
-     1,
-     1909,
-     1827
+     1898,
+     820
     ],
     "towerSquareBaseColor_NE": [
-     2,
      0,
-     1120
-    ],
-    "towerSquareBaseColor_NW": [
-     2,
-     153,
-     1120
-    ],
-    "towerSquareBaseColor_SW": [
-     2,
-     306,
-     1120
+     184,
+     1658
     ],
     "towerSquareBase_NE": [
-     2,
-     459,
-     1120
-    ],
-    "towerSquareBase_NW": [
-     2,
-     612,
-     1120
-    ],
-    "towerSquareBase_SW": [
-     2,
-     765,
-     1120
-    ],
-    "towerSquareBaseColor_SE": [
-     2,
-     918,
-     1120
-    ],
-    "towerSquareBase_SE": [
-     2,
-     1071,
-     1120
-    ],
-    "wallDoor_NW": [
-     2,
-     1931,
-     247
-    ],
-    "k_blacksmith_SW": [
-     2,
-     1224,
-     1120
-    ],
-    "towerSquareArch_NW": [
-     2,
-     1416,
-     1120
-    ],
-    "towerSquareMidOpen_NW": [
-     2,
-     1558,
-     1120
-    ],
-    "towerSquareMidWindows_NW": [
-     2,
-     1700,
-     1120
-    ],
-    "towerSquareMid_NW": [
-     2,
-     1842,
-     1120
-    ],
-    "towerSquarePoles_NW": [
-     2,
      0,
-     1302
-    ],
-    "towerBalcony_NW": [
-     2,
-     142,
-     1302
-    ],
-    "towerBalcony_SE": [
-     2,
-     286,
-     1302
-    ],
-    "towerBalcony_SW": [
-     2,
-     430,
-     1302
-    ],
-    "towerSquareArch_SE": [
-     2,
-     574,
-     1302
-    ],
-    "towerSquareArch_SW": [
-     2,
-     717,
-     1302
-    ],
-    "towerSquareMidOpen_SE": [
-     2,
-     860,
-     1302
-    ],
-    "towerSquareMidOpen_SW": [
-     2,
-     1003,
-     1302
-    ],
-    "towerSquareMidWindows_SE": [
-     2,
-     1146,
-     1302
-    ],
-    "towerSquareMidWindows_SW": [
-     2,
-     1289,
-     1302
-    ],
-    "towerSquareMid_SE": [
-     2,
-     1432,
-     1302
-    ],
-    "towerSquareMid_SW": [
-     2,
-     1575,
-     1302
-    ],
-    "towerSquarePoles_SE": [
-     2,
-     1718,
-     1302
-    ],
-    "towerSquarePoles_SW": [
-     2,
-     1861,
-     1302
+     337,
+     1658
     ],
     "towerSquareArch_NE": [
-     2,
      0,
-     1480
+     490,
+     1658
     ],
     "towerSquareMidOpen_NE": [
-     2,
-     142,
-     1480
+     0,
+     632,
+     1658
     ],
     "towerSquareMidWindows_NE": [
-     2,
-     284,
-     1480
+     0,
+     774,
+     1658
     ],
     "towerSquareMid_NE": [
-     2,
-     426,
-     1480
+     0,
+     916,
+     1658
     ],
     "towerSquarePoles_NE": [
-     2,
-     568,
-     1480
-    ],
-    "wallDoor_SE": [
-     2,
-     710,
-     1480
-    ],
-    "towerBase_NW": [
-     2,
-     826,
-     1480
-    ],
-    "towerBase_SE": [
-     2,
-     935,
-     1480
-    ],
-    "towerBase_SW": [
-     2,
-     1044,
-     1480
+     0,
+     1058,
+     1658
     ],
     "towerBalcony_NE": [
-     2,
-     1153,
-     1480
+     0,
+     1200,
+     1658
     ],
     "towerBase_NE": [
-     2,
-     1297,
-     1480
-    ],
-    "k_home_A_SE": [
-     2,
-     1406,
-     1480
-    ],
-    "k_home_A_SW": [
-     2,
-     1596,
-     1480
+     0,
+     1925,
+     1161
     ],
     "k_blacksmith_NE": [
-     2,
-     1784,
-     1480
-    ],
-    "k_shrine_NW": [
-     2,
      0,
-     1657
-    ],
-    "wallDoor_SW": [
-     2,
-     192,
-     1657
-    ],
-    "siegeRam_SE": [
-     2,
-     307,
-     1657
-    ],
-    "siegeRam_SW": [
-     2,
-     483,
-     1657
+     1344,
+     1658
     ],
     "siegeRam_NE": [
-     2,
-     659,
-     1657
-    ],
-    "siegeRam_NW": [
-     2,
-     834,
-     1657
+     0,
+     1536,
+     1658
     ],
     "wallNarrowStairs_NE": [
-     2,
-     1009,
-     1657
+     0,
+     1711,
+     1658
     ],
     "wallDoor_NE": [
-     2,
-     1159,
-     1657
+     0,
+     1861,
+     1658
     ],
     "k_shrine_NE": [
-     2,
-     1274,
-     1657
-    ],
-    "towerSquareTopRoofHigh_NW": [
-     2,
-     1464,
-     1657
-    ],
-    "towerSquareTopRoofHigh_SE": [
-     2,
-     1617,
-     1657
+     0,
+     0,
+     1846
     ],
     "towerSquareTopRoofHigh_NE": [
-     2,
-     1770,
-     1657
-    ],
-    "towerSquareTopRoofHigh_SW": [
-     2,
      0,
-     1831
-    ],
-    "k_blacksmith_SE": [
-     2,
-     153,
-     1831
-    ],
-    "k_shrine_SW": [
-     2,
-     390,
-     1831
+     190,
+     1846
     ],
     "k_soldier_NE": [
-     1,
-     1962,
-     1827
-    ],
-    "k_soldier_NW": [
-     2,
-     1944,
-     487
-    ],
-    "k_soldier_SE": [
-     2,
-     1960,
-     918
-    ],
-    "k_soldier_SW": [
-     2,
-     1976,
-     1480
-    ],
-    "k_shrine_SE": [
-     2,
-     580,
-     1831
+     0,
+     1951,
+     820
     ],
     "towerSquareTopColor_NE": [
-     2,
-     772,
-     1831
-    ],
-    "towerSquareTopColor_NW": [
-     2,
-     925,
-     1831
-    ],
-    "towerSquareTopColor_SE": [
-     2,
-     1078,
-     1831
-    ],
-    "towerSquareTopColor_SW": [
-     2,
-     1231,
-     1831
-    ],
-    "siegeBallista_SW": [
-     2,
-     1384,
-     1831
-    ],
-    "siegeBallista_NW": [
-     2,
-     1522,
-     1831
-    ],
-    "towerSquareTopRoof_SE": [
-     2,
-     1659,
-     1831
+     0,
+     343,
+     1846
     ],
     "towerSquareTopRoof_NE": [
-     2,
-     1812,
-     1831
-    ],
-    "towerSquareTopRoof_NW": [
-     3,
      0,
-     0
-    ],
-    "towerSquareTopRoof_SW": [
-     3,
-     153,
-     0
-    ],
-    "siegeBallista_SE": [
-     3,
-     306,
-     0
+     496,
+     1846
     ],
     "siegeBallista_NE": [
-     3,
-     444,
-     0
+     0,
+     649,
+     1846
     ],
     "towerSquareTop_NE": [
-     3,
-     581,
-     0
-    ],
-    "towerSquareTop_NW": [
-     3,
-     734,
-     0
-    ],
-    "towerSquareTop_SE": [
-     3,
-     887,
-     0
-    ],
-    "towerSquareTop_SW": [
-     3,
-     1040,
-     0
-    ],
-    "k_flag_SE": [
-     2,
-     1984,
-     1120
-    ],
-    "k_flag_SW": [
-     2,
-     1923,
-     1657
+     0,
+     786,
+     1846
     ],
     "towerTopRoof_NE": [
-     3,
-     1193,
-     0
-    ],
-    "towerTopRoof_NW": [
-     3,
-     1315,
-     0
-    ],
-    "towerTopRoof_SW": [
-     3,
-     1437,
-     0
+     0,
+     939,
+     1846
     ],
     "towerSquareMidColor_NE": [
-     3,
-     1559,
-     0
-    ],
-    "towerSquareMidColor_NW": [
-     3,
-     1702,
-     0
-    ],
-    "towerSquareMidColor_SE": [
-     3,
-     1845,
-     0
-    ],
-    "towerSquareMidColor_SW": [
-     3,
      0,
-     131
-    ],
-    "towerTopRoof_SE": [
-     3,
-     143,
-     131
-    ],
-    "stairsStone_SW": [
-     2,
-     1965,
-     1831
-    ],
-    "stairsStone_SE": [
-     3,
-     265,
-     131
+     1061,
+     1846
     ],
     "k_flag_NE": [
-     2,
-     1985,
-     1657
-    ],
-    "k_flag_NW": [
-     3,
-     347,
-     131
-    ],
-    "bridge_SE": [
-     3,
-     409,
-     131
-    ],
-    "bridge_NW": [
-     3,
-     550,
-     131
-    ],
-    "bridge_SW": [
-     3,
-     690,
-     131
+     0,
+     1958,
+     1436
     ],
     "bridge_NE": [
-     3,
-     831,
-     131
-    ],
-    "metalGate_NW": [
-     3,
-     1988,
-     0
-    ],
-    "metalGate_SE": [
-     3,
-     971,
-     131
-    ],
-    "metalGate_SW": [
-     3,
-     1029,
-     131
+     0,
+     1204,
+     1846
     ],
     "metalGate_NE": [
-     3,
-     1087,
-     131
-    ],
-    "towerTop_NW": [
-     3,
-     1144,
-     131
-    ],
-    "towerTop_SE": [
-     3,
-     1253,
-     131
-    ],
-    "towerTop_SW": [
-     3,
-     1362,
-     131
+     0,
+     1976,
+     1658
     ],
     "towerTop_NE": [
-     3,
-     1471,
-     131
-    ],
-    "flagBlue_NW": [
-     1,
-     2005,
-     1279
-    ],
-    "flagBannerShort_NW": [
-     3,
-     1580,
-     131
+     0,
+     1344,
+     1846
     ],
     "flagBlue_NE": [
-     2,
-     2004,
-     1302
+     0,
+     1453,
+     1846
     ],
     "flagBannerShort_NE": [
-     3,
-     1633,
-     131
-    ],
-    "flagBannerShort_SW": [
-     3,
-     1686,
-     131
-    ],
-    "flagBannerShort_SE": [
-     3,
-     1739,
-     131
+     0,
+     1497,
+     1846
     ],
     "flagBlueWide_NE": [
-     2,
-     2009,
-     487
-    ],
-    "flagBlueWide_NW": [
-     3,
-     1792,
-     131
-    ],
-    "stairsStone_NE": [
-     3,
-     1825,
-     131
-    ],
-    "stairsStone_NW": [
-     3,
-     1907,
-     131
-    ],
-    "king_NE": [
-     3,
-     1988,
-     131
-    ],
-    "king_NW": [
-     3,
      0,
-     248
-    ],
-    "king_SE": [
-     3,
-     47,
-     248
-    ],
-    "king_SW": [
-     3,
-     94,
-     248
-    ],
-    "knightBlue_NE": [
-     3,
-     141,
-     248
-    ],
-    "knightBlue_NW": [
-     3,
-     188,
-     248
-    ],
-    "knightBlue_SE": [
-     3,
-     235,
-     248
-    ],
-    "knightBlue_SW": [
-     3,
-     282,
-     248
-    ],
-    "knightRed_NE": [
-     3,
-     329,
-     248
-    ],
-    "knightRed_NW": [
-     3,
-     376,
-     248
-    ],
-    "knightRed_SE": [
-     3,
-     423,
-     248
-    ],
-    "knightRed_SW": [
-     3,
-     470,
-     248
-    ],
-    "flagBlue_SE": [
-     3,
-     517,
-     248
-    ],
-    "flagBlue_SW": [
-     3,
-     561,
-     248
-    ],
-    "flagBlueWide_SE": [
-     3,
-     605,
-     248
-    ],
-    "flagBlueWide_SW": [
-     3,
-     638,
-     248
-    ],
-    "shieldBlue_NW": [
-     1,
-     2023,
+     2005,
      0
     ],
-    "shieldBlue_SE": [
-     1,
-     2021,
-     367
+    "stairsStone_NE": [
+     0,
+     1550,
+     1846
+    ],
+    "king_NE": [
+     0,
+     1632,
+     1846
+    ],
+    "knightBlue_NE": [
+     0,
+     1679,
+     1846
+    ],
+    "knightRed_NE": [
+     0,
+     1726,
+     1846
     ],
     "shieldBlue_NE": [
-     2,
      0,
-     1988
-    ],
-    "shieldBlue_SW": [
-     2,
-     25,
-     1988
+     2016,
+     820
     ]
    },
    "gold/": {
@@ -15381,1368 +7416,348 @@
      0,
      0
     ],
-    "k_castle_NW": [
+    "k_townhall_NE": [
      0,
      453,
      0
     ],
-    "k_castle_SE": [
-     0,
-     906,
-     0
-    ],
-    "k_castle_SW": [
-     0,
-     1359,
-     0
-    ],
-    "k_townhall_SW": [
-     0,
-     0,
-     820
-    ],
-    "k_townhall_NW": [
-     0,
-     385,
-     820
-    ],
-    "k_townhall_SE": [
-     0,
-     773,
-     820
-    ],
-    "k_archeryrange_NW": [
-     0,
-     1163,
-     820
-    ],
-    "k_townhall_NE": [
-     0,
-     1520,
-     820
-    ],
     "k_barracks_NE": [
      0,
-     0,
-     1282
-    ],
-    "k_barracks_NW": [
-     0,
-     374,
-     1282
-    ],
-    "k_barracks_SE": [
-     0,
-     748,
-     1282
-    ],
-    "k_barracks_SW": [
-     0,
-     1122,
-     1282
-    ],
-    "k_tower_cannon_SE": [
-     0,
-     1812,
-     0
-    ],
-    "k_tower_cannon_SW": [
-     0,
-     1496,
-     1282
-    ],
-    "k_archeryrange_SW": [
-     1,
-     0,
+     838,
      0
     ],
     "k_tower_cannon_NE": [
      0,
-     1677,
-     1282
-    ],
-    "k_tower_cannon_NW": [
-     0,
-     1858,
-     1282
-    ],
-    "k_workshop_NW": [
-     0,
-     0,
-     1688
+     1212,
+     0
     ],
     "k_tower_catapult_NE": [
      0,
-     355,
-     1688
-    ],
-    "k_tower_catapult_NW": [
-     0,
-     547,
-     1688
+     1393,
+     0
     ],
     "k_tower_A_NE": [
      0,
-     739,
-     1688
-    ],
-    "k_tower_A_NW": [
-     0,
-     920,
-     1688
+     1585,
+     0
     ],
     "k_archeryrange_NE": [
      0,
-     1101,
-     1688
-    ],
-    "k_mine_NW": [
      0,
-     1486,
-     1688
-    ],
-    "k_tower_A_SE": [
-     0,
-     1853,
-     1688
-    ],
-    "k_tower_A_SW": [
-     1,
-     385,
-     0
+     820
     ],
     "k_mine_NE": [
-     1,
-     566,
-     0
-    ],
-    "k_tower_catapult_SE": [
-     1,
-     923,
-     0
-    ],
-    "k_tower_catapult_SW": [
-     1,
-     1115,
-     0
+     0,
+     385,
+     820
     ],
     "k_tower_B_NE": [
-     1,
-     1307,
-     0
-    ],
-    "k_tower_B_NW": [
-     1,
-     1486,
-     0
-    ],
-    "k_tower_B_SE": [
-     1,
-     1665,
-     0
-    ],
-    "k_tower_B_SW": [
-     1,
-     1844,
-     0
-    ],
-    "k_shipyard_SW": [
-     1,
      0,
-     367
-    ],
-    "k_archeryrange_SE": [
-     1,
-     397,
-     367
-    ],
-    "k_mine_SW": [
-     1,
-     754,
-     367
+     1766,
+     0
     ],
     "k_tower_base_NE": [
-     1,
-     1111,
-     367
-    ],
-    "k_tower_base_NW": [
-     1,
-     1292,
-     367
-    ],
-    "k_mine_SE": [
-     1,
-     1473,
-     367
-    ],
-    "k_tower_base_SE": [
-     1,
-     1840,
-     367
-    ],
-    "k_tower_base_SW": [
-     1,
      0,
-     679
+     742,
+     820
     ],
     "k_workshop_NE": [
-     1,
-     181,
-     679
-    ],
-    "k_shipyard_NW": [
-     1,
-     543,
-     679
-    ],
-    "siegeTower_NW": [
-     1,
-     931,
-     679
-    ],
-    "siegeTower_SW": [
-     1,
-     1135,
-     679
-    ],
-    "k_market_NW": [
-     1,
-     1339,
-     679
+     0,
+     923,
+     820
     ],
     "k_stables_NE": [
-     1,
      0,
-     985
-    ],
-    "k_workshop_SW": [
-     1,
-     1676,
-     679
-    ],
-    "k_tent_SE": [
-     1,
-     409,
-     985
-    ],
-    "k_workshop_SE": [
-     1,
-     801,
-     985
-    ],
-    "k_stables_NW": [
-     1,
-     1156,
-     985
-    ],
-    "k_tent_SW": [
-     1,
-     1562,
-     985
+     1285,
+     820
     ],
     "siegeTower_NE": [
-     1,
      0,
-     1279
-    ],
-    "siegeTower_SE": [
-     1,
-     204,
-     1279
-    ],
-    "k_stables_SW": [
-     1,
-     408,
-     1279
+     1694,
+     820
     ],
     "k_tent_NE": [
-     1,
-     817,
-     1279
-    ],
-    "k_tent_NW": [
-     1,
-     1186,
-     1279
+     0,
+     0,
+     1161
     ],
     "k_market_NE": [
-     1,
-     1578,
-     1279
+     0,
+     369,
+     1161
     ],
     "k_shipyard_NE": [
-     1,
      0,
-     1558
-    ],
-    "k_shipyard_SE": [
-     1,
-     397,
-     1558
-    ],
-    "k_windmill_SE": [
-     1,
-     785,
-     1558
-    ],
-    "k_windmill_SW": [
-     1,
-     971,
-     1558
-    ],
-    "k_lumbermill_SE": [
-     1,
-     1157,
-     1558
-    ],
-    "k_home_B_NW": [
-     1,
-     1368,
-     1558
-    ],
-    "k_stables_SE": [
-     1,
-     1565,
-     1558
-    ],
-    "k_market_SW": [
-     2,
-     0,
-     0
+     736,
+     1161
     ],
     "siegeTrebuchet_NE": [
-     2,
-     367,
-     0
-    ],
-    "k_lumbermill_SW": [
-     2,
-     568,
-     0
-    ],
-    "siegeTrebuchet_SE": [
-     2,
-     774,
-     0
-    ],
-    "wallCornerHalfTower_SW": [
-     2,
-     974,
-     0
+     0,
+     1133,
+     1161
     ],
     "k_home_B_NE": [
-     2,
-     1127,
-     0
-    ],
-    "k_market_SE": [
-     2,
-     1326,
-     0
-    ],
-    "k_church_SE": [
-     2,
-     1663,
-     0
-    ],
-    "k_church_SW": [
-     2,
      0,
-     247
+     1334,
+     1161
     ],
     "k_lumbermill_NE": [
-     2,
-     197,
-     247
-    ],
-    "k_watermill_SE": [
-     2,
-     1860,
-     0
-    ],
-    "wallCornerHalfTower_NW": [
-     2,
-     403,
-     247
-    ],
-    "k_watermill_SW": [
-     2,
-     556,
-     247
-    ],
-    "k_home_B_SW": [
-     2,
-     758,
-     247
-    ],
-    "siegeTrebuchet_NW": [
-     2,
-     957,
-     247
-    ],
-    "siegeTrebuchet_SW": [
-     2,
-     1158,
-     247
-    ],
-    "k_home_B_SE": [
-     2,
-     1358,
-     247
+     0,
+     1533,
+     1161
     ],
     "k_tavern_NE": [
-     2,
-     1555,
-     247
-    ],
-    "k_tavern_SE": [
-     2,
-     1741,
-     247
-    ],
-    "k_lumbermill_NW": [
-     2,
      0,
-     487
-    ],
-    "k_windmill_NW": [
-     2,
-     211,
-     487
+     1739,
+     1161
     ],
     "k_windmill_NE": [
-     2,
-     394,
-     487
-    ],
-    "k_watermill_NW": [
-     1,
      0,
-     1827
+     0,
+     1436
     ],
     "k_watchtower_NE": [
-     1,
-     181,
-     1827
+     0,
+     186,
+     1436
     ],
     "k_watermill_NE": [
-     1,
-     362,
-     1827
-    ],
-    "k_watchtower_NW": [
-     1,
-     564,
-     1827
-    ],
-    "k_watchtower_SE": [
-     1,
-     745,
-     1827
-    ],
-    "k_watchtower_SW": [
-     1,
-     926,
-     1827
-    ],
-    "k_tavern_NW": [
-     1,
-     1107,
-     1827
+     0,
+     367,
+     1436
     ],
     "towerSquareRoof_NE": [
-     1,
-     1297,
-     1827
-    ],
-    "towerSquareRoof_NW": [
-     1,
-     1450,
-     1827
-    ],
-    "towerSquareRoof_SE": [
-     1,
-     1603,
-     1827
-    ],
-    "towerSquareRoof_SW": [
-     1,
-     1756,
-     1827
-    ],
-    "k_tavern_SW": [
-     2,
-     580,
-     487
+     0,
+     569,
+     1436
     ],
     "wallCornerHalfTower_NE": [
-     2,
-     766,
-     487
-    ],
-    "wallCornerHalfTower_SE": [
-     2,
-     973,
-     487
-    ],
-    "wallCorner_NW": [
-     2,
-     1179,
-     487
-    ],
-    "wallCorner_SW": [
-     2,
-     1332,
-     487
-    ],
-    "wallHalf_NW": [
-     2,
-     1485,
-     487
+     0,
+     722,
+     1436
     ],
     "wall_NE": [
-     2,
-     1638,
-     487
-    ],
-    "wall_NW": [
-     2,
-     1791,
-     487
-    ],
-    "wallNarrowStairs_NW": [
-     2,
      0,
-     712
+     929,
+     1436
     ],
     "k_church_NE": [
-     2,
-     151,
-     712
-    ],
-    "k_church_NW": [
-     2,
-     348,
-     712
-    ],
-    "wall_SW": [
-     2,
-     545,
-     712
+     0,
+     1082,
+     1436
     ],
     "k_well_NE": [
-     2,
-     698,
-     712
-    ],
-    "k_well_SE": [
-     2,
-     881,
-     712
+     0,
+     1279,
+     1436
     ],
     "wallCorner_NE": [
-     2,
-     1064,
-     712
-    ],
-    "wallCorner_SE": [
-     2,
-     1217,
-     712
-    ],
-    "wallHalf_SE": [
-     2,
-     1370,
-     712
-    ],
-    "wall_SE": [
-     2,
-     1523,
-     712
-    ],
-    "k_well_NW": [
-     2,
-     1676,
-     712
-    ],
-    "k_well_SW": [
-     2,
-     1859,
-     712
-    ],
-    "wallNarrowStairs_SE": [
-     2,
      0,
-     918
+     1462,
+     1436
     ],
     "k_home_A_NE": [
-     2,
-     151,
-     918
-    ],
-    "k_home_A_NW": [
-     2,
-     341,
-     918
+     0,
+     1615,
+     1436
     ],
     "wallHalf_NE": [
-     2,
-     531,
-     918
-    ],
-    "wallHalf_SW": [
-     2,
-     684,
-     918
+     0,
+     1805,
+     1436
     ],
     "k_banner_NE": [
      0,
-     1905,
-     820
-    ],
-    "k_banner_NW": [
-     0,
-     1965,
-     820
-    ],
-    "k_banner_SE": [
-     1,
-     1931,
-     985
-    ],
-    "k_banner_SW": [
-     1,
      1945,
-     1279
-    ],
-    "k_blacksmith_NW": [
-     2,
-     837,
-     918
+     0
     ],
     "siegeCatapult_NE": [
-     2,
-     1074,
-     918
-    ],
-    "siegeCatapult_NW": [
-     2,
-     1258,
-     918
-    ],
-    "siegeCatapult_SE": [
-     2,
-     1442,
-     918
-    ],
-    "siegeCatapult_SW": [
-     2,
-     1626,
-     918
+     0,
+     0,
+     1658
     ],
     "flagBannerLong_NE": [
      0,
-     1993,
-     0
-    ],
-    "flagBannerLong_NW": [
-     1,
-     1991,
-     985
-    ],
-    "flagBannerLong_SW": [
-     1,
-     1971,
-     1558
-    ],
-    "wallNarrowStairs_SW": [
-     2,
-     1810,
-     918
-    ],
-    "flagBannerLong_SE": [
-     1,
-     1909,
-     1827
+     1898,
+     820
     ],
     "towerSquareBaseColor_NE": [
-     2,
      0,
-     1120
-    ],
-    "towerSquareBaseColor_NW": [
-     2,
-     153,
-     1120
-    ],
-    "towerSquareBaseColor_SW": [
-     2,
-     306,
-     1120
+     184,
+     1658
     ],
     "towerSquareBase_NE": [
-     2,
-     459,
-     1120
-    ],
-    "towerSquareBase_NW": [
-     2,
-     612,
-     1120
-    ],
-    "towerSquareBase_SW": [
-     2,
-     765,
-     1120
-    ],
-    "towerSquareBaseColor_SE": [
-     2,
-     918,
-     1120
-    ],
-    "towerSquareBase_SE": [
-     2,
-     1071,
-     1120
-    ],
-    "wallDoor_NW": [
-     2,
-     1931,
-     247
-    ],
-    "k_blacksmith_SW": [
-     2,
-     1224,
-     1120
-    ],
-    "towerSquareArch_NW": [
-     2,
-     1416,
-     1120
-    ],
-    "towerSquareMidOpen_NW": [
-     2,
-     1558,
-     1120
-    ],
-    "towerSquareMidWindows_NW": [
-     2,
-     1700,
-     1120
-    ],
-    "towerSquareMid_NW": [
-     2,
-     1842,
-     1120
-    ],
-    "towerSquarePoles_NW": [
-     2,
      0,
-     1302
-    ],
-    "towerBalcony_NW": [
-     2,
-     142,
-     1302
-    ],
-    "towerBalcony_SE": [
-     2,
-     286,
-     1302
-    ],
-    "towerBalcony_SW": [
-     2,
-     430,
-     1302
-    ],
-    "towerSquareArch_SE": [
-     2,
-     574,
-     1302
-    ],
-    "towerSquareArch_SW": [
-     2,
-     717,
-     1302
-    ],
-    "towerSquareMidOpen_SE": [
-     2,
-     860,
-     1302
-    ],
-    "towerSquareMidOpen_SW": [
-     2,
-     1003,
-     1302
-    ],
-    "towerSquareMidWindows_SE": [
-     2,
-     1146,
-     1302
-    ],
-    "towerSquareMidWindows_SW": [
-     2,
-     1289,
-     1302
-    ],
-    "towerSquareMid_SE": [
-     2,
-     1432,
-     1302
-    ],
-    "towerSquareMid_SW": [
-     2,
-     1575,
-     1302
-    ],
-    "towerSquarePoles_SE": [
-     2,
-     1718,
-     1302
-    ],
-    "towerSquarePoles_SW": [
-     2,
-     1861,
-     1302
+     337,
+     1658
     ],
     "towerSquareArch_NE": [
-     2,
      0,
-     1480
+     490,
+     1658
     ],
     "towerSquareMidOpen_NE": [
-     2,
-     142,
-     1480
+     0,
+     632,
+     1658
     ],
     "towerSquareMidWindows_NE": [
-     2,
-     284,
-     1480
+     0,
+     774,
+     1658
     ],
     "towerSquareMid_NE": [
-     2,
-     426,
-     1480
+     0,
+     916,
+     1658
     ],
     "towerSquarePoles_NE": [
-     2,
-     568,
-     1480
-    ],
-    "wallDoor_SE": [
-     2,
-     710,
-     1480
-    ],
-    "towerBase_NW": [
-     2,
-     826,
-     1480
-    ],
-    "towerBase_SE": [
-     2,
-     935,
-     1480
-    ],
-    "towerBase_SW": [
-     2,
-     1044,
-     1480
+     0,
+     1058,
+     1658
     ],
     "towerBalcony_NE": [
-     2,
-     1153,
-     1480
+     0,
+     1200,
+     1658
     ],
     "towerBase_NE": [
-     2,
-     1297,
-     1480
-    ],
-    "k_home_A_SE": [
-     2,
-     1406,
-     1480
-    ],
-    "k_home_A_SW": [
-     2,
-     1596,
-     1480
+     0,
+     1925,
+     1161
     ],
     "k_blacksmith_NE": [
-     2,
-     1784,
-     1480
-    ],
-    "k_shrine_NW": [
-     2,
      0,
-     1657
-    ],
-    "wallDoor_SW": [
-     2,
-     192,
-     1657
-    ],
-    "siegeRam_SE": [
-     2,
-     307,
-     1657
-    ],
-    "siegeRam_SW": [
-     2,
-     483,
-     1657
+     1344,
+     1658
     ],
     "siegeRam_NE": [
-     2,
-     659,
-     1657
-    ],
-    "siegeRam_NW": [
-     2,
-     834,
-     1657
+     0,
+     1536,
+     1658
     ],
     "wallNarrowStairs_NE": [
-     2,
-     1009,
-     1657
+     0,
+     1711,
+     1658
     ],
     "wallDoor_NE": [
-     2,
-     1159,
-     1657
+     0,
+     1861,
+     1658
     ],
     "k_shrine_NE": [
-     2,
-     1274,
-     1657
-    ],
-    "towerSquareTopRoofHigh_NW": [
-     2,
-     1464,
-     1657
-    ],
-    "towerSquareTopRoofHigh_SE": [
-     2,
-     1617,
-     1657
+     0,
+     0,
+     1846
     ],
     "towerSquareTopRoofHigh_NE": [
-     2,
-     1770,
-     1657
-    ],
-    "towerSquareTopRoofHigh_SW": [
-     2,
      0,
-     1831
-    ],
-    "k_blacksmith_SE": [
-     2,
-     153,
-     1831
-    ],
-    "k_shrine_SW": [
-     2,
-     390,
-     1831
+     190,
+     1846
     ],
     "k_soldier_NE": [
-     1,
-     1962,
-     1827
-    ],
-    "k_soldier_NW": [
-     2,
-     1944,
-     487
-    ],
-    "k_soldier_SE": [
-     2,
-     1960,
-     918
-    ],
-    "k_soldier_SW": [
-     2,
-     1976,
-     1480
-    ],
-    "k_shrine_SE": [
-     2,
-     580,
-     1831
+     0,
+     1951,
+     820
     ],
     "towerSquareTopColor_NE": [
-     2,
-     772,
-     1831
-    ],
-    "towerSquareTopColor_NW": [
-     2,
-     925,
-     1831
-    ],
-    "towerSquareTopColor_SE": [
-     2,
-     1078,
-     1831
-    ],
-    "towerSquareTopColor_SW": [
-     2,
-     1231,
-     1831
-    ],
-    "siegeBallista_SW": [
-     2,
-     1384,
-     1831
-    ],
-    "siegeBallista_NW": [
-     2,
-     1522,
-     1831
-    ],
-    "towerSquareTopRoof_SE": [
-     2,
-     1659,
-     1831
+     0,
+     343,
+     1846
     ],
     "towerSquareTopRoof_NE": [
-     2,
-     1812,
-     1831
-    ],
-    "towerSquareTopRoof_NW": [
-     3,
      0,
-     0
-    ],
-    "towerSquareTopRoof_SW": [
-     3,
-     153,
-     0
-    ],
-    "siegeBallista_SE": [
-     3,
-     306,
-     0
+     496,
+     1846
     ],
     "siegeBallista_NE": [
-     3,
-     444,
-     0
+     0,
+     649,
+     1846
     ],
     "towerSquareTop_NE": [
-     3,
-     581,
-     0
-    ],
-    "towerSquareTop_NW": [
-     3,
-     734,
-     0
-    ],
-    "towerSquareTop_SE": [
-     3,
-     887,
-     0
-    ],
-    "towerSquareTop_SW": [
-     3,
-     1040,
-     0
-    ],
-    "k_flag_SE": [
-     2,
-     1984,
-     1120
-    ],
-    "k_flag_SW": [
-     2,
-     1923,
-     1657
+     0,
+     786,
+     1846
     ],
     "towerTopRoof_NE": [
-     3,
-     1193,
-     0
-    ],
-    "towerTopRoof_NW": [
-     3,
-     1315,
-     0
-    ],
-    "towerTopRoof_SW": [
-     3,
-     1437,
-     0
+     0,
+     939,
+     1846
     ],
     "towerSquareMidColor_NE": [
-     3,
-     1559,
-     0
-    ],
-    "towerSquareMidColor_NW": [
-     3,
-     1702,
-     0
-    ],
-    "towerSquareMidColor_SE": [
-     3,
-     1845,
-     0
-    ],
-    "towerSquareMidColor_SW": [
-     3,
      0,
-     131
-    ],
-    "towerTopRoof_SE": [
-     3,
-     143,
-     131
-    ],
-    "stairsStone_SW": [
-     2,
-     1965,
-     1831
-    ],
-    "stairsStone_SE": [
-     3,
-     265,
-     131
+     1061,
+     1846
     ],
     "k_flag_NE": [
-     2,
-     1985,
-     1657
-    ],
-    "k_flag_NW": [
-     3,
-     347,
-     131
-    ],
-    "bridge_SE": [
-     3,
-     409,
-     131
-    ],
-    "bridge_NW": [
-     3,
-     550,
-     131
-    ],
-    "bridge_SW": [
-     3,
-     690,
-     131
+     0,
+     1958,
+     1436
     ],
     "bridge_NE": [
-     3,
-     831,
-     131
-    ],
-    "metalGate_NW": [
-     3,
-     1988,
-     0
-    ],
-    "metalGate_SE": [
-     3,
-     971,
-     131
-    ],
-    "metalGate_SW": [
-     3,
-     1029,
-     131
+     0,
+     1204,
+     1846
     ],
     "metalGate_NE": [
-     3,
-     1087,
-     131
-    ],
-    "towerTop_NW": [
-     3,
-     1144,
-     131
-    ],
-    "towerTop_SE": [
-     3,
-     1253,
-     131
-    ],
-    "towerTop_SW": [
-     3,
-     1362,
-     131
+     0,
+     1976,
+     1658
     ],
     "towerTop_NE": [
-     3,
-     1471,
-     131
-    ],
-    "flagBlue_NW": [
-     1,
-     2005,
-     1279
-    ],
-    "flagBannerShort_NW": [
-     3,
-     1580,
-     131
+     0,
+     1344,
+     1846
     ],
     "flagBlue_NE": [
-     2,
-     2004,
-     1302
+     0,
+     1453,
+     1846
     ],
     "flagBannerShort_NE": [
-     3,
-     1633,
-     131
-    ],
-    "flagBannerShort_SW": [
-     3,
-     1686,
-     131
-    ],
-    "flagBannerShort_SE": [
-     3,
-     1739,
-     131
+     0,
+     1497,
+     1846
     ],
     "flagBlueWide_NE": [
-     2,
-     2009,
-     487
-    ],
-    "flagBlueWide_NW": [
-     3,
-     1792,
-     131
-    ],
-    "stairsStone_NE": [
-     3,
-     1825,
-     131
-    ],
-    "stairsStone_NW": [
-     3,
-     1907,
-     131
-    ],
-    "king_NE": [
-     3,
-     1988,
-     131
-    ],
-    "king_NW": [
-     3,
      0,
-     248
-    ],
-    "king_SE": [
-     3,
-     47,
-     248
-    ],
-    "king_SW": [
-     3,
-     94,
-     248
-    ],
-    "knightBlue_NE": [
-     3,
-     141,
-     248
-    ],
-    "knightBlue_NW": [
-     3,
-     188,
-     248
-    ],
-    "knightBlue_SE": [
-     3,
-     235,
-     248
-    ],
-    "knightBlue_SW": [
-     3,
-     282,
-     248
-    ],
-    "knightRed_NE": [
-     3,
-     329,
-     248
-    ],
-    "knightRed_NW": [
-     3,
-     376,
-     248
-    ],
-    "knightRed_SE": [
-     3,
-     423,
-     248
-    ],
-    "knightRed_SW": [
-     3,
-     470,
-     248
-    ],
-    "flagBlue_SE": [
-     3,
-     517,
-     248
-    ],
-    "flagBlue_SW": [
-     3,
-     561,
-     248
-    ],
-    "flagBlueWide_SE": [
-     3,
-     605,
-     248
-    ],
-    "flagBlueWide_SW": [
-     3,
-     638,
-     248
-    ],
-    "shieldBlue_NW": [
-     1,
-     2023,
+     2005,
      0
     ],
-    "shieldBlue_SE": [
-     1,
-     2021,
-     367
+    "stairsStone_NE": [
+     0,
+     1550,
+     1846
+    ],
+    "king_NE": [
+     0,
+     1632,
+     1846
+    ],
+    "knightBlue_NE": [
+     0,
+     1679,
+     1846
+    ],
+    "knightRed_NE": [
+     0,
+     1726,
+     1846
     ],
     "shieldBlue_NE": [
-     2,
      0,
-     1988
-    ],
-    "shieldBlue_SW": [
-     2,
-     25,
-     1988
+     2016,
+     820
     ]
    }
   },
   "sheets": {
-   "": 6,
-   "red/": 4,
-   "green/": 4,
-   "gold/": 4
+   "": 2,
+   "red/": 1,
+   "green/": 1,
+   "gold/": 1
   }
  }
 }

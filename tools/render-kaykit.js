@@ -13,14 +13,16 @@
    tools/three/, ignored by git) if it is not there. Needs Playwright's Chromium (WebGL via SwiftShader). */
 var path = require("path"), fs = require("fs"), http = require("http"), url = require("url"), cp = require("child_process");
 var { chromium } = require("/opt/node22/lib/node_modules/playwright");
-var args = process.argv.slice(2), kit = args[0], outDir = args[1], threeDir = path.join(__dirname, "three");
+var args = process.argv.slice(2), kit = args[0], outDir = args[1], threeDir = path.join(__dirname, "three"), asModule = require.main !== module;
 for (var a = 2; a < args.length; a++) if (args[a] === "--three") threeDir = args[++a];
-if (!kit || !outDir) { console.error("usage: node tools/render-kaykit.js <gltf dir> <out dir> [--three <dir>]"); process.exit(2); }
+if (!asModule && (!kit || !outDir)) { console.error("usage: node tools/render-kaykit.js <gltf dir> <out dir> [--three <dir>]"); process.exit(2); }
 
+/* v5.5: tools/pack-models.js requires this file for SPECS and COLOURS; nothing runs then */
+if (asModule) { module.exports = { SPECS: null, COLOURS: null }; }
 var THREE_FILES = { "three.module.js": "build/three.module.js", "GLTFLoader.js": "examples/jsm/loaders/GLTFLoader.js", "OBJLoader.js": "examples/jsm/loaders/OBJLoader.js",
   "MTLLoader.js": "examples/jsm/loaders/MTLLoader.js", "BufferGeometryUtils.js": "examples/jsm/utils/BufferGeometryUtils.js" };
-fs.mkdirSync(threeDir, { recursive: true });
-Object.keys(THREE_FILES).forEach(function (f) {
+if (!asModule) fs.mkdirSync(threeDir, { recursive: true });
+if (!asModule) Object.keys(THREE_FILES).forEach(function (f) {
   var p = path.join(threeDir, f);
   if (!fs.existsSync(p)) { console.log("fetching three.js", f); cp.execFileSync("curl", ["-sS", "-f", "-L", "-o", p, "https://raw.githubusercontent.com/mrdoob/three.js/r160/" + THREE_FILES[f]]); }
 });
@@ -68,7 +70,8 @@ var srv = http.createServer(function (req, res) {
   else f = path.join(__dirname, "render-iso.html");
   fs.readFile(f, function (err, buf) { if (err) { res.writeHead(404); res.end(); return; } res.writeHead(200, { "Content-Type": MIME[f.split(".").pop()] || "application/octet-stream" }); res.end(buf); });
 });
-(async function () {
+if (asModule) { module.exports.SPECS = SPECS; module.exports.COLOURS = COLOURS; }
+if (!asModule) (async function () {
   await new Promise(function (r) { srv.listen(0, r); });
   var base = "http://127.0.0.1:" + srv.address().port;
   var browser = await chromium.launch({ args: ["--use-gl=angle", "--use-angle=swiftshader", "--enable-unsafe-swiftshader"] });
