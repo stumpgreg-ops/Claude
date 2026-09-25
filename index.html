@@ -4,17 +4,42 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="color-scheme" content="dark" />
+  <meta http-equiv="Cache-Control" content="no-cache" />
   <title>SOL Labyrinth</title>
-  <link rel="stylesheet" href="css/after-hours.css" />
-  <link rel="stylesheet" href="css/build.css" />
+  <link rel="stylesheet" href="css/after-hours.css?v=5.6" />
+  <link rel="stylesheet" href="css/build.css?v=5.6" />
+  <link rel="icon" type="image/png" sizes="64x64" href="assets/logo/favicon-64.png?v=5.6" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/logo/favicon-32.png?v=5.6" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/logo/favicon-180.png?v=5.6" />
 </head>
 <body>
   <div id="app">
-    <section id="title-screen" class="screen">
-      <p class="kicker">NNPS · VA 2024 EOC Reading practice skills · 100 nights</p>
-      <h1>SOL Labyrinth</h1>
+    <section id="state-screen" class="screen">
+      <p class="kicker">Reading practice · 100 levels</p>
+      <h1 class="logo"><img src="assets/logo/sols-labyrinth-512.png?v=5.6" alt="Sol's Labyrinth — SOL review game" width="512" height="512" /></h1>
+      <p class="ver">v5.6</p>
+      <p class="tag state-tag">Tap your state to start.</p>
+      <div class="packs state-packs">
+        <button type="button" class="card state-card state-nj" data-state="NJ">
+          <span class="name">New Jersey</span>
+          <span class="kind">NJSLA-ELA · Grade 5</span>
+          <span class="meta">Literature, informational text, vocabulary and paired texts, with Part A / Part B evidence questions.</span>
+        </button>
+        <button type="button" class="card state-card state-va" data-state="VA">
+          <span class="name">Virginia</span>
+          <span class="kind">VA 2024 EOC Reading SOL · Grades 9–11</span>
+          <span class="meta">Literary, informational, vocabulary and paired-text skills.</span>
+        </button>
+      </div>
+      <p class="howto">Your state picks the test the questions practise. Progress, coins and your town or castle stay on this Chromebook, and you can switch states from the title screen.</p>
+    </section>
+
+    <section id="title-screen" class="screen hidden">
+      <p class="kicker" id="title-kicker">NNPS · VA 2024 EOC Reading practice skills · 100 levels</p>
+      <h1 class="logo"><img src="assets/logo/sols-labyrinth-512.png?v=5.6" alt="Sol's Labyrinth — SOL review game" width="512" height="512" /></h1>
+      <p class="ver">v5.6</p>
       <p class="tag">Tap a grade to pick your skill focus. Read the passage in the side panel. Grab the matching letter. Walk it to EXIT · SAFE. The janitor does not know the answer — only you do.</p>
-      <p id="save-line" class="save-line">No night saved on this Chromebook yet.</p>
+      <p id="save-line" class="save-line">No level saved on this Chromebook yet.</p>
 
       <div class="packs">
         <button type="button" class="card selected" data-family="G9">
@@ -32,9 +57,15 @@
           <span class="name">Grade 11</span>
           <span class="meta">All skills — Grade 9, 10, and 11. Same short passage length for Chromebook play.</span>
         </button>
+        <button type="button" class="card hidden" data-family="NJ5">
+          <span class="kind">NJSLA-ELA</span>
+          <span class="name">Grade 5</span>
+          <span class="meta">Literature, informational text, vocabulary and paired texts. Questions adapt to how you play, and Part B evidence questions follow Part A.</span>
+        </button>
       </div>
 
       <div class="row title-tools">
+        <button type="button" class="btn" id="btn-state" title="Pick a different state">Virginia · change</button>
         <button type="button" class="btn" id="btn-town" title="See the town or castle you have built">My Town</button>
         <button type="button" class="btn" id="btn-music" aria-pressed="true" title="Background music on/off">♪ Music on</button>
       </div>
@@ -49,11 +80,11 @@
       </div>
 
       <p class="howto">
-        <strong>100 nights of stealth extract — not a quiz skin.</strong>
+        <strong>100 levels of stealth extract — not a quiz skin.</strong>
         Tap Grade 9, 10, or 11 — then choose a skill (or All) and start.
         Move quiet, grab the right letter on the map, extract at EXIT · SAFE. Correct letters call Sol's CHARIOT.
         START · SAFE is where you spawn; EXIT · SAFE is where you extract and read. Hati cannot see you in either booth.
-        Three catches (then two) end a night. Win to unlock the next night on this Chromebook.
+        Catches and wrong letters both cost a life; three (then two) end a level. Win to unlock the next level on this Chromebook.
         Itch login does not store progress. Solo works without a class code.
       </p>
     </section>
@@ -61,8 +92,8 @@
     <section id="skill-screen" class="screen hidden">
       <p class="kicker" id="skill-kicker">Selection · skill focus</p>
       <h1>Pick a skill</h1>
-      <p class="tag">Choose a skill focus for this night, or play with all skills mixed.</p>
-      <p id="skill-save-line" class="save-line">No night saved on this Chromebook yet.</p>
+      <p class="tag">Choose a skill focus for this level, or play with all skills mixed.</p>
+      <p id="skill-save-line" class="save-line">No level saved on this Chromebook yet.</p>
 
       <div class="packs" id="skill-packs">
         <!-- filled by game.js -->
@@ -79,7 +110,7 @@
 
       <div class="row">
         <button type="button" class="btn" id="btn-skill-back">Back</button>
-        <button type="button" class="btn primary" id="btn-skill-start">New game (Night 1)</button>
+        <button type="button" class="btn primary" id="btn-skill-start">New game (Level 1)</button>
         <button type="button" class="btn primary hidden" id="btn-skill-continue">Continue</button>
       </div>
     </section>
@@ -89,11 +120,11 @@
         <div class="eoc">
           <div class="eoc-bar">
             <p class="sol" id="job-sol">Teacher · 9.RI.1.C</p>
-            <p class="round" id="round-flag">Night 1 / 100</p>
+            <p class="round" id="round-flag">Level 1 / 100</p>
             <div class="scores">
               <span class="pip gold" id="score-pip">Extracts 0 / 5</span>
               <span class="pip strike" id="strike-pip">Strikes 0 / 3</span>
-              <span class="pip bonus" id="bonus-pip">Bonus 0</span>
+              <span class="pip bonus" id="bonus-pip">Coins 0</span>
               <span class="pip" id="token-pip">Token N001E0S0</span>
             </div>
           </div>
@@ -138,8 +169,9 @@
         <h2 id="win-title">Set</h2>
         <p id="win-msg"></p>
         <div class="row">
-          <button type="button" class="btn primary hidden" id="btn-next">Next night</button>
-          <button type="button" class="btn primary hidden" id="btn-retry">Retry this night</button>
+          <button type="button" class="btn primary hidden" id="btn-next">Next level</button>
+          <button type="button" class="btn primary hidden" id="btn-retry">Retry this level</button>
+          <button type="button" class="btn hidden" id="btn-shop" data-night="1">Shop</button>
           <button type="button" class="btn" id="btn-again">Title</button>
         </div>
       </div>
@@ -228,14 +260,40 @@
     try { console.error("[SOL]", (e && e.message) || "error", e && e.error && e.error.stack ? e.error.stack : ""); } catch (x) {}
   });
   </script>
-  <script src="https://unpkg.com/phaser@3.80.1/dist/phaser.min.js"></script>
-  <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
-  <script src="js/content.js"></script>
-  <script src="js/content2.js"></script>
-  <script src="js/audio.js"></script>
-  <script src="js/music.js"></script>
-  <script src="js/net.js"></script>
-  <script src="js/build.js"></script>
-  <script src="js/game.js"></script>
+  <script src="js/vendor/phaser.min.js?v=5.6"></script>
+  <script src="js/vendor/peerjs.min.js?v=5.6"></script>
+  <script src="js/content.js?v=5.6"></script>
+  <script src="js/content2.js?v=5.6"></script>
+  <script src="js/content3.js?v=5.6"></script>
+  <script src="js/content4.js?v=5.6"></script>
+  <script src="js/content5.js?v=5.6"></script>
+  <script src="js/content6.js?v=5.6"></script>
+  <script src="js/content7.js?v=5.6"></script>
+  <script src="js/content8.js?v=5.6"></script>
+  <script src="js/content9.js?v=5.6"></script>
+  <script src="js/content10.js?v=5.6"></script>
+  <script src="js/content11.js?v=5.6"></script>
+  <script src="js/content12.js?v=5.6"></script>
+  <script src="js/content13.js?v=5.6"></script>
+  <script src="js/content14.js?v=5.6"></script>
+  <script src="js/content15.js?v=5.6"></script>
+  <script src="js/content16.js?v=5.6"></script>
+  <script src="js/content17.js?v=5.6"></script>
+  <script src="js/content18.js?v=5.6"></script>
+  <script src="js/content19.js?v=5.6"></script>
+  <script src="js/content20.js?v=5.6"></script>
+  <script src="js/content21.js?v=5.6"></script>
+  <script src="js/content22.js?v=5.6"></script>
+  <script src="js/content23.js?v=5.6"></script>
+  <script src="js/content24.js?v=5.6"></script>
+  <script src="js/content25.js?v=5.6"></script>
+  <script src="js/audio.js?v=5.6"></script>
+  <script src="js/music.js?v=5.6"></script>
+  <script src="js/net.js?v=5.6"></script>
+  <script src="js/vendor/three.min.js?v=5.6"></script>
+  <script src="js/build3d.js?v=5.6"></script>
+  <script src="js/build.js?v=5.6"></script>
+  <script src="js/realms.js?v=5.6"></script>
+  <script src="js/game.js?v=5.6"></script>
 </body>
 </html>
