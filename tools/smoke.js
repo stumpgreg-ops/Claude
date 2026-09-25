@@ -357,6 +357,7 @@ var srv = http.createServer(function (req, res) {
   /* a wrong letter costs a life: three wrong grabs end the night */
   var strikeRun = await page.evaluate(function () {
     var sc = window.SolScene, out = { before: sc.strikes, hud: [], ended: false };
+    sc.spareLives = 0; sc.perks = {};   /* v5.6: no castle perks (a Blessing 1UP) in this check */
     for (var i = 0; i < 3; i++) {
       sc.iframeMs = 0; sc.stunMs = 0;
       sc.flagWrongAlarm({ x: sc.player.x, y: sc.player.y });
@@ -376,6 +377,102 @@ var srv = http.createServer(function (req, res) {
     var sc = null; try { sc = window.__scene || null; } catch (e) {}
     return sc ? "scene" : "no";
   });
+  /* v5.6: ten realms of ten levels, one creature each, Fenrir on every tenth level, castle perks */
+  async function realmLevel(n) {
+    await page.evaluate(function (n) { SolScene.scene.restart({ family: "NJ5", strand: "ALL", night: n }); }, n);
+    await page.waitForTimeout(2500);
+  }
+  var realmSeen = [];
+  var wantFoe = { 11: "raven", 21: "troll", 31: "vent", 41: "serpent", 51: "boar", 61: "wisp", 71: "draugr", 81: "valkyrie" };
+  for (var rn of [1, 11, 21, 31, 41, 51, 61, 71, 81, 91]) {
+    await realmLevel(rn);
+    realmSeen.push(await page.evaluate(function () { var s = SolScene; return { n: s.night, realm: s.realm && s.realm.name, flag: document.getElementById("round-flag").textContent, foes: (s.foes || []).map(function (f) { return f.kind; }), fenrir: !!s.fenrir }; }));
+    if (rn === 31) await shot("15-realm-muspelheim");
+  }
+  console.log("realms", JSON.stringify(realmSeen));
+  check(realmSeen.map(function (r) { return r.realm; }).join(",") === "Midgard,Niflheim,Jotunheim,Muspelheim,Svartalfheim,Vanaheim,Alfheim,Helheim,Asgard,Ragnarok", "ten realms of ten levels, named on the HUD");
+  check(realmSeen.every(function (r) { return r.flag.indexOf(r.realm) !== -1 && !r.fenrir; }), "the HUD names the realm; no Fenrir on ordinary levels");
+  check(realmSeen[0].foes.length === 0 && realmSeen.slice(1, 9).every(function (r) { return r.foes.length && r.foes.every(function (k) { return k === wantFoe[r.n]; }); }), "each realm brings its own creature (none in Midgard)");
+  check(realmSeen[9].foes.length >= 3, "Ragnarok mixes creatures from the other realms");
+  /* every creature that hurts costs a life, with its name on the CAUGHT tag */
+  var foeHits = [];
+  for (var fk of [[21, "troll"], [31, "vent"], [41, "serpent"], [51, "boar"], [71, "draugr"], [81, "valkyrie"]]) {
+    await realmLevel(fk[0]);
+    foeHits.push(await page.evaluate(function (kind) {
+      var s = SolScene, f = s.foes.filter(function (q) { return q.kind === kind; })[0], sp = s.slips[0], st = s.strikes;
+      s.spareLives = 0; s.iframeMs = 0; s.justStruck = false; s.perks = {};
+      s.lockerPowerMs = 0; s.dogModeMs = 0; s.pineappleMs = 0; s.forcefieldMs = 0; s.superPacMs = 0;
+      if (kind === "vent") f.phase = f.idle + f.warn + 300;
+      if (kind === "valkyrie") { s.player.body.reset(sp.x, sp.y); f.state = "fly"; f.horiz = true; f.line = sp.y; f.pos = sp.x - 20; f.dir = 1; }
+      else s.player.body.reset(f.x, f.y);
+      s.tickFoes(16);
+      return kind + ":" + (s.strikes - st) + ":" + (s.caughtFlashTag ? s.caughtFlashTag.text : "");
+    }, fk[1]));
+  }
+  console.log("creature catches", JSON.stringify(foeHits));
+  check(foeHits.every(function (h) { return /:1:CAUGHT BY /.test(h); }), "trolls, vents, the serpent, boars, draugr and valkyries each catch Sol");
+  await realmLevel(11);
+  var ravenCall = await page.evaluate(function () {
+    var s = SolScene, f = s.foes[0], sp = s.slips[0];
+    s.player.body.reset(sp.x, sp.y); s.inDarkZone = false; f.x = sp.x + 30; f.y = sp.y; f.tx = f.x; f.ty = f.y; f.cd = 0;
+    s.janitors.forEach(function (j) { j.chasing = false; });
+    s.tickFoes(16);
+    return s.janitors.filter(function (j) { return j.chasing; }).length;
+  });
+  check(ravenCall >= 1, "a raven that spots Sol sends a wolf after her");
+  await realmLevel(71);
+  var draugrLook = await page.evaluate(function () {
+    var s = SolScene, f = s.foes[0], K = SolRealms._K, M = K.maze(), i, x0, y0, o = {}, pair = null;
+    /* the draugr on a junction, Sol two junctions away down a clear hall */
+    for (i = 0; i < M.nodes.length && !pair; i++) {
+      var a = M.nodes[i]; if (a.id.charAt(0) !== "j" || K.inSafeZone(a.x, a.y)) continue;
+      var n1 = (M.neigh[String(i)] || []).filter(function (x) { return x.dir === "E"; })[0]; if (!n1) continue;
+      var n2 = (M.neigh[String(n1.i)] || []).filter(function (x) { return x.dir === "E"; })[0]; if (!n2) continue;
+      if (!K.inSafeZone(n2.x, n2.y) && !K.losBlocked(a.x, a.y, n2.x, n2.y)) pair = { a: a, b: n2 };
+    }
+    f.x = pair.b.x; f.y = pair.b.y; f.path = null; f.replan = 0;
+    s.player.body.reset(pair.a.x, pair.a.y);
+    s.playerFace = 0;
+    x0 = f.x; y0 = f.y; for (i = 0; i < 20; i++) s.tickFoes(16); o.watched = Math.hypot(f.x - x0, f.y - y0);
+    s.playerFace += Math.PI;
+    x0 = f.x; y0 = f.y; for (i = 0; i < 20; i++) s.tickFoes(16); o.free = Math.hypot(f.x - x0, f.y - y0);
+    return o;
+  });
+  check(draugrLook.free > 20 && (draugrLook.watched < 1 || draugrLook.watched < draugrLook.free / 4), "a draugr moves only while Sol looks away: " + JSON.stringify(draugrLook));
+  /* boss level: Fenrir, the gate chains, a wrong letter sets him off, a banked answer breaks a chain */
+  await realmLevel(20);
+  var boss = await page.evaluate(function () {
+    var s = SolScene, o = { fenrir: !!s.fenrir, chains: s.chainsLeft, need: s.needExtracts, hati: s.janitors.length, pip: document.getElementById("realm-pip").textContent };
+    s.spareLives = 3; s.iframeMs = 0; s.stunMs = 0;
+    s.flagWrongAlarm({ x: s.player.x, y: s.player.y }); o.provoked = s.fenrir.state;
+    s.strikes = 0; s.carryExtra = []; s.player.carrying = null;
+    s.need.forEach(function (L, i) { var sl = s.slips.filter(function (q) { return q.letter === L; })[0]; if (!i) s.player.carrying = sl; else s.carryExtra.push(sl); });
+    s.player.body.reset(s.exitZone.x, s.exitZone.y); s.tryExtract(); o.after = s.chainsLeft;
+    return o;
+  });
+  console.log("boss", JSON.stringify(boss));
+  check(boss.fenrir && boss.chains === boss.need && boss.hati === 2 && /Fenrir/.test(boss.pip), "level 20: Fenrir guards a gate with one chain per question, and one Hati fewer");
+  check(boss.provoked === "windup" && boss.after === boss.chains - 1, "a wrong letter sets Fenrir off; a banked answer breaks a chain");
+  /* castle perks: buildings on the field grant perks in the maze */
+  await page.evaluate(function () {
+    var picks = ["keep", "k-stables", "k-church", "k-barracks", "k-market", "k-castle"].map(function (id, i) { return { night: 5, piece: id, style: "blue", src: "free", deco: false, ord: i, rot: 0, cx: i * 3, cy: 0 }; });
+    localStorage.setItem("afterHours.v1.build", JSON.stringify({ v: 4, theme: "castle", salt: 7, coins: 50, kit: 2, owned: {}, rewards: {}, picks: picks, view: { a: 0, z: 1, px: 0, py: 0 }, code: "" }));
+    SolBuild._reload();
+  });
+  await realmLevel(20);
+  var perks = await page.evaluate(function () {
+    var s = SolScene, o = { list: s.perkList.map(function (p) { return p.id; }).sort().join(","), spare: s.spareLives, answer: s.coinEconomy().answer, speed: Math.round(s.realmSpeed(268, false, false)) };
+    s.player.body.reset(s.slips[0].x, s.slips[0].y); s.iframeMs = 0; s.justStruck = false;
+    var st = s.strikes; s.caught({ x: s.player.x, y: s.player.y, setVelocity: function () {} }); o.guarded = s.strikes === st && s.spareLives === 1;
+    s.iframeMs = 0; s.justStruck = false; s.fenrir.stunMs = 0; s.fenrir.state = "charge"; s.player.body.reset(s.fenrir.x, s.fenrir.y); s.foeContact(s.fenrir); o.rune = s._runeUsed && s.strikes === st;
+    return o;
+  });
+  console.log("perks", JSON.stringify(perks));
+  check(perks.list === "blessing,guard,rune,swift,trade", "castle buildings on the field grant their perks: " + perks.list);
+  check(perks.spare === 1 && perks.answer === 12 && perks.speed === 284, "Blessing gives a 1UP, Trade +2 coins an answer, Swift feet 6% speed");
+  check(perks.guarded && perks.rune, "Castle guard blocks the first catch; the Rune of Sol turns Fenrir's first charge aside");
+  await page.evaluate(function () { localStorage.removeItem("afterHours.v1.build"); SolBuild._reload(); });
+
   /* v5.2: the two standalone builds (node tools/build-games.js). Each is one state with no
      gateway, only its grade cards, only its packs, and no "change state" button. */
   var distRoot = path.join(root, "dist");

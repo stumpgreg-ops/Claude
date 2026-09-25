@@ -114,6 +114,43 @@
   function rewardsTaken() { return Object.keys(save.rewards).filter(function (k) { return !!save.rewards[k]; }).length; }
   function owned(id) { return !!(save.owned && save.owned[id]); }
   function unlock(id) { if (!save.owned) save.owned = {}; save.owned[id] = 1; }
+
+  /* v5.6: castle perks. A building on the field gives its perk in the maze
+     (each perk counts once, however many copies are placed). The maze reads
+     SolBuild.perks() when a level starts; js/realms.js applies them. */
+  var PERKS = [
+    { id: "swift",    name: "Swift feet",    desc: "Sol runs 6% faster.", pieces: ["k-stables", "stable", "bakery"] },
+    { id: "surefoot", name: "Sure footing",  desc: "Wet floors never slow Sol down or trip her.", pieces: ["k-well", "well", "fountain"] },
+    { id: "lookout",  name: "Lookout",       desc: "Ravens, trolls and the other realm creatures show on the map.", pieces: ["k-watchtower", "watchtower", "bell-tower"] },
+    { id: "guard",    name: "Castle guard",  desc: "The first catch in each level bounces off.", pieces: ["k-barracks", "manor"] },
+    { id: "blessing", name: "Blessing",      desc: "Start every level with a 1UP (a spare life).", pieces: ["k-church", "c-chapel", "chapel", "k-shrine"] },
+    { id: "trade",    name: "Trade",         desc: "+2 coins for every correct answer.", pieces: ["k-market", "square"] },
+    { id: "gold",     name: "Gold vein",     desc: "Pickups in the maze pay double coins.", pieces: ["k-mine", "harbour"] },
+    { id: "iron",     name: "Iron boots",    desc: "Slowing floors slow Sol only half as much.", pieces: ["k-blacksmith", "dock"] },
+    { id: "archers",  name: "Archers",       desc: "The Hati wolves run 5% slower.", pieces: ["k-archery"] },
+    { id: "hearth",   name: "Warm hearth",   desc: "One extra second of safety after a catch.", pieces: ["k-inn", "c-tavern", "tavern"] },
+    { id: "tinker",   name: "Tinkerer",      desc: "The chariot power lasts 25% longer.", pieces: ["k-workshop", "k-lumbermill"] },
+    { id: "charter",  name: "Royal charter", desc: "+10 coins for every level you clear.", pieces: ["k-townhall", "town-hall"] },
+    { id: "harvest",  name: "Harvest",       desc: "+5 coins for every level you clear.", pieces: ["k-windmill", "k-watermill", "c-windmill", "windmill", "watermill", "grand-mill", "barn"] },
+    { id: "rune",     name: "Rune of Sol",   desc: "Fenrir's first charge in each boss level misses.", pieces: ["k-castle", "great-tower", "royal-tower"] }
+  ];
+  var PERK_BY_PIECE = {};
+  PERKS.forEach(function (pk) { pk.pieces.forEach(function (id) { PERK_BY_PIECE[id] = pk; }); });
+  function perkOf(pieceId) { return PERK_BY_PIECE[pieceId] || null; }
+  function perkLine(p) { var pk = p && perkOf(p.id); return pk ? "Perk in the maze: " + pk.name + " · " + pk.desc : ""; }
+  function activePerks() {
+    if (!save) save = loadSave();
+    var out = [], seen = {};
+    (save.picks || []).forEach(function (pick) {
+      var pk = perkOf(pick.piece), pc;
+      if (!pk) return;
+      if (!seen[pk.id]) { seen[pk.id] = { id: pk.id, name: pk.name, desc: pk.desc, from: [] }; out.push(seen[pk.id]); }
+      pc = data ? pieceById(pick.piece) : null;
+      var nm = (pc && pc.name) || pick.piece;
+      if (seen[pk.id].from.indexOf(nm) === -1) seen[pk.id].from.push(nm);
+    });
+    return out;
+  }
   /* Once pieces.json is in: old castles map to kit pieces; picks that no longer exist are dropped. */
   function migrateIfNeeded() {
     if (!save || !data) return;
@@ -151,6 +188,7 @@
     ensurePositions();
   }
   function persist() {
+    if (ui && ui.perks && step === "gallery") { try { fillPerks(); } catch (eP) {} }
     save.picks.sort(function (a, b) { return (a.ord || 0) - (b.ord || 0); });
     save.picks.forEach(function (p, i) { p.ord = i; });
     save.code = exportCode();
@@ -1116,6 +1154,7 @@
     ui.kicker = el("p", "tut-kicker"); ui.title = el("h2"); hl.appendChild(ui.kicker); hl.appendChild(ui.title);
     ui.badge = el("span", "build-badge"); head.appendChild(hl); head.appendChild(ui.badge);
     ui.sub = el("p", "build-sub");
+    ui.perks = el("p", "build-perks hidden");
     ui.themes = el("div", "build-themes hidden");
     ui.options = el("div", "build-options hidden");
     ui.styles = el("div", "build-styles hidden");
@@ -1154,7 +1193,7 @@
     ui.codeMsg = el("p", "build-msg");
     [codeLab, ui.codeOut, ui.copyBtn, loadLab, ui.codeIn, ui.loadBtn, ui.codeMsg].forEach(function (n) { ui.codeWrap.appendChild(n); });
     ui.row = el("div", "row build-row");
-    [head, ui.sub, ui.themes, ui.options, ui.styles, ui.tabs, ui.shop, ui.main, ui.note, ui.codeWrap, ui.row].forEach(function (n) { ui.card.appendChild(n); });
+    [head, ui.sub, ui.perks, ui.themes, ui.options, ui.styles, ui.tabs, ui.shop, ui.main, ui.note, ui.codeWrap, ui.row].forEach(function (n) { ui.card.appendChild(n); });
     ui.overlay.appendChild(ui.card);
     document.body.appendChild(ui.overlay);
 
@@ -1279,7 +1318,8 @@
       var have = owned(p.id), b = btn("build-pitem" + (have ? "" : " locked"));
       b.appendChild(picFor(p, dom)); b.appendChild(el("span", "name", p.name || p.id));
       b.appendChild(el("span", "tag", have ? "Tap to place" : priceOf(p) + " coins"));
-      b.title = p.desc || "";
+      if (perkOf(p.id)) { b.appendChild(el("span", "perkmark", "★ " + perkOf(p.id).name)); b.classList.add("has-perk"); }
+      b.title = (p.desc || "") + (perkOf(p.id) ? " " + perkLine(p) : "");
       b.addEventListener("click", function () {
         if (step !== "gallery") return;
         if (have) { addPiece(p, null, "free"); return; }
@@ -1294,6 +1334,7 @@
     ui.pbar.innerHTML = "";
     if (!pk || !p || !dragStep()) { show(ui.pbar, false); return; }
     ui.pbar.appendChild(el("span", "name", p.name || p.id));
+    if (perkOf(p.id)) ui.pbar.appendChild(el("span", "perk", "★ " + perkOf(p.id).name + ": " + perkOf(p.id).desc));
     if (styleable(p)) stylesOf().forEach(function (st) {
       var c = btn("build-chip" + (pk.style === st.id ? " selected" : ""), "", st.name);
       c.setAttribute("aria-label", st.name); c.setAttribute("data-style", st.id);
@@ -1315,6 +1356,27 @@
     cur.shop = true; cur.night = cur.night || 1; cur.tab = tab || "build"; cur.fromGallery = true; cur.sel = null; mode = "shop";
     showStep(save.theme && themeDef(save.theme) ? "shop" : "theme");
   }
+  /* v5.6: the perks the castle gives in the maze, listed under the gallery summary */
+  function fillPerks() {
+    if (!ui.perks) return;
+    ui.perks.innerHTML = "";
+    if (!save.theme || loadState !== "ok") { show(ui.perks, false); return; }
+    var act = activePerks(), ids = {}, missing = [];
+    act.forEach(function (a) { ids[a.id] = 1; });
+    ui.perks.appendChild(el("span", "lab", act.length ? "Perks in the maze:" : "Perks in the maze: none yet."));
+    act.forEach(function (a) {
+      var chip = el("span", "chip on", "★ " + a.name);
+      chip.title = a.desc + " From: " + a.from.join(", ") + ".";
+      ui.perks.appendChild(chip);
+    });
+    PERKS.forEach(function (pk) {
+      if (ids[pk.id]) return;
+      var names = pk.pieces.map(function (id) { var pc = pieceById(id); return pc && pc.theme === save.theme ? pc.name : null; }).filter(Boolean);
+      if (names.length) missing.push(pk.name + " (" + names[0] + ")");
+    });
+    if (missing.length) ui.perks.appendChild(el("span", "more", (act.length ? "More to earn: " : "Place one of these to earn a perk: ") + missing.slice(0, 5).join(", ") + (missing.length > 5 ? ", …" : ".")));
+    show(ui.perks, true);
+  }
   function fillGallery() {
     var next = nextRewardNight(), n = rewardsTaken();
     ui.kicker.textContent = "My build · full-screen editor"; ui.title.textContent = save.theme ? "My " + themeName(save.theme) : "My build";
@@ -1322,6 +1384,7 @@
       !save.theme ? "Tap Shop to choose a Town or a Castle and start building — or win Level 5 for your first free piece." :
       save.picks.length + " pieces on the field · " + Object.keys(save.owned).length + " kinds unlocked · " + n + " of " + TOTAL + " rewards" +
       (styleSummary() ? " (" + styleSummary() + ")" : "") + " · " + (next ? "next reward after level " + next : "every reward earned!");
+    fillPerks();
     ui.codeOut.value = exportCode(); ui.codeIn.value = ""; ui.codeMsg.textContent = ""; ui.loadBtn.textContent = "Load";
     ui.badge.textContent = galleryBadge();
     var buttons = [{ label: "Close", primary: true, onTap: function () { var cb = cur && cur.onClose; closeOverlay(); if (cb) cb(); } }];
@@ -1346,6 +1409,7 @@
     show(ui.side, s === "gallery" && !!save.theme);
     show(ui.tools, s === "gallery" || s === "shop" || s === "place" || s === "done");
     show(ui.note, s === "place" || s === "done" || s === "shop" || s === "gallery"); show(ui.codeWrap, s === "gallery");
+    if (s !== "gallery") show(ui.perks, false);
     if (cur) { cur.drag = null; cur.pan = null; if (s !== "place" && s !== "done") cur.placedKey = null; if (!dragStep()) cur.sel = null; }
     ui.note.textContent = "";
     fillPieceBar();
@@ -1554,7 +1618,7 @@
       ui.note.textContent = ui.note.textContent || (isKit() ? "Walls, hedges and fences turn corners by themselves. Tap a piece to buy it (once) and choose its colour." : "Tap a building to buy it and choose its style.");
       off.builds.forEach(function (p) {
         if (isKit()) heading(p);
-        card(p, dom, p.name, p.desc, priceOf(p), owned(p.id), function () {
+        card(p, dom, p.name, p.desc + (perkOf(p.id) ? " ★ " + perkOf(p.id).name + ": " + perkOf(p.id).desc : ""), priceOf(p), owned(p.id), function () {
           if (owned(p.id)) { if (addPiece(p, null, "free")) fillShop(true); return; }
           if (save.coins < priceOf(p)) { ui.note.textContent = "Not enough coins for the " + p.name + " (" + priceOf(p) + ")."; return; }
           cur.piece = p; cur.stylePick = dom; if (styleable(p)) showStep("style"); else place();
@@ -1709,10 +1773,12 @@
     addCoins: addCoins, coins: coins, economy: economy,
     close: closeOverlay, isOpen: function () { return !!mode; },
     exportCode: exportCode, importCode: importCode, state: state,
+    perks: activePerks, perkOf: perkOf, perkTable: function () { return PERKS.slice(); },
     LS_KEY: LS_KEY, version: 5,
     /* test hooks (tools/smoke.js) */
     _offer: function (night) { return offerFor(night, night / EVERY).map(function (p) { return p.id; }); },
     _coreStage: function () { return isKit() ? coreStage() : null; },
+    _reload: function () { save = loadSave(); try { migrateIfNeeded(); } catch (e) {} return state(); },
     _owned: function () { return Object.keys(save.owned || {}).filter(function (k) { return save.owned[k]; }); },
     _place: function (id) { var p = pieceById(id); return p && cur ? !!addPiece(p, null, "free") : false; },
     _select: function (i) { if (!cur) return false; selectPick(save.picks[i] || null); return !!cur.sel; },

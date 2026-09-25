@@ -5462,6 +5462,8 @@
       this.scale.on("resize", this.onResize, this);
       this.onResize();
 
+      /* v5.6: realm look, creatures, Fenrir and castle perks (js/realms.js) */
+      if (this.setupRealm) { try { this.setupRealm(); } catch (eRealm) { if (window.console) console.warn("[realms] setup", eRealm); } }
       this.claim = null;
       this.nextClaim();
       pingTeacher(this, "playing");
@@ -5500,8 +5502,8 @@
       this.flickerFloorSprites = [];
       var g = this.add.graphics().setDepth(0);
       this.schoolFloorGfx = g;
-      /* SOL Labyrinth: dark void outside, Flicker corridor floors inside */
-      g.fillStyle(0x05070c, 1);
+      /* SOL Labyrinth: dark void outside, Flicker corridor floors inside (v5.6: in the realm's colour) */
+      g.fillStyle(nightTheme(this.night || (this.level && this.level.n) || 1).void || 0x05070c, 1);
       g.fillRect(0, 0, WORLD_W, WORLD_H);
 
       var TS = 32;
@@ -6067,6 +6069,8 @@
       rx.globalCompositeOperation = "destination-out";
       rx.save(); rx.translate(-3, -3); rx.fillStyle = "#000"; rx.fill(path, "nonzero"); rx.restore();
       ctx.drawImage(rim, 0, 0);
+      /* v5.6: realm touches on the walls (frost, moss, embers ...) */
+      if (this.decorateWallCanvas) { try { this.decorateWallCanvas(ctx, path, theme); } catch (eDw) {} }
       try {
         this.textures.addCanvas(key, cv);
         this.wallUnionImg = this.add.image(0, 0, key).setOrigin(0, 0).setDepth(2);
@@ -26171,6 +26175,8 @@
       for (i = 0; i < this.puddles.length; i++) {
         if (this.playerInBox(this.puddles[i])) wet = true;
       }
+      /* v5.6: the Sure footing castle perk (a well) ignores wet floors */
+      if (wet && this.perks && this.perks.surefoot) wet = false;
       if (wet !== this.wetNow) {
         this.wetNow = wet;
         this.paintHud();
@@ -26385,6 +26391,8 @@
       if ((this.superPacMs || 0) > 0 && this.player && this.player.setTint) {
         try { this.player.setTint(0xa5d6a7); this._superTintOn = true; } catch (eSu) {}
       }
+      /* v5.6: castle perks (Swift feet, Iron boots) */
+      if (this.realmSpeed) spd = this.realmSpeed(spd, carrying, sprinting);
       if (ax || ay) this.player.setVelocity((ax / len) * spd, (ay / len) * spd);
       else this.player.setVelocity(0, 0);
       this.tickPlayerCharAnim(ax, ay, sprinting);
@@ -26591,6 +26599,8 @@
       for (i = 0; i < this.janitors.length; i++) this.updateJanitor(this.janitors[i], dt);
       this.tickHatiReturns(playStep(dt));
       this.tickCatchContacts();
+      /* v5.6: realm creatures, Fenrir, dazzle, ambience (js/realms.js) */
+      if (this.tickRealm) this.tickRealm(dt);
       if (!railGraph()) this.destackJanitors();
       for (i = 0; i < this.janitors.length; i++) {
         if ((this.janitors[i].trogFreezeMs || 0) > 0 || (this.iceWorldFreezeMs || 0) > 0 ||
@@ -26622,6 +26632,23 @@
       Input.actEdge = false;
       Input.shutterEdge = false;
     }
+  }
+
+  /* v5.6: the realms, their creatures, Fenrir and the castle perks live in
+     js/realms.js; it wraps a few NightScene methods and needs these internals. */
+  if (window.SolRealms && SolRealms.install) {
+    try {
+      SolRealms.install(NightScene, {
+        maze: function () { return MAZE; },
+        railGraph: railGraph, railPath: railPath, nearestMazeNode: nearestMazeNode,
+        losBlocked: losBlocked, hitsSolid: hitsSolid, inSafeZone: inSafeZone, playStep: playStep,
+        exitPos: function () { return { x: EXIT_X, y: EXIT_Y }; },
+        startPos: function () { return { x: START_X, y: START_Y }; },
+        WALK: WALK, SPRINT: SPRINT, CARRY_WALK: CARRY_WALK, CARRY_SPRINT: CARRY_SPRINT,
+        WORLD_W: WORLD_W, WORLD_H: WORLD_H,
+        NIGHT_THEMES: NIGHT_THEMES, nightTheme: nightTheme
+      });
+    } catch (eInstall) { if (window.console) console.warn("[realms] install failed", eInstall); }
   }
 
   function pingTeacher(scene, status) {
@@ -27440,6 +27467,7 @@
     wantNight1Tut = false;
     tutClosed = true;
     hideTut();
+    if (window.SolRealms && SolRealms.stopAmbience) SolRealms.stopAmbience();
     if (gameRef) { gameRef.destroy(true); gameRef = null; }
     refreshSaveLine();
   });
@@ -27522,7 +27550,7 @@
   (function buildMusicPicker() {
     var wrap = document.getElementById("music-chips");
     if (!wrap || !window.SolMusic || !SolMusic.TRACKS || !SolMusic.setPick) return;
-    var opts = [{ key: "auto", name: "Surprise me (suspense)" }];
+    var opts = [{ key: "auto", name: "Surprise me (a track for each realm)" }];
     Object.keys(SolMusic.TRACKS).forEach(function (k) { opts.push({ key: k, name: SolMusic.TRACKS[k].name }); });
     opts.push({ key: "off", name: "No music" });
     var cur = SolMusic.getPick ? SolMusic.getPick() : "auto";

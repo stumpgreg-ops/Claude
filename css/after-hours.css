@@ -645,3 +645,26 @@ h1.logo img { width: min(300px, 60vw); height: auto; display: block; margin: 0 a
 .state-card.selected::after { content: "Last time"; font: 700 11px/1 "Trebuchet MS", sans-serif; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin-top: 4px; }
 #btn-state { color: var(--dim); }
 @media (max-width: 720px) { .state-card { min-height: 160px; } .state-card .name { font-size: 34px; } }
+
+/* v5.6: the realm card at the top of the reading pop-up, and the realm/perk pip in the HUD */
+.realm-card {
+  margin: 0 0 10px; padding: 10px 14px; border-radius: 12px; border: 1px solid rgba(245,200,66,.35);
+  background: linear-gradient(135deg, rgba(40,34,18,.92), rgba(18,20,28,.92)); color: var(--ink); font-size: 14px; line-height: 1.4;
+}
+.realm-card.hidden { display: none; }
+.realm-card .rk { margin: 0; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--dim); }
+.realm-card h3 { margin: 2px 0 4px; font-size: 22px; color: var(--gold); }
+.realm-card h3 span { font-size: 14px; font-weight: 600; color: var(--ink); }
+.realm-card p { margin: 3px 0; }
+.realm-card .foe b { color: #ffcf8a; }
+.realm-card .boss { color: #ffd0c8; }
+.realm-card .boss b { color: #ff8b7a; }
+.realm-card .perks b { color: #9aefc0; }
+.realm-card.boss { border-color: rgba(255,120,100,.6); background: linear-gradient(135deg, rgba(60,14,10,.94), rgba(18,20,28,.94)); }
+.realm-card[data-realm="niflheim"] { border-color: rgba(160,210,255,.5); }
+.realm-card[data-realm="muspelheim"], .realm-card[data-realm="ragnarok"] { border-color: rgba(255,120,60,.55); }
+.realm-card[data-realm="vanaheim"], .realm-card[data-realm="midgard"] { border-color: rgba(140,210,120,.5); }
+.realm-card[data-realm="helheim"] { border-color: rgba(150,210,190,.45); }
+.pip.realm-pip { border-color: #8a6ad8; color: #d8c8ff; }
+.pip.realm-pip.boss { border-color: #ff6a4a; color: #ffb0a0; }
+.pip.realm-pip.hidden { display: none; }
