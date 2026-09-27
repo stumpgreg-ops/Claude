@@ -1433,6 +1433,7 @@
   window.SolRealms = {
     REALMS: REALMS, realmOf: realmOf, realmIndex: realmIndex, isBoss: isBoss, levelInRealm: levelInRealm,
     install: install, stopAmbience: stopAmbience,
+    sfx: SFX, blip: blip, hiss: hiss,
     _paintFloor: paintFloor, _ensureArt: ensureArt
   };
 })();

@@ -668,3 +668,9 @@ h1.logo img { width: min(300px, 60vw); height: auto; display: block; margin: 0 a
 .pip.realm-pip { border-color: #8a6ad8; color: #d8c8ff; }
 .pip.realm-pip.boss { border-color: #ff6a4a; color: #ffb0a0; }
 .pip.realm-pip.hidden { display: none; }
+
+/* v5.7 shooter levels (js/modes.js): no minimap, FIRE on the big button, PULL only for Rune Rocks */
+#stage.mode-play #minimap { display: none; }
+#stage.mode-play #btn-shutter { display: none; }
+#stage.mode-play.mode-rocks #btn-shutter { display: inline-block; }
+.realm-card.mode-card { border-color: rgba(255,210,110,.6); background: linear-gradient(135deg, rgba(40,30,8,.94), rgba(18,20,28,.94)); }

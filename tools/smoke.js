@@ -335,7 +335,7 @@ var srv = http.createServer(function (req, res) {
     }
     var sc = window.SolScene;
     out.nights.push(checkNight(sc));
-    for (var n of [12, 30, 55]) {
+    for (var n of [13, 30, 55]) {
       sc.scene.restart({ family: "NJ5", strand: "ALL", night: n });
       await new Promise(function (r) { setTimeout(r, 2500); });
       sc = window.SolScene;
@@ -349,7 +349,7 @@ var srv = http.createServer(function (req, res) {
     return out;
   });
   console.log("hazards", JSON.stringify(hazardCheck));
-  check(hazardCheck.nights.every(function (n) { return n.bad === 0 && n.slips === 4; }), "letter tiles sit clear of every hazard and pickup on nights 1/12/30/55");
+  check(hazardCheck.nights.every(function (n) { return n.bad === 0 && n.slips === 4; }), "letter tiles sit clear of every hazard and pickup on nights 1/13/30/55");
   check(hazardCheck.skull && hazardCheck.skull.frozen && !hazardCheck.skull.eyes && !hazardCheck.skull.moved && hazardCheck.skull.skullGone, "a skull stuns a Hati in place: " + JSON.stringify(hazardCheck.skull));
   for (var w = 0; w < 10; w++) { if (await page.isVisible("#read-go")) { await page.click("#read-go"); break; } await page.waitForTimeout(300); }
   await page.waitForTimeout(500);
@@ -416,7 +416,10 @@ var srv = http.createServer(function (req, res) {
     var s = SolScene, f = s.foes[0], sp = s.slips[0];
     s.player.body.reset(sp.x, sp.y); s.inDarkZone = false; f.x = sp.x + 30; f.y = sp.y; f.tx = f.x; f.ty = f.y; f.cd = 0;
     s.janitors.forEach(function (j) { j.chasing = false; });
+    /* v5.7: a letter tile can sit in a dark zone, where ravens cannot see Sol; test in the light */
+    var M = SolRealms._K.maze(), dz = M.darkZones; M.darkZones = [];
     s.tickFoes(16);
+    M.darkZones = dz;
     return s.janitors.filter(function (j) { return j.chasing; }).length;
   });
   check(ravenCall >= 1, "a raven that spots Sol sends a wolf after her");
@@ -472,6 +475,112 @@ var srv = http.createServer(function (req, res) {
   check(perks.spare === 1 && perks.answer === 12 && perks.speed === 284, "Blessing gives a 1UP, Trade +2 coins an answer, Swift feet 6% speed");
   check(perks.guarded && perks.rune, "Castle guard blocks the first catch; the Rune of Sol turns Fenrir's first charge aside");
   await page.evaluate(function () { localStorage.removeItem("afterHours.v1.build"); SolBuild._reload(); });
+
+  /* v5.7: shooter levels on 2, 4, 6 and 8 of each realm, reached through the real Next level button */
+  var rot = await page.evaluate(function () { var o = []; for (var n = 1; n <= 20; n++) { var m = SolModes.modeFor(n); o.push(m ? m.id : "-"); } return o.join(","); });
+  check(rot === "-,raid,-,rocks,-,sky,-,ring,-,-,-,raid,-,rocks,-,sky,-,ring,-,-", "shooter rotation: raid, rocks, sky, ring on even levels; maze on odd levels and bosses: " + rot);
+  async function gotoLevel(n) {
+    await page.evaluate(function (n) { var b = document.getElementById("btn-next"); b.dataset.goto = String(n); b.click(); }, n);
+    await page.waitForTimeout(1500);
+    /* wait for the level's reading pop-up, then close it so the level runs */
+    await page.waitForFunction(function (n) { var s = window.SolScene; return s && s.night === n && s.claim && s.readOpen; }, n, { timeout: 15000 }).catch(function () {});
+    if (await page.isVisible("#read-go")) await page.click("#read-go");
+    await page.waitForFunction(function () { var s = window.SolScene; return s && !s.readOpen; }, null, { timeout: 5000 }).catch(function () {});
+    await page.waitForTimeout(300);
+  }
+  function tickWait(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+  var modeRuns = {};
+  await gotoLevel(2);
+  modeRuns.raid = await page.evaluate(async function () {
+    var s = SolScene, o = { key: s.sys.settings.key, mode: s.mode.id, fire: document.getElementById("btn-action").textContent, mini: getComputedStyle(document.getElementById("minimap")).display, hud: document.getElementById("score-pip").textContent };
+    s.spareLives = 0; s.perks = {};
+    var R = s.raid, wrong = R.ravens.filter(function (q) { return q.letter && s.need.indexOf(q.letter) === -1; })[0];
+    s.raidHit(wrong); o.wrong = s.strikes; s.strikes = 0; s.iframeMs = 0;
+    R.feathers.push({ x: s.player.x, y: s.player.y - 20, t: 0, spr: s.add.image(s.player.x, s.player.y - 20, "md-feather") });
+    await new Promise(function (r) { setTimeout(r, 600); }); o.feather = s.strikes; s.strikes = 0; s.iframeMs = 0;
+    var coins = s.nightCoins;
+    R.ravens.filter(function (q) { return q.alive && q.letter && s.need.indexOf(q.letter) !== -1; }).forEach(function (q) { s.raidHit(q); });
+    o.score = s.score; o.coins = s.nightCoins > coins;
+    await new Promise(function (r) { setTimeout(r, 1800); });
+    o.newWave = R.ravens.filter(function (q) { return q.alive && q.letter; }).length;
+    var pip = document.getElementById("realm-pip"); o.pip = pip ? pip.textContent : "";
+    return o;
+  });
+  await shot("16-raven-raid");
+  await gotoLevel(4);
+  modeRuns.rocks = await page.evaluate(async function () {
+    var s = SolScene, R = s.rk, o = { mode: s.mode.id, pull: getComputedStyle(document.getElementById("btn-shutter")).display };
+    s.spareLives = 0; s.perks = {};
+    function rockOf(right) { return R.rocks.filter(function (q) { return q.letter && (s.need.indexOf(q.letter) !== -1) === right; })[0]; }
+    s.rockCaught(rockOf(false)); o.pullWrong = s.strikes; s.strikes = 0; s.iframeMs = 0;
+    var right = rockOf(true), L = right.letter;
+    s.rockShot(right); o.blastRight = s.strikes; s.strikes = 0; s.iframeMs = 0;
+    s.rockShot(rockOf(false)); o.blastWrong = s.strikes;
+    await new Promise(function (r) { setTimeout(r, 2600); });
+    o.back = R.rocks.some(function (q) { return q.letter === L; });
+    var blank = s.rockMake(2, null, R.ship.x, R.ship.y, 0, 0); s.iframeMs = 0;
+    await new Promise(function (r) { setTimeout(r, 500); }); o.hit = s.strikes; s.strikes = 0; s.iframeMs = 0;
+    s.need.forEach(function (N) { var q = R.rocks.filter(function (z) { return z.letter === N; })[0]; if (q) s.rockCaught(q); });
+    o.score = s.score;
+    return o;
+  });
+  await shot("17-rune-rocks");
+  await gotoLevel(6);
+  modeRuns.sky = await page.evaluate(async function () {
+    var s = SolScene, K = s.sky, o = { mode: s.mode.id };
+    s.spareLives = 0; s.perks = {};
+    K.orbs.forEach(function (q, i) { q.x = s.W * 0.6 + i * 60; q.vx = 0; });   /* bring the orbs on screen */
+    function bolt(x, y) { K.bolts.push({ x: x - 40, y: y, spr: s.add.image(x - 40, y, "md-bolt") }); }
+    var w = K.orbs.filter(function (q) { return s.need.indexOf(q.letter) === -1; })[0];
+    bolt(w.x, w.y); await new Promise(function (r) { setTimeout(r, 400); }); o.wrong = s.strikes; s.strikes = 0; s.iframeMs = 0;
+    K.foes.push({ kind: "raven", x: K.x, y: K.y - 8, by: K.y - 8, r: 22, sp: 0, amp: 0, fr: 1, t: 0, spr: s.add.image(K.x, K.y, "rf-raven-0") });
+    await new Promise(function (r) { setTimeout(r, 400); }); o.crash = s.strikes; s.strikes = 0; s.iframeMs = 0;
+    K.orbs.filter(function (q) { return s.need.indexOf(q.letter) !== -1; }).forEach(function (q) { bolt(q.x, q.y); });
+    await new Promise(function (r) { setTimeout(r, 400); }); o.score = s.score;
+    return o;
+  });
+  await shot("18-sun-chariot");
+  await gotoLevel(8);
+  modeRuns.ring = await page.evaluate(async function () {
+    var s = SolScene, G = s.rg, p = s.player, o = { mode: s.mode.id };
+    s.spareLives = 0; s.perks = {};
+    function arrowAt(x, y) { G.arrows.push({ x: x, y: y, vx: 0, vy: 0, spr: s.add.image(x, y, "md-arrow") }); }
+    var w = G.stones.filter(function (q) { return s.need.indexOf(q.letter) === -1; })[0];
+    arrowAt(w.x, w.y); await new Promise(function (r) { setTimeout(r, 400); }); o.wrong = s.strikes; o.crossed = w.dead; s.strikes = 0; s.iframeMs = 0;
+    G.wolves.push({ x: p.x + 10, y: p.y, state: "run", sp: 0, spr: s.add.image(p.x, p.y, "hati1").setScale(0.5) });
+    await new Promise(function (r) { setTimeout(r, 400); }); o.bitten = s.strikes; s.strikes = 0; s.iframeMs = 0;
+    s.score = s.needExtracts - 1;
+    G.stones.filter(function (q) { return s.need.indexOf(q.letter) !== -1; }).forEach(function (q) { arrowAt(q.x, q.y); });
+    await new Promise(function (r) { setTimeout(r, 2200); });
+    o.ended = s.ended; o.title = document.getElementById("win-title").textContent; o.msg = document.getElementById("win-msg").textContent; o.goto = document.getElementById("btn-next").dataset.goto;
+    return o;
+  });
+  await shot("19-wolf-ring-cleared");
+  console.log("modes", JSON.stringify(modeRuns));
+  var mr = modeRuns;
+  check(mr.raid.key === "mode" && mr.raid.mode === "raid" && mr.raid.fire === "FIRE" && mr.raid.mini === "none" && /^Answers 0/.test(mr.raid.hud), "level 2 is Raven Raid in the shooter scene (FIRE button, no minimap, Answers on the HUD)");
+  check(mr.raid.wrong === 1 && mr.raid.feather === 1 && mr.raid.score === 1 && mr.raid.coins && mr.raid.newWave > 0 && !/Fenrir/.test(mr.raid.pip), "Raven Raid: a wrong letter and a feather each cost a life; the right raven answers, pays coins and a new flock comes");
+  check(mr.rocks.mode === "rocks" && mr.rocks.pull !== "none" && mr.rocks.pullWrong === 1 && mr.rocks.blastRight === 1 && mr.rocks.blastWrong === 0 && mr.rocks.back && mr.rocks.hit === 1 && mr.rocks.score === 1, "Rune Rocks: pulling a wrong letter, blasting the right one and a rock hit cost a life; blasting a wrong letter is free; the right rock returns; beaming it in answers");
+  check(mr.sky.mode === "sky" && mr.sky.wrong === 1 && mr.sky.crash === 1 && mr.sky.score === 1, "Sun Chariot: a wrong orb and a crash cost a life; the right orb answers");
+  check(mr.ring.mode === "ring" && mr.ring.wrong === 1 && mr.ring.crossed && mr.ring.bitten === 1, "Wolf Ring: a wrong stone is crossed out and costs a life; a wolf reaching Sol costs a life");
+  check(mr.ring.ended && mr.ring.title === "Wolf Ring cleared" && mr.ring.goto === "9" && /back to the maze/.test(mr.ring.msg), "the last right answer clears the level and points to the maze next");
+  await page.evaluate(function () { document.getElementById("btn-next").click(); });
+  await page.waitForTimeout(3000);
+  var back = await page.evaluate(function () { var s = SolScene; return { key: s.sys.settings.key, night: s.night, slips: (s.slips || []).length, act: document.getElementById("btn-action").textContent, mini: getComputedStyle(document.getElementById("minimap")).display, stage: document.getElementById("stage").className }; });
+  console.log("back to maze", JSON.stringify(back));
+  check(back.key === "night" && back.night === 9 && back.slips === 4 && back.act === "SPRINT" && back.mini !== "none" && back.stage.indexOf("mode") === -1, "Next level goes from the shooter back to the maze with its own controls");
+  await gotoLevel(2);
+  var retry = await page.evaluate(async function () {
+    var s = SolScene; s.spareLives = 0; s.perks = {}; s.strikes = s.needStrikes - 1;
+    s.answerWrong("Z", "WRONG LETTER");
+    await new Promise(function (r) { setTimeout(r, 1500); });
+    return { ended: s.ended, title: document.getElementById("win-title").textContent, msg: document.getElementById("win-msg").textContent, retry: !document.getElementById("btn-retry").classList.contains("hidden") };
+  });
+  await page.click("#btn-retry");
+  await page.waitForTimeout(2500);
+  retry.after = await page.evaluate(function () { var s = SolScene; return { key: s.sys.settings.key, night: s.night, strikes: s.strikes, mode: s.mode && s.mode.id }; });
+  console.log("mode retry", JSON.stringify(retry));
+  check(retry.ended && retry.title === "Run over" && /Raven Raid/.test(retry.msg) && retry.retry && retry.after.key === "mode" && retry.after.night === 2 && retry.after.strikes === 0, "losing a shooter level offers Retry, which restarts the same shooter");
 
   /* v5.2: the two standalone builds (node tools/build-games.js). Each is one state with no
      gateway, only its grade cards, only its packs, and no "change state" button. */

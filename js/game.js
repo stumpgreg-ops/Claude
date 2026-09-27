@@ -64,7 +64,7 @@
     } catch (eLock) {}
   }
 
-  var Input = { ax: 0, ay: 0, act: false, actEdge: false, sprint: false, shutterEdge: false };
+  var Input = { ax: 0, ay: 0, act: false, actEdge: false, sprint: false, shutterEdge: false, shutterHeld: false };
   var keysHeld = { n: 0, s: 0, w: 0, e: 0 };
   var gameRef = null;
   var playScene = null;
@@ -4347,7 +4347,7 @@
   }
 
   class NightScene extends Phaser.Scene {
-    constructor() { super("night"); }
+    constructor(key) { super(key || "night"); }   /* v5.7: js/modes.js subclasses this as the "mode" scene */
 
     init(data) {
       /* BUGFIX — "game locks up after Retry / Next level once I leave the safe zone".
@@ -26651,6 +26651,29 @@
     } catch (eInstall) { if (window.console) console.warn("[realms] install failed", eInstall); }
   }
 
+  /* v5.7: the shooter levels (every other level: 2, 4, 6 and 8 of each realm) live in
+     js/modes.js. Its ModeScene subclasses NightScene, so coins, the reading pop-up, the HUD
+     and the end-of-level screens are shared; it needs these internals. */
+  var ModeScene = null;
+  if (window.SolModes && SolModes.install) {
+    try {
+      ModeScene = SolModes.install(NightScene, {
+        Input: Input,
+        setPlayScene: function (sc) { playScene = sc; },
+        adaptEvent: adaptEvent, pingTeacher: function (sc, st) { pingTeacher(sc, st); },
+        loadUsedClaims: loadUsedClaims, loadAdapt: loadAdapt,
+        readingIsVisible: readingIsVisible, hideReading: hideReading,
+        hideTut: function () { try { hideTut(); } catch (e) {} },
+        hideTrapIntro: function () { try { hideTrapIntro(); } catch (e) {} },
+        installSafeCamFlash: installSafeCamFlash
+      });
+    } catch (eModes) { ModeScene = null; if (window.console) console.warn("[modes] install failed", eModes); }
+  }
+  function sceneKeyFor(n) {
+    try { if (ModeScene && window.SolModes && SolModes.modeFor(n)) return "mode"; } catch (e) {}
+    return "night";
+  }
+
   function pingTeacher(scene, status) {
     var tokenEl = document.getElementById("token-pip");
     var tok = makeToken(scene.night, scene.score, scene.strikes);
@@ -26866,7 +26889,8 @@
         width: w,
         height: h
       },
-      scene: NightScene,
+      /* v5.7: the first scene in the list starts; the other waits for restartNight() */
+      scene: ModeScene ? (sceneKeyFor(cfg.night) === "mode" ? [ModeScene, NightScene] : [NightScene, ModeScene]) : NightScene,
       input: { keyboard: true }
     });
     window.setTimeout(function () {
@@ -26918,7 +26942,14 @@
       playScene.tutDone = tutClosed;
       playScene.tutOpen = false;
       playScene.tutLockUntil = Date.now() + TUT_LOCK_MS;
-      playScene.scene.restart({ family: cfg.family, strand: cfg.strand, night: cfg.night });
+      var lvData = { family: cfg.family, strand: cfg.strand, night: cfg.night };
+      var wantKey = sceneKeyFor(cfg.night), curKey = (playScene.sys && playScene.sys.settings && playScene.sys.settings.key) || "night";
+      if (wantKey === curKey || !gameRef) playScene.scene.restart(lvData);
+      else {
+        /* v5.7: maze level <-> shooter level */
+        try { gameRef.scene.stop(curKey); } catch (eSt) {}
+        gameRef.scene.start(wantKey, lvData);
+      }
     } else {
       bootPhaser();
     }
@@ -27226,11 +27257,13 @@
         e.preventDefault();
         shut.classList.add("held");
         Input.shutterEdge = true;
+        Input.shutterHeld = true;
         if (window.AfterHoursAudio) AfterHoursAudio.unlock();
       }
       function shutOff(e) {
         e.preventDefault();
         shut.classList.remove("held");
+        Input.shutterHeld = false;
       }
       shut.addEventListener("pointerdown", shutOn);
       shut.addEventListener("pointerup", shutOff);
