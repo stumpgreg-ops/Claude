@@ -13,6 +13,21 @@ Progress saves in this browser profile (`afterHours.v1.night`). Itch login does 
 
 Question packs: `js/content.js` and `js/content2.js` (the v4 Virginia packs) plus `js/content3.js`–`js/content11.js` (v4.9 Virginia) and `js/content12.js`–`js/content17.js` (v4.9 New Jersey grade 5). Format and writing rules: `tools/CONTENT-GUIDE.md`. Check every file with `node tools/validate-content.js`. Headless smoke test of the gateway, builder, shop, a night, the realms and their creatures, Fenrir, the castle perks, the shooter levels and the two built games: `node tools/smoke.js` (screenshots in `tools/shots/`).
 
+## v5.7.6 (2026-09-28) — a Fenrir worth fearing, and boss rewards
+- **Fenrir hunts.**
+  - He stalks Sol through the whole maze at 70% of her walking speed, re-aiming every 1.5 s. When she stands in START or EXIT he wanders instead.
+  - He charges 7 s into the level, then every 10 s, and 0.8 s sooner for each chain broken (never less often than every 5.5 s).
+  - A charge lasts 4.5 s at 390 speed plus 10 per realm, and 8 faster for every chain broken. Sol outruns him empty-handed, but not while carrying a letter (365).
+  - Picking up a right letter brings his charge within 2.5 s ("Fenrir smells the rune you picked up").
+  - After a charge, a catch or a stun he pants for a moment instead of walking home to the pen.
+  - Boss levels keep every Hati; they used to lose one.
+- **Beating Fenrir pays three ways.**
+  - Coins: 100 plus 25 per realm (325 at level 100), up from 40.
+  - Fenrir's Fang for that realm: +1 coin on every correct answer for good, one per realm, stored as `afterHours.v1.fangs`. The win screen shows the fangs collected.
+  - The realm's monument, placed in the castle: ten castle pieces nobody can buy and that are never offered as rewards. They are Hero of Midgard, Frost Obelisk, Giant's Head, Fire Beacon, Dwarf-Forged Urn, Sun Ring, Light Spire, Ward Stone, King of Asgard and the Wolf-Slayer's Column (`pieces.json`, `"boss": realm`; `SolBuild.grantTrophy`). The palette shows the ones still to win as "Beat Fenrir in …". A Town gets +50 coins instead, and the message suggests the Castle.
+- **Every question with no adapting.** `docs/questions/SOL-Labyrinth-Grade5/9/10/11-all-questions-no-adapting.docx` list every question of a grade in level order. Each passage sits at the level whose target length is closest to its word count, reading level shown but not used. A table shows how many passages each group of ten levels has. The earlier average-student lists are still there.
+- `tools/smoke.js` checks the hunter, the smell of a picked-up rune, every Hati on a boss level, the boss coins, the Fang and its +1, the monument on the field, and that the shop never lists a monument.
+
 ## v5.7.5 (2026-09-28) — a harder Sun Chariot, runestones that rise under attack
 - **Sun Chariot is harder from the start and keeps climbing** (`skyParams`). The first one (level 6) plays like level 30 used to, and each later one adds more on a steeper curve: creatures come every ~1.0 s at level 6 and every ~0.4 s by level 96, and ravens and wisps fly faster.
   - Ravens now throw feathers at the chariot, aimed at where it is. A raven glows orange for a third of a second first. The chance a raven throws grows from 45% to 83%.

@@ -129,7 +129,7 @@ function buildGrade(g) {
   const sim = simulate(pool);
   const kids = [];
   kids.push(new Paragraph({ heading: HeadingLevel.TITLE, children: [new TextRun({ text: "Sol's Labyrinth — " + SHORT[g] + " questions by level", font: FONT })] }));
-  kids.push(p(NAME[g] + " · game version 5.7.5 · for an average student reading on grade level", { italics: true, color: "555555" }));
+  kids.push(p(NAME[g] + " · game version 5.7.6 · for an average student reading on grade level", { italics: true, color: "555555" }));
 
   kids.push(new Paragraph({ heading: HeadingLevel.HEADING_1, children: [new TextRun("What this list shows")] }));
   const bullets = [
@@ -191,8 +191,11 @@ function buildGrade(g) {
     o.cs.forEach(c => { qn++; questionParas(o.pk, c, qn, kids); });
   });
   const served = qn - nRest;
+  return writeDoc(g, kids, "questions by level", "-questions-by-level.docx").then(f => console.log(f, "levels:", served, "questions; appendix:", nRest, "; own grade total:", nqOwn, "; flagged realms:", flags.map(k => REALMS[k]).join(",") || "none"));
+}
+function writeDoc(g, kids, what, suffix) {
   const doc = new Document({
-    creator: "Sol's Labyrinth", title: "Sol's Labyrinth — " + SHORT[g] + " questions by level",
+    creator: "Sol's Labyrinth", title: "Sol's Labyrinth — " + SHORT[g] + " " + what,
     styles: { default: { document: { run: { font: FONT, size: 21 } } },
       paragraphStyles: [
         { id: "Title", name: "Title", basedOn: "Normal", run: { size: 40, bold: true, font: FONT, color: "3A2A10" }, paragraph: { spacing: { after: 120 } } },
@@ -204,7 +207,52 @@ function buildGrade(g) {
       footers: { default: new Footer({ children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: SHORT[g] + " questions · page ", size: 16, color: "888888" }), new TextRun({ children: [PageNumber.CURRENT], size: 16, color: "888888" })] })] }) },
       children: kids }]
   });
-  return Packer.toBuffer(doc).then(buf => { const f = path.join(root, "docs", "questions", "SOL-Labyrinth-") + SHORT[g].replace(" ", "") + "-questions-by-level.docx"; fs.writeFileSync(f, buf); console.log(f, "levels:", served, "questions; appendix:", nRest, "; own grade total:", nqOwn, "; flagged realms:", flags.map(k => REALMS[k]).join(",") || "none"); });
+  const f = path.join(root, "docs", "questions", "SOL-Labyrinth-") + SHORT[g].replace(" ", "") + suffix;
+  return Packer.toBuffer(doc).then(buf => { fs.writeFileSync(f, buf); return f; });
 }
+
+/* v5.7.6: every question of a grade, with no adapting. Reading level is ignored; each passage sits at
+   the level whose target length is closest to its own (the one rule that does not depend on the
+   student), with all its questions, Part A then Part B. Levels with no passage of their length say so. */
+function bestFitLevel(w) { let b = 0, bd = 1e9; T.forEach((t, i) => { const d = Math.abs(t - w); if (d < bd) { bd = d; b = i; } }); return b + 1; }
+function buildAll(g) {
+  const own = q.packs.filter(x => x.family === g).map(x => Object.assign({ fit: bestFitLevel(x.words) }, x))
+    .sort((a, b) => a.fit - b.fit || a.words - b.words || a.id.localeCompare(b.id));
+  const nq = own.reduce((a, x) => a + x.claims.length, 0);
+  const kids = [];
+  kids.push(new Paragraph({ heading: HeadingLevel.TITLE, children: [new TextRun({ text: "Sol's Labyrinth — every " + SHORT[g] + " question by level", font: FONT })] }));
+  kids.push(p(NAME[g] + " · game version 5.7.6 · " + own.length + " passages, " + nq + " questions · no adapting", { italics: true, color: "555555" }));
+  kids.push(new Paragraph({ heading: HeadingLevel.HEADING_1, children: [new TextRun("What this list shows")] }));
+  [
+    "Every question written for " + SHORT[g] + ", in level order, as if the game did not adapt to the student at all.",
+    "The one thing the game changes by level on its own is passage length: 60 words on level 1, 10 more every two levels, 300 at level 50 and 550 at level 100. Each passage is listed at the level whose target length is closest to its word count, with all of its questions (a Part B right after its Part A).",
+    "Reading level (1 easier, 2 middle, 3 harder) is shown for each passage but does not move it. In the game, reading level is the part that adapts; here it is left out on purpose.",
+    "In play, a level asks 5 questions (6 from level 55, 7 from level 80), and a passage can be used on any level where its length is between 60% and 160% of the target, so a level may draw on passages listed a few levels either side.",
+    (g === "G10" ? "Grade 10 students also get the Grade 9 questions (see the Grade 9 list). " : g === "G11" ? "Grade 11 students also get the Grade 9 and Grade 10 questions (see those lists). " : "") + "The ✓ marks the keyed answer; the check boxes are for the reviewer."
+  ].forEach(t => kids.push(new Paragraph({ numbering: { reference: "bul", level: 0 }, spacing: { after: 60 }, children: [r(t)] })));
+  /* coverage by realm */
+  kids.push(new Paragraph({ heading: HeadingLevel.HEADING_1, children: [new TextRun("Passages per group of ten levels")] }));
+  const rows = [["Levels (realm)", "Target length", "Passages placed here", "Questions", "Reading levels (1/2/3)"]];
+  for (let k = 0; k < 10; k++) {
+    const ps = own.filter(x => realmOf(x.fit) === k);
+    rows.push([{ text: (k * 10 + 1) + "–" + (k * 10 + 10) + " (" + REALMS[k] + ")", fill: ps.length < 3 ? "FCEFC7" : null }, T[k * 10] + "–" + T[k * 10 + 9] + " words", String(ps.length), String(ps.reduce((a, x) => a + x.claims.length, 0)), [1, 2, 3].map(l => ps.filter(x => x.level === l).length).join(" / ")]);
+  }
+  kids.push(table([2100, 1600, 1900, 1300, 2460], rows));
+  kids.push(p("Shaded rows have fewer than three passages written near their length, so in play those levels borrow from their neighbours.", { before: 100, italics: true, color: "555555" }));
+  /* the levels */
+  let qn = 0, curRealm = -1, lastFit = 0;
+  own.forEach(x => {
+    const k = realmOf(x.fit);
+    if (k !== curRealm) { curRealm = k; kids.push(new Paragraph({ heading: HeadingLevel.HEADING_1, pageBreakBefore: true, children: [new TextRun(REALMS[k] + " · levels " + (k * 10 + 1) + "–" + (k * 10 + 10))] })); }
+    if (x.fit !== lastFit) {
+      lastFit = x.fit;
+      kids.push(new Paragraph({ heading: HeadingLevel.HEADING_2, keepNext: true, children: [new TextRun("Level " + x.fit + " · " + levelKind(x.fit) + " · target " + T[x.fit - 1] + " words")] }));
+    }
+    passageHead(x, kids, "", true);
+    x.claims.forEach(c => { qn++; questionParas(x, c, qn, kids); });
+  });
+  return writeDoc(g, kids, "every question by level", "-all-questions-no-adapting.docx").then(f => console.log(f, own.length, "passages", qn, "questions"));
+}
+
 fs.mkdirSync(path.join(root, "docs", "questions"), { recursive: true });
-Promise.all(["NJ5", "G9", "G10", "G11"].map(buildGrade)).catch(e => { console.error(e); process.exit(1); });
+Promise.all(["NJ5", "G9", "G10", "G11"].map(buildGrade).concat(["NJ5", "G9", "G10", "G11"].map(buildAll))).catch(e => { console.error(e); process.exit(1); });
