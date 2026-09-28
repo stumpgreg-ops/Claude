@@ -5,7 +5,7 @@
  *   2  Eagle Swoop   galaga style: eagles carry the letters above a raven guard and dive; shoot the right eagle
  *   4  Rune Rocks    asteroids style: beam in the rock with the right letter, blast the rest
  *   6  Sun Chariot   side-scrolling flyer: shoot the letter orb with the right answer
- *   8  Wolf Ring     arena: Hati circle in; shoot the runestone with the right answer
+ *   8  Wolf Ring     arena: Hati attack; runestones rise one or two at a time; shoot the right one while it is up
  * Odd levels stay in the maze and every tenth level is still Fenrir's boss maze.
  *
  * The questions, the reading pop-up, lives, coins, the adaptive reading level,
@@ -49,11 +49,11 @@
     },
     ring: {
       id: "ring", name: "Wolf Ring", kind: "arena level",
-      how: "Sol stands inside a ring of runestones while the Hati circle in. Shoot the runestone with the right answer. An arrow sends a wolf running.",
+      how: "Sol stands in a stone ring while the Hati attack. The letter runestones are sunk in the ground: after the wolves come, they rise one or two at a time, in any order and anywhere round the ring, and sink again a few seconds later. Shoot the runestone with the right answer while it is up. An arrow sends a wolf running.",
       rules: "Shooting a wrong stone costs a life. So does letting a wolf reach you.",
-      keys: "Arrow keys or WASD move and aim · Space or FIRE shoots · or click or tap to aim and shoot.",
-      tip: "WOLF RING — shoot the runestone with the right letter. Keep the wolves off.",
-      hint1: "Shoot the runestone with the right letter. The passage stays in the side panel.",
+      keys: "Arrow keys or WASD move and aim · Space or FIRE shoots · or click or tap to aim and shoot (Sol does not move).",
+      tip: "WOLF RING — watch for the right runestone to rise, and shoot it. Keep the wolves off.",
+      hint1: "The runestones rise after the wolves come. Shoot the one with the right letter while it is up. The passage stays in the side panel.",
       hint2: "This question has two right letters. Shoot both runestones that carry them."
     }
   };
@@ -1352,27 +1352,78 @@
         rg.wolves.forEach(function (w) { w.x += dx; w.y += dy; });
         this.ringPlaceStones();
       }
+      /* v5.7.5: the runestones start sunk in the ground. The Hati attack first; after a few seconds
+         the stones rise one or two at a time, in a shuffled order, on random spots round the ring. Each
+         stays up for a few seconds, then sinks and the next rise, so the right answer is only open
+         for a moment and never before the wolves are on the move. */
       answers_ring() {
         var rg = this.rg, self = this;
         rg.stones.forEach(kill); rg.stones = [];
         var letters = shuffle(this.choiceLetters().slice());
-        rg.stoneA0 = -Math.PI / 2 + rnd(-0.4, 0.4);
+        rg.stoneA0 = rnd(0, Math.PI * 2);
+        rg.slotN = 8;
         letters.forEach(function (L) {
-          var o = { letter: L, dead: false };
-          o.spr = self.add.image(0, 0, "md-stone").setDepth(9);
-          o.label = self.letterText(0, 0, L, 30, "#ffe07a", "#1a1008").setDepth(10);
+          var o = { letter: L, dead: false, state: "down", t: 0, slot: 0, x: -999, y: -999 };
+          o.spr = self.add.image(0, 0, "md-stone").setDepth(9).setVisible(false);
+          o.label = self.letterText(0, 0, L, 30, "#ffe07a", "#1a1008").setDepth(10).setVisible(false);
           rg.stones.push(o);
         });
-        this.ringPlaceStones();
+        rg.queue = [];
+        rg.riseCd = 3600;                                   /* the wolves get a head start */
+        rg.spawnCd = Math.min(rg.spawnCd, 600);
+        rg.upMs = Math.max(3800, 6500 - this.night * 25);   /* how long a stone stays up */
+      }
+      ringSlotPos(k) {
+        var rg = this.rg, a = rg.stoneA0 + k / rg.slotN * Math.PI * 2;
+        return { x: rg.cx + Math.cos(a) * (rg.R - 34), y: rg.cy + Math.sin(a) * (rg.R - 34) };
       }
       ringPlaceStones() {
-        var rg = this.rg, n = rg.stones.length;
-        rg.stones.forEach(function (o, k) {
-          var a = rg.stoneA0 + k / n * Math.PI * 2;
-          o.x = rg.cx + Math.cos(a) * (rg.R - 34); o.y = rg.cy + Math.sin(a) * (rg.R - 34);
-          if (o.spr) o.spr.setPosition(o.x, o.y);
-          if (o.label) o.label.setPosition(o.x, o.y - 2);
+        var self = this;
+        this.rg.stones.forEach(function (o) {
+          if (o.state === "down") return;
+          var q = self.ringSlotPos(o.slot); o.x = q.x; o.y = q.y;
+          self.ringDrawStone(o);
         });
+      }
+      ringDrawStone(o) {
+        var k = o.state === "rising" ? clamp(o.t / 400, 0, 1) : o.state === "sinking" ? clamp(1 - o.t / 350, 0, 1) : o.state === "up" ? 1 : 0;
+        o.spr.setVisible(k > 0).setScale(1, Math.max(0.01, k)).setPosition(o.x, o.y + (1 - k) * 34);
+        o.label.setVisible(k > 0.6).setAlpha(k).setPosition(o.x, o.y - 2);
+      }
+      /* raise a stone on a free spot, not right beside Sol */
+      ringRaise(o) {
+        var rg = this.rg, p = this.player, self = this, used = {}, free = [], k;
+        rg.stones.forEach(function (q) { if (q !== o && q.state !== "down") used[q.slot] = true; });
+        for (k = 0; k < rg.slotN; k++) if (!used[k]) { var q2 = this.ringSlotPos(k); if (!p || dist(q2.x, q2.y, p.x, p.y) > 130) free.push(k); }
+        if (!free.length) for (k = 0; k < rg.slotN; k++) if (!used[k]) free.push(k);
+        o.slot = free[Math.floor(Math.random() * free.length)] || 0;
+        var pos = this.ringSlotPos(o.slot); o.x = pos.x; o.y = pos.y;
+        o.state = "rising"; o.t = 0;
+        this.burst(o.x, o.y + 20, 0x9a8a6a, 10);
+        snd("rock");
+        this.ringDrawStone(o);
+      }
+      ringStones(ms) {
+        var rg = this.rg, self = this;
+        rg.stones.forEach(function (o) {
+          if (o.state === "down") return;
+          o.t += ms;
+          if (o.state === "rising" && o.t >= 400) { o.state = "up"; o.t = 0; }
+          else if (o.state === "up" && o.t >= (o.dead ? 1000 : rg.upMs)) { o.state = "sinking"; o.t = 0; }
+          else if (o.state === "sinking" && o.t >= 350) { o.state = "down"; o.t = 0; if (!rg.stones.some(function (q) { return q.state !== "down"; })) rg.riseCd = 900; }
+          self.ringDrawStone(o);
+        });
+        if (this._between) return;
+        rg.riseCd -= ms;
+        if (rg.riseCd > 0 || rg.stones.some(function (q) { return q.state !== "down"; })) return;
+        /* next one or two, from a shuffled round of the stones still in play */
+        var live = rg.stones.filter(function (q) { return !q.dead; });
+        if (!live.length) return;
+        rg.queue = rg.queue.filter(function (q) { return !q.dead; });
+        if (!rg.queue.length) rg.queue = shuffle(live.slice());
+        var n = Math.min(rg.queue.length, Math.random() < 0.5 ? 1 : 2);
+        for (var i = 0; i < n; i++) this.ringRaise(rg.queue.shift());
+        rg.riseCd = 99999;
       }
       tick_ring(s, inp, ms) {
         var rg = this.rg, p = this.player, i, j, self = this, g = this.fxG, now = this.time.now;
@@ -1382,7 +1433,9 @@
         p.x += ax / l * 320 * s; p.y += ay / l * 320 * s;
         var dc = dist(p.x, p.y, rg.cx, rg.cy), lim = rg.R - 34;
         if (dc > lim) { p.x = rg.cx + (p.x - rg.cx) / dc * lim; p.y = rg.cy + (p.y - rg.cy) / dc * lim; }
+        this.ringStones(ms);
         rg.stones.forEach(function (o) {
+          if (o.state !== "up") return;
           var d = dist(p.x, p.y, o.x, o.y);
           if (d < 40 && d > 0) { p.x = o.x + (p.x - o.x) / d * 40; p.y = o.y + (p.y - o.y) / d * 40; }
         });
@@ -1410,11 +1463,12 @@
           }
           for (j = 0; j < rg.stones.length && !hit; j++) {
             var o = rg.stones[j];
-            if (!o.dead && dist(a.x, a.y, o.x, o.y) < 30) {
+            var upEnough = o.state === "up" || (o.state === "rising" && o.t > 200);
+            if (!o.dead && upEnough && dist(a.x, a.y, o.x, o.y) < 30) {
               hit = true;
               var res = this.answerPick(o.letter, o.x, o.y);
-              if (res === "wrong") { o.dead = true; o.spr.setTint(0x555555); o.label.setText("✕").setColor("#8a8a8a"); }
-              else if (res === "partial") { o.dead = true; o.spr.setTint(0xffe07a); }
+              if (res === "wrong") { o.dead = true; o.spr.setTint(0x555555); o.label.setText("✕").setColor("#8a8a8a"); o.state = "up"; o.t = 0; }
+              else if (res === "partial") { o.dead = true; o.spr.setTint(0xffe07a); o.state = "up"; o.t = 0; }
             }
           }
           if (hit || dist(a.x, a.y, rg.cx, rg.cy) > rg.R + 90) { a.spr.destroy(); rg.arrows.splice(i, 1); }

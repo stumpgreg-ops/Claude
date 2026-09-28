@@ -13,6 +13,17 @@ Progress saves in this browser profile (`afterHours.v1.night`). Itch login does 
 
 Question packs: `js/content.js` and `js/content2.js` (the v4 Virginia packs) plus `js/content3.js`–`js/content11.js` (v4.9 Virginia) and `js/content12.js`–`js/content17.js` (v4.9 New Jersey grade 5). Format and writing rules: `tools/CONTENT-GUIDE.md`. Check every file with `node tools/validate-content.js`. Headless smoke test of the gateway, builder, shop, a night, the realms and their creatures, Fenrir, the castle perks, the shooter levels and the two built games: `node tools/smoke.js` (screenshots in `tools/shots/`).
 
+## v5.7.5 (2026-09-28) — a harder Sun Chariot, runestones that rise under attack
+- **Sun Chariot is harder from the start and keeps climbing** (`skyParams`). The first one (level 6) plays like level 30 used to, and each later one adds more on a steeper curve: creatures come every ~1.0 s at level 6 and every ~0.4 s by level 96, and ravens and wisps fly faster.
+  - Ravens now throw feathers at the chariot, aimed at where it is. A raven glows orange for a third of a second first. The chance a raven throws grows from 45% to 83%.
+  - From level 26, wisps throw sparks too.
+  - From level 16 the orbs weave further and faster.
+  - Also from level 16, a guard raven (pale violet) flies in front of some orbs: 1 at level 16, 2 at 36, 3 at 56, 4 at 76. A bolt hits the guard first; it comes back when the orb comes round again. Right and wrong orbs are guarded alike.
+  - Bolts now check their whole path, so fast shots no longer pass through a target.
+- **Wolf Ring: the runestones rise under attack.** Every stone starts sunk in the ground while the Hati come in. After about 3.6 s, stones rise one or two at a time, in a shuffled order, on random spots round the ring, never right beside Sol. Each stays up for 6.3 s at level 8, down to 4 s at the top levels, then sinks, and the next rise. Every stone comes up once per round. A sunk stone can't be shot. A wrong stone is crossed out and leaves the rotation, so the right answer is only open for moments while the wolves are running.
+- The mode cards and hints describe the new rules.
+- `tools/smoke.js` checks the Sun Chariot difficulty curve, a thrown feather, a guard taking the bolt, the stones starting sunk, a sunk stone ignoring arrows, and one or two stones rising at a time.
+
 ## v5.7.4 (2026-09-28) — clicking only shoots; letting go of the beam too soon
 - **The mouse never steers in Rune Rocks or Sun Chariot.** A click used to turn and thrust the ship toward the pointer (Rune Rocks) or fly the chariot to it (Sun Chariot) as well as fire. Now the left button only fires and, in Rune Rocks, the right button only holds the beam straight ahead; ◀ ▶ ▲, WASD and the on-screen pad steer. Wolf Ring still aims where you click (Sol does not move).
 - **Letting go of the beam early is explained.** A rock pulled part of the way keeps flying at the ship when the beam is released, and hitting the ship costs a life even when it carries the right letter. The beam card says so ("Don't let go early!", and step 3 is now "Keep holding until the rock touches your ship"), the mode card's rules say so, and such a hit is labelled YOU LET GO OF THE BEAM TOO SOON with a reminder on the side panel.

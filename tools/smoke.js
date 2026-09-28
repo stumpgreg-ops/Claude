@@ -632,16 +632,31 @@ var srv = http.createServer(function (req, res) {
   await shot("18b-sun-chariot-busy");
   await page.evaluate(function () { SolScene.iframeMs = 0; });
   await gotoLevel(8);
+  await page.evaluate(function () { var s = SolScene; s.iframeMs = 60000; s.rg.riseCd = 1500; });   /* just for the picture */
+  await page.waitForTimeout(6500);
+  await shot("19a-wolf-ring");
+  await page.evaluate(function () { var s = SolScene; s.iframeMs = 0; s.strikes = 0; s.rg.stones.forEach(function (q) { q.state = "down"; q.t = 0; s.ringDrawStone(q); }); s.rg.riseCd = 3600; s.rg.wolves.forEach(function (w) { w.spr.destroy(); }); s.rg.wolves = []; s.rg.spawnCd = 1e9; });
   modeRuns.ring = await page.evaluate(async function () {
     var s = SolScene, G = s.rg, p = s.player, o = { mode: s.mode.id };
     s.spareLives = 0; s.perks = {};
     function arrowAt(x, y) { G.arrows.push({ x: x, y: y, vx: 0, vy: 0, spr: s.add.image(x, y, "md-arrow") }); }
+    /* v5.7.5: every runestone starts sunk; the wolves come first */
+    o.sunkAtStart = G.stones.every(function (q) { return q.state === "down" && !q.spr.visible; });   /* (reset after the picture) */
+    o.riseWait = G.riseCd;
+    var sunkArrow = G.stones[0]; s.ringRaise(sunkArrow); sunkArrow.state = "down"; s.ringDrawStone(sunkArrow);
+    arrowAt(sunkArrow.x, sunkArrow.y); await new Promise(function (r) { setTimeout(r, 300); }); o.sunkShot = s.strikes + s.score; s.strikes = 0; s.iframeMs = 0;
+    /* then they rise one or two at a time */
+    G.riseCd = 0; await new Promise(function (r) { setTimeout(r, 900); });
+    o.upCount = G.stones.filter(function (q) { return q.state !== "down"; }).length;
+    G.stones.forEach(function (q) { q.state = "down"; s.ringDrawStone(q); }); G.riseCd = 99999; G.queue = [];
+    function raise(q) { s.ringRaise(q); q.state = "up"; q.t = 0; s.ringDrawStone(q); }
     var w = G.stones.filter(function (q) { return s.need.indexOf(q.letter) === -1; })[0];
+    raise(w);
     arrowAt(w.x, w.y); await new Promise(function (r) { setTimeout(r, 400); }); o.wrong = s.strikes; o.crossed = w.dead; s.strikes = 0; s.iframeMs = 0;
     G.wolves.push({ x: p.x + 10, y: p.y, state: "run", sp: 0, spr: s.add.image(p.x, p.y, "hati1").setScale(0.5) });
     await new Promise(function (r) { setTimeout(r, 400); }); o.bitten = s.strikes; s.strikes = 0; s.iframeMs = 0;
     s.score = s.needExtracts - 1;
-    G.stones.filter(function (q) { return s.need.indexOf(q.letter) !== -1; }).forEach(function (q) { arrowAt(q.x, q.y); });
+    G.stones.filter(function (q) { return s.need.indexOf(q.letter) !== -1; }).forEach(function (q) { raise(q); arrowAt(q.x, q.y); });
     await new Promise(function (r) { setTimeout(r, 2200); });
     o.ended = s.ended; o.title = document.getElementById("win-title").textContent; o.msg = document.getElementById("win-msg").textContent; o.goto = document.getElementById("btn-next").dataset.goto;
     return o;
@@ -661,6 +676,7 @@ var srv = http.createServer(function (req, res) {
   check(cv.spawn6 < 1100 && cv.spawn96 <= 400 && cv.throw6 > 0.3 && cv.throw96 > cv.throw6 && cv.spark6 === 0 && cv.spark96 > 0 && cv.guards6 === 0 && cv.guards16 === 1 && cv.guards56 === 3 && cv.bob56 > cv.bob6, "Sun Chariot: harder from the first one (level 6) and harder every time after: " + JSON.stringify(cv));
   check(mr.sky.feather === 1, "Sun Chariot: a raven's feather that hits the chariot costs a life");
   check(mr.sky.guard && mr.sky.guard.orbSafe && mr.sky.guard.guardGone && mr.sky.guard.strikes === 0 && mr.sky.guard.kill, "Sun Chariot: a guard raven in front of an orb takes the bolt and the orb stays: " + JSON.stringify(mr.sky.guard));
+  check(mr.ring.sunkAtStart && mr.ring.riseWait > 2000 && mr.ring.sunkShot === 0 && mr.ring.upCount >= 1 && mr.ring.upCount <= 2, "Wolf Ring: the runestones start sunk while the wolves come, can't be shot down there, and rise one or two at a time: " + JSON.stringify({ sunk: mr.ring.sunkAtStart, wait: mr.ring.riseWait, sunkShot: mr.ring.sunkShot, up: mr.ring.upCount }));
   check(mr.skyMouse && mr.skyMouse.moved < 2, "Sun Chariot: clicking does not move the chariot: " + JSON.stringify(mr.skyMouse));
   check(mr.beamHelp && /let go early/i.test(mr.beamHelp.text || ""), "Rune Rocks: the beam card warns about letting go early");
   check(mr.rocks.learned === "1", "Rune Rocks: pulling a rock in retires the beam tutorial on this Chromebook");
