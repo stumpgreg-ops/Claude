@@ -1,4 +1,4 @@
-/* SOL Labyrinth v5.7.5 — shooter levels.
+/* SOL Labyrinth v5.7.7 — shooter levels.
  *
  * Every other level of each realm (levels 2, 4, 6 and 8) swaps the maze for a
  * shooter, in rotation:
@@ -22,10 +22,10 @@
   var MODES = {
     raid: {
       id: "raid", name: "Eagle Swoop", kind: "galaga-style level",
-      how: "Great eagles sit at the top of the sky, each carrying a letter in its talons, with rows of ravens flying guard below them. Shoot the eagle that carries the right answer. An eagle takes two arrows. Ravens and eagles swoop down at Sol, and an eagle can stop and shine a beam down to catch him.",
-      rules: "A wrong letter costs a life. So does a feather, a bird crashing into you, or getting caught in an eagle's beam.",
+      how: "Great eagles fly in and take the top of the sky, each carrying a letter in its talons, with two guard ravens under each eagle and rows of ravens below. Once the flock has formed, shoot the eagle that carries the right answer — it takes two arrows. Birds are always swooping down at Sol, and an eagle can stop and shine a beam down to catch him.",
+      rules: "A wrong letter costs a life. So does bird poo landing on you, a bird crashing into you, or getting caught in an eagle's beam. You can't shoot until the flock has flown into formation.",
       keys: "◀ ▶ or A / D move · Space, FIRE or a mouse button shoots (clicking does not move Sol).",
-      tip: "EAGLE SWOOP — shoot the eagle with the right letter. Dodge the beams.",
+      tip: "EAGLE SWOOP — shoot the eagle with the right letter. Dodge the poo and the beams.",
       hint1: "Shoot the eagle carrying the right letter — it takes two arrows. The passage stays in the side panel.",
       hint2: "This question has two right letters. Shoot both eagles that carry them."
     },
@@ -117,10 +117,30 @@
     g.addColorStop(0, "rgba(255,255,230,1)"); g.addColorStop(0.35, "rgba(255,220,90,0.95)"); g.addColorStop(1, "rgba(255,150,30,0)");
     c.fillStyle = g; c.beginPath(); c.ellipse(w / 2, h / 2, w / 2, h / 2, 0, 0, Math.PI * 2); c.fill();
   }
+  /* v5.7.7: bird poo — thick and white with a dark outline so it reads on any sky */
+  function drawPoo(c, w, h) {
+    c.fillStyle = "#1a1a22"; c.beginPath(); c.moveTo(w / 2, 1); c.quadraticCurveTo(w - 1, h * 0.55, w / 2, h - 1); c.quadraticCurveTo(1, h * 0.55, w / 2, 1); c.fill();
+    c.fillStyle = "#f7f7ee"; c.beginPath(); c.moveTo(w / 2, 4); c.quadraticCurveTo(w - 4, h * 0.56, w / 2, h - 4); c.quadraticCurveTo(4, h * 0.56, w / 2, 4); c.fill();
+    c.fillStyle = "#b9b9a8"; c.beginPath(); c.arc(w * 0.42, h * 0.66, w * 0.14, 0, Math.PI * 2); c.fill();
+    c.fillStyle = "#ffffff"; c.beginPath(); c.arc(w * 0.6, h * 0.48, w * 0.09, 0, Math.PI * 2); c.fill();
+  }
+  function drawSplat(c, w, h) {
+    var cx = w / 2, cy = h / 2, i, a, r;
+    c.fillStyle = "#1a1a22"; c.beginPath();
+    for (i = 0; i <= 16; i++) { a = i / 16 * Math.PI * 2; r = (i % 2 ? 0.28 : 0.46) * w; c[i ? "lineTo" : "moveTo"](cx + Math.cos(a) * r, cy + Math.sin(a) * r * 0.8); }
+    c.fill();
+    c.fillStyle = "#f7f7ee"; c.beginPath();
+    for (i = 0; i <= 16; i++) { a = i / 16 * Math.PI * 2; r = (i % 2 ? 0.23 : 0.41) * w; c[i ? "lineTo" : "moveTo"](cx + Math.cos(a) * r, cy + Math.sin(a) * r * 0.8); }
+    c.fill();
+    c.fillStyle = "#c8c8b6"; c.beginPath(); c.arc(cx - w * 0.08, cy + h * 0.06, w * 0.1, 0, Math.PI * 2); c.fill();
+  }
   function drawFeather(c, w, h) {
-    c.fillStyle = "#2a2238"; c.beginPath(); c.moveTo(w / 2, 0);
-    c.quadraticCurveTo(w, h * 0.45, w / 2, h - 3); c.quadraticCurveTo(0, h * 0.45, w / 2, 0); c.fill();
-    c.strokeStyle = "#8a80a8"; c.lineWidth = 1.2; c.beginPath(); c.moveTo(w / 2, 2); c.lineTo(w / 2, h); c.stroke();
+    /* v5.7.7: a light outline so a dark feather shows against a dark sky */
+    c.fillStyle = "#f2ecff"; c.beginPath(); c.moveTo(w / 2, 0);
+    c.quadraticCurveTo(w, h * 0.45, w / 2, h - 1); c.quadraticCurveTo(0, h * 0.45, w / 2, 0); c.fill();
+    c.fillStyle = "#2a2238"; c.beginPath(); c.moveTo(w / 2, 3);
+    c.quadraticCurveTo(w - 3, h * 0.45, w / 2, h - 4); c.quadraticCurveTo(3, h * 0.45, w / 2, 3); c.fill();
+    c.strokeStyle = "#c8c0e8"; c.lineWidth = 1.5; c.beginPath(); c.moveTo(w / 2, 3); c.lineTo(w / 2, h); c.stroke();
   }
   function drawEagle(up) {
     return function (c, w, h) {
@@ -215,7 +235,9 @@
   function ensureModeArt(scene, pal) {
     canvasTex(scene, "md-arrow", 12, 34, drawArrow);
     canvasTex(scene, "md-bolt", 34, 12, drawBolt);
-    canvasTex(scene, "md-feather", 12, 26, drawFeather);
+    canvasTex(scene, "md-feather", 16, 32, drawFeather);
+    canvasTex(scene, "md-poo", 22, 28, drawPoo);
+    canvasTex(scene, "md-splat", 54, 44, drawSplat);
     canvasTex(scene, "md-shield", 42, 42, drawShield);
     canvasTex(scene, "md-eagle-0", 88, 62, drawEagle(true));
     canvasTex(scene, "md-eagle-1", 88, 62, drawEagle(false));
@@ -649,9 +671,11 @@
           eg.label = this.letterText(-99, -99, eg.letter, 22, "#2a1604", "#fff6d8");
           list.push(eg);
         }
-        for (r = 0; r < rows; r++) for (c = 0; c < cols; c++) R.ravSlots.push({ sx: (c - (cols - 1) / 2) * gapR, sy: 88 + r * 54 });
+        for (r = 0; r < rows; r++) for (c = 0; c < cols; c++) R.ravSlots.push({ sx: (c - (cols - 1) / 2) * gapR, sy: 112 + r * 54 });
         var rav = [];
         R.ravSlots.forEach(function (sl, k) { rav.push(self.raidRaven(k)); });
+        /* v5.7.7: two guard ravens hang just under every eagle's letter; they never dive, and fly back if shot */
+        list.forEach(function (eg2) { [-1, 1].forEach(function (sd) { rav.push(self.raidGuard(eg2, sd)); }); });
         R.total = rav.length;
         /* they fly in by groups from alternating sides: the eagles with the first ravens */
         shuffle(rav);
@@ -662,10 +686,17 @@
           e.delay = g * 750 + k2 * 110; e.side = g % 2 ? 1 : -1; k2++;
         });
         R.ravens = list;
-        R.diveCd = 2500 + (g + 1) * 750 + 2000;
+        R.ready = false; R.readyWarned = false; R.guardCd = 5000;   /* v5.7.7: no arrows until the flock has formed */
+        this.showTag("GET READY — THE FLOCK IS FLYING IN", "#ffe08a");
+        R.diveCd = 600;
         R.refillCd = 9000;
         this.raidSway();
         snd("caw");
+      }
+      raidGuard(eg, sd) {
+        var e = { kind: "raven", guard: true, guardOf: eg, gside: sd, letter: null, hp: 1, alive: true, slot: -1, sx: eg.sx + sd * 23, sy: 74, state: "wait", x: -99, y: -99 };
+        e.spr = this.add.image(-99, -99, "rf-raven-0").setScale(0.66).setTint(0xc8d4ff).setDepth(12);
+        return e;
       }
       raidRaven(k) {
         var sl = this.raid.ravSlots[k];
@@ -745,7 +776,11 @@
         this.blink(p);
         /* arrows */
         R.cd -= ms;
-        if (inp.fire && R.cd <= 0 && R.arrows.length < 2) {
+        if (!R.ready && R.ravens.length && R.ravens.every(function (o) { return o.state !== "wait" && o.state !== "enter"; })) {
+          R.ready = true; this.showTag("FIRE!", "#9aefc0"); snd("caw");
+        }
+        if (inp.fire && !R.ready && !R.readyWarned) { R.readyWarned = true; this.toast("Wait for the flock to fly into formation — then fire!", 2200); }
+        if (inp.fire && R.ready && R.cd <= 0 && R.arrows.length < 2) {
           R.arrows.push({ x: p.x, y: p.y - 36, spr: this.add.image(p.x, p.y - 36, "md-arrow").setDepth(18) });
           R.cd = 260; R.fired += 1; snd("shot");
         }
@@ -823,18 +858,29 @@
         R.ravens = R.ravens.filter(function (o) { return o.alive; });
         /* who dives next */
         R.diveCd -= ms;
-        var maxDivers = 2 + Math.floor(this.night / 35);
-        if (R.diveCd <= 0 && anyForm && divers < maxDivers) {
+        var maxDivers = 2 + Math.floor(this.night / 25);   /* 2 at first, 3 from 25, … 5 at 75+ */
+        var flying = R.ravens.filter(function (o) { return o.alive && (o.state === "dive" || o.state === "beam" || o.state === "return"); }).length;
+        if (R.ready && anyForm && (flying === 0 || (R.diveCd <= 0 && divers < maxDivers))) {   /* never an empty sky */
           this.raidLaunch();
-          R.diveCd = rnd(1300, 2500) * (1 - Math.min(0.45, this.night / 220));
+          R.diveCd = rnd(700, 1400) * (1 - Math.min(0.4, this.night / 250));
+        }
+        /* guards fly back to an eagle that is home in the formation */
+        R.guardCd -= ms;
+        if (R.guardCd <= 0) {
+          R.guardCd = 5000;
+          R.ravens.filter(function (o) { return o.kind === "eagle" && o.alive && o.state === "form"; }).forEach(function (eg) {
+            [-1, 1].forEach(function (sd) {
+              if (!R.ravens.some(function (o) { return o.guard && o.guardOf === eg && o.gside === sd && o.alive; })) { var ng = self.raidGuard(eg, sd); ng.delay = 0; ng.side = sd; R.ravens.push(ng); }
+            });
+          });
         }
         /* when the ravens thin out, more fly in to shield the eagles */
         R.refillCd -= ms;
         if (R.refillCd <= 0) {
-          R.refillCd = 7000;
+          R.refillCd = 5000;
           var used = {}, liveRav = 0;
-          R.ravens.forEach(function (o) { if (o.kind === "raven") { used[o.slot] = 1; liveRav++; } });
-          if (liveRav <= R.total * 0.6 && R.ravens.some(function (o) { return o.kind === "eagle"; })) {
+          R.ravens.forEach(function (o) { if (o.kind === "raven" && !o.guard) { used[o.slot] = 1; liveRav++; } });
+          if (liveRav <= R.total * 0.75 && R.ravens.some(function (o) { return o.kind === "eagle"; })) {
             var empties = R.ravSlots.map(function (x, k) { return k; }).filter(function (k) { return !used[k]; });
             shuffle(empties).slice(0, 4).forEach(function (k, j) {
               var nr = self.raidRaven(k); nr.delay = j * 130; nr.side = Math.random() < 0.5 ? -1 : 1; R.ravens.push(nr);
@@ -844,10 +890,13 @@
         /* falling feathers */
         for (i = R.feathers.length - 1; i >= 0; i--) {
           var f = R.feathers[i], gone = false;
-          f.t += s; f.y += (210 + this.night * 1.1) * s; f.x += ((f.vx || 0) + Math.sin(f.t * 6) * 40) * s;
-          f.spr.setPosition(f.x, f.y).setRotation(Math.sin(f.t * 6) * 0.4);
-          if (dist(f.x, f.y, p.x, p.y - 10) < 24) { gone = true; this.loseLife("hit", "HIT BY A FEATHER"); }
-          if (gone || f.y > H + 20) { f.spr.destroy(); R.feathers.splice(i, 1); }
+          f.t += s; f.y += (230 + this.night * 1.1) * s; f.x += (f.vx || 0) * s;
+          f.spr.setPosition(f.x, f.y).setScale(1, 1 + Math.min(0.25, f.t * 0.3));
+          if (dist(f.x, f.y, p.x, p.y - 10) < 26) {
+            gone = true;
+            if (this.loseLife("hit", "SPLAT! BIRD POO GOT YOU")) this.raidSplat(p.x, p.y - 22, true);
+          } else if (f.y > H - 30) { gone = true; this.raidSplat(f.x, H - 26, false); }
+          if (gone) { f.spr.destroy(); R.feathers.splice(i, 1); }
         }
         /* Huginn, the golden raven, crosses the top now and then */
         if (!R.huginn) {
@@ -863,17 +912,24 @@
           if (R.huginn.x < -80 || R.huginn.x > W + 80) { kill(R.huginn); R.huginn = null; R.huginnCd = rnd(14000, 22000); }
         }
       }
+      /* a white splat on Sol (it rides along and fades) or on the ground */
+      raidSplat(x, y, onSol) {
+        var sp = this.add.image(x, y, "md-splat").setDepth(onSol ? 22 : 3).setScale(onSol ? 1 : 0.7).setAlpha(0.95), self = this, p = this.player;
+        snd("pop");
+        this.tweens.add({ targets: sp, alpha: 0, delay: onSol ? 700 : 500, duration: onSol ? 500 : 700, onComplete: function () { sp.destroy(); },
+          onUpdate: function () { if (onSol && p) sp.setPosition(p.x, p.y - 22); } });
+      }
       raidFeather(x, y) {
         var p = this.player, fall = Math.max(0.4, (p.y - y) / (210 + this.night * 1.1));
         var vx = clamp((p.x - x) / fall, -140, 140) * (this.night >= 20 ? 1 : 0.6);
-        this.raid.feathers.push({ x: x, y: y, vx: vx, t: 0, spr: this.add.image(x, y, "md-feather").setDepth(17) });
+        this.raid.feathers.push({ x: x, y: y, vx: vx, t: 0, spr: this.add.image(x, y, "md-poo").setDepth(17) });
       }
       raidLaunch() {
         var R = this.raid, self = this;
         var form = R.ravens.filter(function (o) { return o.alive && o.state === "form"; });
-        var eagles = form.filter(function (o) { return o.kind === "eagle"; }), ravens = form.filter(function (o) { return o.kind === "raven"; });
+        var eagles = form.filter(function (o) { return o.kind === "eagle"; }), ravens = form.filter(function (o) { return o.kind === "raven" && !o.guard; });
         var beaming = R.ravens.some(function (o) { return o.alive && (o.state === "beam" || o.beamer); });
-        if (eagles.length && (Math.random() < 0.4 || !ravens.length)) {
+        if (eagles.length && (Math.random() < 0.5 || !ravens.length)) {
           var eg = eagles[Math.floor(Math.random() * eagles.length)];
           eg.lead = true;
           if (!beaming && Math.random() < 0.55) { this.raidBeamDive(eg); return; }

@@ -129,7 +129,7 @@ function buildGrade(g) {
   const sim = simulate(pool);
   const kids = [];
   kids.push(new Paragraph({ heading: HeadingLevel.TITLE, children: [new TextRun({ text: "Sol's Labyrinth — " + SHORT[g] + " questions by level", font: FONT })] }));
-  kids.push(p(NAME[g] + " · game version 5.7.6 · for an average student reading on grade level", { italics: true, color: "555555" }));
+  kids.push(p(NAME[g] + " · game version 5.7.7 · for an average student reading on grade level", { italics: true, color: "555555" }));
 
   kids.push(new Paragraph({ heading: HeadingLevel.HEADING_1, children: [new TextRun("What this list shows")] }));
   const bullets = [
@@ -221,7 +221,7 @@ function buildAll(g) {
   const nq = own.reduce((a, x) => a + x.claims.length, 0);
   const kids = [];
   kids.push(new Paragraph({ heading: HeadingLevel.TITLE, children: [new TextRun({ text: "Sol's Labyrinth — every " + SHORT[g] + " question by level", font: FONT })] }));
-  kids.push(p(NAME[g] + " · game version 5.7.6 · " + own.length + " passages, " + nq + " questions · no adapting", { italics: true, color: "555555" }));
+  kids.push(p(NAME[g] + " · game version 5.7.7 · " + own.length + " passages, " + nq + " questions · no adapting", { italics: true, color: "555555" }));
   kids.push(new Paragraph({ heading: HeadingLevel.HEADING_1, children: [new TextRun("What this list shows")] }));
   [
     "Every question written for " + SHORT[g] + ", in level order, as if the game did not adapt to the student at all.",

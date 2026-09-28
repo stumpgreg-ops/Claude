@@ -13,6 +13,13 @@ Progress saves in this browser profile (`afterHours.v1.night`). Itch login does 
 
 Question packs: `js/content.js` and `js/content2.js` (the v4 Virginia packs) plus `js/content3.js`–`js/content11.js` (v4.9 Virginia) and `js/content12.js`–`js/content17.js` (v4.9 New Jersey grade 5). Format and writing rules: `tools/CONTENT-GUIDE.md`. Check every file with `node tools/validate-content.js`. Headless smoke test of the gateway, builder, shop, a night, the realms and their creatures, Fenrir, the castle perks, the shooter levels and the two built games: `node tools/smoke.js` (screenshots in `tools/shots/`).
 
+## v5.7.7 (2026-09-28) — a harder Eagle Swoop
+- **No shooting until the flock has formed.** "GET READY" shows while the birds fly in; arrows only start once every bird of the wave has reached its place ("FIRE!"). A student who fires early is told to wait.
+- **Always a bird in the air.** Once shooting starts, a bird dives the moment none is flying. Up to 2 dive at once at first, 3 from level 25, 4 from 50 and 5 from 75, launched every 0.7–1.4 s. Eagles lead half the dives (up from 40%), so the right answer is often on the move.
+- **Eagles are better guarded.** Two pale guard ravens hang just under every eagle's letter, and an arrow hits the first bird in its path. Guards never dive and fly back to an eagle that is home in the formation (checked every 5 s). The raven rows sit lower, and they refill sooner: at 75% instead of 60%, every 5 s instead of 7.
+- **Bird poo instead of feathers.** Thick white drops with a dark outline, easy to see on any sky, splat on Sol ("SPLAT! BIRD POO GOT YOU") or on the ground. The Sun Chariot's thrown feathers are bigger and have a light outline.
+- `tools/smoke.js` checks that early shots do nothing, two guards per eagle, and a bird always flying once shooting starts.
+
 ## v5.7.6 (2026-09-28) — a Fenrir worth fearing, and boss rewards
 - **Fenrir hunts.**
   - He stalks Sol through the whole maze at 70% of her walking speed, re-aiming every 1.5 s. When she stands in START or EXIT he wanders instead.
