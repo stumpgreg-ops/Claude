@@ -688,3 +688,12 @@ h1.logo img { width: min(300px, 60vw); height: auto; display: block; margin: 0 a
 #beam-help .beam-steps li { margin-bottom: 6px; }
 #beam-help .beam-warn { margin: 0 0 12px; color: #ffb89a; font-size: 14px; }
 #beam-help #beam-help-ok { min-height: 44px; min-width: 120px; }
+
+/* v5.7.6: Fenrir's Fangs on a boss level's win screen */
+.fang-row { margin: 8px 0 10px; text-align: center; }
+.fang-row.hidden { display: none; }
+.fang-row .fang-title { margin: 0 0 6px; color: var(--gold); font-weight: 700; letter-spacing: .06em; font-size: 13px; text-transform: uppercase; }
+.fang-row .fang { display: inline-flex; flex-direction: column; align-items: center; width: 64px; margin: 2px; color: #55606e; font-size: 20px; line-height: 1; }
+.fang-row .fang small { font-size: 10px; margin-top: 3px; color: #7a8594; }
+.fang-row .fang.on { color: #fff3c4; text-shadow: 0 0 8px rgba(255, 216, 74, .7); }
+.fang-row .fang.on small { color: var(--gold); }

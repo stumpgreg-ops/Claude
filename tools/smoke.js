@@ -445,7 +445,15 @@ var srv = http.createServer(function (req, res) {
   /* boss level: Fenrir, the gate chains, a wrong letter sets him off, a banked answer breaks a chain */
   await realmLevel(20);
   var boss = await page.evaluate(function () {
-    var s = SolScene, o = { fenrir: !!s.fenrir, chains: s.chainsLeft, need: s.needExtracts, hati: s.janitors.length, pip: document.getElementById("realm-pip").textContent };
+    var s = SolScene, o = { fenrir: !!s.fenrir, chains: s.chainsLeft, need: s.needExtracts, hati: s.janitors.length, lanes: (s.level.startLanes || []).length, pip: document.getElementById("realm-pip").textContent };
+    /* v5.7.6: a hunter — stalks at 70% of Sol's walk, charges faster than she can run while carrying a letter */
+    o.stalk = s.fenrir.spd; o.charge = s.fenrir.chargeSpd; o.firstCharge = s.fenrir.nextCharge;
+    /* picking up a right letter brings his charge within 2.5 s */
+    s.fenrir.state = "prowl"; s.fenrir.nextCharge = 9000; s.player.carrying = null; s.carryExtra = []; s.stunMs = 0;
+    var rs = s.slips.filter(function (q) { return q.visible && s.need.indexOf(q.letter) !== -1; })[0];
+    if (rs) { s.player.body.reset(rs.x, rs.y); s.player.x = rs.x; s.player.y = rs.y; s.tryGrab(); }
+    o.smell = s.fenrir.nextCharge; o.grabbed = !!s.player.carrying;
+    s.player.carrying = null; s.carryExtra = [];
     s.spareLives = 3; s.iframeMs = 0; s.stunMs = 0;
     s.flagWrongAlarm({ x: s.player.x, y: s.player.y }); o.provoked = s.fenrir.state;
     s.strikes = 0; s.carryExtra = []; s.player.carrying = null;
@@ -454,8 +462,43 @@ var srv = http.createServer(function (req, res) {
     return o;
   });
   console.log("boss", JSON.stringify(boss));
-  check(boss.fenrir && boss.chains === boss.need && boss.hati === 2 && /Fenrir/.test(boss.pip), "level 20: Fenrir guards a gate with one chain per question, and one Hati fewer");
+  check(boss.fenrir && boss.chains === boss.need && boss.hati === boss.lanes && boss.hati >= 2 && /Fenrir/.test(boss.pip), "level 20: Fenrir guards a gate with one chain per question, and every Hati stays: " + boss.hati);
+  check(boss.stalk > 180 && boss.charge > 365 && boss.firstCharge <= 7000 && boss.grabbed && boss.smell <= 2500, "Fenrir hunts: he stalks Sol, charges faster than she can run with a letter, and picking up a right letter brings his charge on: " + JSON.stringify({ stalk: boss.stalk, charge: boss.charge, first: boss.firstCharge, smell: boss.smell }));
   check(boss.provoked === "windup" && boss.after === boss.chains - 1, "a wrong letter sets Fenrir off; a banked answer breaks a chain");
+  /* v5.7.6: beating Fenrir pays 100+ coins and a Fang (+1 coin an answer for good), shown on the win screen */
+  var bossWin = await page.evaluate(async function () {
+    var s = SolScene, o = {};
+    try { localStorage.removeItem("afterHours.v1.fangs"); } catch (e) {}
+    o.answer0 = s.coinEconomy().answer; var c0 = s.nightCoins || 0;
+    s.endRun(true);
+    await new Promise(function (r) { setTimeout(r, 900); });
+    o.coins = (s.nightCoins || 0) - c0;
+    o.title = document.getElementById("win-title").textContent; o.msg = document.getElementById("win-msg").textContent;
+    var fr = document.getElementById("fang-row"); o.fangRow = !!fr && !fr.classList.contains("hidden"); o.fangOn = fr ? fr.querySelectorAll(".fang.on").length : 0;
+    o.fangs = localStorage.getItem("afterHours.v1.fangs");
+    o.answer1 = s.coinEconomy().answer;
+    o.trophies = window.SolBuild && SolBuild.trophies ? SolBuild.trophies() : [];
+    o.theme = window.SolBuild ? SolBuild.state().theme : null;
+    o.onField = window.SolBuild ? JSON.parse(localStorage.getItem(SolBuild.LS_KEY) || "{}").picks.filter(function (q) { return /^trophy-/.test(q.piece); }).map(function (q) { return q.piece; }) : [];
+    o.shopHasTrophy = window.SolBuild && SolBuild._shopDecos ? SolBuild._shopDecos().some(function (id) { return /^trophy-/.test(id); }) : null;
+    return o;
+  });
+  console.log("boss win", JSON.stringify(bossWin));
+  await shot("15b-boss-win");
+  await page.evaluate(function () { try { if (window.SolBuild && SolBuild.isOpen()) SolBuild.close(); } catch (e) {} });
+  /* the monument stands in the castle */
+  await page.evaluate(function () { try { SolBuild.showGallery(); } catch (e) {} });
+  await page.waitForTimeout(2500);
+  await shot("15c-boss-monument");
+  /* all ten monuments side by side, for the picture */
+  await page.evaluate(function () { try { SolBuild.trophies().forEach(function (t) { if (!t.owned) SolBuild._place(t.id); }); SolBuild._zoom(1.5); } catch (e) {} });
+  await page.waitForTimeout(3500);
+  await shot("15d-monuments");
+  await page.evaluate(function () { try { if (SolBuild.isOpen()) SolBuild.close(); } catch (e) {} });
+  await page.evaluate(function () { try { localStorage.removeItem("afterHours.v1.fangs"); } catch (e) {} });
+  var nifTrophy = (bossWin.trophies || []).filter(function (t) { return t.realm === "niflheim"; })[0];
+  check(bossWin.theme !== "castle" || (nifTrophy && nifTrophy.owned && bossWin.onField.indexOf("trophy-niflheim") !== -1 && bossWin.shopHasTrophy === false && (bossWin.trophies || []).length === 10), "beating Fenrir sets that realm's monument in the castle; monuments are never in the shop: " + JSON.stringify({ theme: bossWin.theme, nif: nifTrophy, field: bossWin.onField, shop: bossWin.shopHasTrophy, n: (bossWin.trophies || []).length }));
+  check(/Fenrir beaten/.test(bossWin.title) && bossWin.coins >= 100 && bossWin.fangRow && bossWin.fangOn === 1 && /niflheim/i.test(bossWin.fangs || "") && bossWin.answer1 === bossWin.answer0 + 1 && /Fang/.test(bossWin.msg), "beating Fenrir: a Fenrir-beaten title, 100+ coins, a Fang shown on the win screen and +1 coin on every answer after: " + JSON.stringify({ title: bossWin.title, coins: bossWin.coins, fangs: bossWin.fangs, a0: bossWin.answer0, a1: bossWin.answer1 }));
   /* castle perks: buildings on the field grant perks in the maze */
   await page.evaluate(function () {
     var picks = ["keep", "k-stables", "k-church", "k-barracks", "k-market", "k-castle"].map(function (id, i) { return { night: 5, piece: id, style: "blue", src: "free", deco: false, ord: i, rot: 0, cx: i * 3, cy: 0 }; });
@@ -567,6 +610,9 @@ var srv = http.createServer(function (req, res) {
   modeRuns.rocks = await page.evaluate(async function () {
     var s = SolScene, R = s.rk, o = { mode: s.mode.id, pull: getComputedStyle(document.getElementById("btn-shutter")).display };
     s.spareLives = 0; s.perks = {};
+    /* the mouse test's shots may have hit a letter rock: fresh letters, no lives spent */
+    R.bullets.forEach(function (b) { b.spr.destroy(); }); R.bullets = [];
+    s.answers_rocks(); s.strikes = 0; s.iframeMs = 0; s.claimWrong = 0;
     function rockOf(right) { return R.rocks.filter(function (q) { return q.letter && (s.need.indexOf(q.letter) !== -1) === right; })[0]; }
     s.rockCaught(rockOf(false)); o.pullWrong = s.strikes; s.strikes = 0; s.iframeMs = 0;
     var right = rockOf(true), L = right.letter;
@@ -645,10 +691,12 @@ var srv = http.createServer(function (req, res) {
     o.riseWait = G.riseCd;
     var sunkArrow = G.stones[0]; s.ringRaise(sunkArrow); sunkArrow.state = "down"; s.ringDrawStone(sunkArrow);
     arrowAt(sunkArrow.x, sunkArrow.y); await new Promise(function (r) { setTimeout(r, 300); }); o.sunkShot = s.strikes + s.score; s.strikes = 0; s.iframeMs = 0;
+    G.arrows.forEach(function (a) { a.spr.destroy(); }); G.arrows = [];
     /* then they rise one or two at a time */
     G.riseCd = 0; await new Promise(function (r) { setTimeout(r, 900); });
     o.upCount = G.stones.filter(function (q) { return q.state !== "down"; }).length;
     G.stones.forEach(function (q) { q.state = "down"; s.ringDrawStone(q); }); G.riseCd = 99999; G.queue = [];
+    G.arrows.forEach(function (a) { a.spr.destroy(); }); G.arrows = []; s.strikes = 0; s.iframeMs = 0; s.claimWrong = 0;
     function raise(q) { s.ringRaise(q); q.state = "up"; q.t = 0; s.ringDrawStone(q); }
     var w = G.stones.filter(function (q) { return s.need.indexOf(q.letter) === -1; })[0];
     raise(w);
