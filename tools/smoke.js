@@ -491,22 +491,52 @@ var srv = http.createServer(function (req, res) {
   function tickWait(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
   var modeRuns = {};
   await gotoLevel(2);
+  /* a mouse button (left or right) shoots without moving Sol */
+  var cbox = await page.evaluate(function () { var r = SolScene.game.canvas.getBoundingClientRect(); return { x: r.left, y: r.top, width: r.width, height: r.height }; });
+  var click0 = await page.evaluate(function () { var s = SolScene; s.tutLockUntil = 0; return { x: s.player.x, fired: s.raid.fired }; });
+  await page.mouse.move(cbox.x + cbox.width * 0.2, cbox.y + cbox.height * 0.55);
+  await page.mouse.down({ button: "right" }); await page.waitForTimeout(700);
+  await page.mouse.up({ button: "right" });
+  await page.mouse.down(); await page.waitForTimeout(700); await page.mouse.up();
+  var click1 = await page.evaluate(function () { var s = SolScene; return { x: s.player.x, fired: s.raid.fired, menu: false }; });
+  modeRuns.click = { moved: Math.abs(click1.x - click0.x), fired: click1.fired - click0.fired };
   modeRuns.raid = await page.evaluate(async function () {
     var s = SolScene, o = { key: s.sys.settings.key, mode: s.mode.id, fire: document.getElementById("btn-action").textContent, mini: getComputedStyle(document.getElementById("minimap")).display, hud: document.getElementById("score-pip").textContent };
     s.spareLives = 0; s.perks = {};
-    var R = s.raid, wrong = R.ravens.filter(function (q) { return q.letter && s.need.indexOf(q.letter) === -1; })[0];
+    var R = s.raid, eagles = R.ravens.filter(function (q) { return q.letter; });
+    o.eagles = eagles.length; o.ravens = R.ravens.length - eagles.length;
+    var wrong = eagles.filter(function (q) { return s.need.indexOf(q.letter) === -1; })[0];
+    wrong.hp = 2; s.strikes = 0; s.iframeMs = 0;   /* the mouse test's arrows may have hit it */
+    s.raidHit(wrong); o.afterOne = s.strikes + (wrong.alive ? 0 : 10);
     s.raidHit(wrong); o.wrong = s.strikes; s.strikes = 0; s.iframeMs = 0;
-    R.feathers.push({ x: s.player.x, y: s.player.y - 20, t: 0, spr: s.add.image(s.player.x, s.player.y - 20, "md-feather") });
+    R.feathers.push({ x: s.player.x, y: s.player.y - 20, vx: 0, t: 0, spr: s.add.image(s.player.x, s.player.y - 20, "md-feather") });
     await new Promise(function (r) { setTimeout(r, 600); }); o.feather = s.strikes; s.strikes = 0; s.iframeMs = 0;
+    /* an eagle's beam over Sol catches him */
+    var bm = R.ravens.filter(function (q) { return q.alive && q.letter && q.state !== "wait"; })[0] || R.ravens.filter(function (q) { return q.alive && q.letter; })[0];
+    bm.state = "beam"; bm.beamMs = 900; bm.path = null; bm.x = s.player.x; bm.hoverY = s.H * 0.4; bm.y = bm.hoverY; bm.lead = true;
+    await new Promise(function (r) { setTimeout(r, 700); }); o.beam = s.strikes; s.strikes = 0; s.iframeMs = 0;
     var coins = s.nightCoins;
-    R.ravens.filter(function (q) { return q.alive && q.letter && s.need.indexOf(q.letter) !== -1; }).forEach(function (q) { s.raidHit(q); });
+    R.ravens.filter(function (q) { return q.alive && q.letter && s.need.indexOf(q.letter) !== -1; }).forEach(function (q) { s.raidHit(q); s.raidHit(q); });
     o.score = s.score; o.coins = s.nightCoins > coins;
     await new Promise(function (r) { setTimeout(r, 1800); });
     o.newWave = R.ravens.filter(function (q) { return q.alive && q.letter; }).length;
     var pip = document.getElementById("realm-pip"); o.pip = pip ? pip.textContent : "";
     return o;
   });
-  await shot("16-raven-raid");
+  if (await page.isVisible("#read-go")) await page.click("#read-go");
+  await page.waitForTimeout(3500);
+  modeRuns.raid.flying = await page.evaluate(function () { return SolScene.raid.ravens.filter(function (q) { return q.state !== "wait"; }).length; });
+  await shot("16-eagle-swoop");
+  await page.evaluate(function () {
+    var s = SolScene, e = s.raid.ravens.filter(function (q) { return q.alive && q.letter && q.state === "form"; })[0];
+    s.iframeMs = 60000;   /* just for the picture */
+    if (e) s.raidBeamDive(e);
+    var r = s.raid.ravens.filter(function (q) { return q.alive && q.kind === "raven" && q.state === "form"; })[0];
+    if (r) { r.lead = true; s.raidDive(r, 0); }
+  });
+  await page.waitForFunction(function () { return SolScene.raid.ravens.some(function (q) { return q.state === "beam" && q.beamMs > 700; }); }, null, { timeout: 20000 }).catch(function () {});
+  await shot("16b-eagle-beam");
+  await page.evaluate(function () { SolScene.iframeMs = 0; });
   await gotoLevel(4);
   modeRuns.rocks = await page.evaluate(async function () {
     var s = SolScene, R = s.rk, o = { mode: s.mode.id, pull: getComputedStyle(document.getElementById("btn-shutter")).display };
@@ -558,8 +588,9 @@ var srv = http.createServer(function (req, res) {
   await shot("19-wolf-ring-cleared");
   console.log("modes", JSON.stringify(modeRuns));
   var mr = modeRuns;
-  check(mr.raid.key === "mode" && mr.raid.mode === "raid" && mr.raid.fire === "FIRE" && mr.raid.mini === "none" && /^Answers 0/.test(mr.raid.hud), "level 2 is Raven Raid in the shooter scene (FIRE button, no minimap, Answers on the HUD)");
-  check(mr.raid.wrong === 1 && mr.raid.feather === 1 && mr.raid.score === 1 && mr.raid.coins && mr.raid.newWave > 0 && !/Fenrir/.test(mr.raid.pip), "Raven Raid: a wrong letter and a feather each cost a life; the right raven answers, pays coins and a new flock comes");
+  check(mr.raid.key === "mode" && mr.raid.mode === "raid" && mr.raid.fire === "FIRE" && mr.raid.mini === "none" && /^Answers 0/.test(mr.raid.hud), "level 2 is Eagle Swoop in the shooter scene (FIRE button, no minimap, Answers on the HUD)");
+  check(mr.raid.eagles >= 2 && mr.raid.ravens >= 12 && mr.raid.afterOne === 0 && mr.raid.wrong === 1 && mr.raid.feather === 1 && mr.raid.beam === 1 && mr.raid.score === 1 && mr.raid.coins && mr.raid.newWave > 0 && mr.raid.flying > 0 && !/Fenrir/.test(mr.raid.pip), "Eagle Swoop: eagles carry the letters above a raven guard; an eagle takes two arrows; a wrong letter, a feather and an eagle's beam each cost a life; the right eagle answers, pays coins and a new wave flies in: " + JSON.stringify(mr.raid));
+  check(mr.click && mr.click.moved < 2 && mr.click.fired >= 2, "Eagle Swoop: left and right mouse buttons shoot without moving Sol: " + JSON.stringify(mr.click));
   check(mr.rocks.mode === "rocks" && mr.rocks.pull !== "none" && mr.rocks.pullWrong === 1 && mr.rocks.blastRight === 1 && mr.rocks.blastWrong === 0 && mr.rocks.back && mr.rocks.hit === 1 && mr.rocks.score === 1, "Rune Rocks: pulling a wrong letter, blasting the right one and a rock hit cost a life; blasting a wrong letter is free; the right rock returns; beaming it in answers");
   check(mr.sky.mode === "sky" && mr.sky.wrong === 1 && mr.sky.crash === 1 && mr.sky.score === 1, "Sun Chariot: a wrong orb and a crash cost a life; the right orb answers");
   check(mr.ring.mode === "ring" && mr.ring.wrong === 1 && mr.ring.crossed && mr.ring.bitten === 1, "Wolf Ring: a wrong stone is crossed out and costs a life; a wolf reaching Sol costs a life");
@@ -580,7 +611,7 @@ var srv = http.createServer(function (req, res) {
   await page.waitForTimeout(2500);
   retry.after = await page.evaluate(function () { var s = SolScene; return { key: s.sys.settings.key, night: s.night, strikes: s.strikes, mode: s.mode && s.mode.id }; });
   console.log("mode retry", JSON.stringify(retry));
-  check(retry.ended && retry.title === "Run over" && /Raven Raid/.test(retry.msg) && retry.retry && retry.after.key === "mode" && retry.after.night === 2 && retry.after.strikes === 0, "losing a shooter level offers Retry, which restarts the same shooter");
+  check(retry.ended && retry.title === "Run over" && /Eagle Swoop/.test(retry.msg) && retry.retry && retry.after.key === "mode" && retry.after.night === 2 && retry.after.strikes === 0, "losing a shooter level offers Retry, which restarts the same shooter");
 
   /* v5.2: the two standalone builds (node tools/build-games.js). Each is one state with no
      gateway, only its grade cards, only its packs, and no "change state" button. */

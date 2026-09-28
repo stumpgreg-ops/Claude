@@ -1,8 +1,8 @@
-/* SOL Labyrinth v5.7 — shooter levels.
+/* SOL Labyrinth v5.7.1 — shooter levels.
  *
  * Every other level of each realm (levels 2, 4, 6 and 8) swaps the maze for a
  * shooter, in rotation:
- *   2  Raven Raid    space-invaders style: a flock marches down; shoot the raven with the right letter
+ *   2  Eagle Swoop   galaga style: eagles carry the letters above a raven guard and dive; shoot the right eagle
  *   4  Rune Rocks    asteroids style: beam in the rock with the right letter, blast the rest
  *   6  Sun Chariot   side-scrolling flyer: shoot the letter orb with the right answer
  *   8  Wolf Ring     arena: Hati circle in; shoot the runestone with the right answer
@@ -21,13 +21,13 @@
 
   var MODES = {
     raid: {
-      id: "raid", name: "Raven Raid", kind: "space-invaders level",
-      how: "A flock of Odin's ravens marches down the sky. Some carry a letter shield. Shoot the raven that carries the right answer. Hiding behind the rune stones keeps the falling feathers off you.",
-      rules: "A wrong letter costs a life. So does a feather hitting you, or the flock reaching the ground.",
-      keys: "◀ ▶ or A / D move · Space or FIRE shoots · or hold the mouse or a finger where you want to stand.",
-      tip: "RAVEN RAID — shoot the raven with the right letter. Dodge the feathers.",
-      hint1: "Shoot the raven carrying the right letter. The passage stays in the side panel.",
-      hint2: "This question has two right letters. Shoot both ravens that carry them."
+      id: "raid", name: "Eagle Swoop", kind: "galaga-style level",
+      how: "Great eagles sit at the top of the sky, each carrying a letter in its talons, with rows of ravens flying guard below them. Shoot the eagle that carries the right answer. An eagle takes two arrows. Ravens and eagles swoop down at Sol, and an eagle can stop and shine a beam down to catch him.",
+      rules: "A wrong letter costs a life. So does a feather, a bird crashing into you, or getting caught in an eagle's beam.",
+      keys: "◀ ▶ or A / D move · Space, FIRE or a mouse button shoots (clicking does not move Sol).",
+      tip: "EAGLE SWOOP — shoot the eagle with the right letter. Dodge the beams.",
+      hint1: "Shoot the eagle carrying the right letter — it takes two arrows. The passage stays in the side panel.",
+      hint2: "This question has two right letters. Shoot both eagles that carry them."
     },
     rocks: {
       id: "rocks", name: "Rune Rocks", kind: "asteroids level",
@@ -121,6 +121,28 @@
     c.quadraticCurveTo(w, h * 0.45, w / 2, h - 3); c.quadraticCurveTo(0, h * 0.45, w / 2, 0); c.fill();
     c.strokeStyle = "#8a80a8"; c.lineWidth = 1.2; c.beginPath(); c.moveTo(w / 2, 2); c.lineTo(w / 2, h); c.stroke();
   }
+  function drawEagle(up) {
+    return function (c, w, h) {
+      var cx = w / 2;
+      /* wings */
+      c.fillStyle = "#4a321c"; c.strokeStyle = "#d8a73a"; c.lineWidth = 1.5;
+      [-1, 1].forEach(function (sd) {
+        c.beginPath(); c.moveTo(cx + sd * 8, 24);
+        if (up) { c.lineTo(cx + sd * 30, 4); c.lineTo(cx + sd * 43, 2); c.lineTo(cx + sd * 38, 12); c.lineTo(cx + sd * 42, 16); c.lineTo(cx + sd * 34, 22); c.lineTo(cx + sd * 36, 28); c.lineTo(cx + sd * 12, 36); }
+        else { c.lineTo(cx + sd * 30, 22); c.lineTo(cx + sd * 43, 34); c.lineTo(cx + sd * 34, 36); c.lineTo(cx + sd * 38, 44); c.lineTo(cx + sd * 28, 42); c.lineTo(cx + sd * 26, 48); c.lineTo(cx + sd * 12, 38); }
+        c.closePath(); c.fill(); c.stroke();
+      });
+      /* tail, body, head */
+      c.fillStyle = "#e8e2d0"; c.beginPath(); c.moveTo(cx - 8, 44); c.lineTo(cx + 8, 44); c.lineTo(cx + 11, 54); c.lineTo(cx - 11, 54); c.closePath(); c.fill();
+      c.fillStyle = "#6a4a2a"; c.beginPath(); c.ellipse(cx, 32, 11, 16, 0, 0, Math.PI * 2); c.fill();
+      c.fillStyle = "#f2efe6"; c.beginPath(); c.arc(cx, 15, 8.5, 0, Math.PI * 2); c.fill();
+      c.fillStyle = "#f0b030"; c.beginPath(); c.moveTo(cx - 3.5, 17); c.lineTo(cx + 3.5, 17); c.lineTo(cx, 25); c.closePath(); c.fill();
+      c.fillStyle = "#1a1208"; c.beginPath(); c.arc(cx - 3.5, 13, 1.6, 0, Math.PI * 2); c.arc(cx + 3.5, 13, 1.6, 0, Math.PI * 2); c.fill();
+      /* talons, gripping the letter below */
+      c.strokeStyle = "#f0b030"; c.lineWidth = 3;
+      c.beginPath(); c.moveTo(cx - 5, 44); c.lineTo(cx - 8, h - 2); c.moveTo(cx + 5, 44); c.lineTo(cx + 8, h - 2); c.stroke();
+    };
+  }
   function drawShield(c, w, h) {
     var r = w / 2 - 2;
     c.fillStyle = "#b8742e"; c.beginPath(); c.arc(w / 2, h / 2, r, 0, Math.PI * 2); c.fill();
@@ -194,6 +216,8 @@
     canvasTex(scene, "md-bolt", 34, 12, drawBolt);
     canvasTex(scene, "md-feather", 12, 26, drawFeather);
     canvasTex(scene, "md-shield", 42, 42, drawShield);
+    canvasTex(scene, "md-eagle-0", 88, 62, drawEagle(true));
+    canvasTex(scene, "md-eagle-1", 88, 62, drawEagle(false));
     for (var i = 0; i < 3; i++) canvasTex(scene, "md-rock-" + i, 100, 100, drawRock(i + 1, false));
     canvasTex(scene, "md-rock-l", 100, 100, drawRock(7, true));
     canvasTex(scene, "md-ship", 44, 52, drawShip);
@@ -569,13 +593,19 @@
         } catch (e) {}
       }
 
-      /* ═══ 1. RAVEN RAID — space invaders ═══════════════════════════════════ */
+      /* ═══ 1. EAGLE SWOOP — galaga ══════════════════════════════════════════
+         The eagles in the top row carry the letters in their talons, the way
+         Galaga's boss ships carry a captured fighter. Rows of ravens fly in
+         below them and shield them. Ravens and eagles peel off and dive; a
+         diving eagle can stop and shine a beam down to catch Sol. An eagle
+         takes two arrows; the second decides its letter. */
       setup_raid() {
         this.drawSkyBg(110);
         this.raidGround();
         this.makeSol(this.W / 2, this.H - 62, "up");
-        this.raid = { arrows: [], feathers: [], ravens: [], blocks: [], dir: 1, fx: 0, fy: 60, cd: 0, dropCd: 1800, flapMs: 0, flap: 0, huginn: null, huginnCd: rnd(9000, 15000), total: 1, speed: 30 };
-        this.raidBunkers();
+        this.raid = { arrows: [], feathers: [], ravens: [], ravSlots: [], cd: 0, clock: 0, fcx: this.W / 2, breath: 1, swayAmp: 60, top: 112,
+          diveCd: 4000, refillCd: 8000, huginn: null, huginnCd: rnd(12000, 18000), fired: 0, total: 1 };
+        try { if (this.input.mouse) this.input.mouse.disableContextMenu(); } catch (e) {}
       }
       raidGround() {
         if (this.groundG) this.groundG.destroy();
@@ -583,78 +613,122 @@
         g.fillStyle(mix(this.pal.wall, 0x000000, 0.2), 1); g.fillRect(0, H - 28, W, 28);
         g.fillStyle(this.pal.stroke, 0.6); g.fillRect(0, H - 28, W, 3);
       }
-      raidBunkers() {
-        var R = this.raid, W = this.W, n = W < 700 ? 3 : 4, i, c, r, bw = 14, bh = 12, cols = 6, rows = 3;
-        R.blocks.forEach(function (b) { if (b.spr) b.spr.destroy(); });
-        R.blocks = [];
-        var y0 = this.H - 150;
-        for (i = 0; i < n; i++) {
-          var cx = W * (i + 1) / (n + 1);
-          for (r = 0; r < rows; r++) for (c = 0; c < cols; c++) {
-            if (r === rows - 1 && (c === 2 || c === 3)) continue;   /* the arch */
-            var x = cx + (c - (cols - 1) / 2) * bw, y = y0 + r * bh;
-            var spr = this.add.rectangle(x, y, bw - 1, bh - 1, mix(this.pal.lip, 0x9a9488, 0.45), 1).setStrokeStyle(1, mix(this.pal.stroke, 0x000000, 0.3)).setDepth(8);
-            R.blocks.push({ x: x, y: y, hw: bw / 2, hh: bh / 2, spr: spr, alive: true });
-          }
-        }
-      }
       resize_raid(oldW, oldH) {
         var R = this.raid, dy = this.H - oldH;
         this.drawSkyBg(110); this.raidGround();
         if (this.player) this.player.y = this.H - 62;
-        R.blocks.forEach(function (b) { b.y += dy; if (b.spr) b.spr.y = b.y; });
         R.feathers.forEach(function (f) { f.y += dy; });
+        this.raidSway();
+      }
+      raidSway() {
+        var R = this.raid, span = 0;
+        R.ravens.forEach(function (e) { span = Math.max(span, Math.abs(e.sx) * 2 + 80); });
+        R.swayAmp = clamp((this.W - span) / 2 - 40, 0, 80);
       }
       answers_raid() {
-        var R = this.raid, W = this.W, self = this;
-        R.ravens.forEach(kill); R.ravens = [];
-        var letters = shuffle(this.choiceLetters().slice());
-        var gapX = 74, gapY = 60, cols = clamp(Math.floor((W * 0.74) / gapX), 6, 11), rows = this.night >= 40 ? 4 : 3;
-        while (cols * rows < letters.length + 6) rows++;
-        var cells = [], r, c, i;
-        for (r = 0; r < rows; r++) for (c = 0; c < cols; c++) cells.push({ r: r, c: c });
-        shuffle(cells);
-        R.gapX = gapX; R.gapY = gapY; R.cols = cols; R.rows = rows;
-        R.top = 112;
-        R.fx = (W - (cols - 1) * gapX) / 2; R.fy = -rows * gapY; R.entering = true; R.dir = 1;
-        for (i = 0; i < cells.length; i++) {
-          var L = i < letters.length ? letters[i] : null;
-          var o = { r: cells[i].r, c: cells[i].c, letter: L, alive: true };
-          o.spr = this.add.image(0, 0, "rf-raven-0").setScale(0.78).setDepth(12);
-          if (L) {
-            o.shield = this.add.image(0, 0, "md-shield").setDepth(13);
-            o.label = this.letterText(0, 0, L, 23, "#2a1604", "#fff6d8");
-          }
-          R.ravens.push(o);
+        var R = this.raid, W = this.W, H = this.H, self = this, i, r, c;
+        R.ravens.forEach(kill); R.ravens = []; R.ravSlots = [];
+        var letters = shuffle(this.choiceLetters().slice()), n = letters.length;
+        var gapE = 100, gapR = 62, cols = clamp(Math.floor((W * 0.72) / gapR), 6, 11), rows = this.night >= 40 ? 3 : 2;
+        var list = [];
+        for (i = 0; i < n; i++) {
+          var eg = { kind: "eagle", letter: letters[i], hp: 2, alive: true, sx: (i - (n - 1) / 2) * gapE, sy: 0, state: "wait", x: -99, y: -99 };
+          eg.spr = this.add.image(-99, -99, "md-eagle-0").setScale(1.12).setDepth(13);
+          eg.shield = this.add.image(-99, -99, "md-shield").setDepth(12).setScale(0.95);
+          eg.label = this.letterText(-99, -99, eg.letter, 22, "#2a1604", "#fff6d8");
+          list.push(eg);
         }
-        R.total = R.ravens.length;
-        R.speed = 28 + this.night * 0.5;
-        R.dropCd = 2200;
-        R.ravens.forEach(function (o) { self.raidPlace(o); });
+        for (r = 0; r < rows; r++) for (c = 0; c < cols; c++) R.ravSlots.push({ sx: (c - (cols - 1) / 2) * gapR, sy: 88 + r * 54 });
+        var rav = [];
+        R.ravSlots.forEach(function (sl, k) { rav.push(self.raidRaven(k)); });
+        R.total = rav.length;
+        /* they fly in by groups from alternating sides: the eagles with the first ravens */
+        shuffle(rav);
+        list = list.concat(rav);
+        var g = 0, k2 = 0, size = Math.max(6, n + 2);
+        list.forEach(function (e, idx) {
+          if (idx && idx % size === 0) { g++; k2 = 0; }
+          e.delay = g * 750 + k2 * 110; e.side = g % 2 ? 1 : -1; k2++;
+        });
+        R.ravens = list;
+        R.diveCd = 2500 + (g + 1) * 750 + 2000;
+        R.refillCd = 9000;
+        this.raidSway();
         snd("caw");
       }
-      raidPos(o) { var R = this.raid; return { x: R.fx + o.c * R.gapX, y: R.fy + o.r * R.gapY }; }
-      raidPlace(o) {
-        var p = this.raidPos(o);
-        if (o.spr) o.spr.setPosition(p.x, p.y);
-        if (o.shield) o.shield.setPosition(p.x, p.y + 22);
-        if (o.label) o.label.setPosition(p.x, p.y + 22);
-        return p;
+      raidRaven(k) {
+        var sl = this.raid.ravSlots[k];
+        var e = { kind: "raven", letter: null, hp: 1, alive: true, slot: k, sx: sl.sx, sy: sl.sy, state: "wait", x: -99, y: -99 };
+        e.spr = this.add.image(-99, -99, "rf-raven-0").setScale(0.72).setDepth(12);
+        return e;
+      }
+      raidSlot(e) {
+        var R = this.raid;
+        return { x: R.fcx + e.sx * R.breath, y: R.top + e.sy * (0.94 + 0.06 * R.breath) };
+      }
+      raidPos(o) { return { x: o.x, y: o.y }; }
+      raidPlace(e) {
+        if (e.spr) e.spr.setPosition(e.x, e.y);
+        if (e.shield) e.shield.setPosition(e.x, e.y + 42);
+        if (e.label) e.label.setPosition(e.x, e.y + 42);
+      }
+      raidBez(e) {
+        var P = e.path, u = clamp(P.t, 0, 1), v = 1 - u, end = P.p3 || this.raidSlot(e);
+        var a = v * v * v, b = 3 * v * v * u, c = 3 * v * u * u, d = u * u * u;
+        return { x: a * P.p0.x + b * P.p1.x + c * P.p2.x + d * end.x, y: a * P.p0.y + b * P.p1.y + c * P.p2.y + d * end.y };
+      }
+      raidEntry(e) {
+        var W = this.W, H = this.H, sd = e.side || -1;
+        e.state = "enter";
+        e.path = { p0: { x: W / 2 + sd * (W * 0.5 + 40), y: H * 0.12 }, p1: { x: W / 2 + sd * W * 0.08, y: H * 0.72 }, p2: { x: W / 2 - sd * W * 0.3, y: H * 0.5 }, p3: null, t: 0, dur: 2.1, next: "form" };
+      }
+      /* Galaga's dive: a loop up and out, a swoop at Sol, off the bottom, back in from the top */
+      raidDive(e, dx) {
+        var W = this.W, H = this.H, p = this.player, sd = e.x < W / 2 ? -1 : 1, tx = clamp(p.x + rnd(-40, 40), 40, W - 40);
+        e.state = "dive"; e.drops = 0; e.dx = dx || 0;
+        var spd = 1 + Math.min(0.6, this.night / 160);
+        e.path = { p0: { x: e.x, y: e.y }, p1: { x: e.x + sd * 130, y: e.y - 110 }, p2: { x: tx - sd * 190 + e.dx, y: H * 0.72 }, p3: { x: tx + sd * 140 + e.dx, y: H + 70 }, t: 0, dur: 2.8 / spd, next: "return" };
+      }
+      raidBeamDive(e) {
+        var W = this.W, H = this.H, p = this.player, sd = e.x < W / 2 ? -1 : 1, tx = clamp(p.x + rnd(-50, 50), 70, W - 70), hy = Math.max(e.y + 80, H * 0.44);
+        e.state = "dive"; e.drops = 9; e.beamer = true;
+        e.path = { p0: { x: e.x, y: e.y }, p1: { x: e.x + sd * 110, y: e.y - 80 }, p2: { x: tx, y: hy - 90 }, p3: { x: tx, y: hy }, t: 0, dur: 2.0, next: "beam" };
       }
       raidHit(o) {
-        var p = this.raidPos(o);
+        if (!o || !o.alive) return;
+        var x = o.x, y = o.y;
+        if (o.kind === "eagle" && o.hp > 1) {
+          o.hp -= 1;
+          if (o.spr) o.spr.setTint(0xffb08a);
+          this.burst(x, y, 0xffb08a, 10);
+          snd("pop");
+          this.toast("That eagle is hurt. One more arrow and its letter " + o.letter + " is your answer.", 2600);
+          return;
+        }
         o.alive = false;
         kill(o);
-        this.burst(p.x, p.y, 0x5a4a78, 12);
+        this.burst(x, y, o.kind === "eagle" ? 0xc89a5a : 0x5a4a78, 12);
         snd("pop");
-        if (o.letter) this.answerPick(o.letter, p.x, p.y);
-        else this.addKill(p.x, p.y, "Twelve ravens");
+        if (o.letter) this.answerPick(o.letter, x, y);
+        else this.addKill(x, y, "Twelve ravens");
+      }
+      /* the target an arrow meets first, coming up from below (so the ravens shield the eagles) */
+      raidArrowHit(ax, y0, y1) {
+        var R = this.raid, best = null, bestY = -1e9;
+        R.ravens.forEach(function (e) {
+          if (!e.alive || e.state === "wait") return;
+          var boxes = e.kind === "eagle" ? [[38, -27, 22], [21, 20, 64]] : [[25, -18, 18]];
+          boxes.forEach(function (b) {
+            if (Math.abs(ax - e.x) < b[0] && y1 <= e.y + b[2] && y0 >= e.y + b[1] && e.y + b[2] > bestY) { best = e; bestY = e.y + b[2]; }
+          });
+        });
+        return best;
       }
       tick_raid(s, inp, ms) {
-        var R = this.raid, p = this.player, W = this.W, H = this.H, i, j, self = this;
-        /* Sol */
+        var R = this.raid, p = this.player, W = this.W, H = this.H, i, self = this;
+        R.clock += s;
+        /* Sol walks with the keys or the ◀ ▶ pad only; a mouse button or a tap just shoots */
         var vx = inp.ax * 430;
-        if (inp.ptr) { var dxp = inp.ptr.x - p.x; vx = Math.abs(dxp) > 10 ? (dxp > 0 ? 430 : -430) : 0; }
         p.x = clamp(p.x + vx * s, 30, W - 30); p.y = H - 62;
         this.tickPlayerCharAnim(0, vx ? -1 : 0, false);
         this.blink(p);
@@ -662,22 +736,14 @@
         R.cd -= ms;
         if (inp.fire && R.cd <= 0 && R.arrows.length < 2) {
           R.arrows.push({ x: p.x, y: p.y - 36, spr: this.add.image(p.x, p.y - 36, "md-arrow").setDepth(18) });
-          R.cd = 280; snd("shot");
+          R.cd = 260; R.fired += 1; snd("shot");
         }
         for (i = R.arrows.length - 1; i >= 0; i--) {
-          var a = R.arrows[i], hit = false;
+          var a = R.arrows[i], y0 = a.y, hit = false;
           a.y -= 760 * s; a.spr.y = a.y;
-          for (j = 0; j < R.blocks.length && !hit; j++) {
-            var b = R.blocks[j];
-            if (b.alive && Math.abs(a.x - b.x) < b.hw + 2 && Math.abs(a.y - b.y) < b.hh + 12) { b.alive = false; b.spr.destroy(); b.spr = null; hit = true; }
-          }
-          for (j = 0; j < R.ravens.length && !hit; j++) {
-            var o = R.ravens[j];
-            if (!o.alive) continue;
-            var op = this.raidPos(o);
-            if (Math.abs(a.x - op.x) < 26 && a.y - op.y < 30 && op.y - a.y < 26) { hit = true; this.raidHit(o); }
-          }
-          if (!hit && R.huginn && dist(a.x, a.y, R.huginn.x, R.huginn.y) < 32) {
+          var tgt = this._finishing ? null : this.raidArrowHit(a.x, y0, a.y);
+          if (tgt) { hit = true; this.raidHit(tgt); }
+          if (!hit && R.huginn && Math.abs(a.x - R.huginn.x) < 32 && a.y < R.huginn.y + 24 && y0 > R.huginn.y - 24) {
             hit = true;
             this.burst(R.huginn.x, R.huginn.y, 0xffd84a, 24);
             this.awardBonusPoints(3000, "Huginn, Odin's raven!");
@@ -685,53 +751,99 @@
           }
           if (hit || a.y < -30) { a.spr.destroy(); R.arrows.splice(i, 1); }
         }
+        this.fxG.clear();
         if (this._finishing) return;
-        /* the flock */
-        var alive = R.ravens.filter(function (o) { return o.alive; });
-        if (R.entering) { R.fy += 260 * s; if (R.fy >= R.top) { R.fy = R.top; R.entering = false; } }
-        if (alive.length) {
-          var minX = 1e9, maxX = -1e9, maxY = -1e9;
-          alive.forEach(function (o) { var q = self.raidPos(o); minX = Math.min(minX, q.x); maxX = Math.max(maxX, q.x); maxY = Math.max(maxY, q.y + (o.letter ? 40 : 18)); });
-          var mul = 1 + 1.3 * (1 - alive.length / R.total);
-          if (!R.entering) {
-            R.fx += R.dir * R.speed * mul * s;
-            if ((R.dir > 0 && maxX > W - 36) || (R.dir < 0 && minX < 36)) { R.dir *= -1; R.fy += 14 + Math.min(10, this.night * 0.1); }
+        /* the formation sways, then breathes */
+        R.fcx = W / 2 + Math.sin(R.clock * 0.5) * R.swayAmp;
+        R.breath = 1 + 0.07 * Math.sin(R.clock * 1.3);
+        var flap = Math.floor(R.clock * 4) % 2, divers = 0, anyForm = false;
+        for (i = 0; i < R.ravens.length; i++) {
+          var e = R.ravens[i];
+          if (!e.alive) continue;
+          var ox = e.x, oy = e.y;
+          if (e.state === "wait") {
+            e.delay -= ms;
+            if (e.delay <= 0) this.raidEntry(e);
+            else continue;
           }
-          if (maxY > p.y - 60) {
-            this.loseLife("hit", "THE RAVENS REACHED YOU");
-            R.fy = Math.max(R.top - (R.rows - 1) * R.gapY * 0.5, R.fy - 190);
+          if (e.state === "form") {
+            var sl = this.raidSlot(e); e.x = sl.x; e.y = sl.y; anyForm = true;
+          } else if (e.state === "beam") {
+            this.raidBeamTick(e, s, ms);
+            if (!e.alive) continue;
+          } else if (e.path) {
+            e.path.t += s / e.path.dur;
+            var q = this.raidBez(e); e.x = q.x; e.y = q.y;
+            if (e.state === "dive" && !e.beamer) {
+              var want = this.night >= 30 ? 2 : 1;
+              if (e.drops < want && e.path.t > 0.42 + e.drops * 0.14 && e.y < p.y - 110 && e.y > 0) { e.drops++; this.raidFeather(e.x, e.y + 16); }
+            }
+            if (e.path.t >= 1) {
+              var nx = e.path.next;
+              if (nx === "form") { e.state = "form"; e.path = null; }
+              else if (nx === "beam") { e.state = "beam"; e.beamMs = 0; e.path = null; e.hoverY = e.y; }
+              else if (nx === "return") {
+                var sl2 = this.raidSlot(e);
+                e.state = "return"; e.x = sl2.x; e.y = -60;
+                e.path = { p0: { x: sl2.x, y: -60 }, p1: { x: sl2.x, y: sl2.y * 0.4 }, p2: { x: sl2.x, y: sl2.y * 0.8 }, p3: null, t: 0, dur: 1.3, next: "form" };
+              }
+            }
           }
-          R.flapMs += ms;
-          if (R.flapMs > 260) { R.flapMs = 0; R.flap ^= 1; alive.forEach(function (o) { if (o.spr) o.spr.setTexture("rf-raven-" + R.flap); }); }
-          alive.forEach(function (o) { self.raidPlace(o); });
-          /* falling feathers, dropped by the lowest raven in a column */
-          R.dropCd -= ms;
-          if (R.dropCd <= 0 && !R.entering) {
-            var low = {};
-            alive.forEach(function (o) { if (!low[o.c] || low[o.c].r < o.r) low[o.c] = o; });
-            var colsA = Object.keys(low), dropper = low[colsA[Math.floor(Math.random() * colsA.length)]], dp = this.raidPos(dropper);
-            R.feathers.push({ x: dp.x, y: dp.y + 20, t: 0, spr: this.add.image(dp.x, dp.y + 20, "md-feather").setDepth(17) });
-            R.dropCd = rnd(900, 1700) * (1 - Math.min(0.55, this.night / 180));
+          if (e.state === "dive" || e.state === "beam") { if (e.lead) divers++; }
+          /* look where they fly */
+          var mvx = (e.x - ox) / Math.max(s, 0.001), mvy = (e.y - oy) / Math.max(s, 0.001);
+          if (e.spr) {
+            if (e.kind === "raven") {
+              e.spr.setTexture("rf-raven-" + flap);
+              if (e.state === "form") e.spr.setFlipX(false).setRotation(0);
+              else if (Math.abs(mvx) + Math.abs(mvy) > 5) { e.spr.setFlipX(mvx < 0); e.spr.setRotation(clamp((mvx < 0 ? -1 : 1) * Math.atan2(mvy, Math.abs(mvx) + 1) * 0.6, -0.9, 0.9)); }
+            } else {
+              e.spr.setTexture("md-eagle-" + (e.state === "beam" ? 1 : flap));
+              e.spr.setRotation(e.state === "form" ? 0 : clamp(mvx / 700, -0.45, 0.45));
+            }
+          }
+          this.raidPlace(e);
+          /* a diving bird that reaches Sol costs a life */
+          if ((e.state === "dive" || e.state === "return") && e.y > p.y - 70 && dist(e.x, e.y, p.x, p.y - 10) < (e.kind === "eagle" ? 38 : 30)) {
+            this.loseLife("hit", e.kind === "eagle" ? "AN EAGLE CRASHED INTO YOU" : "A RAVEN CRASHED INTO YOU");
+            if (e.kind === "raven") { e.alive = false; this.burst(e.x, e.y, 0x5a4a78, 12); kill(e); }
           }
         }
+        R.ravens = R.ravens.filter(function (o) { return o.alive; });
+        /* who dives next */
+        R.diveCd -= ms;
+        var maxDivers = 2 + Math.floor(this.night / 35);
+        if (R.diveCd <= 0 && anyForm && divers < maxDivers) {
+          this.raidLaunch();
+          R.diveCd = rnd(1300, 2500) * (1 - Math.min(0.45, this.night / 220));
+        }
+        /* when the ravens thin out, more fly in to shield the eagles */
+        R.refillCd -= ms;
+        if (R.refillCd <= 0) {
+          R.refillCd = 7000;
+          var used = {}, liveRav = 0;
+          R.ravens.forEach(function (o) { if (o.kind === "raven") { used[o.slot] = 1; liveRav++; } });
+          if (liveRav <= R.total * 0.6 && R.ravens.some(function (o) { return o.kind === "eagle"; })) {
+            var empties = R.ravSlots.map(function (x, k) { return k; }).filter(function (k) { return !used[k]; });
+            shuffle(empties).slice(0, 4).forEach(function (k, j) {
+              var nr = self.raidRaven(k); nr.delay = j * 130; nr.side = Math.random() < 0.5 ? -1 : 1; R.ravens.push(nr);
+            });
+          }
+        }
+        /* falling feathers */
         for (i = R.feathers.length - 1; i >= 0; i--) {
           var f = R.feathers[i], gone = false;
-          f.t += s; f.y += (200 + this.night * 1.1) * s; f.x += Math.sin(f.t * 6) * 40 * s;
+          f.t += s; f.y += (210 + this.night * 1.1) * s; f.x += ((f.vx || 0) + Math.sin(f.t * 6) * 40) * s;
           f.spr.setPosition(f.x, f.y).setRotation(Math.sin(f.t * 6) * 0.4);
-          for (j = 0; j < R.blocks.length && !gone; j++) {
-            var bb = R.blocks[j];
-            if (bb.alive && Math.abs(f.x - bb.x) < bb.hw + 3 && Math.abs(f.y - bb.y) < bb.hh + 8) { bb.alive = false; bb.spr.destroy(); bb.spr = null; gone = true; }
-          }
-          if (!gone && dist(f.x, f.y, p.x, p.y - 10) < 26) { gone = true; this.loseLife("hit", "HIT BY A FEATHER"); }
+          if (dist(f.x, f.y, p.x, p.y - 10) < 24) { gone = true; this.loseLife("hit", "HIT BY A FEATHER"); }
           if (gone || f.y > H + 20) { f.spr.destroy(); R.feathers.splice(i, 1); }
         }
-        R.blocks = R.blocks.filter(function (b) { return b.alive; });
         /* Huginn, the golden raven, crosses the top now and then */
         if (!R.huginn) {
           R.huginnCd -= ms;
           if (R.huginnCd <= 0) {
             var fromL = Math.random() < 0.5;
-            R.huginn = { x: fromL ? -50 : W + 50, y: 70, vx: fromL ? 170 : -170, spr: this.add.image(0, 70, "rf-raven-0").setScale(0.7).setTint(0xffd84a).setDepth(12).setFlipX(!fromL) };
+            R.huginn = { x: fromL ? -50 : W + 50, y: 62, vx: fromL ? 170 : -170, spr: this.add.image(0, 62, "rf-raven-0").setScale(0.7).setTint(0xffd84a).setDepth(12).setFlipX(!fromL) };
             snd("caw");
           }
         } else {
@@ -740,11 +852,68 @@
           if (R.huginn.x < -80 || R.huginn.x > W + 80) { kill(R.huginn); R.huginn = null; R.huginnCd = rnd(14000, 22000); }
         }
       }
+      raidFeather(x, y) {
+        var p = this.player, fall = Math.max(0.4, (p.y - y) / (210 + this.night * 1.1));
+        var vx = clamp((p.x - x) / fall, -140, 140) * (this.night >= 20 ? 1 : 0.6);
+        this.raid.feathers.push({ x: x, y: y, vx: vx, t: 0, spr: this.add.image(x, y, "md-feather").setDepth(17) });
+      }
+      raidLaunch() {
+        var R = this.raid, self = this;
+        var form = R.ravens.filter(function (o) { return o.alive && o.state === "form"; });
+        var eagles = form.filter(function (o) { return o.kind === "eagle"; }), ravens = form.filter(function (o) { return o.kind === "raven"; });
+        var beaming = R.ravens.some(function (o) { return o.alive && (o.state === "beam" || o.beamer); });
+        if (eagles.length && (Math.random() < 0.4 || !ravens.length)) {
+          var eg = eagles[Math.floor(Math.random() * eagles.length)];
+          eg.lead = true;
+          if (!beaming && Math.random() < 0.55) { this.raidBeamDive(eg); return; }
+          eg.beamer = false;
+          this.raidDive(eg, 0);
+          /* up to two ravens fly escort, as in Galaga */
+          ravens.sort(function (a, b) { return Math.abs(a.x - eg.x) - Math.abs(b.x - eg.x); }).slice(0, 2).forEach(function (o, j) { o.lead = false; o.beamer = false; self.raidDive(o, j ? 46 : -46); o.path = { p0: { x: o.x, y: o.y }, p1: { x: eg.path.p1.x + o.dx, y: eg.path.p1.y + 30 }, p2: { x: eg.path.p2.x + o.dx, y: eg.path.p2.y + 20 }, p3: { x: eg.path.p3.x + o.dx, y: eg.path.p3.y }, t: 0, dur: eg.path.dur, next: "return" }; });
+          return;
+        }
+        if (!ravens.length) return;
+        var rv = ravens[Math.floor(Math.random() * ravens.length)];
+        rv.lead = true; rv.beamer = false;
+        this.raidDive(rv, 0);
+      }
+      /* the eagle's catching beam: it grows for 0.6s (a fair warning), shines, then pulls back */
+      raidBeamTick(e, s, ms) {
+        var p = this.player, g = this.fxG, H = this.H;
+        e.beamMs += ms;
+        e.x += Math.sin(this.raid.clock * 1.6) * 12 * s;
+        e.y = e.hoverY + Math.sin(this.raid.clock * 3) * 3;
+        var ms0 = e.beamMs, grow = ms0 < 600 ? ms0 / 600 : ms0 < 2800 ? 1 : Math.max(0, 1 - (ms0 - 2800) / 400);
+        var top = e.y + 66, full = (H - 30) - top, len = full * grow, w0 = 14, w1 = 14 + len * 0.16;
+        if (len > 4) {
+          var pulse = 0.2 + 0.05 * Math.sin(this.raid.clock * 4);
+          g.fillStyle(0xffe08a, pulse);
+          g.fillPoints([{ x: e.x - w0, y: top }, { x: e.x + w0, y: top }, { x: e.x + w1, y: top + len }, { x: e.x - w1, y: top + len }], true);
+          g.lineStyle(2, 0xfff2b8, 0.45);
+          for (var k = 0; k < 4; k++) {
+            var yy = ((this.raid.clock * 90 + k * full / 4) % full);
+            if (yy > len) continue;
+            var ww = w0 + yy * 0.16;
+            g.lineBetween(e.x - ww, top + yy, e.x + ww, top + yy);
+          }
+        }
+        if (grow >= 1 && ms0 < 2800) {
+          var half = w0 + (p.y - 10 - top) * 0.16;
+          if (Math.abs(p.x - e.x) < half + 6) {
+            if (this.loseLife("hit", "THE EAGLE'S BEAM CAUGHT YOU")) e.beamMs = 2800;
+          }
+        }
+        if (ms0 >= 3200) {
+          e.state = "return"; e.beamer = false;
+          e.path = { p0: { x: e.x, y: e.y }, p1: { x: e.x, y: e.y - 120 }, p2: { x: this.raidSlot(e).x, y: this.raidSlot(e).y + 90 }, p3: null, t: 0, dur: 1.5, next: "form" };
+        }
+      }
       clear_raid() {
         var R = this.raid, self = this;
-        R.ravens.forEach(function (o) { if (o.alive) { var q = self.raidPos(o); self.burst(q.x, q.y, 0x5a4a78, 8); } kill(o); });
+        R.ravens.forEach(function (o) { if (o.alive && o.state !== "wait") self.burst(o.x, o.y, o.kind === "eagle" ? 0xc89a5a : 0x5a4a78, 8); kill(o); });
         R.ravens = [];
         R.feathers.forEach(kill); R.feathers = [];
+        try { this.fxG.clear(); } catch (e) {}
       }
 
       /* ═══ 2. RUNE ROCKS — asteroids ═══════════════════════════════════════ */

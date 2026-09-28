@@ -16,7 +16,7 @@ export GIT_INDEX_FILE="$idx"
 git --work-tree="$site" add -A .
 tree=$(git write-tree)
 ver=$(grep -o 'v[0-9.]*</p>' index.html | head -1 | tr -d 'v</p>')
-commit=$(printf 'Publish Sol'"'"'s Labyrinth v%s to GitHub Pages\n\nCo-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_017qmwrcccjJu3wyLLFz2gXy\n' "$ver" | git commit-tree "$tree")
+commit=$(printf 'Publish Sol'"'"'s Labyrinth v%s to GitHub Pages\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_017qmwrcccjJu3wyLLFz2gXy\n' "$ver" | git commit-tree "$tree")
 unset GIT_INDEX_FILE
 git update-ref refs/heads/gh-pages "$commit"
 git push --force -u origin gh-pages
