@@ -1,4 +1,4 @@
-/* SOL Labyrinth v5.7.4 — shooter levels.
+/* SOL Labyrinth v5.7.5 — shooter levels.
  *
  * Every other level of each realm (levels 2, 4, 6 and 8) swaps the maze for a
  * shooter, in rotation:
@@ -40,10 +40,10 @@
     },
     sky: {
       id: "sky", name: "Sun Chariot", kind: "flying shooter level",
-      how: "Sol drives the sun's chariot across the sky. Letter orbs float past among ravens and will-o'-wisps. Shoot the orb with the right answer. Orbs you miss come round again.",
-      rules: "Shooting a wrong orb costs a life. So does flying into a raven or a wisp.",
+      how: "Sol drives the sun's chariot across the sky. Letter orbs float past among ravens and will-o'-wisps. Shoot the orb with the right answer; orbs you miss come round again. Ravens throw feathers at you (they glow orange first), and in later realms wisps throw sparks and a raven guards some orbs — shoot the guard out of the way.",
+      rules: "Shooting a wrong orb costs a life. So does a feather, a spark, or flying into a raven or a wisp.",
       keys: "Arrow keys, WASD or the on-screen pad fly · Space, FIRE or a mouse button shoots (clicking does not move the chariot).",
-      tip: "SUN CHARIOT — shoot the orb with the right letter. Dodge the ravens and wisps.",
+      tip: "SUN CHARIOT — shoot the orb with the right letter. Dodge the ravens, wisps and feathers.",
       hint1: "Shoot the orb with the right letter. The passage stays in the side panel.",
       hint2: "This question has two right letters. Shoot both orbs that carry them."
     },
@@ -1148,14 +1148,39 @@
         R.rocks.filter(function (o) { return o.letter; }).forEach(function (o) { self.burst(o.x, o.y, 0xffd84a, 10); self.rockRemove(o); });
       }
 
-      /* ═══ 3. SUN CHARIOT — side-scrolling flyer ═══════════════════════════ */
+      /* ═══ 3. SUN CHARIOT — side-scrolling flyer ═══════════════════════════
+         v5.7.5: harder from the start and climbing faster. The first Sun Chariot
+         (level 6) plays like level 30 used to, and every later one adds more.
+         Ravens throw feathers at Sol (after a short orange wind-up), wisps throw
+         sparks from level 26, and from level 16 the orbs weave more and some are
+         guarded by a raven flying in front of them that has to be shot first. */
+      skyParams(n) {
+        var eff = 30 + Math.max(0, n - 6) * 1.25;          /* 30 at level 6, 42 at 16, 80 at 46, 142 at 96 */
+        var late = Math.max(0, n - 6);
+        return {
+          eff: eff,
+          spawnMs: Math.max(380, 1200 - eff * 6),
+          ravenSp: 170 + Math.min(130, eff * 0.9),         /* + up to 70 random */
+          wispSp: 110 + Math.min(90, eff * 0.6),
+          wispHome: 60 + Math.min(80, eff * 0.5),
+          wispShare: 0.25 + Math.min(0.2, eff / 600),
+          throwP: clamp(0.35 + eff / 300, 0.35, 0.85),     /* chance a raven throws a feather */
+          featherSp: 230 + Math.min(170, eff * 1.2),
+          sparkP: n >= 26 ? clamp(0.3 + (eff - 55) / 250, 0.3, 0.7) : 0,
+          sparkSp: 180 + Math.min(120, eff),
+          orbSp: 78 + Math.min(90, eff * 0.55),
+          bob: n >= 16 ? 26 + Math.min(60, late * 1.2) : 26,
+          bobFr: n >= 16 ? 1.6 + Math.min(1.2, late * 0.015) : 1.6,
+          guards: n >= 16 ? 1 + Math.floor((n - 16) / 20) : 0   /* 1 at 16, 2 at 36, 3 at 56, 4 at 76 */
+        };
+      }
       setup_sky() {
         this.drawSkyBg(50);
         this.skyHills();
         var x = this.W * 0.2, y = this.H / 2;
         this.chariot = this.add.image(x, y, "md-chariot").setScale(1.25).setDepth(21);
         this.makeSol(x - 10, y - 36, "right", 1.6);
-        this.sky = { bolts: [], foes: [], orbs: [], cd: 0, spawnCd: 1800, t: 0, x: x, y: y };
+        this.sky = { bolts: [], foes: [], orbs: [], shots: [], cd: 0, spawnCd: 1800, t: 0, x: x, y: y, P: this.skyParams(this.night) };
       }
       skyHills() {
         var id = this.realm ? this.realm.id : "midgard", W = this.W, H = this.H;
@@ -1166,20 +1191,34 @@
       }
       resize_sky() { this.drawSkyBg(50); this.skyHills(); }
       answers_sky() {
-        var K2 = this.sky, W = this.W, H = this.H, self = this;
+        var K2 = this.sky, W = this.W, H = this.H, self = this, P = K2.P;
         K2.orbs.forEach(kill); K2.orbs = [];
+        K2.foes = K2.foes.filter(function (f) { if (f.kind === "guard") { kill(f); return false; } return true; });
         var letters = shuffle(this.choiceLetters().slice()), n = letters.length;
         var lanes = []; for (var i = 0; i < n; i++) lanes.push(90 + (H - 190) * (n === 1 ? 0.5 : i / (n - 1)));
         shuffle(lanes);
         letters.forEach(function (L, k) {
-          var o = { x: W + 90 + k * 200, by: lanes[k], y: lanes[k], ph: rnd(0, 6), letter: L, vx: -(78 + self.night * 0.45) };
+          var o = { x: W + 90 + k * 200, by: lanes[k], y: lanes[k], ph: rnd(0, 6), letter: L, vx: -P.orbSp * rnd(0.9, 1.1) };
           o.spr = self.add.image(o.x, o.y, "md-orb").setDepth(13);
           o.label = self.letterText(o.x, o.y, L, 28, "#1a2a5a", "#ffffff");
           K2.orbs.push(o);
         });
+        /* guards: right and wrong orbs alike, so a guard gives nothing away */
+        shuffle(K2.orbs.slice()).slice(0, Math.min(P.guards, n)).forEach(function (o) { o.guarded = true; self.skyGuard(o); });
+      }
+      skyGuard(o) {
+        var g = { kind: "guard", orb: o, x: o.x - 58, y: o.y, r: 22, t: rnd(0, 3), spr: this.add.image(o.x - 58, o.y, "rf-raven-0").setScale(0.72).setFlipX(true).setTint(0xd8c8ff).setDepth(15) };
+        this.sky.foes.push(g);
+        return g;
+      }
+      skyThrow(x, y, spark) {
+        var K2 = this.sky, P = K2.P, tx = K2.x, ty = K2.y - 8, dx = tx - x, dy = ty - y, dl = Math.sqrt(dx * dx + dy * dy) || 1, sp = spark ? P.sparkSp : P.featherSp;
+        var spr = spark ? this.add.image(x, y, "spark").setTint(0xbfe8ff).setScale(1.1).setDepth(17) : this.add.image(x, y, "md-feather").setDepth(17);
+        K2.shots.push({ x: x, y: y, vx: dx / dl * sp, vy: dy / dl * sp, spark: !!spark, t: 0, spr: spr });
+        snd(spark ? "beam" : "shot");
       }
       tick_sky(s, inp, ms) {
-        var K2 = this.sky, W = this.W, H = this.H, i, j, self = this;
+        var K2 = this.sky, W = this.W, H = this.H, P = K2.P, i, j, self = this;
         K2.t += s;
         if (this.hillFar) this.hillFar.tilePositionX += 30 * s;
         if (this.hillNear) this.hillNear.tilePositionX += 80 * s;
@@ -1190,56 +1229,69 @@
         this.chariot.setPosition(K2.x, K2.y + Math.sin(K2.t * 3) * 2);
         this.player.setPosition(K2.x - 10, K2.y - 36 + Math.sin(K2.t * 3) * 2);
         this.blink(this.chariot); this.blink(this.player);
-        /* sunbolts */
+        /* sunbolts: the first thing in a bolt's path takes it (a guard shields its orb) */
         K2.cd -= ms;
         if (inp.fire && K2.cd <= 0) {
           K2.bolts.push({ x: K2.x + 60, y: K2.y - 4, spr: this.add.image(K2.x + 60, K2.y - 4, "md-bolt").setDepth(18) });
-          K2.cd = 200; snd("shot");
+          K2.cd = 200; K2.fired = (K2.fired || 0) + 1; snd("shot");
         }
         for (i = K2.bolts.length - 1; i >= 0; i--) {
-          var b = K2.bolts[i], hit = false;
+          var b = K2.bolts[i], x0 = b.x, best = null, bx = 1e9, isOrb = false;
           b.x += 820 * s; b.spr.x = b.x;
-          for (j = 0; j < K2.foes.length && !hit; j++) {
-            var f = K2.foes[j];
-            if (dist(b.x, b.y, f.x, f.y) < f.r + 6) { hit = true; this.burst(f.x, f.y, f.kind === "wisp" ? 0xbfe8ff : 0x5a4a78, 12); snd("pop"); kill(f); K2.foes.splice(j, 1); this.addKill(f.x, f.y, "Sky cleared"); }
+          K2.foes.forEach(function (f) { if (Math.abs(f.y - b.y) < f.r + 6 && f.x + f.r + 6 >= x0 && f.x - f.r - 6 <= b.x && f.x < bx) { best = f; bx = f.x; isOrb = false; } });
+          K2.orbs.forEach(function (o) { if (Math.abs(o.y - b.y) < 32 && o.x + 32 >= x0 && o.x - 32 <= b.x && o.x < bx) { best = o; bx = o.x; isOrb = true; } });
+          if (best && !isOrb) {
+            this.burst(best.x, best.y, best.kind === "wisp" ? 0xbfe8ff : 0x5a4a78, 12); snd("pop");
+            kill(best); K2.foes.splice(K2.foes.indexOf(best), 1); this.addKill(best.x, best.y, "Sky cleared");
+          } else if (best) {
+            K2.orbs.splice(K2.orbs.indexOf(best), 1);
+            kill(best);
+            this.answerPick(best.letter, best.x, best.y);
           }
-          for (j = 0; j < K2.orbs.length && !hit; j++) {
-            var o = K2.orbs[j];
-            if (dist(b.x, b.y, o.x, o.y) < 32) {
-              hit = true;
-              K2.orbs.splice(j, 1);
-              kill(o);
-              this.answerPick(o.letter, o.x, o.y);
-            }
-          }
-          if (hit || b.x > W + 30) { b.spr.destroy(); K2.bolts.splice(i, 1); }
+          if (best || b.x > W + 30) { b.spr.destroy(); K2.bolts.splice(i, 1); }
           if (this._finishing) return;
         }
-        /* orbs drift past and come round again */
+        /* orbs drift past and come round again (weaving harder from level 16) */
         K2.orbs.forEach(function (o) {
-          o.x += o.vx * s; o.y = o.by + Math.sin(K2.t * 1.6 + o.ph) * 26;
-          if (o.x < -60) { o.x = W + 60 + rnd(0, 220); o.by = rnd(90, H - 100); }
+          o.x += o.vx * s; o.y = o.by + Math.sin(K2.t * P.bobFr + o.ph) * P.bob;
+          if (o.x < -60) {
+            o.x = W + 60 + rnd(0, 220); o.by = rnd(90, H - 100);
+            if (o.guarded && !K2.foes.some(function (f) { return f.orb === o; })) self.skyGuard(o);   /* a new guard each time round */
+          }
           o.spr.setPosition(o.x, o.y); o.label.setPosition(o.x, o.y);
         });
         /* ravens and wisps */
         K2.spawnCd -= ms;
         if (K2.spawnCd <= 0 && !this._between) {
-          var wisp = Math.random() < 0.3, y0 = rnd(60, H - 60);
+          var wisp = Math.random() < P.wispShare, y0 = rnd(60, H - 60);
           var foe = wisp
-            ? { kind: "wisp", x: W + 40, y: y0, by: y0, r: 20, sp: 110 + this.night * 0.6, spr: this.add.image(W + 40, y0, "rf-wisp").setScale(0.7).setDepth(15) }
-            : { kind: "raven", x: W + 40, y: y0, by: y0, r: 22, sp: rnd(170, 240) + this.night * 0.9, amp: rnd(20, 80), fr: rnd(1.5, 3), t: 0, spr: this.add.image(W + 40, y0, "rf-raven-0").setScale(0.7).setFlipX(true).setDepth(15) };
+            ? { kind: "wisp", x: W + 40, y: y0, by: y0, r: 20, sp: P.wispSp, spr: this.add.image(W + 40, y0, "rf-wisp").setScale(0.7).setDepth(15) }
+            : { kind: "raven", x: W + 40, y: y0, by: y0, r: 22, sp: P.ravenSp + rnd(0, 70), amp: rnd(20, 80), fr: rnd(1.5, 3), t: 0, spr: this.add.image(W + 40, y0, "rf-raven-0").setScale(0.7).setFlipX(true).setDepth(15) };
+          /* will it throw, and from how far along? */
+          var pThrow = wisp ? P.sparkP : P.throwP;
+          if (Math.random() < pThrow) foe.throwX = rnd(K2.x + 220, W - 60);
           K2.foes.push(foe);
-          K2.spawnCd = Math.max(420, 1200 - this.night * 6) * rnd(0.7, 1.3);
+          K2.spawnCd = P.spawnMs * rnd(0.7, 1.3);
         }
         for (i = K2.foes.length - 1; i >= 0; i--) {
           var e = K2.foes[i];
-          if (e.kind === "wisp") {
+          if (e.kind === "guard") {
+            if (K2.orbs.indexOf(e.orb) === -1) { kill(e); K2.foes.splice(i, 1); continue; }
+            e.t += s; e.x = e.orb.x - 58; e.y = e.orb.y + Math.sin(e.t * 5) * 4;
+            e.spr.setPosition(e.x, e.y).setTexture("rf-raven-" + (Math.floor(e.t * 4) % 2));
+          } else if (e.kind === "wisp") {
             e.x -= e.sp * s;
-            e.y += clamp(K2.y - e.y, -1, 1) * 60 * s;
+            e.y += clamp(K2.y - e.y, -1, 1) * P.wispHome * s;
             e.spr.setPosition(e.x, e.y).setAlpha(0.75 + Math.sin(K2.t * 8 + i) * 0.2);
           } else {
             e.t += s; e.x -= e.sp * s; e.y = e.by + Math.sin(e.t * e.fr) * e.amp;
             e.spr.setPosition(e.x, e.y).setTexture("rf-raven-" + (Math.floor(e.t * 4) % 2));
+          }
+          /* the wind-up (it glows orange for a third of a second), then the throw */
+          if (e.throwX != null && e.x <= e.throwX && !e.thrown) {
+            e.wind = (e.wind || 0) + ms;
+            if (e.kind === "raven") e.spr.setTint(0xffb060);
+            if (e.wind >= 330) { e.thrown = true; e.spr.clearTint(); this.skyThrow(e.x - 16, e.y, e.kind === "wisp"); }
           }
           if (dist(e.x, e.y, K2.x, K2.y - 8) < e.r + 26) {
             var hurt = this.loseLife("hit", e.kind === "wisp" ? "A WISP HIT YOU" : "A RAVEN HIT YOU");
@@ -1247,13 +1299,27 @@
             if (this._finishing) return;
             continue;
           }
-          if (e.x < -60) { kill(e); K2.foes.splice(i, 1); }
+          if (e.x < -60 && e.kind !== "guard") { kill(e); K2.foes.splice(i, 1); }
+        }
+        /* feathers and sparks */
+        for (i = K2.shots.length - 1; i >= 0; i--) {
+          var sh = K2.shots[i];
+          sh.t += s; sh.x += sh.vx * s; sh.y += sh.vy * s;
+          sh.spr.setPosition(sh.x, sh.y).setRotation(sh.spark ? sh.t * 6 : Math.atan2(sh.vy, sh.vx) + Math.PI / 2 + Math.sin(sh.t * 10) * 0.3);
+          var gone = sh.x < -30 || sh.x > W + 30 || sh.y < -30 || sh.y > H + 30;
+          if (!gone && dist(sh.x, sh.y, K2.x, K2.y - 8) < 30) {
+            gone = true;
+            this.loseLife("hit", sh.spark ? "A WISP'S SPARK HIT YOU" : "HIT BY A FEATHER");
+            if (this._finishing) { sh.spr.destroy(); K2.shots.splice(i, 1); return; }
+          }
+          if (gone) { sh.spr.destroy(); K2.shots.splice(i, 1); }
         }
       }
       clear_sky() {
         var K2 = this.sky, self = this;
         K2.foes.forEach(function (f) { self.burst(f.x, f.y, 0xffd84a, 6); kill(f); }); K2.foes = [];
         K2.orbs.forEach(function (o) { self.burst(o.x, o.y, 0xbfe8ff, 8); kill(o); }); K2.orbs = [];
+        K2.shots.forEach(kill); K2.shots = [];
         K2.spawnCd = 1800;
       }
 

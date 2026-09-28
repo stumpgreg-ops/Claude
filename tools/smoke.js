@@ -594,18 +594,43 @@ var srv = http.createServer(function (req, res) {
   modeRuns.skyMouse = await page.evaluate(function (a) { var s = SolScene; return { moved: Math.hypot(s.sky.x - a.x, s.sky.y - a.y) }; }, sk0);
   modeRuns.sky = await page.evaluate(async function () {
     var s = SolScene, K = s.sky, o = { mode: s.mode.id };
-    s.spareLives = 0; s.perks = {};
+    s.spareLives = 0; s.perks = {}; s.strikes = 0; s.iframeMs = 0;
+    /* v5.7.5: difficulty climbs from a harder start */
+    var p6 = s.skyParams(6), p16 = s.skyParams(16), p56 = s.skyParams(56), p96 = s.skyParams(96);
+    o.curve = { spawn6: p6.spawnMs, spawn96: p96.spawnMs, throw6: p6.throwP, throw96: p96.throwP, spark6: p6.sparkP, spark96: p96.sparkP, guards6: p6.guards, guards16: p16.guards, guards56: p56.guards, bob6: p6.bob, bob56: p56.bob };
+    /* quiet sky for the scripted checks */
+    K.spawnCd = 1e9; K.foes.forEach(function (f) { if (f.spr) f.spr.destroy(); }); K.foes = []; K.shots.forEach(function (f) { f.spr.destroy(); }); K.shots = [];
     K.orbs.forEach(function (q, i) { q.x = s.W * 0.6 + i * 60; q.vx = 0; });   /* bring the orbs on screen */
     function bolt(x, y) { K.bolts.push({ x: x - 40, y: y, spr: s.add.image(x - 40, y, "md-bolt") }); }
     var w = K.orbs.filter(function (q) { return s.need.indexOf(q.letter) === -1; })[0];
     bolt(w.x, w.y); await new Promise(function (r) { setTimeout(r, 400); }); o.wrong = s.strikes; s.strikes = 0; s.iframeMs = 0;
     K.foes.push({ kind: "raven", x: K.x, y: K.y - 8, by: K.y - 8, r: 22, sp: 0, amp: 0, fr: 1, t: 0, spr: s.add.image(K.x, K.y, "rf-raven-0") });
     await new Promise(function (r) { setTimeout(r, 400); }); o.crash = s.strikes; s.strikes = 0; s.iframeMs = 0;
+    K.foes.forEach(function (f) { if (f.spr) f.spr.destroy(); }); K.foes = [];
+    /* a thrown feather hits the chariot */
+    s.skyThrow(K.x + 120, K.y - 8, false);
+    await new Promise(function (r) { setTimeout(r, 900); }); o.feather = s.strikes; s.strikes = 0; s.iframeMs = 0;
+    /* a guard in front of an orb takes the bolt; the orb is untouched */
+    var gOrb = K.orbs.filter(function (q) { return s.need.indexOf(q.letter) === -1; })[0] || K.orbs[0];
+    var guard = s.skyGuard(gOrb), kills = s.kills;
+    bolt(guard.x - 20, guard.y);
+    await new Promise(function (r) { setTimeout(r, 500); });
+    o.guard = { orbSafe: K.orbs.indexOf(gOrb) !== -1, guardGone: K.foes.indexOf(guard) === -1, strikes: s.strikes, kill: s.kills > kills };
+    s.strikes = 0; s.iframeMs = 0;
     K.orbs.filter(function (q) { return s.need.indexOf(q.letter) !== -1; }).forEach(function (q) { bolt(q.x, q.y); });
     await new Promise(function (r) { setTimeout(r, 400); }); o.score = s.score;
     return o;
   });
   await shot("18-sun-chariot");
+  if (await page.isVisible("#read-go")) await page.click("#read-go");
+  await page.evaluate(function () {
+    var s = SolScene, K = s.sky; s.iframeMs = 60000; K.spawnCd = 0;   /* just for the picture: a busy sky, a guarded orb */
+    K.orbs.forEach(function (q, i) { q.x = s.W * 0.55 + i * 150; q.vx = -40; });
+    if (K.orbs[0]) s.skyGuard(K.orbs[0]);
+  });
+  await page.waitForTimeout(4500);
+  await shot("18b-sun-chariot-busy");
+  await page.evaluate(function () { SolScene.iframeMs = 0; });
   await gotoLevel(8);
   modeRuns.ring = await page.evaluate(async function () {
     var s = SolScene, G = s.rg, p = s.player, o = { mode: s.mode.id };
@@ -632,6 +657,10 @@ var srv = http.createServer(function (req, res) {
   check(mr.beamHelp && mr.beamHelp.rightBtn.rightPulls && mr.beamHelp.rightBtn.leftFires, "Rune Rocks: the right mouse button holds the beam; the left button fires");
   check(mr.rockMouse && mr.rockMouse.turned < 0.01 && mr.rockMouse.moved < 3 && mr.rockMouse.fired >= 1, "Rune Rocks: clicking fires without turning or moving the ship: " + JSON.stringify(mr.rockMouse));
   check(mr.rocks.early === 1 && mr.rocks.earlyLabel === "YOU LET GO OF THE BEAM TOO SOON", "Rune Rocks: a rock let go of early that hits the ship costs a life and says why: " + mr.rocks.earlyLabel);
+  var cv = mr.sky.curve || {};
+  check(cv.spawn6 < 1100 && cv.spawn96 <= 400 && cv.throw6 > 0.3 && cv.throw96 > cv.throw6 && cv.spark6 === 0 && cv.spark96 > 0 && cv.guards6 === 0 && cv.guards16 === 1 && cv.guards56 === 3 && cv.bob56 > cv.bob6, "Sun Chariot: harder from the first one (level 6) and harder every time after: " + JSON.stringify(cv));
+  check(mr.sky.feather === 1, "Sun Chariot: a raven's feather that hits the chariot costs a life");
+  check(mr.sky.guard && mr.sky.guard.orbSafe && mr.sky.guard.guardGone && mr.sky.guard.strikes === 0 && mr.sky.guard.kill, "Sun Chariot: a guard raven in front of an orb takes the bolt and the orb stays: " + JSON.stringify(mr.sky.guard));
   check(mr.skyMouse && mr.skyMouse.moved < 2, "Sun Chariot: clicking does not move the chariot: " + JSON.stringify(mr.skyMouse));
   check(mr.beamHelp && /let go early/i.test(mr.beamHelp.text || ""), "Rune Rocks: the beam card warns about letting go early");
   check(mr.rocks.learned === "1", "Rune Rocks: pulling a rock in retires the beam tutorial on this Chromebook");
