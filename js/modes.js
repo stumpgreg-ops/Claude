@@ -1,4 +1,4 @@
-/* SOL Labyrinth v5.7.3 — shooter levels.
+/* SOL Labyrinth v5.7.4 — shooter levels.
  *
  * Every other level of each realm (levels 2, 4, 6 and 8) swaps the maze for a
  * shooter, in rotation:
@@ -32,8 +32,8 @@
     rocks: {
       id: "rocks", name: "Rune Rocks", kind: "asteroids level",
       how: "Rocks drift through space and a few carry letters. Hold your beam on the rock with the right answer to pull it in. Blast the wrong letters and the plain rocks before they hit you.",
-      rules: "Pulling in a wrong letter costs a life. So does blasting the right answer, or a rock hitting your ship.",
-      keys: "◀ ▶ turn · ▲ thrust · Space or FIRE shoots · ▼, Shift or PULL holds the beam. With a mouse: left button turns toward the pointer and fires, right button turns toward it and holds the beam.",
+      rules: "Pulling in a wrong letter costs a life. So does blasting the right answer, or a rock hitting your ship — including a rock you let go of before it reached you.",
+      keys: "◀ ▶ turn · ▲ thrust · Space, FIRE or the left mouse button shoots · ▼, Shift, PULL or the right mouse button holds the beam. The mouse never steers the ship.",
       tip: "RUNE ROCKS — beam in the right letter, blast the rest. Don't get hit.",
       hint1: "Pull in the rock with the right letter (▼, Shift or PULL). Blast the others. The passage stays in the side panel.",
       hint2: "This question has two right letters. Pull in both rocks that carry them."
@@ -42,7 +42,7 @@
       id: "sky", name: "Sun Chariot", kind: "flying shooter level",
       how: "Sol drives the sun's chariot across the sky. Letter orbs float past among ravens and will-o'-wisps. Shoot the orb with the right answer. Orbs you miss come round again.",
       rules: "Shooting a wrong orb costs a life. So does flying into a raven or a wisp.",
-      keys: "Arrow keys or WASD fly · Space or FIRE shoots · or hold the mouse or a finger where you want to fly.",
+      keys: "Arrow keys, WASD or the on-screen pad fly · Space, FIRE or a mouse button shoots (clicking does not move the chariot).",
       tip: "SUN CHARIOT — shoot the orb with the right letter. Dodge the ravens and wisps.",
       hint1: "Shoot the orb with the right letter. The passage stays in the side panel.",
       hint2: "This question has two right letters. Shoot both orbs that carry them."
@@ -951,11 +951,11 @@
               '<defs><marker id="bh-arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#fff"/></marker></defs>' +
             '</svg>' +
             '<ol class="beam-steps">' +
-              '<li><b>Point your ship</b> at the rock with the right letter (◀ ▶ turn, ▲ moves you closer).</li>' +
+              '<li><b>Point your ship</b> at the rock with the right letter: ◀ ▶ turn, ▲ moves you closer. (The mouse does not steer.)</li>' +
               '<li><b>Hold the beam:</b> ▼ or Shift, the <b>PULL</b> button, or the <b>right mouse button</b>. A gold cone shines in front of the ship.</li>' +
-              '<li><b>Keep holding</b> while the rock is in the cone. It flies to your ship and counts as your answer.</li>' +
+              '<li><b>Keep holding until the rock touches your ship.</b> Then it counts as your answer.</li>' +
             '</ol>' +
-            '<p class="beam-warn">Don\'t shoot the right rock — that costs a life. Shoot the wrong letters and the plain rocks.</p>' +
+            '<p class="beam-warn"><b>Don\'t let go early!</b> A rock you let go of keeps flying at you, and a rock hitting your ship costs a life — even the right one. Don\'t shoot the right rock either; shoot the wrong letters and the plain rocks.</p>' +
             '<button type="button" class="btn primary" id="beam-help-ok">Got it</button>' +
             '</div>';
           (document.getElementById("stage") || document.body).appendChild(ov);
@@ -1058,13 +1058,9 @@
         var R = this.rk, S = R.ship, W = this.W, H = this.H, i, j, self = this, g = this.fxG;
         g.clear();
         /* steering */
+        /* only the keys and the pad steer; a mouse button just fires (left) or holds the beam (right) */
         var thrust = inp.ay < 0;
         S.ang += inp.ax * 3.8 * s;
-        if (inp.ptr) {
-          var want = Math.atan2(inp.ptr.y - S.y, inp.ptr.x - S.x), d = angDiff(want, S.ang);
-          S.ang += clamp(d, -5 * s, 5 * s);
-          if (Math.abs(d) < 0.5 && dist(inp.ptr.x, inp.ptr.y, S.x, S.y) > 140 && !inp.pull) thrust = true;
-        }
         if (thrust) { S.vx += Math.cos(S.ang) * 420 * s; S.vy += Math.sin(S.ang) * 420 * s; }
         var sp = Math.sqrt(S.vx * S.vx + S.vy * S.vy);
         if (sp > 340) { S.vx *= 340 / sp; S.vy *= 340 / sp; }
@@ -1083,7 +1079,7 @@
         R.cd -= ms;
         if (inp.fire && R.cd <= 0 && R.bullets.length < 6) {
           R.bullets.push({ x: S.x + nx * 26, y: S.y + ny * 26, vx: nx * 640 + S.vx * 0.5, vy: ny * 640 + S.vy * 0.5, life: 0.9, spr: this.add.image(S.x, S.y, "md-bolt").setDepth(18).setRotation(S.ang) });
-          R.cd = 170; snd("shot");
+          R.cd = 170; R.fired = (R.fired || 0) + 1; snd("shot");
         }
         for (i = R.bullets.length - 1; i >= 0; i--) {
           var b = R.bullets[i], hit = null;
@@ -1111,7 +1107,7 @@
           R.beamSnd -= ms;
           if (R.beamSnd <= 0) { snd("beam"); R.beamSnd = 420; }
           if (best) {
-            R.target = best;
+            R.target = best; best.beamT = this.time.now;
             g.lineStyle(5, 0xffe07a, 0.55); g.lineBetween(S.x + nx * 18, S.y + ny * 18, best.x, best.y);
             g.lineStyle(2, 0xffffff, 0.8); g.strokeCircle(best.x, best.y, best.r + 6);
             var tx = S.x - best.x, ty = S.y - best.y, tl = Math.sqrt(tx * tx + ty * ty) || 1;
@@ -1129,7 +1125,9 @@
           o.spr.setPosition(o.x, o.y).setRotation(o.rot);
           if (o.label) o.label.setPosition(o.x, o.y);
           if (o !== R.target && dist(o.x, o.y, S.x, S.y) < o.r + 17 && this.iframeMs <= 0) {
-            var hurt = this.loseLife("hit", "HIT BY A ROCK");
+            var early = o.beamT && this.time.now - o.beamT < 1600;   /* let go of the beam before it was in */
+            var hurt = this.loseLife("hit", early ? "YOU LET GO OF THE BEAM TOO SOON" : "HIT BY A ROCK");
+            if (hurt && early) this.toast("Keep holding the beam until the rock touches your ship. A rock you let go of keeps coming and hits you.", 4200);
             if (hurt) {
               var ka = Math.atan2(S.y - o.y, S.x - o.x);
               S.vx = Math.cos(ka) * 220; S.vy = Math.sin(ka) * 220;
@@ -1188,10 +1186,6 @@
         /* flying */
         var vx = inp.ax * 380, vy = inp.ay * 380;
         if (inp.ay && inp.ax) { vx *= 0.7071; vy *= 0.7071; }
-        if (inp.ptr) {
-          var dx = inp.ptr.x - K2.x, dy = inp.ptr.y - K2.y, dl = Math.sqrt(dx * dx + dy * dy);
-          if (dl > 12) { vx = dx / dl * 380; vy = dy / dl * 380; } else { vx = 0; vy = 0; }
-        }
         K2.x = clamp(K2.x + vx * s, 60, W * 0.55); K2.y = clamp(K2.y + vy * s, 56, H - 44);
         this.chariot.setPosition(K2.x, K2.y + Math.sin(K2.t * 3) * 2);
         this.player.setPosition(K2.x - 10, K2.y - 36 + Math.sin(K2.t * 3) * 2);

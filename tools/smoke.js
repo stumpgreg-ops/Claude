@@ -542,7 +542,7 @@ var srv = http.createServer(function (req, res) {
   await page.waitForSelector("#beam-help:not(.hidden)", { timeout: 8000 }).catch(function () {});
   var beamHelp = await page.evaluate(function () {
     var ov = document.getElementById("beam-help"), s = SolScene;
-    return { shown: !!ov && !ov.classList.contains("hidden") && getComputedStyle(ov).display !== "none", paused: !!s.helpOpen, right: /right mouse button/.test(ov ? ov.textContent : "") };
+    return { shown: !!ov && !ov.classList.contains("hidden") && getComputedStyle(ov).display !== "none", paused: !!s.helpOpen, right: /right mouse button/.test(ov ? ov.textContent : ""), text: ov ? ov.textContent : "" };
   });
   await shot("17b-beam-help");
   if (await page.isVisible("#beam-help-ok")) await page.click("#beam-help-ok");
@@ -557,6 +557,13 @@ var srv = http.createServer(function (req, res) {
     return { rightPulls: a.pull && !a.fire, leftFires: b.fire && !b.pull };
   });
   modeRuns.beamHelp = beamHelp;
+  /* v5.7.4: a mouse button never steers the ship: left fires, right beams */
+  var rk0 = await page.evaluate(function () { var s = SolScene, S = s.rk.ship; s.tutLockUntil = 0; S.vx = 0; S.vy = 0; return { x: S.x, y: S.y, ang: S.ang, fired: s.rk.fired || 0, W: s.W, H: s.H }; });
+  var cb2 = await page.evaluate(function () { var r = SolScene.game.canvas.getBoundingClientRect(); return { x: r.left, y: r.top, w: r.width, h: r.height }; });
+  await page.mouse.move(cb2.x + cb2.w * 0.85, cb2.y + cb2.h * 0.2);
+  await page.mouse.down(); await page.waitForTimeout(600); await page.mouse.up();
+  await page.mouse.down({ button: "right" }); await page.waitForTimeout(400); await page.mouse.up({ button: "right" });
+  modeRuns.rockMouse = await page.evaluate(function (a) { var s = SolScene, S = s.rk.ship; return { turned: Math.abs(S.ang - a.ang), moved: Math.hypot(S.x - a.x, S.y - a.y), fired: (s.rk.fired || 0) - a.fired }; }, rk0);
   modeRuns.rocks = await page.evaluate(async function () {
     var s = SolScene, R = s.rk, o = { mode: s.mode.id, pull: getComputedStyle(document.getElementById("btn-shutter")).display };
     s.spareLives = 0; s.perks = {};
@@ -569,6 +576,10 @@ var srv = http.createServer(function (req, res) {
     o.back = R.rocks.some(function (q) { return q.letter === L; });
     var blank = s.rockMake(2, null, R.ship.x, R.ship.y, 0, 0); s.iframeMs = 0;
     await new Promise(function (r) { setTimeout(r, 500); }); o.hit = s.strikes; s.strikes = 0; s.iframeMs = 0;
+    /* a right rock that was in the beam a moment ago and hits the ship: named, and still costs a life */
+    var rr = rockOf(true); s.strikes = 0; s.iframeMs = 0;
+    if (rr) { rr.x = R.ship.x + 10; rr.y = R.ship.y; rr.vx = 0; rr.vy = 0; rr.beamT = s.time.now; }
+    await new Promise(function (r) { setTimeout(r, 500); }); o.early = s.strikes; o.earlyLabel = s._lastHitLabel; s.strikes = 0; s.iframeMs = 0;
     s.need.forEach(function (N) { var q = R.rocks.filter(function (z) { return z.letter === N; })[0]; if (q) s.rockCaught(q); });
     o.score = s.score;
     try { o.learned = localStorage.getItem("afterHours.v1.beamLearned"); } catch (e) {}
@@ -576,6 +587,11 @@ var srv = http.createServer(function (req, res) {
   });
   await shot("17-rune-rocks");
   await gotoLevel(6);
+  var sk0 = await page.evaluate(function () { var s = SolScene; s.tutLockUntil = 0; return { x: s.sky.x, y: s.sky.y }; });
+  var cb3 = await page.evaluate(function () { var r = SolScene.game.canvas.getBoundingClientRect(); return { x: r.left, y: r.top, w: r.width, h: r.height }; });
+  await page.mouse.move(cb3.x + cb3.w * 0.5, cb3.y + cb3.h * 0.15);
+  await page.mouse.down(); await page.waitForTimeout(600); await page.mouse.up();
+  modeRuns.skyMouse = await page.evaluate(function (a) { var s = SolScene; return { moved: Math.hypot(s.sky.x - a.x, s.sky.y - a.y) }; }, sk0);
   modeRuns.sky = await page.evaluate(async function () {
     var s = SolScene, K = s.sky, o = { mode: s.mode.id };
     s.spareLives = 0; s.perks = {};
@@ -612,8 +628,12 @@ var srv = http.createServer(function (req, res) {
   check(mr.raid.eagles >= 2 && mr.raid.ravens >= 12 && mr.raid.afterOne === 0 && mr.raid.wrong === 1 && mr.raid.feather === 1 && mr.raid.beam === 1 && mr.raid.score === 1 && mr.raid.coins && mr.raid.newWave > 0 && mr.raid.flying > 0 && !/Fenrir/.test(mr.raid.pip), "Eagle Swoop: eagles carry the letters above a raven guard; an eagle takes two arrows; a wrong letter, a feather and an eagle's beam each cost a life; the right eagle answers, pays coins and a new wave flies in: " + JSON.stringify(mr.raid));
   check(mr.click && mr.click.moved < 2 && mr.click.fired >= 2, "Eagle Swoop: left and right mouse buttons shoot without moving Sol: " + JSON.stringify(mr.click));
   check(mr.rocks.mode === "rocks" && mr.rocks.pull !== "none" && mr.rocks.pullWrong === 1 && mr.rocks.blastRight === 1 && mr.rocks.blastWrong === 0 && mr.rocks.back && mr.rocks.hit === 1 && mr.rocks.score === 1, "Rune Rocks: pulling a wrong letter, blasting the right one and a rock hit cost a life; blasting a wrong letter is free; the right rock returns; beaming it in answers");
-  check(mr.beamHelp && mr.beamHelp.shown && mr.beamHelp.paused && mr.beamHelp.right && mr.beamHelp.closed, "Rune Rocks: a one-card beam tutorial shows after the reading pop-up, pauses the level and closes with Got it: " + JSON.stringify(mr.beamHelp));
+  check(mr.beamHelp && mr.beamHelp.shown && mr.beamHelp.paused && mr.beamHelp.right && mr.beamHelp.closed, "Rune Rocks: a one-card beam tutorial shows after the reading pop-up, pauses the level and closes with Got it: " + JSON.stringify({ shown: mr.beamHelp.shown, paused: mr.beamHelp.paused, closed: mr.beamHelp.closed }));
   check(mr.beamHelp && mr.beamHelp.rightBtn.rightPulls && mr.beamHelp.rightBtn.leftFires, "Rune Rocks: the right mouse button holds the beam; the left button fires");
+  check(mr.rockMouse && mr.rockMouse.turned < 0.01 && mr.rockMouse.moved < 3 && mr.rockMouse.fired >= 1, "Rune Rocks: clicking fires without turning or moving the ship: " + JSON.stringify(mr.rockMouse));
+  check(mr.rocks.early === 1 && mr.rocks.earlyLabel === "YOU LET GO OF THE BEAM TOO SOON", "Rune Rocks: a rock let go of early that hits the ship costs a life and says why: " + mr.rocks.earlyLabel);
+  check(mr.skyMouse && mr.skyMouse.moved < 2, "Sun Chariot: clicking does not move the chariot: " + JSON.stringify(mr.skyMouse));
+  check(mr.beamHelp && /let go early/i.test(mr.beamHelp.text || ""), "Rune Rocks: the beam card warns about letting go early");
   check(mr.rocks.learned === "1", "Rune Rocks: pulling a rock in retires the beam tutorial on this Chromebook");
   check(/blasted the rock with the right answer/.test(mr.rocks.why || ""), "Rune Rocks: losing the last life by blasting the right answer says so (not \"wrong letter\"): " + mr.rocks.why);
   check(mr.sky.mode === "sky" && mr.sky.wrong === 1 && mr.sky.crash === 1 && mr.sky.score === 1, "Sun Chariot: a wrong orb and a crash cost a life; the right orb answers");
