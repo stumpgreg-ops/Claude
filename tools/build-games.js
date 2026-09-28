@@ -10,7 +10,7 @@
      content files are loaded (content.js stays in both: it holds the pack engine; game.js
      prunes the other state's packs from it at start-up).
    - js/: content files for the other state left out.
-   - tools/ and dist/ left out. */
+   - tools/, dist/ and docs/ (the question lists with answer keys) left out. */
 var fs = require("fs"), path = require("path"), cp = require("child_process");
 var root = path.join(__dirname, ".."), dist = path.join(root, "dist");
 var version = process.argv[2] || (function () {
@@ -85,7 +85,7 @@ fs.rmSync(dist, { recursive: true, force: true });
 Object.keys(STATES).forEach(function (st) {
   var def = STATES[st], out = path.join(dist, st.toLowerCase()), drop = CONTENT[st === "NJ" ? "VA" : "NJ"];
   copyTree(root, out, function (rel, name) {
-    if (rel === "tools" || rel === "dist" || rel === ".git" || rel === "node_modules" || rel === ".claude") return true;
+    if (rel === "tools" || rel === "dist" || rel === "docs" || rel === ".git" || rel === "node_modules" || rel === ".claude") return true;
     if (name === ".DS_Store" || name === "Thumbs.db" || name === ".gitignore") return true;
     if (/^js\/content\d*\.js$/.test(rel) && drop.indexOf(name) !== -1) return true;
     return false;

@@ -6912,7 +6912,7 @@
       var unused = function (c) { return self.usedClaims.indexOf(c.id) === -1; };
       /* v4.9: an NJSLA Part B (evidence) item always follows its Part A. */
       if (this.claim && this.claim.partB) {
-        for (i = 0; i < claims.length; i++) if (claims[i].id === this.claim.partB && unused(claims[i])) { pick = i; break; }
+        for (i = 0; i < claims.length; i++) if (claims[i].id === this.claim.partB) { pick = i; break; }   /* v5.7.1: also when a Part A is asked again */
       }
       if (pick < 0) {
         var pool = [];
@@ -6934,10 +6934,22 @@
         var band = [], loW = wantWords * 0.6, hiW = wantWords * 1.6;
         for (i = 0; i < pool.length; i++) { var cw = claims[pool[i]].words; if (!cw || (cw >= loW && cw <= hiW)) band.push(pool[i]); }
         if (band.length >= 12) pool = band;
+        else {
+          /* v5.7.1: few unused passages of the right length left (a small pool late in the campaign).
+             Asking again from right-length passages not seen recently beats dropping to a short one. */
+          var recent = this.usedClaims.slice(-20), again = [];
+          for (i = 0; i < claims.length; i++) {
+            var cc = claims[i];
+            if (cc.isPartB || recent.indexOf(cc.id) !== -1 || this.nightPacks.indexOf(cc.packId) !== -1) continue;
+            if (!cc.words || (cc.words >= loW && cc.words <= hiW)) again.push(i);
+          }
+          if (again.length >= 12) pool = again;
+        }
         var weights = [], total = 0, w, rec, acc;
         for (i = 0; i < pool.length; i++) {
           var c = claims[pool[i]];
           w = Math.exp(-Math.abs((c.level || 2) - target) * 1.3);
+          if (!unused(c)) w *= 0.35;   /* a question asked before only when the fresh ones are far off */
           if (c.words) w *= Math.exp(-Math.abs(c.words - wantWords) / (0.18 * wantWords));
           if (allStrands && a) {
             rec = a.strands[c.strand || "RL"];

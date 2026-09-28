@@ -1,4 +1,4 @@
-/* SOL Labyrinth v5.7.1 — shooter levels.
+/* SOL Labyrinth v5.7.2 — shooter levels.
  *
  * Every other level of each realm (levels 2, 4, 6 and 8) swaps the maze for a
  * shooter, in rotation:
@@ -586,11 +586,17 @@
             var nx = modeFor(this.night + 1);
             if (msg && this.night < 100) msg.textContent += " Next: " + (nx ? nx.name + " (" + nx.kind + ")." : ((this.night + 1) % 10 === 0 ? "Fenrir's boss maze." : "back to the maze."));
           } else if (msg) {
-            msg.textContent = (this.lastStrikeReason === "wrong" ? "That wrong letter used your last life. " :
-              (this._lastHitLabel ? "Last hit: " + this._lastHitLabel.toLowerCase() + ". " : "")) +
-              "In " + m.name + ", wrong letters and hits both cost a life. Retry this level — the campaign stays here.";
+            msg.textContent = this.lossReason() + "In " + m.name + ", wrong letters and hits both cost a life. Retry this level — the campaign stays here.";
           }
         } catch (e) {}
+      }
+
+      /* what used the last life, in words (the label is the one the big tag showed) */
+      lossReason() {
+        var lab = this._lastHitLabel || "";
+        if (lab === "YOU BLASTED THE RIGHT ANSWER") return "You blasted the rock with the right answer, and that used your last life. Pull the right letter in with the beam instead of shooting it. ";
+        if (this.lastStrikeReason === "wrong") return "That wrong letter used your last life. ";
+        return lab ? "Last hit: " + lab.toLowerCase() + ". " : "";
       }
 
       /* ═══ 1. EAGLE SWOOP — galaga ══════════════════════════════════════════
