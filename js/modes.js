@@ -1,4 +1,4 @@
-/* SOL Labyrinth v5.7.2 — shooter levels.
+/* SOL Labyrinth v5.7.3 — shooter levels.
  *
  * Every other level of each realm (levels 2, 4, 6 and 8) swaps the maze for a
  * shooter, in rotation:
@@ -33,7 +33,7 @@
       id: "rocks", name: "Rune Rocks", kind: "asteroids level",
       how: "Rocks drift through space and a few carry letters. Hold your beam on the rock with the right answer to pull it in. Blast the wrong letters and the plain rocks before they hit you.",
       rules: "Pulling in a wrong letter costs a life. So does blasting the right answer, or a rock hitting your ship.",
-      keys: "◀ ▶ turn · ▲ thrust · Space or FIRE shoots · ▼, Shift or PULL holds the beam. With a mouse, hold the button to turn toward it and fire.",
+      keys: "◀ ▶ turn · ▲ thrust · Space or FIRE shoots · ▼, Shift or PULL holds the beam. With a mouse: left button turns toward the pointer and fires, right button turns toward it and holds the beam.",
       tip: "RUNE ROCKS — beam in the right letter, blast the rest. Don't get hit.",
       hint1: "Pull in the rock with the right letter (▼, Shift or PULL). Blast the others. The passage stays in the side panel.",
       hint2: "This question has two right letters. Pull in both rocks that carry them."
@@ -58,6 +58,7 @@
     }
   };
   var SLOTS = { 2: "raid", 4: "rocks", 6: "sky", 8: "ring" };
+  var BEAM_KEY = "afterHours.v1.beamLearned";   /* set once a student has pulled a rock in */
 
   function modeFor(n) {
     n = Math.floor(Number(n) || 0);
@@ -270,6 +271,7 @@
         this.nightPacks = []; this.nightWrong = 0; this.nightCoins = 0; this.claimWrong = 0; this.extracted = [];
         this.iframeMs = 0; this.bigTagMs = 0; this.lastStrikeReason = ""; this._lastHitLabel = "";
         this.janitors = []; this.slips = []; this.shutters = [];
+        this._beamHelpDone = false; this.helpOpen = false;
 
         this.pal = (this.realm && this.realm.pal) || { wall: 0x2f3b2c, stroke: 0x5a7050, lip: 0x8aa47a, floorA: 0xdcd4b4, floorB: 0xb9b08e, accent: 0xf5d76e, wash: 0x6aa84a, void: 0x07100a };
         this.W = this.scale.width; this.H = this.scale.height;
@@ -278,10 +280,11 @@
 
         this.keys = this.input.keyboard.addKeys("LEFT,RIGHT,UP,DOWN,W,A,S,D,SPACE,SHIFT");
         this.ptr = { down: false, x: 0, y: 0, t: -9999 };
-        this.input.on("pointerdown", function (p) { self.ptr.down = true; self.ptr.x = p.x; self.ptr.y = p.y; self.ptr.t = self.time.now; });
+        this.input.on("pointerdown", function (p) { self.ptr.down = true; self.ptr.right = !!(p.rightButtonDown && p.rightButtonDown()); self.ptr.x = p.x; self.ptr.y = p.y; self.ptr.t = self.time.now; });
         this.input.on("pointermove", function (p) { self.ptr.x = p.x; self.ptr.y = p.y; if (p.isDown || self.ptr.down) self.ptr.t = self.time.now; });
-        this.input.on("pointerup", function () { self.ptr.down = false; });
-        this.input.on("pointerupoutside", function () { self.ptr.down = false; });
+        this.input.on("pointerup", function () { self.ptr.down = false; self.ptr.right = false; });
+        this.input.on("pointerupoutside", function () { self.ptr.down = false; self.ptr.right = false; });
+        try { if (this.input.mouse) this.input.mouse.disableContextMenu(); } catch (eM) {}   /* the right button is a game button here */
 
         this.sparks = this.add.particles(0, 0, "spark", { speed: { min: 60, max: 260 }, lifespan: 460, scale: { start: 0.9, end: 0 }, emitting: false }).setDepth(30);
         this.dust = this.add.particles(0, 0, this.textures.exists("rf-dot") ? "rf-dot" : "spark", { speed: { min: 40, max: 200 }, lifespan: 560, scale: { start: 0.8, end: 0 }, alpha: { start: 0.9, end: 0 }, emitting: false }).setDepth(29);
@@ -319,6 +322,7 @@
           var card = document.getElementById("mode-card"); if (card) card.classList.add("hidden");
         } catch (e2) {}
         Input.shutterHeld = false;
+        this.hideBeamHelp();
       }
 
       placeSlips() {
@@ -347,7 +351,8 @@
           this._readPending = false;
           this.openReading(this._readReason || "start");
         }
-        if (this.readOpen || this.ended) { Input.actEdge = false; Input.shutterEdge = false; return; }
+        if (!this.readOpen && !this.ended && this.mode.id === "rocks" && !this._beamHelpDone) this.showBeamHelp();
+        if (this.readOpen || this.ended || this.helpOpen) { Input.actEdge = false; Input.shutterEdge = false; return; }
         var inp = this.readInput();
         this.tickTimers(dt);
         if (!this._finishing) {
@@ -364,11 +369,12 @@
         var up = k.UP.isDown || k.W.isDown || Input.ay < 0, down = k.DOWN.isDown || k.S.isDown || Input.ay > 0;
         var locked = Date.now() < (this.tutLockUntil || 0);
         var ptr = this.ptr.down ? this.ptr : null;
+        var rightBeam = this.mode.id === "rocks" && !!ptr && !!ptr.right;   /* Rune Rocks: the right mouse button is the beam */
         return {
           ax: (right ? 1 : 0) - (left ? 1 : 0),
           ay: (down ? 1 : 0) - (up ? 1 : 0),
-          fire: !locked && (k.SPACE.isDown || Input.act || !!ptr),
-          pull: k.SHIFT.isDown || !!Input.shutterHeld || (this.mode.id === "rocks" && down),
+          fire: !locked && (k.SPACE.isDown || Input.act || (!!ptr && !rightBeam)),
+          pull: k.SHIFT.isDown || !!Input.shutterHeld || (this.mode.id === "rocks" && down) || rightBeam,
           ptr: locked ? null : ptr
         };
       }
@@ -611,7 +617,6 @@
         this.makeSol(this.W / 2, this.H - 62, "up");
         this.raid = { arrows: [], feathers: [], ravens: [], ravSlots: [], cd: 0, clock: 0, fcx: this.W / 2, breath: 1, swayAmp: 60, top: 112,
           diveCd: 4000, refillCd: 8000, huginn: null, huginnCd: rnd(12000, 18000), fired: 0, total: 1 };
-        try { if (this.input.mouse) this.input.mouse.disableContextMenu(); } catch (e) {}
       }
       raidGround() {
         if (this.groundG) this.groundG.destroy();
@@ -922,6 +927,54 @@
         try { this.fxG.clear(); } catch (e) {}
       }
 
+      /* ── Rune Rocks: a one-card "how to pull a rock in" pop-up. It shows after the reading pop-up
+         on each Rune Rocks level until the student has pulled a rock in once on this Chromebook. ── */
+      showBeamHelp() {
+        this._beamHelpDone = true;
+        var learned = false;
+        try { learned = localStorage.getItem(BEAM_KEY) === "1"; } catch (e) {}
+        if (learned) return;
+        var self = this, ov = document.getElementById("beam-help");
+        if (!ov) {
+          ov = document.createElement("div");
+          ov.id = "beam-help"; ov.className = "beam-help"; ov.setAttribute("role", "dialog"); ov.setAttribute("aria-modal", "true"); ov.setAttribute("aria-labelledby", "beam-help-title");
+          ov.innerHTML = '<div class="tut-card beam-card">' +
+            '<p class="tut-kicker">Rune Rocks · how to pull a rock in</p>' +
+            '<h2 id="beam-help-title">Use the beam</h2>' +
+            '<svg viewBox="0 0 360 120" width="100%" role="img" aria-label="The ship points at a rock; a gold beam pulls it in">' +
+              '<polygon points="70,60 300,18 300,102" fill="rgba(255,224,122,0.22)"/>' +
+              '<line x1="78" y1="60" x2="252" y2="60" stroke="#ffe07a" stroke-width="5" opacity="0.6"/>' +
+              '<g transform="translate(52,60) rotate(90)"><polygon points="0,-22 16,16 0,8 -16,16" fill="#f0c040" stroke="#7a4a10" stroke-width="2.5"/></g>' +
+              '<circle cx="270" cy="60" r="27" fill="#5a4c34" stroke="#ffd84a" stroke-width="4"/>' +
+              '<text x="270" y="69" text-anchor="middle" font-family="Trebuchet MS, sans-serif" font-weight="bold" font-size="26" fill="#fff6d8">B</text>' +
+              '<path d="M226 88 L150 88" stroke="#fff" stroke-width="3" fill="none" marker-end="url(#bh-arrow)"/>' +
+              '<defs><marker id="bh-arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#fff"/></marker></defs>' +
+            '</svg>' +
+            '<ol class="beam-steps">' +
+              '<li><b>Point your ship</b> at the rock with the right letter (◀ ▶ turn, ▲ moves you closer).</li>' +
+              '<li><b>Hold the beam:</b> ▼ or Shift, the <b>PULL</b> button, or the <b>right mouse button</b>. A gold cone shines in front of the ship.</li>' +
+              '<li><b>Keep holding</b> while the rock is in the cone. It flies to your ship and counts as your answer.</li>' +
+            '</ol>' +
+            '<p class="beam-warn">Don\'t shoot the right rock — that costs a life. Shoot the wrong letters and the plain rocks.</p>' +
+            '<button type="button" class="btn primary" id="beam-help-ok">Got it</button>' +
+            '</div>';
+          (document.getElementById("stage") || document.body).appendChild(ov);
+        }
+        ov.classList.remove("hidden");
+        this.helpOpen = true;
+        var close = function () { self.hideBeamHelp(); self.tutLockUntil = Date.now() + 350; };
+        var btn = document.getElementById("beam-help-ok");
+        if (btn) { btn.onclick = close; try { btn.focus(); } catch (e2) {} }
+        this._beamKey = function (ev) { if (ev.key === "Enter" || ev.key === " " || ev.key === "Escape") { ev.preventDefault(); close(); } };
+        document.addEventListener("keydown", this._beamKey, true);
+      }
+      hideBeamHelp() {
+        this.helpOpen = false;
+        if (this._beamKey) { document.removeEventListener("keydown", this._beamKey, true); this._beamKey = null; }
+        var ov = document.getElementById("beam-help");
+        if (ov) ov.classList.add("hidden");
+      }
+
       /* ═══ 2. RUNE ROCKS — asteroids ═══════════════════════════════════════ */
       setup_rocks() {
         this.drawSkyBg(160, true);
@@ -990,6 +1043,7 @@
         if (!noCredit) this.addKill(o.x, o.y, "Rocks cleared");
       }
       rockCaught(o) {
+        try { localStorage.setItem(BEAM_KEY, "1"); } catch (eL) {}   /* the beam pop-up has done its job */
         var x = o.x, y = o.y, L = o.letter;
         this.rockRemove(o);
         if (L) this.answerPick(L, x, y);
@@ -1009,7 +1063,7 @@
         if (inp.ptr) {
           var want = Math.atan2(inp.ptr.y - S.y, inp.ptr.x - S.x), d = angDiff(want, S.ang);
           S.ang += clamp(d, -5 * s, 5 * s);
-          if (Math.abs(d) < 0.5 && dist(inp.ptr.x, inp.ptr.y, S.x, S.y) > 140) thrust = true;
+          if (Math.abs(d) < 0.5 && dist(inp.ptr.x, inp.ptr.y, S.x, S.y) > 140 && !inp.pull) thrust = true;
         }
         if (thrust) { S.vx += Math.cos(S.ang) * 420 * s; S.vy += Math.sin(S.ang) * 420 * s; }
         var sp = Math.sqrt(S.vx * S.vx + S.vy * S.vy);

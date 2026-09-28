@@ -538,6 +538,25 @@ var srv = http.createServer(function (req, res) {
   await shot("16b-eagle-beam");
   await page.evaluate(function () { SolScene.iframeMs = 0; });
   await gotoLevel(4);
+  /* v5.7.3: the "how to pull a rock in" card comes up once the reading pop-up closes, and pauses the level */
+  await page.waitForSelector("#beam-help:not(.hidden)", { timeout: 8000 }).catch(function () {});
+  var beamHelp = await page.evaluate(function () {
+    var ov = document.getElementById("beam-help"), s = SolScene;
+    return { shown: !!ov && !ov.classList.contains("hidden") && getComputedStyle(ov).display !== "none", paused: !!s.helpOpen, right: /right mouse button/.test(ov ? ov.textContent : "") };
+  });
+  await shot("17b-beam-help");
+  if (await page.isVisible("#beam-help-ok")) await page.click("#beam-help-ok");
+  await page.waitForTimeout(300);
+  beamHelp.closed = await page.evaluate(function () { var ov = document.getElementById("beam-help"); return ov.classList.contains("hidden") && !SolScene.helpOpen; });
+  beamHelp.rightBtn = await page.evaluate(function () {
+    var s = SolScene, keep = s.ptr, lock = s.tutLockUntil;
+    s.tutLockUntil = 0;
+    s.ptr = { down: true, right: true, x: 10, y: 10, t: s.time.now }; var a = s.readInput();
+    s.ptr = { down: true, right: false, x: 10, y: 10, t: s.time.now }; var b = s.readInput();
+    s.ptr = keep; s.tutLockUntil = lock;
+    return { rightPulls: a.pull && !a.fire, leftFires: b.fire && !b.pull };
+  });
+  modeRuns.beamHelp = beamHelp;
   modeRuns.rocks = await page.evaluate(async function () {
     var s = SolScene, R = s.rk, o = { mode: s.mode.id, pull: getComputedStyle(document.getElementById("btn-shutter")).display };
     s.spareLives = 0; s.perks = {};
@@ -552,6 +571,7 @@ var srv = http.createServer(function (req, res) {
     await new Promise(function (r) { setTimeout(r, 500); }); o.hit = s.strikes; s.strikes = 0; s.iframeMs = 0;
     s.need.forEach(function (N) { var q = R.rocks.filter(function (z) { return z.letter === N; })[0]; if (q) s.rockCaught(q); });
     o.score = s.score;
+    try { o.learned = localStorage.getItem("afterHours.v1.beamLearned"); } catch (e) {}
     return o;
   });
   await shot("17-rune-rocks");
@@ -592,6 +612,9 @@ var srv = http.createServer(function (req, res) {
   check(mr.raid.eagles >= 2 && mr.raid.ravens >= 12 && mr.raid.afterOne === 0 && mr.raid.wrong === 1 && mr.raid.feather === 1 && mr.raid.beam === 1 && mr.raid.score === 1 && mr.raid.coins && mr.raid.newWave > 0 && mr.raid.flying > 0 && !/Fenrir/.test(mr.raid.pip), "Eagle Swoop: eagles carry the letters above a raven guard; an eagle takes two arrows; a wrong letter, a feather and an eagle's beam each cost a life; the right eagle answers, pays coins and a new wave flies in: " + JSON.stringify(mr.raid));
   check(mr.click && mr.click.moved < 2 && mr.click.fired >= 2, "Eagle Swoop: left and right mouse buttons shoot without moving Sol: " + JSON.stringify(mr.click));
   check(mr.rocks.mode === "rocks" && mr.rocks.pull !== "none" && mr.rocks.pullWrong === 1 && mr.rocks.blastRight === 1 && mr.rocks.blastWrong === 0 && mr.rocks.back && mr.rocks.hit === 1 && mr.rocks.score === 1, "Rune Rocks: pulling a wrong letter, blasting the right one and a rock hit cost a life; blasting a wrong letter is free; the right rock returns; beaming it in answers");
+  check(mr.beamHelp && mr.beamHelp.shown && mr.beamHelp.paused && mr.beamHelp.right && mr.beamHelp.closed, "Rune Rocks: a one-card beam tutorial shows after the reading pop-up, pauses the level and closes with Got it: " + JSON.stringify(mr.beamHelp));
+  check(mr.beamHelp && mr.beamHelp.rightBtn.rightPulls && mr.beamHelp.rightBtn.leftFires, "Rune Rocks: the right mouse button holds the beam; the left button fires");
+  check(mr.rocks.learned === "1", "Rune Rocks: pulling a rock in retires the beam tutorial on this Chromebook");
   check(/blasted the rock with the right answer/.test(mr.rocks.why || ""), "Rune Rocks: losing the last life by blasting the right answer says so (not \"wrong letter\"): " + mr.rocks.why);
   check(mr.sky.mode === "sky" && mr.sky.wrong === 1 && mr.sky.crash === 1 && mr.sky.score === 1, "Sun Chariot: a wrong orb and a crash cost a life; the right orb answers");
   check(mr.ring.mode === "ring" && mr.ring.wrong === 1 && mr.ring.crossed && mr.ring.bitten === 1, "Wolf Ring: a wrong stone is crossed out and costs a life; a wolf reaching Sol costs a life");

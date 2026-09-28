@@ -674,3 +674,17 @@ h1.logo img { width: min(300px, 60vw); height: auto; display: block; margin: 0 a
 #stage.mode-play #btn-shutter { display: none; }
 #stage.mode-play.mode-rocks #btn-shutter { display: inline-block; }
 .realm-card.mode-card { border-color: rgba(255,210,110,.6); background: linear-gradient(135deg, rgba(40,30,8,.94), rgba(18,20,28,.94)); }
+
+/* v5.7.3: Rune Rocks — the one-card "how to pull a rock in" pop-up */
+#beam-help {
+  position: absolute; inset: 0; z-index: 70;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(8, 10, 14, 0.62); padding: 16px;
+}
+#beam-help.hidden { display: none !important; }
+#beam-help .beam-card { max-width: 460px; width: min(460px, 94%); }
+#beam-help svg { display: block; margin: 4px 0 10px; background: #0b0f1a; border-radius: 10px; }
+#beam-help .beam-steps { margin: 0 0 10px; padding-left: 22px; color: var(--ink); font-size: 15px; line-height: 1.4; }
+#beam-help .beam-steps li { margin-bottom: 6px; }
+#beam-help .beam-warn { margin: 0 0 12px; color: #ffb89a; font-size: 14px; }
+#beam-help #beam-help-ok { min-height: 44px; min-width: 120px; }

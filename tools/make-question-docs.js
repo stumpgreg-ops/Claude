@@ -129,7 +129,7 @@ function buildGrade(g) {
   const sim = simulate(pool);
   const kids = [];
   kids.push(new Paragraph({ heading: HeadingLevel.TITLE, children: [new TextRun({ text: "Sol's Labyrinth — " + SHORT[g] + " questions by level", font: FONT })] }));
-  kids.push(p(NAME[g] + " · game version 5.7.2 · for an average student reading on grade level", { italics: true, color: "555555" }));
+  kids.push(p(NAME[g] + " · game version 5.7.3 · for an average student reading on grade level", { italics: true, color: "555555" }));
 
   kids.push(new Paragraph({ heading: HeadingLevel.HEADING_1, children: [new TextRun("What this list shows")] }));
   const bullets = [
