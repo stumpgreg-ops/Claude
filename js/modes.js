@@ -1,4 +1,4 @@
-/* SOL Labyrinth v5.7.7 — shooter levels.
+/* SOL Labyrinth v5.7.8 — shooter levels.
  *
  * Every other level of each realm (levels 2, 4, 6 and 8) swaps the maze for a
  * shooter, in rotation:
