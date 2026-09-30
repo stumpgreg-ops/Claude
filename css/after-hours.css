@@ -660,6 +660,8 @@ h1.logo img { width: min(300px, 60vw); height: auto; display: block; margin: 0 a
 .realm-card .boss { color: #ffd0c8; }
 .realm-card .boss b { color: #ff8b7a; }
 .realm-card .perks b { color: #9aefc0; }
+.realm-card.mode-card .new { margin-top: 6px; padding: 4px 8px; border-left: 3px solid #ffd84a; background: rgba(255,216,74,.10); }
+.realm-card.mode-card .new b { color: #ffd84a; }
 .realm-card.boss { border-color: rgba(255,120,100,.6); background: linear-gradient(135deg, rgba(60,14,10,.94), rgba(18,20,28,.94)); }
 .realm-card[data-realm="niflheim"] { border-color: rgba(160,210,255,.5); }
 .realm-card[data-realm="muspelheim"], .realm-card[data-realm="ragnarok"] { border-color: rgba(255,120,60,.55); }

@@ -13,6 +13,55 @@ Progress saves in this browser profile (`afterHours.v1.night`). Itch login does 
 
 Question packs: `js/content.js` and `js/content2.js` (the v4 Virginia packs) plus `js/content3.js`–`js/content11.js` (v4.9 Virginia) and `js/content12.js`–`js/content17.js` (v4.9 New Jersey grade 5). Format and writing rules: `tools/CONTENT-GUIDE.md`. Check every file with `node tools/validate-content.js`. Headless smoke test of the gateway, builder, shop, a night, the realms and their creatures, Fenrir, the castle perks, the shooter levels and the two built games: `node tools/smoke.js` (screenshots in `tools/shots/`).
 
+## v5.7.9 (2026-09-30) — every shooter climbs, a shielded Sun Chariot, horses, and town fixes
+- **Each shooter adds something every time it comes round.** A mode comes round once a realm, 10 times in all. From the second time on, its intro card says what is new ("New this time: …"), and the new thing stays for the rest of the run.
+  - **Eagle Swoop:**
+    - aimed poo, two drops a dive
+    - eagles trade places
+    - iron-helmed eagles (three arrows)
+    - a third raven row
+    - a storm cloud that stops arrows
+    - beams that follow Sol
+    - ravens in formation drop poo
+    - two clouds and faster swaps
+    - one more diver in Ragnarok
+  - **Rune Rocks:**
+    - comets (a red line shows where first)
+    - iron rocks (two shots)
+    - heavy runes (slower pull)
+    - a slippery ship
+    - guard stones circling each letter rock (they block the beam until they are shot)
+    - comets in pairs
+    - a valkyrie throwing spears
+    - rock showers
+    - faster rocks in Ragnarok
+  - **Wolf Ring:**
+    - wolf packs
+    - the alpha wolf (three arrows)
+    - ravens dropping poo, with a shadow showing where it will land
+    - sliding runestones
+    - a quiver of six arrows that refills
+    - zig-zag wolves
+    - shorter stone time and two alphas
+    - leaping wolves (they crouch first)
+    - faster wolves in Ragnarok
+- **Sun Chariot is harder from the start.**
+  - Every letter orb sits in a turning gold shield with one gap. A sunbolt only gets through when the gap faces the chariot, so a shot needs timing, not just aim.
+  - Orbs are smaller, faster and wobble more.
+  - Each time the level comes round, the gap narrows (62° to 35° either side) and the shields spin faster. From level 36 the shields reverse without warning, and from level 66 each shield spins at its own speed. The guard ravens and wisps' sparks stay.
+- **Two horses pull the sun chariot.** A two-frame gallop. The whole team is drawn smaller than the old chariot on its own. Anything that hits the horses costs a life too, and bolts leave from in front of the horses.
+- **Sol rides the chariot in the maze.** The CHARIOT power after a right letter used to say Sol rides the sun's chariot but showed nothing. Now the horse team pulls Sol while it lasts: the horses lead the way Sol runs, sparks trail behind, and it fades in the last half second.
+- **Town builder.**
+  - Dragging a piece no longer drags the view with it. The view fits itself to the pieces, so a lone house used to stay put while the ground slid under it.
+  - The view now holds still during a drag, and after the drop it pans so the piece stays where it was let go.
+  - Turn now flips a town building to face the other way. Town buildings are single pictures, so they have two ways to face. Before, Turn said "turned" and nothing changed.
+- **A wrong letter names the letter.** The banner reads "WRONG LETTER (B)", and when a wrong letter uses the last life, the end screen says which letter was picked and which the question wanted. This makes it easy to check a question that seems marked wrong. All 2,849 keys map correctly, and letter tiles are never closer than 128 px (the pickup reach is 92 px).
+- `tools/smoke.js` (121 checks) adds tests for:
+  - the shields
+  - the chariot ride in the maze
+  - the town drag and turn
+  - every shooter at its Ragnarok level
+
 ## v5.7.8 (2026-09-29) — a Google Apps Script version (Virginia)
 - **For schools that block GitHub Pages and Netlify.** The teacher pastes one small file, `dist/appsscript/Code.gs` (also published at `appsscript/Code.gs` on the gh-pages branch), into a new project on script.google.com and deploys it as a web app. Students open the `/exec` link, or the teacher embeds it in Google Sites. The page only ever talks to script.google.com. The script fetches the game from this public repository on Google's servers, where the school's filter never sees the request.
 - **The whole game, without the music.** The 3D castle is included. `tools/build-appsscript.js` packs the built game (511 files, 17.6 MiB) into one gzip (8.6 MiB), cut into three parts. The loader keeps the bundle in the Chromebook's IndexedDB, so each Chromebook downloads a version once. After that, a visit only asks for the small manifest. The loader answers every request the game makes (fetch, XMLHttpRequest, images, CSS) from the bundle in memory. With `window.SOL_NO_MUSIC` set, `js/music.js` plays nothing, and the music buttons are hidden.

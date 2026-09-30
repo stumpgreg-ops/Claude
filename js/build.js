@@ -650,7 +650,8 @@
       it = { p: p, pk: pk, style: style, x: c.x, y: c.y + n * cellH() / 2, a: 1, depth: ctr.u + ctr.v + n - 1 + (isTopper(p) ? 0.5 : 0), cx: cx, cy: cy, n: n, kit: true, base: base, ign: ignore || null, parts: partsFor(p, cx, cy, ignore, pk ? pk.rot : 0),
         key: keyOf(pk) || ("g" + cx + "," + cy), prot: pk ? (pk.rot || 0) : 0, run: isRun(p), hostKey: host ? keyOf(host) : "" };
     } else {
-      it = { p: p, pk: pk, style: style, x: c.x, y: c.y, a: 1, depth: ctr.u + ctr.v + n, cx: cx, cy: cy, n: n };
+      /* v5.7.9: a town piece is one picture, so it has two ways to face: its turn mirrors it */
+      it = { p: p, pk: pk, style: style, x: c.x, y: c.y, a: 1, depth: ctr.u + ctr.v + n, cx: cx, cy: cy, n: n, flip: !!(pk && (pk.rot || 0) % 2) };
     }
     if (extra) for (k in extra) it[k] = extra[k];
     return it;
@@ -902,7 +903,7 @@
     if (it.n && (it.ghost || it.sel)) drawFootprint(ctx, it, fit);
     if (c.ok) {
       iw = c.img.naturalWidth || p.w || 1; ih = c.img.naturalHeight || p.h || 1; dw = iw * s / fit.base; dh = ih * s / fit.base;
-      if (!it.flip) { ctx.fillStyle = "rgba(0,0,0,.16)"; ellipse(ctx, x, y + 2, dw * 0.4, dw * 0.1); }
+      if (!(it.ring && it.flip)) { ctx.fillStyle = "rgba(0,0,0,.16)"; ellipse(ctx, x, y + 2, dw * 0.4, dw * 0.1); }
       if (it.flip) { ctx.translate(x, y); ctx.scale(-1, 1); ctx.drawImage(c.img, -dw * (1 - ax), -dh * ay, dw, dh); }
       else ctx.drawImage(c.img, x - dw * ax, y - dh * ay, dw, dh);
     } else if (c.ok === false || !it.flip) {
@@ -924,7 +925,9 @@
     paintBg(ctx, W, H, save.theme || "village");
     if (!save.theme) { banner(ctx, W, H, loadState === "ok" ? "Choose a Town or a Castle to start building" : "Build data not available"); lastFit = null; return; }
     items = sceneItems();
-    fit = lastFit = fitScene(items, W, H);
+    /* v5.7.9: the view fits the pieces, so a dragged piece used to pull the whole view along with it (a lone
+       house stayed put while the ground slid under it). While a piece is dragged the view holds still. */
+    fit = lastFit = (cur && cur.drag && cur.drag.fit) ? cur.drag.fit : fitScene(items, W, H);
     drawGround(ctx, fit);
     /* v5.5: a kit theme draws its pieces in 3D when it can (js/build3d.js), so they turn with the map by the degree */
     var td = window.SolBuild3D, use3d = isKit() && td && td.ready() && !redraw.force2d;
@@ -987,6 +990,18 @@
     });
     return bestFoot || bestBox;
   }
+  /* where a piece's footprint centre lands on the canvas under a fit */
+  function pickScreenPos(pk, cx, cy, fit) {
+    var p = pieceById(pk.piece), n = cellsOf(p), ctr = rotPt(cx + n / 2, cy + n / 2), c = cellXY(ctr.u, ctr.v);
+    return fit ? { x: fit.ox + c.x * fit.s / fit.base, y: fit.oy + c.y * fit.s / fit.base } : null;
+  }
+  /* after a drop the view refits to the pieces; pan it so the dropped piece stays where the student let go */
+  function holdOnScreen(pk, was) {
+    if (!was || !ui || !ui.canvas) return;
+    var cv = ui.canvas, nf = fitScene(sceneItems(), cv._w || 1, cv._h || 1), now = pickScreenPos(pk, pk.cx, pk.cy, nf);
+    if (!now) return;
+    view().px = (view().px || 0) + (was.x - now.x); view().py = (view().py || 0) + (was.y - now.y);
+  }
   function dragStep() { return step === "place" || step === "done" || step === "gallery" || step === "shop"; }
   function draggable(pk) { return !!pk && !!cur && dragStep(); }
   function onPointerDown(e) {
@@ -995,7 +1010,7 @@
     if (e.button === 2) return;                                             /* right button: contextmenu turns the piece */
     var pk = hitPick(pt), cell = pxToCell(pt.x, pt.y), wpt = unrotPt(cell.u, cell.v);
     if (pk) {
-      cur.drag = { pk: pk, id: e.pointerId, du: wpt.x - pk.cx, dv: wpt.y - pk.cy, cx: pk.cx, cy: pk.cy, ok: true, moved: false, sx: e.clientX, sy: e.clientY };
+      cur.drag = { pk: pk, id: e.pointerId, du: wpt.x - pk.cx, dv: wpt.y - pk.cy, cx: pk.cx, cy: pk.cy, ok: true, moved: false, sx: e.clientX, sy: e.clientY, fit: lastFit };
     } else {
       cur.pan = { id: e.pointerId, sx: e.clientX, sy: e.clientY, px: view().px || 0, py: view().py || 0, moved: false };
     }
@@ -1034,7 +1049,7 @@
     if (!cur.drag || cur.drag.id !== e.pointerId) return;
     var d = cur.drag; cur.drag = null;
     if (!d.moved) { cur.sel = cur.sel === d.pk ? null : d.pk; fillPieceBar(); redraw(); return; }
-    if (d.ok && (d.cx !== d.pk.cx || d.cy !== d.pk.cy)) { d.pk.cx = d.cx; d.pk.cy = d.cy; persist(); ui.note.textContent = joinedNote(d.pk); if (step === "gallery") ui.badge.textContent = galleryBadge(); }
+    if (d.ok && (d.cx !== d.pk.cx || d.cy !== d.pk.cy)) { var was = pickScreenPos(d.pk, d.cx, d.cy, d.fit); d.pk.cx = d.cx; d.pk.cy = d.cy; holdOnScreen(d.pk, was); persist(); ui.note.textContent = joinedNote(d.pk); if (step === "gallery") ui.badge.textContent = galleryBadge(); }
     else if (!d.ok) ui.note.textContent = isTopper(pieceById(d.pk.piece)) ? "Flags and banners go on top of a tower that has none — it went back." : "That spot is taken — the piece went back.";
     redraw();
   }
@@ -1061,11 +1076,13 @@
   var TWO_WAY = { wall: 1, gate: 1, doorway: 1, hedge: 1, "hedge-gate": 1, "c-fence": 1, "fence-gate": 1, "rail-fence": 1 };
   function turnPick(pk) {
     if (!pk) return;
-    var p = pieceById(pk.piece), two = !!(p && p.auto && TWO_WAY[p.id]);
-    pk.rot = two ? ((pk.rot || 0) + 1) & 1 : ((pk.rot || 0) + 1) & 3;
+    var p = pieceById(pk.piece), two = !!(p && p.auto && TWO_WAY[p.id]), pic = !isKit();
+    pk.rot = (two || pic) ? ((pk.rot || 0) + 1) & 1 : ((pk.rot || 0) + 1) & 3;
     cur.sel = pk; persist(); fillPieceBar(); redraw();
     var joined = two && isRun(p) && runDirs(p, pk.cx, pk.cy, pk).length > 0;
-    ui.note.textContent = joined
+    ui.note.textContent = pic
+      ? ((p ? p.name : "Piece") + " now faces the other way. Town buildings are pictures, so each has two ways to face; right-click (or Turn) again to switch back.")
+      : joined
       ? (p.name + " follows the pieces it joins, so it keeps its line" + (p.id === "stairs-wall" ? "; its stairs moved to the other side." : ". Move it away from them to run it the other way."))
       : two ? (p.name + " now runs the other way. A wall or gate looks the same from behind, so it has two ways to face; right-click (or Turn) again to switch back.")
       : ((p ? p.name : "Piece") + " turned. Right-click (or Turn) again for the next quarter turn.");

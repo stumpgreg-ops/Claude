@@ -220,6 +220,21 @@ var srv = http.createServer(function (req, res) {
   var townSt = await page.evaluate(function () { return SolBuild.state(); });
   check(townSt.theme === "village" && townSt.buildings === 3, "town theme still builds: " + JSON.stringify({ theme: townSt.theme, b: townSt.buildings }));
   await shot("09c-town");
+  /* v5.7.9: dragging a town piece holds the view still (the ground used to slide under a lone house), the piece
+     lands where it is let go, and Turn mirrors a town picture (two ways to face) */
+  await page.evaluate(function () { SolBuild.showGallery(); });
+  await page.waitForSelector("#build-overlay:not(.hidden)"); await page.waitForTimeout(600);
+  var tA = await page.evaluate(function () { return { pk: SolBuild._pickScreen(0), g: SolBuild._probe(0, 0, 0) }; });
+  await page.mouse.move(tA.pk.x, tA.pk.y - 30); await page.mouse.down();
+  for (var tk = 1; tk <= 8; tk++) { await page.mouse.move(tA.pk.x - tk * 22, tA.pk.y - 30 + tk * 11); await page.waitForTimeout(25); }
+  var tMid = await page.evaluate(function () { return SolBuild._probe(0, 0, 0); });
+  await page.mouse.up(); await page.waitForTimeout(150);
+  var tB = await page.evaluate(function () { var o = { pk: SolBuild._pickScreen(0) }; SolBuild._select(0); o.r1 = SolBuild._turn(); o.note = document.querySelector(".build-note").textContent; o.r2 = SolBuild._turn(); return o; });
+  var tMoved = tB.pk.cx !== tA.pk.cx || tB.pk.cy !== tA.pk.cy;
+  check(Math.abs(tMid.x2 - tA.g.x2) < 1 && Math.abs(tMid.y2 - tA.g.y2) < 1, "town: the ground holds still while a piece is dragged");
+  check(!tMoved || Math.hypot(tB.pk.x - (tA.pk.x - 176), tB.pk.y - (tA.pk.y + 88)) < 60, "town: a dragged piece lands where it is let go: " + JSON.stringify({ moved: tMoved, from: [Math.round(tA.pk.x), Math.round(tA.pk.y)], to: [Math.round(tB.pk.x), Math.round(tB.pk.y)] }));
+  check(tB.r1 === 1 && tB.r2 === 0 && /faces the other way/.test(tB.note), "town: Turn flips a town building to face the other way and back: " + JSON.stringify({ r1: tB.r1, r2: tB.r2 }));
+  await page.evaluate(function () { SolBuild.close(); });
   await page.evaluate(function () { SolBuild.importCode(localStorage.getItem("smoke.castleCode")); });
   await page.reload({ waitUntil: "load" }); await page.waitForTimeout(800);
   await page.click('#state-screen .card[data-state="NJ"]'); await page.waitForTimeout(200);
@@ -462,6 +477,18 @@ var srv = http.createServer(function (req, res) {
     return o;
   });
   console.log("boss", JSON.stringify(boss));
+  /* v5.7.9: a right letter's CHARIOT power shows Sol riding the sun chariot, and it goes when the power ends */
+  for (var rw = 0; rw < 10; rw++) { if (await page.isVisible("#read-go")) { await page.click("#read-go"); break; } await page.waitForTimeout(150); }
+  var ride = await page.evaluate(async function () {
+    var s = SolScene; s.activateLockerPower();
+    await new Promise(function (r) { setTimeout(r, 200); });
+    var c = s.chariotRide, o = { on: !!(c && c.visible), near: c ? Math.hypot(c.x - s.player.x, c.y - s.player.y) : -1 };
+    s.lockerPowerMs = 1;
+    for (var w = 0; w < 10 && s.chariotRide && s.chariotRide.visible; w++) await new Promise(function (r) { setTimeout(r, 150); });
+    o.off = !(s.chariotRide && s.chariotRide.visible); o.power = s.lockerPowerMs; o.read = s.readOpen;
+    return o;
+  });
+  check(ride.on && ride.near < 60 && ride.off, "the CHARIOT power shows Sol riding the sun chariot, which goes when the power ends: " + JSON.stringify(ride));
   check(boss.fenrir && boss.chains === boss.need && boss.hati === boss.lanes && boss.hati >= 2 && /Fenrir/.test(boss.pip), "level 20: Fenrir guards a gate with one chain per question, and every Hati stays: " + boss.hati);
   check(boss.stalk > 180 && boss.charge > 365 && boss.firstCharge <= 7000 && boss.grabbed && boss.smell <= 2500, "Fenrir hunts: he stalks Sol, charges faster than she can run with a letter, and picking up a right letter brings his charge on: " + JSON.stringify({ stalk: boss.stalk, charge: boss.charge, first: boss.firstCharge, smell: boss.smell }));
   check(boss.provoked === "windup" && boss.after === boss.chains - 1, "a wrong letter sets Fenrir off; a banked answer breaks a chain");
@@ -557,6 +584,11 @@ var srv = http.createServer(function (req, res) {
     s.spareLives = 0; s.perks = {};
     /* the click test's arrows may have hit birds: a fresh wave, no lives spent */
     var R = s.raid;
+    if (s._between) {   /* an arrow answered the question: let the next one load, then close its reading pop-up */
+      await new Promise(function (r) { setTimeout(r, 1300); });
+      var rgo = document.getElementById("read-go"); if (rgo && rgo.offsetParent) rgo.click();
+      await new Promise(function (r) { setTimeout(r, 300); });
+    }
     R.arrows.forEach(function (a) { a.spr.destroy(); }); R.arrows = [];
     if (s.ended || s._finishing) { o.endedEarly = true; }
     s.answers_raid(); s.strikes = 0; s.iframeMs = 0; s.claimWrong = 0; s.score = 0; s.paintHud();
@@ -658,11 +690,16 @@ var srv = http.createServer(function (req, res) {
     s.spareLives = 0; s.perks = {}; s.strikes = 0; s.iframeMs = 0;
     /* v5.7.5: difficulty climbs from a harder start */
     var p6 = s.skyParams(6), p16 = s.skyParams(16), p56 = s.skyParams(56), p96 = s.skyParams(96);
-    o.curve = { spawn6: p6.spawnMs, spawn96: p96.spawnMs, throw6: p6.throwP, throw96: p96.throwP, spark6: p6.sparkP, spark96: p96.sparkP, guards6: p6.guards, guards16: p16.guards, guards56: p56.guards, bob6: p6.bob, bob56: p56.bob };
+    o.curve = { spawn6: p6.spawnMs, spawn96: p96.spawnMs, throw6: p6.throwP, throw96: p96.throwP, spark6: p6.sparkP, spark96: p96.sparkP, guards6: p6.guards, guards16: p16.guards, guards56: p56.guards, bob6: p6.bob, bob56: p56.bob,
+      gap6: p6.gapHalf, gap16: p16.gapHalf, gap96: p96.gapHalf, spin6: p6.spin, spin96: p96.spin, flip6: p6.flip, flip36: s.skyParams(36).flip };
     /* quiet sky for the scripted checks */
     K.spawnCd = 1e9; K.foes.forEach(function (f) { if (f.spr) f.spr.destroy(); }); K.foes = []; K.shots.forEach(function (f) { f.spr.destroy(); }); K.shots = [];
-    K.orbs.forEach(function (q, i) { q.x = s.W * 0.6 + i * 60; q.vx = 0; });   /* bring the orbs on screen */
+    K.orbs.forEach(function (q, i) { q.x = s.W * 0.6 + i * 60; q.vx = 0; q.gap = Math.PI; q.spin = 0; q.flipCd = 1e9; });   /* bring the orbs on screen, gaps facing the chariot */
     function bolt(x, y) { K.bolts.push({ x: x - 40, y: y, spr: s.add.image(x - 40, y, "md-bolt") }); }
+    /* v5.7.9: a shield turned away stops the bolt: the right orb stays, no life lost, no answer */
+    var sh = K.orbs.filter(function (q) { return s.need.indexOf(q.letter) !== -1; })[0];
+    sh.gap = 0; bolt(sh.x, sh.y); await new Promise(function (r) { setTimeout(r, 400); });
+    o.blocked = { stays: K.orbs.indexOf(sh) !== -1, strikes: s.strikes, score: s.score }; sh.gap = Math.PI;
     var w = K.orbs.filter(function (q) { return s.need.indexOf(q.letter) === -1; })[0];
     bolt(w.x, w.y); await new Promise(function (r) { setTimeout(r, 400); }); o.wrong = s.strikes; s.strikes = 0; s.iframeMs = 0;
     K.foes.push({ kind: "raven", x: K.x, y: K.y - 8, by: K.y - 8, r: 22, sp: 0, amp: 0, fr: 1, t: 0, spr: s.add.image(K.x, K.y, "rf-raven-0") });
@@ -740,6 +777,8 @@ var srv = http.createServer(function (req, res) {
   var cv = mr.sky.curve || {};
   check(cv.spawn6 < 1100 && cv.spawn96 <= 400 && cv.throw6 > 0.3 && cv.throw96 > cv.throw6 && cv.spark6 === 0 && cv.spark96 > 0 && cv.guards6 === 0 && cv.guards16 === 1 && cv.guards56 === 3 && cv.bob56 > cv.bob6, "Sun Chariot: harder from the first one (level 6) and harder every time after: " + JSON.stringify(cv));
   check(mr.sky.feather === 1, "Sun Chariot: a raven's feather that hits the chariot costs a life");
+  check(mr.sky.blocked && mr.sky.blocked.stays && mr.sky.blocked.strikes === 0 && mr.sky.blocked.score === 0, "Sun Chariot: an orb's shield stops a bolt unless its gap faces the chariot: " + JSON.stringify(mr.sky.blocked));
+  check(cv.gap16 < cv.gap6 && cv.gap96 < cv.gap16 && cv.spin96 > cv.spin6 && !cv.flip6 && cv.flip36, "Sun Chariot: the shield gap narrows and spins faster every time the level comes round, and from level 36 it reverses: " + JSON.stringify({ g6: cv.gap6, g16: cv.gap16, g96: cv.gap96, s6: cv.spin6, s96: cv.spin96 }));
   check(mr.sky.guard && mr.sky.guard.orbSafe && mr.sky.guard.guardGone && mr.sky.guard.strikes === 0 && mr.sky.guard.kill, "Sun Chariot: a guard raven in front of an orb takes the bolt and the orb stays: " + JSON.stringify(mr.sky.guard));
   check(mr.ring.sunkAtStart && mr.ring.riseWait > 2000 && mr.ring.sunkShot === 0 && mr.ring.upCount >= 1 && mr.ring.upCount <= 2, "Wolf Ring: the runestones start sunk while the wolves come, can't be shot down there, and rise one or two at a time: " + JSON.stringify({ sunk: mr.ring.sunkAtStart, wait: mr.ring.riseWait, sunkShot: mr.ring.sunkShot, up: mr.ring.upCount }));
   check(mr.skyMouse && mr.skyMouse.moved < 2, "Sun Chariot: clicking does not move the chariot: " + JSON.stringify(mr.skyMouse));
@@ -754,6 +793,48 @@ var srv = http.createServer(function (req, res) {
   var back = await page.evaluate(function () { var s = SolScene; return { key: s.sys.settings.key, night: s.night, slips: (s.slips || []).length, act: document.getElementById("btn-action").textContent, mini: getComputedStyle(document.getElementById("minimap")).display, stage: document.getElementById("stage").className }; });
   console.log("back to maze", JSON.stringify(back));
   check(back.key === "night" && back.night === 9 && back.slips === 4 && back.act === "SPRINT" && back.mini !== "none" && back.stage.indexOf("mode") === -1, "Next level goes from the shooter back to the maze with its own controls");
+  /* v5.7.9: every time a mode comes round (once a realm) it adds something; the Ragnarok levels have it all */
+  var tiers = {};
+  await gotoLevel(92);
+  tiers.raid = await page.evaluate(async function () {
+    var s = SolScene, R = s.raid; s.iframeMs = 1e9; s.spareLives = 9;
+    R.ravens.forEach(function (e) { if (e.state === "wait" || e.state === "enter") { e.state = "form"; e.path = null; } });
+    R.cloudCd = 0; R.swapCd = 0;
+    await new Promise(function (r) { setTimeout(r, 2500); });
+    return { tier: s.tier, card: (document.getElementById("mode-card") || {}).textContent || "", clouds: (R.clouds || []).length, swapped: !!R.toldSwap,
+      helm: R.ravens.filter(function (o) { return o.kind === "eagle"; }).every(function (o) { return o.hp === 3; }), rows: R.ravSlots.length };
+  });
+  await shot("20a-eagle-swoop-ragnarok");
+  await gotoLevel(94);
+  tiers.rocks = await page.evaluate(async function () {
+    var s = SolScene, R = s.rk; s.iframeMs = 1e9; s.spareLives = 9; s._beamHelpDone = true; s.helpOpen = false; s.hideBeamHelp();
+    R.cometCd = 0; R.valkCd = 0; R.showerCd = 0;
+    await new Promise(function (r) { setTimeout(r, 1500); });
+    var o = { tier: s.tier, warned: R.warns.length > 0, valk: !!R.valk, guards: R.rocks.filter(function (q) { return q.orbitOf; }).length, iron: R.rocks.some(function (q) { return q.hp === 2; }) };
+    await new Promise(function (r) { setTimeout(r, 1300); });
+    o.comet = R.rocks.some(function (q) { return q.comet; }) || o.warned;
+    return o;
+  });
+  await shot("20b-rune-rocks-ragnarok");
+  await gotoLevel(96);
+  tiers.sky = await page.evaluate(async function () {
+    var s = SolScene; s.iframeMs = 1e9; s.spareLives = 9;
+    await new Promise(function (r) { setTimeout(r, 2500); });
+    return { tier: s.tier, flip: s.sky.P.flip, gap: s.sky.P.gapHalf, orbs: s.sky.orbs.length };
+  });
+  await shot("20c-sun-chariot-ragnarok");
+  await gotoLevel(98);
+  tiers.ring = await page.evaluate(async function () {
+    var s = SolScene, G = s.rg; s.iframeMs = 1e9; s.spareLives = 9; G.alphaCd = 0; G.ravCd = 0;
+    await new Promise(function (r) { setTimeout(r, 2600); });
+    return { tier: s.tier, alpha: G.wolves.some(function (w) { return w.alpha; }), raven: !!G.rav || G.drops.length > 0, ammo: G.ammo, short: G.upMs };
+  });
+  await shot("20d-wolf-ring-ragnarok");
+  console.log("tiers", JSON.stringify(tiers));
+  check(tiers.raid.tier === 9 && /New this time/.test(tiers.raid.card) && tiers.raid.clouds >= 1 && tiers.raid.swapped && tiers.raid.helm && tiers.raid.rows > 12, "Eagle Swoop in Ragnarok: storm clouds, eagles trading places, iron helms, three raven rows, and the card says what's new: " + JSON.stringify(tiers.raid).slice(0, 200));
+  check(tiers.rocks.tier === 9 && tiers.rocks.comet && tiers.rocks.valk && tiers.rocks.guards >= 2 && tiers.rocks.iron, "Rune Rocks in Ragnarok: comets, a valkyrie, guard stones and iron rocks: " + JSON.stringify(tiers.rocks));
+  check(tiers.sky.tier === 9 && tiers.sky.flip && tiers.sky.orbs > 0, "Sun Chariot in Ragnarok runs with reversing shields: " + JSON.stringify(tiers.sky));
+  check(tiers.ring.tier === 9 && tiers.ring.alpha && tiers.ring.raven && tiers.ring.ammo <= 6, "Wolf Ring in Ragnarok: the alpha wolf, poo-dropping ravens and the quiver: " + JSON.stringify(tiers.ring));
   await gotoLevel(2);
   var retry = await page.evaluate(async function () {
     var s = SolScene; s.spareLives = 0; s.perks = {}; s.strikes = s.needStrikes - 1;
