@@ -215,20 +215,57 @@
     });
   }
 
+  /* v5.8: a class session (?class=CODE): its settings come from the script alongside the game */
+  function getClass() {
+    var code = window.SOL_CLASS_CODE;
+    if (!code) return Promise.resolve(null);
+    return retry(function () { return server("solClass", code); }, 3).then(function (t) {
+      if (!t) return { missing: code };
+      try { return JSON.parse(t); } catch (e) { return { missing: code }; }
+    }, function () { return { missing: code }; });
+  }
+  function useClass(cfg) {
+    if (!cfg) return;
+    if (cfg.missing) { window.SOL_CLASS_MISSING = cfg.missing; return; }
+    window.SOL_CLASS = cfg;
+    window.SOL_CLASS_SEND = function (rec) {
+      try { google.script.run.withFailureHandler(function () {}).solReport(cfg.code, rec); } catch (e) {}
+    };
+  }
+  function classNotice() {
+    if (!window.SOL_CLASS_MISSING) return;
+    var n = document.createElement("div");
+    n.setAttribute("style", "position:fixed;left:50%;top:12px;transform:translateX(-50%);z-index:9000;background:#3a1a14;color:#ffd8c8;border:1px solid #ff8b7a;border-radius:10px;padding:8px 14px;font:14px system-ui,sans-serif");
+    n.textContent = "Class code " + window.SOL_CLASS_MISSING + " was not found, so this is the regular game. Check the link with your teacher.";
+    document.body.appendChild(n);
+    setTimeout(function () { if (n.parentNode) n.parentNode.removeChild(n); }, 9000);
+  }
+
   function start() {
     if (!window.google || !google.script || !google.script.run) { failed(new Error("open this page from its Apps Script web app link")); return; }
+    var klass = window.SOL_ADMIN ? Promise.resolve(null) : getClass();
     getBundle().then(function (b) {
       say("Unpacking…"); bar(0.93);
       return gunzip(b.gz).then(function (raw) { unpack(raw); return b.man; });
     }).then(function (man) {
+      return klass.then(function (cfg) { useClass(cfg); return man; });
+    }).then(function (man) {
       shim();
+      bar(1);
+      if (window.SOL_ADMIN) {
+        /* the teacher page: the question bank (the content files) and the admin app, no game */
+        css("__admin.css");
+        runScripts(man.scripts.filter(function (sc) { return sc.src && /^js\/content\d*\.js$/.test(sc.src); }).concat([{ src: "__admin.js" }]));
+        bootEl.parentNode.removeChild(bootEl);
+        return;
+      }
       man.css.forEach(css);
       if (man.body) document.body.className = man.body;
       document.body.insertAdjacentHTML("beforeend", text("__page.html"));
       [].forEach.call(document.querySelectorAll("img"), fixImg);
-      bar(1);
       runScripts(man.scripts);
       bootEl.parentNode.removeChild(bootEl);
+      classNotice();
     }).catch(failed);
   }
   start();

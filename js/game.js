@@ -26725,6 +26725,7 @@
   }
 
   function pingTeacher(scene, status) {
+    if (window.SolClass && SolClass.report) { try { SolClass.report(scene, status, adaptLevelLabel(scene.adapt)); } catch (eC) {} }
     var tokenEl = document.getElementById("token-pip");
     var tok = makeToken(scene.night, scene.score, scene.strikes);
     if (tokenEl) tokenEl.textContent = "Token " + tok;
@@ -26808,7 +26809,10 @@
     return "Selection 1 · Grade 9";
   }
 
+  /* v5.8: a class session (Apps Script ?class=CODE, js/classes.js) plays one grade */
+  function classGrade() { var C = window.SOL_CLASS; return C && /^(G9|G10|G11|NJ5)$/.test(C.grade || "") ? C.grade : null; }
   function selectedFamily() {
+    if (classGrade()) return classGrade();
     var el = document.querySelector("#title-screen .card.selected[data-family]:not(.hidden)");
     var st = STATE_DEFS[cfg.state];
     return (el && el.getAttribute("data-family")) || (st && st.def) || "G9";
@@ -26820,19 +26824,20 @@
     if (!STATE_DEFS[st]) st = "VA";
     cfg.state = st;
     try { localStorage.setItem(LS_STATE, st); } catch (e) {}
-    var def = STATE_DEFS[st], any = false;
+    var def = STATE_DEFS[st], any = false, cg = classGrade();
+    if (cg && def.families.indexOf(cg) !== -1) cfg.family = cg;
     document.querySelectorAll("#title-screen .card[data-family]").forEach(function (c) {
-      var fam = c.getAttribute("data-family"), ok = def.families.indexOf(fam) !== -1;
+      var fam = c.getAttribute("data-family"), ok = def.families.indexOf(fam) !== -1 && (!cg || fam === cg);
       c.classList.toggle("hidden", !ok);
       if (!ok) c.classList.remove("selected");
       if (ok && c.classList.contains("selected")) any = true;
     });
     if (!any || def.families.indexOf(cfg.family) === -1) {
-      cfg.family = def.def;
+      cfg.family = (cg && def.families.indexOf(cg) !== -1) ? cg : def.def;
       document.querySelectorAll("#title-screen .card[data-family]").forEach(function (c) { c.classList.toggle("selected", c.getAttribute("data-family") === cfg.family); });
     }
     var kick = document.getElementById("title-kicker");
-    if (kick) kick.textContent = def.kicker;
+    if (kick) kick.textContent = def.kicker + (window.SOL_CLASS ? " · Class: " + (window.SOL_CLASS.name || window.SOL_CLASS.code) : "");
     var sw = document.getElementById("btn-state");
     if (sw) { sw.textContent = def.name + " · change"; sw.classList.toggle("hidden", !!LOCKED_STATE); }
     var stateScreen = document.getElementById("state-screen"), title = document.getElementById("title-screen");

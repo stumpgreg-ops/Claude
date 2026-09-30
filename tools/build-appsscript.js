@@ -68,6 +68,9 @@ headCss.forEach(function (c) { if (files.indexOf(c) === -1) throw new Error("too
 var header = [], bufs = [], off = 0;
 function add(f, b) { header.push([f, off, b.length]); bufs.push(b); off += b.length; }
 add("__page.html", Buffer.from(body.trim()));
+/* v5.8: the teacher page (?admin=1) — run by the loader after the content files, instead of the game */
+add("__admin.js", fs.readFileSync(path.join(__dirname, "appsscript", "admin.js")));
+add("__admin.css", fs.readFileSync(path.join(__dirname, "appsscript", "admin.css")));
 files.forEach(function (f) { add(f, fs.readFileSync(path.join(src, f))); });
 var hj = Buffer.from(JSON.stringify(header)), hl = Buffer.alloc(4); hl.writeUInt32BE(hj.length, 0);
 var raw = Buffer.concat([hl, hj].concat(bufs));

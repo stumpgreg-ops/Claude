@@ -13,6 +13,31 @@ Progress saves in this browser profile (`afterHours.v1.night`). Itch login does 
 
 Question packs: `js/content.js` and `js/content2.js` (the v4 Virginia packs) plus `js/content3.js`–`js/content11.js` (v4.9 Virginia) and `js/content12.js`–`js/content17.js` (v4.9 New Jersey grade 5). Format and writing rules: `tools/CONTENT-GUIDE.md`. Check every file with `node tools/validate-content.js`. Headless smoke test of the gateway, builder, shop, a night, the realms and their creatures, Fenrir, the castle perks, the shooter levels and the two built games: `node tools/smoke.js` (screenshots in `tools/shots/`).
 
+## v5.8.0 (2026-09-30) — class sessions and a teacher page (Google Apps Script)
+- **A class-only session without changing the core game.** The teacher page is the Apps Script link with `?admin=1`, locked with a teacher PIN chosen on the first visit. It makes classes. Each class has its own link, the game link with `?class=CODE`, and only students on that link get the class's settings. Everyone on the plain link keeps the regular game.
+- **Per class:**
+  - **Question sets on any theme** (for example *The Odyssey*): a passage (sentences numbered automatically) and multiple-choice questions, each with a skill (RL / RI / RV / DSR) and a right letter.
+  - **Hide** a regular question.
+  - **Edit** a regular question's wording, choices or right answer.
+  - **Choose** whether the class plays only its own sets or mixes them with the regular questions.
+  - **See students' progress:** highest level, current level, right and wrong answers, reading level, and when last seen.
+  - Students type a first name or nickname once. Real names are never required.
+- **Where it lives:**
+  - `Code.gs` stores classes and progress in the script's own properties, split into 8 KB pieces. Nothing goes in Google Drive.
+  - The game loads a class's settings while it downloads (`tools/appsscript/loader.js`). `js/classes.js` applies them to the question bank before `game.js` starts and does nothing without a class.
+  - Progress goes out through `solReport` whenever the game pings the teacher.
+  - The teacher page (`tools/appsscript/admin.js` and `admin.css`) is packed into the bundle and runs after the question bank, instead of the game.
+  - An unknown class code plays the regular game and says so.
+- `Code.gs` changed, so paste it into the Apps Script project once more.
+- `node tools/smoke-appsscript.js` also drives the teacher page and a class session:
+  - PIN setup
+  - a new class with an Odyssey set and a hidden question
+  - the student's nickname
+  - the set mixed into the pool
+  - progress reaching the teacher page
+  - "only this class's sets"
+  - an unknown code
+
 ## v5.7.9 (2026-09-30) — every shooter climbs, a shielded Sun Chariot, horses, and town fixes
 - **Each shooter adds something every time it comes round.** A mode comes round once a realm, 10 times in all. From the second time on, its intro card says what is new ("New this time: …"), and the new thing stays for the rest of the run.
   - **Eagle Swoop:**
