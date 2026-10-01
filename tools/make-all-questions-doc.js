@@ -16,7 +16,10 @@ files.forEach(function (f) { vm.runInContext(fs.readFileSync(path.join(root, f),
 const D = require("docx");
 const { Document, Packer, Paragraph, TextRun, HeadingLevel, Table, TableRow, TableCell, WidthType, ShadingType, BorderStyle, Footer, PageNumber, AlignmentType } = D;
 
-const ORDER = ["NJ5", "G9", "G10", "G11"];
+/* node tools/make-all-questions-doc.js [VA|NJ] — one state only (default: both) */
+const ONLY = String(process.argv[2] || "").toUpperCase();
+const ORDER = ONLY === "VA" ? ["G9", "G10", "G11"] : ONLY === "NJ" ? ["NJ5"] : ["NJ5", "G9", "G10", "G11"];
+const LABEL = ONLY === "VA" ? "Virginia" : ONLY === "NJ" ? "New Jersey" : "";
 const NAME = { NJ5: "Grade 5 · New Jersey (NJSLA-ELA)", G9: "Grade 9 · Virginia (Selection 1)", G10: "Grade 10 · Virginia (Selection 2)", G11: "Grade 11 · Virginia (Selection 3)" };
 const NOTE = {
   NJ5: "New Jersey Grade 5 students get only these passages.",
@@ -65,7 +68,7 @@ const kids = [];
 let qTotal = 0;
 const counts = ORDER.map(f => { const ps = packs.filter(x => x.p.family === f); const n = ps.reduce((a, x) => a + x.p.claims.length, 0); qTotal += n; return [NAME[f], String(ps.length), String(n)]; });
 
-kids.push(para(run("SOL Labyrinth — every question and answer", { size: 40, bold: true }), { heading: HeadingLevel.TITLE, spacing: { after: 120 } }));
+kids.push(para(run("SOL Labyrinth — " + (LABEL ? LABEL + " questions and answers" : "every question and answer"), { size: 40, bold: true }), { heading: HeadingLevel.TITLE, spacing: { after: 120 } }));
 kids.push(para(run("Version " + (html.match(/<p class="ver">v([0-9.]+)/) || [0, "?"])[1] + " · " + qTotal + " questions on " + packs.length + " passages", { color: "555555" })));
 kids.push(para("Every passage and question the game can ask, with the right answer marked ✓ and in bold. Grades are grouped as students see them. Within a grade, passages run from shortest to longest, the order the game's levels reach them; each passage says the levels where it usually appears (the game also adapts to each student's reading level, and a class session can add, hide or reword questions)."));
 kids.push(para("Sentence and line numbers in the passages are the ones students see, so a question that says \"sentence 4\" means the sentence marked (4). A \"Part A / Part B\" pair is always asked together, Part A first."));
@@ -103,11 +106,11 @@ ORDER.forEach(fam => {
 });
 
 const doc = new Document({
-  creator: "SOL Labyrinth", title: "SOL Labyrinth — every question and answer",
+  creator: "SOL Labyrinth", title: "SOL Labyrinth — " + (LABEL ? LABEL + " questions and answers" : "every question and answer"),
   styles: { default: { document: { run: { font: FONT, size: 21 } } } },
   sections: [{ properties: { page: { size: { width: 12240, height: 15840 }, margin: { top: 1080, bottom: 1080, left: 1080, right: 1080 } } },
-    footers: { default: new Footer({ children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [run("SOL Labyrinth · all questions and answers · page ", { size: 16, color: "888888" }), new TextRun({ children: [PageNumber.CURRENT], size: 16, color: "888888", font: FONT })] })] }) },
+    footers: { default: new Footer({ children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [run("SOL Labyrinth · " + (LABEL ? LABEL + " " : "all ") + "questions and answers · page ", { size: 16, color: "888888" }), new TextRun({ children: [PageNumber.CURRENT], size: 16, color: "888888", font: FONT })] })] }) },
     children: kids }]
 });
-const out = path.join(root, "docs", "questions", "SOL-Labyrinth-all-questions-and-answers.docx");
+const out = path.join(root, "docs", "questions", LABEL ? "SOL-Labyrinth-" + ONLY + "-questions-and-answers.docx" : "SOL-Labyrinth-all-questions-and-answers.docx");
 Packer.toBuffer(doc).then(buf => { fs.writeFileSync(out, buf); console.log(out + " · " + qTotal + " questions · " + packs.length + " passages · " + (buf.length / 1048576).toFixed(1) + " MiB"); });
