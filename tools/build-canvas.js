@@ -36,6 +36,11 @@ page = page.replace('<div class="msg">Loading the game…</div>', stuck);
 var early = "<script>(function(){var n=document.getElementById('sol-noscript');if(n)n.parentNode.removeChild(n);" +
   "var m=document.querySelector('#sol-boot .msg'),f=document.querySelector('#sol-boot .fill');" +
   "window.solP=function(p){if(m)m.textContent='Opening the game file… '+p+'%';if(f)f.style.width=Math.round(p*0.9)+'%';};solP(0);" +
+  /* anything the page refuses to load (a security rule) is named on screen, since a student can't open the console */
+  "var blocked=[];document.addEventListener('securitypolicyviolation',function(e){var k=(e.effectiveDirective||e.violatedDirective)+' '+String(e.blockedURI).slice(0,12);" +
+  "if(blocked.indexOf(k)>=0)return;blocked.push(k);var d=document.getElementById('sol-blocked');if(!d){d=document.createElement('div');d.id='sol-blocked';" +
+  "d.setAttribute('style','position:fixed;left:8px;bottom:8px;z-index:100000;background:#3a1a14;color:#ffd8c8;border:1px solid #ff8b7a;border-radius:8px;padding:6px 10px;font:13px system-ui,sans-serif;max-width:90vw');" +
+  "document.body.appendChild(d);}d.textContent='Canvas blocked part of the game: '+blocked.join(', ');});" +
   "window.addEventListener('error',function(e){var m=document.querySelector('#sol-boot .msg');if(m&&document.getElementById('sol-boot'))m.textContent='The game hit an error: '+(e.message||e)+' (line '+(e.lineno||'?')+')';});})();</script>\n";
 var at = page.indexOf("<script>");
 var inline = early +

@@ -50,13 +50,13 @@ var lms = http.createServer(function (req, res) {
   var s1 = await f.evaluate(function () {
     return { state: window.SOL_STATE, canvas: !!window.SOL_CANVAS, boot: !!document.getElementById("sol-boot"), phaser: !!window.Phaser, build: !!window.SolBuild,
       three: !!window.THREE, music: getComputedStyle(document.getElementById("btn-music")).display,
-      logo: document.querySelector("#title-screen .logo img").src, logoOk: document.querySelector("#title-screen .logo img").naturalWidth,
+      logo: document.querySelector("#title-screen .logo img").src.slice(0, 40), logoOk: document.querySelector("#title-screen .logo img").naturalWidth,
       night: localStorage.getItem("afterHours.v1.night") };
   });
   console.log(JSON.stringify(s1));
   check(s1.state === st.toUpperCase() && s1.canvas, "the page is the " + st.toUpperCase() + " game, Canvas build");
   check(!s1.boot && s1.phaser && s1.build && s1.three, "the loader finished and the game's scripts ran");
-  check(s1.logoOk > 0 && /^blob:/.test(s1.logo), "the title logo comes from the file");
+  check(s1.logoOk > 0 && /^data:/.test(s1.logo), "the title logo comes from the file (as a data: URL)");
   check(s1.music === "none", "no music button");
   check(s1.night !== "57", "the other game's save is not this game's");
   await page.screenshot({ path: path.join(shots, "cv-01-title.png") });

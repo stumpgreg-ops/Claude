@@ -157,7 +157,18 @@
     if (t === "image/png" && b.length > 12 && b[0] === 0x52 && b[1] === 0x49 && b[8] === 0x57 && b[9] === 0x45) t = "image/webp";
     return new Blob([b], { type: t });
   }
-  function url(p) { return urls[p] || (urls[p] = URL.createObjectURL(blob(p))); }
+  /* the Canvas build hands out data: URLs instead of blob: ones: Canvas's file domain may refuse blob: (the Algebra
+     game, which runs there, uses data: URLs too) */
+  function b64(u) {
+    var s = "", i, CH = 0x8000;
+    for (i = 0; i < u.length; i += CH) s += String.fromCharCode.apply(null, u.subarray(i, i + CH));
+    return btoa(s);
+  }
+  function url(p) {
+    if (urls[p]) return urls[p];
+    if (INLINE) { var b = blob(p); return (urls[p] = "data:" + b.type + ";base64," + b64(slice(p))); }
+    return (urls[p] = URL.createObjectURL(blob(p)));
+  }
   function text(p) { return new TextDecoder().decode(slice(p)); }
   /* "assets/x.png?v=5", "/assets/x.png", "https://this-origin/…/assets/x.png" → "assets/x.png" when the bundle has it */
   function resolve(u) {
