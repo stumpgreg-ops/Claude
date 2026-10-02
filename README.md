@@ -13,6 +13,22 @@ Progress saves in this browser profile (`afterHours.v1.night`). Itch login does 
 
 Question packs: `js/content.js` and `js/content2.js` (the v4 Virginia packs) plus `js/content3.js`–`js/content11.js` (v4.9 Virginia) and `js/content12.js`–`js/content17.js` (v4.9 New Jersey grade 5). Format and writing rules: `tools/CONTENT-GUIDE.md`. Check every file with `node tools/validate-content.js`. Headless smoke test of the gateway, builder, shop, a night, the realms and their creatures, Fenrir, the castle perks, the shooter levels and the two built games: `node tools/smoke.js` (screenshots in `tools/shots/`).
 
+## v5.8.1 (2026-10-02) — a Canvas version: one HTML file, nothing hosted outside the school
+
+For schools where the game can't be hosted on GitHub or any other outside site: `node tools/build-canvas.js VA` (after `tools/build-games.js` and `tools/build-appsscript.js VA`) writes **`dist/canvas/SOLLabyrinth-VA-Canvas.html`** (about 12 MB). The whole game is inside that one file. That includes the 3D castle but no music, like the Apps Script version.
+
+- **In Canvas:**
+  1. Upload the file to the course's **Files**.
+  2. Embed it in a Page with an iframe pointing at the file's `/preview` address.
+- **How it loads:** The file holds the Apps Script loader with the manifest and the gzip bundle written in as base64. The loader (`tools/appsscript/loader.js`) sees the bundle in the page, so it needs no server: no `google.script.run` calls, no downloads and no IndexedDB.
+- **Saves:** Canvas serves every uploaded HTML file from one shared domain. The Canvas build therefore gives the game's localStorage keys their own prefix (`solReading.va:`). Another game built on this engine on the same Canvas can't read or overwrite these saves.
+- **Not included:** Class sessions and the teacher page need the Apps Script server, so they are not in the Canvas file.
+- **Test:** `node tools/smoke-canvas.js va` serves the file from one origin and embeds it in a "course page" on another. It checks that:
+  - the file requests nothing else;
+  - a level starts and the 3D castle draws;
+  - music is off;
+  - another game's saves on the same domain stay separate.
+
 ## v5.8.0 (2026-09-30) — class sessions and a teacher page (Google Apps Script)
 - **A class-only session without changing the core game.** The teacher page is the Apps Script link with `?admin=1`, locked with a teacher PIN chosen on the first visit. It makes classes. Each class has its own link, the game link with `?class=CODE`, and only students on that link get the class's settings. Everyone on the plain link keeps the regular game.
 - **Per class:**

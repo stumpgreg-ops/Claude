@@ -8,6 +8,7 @@ set -e
 cd "$(dirname "$0")/.."
 node tools/build-games.js "$@"
 node tools/build-appsscript.js VA
+node tools/build-canvas.js VA   # v5.8.1: dist/canvas/ — uploaded to Canvas by the teacher, never published here
 site=$(mktemp -d)
 cp -r dist/nj "$site/nj"; cp -r dist/va "$site/va"
 # v5.7.8: the Apps Script version (tools/build-appsscript.js) — Code.gs fetches …/appsscript/va/ from this branch

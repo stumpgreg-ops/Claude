@@ -1,4 +1,7 @@
 /* SOL Labyrinth — Apps Script loader (tools/build-appsscript.js puts this in loader.html).
+   v5.8.1: also the Canvas loader (tools/build-canvas.js): there the manifest and the gzip bundle sit inside the
+   page itself (<script id="sol-manifest"> and <script id="sol-bundle">, base64), so the one HTML file needs no
+   server at all, and the game's saves get their own prefix in localStorage (see canvasStorage).
    Asks the Apps Script server (google.script.run) for the manifest and the bundle's parts, keeps the bundle in
    IndexedDB so each Chromebook downloads a version once, unpacks it in memory, and makes every request the game
    makes for assets/…, js/… or css/… answer from memory: fetch, XMLHttpRequest, <img src> (property, attribute
@@ -18,7 +21,8 @@
   }
   window.SOL_STATE = window.SOL_STATE || null;
   window.SOL_NO_MUSIC = true;
-  window.SOL_APPSSCRIPT = true;
+  var INLINE = document.getElementById("sol-bundle");
+  if (INLINE) window.SOL_CANVAS = true; else window.SOL_APPSSCRIPT = true;
 
   /* ── server calls ── */
   function server(fn, arg) {
@@ -88,6 +92,13 @@
   }
   function getBundle() {
     bar(0.03);
+    if (INLINE) {
+      var man = JSON.parse(document.getElementById("sol-manifest").textContent);
+      var gz = unb64(INLINE.textContent.replace(/\s+/g, ""));
+      INLINE.textContent = "";   /* free the text copy */
+      if (gz.length !== man.bytes) return Promise.reject(new Error("the file is incomplete: upload it again"));
+      return Promise.resolve({ man: man, gz: gz });
+    }
     return cacheGet().then(function (cached) {
       return retry(function () { return server("solManifest"); }, 4).then(function (t) { return JSON.parse(t); }, function (e) {
         if (cached) return cached.manifest;   /* the server is unreachable: play the version this Chromebook already has */
@@ -241,9 +252,23 @@
     setTimeout(function () { if (n.parentNode) n.parentNode.removeChild(n); }, 9000);
   }
 
+  /* Canvas serves every uploaded HTML file from one shared domain, so other games built on this engine (an
+     Algebra or Biology version, say) would read and overwrite these saves. Each Canvas build keeps its own. */
+  function canvasStorage(prefix) {
+    var S = Storage.prototype, get = S.getItem, set = S.setItem, rem = S.removeItem, keyAt = S.key;
+    function mine(st) { try { return st === window.localStorage; } catch (e) { return false; } }
+    S.getItem = function (k) { return get.call(this, mine(this) ? prefix + k : k); };
+    S.setItem = function (k, v) { return set.call(this, mine(this) ? prefix + k : k, v); };
+    S.removeItem = function (k) { return rem.call(this, mine(this) ? prefix + k : k); };
+    /* key(i) and length still see every key; the game only uses them to find its own, which carry the prefix */
+    S.key = function (i) { var k = keyAt.call(this, i); return mine(this) && k && k.indexOf(prefix) === 0 ? k.slice(prefix.length) : k; };
+  }
+
   function start() {
-    if (!window.google || !google.script || !google.script.run) { failed(new Error("open this page from its Apps Script web app link")); return; }
-    var klass = window.SOL_ADMIN ? Promise.resolve(null) : getClass();
+    if (INLINE) {
+      canvasStorage("solReading." + String(window.SOL_CANVAS_ID || "game") + ":");
+    } else if (!window.google || !google.script || !google.script.run) { failed(new Error("open this page from its Apps Script web app link")); return; }
+    var klass = (window.SOL_ADMIN || INLINE) ? Promise.resolve(null) : getClass();
     getBundle().then(function (b) {
       say("Unpacking…"); bar(0.93);
       return gunzip(b.gz).then(function (raw) { unpack(raw); return b.man; });
