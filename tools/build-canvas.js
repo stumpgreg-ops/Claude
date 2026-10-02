@@ -44,6 +44,10 @@ var inline = early +
   parts;
 page = page.slice(0, at) + inline + page.slice(at);
 
+/* Canvas's file preview seems to stop at 10 MiB: the Algebra game (9.97 MiB) runs there, and the first Canvas build of
+   this one (11.7 MiB) stopped on its loading screen. Keep well under. */
+var LIMIT = 9.5 * 1048576;
+if (Buffer.byteLength(page) > LIMIT) throw new Error("tools/build-canvas.js: the file is " + (Buffer.byteLength(page) / 1048576).toFixed(1) + " MiB; Canvas's preview needs it under 10 MiB");
 fs.mkdirSync(out, { recursive: true });
 var file = path.join(out, "SOLLabyrinth-" + st + "-Canvas.html");
 fs.writeFileSync(file, page);
