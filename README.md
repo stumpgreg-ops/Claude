@@ -15,12 +15,17 @@ Question packs: `js/content.js` and `js/content2.js` (the v4 Virginia packs) plu
 
 ## v5.8.1 (2026-10-02) — a Canvas version: one HTML file, nothing hosted outside the school
 
-For schools where the game can't be hosted on GitHub or any other outside site: `node tools/build-canvas.js VA` (after `tools/build-games.js` and `tools/build-appsscript.js VA`) writes **`dist/canvas/SOLLabyrinth-VA-Canvas.html`** (about 12 MB). The whole game is inside that one file. That includes the 3D castle but no music, like the Apps Script version.
+For schools where the game can't be hosted on GitHub or any other outside site: `node tools/build-canvas.js VA` (after `tools/build-games.js` and `tools/build-appsscript.js VA`) writes **`dist/canvas/SOLLabyrinth-VA-Canvas.html`** (about 7 MB). The whole game is inside that one file. That includes the 3D castle but no music, like the Apps Script version.
 
 - **In Canvas:**
   1. Upload the file to the course's **Files**.
   2. Embed it in a Page with an iframe pointing at the file's `/preview` address.
 - **How it loads:** The file holds the Apps Script loader with the manifest and the gzip bundle written in as base64. The loader (`tools/appsscript/loader.js`) sees the bundle in the page, so it needs no server: no `google.script.run` calls, no downloads and no IndexedDB.
+  - The bundle is split into 384 KB pieces, each followed by a one-line script that moves the loading bar, so the bar moves while the browser is still reading the file.
+  - The page also says plainly when it isn't allowed to run scripts, and shows any error.
+- **Smaller bundle (both versions):** The file went from 12.3 MB to 7.3 MB, and the Apps Script download from 8.6 MB to 5.2 MB.
+  - A castle model that differs from an earlier one by one word in its name (the four colours) is stored as a delta of that model. That makes 5 MB of models 0.14 MB.
+  - PNGs travel as lossless WebP when that is smaller. The pixels are the same; `tools/webp-cache.py` keeps the encodings in `dist/.webp-cache`.
 - **Saves:** Canvas serves every uploaded HTML file from one shared domain. The Canvas build therefore gives the game's localStorage keys their own prefix (`solReading.va:`). Another game built on this engine on the same Canvas can't read or overwrite these saves.
 - **Not included:** Class sessions and the teacher page need the Apps Script server, so they are not in the Canvas file.
 - **Test:** `node tools/smoke-canvas.js va` serves the file from one origin and embeds it in a "course page" on another. It checks that:

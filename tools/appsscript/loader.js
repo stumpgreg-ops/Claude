@@ -1,6 +1,6 @@
 /* SOL Labyrinth — Apps Script loader (tools/build-appsscript.js puts this in loader.html).
    v5.8.1: also the Canvas loader (tools/build-canvas.js): there the manifest and the gzip bundle sit inside the
-   page itself (<script id="sol-manifest"> and <script id="sol-bundle">, base64), so the one HTML file needs no
+   page itself (<script id="sol-manifest"> and <script class="sol-part">s, base64), so the one HTML file needs no
    server at all, and the game's saves get their own prefix in localStorage (see canvasStorage).
    Asks the Apps Script server (google.script.run) for the manifest and the bundle's parts, keeps the bundle in
    IndexedDB so each Chromebook downloads a version once, unpacks it in memory, and makes every request the game
@@ -21,7 +21,8 @@
   }
   window.SOL_STATE = window.SOL_STATE || null;
   window.SOL_NO_MUSIC = true;
-  var INLINE = document.getElementById("sol-bundle");
+  var INLINE = document.querySelectorAll("script.sol-part");
+  INLINE = INLINE.length ? INLINE : null;
   if (INLINE) window.SOL_CANVAS = true; else window.SOL_APPSSCRIPT = true;
 
   /* ── server calls ── */
@@ -94,9 +95,14 @@
     bar(0.03);
     if (INLINE) {
       var man = JSON.parse(document.getElementById("sol-manifest").textContent);
-      var gz = unb64(INLINE.textContent.replace(/\s+/g, ""));
-      INLINE.textContent = "";   /* free the text copy */
-      if (gz.length !== man.bytes) return Promise.reject(new Error("the file is incomplete: upload it again"));
+      var gz = new Uint8Array(man.bytes), off = 0;
+      for (var i = 0; i < INLINE.length; i++) {
+        var u = unb64(INLINE[i].textContent.replace(/\s+/g, ""));
+        if (off + u.length > gz.length) break;
+        gz.set(u, off); off += u.length;
+        INLINE[i].textContent = "";   /* free the text copy */
+      }
+      if (off !== man.bytes) return Promise.reject(new Error("the file is incomplete: upload it again"));
       return Promise.resolve({ man: man, gz: gz });
     }
     return cacheGet().then(function (cached) {
@@ -128,10 +134,29 @@
     var head = JSON.parse(new TextDecoder().decode(raw.subarray(4, 4 + hl))), base = 4 + hl;
     head.forEach(function (h) { index[h[0]] = [base + h[1], h[2]]; });
     bytes = raw;
+    /* v5.8.1: a near-copy of another model is stored as a delta of it (tools/build-appsscript.js delta()) */
+    head.forEach(function (h) { if (h[3]) rebuilt[h[0]] = undelta(slice(h[3]), bytes.subarray(base + h[1], base + h[1] + h[2])); });
   }
-  function slice(p) { var e = index[p]; return bytes.subarray(e[0], e[0] + e[1]); }
+  var rebuilt = {};
+  function undelta(a, d) {
+    var parts = [], n = 0, i = 0;
+    function v() { var x = 0, m = 1, c; do { c = d[i++]; x += (c & 127) * m; m *= 128; } while (c & 128); return x; }
+    while (i < d.length) {
+      var l = v(); parts.push(d.subarray(i, i + l)); n += l; i += l;
+      var c = v(), o = v(); if (c) { parts.push(a.subarray(o, o + c)); n += c; }
+    }
+    var out = new Uint8Array(n), at = 0;
+    parts.forEach(function (p) { out.set(p, at); at += p.length; });
+    return out;
+  }
+  function slice(p) { if (rebuilt[p]) return rebuilt[p]; var e = index[p]; return bytes.subarray(e[0], e[0] + e[1]); }
   function type(p) { return TYPES[(p.split(".").pop() || "").toLowerCase()] || "application/octet-stream"; }
-  function blob(p) { return new Blob([slice(p)], { type: type(p) }); }
+  /* a .png may travel as lossless WebP (tools/build-appsscript.js): name the type by what the bytes are */
+  function blob(p) {
+    var b = slice(p), t = type(p);
+    if (t === "image/png" && b.length > 12 && b[0] === 0x52 && b[1] === 0x49 && b[8] === 0x57 && b[9] === 0x45) t = "image/webp";
+    return new Blob([b], { type: t });
+  }
   function url(p) { return urls[p] || (urls[p] = URL.createObjectURL(blob(p))); }
   function text(p) { return new TextDecoder().decode(slice(p)); }
   /* "assets/x.png?v=5", "/assets/x.png", "https://this-origin/…/assets/x.png" → "assets/x.png" when the bundle has it */
@@ -159,7 +184,7 @@
     var realFetch = window.fetch;
     window.fetch = function (input, init) {
       var p = resolve(typeof input === "string" ? input : (input && input.url));
-      if (p) return Promise.resolve(new Response(blob(p), { status: 200, headers: { "Content-Type": type(p) } }));
+      if (p) { var bl = blob(p); return Promise.resolve(new Response(bl, { status: 200, headers: { "Content-Type": bl.type } })); }
       return realFetch.apply(this, arguments);
     };
     var open = XMLHttpRequest.prototype.open;
