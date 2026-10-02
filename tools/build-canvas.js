@@ -18,11 +18,20 @@ var gz = Buffer.concat(man.parts.map(function (p) { return fs.readFileSync(path.
 if (gz.length !== man.bytes) throw new Error("tools/build-canvas.js: the bundle parts add up to " + gz.length + " bytes, not " + man.bytes);
 
 var page = fs.readFileSync(path.join(src, "loader.html"), "utf8");
-var at = page.indexOf("<script>");
-if (at < 0) throw new Error("tools/build-canvas.js: no loader script in loader.html");
+if (page.indexOf("<script>") < 0) throw new Error("tools/build-canvas.js: no loader script in loader.html");
 /* base64 in lines of 76 characters, so editors and Canvas's file preview never meet one 12 MB line */
 var b64 = gz.toString("base64").replace(/.{76}/g, "$&\n");
-var inline =
+/* v5.8.1: what the page says when its scripts can't run (a preview that blocks scripts shows only this), and a
+   first small script that changes it, so a stuck screen tells the teacher which of the two happened */
+var stuck = '<div class="msg">Loading the game…</div><div class="msg" id="sol-noscript" style="font-size:13px;opacity:.7">' +
+  "If this message never changes, the page is not allowed to run the game here (Canvas shows some files as a preview that cannot run games).</div>";
+if (page.indexOf('<div class="msg">Loading the game…</div>') < 0) throw new Error("tools/build-canvas.js: loader.html has no loading message");
+page = page.replace('<div class="msg">Loading the game…</div>', stuck);
+var early = "<script>(function(){var n=document.getElementById('sol-noscript');if(n)n.parentNode.removeChild(n);" +
+  "var m=document.querySelector('#sol-boot .msg');if(m)m.textContent='Opening the game file (" + (gz.length * 4 / 3 / 1048576).toFixed(0) + " MB)…';" +
+  "window.addEventListener('error',function(e){var m=document.querySelector('#sol-boot .msg');if(m&&document.getElementById('sol-boot'))m.textContent='The game hit an error: '+(e.message||e)+' (line '+(e.lineno||'?')+')';});})();</script>\n";
+var at = page.indexOf("<script>");
+var inline = early +
   "<script>window.SOL_CANVAS_ID = " + JSON.stringify(lo) + ";</script>\n" +
   '<script type="application/json" id="sol-manifest">' + JSON.stringify(man).replace(/</g, "\\u003c") + "</script>\n" +
   '<script type="application/octet-stream" id="sol-bundle">\n' + b64 + "\n</script>\n";
