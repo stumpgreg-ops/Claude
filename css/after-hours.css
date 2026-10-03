@@ -37,6 +37,10 @@ html, body {
 #state-screen { z-index: 22; }
 
 #skill-screen { z-index: 21; }
+#mode-screen { z-index: 21; }
+#mode-screen .packs { margin-top: 4px; }
+#mode-screen .card { width: min(280px, 92vw); }
+#mode-screen .card .name { font-size: 17px; }
 #skill-screen .packs { margin-top: 4px; }
 #skill-screen .card { width: min(280px, 92vw); }
 #skill-screen .card .name { font-size: 17px; }

@@ -300,7 +300,35 @@ var srv = http.createServer(function (req, res) {
 
   /* start a Grade 5 night */
   await page.click('#title-screen .card[data-family="NJ5"]');
+  /* v5.8.3: the game mode screen comes after the grade: all modes, or one mode on every level */
+  await page.waitForSelector("#mode-screen:not(.hidden)");
+  var gm = await page.evaluate(function () {
+    return { cards: Array.prototype.map.call(document.querySelectorAll("#mode-packs .card"), function (c) { return c.getAttribute("data-gamemode"); }).join(","),
+      sel: (document.querySelector("#mode-packs .card.selected") || {}).getAttribute && document.querySelector("#mode-packs .card.selected").getAttribute("data-gamemode"),
+      skill: !document.getElementById("skill-screen").classList.contains("hidden"), kick: document.getElementById("mode-kicker").textContent };
+  });
+  await shot("10a-game-mode");
+  await page.click('#mode-packs .card[data-gamemode="raid"]');
   await page.waitForSelector("#skill-screen:not(.hidden)");
+  gm.one = await page.evaluate(function () { return { kick: document.getElementById("skill-kicker").textContent, l1: (SolModes.modeFor(1) || {}).id, l10: (SolModes.modeFor(10) || {}).id, saved: localStorage.getItem("afterHours.v1.gameMode"), modeHidden: document.getElementById("mode-screen").classList.contains("hidden") }; });
+  await page.click("#btn-skill-back");
+  await page.waitForSelector("#mode-screen:not(.hidden)");
+  gm.backSel = await page.evaluate(function () { return document.querySelector("#mode-packs .card.selected").getAttribute("data-gamemode"); });
+  await page.click('#mode-packs .card[data-gamemode="maze"]');
+  await page.waitForSelector("#skill-screen:not(.hidden)");
+  gm.maze = await page.evaluate(function () { return [2, 4, 10].map(function (n) { return SolModes.modeFor(n) ? "x" : "-"; }).join(""); });
+  await page.waitForTimeout(500);   /* a button ignores a second tap within 450 ms */
+  await page.click("#btn-skill-back"); await page.waitForSelector("#mode-screen:not(.hidden)");
+  await page.click("#btn-mode-back"); await page.waitForTimeout(300);
+  gm.backToGrades = await page.isVisible('#title-screen .card[data-family="NJ5"]') && !(await page.isVisible("#mode-screen"));
+  await page.click('#title-screen .card[data-family="NJ5"]');
+  await page.waitForSelector("#mode-screen:not(.hidden)");
+  await page.click('#mode-packs .card[data-gamemode="ALL"]');
+  await page.waitForSelector("#skill-screen:not(.hidden)");
+  gm.all = await page.evaluate(function () { return (SolModes.modeFor(2) || {}).id + "," + (SolModes.modeFor(1) ? "x" : "-"); });
+  check(gm.cards === "ALL,maze,raid,rocks,sky,ring" && !gm.skill && /Grade 5/.test(gm.kick), "after the grade, a game mode screen: all modes, the maze, or one of the four shooters: " + JSON.stringify(gm));
+  check(gm.one.l1 === "raid" && gm.one.l10 === "raid" && /Eagle Swoop/.test(gm.one.kick) && gm.one.saved === "raid" && gm.one.modeHidden && gm.backSel === "raid", "one mode: every level (a boss level too) is that mode, the skill screen names it, and it is remembered: " + JSON.stringify(gm.one));
+  check(gm.maze === "---" && gm.backToGrades && gm.all === "raid,-", "maze only: no shooter levels; Back goes skill → mode → grades; All modes brings the rotation back: " + JSON.stringify(gm));
   check((await page.$$eval("#skill-packs .card", function (l) { return l.length; })) === 5, "five NJ skill cards");
   await shot("10-skills-nj");
   await page.click("#btn-skill-start");
@@ -549,6 +577,14 @@ var srv = http.createServer(function (req, res) {
   /* v5.7: shooter levels on 2, 4, 6 and 8 of each realm, reached through the real Next level button */
   var rot = await page.evaluate(function () { var o = []; for (var n = 1; n <= 20; n++) { var m = SolModes.modeFor(n); o.push(m ? m.id : "-"); } return o.join(","); });
   check(rot === "-,raid,-,rocks,-,sky,-,ring,-,-,-,raid,-,rocks,-,sky,-,ring,-,-", "shooter rotation: raid, rocks, sky, ring on even levels; maze on odd levels and bosses: " + rot);
+  /* v5.8.3: with one game mode picked, an odd level plays as that mode */
+  await page.evaluate(function () { SolModes.only = "rocks"; });
+  await page.evaluate(function () { var b = document.getElementById("btn-next"); b.dataset.goto = "3"; b.click(); });
+  await page.waitForFunction(function () { var s = window.SolScene; return s && s.night === 3 && s.claim; }, null, { timeout: 15000 }).catch(function () {});
+  var only3 = await page.evaluate(function () { var s = SolScene; return { key: s.sys.settings.key, mode: s.mode && s.mode.id }; });
+  await page.evaluate(function () { SolModes.only = null; if (SolScene.readOpen) { var g = document.getElementById("read-go"); if (g) g.click(); } });
+  await page.waitForTimeout(500);
+  check(only3.key === "mode" && only3.mode === "rocks", "Rune Rocks only: level 3 (a maze level in the mix) plays as Rune Rocks: " + JSON.stringify(only3));
   async function gotoLevel(n) {
     await page.evaluate(function (n) { var b = document.getElementById("btn-next"); b.dataset.goto = String(n); b.click(); }, n);
     await page.waitForTimeout(1500);
@@ -592,6 +628,9 @@ var srv = http.createServer(function (req, res) {
     R.arrows.forEach(function (a) { a.spr.destroy(); }); R.arrows = [];
     if (s.ended || s._finishing) { o.endedEarly = true; }
     s.answers_raid(); s.strikes = 0; s.iframeMs = 0; s.claimWrong = 0; s.score = 0; s.paintHud();
+    /* the birds stay out of the sky for these checks (a dive or a beam would muddle the counts) */
+    R.ravens.forEach(function (q) { q.delay = 1e9; });
+    R.feathers.forEach(function (f) { f.spr.destroy(); }); R.feathers = [];
     o.hud = document.getElementById("score-pip").textContent;
     var eagles = R.ravens.filter(function (q) { return q.letter; });
     o.eagles = eagles.length; o.ravens = R.ravens.filter(function (q) { return !q.letter && !q.guard; }).length;
@@ -625,9 +664,13 @@ var srv = http.createServer(function (req, res) {
     o.capt.lostOne = !R.wing && s.strikes === 0;
     s.iframeMs = 0;
     R.arrows.forEach(function (a) { a.spr.destroy(); }); R.arrows = [];
+    /* v5.8.3: a Sol still held when the question is answered costs a life then */
+    var ke = R.ravens.filter(function (q) { return q.alive && q.letter && s.need.indexOf(q.letter) === -1; })[0];
+    if (ke) { s.raidCapture(ke); R.capt.held = true; R.capt.t = 1; }
+    s.strikes = 0; s.iframeMs = 0;
     var coins = s.nightCoins;
     R.ravens.filter(function (q) { return q.alive && q.letter && s.need.indexOf(q.letter) !== -1; }).forEach(function (q) { s.raidHit(q); s.raidHit(q); });
-    o.score = s.score; o.coins = s.nightCoins > coins;
+    o.score = s.score; o.coins = s.nightCoins > coins; o.capt.kept = ke ? s.strikes : -1; o.capt.keptGone = !R.capt;
     await new Promise(function (r) { setTimeout(r, 1800); });
     o.newWave = R.ravens.filter(function (q) { return q.alive && q.letter; }).length;
     var pip = document.getElementById("realm-pip"); o.pip = pip ? pip.textContent : "";
@@ -796,8 +839,8 @@ var srv = http.createServer(function (req, res) {
   console.log("modes", JSON.stringify(modeRuns));
   var mr = modeRuns;
   check(mr.raid.key === "mode" && mr.raid.mode === "raid" && mr.raid.fire === "FIRE" && mr.raid.mini === "none" && /^Answers 0/.test(mr.raid.hud), "level 2 is Eagle Swoop in the shooter scene (FIRE button, no minimap, Answers on the HUD)");
-  check(mr.raid.capt && mr.raid.capt.caught && mr.raid.capt.freedNoHurt && mr.raid.capt.double && mr.raid.capt.twoArrows === 2 && mr.raid.capt.lostOne, "Eagle Swoop (v5.8.2): the beam carries Sol off to the eagle; an arrow on that eagle frees him without hurting it; two Sols shoot two arrows; poo on one takes him away, not a life: " + JSON.stringify(mr.raid.capt));
-  check(mr.raid.eagles >= 2 && mr.raid.ravens >= 12 && mr.raid.afterOne === 0 && mr.raid.wrong === 1 && mr.raid.feather === 1 && mr.raid.beam === 1 && mr.raid.score === 1 && mr.raid.coins && mr.raid.newWave > 0 && mr.raid.flying > 0 && !/Fenrir/.test(mr.raid.pip), "Eagle Swoop: eagles carry the letters above a raven guard; an eagle takes two arrows; a wrong letter, a feather and an eagle's beam each cost a life; the right eagle answers, pays coins and a new wave flies in: " + JSON.stringify(mr.raid));
+  check(mr.raid.capt && mr.raid.capt.caught && mr.raid.capt.freedNoHurt && mr.raid.capt.double && mr.raid.capt.twoArrows === 2 && mr.raid.capt.lostOne && mr.raid.capt.kept === 1 && mr.raid.capt.keptGone, "Eagle Swoop (v5.8.2/3): the beam carries Sol off to the eagle (no life yet); an arrow on that eagle frees him without hurting it; two Sols shoot two arrows; poo on one takes him away, not a life; a Sol still held when the question is answered costs a life then: " + JSON.stringify(mr.raid.capt));
+  check(mr.raid.eagles >= 2 && mr.raid.ravens >= 12 && mr.raid.afterOne === 0 && mr.raid.wrong === 1 && mr.raid.feather === 1 && mr.raid.beam === 0 && mr.raid.score === 1 && mr.raid.coins && mr.raid.newWave > 0 && mr.raid.flying > 0 && !/Fenrir/.test(mr.raid.pip), "Eagle Swoop: eagles carry the letters above a raven guard; an eagle takes two arrows; a wrong letter and a feather each cost a life, an eagle's beam catches Sol; the right eagle answers, pays coins and a new wave flies in: " + JSON.stringify(mr.raid));
   check(mr.raidPre && mr.raidPre.ready === false && mr.raidPre.firedEarly === 0 && mr.raidPre.after.ready, "Eagle Swoop: no shooting until the flock has formed: " + JSON.stringify(mr.raidPre));
   check(mr.raidPre && mr.raidPre.guards === 2 * mr.raidPre.eagles && mr.raidPre.after.flying >= 1, "Eagle Swoop: two guard ravens under every eagle, and once shooting starts a bird is always flying: " + JSON.stringify(mr.raidPre));
   check(mr.click && mr.click.moved < 2 && mr.click.fired >= 2, "Eagle Swoop: left and right mouse buttons shoot without moving Sol: " + JSON.stringify(mr.click));
@@ -905,8 +948,11 @@ var srv = http.createServer(function (req, res) {
     check(lockInfo.pools[b.fam] > 40 && b.other.every(function (f) { return lockInfo.pools[f] === 0; }), "dist/" + bk + ": only its packs in the pool");
     /* pick the grade and reach the skill screen; the gateway must never come back */
     await page.click('#title-screen .card[data-family="' + b.fam + '"]'); await page.waitForTimeout(300);
+    check(await page.isVisible("#mode-screen"), "dist/" + bk + ": game mode screen opens");
+    await page.click('#mode-packs .card[data-gamemode="ALL"]'); await page.waitForTimeout(300);
     check(await page.isVisible("#skill-screen"), "dist/" + bk + ": skill screen opens");
     await page.click("#btn-skill-back"); await page.waitForTimeout(300);
+    await page.click("#btn-mode-back"); await page.waitForTimeout(300);
     check(await page.isVisible("#title-screen") && !(await page.isVisible("#state-screen")), "dist/" + bk + ": back goes to the title, not the gateway");
     await shot("14-dist-" + bk);
   }

@@ -67,6 +67,8 @@ var lms = http.createServer(function (req, res) {
 
   var fam = st === "va" ? "G9" : "NJ5";
   await f.click('#title-screen .card[data-family="' + fam + '"]');
+  await f.waitForSelector("#mode-screen:not(.hidden)");   /* v5.8.3: the game mode screen */
+  await f.click('#mode-packs .card[data-gamemode="ALL"]');
   await f.waitForSelector("#skill-screen:not(.hidden)");
   await f.click("#btn-skill-start");
   await page.waitForTimeout(400);

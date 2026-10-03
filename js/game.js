@@ -5,11 +5,12 @@
   /* v5.2: a build made for one state (tools/build-games.js sets window.SOL_STATE) has no
      gateway at all — the title screen for that state is the first thing on screen. */
   try {
-    var _gw = document.getElementById("state-screen"), _ts = document.getElementById("title-screen"), _ss = document.getElementById("skill-screen");
+    var _gw = document.getElementById("state-screen"), _ts = document.getElementById("title-screen"), _ss = document.getElementById("skill-screen"), _ms = document.getElementById("mode-screen");
     var _locked = !!(typeof window !== "undefined" && window.SOL_STATE);
     if (_gw) _gw.classList.toggle("hidden", _locked);
     if (_ts) _ts.classList.toggle("hidden", !_locked);
     if (_ss) _ss.classList.add("hidden");
+    if (_ms) _ms.classList.add("hidden");
   } catch (eGw) {}
   var WORLD_W = 2400;
   var WORLD_H = 2000;
@@ -40,6 +41,7 @@
   var LS_CLASS = "afterHours.v1.class";
   var LS_FAMILY = "afterHours.v1.family";
   var LS_STRAND = "afterHours.v1.strand";
+  var LS_GAMEMODE = "afterHours.v1.gameMode";   /* v5.8.3: "ALL", "maze" or a shooter's id */
   var LS_CHAR = "afterHours.v1.charPreset";
   var LS_STATE = "afterHours.v1.state";
   var LS_ADAPT = "afterHours.v1.adapt.";
@@ -26746,6 +26748,8 @@
     document.getElementById("title-screen").classList.toggle("hidden", on);
     var skill = document.getElementById("skill-screen");
     if (skill) skill.classList.add("hidden");
+    var modeScr = document.getElementById("mode-screen");
+    if (modeScr) modeScr.classList.add("hidden");
     var stateScreen = document.getElementById("state-screen");
     if (stateScreen) {
       if (!on && !cfg.state && !LOCKED_STATE) { stateScreen.classList.remove("hidden"); document.getElementById("title-screen").classList.add("hidden"); }
@@ -26848,6 +26852,8 @@
   }
   function showStateScreen() {
     var stateScreen = document.getElementById("state-screen"), title = document.getElementById("title-screen"), skill = document.getElementById("skill-screen");
+    var modeScr = document.getElementById("mode-screen");
+    if (modeScr) modeScr.classList.add("hidden");
     if (LOCKED_STATE) { if (skill) skill.classList.add("hidden"); if (stateScreen) stateScreen.classList.add("hidden"); applyState(LOCKED_STATE); return; }
     if (title) title.classList.add("hidden");
     if (skill) skill.classList.add("hidden");
@@ -26897,6 +26903,64 @@
     });
   }
 
+  /* ── v5.8.3: the game mode screen, between the grade and the skill ── */
+  var GAME_MODE_DEFS = [
+    { id: "ALL", kind: "All modes", name: "Mixed", meta: "The full campaign: the maze on odd levels and Fenrir's boss levels, a shooter level on the even ones." },
+    { id: "maze", kind: "Maze", name: "Labyrinth", meta: "Sneak past Hati, grab the right letter and get out through EXIT · SAFE. Every level is the maze." },
+    { id: "raid", kind: "Galaga style", name: "Eagle Swoop", meta: "Shoot the eagle carrying the right letter while the flock dives at you." },
+    { id: "rocks", kind: "Asteroids style", name: "Rune Rocks", meta: "Pull the rock with the right letter in with your beam and blast the rest." },
+    { id: "sky", kind: "Flying shooter", name: "Sun Chariot", meta: "Fly the sun's chariot and shoot the right orb through the gap in its shield." },
+    { id: "ring", kind: "Arena", name: "Wolf Ring", meta: "Keep the wolves off and shoot the right runestone when it rises." }
+  ];
+  function readGameMode() {
+    var m = "ALL";
+    try { m = localStorage.getItem(LS_GAMEMODE) || "ALL"; } catch (e) {}
+    return GAME_MODE_DEFS.some(function (d) { return d.id === m; }) ? m : "ALL";
+  }
+  function applyGameMode(m) {
+    cfg.gameMode = m;
+    if (window.SolModes) SolModes.only = m === "ALL" ? null : m;
+  }
+  applyGameMode(readGameMode());
+  function gameModeName(m) {
+    var d = GAME_MODE_DEFS.filter(function (x) { return x.id === m; })[0];
+    return d && d.id !== "ALL" ? d.name : "All modes";
+  }
+  function showModeScreen() {
+    cfg.family = selectedFamily();
+    var title = document.getElementById("title-screen"), skill = document.getElementById("skill-screen"), scr = document.getElementById("mode-screen");
+    if (title) title.classList.add("hidden");
+    if (skill) skill.classList.add("hidden");
+    if (scr) scr.classList.remove("hidden");
+    var kicker = document.getElementById("mode-kicker");
+    if (kicker) kicker.textContent = gradeLabel(cfg.family) + " · game mode";
+    var host = document.getElementById("mode-packs");
+    if (!host) return;
+    var want = readGameMode();
+    host.innerHTML = "";
+    GAME_MODE_DEFS.forEach(function (d) {
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = d.id === want ? "card selected" : "card";
+      btn.setAttribute("data-gamemode", d.id);
+      btn.innerHTML = '<span class="kind">' + d.kind + '</span><span class="name">' + d.name + '</span><span class="meta">' + d.meta + '</span>';
+      bindTap(btn, function () {
+        host.querySelectorAll(".card").forEach(function (c) { c.classList.remove("selected"); });
+        btn.classList.add("selected");
+        try { localStorage.setItem(LS_GAMEMODE, d.id); } catch (e) {}
+        applyGameMode(d.id);
+        showSkillScreen(1);
+      });
+      host.appendChild(btn);
+    });
+  }
+  function hideModeScreen() {
+    var scr = document.getElementById("mode-screen"), title = document.getElementById("title-screen");
+    if (scr) scr.classList.add("hidden");
+    if (title) title.classList.remove("hidden");
+    refreshSaveLine();
+  }
+
   function showSkillScreen(nightHint) {
     pendingNight = nightHint || 1;
     cfg.family = selectedFamily();
@@ -26907,20 +26971,14 @@
     } catch (e2) {}
     var title = document.getElementById("title-screen");
     var skill = document.getElementById("skill-screen");
+    var modeScr = document.getElementById("mode-screen");
     if (title) title.classList.add("hidden");
+    if (modeScr) modeScr.classList.add("hidden");
     if (skill) skill.classList.remove("hidden");
     var kicker = document.getElementById("skill-kicker");
-    if (kicker) kicker.textContent = gradeLabel(cfg.family) + " · skill focus";
+    if (kicker) kicker.textContent = gradeLabel(cfg.family) + " · " + gameModeName(cfg.gameMode) + " · skill focus";
     renderSkillCards(cfg.family);
     refreshSkillSaveLine();
-  }
-
-  function hideSkillScreen() {
-    var skill = document.getElementById("skill-screen");
-    var title = document.getElementById("title-screen");
-    if (skill) skill.classList.add("hidden");
-    if (title) title.classList.remove("hidden");
-    refreshSaveLine();
   }
 
   function bootPhaser() {
@@ -27523,14 +27581,16 @@
   });
 
   /* Title Start/Continue removed — grade card opens skill screen. */
-  bindTap(document.getElementById("btn-skill-back"), function () { hideSkillScreen(); });
+  /* v5.8.3: Back on the skill screen goes to the game mode screen; Back there goes to the grades */
+  bindTap(document.getElementById("btn-skill-back"), function () { showModeScreen(); });
+  bindTap(document.getElementById("btn-mode-back"), function () { hideModeScreen(); });
   document.querySelectorAll("#title-screen .card[data-family]").forEach(function (card) {
     bindTap(card, function () {
       document.querySelectorAll("#title-screen .card[data-family]").forEach(function (c) { c.classList.remove("selected"); });
       card.classList.add("selected");
       cfg.family = card.getAttribute("data-family") || "G9";
       try { localStorage.setItem(LS_FAMILY, cfg.family); } catch (e) {}
-      showSkillScreen(1);
+      showModeScreen();
     });
   });
   bindTap(document.getElementById("btn-skill-start"), function () { openCharPicker(1, false); });

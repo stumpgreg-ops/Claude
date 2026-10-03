@@ -1,4 +1,4 @@
-/* SOL Labyrinth v5.8.2 — shooter levels.
+/* SOL Labyrinth v5.8.3 — shooter levels.
  *
  * Every other level of each realm (levels 2, 4, 6 and 8) swaps the maze for a
  * shooter, in rotation:
@@ -23,7 +23,7 @@
     raid: {
       id: "raid", name: "Eagle Swoop", kind: "galaga-style level",
       how: "Great eagles fly in and take the top of the sky, each carrying a letter in its talons, with two guard ravens under each eagle and rows of ravens below. Once the flock has formed, shoot the eagle that carries the right answer — it takes two arrows. Birds are always swooping down at Sol, and an eagle can stop and shine a beam down to catch him and carry him off. Hit that eagle with an arrow to free him: then two Sols stand side by side and shoot two arrows at a time.",
-      rules: "A wrong letter costs a life. So does bird poo landing on you, a bird crashing into you, or an eagle carrying you off in its beam. With two Sols, a hit or a beam takes one Sol away instead of a life. You can't shoot until the flock has flown into formation.",
+      rules: "A wrong letter costs a life. So does bird poo landing on you or a bird crashing into you. If an eagle carries Sol off, free him before the question is answered, or it costs a life. With two Sols, a hit or a beam takes one Sol away instead of a life. You can't shoot until the flock has flown into formation.",
       keys: "◀ ▶ or A / D move · Space, FIRE or a mouse button shoots (clicking does not move Sol).",
       tip: "EAGLE SWOOP — shoot the eagle with the right letter. If an eagle carries Sol off, hit it to get him back: two Sols!",
       hint1: "Shoot the eagle carrying the right letter — it takes two arrows. The passage stays in the side panel.",
@@ -101,9 +101,14 @@
   var BEAM_KEY = "afterHours.v1.beamLearned";   /* set once a student has pulled a rock in */
   var WING = 40, CAPT_UP = 54;   /* Eagle Swoop: the second Sol stands WING px to the right; a caught Sol hangs CAPT_UP px over his eagle */
 
+  /* v5.8.3: the game mode the student picked (game.js sets SolModes.only): null plays every mode in turn,
+     "maze" only the maze, a mode's id only that mode, on every level (boss levels too) */
   function modeFor(n) {
     n = Math.floor(Number(n) || 0);
     if (n < 1 || n > 100) return null;
+    var only = window.SolModes && window.SolModes.only;
+    if (only === "maze") return null;
+    if (only && MODES[only]) return MODES[only];
     var id = SLOTS[((n - 1) % 10) + 1];
     return id ? MODES[id] : null;
   }
@@ -717,8 +722,9 @@
          below them and shield them. Ravens and eagles peel off and dive; a
          diving eagle can stop and shine a beam down to catch Sol. An eagle
          takes two arrows; the second decides its letter.
-         v5.8.2, Galaga's capture: a beam that catches a lone Sol costs a life
-         and the eagle carries a copy of him back to the formation. The next
+         v5.8.2, Galaga's capture: the eagle whose beam catches a lone Sol
+         carries a copy of him back to the formation (v5.8.3: no life yet; it
+         costs a life only if he is still held when the question is answered). The next
          arrow that hits that eagle frees him (it doesn't hurt the eagle, so
          it never picks the eagle's letter), and he flies down to stand next
          to Sol: two Sols, two arrows at a time. With two Sols, a beam, a bird
@@ -831,7 +837,7 @@
       raidHit(o) {
         if (!o || !o.alive) return;
         var x = o.x, y = o.y;
-        if (o.captive && o.captive.held) { this.raidFree(o); return; }
+        if (o.captive && !o.captive.freeing) { this.raidFree(o); return; }   /* held, or still rising up the beam */
         if (o.kind === "eagle" && o.hp > 1) {
           o.hp -= 1;
           if (o.spr) o.spr.setTint(0xffb08a);
@@ -1120,7 +1126,7 @@
           var half = w0 + (p.y - 10 - top) * 0.16, R = this.raid;
           var bw = Math.abs(p.x - e.x) < half + 6 ? 1 : (R.wing && Math.abs(R.wing.x - e.x) < half + 6 ? 2 : 0);
           if (bw && R.wing) { if (this.raidHurt(bw, "THE EAGLE'S BEAM")) e.beamMs = 2800; }
-          else if (bw && !R.capt && e.kind === "eagle") { if (this.loseLife("hit", "THE EAGLE CAUGHT SOL")) { this.raidCapture(e); e.beamMs = 2800; } }
+          else if (bw && !R.capt && e.kind === "eagle") { if (!this.iframeMs && !this.ended && !this._finishing) { this.raidCapture(e); e.beamMs = 2800; } }
           else if (bw) { if (this.loseLife("hit", "THE EAGLE'S BEAM CAUGHT YOU")) e.beamMs = 2800; }
         }
         if (ms0 >= 3200) {
@@ -1158,7 +1164,10 @@
         var spr = this.add.sprite(p.x, p.y, p.texture.key, p.frame.name).setScale(p.scaleX, p.scaleY).setDepth(14).setTint(0xffd27a);
         R.capt = { eagle: e, spr: spr, held: false, freeing: false, t: 0, x0: p.x, y0: p.y };
         e.captive = R.capt;
-        if (!R.toldCapt) { R.toldCapt = true; this.toast("The eagle caught Sol! Hit that eagle (letter " + e.letter + ") with an arrow to free him — then you get two Sols.", 4200); }
+        this.iframeMs = 1200;
+        this.showTag("THE EAGLE CAUGHT SOL!", "#ffd27a");
+        try { this.cameras.main.shake(160, 0.006); } catch (e1) {}
+        this.toast("The eagle caught Sol! Hit that eagle (letter " + e.letter + ") with an arrow to free him and get two Sols. If he's still caught when this question ends, you lose a life.", 4800);
       }
       /* an arrow hit the eagle that holds Sol: he flies down to stand next to Sol */
       raidFree(e) {
@@ -1198,7 +1207,8 @@
         this.showTag("DOUBLE SOL!", "#9aefc0");
         this.toast("Two Sols! You shoot two arrows at a time. A hit takes one Sol away instead of a life.", 3400);
       }
-      /* the flock is going (a new question, a correct answer): a held Sol goes with it; one on his way down lands */
+      /* the flock is going (a new question, a correct answer): a held Sol goes with it and that costs a life,
+         except on the level's last answer (v5.8.3); one on his way down lands */
       raidDropCaptive() {
         var R = this.raid, c = R.capt;
         if (!c) return;
@@ -1206,6 +1216,7 @@
         if (c.eagle) c.eagle.captive = null;
         try { c.spr.destroy(); } catch (e) {}
         R.capt = null;
+        if (this.score < this.needExtracts) { this.iframeMs = 0; this.loseLife("hit", "THE EAGLE KEPT SOL"); }
       }
       clear_raid() {
         var R = this.raid, self = this;

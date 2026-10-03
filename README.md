@@ -13,6 +13,19 @@ Progress saves in this browser profile (`afterHours.v1.night`). Itch login does 
 
 Question packs: `js/content.js` and `js/content2.js` (the v4 Virginia packs) plus `js/content3.js`–`js/content11.js` (v4.9 Virginia) and `js/content12.js`–`js/content17.js` (v4.9 New Jersey grade 5). Format and writing rules: `tools/CONTENT-GUIDE.md`. Check every file with `node tools/validate-content.js`. Headless smoke test of the gateway, builder, shop, a night, the realms and their creatures, Fenrir, the castle perks, the shooter levels and the two built games: `node tools/smoke.js` (screenshots in `tools/shots/`).
 
+## v5.8.3 (2026-10-03) — pick a game mode; a caught Sol costs a life only if he isn't freed
+
+- **A game mode screen after the grade.** The cards are **All modes** (the mixed campaign, as before), **Labyrinth** (the maze only), and one card for each shooter: **Eagle Swoop**, **Rune Rocks**, **Sun Chariot** and **Wolf Ring**.
+  - With one mode picked, every level plays as that mode, boss levels included. The levels, realms and questions don't change.
+  - The choice is remembered on the Chromebook (`afterHours.v1.gameMode`), and the skill screen names it.
+  - Back on the skill screen goes to the mode screen; Back there goes to the grades.
+  - How it works: `game.js` sets `SolModes.only`, and `SolModes.modeFor(n)` (`js/modes.js`) follows it.
+- **Eagle Swoop: being caught costs nothing yet.**
+  - An eagle's beam catches Sol without costing a life (a 1.2 s safe time, and a big "THE EAGLE CAUGHT SOL!").
+  - A life is lost only if he is still held when the question is answered (the round ends), except on the level's last answer.
+  - An arrow on that eagle frees him even while he is still rising up the beam.
+- **Tests:** `tools/smoke.js` covers the mode screen (cards, Back, remembered choice, maze only, one shooter on every level, Rune Rocks on level 3) and the new capture rule. The Apps Script and Canvas tests click through the mode screen.
+
 ## v5.8.2 (2026-10-03) — Eagle Swoop's capture and two Sols; the Canvas version runs
 
 ### Eagle Swoop: Galaga's capture
