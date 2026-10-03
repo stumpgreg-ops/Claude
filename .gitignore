@@ -1,2 +1,6 @@
 .DS_Store
 Thumbs.db
+tools/shots/
+node_modules/
+dist/
+tools/three/
