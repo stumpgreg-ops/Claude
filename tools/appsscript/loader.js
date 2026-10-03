@@ -1,7 +1,7 @@
 /* SOL Labyrinth — Apps Script loader (tools/build-appsscript.js puts this in loader.html).
    v5.8.1: also the Canvas loader (tools/build-canvas.js): there the manifest and the gzip bundle sit inside the
    page itself (<script id="sol-manifest"> and <script class="sol-part">s, base64), so the one HTML file needs no
-   server at all, and the game's saves get their own prefix in localStorage (see canvasStorage).
+   server at all (v5.8.2: or in data files next to a small starter page, see loadParts), and the game's saves get their own prefix in localStorage (see canvasStorage).
    Asks the Apps Script server (google.script.run) for the manifest and the bundle's parts, keeps the bundle in
    IndexedDB so each Chromebook downloads a version once, unpacks it in memory, and makes every request the game
    makes for assets/…, js/… or css/… answer from memory: fetch, XMLHttpRequest, <img src> (property, attribute
@@ -23,6 +23,11 @@
   window.SOL_NO_MUSIC = true;
   var INLINE = document.querySelectorAll("script.sol-part");
   INLINE = INLINE.length ? INLINE : null;
+  /* v5.8.2: the Canvas build in files: a small starter page and data files next to it in the same Canvas folder,
+     read with relative <script src>s (Canvas runs a small page's scripts but not a big one's). SOL_PARTS =
+     { manifest, files: [...] }; each data file calls solPart(i, version hash, base64). Behaves like the one-file build. */
+  var PARTS = window.SOL_PARTS || null;
+  if (PARTS) INLINE = true;
   if (INLINE) window.SOL_CANVAS = true; else window.SOL_APPSSCRIPT = true;
 
   /* ── server calls ── */
@@ -93,6 +98,7 @@
   }
   function getBundle() {
     bar(0.03);
+    if (PARTS) return loadParts();
     if (INLINE) {
       var man = JSON.parse(document.getElementById("sol-manifest").textContent);
       var gz = new Uint8Array(man.bytes), off = 0;
@@ -116,6 +122,36 @@
           return cachePut({ manifest: man, gz: gz.buffer }).then(function () { return { man: man, gz: gz }; });
         });
       });
+    });
+  }
+  /* the data files, two at a time, each a <script src> relative to the page (so Canvas finds it in the page's folder) */
+  function loadParts() {
+    var man = PARTS.manifest, files = PARTS.files, got = new Array(files.length), done = 0, next = 0;
+    window.solPart = function (i, h, s) { if (h === man.hash) got[i] = s; };
+    say("Opening the game files…");
+    function one() {
+      if (next >= files.length) return Promise.resolve();
+      var i = next++;
+      return new Promise(function (ok, bad) {
+        var sc = document.createElement("script");
+        sc.src = files[i];
+        sc.onload = function () {
+          if (typeof got[i] !== "string") { bad(new Error(files[i] + " is not this version's file: upload it again")); return; }
+          done++; bar(0.1 + 0.8 * done / files.length); ok();
+        };
+        sc.onerror = function () { bad(new Error("can't find " + files[i] + ": upload it to the same folder as this page, with the same name")); };
+        document.head.appendChild(sc);
+      }).then(one);
+    }
+    return Promise.all([one(), one()]).then(function () {
+      var gz = new Uint8Array(man.bytes), off = 0;
+      for (var i = 0; i < got.length; i++) {
+        var u = unb64(got[i]);
+        if (off + u.length > gz.length) { off = -1; break; }
+        gz.set(u, off); off += u.length; got[i] = null;
+      }
+      if (off !== man.bytes) throw new Error("the game files don't match each other: upload them all again");
+      return { man: man, gz: gz };
     });
   }
   function gunzip(gz) {

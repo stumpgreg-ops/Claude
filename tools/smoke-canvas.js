@@ -1,13 +1,16 @@
 /* Headless check of the Canvas build: node tools/smoke-canvas.js [va|nj]
    (run tools/build-games.js, tools/build-appsscript.js and tools/build-canvas.js first).
-   Plays Canvas's part: one server stands in for Canvas's file domain and serves only the uploaded HTML file;
-   a second one, on another origin, is the Canvas page that embeds it in an iframe. Checks that the file asks
-   for nothing else (every asset comes out of the file itself), that the title screen, a level and the 3D castle
-   work, that music is off, and that the game's saves don't mix with another game's on the same domain. */
+   Plays Canvas's part: one server stands in for Canvas's file domain and serves only the uploaded files, from a
+   folder path like Canvas's (with a space in it); a second one, on another origin, is the Canvas page that embeds
+   the starter page in an iframe. Checks that the page asks for nothing but its own files (every asset comes out
+   of them), that the title screen, a level and the 3D castle work, that music is off, that the game's saves
+   don't mix with another game's on the same domain, and that a missing data file is named on screen. */
 var path = require("path"), fs = require("fs"), http = require("http"), url = require("url");
 var { chromium } = require("/opt/node22/lib/node_modules/playwright");
 var st = (process.argv[2] || "va").toLowerCase();
-var file = path.join(__dirname, "..", "dist", "canvas", "SOLLabyrinth-" + st.toUpperCase() + "-Canvas.html");
+var dir = path.join(__dirname, "..", "dist", "canvas", st.toUpperCase());
+var start = "SOLLabyrinth-" + st.toUpperCase() + ".html", uploaded = fs.readdirSync(dir), hide = null;
+var FOLDER = "/courses/1~2/files/1~3/course files/SOL Test/";
 var shots = path.join(__dirname, "shots");
 fs.mkdirSync(shots, { recursive: true });
 var served = [];
@@ -15,8 +18,9 @@ var files = http.createServer(function (req, res) {
   var p = decodeURIComponent(url.parse(req.url).pathname);
   served.push(p);
   if (p === "/blank") { res.writeHead(200, { "Content-Type": "text/html" }); res.end("<!DOCTYPE html><title>blank</title>"); return; }
-  if (p !== "/game.html") { res.writeHead(404); res.end(); return; }
-  res.writeHead(200, { "Content-Type": "text/html" }); res.end(fs.readFileSync(file));
+  var f = p.indexOf(FOLDER) === 0 ? p.slice(FOLDER.length) : null;
+  if (!f || uploaded.indexOf(f) < 0 || f === hide) { res.writeHead(404, { "Content-Type": "text/html" }); res.end("<h1>Page not found</h1>"); return; }
+  res.writeHead(200, { "Content-Type": /\.js$/.test(f) ? "text/javascript" : "text/html" }); res.end(fs.readFileSync(path.join(dir, f)));
 });
 var lms = http.createServer(function (req, res) {
   res.writeHead(200, { "Content-Type": "text/html" });
@@ -26,7 +30,7 @@ var lms = http.createServer(function (req, res) {
 (async function () {
   await new Promise(function (r) { files.listen(0, r); });
   await new Promise(function (r) { lms.listen(0, r); });
-  lms.gameUrl = "http://127.0.0.1:" + files.address().port + "/game.html";
+  lms.gameUrl = "http://127.0.0.1:" + files.address().port + encodeURI(FOLDER + start);
   var course = "http://localhost:" + lms.address().port + "/";   /* another origin than the file's */
   var browser = await chromium.launch({ args: ["--use-gl=angle", "--use-angle=swiftshader", "--enable-unsafe-swiftshader"] });
   var ctx = await browser.newContext({ viewport: { width: 1280, height: 760 } });
@@ -38,14 +42,14 @@ var lms = http.createServer(function (req, res) {
   async function frame() { var h = await page.waitForSelector("#app"); return h.contentFrame(); }
 
   /* another game built on this engine already saved on Canvas's file domain */
-  await page.goto(lms.gameUrl.replace("game.html", "blank"));
+  await page.goto("http://127.0.0.1:" + files.address().port + "/blank");
   await page.evaluate(function () { localStorage.setItem("afterHours.v1.night", "57"); localStorage.setItem("afterHours.v1.nick", "Other game"); });
 
   var t0 = Date.now();
   await page.goto(course);
   var f = await frame();
   await f.waitForSelector("#title-screen:not(.hidden)", { timeout: 60000 });
-  console.log("load " + (Date.now() - t0) + " ms, " + (fs.statSync(file).size / 1048576).toFixed(1) + " MiB");
+  console.log("load " + (Date.now() - t0) + " ms, " + uploaded.length + " files, " + (uploaded.reduce(function (a, f) { return a + fs.statSync(path.join(dir, f)).size; }, 0) / 1048576).toFixed(1) + " MiB; the page " + (fs.statSync(path.join(dir, start)).size / 1024).toFixed(1) + " KiB");
   await page.waitForTimeout(1500);
   var s1 = await f.evaluate(function () {
     return { state: window.SOL_STATE, canvas: !!window.SOL_CANVAS, boot: !!document.getElementById("sol-boot"), phaser: !!window.Phaser, build: !!window.SolBuild,
@@ -113,8 +117,19 @@ var lms = http.createServer(function (req, res) {
   var other = await f.evaluate(function () { return localStorage["afterHours.v1.night"]; });
   check(other === "57", "the other game's save is untouched");
 
-  check(served.every(function (p) { return p === "/game.html" || p === "/blank"; }), "the file asked its server for nothing else: " + served.filter(function (p) { return p !== "/game.html" && p !== "/blank"; }).join(", "));
+  function own(p) { return p === "/blank" || (p.indexOf(FOLDER) === 0 && uploaded.indexOf(p.slice(FOLDER.length)) >= 0); }
+  check(served.every(own), "the page asked its server for nothing but its own files: " + served.filter(function (p) { return !own(p); }).join(", "));
+  check(uploaded.every(function (f) { return served.indexOf(FOLDER + f) >= 0; }), "every uploaded file was read");
   check(errors.length === 0, "no page errors" + (errors.length ? ": " + errors.slice(0, 5).join(" | ") : ""));
+
+  /* a data file left out of the upload: the screen names it */
+  hide = uploaded.filter(function (f) { return /-data-03\.js$/.test(f); })[0];
+  errors = [];
+  await page.reload();
+  f = await frame();
+  var said = "";
+  for (var k = 0; k < 40 && !/can't find/i.test(said); k++) { await page.waitForTimeout(250); said = await f.evaluate(function () { var m = document.querySelector("#sol-boot .msg"); return m ? m.textContent : ""; }); }
+  check(/can't find .*-data-03\.js/.test(said), "a missing data file is named on screen: " + said.slice(0, 120));
   await browser.close(); files.close(); lms.close();
   console.log(fails.length ? "FAILED: " + fails.length : "ALL OK");
   process.exit(fails.length ? 1 : 0);

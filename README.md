@@ -13,6 +13,24 @@ Progress saves in this browser profile (`afterHours.v1.night`). Itch login does 
 
 Question packs: `js/content.js` and `js/content2.js` (the v4 Virginia packs) plus `js/content3.js`–`js/content11.js` (v4.9 Virginia) and `js/content12.js`–`js/content17.js` (v4.9 New Jersey grade 5). Format and writing rules: `tools/CONTENT-GUIDE.md`. Check every file with `node tools/validate-content.js`. Headless smoke test of the gateway, builder, shop, a night, the realms and their creatures, Fenrir, the castle perks, the shooter levels and the two built games: `node tools/smoke.js` (screenshots in `tools/shots/`).
 
+## v5.8.2 (2026-10-03) — the Canvas version runs: a small starter page and its data files
+
+The one-file Canvas build (v5.8.1) never got past its first screen in Canvas. Tests in a real course showed why:
+- Canvas runs the scripts of a small uploaded HTML page shown in a Page's iframe (`/courses/…/files/…/preview`), but not of a 7 MB one.
+- A small page can read a file next to it in the same Canvas folder with a relative `<script src>`.
+
+So `node tools/build-canvas.js VA` now writes **`dist/canvas/VA/`** and the same files as **`dist/canvas/SOLLabyrinth-VA-Canvas.zip`** (5.2 MB):
+- `SOLLabyrinth-VA.html`: the starter page (3 KB). It holds the loading screen and one `<script src>`.
+- `SOLLabyrinth-VA-game.js`: the loader, the manifest and the list of data files.
+- `SOLLabyrinth-VA-data-01.js` … `-10.js`: the gzip bundle as base64, 576 KB of it per file. Each file calls `solPart(i, hash, base64)`, and a file from another version is refused.
+
+- **In Canvas:**
+  1. Upload the zip to one folder in **Files** and let Canvas expand it.
+  2. Embed `SOLLabyrinth-VA.html` in a Page: `<iframe src="/courses/<course>/files/<file id>/preview" width="100%" height="700" allowfullscreen></iframe>`.
+- **Saves:** Canvas gives each uploaded file its own web address, and the saves live with the starter page's. An update replaces only the `.js` files, so the starter page and every student's progress stay.
+- **A missing or renamed file is named on screen** (for example, "can't find SOLLabyrinth-VA-data-03.js: upload it to the same folder as this page, with the same name").
+- **Test:** `node tools/smoke-canvas.js va` serves the files from a Canvas-like folder path (with a space in it) and embeds the starter page in a "course page" on another origin. It checks that the page reads only its own files, that every file is read, and that a missing data file is named. The v5.8.1 checks (level, 3D castle, music, separate saves) still run.
+
 ## v5.8.1 (2026-10-02) — a Canvas version: one HTML file, nothing hosted outside the school
 
 For schools where the game can't be hosted on GitHub or any other outside site: `node tools/build-canvas.js VA` (after `tools/build-games.js` and `tools/build-appsscript.js VA`) writes **`dist/canvas/SOLLabyrinth-VA-Canvas.html`** (about 7 MB). The whole game is inside that one file. That includes the 3D castle but no music, like the Apps Script version.

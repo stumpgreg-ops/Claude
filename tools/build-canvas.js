@@ -1,16 +1,21 @@
 /* Build the Canvas (LMS) version of a state's game: node tools/build-canvas.js [VA|NJ]
    (run tools/build-games.js and tools/build-appsscript.js first; tools/publish-pages.sh runs all three).
 
-   One self-contained HTML file a teacher uploads to Canvas Files and embeds in a Canvas page: nothing is hosted
-   on GitHub or any other outside site. It is the Apps Script loader.html with the manifest and the whole gzip
-   bundle (no music) inside it as base64, so the loader unpacks the game from the page itself.
-   The game's saves get their own localStorage prefix (Canvas serves every uploaded HTML file from one domain).
+   Files a teacher uploads to one folder in Canvas Files and embeds in a Canvas page: nothing is hosted on GitHub
+   or any other outside site. v5.8.2: Canvas runs the scripts of a small uploaded HTML page but not of a big one
+   (the one-file 7 MB build stopped on its first screen), and a small page can read files next to it in its folder
+   with a relative <script src>. So the game is:
+     SOLLabyrinth-<ST>.html          the starter page (a few KB): the loading screen and one <script src>
+     SOLLabyrinth-<ST>-game.js       the Apps Script loader, the manifest and the list of data files
+     SOLLabyrinth-<ST>-data-NN.js    the gzip bundle (no music) as base64, in pieces of 576 KB
+   Canvas gives each uploaded file its own web address, and the game's saves live with the starter page's: an
+   update replaces only the .js files, so the starter page (and every student's progress) stays.
 
-   Writes dist/canvas/SOLLabyrinth-<ST>-Canvas.html */
-var fs = require("fs"), path = require("path");
+   Writes dist/canvas/<ST>/ and dist/canvas/SOLLabyrinth-<ST>-Canvas.zip (the same files, for one upload) */
+var fs = require("fs"), path = require("path"), cp = require("child_process");
 var root = path.join(__dirname, ".."), dist = path.join(root, "dist");
 var st = (process.argv[2] || "VA").toUpperCase(), lo = st.toLowerCase();
-var src = path.join(dist, "appsscript", lo), out = path.join(dist, "canvas");
+var src = path.join(dist, "appsscript", lo), outAll = path.join(dist, "canvas"), out = path.join(outAll, st);
 if (!fs.existsSync(path.join(src, "manifest.json"))) throw new Error("tools/build-canvas.js: run tools/build-appsscript.js " + st + " first");
 
 var man = JSON.parse(fs.readFileSync(path.join(src, "manifest.json"), "utf8"));
@@ -18,42 +23,54 @@ var gz = Buffer.concat(man.parts.map(function (p) { return fs.readFileSync(path.
 if (gz.length !== man.bytes) throw new Error("tools/build-canvas.js: the bundle parts add up to " + gz.length + " bytes, not " + man.bytes);
 
 var page = fs.readFileSync(path.join(src, "loader.html"), "utf8");
-if (page.indexOf("<script>") < 0) throw new Error("tools/build-canvas.js: no loader script in loader.html");
-/* base64 in lines of 76 characters, so no editor or preview meets one multi-megabyte line */
-/* the bundle in pieces of 384 KB with a one-line script after each, so the bar moves while the browser is still
-   reading the file (the loader itself runs only once the whole file is in) */
-var PIECE = 384 * 1024, parts = "";
-for (var o = 0; o < gz.length; o += PIECE) {
-  parts += '<script type="application/octet-stream" class="sol-part">\n' + gz.subarray(o, o + PIECE).toString("base64").replace(/.{76}/g, "$&\n") +
-    "\n</script><script>solP(" + Math.round(100 * Math.min(gz.length, o + PIECE) / gz.length) + ")</script>\n";
+var m = page.match(/<script>([\s\S]*)<\/script>/);
+if (!m) throw new Error("tools/build-canvas.js: no loader script in loader.html");
+var loaderJs = m[1];
+var base = "SOLLabyrinth-" + st;
+
+/* ── the data files: 576 KB of bundle each (768 KB of base64; Canvas has served an 800 KB one to a page) ── */
+var PIECE = 576 * 1024, files = [];
+for (var o = 0, n = 1; o < gz.length; o += PIECE, n++) {
+  var name = base + "-data-" + (n < 10 ? "0" : "") + n + ".js";
+  files.push(name);
+  fs.mkdirSync(out, { recursive: true });
+  fs.writeFileSync(path.join(out, name), "/* SOL Labyrinth " + st + " v" + man.version + ": game data " + n + " (open " + base + ".html, not this file) */\n" +
+    "solPart(" + (n - 1) + "," + JSON.stringify(man.hash) + ',"' + gz.subarray(o, o + PIECE).toString("base64") + '");\n');
 }
-/* v5.8.1: what the page says when its scripts can't run (a preview that blocks scripts shows only this), and a
-   first small script that changes it, so a stuck screen tells the teacher which of the two happened */
+
+/* ── the game file: which version, which data files, and the loader ── */
+var parts = { manifest: man, files: files };
+fs.writeFileSync(path.join(out, base + "-game.js"), "/* SOL Labyrinth " + st + " v" + man.version + " (open " + base + ".html, not this file) */\n" +
+  "window.SOL_CANVAS_ID = " + JSON.stringify(lo) + ";\nwindow.SOL_PARTS = " + JSON.stringify(parts) + ";\n" + loaderJs + "\n");
+
+/* ── the starter page: what it says when its scripts can't run (a preview that blocks scripts shows only that),
+   a first small script that changes it, then the game file ── */
 var stuck = '<div class="msg">Loading the game…</div><div class="msg" id="sol-noscript" style="font-size:13px;opacity:.7">' +
   "If this message never changes, the page is not allowed to run the game here (Canvas shows some files as a preview that cannot run games).</div>";
 if (page.indexOf('<div class="msg">Loading the game…</div>') < 0) throw new Error("tools/build-canvas.js: loader.html has no loading message");
 page = page.replace('<div class="msg">Loading the game…</div>', stuck);
 var early = "<script>(function(){var n=document.getElementById('sol-noscript');if(n)n.parentNode.removeChild(n);" +
-  "var m=document.querySelector('#sol-boot .msg'),f=document.querySelector('#sol-boot .fill');" +
-  "window.solP=function(p){if(m)m.textContent='Opening the game file… '+p+'%';if(f)f.style.width=Math.round(p*0.9)+'%';};solP(0);" +
   /* anything the page refuses to load (a security rule) is named on screen, since a student can't open the console */
   "var blocked=[];document.addEventListener('securitypolicyviolation',function(e){var k=(e.effectiveDirective||e.violatedDirective)+' '+String(e.blockedURI).slice(0,12);" +
   "if(blocked.indexOf(k)>=0)return;blocked.push(k);var d=document.getElementById('sol-blocked');if(!d){d=document.createElement('div');d.id='sol-blocked';" +
   "d.setAttribute('style','position:fixed;left:8px;bottom:8px;z-index:100000;background:#3a1a14;color:#ffd8c8;border:1px solid #ff8b7a;border-radius:8px;padding:6px 10px;font:13px system-ui,sans-serif;max-width:90vw');" +
   "document.body.appendChild(d);}d.textContent='Canvas blocked part of the game: '+blocked.join(', ');});" +
-  "window.addEventListener('error',function(e){var m=document.querySelector('#sol-boot .msg');if(m&&document.getElementById('sol-boot'))m.textContent='The game hit an error: '+(e.message||e)+' (line '+(e.lineno||'?')+')';});})();</script>\n";
-var at = page.indexOf("<script>");
-var inline = early +
-  "<script>window.SOL_CANVAS_ID = " + JSON.stringify(lo) + ";</script>\n" +
-  '<script type="application/json" id="sol-manifest">' + JSON.stringify(man).replace(/</g, "\\u003c") + "</script>\n" +
-  parts;
-page = page.slice(0, at) + inline + page.slice(at);
+  "window.addEventListener('error',function(e){var m=document.querySelector('#sol-boot .msg');if(m&&document.getElementById('sol-boot'))m.textContent='The game hit an error: '+(e.message||e)+' (line '+(e.lineno||'?')+')';});" +
+  "window.solMissing=function(f){var m=document.querySelector('#sol-boot .msg');if(m)m.textContent='Can\\'t find '+f+'. Upload it to the same Canvas folder as this page, with the same name.';};})();</script>\n";
+var game = base + "-game.js";
+var starter = page.replace(m[0], function () { return early + '<script src="' + game + '" onerror="solMissing(\'' + game + '\')"></script>'; });
+if (Buffer.byteLength(starter) > 64 * 1024) throw new Error("tools/build-canvas.js: the starter page is " + Buffer.byteLength(starter) + " bytes; Canvas runs only small pages");
+fs.writeFileSync(path.join(out, base + ".html"), starter);
 
-/* Canvas's file preview seems to stop at 10 MiB: the Algebra game (9.97 MiB) runs there, and the first Canvas build of
-   this one (11.7 MiB) stopped on its loading screen. Keep well under. */
-var LIMIT = 9.5 * 1048576;
-if (Buffer.byteLength(page) > LIMIT) throw new Error("tools/build-canvas.js: the file is " + (Buffer.byteLength(page) / 1048576).toFixed(1) + " MiB; Canvas's preview needs it under 10 MiB");
-fs.mkdirSync(out, { recursive: true });
-var file = path.join(out, "SOLLabyrinth-" + st + "-Canvas.html");
-fs.writeFileSync(file, page);
-console.log("Canvas " + st + " v" + man.version + ": " + path.relative(root, file) + " (" + (page.length / 1048576).toFixed(1) + " MiB)");
+/* the files of an older build that this one doesn't have (fewer data files, the one-file build) */
+fs.readdirSync(out).forEach(function (f) { if (f !== base + ".html" && f !== game && files.indexOf(f) < 0) fs.unlinkSync(path.join(out, f)); });
+var old = path.join(outAll, base + "-Canvas.html");
+if (fs.existsSync(old)) fs.unlinkSync(old);
+
+var zip = path.join(outAll, base + "-Canvas.zip");
+if (fs.existsSync(zip)) fs.unlinkSync(zip);
+cp.execFileSync("zip", ["-q", "-X", "-j", zip].concat([base + ".html", game].concat(files).map(function (f) { return path.join(out, f); })));
+
+var mb = function (b) { return (b / 1048576).toFixed(1) + " MiB"; };
+console.log("Canvas " + st + " v" + man.version + ": " + path.relative(root, out) + "/ (" + base + ".html " + (Buffer.byteLength(starter) / 1024).toFixed(1) + " KiB, " + game + ", " +
+  files.length + " data files) and " + path.relative(root, zip) + " (" + mb(fs.statSync(zip).size) + ")");
