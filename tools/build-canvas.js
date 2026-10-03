@@ -11,7 +11,8 @@
    Canvas gives each uploaded file its own web address, and the game's saves live with the starter page's: an
    update replaces only the .js files, so the starter page (and every student's progress) stays.
 
-   Writes dist/canvas/<ST>/ and dist/canvas/SOLLabyrinth-<ST>-Canvas.zip (the same files, for one upload) */
+   Writes dist/canvas/<ST>/, dist/canvas/SOLLabyrinth-<ST>-Canvas.zip (the same files, for one upload) and
+   dist/canvas/SOLLabyrinth-<ST>-Canvas-update.zip (the .js files only, for updating a game already in Canvas) */
 var fs = require("fs"), path = require("path"), cp = require("child_process");
 var root = path.join(__dirname, ".."), dist = path.join(root, "dist");
 var st = (process.argv[2] || "VA").toUpperCase(), lo = st.toLowerCase();
@@ -70,7 +71,11 @@ if (fs.existsSync(old)) fs.unlinkSync(old);
 var zip = path.join(outAll, base + "-Canvas.zip");
 if (fs.existsSync(zip)) fs.unlinkSync(zip);
 cp.execFileSync("zip", ["-q", "-X", "-j", zip].concat([base + ".html", game].concat(files).map(function (f) { return path.join(out, f); })));
+/* an update: the .js files only, so the starter page already in Canvas (and its saves) stays */
+var upd = path.join(outAll, base + "-Canvas-update.zip");
+if (fs.existsSync(upd)) fs.unlinkSync(upd);
+cp.execFileSync("zip", ["-q", "-X", "-j", upd].concat([game].concat(files).map(function (f) { return path.join(out, f); })));
 
 var mb = function (b) { return (b / 1048576).toFixed(1) + " MiB"; };
 console.log("Canvas " + st + " v" + man.version + ": " + path.relative(root, out) + "/ (" + base + ".html " + (Buffer.byteLength(starter) / 1024).toFixed(1) + " KiB, " + game + ", " +
-  files.length + " data files) and " + path.relative(root, zip) + " (" + mb(fs.statSync(zip).size) + ")");
+  files.length + " data files) and " + path.relative(root, zip) + " (" + mb(fs.statSync(zip).size) + "), update " + path.basename(upd));

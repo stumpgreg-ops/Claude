@@ -605,6 +605,26 @@ var srv = http.createServer(function (req, res) {
     var bm = R.ravens.filter(function (q) { return q.alive && q.letter && q.state !== "wait"; })[0] || R.ravens.filter(function (q) { return q.alive && q.letter; })[0];
     bm.state = "beam"; bm.beamMs = 900; bm.path = null; bm.x = s.player.x; bm.hoverY = s.H * 0.4; bm.y = bm.hoverY; bm.lead = true;
     await new Promise(function (r) { setTimeout(r, 700); }); o.beam = s.strikes; s.strikes = 0; s.iframeMs = 0;
+    /* v5.8.2: Galaga's capture — the eagle carries Sol off; an arrow on it frees him and he stands next to Sol */
+    await new Promise(function (r) { setTimeout(r, 1400); });
+    var cap = R.capt;
+    o.capt = { caught: !!cap && cap.held && cap.eagle === bm, hp: bm.hp };
+    s.raidHit(bm);
+    o.capt.freedNoHurt = bm.alive && bm.hp === o.capt.hp && s.strikes === 0;
+    await new Promise(function (r) { setTimeout(r, 1300); });
+    o.capt.double = !!R.wing && !R.capt && Math.abs(R.wing.x - s.player.x - 40) < 1;
+    R.arrows.forEach(function (a) { a.spr.destroy(); }); R.arrows = [];
+    var wasReady = R.ready; R.ready = true; R.cd = 0;
+    s.keys.SPACE.isDown = true; await new Promise(function (r) { setTimeout(r, 60); }); s.keys.SPACE.isDown = false;
+    o.capt.twoArrows = R.arrows.length; R.ready = wasReady;
+    R.arrows.forEach(function (a) { a.spr.destroy(); }); R.arrows = [];
+    /* with two Sols, poo on the second one takes him away, not a life */
+    s.iframeMs = 0;
+    R.feathers.push({ x: R.wing.x, y: s.player.y - 20, vx: 0, t: 0, spr: s.add.image(R.wing.x, s.player.y - 20, "md-poo") });
+    await new Promise(function (r) { setTimeout(r, 500); });
+    o.capt.lostOne = !R.wing && s.strikes === 0;
+    s.iframeMs = 0;
+    R.arrows.forEach(function (a) { a.spr.destroy(); }); R.arrows = [];
     var coins = s.nightCoins;
     R.ravens.filter(function (q) { return q.alive && q.letter && s.need.indexOf(q.letter) !== -1; }).forEach(function (q) { s.raidHit(q); s.raidHit(q); });
     o.score = s.score; o.coins = s.nightCoins > coins;
@@ -626,6 +646,17 @@ var srv = http.createServer(function (req, res) {
   });
   await page.waitForFunction(function () { return SolScene.raid.ravens.some(function (q) { return q.state === "beam" && q.beamMs > 700; }); }, null, { timeout: 20000 }).catch(function () {});
   await shot("16b-eagle-beam");
+  /* v5.8.2: pictures of a caught Sol over his eagle, then the two Sols */
+  await page.evaluate(function () {
+    var s = SolScene, R = s.raid, e = R.ravens.filter(function (q) { return q.alive && q.letter && q.state === "form" && !q.captive; })[0];
+    s.iframeMs = 60000;
+    if (e && !R.capt && !R.wing) s.raidCapture(e);
+  });
+  await page.waitForTimeout(1600);
+  await shot("16c-eagle-caught-sol");
+  await page.evaluate(function () { var R = SolScene.raid; if (R.capt && R.capt.held) SolScene.raidHit(R.capt.eagle); });
+  await page.waitForTimeout(1400);
+  await shot("16d-two-sols");
   await page.evaluate(function () { SolScene.iframeMs = 0; });
   await gotoLevel(4);
   /* v5.7.3: the "how to pull a rock in" card comes up once the reading pop-up closes, and pauses the level */
@@ -765,6 +796,7 @@ var srv = http.createServer(function (req, res) {
   console.log("modes", JSON.stringify(modeRuns));
   var mr = modeRuns;
   check(mr.raid.key === "mode" && mr.raid.mode === "raid" && mr.raid.fire === "FIRE" && mr.raid.mini === "none" && /^Answers 0/.test(mr.raid.hud), "level 2 is Eagle Swoop in the shooter scene (FIRE button, no minimap, Answers on the HUD)");
+  check(mr.raid.capt && mr.raid.capt.caught && mr.raid.capt.freedNoHurt && mr.raid.capt.double && mr.raid.capt.twoArrows === 2 && mr.raid.capt.lostOne, "Eagle Swoop (v5.8.2): the beam carries Sol off to the eagle; an arrow on that eagle frees him without hurting it; two Sols shoot two arrows; poo on one takes him away, not a life: " + JSON.stringify(mr.raid.capt));
   check(mr.raid.eagles >= 2 && mr.raid.ravens >= 12 && mr.raid.afterOne === 0 && mr.raid.wrong === 1 && mr.raid.feather === 1 && mr.raid.beam === 1 && mr.raid.score === 1 && mr.raid.coins && mr.raid.newWave > 0 && mr.raid.flying > 0 && !/Fenrir/.test(mr.raid.pip), "Eagle Swoop: eagles carry the letters above a raven guard; an eagle takes two arrows; a wrong letter, a feather and an eagle's beam each cost a life; the right eagle answers, pays coins and a new wave flies in: " + JSON.stringify(mr.raid));
   check(mr.raidPre && mr.raidPre.ready === false && mr.raidPre.firedEarly === 0 && mr.raidPre.after.ready, "Eagle Swoop: no shooting until the flock has formed: " + JSON.stringify(mr.raidPre));
   check(mr.raidPre && mr.raidPre.guards === 2 * mr.raidPre.eagles && mr.raidPre.after.flying >= 1, "Eagle Swoop: two guard ravens under every eagle, and once shooting starts a bird is always flying: " + JSON.stringify(mr.raidPre));

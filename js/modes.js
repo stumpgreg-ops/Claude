@@ -1,4 +1,4 @@
-/* SOL Labyrinth v5.8.0 — shooter levels.
+/* SOL Labyrinth v5.8.2 — shooter levels.
  *
  * Every other level of each realm (levels 2, 4, 6 and 8) swaps the maze for a
  * shooter, in rotation:
@@ -22,10 +22,10 @@
   var MODES = {
     raid: {
       id: "raid", name: "Eagle Swoop", kind: "galaga-style level",
-      how: "Great eagles fly in and take the top of the sky, each carrying a letter in its talons, with two guard ravens under each eagle and rows of ravens below. Once the flock has formed, shoot the eagle that carries the right answer — it takes two arrows. Birds are always swooping down at Sol, and an eagle can stop and shine a beam down to catch him.",
-      rules: "A wrong letter costs a life. So does bird poo landing on you, a bird crashing into you, or getting caught in an eagle's beam. You can't shoot until the flock has flown into formation.",
+      how: "Great eagles fly in and take the top of the sky, each carrying a letter in its talons, with two guard ravens under each eagle and rows of ravens below. Once the flock has formed, shoot the eagle that carries the right answer — it takes two arrows. Birds are always swooping down at Sol, and an eagle can stop and shine a beam down to catch him and carry him off. Hit that eagle with an arrow to free him: then two Sols stand side by side and shoot two arrows at a time.",
+      rules: "A wrong letter costs a life. So does bird poo landing on you, a bird crashing into you, or an eagle carrying you off in its beam. With two Sols, a hit or a beam takes one Sol away instead of a life. You can't shoot until the flock has flown into formation.",
       keys: "◀ ▶ or A / D move · Space, FIRE or a mouse button shoots (clicking does not move Sol).",
-      tip: "EAGLE SWOOP — shoot the eagle with the right letter. Dodge the poo and the beams.",
+      tip: "EAGLE SWOOP — shoot the eagle with the right letter. If an eagle carries Sol off, hit it to get him back: two Sols!",
       hint1: "Shoot the eagle carrying the right letter — it takes two arrows. The passage stays in the side panel.",
       hint2: "This question has two right letters. Shoot both eagles that carry them.",
       news: ["",
@@ -99,6 +99,7 @@
   };
   var SLOTS = { 2: "raid", 4: "rocks", 6: "sky", 8: "ring" };
   var BEAM_KEY = "afterHours.v1.beamLearned";   /* set once a student has pulled a rock in */
+  var WING = 40, CAPT_UP = 54;   /* Eagle Swoop: the second Sol stands WING px to the right; a caught Sol hangs CAPT_UP px over his eagle */
 
   function modeFor(n) {
     n = Math.floor(Number(n) || 0);
@@ -715,13 +716,19 @@
          Galaga's boss ships carry a captured fighter. Rows of ravens fly in
          below them and shield them. Ravens and eagles peel off and dive; a
          diving eagle can stop and shine a beam down to catch Sol. An eagle
-         takes two arrows; the second decides its letter. */
+         takes two arrows; the second decides its letter.
+         v5.8.2, Galaga's capture: a beam that catches a lone Sol costs a life
+         and the eagle carries a copy of him back to the formation. The next
+         arrow that hits that eagle frees him (it doesn't hurt the eagle, so
+         it never picks the eagle's letter), and he flies down to stand next
+         to Sol: two Sols, two arrows at a time. With two Sols, a beam, a bird
+         or poo takes one of them away instead of a life. */
       setup_raid() {
         this.drawSkyBg(110);
         this.raidGround();
         this.makeSol(this.W / 2, this.H - 62, "up");
         this.raid = { arrows: [], feathers: [], ravens: [], ravSlots: [], cd: 0, clock: 0, fcx: this.W / 2, breath: 1, swayAmp: 60, top: 112,
-          diveCd: 4000, refillCd: 8000, huginn: null, huginnCd: rnd(12000, 18000), fired: 0, total: 1 };
+          diveCd: 4000, refillCd: 8000, huginn: null, huginnCd: rnd(12000, 18000), fired: 0, total: 1, capt: null, wing: null };
       }
       raidGround() {
         if (this.groundG) this.groundG.destroy();
@@ -743,6 +750,7 @@
       }
       answers_raid() {
         var R = this.raid, W = this.W, H = this.H, self = this, i, r, c;
+        this.raidDropCaptive();
         R.ravens.forEach(kill); R.ravens = []; R.ravSlots = [];
         var letters = shuffle(this.choiceLetters().slice()), n = letters.length;
         var gapE = 100, gapR = 62, cols = clamp(Math.floor((W * 0.72) / gapR), 6, 11), rows = this.tier >= 4 ? 3 : 2;
@@ -823,6 +831,7 @@
       raidHit(o) {
         if (!o || !o.alive) return;
         var x = o.x, y = o.y;
+        if (o.captive && o.captive.held) { this.raidFree(o); return; }
         if (o.kind === "eagle" && o.hp > 1) {
           o.hp -= 1;
           if (o.spr) o.spr.setTint(0xffb08a);
@@ -855,17 +864,24 @@
         R.clock += s;
         /* Sol walks with the keys or the ◀ ▶ pad only; a mouse button or a tap just shoots */
         var vx = inp.ax * 430;
-        p.x = clamp(p.x + vx * s, 30, W - 30); p.y = H - 62;
+        p.x = clamp(p.x + vx * s, 30, W - 30 - (R.wing ? WING : 0)); p.y = H - 62;
         this.tickPlayerCharAnim(0, vx ? -1 : 0, false);
         this.blink(p);
+        if (R.wing) {
+          R.wing.setPosition(p.x + WING, p.y);
+          try { R.wing.setTexture(p.texture.key, p.frame.name); } catch (eW) {}
+          this.blink(R.wing);
+        }
+        this.raidCaptiveTick(s);
         /* arrows */
         R.cd -= ms;
         if (!R.ready && R.ravens.length && R.ravens.every(function (o) { return o.state !== "wait" && o.state !== "enter"; })) {
           R.ready = true; this.showTag("FIRE!", "#9aefc0"); snd("caw");
         }
         if (inp.fire && !R.ready && !R.readyWarned) { R.readyWarned = true; this.toast("Wait for the flock to fly into formation — then fire!", 2200); }
-        if (inp.fire && R.ready && R.cd <= 0 && R.arrows.length < 2) {
+        if (inp.fire && R.ready && R.cd <= 0 && R.arrows.length < (R.wing ? 4 : 2)) {
           R.arrows.push({ x: p.x, y: p.y - 36, spr: this.add.image(p.x, p.y - 36, "md-arrow").setDepth(18) });
+          if (R.wing) R.arrows.push({ x: R.wing.x, y: p.y - 36, spr: this.add.image(R.wing.x, p.y - 36, "md-arrow").setDepth(18) });
           R.cd = 260; R.fired += 1; snd("shot");
         }
         for (i = R.arrows.length - 1; i >= 0; i--) {
@@ -935,9 +951,11 @@
             }
           }
           this.raidPlace(e);
-          /* a diving bird that reaches Sol costs a life */
-          if ((e.state === "dive" || e.state === "return") && e.y > p.y - 70 && dist(e.x, e.y, p.x, p.y - 10) < (e.kind === "eagle" ? 38 : 30)) {
-            this.loseLife("hit", e.kind === "eagle" ? "AN EAGLE CRASHED INTO YOU" : "A RAVEN CRASHED INTO YOU");
+          if (e.captive && e.captive.held) e.captive.spr.setPosition(e.x, e.y - CAPT_UP);
+          /* a diving bird that reaches Sol costs a life (or, with two Sols, one of them) */
+          var who = e.y > p.y - 70 && (e.state === "dive" || e.state === "return") ? this.raidSolAt(e.x, e.y, e.kind === "eagle" ? 38 : 30) : 0;
+          if (who) {
+            this.raidHurt(who, e.kind === "eagle" ? "AN EAGLE CRASHED INTO YOU" : "A RAVEN CRASHED INTO YOU");
             if (e.kind === "raven") { e.alive = false; this.burst(e.x, e.y, 0x5a4a78, 12); kill(e); }
           }
         }
@@ -994,9 +1012,11 @@
           var f = R.feathers[i], gone = false;
           f.t += s; f.y += (230 + this.night * 1.1) * s; f.x += (f.vx || 0) * s;
           f.spr.setPosition(f.x, f.y).setScale(1, 1 + Math.min(0.25, f.t * 0.3));
-          if (dist(f.x, f.y, p.x, p.y - 10) < 26) {
+          var fw = this.raidSolAt(f.x, f.y, 26);
+          if (fw) {
             gone = true;
-            if (this.loseLife("hit", "SPLAT! BIRD POO GOT YOU")) this.raidSplat(p.x, p.y - 22, true);
+            var two = !!R.wing, sx = fw === 2 ? R.wing.x : p.x;
+            if (this.raidHurt(fw, "SPLAT! BIRD POO GOT YOU")) this.raidSplat(two ? sx : p.x, p.y - 22, !two);
           } else if (f.y > H - 30) { gone = true; this.raidSplat(f.x, H - 26, false); }
           if (gone) { f.spr.destroy(); R.feathers.splice(i, 1); }
         }
@@ -1059,7 +1079,7 @@
         var R = this.raid, self = this;
         var form = R.ravens.filter(function (o) { return o.alive && o.state === "form"; });
         var eagles = form.filter(function (o) { return o.kind === "eagle"; }), ravens = form.filter(function (o) { return o.kind === "raven" && !o.guard; });
-        var beaming = R.ravens.some(function (o) { return o.alive && (o.state === "beam" || o.beamer); });
+        var beaming = !!R.capt || R.ravens.some(function (o) { return o.alive && (o.state === "beam" || o.beamer); });
         if (eagles.length && (Math.random() < 0.5 || !ravens.length)) {
           var eg = eagles[Math.floor(Math.random() * eagles.length)];
           eg.lead = true;
@@ -1097,18 +1117,99 @@
           }
         }
         if (grow >= 1 && ms0 < 2800) {
-          var half = w0 + (p.y - 10 - top) * 0.16;
-          if (Math.abs(p.x - e.x) < half + 6) {
-            if (this.loseLife("hit", "THE EAGLE'S BEAM CAUGHT YOU")) e.beamMs = 2800;
-          }
+          var half = w0 + (p.y - 10 - top) * 0.16, R = this.raid;
+          var bw = Math.abs(p.x - e.x) < half + 6 ? 1 : (R.wing && Math.abs(R.wing.x - e.x) < half + 6 ? 2 : 0);
+          if (bw && R.wing) { if (this.raidHurt(bw, "THE EAGLE'S BEAM")) e.beamMs = 2800; }
+          else if (bw && !R.capt && e.kind === "eagle") { if (this.loseLife("hit", "THE EAGLE CAUGHT SOL")) { this.raidCapture(e); e.beamMs = 2800; } }
+          else if (bw) { if (this.loseLife("hit", "THE EAGLE'S BEAM CAUGHT YOU")) e.beamMs = 2800; }
         }
         if (ms0 >= 3200) {
           e.state = "return"; e.beamer = false;
           e.path = { p0: { x: e.x, y: e.y }, p1: { x: e.x, y: e.y - 120 }, p2: { x: this.raidSlot(e).x, y: this.raidSlot(e).y + 90 }, p3: null, t: 0, dur: 1.5, next: "form" };
         }
       }
+      /* ── v5.8.2: Galaga's capture and the double Sol ── */
+      /* which Sol a thing at (x, y) touches: 1 Sol, 2 the second Sol, 0 neither */
+      raidSolAt(x, y, r) {
+        var p = this.player, w = this.raid.wing;
+        if (dist(x, y, p.x, p.y - 10) < r) return 1;
+        if (w && dist(x, y, w.x, w.y - 10) < r) return 2;
+        return 0;
+      }
+      /* a hit: with two Sols it takes one away (no life), with one it costs a life */
+      raidHurt(who, label) {
+        var R = this.raid, p = this.player;
+        if (!R.wing) return this.loseLife("hit", label);
+        if (this.ended || this._finishing || this.iframeMs > 0) return false;
+        var w = R.wing, x = who === 2 ? w.x : p.x;
+        this.burst(x, p.y - 10, 0xff9a7a, 18);
+        if (who !== 2) p.x = w.x;   /* the Sol that's left stands where he stood */
+        w.destroy(); R.wing = null;
+        this.iframeMs = 1500;
+        this.showTag(label + " · ONE SOL LEFT", "#ff9a7a");
+        this.toast("You lost one of your two Sols, but not a life. Get caught by a beam again to win him back.", 2800);
+        try { this.cameras.main.shake(160, 0.008); } catch (e) {}
+        if (window.AfterHoursAudio) { try { AfterHoursAudio.catch(); } catch (e2) {} }
+        return true;
+      }
+      /* the beam lifts a copy of Sol up to the eagle, which takes him back to the formation */
+      raidCapture(e) {
+        var R = this.raid, p = this.player;
+        var spr = this.add.sprite(p.x, p.y, p.texture.key, p.frame.name).setScale(p.scaleX, p.scaleY).setDepth(14).setTint(0xffd27a);
+        R.capt = { eagle: e, spr: spr, held: false, freeing: false, t: 0, x0: p.x, y0: p.y };
+        e.captive = R.capt;
+        if (!R.toldCapt) { R.toldCapt = true; this.toast("The eagle caught Sol! Hit that eagle (letter " + e.letter + ") with an arrow to free him — then you get two Sols.", 4200); }
+      }
+      /* an arrow hit the eagle that holds Sol: he flies down to stand next to Sol */
+      raidFree(e) {
+        var R = this.raid, c = R.capt;
+        e.captive = null;
+        if (!c) return;
+        c.held = false; c.freeing = true; c.t = 0; c.x0 = c.spr.x; c.y0 = c.spr.y;
+        c.spr.clearTint();
+        this.burst(c.x0, c.y0, 0xffe08a, 16);
+        snd("chime");
+        this.showTag("SOL IS FREE!", "#9aefc0");
+      }
+      raidCaptiveTick(s) {
+        var R = this.raid, c = R.capt, p = this.player;
+        if (!c) return;
+        if (!c.held && !c.freeing) {   /* rising up the beam, turning */
+          c.t = Math.min(1, c.t + s / 1.2);
+          var e = c.eagle, u = c.t * c.t * (3 - 2 * c.t);
+          if (!e.alive) { this.raidDropCaptive(); return; }
+          c.spr.setPosition(c.x0 + (e.x - c.x0) * u, c.y0 + (e.y - CAPT_UP - c.y0) * u).setRotation(c.t < 1 ? c.t * Math.PI * 4 : 0);
+          if (c.t >= 1) c.held = true;
+        } else if (c.freeing) {   /* down to Sol's side */
+          c.t = Math.min(1, c.t + s / 1.0);
+          var tx = Math.min(p.x + WING, this.W - 30), u2 = c.t * c.t * (3 - 2 * c.t);
+          c.spr.setPosition(c.x0 + (tx - c.x0) * u2, c.y0 + (p.y - c.y0) * u2);
+          if (c.t >= 1) this.raidDock();
+        }
+      }
+      raidDock() {
+        var R = this.raid, c = R.capt, p = this.player;
+        if (!c) return;
+        c.spr.destroy(); R.capt = null;
+        if (R.wing || this.ended) return;
+        p.x = Math.min(p.x, this.W - 30 - WING);
+        R.wing = this.add.sprite(p.x + WING, p.y, p.texture.key, p.frame.name).setScale(p.scaleX, p.scaleY).setDepth(20);
+        this.awardBonusPoints(1000, "Sol rescued");
+        this.showTag("DOUBLE SOL!", "#9aefc0");
+        this.toast("Two Sols! You shoot two arrows at a time. A hit takes one Sol away instead of a life.", 3400);
+      }
+      /* the flock is going (a new question, a correct answer): a held Sol goes with it; one on his way down lands */
+      raidDropCaptive() {
+        var R = this.raid, c = R.capt;
+        if (!c) return;
+        if (c.freeing) { this.raidDock(); return; }
+        if (c.eagle) c.eagle.captive = null;
+        try { c.spr.destroy(); } catch (e) {}
+        R.capt = null;
+      }
       clear_raid() {
         var R = this.raid, self = this;
+        this.raidDropCaptive();
         R.ravens.forEach(function (o) { if (o.alive && o.state !== "wait") self.burst(o.x, o.y, o.kind === "eagle" ? 0xc89a5a : 0x5a4a78, 8); kill(o); });
         R.ravens = [];
         R.feathers.forEach(kill); R.feathers = [];
