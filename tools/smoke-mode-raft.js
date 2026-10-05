@@ -349,10 +349,11 @@ var srv = http.createServer(function (req, res) {
     await page.waitForFunction(function () { var S = SolScene.rf; return S.letters.length >= 1 && S.letters.some(function (o) { return o.x > 140 && o.x < SolScene.W - 120; }); }, null, { timeout: 30000 }).catch(function () {});
     await page.waitForTimeout(600);
     await shot(name);
-    return Object.assign(info, await page.evaluate(function () { var S = SolScene.rf; return { cam: Math.round(S.cam), spawned: window.__raftSpawned, rocks: S.rocks.length }; }));
+    return Object.assign(info, await page.evaluate(function () { var S = SolScene.rf; return { cam: Math.round(S.cam), spawned: window.__raftSpawned, letters: S.letters.length, rocks: S.rocks.length }; }));
   }
   var p34 = await play(34, "raft-03-play-34");
-  check(p34.cam > 300 && p34.spawned.star + p34.spawned.buoy + p34.spawned.deep >= 1, "level 34 plays on its own: the sea runs and letters come: " + JSON.stringify(p34));
+  /* letters already on the sea when the counter was hooked count too (on a fast machine they spawn before it) */
+  check(p34.cam > 300 && (p34.letters >= 1 || p34.spawned.star + p34.spawned.buoy + p34.spawned.deep >= 1), "level 34 plays on its own: the sea runs and letters come: " + JSON.stringify(p34));
   var p92 = await play(92, "raft-04-play-92");
   check(p92.tier === 9 && /New this time:.*Poseidon's storm/.test(p92.card) && p92.cam > 300, "level 92 (Poseidon's storm) plays, and its card says what's new: " + JSON.stringify(p92).slice(0, 200));
 
