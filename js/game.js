@@ -48,7 +48,9 @@
   /* v4.9: the gateway screen picks a state; each state has its own grade cards. */
   var STATE_DEFS = {
     VA: { name: "Virginia", kicker: "NNPS · VA 2024 EOC Reading practice skills · 100 levels", families: ["G9", "G10", "G11"], def: "G9", hud: "Teacher" },
-    NJ: { name: "New Jersey", kicker: "NJSLA-ELA · Grade 5 reading practice · 100 levels", families: ["NJ5"], def: "NJ5", hud: "NJSLS" }
+    NJ: { name: "New Jersey", kicker: "NJSLA-ELA · Grade 5 reading practice · 100 levels", families: ["NJ5"], def: "NJ5", hud: "NJSLS" },
+    /* v5.9: the Odyssey game (English 9, Unit 2 "Challenge Accepted!") — its own build, tools/build-games.js ODY */
+    ODY: { name: "The Odyssey", kicker: "English 9 · Unit 2: Challenge Accepted! · The Odyssey · 100 levels", families: ["ODY"], def: "ODY", hud: "Teacher" }
   };
   /* v5.2: the New Jersey and Virginia games are separate builds. tools/build-games.js writes
      window.SOL_STATE into each build's index.html; that build never shows the gateway, never
@@ -26806,7 +26808,20 @@
     { strand: "ALL", kind: "All skills", name: "All", meta: "Everything mixed, leaning toward the skills you miss most." }
   ];
 
+  /* v5.9: the Odyssey game's "skill" is an episode; each one tests the unit's skills
+     (character, plot and setting, theme, word choice and tone, vocabulary in context). */
+  SKILL_DEFS.ODY = [
+    { strand: "LOTUS", kind: "Book 9", name: "The Lotus-Eaters", meta: "Temptation and forgetting home. Character, setting and plot." },
+    { strand: "CYCLOPS", kind: "Book 9", name: "The Cyclops", meta: "Curiosity, pride and a clever escape. Character, epic similes, theme." },
+    { strand: "CIRCE", kind: "Book 10", name: "Circe", meta: "The goddess who turns men to pigs. Inference, character, word choice." },
+    { strand: "HELIOS", kind: "Book 12", name: "The Cattle of the Sun", meta: "Hunger against a promise. Theme, tone, and Odysseus against Eurylochus." },
+    { strand: "CALYPSO", kind: "Book 5", name: "Calypso", meta: "Seven years on a beautiful island. Setting, imagery, longing for home." },
+    { strand: "VOYAGE", kind: "Paired texts", name: "The Whole Voyage", meta: "Compare characters and episodes, Greek values, and facing challenges." },
+    { strand: "ALL", kind: "All episodes", name: "All", meta: "Every episode mixed, leaning toward the skills you miss most." }
+  ];
+
   function gradeLabel(family) {
+    if (family === "ODY") return "The Odyssey · English 9";
     if (family === "NJ5") return "New Jersey · Grade 5";
     if (family === "G10") return "Selection 2 · Grade 10";
     if (family === "G11") return "Selection 3 · Grade 11";
@@ -26814,7 +26829,7 @@
   }
 
   /* v5.8: a class session (Apps Script ?class=CODE, js/classes.js) plays one grade */
-  function classGrade() { var C = window.SOL_CLASS; return C && /^(G9|G10|G11|NJ5)$/.test(C.grade || "") ? C.grade : null; }
+  function classGrade() { var C = window.SOL_CLASS; return C && /^(G9|G10|G11|NJ5|ODY)$/.test(C.grade || "") ? C.grade : null; }
   function selectedFamily() {
     if (classGrade()) return classGrade();
     var el = document.querySelector("#title-screen .card.selected[data-family]:not(.hidden)");
@@ -26976,7 +26991,10 @@
     if (modeScr) modeScr.classList.add("hidden");
     if (skill) skill.classList.remove("hidden");
     var kicker = document.getElementById("skill-kicker");
-    if (kicker) kicker.textContent = gradeLabel(cfg.family) + " · " + gameModeName(cfg.gameMode) + " · skill focus";
+    var ody = cfg.family === "ODY", skT = document.getElementById("skill-title"), skG = document.getElementById("skill-tag");
+    if (kicker) kicker.textContent = gradeLabel(cfg.family) + " · " + gameModeName(cfg.gameMode) + (ody ? " · episode" : " · skill focus");
+    if (skT) skT.textContent = ody ? "Pick an episode" : "Pick a skill";
+    if (skG) skG.textContent = ody ? "Choose the episode your class is reading, or play them all mixed." : "Choose a skill focus for this level, or play with all skills mixed.";
     renderSkillCards(cfg.family);
     refreshSkillSaveLine();
   }
@@ -27645,7 +27663,7 @@
     if (strand) cfg.strand = strand;
     /* v4.9.1: the gateway is always the first screen; the last choice is only pre-highlighted. */
     var savedState = localStorage.getItem(LS_STATE);
-    if (!(savedState && STATE_DEFS[savedState])) savedState = fam === "NJ5" ? "NJ" : (fam ? "VA" : null);
+    if (!(savedState && STATE_DEFS[savedState])) savedState = fam === "NJ5" ? "NJ" : fam === "ODY" ? "ODY" : (fam ? "VA" : null);
     if (LOCKED_STATE) savedState = null;
     if (savedState) {
       applyState(savedState, true);

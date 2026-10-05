@@ -1,4 +1,4 @@
-/* Build the Canvas (LMS) version of a state's game: node tools/build-canvas.js [VA|NJ]
+/* Build the Canvas (LMS) version of a state's game: node tools/build-canvas.js [VA|NJ|ODY]
    (run tools/build-games.js and tools/build-appsscript.js first; tools/publish-pages.sh runs all three).
 
    Files a teacher uploads to one folder in Canvas Files and embeds in a Canvas page: nothing is hosted on GitHub
@@ -27,7 +27,7 @@ var page = fs.readFileSync(path.join(src, "loader.html"), "utf8");
 var m = page.match(/<script>([\s\S]*)<\/script>/);
 if (!m) throw new Error("tools/build-canvas.js: no loader script in loader.html");
 var loaderJs = m[1];
-var base = "SOLLabyrinth-" + st;
+var base = st === "ODY" ? "SOLLabyrinth-Odyssey" : "SOLLabyrinth-" + st;   /* v5.9: the Odyssey game has its own file names */
 
 /* ── the data files: 576 KB of bundle each (768 KB of base64; Canvas has served an 800 KB one to a page) ── */
 var PIECE = 576 * 1024, files = [];

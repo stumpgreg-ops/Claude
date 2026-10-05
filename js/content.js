@@ -1441,11 +1441,14 @@
     { id: "G10", label: "Selection 2 · Grade 10", meta: "9th + 10th skills. Mix literary, informational, vocab, and paired evidence." },
     { id: "G11", label: "Selection 3 · Grade 11", meta: "All skills 9–11. Heavier analysis, tone, organization, and Select TWO." },
     { id: "ALL", label: "All skills", meta: "Legacy Grade 9 mix — same pool as Selection 1." },
-    { id: "NJ5", label: "New Jersey · Grade 5", meta: "NJSLA-ELA grade 5: literature, informational, vocabulary and paired texts, with Part A / Part B evidence pairs." }
+    { id: "NJ5", label: "New Jersey · Grade 5", meta: "NJSLA-ELA grade 5: literature, informational, vocabulary and paired texts, with Part A / Part B evidence pairs." },
+    { id: "ODY", label: "The Odyssey · English 9", meta: "Unit 2: the Lotus-Eaters, the Cyclops, Circe, the cattle of Helios and Calypso." }
   ];
   /* Which pack families feed each selection. Virginia selections are cumulative
      (the Grade 10 card promises "Grade 9 and Grade 10 skills mixed"). */
-  var FAMILY_POOL = { G9: ["G9"], G10: ["G9", "G10"], G11: ["G9", "G10", "G11"], NJ5: ["NJ5"], ALL: ["G9"] };
+  var FAMILY_POOL = { G9: ["G9"], G10: ["G9", "G10"], G11: ["G9", "G10", "G11"], NJ5: ["NJ5"], ODY: ["ODY"], ALL: ["G9"] };
+  /* v5.9: the Odyssey game's skill screen picks an episode; every ODY pack names one. */
+  var EPISODES = ["LOTUS", "CYCLOPS", "CIRCE", "HELIOS", "CALYPSO", "VOYAGE"];
 
   function wordCount(s) {
     return String(s).replace(/<[^>]+>/g, " ").trim().split(/\s+/).filter(Boolean).length;
@@ -1485,9 +1488,10 @@
     m = /^(RL|RI)\./.exec(sol);
     return m ? m[1] : "RL";
   }
-  function strandMatch(claim, strand) {
+  function strandMatch(claim, strand, pack) {
     strand = String(strand || "ALL").toUpperCase();
     if (!strand || strand === "ALL" || strand === "NULL") return true;
+    if (EPISODES.indexOf(strand) !== -1) return String((pack && pack.episode) || "").toUpperCase() === strand;
     if (!/^(RL|RI|RV|DSR)$/.test(strand)) return true;
     return strandOf(claim) === strand;
   }
@@ -1547,7 +1551,7 @@
         /* A Part B item is only ever asked right after its Part A, so the strand
            filter follows the Part A and Part B is never drawn on its own. */
         var isPartB = p.claims.some(function (o) { return o.partB === c.id; });
-        if (!isPartB && !strandMatch(c, strand)) return;
+        if (!isPartB && !strandMatch(c, strand, p)) return;
         var choices = (c.choices || []).map(function (ch, i) {
           return {
             letter: ch.letter,
@@ -1571,6 +1575,7 @@
           correct: c.correct,
           passage: p.passage,
           packTitle: p.title,
+          episode: p.episode || null,
           family: p.family
         });
       });

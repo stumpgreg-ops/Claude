@@ -1,4 +1,4 @@
-/* Headless check of the Canvas build: node tools/smoke-canvas.js [va|nj]
+/* Headless check of the Canvas build: node tools/smoke-canvas.js [va|nj|ody]
    (run tools/build-games.js, tools/build-appsscript.js and tools/build-canvas.js first).
    Plays Canvas's part: one server stands in for Canvas's file domain and serves only the uploaded files, from a
    folder path like Canvas's (with a space in it); a second one, on another origin, is the Canvas page that embeds
@@ -9,7 +9,8 @@ var path = require("path"), fs = require("fs"), http = require("http"), url = re
 var { chromium } = require("/opt/node22/lib/node_modules/playwright");
 var st = (process.argv[2] || "va").toLowerCase();
 var dir = path.join(__dirname, "..", "dist", "canvas", st.toUpperCase());
-var start = "SOLLabyrinth-" + st.toUpperCase() + ".html", uploaded = fs.readdirSync(dir), hide = null;
+var K = st === "ody" ? "afterHours.ody." : "afterHours.v1.";   /* the game's own save keys (the Odyssey build has its own) */
+var start = (st === "ody" ? "SOLLabyrinth-Odyssey" : "SOLLabyrinth-" + st.toUpperCase()) + ".html", uploaded = fs.readdirSync(dir), hide = null;
 var FOLDER = "/courses/1~2/files/1~3/course files/SOL Test/";
 var shots = path.join(__dirname, "shots");
 fs.mkdirSync(shots, { recursive: true });
@@ -65,7 +66,7 @@ var lms = http.createServer(function (req, res) {
   check(s1.night !== "57", "the other game's save is not this game's");
   await page.screenshot({ path: path.join(shots, "cv-01-title.png") });
 
-  var fam = st === "va" ? "G9" : "NJ5";
+  var fam = st === "va" ? "G9" : st === "ody" ? "ODY" : "NJ5";
   await f.click('#title-screen .card[data-family="' + fam + '"]');
   await f.waitForSelector("#mode-screen:not(.hidden)");   /* v5.8.3: the game mode screen */
   await f.click('#mode-packs .card[data-gamemode="ALL"]');
@@ -90,11 +91,11 @@ var lms = http.createServer(function (req, res) {
   await page.screenshot({ path: path.join(shots, "cv-02-maze.png") });
 
   /* the 3D castle */
-  await f.evaluate(function () {
+  await f.evaluate(function (K) {
     var ids = ["keep", "k-stables", "k-church", "k-market", "trophy-midgard", "tower", "wall", "gate"];
     var picks = ids.map(function (id, i) { return { night: 5, piece: id, style: "blue", src: "free", deco: false, ord: i, rot: 0, cx: (i % 4) * 4, cy: Math.floor(i / 4) * 4 }; });
-    localStorage.setItem("afterHours.v1.build", JSON.stringify({ v: 4, theme: "castle", salt: 7, coins: 50, kit: 2, owned: {}, rewards: {}, picks: picks, view: { a: 0, z: 1, px: 0, py: 0 }, code: "" }));
-  });
+    localStorage.setItem(K + "build", JSON.stringify({ v: 4, theme: "castle", salt: 7, coins: 50, kit: 2, owned: {}, rewards: {}, picks: picks, view: { a: 0, z: 1, px: 0, py: 0 }, code: "" }));
+  }, K);
   await page.reload();
   f = await frame();
   await f.waitForSelector("#title-screen:not(.hidden)", { timeout: 60000 });
@@ -115,7 +116,7 @@ var lms = http.createServer(function (req, res) {
   /* saves: every key this game wrote carries its prefix; the other game's keys are untouched */
   var keys = await f.evaluate(function () { return Object.keys(localStorage); });
   var bare = keys.filter(function (k) { return /^afterHours/.test(k) && !/^afterHours\.v1\.(night|nick)$/.test(k); });
-  check(bare.length === 0 && keys.some(function (k) { return k.indexOf("solReading." + st + ":afterHours.v1.build") === 0; }), "the game's saves carry their own prefix" + (bare.length ? ": bare " + bare.join(",") : ""));
+  check(bare.length === 0 && keys.some(function (k) { return k.indexOf("solReading." + st + ":" + K + "build") === 0; }), "the game's saves carry their own prefix" + (bare.length ? ": bare " + bare.join(",") : ""));
   var other = await f.evaluate(function () { return localStorage["afterHours.v1.night"]; });
   check(other === "57", "the other game's save is untouched");
 

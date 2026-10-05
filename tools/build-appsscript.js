@@ -1,4 +1,4 @@
-/* Build the Google Apps Script version of a state's game: node tools/build-appsscript.js [VA|NJ]
+/* Build the Google Apps Script version of a state's game: node tools/build-appsscript.js [VA|NJ|ODY]
    (run tools/build-games.js first; tools/publish-pages.sh runs both).
 
    School filters block github.io, netlify.app and the like, but not script.google.com. The teacher pastes
@@ -25,7 +25,7 @@ var src = path.join(dist, lo), out = path.join(dist, "appsscript"), outSt = path
 var REPO_RAW = "https://raw.githubusercontent.com/stumpgreg-ops/Claude/gh-pages/appsscript/" + lo + "/";
 var REPO_CDN = "https://cdn.jsdelivr.net/gh/stumpgreg-ops/Claude@gh-pages/appsscript/" + lo + "/";
 var PART_BYTES = 3 * 1024 * 1024;
-var NAMES = { VA: "Virginia", NJ: "New Jersey" };
+var NAMES = { VA: "Virginia", NJ: "New Jersey", ODY: "The Odyssey" };
 if (!fs.existsSync(path.join(src, "index.html"))) throw new Error("tools/build-appsscript.js: run tools/build-games.js first (no dist/" + lo + ")");
 
 var html = fs.readFileSync(path.join(src, "index.html"), "utf8");

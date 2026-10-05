@@ -82,6 +82,14 @@ Part A is a normal claim with `partB: "<id of the Part B claim>"`; Part B is a s
 whose stem starts with `Part B:` and asks which sentence/detail best supports the Part A
 answer (its `sol` is usually `RL.CR.5.1` / `RI.CR.5.1`). The game asks Part B right after Part A.
 
+**The Odyssey (English 9, Unit 2 "Challenge Accepted!").** `family: "ODY"` and
+`episode: "lotus" | "cyclops" | "circe" | "helios" | "calypso" | "voyage"` on every pack (the game's
+skill screen picks an episode; `voyage` holds the cross-episode and paired texts). Codes are the
+Virginia 9.x codes. Passages are original retellings of Homer (the plot is public domain; never copy a
+modern translation). Files: `js/content26.js`–`js/content31.js`, one per episode in that order; they go
+only into the Odyssey build (`node tools/build-games.js` → `dist/ody/`). Kind strings:
+`The Odyssey · 9.RL`, `Epic poetry · 9.RL`, `Vocabulary · 9.RV`, `Informational · 9.RI`, `Paired texts · 9.DSR`.
+
 ## Passage length tiers (stamina)
 
 The game raises the target passage length as nights go by (about 60 words on night 1,

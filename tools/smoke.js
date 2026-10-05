@@ -59,6 +59,19 @@ var srv = http.createServer(function (req, res) {
   });
   console.log("pools", JSON.stringify(pools));
   check(pools.NJ5.all > 250 && pools.G9.all > 180 && pools.G11.all > 500, "question pools are large");
+  /* v5.9: the Odyssey packs — every episode has questions, an episode pick serves only that episode, and no other game sees them */
+  var ody = await page.evaluate(function () {
+    var out = { all: heistBuildPack("ODY", "ALL").claims.length, eps: {}, stray: 0 };
+    ["LOTUS", "CYCLOPS", "CIRCE", "HELIOS", "CALYPSO", "VOYAGE"].forEach(function (e) {
+      var cl = heistBuildPack("ODY", e).claims;
+      out.eps[e] = cl.length;
+      cl.forEach(function (c) { if (String(c.episode).toUpperCase() !== e) out.stray++; });
+    });
+    ["G9", "G10", "G11", "NJ5"].forEach(function (f) { heistBuildPack(f, "ALL").claims.forEach(function (c) { if (c.family === "ODY") out.stray++; }); });
+    return out;
+  });
+  console.log("odyssey", JSON.stringify(ody));
+  check(ody.all > 200 && Object.keys(ody.eps).every(function (e) { return ody.eps[e] >= 30; }) && ody.stray === 0, "Odyssey: every episode has its own questions, and they stay out of the other games");
 
   /* v4.9.7: the shop is open from night 1 — with no build yet it asks Town or Castle first, and a wall
      bought before the first reward must not steal lot 1 from the keep */
@@ -1012,7 +1025,8 @@ var srv = http.createServer(function (req, res) {
   /* v5.2: the two standalone builds (node tools/build-games.js). Each is one state with no
      gateway, only its grade cards, only its packs, and no "change state" button. */
   var distRoot = path.join(root, "dist");
-  var builds = { nj: { st: "NJ", fam: "NJ5", other: ["G9", "G10", "G11"], cards: 1 }, va: { st: "VA", fam: "G9", other: ["NJ5"], cards: 3 } };
+  var builds = { nj: { st: "NJ", fam: "NJ5", other: ["G9", "G10", "G11", "ODY"], cards: 1 }, va: { st: "VA", fam: "G9", other: ["NJ5", "ODY"], cards: 3 },
+    ody: { st: "ODY", fam: "ODY", other: ["G9", "G10", "G11", "NJ5"], cards: 1 } };
   for (var bk in builds) {
     var b = builds[bk], bdir = path.join(distRoot, bk);
     if (!fs.existsSync(path.join(bdir, "index.html"))) { console.log("skip  dist/" + bk + " (run node tools/build-games.js)"); continue; }
@@ -1021,7 +1035,7 @@ var srv = http.createServer(function (req, res) {
     await page.goto(base + "index.html", { waitUntil: "load" }); await page.waitForTimeout(800);
     var lockInfo = await page.evaluate(function (o) {
       /* count packs by family straight from the pool: heistBuildPack falls back to every pack when a family is empty */
-      var pools = {}; ["G9", "G10", "G11", "NJ5"].forEach(function (f) { pools[f] = window.HEIST_PACKS.filter(function (p) { return p.family === f; }).length; });
+      var pools = {}; ["G9", "G10", "G11", "NJ5", "ODY"].forEach(function (f) { pools[f] = window.HEIST_PACKS.filter(function (p) { return p.family === f; }).length; });
       return { state: window.SOL_STATE, title: document.title, gateway: !document.getElementById("state-screen").classList.contains("hidden"),
         titleShown: !document.getElementById("title-screen").classList.contains("hidden"),
         cards: Array.prototype.filter.call(document.querySelectorAll('#title-screen .card[data-family]'), function (c) { return !c.classList.contains("hidden"); }).map(function (c) { return c.getAttribute("data-family"); }),
@@ -1037,6 +1051,30 @@ var srv = http.createServer(function (req, res) {
     check(await page.isVisible("#mode-screen"), "dist/" + bk + ": game mode screen opens");
     await page.click('#mode-packs .card[data-gamemode="ALL"]'); await page.waitForTimeout(300);
     check(await page.isVisible("#skill-screen"), "dist/" + bk + ": skill screen opens");
+    if (bk === "ody") {
+      /* v5.9: the Odyssey game picks an episode, and keeps its own saves */
+      var odyInfo = await page.evaluate(function () {
+        var keys = []; for (var i = 0; i < localStorage.length; i++) keys.push(localStorage.key(i));
+        return { title: document.getElementById("skill-title").textContent,
+          episodes: Array.prototype.map.call(document.querySelectorAll("#skill-packs .card[data-strand]"), function (c) { return c.getAttribute("data-strand"); }),
+          keys: keys, kicker: document.getElementById("title-kicker").textContent };
+      });
+      console.log("dist/ody", JSON.stringify(odyInfo));
+      check(odyInfo.title === "Pick an episode" && ["LOTUS", "CYCLOPS", "CIRCE", "HELIOS", "CALYPSO", "VOYAGE", "ALL"].every(function (e) { return odyInfo.episodes.indexOf(e) !== -1; }), "dist/ody: the skill screen lists the five episodes, the whole voyage and All");
+      check(odyInfo.keys.length > 0 && odyInfo.keys.every(function (k) { return k.indexOf("afterHours.v1.") !== 0; }) && odyInfo.keys.some(function (k) { return k.indexOf("afterHours.ody.") === 0; }), "dist/ody: saves under afterHours.ody.*, never the Virginia game's keys");
+      check(/Odyssey/.test(odyInfo.kicker) && /Odyssey/.test(lockInfo.title), "dist/ody: the title and kicker name The Odyssey");
+      await page.click('#skill-packs .card[data-strand="CYCLOPS"]'); await page.waitForTimeout(200);
+      await page.click("#btn-skill-start"); await page.waitForTimeout(300);
+      if (await page.isVisible("#btn-char-confirm")) await page.click("#btn-char-confirm");
+      await page.waitForTimeout(3000);
+      var odyPlay = await page.evaluate(function () { var sc = window.SolScene; return sc && sc.claim ? { fam: sc.family, strand: sc.strand, ep: sc.claim.episode, title: sc.claim.packTitle } : null; });
+      console.log("dist/ody play", JSON.stringify(odyPlay));
+      check(odyPlay && odyPlay.fam === "ODY" && odyPlay.ep === "cyclops", "dist/ody: picking the Cyclops plays a Cyclops passage");
+      await page.evaluate(function () { localStorage.clear(); });
+      await page.goto(base + "index.html", { waitUntil: "load" }); await page.waitForTimeout(800);
+      await page.click('#title-screen .card[data-family="ODY"]'); await page.waitForTimeout(300);
+      await page.click('#mode-packs .card[data-gamemode="ALL"]'); await page.waitForTimeout(300);
+    }
     await page.click("#btn-skill-back"); await page.waitForTimeout(300);
     await page.click("#btn-mode-back"); await page.waitForTimeout(300);
     check(await page.isVisible("#title-screen") && !(await page.isVisible("#state-screen")), "dist/" + bk + ": back goes to the title, not the gateway");
