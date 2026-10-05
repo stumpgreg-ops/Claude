@@ -26927,12 +26927,20 @@
     { id: "sky", kind: "Flying shooter", name: "Sun Chariot", meta: "Fly the sun's chariot and shoot the right orb through the gap in its shield." },
     { id: "ring", kind: "Arena", name: "Wolf Ring", meta: "Keep the wolves off and shoot the right runestone when it rises." }
   ];
+  /* v5.10: the Odyssey build only (window.SOL_STATE === "ODY") */
+  GAME_MODE_DEFS.push({ id: "strait", kind: "Steer the strait", name: "Scylla and Charybdis", meta: "Steer Odysseus's ship through the gate with the right letter while Charybdis pulls and Scylla strikes.", ody: true });
+  /* the cards this build offers: the Odyssey-only modes appear only in the Odyssey build */
+  function gameModeDefs() {
+    var ody = typeof window !== "undefined" && window.SOL_STATE === "ODY";
+    return GAME_MODE_DEFS.filter(function (d) { return !d.ody || ody; });
+  }
   function readGameMode() {
     var m = "ALL";
     try { m = localStorage.getItem(LS_GAMEMODE) || "ALL"; } catch (e) {}
-    return GAME_MODE_DEFS.some(function (d) { return d.id === m; }) ? m : "ALL";
+    return gameModeDefs().some(function (d) { return d.id === m; }) ? m : "ALL";
   }
   function applyGameMode(m) {
+    if (!gameModeDefs().some(function (d) { return d.id === m; })) m = "ALL";
     cfg.gameMode = m;
     if (window.SolModes) SolModes.only = m === "ALL" ? null : m;
   }
@@ -26953,7 +26961,7 @@
     if (!host) return;
     var want = readGameMode();
     host.innerHTML = "";
-    GAME_MODE_DEFS.forEach(function (d) {
+    gameModeDefs().forEach(function (d) {
       var btn = document.createElement("button");
       btn.type = "button";
       btn.className = d.id === want ? "card selected" : "card";

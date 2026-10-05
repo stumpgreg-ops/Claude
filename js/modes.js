@@ -7,6 +7,9 @@
  *   6  Sun Chariot   side-scrolling flyer: shoot the letter orb with the right answer
  *   8  Wolf Ring     arena: Hati attack; runestones rise one or two at a time; shoot the right one while it is up
  * Odd levels stay in the maze and every tenth level is still Fenrir's boss maze.
+ * v5.10, the Odyssey build only (window.SOL_STATE === "ODY"): level 9 of every island is
+ *   9  Scylla and Charybdis  steering level: sail through the gate with the right letter while
+ *                            Charybdis's whirlpool pulls and Scylla's heads strike
  *
  * The questions, the reading pop-up, lives, coins, the adaptive reading level,
  * the castle perks and the end-of-level screens are the maze's own: ModeScene
@@ -95,9 +98,32 @@
         "The runestones stay up for less time, and two alpha wolves can come at once.",
         "Leaping wolves: some crouch, then leap the last stretch.",
         "Ragnarok: the wolves come faster, on top of everything else."]
+    },
+    /* v5.10: the Odyssey build only (window.SOL_STATE === "ODY"): Book 12, the strait between Scylla and Charybdis */
+    strait: {
+      id: "strait", name: "Scylla and Charybdis", kind: "steering level", level: "steering level", act: "ROW",
+      how: "Odysseus's ship sails up the narrow strait. Gates of rock pillars come down the water toward you, each marked with a letter. Steer through the gate with the right answer; you can sail past the others in the open water between them. Gates you miss come round again. On the right, Charybdis's whirlpool swirls: when the water there turns dark and spins faster, she is about to surge and drag your ship toward her. On the left, Scylla waits on her cliff: a dark shadow on the water shows where one of her heads will strike next. Get out from under it.",
+      rules: "Sailing through a wrong gate costs a life. So does hitting a rock, touching the dark centre of Charybdis, or being under one of Scylla's heads when it strikes — she snatches a crewman, as she took six men from Odysseus.",
+      keys: "Arrow keys, WASD or the on-screen pad steer · Space, ROW or a mouse button: the crew pulls hard for a moment (a burst of speed). The mouse does not steer.",
+      tip: "SCYLLA AND CHARYBDIS — steer through the gate with the right letter. Keep away from the whirlpool and from Scylla's shadows.",
+      hint1: "Steer through the gate marked with the right letter. The passage stays in the side panel.",
+      hint2: "This question has two right letters. Sail through both gates that carry them.",
+      news: ["",
+        "Charybdis tugs at the ship all the time now, not only when she surges.",
+        "Scylla strikes with two heads at once.",
+        "The gates sway from side to side.",
+        "Lone rocks stand in the water between the gates. Steer round them.",
+        "Scylla strikes with three heads at once.",
+        "A head that misses strikes again at once: watch for a second shadow right where you are.",
+        "Four of Scylla's heads strike at once.",
+        "More lone rocks, narrower gates, and Charybdis surges more often.",
+        "Ithaca is close: the strait runs faster, on top of everything else."]
     }
   };
   var SLOTS = { 2: "raid", 4: "rocks", 6: "sky", 8: "ring" };
+  /* v5.10: the Odyssey build's Mixed rotation adds the strait on level 9 of every island (10 stays the boss) */
+  var ODY_SLOTS = { 2: "raid", 4: "rocks", 6: "sky", 8: "ring", 9: "strait" };
+  function isOdy() { return typeof window !== "undefined" && window.SOL_STATE === "ODY"; }
   var BEAM_KEY = "afterHours.v1.beamLearned";   /* set once a student has pulled a rock in */
   var WING = 40, CAPT_UP = 54;   /* Eagle Swoop: the second Sol stands WING px to the right; a caught Sol hangs CAPT_UP px over his eagle */
 
@@ -109,7 +135,7 @@
     var only = window.SolModes && window.SolModes.only;
     if (only === "maze") return null;
     if (only && MODES[only]) return MODES[only];
-    var id = SLOTS[((n - 1) % 10) + 1];
+    var id = (isOdy() ? ODY_SLOTS : SLOTS)[((n - 1) % 10) + 1];
     return id ? MODES[id] : null;
   }
 
@@ -323,6 +349,190 @@
       c.lineTo(w, h); c.closePath(); c.fill();
     };
   }
+  /* ── v5.10: Scylla and Charybdis art (the Odyssey sheet's palette: Aegean blue, sea-foam, terracotta,
+     ochre, black glaze, bone white). Every texture that tiles is drawn three times, wrapped. ── */
+  var ST = { blue: "#1e5f8c", deep: "#123f60", foam: "#9fd3d6", bone: "#efe6d2", terra: "#d9772b", ochre: "#e8b04a", glaze: "#140c0a", wine: "#3a0f2a",
+    green: "#3f8f7a", greenDk: "#1b4a40", greenLt: "#7cc4a8" };
+  var SHIP_W = 76, SHIP_H = 124;
+  function drawStraitWater(c, w, h) {
+    var g = c.createLinearGradient(0, 0, w, 0), i, k, x, y;
+    g.addColorStop(0, "#17527a"); g.addColorStop(0.5, ST.blue); g.addColorStop(1, "#17527a");
+    c.fillStyle = g; c.fillRect(0, 0, w, h);
+    var seed = 11;
+    function r() { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; }
+    /* long wave crests, then foam flecks; each drawn at y-h, y and y+h so the tile wraps */
+    for (i = 0; i < 26; i++) {
+      x = r() * w; y = r() * h; var len = 26 + r() * 46, col = i % 3 ? "rgba(70,140,190,0.55)" : "rgba(159,211,214,0.30)";
+      for (k = -1; k <= 1; k++) for (var j = -1; j <= 1; j++) {
+        c.strokeStyle = col; c.lineWidth = i % 3 ? 2.5 : 2; c.beginPath();
+        c.moveTo(x - len / 2 + j * w, y + k * h); c.quadraticCurveTo(x + j * w, y - 6 + k * h, x + len / 2 + j * w, y + k * h); c.stroke();
+      }
+    }
+    for (i = 0; i < 40; i++) {
+      x = r() * w; y = r() * h;
+      for (k = -1; k <= 1; k++) for (var j2 = -1; j2 <= 1; j2++) { c.fillStyle = "rgba(239,230,210," + (0.12 + r() * 0.2).toFixed(2) + ")"; c.beginPath(); c.arc(x + j2 * w, y + k * h, 1 + r() * 1.6, 0, Math.PI * 2); c.fill(); }
+    }
+  }
+  /* the cliffs: Scylla's high cliff on the left (its sea edge on the right of the texture), the low rocks under
+     Charybdis's fig tree on the right (flip = true puts the sea edge on the left) */
+  function drawStraitCliff(flip, high) {
+    return function (c, w, h) {
+      function edge(y) { return w * (high ? 0.8 : 0.62) + Math.sin(y / h * Math.PI * 2 * 3) * w * 0.07 + Math.sin(y / h * Math.PI * 2 * 7 + 1) * w * 0.04; }
+      c.save();
+      if (flip) { c.translate(w, 0); c.scale(-1, 1); }
+      var g = c.createLinearGradient(0, 0, w, 0);
+      if (high) { g.addColorStop(0, "#1a100c"); g.addColorStop(0.6, "#3a2418"); g.addColorStop(1, "#6a3a22"); }
+      else { g.addColorStop(0, "#2a2a26"); g.addColorStop(1, "#5a5448"); }
+      c.fillStyle = g; c.beginPath(); c.moveTo(0, 0);
+      var y;
+      for (y = 0; y <= h; y += 4) c.lineTo(edge(y), y);
+      c.lineTo(0, h); c.closePath(); c.fill();
+      /* strata and cracks in terracotta and black glaze */
+      for (var i = 0; i < 9; i++) {
+        var yy = (i + 0.5) * h / 9;
+        c.strokeStyle = high ? (i % 2 ? "rgba(217,119,43,0.35)" : "rgba(20,12,10,0.6)") : "rgba(20,12,10,0.4)"; c.lineWidth = high ? 3 : 2;
+        c.beginPath(); c.moveTo(4, yy); c.quadraticCurveTo(edge(yy) * 0.5, yy + (i % 2 ? 10 : -10), edge(yy) - 6, yy + 4); c.stroke();
+      }
+      /* foam where the sea breaks on the rock */
+      c.strokeStyle = "rgba(159,211,214,0.85)"; c.lineWidth = 4; c.beginPath();
+      for (y = 0; y <= h; y += 4) c[y ? "lineTo" : "moveTo"](edge(y) + 3, y);
+      c.stroke();
+      c.strokeStyle = "rgba(239,230,210,0.55)"; c.lineWidth = 2; c.setLineDash([6, 9]); c.beginPath();
+      for (y = 0; y <= h; y += 4) c[y ? "lineTo" : "moveTo"](edge(y) + 9, y);
+      c.stroke(); c.setLineDash([]);
+      c.restore();
+    };
+  }
+  /* Charybdis: a spiral of dark water with foam arms; the second layer is foam only and turns faster */
+  function drawWhirl(foamOnly) {
+    return function (c, w, h) {
+      var cx = w / 2, cy = h / 2, R = w / 2, k, r;
+      if (!foamOnly) {
+        var g = c.createRadialGradient(cx, cy, 2, cx, cy, R);
+        g.addColorStop(0, "rgba(6,16,26,1)"); g.addColorStop(0.18, "rgba(10,30,48,1)"); g.addColorStop(0.55, "rgba(18,63,96,0.9)"); g.addColorStop(1, "rgba(30,95,140,0)");
+        c.fillStyle = g; c.beginPath(); c.arc(cx, cy, R, 0, Math.PI * 2); c.fill();
+      }
+      var arms = foamOnly ? 3 : 5;
+      for (k = 0; k < arms; k++) {
+        var a0 = k / arms * Math.PI * 2 + (foamOnly ? 0.5 : 0);
+        c.beginPath();
+        for (r = R * 0.08; r <= R * 0.94; r += 2) {
+          var a = a0 + Math.log(r / (R * 0.08)) * 1.9;
+          c[r === R * 0.08 ? "moveTo" : "lineTo"](cx + Math.cos(a) * r, cy + Math.sin(a) * r);
+        }
+        c.strokeStyle = foamOnly ? "rgba(239,230,210,0.55)" : (k % 2 ? "rgba(159,211,214,0.55)" : "rgba(70,140,190,0.6)");
+        c.lineWidth = foamOnly ? 3 : 5; c.lineCap = "round"; c.stroke();
+      }
+    };
+  }
+  function drawPillar(lettered) {
+    return function (c, w, h) {
+      var cx = w / 2, cy = h / 2, pts = rockShape(lettered ? 5 : 9), n = pts.length, i, a, r = w * 0.4;
+      c.fillStyle = "rgba(159,211,214,0.45)"; c.beginPath(); c.arc(cx, cy + 2, w * 0.49, 0, Math.PI * 2); c.fill();
+      c.beginPath();
+      for (i = 0; i < n; i++) { a = i / n * Math.PI * 2; c[i ? "lineTo" : "moveTo"](cx + Math.cos(a) * r * pts[i], cy + Math.sin(a) * r * pts[i]); }
+      c.closePath();
+      var g = c.createRadialGradient(cx - r * 0.3, cy - r * 0.35, r * 0.1, cx, cy, r);
+      g.addColorStop(0, lettered ? "#9a6440" : "#7a6a5a"); g.addColorStop(1, lettered ? "#3a2014" : "#2a2420");
+      c.fillStyle = g; c.fill(); c.lineWidth = 2.5; c.strokeStyle = ST.glaze; c.stroke();
+      if (lettered) {
+        /* a bone-white plaque with a terracotta rim, like a painted pot, for the letter */
+        c.fillStyle = ST.terra; c.beginPath(); c.arc(cx, cy, r * 0.74, 0, Math.PI * 2); c.fill();
+        c.fillStyle = ST.bone; c.beginPath(); c.arc(cx, cy, r * 0.62, 0, Math.PI * 2); c.fill();
+      } else {
+        c.fillStyle = "rgba(0,0,0,0.25)";
+        [[0.3, -0.2, 0.18], [-0.3, 0.25, 0.14]].forEach(function (q) { c.beginPath(); c.arc(cx + q[0] * r, cy + q[1] * r, q[2] * r, 0, Math.PI * 2); c.fill(); });
+      }
+    };
+  }
+  /* Odysseus's galley from above, bow up: black hull with a terracotta stripe, the painted eye on each side of the
+     prow, a square bone-and-terracotta sail on its yard, and five oars a side (frame 0 forward, frame 1 back) */
+  function drawGalley(frame) {
+    return function (c, w, h) {
+      var cx = w / 2, top = 8, bot = h - 6, hw = 13, i;
+      c.lineCap = "round";
+      /* oars */
+      for (i = 0; i < 5; i++) {
+        var oy = top + 34 + i * 14, sw = frame ? 7 : -7;
+        [-1, 1].forEach(function (sd) {
+          c.strokeStyle = "#5a3418"; c.lineWidth = 3;
+          c.beginPath(); c.moveTo(cx + sd * (hw - 2), oy); c.lineTo(cx + sd * (w / 2 - 4), oy + sw); c.stroke();
+          c.strokeStyle = ST.ochre; c.lineWidth = 4; c.beginPath(); c.moveTo(cx + sd * (w / 2 - 10), oy + sw * 0.8); c.lineTo(cx + sd * (w / 2 - 3), oy + sw); c.stroke();
+        });
+      }
+      /* hull */
+      c.fillStyle = ST.glaze; c.beginPath();
+      c.moveTo(cx, top); c.quadraticCurveTo(cx + hw + 3, top + 26, cx + hw, top + 60); c.quadraticCurveTo(cx + hw - 1, bot - 18, cx + 5, bot - 4);
+      c.lineTo(cx, bot); c.lineTo(cx - 5, bot - 4); c.quadraticCurveTo(cx - hw + 1, bot - 18, cx - hw, top + 60); c.quadraticCurveTo(cx - hw - 3, top + 26, cx, top); c.closePath(); c.fill();
+      c.strokeStyle = ST.terra; c.lineWidth = 2; c.stroke();
+      /* deck */
+      c.fillStyle = "#8a5a32"; c.beginPath();
+      c.moveTo(cx, top + 14); c.quadraticCurveTo(cx + hw - 3, top + 32, cx + hw - 4, top + 60); c.quadraticCurveTo(cx + hw - 5, bot - 22, cx, bot - 10);
+      c.quadraticCurveTo(cx - hw + 5, bot - 22, cx - hw + 4, top + 60); c.quadraticCurveTo(cx - hw + 3, top + 32, cx, top + 14); c.closePath(); c.fill();
+      c.strokeStyle = "rgba(20,12,10,0.45)"; c.lineWidth = 1;
+      for (i = 0; i < 6; i++) { var by = top + 34 + i * 13; c.beginPath(); c.moveTo(cx - hw + 5, by); c.lineTo(cx + hw - 5, by); c.stroke(); }
+      /* the crew at the benches */
+      c.fillStyle = "#c98a52";
+      for (i = 0; i < 5; i++) { c.beginPath(); c.arc(cx - 5, top + 40 + i * 14, 2.4, 0, Math.PI * 2); c.arc(cx + 5, top + 40 + i * 14, 2.4, 0, Math.PI * 2); c.fill(); }
+      /* the painted eyes on the prow */
+      [-1, 1].forEach(function (sd) {
+        var ex = cx + sd * 7, ey = top + 17;
+        c.fillStyle = ST.bone; c.beginPath(); c.ellipse(ex, ey, 3.2, 5.5, sd * 0.35, 0, Math.PI * 2); c.fill();
+        c.fillStyle = "#b8321e"; c.beginPath(); c.arc(ex, ey, 2.2, 0, Math.PI * 2); c.fill();
+        c.fillStyle = ST.glaze; c.beginPath(); c.arc(ex, ey, 1.2, 0, Math.PI * 2); c.fill();
+      });
+      /* the stern post curls back */
+      c.strokeStyle = ST.terra; c.lineWidth = 3; c.beginPath(); c.arc(cx, bot - 8, 5, 0.2, Math.PI - 0.2); c.stroke();
+      /* yard and the square sail, bellied forward */
+      var sy = top + 50;
+      c.fillStyle = ST.bone; c.beginPath(); c.moveTo(cx - 30, sy); c.quadraticCurveTo(cx, sy - 14, cx + 30, sy); c.lineTo(cx + 28, sy + 9); c.quadraticCurveTo(cx, sy - 3, cx - 28, sy + 9); c.closePath(); c.fill();
+      c.fillStyle = ST.terra;
+      [-18, -6, 6, 18].forEach(function (dx) { c.beginPath(); c.moveTo(cx + dx - 2.5, sy - 10 + Math.abs(dx) * 0.33); c.lineTo(cx + dx + 2.5, sy - 10 + Math.abs(dx) * 0.33); c.lineTo(cx + dx + 2.5, sy + 4 + Math.abs(dx) * 0.2); c.lineTo(cx + dx - 2.5, sy + 4 + Math.abs(dx) * 0.2); c.closePath(); c.fill(); });
+      c.strokeStyle = "#5a3418"; c.lineWidth = 2.5; c.beginPath(); c.moveTo(cx - 32, sy + 1); c.quadraticCurveTo(cx, sy - 13, cx + 32, sy + 1); c.stroke();
+      c.fillStyle = "#5a3418"; c.beginPath(); c.arc(cx, sy - 6, 3, 0, Math.PI * 2); c.fill();
+    };
+  }
+  /* one of Scylla's heads from above, facing right: a long sea-green serpent's head with a fin crest */
+  function drawScyllaHead(c, w, h) {
+    var cy = h / 2;
+    c.fillStyle = ST.greenDk; c.beginPath(); c.moveTo(4, cy - 9); c.lineTo(14, cy - 19); c.lineTo(22, cy - 10); c.lineTo(30, cy - 20); c.lineTo(36, cy - 9); c.lineTo(36, cy + 9); c.lineTo(30, cy + 20); c.lineTo(22, cy + 10); c.lineTo(14, cy + 19); c.lineTo(4, cy + 9); c.closePath(); c.fill();
+    var g = c.createLinearGradient(0, cy - 14, 0, cy + 14);
+    g.addColorStop(0, ST.greenLt); g.addColorStop(0.5, ST.green); g.addColorStop(1, "#2c6e5c");
+    c.fillStyle = g; c.strokeStyle = ST.greenDk; c.lineWidth = 2;
+    c.beginPath(); c.moveTo(2, cy - 11); c.quadraticCurveTo(30, cy - 17, w - 6, cy - 5); c.quadraticCurveTo(w, cy, w - 6, cy + 5); c.quadraticCurveTo(30, cy + 17, 2, cy + 11); c.closePath(); c.fill(); c.stroke();
+    /* the mouth line and a few white teeth */
+    c.strokeStyle = ST.greenDk; c.lineWidth = 1.5; c.beginPath(); c.moveTo(w - 6, cy); c.lineTo(w - 26, cy); c.stroke();
+    c.fillStyle = ST.bone;
+    [w - 10, w - 16, w - 22].forEach(function (x) { c.beginPath(); c.moveTo(x, cy - 1); c.lineTo(x - 2.5, cy - 4.5); c.lineTo(x - 5, cy - 1); c.fill(); c.beginPath(); c.moveTo(x, cy + 1); c.lineTo(x - 2.5, cy + 4.5); c.lineTo(x - 5, cy + 1); c.fill(); });
+    /* eyes */
+    [-1, 1].forEach(function (sd) {
+      c.fillStyle = ST.ochre; c.beginPath(); c.ellipse(w * 0.52, cy + sd * 9, 4.5, 3.2, 0, 0, Math.PI * 2); c.fill();
+      c.fillStyle = ST.glaze; c.beginPath(); c.ellipse(w * 0.53, cy + sd * 9, 1.4, 2.6, 0, 0, Math.PI * 2); c.fill();
+    });
+  }
+  /* the fig tree on Charybdis's rock (Homer: "a great fig tree, in full leaf") */
+  function drawFig(c, w, h) {
+    var cx = w / 2, cy = h / 2;
+    c.fillStyle = "rgba(0,0,0,0.3)"; c.beginPath(); c.arc(cx + 4, cy + 5, w * 0.42, 0, Math.PI * 2); c.fill();
+    [[0, 0, 0.36, "#2f5a22"], [-0.18, -0.14, 0.22, "#4a7a2e"], [0.18, -0.1, 0.2, "#5e8f3a"], [0.08, 0.18, 0.22, "#4a7a2e"], [-0.16, 0.14, 0.18, "#5e8f3a"]].forEach(function (q) {
+      c.fillStyle = q[3]; c.beginPath(); c.arc(cx + q[0] * w, cy + q[1] * h, q[2] * w, 0, Math.PI * 2); c.fill();
+    });
+    c.fillStyle = "#6a2a4a";
+    [[-0.1, -0.05], [0.14, 0.06], [0.02, 0.2], [-0.2, 0.12], [0.2, -0.16]].forEach(function (q) { c.beginPath(); c.arc(cx + q[0] * w, cy + q[1] * h, 2.6, 0, Math.PI * 2); c.fill(); });
+  }
+  function ensureStraitArt(scene) {
+    canvasTex(scene, "md-strait-water", 256, 256, drawStraitWater);
+    canvasTex(scene, "md-strait-cliff", 128, 256, drawStraitCliff(false, true));
+    canvasTex(scene, "md-strait-shore", 64, 256, drawStraitCliff(true, false));
+    canvasTex(scene, "md-strait-whirl", 256, 256, drawWhirl(false));
+    canvasTex(scene, "md-strait-foam", 256, 256, drawWhirl(true));
+    canvasTex(scene, "md-strait-pillar", 56, 56, drawPillar(true));
+    canvasTex(scene, "md-strait-rock", 56, 56, drawPillar(false));
+    canvasTex(scene, "md-strait-ship-0", SHIP_W, SHIP_H, drawGalley(0));
+    canvasTex(scene, "md-strait-ship-1", SHIP_W, SHIP_H, drawGalley(1));
+    canvasTex(scene, "md-strait-head", 64, 44, drawScyllaHead);
+    canvasTex(scene, "md-strait-fig", 64, 64, drawFig);
+  }
   function ensureModeArt(scene, pal) {
     canvasTex(scene, "md-arrow", 12, 34, drawArrow);
     canvasTex(scene, "md-bolt", 34, 12, drawBolt);
@@ -415,7 +625,7 @@
           var st = document.getElementById("stage");
           if (st) { st.classList.add("mode-play"); st.classList.add("mode-" + this.mode.id); }
           var act = document.getElementById("btn-action"), sh = document.getElementById("btn-shutter");
-          if (act) { if (act.dataset.mazeLabel == null) act.dataset.mazeLabel = act.textContent; act.textContent = "FIRE"; }
+          if (act) { if (act.dataset.mazeLabel == null) act.dataset.mazeLabel = act.textContent; act.textContent = this.mode.act || "FIRE"; }
           if (sh) { if (sh.dataset.mazeLabel == null) sh.dataset.mazeLabel = sh.textContent; sh.textContent = "PULL"; }
         } catch (eS) {}
         this._onResize = function (size) { self.relayout(size && size.width || self.scale.width, size && size.height || self.scale.height); };
@@ -686,7 +896,7 @@
         }
         if (card) {
           if (reason === "start") {
-            card.innerHTML = '<p class="rk">Level ' + this.night + " · shooter level · " + (this.realm ? this.realm.name : "") + "</p>" +
+            card.innerHTML = '<p class="rk">Level ' + this.night + " · " + (m.level || "shooter level") + " · " + (this.realm ? this.realm.name : "") + "</p>" +
               "<h3>" + m.name + " <span>· " + m.kind + "</span></h3>" +
               "<p>" + m.how + "</p><p class=\"foe\"><b>Lives:</b> " + m.rules + "</p>" +
               "<p class=\"perks\"><b>Controls:</b> " + m.keys + "</p>" +
@@ -2172,6 +2382,371 @@
         rg.stones.forEach(function (o) { self.burst(o.x, o.y, 0xffe07a, 8); kill(o); });
         rg.stones = [];
         rg.spawnCd = 2400;
+      }
+
+      /* ═══ 5. SCYLLA AND CHARYBDIS — steering (v5.10, the Odyssey build) ════
+         Odyssey 12: the galley sails up the strait (the water scrolls down the
+         screen toward it). Gates of two rock pillars come down, each marked
+         with a letter; sailing between a gate's pillars picks that letter. A
+         row holds two or three gates with open water between them, so a gate
+         can be passed by; its letter comes round again in a later row. On the
+         right, Charybdis: a whirlpool that tugs at the ship (from level 19),
+         and every few seconds darkens and spins faster for about a second,
+         then surges and drags the ship toward her; her dark centre costs a
+         life. On the left, Scylla's cliff: a shadow and a closing ring on the
+         water mark where a head will strike, then the head lunges there and
+         snatches a crewman (a life) if the ship is under it. Scylla's reach
+         ends partway across the strait, so the safe water is next to
+         Charybdis — Circe's choice. A wrong gate, a pillar or a lone rock
+         also cost a life. straitParams sets one curve for all of it. */
+      straitParams(n) {
+        n = Math.max(1, n || 1);
+        return {
+          scroll: (95 + n * 1.3) * (n >= 99 ? 1.1 : 1),          /* px a second: 107 at 9, 159 at 49, 246 at 99 */
+          rowGap: Math.max(300, 480 - n * 1.8),                  /* px between rows of gates */
+          gateW: Math.max(78, 150 - n * 0.75) * (n >= 89 ? 0.94 : 1),   /* the opening between a gate's pillars */
+          sway: n >= 39 ? Math.min(80, 24 + (n - 39) * 0.8) : 0,  /* gates swaying side to side, px */
+          rockP: n >= 49 ? Math.min(0.85, 0.3 + (n - 49) * 0.008 + (n >= 89 ? 0.15 : 0)) : 0,   /* a lone rock in a row */
+          basePull: n >= 19 ? Math.min(90, 20 + (n - 19) * 0.8) : 0,   /* Charybdis's tug between surges, px a second */
+          surgePull: 120 + n * 1.7,                              /* her pull in a surge (the ship steers at 330) */
+          surgeEvery: Math.max(3200, 9800 - n * 65) * (n >= 89 ? 0.9 : 1),   /* calm water between surges, ms */
+          surgeMs: 1700 + n * 12,                                /* how long a surge lasts */
+          surgeWarn: Math.max(800, 1100 - n * 3),                /* the warning: dark, fast water first */
+          coreR: 40 + n * 0.25,                                  /* her deadly centre */
+          heads: n >= 79 ? 4 : n >= 59 ? 3 : n >= 29 ? 2 : 1,    /* Scylla's heads striking at once */
+          strikeEvery: Math.max(1000, 4300 - n * 33),            /* ms between strikes */
+          strikeWarn: Math.max(560, 1250 - n * 7),               /* the shadow on the water before a strike */
+          strikeMs: Math.max(110, 280 - n * 1.7),                /* the lunge */
+          strikeR: 40 + n * 0.12,                                /* what a strike covers */
+          aimErr: Math.max(0, 70 - n * 0.7),                     /* how far from the ship she aims */
+          reach: Math.min(0.9, 0.55 + n * 0.0035),               /* how far across the strait her necks reach */
+          again: n >= 69                                         /* a head that misses strikes again at once */
+        };
+      }
+      setup_strait() {
+        ensureStraitArt(this);
+        var P = this.straitParams(this.night);
+        var S = this.st = { rows: [], heads: [], dead: [], queue: [], dist: 0, t: 0, rowMs: 0, rowCd: 0, kx: 0, ky: 0, wA: 0, frameMs: 0, frame: 0,
+          surge: { state: "calm", t: 0, cd: P.surgeEvery * 0.6 }, headCd: Math.max(2600, P.strikeEvery), P: P };
+        this.cameras.main.setBackgroundColor(ST.deep);
+        S.water = this.add.tileSprite(0, 0, this.W, this.H, "md-strait-water").setOrigin(0, 0).setDepth(0);
+        S.cliff = this.add.tileSprite(0, 0, 128, this.H, "md-strait-cliff").setOrigin(0, 0).setDepth(5);
+        S.shore = this.add.tileSprite(0, 0, 64, this.H, "md-strait-shore").setOrigin(0, 0).setDepth(5);
+        S.whirl = this.add.image(0, 0, "md-strait-whirl").setDepth(3);
+        S.foam = this.add.image(0, 0, "md-strait-foam").setDepth(4).setAlpha(0.85);
+        S.fig = this.add.image(0, 0, "md-strait-fig").setDepth(6);
+        S.lowG = this.add.graphics().setDepth(7);
+        S.neckG = this.add.graphics().setDepth(21);
+        S.label = this.add.text(0, 0, "", { fontFamily: "Georgia, 'Palatino Linotype', serif", fontSize: 17, color: "#efe6d2", fontStyle: "bold", stroke: "#140c0a", strokeThickness: 5 }).setOrigin(1, 1).setDepth(23);
+        this.straitLayout();
+        var x = S.chanL + (S.chanR - S.chanL) * 0.4, y = this.H - 110;
+        S.ship = { x: x, y: y, spr: this.add.image(x, y, "md-strait-ship-0").setScale(0.9).setDepth(20) };
+        this.makeSol(x, y, "up").setVisible(false);   /* Odysseus steers; the sprite stays for coin pop-ups */
+      }
+      straitLayout() {
+        var S = this.st, W = this.W, H = this.H, P = S.P;
+        S.cliffW = clamp(Math.round(W * 0.085), 56, 120);
+        S.shoreW = clamp(Math.round(W * 0.035), 24, 44);
+        S.cliffEdge = S.cliffW * 0.86;                      /* where Scylla's cliff meets the sea */
+        S.wx = W - S.shoreW - 30; S.wy = H * 0.56;           /* Charybdis, under the fig tree's rock */
+        S.wR = clamp(P.coreR * 2.9, 120, 200);
+        S.minX = S.cliffEdge + 18; S.maxX = W - S.shoreW * 0.55 - 12;
+        S.yMin = H * 0.42; S.yMax = H - 52;
+        S.chanL = S.cliffEdge + 22; S.chanR = Math.max(S.chanL + 200, S.wx - P.coreR - 56);
+        S.reachX = S.chanL + (S.wx - S.chanL) * P.reach;     /* Scylla's necks reach no further */
+        S.water.setSize(W, H);
+        S.cliff.setSize(S.cliffW, H).setTileScale(S.cliffW / 128, S.cliffW / 128);
+        S.shore.setPosition(W - S.shoreW, 0).setSize(S.shoreW, H).setTileScale(S.shoreW / 64, S.shoreW / 64);
+        S.whirl.setPosition(S.wx, S.wy).setScale(S.wR / 128);
+        S.foam.setPosition(S.wx, S.wy).setScale(S.wR / 128);
+        S.fig.setPosition(W - S.shoreW * 0.4, S.wy - S.wR * 0.62);
+        S.label.setPosition(S.wx + 10, S.wy - S.wR * 0.5);
+      }
+      resize_strait(oldW, oldH) {
+        var S = this.st, fx = this.W / (oldW || this.W), fy = this.H / (oldH || this.H);
+        this.straitLayout();
+        S.ship.x = clamp(S.ship.x * fx, S.minX, S.maxX); S.ship.y = clamp(S.ship.y * fy, S.yMin, S.yMax);
+        S.rows.forEach(function (r) { r.y *= fy; r.gates.forEach(function (g) { g.base *= fx; }); r.rocks.forEach(function (k) { k.base *= fx; }); });
+        S.heads.forEach(function (h) { h.x *= fx; h.y *= fy; h.ay *= fy; });
+      }
+      /* the letters still in play: not picked wrong, not found yet */
+      straitLive() {
+        var S = this.st, self = this;
+        return this.choiceLetters().filter(function (L) { return S.dead.indexOf(L) === -1 && self.extracted.indexOf(L) === -1; });
+      }
+      answers_strait() {
+        var S = this.st, self = this;
+        S.rows.forEach(function (r) { self.straitKillRow(r); });
+        S.rows = []; S.dead = []; S.queue = [];
+        S.dist = S.P.rowGap - Math.min(S.P.rowGap, S.P.scroll * 1.2);   /* the first row comes in about a second */
+      }
+      /* a row of gates (letters) at height y; xs (optional) are the gates' centres */
+      straitRow(letters, y, xs) {
+        var S = this.st, P = S.P, self = this, pr = 18, half = P.gateW / 2, n = letters.length;
+        var row = { y: y, gates: [], rocks: [], done: false, rel: null, ph: rnd(0, 6) };
+        var slot = (S.chanR - S.chanL) / Math.max(1, n), hf = half + pr * 2;
+        letters.forEach(function (L, k) {
+          var cx = xs && xs[k] != null ? xs[k] : S.chanL + slot * k + hf + rnd(0, Math.max(0, slot - hf * 2));
+          var g = { letter: L, base: cx, cx: cx, half: half, state: "live", posts: [], labels: [] };
+          [-1, 1].forEach(function (sd) {
+            g.posts.push(self.add.image(cx + sd * (half + pr), y, "md-strait-pillar").setDepth(8).setScale(0.86));
+            g.labels.push(self.add.text(cx + sd * (half + pr), y, L, { fontFamily: "Georgia, 'Palatino Linotype', serif", fontSize: 22, color: ST.glaze, fontStyle: "bold" }).setOrigin(0.5).setDepth(9));
+          });
+          if (S.dead.indexOf(L) !== -1) self.straitPaint(g, "wrong");
+          else if (self.extracted.indexOf(L) !== -1) self.straitPaint(g, "right");
+          row.gates.push(g);
+        });
+        /* a lone rock in the open water between the gates (level 49 on) */
+        if (!xs && P.rockP > 0 && Math.random() < P.rockP) {
+          for (var t = 0; t < 14; t++) {
+            var rx = rnd(S.chanL + pr, S.chanR - pr);
+            if (row.gates.every(function (g) { return Math.abs(rx - g.base) > g.half + pr * 3 + 34; })) {
+              row.rocks.push({ base: rx, x: rx, spr: this.add.image(rx, y, "md-strait-rock").setDepth(8).setScale(0.8).setRotation(rnd(0, 6)) });
+              break;
+            }
+          }
+        }
+        S.rows.push(row);
+        return row;
+      }
+      straitSpawnRow() {
+        var S = this.st, P = S.P, live = this.straitLive(), pick = [];
+        if (!live.length) return null;
+        var foot = P.gateW + 4 * 18 + 70, per = Math.min(live.length, clamp(Math.floor((S.chanR - S.chanL) / foot), 1, 3));
+        S.queue = S.queue.filter(function (L) { return live.indexOf(L) !== -1; });
+        while (pick.length < per) {
+          if (!S.queue.length) S.queue = shuffle(live.filter(function (L) { return pick.indexOf(L) === -1; }));
+          if (!S.queue.length) break;
+          var L = S.queue.shift();
+          if (pick.indexOf(L) === -1) pick.push(L);
+        }
+        return this.straitRow(shuffle(pick), -44);
+      }
+      straitPaint(g, state) {
+        g.state = state;
+        g.posts.forEach(function (p) { p.setTint(state === "wrong" ? 0x8a8a8a : 0xbff0c8); });
+        g.labels.forEach(function (t) { t.setText(state === "wrong" ? "✕" : "✓").setColor(state === "wrong" ? "#5a5a5a" : "#1f6a3a"); });
+      }
+      straitMark(L, state) {
+        var self = this;
+        this.st.rows.forEach(function (r) { r.gates.forEach(function (g) { if (g.letter === L) self.straitPaint(g, state); }); });
+      }
+      straitKillRow(r) {
+        r.gates.forEach(function (g) { g.posts.concat(g.labels).forEach(function (o) { try { o.destroy(); } catch (e) {} }); });
+        r.rocks.forEach(function (k) { try { k.spr.destroy(); } catch (e) {} });
+      }
+      /* the ship sailed between a gate's pillars */
+      straitThrough(g) {
+        var res = this.answerPick(g.letter, g.cx, this.st.ship.y - 24);
+        if (res === "wrong") { if (this.st.dead.indexOf(g.letter) === -1) this.st.dead.push(g.letter); this.straitMark(g.letter, "wrong"); }
+        else if (res === "partial") this.straitMark(g.letter, "right");
+        return res;
+      }
+      /* the hull: four circles along the keel */
+      straitHull() {
+        var sh = this.st.ship;
+        return [-34, -11, 11, 34].map(function (d) { return { x: sh.x, y: sh.y + d }; });
+      }
+      straitTouch(x, y, r) {
+        return this.straitHull().some(function (c) { return dist(c.x, c.y, x, y) < r + 10; });
+      }
+      straitBump(x, y, label) {
+        var S = this.st;
+        this.burst(x, y, 0x9fd3d6, 12);
+        snd("rock");
+        this.loseLife("hit", label);
+        S.kx = (S.ship.x >= x ? 1 : -1) * 420;
+      }
+      /* Scylla: a head will strike at (x, y) after `warn` ms */
+      straitStrike(x, y, warn, follow) {
+        var S = this.st, H = this.H;
+        x = clamp(x, S.minX, Math.max(S.minX, S.reachX)); y = clamp(y, S.yMin - 30, S.yMax + 10);
+        var ay = clamp(y - rnd(60, 150), 30, H - 30);
+        var h = { x: x, y: y, t: 0, warn: warn, phase: "warn", ay: ay, follow: !!follow, tip: null,
+          spr: this.add.image(S.cliffEdge, ay, "md-strait-head").setDepth(22).setAlpha(0) };
+        S.heads.push(h);
+        if (!S.toldScylla) { S.toldScylla = true; this.toast("Scylla! A dark shadow on the water shows where her head will strike. Steer out from under it.", 4200); }
+        return h;
+      }
+      straitVolley() {
+        var S = this.st, P = S.P, sh = S.ship, self = this;
+        var busy = S.heads.filter(function (h) { return h.phase === "warn" || h.phase === "strike"; }).length, k = Math.max(0, P.heads - busy), i;
+        for (i = 0; i < k; i++) {
+          var a = rnd(0, Math.PI * 2), r = i === 0 ? rnd(0, P.aimErr) : rnd(P.strikeR * 1.9, P.strikeR * 3.4);   /* the first at the ship, the others round it */
+          self.straitStrike(sh.x + Math.cos(a) * r, sh.y + Math.sin(a) * r * 0.8, P.strikeWarn + i * 180);
+        }
+        if (k) snd("caw");
+      }
+      straitNeck(h, tip) {
+        var S = this.st, g = S.neckG, ax = S.cliffEdge - 34, ay = h.ay;
+        var cx = S.cliffEdge + (tip.x - S.cliffEdge) * 0.35, cy = Math.min(ay, tip.y) - Math.min(46, Math.abs(tip.x - ax) * 0.25), i, pts = [];
+        for (i = 0; i <= 22; i++) { var u = i / 22, v = 1 - u; pts.push({ x: v * v * ax + 2 * v * u * cx + u * u * tip.x, y: v * v * ay + 2 * v * u * cy + u * u * tip.y }); }
+        /* a smooth tube: thick strokes, with a disc on every joint to round it */
+        g.lineStyle(20, 0x1b4a40, 1); g.strokePoints(pts);
+        g.fillStyle(0x1b4a40, 1); pts.forEach(function (p) { g.fillCircle(p.x, p.y, 10); });
+        g.lineStyle(14, 0x3f8f7a, 1); g.strokePoints(pts);
+        g.fillStyle(0x3f8f7a, 1); pts.forEach(function (p) { g.fillCircle(p.x, p.y, 7); });
+        g.lineStyle(3, 0x7cc4a8, 0.7); g.strokePoints(pts.map(function (p) { return { x: p.x, y: p.y - 3 }; }));
+        var p0 = pts[pts.length - 2];
+        h.spr.setPosition(tip.x, tip.y).setRotation(Math.atan2(tip.y - p0.y, tip.x - p0.x)).setAlpha(1);
+      }
+      tick_strait(s, inp, ms) {
+        var S = this.st, P = S.P, W = this.W, H = this.H, sh = S.ship, self = this, i, lg = S.lowG;
+        S.t += s;
+        lg.clear(); S.neckG.clear();
+        var dy = P.scroll * s;
+        S.water.tilePositionY -= dy;
+        S.cliff.tilePositionY -= dy / S.cliff.tileScaleY;
+        S.shore.tilePositionY -= dy / S.shore.tileScaleY;
+        /* steering: keys or the pad; Space, ROW or a mouse button pulls hard for a moment */
+        S.rowCd -= ms; S.rowMs = Math.max(0, S.rowMs - ms);
+        if (inp.fire && S.rowCd <= 0) {
+          S.rowMs = 650; S.rowCd = 1900; S.rows0 = (S.rows0 || 0) + 1;
+          try { if (window.SolRealms && SolRealms.hiss) SolRealms.hiss(0.25, 900, 0.04); } catch (eH) {}
+        }
+        var boost = S.rowMs > 0 ? 1.7 : 1, diag = inp.ax && inp.ay ? 0.7071 : 1;
+        var vx = inp.ax * 330 * boost * diag, vy = inp.ay * 240 * boost * diag;
+        /* Charybdis pulls toward her centre: a tug between surges, hard in a surge */
+        var su = S.surge, pull = P.basePull;
+        if (su.state === "surge") pull = Math.max(pull, P.surgePull);
+        var dxw = S.wx - sh.x, dyw = S.wy - sh.y, dw = Math.sqrt(dxw * dxw + dyw * dyw) || 1;
+        var f = pull * (0.55 + 0.45 * clamp(1 - dw / (W * 0.8), 0, 1)), px = dxw / dw * f, py = dyw / dw * f * 0.6;
+        sh.x = clamp(sh.x + (vx + px + S.kx) * s, S.minX, S.maxX);
+        sh.y = clamp(sh.y + (vy + py + S.ky) * s, S.yMin, S.yMax);
+        S.kx *= Math.pow(0.03, s); S.ky *= Math.pow(0.03, s);
+        S.frameMs += ms;
+        if (S.frameMs >= (S.rowMs > 0 ? 130 : 300)) { S.frameMs = 0; S.frame = 1 - S.frame; }
+        sh.spr.setPosition(sh.x, sh.y).setTexture("md-strait-ship-" + S.frame).setRotation(clamp((vx + px + S.kx) / 1500, -0.25, 0.25));
+        this.blink(sh.spr);
+        this.player.setPosition(sh.x, sh.y);
+        /* the wake */
+        var wa = S.rowMs > 0 ? 0.6 : 0.38;
+        for (i = 0; i < 5; i++) {
+          var wy = sh.y + 50 + i * 11 + ((S.t * P.scroll) % 11), ww = 8 + i * 5;
+          lg.fillStyle(0xefe6d2, wa * (1 - i / 5)); lg.fillEllipse(sh.x - ww, wy, 7, 3); lg.fillEllipse(sh.x + ww, wy, 7, 3);
+        }
+        /* Charybdis: calm → warning (dark, fast water) → surge → calm */
+        su.t += ms;
+        if (su.state === "calm" && su.t >= su.cd) {
+          su.state = "warn"; su.t = 0;
+          try { if (window.SolRealms && SolRealms.hiss) SolRealms.hiss(0.9, 300, 0.05); } catch (eS) {}
+          if (!S.toldSurge) { S.toldSurge = true; this.toast("Charybdis is about to surge! When her water turns dark and spins fast, steer away from the whirlpool.", 4200); }
+        } else if (su.state === "warn" && su.t >= P.surgeWarn) { su.state = "surge"; su.t = 0; }
+        else if (su.state === "surge" && su.t >= P.surgeMs) { su.state = "calm"; su.t = 0; su.cd = P.surgeEvery; }
+        var wk = su.state === "warn" ? clamp(su.t / P.surgeWarn, 0, 1) : su.state === "surge" ? 1 : 0;
+        S.wA += (0.9 + wk * 3.6) * s;
+        var tint = mix(0xffffff, 0x4a5878, wk), pulse = su.state === "surge" ? 1 + 0.05 * Math.sin(S.t * 9) : 1;
+        S.whirl.setRotation(-S.wA).setTint(tint).setScale(S.wR / 128 * pulse);
+        S.foam.setRotation(-S.wA * 1.6).setAlpha(0.85 - wk * 0.35).setScale(S.wR / 128 * pulse);
+        S.label.setText(su.state === "warn" ? "Charybdis stirs…" : su.state === "surge" ? "CHARYBDIS SURGES!" : "");
+        if (su.state === "surge") {
+          /* foam streaks spiralling in */
+          lg.lineStyle(3, 0x9fd3d6, 0.45);
+          for (i = 0; i < 12; i++) {
+            var rr = S.wR * 1.9 - ((S.t * 170 + i * 41) % (S.wR * 1.5)), a0 = i / 12 * Math.PI * 2 - S.t * 2.2;
+            lg.beginPath(); lg.arc(S.wx, S.wy, rr, a0, a0 + 0.45, false); lg.strokePath();
+          }
+        }
+        /* her dark centre: a life, and she spits the ship back out */
+        if (dw < P.coreR + 8) {
+          this.burst(sh.x, sh.y, 0x9fd3d6, 22);
+          this.loseLife("hit", "CHARYBDIS SWALLOWED YOUR SHIP");
+          S.kx = -720; S.ky = (sh.y < S.wy ? -1 : 1) * 160;
+          if (su.state !== "calm") { su.state = "calm"; su.t = 0; su.cd = P.surgeEvery; }
+          if (this._finishing) return;
+        }
+        /* the gates come down the strait */
+        S.dist += dy;
+        if (!this._between && S.dist >= P.rowGap) { S.dist = 0; this.straitSpawnRow(); }
+        var rows = S.rows.slice();
+        for (i = 0; i < rows.length; i++) {
+          var row = rows[i];
+          if (S.rows.indexOf(row) === -1) continue;
+          row.y += dy;
+          /* the whole row sways together, kept inside the channel */
+          var off = 0;
+          if (P.sway) {
+            var lo = 1e9, hi = -1e9;
+            row.gates.forEach(function (g) { lo = Math.min(lo, g.base - g.half - 36); hi = Math.max(hi, g.base + g.half + 36); });
+            row.rocks.forEach(function (k) { lo = Math.min(lo, k.base - 18); hi = Math.max(hi, k.base + 18); });
+            off = clamp(Math.sin(S.t * 1.1 + row.ph) * P.sway, S.chanL - lo, S.chanR - hi);
+            if (S.chanL - lo > S.chanR - hi) off = 0;
+          }
+          row.gates.forEach(function (g) {
+            g.cx = g.base + off;
+            [-1, 1].forEach(function (sd, k) { var gx = g.cx + sd * (g.half + 18); g.posts[k].setPosition(gx, row.y); g.labels[k].setPosition(gx, row.y); });
+            /* the rope of floats across the opening */
+            var col = g.state === "wrong" ? 0x8a8a8a : g.state === "right" ? 0x7af0a0 : 0xe8b04a;
+            lg.lineStyle(2, 0xefe6d2, 0.45); lg.lineBetween(g.cx - g.half, row.y, g.cx + g.half, row.y);
+            lg.fillStyle(col, 0.95);
+            for (var fx = -g.half + 8; fx <= g.half - 8; fx += 16) lg.fillCircle(g.cx + fx, row.y, 3.2);
+          });
+          row.rocks.forEach(function (k) { k.x = k.base + off; k.spr.setPosition(k.x, row.y); });
+          /* pillars and rocks: a life, and the ship bounces off */
+          if (this.iframeMs <= 0) {
+            var hitAt = null;
+            row.gates.forEach(function (g) { g.posts.forEach(function (p) { if (!hitAt && self.straitTouch(p.x, p.y, 17)) hitAt = p; }); });
+            row.rocks.forEach(function (k) { if (!hitAt && self.straitTouch(k.x, row.y, 17)) hitAt = { x: k.x, y: row.y }; });
+            if (hitAt) { this.straitBump(hitAt.x, hitAt.y, "YOU HIT THE ROCKS"); if (this._finishing) return; }
+          }
+          /* through a gate: the row crosses the ship's middle */
+          var rel = row.y - sh.y;
+          if (!row.done && row.rel != null && row.rel < 0 && rel >= 0) {
+            row.done = true;
+            var gate = row.gates.filter(function (g) { return g.state === "live" && Math.abs(sh.x - g.cx) < g.half; })[0];
+            if (gate) { this.straitThrough(gate); if (this._finishing) return; }
+          }
+          row.rel = rel;
+          if (row.y > H + 60) { this.straitKillRow(row); S.rows.splice(S.rows.indexOf(row), 1); }
+        }
+        /* Scylla */
+        S.headCd -= ms;
+        if (S.headCd <= 0 && !this._between) { this.straitVolley(); S.headCd = P.strikeEvery * rnd(0.85, 1.15); }
+        for (i = S.heads.length - 1; i >= 0; i--) {
+          var h = S.heads[i], start = { x: S.cliffEdge + 6, y: h.ay };
+          h.t += ms;
+          if (h.phase === "warn") {
+            var k = clamp(h.t / h.warn, 0, 1);
+            lg.fillStyle(0x06121c, 0.16 + 0.42 * k); lg.fillEllipse(h.x, h.y, P.strikeR * 2, P.strikeR * 1.7);
+            lg.lineStyle(3, 0x9fd3d6, 0.45 + 0.45 * k); lg.strokeCircle(h.x, h.y, P.strikeR * (2.3 - 1.3 * k));
+            lg.lineStyle(2, 0xd9772b, 0.5 + 0.4 * k); lg.strokeEllipse(h.x, h.y, P.strikeR * 2, P.strikeR * 1.7);
+            /* the head rears out of the cliff, looking at the spot */
+            this.straitNeck(h, { x: start.x + 6 + 10 * k, y: h.ay + Math.sin(S.t * 6 + i) * 3 });
+            h.spr.setRotation(Math.atan2(h.y - h.ay, h.x - start.x)).setAlpha(0.6 + 0.4 * k);
+            if (h.t >= h.warn) { h.phase = "strike"; h.t = 0; snd("rock"); }
+          } else if (h.phase === "strike") {
+            var u = clamp(h.t / P.strikeMs, 0, 1), e = 1 - (1 - u) * (1 - u);
+            h.tip = { x: start.x + (h.x - start.x) * e, y: h.ay + (h.y - h.ay) * e };
+            this.straitNeck(h, h.tip);
+            if (u >= 1) {
+              h.phase = "hold"; h.t = 0;
+              this.burst(h.x, h.y, 0x9fd3d6, 16);
+              if (this.straitTouch(h.x, h.y, P.strikeR - 4)) {
+                this.loseLife("hit", "SCYLLA SNATCHED A CREWMAN");
+                if (this._finishing) return;
+              } else if (P.again && !h.follow) {
+                this.straitStrike(sh.x + rnd(-P.aimErr, P.aimErr) * 0.5, sh.y, Math.max(450, P.strikeWarn * 0.75), true);
+              }
+            }
+          } else if (h.phase === "hold") {
+            this.straitNeck(h, h.tip);
+            if (h.t >= 220) { h.phase = "back"; h.t = 0; }
+          } else {
+            var b = clamp(1 - h.t / 360, 0, 1);
+            this.straitNeck(h, { x: start.x + (h.x - start.x) * b, y: h.ay + (h.y - h.ay) * b });
+            h.spr.setAlpha(b);
+            if (h.t >= 360) { try { h.spr.destroy(); } catch (eD) {} S.heads.splice(i, 1); }
+          }
+        }
+      }
+      clear_strait() {
+        var S = this.st, self = this;
+        S.rows.forEach(function (r) { r.gates.forEach(function (g) { self.burst(g.cx, r.y, 0xe8b04a, 6); }); self.straitKillRow(r); });
+        S.rows = [];
+        S.heads.forEach(function (h) { try { h.spr.destroy(); } catch (e) {} });
+        S.heads = [];
+        S.headCd = Math.max(S.headCd, 1800);
+        try { S.lowG.clear(); S.neckG.clear(); } catch (e2) {}
       }
     }
 

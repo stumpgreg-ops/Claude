@@ -656,14 +656,16 @@ var srv = http.createServer(function (req, res) {
     /* an eagle's beam over Sol catches him */
     var bm = R.ravens.filter(function (q) { return q.alive && q.letter && q.state !== "wait"; })[0] || R.ravens.filter(function (q) { return q.alive && q.letter; })[0];
     bm.state = "beam"; bm.beamMs = 900; bm.path = null; bm.x = s.player.x; bm.hoverY = s.H * 0.4; bm.y = bm.hoverY; bm.lead = true;
-    await new Promise(function (r) { setTimeout(r, 700); }); o.beam = s.strikes; s.strikes = 0; s.iframeMs = 0;
+    /* v5.10: wait on the game, not the clock (a busy machine runs the game slower than real time) */
+    async function until(f, ms) { var t0 = Date.now(); while (!f() && Date.now() - t0 < ms) await new Promise(function (r) { setTimeout(r, 50); }); }
+    await until(function () { return !!R.capt; }, 8000); o.beam = s.strikes; s.strikes = 0; s.iframeMs = 0;
     /* v5.8.2: Galaga's capture — the eagle carries Sol off; an arrow on it frees him and he stands next to Sol */
-    await new Promise(function (r) { setTimeout(r, 1400); });
+    await until(function () { return R.capt && R.capt.held; }, 8000);
     var cap = R.capt;
     o.capt = { caught: !!cap && cap.held && cap.eagle === bm, hp: bm.hp };
     s.raidHit(bm);
     o.capt.freedNoHurt = bm.alive && bm.hp === o.capt.hp && s.strikes === 0;
-    await new Promise(function (r) { setTimeout(r, 1300); });
+    await until(function () { return !!R.wing && !R.capt; }, 8000);
     o.capt.double = !!R.wing && !R.capt && Math.abs(R.wing.x - s.player.x - 40) < 1;
     R.arrows.forEach(function (a) { a.spr.destroy(); }); R.arrows = [];
     var wasReady = R.ready; R.ready = true; R.cd = 0;
@@ -758,6 +760,10 @@ var srv = http.createServer(function (req, res) {
     await new Promise(function (r) { setTimeout(r, 500); }); o.hit = s.strikes; s.strikes = 0; s.iframeMs = 0;
     /* a right rock that was in the beam a moment ago and hits the ship: named, and still costs a life */
     var rr = rockOf(true); s.strikes = 0; s.iframeMs = 0;
+    /* v5.10: nothing else may hit the ship first (on a busy machine a stray rock sometimes did) */
+    R.rocks.filter(function (q) { return !q.letter; }).slice().forEach(function (q) { s.rockRemove(q); }); R.spawnCd = 1e9; R.saucerCd = 1e9;
+    R.saucers.forEach(function (u) { u.spr.destroy(); }); R.saucers = []; R.sBullets.forEach(function (q) { q.spr.destroy(); }); R.sBullets = [];
+    R.rocks.forEach(function (q) { if (q.letter && q !== rr) { q.x = R.ship.x - 300; q.y = R.ship.y - 200; q.vx = 0; q.vy = 0; } });
     if (rr) { rr.x = R.ship.x + 10; rr.y = R.ship.y; rr.vx = 0; rr.vy = 0; rr.beamT = s.time.now; }
     await new Promise(function (r) { setTimeout(r, 500); }); o.early = s.strikes; o.earlyLabel = s._lastHitLabel; s.strikes = 0; s.iframeMs = 0;
     s.need.forEach(function (N) { var q = R.rocks.filter(function (z) { return z.letter === N; })[0]; if (q) s.rockCaught(q); });
@@ -993,12 +999,17 @@ var srv = http.createServer(function (req, res) {
     chk("rocks", function (n) { return s.rkParams(n, 1); }, ["start", "cap", "speed", "speedAdd", "smallShare"], ["spawnMs", "saucerMs", "aimErr", "saucerFireMs"]);
     chk("sky", function (n) { return s.skyParams(n); }, ["eff", "ravenSp", "featherSp", "orbSp", "throwP", "guards", "spin"], ["spawnMs", "gapHalf"]);
     chk("ring", function (n) { return s.ringParams(n); }, ["eff", "cap", "wolfSp", "packP", "packMax"], ["spawnMs", "upMs", "headStart", "alphaMs"]);
+    /* v5.10: Scylla and Charybdis (the Odyssey build) */
+    chk("strait", function (n) { return s.straitParams(n); }, ["scroll", "sway", "rockP", "basePull", "surgePull", "surgeMs", "coreR", "heads", "strikeR", "reach"], ["rowGap", "gateW", "surgeEvery", "surgeWarn", "strikeEvery", "strikeWarn", "strikeMs", "aimErr"]);
+    var t9 = s.straitParams(9), t99 = s.straitParams(99);
+    out.straitEnds = { l9: { heads: t9.heads, strikeWarn: t9.strikeWarn, strikeEvery: t9.strikeEvery, surgeWarn: t9.surgeWarn, surgeEvery: t9.surgeEvery, gateW: t9.gateW, scroll: t9.scroll, basePull: t9.basePull },
+      l99: { heads: t99.heads, strikeWarn: t99.strikeWarn, strikeEvery: t99.strikeEvery, surgeEvery: t99.surgeEvery, gateW: t99.gateW, scroll: t99.scroll, surgePull: t99.surgePull, again: t99.again } };
     var r1 = s.ringParams(1), r8 = s.ringParams(8);
     out.ringStart = { cap: r1.cap, spawnMs: r1.spawnMs, wolfSp: r1.wolfSp, packP: r1.packP, l8: { cap: r8.cap, spawnMs: r8.spawnMs, wolfSp: r8.wolfSp } };
     return out;
   });
   console.log("ramp", JSON.stringify(ramp));
-  ["maze", "raid", "rocks", "sky", "ring"].forEach(function (m) {
+  ["maze", "raid", "rocks", "sky", "ring", "strait"].forEach(function (m) {
     check(ramp[m] && ramp[m].easier.length === 0 && ramp[m].flat.length === 0, "v5.8.4: " + m + " is harder at every level 2-100 than at the level before, and never easier: " + JSON.stringify(ramp[m]));
   });
   check(ramp.ringStart.cap >= 4 && ramp.ringStart.spawnMs < 1500 && ramp.ringStart.wolfSp > 180 && ramp.ringStart.packP > 0, "v5.8.4: Wolf Ring starts harder (4 wolves at once, sooner and faster, packs from the start): " + JSON.stringify(ramp.ringStart));
@@ -1009,6 +1020,129 @@ var srv = http.createServer(function (req, res) {
   check(tiers.rocks.tier === 9 && tiers.rocks.comet && tiers.rocks.valk && tiers.rocks.guards >= 2 && tiers.rocks.iron, "Rune Rocks in Ragnarok: comets, a valkyrie, guard stones and iron rocks: " + JSON.stringify(tiers.rocks));
   check(tiers.sky.tier === 9 && tiers.sky.flip && tiers.sky.orbs > 0, "Sun Chariot in Ragnarok runs with reversing shields: " + JSON.stringify(tiers.sky));
   check(tiers.ring.tier === 9 && tiers.ring.alpha && tiers.ring.raven && tiers.ring.ammo <= 6, "Wolf Ring in Ragnarok: the alpha wolf, poo-dropping ravens and the quiver: " + JSON.stringify(tiers.ring));
+  var se = ramp.straitEnds;
+  check(se.l9.heads === 1 && se.l9.strikeWarn >= 1000 && se.l9.surgeWarn >= 900 && se.l9.gateW >= 130 && se.l9.surgeEvery >= 8000 && se.l9.strikeEvery <= 4500 && se.l9.scroll >= 100,
+    "Scylla and Charybdis (v5.10): level 9 is fair for a beginner (one head, a second's warning before a strike or a surge, wide gates) but not trivial (a strike every 4 s): " + JSON.stringify(se.l9));
+  check(se.l99.heads === 4 && se.l99.strikeWarn <= 600 && se.l99.strikeEvery <= 1100 && se.l99.gateW <= 80 && se.l99.surgeEvery <= 3500 && se.l99.scroll > 2 * se.l9.scroll && se.l99.again,
+    "Scylla and Charybdis (v5.10): level 99 is intense (four heads, short warnings, narrow gates, near-constant surges, twice the speed): " + JSON.stringify(se.l99));
+
+  /* v5.10: Scylla and Charybdis, the Odyssey build's level 9 of every island. In this page window.SOL_STATE is
+     set to "ODY" for these checks only, then taken away again. */
+  var strait = {};
+  strait.rot = await page.evaluate(function () {
+    var had = Object.prototype.hasOwnProperty.call(window, "SOL_STATE"), keep = window.SOL_STATE, o = {};
+    function rot() { var a = []; for (var n = 1; n <= 20; n++) { var m = SolModes.modeFor(n); a.push(m ? m.id : "-"); } return a.join(","); }
+    window.SOL_STATE = "ODY"; o.ody = rot();
+    if (had) window.SOL_STATE = keep; else delete window.SOL_STATE;
+    o.other = rot();
+    var only = SolModes.only;
+    SolModes.only = "strait"; o.only = [1, 9, 10, 55].map(function (n) { return SolModes.modeFor(n).id; }).join(",");
+    SolModes.only = only;
+    return o;
+  });
+  await page.evaluate(function () { window.SOL_STATE = "ODY"; });
+  await gotoLevel(9);
+  strait.run = await page.evaluate(async function () {
+    var s = SolScene, S = s.st, o = { key: s.sys.settings.key, mode: s.mode && s.mode.id, act: document.getElementById("btn-action").textContent };
+    /* wait on the game, not the clock (a busy machine runs the game slower than real time) */
+    function wait(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+    async function until(f, ms) { var t0 = Date.now(); while (!f() && Date.now() - t0 < (ms || 8000)) await wait(40); }
+    s.spareLives = 0; s.perks = {}; s.tutLockUntil = 0;
+    /* no hazards and no rows of their own while the scripted checks run */
+    function quiet() {
+      S.headCd = 1e9; S.heads.forEach(function (h) { h.spr.destroy(); }); S.heads = [];
+      S.surge.state = "calm"; S.surge.t = 0; S.surge.cd = 1e9; S.dist = -1e9; S.kx = 0; S.ky = 0;
+      S.rows.forEach(function (r) { s.straitKillRow(r); }); S.rows = []; S.dead = [];
+      s.strikes = 0; s.iframeMs = 0;
+    }
+    function home(x) { S.ship.x = x == null ? (S.chanL + S.chanR) / 2 : x; S.ship.y = s.H - 110; }
+    /* a one-gate row just ahead of the ship; resolves once the row has crossed the ship's middle */
+    async function sail(L, dx) { var r = s.straitRow([L], S.ship.y - 12, [S.ship.x + (dx || 0)]); await until(function () { return r.done || s._between; }); await wait(60); return r; }
+    quiet(); home(); s.score = 0; s.extracted = [];
+    var need = s.need.slice(), letters = s.choiceLetters(), wrongL = letters.filter(function (L) { return need.indexOf(L) === -1; })[0];
+    /* sailing past a gate in the open water picks nothing */
+    await sail(wrongL, S.P.gateW / 2 + 18 + 80);
+    o.past = s.strikes + s.score;
+    /* a wrong gate: a life, and its letter is crossed out */
+    quiet(); home();
+    var wr = await sail(wrongL);
+    o.wrong = s.strikes; o.wrongMark = wr.gates[0].state; o.wrongLabel = s._lastHitLabel;
+    /* a pillar: a life */
+    quiet(); home();
+    await sail(need[0], -(S.P.gateW / 2 + 18));   /* its right pillar is where the ship is */
+    o.pillar = s.strikes; o.pillarScore = s.score;
+    /* Charybdis's centre: a life, and she spits the ship back out */
+    quiet(); S.ship.x = S.wx - 4; S.ship.y = Math.max(S.yMin, Math.min(S.yMax, S.wy));
+    await until(function () { return s.strikes > 0 && S.ship.x < S.wx - S.P.coreR; });
+    o.charybdis = s.strikes; o.charLabel = s._lastHitLabel; o.spat = S.ship.x < S.wx - S.P.coreR;
+    /* a surge: a dark, fast warning first, then the ship is dragged toward her with no key held */
+    quiet(); home(S.chanL + 60); var x0 = S.ship.x;
+    S.surge.state = "warn"; S.surge.t = 0;
+    await until(function () { return S.surge.state !== "warn" || S.surge.t >= S.P.surgeWarn / 2; });
+    o.warn = { dark: S.whirl.tintTopLeft !== 0xffffff, label: S.label.text, still: Math.abs(S.ship.x - x0) < 2 };
+    await until(function () { return S.surge.state === "surge" && S.surge.t >= 800; });
+    o.surge = { state: S.surge.state, dragged: Math.round(S.ship.x - x0), strikes: s.strikes };
+    /* Scylla: a shadow, then the strike — under it costs a crewman (a life); out from under it costs nothing */
+    quiet(); home(S.chanL + 90);
+    var h = s.straitStrike(S.ship.x, S.ship.y, 500);
+    await until(function () { return h.t >= 250; }); o.shadow = h.phase === "warn" && s.strikes === 0;
+    await until(function () { return h.phase === "hold" || h.phase === "back" || S.heads.indexOf(h) < 0; });
+    o.scylla = s.strikes; o.scyllaLabel = s._lastHitLabel;
+    quiet(); home(S.chanL + 90);
+    var h2 = s.straitStrike(S.ship.x, S.ship.y - 220, 400);
+    await until(function () { return h2.phase === "hold" || h2.phase === "back" || S.heads.indexOf(h2) < 0; });
+    o.scyllaMiss = s.strikes;
+    /* ROW: a burst of speed */
+    quiet(); var r0 = S.rows0 || 0; s.keys.SPACE.isDown = true;
+    await until(function () { return (S.rows0 || 0) > r0; }, 4000); s.keys.SPACE.isDown = false;
+    o.row = (S.rows0 || 0) - r0;
+    /* a Select TWO question: the first right gate is half the answer, the second one answers it */
+    quiet(); home(); s.extracted = []; var sc0 = s.score, two = letters.slice(0, 2); s.need = two.slice();
+    var later = s.straitRow([two[0]], 30, [S.ship.x]);
+    await sail(two[0]);
+    o.two = { first: s.score - sc0, found: s.extracted.slice().join(""), later: later.gates[0].state, strikes: s.strikes };
+    quiet(); home();
+    var coins = s.nightCoins;
+    await sail(two[1]);
+    o.two.second = s.score - sc0; o.two.coins = s.nightCoins > coins;
+    /* the next question: its right gate (or gates) answer it */
+    await until(function () { var g = document.getElementById("read-go"); return !s._between && !!g && !!g.offsetParent; });
+    var rgo = document.getElementById("read-go"); if (rgo && rgo.offsetParent) rgo.click();
+    await until(function () { return !s.readOpen; });
+    var sc1 = s.score; o.nextNeed = s.need.length;
+    for (var j = 0; j < o.nextNeed; j++) { quiet(); home(); await sail(s.need[j]); }
+    o.right = s.score - sc1; o.rightStrikes = s.strikes;
+    return o;
+  });
+  await page.waitForTimeout(1300);
+  if (await page.isVisible("#read-go")) await page.click("#read-go");
+  await page.evaluate(function () { SolScene.iframeMs = 1e9; SolScene.spareLives = 9; });   /* just for the picture */
+  await page.waitForTimeout(5000);
+  await shot("21a-scylla-charybdis-9");
+  await gotoLevel(89);
+  strait.l89 = await page.evaluate(async function () {
+    var s = SolScene, S = s.st; s.iframeMs = 1e9; s.spareLives = 9;
+    await new Promise(function (r) { setTimeout(r, 5000); });
+    return { mode: s.mode.id, tier: s.tier, card: (document.getElementById("mode-card") || {}).textContent || "", heads: S.P.heads, sway: S.P.sway, rocks: S.P.rockP, rows: S.rows.length };
+  });
+  await shot("21b-scylla-charybdis-89");
+  strait.after = await page.evaluate(function () {
+    delete window.SOL_STATE;
+    var a = []; for (var n = 1; n <= 20; n++) { var m = SolModes.modeFor(n); a.push(m ? m.id : "-"); }
+    SolScene.iframeMs = 0;
+    return a.join(",");
+  });
+  console.log("strait", JSON.stringify(strait));
+  var sr = strait.run;
+  check(strait.rot.ody === "-,raid,-,rocks,-,sky,-,ring,strait,-,-,raid,-,rocks,-,sky,-,ring,strait,-" && strait.rot.other === "-,raid,-,rocks,-,sky,-,ring,-,-,-,raid,-,rocks,-,sky,-,ring,-,-" && strait.after === strait.rot.other && strait.rot.only === "strait,strait,strait,strait",
+    "Scylla and Charybdis (v5.10): the Odyssey rotation plays it on level 9 of every island; the Virginia and New Jersey rotation is unchanged; picked alone it plays every level: " + JSON.stringify(strait.rot) + " after: " + strait.after);
+  check(sr.key === "mode" && sr.mode === "strait" && sr.act === "ROW" && sr.row === 1, "Scylla and Charybdis: level 9 of the Odyssey runs in the mode scene with a ROW button that gives a burst of speed: " + JSON.stringify({ key: sr.key, mode: sr.mode, act: sr.act, row: sr.row }));
+  check(sr.past === 0 && sr.wrong === 1 && sr.wrongMark === "wrong" && /WRONG LETTER/.test(sr.wrongLabel || "") && sr.pillar === 1 && sr.pillarScore === 0, "Scylla and Charybdis: sailing past a gate picks nothing; a wrong gate costs a life and is crossed out; hitting a pillar costs a life: " + JSON.stringify({ past: sr.past, wrong: sr.wrong, mark: sr.wrongMark, pillar: sr.pillar }));
+  check(sr.charybdis === 1 && /CHARYBDIS/.test(sr.charLabel || "") && sr.spat && sr.warn.dark && /stirs/i.test(sr.warn.label) && sr.warn.still && sr.surge.state === "surge" && sr.surge.dragged > 30 && sr.surge.strikes === 0, "Scylla and Charybdis: Charybdis's centre costs a life; a surge is telegraphed (dark, fast water, no pull yet), then drags the ship toward her: " + JSON.stringify({ c: sr.charybdis, spat: sr.spat, warn: sr.warn, surge: sr.surge }));
+  check(sr.shadow && sr.scylla === 1 && /SCYLLA/.test(sr.scyllaLabel || "") && sr.scyllaMiss === 0, "Scylla and Charybdis: a shadow warns first; Scylla's strike on the ship costs a life, a strike elsewhere costs nothing: " + JSON.stringify({ shadow: sr.shadow, hit: sr.scylla, miss: sr.scyllaMiss }));
+  check(sr.two.first === 0 && sr.two.found.length === 1 && sr.two.later === "right" && sr.two.strikes === 0 && sr.two.second === 1 && sr.two.coins, "Scylla and Charybdis: a Select TWO question needs both right gates — the first is marked found, the second answers and pays coins: " + JSON.stringify(sr.two));
+  check(sr.right === 1 && sr.rightStrikes === 0, "Scylla and Charybdis: sailing through the right gate answers the question: " + JSON.stringify({ right: sr.right, need: sr.nextNeed }));
+  check(strait.l89.mode === "strait" && strait.l89.tier === 8 && /New this time/.test(strait.l89.card) && strait.l89.heads === 4 && strait.l89.sway > 0 && strait.l89.rocks > 0, "Scylla and Charybdis at level 89: four heads, swaying gates, lone rocks, and the card says what's new: " + JSON.stringify(strait.l89).slice(0, 220));
   await gotoLevel(2);
   var retry = await page.evaluate(async function () {
     var s = SolScene; s.spareLives = 0; s.perks = {}; s.strikes = s.needStrikes - 1;
@@ -1031,7 +1165,7 @@ var srv = http.createServer(function (req, res) {
     var b = builds[bk], bdir = path.join(distRoot, bk);
     if (!fs.existsSync(path.join(bdir, "index.html"))) { console.log("skip  dist/" + bk + " (run node tools/build-games.js)"); continue; }
     root = bdir;
-    await page.evaluate(function () { localStorage.clear(); });
+    await page.evaluate(function (k) { localStorage.clear(); localStorage.setItem(k, "strait"); }, bk === "ody" ? "afterHours.ody.gameMode" : "afterHours.v1.gameMode");
     await page.goto(base + "index.html", { waitUntil: "load" }); await page.waitForTimeout(800);
     var lockInfo = await page.evaluate(function (o) {
       /* count packs by family straight from the pool: heistBuildPack falls back to every pack when a family is empty */
@@ -1049,7 +1183,13 @@ var srv = http.createServer(function (req, res) {
     /* pick the grade and reach the skill screen; the gateway must never come back */
     await page.click('#title-screen .card[data-family="' + b.fam + '"]'); await page.waitForTimeout(300);
     check(await page.isVisible("#mode-screen"), "dist/" + bk + ": game mode screen opens");
+    /* v5.10: Scylla and Charybdis is offered (and a saved pick of it kept) only in the Odyssey game */
+    var mcards = await page.evaluate(function () { return { cards: Array.prototype.map.call(document.querySelectorAll("#mode-packs .card"), function (c) { return c.getAttribute("data-gamemode"); }), only: window.SolModes ? SolModes.only : "?" }; });
+    check(bk === "ody" ? mcards.cards.indexOf("strait") !== -1 && mcards.only === "strait" : mcards.cards.indexOf("strait") === -1 && mcards.only === null,
+      "dist/" + bk + ": the Scylla and Charybdis card " + (bk === "ody" ? "is offered and a saved pick of it is kept" : "is not offered, and a saved pick of it falls back to All modes") + ": " + JSON.stringify(mcards));
     await page.click('#mode-packs .card[data-gamemode="ALL"]'); await page.waitForTimeout(300);
+    var drot = await page.evaluate(function () { var a = []; for (var n = 1; n <= 10; n++) { var m = SolModes.modeFor(n); a.push(m ? m.id : "-"); } return a.join(","); });
+    check(drot === (bk === "ody" ? "-,raid,-,rocks,-,sky,-,ring,strait,-" : "-,raid,-,rocks,-,sky,-,ring,-,-"), "dist/" + bk + ": the Mixed rotation " + (bk === "ody" ? "has Scylla and Charybdis on level 9" : "is unchanged") + ": " + drot);
     check(await page.isVisible("#skill-screen"), "dist/" + bk + ": skill screen opens");
     if (bk === "ody") {
       /* v5.9: the Odyssey game picks an episode, and keeps its own saves */
