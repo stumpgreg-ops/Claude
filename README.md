@@ -13,6 +13,18 @@ Progress saves in this browser profile (`afterHours.v1.night`). Itch login does 
 
 Question packs: `js/content.js` and `js/content2.js` (the v4 Virginia packs) plus `js/content3.js`–`js/content11.js` (v4.9 Virginia) and `js/content12.js`–`js/content17.js` (v4.9 New Jersey grade 5). Format and writing rules: `tools/CONTENT-GUIDE.md`. Check every file with `node tools/validate-content.js`. Headless smoke test of the gateway, builder, shop, a night, the realms and their creatures, Fenrir, the castle perks, the shooter levels and the two built games: `node tools/smoke.js` (screenshots in `tools/shots/`).
 
+## v5.10 (2026-10-05) — The Odyssey: Scylla and Charybdis, a new steering level
+
+Only in the Odyssey build (`window.SOL_STATE === "ODY"`); the Virginia and New Jersey games are unchanged.
+
+- **The level (Odyssey Book 12):** Odysseus's galley sails up the strait while the water scrolls down toward it. Rows of gates, each two rock pillars marked with a letter, come down the strait; sail between the pillars of the gate with the right letter. Each row holds two or three gates with open water between them, so a gate can be passed by, and its letter comes round again.
+  - **Charybdis** (right): a whirlpool under the fig tree's rock. Every few seconds her water turns dark and spins faster for about a second, then she surges and drags the ship toward her. Her dark centre costs a life, and she spits the ship back out.
+  - **Scylla** (left): a shadow and a closing ring on the water mark where one of her heads will strike. The sea-green neck then lunges there; a ship under it loses a crewman (a life). Her necks reach only partway across, so the safe water is next to Charybdis, as Circe warned.
+  - A wrong gate, a pillar or a lone rock also costs a life. A Select TWO question needs both right gates. **ROW** (Space, the ROW button or a mouse button) gives a short burst of speed.
+- **Difficulty** (`straitParams` in `js/modes.js`): one curve, harder at every level. Level 9: one head, a strike every 4 s with 1.2 s of warning, a surge every 9 s, gates 143 px wide. Level 99: four heads, a strike every second with 0.56 s of warning, near-constant surges, gates 73 px wide, swaying gates and lone rocks, and more than twice the speed.
+- **Where it plays:** the Odyssey game's Mixed rotation is level 2 Eagle Swoop, 4 Rune Rocks, 6 Sun Chariot, 8 Wolf Ring and **9 Scylla and Charybdis**; levels 1, 3, 5, 7 and 10 stay the maze and the boss. Its game mode screen also has a **Scylla and Charybdis** card that plays it on every level. The card, and a saved pick of it, exist only in the Odyssey build.
+- **Tests:** `tools/smoke.js` checks the rotation in both kinds of build, the card in each `dist/` game, the difficulty ramp (every level 2–100 harder than the one before), and a run: the right gate answers, a wrong gate, a pillar, Charybdis's centre and Scylla's strike each cost a life, a surge is telegraphed and then pulls, and a Select TWO question needs both gates. Pictures: `tools/shots/21a-scylla-charybdis-9.png` and `21b-scylla-charybdis-89.png`.
+
 ## v5.9.0 (2026-10-05) — The Odyssey: a third game for English 9, Unit 2
 
 - **A separate game:** `node tools/build-games.js` now also writes `dist/ody/`, built for the Eng 9 Unit 2 "Challenge Accepted!" plan. In Canvas it is its own file, `SOLLabyrinth-Odyssey.html` (`node tools/build-appsscript.js ODY` then `node tools/build-canvas.js ODY` → `dist/canvas/SOLLabyrinth-Odyssey-Canvas.zip`). It opens on its own title screen, with no state or grade to choose.
