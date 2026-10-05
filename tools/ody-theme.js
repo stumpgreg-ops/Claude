@@ -113,6 +113,10 @@ var EXACT = {
     ["Two Sols! You shoot two arrows at a time. A hit takes one Sol away instead of a life.",
      "Two archers! You shoot two arrows at a time. A hit takes your crewman away instead of a life."],
     ["THE EAGLE KEPT SOL", "THE SIREN KEPT YOUR CREWMAN"],
+    /* v5.12: the birds in Siren Swoop's rows (BIRDS): gulls for ravens, terns for magpies (js/odyssey.js draws the tern) */
+    ["Ravens", "Gulls", /name:\s*$/],
+    ["Magpies", "Terns", /name:\s*$/],
+    ["Twelve magpies", "Twelve terns"],
     /* The Wandering Rocks (Rune Rocks): Zeus's storm clouds are the saucers, a Siren is the valkyrie */
     ['<p class="tut-kicker">Rune Rocks · how to pull a rock in</p>', '<p class="tut-kicker">The Wandering Rocks · how to pull a rock in</p>'],
     ["Valkyrie driven off", "Siren driven off"],
@@ -181,6 +185,9 @@ var RULES = [
   [/\bRune of Sol\b/g, "Athena's Aegis"],
   [/\bSol's\b/g, "Odysseus's"],
   [/\bSol\b/g, "Odysseus"],
+  /* v5.12: the birds — storm gulls for Odin's ravens, terns for Eagle Swoop's magpies */
+  [/\bRAVENS\b/g, "GULLS"], [/\bRAVEN\b/g, "GULL"], [/\bRavens\b/g, "Gulls"], [/\bRaven\b/g, "Gull"], [/\bravens\b/g, "gulls"], [/\braven\b/g, "gull"],
+  [/\bMAGPIES\b/g, "TERNS"], [/\bMAGPIE\b/g, "TERN"], [/\bMagpies\b/g, "Terns"], [/\bMagpie\b/g, "Tern"], [/\bmagpies\b/g, "terns"], [/\bmagpie\b/g, "tern"],
   /* the voyage */
   [/\ba realm\b/g, "an island"],
   [/\bA realm\b/g, "An island"],
@@ -200,7 +207,7 @@ var RULES = [
 ];
 
 /* the words that must not be left where a player reads them */
-var LEFT_RE = /\b(Hati|Fenrir|Sol|Odin|Valkyries?|Ragnarok|Midgard|Niflheim|Jotunheim|Muspelheim|Svartalfheim|Vanaheim|Alfheim|Helheim|Asgard|Huginn|Norse)\b|rune|realm|hati|fenrir|valkyr|ragnarok|huginn|odin\b/i;
+var LEFT_RE = /\b(Hati|Fenrir|Sol|Odin|Valkyries?|Ragnarok|Midgard|Niflheim|Jotunheim|Muspelheim|Svartalfheim|Vanaheim|Alfheim|Helheim|Asgard|Huginn|Norse)\b|rune|realm|hati|fenrir|valkyr|ragnarok|huginn|odin\b|\bravens?\b|\bmagpies?\b/i;
 
 /* ── string-literal helpers ── */
 /* the content of a literal with its own quote unescaped (\' -> ' in '...'), other escapes kept as written */
@@ -304,6 +311,7 @@ function themeJs(rel, src) {
 }
 
 function leftReason(rel, txt, inTable) {
+  if (inTable && rel === "js/modes.js" && /\b(worms?|mushrooms?|Nidhogg)\b/i.test(txt)) return "MODES.worms table: Root Worms is never offered or played in the Odyssey build (noOdy)";
   if (inTable) return rel === "js/realms.js" ? "REALMS table: js/odyssey.js rewrites it at runtime" : "MODES table: js/odyssey.js rewrites it at runtime";
   if (/^\[/.test(txt)) return "console tag, never shown";
   if (/^afterHours\./.test(txt)) return "save key";

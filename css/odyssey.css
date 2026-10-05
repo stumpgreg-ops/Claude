@@ -139,6 +139,8 @@ h1.logo img { width: min(300px, 60vw); filter: drop-shadow(0 8px 22px rgba(0, 0,
 .realm-card.mode-card { border-color: rgba(232, 176, 74, .6); background: linear-gradient(135deg, rgba(30, 60, 92, .95), rgba(18, 10, 20, .95)); }
 .realm-card.mode-card .new { border-left-color: var(--ochre); background: rgba(232, 176, 74, .1); }
 .realm-card.mode-card .new b { color: var(--ochre); }
+.realm-card.mode-card .birds { border-left-color: var(--foam); background: rgba(159, 211, 214, .08); }
+.realm-card.mode-card .birds b { color: var(--foam); }
 .realm-card.boss { border-color: rgba(255, 120, 90, .65); background: linear-gradient(135deg, rgba(76, 18, 12, .96), rgba(20, 10, 10, .96)); }
 .realm-card.boss::before { background-image: var(--meander-terra); }
 /* each island its own colours (data-realm keeps the old realm ids) */
