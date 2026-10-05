@@ -244,11 +244,12 @@ var srv = http.createServer(function (req, res) {
     var r = R.rams.filter(function (q) { return q.state === "graze" && !q.mark; })[0];
     if (r) { r.x = R.fx0 + R.caveW * 0.5; r.y = R.doorY + 50; r.state = "go"; s.ramCling(r); }
     R.gropeCd = 1e9; R.relCd = 1500;
-    var t0 = R.t; while (R.t - t0 < 1.2) await new Promise(function (res) { setTimeout(res, 50); });
+    /* wait on game time, but never forever: a paused scene (a card open, the level over) stops R.t */
+    var t0 = R.t, w0 = Date.now(); while (R.t - t0 < 1.2 && Date.now() - w0 < 8000) await new Promise(function (res) { setTimeout(res, 50); });
     /* a grope coming down on an empty spot: the shadow and the closing ring */
     var spot = s.ramClampReach(R.wallX0 - R.reachR * 0.7, R.doorY - R.doorH * 0.75);
     s.ramGrope(R.hands[0], spot.x, spot.y, 2400);
-    t0 = R.t; while (R.t - t0 < 1.3) await new Promise(function (res) { setTimeout(res, 50); });
+    t0 = R.t; w0 = Date.now(); while (R.t - t0 < 1.3 && Date.now() - w0 < 8000) await new Promise(function (res) { setTimeout(res, 50); });
   });
   await shot("ram-22-early");
 
