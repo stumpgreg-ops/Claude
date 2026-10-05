@@ -1,4 +1,4 @@
-/* SOL Labyrinth v5.8.3 — shooter levels.
+/* SOL Labyrinth v5.8.4 — shooter levels.
  *
  * Every other level of each realm (levels 2, 4, 6 and 8) swaps the maze for a
  * shooter, in rotation:
@@ -41,15 +41,15 @@
     },
     rocks: {
       id: "rocks", name: "Rune Rocks", kind: "asteroids level",
-      how: "Rocks drift through space and a few carry letters. Hold your beam on the rock with the right answer to pull it in. Blast the wrong letters and the plain rocks before they hit you.",
-      rules: "Pulling in a wrong letter costs a life. So does blasting the right answer, or a rock hitting your ship — including a rock you let go of before it reached you.",
+      how: "Rocks drift through space and a few carry letters. Hold your beam on the rock with the right answer to pull it in. Blast the wrong letters and the plain rocks before they hit you. Every level brings more and faster rocks, every new question sends in another wave, and dark-elf saucers fly across and shoot at you — shoot them for a bonus.",
+      rules: "Pulling in a wrong letter costs a life. So does blasting the right answer, a saucer's shot, or a rock hitting your ship — including a rock you let go of before it reached you.",
       keys: "◀ ▶ turn · ▲ thrust · Space, FIRE or the left mouse button shoots · ▼, Shift, PULL or the right mouse button holds the beam. The mouse never steers the ship.",
       tip: "RUNE ROCKS — beam in the right letter, blast the rest. Don't get hit.",
       hint1: "Pull in the rock with the right letter (▼, Shift or PULL). Blast the others. The passage stays in the side panel.",
       hint2: "This question has two right letters. Pull in both rocks that carry them.",
       news: ["",
         "Comets: a red line flashes where a comet will streak across a second later. Get out of its way.",
-        "Iron rocks: the big grey-blue rocks take two shots.",
+        "Iron rocks: the big grey-blue rocks take two shots. Small dark-elf saucers now come too, and they aim at you.",
         "Heavy runes: the beam pulls letter rocks in more slowly. Hold it longer.",
         "Slippery space: your ship drifts further before it stops.",
         "Guard stones: two small stones circle every letter rock. Shoot them off before the beam can pull it in.",
@@ -79,15 +79,15 @@
     },
     ring: {
       id: "ring", name: "Wolf Ring", kind: "arena level",
-      how: "Sol stands in a stone ring while the Hati attack. The letter runestones are sunk in the ground: after the wolves come, they rise one or two at a time, in any order and anywhere round the ring, and sink again a few seconds later. Shoot the runestone with the right answer while it is up. An arrow sends a wolf running.",
+      how: "Sol stands in a stone ring while the Hati attack, often in packs. The letter runestones are sunk in the ground: after the wolves come, they rise one or two at a time, in any order and anywhere round the ring, and sink again a few seconds later. Shoot the runestone with the right answer while it is up. An arrow sends a wolf running. Every level the wolves come faster and in bigger numbers, and the stones stay up for less time.",
       rules: "Shooting a wrong stone costs a life. So does letting a wolf reach you.",
       keys: "Arrow keys or WASD move and aim · Space or FIRE shoots · or click or tap to aim and shoot (Sol does not move).",
       tip: "WOLF RING — watch for the right runestone to rise, and shoot it. Keep the wolves off.",
       hint1: "The runestones rise after the wolves come. Shoot the one with the right letter while it is up. The passage stays in the side panel.",
       hint2: "This question has two right letters. Shoot both runestones that carry them.",
       news: ["",
-        "Wolf packs: the Hati sometimes come two at a time from the same side.",
         "The alpha wolf: a big grey wolf that takes three arrows to send away.",
+        "Bigger packs: the Hati can come three at a time from the same side.",
         "Ravens fly over the ring and drop poo. A shadow shows where it will land.",
         "The runestones slide round the ring while they are up.",
         "A quiver of six arrows: each one comes back after a moment, so don't waste them.",
@@ -242,6 +242,15 @@
       [[0.3, -0.2, 0.14], [-0.35, 0.25, 0.1], [0.1, 0.4, 0.08]].forEach(function (k) { c.beginPath(); c.arc(cx + k[0] * r, cy + k[1] * r, k[2] * r, 0, Math.PI * 2); c.fill(); });
     };
   }
+  /* v5.8.4: a dark-elf saucer (Asteroids' flying saucer) */
+  function drawSaucer(c, w, h) {
+    c.fillStyle = "rgba(160,255,190,0.18)"; c.beginPath(); c.ellipse(w / 2, h * 0.62, w * 0.5, h * 0.36, 0, 0, Math.PI * 2); c.fill();
+    c.fillStyle = "#9ad8ff"; c.beginPath(); c.ellipse(w / 2, h * 0.42, w * 0.2, h * 0.3, 0, Math.PI, 0); c.fill();
+    c.fillStyle = "#4a3a6a"; c.beginPath(); c.ellipse(w / 2, h * 0.58, w * 0.46, h * 0.2, 0, 0, Math.PI * 2); c.fill();
+    c.strokeStyle = "#c8b8f0"; c.lineWidth = 2; c.stroke();
+    c.fillStyle = "#9affb0";
+    for (var i = 0; i < 5; i++) { c.beginPath(); c.arc(w * (0.22 + i * 0.14), h * 0.6, 2.2, 0, Math.PI * 2); c.fill(); }
+  }
   function drawShip(c, w, h) {
     var g = c.createRadialGradient(w / 2, h * 0.58, 2, w / 2, h * 0.58, w * 0.5);
     g.addColorStop(0, "rgba(255,230,120,0.55)"); g.addColorStop(1, "rgba(255,200,60,0)");
@@ -327,6 +336,7 @@
     for (var i = 0; i < 3; i++) canvasTex(scene, "md-rock-" + i, 100, 100, drawRock(i + 1, false));
     canvasTex(scene, "md-rock-l", 100, 100, drawRock(7, true));
     canvasTex(scene, "md-ship", 44, 52, drawShip);
+    canvasTex(scene, "md-saucer", 64, 34, drawSaucer);
     canvasTex(scene, "md-chariot", 110, 72, drawChariot);
     canvasTex(scene, "md-team-0", TEAM_W, TEAM_H, drawTeam(0));
     canvasTex(scene, "md-team-1", TEAM_W, TEAM_H, drawTeam(1));
@@ -749,6 +759,18 @@
         R.feathers.forEach(function (f) { f.y += dy; });
         this.raidSway();
       }
+      /* v5.8.4: one difficulty curve, a little harder every level (dives come sooner and faster,
+         more birds dive at once, poo falls faster, eagles beam more often) */
+      raidParams(n) {
+        n = Math.max(1, n || 1);
+        return {
+          maxDivers: 2 + Math.floor(n / 20) + (this.tier >= 9 ? 1 : 0),   /* 2 at first, 3 from 20 … 7 at 100 */
+          diveCdMul: 1 - Math.min(0.55, n / 180),
+          diveSpd: 1 + Math.min(0.75, n / 132),
+          featherSp: 230 + n * 1.3,
+          beamP: Math.min(0.75, 0.45 + n * 0.003)
+        };
+      }
       raidSway() {
         var R = this.raid, span = 0;
         R.ravens.forEach(function (e) { span = Math.max(span, Math.abs(e.sx) * 2 + 80); });
@@ -826,7 +848,7 @@
       raidDive(e, dx) {
         var W = this.W, H = this.H, p = this.player, sd = e.x < W / 2 ? -1 : 1, tx = clamp(p.x + rnd(-40, 40), 40, W - 40);
         e.state = "dive"; e.drops = 0; e.dx = dx || 0;
-        var spd = 1 + Math.min(0.6, this.night / 160);
+        var spd = this.raidParams(this.night).diveSpd;
         e.path = { p0: { x: e.x, y: e.y }, p1: { x: e.x + sd * 130, y: e.y - 110 }, p2: { x: tx - sd * 190 + e.dx, y: H * 0.72 }, p3: { x: tx + sd * 140 + e.dx, y: H + 70 }, t: 0, dur: 2.8 / spd, next: "return" };
       }
       raidBeamDive(e) {
@@ -968,11 +990,11 @@
         R.ravens = R.ravens.filter(function (o) { return o.alive; });
         /* who dives next */
         R.diveCd -= ms;
-        var maxDivers = 2 + Math.floor(this.night / 25) + (this.tier >= 9 ? 1 : 0);   /* 2 at first, 3 from 25, … 5 at 75+, 6 in Ragnarok */
+        var RP = this.raidParams(this.night), maxDivers = RP.maxDivers;
         var flying = R.ravens.filter(function (o) { return o.alive && (o.state === "dive" || o.state === "beam" || o.state === "return"); }).length;
         if (R.ready && anyForm && (flying === 0 || (R.diveCd <= 0 && divers < maxDivers))) {   /* never an empty sky */
           this.raidLaunch();
-          R.diveCd = rnd(700, 1400) * (1 - Math.min(0.4, this.night / 250));
+          R.diveCd = rnd(700, 1400) * RP.diveCdMul;
         }
         /* v5.7.9 (realm 3 on): two eagles trade places now and then */
         if (this.tier >= 2 && R.ready) {
@@ -1016,7 +1038,7 @@
         /* falling feathers */
         for (i = R.feathers.length - 1; i >= 0; i--) {
           var f = R.feathers[i], gone = false;
-          f.t += s; f.y += (230 + this.night * 1.1) * s; f.x += (f.vx || 0) * s;
+          f.t += s; f.y += this.raidParams(this.night).featherSp * s; f.x += (f.vx || 0) * s;
           f.spr.setPosition(f.x, f.y).setScale(1, 1 + Math.min(0.25, f.t * 0.3));
           var fw = this.raidSolAt(f.x, f.y, 26);
           if (fw) {
@@ -1077,7 +1099,7 @@
           onUpdate: function () { if (onSol && p) sp.setPosition(p.x, p.y - 22); } });
       }
       raidFeather(x, y) {
-        var p = this.player, fall = Math.max(0.4, (p.y - y) / (210 + this.night * 1.1));
+        var p = this.player, fall = Math.max(0.4, (p.y - y) / (this.raidParams(this.night).featherSp - 20));
         var vx = clamp((p.x - x) / fall, -140, 140) * (this.tier >= 1 ? 1 : 0.6);
         this.raid.feathers.push({ x: x, y: y, vx: vx, t: 0, spr: this.add.image(x, y, "md-poo").setDepth(17) });
       }
@@ -1089,7 +1111,7 @@
         if (eagles.length && (Math.random() < 0.5 || !ravens.length)) {
           var eg = eagles[Math.floor(Math.random() * eagles.length)];
           eg.lead = true;
-          if (!beaming && Math.random() < 0.55) { this.raidBeamDive(eg); return; }
+          if (!beaming && Math.random() < this.raidParams(this.night).beamP) { this.raidBeamDive(eg); return; }
           eg.beamer = false;
           this.raidDive(eg, 0);
           /* up to two ravens fly escort, as in Galaga */
@@ -1276,16 +1298,41 @@
         if (ov) ov.classList.add("hidden");
       }
 
-      /* ═══ 2. RUNE ROCKS — asteroids ═══════════════════════════════════════ */
+      /* ═══ 2. RUNE ROCKS — asteroids ═══════════════════════════════════════
+         v5.8.4: harder every level, the way Asteroids gets harder every wave:
+         more rocks to start with, a fuller field, faster respawns and faster
+         rocks, level by level; each new question in a level sends in another
+         wave of big rocks; and dark-elf saucers fly across and shoot — a big
+         one that fires anywhere (level 6 on) and a small one that aims at the
+         ship (level 16 on), coming more often and aiming better as levels rise. */
+      rkParams(n, wave) {
+        n = Math.max(1, n || 1); wave = Math.max(1, wave || 1);
+        var w = wave - 1;
+        return {
+          start: Math.min(14, 3 + Math.round(n / 8)),                 /* 3 at level 1, 4 at 4, 9 at 48, 14 at 88+ */
+          waveAdd: w ? Math.min(6, 1 + Math.floor(n / 20)) : 0,     /* big rocks each new question brings */
+          cap: Math.min(36, 8 + Math.floor(n / 4) + 2 * w),           /* plain rock sizes kept on the field */
+          spawnMs: Math.max(700, 3000 - n * 20 - w * 150),
+          speed: (1 + n * 0.009 + w * 0.04) * (this.tier >= 9 ? 1.25 : 1),
+          speedAdd: n * 0.3,
+          saucer: n >= 6,
+          saucerMs: Math.max(7000, 26000 - n * 170) * Math.max(0.6, 1 - w * 0.1),
+          smallShare: n >= 16 ? clamp(0.25 + (n - 16) / 80, 0.25, 0.85) : 0,
+          aimErr: Math.max(0.06, 0.45 - Math.max(0, n - 16) * 0.005),
+          saucerFireMs: Math.max(550, 1300 - n * 6)
+        };
+      }
       setup_rocks() {
         this.drawSkyBg(160, true);
         var W = this.W, H = this.H;
         var ship = { x: W / 2, y: H / 2, vx: 0, vy: 0, ang: -Math.PI / 2, spr: this.add.image(W / 2, H / 2, "md-ship").setScale(1.2).setDepth(20) };
         this.makeSol(W / 2, H / 2, "up").setVisible(false);   /* Sol flies the ship; the sprite stays for coin pop-ups */
         this.rk = { ship: ship, rocks: [], bullets: [], cd: 0, spawnCd: 0, target: null, beamSnd: 0, gen: 0,
-          warns: [], cometCd: 6000, valk: null, valkCd: 10000, spears: [], showerCd: 11000 };
-        var n = 4 + Math.floor(this.night / 22), i;
-        for (i = 0; i < n; i++) this.rockFromEdge(3, null);
+          warns: [], cometCd: 6000, valk: null, valkCd: 10000, spears: [], showerCd: 11000,
+          wave: 0, saucers: [], sBullets: [], saucerCd: 0 };
+        var P = this.rkParams(this.night, 1), i;
+        this.rk.saucerCd = P.saucerMs * 0.6;
+        for (i = 0; i < P.start; i++) this.rockFromEdge(3, null);
       }
       resize_rocks() { this.drawSkyBg(160, true); }
       rockMake(size, letter, x, y, vx, vy) {
@@ -1306,7 +1353,8 @@
           tries++;
         } while (tries < 8 && dist(x, y, S.x, S.y) < 220);
         var tx = rnd(W * 0.2, W * 0.8), ty = rnd(H * 0.2, H * 0.8), a = Math.atan2(ty - y, tx - x);
-        var sp = (letter ? rnd(34, 56) + this.night * 0.2 : rnd(40, 80) + this.night * 0.45) * (this.tier >= 9 ? 1.25 : 1);
+        var P = this.rkParams(this.night, this.rk.wave);
+        var sp = letter ? (rnd(34, 56) + this.night * 0.2) * (this.tier >= 9 ? 1.25 : 1) : rnd(40, 80) * P.speed + P.speedAdd;
         return this.rockMake(size, letter, x, y, Math.cos(a) * sp, Math.sin(a) * sp);
       }
       /* a letter rock; from realm 6 two guard stones circle it and block the beam until they are shot off */
@@ -1323,10 +1371,15 @@
         R.rocks.filter(function (q) { return q.orbitOf === o; }).forEach(function (q) { self.burst(q.x, q.y, 0xe8c890, 6); self.rockRemove(q); });
       }
       answers_rocks() {
-        var R = this.rk, self = this;
+        var R = this.rk, self = this, k;
         R.gen += 1;
         R.rocks.filter(function (o) { return o.letter; }).forEach(function (o) { self.burst(o.x, o.y, 0xffd84a, 10); self.rockRemove(o); });
         shuffle(this.choiceLetters().slice()).forEach(function (L) { self.letterRock(L); });
+        /* v5.8.4: every new question is a new wave, with more big rocks */
+        R.wave += 1;
+        var P = this.rkParams(this.night, R.wave);
+        for (k = 0; k < P.waveAdd; k++) this.rockFromEdge(3, null);
+        if (P.waveAdd) this.toast("Wave " + R.wave + ": " + P.waveAdd + " more big rock" + (P.waveAdd === 1 ? "" : "s") + " fly in.", 2400);
       }
       rockShot(o, noCredit) {
         var self = this;
@@ -1398,7 +1451,13 @@
           this.wrap(b, 10);
           b.spr.setPosition(b.x, b.y);
           for (j = 0; j < R.rocks.length; j++) { if (dist(b.x, b.y, R.rocks[j].x, R.rocks[j].y) < R.rocks[j].r + 4) { hit = R.rocks[j]; break; } }
-          if (!hit && R.valk && dist(b.x, b.y, R.valk.x, R.valk.y) < 32) {
+          if (!hit) {
+            for (j = 0; j < R.saucers.length; j++) {
+              var sc = R.saucers[j];
+              if (dist(b.x, b.y, sc.x, sc.y) < (sc.small ? 18 : 28)) { this.saucerDown(sc, true); b.life = 0; break; }
+            }
+          }
+          if (!hit && b.life > 0 && R.valk && dist(b.x, b.y, R.valk.x, R.valk.y) < 32) {
             this.burst(R.valk.x, R.valk.y, 0xe0e8ff, 20); this.awardBonusPoints(1500, "Valkyrie driven off");
             kill(R.valk); R.valk = null; R.valkCd = rnd(14000, 20000); b.life = 0;
           }
@@ -1464,10 +1523,81 @@
         }
         this.rockExtras(s, ms);
         if (this._finishing) return;
-        /* keep the field busy */
+        this.rockSaucers(s, ms);
+        if (this._finishing) return;
+        /* keep the field busy: fuller and faster to refill every level and every wave */
+        var P = this.rkParams(this.night, R.wave);
         var blanks = R.rocks.filter(function (o) { return !o.letter; }).reduce(function (a, o) { return a + o.size; }, 0);
         R.spawnCd -= ms;
-        if (R.spawnCd <= 0 && blanks < 10 + Math.floor(this.night / 12)) { this.rockFromEdge(3, null); R.spawnCd = 2600; }
+        if (R.spawnCd <= 0 && blanks < P.cap) { this.rockFromEdge(3, null); R.spawnCd = P.spawnMs; }
+      }
+      /* v5.8.4: dark-elf saucers, Asteroids' flying saucers. A big one wanders across and fires anywhere;
+         a small one is quicker and aims at the ship. Their shots break plain rocks too. */
+      rockSaucers(s, ms) {
+        var R = this.rk, S = R.ship, W = this.W, H = this.H, P = this.rkParams(this.night, R.wave), i, j, self = this;
+        if (P.saucer && R.saucers.length === 0) {
+          R.saucerCd -= ms;
+          if (R.saucerCd <= 0) {
+            R.saucerCd = P.saucerMs;
+            var small = Math.random() < P.smallShare, fromL = Math.random() < 0.5;
+            var sc = { small: small, x: fromL ? -40 : W + 40, y: rnd(H * 0.15, H * 0.85), vx: (fromL ? 1 : -1) * (small ? 170 : 110), vy: 0,
+              turnCd: rnd(900, 1800), fireCd: 700, t: 0,
+              spr: this.add.image(0, 0, "md-saucer").setDepth(16).setScale(small ? 0.62 : 1).setTint(small ? 0xffb0c8 : 0xffffff) };
+            R.saucers.push(sc);
+            snd("caw");
+            if (!R.toldSaucer || (small && !R.toldSmall)) {
+              R.toldSaucer = true; if (small) R.toldSmall = true;
+              this.toast(small ? "A small dark-elf saucer! It aims at your ship. Shoot it for a big bonus." : "A dark-elf saucer! It shoots in all directions. Dodge its shots, or shoot it for a bonus.", 3600);
+            }
+          }
+        }
+        for (i = R.saucers.length - 1; i >= 0; i--) {
+          var u = R.saucers[i];
+          u.t += s; u.x += u.vx * s; u.y += u.vy * s;
+          if (u.y < -20) u.y = H + 20; else if (u.y > H + 20) u.y = -20;
+          u.turnCd -= ms;
+          if (u.turnCd <= 0) { u.turnCd = rnd(900, 1800); u.vy = [0, -1, 1][Math.floor(rnd(0, 3))] * Math.abs(u.vx) * 0.6; }
+          u.spr.setPosition(u.x, u.y + Math.sin(u.t * 6) * 2);
+          u.fireCd -= ms;
+          if (u.fireCd <= 0 && u.x > 0 && u.x < W) {
+            u.fireCd = P.saucerFireMs * (u.small ? 0.85 : 1);
+            var a = u.small ? Math.atan2(S.y - u.y, S.x - u.x) + rnd(-P.aimErr, P.aimErr) : rnd(0, Math.PI * 2);
+            R.sBullets.push({ x: u.x, y: u.y, vx: Math.cos(a) * 330, vy: Math.sin(a) * 330, life: 1.6,
+              spr: this.add.image(u.x, u.y, "md-bolt").setTint(0x9affb0).setDepth(17).setRotation(a) });
+            snd("shot");
+          }
+          if (dist(u.x, u.y, S.x, S.y) < (u.small ? 26 : 34) && this.iframeMs <= 0) {
+            this.loseLife("hit", "A DARK-ELF SAUCER RAMMED YOU");
+            this.saucerDown(u, false);
+            if (this._finishing) return;
+            continue;
+          }
+          if (u.x < -70 || u.x > W + 70) { kill(u); R.saucers.splice(i, 1); }
+        }
+        for (i = R.sBullets.length - 1; i >= 0; i--) {
+          var b = R.sBullets[i], gone = false;
+          b.x += b.vx * s; b.y += b.vy * s; b.life -= s;
+          this.wrap(b, 10);
+          b.spr.setPosition(b.x, b.y);
+          if (dist(b.x, b.y, S.x, S.y) < 18) {
+            gone = true;
+            if (this.iframeMs <= 0) this.loseLife("hit", "A DARK-ELF SAUCER SHOT YOU");
+          } else {
+            for (j = 0; j < R.rocks.length; j++) {
+              var o = R.rocks[j];
+              if (!o.letter && !o.orbitOf && !o.comet && dist(b.x, b.y, o.x, o.y) < o.r) { this.rockShot(o, true); gone = true; break; }
+            }
+          }
+          if (gone || b.life <= 0) { b.spr.destroy(); R.sBullets.splice(i, 1); }
+          if (this._finishing) return;
+        }
+      }
+      saucerDown(u, byPlayer) {
+        var R = this.rk, i = R.saucers.indexOf(u);
+        if (i >= 0) R.saucers.splice(i, 1);
+        this.burst(u.x, u.y, 0x9affb0, 22); snd("rock");
+        kill(u);
+        if (byPlayer) this.awardBonusPoints(u.small ? 2000 : 1000, u.small ? "Small saucer shot down" : "Saucer shot down");
       }
       /* comets (realm 2 on), a valkyrie (realm 8 on) and rock showers (realm 9 on) */
       rockExtras(s, ms) {
@@ -1546,8 +1676,8 @@
          sparks from level 26, and from level 16 the orbs weave more and some are
          guarded by a raven flying in front of them that has to be shot first. */
       skyParams(n) {
-        var eff = 30 + Math.max(0, n - 6) * 1.25;          /* 30 at level 6, 42 at 16, 80 at 46, 142 at 96 */
-        var late = Math.max(0, n - 6), tier = clamp(Math.floor((n - 1) / 10), 0, 9);
+        var eff = 22.5 + n * 1.25;          /* v5.8.4: climbs from level 1 (24) — 30 at level 6, 42 at 16, 80 at 46, 142 at 96 */
+        var late = n - 1, tier = clamp(Math.floor((n - 1) / 10), 0, 9);
         return {
           eff: eff,
           spawnMs: Math.max(380, 1200 - eff * 6),
@@ -1749,7 +1879,27 @@
         try { this.fxG.clear(); } catch (e) {}
       }
 
-      /* ═══ 4. WOLF RING — arena ════════════════════════════════════════════ */
+      /* ═══ 4. WOLF RING — arena ════════════════════════════════════════════
+         v5.8.4: harder from the start and harder every level. One curve sets how many wolves run at
+         once, how fast they come and run, how often they come in packs, how long a stone stays up
+         and how long the head start is; the alpha wolf comes from level 12 and bigger packs from 21. */
+      ringParams(n) {
+        n = Math.max(1, n || 1);
+        var eff = 25 + n * 1.1;                       /* 26 at level 1, 34 at 8, 133 at 98 */
+        return {
+          eff: eff,
+          cap: Math.min(10, 3 + Math.floor(eff / 18)) + (this.tier >= 9 ? 1 : 0),   /* wolves running at once: 4 at first */
+          spawnMs: Math.max(420, 1700 - eff * 10),
+          wolfSp: Math.min(310, 160 + eff * 1.3),
+          packP: clamp(0.15 + eff / 220, 0.15, 0.75),
+          packMax: n >= 21 ? 3 : 2,
+          upMs: Math.max(2400, 5600 - eff * 25) * (this.tier >= 7 ? 0.85 : 1),
+          headStart: Math.max(1400, 3600 - eff * 15),
+          alpha: n >= 12,
+          alphaMs: Math.max(5000, 13000 - eff * 50),
+          maxAlphas: this.tier >= 7 ? 2 : 1
+        };
+      }
       setup_ring() {
         this.rg = { arrows: [], wolves: [], stones: [], cd: 0, spawnCd: 2200, aim: -Math.PI / 2, frameMs: 0,
           ammo: 6, ammoMs: 0, alphaCd: 7000, drops: [], rav: null, ravCd: 5000 };
@@ -1796,9 +1946,10 @@
           rg.stones.push(o);
         });
         rg.queue = [];
-        rg.riseCd = 3600;                                   /* the wolves get a head start */
+        var GP = this.ringParams(this.night);
+        rg.riseCd = GP.headStart;                         /* the wolves get a head start */
         rg.spawnCd = Math.min(rg.spawnCd, 600);
-        rg.upMs = Math.max(3800, 6500 - this.night * 25) * (this.tier >= 7 ? 0.75 : 1);   /* how long a stone stays up */
+        rg.upMs = GP.upMs;                                /* how long a stone stays up */
       }
       ringSlotPos(k, drift) {
         var rg = this.rg, a = rg.stoneA0 + k / rg.slotN * Math.PI * 2 + (drift || 0);
@@ -1920,18 +2071,19 @@
         /* the Hati */
         var running = rg.wolves.filter(function (w) { return w.state === "run"; }).length;
         rg.spawnCd -= ms;
-        var cap = 3 + Math.floor(this.night / 22) + (this.tier >= 9 ? 1 : 0);
+        var GP = this.ringParams(this.night), cap = GP.cap;
         if (rg.spawnCd <= 0 && !this._between && running < cap) {
-          var sa2 = rnd(0, Math.PI * 2);
+          var sa2 = rnd(0, Math.PI * 2), pk;
           this.ringWolf(sa2, false);
-          if (this.tier >= 1 && Math.random() < 0.35 && running + 1 < cap + 1) this.ringWolf(sa2 + 0.2, false);   /* a pack of two */
+          /* packs: one or two more from the same side */
+          for (pk = 1; pk < GP.packMax && running + pk < cap + 1; pk++) { if (Math.random() < GP.packP) this.ringWolf(sa2 + pk * 0.2, false); else break; }
           if (Math.random() < 0.25) snd("howl");
-          rg.spawnCd = Math.max(650, 2100 - this.night * 13) * rnd(0.75, 1.25) * (this.tier >= 9 ? 0.75 : 1);
+          rg.spawnCd = GP.spawnMs * rnd(0.75, 1.25) * (this.tier >= 9 ? 0.75 : 1);
         }
-        if (this.tier >= 2 && !this._between) {
+        if (GP.alpha && !this._between) {
           rg.alphaCd -= ms;
           var alphas = rg.wolves.filter(function (w) { return w.alpha && w.state === "run"; }).length;
-          if (rg.alphaCd <= 0 && alphas < (this.tier >= 7 ? 2 : 1)) { this.ringWolf(rnd(0, Math.PI * 2), true); snd("howl"); rg.alphaCd = rnd(9000, 13000); }
+          if (rg.alphaCd <= 0 && alphas < GP.maxAlphas) { this.ringWolf(rnd(0, Math.PI * 2), true); snd("howl"); rg.alphaCd = GP.alphaMs * rnd(0.8, 1.2); }
         }
         if (this.tier >= 3) this.ringRavens(s, ms);
         rg.frameMs += ms;
@@ -1964,7 +2116,7 @@
       }
       ringWolf(ang, alpha) {
         var rg = this.rg, wx = rg.cx + Math.cos(ang) * (rg.R + 70), wy = rg.cy + Math.sin(ang) * (rg.R + 70);
-        var w = { x: wx, y: wy, state: "run", sp: Math.min(285, 145 + this.night * 1.4) * rnd(0.9, 1.1) * (alpha ? 0.85 : 1), ph: rnd(0, 6),
+        var w = { x: wx, y: wy, state: "run", sp: this.ringParams(this.night).wolfSp * rnd(0.9, 1.1) * (alpha ? 0.85 : 1), ph: rnd(0, 6),
           alpha: !!alpha, hp: alpha ? 3 : 1, zig: !alpha && this.tier >= 6 && Math.random() < 0.5, leap: !alpha && this.tier >= 8 && Math.random() < 0.4,
           spr: this.add.image(wx, wy, "hati1").setScale(alpha ? 0.74 : 0.5).setDepth(16) };
         if (alpha) w.spr.setTint(0xb8c0cc);

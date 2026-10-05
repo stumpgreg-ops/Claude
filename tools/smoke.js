@@ -888,6 +888,35 @@ var srv = http.createServer(function (req, res) {
     var o = { tier: s.tier, warned: R.warns.length > 0, valk: !!R.valk, guards: R.rocks.filter(function (q) { return q.orbitOf; }).length, iron: R.rocks.some(function (q) { return q.hp === 2; }) };
     await new Promise(function (r) { setTimeout(r, 1300); });
     o.comet = R.rocks.some(function (q) { return q.comet; }) || o.warned;
+    /* v5.8.4: harder every level — more, faster rocks, fuller fields, waves within a level, saucers */
+    var lv = [], k, ok = true;
+    for (k = 1; k <= 100; k++) lv.push(s.rkParams(k, 1));
+    for (k = 1; k < 100; k++) {
+      var a = lv[k - 1], b = lv[k];
+      if (!(b.speed > a.speed && b.speedAdd > a.speedAdd && b.spawnMs <= a.spawnMs && b.start >= a.start && b.cap >= a.cap && b.saucerMs <= a.saucerMs)) ok = false;
+      if (!(b.spawnMs < a.spawnMs || b.start > a.start || b.cap > a.cap || b.speed > a.speed)) ok = false;
+    }
+    o.ramp = { ok: ok, start: [lv[0].start, lv[49].start, lv[99].start], cap: [lv[0].cap, lv[49].cap, lv[99].cap], saucer: [lv[4].saucer, lv[5].saucer], small: [lv[14].smallShare, lv[15].smallShare] };
+    var w1 = s.rkParams(40, 1), w3 = s.rkParams(40, 3);
+    o.waves = w3.cap > w1.cap && w3.speed > w1.speed && w3.waveAdd > 0 && w1.waveAdd === 0;
+    var big0 = R.rocks.filter(function (q) { return q.size === 3 && !q.letter; }).length, wv = R.wave;
+    s.answers_rocks();
+    o.waveRocks = R.wave === wv + 1 && R.rocks.filter(function (q) { return q.size === 3 && !q.letter; }).length >= big0 + s.rkParams(94, R.wave).waveAdd;
+    /* a saucer flies in, shoots, and can be shot down for a bonus */
+    R.saucers.forEach(function (u) { u.spr.destroy(); }); R.saucers = []; R.saucerCd = 0;
+    await new Promise(function (r) { setTimeout(r, 900); });
+    o.saucer = R.saucers.length === 1;
+    await new Promise(function (r) { setTimeout(r, 1400); });
+    o.saucerShot = R.sBullets.length > 0 || (R.saucers[0] && R.saucers[0].fireCd < 1300);
+    var u0 = R.saucers[0];
+    if (u0) s.saucerDown(u0, true);
+    o.saucerDown = !!u0 && R.saucers.length === 0;
+    /* a saucer's shot costs a life */
+    s.iframeMs = 0; var st0 = s.strikes, sp0 = s.spareLives;
+    R.sBullets.push({ x: R.ship.x + 4, y: R.ship.y, vx: 0, vy: 0, life: 1, spr: s.add.image(R.ship.x, R.ship.y, "md-bolt") });
+    await new Promise(function (r) { setTimeout(r, 200); });
+    o.saucerHurts = s.strikes > st0 || s.spareLives < sp0;
+    s.iframeMs = 1e9;
     return o;
   });
   await shot("20b-rune-rocks-ragnarok");
@@ -905,8 +934,37 @@ var srv = http.createServer(function (req, res) {
     return { tier: s.tier, alpha: G.wolves.some(function (w) { return w.alpha; }), raven: !!G.rav || G.drops.length > 0, ammo: G.ammo, short: G.upMs };
   });
   await shot("20d-wolf-ring-ragnarok");
+  /* v5.8.4: every mode is harder at every level than at the one before (never easier on any setting) */
+  var ramp = await page.evaluate(function () {
+    var s = SolScene, out = {};
+    function chk(name, f, up, down) {
+      var easier = [], flat = [], n;
+      for (n = 1; n < 100; n++) {
+        var a = f(n), b = f(n + 1), harder = false, worse = false;
+        up.forEach(function (k) { if (b[k] > a[k] + 1e-9) harder = true; if (b[k] < a[k] - 1e-9) worse = true; });
+        down.forEach(function (k) { if (b[k] < a[k] - 1e-9) harder = true; if (b[k] > a[k] + 1e-9) worse = true; });
+        if (worse) easier.push(n + 1); if (!harder) flat.push(n + 1);
+      }
+      out[name] = { easier: easier.slice(0, 6), flat: flat.slice(0, 6) };
+    }
+    chk("maze", function (n) { return window.__sol.nightConfig(n); }, ["coneRange", "coneHalf", "janPatrol", "janHurry", "janChase", "chaseMs", "cameraCount", "mazeCount", "extracts"], ["iframe", "strikes"]);
+    chk("raid", function (n) { return s.raidParams(n); }, ["maxDivers", "diveSpd", "featherSp", "beamP"], ["diveCdMul"]);
+    chk("rocks", function (n) { return s.rkParams(n, 1); }, ["start", "cap", "speed", "speedAdd", "smallShare"], ["spawnMs", "saucerMs", "aimErr", "saucerFireMs"]);
+    chk("sky", function (n) { return s.skyParams(n); }, ["eff", "ravenSp", "featherSp", "orbSp", "throwP", "guards", "spin"], ["spawnMs", "gapHalf"]);
+    chk("ring", function (n) { return s.ringParams(n); }, ["eff", "cap", "wolfSp", "packP", "packMax"], ["spawnMs", "upMs", "headStart", "alphaMs"]);
+    var r1 = s.ringParams(1), r8 = s.ringParams(8);
+    out.ringStart = { cap: r1.cap, spawnMs: r1.spawnMs, wolfSp: r1.wolfSp, packP: r1.packP, l8: { cap: r8.cap, spawnMs: r8.spawnMs, wolfSp: r8.wolfSp } };
+    return out;
+  });
+  console.log("ramp", JSON.stringify(ramp));
+  ["maze", "raid", "rocks", "sky", "ring"].forEach(function (m) {
+    check(ramp[m] && ramp[m].easier.length === 0 && ramp[m].flat.length === 0, "v5.8.4: " + m + " is harder at every level 2-100 than at the level before, and never easier: " + JSON.stringify(ramp[m]));
+  });
+  check(ramp.ringStart.cap >= 4 && ramp.ringStart.spawnMs < 1500 && ramp.ringStart.wolfSp > 180 && ramp.ringStart.packP > 0, "v5.8.4: Wolf Ring starts harder (4 wolves at once, sooner and faster, packs from the start): " + JSON.stringify(ramp.ringStart));
   console.log("tiers", JSON.stringify(tiers));
   check(tiers.raid.tier === 9 && /New this time/.test(tiers.raid.card) && tiers.raid.clouds >= 1 && tiers.raid.swapped && tiers.raid.helm && tiers.raid.rows > 12, "Eagle Swoop in Ragnarok: storm clouds, eagles trading places, iron helms, three raven rows, and the card says what's new: " + JSON.stringify(tiers.raid).slice(0, 200));
+  check(tiers.rocks.ramp && tiers.rocks.ramp.ok && tiers.rocks.ramp.start[2] > tiers.rocks.ramp.start[0] && tiers.rocks.ramp.cap[2] > tiers.rocks.ramp.cap[0] && !tiers.rocks.ramp.saucer[0] && tiers.rocks.ramp.saucer[1] && tiers.rocks.ramp.small[0] === 0 && tiers.rocks.ramp.small[1] > 0, "Rune Rocks (v5.8.4): every level is harder than the one before (faster rocks, faster respawns, never fewer rocks), saucers from level 6, small aiming saucers from 16: " + JSON.stringify(tiers.rocks.ramp));
+  check(tiers.rocks.waves && tiers.rocks.waveRocks && tiers.rocks.saucer && tiers.rocks.saucerShot && tiers.rocks.saucerDown && tiers.rocks.saucerHurts, "Rune Rocks (v5.8.4): each new question sends a wave of big rocks; a dark-elf saucer flies in, fires, can be shot down, and its shot costs a life: " + JSON.stringify({ w: tiers.rocks.waves, wr: tiers.rocks.waveRocks, s: tiers.rocks.saucer, f: tiers.rocks.saucerShot, d: tiers.rocks.saucerDown, h: tiers.rocks.saucerHurts }));
   check(tiers.rocks.tier === 9 && tiers.rocks.comet && tiers.rocks.valk && tiers.rocks.guards >= 2 && tiers.rocks.iron, "Rune Rocks in Ragnarok: comets, a valkyrie, guard stones and iron rocks: " + JSON.stringify(tiers.rocks));
   check(tiers.sky.tier === 9 && tiers.sky.flip && tiers.sky.orbs > 0, "Sun Chariot in Ragnarok runs with reversing shields: " + JSON.stringify(tiers.sky));
   check(tiers.ring.tier === 9 && tiers.ring.alpha && tiers.ring.raven && tiers.ring.ammo <= 6, "Wolf Ring in Ragnarok: the alpha wolf, poo-dropping ravens and the quiver: " + JSON.stringify(tiers.ring));

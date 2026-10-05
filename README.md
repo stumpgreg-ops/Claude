@@ -13,6 +13,24 @@ Progress saves in this browser profile (`afterHours.v1.night`). Itch login does 
 
 Question packs: `js/content.js` and `js/content2.js` (the v4 Virginia packs) plus `js/content3.js`–`js/content11.js` (v4.9 Virginia) and `js/content12.js`–`js/content17.js` (v4.9 New Jersey grade 5). Format and writing rules: `tools/CONTENT-GUIDE.md`. Check every file with `node tools/validate-content.js`. Headless smoke test of the gateway, builder, shop, a night, the realms and their creatures, Fenrir, the castle perks, the shooter levels and the two built games: `node tools/smoke.js` (screenshots in `tools/shots/`).
 
+## v5.8.4 (2026-10-05) — every mode gets harder at every level; Rune Rocks waves and saucers; a tougher Wolf Ring
+
+Each mode now has one difficulty curve tied to the level number, so every level is harder than the one before. That matters most when a student picks a single mode, because then it plays on every level.
+
+- **Rune Rocks** (`rkParams`), modeled on Asteroids:
+  - **Every level:** more rocks at the start (3 at level 1, 9 at 48, 14 from 88), a fuller field, faster respawns and faster rocks.
+  - **Waves:** each new question in a level sends in another wave of big rocks.
+  - **Dark-elf saucers** (Asteroids' flying saucers): a big one from level 6 fires in random directions; a small one from level 16 aims at the ship. Both come more often, and the small one aims better, as levels rise.
+  - Saucer shots break plain rocks. A saucer's shot or ram costs a life, and shooting one gives 1,000 or 2,000 points.
+- **Wolf Ring** (`ringParams`) starts harder and keeps climbing:
+  - At level 1: four wolves at once, sooner and faster, in packs from the start.
+  - Every level: more wolves, faster, more packs, shorter head start, and stones that stay up for less time.
+  - The alpha wolf comes from level 12 and packs of three from level 21.
+- **Eagle Swoop** (`raidParams`): dives come sooner and faster, more birds dive at once (one more every 20 levels), poo falls faster, and eagles beam more often.
+- **Sun Chariot:** the curve now climbs from level 1, not flat until level 6.
+- **Maze:** already harder every level (wider cameras, faster Hati, longer chases). The new test confirms it.
+- **Test:** `tools/smoke.js` checks every mode's settings for levels 1–100: each level must be harder than the one before and never easier on any setting. It also checks Rune Rocks waves and saucers (they fly in, fire, can be shot down, and their shot costs a life).
+
 ## v5.8.3 (2026-10-03) — pick a game mode; a caught Sol costs a life only if he isn't freed
 
 - **A game mode screen after the grade.** The cards are **All modes** (the mixed campaign, as before), **Labyrinth** (the maze only), and one card for each shooter: **Eagle Swoop**, **Rune Rocks**, **Sun Chariot** and **Wolf Ring**.
