@@ -1,5 +1,5 @@
 # SOL Labyrinth
-Solo Chromebook maze-chase extract. 100 nights. Virginia 2024 EOC Reading SOL (grades 9–11) and New Jersey NJSLA-ELA (grade 5).
+Solo Chromebook maze-chase extract. 100 nights. Virginia 2024 EOC Reading SOL (grades 9–11), New Jersey NJSLA-ELA (grade 5), and The Odyssey (English 9, Unit 2).
 
 **Theme (Norse × SOL):** You are **Sol**, the Norse sun goddess, collecting letter slips in a Pac-like school labyrinth. Ravenous wolves — **Hati** — patrol the corridors. Grab the **correct** letter to summon Sol's **CHARIOT** and smash Hati by contact (they return from the Wolf Pen). Wrong letter alarms. Fruit = bonus points only. Ice = brief escape freeze. **Only one power/effect active at a time.**
 
@@ -12,6 +12,19 @@ Play (combined dev build): `index.html`. Teacher monitor: `admin.html` (PIN lock
 Progress saves in this browser profile (`afterHours.v1.night`). Itch login does not store progress.
 
 Question packs: `js/content.js` and `js/content2.js` (the v4 Virginia packs) plus `js/content3.js`–`js/content11.js` (v4.9 Virginia) and `js/content12.js`–`js/content17.js` (v4.9 New Jersey grade 5). Format and writing rules: `tools/CONTENT-GUIDE.md`. Check every file with `node tools/validate-content.js`. Headless smoke test of the gateway, builder, shop, a night, the realms and their creatures, Fenrir, the castle perks, the shooter levels and the two built games: `node tools/smoke.js` (screenshots in `tools/shots/`).
+
+## v5.9.0 (2026-10-05) — The Odyssey: a third game for English 9, Unit 2
+
+- **A separate game:** `node tools/build-games.js` now also writes `dist/ody/`, built for the Eng 9 Unit 2 "Challenge Accepted!" plan. In Canvas it is its own file, `SOLLabyrinth-Odyssey.html` (`node tools/build-appsscript.js ODY` then `node tools/build-canvas.js ODY` → `dist/canvas/SOLLabyrinth-Odyssey-Canvas.zip`). It opens on its own title screen, with no state or grade to choose.
+- **Pick an episode:** after the game mode, the skill screen lists the episodes instead of the skills:
+  - The Lotus-Eaters, the Cyclops, Circe, the Cattle of the Sun and Calypso
+  - The Whole Voyage: paired texts that compare characters across episodes, Greek values, and an article on facing setbacks set beside Odysseus
+  - All
+- **The questions:** 48 passages and 296 questions, eight passages per episode from tiny (about 80 words) to epic (about 600), in `js/content26.js`–`content31.js` (`family: "ODY"`, with an `episode` on every pack).
+  - The passages are original retellings of Homer, some in verse. No modern translation is used.
+  - The questions use the unit's Virginia codes: character traits and responses to challenges, setting and plot, theme ("How do the challenges of life affect a person?"), epic similes and imagery, word choice and tone, vocabulary in context, allusions, and comparing texts.
+- **Its own saves:** the build's save keys are `afterHours.ody.*`, so its levels, castle and used questions never mix with the Virginia game's, even on the same site.
+- **Tests:** `tools/smoke.js` checks the episode pools (each episode serves only its own passages, and no other game sees them) and the `dist/ody` build: the episode screen, the save keys, and a Cyclops level. `tools/smoke-canvas.js ody` checks the Canvas build.
 
 ## v5.8.5 (2026-10-05) — Rune Rocks: the beam stays locked on the rock it is pulling
 
