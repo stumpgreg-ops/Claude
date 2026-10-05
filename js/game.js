@@ -26929,6 +26929,13 @@
   ];
   /* v5.10: the Odyssey build only (window.SOL_STATE === "ODY") */
   GAME_MODE_DEFS.push({ id: "strait", kind: "Steer the strait", name: "Scylla and Charybdis", meta: "Steer Odysseus's ship through the gate with the right letter while Charybdis pulls and Scylla strikes.", ody: true });
+  /* v5.11: four more Odyssey modes, each in its own file (js/mode-ram.js, mode-bow.js, mode-raft.js, mode-row.js) */
+  GAME_MODE_DEFS.push(
+    { id: "ram", kind: "Sneak out of the cave", name: "Under the Ram", meta: "Cling under a ram and slip out of the Cyclops's cave past blind Polyphemus's groping hands — ride out on the ram with the right letter.", ody: true },
+    { id: "bow", kind: "Archery", name: "Bend the Bow", meta: "String Odysseus's great bow and shoot an arrow through the twelve axe heads — the row with the right letter.", ody: true },
+    { id: "raft", kind: "Ride the waves", name: "Calypso's Raft", meta: "Sail the raft from Ogygia, steer by the stars and ride Poseidon's waves to the right letter.", ody: true },
+    { id: "row", kind: "Keep the beat", name: "Row Past the Sirens", meta: "Keep the crew rowing to the beat while Odysseus, tied to the mast, strains toward the Sirens — row to the right letter.", ody: true }
+  );
   /* the cards this build offers: the Odyssey-only modes appear only in the Odyssey build */
   function gameModeDefs() {
     var ody = typeof window !== "undefined" && window.SOL_STATE === "ODY";

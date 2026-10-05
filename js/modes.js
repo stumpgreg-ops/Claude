@@ -122,7 +122,31 @@
   };
   var SLOTS = { 2: "raid", 4: "rocks", 6: "sky", 8: "ring" };
   /* v5.10: the Odyssey build's Mixed rotation adds the strait on level 9 of every island (10 stays the boss) */
-  var ODY_SLOTS = { 2: "raid", 4: "rocks", 6: "sky", 8: "ring", 9: "strait" };
+  /* v5.11: the Odyssey build mixes its own modes into each island's levels 2, 4, 6, 8 and 9
+     (js/mode-ram.js, mode-bow.js, mode-raft.js, mode-row.js register themselves with SolModes.extend).
+     One row per island; a mode that is not loaded falls back to the maze. */
+  var ODY_ROT = [
+    ["raid", "rocks", "sky", "ring", "strait"],   /* 1 Troy's Shore */
+    ["row", "rocks", "sky", "ring", "bow"],       /* 2 the Lotus-Eaters */
+    ["ram", "rocks", "sky", "ring", "strait"],    /* 3 the Cyclopes */
+    ["raid", "raft", "sky", "ring", "strait"],    /* 4 Aeolia */
+    ["raid", "rocks", "bow", "ring", "strait"],   /* 5 the Laestrygonians */
+    ["raid", "rocks", "sky", "ring", "row"],      /* 6 Circe's island */
+    ["ram", "rocks", "sky", "bow", "strait"],     /* 7 the House of Hades */
+    ["raid", "row", "sky", "ring", "strait"],     /* 8 the Sirens' isle */
+    ["raft", "rocks", "sky", "ring", "strait"],   /* 9 Scylla and Charybdis */
+    ["raft", "ram", "bow", "row", "strait"]       /* 10 Poseidon's storm */
+  ];
+  var ODY_SLOT_IDX = { 2: 0, 4: 1, 6: 2, 8: 3, 9: 4 };
+  /* v5.11: modes kept in their own files: SolModes.extend(id, def, methods) adds the MODES entry and,
+     at install, copies the methods (setup_<id>, answers_<id>, tick_<id>, clear_<id>, resize_<id>, ...) onto ModeScene */
+  var EXT = {};
+  function extend(id, def, methods) {
+    def.id = id;
+    MODES[id] = def;
+    EXT[id] = methods || {};
+    return def;
+  }
   function isOdy() { return typeof window !== "undefined" && window.SOL_STATE === "ODY"; }
   var BEAM_KEY = "afterHours.v1.beamLearned";   /* set once a student has pulled a rock in */
   var WING = 40, CAPT_UP = 54;   /* Eagle Swoop: the second Sol stands WING px to the right; a caught Sol hangs CAPT_UP px over his eagle */
@@ -135,8 +159,12 @@
     var only = window.SolModes && window.SolModes.only;
     if (only === "maze") return null;
     if (only && MODES[only]) return MODES[only];
-    var id = (isOdy() ? ODY_SLOTS : SLOTS)[((n - 1) % 10) + 1];
-    return id ? MODES[id] : null;
+    var slot = ((n - 1) % 10) + 1, id;
+    if (isOdy()) {
+      var row = ODY_ROT[Math.min(9, Math.floor((n - 1) / 10))];
+      id = ODY_SLOT_IDX[slot] != null ? row[ODY_SLOT_IDX[slot]] : null;
+    } else id = SLOTS[slot];
+    return id && MODES[id] ? MODES[id] : null;
   }
 
   /* ── small helpers ── */
@@ -2750,11 +2778,17 @@
       }
     }
 
+    Object.keys(EXT).forEach(function (id) {
+      Object.keys(EXT[id]).forEach(function (k) { ModeScene.prototype[k] = EXT[id][k]; });
+    });
     return ModeScene;
   }
 
   /* v5.7.9: the maze draws Sol riding this chariot while the CHARIOT power lasts */
   function ensureChariotArt(scene) { canvasTex(scene, "md-team-0", TEAM_W, TEAM_H, drawTeam(0)); canvasTex(scene, "md-team-1", TEAM_W, TEAM_H, drawTeam(1)); }
-  window.SolModes = { MODES: MODES, SLOTS: SLOTS, modeFor: modeFor, install: install, ensureChariotArt: ensureChariotArt,
+  window.SolModes = { MODES: MODES, SLOTS: SLOTS, ODY_ROT: ODY_ROT, modeFor: modeFor, install: install, ensureChariotArt: ensureChariotArt, extend: extend,
+    /* v5.11: the shared helpers, for the modes in their own files */
+    lib: { clamp: clamp, rnd: rnd, dist: dist, shuffle: shuffle, hex: hex, mix: mix, angDiff: angDiff, kill: kill, snd: snd, canvasTex: canvasTex,
+      isOdy: isOdy, ST: ST, drawGalley: drawGalley, drawArrow: drawArrow, drawSplat: drawSplat, drawStraitWater: drawStraitWater, SHIP_W: SHIP_W, SHIP_H: SHIP_H },
     TEAM: { w: TEAM_W, h: TEAM_H, car: TEAM_CAR } };
 })();
