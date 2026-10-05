@@ -10,7 +10,11 @@
      content files are loaded (content.js stays in both: it holds the pack engine; game.js
      prunes the other state's packs from it at start-up).
    - js/: content files for the other state left out.
-   - tools/, dist/ and docs/ (the question lists with answer keys) left out. */
+   - tools/, dist/ and docs/ (the question lists with answer keys) left out.
+   The Odyssey build (ODY) is also reskinned: its own title and logo, css/odyssey.css and js/odyssey.js
+   (the look, and the realm and mode tables retold at runtime), and tools/ody-theme.js rewrites the words
+   players read in its copies of the scripts, index.html and the castle trophies (review:
+   dist/ody-theme-review.txt). Those two files and the Odyssey logo stay out of the other builds. */
 var fs = require("fs"), path = require("path"), cp = require("child_process");
 var root = path.join(__dirname, ".."), dist = path.join(root, "dist");
 var version = process.argv[2] || (function () {
@@ -32,7 +36,8 @@ var STATES = {
   VA: { name: "Virginia", families: ["G9", "G10", "G11"], def: "G9", zip: "SOLLabyrinth-VA" },
   /* its own saves (afterHours.ody.*), so it never shares a level, town or used-question list
      with the Virginia game when both are opened from the same site */
-  ODY: { name: "The Odyssey", families: ["ODY"], def: "ODY", zip: "SOLLabyrinth-Odyssey", savePrefix: "afterHours.ody." }
+  ODY: { name: "The Odyssey", families: ["ODY"], def: "ODY", zip: "SOLLabyrinth-Odyssey", savePrefix: "afterHours.ody.",
+         title: "The Odyssey: Labyrinth of the Wine-Dark Sea", logo: "assets/logo/odyssey-labyrinth-512.png", theme: "./ody-theme" }
 };
 /* every other state's content files are left out of a build */
 function dropFor(st) {
@@ -64,7 +69,7 @@ function rewriteIndex(html, st) {
     if (!re.test(out)) throw new Error("tools/build-games.js: index.html has no " + what);
     out = out.replace(re, rep);
   }
-  must(/<title>[^<]*<\/title>/, "<title>SOL Labyrinth · " + def.name + "</title>", "<title>");
+  must(/<title>[^<]*<\/title>/, "<title>" + (def.title || "SOL Labyrinth · " + def.name) + "</title>", "<title>");
   out = out.replace(/\?v=[0-9.]+/g, "?v=" + version);
   out = out.replace(/(<p class="ver">)v[0-9.]+/g, "$1v" + version);   /* the version label on the title screen */
   /* the state is set before any script runs */
@@ -84,7 +89,14 @@ function rewriteIndex(html, st) {
   if (st === "ODY") {
     must(/Tap Grade 9, 10, or 11 — then choose a skill \(or All\)/, "Tap The Odyssey — then choose an episode (or All)", "how-to grade line");
     must(/Tap a grade to pick your skill focus\./, "Tap The Odyssey to pick an episode.", "title tag line");
-    must(/alt="Sol's Labyrinth — SOL review game"/g, 'alt="Sol\'s Labyrinth — The Odyssey"', "logo alt");
+    /* the Odyssey's own logo, stylesheet and theme script (same ?v= as every other tag) */
+    must(/<img src="assets\/logo\/sols-labyrinth-512\.png(\?v=[0-9.]+)" alt="Sol's Labyrinth — SOL review game"/g,
+      '<img src="' + def.logo + '$1" alt="' + def.title + '"', "logo");
+    must(/(<link rel="stylesheet" href="css\/after-hours\.css\?v=[0-9.]+" \/>)/, '$1\n  <link rel="stylesheet" href="css/odyssey.css?v=' + version + '" />', "after-hours.css link");
+    must(/(\n(\s*)<script src="js\/game\.js\?v=[0-9.]+"><\/script>)/,
+      '\n$2<script src="js/odyssey.js?v=' + version + '"></script>$1' +
+      /* game.js names the tab "SOL Labyrinth · The Odyssey" as it starts; the game's own title wins */
+      '\n$2<script>document.title = ' + JSON.stringify(def.title) + ';</script>', "game.js script tag");
   }
   /* no "change state" button */
   must(/\s*<button type="button" class="btn" id="btn-state"[^>]*>[^<]*<\/button>/, "", "btn-state");
@@ -104,9 +116,16 @@ Object.keys(STATES).forEach(function (st) {
     if (rel === "tools" || rel === "dist" || rel === "docs" || rel === ".git" || rel === "node_modules" || rel === ".claude") return true;
     if (name === ".DS_Store" || name === "Thumbs.db" || name === ".gitignore") return true;
     if (/^js\/content\d*\.js$/.test(rel) && drop.indexOf(name) !== -1) return true;
+    if (st !== "ODY" && /^(js\/odyssey\.js|css\/odyssey\.css|assets\/logo\/odyssey-)/.test(rel.split(path.sep).join("/"))) return true;
     return false;
   });
   fs.writeFileSync(path.join(out, "index.html"), rewriteIndex(fs.readFileSync(path.join(root, "index.html"), "utf8"), st));
+  if (def.theme) {
+    if (def.logo && !fs.existsSync(path.join(out, def.logo))) console.warn("tools/build-games.js: warning: " + def.logo + " is missing — the title screen of " + def.name + " will show no logo");
+    var th = require(def.theme).apply(out);
+    console.log(def.name + ": " + th.changes + " literals reworded (" + Object.keys(th.perFile).map(function (f) { return f + " " + th.perFile[f]; }).join(", ") + "); review: dist/ody-theme-review.txt");
+    if (th.unexpected) throw new Error("tools/build-games.js: " + th.unexpected + " Norse word(s) left where players read them — see dist/ody-theme-review.txt");
+  }
   if (def.savePrefix) {
     /* a separate set of saves: every "afterHours.v1." key in the build's scripts and pages */
     var moved = 0;
