@@ -13,7 +13,7 @@ Progress saves in this browser profile (`afterHours.v1.night`). Itch login does 
 
 Question packs: `js/content.js` and `js/content2.js` (the v4 Virginia packs) plus `js/content3.js`–`js/content11.js` (v4.9 Virginia) and `js/content12.js`–`js/content17.js` (v4.9 New Jersey grade 5). Format and writing rules: `tools/CONTENT-GUIDE.md`. Check every file with `node tools/validate-content.js`. Headless smoke test of the gateway, builder, shop, a night, the realms and their creatures, Fenrir, the castle perks, the shooter levels and the two built games: `node tools/smoke.js` (screenshots in `tools/shots/`).
 
-## v5.12 (in progress) — Root Worms, new birds in Eagle Swoop, and "clear the field" after the last answer
+## v5.12.0 (2026-10-05) — Root Worms, new birds in Eagle Swoop, and "clear the field" after the last answer
 
 Ported from the teacher's Chemistry build (its v1.3, forked from v5.8.0): only the game-mode code, fitted into the current shooter shell. No Chemistry content or wording came over.
 
@@ -29,6 +29,16 @@ Ported from the teacher's Chemistry build (its v1.3, forked from v5.8.0): only t
   - The clearing can't drag on: birds still waiting off-screen fly in, the stragglers dive more, and a worm still up in the field after 15 s plunges into the clearing.
   - The level is won when the last one falls, with the usual end screen, plus a small bonus for clearing without a hit.
 - **Tests** (`tools/smoke.js`): the birds per realm, a hawk taking two arrows, rows that don't refill; a Root Worms run (a right segment scores, a wrong one costs a life, a shot splits the worm and leaves a mushroom, a bite costs a life, Select TWO needs both, nothing can get stuck); the clearing rule in both modes (no win on the last answer, the banner, a win only on the last kill, a loss when the last life goes); `wormsParams` in the every-level ramp check; the new rotation; the card in each `dist/` game. Pictures: `tools/shots/22a`–`22e` and `23a`–`23c`. On a loaded machine three older checks broke on fixed waits: the Eagle Swoop capture test crashed when the freed Sol had not landed within 8 s, the Rune Rocks beam-lock test ran while the next question's pop-up paused the level, and `tools/smoke-mode-ram.js` could loop forever behind that pop-up. They now wait on the game itself. `smoke-mode-ram.js` also expects the new Virginia rotation (levels 2, 22 and 62: raid, sky, rocks).
+
+## v5.11.0 (2026-10-05) — four more Odyssey modes
+
+Odyssey build only. Each mode lives in its own file and registers itself with `SolModes.extend(id, def, methods)` (new in `js/modes.js`, with the shared helpers on `SolModes.lib`). Each has its own test, `tools/smoke-mode-<id>.js`.
+
+- **Under the Ram** (`js/mode-ram.js`, Book 9): cling under the ram with the right letter and ride it out of the Cyclops's cave past blind Polyphemus's groping hands.
+- **Bend the Bow** (`js/mode-bow.js`, Book 21): aim and draw the great bow and shoot through the twelve axe heads in the row with the right letter, before the suitors run out of patience.
+- **Calypso's Raft** (`js/mode-raft.js`, Book 5): ride the waves to the right letter and get on top of Poseidon's breakers. Ino's veil saves one hit.
+- **Row Past the Sirens** (`js/mode-row.js`, Book 12): a rhythm game. Row on the drum's beat and steer through the right letter's passage while the Sirens' song pulls toward the rocks.
+- **The Odyssey's Mixed rotation** (`ODY_ROT`): each island mixes in the modes that fit it (the ram on the Cyclopes' island, rowing on the Sirens' isle), and Poseidon's Storm brings them all back. All four new modes also have cards on the mode screen.
 
 ## v5.10.0 (2026-10-05) — The Odyssey gets its own look, its own creatures and a new mode
 
