@@ -9,7 +9,7 @@
  *     SolRealms.REALMS is changed in place before game.js copies the palettes.
  *  2. The four shooter modes get their Odyssey names and text (SolModes.MODES, in place).
  *  3. New art under the same texture keys, at the same sizes: Sirens for the eagles, storm
- *     gulls for the ravens, Cyclops shepherds for the trolls, lotus blossoms, shades,
+ *     gulls for the ravens, terns for Eagle Swoop's magpies (v5.12), Cyclops shepherds for the trolls, lotus blossoms, shades,
  *     Siren song, Scylla's necks, a Greek galley, Zeus's storm clouds, moly flowers,
  *     sea-worn rocks, sun-discs, Circe's swine and the giants' fire pits; and Polyphemus,
  *     a one-eyed giant of his own, in place of Fenrir's tinted wolf on boss levels.
@@ -80,22 +80,23 @@
   var MODE_TEXT = {
     raid: {
       name: "Siren Swoop", kind: "galaga-style level",
-      how: "Sirens fly in and take the top of the sky, each carrying a letter in her talons, with two guard gulls under each Siren and rows of storm gulls below. Once the flock has formed, shoot the Siren that carries the right answer — she takes two arrows. Birds are always swooping down at Odysseus, and a Siren can stop and pour her song down to lure your archer away. Hit that Siren with an arrow to win him back: then two archers stand side by side and shoot two arrows at a time.",
-      rules: "A wrong letter costs a life. So does bird poo landing on you or a bird crashing into you. If a Siren's song lures your archer away, win him back before the question is answered, or it costs a life. With two archers, a hit or a song takes one archer away instead of a life. You can't shoot until the flock has flown into formation.",
+      how: "Sirens fly in and take the top of the sky, each carrying a letter in her talons, with two guard gulls under each Siren and rows of seabirds below. Once the flock has formed, shoot the Siren that carries the right answer — she takes two arrows. Birds are always swooping down at Odysseus, and a Siren can stop and pour her song down to lure your archer away. Hit that Siren with an arrow to win him back: then two archers stand side by side and shoot two arrows at a time. A bird you shoot out of the rows stays down, so the rows thin out as you clear them, and from the second island on the rows bring new birds with tricks of their own (listed below). When the last question is answered, shoot down every bird left in the sky to clear the level.",
+      rules: "A wrong letter costs a life. So does bird poo landing on you or a bird crashing into you. If a Siren's song lures your archer away, win him back before the question is answered, or it costs a life. With two archers, a hit or a song takes one archer away instead of a life. You can't shoot until the flock has flown into formation. While you clear the sky after the last answer, a hit still costs a life.",
       keys: "◀ ▶ or A / D move · Space, FIRE or a mouse button shoots (clicking does not move Odysseus).",
       tip: "SIREN SWOOP — shoot the Siren with the right letter. If a Siren lures your archer away, hit her to win him back: two archers!",
       hint1: "Shoot the Siren carrying the right letter — she takes two arrows. The passage stays in the side panel.",
       hint2: "This question has two right letters. Shoot both Sirens that carry them.",
+      /* v5.12: the rows are new birds island by island (js/modes.js BIRDS: gulls, terns, hawks, owls, falcons) */
       news: ["",
-        "Bird poo now drifts toward where you stand, and every diving bird drops two.",
-        "The Sirens trade places in the formation now and then. Keep your eye on the right letter.",
-        "Bronze-crowned Sirens: a Siren now takes three arrows.",
-        "A third row of gulls guards the Sirens.",
-        "A storm cloud drifts across the flock. Arrows can't get through it.",
-        "A Siren's song now follows you.",
-        "Gulls in the formation drop poo too, not just the divers.",
+        "Terns fly in the top row: fast divers that zig-zag on the way down. Bird poo now drifts toward where you stand, and diving gulls and Sirens drop two.",
+        "Hawks take the top row: a hawk takes two arrows and steers at you in mid-dive. The Sirens trade places in the formation now and then.",
+        "Bronze-crowned Sirens: a Siren now takes three arrows. Terns are back, in the second row.",
+        "A third row of birds, and owls join the flock: an owl drops a spread of three.",
+        "A storm cloud drifts across the flock. Arrows can't get through it. Terns fill the bottom row.",
+        "Falcons take the top row: the fastest birds, they dive straight at you and correct their aim. A Siren's song now follows you.",
+        "Birds in the formation drop poo too, not just the divers.",
         "Two storm clouds, and the Sirens trade places more often.",
-        "Poseidon's storm: one more bird dives at a time, on top of everything else."]
+        "Poseidon's storm: the rows are a mix of every bird, and one more dives at a time."]
     },
     rocks: {
       name: "The Wandering Rocks", kind: "asteroids level",
@@ -276,6 +277,30 @@
       if (up) poly(c, [[12, 2], [20, 4], [24, 8], [17, 10]]); else poly(c, [[11, 52], [19, 51], [24, 47], [17, 45]]);
       c.closePath(); c.fill();
       c.fillStyle = "#ffffff"; c.beginPath(); c.arc(up ? 16 : 15, up ? 5 : 49, 0.9, 0, TAU); c.fill();
+    };
+  }
+
+  /* md-magpie-0/1 (72 × 54), v5.12: Siren Swoop's terns in place of Eagle Swoop's magpies — a slim white
+     seabird with a black cap, a red-orange bill, a long forked tail and pale grey, black-tipped wings */
+  function drawTern(up) {
+    return function (c) {
+      var OUT = "#2e3640";
+      c.lineJoin = "round"; c.lineCap = "round";
+      c.fillStyle = "#eef2f6"; c.strokeStyle = OUT; c.lineWidth = 1.3;
+      poly(c, [[24, 27], [3, 20], [12, 29], [3, 37], [24, 32]]); c.closePath(); c.fill(); c.stroke();
+      c.fillStyle = "#f8fafc"; ell(c, 35, 29, 13, 7.5); c.fill(); c.stroke();
+      c.fillStyle = "#dfe5ea"; ell(c, 36, 32, 9, 3); c.fill();
+      c.fillStyle = "#f8fafc"; c.beginPath(); c.arc(49, 24, 7, 0, TAU); c.fill(); c.stroke();
+      c.fillStyle = "#16181c"; c.beginPath(); c.arc(49, 23.5, 7, Math.PI * 0.95, Math.PI * 2.05); c.closePath(); c.fill();
+      c.fillStyle = "#e85a2a"; c.strokeStyle = "#8a2a10"; c.lineWidth = 0.9;
+      poly(c, [[55, 21.5], [67, 24], [55, 26.5]]); c.closePath(); c.fill(); c.stroke();
+      c.fillStyle = "#ffffff"; c.beginPath(); c.arc(51.6, 23.2, 1.3, 0, TAU); c.fill();
+      c.fillStyle = "#0c0e10"; c.beginPath(); c.arc(51.9, 23.2, 0.7, 0, TAU); c.fill();
+      c.fillStyle = "#b8c4ce"; c.strokeStyle = OUT; c.lineWidth = 1.3;
+      if (up) poly(c, [[27, 26], [16, 3], [24, 5], [36, 9], [43, 24]]); else poly(c, [[27, 31], [15, 52], [23, 50], [36, 45], [43, 32]]);
+      c.closePath(); c.fill(); c.stroke();
+      c.fillStyle = "#1c2026"; if (up) poly(c, [[16, 3], [24, 5], [25, 10], [19, 9]]); else poly(c, [[15, 52], [23, 50], [24, 45], [18, 46]]);
+      c.closePath(); c.fill();
     };
   }
 
@@ -670,6 +695,7 @@
   var ART = [
     ["md-eagle-0", 88, 62, drawSiren(true)], ["md-eagle-1", 88, 62, drawSiren(false)],
     ["rf-raven-0", 72, 54, drawGull(true)], ["rf-raven-1", 72, 54, drawGull(false)],
+    ["md-magpie-0", 72, 54, drawTern(true)], ["md-magpie-1", 72, 54, drawTern(false)],
     ["rf-troll-0", 88, 96, drawCyclops(0)], ["rf-troll-1", 88, 96, drawCyclops(1)],
     ["ody-poly-0", POLY_W, POLY_H, drawPolyphemus(0, false)], ["ody-poly-1", POLY_W, POLY_H, drawPolyphemus(1, false)],
     ["ody-poly-a0", POLY_W, POLY_H, drawPolyphemus(0, true)], ["ody-poly-a1", POLY_W, POLY_H, drawPolyphemus(1, true)],

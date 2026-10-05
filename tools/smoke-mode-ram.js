@@ -236,6 +236,9 @@ var srv = http.createServer(function (req, res) {
 
   /* the picture at the first level in the rotation, with everything running (no lives lost for the picture):
      Odysseus under a ram on its way to the door, the rest of the flock grazing, a hand groping */
+  /* wait for the next question's reading pop-up to have opened first (on a loaded machine it opened after the
+     20 s wait, paused the level, and the loops below, which count game time, never ended) */
+  await page.waitForFunction(function () { var s = window.SolScene; return s && !s._between && !s._readPending; }, null, { timeout: 60000 }).catch(function () {});
   await page.waitForFunction(function () { var g = document.getElementById("read-go"); var s = window.SolScene; return s && (!s.readOpen || (g && g.offsetParent)); }, null, { timeout: 20000 }).catch(function () {});
   if (await page.isVisible("#read-go")) await page.click("#read-go");
   await page.waitForFunction(function () { var s = window.SolScene; return s && !s.readOpen; }, null, { timeout: 15000 }).catch(function () {});
@@ -244,11 +247,11 @@ var srv = http.createServer(function (req, res) {
     var r = R.rams.filter(function (q) { return q.state === "graze" && !q.mark; })[0];
     if (r) { r.x = R.fx0 + R.caveW * 0.5; r.y = R.doorY + 50; r.state = "go"; s.ramCling(r); }
     R.gropeCd = 1e9; R.relCd = 1500;
-    var t0 = R.t; while (R.t - t0 < 1.2) await new Promise(function (res) { setTimeout(res, 50); });
+    var t0 = R.t, w0 = Date.now(); while (R.t - t0 < 1.2 && Date.now() - w0 < 60000) await new Promise(function (res) { setTimeout(res, 50); });
     /* a grope coming down on an empty spot: the shadow and the closing ring */
     var spot = s.ramClampReach(R.wallX0 - R.reachR * 0.7, R.doorY - R.doorH * 0.75);
     s.ramGrope(R.hands[0], spot.x, spot.y, 2400);
-    t0 = R.t; while (R.t - t0 < 1.3) await new Promise(function (res) { setTimeout(res, 50); });
+    t0 = R.t; w0 = Date.now(); while (R.t - t0 < 1.3 && Date.now() - w0 < 60000) await new Promise(function (res) { setTimeout(res, 50); });
   });
   await shot("ram-22-early");
 
@@ -345,7 +348,8 @@ var srv = http.createServer(function (req, res) {
         rot: [2, 22, 62].map(function (n) { var m = SolModes.modeFor(n); return m ? m.id : "-"; }).join(",") };
     });
     console.log("dist/va", JSON.stringify(va));
-    check(va.state === "VA" && va.cards.length > 0 && va.cards.indexOf("ram") === -1 && va.only === null && va.rot === "raid,raid,raid", "dist/va: the mode screen does not offer Under the Ram, a saved pick of it falls back to All modes, and the rotation never plays it: " + JSON.stringify(va));
+    /* v5.12: Virginia's Mixed rotation turns its five shooters one place every realm: 2 raid, 22 sky, 62 rocks */
+    check(va.state === "VA" && va.cards.length > 0 && va.cards.indexOf("ram") === -1 && va.only === null && va.rot === "raid,sky,rocks","dist/va: the mode screen does not offer Under the Ram, a saved pick of it falls back to All modes, and the rotation never plays it: " + JSON.stringify(va));
     await p3.close();
   }
   root = repo;

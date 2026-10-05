@@ -26925,7 +26925,9 @@
     { id: "raid", kind: "Galaga style", name: "Eagle Swoop", meta: "Shoot the eagle carrying the right letter while the flock dives at you." },
     { id: "rocks", kind: "Asteroids style", name: "Rune Rocks", meta: "Pull the rock with the right letter in with your beam and blast the rest." },
     { id: "sky", kind: "Flying shooter", name: "Sun Chariot", meta: "Fly the sun's chariot and shoot the right orb through the gap in its shield." },
-    { id: "ring", kind: "Arena", name: "Wolf Ring", meta: "Keep the wolves off and shoot the right runestone when it rises." }
+    { id: "ring", kind: "Arena", name: "Wolf Ring", meta: "Keep the wolves off and shoot the right runestone when it rises." },
+    /* v5.12: Virginia and New Jersey only (js/modes.js, MODES.worms) */
+    { id: "worms", kind: "Centipede style", name: "Root Worms", meta: "Shoot the glowing worm segment with the right letter as the worms wind down through the mushrooms.", noOdy: true }
   ];
   /* v5.10: the Odyssey build only (window.SOL_STATE === "ODY") */
   GAME_MODE_DEFS.push({ id: "strait", kind: "Steer the strait", name: "Scylla and Charybdis", meta: "Steer Odysseus's ship through the gate with the right letter while Charybdis pulls and Scylla strikes.", ody: true });
@@ -26936,10 +26938,11 @@
     { id: "raft", kind: "Ride the waves", name: "Calypso's Raft", meta: "Sail the raft from Ogygia, steer by the stars and ride Poseidon's waves to the right letter.", ody: true },
     { id: "row", kind: "Keep the beat", name: "Row Past the Sirens", meta: "Keep the crew rowing to the beat while Odysseus, tied to the mast, strains toward the Sirens — row to the right letter.", ody: true }
   );
-  /* the cards this build offers: the Odyssey-only modes appear only in the Odyssey build */
+  /* the cards this build offers: the Odyssey-only modes appear only in the Odyssey build, and the modes
+     marked noOdy (v5.12: Root Worms) only in the others; a saved pick of a card not offered falls back to All */
   function gameModeDefs() {
     var ody = typeof window !== "undefined" && window.SOL_STATE === "ODY";
-    return GAME_MODE_DEFS.filter(function (d) { return !d.ody || ody; });
+    return GAME_MODE_DEFS.filter(function (d) { return ody ? !d.noOdy : !d.ody; });
   }
   function readGameMode() {
     var m = "ALL";
