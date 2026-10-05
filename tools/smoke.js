@@ -750,6 +750,33 @@ var srv = http.createServer(function (req, res) {
     s.need.forEach(function (N) { var q = R.rocks.filter(function (z) { return z.letter === N; })[0]; if (q) s.rockCaught(q); });
     o.score = s.score;
     try { o.learned = localStorage.getItem("afterHours.v1.beamLearned"); } catch (e) {}
+    /* v5.8.5: a rock held in the beam stays locked: a plain rock drifting into the beam nearer the ship, and the
+       ship turning so the pulled rock leaves the narrow cone, no longer drop it (it used to hit the ship as
+       "let go too soon" with the beam still held) */
+    await new Promise(function (r) { setTimeout(r, 1300); });
+    var rgo2 = document.getElementById("read-go"); if (rgo2 && rgo2.offsetParent) rgo2.click();
+    await new Promise(function (r) { setTimeout(r, 400); });
+    R.rocks.filter(function (q) { return !q.letter; }).slice().forEach(function (q) { s.rockRemove(q); });
+    R.spawnCd = 1e9; R.saucerCd = 1e9;
+    var S = R.ship; S.x = s.W / 2; S.y = s.H / 2; S.vx = 0; S.vy = 0; S.ang = 0;
+    var lr = R.rocks.filter(function (q) { return q.letter && s.need.indexOf(q.letter) !== -1 && s.extracted.indexOf(q.letter) === -1; })[0];
+    o.lock = { found: !!lr };
+    if (lr) {
+      R.rocks.filter(function (q) { return q.letter && q !== lr; }).forEach(function (q) { q.x = S.x - 300; q.y = S.y - 200; q.vx = 0; q.vy = 0; });
+      lr.x = S.x + 220; lr.y = S.y; lr.vx = 0; lr.vy = 0;
+      var L2 = lr.letter, sc0 = s.score, ex0 = s.extracted.length;
+      s.strikes = 0; s.iframeMs = 0; s.spareLives = 0;
+      s.keys.SHIFT.isDown = true;
+      await new Promise(function (r) { setTimeout(r, 120); });
+      o.lock.lockedFirst = R.lock === lr;
+      var thief = s.rockMake(1, null, S.x + 70, S.y + 18, 0, 0);
+      S.ang = 0.55;
+      await new Promise(function (r) { setTimeout(r, 1400); });
+      s.keys.SHIFT.isDown = false;
+      o.lock.caught = R.rocks.indexOf(lr) < 0 && (s.score > sc0 || s.extracted.length > ex0 || s.extracted.indexOf(L2) !== -1);
+      o.lock.strikes = s.strikes; o.lock.label = s._lastHitLabel || "";
+      if (R.rocks.indexOf(thief) >= 0) s.rockRemove(thief);
+    }
     return o;
   });
   await shot("17-rune-rocks");
@@ -848,6 +875,7 @@ var srv = http.createServer(function (req, res) {
   check(mr.beamHelp && mr.beamHelp.shown && mr.beamHelp.paused && mr.beamHelp.right && mr.beamHelp.closed, "Rune Rocks: a one-card beam tutorial shows after the reading pop-up, pauses the level and closes with Got it: " + JSON.stringify({ shown: mr.beamHelp.shown, paused: mr.beamHelp.paused, closed: mr.beamHelp.closed }));
   check(mr.beamHelp && mr.beamHelp.rightBtn.rightPulls && mr.beamHelp.rightBtn.leftFires, "Rune Rocks: the right mouse button holds the beam; the left button fires");
   check(mr.rockMouse && mr.rockMouse.turned < 0.01 && mr.rockMouse.moved < 3 && mr.rockMouse.fired >= 1, "Rune Rocks: clicking fires without turning or moving the ship: " + JSON.stringify(mr.rockMouse));
+  check(mr.rocks.lock && mr.rocks.lock.found && mr.rocks.lock.lockedFirst && mr.rocks.lock.caught && mr.rocks.lock.strikes === 0, "Rune Rocks (v5.8.5): a rock held in the beam stays locked — a nearer rock drifting into the beam and the ship turning don't drop it, so it is pulled in with no life lost: " + JSON.stringify(mr.rocks.lock));
   check(mr.rocks.early === 1 && mr.rocks.earlyLabel === "YOU LET GO OF THE BEAM TOO SOON", "Rune Rocks: a rock let go of early that hits the ship costs a life and says why: " + mr.rocks.earlyLabel);
   var cv = mr.sky.curve || {};
   check(cv.spawn6 < 1100 && cv.spawn96 <= 400 && cv.throw6 > 0.3 && cv.throw96 > cv.throw6 && cv.spark6 === 0 && cv.spark96 > 0 && cv.guards6 === 0 && cv.guards16 === 1 && cv.guards56 === 3 && cv.bob56 > cv.bob6, "Sun Chariot: harder from the first one (level 6) and harder every time after: " + JSON.stringify(cv));

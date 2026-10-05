@@ -1,4 +1,4 @@
-/* SOL Labyrinth v5.8.4 — shooter levels.
+/* SOL Labyrinth v5.8.5 — shooter levels.
  *
  * Every other level of each realm (levels 2, 4, 6 and 8) swaps the maze for a
  * shooter, in rotation:
@@ -1466,9 +1466,17 @@
         }
         /* the beam: pulls in the nearest rock in front of the ship */
         R.target = null;
+        if (!inp.pull) R.lock = null;
         if (inp.pull) {
           var best = null, bd = 1e9;
-          R.rocks.forEach(function (o) {
+          /* v5.8.5: the beam stays locked on the rock it is pulling until that rock is in or the beam is let
+             go. Before, it re-picked the nearest rock in its cone every frame, so a rock drifting into the cone
+             closer to the ship, or the pulled rock sliding out of the narrow cone in the last moment, dropped the
+             pulled rock, which flew on and hit the ship as "let go too soon" while the beam was still held. */
+          var lk = R.lock;
+          if (lk && R.rocks.indexOf(lk) >= 0 && dist(lk.x, lk.y, S.x, S.y) <= 330) best = lk;
+          else R.lock = null;
+          if (!best) R.rocks.forEach(function (o) {
             if (o.size > 2 || o.comet || o.orbitOf) return;
             var dd = dist(o.x, o.y, S.x, S.y);
             if (dd > 270 || dd >= bd) return;
@@ -1487,7 +1495,7 @@
             best = null;
           }
           if (best) {
-            R.target = best; best.beamT = this.time.now;
+            R.target = best; R.lock = best; best.beamT = this.time.now;
             g.lineStyle(5, 0xffe07a, 0.55); g.lineBetween(S.x + nx * 18, S.y + ny * 18, best.x, best.y);
             g.lineStyle(2, 0xffffff, 0.8); g.strokeCircle(best.x, best.y, best.r + 6);
             var tx = S.x - best.x, ty = S.y - best.y, tl = Math.sqrt(tx * tx + ty * ty) || 1;

@@ -13,6 +13,13 @@ Progress saves in this browser profile (`afterHours.v1.night`). Itch login does 
 
 Question packs: `js/content.js` and `js/content2.js` (the v4 Virginia packs) plus `js/content3.js`–`js/content11.js` (v4.9 Virginia) and `js/content12.js`–`js/content17.js` (v4.9 New Jersey grade 5). Format and writing rules: `tools/CONTENT-GUIDE.md`. Check every file with `node tools/validate-content.js`. Headless smoke test of the gateway, builder, shop, a night, the realms and their creatures, Fenrir, the castle perks, the shooter levels and the two built games: `node tools/smoke.js` (screenshots in `tools/shots/`).
 
+## v5.8.5 (2026-10-05) — Rune Rocks: the beam stays locked on the rock it is pulling
+
+- **The bug:** a teacher pulled in the second right letter of a two-answer question while still holding the beam, and was told "you let go of the beam too soon" and lost a life (twice).
+- **The cause:** the beam re-picked its target every frame (the nearest rock in a narrow cone). A rock drifting into the cone nearer the ship, or the pulled rock sliding out of the cone in the last moment, dropped the pulled rock. That rock flew on at pull speed, hit the ship, and was counted as released early.
+- **The fix:** the beam now locks on the rock it is pulling until that rock is in or the beam is let go.
+- **Test:** `tools/smoke.js` recreates both causes at once. A plain rock appears in the beam nearer the ship while the ship turns mid-pull. The test failed on the old code with "YOU LET GO OF THE BEAM TOO SOON" and passes now.
+
 ## v5.8.4 (2026-10-05) — every mode gets harder at every level; Rune Rocks waves and saucers; a tougher Wolf Ring
 
 Each mode now has one difficulty curve tied to the level number, so every level is harder than the one before. That matters most when a student picks a single mode, because then it plays on every level.
