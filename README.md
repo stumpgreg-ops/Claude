@@ -13,16 +13,31 @@ Progress saves in this browser profile (`afterHours.v1.night`). Itch login does 
 
 Question packs: `js/content.js` and `js/content2.js` (the v4 Virginia packs) plus `js/content3.js`–`js/content11.js` (v4.9 Virginia) and `js/content12.js`–`js/content17.js` (v4.9 New Jersey grade 5). Format and writing rules: `tools/CONTENT-GUIDE.md`. Check every file with `node tools/validate-content.js`. Headless smoke test of the gateway, builder, shop, a night, the realms and their creatures, Fenrir, the castle perks, the shooter levels and the two built games: `node tools/smoke.js` (screenshots in `tools/shots/`).
 
-## v5.10 (2026-10-05) — The Odyssey: Scylla and Charybdis, a new steering level
+## v5.10.0 (2026-10-05) — The Odyssey gets its own look, its own creatures and a new mode
 
-Only in the Odyssey build (`window.SOL_STATE === "ODY"`); the Virginia and New Jersey games are unchanged.
+Only in the Odyssey build (`window.SOL_STATE === "ODY"`); the Virginia and New Jersey builds are byte-identical to before.
+
+### The look and the words
+- **Words:** at build time, `tools/ody-theme.js` rewrites the Odyssey copy's player-visible text (325 strings in `js/game.js`, `js/realms.js`, `js/modes.js`, `js/build.js`, `js/music.js`, `index.html` and the trophy pieces).
+  - Sol becomes Odysseus, the Hati become Circe's wolves, Sol's chariot becomes Helios's, and Fenrir becomes Polyphemus, who blocks the gate with boulders and pays out the Ram's Fleece.
+  - Realms become islands, and Ragnarok becomes "You reached Ithaca!".
+  - It only touches the inside of string literals, using a small tokenizer (`tools/ody-jstok.js`). The build fails if any code token changes. Every change is listed in `dist/ody-theme-review.txt`.
+- **Islands, art and colors:** `js/odyssey.js` (loaded only by the Odyssey build, before `js/game.js`):
+  - It rewrites the ten realms as the voyage: Troy's Shore, the Lotus-Eaters, the Cyclopes, Aeolia, the Laestrygonians, Circe's Aeaea, the House of Hades, the Sirens' Isle, Scylla and Charybdis, and Poseidon's Storm. Each island gets its own palette and creature: lotus blossoms, a Cyclops shepherd, storm gulls, the giants' cooking fires, Circe's swine, shades, Siren song and Scylla's necks.
+  - It draws Polyphemus as the boss.
+  - It turns the shooter modes into Siren Swoop, The Wandering Rocks, Chariot of Helios and Circe's Courtyard, with Sirens, a Greek galley, storm clouds, sun-discs and moly flowers.
+- **Page styling:** `css/odyssey.css` gives the pages Greek-pottery colors, serif headings and Greek-key borders.
+- **Logo:** `tools/make-odyssey-logo.js` renders the new emblem and favicons into `assets/logo/odyssey-*.png`.
+- `js/build.js`: a trophy names its realm by the realm's shown name, so the Odyssey castle builder says the island.
+
+### Scylla and Charybdis, a new steering level
 
 - **The level (Odyssey Book 12):** Odysseus's galley sails up the strait while the water scrolls down toward it. Rows of gates, each two rock pillars marked with a letter, come down the strait; sail between the pillars of the gate with the right letter. Each row holds two or three gates with open water between them, so a gate can be passed by, and its letter comes round again.
   - **Charybdis** (right): a whirlpool under the fig tree's rock. Every few seconds her water turns dark and spins faster for about a second, then she surges and drags the ship toward her. Her dark centre costs a life, and she spits the ship back out.
   - **Scylla** (left): a shadow and a closing ring on the water mark where one of her heads will strike. The sea-green neck then lunges there; a ship under it loses a crewman (a life). Her necks reach only partway across, so the safe water is next to Charybdis, as Circe warned.
   - A wrong gate, a pillar or a lone rock also costs a life. A Select TWO question needs both right gates. **ROW** (Space, the ROW button or a mouse button) gives a short burst of speed.
 - **Difficulty** (`straitParams` in `js/modes.js`): one curve, harder at every level. Level 9: one head, a strike every 4 s with 1.2 s of warning, a surge every 9 s, gates 143 px wide. Level 99: four heads, a strike every second with 0.56 s of warning, near-constant surges, gates 73 px wide, swaying gates and lone rocks, and more than twice the speed.
-- **Where it plays:** the Odyssey game's Mixed rotation is level 2 Eagle Swoop, 4 Rune Rocks, 6 Sun Chariot, 8 Wolf Ring and **9 Scylla and Charybdis**; levels 1, 3, 5, 7 and 10 stay the maze and the boss. Its game mode screen also has a **Scylla and Charybdis** card that plays it on every level. The card, and a saved pick of it, exist only in the Odyssey build.
+- **Where it plays:** the Odyssey game's Mixed rotation is level 2 Siren Swoop, 4 The Wandering Rocks, 6 Chariot of Helios, 8 Circe's Courtyard and **9 Scylla and Charybdis**; levels 1, 3, 5, 7 and 10 stay the maze and the boss. Its game mode screen also has a **Scylla and Charybdis** card that plays it on every level. The card, and a saved pick of it, exist only in the Odyssey build.
 - **Tests:** `tools/smoke.js` checks the rotation in both kinds of build, the card in each `dist/` game, the difficulty ramp (every level 2–100 harder than the one before), and a run: the right gate answers, a wrong gate, a pillar, Charybdis's centre and Scylla's strike each cost a life, a surge is telegraphed and then pulls, and a Select TWO question needs both gates. Pictures: `tools/shots/21a-scylla-charybdis-9.png` and `21b-scylla-charybdis-89.png`.
 
 ## v5.9.0 (2026-10-05) — The Odyssey: a third game for English 9, Unit 2
