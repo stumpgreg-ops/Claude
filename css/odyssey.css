@@ -1,1 +1,170 @@
-/* Odyssey theme styles (filled in by another change) */
+/* SOL Labyrinth v5.10 — the look of the Odyssey game.
+   Only the Odyssey build (dist/ody) loads this file, after css/after-hours.css.
+   Greek black-figure pottery and the wine-dark sea: terracotta, ochre and black glaze,
+   bone white, Aegean blue and sea foam; serif headings; Greek-key (meander) borders.
+   Text colours are picked for at least 4.5:1 contrast on the panels they sit on. */
+
+:root {
+  --bg: #120a0e;
+  --gold: #e8b04a;          /* ochre: every accent the game paints with var(--gold) */
+  --red: #e0603a;
+  --ink: #efe6d2;           /* bone white */
+  --dim: #c4b49a;           /* warm grey, 8:1 on the black glaze */
+  --terra: #d9772b;
+  --ochre: #e8b04a;
+  --glaze: #140c0a;
+  --glaze-2: #1e1210;
+  --wine: #3a0f2a;
+  --aegean: #1e5f8c;
+  --foam: #9fd3d6;
+  --bone: #efe6d2;
+  --line: #6a4430;
+  --serif: Georgia, "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  /* a running Greek key, ochre on clear, 16 px tall */
+  --meander: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath d='M0 1.2H16M0 14.8H16M0 12.3H16M11 12.3V3.7H3V9.7H8V6.7H5.6' fill='none' stroke='%23e8b04a' stroke-width='1.4'/%3E%3C/svg%3E");
+  --meander-terra: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath d='M0 1.2H16M0 14.8H16M0 12.3H16M11 12.3V3.7H3V9.7H8V6.7H5.6' fill='none' stroke='%23d9772b' stroke-width='1.4'/%3E%3C/svg%3E");
+  /* the sea under the start screens: low waves in Aegean blue */
+  --waves: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='24' viewBox='0 0 120 24'%3E%3Cpath d='M0 14 Q15 4 30 14 T60 14 T90 14 T120 14' fill='none' stroke='%239fd3d6' stroke-opacity='.10' stroke-width='2'/%3E%3C/svg%3E");
+}
+html, body { background: var(--bg); }
+
+/* ── start screens: from the wine-dark sea at the top to Aegean blue below ── */
+.screen {
+  background:
+    radial-gradient(ellipse 60% 38% at 50% 8%, rgba(232, 176, 74, .20), transparent 70%),
+    var(--waves) 0 100% / 120px 24px repeat-x,
+    linear-gradient(180deg, #1c0814 0%, #3a0f2a 34%, #2a1636 56%, #17345a 82%, #143e62 100%);
+  justify-content: safe center;   /* a screen taller than the window scrolls from its top, never cuts it off */
+}
+h1, h2, h3, .read-head h2, .tut-card h2, .char-panel h2, .codex-head h2, #overlay h2 {
+  font-family: var(--serif);
+  letter-spacing: .01em;
+}
+h1 { color: var(--bone); text-shadow: 0 2px 0 rgba(0, 0, 0, .45); }
+.kicker, .tut-kicker, .music-pick-label, .realm-card .rk, .fang-row .fang-title {
+  font-family: var(--serif);
+  font-variant: small-caps;
+  text-transform: none;
+  letter-spacing: .18em;
+}
+.kicker { color: var(--ochre); font-size: 14px; }
+.tag, .howto, .ver, .save-line { text-shadow: 0 1px 2px rgba(0, 0, 0, .6); }
+.tag { color: #e4d6bc; }
+.howto { color: #d6c8ae; }
+.howto strong { color: var(--bone); }
+h1.logo img { width: min(300px, 60vw); filter: drop-shadow(0 8px 22px rgba(0, 0, 0, .55)) drop-shadow(0 0 18px rgba(232, 176, 74, .18)); }
+@media (max-height: 800px) and (min-width: 721px) { h1.logo img { width: min(230px, 30vh); } }
+
+/* cards and buttons: black glaze with a key border on top */
+.card, .btn {
+  border-color: var(--line);
+  background: linear-gradient(180deg, #24150f, var(--glaze));
+  color: var(--ink);
+}
+.card { padding-top: 22px; overflow: hidden; }
+.card::before {
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 12px;
+  background: var(--meander) 0 0 / 12px 12px repeat-x;
+  border-bottom: 1px solid rgba(232, 176, 74, .25);
+  opacity: .75; pointer-events: none;
+}
+.card .kind { color: var(--terra); font-family: var(--serif); font-variant: small-caps; text-transform: none; letter-spacing: .12em; font-size: 13px; }
+.card .name { font-family: var(--serif); font-size: 20px; color: var(--bone); }
+.card .meta { color: var(--dim); }
+.card:hover, .card:focus-visible { border-color: #9a6a40; }
+.card.selected, .btn.primary { border-color: var(--ochre); box-shadow: 0 0 0 2px rgba(232, 176, 74, .28); }
+.card.selected::before { opacity: 1; }
+.btn { font-family: var(--serif); }
+.btn:hover, .btn:focus-visible { border-color: #9a6a40; }
+/* a primary button is a red-figure plate: terracotta ground, black glaze letters (6:1) */
+.btn.primary {
+  background: linear-gradient(180deg, #e2853a, #c9681f);
+  color: var(--glaze); font-weight: 700; letter-spacing: .04em;
+  text-shadow: 0 1px 0 rgba(255, 220, 170, .35);
+}
+.btn.primary:hover, .btn.primary:focus-visible { background: linear-gradient(180deg, #eb9550, #d4732a); }
+#mode-screen .card .name, #skill-screen .card .name { font-size: 18px; }
+
+.join-row input, .token-row input, #pin-in, .chip {
+  border-color: var(--line); background: var(--glaze); color: var(--ink);
+}
+.chip.selected { border-color: var(--ochre); color: var(--ochre); box-shadow: 0 0 0 2px rgba(232, 176, 74, .2); }
+
+/* ── the side panel during play ── */
+#hud { background: #120a09; border-right-color: #b08a52; }
+.eoc { background: #190f0c; border-color: #b08a52; }
+@media (max-width: 1099px) { #hud { border-bottom-color: #b08a52; } }
+.round { color: var(--ochre); font-family: var(--serif); letter-spacing: .02em; }
+.passage .n, .choices .let, .evidence { color: var(--ochre); }
+.passage p.poem { border-left-color: rgba(232, 176, 74, .4); }
+.choices li { background: rgba(58, 30, 22, .55); border-color: #4e3424; }
+.pip { background: rgba(20, 12, 10, .75); border-color: #4e3424; }
+.pip.realm-pip { border-color: var(--terra); color: #f2c49a; }
+.pip.realm-pip.boss { border-color: #ff6a4a; color: #ffb8a4; }
+
+/* ── pop-up cards: the reading card, the intro, the field guide, the character picker ── */
+.read-card, #overlay .box, .tut-card, .char-panel, .codex-card {
+  background: linear-gradient(180deg, #23140f, #150c0a 120px);
+  border-color: var(--ochre);
+}
+.read-card, #overlay .box, .tut-card, .codex-card { position: relative; }
+.read-card::before, #overlay .box::before, .tut-card::before, .codex-card::before {
+  content: ""; position: absolute; left: 14px; right: 14px; top: 4px; height: 10px;
+  background: var(--meander) 0 0 / 10px 10px repeat-x;
+  opacity: .8; pointer-events: none;
+}
+.read-card, .tut-card, .codex-card { padding-top: 20px; }
+@media (max-width: 720px) { .read-card { padding-top: 18px; } }
+.read-head h2 { color: var(--bone); }
+.read-pause { color: var(--ochre); border-color: rgba(232, 176, 74, .5); }
+.read-scroll { background: #110a09; border-color: rgba(232, 176, 74, .12); }
+.read-hint { color: #d6c8ae; }
+.codex-item { background: #22150f; border-color: #3e2a1e; }
+.char-preset { background: #190f0c; border-color: var(--line); }
+
+/* ── the island card at the top of the reading card ── */
+.realm-card {
+  position: relative; padding-top: 20px;
+  border: 1px solid rgba(232, 176, 74, .5);
+  background: linear-gradient(135deg, rgba(74, 44, 22, .95), rgba(20, 12, 10, .95));
+}
+.realm-card::before {
+  content: ""; position: absolute; left: 10px; right: 10px; top: 4px; height: 10px;
+  background: var(--meander) 0 0 / 10px 10px repeat-x; opacity: .85; pointer-events: none;
+}
+.realm-card .rk { color: #d6c6aa; font-size: 12px; }
+.realm-card h3 { font-family: var(--serif); color: var(--ochre); font-size: 23px; }
+.realm-card h3 span { font-family: var(--serif); font-style: italic; color: var(--ink); font-weight: 400; }
+.realm-card .foe b { color: #ffcf8a; }
+.realm-card.mode-card { border-color: rgba(232, 176, 74, .6); background: linear-gradient(135deg, rgba(30, 60, 92, .95), rgba(18, 10, 20, .95)); }
+.realm-card.mode-card .new { border-left-color: var(--ochre); background: rgba(232, 176, 74, .1); }
+.realm-card.mode-card .new b { color: var(--ochre); }
+.realm-card.boss { border-color: rgba(255, 120, 90, .65); background: linear-gradient(135deg, rgba(76, 18, 12, .96), rgba(20, 10, 10, .96)); }
+.realm-card.boss::before { background-image: var(--meander-terra); }
+/* each island its own colours (data-realm keeps the old realm ids) */
+.realm-card[data-realm="midgard"]      { border-color: rgba(232, 190, 120, .6); background: linear-gradient(135deg, rgba(92, 64, 34, .95), rgba(16, 26, 38, .95)); }
+.realm-card[data-realm="niflheim"]     { border-color: rgba(244, 170, 204, .6); background: linear-gradient(135deg, rgba(54, 70, 22, .95), rgba(26, 18, 16, .95)); }
+.realm-card[data-realm="jotunheim"]    { border-color: rgba(200, 182, 150, .55); background: linear-gradient(135deg, rgba(70, 58, 44, .95), rgba(16, 12, 10, .95)); }
+.realm-card[data-realm="muspelheim"]   { border-color: rgba(159, 211, 214, .6); background: linear-gradient(135deg, rgba(96, 62, 26, .95), rgba(14, 34, 54, .95)); }
+.realm-card[data-realm="svartalfheim"] { border-color: rgba(255, 128, 64, .6); background: linear-gradient(135deg, rgba(86, 28, 12, .95), rgba(18, 8, 6, .95)); }
+.realm-card[data-realm="vanaheim"]     { border-color: rgba(206, 160, 255, .55); background: linear-gradient(135deg, rgba(58, 34, 82, .95), rgba(18, 12, 24, .95)); }
+.realm-card[data-realm="alfheim"]      { border-color: rgba(168, 200, 224, .5); background: linear-gradient(135deg, rgba(40, 46, 56, .95), rgba(6, 6, 10, .95)); }
+.realm-card[data-realm="helheim"]      { border-color: rgba(232, 176, 74, .65); background: linear-gradient(135deg, rgba(84, 22, 62, .95), rgba(22, 8, 18, .95)); }
+.realm-card[data-realm="asgard"]       { border-color: rgba(159, 211, 214, .6); background: linear-gradient(135deg, rgba(22, 66, 86, .95), rgba(6, 18, 26, .95)); }
+.realm-card[data-realm="ragnarok"]     { border-color: rgba(160, 190, 255, .6); background: linear-gradient(135deg, rgba(22, 34, 70, .95), rgba(4, 6, 14, .95)); }
+.realm-card.boss[data-realm] { border-color: rgba(255, 120, 90, .65); }
+
+/* ── the Ram's Fleece row on a boss level's win screen ── */
+.fang-row .fang { color: #6e5a4a; }
+.fang-row .fang small { color: #a8957a; }
+.fang-row .fang.on { color: #fff3d6; text-shadow: 0 0 8px rgba(232, 176, 74, .7); }
+
+/* ── on-screen controls ── */
+.dpad button, #btn-action, #btn-shutter { font-family: var(--serif); }
+.dpad button.held, #btn-action.held { background: rgba(232, 176, 74, .45); border-color: var(--ochre); }
+
+@media (max-width: 720px) {
+  .card .name { font-size: 18px; }
+  .kicker { font-size: 13px; letter-spacing: .14em; }
+  .realm-card h3 { font-size: 20px; }
+}
