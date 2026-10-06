@@ -13,6 +13,14 @@ Progress saves in this browser profile (`afterHours.v1.night`). Itch login does 
 
 Question packs: `js/content.js` and `js/content2.js` (the v4 Virginia packs) plus `js/content3.js`–`js/content11.js` (v4.9 Virginia) and `js/content12.js`–`js/content17.js` (v4.9 New Jersey grade 5). Format and writing rules: `tools/CONTENT-GUIDE.md`. Check every file with `node tools/validate-content.js`. Headless smoke test of the gateway, builder, shop, a night, the realms and their creatures, Fenrir, the castle perks, the shooter levels and the two built games: `node tools/smoke.js` (screenshots in `tools/shots/`).
 
+## v5.12.2 (2026-10-06) — the Odyssey in story order
+
+- **Why:** a teacher saw the Cyclops's cry "Nobody is killing me!" come up before the passage where Odysseus tells him his name is Nobody. The picker chose passages by length and at random.
+- **Within an episode:** the Odyssey game now asks its passages in story order (`ODY_STORY` in `js/content.js`). The scenes come in the order they happen, and passages that retell a whole episode come after its scenes. Short and long passages mix wherever the story puts them.
+- **One passage at a time:** a passage stays on screen until all of its questions are asked, in the order they were written. The next level continues where the last one stopped, and after the last passage the story starts again.
+- **"All episodes":** first the frame at the Phaeacian court, then the Lotus-Eaters, the Cyclops, Circe, the Cattle of the Sun and Calypso, then the paired texts.
+- **Other games:** the Virginia and New Jersey games keep their length-based picker.
+
 ## v5.12.1 (2026-10-06) — a READ ME in every Canvas zip
 
 `tools/build-canvas.js` puts a plain-text file in each zip:

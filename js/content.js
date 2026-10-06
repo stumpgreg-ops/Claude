@@ -1449,6 +1449,25 @@
   var FAMILY_POOL = { G9: ["G9"], G10: ["G9", "G10"], G11: ["G9", "G10", "G11"], NJ5: ["NJ5"], ODY: ["ODY"], ALL: ["G9"] };
   /* v5.9: the Odyssey game's skill screen picks an episode; every ODY pack names one. */
   var EPISODES = ["LOTUS", "CYCLOPS", "CIRCE", "HELIOS", "CALYPSO", "VOYAGE"];
+  /* v5.12.2: the Odyssey is read in story order, not by passage length. Within an episode the scenes come in the
+     order they happen (a passage never tells an event before the one that sets it up — "Nobody is killing me!"
+     comes after Odysseus names himself Nobody); passages that retell a whole episode come after its scenes.
+     "All episodes" follows the voyage: the frame at the Phaeacian court, the five episodes in the order Odysseus
+     lived them, then the paired texts that compare episodes. buildPack orders the claims by this list. */
+  var ODY_STORY = [
+    "ody-voyage-epithet-hero", "ody-voyage-i-am-odysseus", "ody-voyage-court-tale", "ody-voyage-greek-values",
+    "ody-lotus-nine-days", "ody-lotus-gift", "ody-lotus-vocab-forgetting", "ody-lotus-benches", "ody-lotus-paired-nostos",
+    "ody-lotus-poem-shore", "ody-lotus-choice", "ody-lotus-epic-telling",
+    "ody-cyclops-lawless", "ody-cyclops-cheese", "ody-cyclops-cave", "ody-cyclops-wine", "ody-cyclops-stake",
+    "ody-cyclops-nobody", "ody-cyclops-ram", "ody-cyclops-name",
+    "ody-circe-winds", "ody-circe-smoke", "ody-circe-lots", "ody-circe-feast-vocab", "ody-circe-eurylochus-verse",
+    "ody-circe-moly", "ody-circe-oath", "ody-circe-year",
+    "ody-helios-two-warnings", "ody-helios-one-against-many", "ody-helios-wrong-winds", "ody-helios-forbidden-herds",
+    "ody-helios-sweet-sleep", "ody-helios-eurylochus-speech", "ody-helios-sun-complaint", "ody-helios-wrath-of-sun",
+    "ody-calypso-shore", "ody-calypso-council-vocab", "ody-calypso-hermes-flight", "ody-calypso-cave",
+    "ody-calypso-reply", "ody-calypso-dinner", "ody-calypso-raft", "ody-calypso-storm",
+    "ody-voyage-two-temptations", "ody-voyage-eurylochus", "ody-voyage-setbacks-raft", "ody-voyage-tie-me-tighter"
+  ];
 
   function wordCount(s) {
     return String(s).replace(/<[^>]+>/g, " ").trim().split(/\s+/).filter(Boolean).length;
@@ -1576,10 +1595,13 @@
           passage: p.passage,
           packTitle: p.title,
           episode: p.episode || null,
+          seq: p.family === "ODY" && ODY_STORY.indexOf(p.id) !== -1 ? ODY_STORY.indexOf(p.id) * 100 + p.claims.indexOf(c) : null,
           family: p.family
         });
       });
     });
+    /* v5.12.2: story order for the Odyssey (ODY_STORY); a pack missing from the list goes last */
+    if (family === "ODY") claims.sort(function (a, b) { return (a.seq == null ? 1e9 : a.seq) - (b.seq == null ? 1e9 : b.seq); });
     /* If strand filter emptied the pool (sparse strand in a family), fall back to family-all. */
     if (!claims.length && strand !== "ALL") {
       return buildPack(family, "ALL");
@@ -1602,6 +1624,7 @@
   global.heistBuildPack = buildPack;
   global.heistCorrectList = correctList;
   global.heistStrandOf = strandOf;
+  global.heistOdyStory = ODY_STORY;
   global.heistPackLevel = packLevel;
   global.heistTargetWords = targetWords;
   global.heistStamina = STAMINA;

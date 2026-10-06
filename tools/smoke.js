@@ -71,6 +71,15 @@ var srv = http.createServer(function (req, res) {
     return out;
   });
   console.log("odyssey", JSON.stringify(ody));
+  /* v5.12.2: story order — passages come in the order the events happen, each passage's questions together */
+  var story = await page.evaluate(function () {
+    var titles = function (st) { var out = []; heistBuildPack("ODY", st).claims.forEach(function (c) { if (out[out.length - 1] !== c.packTitle) out.push(c.packTitle); }); return out; };
+    return { cyclops: titles("CYCLOPS"), all: titles("ALL") };
+  });
+  console.log("odyssey story order", JSON.stringify(story.cyclops));
+  check(story.cyclops.join(" > ") === "A Land Without Laws > Cheese and Lambs > The Cave of Polyphemus > The Wine of Maron > The Olive Stake > Nobody Is Killing Me > The Lead Ram > The Name Over the Water" &&
+    story.all.length === 48 && story.all[0] === "Epithets and Epic Heroes" && story.all.indexOf("The Wine of Maron") < story.all.indexOf("Nobody Is Killing Me"),
+    "Odyssey: passages come in story order, each passage once, its questions together (Nobody named before \"Nobody is killing me\")");
   check(ody.all > 200 && Object.keys(ody.eps).every(function (e) { return ody.eps[e] >= 30; }) && ody.stray === 0, "Odyssey: every episode has its own questions, and they stay out of the other games");
 
   /* v4.9.7: the shop is open from night 1 — with no build yet it asks Town or Castle first, and a wall
@@ -1586,7 +1595,7 @@ var srv = http.createServer(function (req, res) {
       await page.waitForTimeout(3000);
       var odyPlay = await page.evaluate(function () { var sc = window.SolScene; return sc && sc.claim ? { fam: sc.family, strand: sc.strand, ep: sc.claim.episode, title: sc.claim.packTitle } : null; });
       console.log("dist/ody play", JSON.stringify(odyPlay));
-      check(odyPlay && odyPlay.fam === "ODY" && odyPlay.ep === "cyclops", "dist/ody: picking the Cyclops plays a Cyclops passage");
+      check(odyPlay && odyPlay.fam === "ODY" && odyPlay.ep === "cyclops" && odyPlay.title === "A Land Without Laws", "dist/ody: picking the Cyclops starts the episode at its first scene (story order): " + (odyPlay && odyPlay.title));
       /* v5.12: Siren Swoop (the same code as Eagle Swoop) tells its birds in Odyssey words, and its clearing banner after
          the last answer says "clear the sky" with no Norse word in it */
       await gotoLevel(2);

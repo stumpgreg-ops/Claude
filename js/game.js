@@ -6918,6 +6918,17 @@
       if (this.claim && this.claim.partB) {
         for (i = 0; i < claims.length; i++) if (claims[i].id === this.claim.partB) { pick = i; break; }   /* v5.7.1: also when a Part A is asked again */
       }
+      /* v5.12.2: the Odyssey reads in story order. The pack's claims arrive sorted by story position (content.js
+         ODY_STORY), so the next question is the first one not yet asked: a passage stays on screen until its questions
+         are done, then the story moves on. After the last passage the story starts again from the beginning. */
+      if (pick < 0 && claims[0] && claims[0].seq != null) {
+        for (i = 0; i < claims.length; i++) if (!claims[i].isPartB && unused(claims[i])) { pick = i; break; }
+        if (pick < 0) {
+          this.usedClaims = [];
+          saveUsedClaims(this.family, this.strand, this.usedClaims);
+          for (i = 0; i < claims.length; i++) if (!claims[i].isPartB) { pick = i; break; }
+        }
+      }
       if (pick < 0) {
         var pool = [];
         for (i = 0; i < claims.length; i++) if (!claims[i].isPartB && unused(claims[i]) && this.nightPacks.indexOf(claims[i].packId) === -1) pool.push(i);
