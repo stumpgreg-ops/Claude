@@ -13,6 +13,14 @@ Progress saves in this browser profile (`afterHours.v1.night`). Itch login does 
 
 Question packs: `js/content.js` and `js/content2.js` (the v4 Virginia packs) plus `js/content3.js`–`js/content11.js` (v4.9 Virginia) and `js/content12.js`–`js/content17.js` (v4.9 New Jersey grade 5). Format and writing rules: `tools/CONTENT-GUIDE.md`. Check every file with `node tools/validate-content.js`. Headless smoke test of the gateway, builder, shop, a night, the realms and their creatures, Fenrir, the castle perks, the shooter levels and the two built games: `node tools/smoke.js` (screenshots in `tools/shots/`).
 
+## v5.12.1 (2026-10-06) — a READ ME in every Canvas zip
+
+`tools/build-canvas.js` puts a plain-text file in each zip:
+- "READ ME FIRST - Canvas setup.txt" in the full zip: how to upload the files, find the course and file numbers, and paste the embed code.
+- "READ ME FIRST - Canvas update.txt" in the update zip: how to replace the .js files and keep the page.
+
+Both carry the embed code (`<iframe src="/courses/COURSE/files/NUMBER/preview" width="100%" height="700" allowfullscreen="allowfullscreen"></iframe>`). The game files are unchanged.
+
 ## v5.12.0 (2026-10-05) — Root Worms, new birds in Eagle Swoop, and "clear the field" after the last answer
 
 Ported from the teacher's Chemistry build (its v1.3, forked from v5.8.0): only the game-mode code, fitted into the current shooter shell. No Chemistry content or wording came over.
