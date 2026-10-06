@@ -675,6 +675,8 @@ var srv = http.createServer(function (req, res) {
     wrong.hp = 2; s.strikes = 0; s.iframeMs = 0;   /* the mouse test's arrows may have hit it */
     s.raidHit(wrong); o.afterOne = s.strikes + (wrong.alive ? 0 : 10);
     s.raidHit(wrong); o.wrong = s.strikes; s.strikes = 0; s.iframeMs = 0;
+    /* (earlier random play may have left two Sols: then a feather takes one Sol, not a life — start from one) */
+    if (R.wing) { try { R.wing.destroy(); } catch (eW) {} R.wing = null; }
     R.feathers.push({ x: s.player.x, y: s.player.y - 20, vx: 0, t: 0, spr: s.add.image(s.player.x, s.player.y - 20, "md-poo") });
     await until(function () { return s.strikes > 0 && !R.feathers.length; }, 15000); o.feather = s.strikes; s.strikes = 0; s.iframeMs = 0;
     /* an eagle's beam over Sol catches him */
@@ -1444,7 +1446,7 @@ var srv = http.createServer(function (req, res) {
     }
     function home(x) { S.ship.x = x == null ? (S.chanL + S.chanR) / 2 : x; S.ship.y = s.H - 110; }
     /* a one-gate row just ahead of the ship; resolves once the row has crossed the ship's middle */
-    async function sail(L, dx) { var r = s.straitRow([L], S.ship.y - 12, [S.ship.x + (dx || 0)]); await until(function () { return r.done || s._between; }); await wait(60); return r; }
+    async function sail(L, dx) { var r = s.straitRow([L], S.ship.y - 60, [S.ship.x + (dx || 0)]); await until(function () { return r.done || s._between; }, 30000); await wait(60); return r; }
     quiet(); home(); s.score = 0; s.extracted = [];
     var need = s.need.slice(), letters = s.choiceLetters(), wrongL = letters.filter(function (L) { return need.indexOf(L) === -1; })[0];
     /* sailing past a gate in the open water picks nothing */
@@ -1521,8 +1523,9 @@ var srv = http.createServer(function (req, res) {
     s.score = s.needExtracts - 1; s.extracted = [];
     var need = s.need.slice();
     for (var j = 0; j < need.length && !s._mopup && !s.ended; j++) {
-      var r = s.straitRow([need[j]], S.ship.y - 12, [S.ship.x]);
-      await until(function () { return r.done || !!s._mopup || s._between; });
+      /* (far enough ahead that a slow frame can't carry the row past the ship before its crossing is seen) */
+      var r = s.straitRow([need[j]], S.ship.y - 60, [S.ship.x]);
+      await until(function () { return r.done || !!s._mopup || s._between; }, 30000);
     }
     await wait(100);
     o.after = { score: s.score, need: s.needExtracts, ended: s.ended, finishing: s._finishing, mop: !!s._mopup, left: s._mopup && s._mopup.left, mopRows: S.P.mopRows,

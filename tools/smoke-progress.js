@@ -226,7 +226,7 @@ function makeZip(files) {
   console.log("code", modal.code, modal.code.length + " chars");
   check(/^SOL1-VA-[0-9A-Z]{4}(-[0-9A-Z]{1,4})+$/.test(modal.code) && modal.code.length <= 120, "the window shows a code: SOL1-VA- in blocks of 4, " + modal.code.length + " characters");
   check(dec.ok && dec.data.nick === "Ann S" && dec.data.won === 2 && dec.data.started === 3 && dec.data.lost === 1 && dec.data.answered === modal.sum.answered && dec.data.right === modal.sum.right &&
-    dec.data.wrong === modal.sum.wrong && dec.data.hiReached === 3 && dec.data.hiWon === 2 && dec.data.days === 1 && dec.data.modes === 2 && dec.data.version === "5.12.2" && Math.abs(dec.data.made - Date.now()) < 120000,
+    dec.data.wrong === modal.sum.wrong && dec.data.hiReached === 3 && dec.data.hiWon === 2 && dec.data.days === 1 && dec.data.modes === 2 && dec.data.version === (fs.readFileSync(path.join(__dirname, "..", "index.html"), "utf8").match(/\?v=([0-9.]+)/) || [])[1] && Math.abs(dec.data.made - Date.now()) < 120000,
     "the code decodes to the record, with the nickname: " + JSON.stringify(dec.data).slice(0, 200));
   check(dec.data.skills.length === 4 && dec.data.skills.reduce(function (a, s) { return a + s.a; }, 0) === modal.sum.answered, "the code carries each skill's answered / right");
   check(/Paste this code into the Sol's Labyrinth progress assignment in Canvas\./.test(modal.text) && /levels? won/.test(modal.text) && /questions answered/.test(modal.text) && /right on the first try/.test(modal.text) && /minutes? played/.test(modal.text) && /days? played/.test(modal.text),
