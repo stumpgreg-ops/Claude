@@ -1369,10 +1369,11 @@ var srv = http.createServer(function (req, res) {
     /* v5.12: Root Worms */
     chk("worms", function (n) { return s.wormsParams(n); }, ["worms", "len", "extraLen", "shrooms", "shroomHp", "spider", "spiderSp", "flea", "fleaSp", "fleaPlant", "wisp", "wispSp", "helm"], ["stepMs", "spiderMs", "fleaMs", "wispMs"]);
     out.wormsEnds = { l4: s.wormsParams(4), l18: s.wormsParams(18), l50: s.wormsParams(50), l99: s.wormsParams(99) };
-    chk("strait", function (n) { return s.straitParams(n); }, ["scroll", "sway", "rockP", "basePull", "surgePull", "surgeMs", "coreR", "heads", "strikeR", "reach"], ["rowGap", "gateW", "surgeEvery", "surgeWarn", "strikeEvery", "strikeWarn", "strikeMs", "aimErr"]);
+    /* v5.12.4: plus the reefs between lettered rows (plain), the run after the last answer (mopRows), and reefs with one gap, not two (twoGap) */
+    chk("strait", function (n) { return s.straitParams(n); }, ["scroll", "sway", "rockP", "plain", "mopRows", "basePull", "surgePull", "surgeMs", "coreR", "heads", "strikeR", "reach"], ["rowGap", "gateW", "reefGap", "twoGap", "surgeEvery", "surgeWarn", "strikeEvery", "strikeWarn", "strikeMs", "aimErr"]);
     var t9 = s.straitParams(9), t99 = s.straitParams(99);
-    out.straitEnds = { l9: { heads: t9.heads, strikeWarn: t9.strikeWarn, strikeEvery: t9.strikeEvery, surgeWarn: t9.surgeWarn, surgeEvery: t9.surgeEvery, gateW: t9.gateW, scroll: t9.scroll, basePull: t9.basePull },
-      l99: { heads: t99.heads, strikeWarn: t99.strikeWarn, strikeEvery: t99.strikeEvery, surgeEvery: t99.surgeEvery, gateW: t99.gateW, scroll: t99.scroll, surgePull: t99.surgePull, again: t99.again } };
+    out.straitEnds = { l9: { heads: t9.heads, strikeWarn: t9.strikeWarn, strikeEvery: t9.strikeEvery, surgeWarn: t9.surgeWarn, surgeEvery: t9.surgeEvery, gateW: t9.gateW, scroll: t9.scroll, basePull: t9.basePull, rockP: t9.rockP, plain: t9.plain, mopRows: t9.mopRows },
+      l99: { heads: t99.heads, strikeWarn: t99.strikeWarn, strikeEvery: t99.strikeEvery, surgeEvery: t99.surgeEvery, gateW: t99.gateW, scroll: t99.scroll, surgePull: t99.surgePull, again: t99.again, sway: t99.sway, plain: t99.plain, mopRows: t99.mopRows, twoGap: t99.twoGap } };
     var r1 = s.ringParams(1), r8 = s.ringParams(8);
     out.ringStart = { cap: r1.cap, spawnMs: r1.spawnMs, wolfSp: r1.wolfSp, packP: r1.packP, l8: { cap: r8.cap, spawnMs: r8.spawnMs, wolfSp: r8.wolfSp } };
     return out;
@@ -1399,10 +1400,15 @@ var srv = http.createServer(function (req, res) {
   check(tiers.sky.tier === 9 && tiers.sky.flip && tiers.sky.orbs > 0, "Sun Chariot in Ragnarok runs with reversing shields: " + JSON.stringify(tiers.sky));
   check(tiers.ring.tier === 9 && tiers.ring.alpha && tiers.ring.raven && tiers.ring.ammo <= 6, "Wolf Ring in Ragnarok: the alpha wolf, poo-dropping ravens and the quiver: " + JSON.stringify(tiers.ring));
   var se = ramp.straitEnds;
-  check(se.l9.heads === 1 && se.l9.strikeWarn >= 1000 && se.l9.surgeWarn >= 900 && se.l9.gateW >= 130 && se.l9.surgeEvery >= 8000 && se.l9.strikeEvery <= 4500 && se.l9.scroll >= 100,
-    "Scylla and Charybdis (v5.10): level 9 is fair for a beginner (one head, a second's warning before a strike or a surge, wide gates) but not trivial (a strike every 4 s): " + JSON.stringify(se.l9));
-  check(se.l99.heads === 4 && se.l99.strikeWarn <= 600 && se.l99.strikeEvery <= 1100 && se.l99.gateW <= 80 && se.l99.surgeEvery <= 3500 && se.l99.scroll > 2 * se.l9.scroll && se.l99.again,
-    "Scylla and Charybdis (v5.10): level 99 is intense (four heads, short warnings, narrow gates, near-constant surges, twice the speed): " + JSON.stringify(se.l99));
+  /* v5.12.4 (the teacher: "too easy", "over too quickly"): the thresholds moved on purpose — level 9 is a real challenge
+     from the start (a strike every 3.3 s, a steady tug, lone rocks, two reefs between rows of gates, an 11-reef run to
+     the end) but still fair (one head, a second's warning, a gate opening over 100 px); level 99 is brutal */
+  check(se.l9.heads === 1 && se.l9.strikeWarn >= 1000 && se.l9.surgeWarn >= 900 && se.l9.gateW >= 105 && se.l9.surgeEvery >= 7000 && se.l9.strikeEvery <= 3400 && se.l9.scroll >= 140 &&
+    se.l9.basePull > 0 && se.l9.rockP > 0.3 && se.l9.plain === 2 && se.l9.mopRows >= 10,
+    "Scylla and Charybdis (v5.12.4): level 9 is fair (one head, a second's warning before a strike or a surge, gates over 100 px wide) but a real challenge (a strike every 3.3 s, a steady tug, lone rocks, two reefs between rows of gates, 10+ reefs to run after the last answer): " + JSON.stringify(se.l9));
+  check(se.l99.heads === 4 && se.l99.strikeWarn <= 500 && se.l99.strikeEvery <= 850 && se.l99.gateW <= 62 && se.l99.surgeEvery <= 2400 && se.l99.scroll > 2 * se.l9.scroll && se.l99.again && se.l99.sway >= 85 &&
+    se.l99.plain === 4 && se.l99.mopRows >= 3 * se.l9.mopRows && se.l99.twoGap <= 0.2,
+    "Scylla and Charybdis (v5.12.4): level 99 is brutal (four heads, half-second warnings, 60 px gates, near-constant surges, twice the speed, four reefs between rows of gates, mostly one gap a reef, a 40-reef run to the end): " + JSON.stringify(se.l99));
 
   /* v5.10: Scylla and Charybdis, the Odyssey build's level 9 of every island. In this page window.SOL_STATE is
      set to "ODY" for these checks only, then taken away again. */
@@ -1432,7 +1438,7 @@ var srv = http.createServer(function (req, res) {
     /* no hazards and no rows of their own while the scripted checks run */
     function quiet() {
       S.headCd = 1e9; S.heads.forEach(function (h) { h.spr.destroy(); }); S.heads = [];
-      S.surge.state = "calm"; S.surge.t = 0; S.surge.cd = 1e9; S.dist = -1e9; S.kx = 0; S.ky = 0;
+      S.surge.state = "calm"; S.surge.t = 0; S.surge.cd = 1e9; S.dist = -1e9; S.kx = 0; S.ky = 0; S.P.basePull = 0;   /* (v5.12.4: she tugs from level 1 now) */
       S.rows.forEach(function (r) { s.straitKillRow(r); }); S.rows = []; S.dead = [];
       s.strikes = 0; s.iframeMs = 0;
     }
@@ -1442,7 +1448,7 @@ var srv = http.createServer(function (req, res) {
     quiet(); home(); s.score = 0; s.extracted = [];
     var need = s.need.slice(), letters = s.choiceLetters(), wrongL = letters.filter(function (L) { return need.indexOf(L) === -1; })[0];
     /* sailing past a gate in the open water picks nothing */
-    await sail(wrongL, S.P.gateW / 2 + 18 + 80);
+    await sail(wrongL, S.P.gateW / 2 + SolModes.lib.STACK.R + 80);
     o.past = s.strikes + s.score;
     /* a wrong gate: a life, and its letter is crossed out */
     quiet(); home();
@@ -1450,7 +1456,7 @@ var srv = http.createServer(function (req, res) {
     o.wrong = s.strikes; o.wrongMark = wr.gates[0].state; o.wrongLabel = s._lastHitLabel;
     /* a pillar: a life */
     quiet(); home();
-    await sail(need[0], -(S.P.gateW / 2 + 18));   /* its right pillar is where the ship is */
+    await sail(need[0], -(S.P.gateW / 2 + SolModes.lib.STACK.R));   /* its right stack is where the ship is */
     o.pillar = s.strikes; o.pillarScore = s.score;
     /* Charybdis's centre: a life, and she spits the ship back out */
     quiet(); S.ship.x = S.wx - 4; S.ship.y = Math.max(S.yMin, Math.min(S.yMax, S.wy));
@@ -1500,13 +1506,94 @@ var srv = http.createServer(function (req, res) {
   await page.evaluate(function () { SolScene.iframeMs = 1e9; SolScene.spareLives = 9; });   /* just for the picture */
   await page.waitForTimeout(5000);
   await shot("21a-scylla-charybdis-9");
+  /* v5.12.4, the teacher: "the game is over too quickly". The last answer doesn't end the level: the galley still has to
+     run the rest of the strait — P.mopRows reefs, counted down on a banner as each one passes the ship. */
+  strait.mop = await page.evaluate(async function () {
+    var s = SolScene, S = s.st, o = {};
+    function wait(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+    async function until(f, ms) { var t0 = Date.now(); while (!f() && Date.now() - t0 < (ms || 15000)) await wait(40); return !!f(); }
+    await until(function () { return !s._between && !s.readOpen; });
+    s.spareLives = 0; s.perks = {}; s.tutLockUntil = 0; s.strikes = 0; s.iframeMs = 1e9;
+    S.headCd = 1e9; S.heads.forEach(function (h) { h.spr.destroy(); }); S.heads = []; S.surge.state = "calm"; S.surge.t = 0; S.surge.cd = 1e9; S.P.basePull = 0; S.kx = 0; S.ky = 0;
+    S.rows.forEach(function (r) { s.straitKillRow(r); }); S.rows = []; S.dist = -1e9;
+    S.ship.x = (S.chanL + S.chanR) / 2; S.ship.y = s.H - 110;
+    /* the level's last question: its right gate (or gates) */
+    s.score = s.needExtracts - 1; s.extracted = [];
+    var need = s.need.slice();
+    for (var j = 0; j < need.length && !s._mopup && !s.ended; j++) {
+      var r = s.straitRow([need[j]], S.ship.y - 12, [S.ship.x]);
+      await until(function () { return r.done || !!s._mopup || s._between; });
+    }
+    await wait(100);
+    o.after = { score: s.score, need: s.needExtracts, ended: s.ended, finishing: s._finishing, mop: !!s._mopup, left: s._mopup && s._mopup.left, mopRows: S.P.mopRows,
+      gates: S.rows.filter(function (r) { return r.gates.length; }).length };
+    o.banner = s._mopBanner ? s._mopBanner.t.text : "";
+    await until(function () { return /get through the strait/.test((document.getElementById("carry-flag") || {}).textContent || ""); }, 60000);
+    o.flag = (document.getElementById("carry-flag") || {}).textContent || "";
+    /* the reefs come on their own, and the count goes down as each one passes the ship */
+    var left0 = s._mopup ? s._mopup.left : -1; S.dist = S.P.rowGap;
+    await until(function () { return s._mopup && s._mopup.left <= left0 - 2; }, 60000);
+    var reefs = S.rows.filter(function (r) { return r.mop; });
+    o.count = { left0: left0, left: s._mopup && s._mopup.left, banner: s._mopBanner ? s._mopBanner.t.text : "", reefs: reefs.length, letters: S.rows.filter(function (r) { return r.gates.length; }).length,
+      gaps: reefs.map(function (q) { return q.gaps.length; }).join(","), rocks: reefs.length > 0 && reefs.every(function (q) { return q.rocks.length >= 3; }), ended: s.ended, strikes: s.strikes };
+    return o;
+  });
+  await shot("21c-scylla-charybdis-run-9");
+  strait.mopEnd = await page.evaluate(async function () {
+    var s = SolScene, S = s.st, o = {};
+    function wait(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+    async function until(f, ms) { var t0 = Date.now(); while (!f() && Date.now() - t0 < (ms || 15000)) await wait(40); return !!f(); }
+    if (!s._mopup || s.ended) return { err: "no run" };
+    /* a rock on the run: a life, and the run goes on (this reef's gap is far from the ship) */
+    S.dist = -1e9; S.rows.forEach(function (r) { s.straitKillRow(r); }); S.rows = [];
+    S.ship.x = (S.chanL + S.chanR) / 2; S.kx = 0; s.strikes = 0; s.iframeMs = 0;
+    var hr = s.straitReefRow(S.ship.y - 12, [S.chanL + S.P.reefGap / 2]);
+    await until(function () { return s.strikes > 0 || hr.done; });
+    o.hit = { strikes: s.strikes, label: s._lastHitLabel, mopHit: !!(s._mopup && s._mopup.hit), ended: s.ended, finishing: s._finishing };
+    /* the last reef: with one left the run goes on; sailing through its gap wins the level */
+    s.iframeMs = 1e9; S.kx = 0;
+    S.rows.forEach(function (r) { s.straitKillRow(r); }); S.rows = []; S.mop.spawn = 0;
+    S.ship.x = (S.chanL + S.chanR) / 2;
+    var last = s.straitReefRow(S.ship.y - 160, [S.ship.x]); last.mop = true;
+    await until(function () { return s._mopup && s._mopup.left === 1; });
+    await wait(300);
+    o.oneLeft = { left: s._mopup && s._mopup.left, ended: s.ended, finishing: s._finishing, banner: s._mopBanner ? s._mopBanner.t.text : "" };
+    var coins = s.nightCoins;
+    await until(function () { return s.ended; }, 30000);
+    o.end = { ended: s.ended, passed: last.done, title: document.getElementById("win-title").textContent, msg: document.getElementById("win-msg").textContent, coins: s.nightCoins - coins };
+    return o;
+  });
   await gotoLevel(89);
   strait.l89 = await page.evaluate(async function () {
     var s = SolScene, S = s.st; s.iframeMs = 1e9; s.spareLives = 9;
     await new Promise(function (r) { setTimeout(r, 5000); });
-    return { mode: s.mode.id, tier: s.tier, card: (document.getElementById("mode-card") || {}).textContent || "", heads: S.P.heads, sway: S.P.sway, rocks: S.P.rockP, rows: S.rows.length };
+    return { mode: s.mode.id, tier: s.tier, card: (document.getElementById("mode-card") || {}).textContent || "", heads: S.P.heads, sway: S.P.sway, rocks: S.P.rockP, rows: S.rows.length,
+      reefs: S.rows.filter(function (r) { return r.reef; }).length, chan: Math.round((S.chanR - S.chanL) / s.W * 100) };
   });
   await shot("21b-scylla-charybdis-89");
+  /* and the run to the end at level 89, for the picture */
+  strait.l89run = await page.evaluate(async function () {
+    var s = SolScene, S = s.st; s.iframeMs = 1e9; s.spareLives = 9;
+    /* (the ship may have sailed through a gate by chance while the picture was taken: let the next question come up) */
+    var t2 = Date.now();
+    while (Date.now() - t2 < 20000 && (s._between || s._readPending || s.readOpen)) {
+      var go = document.getElementById("read-go"); if (s.readOpen && go && go.offsetParent) go.click();
+      await new Promise(function (q) { setTimeout(q, 100); });
+    }
+    /* (a still row and calm water, so the right gate is where the ship is: Charybdis may have dragged it off meanwhile) */
+    S.P.sway = 0; S.P.basePull = 0; S.surge.state = "calm"; S.surge.t = 0; S.surge.cd = 1e9; S.kx = 0; S.ky = 0;
+    S.ship.x = (S.chanL + S.chanR) / 2; S.ship.y = s.H - 110;
+    s.score = s.needExtracts - 1; s.extracted = [];
+    var need = s.need.slice();
+    for (var j = 0; j < need.length && !s._mopup; j++) {
+      var r = s.straitRow([need[j]], S.ship.y - 60, [S.ship.x]);   /* (far enough ahead to be seen crossing at this speed) */
+      var t0 = Date.now(); while (!r.done && !s._mopup && !s._between && Date.now() - t0 < 8000) await new Promise(function (q) { setTimeout(q, 40); });
+    }
+    var t1 = s.time.now; while (s.time.now - t1 < 4000) await new Promise(function (q) { setTimeout(q, 50); });
+    s.iframeMs = 1e9;
+    return { mop: !!s._mopup, left: s._mopup && s._mopup.left, mopRows: S.P.mopRows, banner: s._mopBanner ? s._mopBanner.t.text : "", ended: s.ended };
+  });
+  await shot("21d-scylla-charybdis-run-89");
   strait.after = await page.evaluate(function () {
     delete window.SOL_STATE;
     var a = []; for (var n = 1; n <= 20; n++) { var m = SolModes.modeFor(n); a.push(m ? m.id : "-"); }
@@ -1525,6 +1612,22 @@ var srv = http.createServer(function (req, res) {
   check(sr.two.first === 0 && sr.two.found.length === 1 && sr.two.later === "right" && sr.two.strikes === 0 && sr.two.second === 1 && sr.two.coins, "Scylla and Charybdis: a Select TWO question needs both right gates — the first is marked found, the second answers and pays coins: " + JSON.stringify(sr.two));
   check(sr.right === 1 && sr.rightStrikes === 0, "Scylla and Charybdis: sailing through the right gate answers the question: " + JSON.stringify({ right: sr.right, need: sr.nextNeed }));
   check(strait.l89.mode === "strait" && strait.l89.tier === 8 && /New this time/.test(strait.l89.card) && strait.l89.heads === 4 && strait.l89.sway > 0 && strait.l89.rocks > 0, "Scylla and Charybdis at level 89: four heads, swaying gates, lone rocks, and the card says what's new: " + JSON.stringify(strait.l89).slice(0, 220));
+  /* v5.12.4: the run to the end of the strait */
+  var sm = strait.mop || {}, sma = sm.after || {}, smc = sm.count || {}, sme = strait.mopEnd || {};
+  console.log("strait run", JSON.stringify({ mop: sm, end: sme, l89run: strait.l89run }));
+  check(sma.score === sma.need && !sma.ended && !sma.finishing && sma.mop && sma.left === sma.mopRows && sma.mopRows >= 10 && sma.gates === 0,
+    "Scylla and Charybdis (v5.12.4, the teacher's rule): answering the last question doesn't win — the gates go and the galley still has " + sma.mopRows + " reefs to run: " + JSON.stringify(sma));
+  check(/All questions answered — now get through the strait!/.test(sm.banner || "") && /\d+ rows of rocks left/.test(sm.banner || "") && /get through the strait/.test(sm.flag || "") && !/clear the|Any hit takes one down/.test((sm.banner || "") + (sm.flag || "")),
+    "Scylla and Charybdis (v5.12.4): a banner (and the side panel) says to get through the strait and counts the rows of rocks left, in its own words: " + JSON.stringify({ banner: sm.banner, flag: sm.flag }));
+  check(smc.left0 === sma.left && smc.left <= smc.left0 - 2 && !smc.ended && smc.reefs > 0 && smc.letters === 0 && /^[12](,[12])*$/.test(smc.gaps || "") && smc.rocks && /\d+ rows of rocks left/.test(smc.banner) && smc.banner.indexOf(String(smc.left)) !== -1,
+    "Scylla and Charybdis (v5.12.4): reefs keep coming on the run (no letters, one or two gaps each) and the count goes down as each one passes the ship: " + JSON.stringify(smc));
+  check(sme.hit && sme.hit.strikes === 1 && /ROCKS/.test(sme.hit.label || "") && sme.hit.mopHit && !sme.hit.ended && !sme.hit.finishing,
+    "Scylla and Charybdis (v5.12.4): hitting a rock on the run to the end costs a life, and the run goes on: " + JSON.stringify(sme.hit));
+  check(sme.oneLeft && sme.oneLeft.left === 1 && !sme.oneLeft.ended && !sme.oneLeft.finishing && /1 row of rocks left/.test(sme.oneLeft.banner) && sme.end && sme.end.ended && sme.end.passed && sme.end.title === "Scylla and Charybdis cleared" && /You earned \d+ coins/.test(sme.end.msg),
+    "Scylla and Charybdis (v5.12.4): with one reef left the level goes on; sailing through its gap wins it, with the usual end screen: " + JSON.stringify({ one: sme.oneLeft, end: sme.end }));
+  var l9r = strait.l89run || {};
+  check(l9r.mop && l9r.left > 20 && l9r.mopRows > sma.mopRows && /rows of rocks left/.test(l9r.banner) && !l9r.ended && strait.l89.reefs > 0 && strait.l89.chan >= 40 && strait.l89.chan <= 56,
+    "Scylla and Charybdis (v5.12.4): level 89 has reefs between its rows of gates in a strait about half the playfield wide, and a longer run to the end: " + JSON.stringify({ run: l9r, reefs: strait.l89.reefs, chan: strait.l89.chan }));
   await gotoLevel(2);
   var retry = await page.evaluate(async function () {
     var s = SolScene; s.spareLives = 0; s.perks = {}; s.strikes = s.needStrikes - 1;
