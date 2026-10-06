@@ -644,23 +644,47 @@
       }
     };
   }
-  function drawPillar(lettered) {
+  /* v5.12.3: a gate is two jagged sea stacks, not marker buoys: a craggy rock with a sunlit upper-left face, a
+     shadowed lower-right face and cracks, surf breaking white around its foot, a couple of boulders beside it and its
+     shadow on the water. A lettered stack carries the letter on a worn, painted marker stone set into its top.
+     Drawn at 64 px so the rock (radius about 22) matches what the ship can hit (the pillar touch is 27 px). */
+  function drawPillar(lettered, seed) {
     return function (c, w, h) {
-      var cx = w / 2, cy = h / 2, pts = rockShape(lettered ? 5 : 9), n = pts.length, i, a, r = w * 0.4;
-      c.fillStyle = "rgba(159,211,214,0.45)"; c.beginPath(); c.arc(cx, cy + 2, w * 0.49, 0, Math.PI * 2); c.fill();
-      c.beginPath();
-      for (i = 0; i < n; i++) { a = i / n * Math.PI * 2; c[i ? "lineTo" : "moveTo"](cx + Math.cos(a) * r * pts[i], cy + Math.sin(a) * r * pts[i]); }
-      c.closePath();
-      var g = c.createRadialGradient(cx - r * 0.3, cy - r * 0.35, r * 0.1, cx, cy, r);
-      g.addColorStop(0, lettered ? "#9a6440" : "#7a6a5a"); g.addColorStop(1, lettered ? "#3a2014" : "#2a2420");
-      c.fillStyle = g; c.fill(); c.lineWidth = 2.5; c.strokeStyle = ST.glaze; c.stroke();
+      var cx = w / 2, cy = h / 2, i, a, R = 22, n = 13;
+      var rr = function (k) { var x = Math.sin((k + 1) * 12.9898 + (seed || 0) * 78.233) * 43758.5453; return x - Math.floor(x); };
+      var pts = [];
+      for (i = 0; i < n; i++) { a = i / n * Math.PI * 2; var rad = R * (0.78 + rr(i) * 0.3); pts.push([cx + Math.cos(a) * rad, cy + Math.sin(a) * rad]); }
+      function rock(path) { c.beginPath(); path.forEach(function (q, k) { c[k ? "lineTo" : "moveTo"](q[0], q[1]); }); c.closePath(); }
+      /* the rock's shadow on the water, down and to the right */
+      c.fillStyle = "rgba(6,22,40,0.45)"; rock(pts.map(function (q) { return [q[0] + 4, q[1] + 5]; })); c.fill();
+      /* surf: a broken white ring of foam around the foot, then spray dots */
+      c.strokeStyle = "rgba(239,246,246,0.85)"; c.lineWidth = 3;
+      for (i = 0; i < 7; i++) { a = i / 7 * Math.PI * 2 + rr(i + 20); c.beginPath(); c.arc(cx, cy, R + 4 + rr(i + 40) * 3, a, a + 0.55); c.stroke(); }
+      c.fillStyle = "rgba(239,246,246,0.75)";
+      for (i = 0; i < 12; i++) { a = rr(i + 60) * Math.PI * 2; var d = R + 5 + rr(i + 80) * 5; c.beginPath(); c.arc(cx + Math.cos(a) * d, cy + Math.sin(a) * d, 0.8 + rr(i + 90) * 1.4, 0, Math.PI * 2); c.fill(); }
+      /* two small boulders at the foot */
+      [[0.95, 0.55, 5], [-0.75, 0.8, 4]].forEach(function (b, k) {
+        var bx = cx + b[0] * R, by = cy + b[1] * R;
+        c.fillStyle = "#4d4239"; c.beginPath(); c.arc(bx, by, b[2], 0, Math.PI * 2); c.fill();
+        c.fillStyle = "#8a7a68"; c.beginPath(); c.arc(bx - 1.2, by - 1.4, b[2] * 0.55, 0, Math.PI * 2); c.fill();
+      });
+      /* the stack: dark body, then a sunlit cap on the upper-left, then cracks */
+      var g = c.createLinearGradient(cx - R, cy - R, cx + R, cy + R);
+      g.addColorStop(0, "#a8957c"); g.addColorStop(0.45, "#6e5d4c"); g.addColorStop(1, "#2c241d");
+      c.fillStyle = g; rock(pts); c.fill();
+      c.lineWidth = 2; c.strokeStyle = "#1a140f"; c.stroke();
+      c.fillStyle = "rgba(214,200,172,0.55)";
+      rock(pts.map(function (q) { return [cx + (q[0] - cx) * 0.62 - 3, cy + (q[1] - cy) * 0.62 - 4]; })); c.fill();
+      c.strokeStyle = "rgba(26,20,15,0.75)"; c.lineWidth = 1.4;
+      [[-0.55, -0.1, -0.15, 0.35], [0.2, -0.6, 0.45, -0.1], [0.1, 0.25, 0.55, 0.5]].forEach(function (l) {
+        c.beginPath(); c.moveTo(cx + l[0] * R, cy + l[1] * R); c.lineTo(cx + (l[0] + l[2]) / 2 * R + 2, cy + (l[1] + l[3]) / 2 * R); c.lineTo(cx + l[2] * R, cy + l[3] * R); c.stroke();
+      });
       if (lettered) {
-        /* a bone-white plaque with a terracotta rim, like a painted pot, for the letter */
-        c.fillStyle = ST.terra; c.beginPath(); c.arc(cx, cy, r * 0.74, 0, Math.PI * 2); c.fill();
-        c.fillStyle = ST.bone; c.beginPath(); c.arc(cx, cy, r * 0.62, 0, Math.PI * 2); c.fill();
-      } else {
-        c.fillStyle = "rgba(0,0,0,0.25)";
-        [[0.3, -0.2, 0.18], [-0.3, 0.25, 0.14]].forEach(function (q) { c.beginPath(); c.arc(cx + q[0] * r, cy + q[1] * r, q[2] * r, 0, Math.PI * 2); c.fill(); });
+        /* the marker stone: a worn bone-white slab painted with a terracotta band, set into the rock's top */
+        c.fillStyle = "rgba(20,12,10,0.5)"; c.beginPath(); c.arc(cx + 1.5, cy + 2, 12.5, 0, Math.PI * 2); c.fill();
+        c.fillStyle = ST.terra; c.beginPath(); c.arc(cx, cy, 12.5, 0, Math.PI * 2); c.fill();
+        c.fillStyle = ST.bone; c.beginPath(); c.arc(cx, cy, 10.5, 0, Math.PI * 2); c.fill();
+        c.strokeStyle = "rgba(90,70,50,0.35)"; c.lineWidth = 1; c.beginPath(); c.moveTo(cx + 5, cy - 9); c.lineTo(cx + 8, cy - 4); c.stroke();
       }
     };
   }
@@ -745,8 +769,9 @@
     canvasTex(scene, "md-strait-shore", 64, 256, drawStraitCliff(true, false));
     canvasTex(scene, "md-strait-whirl", 256, 256, drawWhirl(false));
     canvasTex(scene, "md-strait-foam", 256, 256, drawWhirl(true));
-    canvasTex(scene, "md-strait-pillar", 56, 56, drawPillar(true));
-    canvasTex(scene, "md-strait-rock", 56, 56, drawPillar(false));
+    canvasTex(scene, "md-strait-pillar", 64, 64, drawPillar(true, 1));
+    canvasTex(scene, "md-strait-pillar-b", 64, 64, drawPillar(true, 2));
+    canvasTex(scene, "md-strait-rock", 64, 64, drawPillar(false, 3));
     canvasTex(scene, "md-strait-ship-0", SHIP_W, SHIP_H, drawGalley(0));
     canvasTex(scene, "md-strait-ship-1", SHIP_W, SHIP_H, drawGalley(1));
     canvasTex(scene, "md-strait-head", 64, 44, drawScyllaHead);
@@ -3192,8 +3217,8 @@
           var cx = xs && xs[k] != null ? xs[k] : S.chanL + slot * k + hf + rnd(0, Math.max(0, slot - hf * 2));
           var g = { letter: L, base: cx, cx: cx, half: half, state: "live", posts: [], labels: [] };
           [-1, 1].forEach(function (sd) {
-            g.posts.push(self.add.image(cx + sd * (half + pr), y, "md-strait-pillar").setDepth(8).setScale(0.86));
-            g.labels.push(self.add.text(cx + sd * (half + pr), y, L, { fontFamily: "Georgia, 'Palatino Linotype', serif", fontSize: 22, color: ST.glaze, fontStyle: "bold" }).setOrigin(0.5).setDepth(9));
+            g.posts.push(self.add.image(cx + sd * (half + pr), y, sd < 0 ? "md-strait-pillar" : "md-strait-pillar-b").setDepth(8));
+            g.labels.push(self.add.text(cx + sd * (half + pr), y, L, { fontFamily: "Georgia, 'Palatino Linotype', serif", fontSize: 19, color: ST.glaze, fontStyle: "bold" }).setOrigin(0.5).setDepth(9));
           });
           if (S.dead.indexOf(L) !== -1) self.straitPaint(g, "wrong");
           else if (self.extracted.indexOf(L) !== -1) self.straitPaint(g, "right");
@@ -3204,7 +3229,7 @@
           for (var t = 0; t < 14; t++) {
             var rx = rnd(S.chanL + pr, S.chanR - pr);
             if (row.gates.every(function (g) { return Math.abs(rx - g.base) > g.half + pr * 3 + 34; })) {
-              row.rocks.push({ base: rx, x: rx, spr: this.add.image(rx, y, "md-strait-rock").setDepth(8).setScale(0.8).setRotation(rnd(0, 6)) });
+              row.rocks.push({ base: rx, x: rx, spr: this.add.image(rx, y, "md-strait-rock").setDepth(8).setScale(0.86).setRotation(rnd(0, 6)) });
               break;
             }
           }
@@ -3378,11 +3403,15 @@
           row.gates.forEach(function (g) {
             g.cx = g.base + off;
             [-1, 1].forEach(function (sd, k) { var gx = g.cx + sd * (g.half + 18); g.posts[k].setPosition(gx, row.y); g.labels[k].setPosition(gx, row.y); });
-            /* the rope of floats across the opening */
-            var col = g.state === "wrong" ? 0x8a8a8a : g.state === "right" ? 0x7af0a0 : 0xe8b04a;
-            lg.lineStyle(2, 0xefe6d2, 0.45); lg.lineBetween(g.cx - g.half, row.y, g.cx + g.half, row.y);
-            lg.fillStyle(col, 0.95);
-            for (var fx = -g.half + 8; fx <= g.half - 8; fx += 16) lg.fillCircle(g.cx + fx, row.y, 3.2);
+            /* v5.12.3: no rope of floats (it read as a slalom): the passage between the two rocks is just open water,
+               with the current running white along the rocks' inner sides */
+            if (g.state !== "wrong") {
+              lg.lineStyle(2, g.state === "right" ? 0x9af0b8 : 0xeff6f6, 0.5);
+              for (var sd2 = -1; sd2 <= 1; sd2 += 2) {
+                var ex = g.cx + sd2 * (g.half - 2);
+                lg.lineBetween(ex, row.y - 22, ex - sd2 * 3, row.y - 6); lg.lineBetween(ex - sd2 * 3, row.y + 6, ex, row.y + 22);
+              }
+            }
           });
           row.rocks.forEach(function (k) { k.x = k.base + off; k.spr.setPosition(k.x, row.y); });
           /* pillars and rocks: a life, and the ship bounces off */
