@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{{TITLE}}</title>
+<style>
+:root {
+  --bg: {{BG}}; --panel: {{PANEL}}; --panel2: {{PANEL2}}; --line: {{LINE}};
+  --gold: {{GOLD}}; --ink: #f1ede4; --dim: #c2bcae; --ok: #86e3a0; --bad: #ff9a88; --warn: #ffd27a;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); color: var(--ink); }
+body { font: 17px/1.5 "Trebuchet MS", "Segoe UI", system-ui, sans-serif; padding: 18px; }
+main { max-width: 1440px; margin: 0 auto; }
+h1 { font-size: 30px; margin: 0; color: var(--gold); }
+h2 { font-size: 22px; margin: 0 0 10px; color: var(--gold); }
+.sub { color: var(--dim); margin: 2px 0 14px; }
+.panel { background: var(--panel); border: 2px solid var(--line); border-radius: 14px; padding: 16px 18px; margin: 0 0 16px; }
+.panel p { margin: 6px 0; }
+details summary { cursor: pointer; font-weight: 700; color: var(--gold); font-size: 18px; }
+details ol { margin: 8px 0 4px; padding-left: 24px; }
+details li { margin: 6px 0; }
+.btn { appearance: none; font: inherit; font-weight: 700; min-height: 46px; padding: 8px 16px; border-radius: 10px; border: 2px solid var(--line);
+  background: var(--panel2); color: var(--ink); cursor: pointer; }
+.btn:hover, .btn:focus-visible { border-color: var(--gold); }
+.btn.primary { background: var(--gold); color: #1a1206; border-color: var(--gold); }
+.btn:disabled { opacity: .5; cursor: default; }
+.row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 10px 0 0; }
+input[type=number] { font: inherit; width: 96px; min-height: 42px; padding: 4px 8px; border-radius: 8px; border: 2px solid var(--line); background: #fffdf6; color: #1a1408; }
+textarea { font: 16px/1.4 Consolas, "Courier New", monospace; width: 100%; min-height: 130px; padding: 10px; border-radius: 10px; border: 2px solid var(--line); background: #fffdf6; color: #1a1408; }
+table.goals { border-collapse: collapse; margin: 6px 0; }
+table.goals th, table.goals td { padding: 6px 12px 6px 0; text-align: left; vertical-align: middle; }
+table.goals th { color: var(--dim); font-size: 14px; font-weight: 700; }
+.hint { color: var(--dim); font-size: 15px; }
+.drop { border: 3px dashed var(--line); border-radius: 14px; padding: 18px; text-align: center; margin: 0 0 12px; background: var(--panel2); }
+.drop.over { border-color: var(--gold); background: rgba(255, 255, 255, .06); }
+.drop b { color: var(--gold); }
+#msg { min-height: 24px; font-weight: 700; margin: 10px 0 0; }
+#msg.bad { color: var(--bad); } #msg.ok { color: var(--ok); }
+.counts { font-size: 18px; margin: 0 0 8px; }
+.counts span { margin-right: 18px; white-space: nowrap; }
+.wrap { overflow: auto; max-height: 70vh; border: 2px solid var(--line); border-radius: 10px; margin-top: 10px; }
+table.res { border-collapse: collapse; width: 100%; font-size: 15px; }
+table.res th, table.res td { padding: 7px 10px; border-bottom: 1px solid var(--line); text-align: right; white-space: nowrap; }
+table.res th { position: sticky; top: 0; background: var(--panel2); color: var(--gold); cursor: pointer; user-select: none; z-index: 2; vertical-align: bottom; white-space: normal; min-width: 70px; }
+table.res th:hover { text-decoration: underline; }
+table.res th .arr { color: var(--ink); }
+table.res td.l, table.res th.l { text-align: left; }
+table.res td.name { font-weight: 700; position: sticky; left: 0; background: var(--panel); z-index: 1; }
+table.res th.name { left: 0; z-index: 3; }
+table.res tr.invalid td { color: var(--bad); }
+table.res tr.other td { color: var(--warn); }
+table.res td.status { white-space: normal; min-width: 170px; max-width: 240px; text-align: left; }
+table.res td.grade { font-weight: 700; color: var(--gold); font-size: 17px; }
+.st-ok { color: var(--ok); font-weight: 700; } .st-bad { color: var(--bad); font-weight: 700; } .st-other { color: var(--warn); font-weight: 700; }
+.small { font-size: 13px; color: var(--dim); white-space: normal; }
+ul.notes { margin: 10px 0 0; padding-left: 22px; color: var(--dim); }
+#copybox { margin-top: 10px; }
+.empty { color: var(--dim); padding: 18px; text-align: center; }
+@media print {
+  @page { size: landscape; margin: 10mm; }
+  body { background: #fff; color: #000; padding: 0; font-size: 11px; }
+  .noprint, details, .drop, textarea, .row, #msg { display: none !important; }
+  .panel { border: none; padding: 0; background: #fff; }
+  h1, h2 { color: #000; }
+  .wrap { max-height: none; overflow: visible; border: none; }
+  table.res { font-size: 10px; }
+  table.res th, table.res td { color: #000 !important; background: #fff !important; border-bottom: 1px solid #999; position: static; padding: 3px 5px; }
+  table.goals td input { border: none; }
+}
+</style>
+</head>
+<body>
+<main>
+  <h1>{{HEADING}}</h1>
+  <p class="sub">For the teacher only: keep this file unpublished in Canvas · made for game version {{VERSION}}</p>
+
+  <section class="panel noprint">
+    <details open>
+      <summary>How this works (3 steps)</summary>
+      <ol>
+        <li><b>Students:</b> in the game, tap <b>My progress code</b> (on the title screen or after a level), tap <b>Copy code</b>,
+          and paste the code into your Canvas assignment <b>“{{ASSIGNMENT}}”</b> (Submission type: <b>Text Entry</b>).</li>
+        <li><b>You:</b> either copy codes from SpeedGrader and paste them in box 2 below (you can type the student's name first, like
+          <code>Ann Smith: SOL1-…</code>), or on the assignment page click <b>Download Submissions</b> and drop that .zip file on box 2.</li>
+        <li>Read the table. Change the goals in box 1 and every suggested grade updates. Download or copy the table, then enter the grades in Canvas.</li>
+      </ol>
+      <p class="hint">Everything stays in this browser: this page sends nothing anywhere. Each code shows everything a student has done on one
+        Chromebook up to the moment the code was made, so ask for a new code whenever you grade.</p>
+    </details>
+  </section>
+
+  <section class="panel" id="goals-panel">
+    <h2>1. Your goals for full participation credit</h2>
+    <table class="goals">
+      <thead><tr><th>Goal</th><th>Full credit at</th><th>How much it counts</th></tr></thead>
+      <tbody id="goal-rows"></tbody>
+    </table>
+    <div class="row">
+      <label>Points possible <input type="number" id="points" min="1" max="1000" step="1" /></label>
+      <button type="button" class="btn noprint" id="goals-reset">Back to the usual goals</button>
+    </div>
+    <p class="hint" id="goal-explain">Each goal gives full credit when the student reaches it, and part credit on the way. “How much it counts” weighs the goals against each other (0 leaves a goal out).</p>
+  </section>
+
+  <section class="panel noprint">
+    <h2>2. Add the students' codes</h2>
+    <div class="drop" id="drop">
+      <p><b>Drop the Canvas “Download Submissions” .zip here</b> (or .txt / .html files)</p>
+      <button type="button" class="btn" id="choose">Choose files…</button>
+      <input type="file" id="file" multiple accept=".zip,.txt,.html,.htm,.csv,text/plain,text/html,application/zip" hidden />
+    </div>
+    <textarea id="paste" spellcheck="false" placeholder="…or paste codes here. Any text works: one code per line, or a name, a colon and the code, like&#10;Ann Smith: SOL1-{{ST}}-…"></textarea>
+    <div class="row">
+      <button type="button" class="btn primary" id="read">Read the codes</button>
+      <button type="button" class="btn" id="clear">Clear the table</button>
+    </div>
+    <p id="msg" aria-live="polite"></p>
+  </section>
+
+  <section class="panel" id="results">
+    <h2>3. Results</h2>
+    <p class="counts" id="counts"></p>
+    <div class="row noprint">
+      <a class="btn" id="csv" download="progress.csv" href="#">Download the table (CSV)</a>
+      <button type="button" class="btn" id="copy">Copy the table</button>
+      <button type="button" class="btn" id="print">Print</button>
+    </div>
+    <div id="copybox" class="noprint" hidden>
+      <p class="hint" id="copyhint">The table is selected below: press Ctrl+C to copy it, then paste it into a spreadsheet.</p>
+      <textarea id="copytext" readonly></textarea>
+    </div>
+    <div class="wrap"><table class="res" id="table"></table></div>
+    <ul class="notes" id="notes"></ul>
+  </section>
+</main>
+<script>window.TEACHER_STATE = "{{ST}}";</script>
+<script>
+{{CODE_JS}}
+</script>
+<script>
+{{APP_JS}}
+</script>
+</body>
+</html>

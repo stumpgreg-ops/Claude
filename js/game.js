@@ -2998,6 +2998,8 @@
   }
   function saveAdapt(family, a) { try { localStorage.setItem(LS_ADAPT + family, JSON.stringify(a)); } catch (e) {} }
   function adaptEvent(scene, kind, claim) {
+    /* v5.13: every answer and wrong pick also goes to the progress record (js/progress.js) */
+    if (window.SolProgress) { try { SolProgress.answer(kind, claim); } catch (eP) {} }
     var a = scene.adapt;
     if (!a) return;
     var st = (claim && claim.strand) || "RL";
@@ -4487,6 +4489,7 @@
 
     create() {
       playScene = this;
+      progressLevelStart(this);
       /* Local-dev hook only (never on itch): lets a test harness read the maze,
          rail graph and scene without reaching into closures. */
       try {
@@ -17369,6 +17372,7 @@
     }
 
     endRun(win) {
+      if (window.SolProgress && !this.ended) { try { SolProgress.levelEnd(!!win); } catch (eP) {} }   /* v5.13: the progress record */
       this.ended = true;
       this.player.setVelocity(0, 0);
       /* Cycle 18 refine-0547: restore timeScale on overlay */
@@ -26724,7 +26728,7 @@
     try {
       ModeScene = SolModes.install(NightScene, {
         Input: Input,
-        setPlayScene: function (sc) { playScene = sc; },
+        setPlayScene: function (sc) { playScene = sc; progressLevelStart(sc); },   /* ModeScene.create() calls it first */
         adaptEvent: adaptEvent, pingTeacher: function (sc, st) { pingTeacher(sc, st); },
         loadUsedClaims: loadUsedClaims, loadAdapt: loadAdapt,
         readingIsVisible: readingIsVisible, hideReading: hideReading,
@@ -26733,6 +26737,33 @@
         installSafeCamFlash: installSafeCamFlash
       });
     } catch (eModes) { ModeScene = null; if (window.console) console.warn("[modes] install failed", eModes); }
+  }
+  /* v5.13: the progress record (js/progress.js) — a level starts when its scene is created (a retry is a new start) */
+  function progressLevelStart(sc) {
+    if (!window.SolProgress || !sc) return;
+    try {
+      SolProgress.levelStart({ family: sc.family, night: sc.night,
+        mode: sc.mode && sc.mode.id ? sc.mode.id : (sc.isBossLevel ? "boss" : "maze") });
+    } catch (eP) {}
+  }
+  /* play time counts only while a level is on screen and nothing pauses it */
+  function progressActive() {
+    var sc = playScene;
+    if (!sc || sc.ended || sc._finishing) return false;
+    if (sc.readOpen || sc.tutOpen || sc.codexOpen || sc.trapOpen || sc.helpOpen || sc._tabHidden) return false;
+    var play = document.getElementById("play");
+    if (!play || play.classList.contains("hidden")) return false;
+    var cards = ["overlay", "read-overlay", "tut-overlay", "codex-overlay", "trap-overlay", "char-overlay", "build-overlay", "progress-overlay"];
+    for (var i = 0; i < cards.length; i++) { var c = document.getElementById(cards[i]); if (c && !c.classList.contains("hidden")) return false; }
+    try { if (sc.scene && sc.scene.isPaused && sc.scene.isPaused()) return false; } catch (e) {}
+    return true;
+  }
+  if (window.SolProgress) {
+    SolProgress.hook({
+      state: function () { return cfg.state || LOCKED_STATE; },
+      nick: function () { var n = document.getElementById("join-nick"); return n ? n.value : ""; },
+      active: progressActive
+    });
   }
   function sceneKeyFor(n) {
     try { if (ModeScene && window.SolModes && SolModes.modeFor(n)) return "mode"; } catch (e) {}

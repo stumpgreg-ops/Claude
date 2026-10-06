@@ -12,7 +12,10 @@
    update replaces only the .js files, so the starter page (and every student's progress) stays.
 
    Writes dist/canvas/<ST>/, dist/canvas/SOLLabyrinth-<ST>-Canvas.zip (the same files, for one upload) and
-   dist/canvas/SOLLabyrinth-<ST>-Canvas-update.zip (the .js files only, for updating a game already in Canvas) */
+   dist/canvas/SOLLabyrinth-<ST>-Canvas-update.zip (the .js files only, for updating a game already in Canvas).
+   v5.13: both zips also carry the teacher progress page, dist/canvas/SOLLabyrinth-<ST>-Teacher.html (tools/build-teacher.js):
+   it reads the progress codes students paste into a Canvas assignment. It is not in dist/canvas/<ST>/ (the files the
+   game itself loads); the teacher uploads it next to them but keeps it hidden from students. */
 var fs = require("fs"), path = require("path"), cp = require("child_process");
 var root = path.join(__dirname, ".."), dist = path.join(root, "dist");
 var st = (process.argv[2] || "VA").toUpperCase(), lo = st.toLowerCase();
@@ -72,20 +75,53 @@ if (fs.existsSync(old)) fs.unlinkSync(old);
    to ask for them. It sits next to the game files in the zip (not in out/, which holds only what goes to Canvas). */
 var GAME_NAMES = { VA: "Sol's Labyrinth (Virginia)", NJ: "Sol's Labyrinth (New Jersey)", ODY: "The Odyssey: Labyrinth of the Wine-Dark Sea" };
 var gameName = GAME_NAMES[st] || ("Sol's Labyrinth (" + st + ")");
+/* v5.13: the teacher progress page (it reads the students' progress codes) */
+var teacherBuild = require("./build-teacher"), PB = require("../js/progress-code.js").BUILDS[st];
+var teacherName = teacherBuild.fileName(st), teacherPath = path.join(outAll, teacherName);
+fs.writeFileSync(teacherPath, teacherBuild.build(st, man.version));
 var EMBED = '<iframe src="/courses/COURSE/files/NUMBER/preview" width="100%" height="700" allowfullscreen="allowfullscreen"></iframe>';
+/* v5.13: tracking progress with progress codes and the teacher page */
+function teacherSteps() {
+  return [
+    "TRACKING STUDENT PROGRESS (PROGRESS CODES AND THE TEACHER PAGE)",
+    "The game can't send anything out of Canvas, so each student's progress stays on their Chromebook. In the game,",
+    "\"My progress code\" (on the title screen and after every level) shows a code with their levels, questions,",
+    "accuracy, minutes and days played. Students paste that code into a Canvas assignment, and the teacher page",
+    "reads all the codes at once and suggests a participation grade.",
+    "1. Upload " + teacherName + " to the same Canvas folder as the game, then HIDE it from students:",
+    "   in Files, click the cloud (publish) icon next to it and choose Unpublish (not \"Only available to",
+    "   students with link\"). An unpublished file can be opened only by teachers.",
+    "2. Make the assignment: Assignments > + Assignment. Name it \"" + PB.assignment + "\".",
+    "   Submission type: Online, with Text Entry checked (nothing else). Points: whatever you like. Save and Publish.",
+    "3. Tell students: open the game, tap My progress code, tap Copy code, and paste it into that assignment",
+    "   as a Text Entry, then Submit. A new code each time you grade: the newest code shows everything so far.",
+    "4. Read the codes: open " + teacherName + " from Files (click it, then open it in a new tab if Canvas shows only",
+    "   a preview). Or download it once and open it from your computer: it needs no internet. Then EITHER",
+    "   (a) open SpeedGrader, copy each student's code and paste it into the box on the teacher page",
+    "       (type the name first if you like: Ann Smith: SOL1-...), OR",
+    "   (b) on the assignment's page click \"Download Submissions\", and drop that .zip file on the teacher page",
+    "       (student names come from the file names Canvas gives them).",
+    "5. Set your goals at the top of the teacher page (minutes, levels won, questions; how much each counts;",
+    "   points possible). The table shows each student and a suggested grade; Download (CSV) or Copy it.",
+    "A typo or a changed code shows as INVALID. The code stops typos and casual tampering, not a determined",
+    "student. A student who plays on two Chromebooks has two codes; the page keeps the newest one."
+  ];
+}
 function readme(update) {
   var n = files.length + (update ? 1 : 2), L = [];
   L.push(gameName + " - version " + man.version + (update ? " (UPDATE)" : ""), "");
   if (update) {
     L.push("THIS ZIP UPDATES A GAME THAT IS ALREADY IN CANVAS.",
-      "It holds only the game's .js files (" + n + " files). It has no .html page on purpose: the page already in",
+      "It holds the game's .js files (" + n + " files) and the teacher page. It has no game .html page on purpose: the page already in",
       "Canvas stays, so your embed code keeps working and students keep their progress.", "",
       "HOW TO UPDATE",
       "1. Unzip this file on your computer.",
       "2. In Canvas, open Files and go to the folder that already holds " + base + ".html.",
       "3. Click Upload and select ALL the .js files from the unzipped folder (you can skip this READ ME).",
       "4. When Canvas asks, choose Replace for every file.",
-      "5. Done. Nothing changes on your Canvas page. Students may need to refresh the page once.", "",
+      "5. Done. Nothing changes on your Canvas page. Students may need to refresh the page once.",
+      "6. New in this version: the teacher progress page (" + teacherName + "). If your folder doesn't have it yet,",
+      "   upload it too and keep it hidden from students - see TRACKING STUDENT PROGRESS below.", "",
       "Setting the game up for the first time? Use the full zip (" + base + "-Canvas.zip) instead.", "");
   } else {
     L.push("THIS ZIP SETS UP THE GAME IN CANVAS FOR THE FIRST TIME.",
@@ -111,16 +147,19 @@ function readme(update) {
       "4. Replace COURSE and NUMBER with your two numbers. With the example numbers it would be:", "",
       "   " + EMBED.replace("COURSE", "152432").replace("NUMBER", "60512345"), "",
       "5. Click Save. The game appears on the page.", "",
+      teacherSteps().join("\r\n"), "",
       "UPDATING LATER",
       "When you get a new version, use the update zip (" + base + "-Canvas-update.zip): upload its .js files to the",
       "same folder and choose Replace. Do not replace or delete " + base + ".html - the embed code and the",
       "students' saved progress stay with it.", "");
   }
+  if (update) L.push(teacherSteps().join("\r\n"), "");
   L.push("IF SOMETHING GOES WRONG",
     "- The page says \"Can't find ...\": that file is missing from the folder. Upload it with exactly the same name.",
     "- The game is too small or too tall: change height=\"700\" in the embed code (try 600 or 800).",
     "- Students can make it full screen with the game's own full-screen button.", "",
-    "Files in the game:", "   " + (update ? "" : base + ".html, ") + game + ", " + files[0] + " ... " + files[files.length - 1]);
+    "Files in the game:", "   " + (update ? "" : base + ".html, ") + game + ", " + files[0] + " ... " + files[files.length - 1],
+    "Teacher page (keep it hidden from students): " + teacherName);
   return L.join("\r\n") + "\r\n";
 }
 var tmpDir = fs.mkdtempSync(path.join(outAll, ".readme-"));
@@ -130,13 +169,14 @@ fs.writeFileSync(RM_UPD, readme(true));
 
 var zip = path.join(outAll, base + "-Canvas.zip");
 if (fs.existsSync(zip)) fs.unlinkSync(zip);
-cp.execFileSync("zip", ["-q", "-X", "-j", zip].concat([RM_FULL]).concat([base + ".html", game].concat(files).map(function (f) { return path.join(out, f); })));
+cp.execFileSync("zip", ["-q", "-X", "-j", zip].concat([RM_FULL, teacherPath]).concat([base + ".html", game].concat(files).map(function (f) { return path.join(out, f); })));
 /* an update: the .js files only, so the starter page already in Canvas (and its saves) stays */
 var upd = path.join(outAll, base + "-Canvas-update.zip");
 if (fs.existsSync(upd)) fs.unlinkSync(upd);
-cp.execFileSync("zip", ["-q", "-X", "-j", upd].concat([RM_UPD]).concat([game].concat(files).map(function (f) { return path.join(out, f); })));
+cp.execFileSync("zip", ["-q", "-X", "-j", upd].concat([RM_UPD, teacherPath]).concat([game].concat(files).map(function (f) { return path.join(out, f); })));
 fs.rmSync(tmpDir, { recursive: true, force: true });
 
 var mb = function (b) { return (b / 1048576).toFixed(1) + " MiB"; };
 console.log("Canvas " + st + " v" + man.version + ": " + path.relative(root, out) + "/ (" + base + ".html " + (Buffer.byteLength(starter) / 1024).toFixed(1) + " KiB, " + game + ", " +
-  files.length + " data files) and " + path.relative(root, zip) + " (" + mb(fs.statSync(zip).size) + "), update " + path.basename(upd));
+  files.length + " data files) and " + path.relative(root, zip) + " (" + mb(fs.statSync(zip).size) + "), update " + path.basename(upd) +
+  "; teacher page " + teacherName + " " + (fs.statSync(teacherPath).size / 1024).toFixed(1) + " KiB");
