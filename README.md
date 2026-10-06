@@ -29,6 +29,15 @@ A game uploaded to Canvas can't send anything anywhere, so progress is shown to 
 
 Tests: `node tools/smoke-progress.js` (after `node tools/build-games.js`, `node tools/build-appsscript.js VA|ODY` and `node tools/build-canvas.js VA|ODY`).
 
+## v5.13.0 (2026-10-06) — progress codes, a teacher page, and a harder, longer Scylla and Charybdis
+
+- **Progress codes and the teacher page** (all three games): see the section above. Each Canvas zip, the update zip included, carries the game's teacher page (`SOLLabyrinth-<VA|NJ|Odyssey>-Teacher.html`).
+- **Scylla and Charybdis** (Odyssey), after the teacher's notes "the rocks look like a slalom", "too easy, over too quickly" and "the path is too wide":
+  - The gates are big sea stacks, and each hit area matches its drawing.
+  - The strait is about half the screen wide, and reefs of rock lie between the lettered rows.
+  - Every setting in `straitParams` is harder from level 9 on.
+  - After the last answer the galley must still get through the rest of the strait: `mopup_strait`, with 11 rows of rocks at level 9 and 40 at level 99.
+
 ## v5.12.2 (2026-10-06) — the Odyssey in story order
 
 - **Why:** a teacher saw the Cyclops's cry "Nobody is killing me!" come up before the passage where Odysseus tells him his name is Nobody. The picker chose passages by length and at random.
