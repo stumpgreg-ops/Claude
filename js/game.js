@@ -26941,7 +26941,7 @@
     { id: "worms", kind: "Centipede style", name: "Root Worms", meta: "Shoot the glowing worm segment with the right letter as the worms wind down through the mushrooms.", noOdy: true }
   ];
   /* v5.10: the Odyssey build only (window.SOL_STATE === "ODY") */
-  GAME_MODE_DEFS.push({ id: "strait", kind: "Steer the strait", name: "Scylla and Charybdis", meta: "Steer Odysseus's ship through the gate with the right letter while Charybdis pulls and Scylla strikes.", ody: true });
+  GAME_MODE_DEFS.push({ id: "strait", kind: "Steer the strait", name: "Scylla and Charybdis", meta: "Steer Odysseus's ship through the gaps in the rocks and the gate with the right letter, to the end of the strait, while Charybdis pulls and Scylla strikes.", ody: true });
   /* v5.11: four more Odyssey modes, each in its own file (js/mode-ram.js, mode-bow.js, mode-raft.js, mode-row.js) */
   GAME_MODE_DEFS.push(
     { id: "ram", kind: "Sneak out of the cave", name: "Under the Ram", meta: "Cling under a ram and slip out of the Cyclops's cave past blind Polyphemus's groping hands — ride out on the ram with the right letter.", ody: true },

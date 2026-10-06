@@ -16,7 +16,9 @@
  * left first (mopup_<id>, mopupLeft, mopupDone).
  * v5.10, the Odyssey build only (window.SOL_STATE === "ODY"): level 9 of every island is
  *   9  Scylla and Charybdis  steering level: sail through the gate with the right letter while
- *                            Charybdis's whirlpool pulls and Scylla's heads strike
+ *                            Charybdis's whirlpool pulls and Scylla's heads strike (v5.12.4: reefs of sea
+ *                            stacks between the gates, and after the last answer the run to the end of the
+ *                            strait, mopup_strait)
  *
  * The questions, the reading pop-up, lives, coins, the adaptive reading level,
  * the castle perks and the end-of-level screens are the maze's own: ModeScene
@@ -129,23 +131,26 @@
         "Three worms at once.",
         "Ragnarok: the worms come faster, on top of everything else."]
     },
-    /* v5.10: the Odyssey build only (window.SOL_STATE === "ODY"): Book 12, the strait between Scylla and Charybdis */
+    /* v5.10: the Odyssey build only (window.SOL_STATE === "ODY"): Book 12, the strait between Scylla and Charybdis.
+       v5.12.4: the rocks are sea stacks, reefs come between the gates, and the level runs to the end of the strait */
     strait: {
       id: "strait", name: "Scylla and Charybdis", kind: "steering level", level: "steering level", act: "ROW",
-      how: "Odysseus's ship sails up the narrow strait. Gates of rock pillars come down the water toward you, each marked with a letter. Steer through the gate with the right answer; you can sail past the others in the open water between them. Gates you miss come round again. On the right, Charybdis's whirlpool swirls: when the water there turns dark and spins faster, she is about to surge and drag your ship toward her. On the left, Scylla waits on her cliff: a dark shadow on the water shows where one of her heads will strike next. Get out from under it.",
-      rules: "Sailing through a wrong gate costs a life. So does hitting a rock, touching the dark centre of Charybdis, or being under one of Scylla's heads when it strikes — she snatches a crewman, as she took six men from Odysseus.",
+      how: "Odysseus's ship has to sail the whole narrow strait. Sea rocks come down the water toward you. Most rows are reefs, rocks right across the strait: steer through a gap between them. Some rows are gates, two sea rocks with a letter stone on top of each: steer between the two rocks marked with the right answer. You can sail past the other gates in the open water beside them, and gates you miss come round again. When the last question is answered the strait isn't over: get the ship through the rows of rocks that are left (a count shows how many) to win the level. On the right, Charybdis's whirlpool tugs at the ship all the time; when her water turns dark and spins faster, she is about to surge and drag your ship toward her. On the left, Scylla waits on her cliff: a dark shadow on the water shows where one of her heads will strike next. Get out from under it.",
+      rules: "Sailing through a wrong gate costs a life. So does hitting a rock, touching the dark centre of Charybdis, or being under one of Scylla's heads when it strikes — she snatches a crewman, as she took six men from Odysseus. On the run to the end of the strait after the last answer, a hit still costs a life.",
       keys: "Arrow keys, WASD or the on-screen pad steer · Space, ROW or a mouse button: the crew pulls hard for a moment (a burst of speed). The mouse does not steer.",
-      tip: "SCYLLA AND CHARYBDIS — steer through the gate with the right letter. Keep away from the whirlpool and from Scylla's shadows.",
-      hint1: "Steer through the gate marked with the right letter. The passage stays in the side panel.",
+      tip: "SCYLLA AND CHARYBDIS — steer through the gate with the right letter and through the gaps in the rocks, all the way to the end of the strait. Keep away from the whirlpool and from Scylla's shadows.",
+      hint1: "Steer between the two rocks marked with the right letter. The passage stays in the side panel.",
       hint2: "This question has two right letters. Sail through both gates that carry them.",
+      clear: { what: "strait", one: "row of rocks", many: "rows of rocks", tag: "CORRECT! NOW GET THROUGH THE STRAIT!", done: "THROUGH THE STRAIT!",
+        sweep: "Clean run: not one hit on the way through the strait" },
       news: ["",
-        "Charybdis tugs at the ship all the time now, not only when she surges.",
-        "Scylla strikes with two heads at once.",
         "The gates sway from side to side.",
-        "Lone rocks stand in the water between the gates. Steer round them.",
+        "Scylla strikes with two heads at once.",
+        "Three reefs now come between one row of gates and the next.",
         "Scylla strikes with three heads at once.",
         "A head that misses strikes again at once: watch for a second shadow right where you are.",
         "Four of Scylla's heads strike at once.",
+        "Four reefs now come between one row of gates and the next.",
         "More lone rocks, narrower gates, and Charybdis surges more often.",
         "Ithaca is close: the strait runs faster, on top of everything else."]
     }
@@ -593,31 +598,59 @@
     }
   }
   /* the cliffs: Scylla's high cliff on the left (its sea edge on the right of the texture), the low rocks under
-     Charybdis's fig tree on the right (flip = true puts the sea edge on the left) */
+     Charybdis's fig tree on the right (flip = true puts the sea edge on the left). v5.12.4: the strait is narrower,
+     so both are drawn wider (256 and 192 px), with fallen boulders along the foot and the sea breaking white on them. */
   function drawStraitCliff(flip, high) {
     return function (c, w, h) {
-      function edge(y) { return w * (high ? 0.8 : 0.62) + Math.sin(y / h * Math.PI * 2 * 3) * w * 0.07 + Math.sin(y / h * Math.PI * 2 * 7 + 1) * w * 0.04; }
+      var seed = high ? 5 : 9;
+      function r() { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; }
+      function edge(y) { return w * (high ? 0.8 : 0.66) + Math.sin(y / h * Math.PI * 2 * 3) * w * 0.05 + Math.sin(y / h * Math.PI * 2 * 7 + 1) * w * 0.03; }
       c.save();
       if (flip) { c.translate(w, 0); c.scale(-1, 1); }
       var g = c.createLinearGradient(0, 0, w, 0);
       if (high) { g.addColorStop(0, "#1a100c"); g.addColorStop(0.6, "#3a2418"); g.addColorStop(1, "#6a3a22"); }
       else { g.addColorStop(0, "#2a2a26"); g.addColorStop(1, "#5a5448"); }
       c.fillStyle = g; c.beginPath(); c.moveTo(0, 0);
-      var y;
+      var y, i, k;
       for (y = 0; y <= h; y += 4) c.lineTo(edge(y), y);
       c.lineTo(0, h); c.closePath(); c.fill();
       /* strata and cracks in terracotta and black glaze */
-      for (var i = 0; i < 9; i++) {
+      for (i = 0; i < 9; i++) {
         var yy = (i + 0.5) * h / 9;
-        c.strokeStyle = high ? (i % 2 ? "rgba(217,119,43,0.35)" : "rgba(20,12,10,0.6)") : "rgba(20,12,10,0.4)"; c.lineWidth = high ? 3 : 2;
+        c.strokeStyle = high ? (i % 2 ? "rgba(217,119,43,0.35)" : "rgba(20,12,10,0.6)") : "rgba(20,12,10,0.4)"; c.lineWidth = high ? 4 : 3;
         c.beginPath(); c.moveTo(4, yy); c.quadraticCurveTo(edge(yy) * 0.5, yy + (i % 2 ? 10 : -10), edge(yy) - 6, yy + 4); c.stroke();
       }
+      /* a sunlit lip along the sea edge */
+      c.strokeStyle = high ? "rgba(214,160,110,0.55)" : "rgba(170,160,140,0.55)"; c.lineWidth = 5; c.beginPath();
+      for (y = 0; y <= h; y += 4) c[y ? "lineTo" : "moveTo"](edge(y) - 7, y);
+      c.stroke();
       /* foam where the sea breaks on the rock */
-      c.strokeStyle = "rgba(159,211,214,0.85)"; c.lineWidth = 4; c.beginPath();
+      c.strokeStyle = "rgba(159,211,214,0.85)"; c.lineWidth = 5; c.beginPath();
       for (y = 0; y <= h; y += 4) c[y ? "lineTo" : "moveTo"](edge(y) + 3, y);
       c.stroke();
+      /* boulders fallen along the foot, each in its own white water (drawn at y - h, y and y + h so the tile wraps) */
+      var bs = [];
+      for (i = 0; i < 5; i++) {
+        var b0 = { y: (i + 0.2 + r() * 0.6) * h / 5, dx: r() * 8 - 4, rad: 8 + r() * 8, pts: [] };
+        for (k = 0; k < 9; k++) b0.pts.push(0.75 + r() * 0.35);
+        bs.push(b0);
+      }
+      function blob(b, bx, by, sc, ox, oy) {
+        c.beginPath();
+        b.pts.forEach(function (f, j) { var a = j / b.pts.length * Math.PI * 2; c[j ? "lineTo" : "moveTo"](bx + ox + Math.cos(a) * b.rad * f * sc, by + oy + Math.sin(a) * b.rad * f * sc * 0.85); });
+        c.closePath(); c.fill();
+      }
+      bs.forEach(function (b) {
+        for (k = -1; k <= 1; k++) {
+          var bx = edge(b.y) + b.dx, by = b.y + k * h;
+          c.fillStyle = "rgba(239,246,246,0.75)"; blob(b, bx, by, 1.25, 1, 2);
+          c.fillStyle = "rgba(4,18,34,0.4)"; blob(b, bx, by, 1, 4, 4);
+          c.fillStyle = high ? "#3e271c" : "#3d3a33"; blob(b, bx, by, 1, 0, 0);
+          c.fillStyle = high ? "#8a5a3a" : "#857f70"; blob(b, bx, by, 0.6, -b.rad * 0.22, -b.rad * 0.28);
+        }
+      });
       c.strokeStyle = "rgba(239,230,210,0.55)"; c.lineWidth = 2; c.setLineDash([6, 9]); c.beginPath();
-      for (y = 0; y <= h; y += 4) c[y ? "lineTo" : "moveTo"](edge(y) + 9, y);
+      for (y = 0; y <= h; y += 4) c[y ? "lineTo" : "moveTo"](edge(y) + 22, y);
       c.stroke(); c.setLineDash([]);
       c.restore();
     };
@@ -644,47 +677,130 @@
       }
     };
   }
-  /* v5.12.3: a gate is two jagged sea stacks, not marker buoys: a craggy rock with a sunlit upper-left face, a
-     shadowed lower-right face and cracks, surf breaking white around its foot, a couple of boulders beside it and its
-     shadow on the water. A lettered stack carries the letter on a worn, painted marker stone set into its top.
-     Drawn at 64 px so the rock (radius about 22) matches what the ship can hit (the pillar touch is 27 px). */
+  /* v5.12.4: the teacher read v5.12.3's small round rocks as a slalom, so every rock in the strait is now a big sea
+     stack seen from above and in front (three-quarter view): its foot sits in the water (the footprint, radius
+     STACK.R, centred on the sprite's origin), its craggy cliff faces rise from it, lit from the upper left and banded
+     with strata, and its narrower, jagged top sits STACK.lift px higher on the screen, streaked white by the gulls.
+     The sea boils white all round the foot and leaves a trail of foam down the strait; the stack's shadow falls on
+     the water to the lower right. A lettered stack carries a worn, painted marker stone on its top (the letter is a
+     text object drawn there). What hurts is what is drawn: the foot (STACK.touch) and the top (STACK.touch * 0.8,
+     STACK.lift up) — see straitRockHit. */
+  var STACK = { w: 104, h: 144, R: 30, lift: 30, touch: 28 };
   function drawPillar(lettered, seed) {
     return function (c, w, h) {
-      var cx = w / 2, cy = h / 2, i, a, R = 22, n = 13;
-      var rr = function (k) { var x = Math.sin((k + 1) * 12.9898 + (seed || 0) * 78.233) * 43758.5453; return x - Math.floor(x); };
-      var pts = [];
-      for (i = 0; i < n; i++) { a = i / n * Math.PI * 2; var rad = R * (0.78 + rr(i) * 0.3); pts.push([cx + Math.cos(a) * rad, cy + Math.sin(a) * rad]); }
-      function rock(path) { c.beginPath(); path.forEach(function (q, k) { c[k ? "lineTo" : "moveTo"](q[0], q[1]); }); c.closePath(); }
-      /* the rock's shadow on the water, down and to the right */
-      c.fillStyle = "rgba(6,22,40,0.45)"; rock(pts.map(function (q) { return [q[0] + 4, q[1] + 5]; })); c.fill();
-      /* surf: a broken white ring of foam around the foot, then spray dots */
-      c.strokeStyle = "rgba(239,246,246,0.85)"; c.lineWidth = 3;
-      for (i = 0; i < 7; i++) { a = i / 7 * Math.PI * 2 + rr(i + 20); c.beginPath(); c.arc(cx, cy, R + 4 + rr(i + 40) * 3, a, a + 0.55); c.stroke(); }
-      c.fillStyle = "rgba(239,246,246,0.75)";
-      for (i = 0; i < 12; i++) { a = rr(i + 60) * Math.PI * 2; var d = R + 5 + rr(i + 80) * 5; c.beginPath(); c.arc(cx + Math.cos(a) * d, cy + Math.sin(a) * d, 0.8 + rr(i + 90) * 1.4, 0, Math.PI * 2); c.fill(); }
-      /* two small boulders at the foot */
-      [[0.95, 0.55, 5], [-0.75, 0.8, 4]].forEach(function (b, k) {
-        var bx = cx + b[0] * R, by = cy + b[1] * R;
-        c.fillStyle = "#4d4239"; c.beginPath(); c.arc(bx, by, b[2], 0, Math.PI * 2); c.fill();
-        c.fillStyle = "#8a7a68"; c.beginPath(); c.arc(bx - 1.2, by - 1.4, b[2] * 0.55, 0, Math.PI * 2); c.fill();
+      var cx = w / 2, cy = h / 2, R = STACK.R, L = STACK.lift, i, a, k, n = 18;
+      var rr = function (q) { var x = Math.sin((q + 1) * 12.9898 + (seed || 0) * 78.233) * 43758.5453; return x - Math.floor(x); };
+      var base = [], top = [];
+      for (i = 0; i < n; i++) {
+        a = i / n * Math.PI * 2;
+        var rb = R * (0.86 + rr(i) * 0.18), rt = R * (0.5 + rr(i + 30) * 0.24) * (i % 2 ? 1.12 : 0.92);
+        base.push([cx + Math.cos(a) * rb, cy + Math.sin(a) * rb * 0.88]);
+        top.push([cx + 2 + Math.cos(a) * rt + (rr(i + 35) - 0.5) * 4, cy - L + Math.sin(a) * rt * 0.8 + (rr(i + 36) - 0.5) * 4]);
+      }
+      function poly(pts) { c.beginPath(); pts.forEach(function (q, j) { c[j ? "lineTo" : "moveTo"](q[0], q[1]); }); c.closePath(); }
+      function quad(j) { var j2 = (j + 1) % n; return [base[j], base[j2], top[j2], top[j]]; }
+      function lerp(p, q, t) { return [p[0] + (q[0] - p[0]) * t, p[1] + (q[1] - p[1]) * t]; }
+      function mixc(c0, c1, t) {
+        var p = function (s, o) { return parseInt(s.substr(o, 2), 16); };
+        return "rgb(" + [1, 3, 5].map(function (o) { return Math.round(p(c0, o) + (p(c1, o) - p(c0, o)) * t); }).join(",") + ")";
+      }
+      function body(dx, dy) {
+        for (var j = 0; j < n; j++) { poly(quad(j).map(function (q) { return [q[0] + dx, q[1] + dy]; })); c.fill(); }
+        poly(base.map(function (q) { return [q[0] + dx, q[1] + dy]; })); c.fill();
+        poly(top.map(function (q) { return [q[0] + dx, q[1] + dy]; })); c.fill();
+      }
+      /* the shadow on the water, down and to the right of the whole stack */
+      c.fillStyle = "rgba(4,18,34,0.4)"; body(10, 8);
+      /* foam trailing down the strait from the foot: blobs that thin out */
+      for (i = 0; i < 22; i++) {
+        var side = i % 2 ? 1 : -1, t = rr(i + 150), d2 = t * 34;
+        c.fillStyle = "rgba(239,246,246," + (0.55 - t * 0.4).toFixed(2) + ")";
+        c.beginPath(); c.ellipse(cx + side * (R * 0.55 - t * 8 + rr(i + 160) * 8), cy + R * 0.7 + d2, 4 - t * 2.4, 2.6 - t * 1.4, 0, 0, Math.PI * 2); c.fill();
+      }
+      /* the sea boiling white round the foot: a broken collar of foam, then a looser ring of spray */
+      for (i = 0; i < 40; i++) {
+        a = i / 40 * Math.PI * 2 + rr(i + 20) * 0.1;
+        var fr = R + 3 + rr(i + 40) * 6;
+        c.fillStyle = "rgba(244,249,249," + (0.6 + rr(i + 45) * 0.35).toFixed(2) + ")";
+        c.beginPath(); c.ellipse(cx + Math.cos(a) * fr, cy + Math.sin(a) * fr * 0.88, 3 + rr(i + 47) * 3, 2.2 + rr(i + 48) * 2, a, 0, Math.PI * 2); c.fill();
+      }
+      c.strokeStyle = "rgba(159,211,214,0.75)"; c.lineWidth = 2;
+      for (i = 0; i < 8; i++) { a = i / 8 * Math.PI * 2 + rr(i + 50); c.beginPath(); c.ellipse(cx, cy, R + 13 + rr(i + 55) * 3, (R + 13) * 0.88, 0, a, a + 0.45); c.stroke(); }
+      c.fillStyle = "rgba(245,250,250,0.85)";
+      for (i = 0; i < 14; i++) { a = rr(i + 60) * Math.PI * 2; var d = R + 10 + rr(i + 80) * 8; c.beginPath(); c.arc(cx + Math.cos(a) * d, cy + Math.sin(a) * d * 0.88, 0.8 + rr(i + 90) * 1.4, 0, Math.PI * 2); c.fill(); }
+      /* a dark rim round the whole stack, so it stands off the water */
+      c.fillStyle = "#14100c"; body(-1.5, 0); body(1.5, 0); body(0, -1.5); body(0, 1.5);
+      /* the cliff faces, back to front: lit on the left, in shadow on the right, darker toward the water */
+      var order = []; for (i = 0; i < n; i++) order.push(i);
+      order.sort(function (p, q) { return (base[p][1] + base[(p + 1) % n][1]) - (base[q][1] + base[(q + 1) % n][1]); });
+      order.forEach(function (j) {
+        var b0 = base[j], b1 = base[(j + 1) % n], nx = b1[1] - b0[1], ny = -(b1[0] - b0[0]), nl = Math.sqrt(nx * nx + ny * ny) || 1;
+        var lit = clamp(0.48 + (-nx / nl) * 0.5 - (ny / nl) * 0.1 + (rr(j + 170) - 0.5) * 0.16, 0, 1);
+        var g = c.createLinearGradient(0, cy - L, 0, cy + R);
+        g.addColorStop(0, mixc("#3c3129", "#a99377", lit)); g.addColorStop(1, mixc("#1d1713", "#5f4f40", lit));
+        c.fillStyle = g; poly(quad(j)); c.fill();
+        c.strokeStyle = g; c.lineWidth = 1; c.stroke();
       });
-      /* the stack: dark body, then a sunlit cap on the upper-left, then cracks */
-      var g = c.createLinearGradient(cx - R, cy - R, cx + R, cy + R);
-      g.addColorStop(0, "#a8957c"); g.addColorStop(0.45, "#6e5d4c"); g.addColorStop(1, "#2c241d");
-      c.fillStyle = g; rock(pts); c.fill();
-      c.lineWidth = 2; c.strokeStyle = "#1a140f"; c.stroke();
-      c.fillStyle = "rgba(214,200,172,0.55)";
-      rock(pts.map(function (q) { return [cx + (q[0] - cx) * 0.62 - 3, cy + (q[1] - cy) * 0.62 - 4]; })); c.fill();
-      c.strokeStyle = "rgba(26,20,15,0.75)"; c.lineWidth = 1.4;
-      [[-0.55, -0.1, -0.15, 0.35], [0.2, -0.6, 0.45, -0.1], [0.1, 0.25, 0.55, 0.5]].forEach(function (l) {
-        c.beginPath(); c.moveTo(cx + l[0] * R, cy + l[1] * R); c.lineTo(cx + (l[0] + l[2]) / 2 * R + 2, cy + (l[1] + l[3]) / 2 * R); c.lineTo(cx + l[2] * R, cy + l[3] * R); c.stroke();
+      /* strata: ragged ledges across the front faces, each with a lit lip and a dark underside */
+      [0.24, 0.47, 0.7].forEach(function (t, s) {
+        [["rgba(14,10,8,0.55)", 1.6, 1.2], ["rgba(214,190,150,0.35)", 1.2, -0.6]].forEach(function (st) {
+          c.strokeStyle = st[0]; c.lineWidth = st[1]; c.beginPath();
+          var on = false;
+          for (var j = 1; j <= n / 2 - 1; j++) {
+            var p = lerp(base[j], top[j], t + (rr(j * 3 + s) - 0.5) * 0.12);
+            if (rr(j + s * 20 + 200) < 0.18) { on = false; continue; }   /* broken ledges, not hoops */
+            c[on ? "lineTo" : "moveTo"](p[0], p[1] + st[2]); on = true;
+          }
+          c.stroke();
+        });
       });
+      /* two or three cracks zig-zagging down the faces */
+      c.strokeStyle = "rgba(10,8,6,0.65)"; c.lineWidth = 1.4;
+      for (i = 0; i < 3; i++) {
+        var j3 = 2 + Math.floor(rr(i + 210) * (n / 2 - 3)), p0 = lerp(base[j3], top[j3], 0.92), p1 = lerp(base[j3], top[j3], 0.08);
+        c.beginPath(); c.moveTo(p0[0], p0[1]);
+        for (k = 1; k <= 4; k++) { var pk = lerp(p0, p1, k / 4); c.lineTo(pk[0] + (k % 2 ? 1 : -1) * (2 + rr(i * 5 + k + 220) * 3), pk[1]); }
+        c.stroke();
+      }
+      /* the wet foot: dark rock and weed at the waterline */
+      c.lineWidth = 5; c.strokeStyle = "rgba(14,20,16,0.8)"; c.beginPath();
+      for (i = 0; i <= n / 2; i++) c[i ? "lineTo" : "moveTo"](base[i][0], base[i][1] - 2.5);
+      c.stroke();
+      c.fillStyle = "rgba(52,96,60,0.85)";
+      for (i = 0; i <= n / 2; i++) { if (rr(i + 100) < 0.45) continue; c.beginPath(); c.ellipse(base[i][0], base[i][1] - 5, 2.5 + rr(i + 110) * 2, 1.8, 0, 0, Math.PI * 2); c.fill(); }
+      /* the top: a sunlit, cracked, jagged crown */
+      var gt = c.createLinearGradient(cx - R * 0.7, cy - L - R * 0.6, cx + R * 0.7, cy - L + R * 0.5);
+      gt.addColorStop(0, "#d2bf9b"); gt.addColorStop(0.55, "#9a8465"); gt.addColorStop(1, "#5e4d3c");
+      c.fillStyle = gt; poly(top); c.fill();
+      c.fillStyle = "rgba(244,232,206,0.32)";
+      poly(top.map(function (q) { return [cx + 2 + (q[0] - cx - 2) * 0.5 - 4, cy - L + (q[1] - cy + L) * 0.5 - 3]; })); c.fill();
+      c.strokeStyle = "rgba(240,226,196,0.6)"; c.lineWidth = 1.2; c.beginPath();
+      for (i = Math.floor(n * 0.5); i <= n; i++) { var q2 = top[i % n]; c[i === Math.floor(n * 0.5) ? "moveTo" : "lineTo"](q2[0], q2[1] + 0.8); }
+      c.stroke();
+      c.strokeStyle = "rgba(26,20,15,0.65)"; c.lineWidth = 1.2;
+      [[-0.5, -0.15, -0.05, 0.3], [0.2, -0.5, 0.5, 0]].forEach(function (l) {
+        c.beginPath(); c.moveTo(cx + l[0] * R * 0.6, cy - L + l[1] * R * 0.5); c.lineTo(cx + (l[0] + l[2]) / 2 * R * 0.6 + 2, cy - L + (l[1] + l[3]) / 2 * R * 0.5 + 1); c.lineTo(cx + l[2] * R * 0.6, cy - L + l[3] * R * 0.5); c.stroke();
+      });
+      /* the gulls' white streaks running down from the top's front edge, and a tuft of green on a plain stack */
+      c.fillStyle = "rgba(244,240,228,0.75)";
+      for (i = 0; i < 4; i++) {
+        var k4 = 2 + Math.floor(rr(i + 120) * (n / 2 - 3)), p4 = top[k4];
+        c.beginPath(); c.ellipse(p4[0], p4[1] + 4 + rr(i + 125) * 3, 1.3, 3.5 + rr(i + 130) * 4, 0, 0, Math.PI * 2); c.fill();
+      }
+      if (!lettered) {
+        c.fillStyle = "#4f7a33"; c.beginPath(); c.arc(cx - 5, cy - L - 2, 3.6, 0, Math.PI * 2); c.arc(cx - 1, cy - L - 5, 2.8, 0, Math.PI * 2); c.fill();
+        c.fillStyle = "#6f9a45"; c.beginPath(); c.arc(cx - 2, cy - L - 5.5, 1.6, 0, Math.PI * 2); c.fill();
+      }
+      /* the front surf, breaking over the foot */
+      c.strokeStyle = "rgba(250,252,252,0.95)"; c.lineWidth = 3;
+      for (i = 0; i < 6; i++) { a = 0.15 + i * 0.5 + rr(i + 140) * 0.2; c.beginPath(); c.ellipse(cx, cy, R + 1.5, (R + 1.5) * 0.88, 0, a, a + 0.32); c.stroke(); }
       if (lettered) {
-        /* the marker stone: a worn bone-white slab painted with a terracotta band, set into the rock's top */
-        c.fillStyle = "rgba(20,12,10,0.5)"; c.beginPath(); c.arc(cx + 1.5, cy + 2, 12.5, 0, Math.PI * 2); c.fill();
-        c.fillStyle = ST.terra; c.beginPath(); c.arc(cx, cy, 12.5, 0, Math.PI * 2); c.fill();
-        c.fillStyle = ST.bone; c.beginPath(); c.arc(cx, cy, 10.5, 0, Math.PI * 2); c.fill();
-        c.strokeStyle = "rgba(90,70,50,0.35)"; c.lineWidth = 1; c.beginPath(); c.moveTo(cx + 5, cy - 9); c.lineTo(cx + 8, cy - 4); c.stroke();
+        /* the marker stone on the top: a worn bone-white slab painted with a terracotta band */
+        var my = cy - L;
+        c.fillStyle = "rgba(20,12,10,0.55)"; c.beginPath(); c.ellipse(cx + 2.5, my + 3, 14, 13, 0, 0, Math.PI * 2); c.fill();
+        c.fillStyle = ST.terra; c.beginPath(); c.ellipse(cx, my, 14, 13, 0, 0, Math.PI * 2); c.fill();
+        c.fillStyle = ST.bone; c.beginPath(); c.ellipse(cx, my, 11.5, 10.5, 0, 0, Math.PI * 2); c.fill();
+        c.strokeStyle = "rgba(90,70,50,0.35)"; c.lineWidth = 1; c.beginPath(); c.moveTo(cx + 5, my - 9); c.lineTo(cx + 8, my - 4); c.stroke();
       }
     };
   }
@@ -765,13 +881,14 @@
   }
   function ensureStraitArt(scene) {
     canvasTex(scene, "md-strait-water", 256, 256, drawStraitWater);
-    canvasTex(scene, "md-strait-cliff", 128, 256, drawStraitCliff(false, true));
-    canvasTex(scene, "md-strait-shore", 64, 256, drawStraitCliff(true, false));
+    canvasTex(scene, "md-strait-cliff-2", 256, 256, drawStraitCliff(false, true));
+    canvasTex(scene, "md-strait-shore-2", 192, 256, drawStraitCliff(true, false));
     canvasTex(scene, "md-strait-whirl", 256, 256, drawWhirl(false));
     canvasTex(scene, "md-strait-foam", 256, 256, drawWhirl(true));
-    canvasTex(scene, "md-strait-pillar", 64, 64, drawPillar(true, 1));
-    canvasTex(scene, "md-strait-pillar-b", 64, 64, drawPillar(true, 2));
-    canvasTex(scene, "md-strait-rock", 64, 64, drawPillar(false, 3));
+    /* v5.12.4: sea stacks (STACK): two lettered ones for the gates, three plain ones for the reefs and lone rocks */
+    canvasTex(scene, "md-strait-stack-0", STACK.w, STACK.h, drawPillar(true, 1));
+    canvasTex(scene, "md-strait-stack-1", STACK.w, STACK.h, drawPillar(true, 2));
+    [3, 4, 5].forEach(function (sd, k) { canvasTex(scene, "md-strait-reef-" + k, STACK.w, STACK.h, drawPillar(false, sd)); });
     canvasTex(scene, "md-strait-ship-0", SHIP_W, SHIP_H, drawGalley(0));
     canvasTex(scene, "md-strait-ship-1", SHIP_W, SHIP_H, drawGalley(1));
     canvasTex(scene, "md-strait-head", 64, 44, drawScyllaHead);
@@ -1068,11 +1185,14 @@
          answerPick calls mopup_<id>() on the level's last answer instead of clear_<id>(). It takes the letters off
          what is left and returns how many are left (0: the level is won as before); from then on the mode's tick reports how many are left
          with mopupLeft(n), and 0 wins the level (mopupDone, then the usual end-of-level screen and coins). Nothing new
-         flies in, hazards keep going, a hit still costs a life and losing the last life still loses the level. ── */
+         flies in, hazards keep going, a hit still costs a life and losing the last life still loses the level.
+         v5.12.4: Scylla and Charybdis uses it too (mopup_strait: the run to the end of the strait). A mode can say it
+         in its own words: mode.clear.tag / done / sweep (the big tags and the clean-sweep bonus)
+         and mopupText_<id>(two, n) for the banner and the side panel. ── */
       mopupStart(n) {
         var c = this.mode.clear || { what: "field", one: "target", many: "targets" };
-        this._mopup = { t: 0, hit: false, left: n, what: c.what, one: c.one, many: c.many };
-        this.showTag("CORRECT! NOW CLEAR THE " + c.what.toUpperCase() + "!", "#9aefc0");
+        this._mopup = { t: 0, hit: false, left: n, what: c.what, one: c.one, many: c.many, done: c.done, sweep: c.sweep };
+        this.showTag(c.tag || "CORRECT! NOW CLEAR THE " + c.what.toUpperCase() + "!", "#9aefc0");
         this.bigTagMs = 2600;
         this.mopupBanner();
         this.paintHud();
@@ -1080,6 +1200,8 @@
       mopupText(two) {
         var M = this._mopup;
         if (!M) return "";
+        var own = this["mopupText_" + this.mode.id];
+        if (own) return own.call(this, two, Math.max(0, M.left));
         var n = Math.max(0, M.left), a = "All questions answered — now clear the " + M.what + "!", b = n + " " + (n === 1 ? M.one : M.many) + " left";
         return two ? a + "\n" + b : a + " " + b + ". Any hit takes one down.";
       }
@@ -1108,8 +1230,8 @@
         if (!M || this._finishing || this.ended) return;
         this._finishing = true;
         if (this._mopBanner) { try { this._mopBanner.g.destroy(); this._mopBanner.t.destroy(); } catch (e) {} this._mopBanner = null; }
-        if (!M.hit) this.awardBonusPoints(2000, "Clean sweep: not one hit while you cleared the " + M.what);
-        this.showTag(M.what.toUpperCase() + " CLEARED!", "#9aefc0");
+        if (!M.hit) this.awardBonusPoints(2000, M.sweep || "Clean sweep: not one hit while you cleared the " + M.what);
+        this.showTag(M.done || M.what.toUpperCase() + " CLEARED!", "#9aefc0");
         snd("chime");
         this.paintHud();
         this.time.delayedCall(1100, function () { if (!self.ended) self.endRun(true); });
@@ -3114,52 +3236,67 @@
 
       /* ═══ 6. SCYLLA AND CHARYBDIS — steering (v5.10, the Odyssey build) ════
          Odyssey 12: the galley sails up the strait (the water scrolls down the
-         screen toward it). Gates of two rock pillars come down, each marked
-         with a letter; sailing between a gate's pillars picks that letter. A
-         row holds two or three gates with open water between them, so a gate
-         can be passed by; its letter comes round again in a later row. On the
-         right, Charybdis: a whirlpool that tugs at the ship (from level 19),
-         and every few seconds darkens and spins faster for about a second,
-         then surges and drags the ship toward her; her dark centre costs a
-         life. On the left, Scylla's cliff: a shadow and a closing ring on the
-         water mark where a head will strike, then the head lunges there and
-         snatches a crewman (a life) if the ship is under it. Scylla's reach
-         ends partway across the strait, so the safe water is next to
-         Charybdis — Circe's choice. A wrong gate, a pillar or a lone rock
-         also cost a life. straitParams sets one curve for all of it. */
+         screen toward it). Gates of two sea stacks come down, each marked
+         with a letter; sailing between a gate's stacks picks that letter. A
+         lettered row holds one to three gates with open water beside them, so
+         a gate can be passed by; its letter comes round again in a later row.
+         On the right, Charybdis: a whirlpool that tugs at the ship, and every
+         few seconds darkens and spins faster for about a second, then surges
+         and drags the ship toward her; her dark centre costs a life. On the
+         left, Scylla's cliff: a shadow and a closing ring on the water mark
+         where a head will strike, then the head lunges there and snatches a
+         crewman (a life) if the ship is under it. Scylla's reach ends partway
+         across the strait, so the safe water is next to Charybdis — Circe's
+         choice. A wrong gate or a rock also cost a life. straitParams sets one
+         curve for all of it.
+         v5.12.4, the teacher: "the rocks look like a slalom", "too easy", "over
+         too quickly", "the path is too wide". Every rock is a big sea stack
+         (drawPillar, STACK) and what is drawn is what hurts (straitRockHit).
+         The strait between Scylla's cliff and Charybdis is about half the
+         playfield. Between two lettered rows come P.plain reefs: a row of
+         stacks from the cliff to Charybdis with one or two gaps to steer
+         through (straitReefRow). And the last answer no longer ends the level
+         (mopup_strait): the galley still has to run the rest of the strait,
+         P.mopRows more reefs, counted down as each one passes the ship. */
       straitParams(n) {
         n = Math.max(1, n || 1);
+        var gateW = Math.max(56, 118 - n * 0.55) * (n >= 89 ? 0.94 : 1);
         return {
-          scroll: (95 + n * 1.3) * (n >= 99 ? 1.1 : 1),          /* px a second: 107 at 9, 159 at 49, 246 at 99 */
-          rowGap: Math.max(300, 480 - n * 1.8),                  /* px between rows of gates */
-          gateW: Math.max(78, 150 - n * 0.75) * (n >= 89 ? 0.94 : 1),   /* the opening between a gate's pillars */
-          sway: n >= 39 ? Math.min(80, 24 + (n - 39) * 0.8) : 0,  /* gates swaying side to side, px */
-          rockP: n >= 49 ? Math.min(0.85, 0.3 + (n - 49) * 0.008 + (n >= 89 ? 0.15 : 0)) : 0,   /* a lone rock in a row */
-          basePull: n >= 19 ? Math.min(90, 20 + (n - 19) * 0.8) : 0,   /* Charybdis's tug between surges, px a second */
-          surgePull: 120 + n * 1.7,                              /* her pull in a surge (the ship steers at 330) */
-          surgeEvery: Math.max(3200, 9800 - n * 65) * (n >= 89 ? 0.9 : 1),   /* calm water between surges, ms */
-          surgeMs: 1700 + n * 12,                                /* how long a surge lasts */
-          surgeWarn: Math.max(800, 1100 - n * 3),                /* the warning: dark, fast water first */
-          coreR: 40 + n * 0.25,                                  /* her deadly centre */
-          heads: n >= 79 ? 4 : n >= 59 ? 3 : n >= 29 ? 2 : 1,    /* Scylla's heads striking at once */
-          strikeEvery: Math.max(1000, 4300 - n * 33),            /* ms between strikes */
-          strikeWarn: Math.max(560, 1250 - n * 7),               /* the shadow on the water before a strike */
-          strikeMs: Math.max(110, 280 - n * 1.7),                /* the lunge */
-          strikeR: 40 + n * 0.12,                                /* what a strike covers */
-          aimErr: Math.max(0, 70 - n * 0.7),                     /* how far from the ship she aims */
-          reach: Math.min(0.9, 0.55 + n * 0.0035),               /* how far across the strait her necks reach */
-          again: n >= 69                                         /* a head that misses strikes again at once */
+          scroll: (130 + n * 1.4) * (n >= 99 ? 1.1 : 1),         /* px a second: 143 at 9, 199 at 49, 296 at 99 */
+          rowGap: Math.max(300, 362 - n * 0.6),                  /* px between rows */
+          gateW: gateW,                                          /* the open water between a gate's two stacks */
+          reefGap: gateW + 14,                                   /* a gap in a reef */
+          sway: n >= 19 ? Math.min(90, 22 + (n - 19) * 0.85) : 0,   /* lettered rows swaying side to side, px */
+          rockP: Math.min(0.95, 0.28 + n * 0.0065 + (n >= 89 ? 0.1 : 0)),   /* a lone rock beside the gates */
+          plain: n >= 79 ? 4 : n >= 39 ? 3 : 2,                  /* reefs between two lettered rows */
+          twoGap: Math.max(0.1, 0.75 - n * 0.006),               /* the chance a reef has two gaps, not one */
+          mopRows: Math.round(8 + n * 0.32),                     /* reefs left to run after the last answer: 11 at 9, 24 at 49, 40 at 99 */
+          basePull: Math.min(110, 12 + n * 0.9),                 /* Charybdis's tug between surges, px a second */
+          surgePull: 140 + n * 1.8,                              /* her pull in a surge (the ship steers at 330) */
+          surgeEvery: Math.max(2600, 7600 - n * 50) * (n >= 89 ? 0.9 : 1),   /* calm water between surges, ms */
+          surgeMs: 1900 + n * 14,                                /* how long a surge lasts */
+          surgeWarn: Math.max(650, 1000 - n * 3.4),              /* the warning: dark, fast water first */
+          coreR: 42 + n * 0.25,                                  /* her deadly centre */
+          heads: n >= 69 ? 4 : n >= 49 ? 3 : n >= 29 ? 2 : 1,    /* Scylla's heads striking at once */
+          strikeEvery: Math.max(800, 3600 - n * 28),             /* ms between strikes */
+          strikeWarn: Math.max(480, 1150 - n * 6.6),             /* the shadow on the water before a strike */
+          strikeMs: Math.max(100, 260 - n * 1.55),               /* the lunge */
+          strikeR: 42 + n * 0.14,                                /* what a strike covers */
+          aimErr: Math.max(0, 60 - n * 0.7),                     /* how far from the ship she aims */
+          reach: Math.min(0.95, 0.6 + n * 0.0035),               /* how far across the strait her necks reach */
+          again: n >= 59                                         /* a head that misses strikes again at once */
         };
       }
       setup_strait() {
         ensureStraitArt(this);
         var P = this.straitParams(this.night);
         var S = this.st = { rows: [], heads: [], dead: [], queue: [], dist: 0, t: 0, rowMs: 0, rowCd: 0, kx: 0, ky: 0, wA: 0, frameMs: 0, frame: 0,
+          plainLeft: 1, lastGaps: null, mop: null, started: false,
           surge: { state: "calm", t: 0, cd: P.surgeEvery * 0.6 }, headCd: Math.max(2600, P.strikeEvery), P: P };
         this.cameras.main.setBackgroundColor(ST.deep);
         S.water = this.add.tileSprite(0, 0, this.W, this.H, "md-strait-water").setOrigin(0, 0).setDepth(0);
-        S.cliff = this.add.tileSprite(0, 0, 128, this.H, "md-strait-cliff").setOrigin(0, 0).setDepth(5);
-        S.shore = this.add.tileSprite(0, 0, 64, this.H, "md-strait-shore").setOrigin(0, 0).setDepth(5);
+        S.cliff = this.add.tileSprite(0, 0, 256, this.H, "md-strait-cliff-2").setOrigin(0, 0).setDepth(5);
+        S.shore = this.add.tileSprite(0, 0, 192, this.H, "md-strait-shore-2").setOrigin(0, 0).setDepth(5);
         S.whirl = this.add.image(0, 0, "md-strait-whirl").setDepth(3);
         S.foam = this.add.image(0, 0, "md-strait-foam").setDepth(4).setAlpha(0.85);
         S.fig = this.add.image(0, 0, "md-strait-fig").setDepth(6);
@@ -3171,20 +3308,23 @@
         S.ship = { x: x, y: y, spr: this.add.image(x, y, "md-strait-ship-0").setScale(0.9).setDepth(20) };
         this.makeSol(x, y, "up").setVisible(false);   /* Odysseus steers; the sprite stays for coin pop-ups */
       }
+      /* v5.12.4: the strait is about half the playfield: Scylla's cliff takes a fifth on the left, the low rocks
+         under the fig tree a seventh on the right, and Charybdis sits in front of them */
       straitLayout() {
         var S = this.st, W = this.W, H = this.H, P = S.P;
-        S.cliffW = clamp(Math.round(W * 0.085), 56, 120);
-        S.shoreW = clamp(Math.round(W * 0.035), 24, 44);
-        S.cliffEdge = S.cliffW * 0.86;                      /* where Scylla's cliff meets the sea */
+        S.cliffW = clamp(Math.round(W * 0.2), 60, 320);
+        S.shoreW = clamp(Math.round(W * 0.15), 36, 240);
+        S.cliffEdge = S.cliffW * 0.9;                       /* where Scylla's cliff meets the sea */
         S.wx = W - S.shoreW - 30; S.wy = H * 0.56;           /* Charybdis, under the fig tree's rock */
         S.wR = clamp(P.coreR * 2.9, 120, 200);
-        S.minX = S.cliffEdge + 18; S.maxX = W - S.shoreW * 0.55 - 12;
+        S.minX = S.cliffEdge + 16; S.maxX = W - S.shoreW * 0.6 - 12;
         S.yMin = H * 0.42; S.yMax = H - 52;
         S.chanL = S.cliffEdge + 22; S.chanR = Math.max(S.chanL + 200, S.wx - P.coreR - 56);
+        S.reefL = S.cliffEdge - 10; S.reefR = Math.max(S.chanR + 20, S.maxX + 26);   /* a reef runs from the cliff's foot right across to the far shore */
         S.reachX = S.chanL + (S.wx - S.chanL) * P.reach;     /* Scylla's necks reach no further */
         S.water.setSize(W, H);
-        S.cliff.setSize(S.cliffW, H).setTileScale(S.cliffW / 128, S.cliffW / 128);
-        S.shore.setPosition(W - S.shoreW, 0).setSize(S.shoreW, H).setTileScale(S.shoreW / 64, S.shoreW / 64);
+        S.cliff.setSize(S.cliffW, H).setTileScale(S.cliffW / 256, S.cliffW / 256);
+        S.shore.setPosition(W - S.shoreW, 0).setSize(S.shoreW, H).setTileScale(S.shoreW / 192, S.shoreW / 192);
         S.whirl.setPosition(S.wx, S.wy).setScale(S.wR / 128);
         S.foam.setPosition(S.wx, S.wy).setScale(S.wR / 128);
         S.fig.setPosition(W - S.shoreW * 0.4, S.wy - S.wR * 0.62);
@@ -3196,51 +3336,151 @@
         S.ship.x = clamp(S.ship.x * fx, S.minX, S.maxX); S.ship.y = clamp(S.ship.y * fy, S.yMin, S.yMax);
         S.rows.forEach(function (r) { r.y *= fy; r.gates.forEach(function (g) { g.base *= fx; }); r.rocks.forEach(function (k) { k.base *= fx; }); });
         S.heads.forEach(function (h) { h.x *= fx; h.y *= fy; h.ay *= fy; });
+        if (S.lastGaps) S.lastGaps = S.lastGaps.map(function (x) { return x * fx; });
       }
       /* the letters still in play: not picked wrong, not found yet */
       straitLive() {
         var S = this.st, self = this;
         return this.choiceLetters().filter(function (L) { return S.dead.indexOf(L) === -1 && self.extracted.indexOf(L) === -1; });
       }
+      /* a new question: the lettered rows go (clear_strait took them on a right answer); the reefs already on the
+         water stay, so the voyage runs on, and P.plain reefs in all come before the first gates (one on the level's
+         first question, to get going) */
       answers_strait() {
-        var S = this.st, self = this;
-        S.rows.forEach(function (r) { self.straitKillRow(r); });
-        S.rows = []; S.dead = []; S.queue = [];
-        S.dist = S.P.rowGap - Math.min(S.P.rowGap, S.P.scroll * 1.2);   /* the first row comes in about a second */
+        var S = this.st, P = S.P, self = this;
+        S.rows = S.rows.filter(function (r) { if (r.gates.length) { self.straitKillRow(r); return false; } return true; });
+        S.dead = []; S.queue = [];
+        var ahead = S.rows.filter(function (r) { return !r.done; }).length;
+        S.plainLeft = S.started ? Math.max(0, P.plain - ahead) : 1;
+        S.started = true;
+        if (!S.rows.length) S.dist = P.rowGap - Math.min(P.rowGap, P.scroll * 1.2);   /* the first row comes in about a second */
+      }
+      /* the room a gate takes (stack, opening, stack) and the open water kept beside gates so they can be passed by */
+      straitGateSpan() { return this.st.P.gateW + 4 * STACK.R; }
+      straitGateXs(n) {
+        var S = this.st, span = this.straitGateSpan(), OPEN = 64, i;
+        var free = Math.max(0, (S.chanR - S.chanL) - n * span), extra = Math.max(0, free - Math.max(1, n - 1) * OPEN), w = [], sum = 0;
+        for (i = 0; i <= n; i++) { w.push(rnd(0.2, 1)); sum += w[i]; }
+        var sp = w.map(function (v, k) { return extra * v / sum + (k > 0 && k < n ? OPEN : 0); });
+        if (n === 1) sp[Math.random() < 0.5 ? 0 : 1] += OPEN;   /* one gate: open water on one side of it at least */
+        var x = S.chanL, xs = [];
+        for (i = 0; i < n; i++) { x += sp[i]; xs.push(x + span / 2); x += span; }
+        return xs;
+      }
+      /* how many gates fit in a lettered row, with open water beside them */
+      straitPerRow() {
+        var S = this.st, span = this.straitGateSpan(), w = S.chanR - S.chanL, n = 3;
+        while (n > 1 && w - n * span < (n - 1) * 64) n--;
+        return n;
+      }
+      straitRock(x, y, key, sc) {
+        var spr = this.add.image(x, y, key).setDepth(8).setScale(sc || 1);
+        return { base: x, x: x, r: STACK.touch * (sc || 1), R: STACK.R * (sc || 1), spr: spr };
       }
       /* a row of gates (letters) at height y; xs (optional) are the gates' centres */
       straitRow(letters, y, xs) {
-        var S = this.st, P = S.P, self = this, pr = 18, half = P.gateW / 2, n = letters.length;
+        var S = this.st, P = S.P, self = this, R = STACK.R, half = P.gateW / 2, n = letters.length, OPEN = 64;
         var row = { y: y, gates: [], rocks: [], done: false, rel: null, ph: rnd(0, 6) };
-        var slot = (S.chanR - S.chanL) / Math.max(1, n), hf = half + pr * 2;
+        var cs = xs || this.straitGateXs(n);
         letters.forEach(function (L, k) {
-          var cx = xs && xs[k] != null ? xs[k] : S.chanL + slot * k + hf + rnd(0, Math.max(0, slot - hf * 2));
+          var cx = cs[k] != null ? cs[k] : S.chanL + (k + 0.5) * (S.chanR - S.chanL) / n;
           var g = { letter: L, base: cx, cx: cx, half: half, state: "live", posts: [], labels: [] };
           [-1, 1].forEach(function (sd) {
-            g.posts.push(self.add.image(cx + sd * (half + pr), y, sd < 0 ? "md-strait-pillar" : "md-strait-pillar-b").setDepth(8));
-            g.labels.push(self.add.text(cx + sd * (half + pr), y, L, { fontFamily: "Georgia, 'Palatino Linotype', serif", fontSize: 19, color: ST.glaze, fontStyle: "bold" }).setOrigin(0.5).setDepth(9));
+            g.posts.push(self.add.image(cx + sd * (half + R), y, "md-strait-stack-" + (sd < 0 ? 0 : 1)).setDepth(8));
+            g.labels.push(self.add.text(cx + sd * (half + R), y - STACK.lift, L, { fontFamily: "Georgia, 'Palatino Linotype', serif", fontSize: 20, color: ST.glaze, fontStyle: "bold" }).setOrigin(0.5).setDepth(9));
           });
           if (S.dead.indexOf(L) !== -1) self.straitPaint(g, "wrong");
           else if (self.extracted.indexOf(L) !== -1) self.straitPaint(g, "right");
           row.gates.push(g);
         });
-        /* a lone rock in the open water between the gates (level 49 on) */
+        /* a lone rock in the open water beside the gates, always leaving a passage on both sides of it */
         if (!xs && P.rockP > 0 && Math.random() < P.rockP) {
-          for (var t = 0; t < 14; t++) {
-            var rx = rnd(S.chanL + pr, S.chanR - pr);
-            if (row.gates.every(function (g) { return Math.abs(rx - g.base) > g.half + pr * 3 + 34; })) {
-              row.rocks.push({ base: rx, x: rx, spr: this.add.image(rx, y, "md-strait-rock").setDepth(8).setScale(0.86).setRotation(rnd(0, 6)) });
-              break;
-            }
+          var edges = [S.chanL - 8], spaces = [];
+          row.gates.forEach(function (g) { edges.push(g.base - half - 2 * R, g.base + half + 2 * R); });
+          edges.push(S.chanR);
+          for (var i = 0; i + 1 < edges.length; i += 2) if (edges[i + 1] - edges[i] >= 2 * R + 2 * OPEN) spaces.push([edges[i], edges[i + 1]]);
+          if (spaces.length) {
+            var s0 = spaces[Math.floor(Math.random() * spaces.length)];
+            row.rocks.push(this.straitRock(rnd(s0[0] + OPEN + R, s0[1] - OPEN - R), y, "md-strait-reef-" + Math.floor(Math.random() * 3)));
           }
         }
         S.rows.push(row);
         return row;
       }
+      /* v5.12.4: a reef — sea stacks right across the strait, from the cliff's foot to the far shore, with one or
+         two gaps (P.reefGap wide between the stacks) to steer through. The gaps are never further from the last
+         reef's than the ship can steer in the time between two rows; after a lettered row (the ship may be at any
+         of its gates) a reef has a gap near each gate, or two gaps, one in each half of the strait, at the start.
+         gaps (optional) fixes them. */
+      straitReefRow(y, gaps) {
+        var S = this.st, P = S.P, self = this, R = STACK.R, gw = P.reefGap, sep = gw + 2 * R + 12;
+        var lo = S.chanL + gw / 2, hi = Math.max(lo, S.chanR - gw / 2), mid = (lo + hi) / 2;
+        /* how far the ship can surely get across between two reefs: it can't turn while one is still alongside (about
+           190 px of the row gap), and it steers at 330 px a second, less against Charybdis's tug */
+        var reach = 220 * Math.max(0.2, (P.rowGap - 190) / P.scroll), last = S.lastGaps, gates = S.lastGates, t;
+        /* every point the ship may be at has a gap within reach */
+        function covers(pts, gs) { return !pts || pts.every(function (l) { return gs.some(function (g) { return Math.abs(g - l) <= reach; }); }); }
+        /* a gap near each point (one serves the points close together), kept a stack's width apart */
+        function follow(pts, jit) {
+          var out = [];
+          pts.slice().sort(function (a, b) { return a - b; }).forEach(function (x) {
+            if (out.length && Math.abs(x - out[out.length - 1]) <= reach * 0.7) return;
+            var g = clamp(x + rnd(-jit, jit) * reach, lo, hi);
+            if (out.length && g < out[out.length - 1] + sep) g = out[out.length - 1] + sep;
+            if (g <= hi) out.push(g);
+          });
+          return out;
+        }
+        S.lastGates = null;
+        if (!gaps && gates && S.rows.indexOf(gates) !== -1) {
+          /* after a lettered row: a gap within reach of every way through it (its gates and the open water beside them) */
+          var ways = this.straitWaysThrough(gates);
+          for (t = 0; t < 10 && (!gaps || !covers(ways, gaps)); t++) gaps = follow(ways, 0.25);
+          if (!covers(ways, gaps)) gaps = follow(ways, 0);
+          if (!gaps.length) gaps = null;
+        }
+        if (!gaps) {
+          /* one gap or two, and whichever gap of the last reef the ship took, one of these is within reach */
+          var two = hi - lo >= sep && (!last || Math.random() < P.twoGap);
+          for (t = 0; t < 30; t++) {
+            gaps = two ? [rnd(lo, Math.max(lo, mid - sep / 2)), rnd(Math.min(hi, mid + sep / 2), hi)] : [rnd(lo, hi)];
+            if (covers(last, gaps)) break;
+          }
+          for (t = 0; t < 10 && !covers(last, gaps); t++) gaps = follow(last, 0.5);
+          if (!covers(last, gaps)) gaps = last.slice();
+        }
+        gaps = gaps.slice().sort(function (a, b) { return a - b; });
+        var row = { y: y, gates: [], rocks: [], done: false, rel: null, ph: 0, reef: true, gaps: gaps };
+        /* the rock between the gaps, then stacks along each solid stretch, overlapping a little */
+        var cuts = [S.reefL];
+        gaps.forEach(function (g) { cuts.push(g - gw / 2, g + gw / 2); });
+        cuts.push(S.reefR);
+        for (var i = 0; i + 1 < cuts.length; i += 2) {
+          var a = cuts[i], b = cuts[i + 1], first = i === 0, lastSeg = i + 2 >= cuts.length;
+          var sc = rnd(0.9, 1.1), r = R * sc, xs = [];
+          if (b - a < 2 * r) xs.push(first ? b - r : lastSeg ? a + r : (a + b) / 2);   /* a short stretch at the cliff or Charybdis: one stack, reaching past it */
+          else {
+            var x = a + r;
+            while (x + r < b) { xs.push(x); x += r * rnd(1.45, 1.7); }
+            xs.push(b - r);
+          }
+          xs.forEach(function (cx) {
+            var s2 = Math.min(sc, rnd(0.9, 1.1));
+            row.rocks.push(self.straitRock(cx, y + rnd(-6, 6), "md-strait-reef-" + Math.floor(Math.random() * 3), s2));
+          });
+        }
+        /* each stack's own height on the water (a stagger of a few px reads as a reef, not a fence) */
+        row.rocks.forEach(function (k) { k.dy = k.spr.y - y; });
+        S.lastGaps = gaps;
+        S.rows.push(row);
+        if (!S.toldReef) { S.toldReef = true; this.toast("Rocks across the strait! Steer through a gap between them — hitting a rock costs a life.", 4200); }
+        return row;
+      }
       straitSpawnRow() {
-        var S = this.st, P = S.P, live = this.straitLive(), pick = [];
-        if (!live.length) return null;
-        var foot = P.gateW + 4 * 18 + 70, per = Math.min(live.length, clamp(Math.floor((S.chanR - S.chanL) / foot), 1, 3));
+        var S = this.st, P = S.P, live = this.straitLive(), pick = [], y = -(STACK.h / 2) - 8;
+        if (S.plainLeft > 0 || !live.length) { S.plainLeft = Math.max(0, S.plainLeft - 1); return this.straitReefRow(y); }
+        S.plainLeft = P.plain;   /* (S.lastGaps stays: if a right answer takes this row away, the next reef follows the last one) */
+        var per = Math.min(live.length, this.straitPerRow());
         S.queue = S.queue.filter(function (L) { return live.indexOf(L) !== -1; });
         while (pick.length < per) {
           if (!S.queue.length) S.queue = shuffle(live.filter(function (L) { return pick.indexOf(L) === -1; }));
@@ -3248,7 +3488,28 @@
           var L = S.queue.shift();
           if (pick.indexOf(L) === -1) pick.push(L);
         }
-        return this.straitRow(shuffle(pick), -44);
+        var row = this.straitRow(shuffle(pick), y);
+        S.lastGates = row;   /* the next reef has a gap near each way through this row */
+        return row;
+      }
+      /* how far a lettered row has swayed at time t (a reef spans the strait, so it never sways) */
+      straitSway(row, t) {
+        var S = this.st, P = S.P;
+        if (!P.sway || row.reef) return 0;
+        var lo = 1e9, hi = -1e9;
+        row.gates.forEach(function (g) { lo = Math.min(lo, g.base - g.half - 2 * STACK.R); hi = Math.max(hi, g.base + g.half + 2 * STACK.R); });
+        row.rocks.forEach(function (k) { lo = Math.min(lo, k.base - k.R); hi = Math.max(hi, k.base + k.R); });
+        if (S.chanL - lo > S.chanR - hi) return 0;
+        return clamp(Math.sin(t * 1.1 + row.ph) * P.sway, S.chanL - lo, S.chanR - hi);
+      }
+      /* the ways through a lettered row where it will cross the ship: its gates, and the open water beside them */
+      straitWaysThrough(row) {
+        var S = this.st, P = S.P, R = STACK.R, ways = [], edges = [S.chanL - 8];
+        var off = this.straitSway(row, S.t + Math.max(0, S.ship.y - row.y) / P.scroll);
+        row.gates.forEach(function (g) { ways.push(g.base + off); edges.push(g.base + off - g.half - 2 * R, g.base + off + g.half + 2 * R); });
+        edges.push(S.chanR);
+        for (var i = 0; i + 1 < edges.length; i += 2) if (edges[i + 1] - edges[i] >= 40) ways.push((edges[i] + edges[i + 1]) / 2);
+        return ways.sort(function (a, b) { return a - b; });
       }
       straitPaint(g, state) {
         g.state = state;
@@ -3262,6 +3523,16 @@
       straitKillRow(r) {
         r.gates.forEach(function (g) { g.posts.concat(g.labels).forEach(function (o) { try { o.destroy(); } catch (e) {} }); });
         r.rocks.forEach(function (k) { try { k.spr.destroy(); } catch (e) {} });
+      }
+      /* lettered rows go in a burst of gold (a right answer, the last answer); reefs stay on the water */
+      straitDropGates() {
+        var S = this.st, self = this;
+        S.rows = S.rows.filter(function (r) {
+          if (!r.gates.length) return true;
+          r.gates.forEach(function (g) { self.burst(g.cx, r.y, 0xe8b04a, 6); });
+          self.straitKillRow(r);
+          return false;
+        });
       }
       /* the ship sailed between a gate's pillars */
       straitThrough(g) {
@@ -3277,6 +3548,10 @@
       }
       straitTouch(x, y, r) {
         return this.straitHull().some(function (c) { return dist(c.x, c.y, x, y) < r + 10; });
+      }
+      /* a sea stack at (x, y) — its foot on the water, its top STACK.lift px up the screen — touches the hull */
+      straitRockHit(x, y, r) {
+        return this.straitTouch(x, y, r) || this.straitTouch(x, y - STACK.lift, r * 0.8);
       }
       straitBump(x, y, label) {
         var S = this.st;
@@ -3383,45 +3658,32 @@
           if (su.state !== "calm") { su.state = "calm"; su.t = 0; su.cd = P.surgeEvery; }
           if (this._finishing) return;
         }
-        /* the gates come down the strait */
+        /* the rows come down the strait: reefs and lettered rows, or (after the last answer) the reefs left to run */
         S.dist += dy;
-        if (!this._between && S.dist >= P.rowGap) { S.dist = 0; this.straitSpawnRow(); }
+        if (!this._between && S.dist >= P.rowGap) {
+          if (!S.mop) { S.dist = 0; this.straitSpawnRow(); }
+          else if (S.mop.spawn > 0) { S.dist = 0; S.mop.spawn -= 1; this.straitReefRow(-(STACK.h / 2) - 8).mop = true; }
+        }
         var rows = S.rows.slice();
         for (i = 0; i < rows.length; i++) {
           var row = rows[i];
           if (S.rows.indexOf(row) === -1) continue;
           row.y += dy;
-          /* the whole row sways together, kept inside the channel */
-          var off = 0;
-          if (P.sway) {
-            var lo = 1e9, hi = -1e9;
-            row.gates.forEach(function (g) { lo = Math.min(lo, g.base - g.half - 36); hi = Math.max(hi, g.base + g.half + 36); });
-            row.rocks.forEach(function (k) { lo = Math.min(lo, k.base - 18); hi = Math.max(hi, k.base + 18); });
-            off = clamp(Math.sin(S.t * 1.1 + row.ph) * P.sway, S.chanL - lo, S.chanR - hi);
-            if (S.chanL - lo > S.chanR - hi) off = 0;
-          }
+          /* a lettered row sways as one, kept inside the channel (a reef spans it, so it never sways) */
+          var off = this.straitSway(row, S.t);
           row.gates.forEach(function (g) {
             g.cx = g.base + off;
-            [-1, 1].forEach(function (sd, k) { var gx = g.cx + sd * (g.half + 18); g.posts[k].setPosition(gx, row.y); g.labels[k].setPosition(gx, row.y); });
-            /* v5.12.3: no rope of floats (it read as a slalom): the passage between the two rocks is just open water,
-               with the current running white along the rocks' inner sides */
-            if (g.state !== "wrong") {
-              lg.lineStyle(2, g.state === "right" ? 0x9af0b8 : 0xeff6f6, 0.5);
-              for (var sd2 = -1; sd2 <= 1; sd2 += 2) {
-                var ex = g.cx + sd2 * (g.half - 2);
-                lg.lineBetween(ex, row.y - 22, ex - sd2 * 3, row.y - 6); lg.lineBetween(ex - sd2 * 3, row.y + 6, ex, row.y + 22);
-              }
-            }
+            [-1, 1].forEach(function (sd, k) { var gx = g.cx + sd * (g.half + STACK.R); g.posts[k].setPosition(gx, row.y); g.labels[k].setPosition(gx, row.y - STACK.lift); });
           });
-          row.rocks.forEach(function (k) { k.x = k.base + off; k.spr.setPosition(k.x, row.y); });
-          /* pillars and rocks: a life, and the ship bounces off */
+          row.rocks.forEach(function (k) { k.x = k.base + off; k.spr.setPosition(k.x, row.y + (k.dy || 0)); });
+          /* stacks: a life, and the ship bounces off */
           if (this.iframeMs <= 0) {
             var hitAt = null;
-            row.gates.forEach(function (g) { g.posts.forEach(function (p) { if (!hitAt && self.straitTouch(p.x, p.y, 17)) hitAt = p; }); });
-            row.rocks.forEach(function (k) { if (!hitAt && self.straitTouch(k.x, row.y, 17)) hitAt = { x: k.x, y: row.y }; });
+            row.gates.forEach(function (g) { g.posts.forEach(function (p) { if (!hitAt && self.straitRockHit(p.x, p.y, STACK.touch)) hitAt = p; }); });
+            row.rocks.forEach(function (k) { if (!hitAt && self.straitRockHit(k.x, k.spr.y, k.r)) hitAt = { x: k.x, y: k.spr.y }; });
             if (hitAt) { this.straitBump(hitAt.x, hitAt.y, "YOU HIT THE ROCKS"); if (this._finishing) return; }
           }
-          /* through a gate: the row crosses the ship's middle */
+          /* through a gate (or past a reef): the row crosses the ship's middle */
           var rel = row.y - sh.y;
           if (!row.done && row.rel != null && row.rel < 0 && rel >= 0) {
             row.done = true;
@@ -3429,7 +3691,12 @@
             if (gate) { this.straitThrough(gate); if (this._finishing) return; }
           }
           row.rel = rel;
-          if (row.y > H + 60) { this.straitKillRow(row); S.rows.splice(S.rows.indexOf(row), 1); }
+          if (row.y > H + STACK.h / 2 + 10) { row.done = true; this.straitKillRow(row); S.rows.splice(S.rows.indexOf(row), 1); }
+        }
+        /* the run to the end of the strait: the count goes down as each reef passes the ship */
+        if (S.mop && this._mopup) {
+          this.mopupLeft(S.mop.spawn + S.rows.filter(function (r) { return r.mop && !r.done; }).length);
+          if (this._finishing) return;
         }
         /* Scylla */
         S.headCd -= ms;
@@ -3471,14 +3738,33 @@
           }
         }
       }
+      /* a right answer: its gates go, Scylla's heads pull back for a moment; the reefs stay on the water */
       clear_strait() {
-        var S = this.st, self = this;
-        S.rows.forEach(function (r) { r.gates.forEach(function (g) { self.burst(g.cx, r.y, 0xe8b04a, 6); }); self.straitKillRow(r); });
-        S.rows = [];
+        var S = this.st;
+        this.straitDropGates();
         S.heads.forEach(function (h) { try { h.spr.destroy(); } catch (e) {} });
         S.heads = [];
         S.headCd = Math.max(S.headCd, 1800);
         try { S.lowG.clear(); S.neckG.clear(); } catch (e2) {}
+      }
+      /* v5.12.4, the teacher's rule for the strait: the last answer doesn't end the level. The gates go and the galley
+         runs the rest of the strait — P.mopRows reefs, counting the ones already on the water ahead of the ship;
+         Scylla and Charybdis keep at it. tick_strait counts the reefs not yet passed (mopupLeft); the last one passed
+         wins the level. */
+      mopup_strait() {
+        var S = this.st, P = S.P;
+        this.straitDropGates();
+        var ahead = S.rows.filter(function (r) { return !r.done; });
+        ahead.forEach(function (r) { r.mop = true; });
+        S.mop = { spawn: Math.max(0, P.mopRows - ahead.length) };
+        S.plainLeft = 0;
+        if (!ahead.length) S.dist = Math.max(S.dist, P.rowGap - P.scroll * 0.8);   /* the first reef comes in under a second */
+        return S.mop.spawn + ahead.length;
+      }
+      mopupY_strait() { return this.H - 38; }   /* low down, over the water the ship has already passed: the rocks ahead stay in sight */
+      mopupText_strait(two, n) {
+        var a = "All questions answered — now get through the strait!", b = n + " row" + (n === 1 ? "" : "s") + " of rocks left";
+        return two ? a + "\n" + b : a + " " + b + ". Steer through the gaps — a hit still costs a life.";
       }
     }
 
@@ -3495,6 +3781,6 @@
     ORDER: ORDER, modeAt: modeAt, modeInRealm: modeInRealm, newsFor: newsFor, BIRDS: BIRDS, raidKindsFor: raidKindsFor,
     /* v5.11: the shared helpers, for the modes in their own files */
     lib: { clamp: clamp, rnd: rnd, dist: dist, shuffle: shuffle, hex: hex, mix: mix, angDiff: angDiff, kill: kill, snd: snd, canvasTex: canvasTex,
-      isOdy: isOdy, ST: ST, drawGalley: drawGalley, drawArrow: drawArrow, drawSplat: drawSplat, drawStraitWater: drawStraitWater, SHIP_W: SHIP_W, SHIP_H: SHIP_H },
+      isOdy: isOdy, ST: ST, drawGalley: drawGalley, drawArrow: drawArrow, drawSplat: drawSplat, drawStraitWater: drawStraitWater, SHIP_W: SHIP_W, SHIP_H: SHIP_H, STACK: STACK },
     TEAM: { w: TEAM_W, h: TEAM_H, car: TEAM_CAR } };
 })();
