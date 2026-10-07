@@ -228,13 +228,20 @@ function makeZip(files) {
   await page.screenshot({ path: path.join(shots, "pg-01-modal-va.png") });
   var dec = C.decode(modal.code);
   console.log("code", modal.code, modal.code.length + " chars");
-  check(/^SOL2-VA-[0-9A-Z]{4}(-[0-9A-Z]{1,4})+$/.test(modal.code) && modal.code.length <= 120, "the window shows a code: SOL2-VA- in blocks of 4, " + modal.code.length + " characters (no castle yet)");
+  check(/^SOL3-VA-[0-9A-Z]{4}(-[0-9A-Z]{1,4})+$/.test(modal.code) && modal.code.length <= 200, "the window shows a code: SOL3-VA- in blocks of 4, " + modal.code.length + " characters (no castle yet)");
   check(dec.ok && dec.data.nick === "Ann S" && dec.data.won === 2 && dec.data.started === 3 && dec.data.lost === 1 && dec.data.answered === modal.sum.answered && dec.data.right === modal.sum.right &&
     dec.data.wrong === modal.sum.wrong && dec.data.hiReached === 3 && dec.data.hiWon === 2 && dec.data.days === 1 && dec.data.modes === 2 && dec.data.version === (fs.readFileSync(path.join(__dirname, "..", "index.html"), "utf8").match(/\?v=([0-9.]+)/) || [])[1] && Math.abs(dec.data.made - Date.now()) < 120000,
     "the code decodes to the record, with the nickname: " + JSON.stringify(dec.data).slice(0, 200));
   check(dec.data.skills.length === 4 && dec.data.skills.reduce(function (a, s) { return a + s.a; }, 0) === modal.sum.answered, "the code carries each skill's answered / right");
-  check(/Paste this code into the Sol's Labyrinth progress assignment in Canvas\./.test(modal.text) && /levels? won/.test(modal.text) && /questions answered/.test(modal.text) && /right on the first try/.test(modal.text) && /minutes? played/.test(modal.text) && /days? played/.test(modal.text),
-    "the window has a friendly summary and the Canvas instruction");
+  /* v5.15: format 3 */
+  var stdSum = (dec.data.std || []).reduce(function (a, s) { return a + s.a; }, 0), stdRec = Object.keys(modal.sum.std || {});
+  check(dec.data.format === 3 && stdSum === modal.sum.answered && dec.data.std.length === stdRec.length && dec.data.std.every(function (s) { return /^9\.(RL|RI|RV|DSR)\./.test(s.code) && modal.sum.std[s.code].a === s.a && modal.sum.std[s.code].r === s.r; }),
+    "the code carries each standard practiced (" + (dec.data.std || []).map(function (s) { return s.code + " " + s.r + "/" + s.a; }).join(", ") + ")");
+  check(dec.data.camp && dec.data.camp.ALL && dec.data.camp.ALL.hiReached === 3 && dec.data.camp.ALL.hiWon === 2 && dec.data.save && dec.data.save.nights.ALL === 3,
+    "the code carries each game mode's levels (Mixed: reached 3, won 2, saved at 3): " + JSON.stringify(dec.data.camp) + " " + JSON.stringify(dec.data.save && dec.data.save.nights));
+  check(dec.data.badges.indexOf("first-win") !== -1 && dec.data.bestStreak >= 1, "the code carries the badges (" + dec.data.badges.join(", ") + ") and the best streak (" + dec.data.bestStreak + ")");
+  check(/turn it in to the Sol's Labyrinth progress assignment in Canvas\./.test(modal.text) && /Start Assignment/.test(modal.text) && /Ctrl\+V/.test(modal.text) && /Submit Assignment/.test(modal.text) && /Your nickname: Ann S/.test(modal.text) && /levels? won/.test(modal.text) && /questions answered/.test(modal.text) && /right on the first try/.test(modal.text) && /minutes? played/.test(modal.text) && /days? played/.test(modal.text),
+    "the Submit my progress window has a friendly summary, the nickname and the steps to turn the code in");
   await page.click("#progress-overlay .btn.primary");
   await page.waitForTimeout(400);
   var copied = await page.textContent("#progress-overlay .prog-copied");
@@ -251,6 +258,47 @@ function makeZip(files) {
   await page.screenshot({ path: path.join(shots, "pg-02-modal-title.png") });
   await page.keyboard.press("Escape");
   check(!(await page.isVisible("#progress-overlay")), "Escape closes it");
+  /* v5.15: badges */
+  check(/My badges \(\d+\)/.test(await page.textContent("#btn-badges")), "title screen: a My badges button with the count: " + await page.textContent("#btn-badges"));
+  await page.click("#btn-badges");
+  await page.waitForSelector("#badge-overlay:not(.hidden)");
+  var bg = await page.evaluate(function () { var o = document.getElementById("badge-overlay"); return { count: o.querySelector(".badge-count").textContent, tiles: o.querySelectorAll(".badge-tile").length, on: o.querySelectorAll(".badge-tile:not(.locked)").length, text: o.innerText }; });
+  await page.screenshot({ path: path.join(shots, "pg-08-badges.png") });
+  check(bg.tiles === 80 && bg.on >= 1 && /First Victory/.test(bg.text) && /Eagle Swoop Bronze/.test(bg.text) && /Root Worms Champion/.test(bg.text) && !/Under the Ram/.test(bg.text),
+    "the badge gallery: 80 Virginia badges (45 general + 5 for each of the 7 modes), earned ones in colour: " + bg.count);
+  await page.keyboard.press("Escape");
+  var toastSeen = await page.evaluate(function () {
+    var rec = SolProgress.record(); rec.badges = rec.badges.filter(function (b) { return b !== "first-win"; });
+    localStorage.setItem("afterHours.v1.progress.VA", JSON.stringify(rec)); SolProgress._reset && 0;
+    return true;
+  });
+  /* each game mode keeps its own level */
+  var nights = await page.evaluate(function () { return { all: localStorage.getItem("afterHours.v1.night.ALL"), raid: localStorage.getItem("afterHours.v1.night.raid"), last: localStorage.getItem("afterHours.v1.night") }; });
+  check(nights.all === "3" && nights.raid === null && nights.last === "3", "Mixed keeps its own level (3); Eagle Swoop has none yet: " + JSON.stringify(nights));
+  await page.click('#title-screen .card[data-family="G9"]');
+  await page.waitForSelector("#mode-screen:not(.hidden)");
+  await page.click('#mode-packs .card[data-gamemode="raid"]');
+  await page.waitForSelector("#skill-screen:not(.hidden)");
+  var ln = await page.evaluate(function () { return { line: document.getElementById("skill-save-line").textContent, cont: !document.getElementById("btn-skill-continue").classList.contains("hidden") }; });
+  check(/No level saved in Eagle Swoop/.test(ln.line) && !ln.cont, "Eagle Swoop starts at level 1 with no Continue: " + ln.line);
+  await page.evaluate(function () { localStorage.setItem("afterHours.v1.gameMode", "ALL"); });
+  await page.reload({ waitUntil: "load" }); await page.waitForTimeout(800);
+  await page.click('#state-screen .card[data-state="VA"]').catch(function () {});
+  await page.waitForSelector("#title-screen:not(.hidden)");
+  await page.click('#title-screen .card[data-family="G9"]');
+  await page.waitForSelector("#mode-screen:not(.hidden)");
+  await page.click('#mode-packs .card[data-gamemode="ALL"]');
+  await page.waitForSelector("#skill-screen:not(.hidden)");
+  var ln2 = await page.evaluate(function () { return { line: document.getElementById("skill-save-line").textContent, cont: document.getElementById("btn-skill-continue").textContent }; });
+  check(/Level 3 saved in Mixed/.test(ln2.line) && /Continue Level 3/.test(ln2.cont), "Mixed still continues at level 3: " + ln2.line);
+  /* a badge that comes back is shown as earned again (the record was edited above to drop First Victory) */
+  var again = await page.evaluate(function () { return SolBadges.check(); });
+  await page.waitForTimeout(300);
+  var toastTxt = await page.evaluate(function () { var t = document.getElementById("badge-toasts"); return t ? t.innerText : ""; });
+  check(again.indexOf("first-win") !== -1 && /Badge earned/i.test(toastTxt) && /First Victory/.test(toastTxt), "a newly earned badge pops up at the top: " + toastTxt.replace(/\n/g, " | "));
+  await page.screenshot({ path: path.join(shots, "pg-09-badge-toast.png") });
+  await page.click("#btn-skill-back").catch(function () {});
+  await page.evaluate(function () { document.getElementById("skill-screen").classList.add("hidden"); document.getElementById("mode-screen").classList.add("hidden"); document.getElementById("title-screen").classList.remove("hidden"); });
   var vaCode = modal.code;
 
   /* ════ 4. restore ════ */
@@ -268,13 +316,15 @@ function makeZip(files) {
     localStorage.setItem("afterHours.v1.build", JSON.stringify({ v: 4, theme: "castle", salt: 123456789, coins: 437, kit: 2, owned: {}, rewards: { 5: picks[0].piece, 10: picks[1].piece, 15: picks[2].piece, 20: picks[3].piece },
       picks: picks, view: { a: 0, z: 1, px: 0, py: 0 }, code: "" }));
     localStorage.setItem("afterHours.v1.night", "21");
+    localStorage.setItem("afterHours.v1.night.ALL", "21");
+    localStorage.setItem("afterHours.v1.night.raid", "6");
     localStorage.setItem("afterHours.v1.fangs", JSON.stringify([SolRealms.REALMS[0].id, SolRealms.REALMS[1].id]));
     SolBuild._reload();                                /* the game's own clean-up of the record, as in play */
     return { build: JSON.parse(localStorage.getItem("afterHours.v1.build")), code: SolProgress.code("VA"), sum: SolProgress.summary("VA"), fangs: localStorage.getItem("afterHours.v1.fangs") };
   }, picks);
   var rd = C.decode(before.code);
   console.log("castle code", before.code.length + " chars for " + before.build.picks.length + " pieces");
-  check(/^SOL2-VA-/.test(before.code) && rd.ok && rd.data.save && rd.data.save.night === 21 && rd.data.save.fangs.join() === "0,1" && rd.data.save.build && rd.data.save.build.theme === "castle" &&
+  check(/^SOL3-VA-/.test(before.code) && rd.ok && rd.data.save && rd.data.save.night === 21 && rd.data.save.fangs.join() === "0,1" && rd.data.save.build && rd.data.save.build.theme === "castle" &&
     rd.data.save.build.picks.length === before.build.picks.length && rd.data.save.build.coins === 437, "the code carries the level (21), two Fangs and the castle (" + before.build.picks.length + " pieces, 437 coins): " + before.code.length + " characters");
   /* a cleared Chromebook */
   await page.evaluate(function () { localStorage.clear(); });
@@ -297,7 +347,7 @@ function makeZip(files) {
   await page.click("#restore-check");
   var r3 = await page.evaluate(function () { return { msg: document.querySelector("#restore-overlay .rest-msg").innerText, go: !document.getElementById("restore-go").classList.contains("hidden") }; });
   await page.screenshot({ path: path.join(shots, "pg-07-restore.png") });
-  check(r3.go && /Level 21 to play next/.test(r3.msg) && /castle: 20 pieces, 437 coins/.test(r3.msg) && /2 Fangs/.test(r3.msg) && /Ann S/.test(r3.msg), "Check code shows what comes back: " + r3.msg.replace(/\n/g, " | "));
+  check(r3.go && /Your levels: Mixed \(all modes\) 21, Eagle Swoop 6/.test(r3.msg) && /\d+ badges?/.test(r3.msg) && /castle: 20 pieces, 437 coins/.test(r3.msg) && /2 Fangs/.test(r3.msg) && /Ann S/.test(r3.msg), "Check code shows what comes back: " + r3.msg.replace(/\n/g, " | "));
   await Promise.all([page.waitForNavigation({ waitUntil: "load" }), page.click("#restore-go")]);
   await page.waitForTimeout(1200);
   var after = await page.evaluate(function () {
@@ -312,7 +362,12 @@ function makeZip(files) {
     after.build.picks.map(key).join("|") === before.build.picks.map(key).join("|"), "the castle comes back piece for piece: theme, salt, coins, rewards, each piece's style, turn and cell");
   check(after2.picks === before.build.picks.length && after2.coins === 437, "the game loads the restored castle as it is (" + after2.picks + " pieces, " + after2.coins + " coins)");
   check(after.night === "21" && after.fangs === before.fangs && after.nick === "Ann S" && after2.nickBox === "Ann S", "the level (21), the Fangs and the nickname come back");
+  var modeNights = await page.evaluate(function () { return { all: localStorage.getItem("afterHours.v1.night.ALL"), raid: localStorage.getItem("afterHours.v1.night.raid"), rec: SolProgress.record("VA") }; });
+  check(modeNights.all === "21" && modeNights.raid === "6", "each mode's level comes back (Mixed 21, Eagle Swoop 6)");
   var s0 = before.sum, s1 = after2.sum;
+  check(s0.badges.every(function (b) { return modeNights.rec.badges.indexOf(b) !== -1; }) && modeNights.rec.badges.indexOf("town20") !== -1 && Object.keys(modeNights.rec.std).length === Object.keys(s0.std).length && modeNights.rec.bestStreak === s0.bestStreak && modeNights.rec.camp.ALL && modeNights.rec.camp.ALL.hiWon === s0.camp.ALL.hiWon,
+    "the badges, standards, best streak and mode levels come back (" + modeNights.rec.badges.length + " badges, " + Object.keys(modeNights.rec.std).length + " standards): " +
+    JSON.stringify({ b: [modeNights.rec.badges, s0.badges], std: [Object.keys(modeNights.rec.std).length, Object.keys(s0.std).length], st: [modeNights.rec.bestStreak, s0.bestStreak], camp: [modeNights.rec.camp, s0.camp] }));
   check(s1.won === s0.won && s1.started === s0.started && s1.answered === s0.answered && s1.right === s0.right && s1.wrong === s0.wrong && s1.hiReached === s0.hiReached && s1.days === s0.days && s1.modes === s0.modes && Math.abs(s1.minutes - s0.minutes) <= 1 &&
     Object.keys(s0.skills).concat(Object.keys(s1.skills)).every(function (k) { var a = s0.skills[k] || {}, b = s1.skills[k] || {}; return (a.a || 0) === (b.a || 0) && (a.r || 0) === (b.r || 0); }), "the totals come back, so the next code goes on from them: " + JSON.stringify(s1).slice(0, 160));
   var nd = C.decode(after2.code);
@@ -356,7 +411,7 @@ function makeZip(files) {
   var om = await page.evaluate(function () { var o = document.getElementById("progress-overlay"); return { text: o.innerText, code: o.querySelector(".prog-code").textContent }; });
   await page.screenshot({ path: path.join(shots, "pg-03-modal-ody.png") });
   var odec = C.decode(om.code);
-  check(/^SOL2-ODY-/.test(om.code) && odec.ok && odec.data.nick === "Odie" && odec.data.answered === 1 && odec.data.skills.length === 6, "the Odyssey's code: SOL1-ODY-, six episodes, the nickname");
+  check(/^SOL3-ODY-/.test(om.code) && odec.ok && odec.data.nick === "Odie" && odec.data.answered === 1 && odec.data.skills.length === 6, "the Odyssey's code: SOL1-ODY-, six episodes, the nickname");
   check(/Odyssey game progress/.test(om.text) && !/\b(Sol|Hati|Fenrir|Norse|Odin)\b|realm|rune/i.test(om.text), "the Odyssey's window names its own assignment and no Norse words");
   var odyCode = om.code;
   await page.close();

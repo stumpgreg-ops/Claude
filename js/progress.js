@@ -22,7 +22,12 @@
    town or castle (js/progress-code.js). "Restore my progress" on the title screen reads a student's last code and,
    after they confirm, writes it all back on this Chromebook and reloads the game: the record (its totals, so the next
    code goes on from them), the level, the Fangs, the town or castle and the nickname. A format 1 code (made before
-   v5.14) restores the totals and the level only. */
+   v5.14) restores the totals and the level only.
+
+   v5.15 (format 3, "SOL3-..."): the record also counts each STANDARD practiced (9.RL.1.A: answered / right on the
+   first try), each GAME MODE's highest level reached and won (every mode keeps its own level now), the best run
+   of first-try answers, perfect levels (won with no wrong letter), comebacks (a level won after losing it) and the
+   BADGES earned (js/badges.js decides them). The code carries them all, and Restore brings them back. */
 (function () {
   "use strict";
   var C = window.SolProgressCode;
@@ -43,6 +48,7 @@
   function blank() {
     return { v: 1, first: null, last: null, days: [], dayCount: 0, activeMs: 0,
       levels: { started: 0, won: 0, lost: 0 }, hiReached: 0, hiWon: 0, modesMin: 0,
+      std: {}, camp: {}, streak: 0, bestStreak: 0, perfect: 0, comebacks: 0, lostAt: [], badges: [],
       q: { answered: 0, right: 0, wrong: 0 }, skills: {}, modes: {}, log: [] };
   }
   /* an old or damaged save: keep what is usable, fill in the rest */
@@ -56,6 +62,16 @@
     r.dayCount = Math.max(num(x.dayCount), r.days.length);
     r.activeMs = num(x.activeMs);
     r.modesMin = num(x.modesMin);
+    if (x.std && typeof x.std === "object") Object.keys(x.std).forEach(function (k) {
+      var s = x.std[k]; if (s && /^[0-9A-Za-z.]{3,24}$/.test(k)) r.std[k] = { a: num(s.a), r: Math.min(num(s.a), num(s.r)) };
+    });
+    if (x.camp && typeof x.camp === "object") Object.keys(x.camp).forEach(function (k) {
+      var c = x.camp[k]; if (c && /^[A-Za-z]{1,12}$/.test(k)) { var hr = Math.min(100, num(c.hiReached)); r.camp[k] = { hiReached: hr, hiWon: Math.min(hr, num(c.hiWon)) }; }
+    });
+    r.streak = num(x.streak); r.bestStreak = Math.max(num(x.bestStreak), r.streak);
+    r.perfect = num(x.perfect); r.comebacks = num(x.comebacks);
+    r.lostAt = Array.isArray(x.lostAt) ? x.lostAt.filter(function (k) { return typeof k === "string"; }).slice(-60) : [];
+    r.badges = Array.isArray(x.badges) ? x.badges.filter(function (k) { return typeof k === "string"; }) : [];
     if (x.levels) { r.levels.started = num(x.levels.started); r.levels.won = num(x.levels.won); r.levels.lost = num(x.levels.lost); }
     r.hiReached = Math.min(100, num(x.hiReached)); r.hiWon = Math.min(r.hiReached, num(x.hiWon));
     if (x.q) { r.q.answered = num(x.q.answered); r.q.right = Math.min(r.q.answered, num(x.q.right)); r.q.wrong = num(x.q.wrong); }
@@ -149,14 +165,17 @@
       var st = stateOfFamily(info && info.family) || stateNow();
       var night = Math.max(1, Math.min(100, num(info && info.night) || 1));
       var mode = String((info && info.mode) || "maze").toLowerCase().replace(/[^a-z]/g, "").slice(0, 12) || "maze";
+      var campaign = String((info && info.campaign) || "ALL").replace(/[^A-Za-z]/g, "").slice(0, 12) || "ALL";
       var rec = load(st);
       rec.levels.started++;
       if (night > rec.hiReached) rec.hiReached = night;
+      var cp = rec.camp[campaign] || (rec.camp[campaign] = { hiReached: 0, hiWon: 0 });
+      if (night > cp.hiReached) cp.hiReached = night;
       var m = rec.modes[mode] || (rec.modes[mode] = { played: 0, won: 0 });
       m.played++;
       touchDay(rec);
       save(st, rec);
-      cur = { st: st, night: night, mode: mode, a: 0, r: 0, w: 0, ms: 0, ended: false };
+      cur = { st: st, night: night, mode: mode, campaign: campaign, a: 0, r: 0, w: 0, ms: 0, ended: false };
       lastTick = Date.now(); lastInput = Date.now();
     } catch (e) {}
   }
@@ -164,12 +183,16 @@
   function answer(kind, claim) {
     try {
       var st = cur ? cur.st : stateNow(), rec = load(st), sk = skillOf(claim);
+      var code = claim && claim.sol ? String(claim.sol).replace(/[^0-9A-Za-z.]/g, "").slice(0, 24) : "";
       if (kind === "wrong") {
         rec.q.wrong++;
+        rec.streak = 0;
         if (cur) cur.w++;
       } else {
         rec.q.answered++;
-        if (kind === "clean") rec.q.right++;
+        if (kind === "clean") { rec.q.right++; rec.streak++; if (rec.streak > rec.bestStreak) rec.bestStreak = rec.streak; }
+        else rec.streak = 0;
+        if (code) { var sd = rec.std[code] || (rec.std[code] = { a: 0, r: 0 }); sd.a++; if (kind === "clean") sd.r++; }
         if (sk) {
           var s = rec.skills[sk] || (rec.skills[sk] = { a: 0, r: 0 });
           s.a++; if (kind === "clean") s.r++;
@@ -178,6 +201,7 @@
       }
       touchDay(rec);
       save(st, rec);
+      badgesSoon();
     } catch (e) {}
   }
   function levelEnd(win) {
@@ -186,15 +210,39 @@
       flush();
       var rec = load(cur.st);
       cur.ended = true;
+      var key = (cur.campaign || "ALL") + ":" + cur.night;
       if (win) {
         rec.levels.won++;
         if (cur.night > rec.hiWon) rec.hiWon = cur.night;
         if (rec.modes[cur.mode]) rec.modes[cur.mode].won++;
-      } else rec.levels.lost++;
+        var cp = rec.camp[cur.campaign || "ALL"] || (rec.camp[cur.campaign || "ALL"] = { hiReached: cur.night, hiWon: 0 });
+        if (cur.night > cp.hiWon) cp.hiWon = cur.night;
+        if (cur.w === 0 && cur.a > 0) rec.perfect++;
+        var li = rec.lostAt.indexOf(key);
+        if (li !== -1) { rec.comebacks++; rec.lostAt.splice(li, 1); }
+      } else {
+        rec.levels.lost++;
+        if (rec.lostAt.indexOf(key) === -1) { rec.lostAt.push(key); if (rec.lostAt.length > 60) rec.lostAt.shift(); }
+      }
       logLevel(rec, cur, win ? "won" : "lost");
       touchDay(rec);
       save(cur.st, rec);
+      badgesSoon();
     } catch (e) {}
+  }
+  /* js/badges.js looks at the record after an answer or a level (a moment later, so a level's own screen comes first) */
+  var badgeTimer = null;
+  function badgesSoon() {
+    if (badgeTimer) return;
+    badgeTimer = setTimeout(function () { badgeTimer = null; try { if (window.SolBadges && SolBadges.check) SolBadges.check(); } catch (e) {} }, 600);
+  }
+  /* the badges js/badges.js awarded: added to the record (once each); returns the ones that are new */
+  function addBadges(ids, st) {
+    st = st || stateNow();
+    var rec = load(st), fresh = [];
+    (ids || []).forEach(function (id) { if (typeof id === "string" && rec.badges.indexOf(id) === -1) { rec.badges.push(id); fresh.push(id); } });
+    if (fresh.length) save(st, rec);
+    return fresh;
   }
 
   /* ── the code ── */
@@ -216,7 +264,8 @@
       started: rec.levels.started, won: rec.levels.won, lost: rec.levels.lost, hiReached: rec.hiReached, hiWon: rec.hiWon,
       answered: rec.q.answered, right: rec.q.right, wrong: rec.q.wrong,
       modes: Math.max(rec.modesMin || 0, Object.keys(rec.modes).filter(function (k) { return rec.modes[k].played > 0; }).length),
-      skills: rec.skills
+      skills: rec.skills,
+      std: rec.std, camp: rec.camp, bestStreak: rec.bestStreak, perfect: rec.perfect, badges: rec.badges.slice()
     };
   }
   /* format 2's restore part: what is saved on this Chromebook now */
@@ -227,6 +276,10 @@
   function saveNow() {
     var sv = { night: 1, fangs: [], build: null }, ids = realmIds();
     try { var n = parseInt(localStorage.getItem(NIGHT_KEY) || "1", 10); if (n >= 1 && n <= 100) sv.night = n; } catch (e) {}
+    sv.nights = {};
+    (C && C.MODE_IDS || []).forEach(function (m) {
+      try { var v = parseInt(localStorage.getItem(NIGHT_KEY + "." + m) || "", 10); if (v >= 1 && v <= 100) sv.nights[m] = v; } catch (e1) {}
+    });
     try {
       var f = JSON.parse(localStorage.getItem(FANG_KEY) || "[]");
       if (Array.isArray(f)) f.forEach(function (id) { var i = ids.indexOf(id); if (i !== -1 && sv.fangs.indexOf(i) === -1) sv.fangs.push(i); });
@@ -274,10 +327,22 @@
     rec.q = { answered: d.answered, right: d.right, wrong: d.wrong };
     (d.skills || []).forEach(function (k) { if (k.a) rec.skills[k.key] = { a: k.a, r: k.r }; });
     rec.modesMin = d.modes;
+    (d.std || []).forEach(function (k) { if (k.a) rec.std[k.code] = { a: k.a, r: k.r }; });
+    if (d.camp) Object.keys(d.camp).forEach(function (k) { rec.camp[k] = { hiReached: d.camp[k].hiReached, hiWon: d.camp[k].hiWon }; });
+    rec.bestStreak = d.bestStreak || 0; rec.perfect = d.perfect || 0;
+    rec.badges = (d.badges || []).slice();
     rec = tidy(rec);
     cur = null; pendingMs = 0;
     save(st, rec); cache.st = null; cache.rec = null;
-    try { localStorage.setItem(NIGHT_KEY, String(nightFrom(d))); } catch (e) {}
+    try {
+      localStorage.setItem(NIGHT_KEY, String(nightFrom(d)));
+      var nights = (d.save && d.save.nights) || {};
+      (C.MODE_IDS || []).forEach(function (m) { localStorage.removeItem(NIGHT_KEY + "." + m); });
+      if (Object.keys(nights).length) {
+        Object.keys(nights).forEach(function (m) { localStorage.setItem(NIGHT_KEY + "." + m, String(nights[m])); });
+        localStorage.setItem(NIGHT_KEY + ".migrated", "1");
+      } else localStorage.removeItem(NIGHT_KEY + ".migrated");   /* an older code: its one level goes to the mode last picked */
+    } catch (e) {}
     try { if (d.nick) localStorage.setItem(NICK_KEY, d.nick); } catch (e2) {}
     if (d.save) {
       try { localStorage.setItem(FANG_KEY, JSON.stringify(d.save.fangs.map(function (i) { return ids[i]; }).filter(Boolean))); } catch (e3) {}
@@ -314,6 +379,10 @@
     ".prog-copied{margin:8px 0 0;color:var(--gold);font-weight:700}",
     ".prog-copied:empty{display:none}",
     ".prog-how{margin:0 0 8px;font-size:17px;line-height:1.4}",
+    ".prog-steps{margin:10px 0 4px;padding-left:24px;font-size:16px;line-height:1.5}",
+    ".prog-steps li{margin:2px 0}",
+    ".prog-nick{margin:4px 0 0;font-size:15px}",
+    ".prog-nick b{color:var(--gold)}",
     ".prog-note{margin:6px 0 0;color:var(--dim);font-size:13px;line-height:1.4}",
     "#progress-overlay .row{justify-content:flex-start;margin-top:12px}",
     "#progress-overlay textarea{position:absolute;left:-9999px;top:0;width:10px;height:10px;opacity:0}"
@@ -325,9 +394,9 @@
     if (ov) return ov;
     var css = el("style"); css.textContent = STYLE; document.head.appendChild(css);
     ov = el("div", "hidden"); ov.id = "progress-overlay";
-    ov.setAttribute("role", "dialog"); ov.setAttribute("aria-modal", "true"); ov.setAttribute("aria-label", "My progress code");
+    ov.setAttribute("role", "dialog"); ov.setAttribute("aria-modal", "true"); ov.setAttribute("aria-label", "Submit my progress");
     var card = el("div", "tut-card"); ov.appendChild(card);
-    card.appendChild(el("p", "tut-kicker", "My progress code"));
+    card.appendChild(el("p", "tut-kicker", "Submit my progress"));
     card.appendChild(el("h2", "prog-title", "Your progress"));
     var stats = el("ul", "prog-stats"); card.appendChild(stats);
     card.appendChild(el("p", "prog-how"));
@@ -336,6 +405,9 @@
     var copy = el("button", "btn primary", "Copy code"); copy.type = "button"; row.appendChild(copy);
     var close = el("button", "btn", "Close"); close.type = "button"; row.appendChild(close);
     var copied = el("p", "prog-copied"); copied.setAttribute("aria-live", "polite"); card.appendChild(copied);
+    /* v5.15: the steps to turn the code in, for a game that sits in its Canvas assignment */
+    var steps = el("ol", "prog-steps"); card.appendChild(steps);
+    card.appendChild(el("p", "prog-nick"));
     card.appendChild(el("p", "prog-note"));
     copy.addEventListener("click", function (e) { e.stopPropagation(); copyCode(); });
     close.addEventListener("click", function (e) { e.stopPropagation(); hide(); });
@@ -359,13 +431,13 @@
         ov.removeChild(ta);
       } catch (e) { ok = false; }
       selectCode();
-      msg.textContent = ok ? "Copied! Now paste it into the assignment (Ctrl+V)." : "The code is selected: press Ctrl+C to copy it, then paste it into the assignment (Ctrl+V).";
+      msg.textContent = ok ? "Copied! Now follow the steps below to turn it in." : "The code is selected: press Ctrl+C to copy it, then follow the steps below.";
     }
     try {
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(text).then(function () {
           selectCode();
-          msg.textContent = "Copied! Now paste it into the assignment (Ctrl+V).";
+          msg.textContent = "Copied! Now follow the steps below to turn it in.";
         }, fallback);
         return;
       }
@@ -392,13 +464,22 @@
     ov.querySelector(".prog-copied").textContent = "";
     var how = ov.querySelector(".prog-how");
     how.innerHTML = "";
-    how.appendChild(document.createTextNode("Paste this code into the "));
+    how.appendChild(document.createTextNode("Tap Copy code, then turn it in to the "));
     how.appendChild(el("b", null, B.assignment));
     how.appendChild(document.createTextNode(" assignment in Canvas."));
+    var steps = ov.querySelector(".prog-steps");
+    steps.innerHTML = "";
+    ["Tap Copy code (below the code).",
+     "Scroll down below the game to the assignment and click Start Assignment (or New Attempt if you turned one in before).",
+     "Click in the Text Entry box and press Ctrl+V to paste your code.",
+     "Click Submit Assignment. Done! Your newest code always shows everything so far."].forEach(function (t) { steps.appendChild(el("li", null, t)); });
+    var nk = ov.querySelector(".prog-nick");
+    nk.innerHTML = "";
+    if (nick) { nk.appendChild(document.createTextNode("Your nickname: ")); nk.appendChild(el("b", null, nick)); nk.appendChild(document.createTextNode(" (look for it on your class leaderboard).")); }
+    else nk.textContent = "No nickname yet: add one on the title screen so you can find yourself on the class leaderboard.";
     ov.querySelector(".prog-note").textContent = (s.started ? "" : "Play a level, then come back for a code that shows it. ") +
-      "Your progress is saved on this Chromebook only. You get a new code each time, and your newest code shows everything so far. " +
-      "It also holds your level and your town or castle: on a new Chromebook, tap Restore my progress on the title screen and paste it." +
-      (nick ? " Your nickname “" + nick + "” is in the code." : " Add a nickname on the title screen to put it in the code.");
+      "Your progress is saved on this Chromebook only. The code also holds your levels, badges and your town or castle: " +
+      "on a new Chromebook, tap Restore my progress on the title screen and paste your newest code.";
     ov.classList.remove("hidden");
     setTimeout(function () { try { ov.querySelector(".btn.primary").focus(); } catch (e) {} }, 30);
   }
@@ -457,12 +538,16 @@
     var d = rchk.d, b = d.save && d.save.build, ul = el("ul");
     msg.className = "rest-msg";
     msg.appendChild(el("div", null, "This code " + (d.nick ? "(“" + d.nick + "”) " : "") + "will bring back:"));
-    li(ul, "Level " + nightFrom(d) + " to play next");
+    var nights = (d.save && d.save.nights) || {}, nk = Object.keys(nights);
+    if (nk.length) {
+      li(ul, "Your levels: " + nk.map(function (m) { var nm = C.badgeInfo("m-" + m + "-10").name.replace(/ Bronze$/, ""); try { nm = (hooks.modeName && hooks.modeName(m)) || nm; } catch (e) {} return nm + " " + nights[m]; }).join(", "));
+    } else li(ul, "Level " + nightFrom(d) + " to play next");
     li(ul, d.won + (d.won === 1 ? " level won, " : " levels won, ") + d.answered + (d.answered === 1 ? " question, " : " questions, ") + d.minutes + (d.minutes === 1 ? " minute played" : " minutes played"));
     if (b) li(ul, "Your " + (b.theme === "castle" ? "castle" : b.theme === "village" ? "town" : "town or castle") + ": " + b.picks.length + (b.picks.length === 1 ? " piece, " : " pieces, ") + b.coins + (b.coins === 1 ? " coin" : " coins"));
     else if (d.save) li(ul, "No town or castle yet");
     var nf = d.save ? d.save.fangs.length : 0, ody = rchk.st === "ODY";
     if (nf) li(ul, nf + (ody ? (nf === 1 ? " Ram's Fleece" : " Ram's Fleeces") : (nf === 1 ? " Fang" : " Fangs")));
+    if (d.badges && d.badges.length) li(ul, d.badges.length + (d.badges.length === 1 ? " badge" : " badges"));
     msg.appendChild(ul);
     if (!d.save) msg.appendChild(el("div", "rest-warn", "This code is from an older version of the game: it brings back your level and totals, but not your town or castle."));
     if (rchk.have.started) msg.appendChild(el("div", "rest-warn", "This replaces what is on this Chromebook now (level " + rchk.have.night + ", " + rchk.have.won + (rchk.have.won === 1 ? " level won" : " levels won") + ")."));
@@ -516,6 +601,8 @@
     summary: function (st) { flush(); return summary(st || stateNow()); },
     code: makeCode, show: show, hide: hide, isOpen: isOpen,
     checkRestore: checkRestore, restore: applyRestore, showRestore: showRestore, hideRestore: hideRestore, saveNow: saveNow,
+    addBadges: addBadges, modes: function () { try { return (hooks.modes && hooks.modes()) || []; } catch (e) { return []; } },
+    modeName: function (m) { try { return (hooks.modeName && hooks.modeName(m)) || m; } catch (e) { return m; } }, state: stateNow,
     current: function () { return cur ? JSON.parse(JSON.stringify(cur)) : null; },
     _reset: function (st) { try { localStorage.removeItem(KEY + (st || stateNow())); } catch (e) {} cache.st = null; cache.rec = null; cur = null; pendingMs = 0; },
     _tick: tick, IDLE_MS: IDLE_MS

@@ -1,4 +1,4 @@
-/* SOL Labyrinth: progress codes (formats 1 and 2). ONE file for the code format, used by the game (js/progress.js makes a
+/* SOL Labyrinth: progress codes (formats 1, 2 and 3). ONE file for the code format, used by the game (js/progress.js makes a
    code) and by the teacher page (tools/build-teacher.js inlines this file and reads codes with it), so the two can't
    drift. It runs in a browser (window.SolProgressCode) and in Node (module.exports).
 
@@ -17,12 +17,16 @@
    placed), the reward picked at each 5th level, and every placed piece (piece, style, how it was got, decoration,
    turn, and its cell). A word (theme, style or piece id) is 0 for none, its place in WORDS + 2, or 1 and the word spelled out.
    The teacher page reads format 1 and 2 alike and skips the restore part.
+   FORMAT 3 (v5.15, "SOL3-...") adds, right after the skills: each standard practiced (its place in STDS + 1, or 0 and
+   the code spelled out; answered; right on the first try), each game mode's highest level reached and won (a mode
+   is a word: ALL, maze, raid ...), the best run of first-try answers, the number of perfect levels and the badges
+   earned (one bit each, in BADGES order); and in the restore part, after the level, each mode's saved level.
    then a 30-bit tag (a hash of the payload bits and the game's secret), then zero bits up to a whole character.
    The tag turns a typo or a made-up code into INVALID. The secret ships inside the game, so it stops typos and
    casual tampering, not a determined student who reads the source. */
 (function (root) {
   "use strict";
-  var FORMAT = 2;                                   /* the newest format; decode() reads 1 and 2 */
+  var FORMAT = 3;                                   /* the newest format; decode() reads 1, 2 and 3 */
   var ALPHA = "0123456789ABCDEFGHJKMNPQRSTVWXYZ";
   var NICK_CHARS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -";
   var NICK_MAX = 12, TAG_BITS = 30;
@@ -55,8 +59,72 @@
     "k-trough", "k-cannonballs", "k-camp-tent", "k-bucket", "k-pallet", "k-cart", "k-merchant-cart", "k-catapult",
     "k-cannon", "k-warhorse", "k-soldier", "k-banner", "k-flag", "k-tree-a", "k-tree-b", "k-grove-a", "k-grove-b",
     "k-rock", "k-stones", "trophy-midgard", "trophy-niflheim", "trophy-jotunheim", "trophy-muspelheim",
-    "trophy-svartalfheim", "trophy-vanaheim", "trophy-alfheim", "trophy-helheim", "trophy-asgard", "trophy-ragnarok"
+    "trophy-svartalfheim", "trophy-vanaheim", "trophy-alfheim", "trophy-helheim", "trophy-asgard", "trophy-ragnarok",
+    /* v5.15: the game modes */
+    "ALL", "maze", "raid", "rocks", "sky", "ring", "worms", "strait", "ram", "bow", "raft", "row"
   ];
+  /* format 3: the standards, by number. APPEND ONLY, like WORDS (Virginia, then New Jersey) */
+  var STDS = [
+    "9.DSR.D", "9.DSR.E", "9.RI.1.A", "9.RI.1.B", "9.RI.1.C", "9.RI.2.A", "9.RI.2.B", "9.RI.3.A", "9.RL.1.A",
+    "9.RL.1.B", "9.RL.1.C", "9.RL.1.D", "9.RL.2.A", "9.RL.2.B", "9.RL.2.C", "9.RL.3.A", "9.RL.3.B", "9.RV.1.B",
+    "9.RV.1.C", "9.RV.1.E", "9.RV.1.F", "10.DSR.D", "10.DSR.E", "10.RI.1.A", "10.RI.1.B", "10.RI.1.C", "10.RI.2.A",
+    "10.RI.2.B", "10.RI.2.C", "10.RL.1.A", "10.RL.1.B", "10.RL.1.C", "10.RL.2.A", "10.RL.2.B", "10.RL.2.C",
+    "10.RL.3.A", "10.RV.1.A", "10.RV.1.B", "10.RV.1.C", "10.RV.1.D", "11.DSR.D", "11.DSR.E", "11.RI.1.A",
+    "11.RI.1.B", "11.RI.1.C", "11.RI.2.A", "11.RI.2.B", "11.RI.2.C", "11.RL.1.A", "11.RL.1.B", "11.RL.1.C",
+    "11.RL.2.A", "11.RL.2.B", "11.RL.2.C", "11.RL.3.A", "11.RV.1.A", "11.RV.1.B", "11.RV.1.C", "L.VI.5.3",
+    "L.VL.5.2", "RI.AA.5.7", "RI.CI.5.2", "RI.CR.5.1", "RI.CT.5.8", "RI.IT.5.3", "RI.PP.5.5", "RI.TS.5.4",
+    "RL.CI.5.2", "RL.CR.5.1", "RL.CT.5.8", "RL.IT.5.3", "RL.PP.5.5", "RL.TS.5.4"
+  ];
+  var STD_CHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ.abcdefghijklmnopqrstuvwxyz-_", STD_MAX = 24;
+  /* format 3: the badges, by number. APPEND ONLY. "m-<mode>-<level>" = win that level in that game mode. */
+  var MODE_IDS = ["ALL", "maze", "raid", "rocks", "sky", "ring", "worms", "strait", "ram", "bow", "raft", "row"];
+  var MODE_TIERS = [10, 25, 50, 75, 100];
+  var BADGES = ["first-win", "q25", "q100", "q250", "q500", "q1000", "q2500", "streak5", "streak10", "streak20", "streak40",
+    "perfect1", "perfect10", "perfect25", "perfect50", "rl25", "rl100", "ri25", "ri100", "rv25", "rv100", "dsr25", "dsr100",
+    "std10", "std20", "days3", "days7", "days15", "days30", "min30", "min120", "min300", "min600", "fang1", "fang5", "fang10",
+    "town5", "town20", "town50", "coins500", "coins2000", "explorer", "grandtour", "legend", "comeback",
+    "m-ALL-10", "m-ALL-25", "m-ALL-50", "m-ALL-75", "m-ALL-100", "m-maze-10", "m-maze-25", "m-maze-50", "m-maze-75", "m-maze-100",
+    "m-raid-10", "m-raid-25", "m-raid-50", "m-raid-75", "m-raid-100", "m-rocks-10", "m-rocks-25", "m-rocks-50", "m-rocks-75", "m-rocks-100",
+    "m-sky-10", "m-sky-25", "m-sky-50", "m-sky-75", "m-sky-100", "m-ring-10", "m-ring-25", "m-ring-50", "m-ring-75", "m-ring-100",
+    "m-worms-10", "m-worms-25", "m-worms-50", "m-worms-75", "m-worms-100", "m-strait-10", "m-strait-25", "m-strait-50", "m-strait-75", "m-strait-100",
+    "m-ram-10", "m-ram-25", "m-ram-50", "m-ram-75", "m-ram-100", "m-bow-10", "m-bow-25", "m-bow-50", "m-bow-75", "m-bow-100",
+    "m-raft-10", "m-raft-25", "m-raft-50", "m-raft-75", "m-raft-100", "m-row-10", "m-row-25", "m-row-50", "m-row-75", "m-row-100"];
+  var MODE_NAMES = { ALL: "Mixed", maze: "Labyrinth", raid: "Eagle Swoop", rocks: "Rune Rocks", sky: "Sun Chariot", ring: "Wolf Ring",
+    worms: "Root Worms", strait: "Scylla and Charybdis", ram: "Under the Ram", bow: "Bend the Bow", raft: "Calypso's Raft", row: "Row Past the Sirens" };
+  var TIER_NAMES = { 10: "Bronze", 25: "Silver", 50: "Gold", 75: "Platinum", 100: "Champion" };
+  var BADGE_INFO = {
+    "first-win": ["First Victory", "Win your first level."],
+    q25: ["Curious Reader", "Answer 25 questions."], q100: ["Avid Reader", "Answer 100 questions."], q250: ["Bookworm", "Answer 250 questions."],
+    q500: ["Scholar", "Answer 500 questions."], q1000: ["Sage", "Answer 1,000 questions."], q2500: ["Living Library", "Answer 2,500 questions."],
+    streak5: ["Sharp Eye", "Get 5 questions in a row right on the first try."], streak10: ["Hot Streak", "Get 10 in a row right on the first try."],
+    streak20: ["On Fire", "Get 20 in a row right on the first try."], streak40: ["Unstoppable", "Get 40 in a row right on the first try."],
+    perfect1: ["Flawless", "Win a level with no wrong letters."], perfect10: ["Precision", "Win 10 levels with no wrong letters."],
+    perfect25: ["Perfectionist", "Win 25 levels with no wrong letters."], perfect50: ["Untouchable", "Win 50 levels with no wrong letters."],
+    rl25: ["Story Seeker", "Get 25 literary questions right on the first try."], rl100: ["Story Master", "Get 100 literary questions right on the first try."],
+    ri25: ["Fact Finder", "Get 25 informational questions right on the first try."], ri100: ["Fact Master", "Get 100 informational questions right on the first try."],
+    rv25: ["Word Hunter", "Get 25 vocabulary questions right on the first try."], rv100: ["Word Master", "Get 100 vocabulary questions right on the first try."],
+    dsr25: ["Connector", "Get 25 paired-text questions right on the first try."], dsr100: ["Master Connector", "Get 100 paired-text questions right on the first try."],
+    std10: ["Well-Rounded", "Practice 10 different standards."], std20: ["Standards Sweep", "Practice 20 different standards."],
+    days3: ["Regular", "Play on 3 different days."], days7: ["Dedicated", "Play on 7 different days."], days15: ["Committed", "Play on 15 different days."],
+    days30: ["Devoted", "Play on 30 different days."],
+    min30: ["Warming Up", "Play for 30 minutes."], min120: ["Focused", "Play for 2 hours."], min300: ["Marathon", "Play for 5 hours."], min600: ["Iron Will", "Play for 10 hours."],
+    fang1: ["Boss Slayer", "Beat a boss level and win Fenrir's Fang."], fang5: ["Realm Hunter", "Win 5 of Fenrir's Fangs."], fang10: ["Realm Conqueror", "Win all 10 of Fenrir's Fangs."],
+    town5: ["Builder", "Place 5 pieces in your town or castle."], town20: ["Architect", "Place 20 pieces in your town or castle."],
+    town50: ["Master Builder", "Place 50 pieces in your town or castle."],
+    coins500: ["Saver", "Have 500 coins at once."], coins2000: ["Treasurer", "Have 2,000 coins at once."],
+    explorer: ["Explorer", "Play a level in every game mode."], grandtour: ["Grand Tour", "Win level 10 in every game mode."],
+    legend: ["Legend", "Win level 100 in every game mode."], comeback: ["Never Give Up", "Win a level you lost before."]
+  };
+  /* badgeInfo("m-raid-25") -> { id, name, desc, mode, tier } */
+  function badgeInfo(id) {
+    var m = /^m-([A-Za-z]+)-(\d+)$/.exec(id || "");
+    if (m) {
+      var nm = MODE_NAMES[m[1]] || m[1];
+      return { id: id, name: nm + " " + (TIER_NAMES[m[2]] || m[2]), desc: "Win level " + m[2] + " in " + nm + ".", mode: m[1], tier: +m[2] };
+    }
+    var b = BADGE_INFO[id];
+    return { id: id, name: b ? b[0] : id, desc: b ? b[1] : "" };
+  }
   var WORD_CHARS = "abcdefghijklmnopqrstuvwxyz0123456789-_ABCDEFGHIJKLMNOPQRSTUVWXYZ", WORD_MAX = 40;
   var SRC = ["reward", "shop", "auto", "free"];
   var PICKS_MAX = 2000, LIST_MAX = 2000;
@@ -131,12 +199,63 @@
     return t;
   };
   Reader.prototype.signed = function () { var n = this.num(); return n % 2 ? -(n + 1) / 2 : n / 2; };
+  Writer.prototype.std = function (s) {
+    s = String(s || "");
+    var i = STDS.indexOf(s);
+    if (i !== -1) { this.num(i + 1); return; }
+    var t = "";
+    for (var k = 0; k < s.length && t.length < STD_MAX; k++) if (STD_CHARS.indexOf(s.charAt(k)) !== -1) t += s.charAt(k);
+    this.num(0); this.num(t.length);
+    for (k = 0; k < t.length; k++) this.fixed(STD_CHARS.indexOf(t.charAt(k)), 6);
+  };
+  Reader.prototype.std = function () {
+    var i = this.num();
+    if (i > 0) { if (i > STDS.length) throw new Error("std"); return STDS[i - 1]; }
+    var n = this.num(), t = "";
+    if (n > STD_MAX) throw new Error("std");
+    for (var k = 0; k < n; k++) t += STD_CHARS.charAt(this.fixed(6));
+    return t;
+  };
+
+  /* format 3's extra numbers: s.std { "9.RL.1.A": { a, r } }, s.camp { raid: { hiReached, hiWon } }, s.bestStreak,
+     s.perfect, s.badges [ids] */
+  function writeExtra(w, s) {
+    var std = s.std || {}, keys = Object.keys(std).filter(function (k) { return std[k] && std[k].a > 0; }).slice(0, 200);
+    w.num(keys.length);
+    keys.forEach(function (k) { w.std(k); w.num(std[k].a); w.num(Math.min(std[k].a, std[k].r || 0)); });
+    var camp = s.camp || {}, ck = Object.keys(camp).filter(function (k) { return camp[k] && camp[k].hiReached > 0; }).slice(0, 30);
+    w.num(ck.length);
+    ck.forEach(function (k) { w.word(k); w.num(Math.min(100, camp[k].hiReached)); w.num(Math.min(camp[k].hiReached, camp[k].hiWon || 0)); });
+    w.num(s.bestStreak); w.num(s.perfect);
+    var have = {}, last = -1;
+    (s.badges || []).forEach(function (id) { var i = BADGES.indexOf(id); if (i !== -1) { have[i] = 1; if (i > last) last = i; } });
+    w.num(last + 1);
+    for (var i = 0; i <= last; i++) w.fixed(have[i] ? 1 : 0, 1);
+  }
+  function readExtra(r, d) {
+    var n = r.num(), i;
+    if (n > 200) throw new Error("std");
+    d.std = [];
+    for (i = 0; i < n; i++) { var code = r.std(), a = r.num(), rr = r.num(); if (rr > a) throw new Error("std"); d.std.push({ code: code, a: a, r: rr }); }
+    n = r.num(); if (n > 30) throw new Error("camp");
+    d.camp = {};
+    for (i = 0; i < n; i++) { var m = r.word(), hr = r.num(), hw = r.num(); if (hr > 100 || hw > hr) throw new Error("camp"); d.camp[m] = { hiReached: hr, hiWon: hw }; }
+    d.bestStreak = r.num(); d.perfect = r.num();
+    n = r.num(); if (n > 1000) throw new Error("badges");
+    d.badges = [];
+    for (i = 0; i < n; i++) if (r.fixed(1)) d.badges.push(BADGES[i] || ("badge" + i));
+  }
 
   /* format 2's restore part. sv: { night, fangs: [realm numbers 0..15], build: null or { theme, salt, coins, kit,
      owned: [ids], rewards: { "5": id, ... }, picks: [{ piece, style, src, deco, rot, cx, cy }] } } */
-  function writeSave(w, sv) {
+  function writeSave(w, sv, fmt) {
     sv = sv || {};
     w.num(Math.max(1, Math.min(100, Math.floor(Number(sv.night) || 1))));
+    if (fmt >= 3) {
+      var nights = sv.nights || {}, nk = Object.keys(nights).filter(function (k) { return nights[k] >= 1 && nights[k] <= 100; }).slice(0, 30);
+      w.num(nk.length);
+      nk.forEach(function (k) { w.word(k); w.num(Math.floor(nights[k])); });
+    }
     var mask = 0;
     (sv.fangs || []).forEach(function (i) { i = Math.floor(Number(i)); if (i >= 0 && i < 16) mask |= 1 << i; });
     w.num(mask);
@@ -162,9 +281,14 @@
       if (hasPos) { w.signed(p.cx); w.signed(p.cy); }
     });
   }
-  function readSave(r) {
-    var sv = { night: r.num(), fangs: [], build: null }, mask = r.num(), i, n;
+  function readSave(r, fmt) {
+    var sv = { night: r.num(), nights: {}, fangs: [], build: null }, mask, i, n;
     if (sv.night < 1 || sv.night > 100) throw new Error("night");
+    if (fmt >= 3) {
+      n = r.num(); if (n > 30) throw new Error("nights");
+      for (i = 0; i < n; i++) { var mk = r.word(), nv = r.num(); if (nv < 1 || nv > 100) throw new Error("nights"); sv.nights[mk] = nv; }
+    }
+    mask = r.num();
     for (i = 0; i < 16; i++) if (mask & (1 << i)) sv.fangs.push(i);
     if (!r.fixed(1)) return sv;
     var b = sv.build = { theme: r.word() || null, salt: r.num(), coins: r.num(), kit: r.num(), owned: [], rewards: {}, picks: [] };
@@ -200,9 +324,11 @@
     return m ? [+m[1], +m[2], +(m[3] || 0)] : [0, 0, 0];
   }
 
-  /* encode(build, s, opts) -> "SOL1-VA-...." (or "SOL2-VA-...." with opts.save: see writeSave)
+  /* encode(build, s, opts) -> "SOL1-VA-...." (or "SOL3-VA-...." with opts.save: see writeExtra and writeSave;
+     opts.format 2 makes a v5.14 code, for tests)
      s: { first, last ("YYYY-MM-DD" or null), days, minutes, started, won, lost, hiReached, hiWon, answered, right,
-          wrong, modes, skills: { RL: { a, r }, ... } }; opts: { nick, version ("5.12.2"), now (ms), save } */
+          wrong, modes, skills: { RL: { a, r }, ... }, and for format 3 std, camp, bestStreak, perfect, badges };
+     opts: { nick, version ("5.12.2"), now (ms), save, format } */
   function encode(build, s, opts) {
     var B = BUILDS[build];
     if (!B) throw new Error("unknown game " + build);
@@ -222,8 +348,9 @@
     w.num(s.modes);
     w.num(B.skills.length);
     B.skills.forEach(function (k) { var r = (s.skills && s.skills[k[0]]) || {}; w.num(r.a); w.num(r.r); });
-    var fmt = opts.save ? 2 : 1;
-    if (fmt === 2) writeSave(w, opts.save);
+    var fmt = opts.format || (opts.save ? FORMAT : 1);
+    if (fmt >= 3) writeExtra(w, s);
+    if (fmt >= 2) writeSave(w, opts.save, fmt);
     var payload = w.b.slice();
     w.fixed(tagOf(B.secret, payload), TAG_BITS);
     while (w.b.length % 5) w.b.push(0);
@@ -279,7 +406,8 @@
         d.skills.push({ key: def[0], name: def[1], a: r.num(), r: r.num() });
       }
       d.format = fmt;
-      if (fmt === 2) d.save = readSave(r);
+      if (fmt >= 3) readExtra(r, d);
+      if (fmt >= 2) d.save = readSave(r, fmt);
       var payload = bits.slice(0, r.i);
       var tag = r.fixed(TAG_BITS);
       var rest = bits.slice(r.i);
@@ -319,7 +447,7 @@
     return out;
   }
 
-  var api = { FORMAT: FORMAT, BUILDS: BUILDS, WORDS: WORDS, buildById: buildById, encode: encode, decode: decode, format: format,
+  var api = { FORMAT: FORMAT, BUILDS: BUILDS, WORDS: WORDS, STDS: STDS, BADGES: BADGES, MODE_IDS: MODE_IDS, MODE_TIERS: MODE_TIERS, badgeInfo: badgeInfo, buildById: buildById, encode: encode, decode: decode, format: format,
     findCodes: findCodes, dayNum: dayNum, dayStr: dayStr, cleanNick: cleanNick, parseVersion: parseVersion, _tag: tagOf };
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   if (root) root.SolProgressCode = api;

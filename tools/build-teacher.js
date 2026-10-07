@@ -8,6 +8,24 @@
 var fs = require("fs"), path = require("path");
 var root = path.join(__dirname, "..");
 var C = require(path.join(root, "js", "progress-code.js"));
+var tokenize = require("./ody-jstok").tokenize;
+/* v5.15: the page's scripts lose their comments and spare spaces (the code is unchanged: only the gaps between the
+   tokens are touched, and a line break stays a line break), so the page stays small enough for Canvas to run. */
+function minifyJs(src) {
+  var toks = tokenize(src), out = "", prev = null;
+  function wordy(t) { return t && (t.type === "id" || t.type === "num"); }
+  toks.forEach(function (t) {
+    var gap = src.slice(prev ? prev.end : 0, t.start);
+    var bare = gap.replace(/\/\*[\s\S]*?\*\//g, " ").replace(/\/\/[^\n]*/g, "");
+    var keep = bare.replace(/\s+/g, "");                       /* template-literal delimiters (` ${ }) stay */
+    var sep = "";
+    if (/\n/.test(bare)) sep = "\n";
+    else if (/\s/.test(bare) && prev && ((wordy(prev) && wordy(t)) || (prev.type === "punct" && t.type === "punct") || keep)) sep = " ";
+    out += (keep ? (sep && !/\n/.test(sep) ? " " : sep) + keep + (sep === "\n" ? "" : "") : sep) + src.slice(t.start, t.end);
+    prev = t;
+  });
+  return out + src.slice(prev ? prev.end : 0).replace(/\/\*[\s\S]*?\*\//g, "").replace(/\/\/[^\n]*/g, "").replace(/\s+/g, "\n");
+}
 var LOOK = {
   VA: { BG: "#0b0d13", PANEL: "#151923", PANEL2: "#1d2230", LINE: "#3a4150", GOLD: "#f5c842" },
   NJ: { BG: "#0b0d13", PANEL: "#151923", PANEL2: "#1d2230", LINE: "#3a4150", GOLD: "#f5c842" },
@@ -28,7 +46,7 @@ function build(st, version) {
     TITLE: esc(B.short + " · teacher progress page"),
     HEADING: esc(B.name) + " · teacher progress page",
     VERSION: esc(version || "?"), ASSIGNMENT: esc(B.assignment), ST: st,
-    CODE_JS: code, APP_JS: app
+    CODE_JS: minifyJs(code), APP_JS: minifyJs(app)
   }, LOOK[st]);
   var html = tpl.replace(/\{\{([A-Z0-9_]+)\}\}/g, function (m, k) {
     if (!(k in vals)) throw new Error("tools/build-teacher.js: no value for " + m);
@@ -38,7 +56,7 @@ function build(st, version) {
   if (size > 60 * 1024) throw new Error("tools/build-teacher.js: the teacher page is " + size + " bytes; Canvas runs only small pages (keep it under 60 KB)");
   return html;
 }
-module.exports = { build: build, fileName: fileName };
+module.exports = { build: build, fileName: fileName, minifyJs: minifyJs };
 
 if (require.main === module) {
   var st = (process.argv[2] || "VA").toUpperCase();

@@ -3910,14 +3910,33 @@
     return NIGHT_THEMES[Math.floor((n - 1) / 10) % NIGHT_THEMES.length];
   }
 
-  function readSavedNight() {
-    var v = parseInt(localStorage.getItem(LS_NIGHT) || "1", 10);
+  /* v5.15: each game mode keeps its own level (afterHours.v1.night.<mode>: ALL for Mixed, maze, raid ...), so a
+     student can be on level 40 in Eagle Swoop and level 12 in the Labyrinth. LS_NIGHT still holds the level last
+     played (in any mode). An older save had one level for every mode: it moves to the mode last picked. */
+  function nightKey(m) { return LS_NIGHT + "." + (m || (cfg && cfg.gameMode) || "ALL"); }
+  function migrateNight() {
+    try {
+      if (localStorage.getItem(LS_NIGHT + ".migrated")) return;
+      var old = localStorage.getItem(LS_NIGHT), m = localStorage.getItem(LS_GAMEMODE) || "ALL";
+      if (old && !localStorage.getItem(LS_NIGHT + "." + m)) localStorage.setItem(LS_NIGHT + "." + m, old);
+      localStorage.setItem(LS_NIGHT + ".migrated", "1");
+    } catch (e) {}
+  }
+  function hasSavedNight(m) {
+    migrateNight();
+    try { return !!localStorage.getItem(nightKey(m)); } catch (e) { return false; }
+  }
+  function readSavedNight(m) {
+    migrateNight();
+    var v = 1;
+    try { v = parseInt(localStorage.getItem(nightKey(m)) || "1", 10); } catch (e) {}
     if (!(v >= 1 && v <= 100)) v = 1;
     return v;
   }
-  function writeSavedNight(n) {
+  function writeSavedNight(n, m) {
     n = clamp(n, 1, 100);
-    try { localStorage.setItem(LS_NIGHT, String(n)); } catch (e) {}
+    migrateNight();
+    try { localStorage.setItem(nightKey(m), String(n)); localStorage.setItem(LS_NIGHT, String(n)); } catch (e) {}
   }
 
   function texRect(scene, key, w, h, fill, stroke, sw) {
@@ -26742,7 +26761,7 @@
   function progressLevelStart(sc) {
     if (!window.SolProgress || !sc) return;
     try {
-      SolProgress.levelStart({ family: sc.family, night: sc.night,
+      SolProgress.levelStart({ family: sc.family, night: sc.night, campaign: cfg.gameMode || "ALL",
         mode: sc.mode && sc.mode.id ? sc.mode.id : (sc.isBossLevel ? "boss" : "maze") });
     } catch (eP) {}
   }
@@ -26753,7 +26772,7 @@
     if (sc.readOpen || sc.tutOpen || sc.codexOpen || sc.trapOpen || sc.helpOpen || sc._tabHidden) return false;
     var play = document.getElementById("play");
     if (!play || play.classList.contains("hidden")) return false;
-    var cards = ["overlay", "read-overlay", "tut-overlay", "codex-overlay", "trap-overlay", "char-overlay", "build-overlay", "progress-overlay"];
+    var cards = ["overlay", "read-overlay", "tut-overlay", "codex-overlay", "trap-overlay", "char-overlay", "build-overlay", "progress-overlay", "restore-overlay", "badge-overlay", "teacher-overlay"];
     for (var i = 0; i < cards.length; i++) { var c = document.getElementById(cards[i]); if (c && !c.classList.contains("hidden")) return false; }
     try { if (sc.scene && sc.scene.isPaused && sc.scene.isPaused()) return false; } catch (e) {}
     return true;
@@ -26762,7 +26781,9 @@
     SolProgress.hook({
       state: function () { return cfg.state || LOCKED_STATE; },
       nick: function () { var n = document.getElementById("join-nick"); return n ? n.value : ""; },
-      active: progressActive
+      active: progressActive,
+      modes: function () { return gameModeDefs().map(function (d) { return d.id; }); },
+      modeName: modeLabel
     });
   }
   function sceneKeyFor(n) {
@@ -26927,14 +26948,14 @@
     var line = document.getElementById("skill-save-line");
     var cont = document.getElementById("btn-skill-continue");
     if (!line || !cont) return;
-    if (!localStorage.getItem(LS_NIGHT)) {
-      line.textContent = "No level saved on this Chromebook yet. Start Level 1.";
+    if (!hasSavedNight()) {
+      line.textContent = "No level saved in " + modeLabel(cfg.gameMode) + " on this Chromebook yet. Start Level 1. Each game mode keeps its own level.";
       cont.classList.add("hidden");
       return;
     }
-    line.textContent = "Level " + n + " saved on this Chromebook. Itch login does not store progress.";
+    line.textContent = "Level " + n + " saved in " + modeLabel(cfg.gameMode) + " on this Chromebook. Each game mode keeps its own level.";
     cont.textContent = n > 1 ? ("Continue Level " + n) : "Continue";
-    cont.classList.toggle("hidden", n <= 1 && !localStorage.getItem(LS_NIGHT));
+    cont.classList.toggle("hidden", n <= 1 && !hasSavedNight());
   }
 
   function renderSkillCards(family) {
@@ -27001,6 +27022,8 @@
     var d = GAME_MODE_DEFS.filter(function (x) { return x.id === m; })[0];
     return d && d.id !== "ALL" ? d.name : "All modes";
   }
+  /* v5.15: a mode's name in a sentence ("Level 5 saved in Eagle Swoop") */
+  function modeLabel(m) { var d = GAME_MODE_DEFS.filter(function (x) { return x.id === m; })[0]; return d ? (d.id === "ALL" ? "Mixed (all modes)" : d.name) : "Mixed (all modes)"; }
   function showModeScreen() {
     cfg.family = selectedFamily();
     var title = document.getElementById("title-screen"), skill = document.getElementById("skill-screen"), scr = document.getElementById("mode-screen");
@@ -27468,15 +27491,15 @@
     var line = document.getElementById("save-line");
     var cont = document.getElementById("btn-continue");
     if (!line) return;
-    if (!localStorage.getItem(LS_NIGHT)) {
-      line.textContent = "No level saved on this Chromebook yet. Tap a grade to start Level 1. Itch login does not store progress.";
+    if (!hasSavedNight()) {
+      line.textContent = "No level saved on this Chromebook yet. Tap a grade to start Level 1. Each game mode keeps its own level.";
       if (cont) cont.classList.add("hidden");
       return;
     }
-    line.textContent = "Level " + n + " saved on this Chromebook. Tap a grade, then Continue on the skill screen. Itch login does not store progress.";
+    line.textContent = "Level " + n + " saved in " + modeLabel(cfg.gameMode) + " on this Chromebook. Tap a grade, then pick a game mode: each mode keeps its own level.";
     if (cont) {
       cont.textContent = n > 1 ? ("Continue Level " + n) : "Continue";
-      cont.classList.toggle("hidden", n <= 1 && !localStorage.getItem(LS_NIGHT));
+      cont.classList.toggle("hidden", n <= 1 && !hasSavedNight());
     }
   }
 
