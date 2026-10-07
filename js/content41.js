@@ -36,6 +36,7 @@
         {
           id: "theme",
           sol: "9.RL.1.A",
+          sub: "9.RL.1.A.1",
           stem: "Which theme is best developed in \"The Empty Grid\"?",
           choices: [
             { letter: "A", text: "Volunteers should compare their work with the work of others." },
@@ -47,7 +48,8 @@
         },
         {
           id: "simile",
-          sol: "9.RL.2.A",
+          sol: "9.RL.2.B",
+          sub: "9.RL.2.B.2",
           stem: "In sentence 6, the author compares the whale's spout to a puff of breath on a cold window mainly to show that it is —",
           choices: [
             { letter: "A", text: "loud enough to frighten the gulls" },
@@ -59,7 +61,8 @@
         },
         {
           id: "char",
-          sol: "9.RL.1.C",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "Sentences 4 and 5 mainly show that Imani is —",
           choices: [
             { letter: "A", text: "worried that she does not measure up to others" },
@@ -71,7 +74,8 @@
         },
         {
           id: "infer",
-          sol: "9.RL.1.B",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "Based on sentences 8 and 9, readers can best infer that the team photographs whale tails because —",
           choices: [
             { letter: "A", text: "the tails are the only part of a whale above water" },
@@ -83,7 +87,8 @@
         },
         {
           id: "ending",
-          sol: "9.RL.3.A",
+          sol: "9.RL.1.B",
+          sub: "9.RL.1.B.2",
           stem: "How does the detail about gulls in sentence 14 connect to the beginning of the story?",
           choices: [
             { letter: "A", text: "It shows that the gulls have followed the boat all day." },
@@ -95,7 +100,8 @@
         },
         {
           id: "tone",
-          sol: "9.RL.2.C",
+          sol: "9.RL.2.B",
+          sub: "9.RL.2.B.1",
           stem: "The tone of sentence 13 is best described as —",
           choices: [
             { letter: "A", text: "bitter" },
@@ -135,6 +141,7 @@
         {
           id: "main",
           sol: "9.RI.1.A",
+          sub: "9.RI.1.A.1",
           stem: "Which sentence best states the central idea of \"The Firefly Flash Code\"?",
           choices: [
             { letter: "A", text: "Fireflies use timed flashes to communicate, and those signals need darkness and habitat." },
@@ -146,7 +153,8 @@
         },
         {
           id: "detail",
-          sol: "9.RI.1.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.1",
           stem: "According to the passage, how does a male firefly know he has found a female of his own species?",
           choices: [
             { letter: "A", text: "She glows more brightly than other fireflies." },
@@ -159,6 +167,7 @@
         {
           id: "org",
           sol: "9.RI.2.A",
+          sub: "9.RI.2.A.1",
           stem: "How is the passage mainly organized?",
           choices: [
             { letter: "A", text: "It tells the life story of one firefly from larva to adult." },
@@ -170,7 +179,8 @@
         },
         {
           id: "craft",
-          sol: "9.RI.2.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "The author calls the flashes \"a conversation\" in sentence 1 mainly to —",
           choices: [
             { letter: "A", text: "suggest that fireflies can understand human speech" },
@@ -182,7 +192,8 @@
         },
         {
           id: "evid",
-          sol: "9.RI.3.A",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "Which sentence best supports the claim that outdoor lights can harm fireflies?",
           choices: [
             { letter: "A", text: "Sentence 4" },
@@ -195,6 +206,7 @@
         {
           id: "type",
           sol: "9.RI.1.C",
+          sub: "9.RI.1.C.1",
           stem: "Which sentence from the passage gives a recommendation rather than a scientific explanation?",
           choices: [
             { letter: "A", text: "Sentence 12" },
@@ -232,7 +244,8 @@
       claims: [
         {
           id: "sub",
-          sol: "9.RV.1.B",
+          sol: "9.RV.1.C",
+          sub: "9.RV.1.C.1",
           stem: "The prefix <em>sub-</em> in <strong>subterranean</strong> (sentence 2) helps the reader understand that the cave is —",
           choices: [
             { letter: "A", text: "older than the farm" },
@@ -244,7 +257,8 @@
         },
         {
           id: "humid",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "Which words from sentence 4 best help the reader understand the meaning of <strong>humid</strong>?",
           choices: [
             { letter: "A", text: "\"The air grew\"" },
@@ -256,7 +270,8 @@
         },
         {
           id: "lum",
-          sol: "9.RV.1.B",
+          sol: "9.RV.1.C",
+          sub: "9.RV.1.C.1",
           stem: "<strong>Illuminated</strong> (sentence 5) shares a root with <em>luminous</em> and <em>luminary</em>. That root carries the idea of —",
           choices: [
             { letter: "A", text: "light" },
@@ -268,7 +283,8 @@
         },
         {
           id: "gradual",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In sentence 6, the word <strong>gradual</strong> most nearly means —",
           choices: [
             { letter: "A", text: "sudden and violent" },
@@ -280,7 +296,8 @@
         },
         {
           id: "fragile",
-          sol: "9.RV.1.E",
+          sol: "9.RV.1.D",
+          sub: "9.RV.1.D.2",
           stem: "The author could have written <em>weak</em> instead of <strong>fragile</strong> in sentence 9. Compared with <em>weak</em>, <strong>fragile</strong> adds a sense that the formations —",
           choices: [
             { letter: "A", text: "are too small for visitors to notice" },
@@ -293,6 +310,7 @@
         {
           id: "simile",
           sol: "9.RV.1.F",
+          sub: "9.RV.1.F.1",
           stem: "In sentence 10, the girl pulls her hand back \"as if it were a hot stove.\" This comparison mainly suggests that she —",
           choices: [
             { letter: "A", text: "feels the cave wall is surprisingly warm" },
@@ -334,6 +352,7 @@
         {
           id: "hinges",
           sol: "9.RL.2.A",
+          sub: "9.RL.2.A.2",
           stem: "In line 1, the poet compares the geese's calls to rusty hinges mainly to suggest that the calls are —",
           choices: [
             { letter: "A", text: "soft and soothing" },
@@ -345,7 +364,8 @@
         },
         {
           id: "image",
-          sol: "9.RL.2.B",
+          sol: "9.RL.2.A",
+          sub: "9.RL.2.A.2",
           stem: "The image in lines 3 and 4 of geese \"writing\" a \"pencil stroke across a clouded book\" mainly helps the reader picture —",
           choices: [
             { letter: "A", text: "a thin dark line of birds moving across a gray sky" },
@@ -357,7 +377,8 @@
         },
         {
           id: "infer",
-          sol: "9.RL.1.B",
+          sol: "9.RL.2.A",
+          sub: "9.RL.2.A.2",
           stem: "Lines 7 and 8 suggest that the geese —",
           choices: [
             { letter: "A", text: "follow one leader for the whole journey" },
@@ -369,7 +390,8 @@
         },
         {
           id: "shift",
-          sol: "9.RL.3.A",
+          sol: "9.RL.1.B",
+          sub: "9.RL.1.B.2",
           stem: "Lines 9 and 10 mark a shift in the poem from —",
           choices: [
             { letter: "A", text: "the speaker's chores to a description of the weather" },
@@ -382,6 +404,7 @@
         {
           id: "theme",
           sol: "9.RL.1.A",
+          sub: "9.RL.1.A.1",
           stem: "Which statement best expresses a theme of \"The Geese Go Over\"?",
           choices: [
             { letter: "A", text: "Birds are wiser than people in every way." },
@@ -393,7 +416,8 @@
         },
         {
           id: "tone",
-          sol: "9.RL.2.C",
+          sol: "9.RL.2.B",
+          sub: "9.RL.2.B.1",
           stem: "The tone of lines 13 and 14 is best described as —",
           choices: [
             { letter: "A", text: "calm and hopeful" },
@@ -439,6 +463,7 @@
         {
           id: "shared",
           sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "Which idea is supported by both Text 1 and Text 2?",
           choices: [
             { letter: "A", text: "Fishers and otters compete for the same urchins." },
@@ -451,6 +476,7 @@
         {
           id: "differ",
           sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "How do the two texts mainly differ in the way they present information about otters?",
           choices: [
             { letter: "A", text: "Text 1 explains the process in general terms; Text 2 describes changes seen firsthand in one place." },
@@ -462,7 +488,8 @@
         },
         {
           id: "two",
-          sol: "9.DSR.E",
+          sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "Which TWO sentences from Text 2 best show the change described in sentence 6 of Text 1? Select TWO.",
           choices: [
             { letter: "A", text: "Sentence 11" },
@@ -474,7 +501,8 @@
         },
         {
           id: "detail",
-          sol: "9.RI.1.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.1",
           stem: "According to Text 1, urchin barrens form mainly because —",
           choices: [
             { letter: "A", text: "otters eat too much of the kelp" },
@@ -486,7 +514,8 @@
         },
         {
           id: "persp",
-          sol: "9.DSR.E",
+          sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "Sentence 11 in Text 2 adds which idea that Text 1 does not address?",
           choices: [
             { letter: "A", text: "The return of otters can create costs for some people." },
@@ -498,7 +527,8 @@
         },
         {
           id: "keystone",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "Based on the context of sentence 7, a <em>keystone species</em> is an animal that —",
           choices: [
             { letter: "A", text: "lives only near rocky shores" },
@@ -539,6 +569,7 @@
         {
           id: "aside1",
           sol: "9.RL.1.D",
+          sub: "9.RL.1.D.2",
           stem: "The aside in sentence 5 mainly reveals that Mei —",
           choices: [
             { letter: "A", text: "is hungry and wants to leave the cave" },
@@ -550,7 +581,8 @@
         },
         {
           id: "direction",
-          sol: "9.RL.3.B",
+          sol: "9.RL.1.D",
+          sub: "9.RL.1.D.2",
           stem: "The stage direction in sentence 9 mainly shows that Mei —",
           choices: [
             { letter: "A", text: "has lost her place in the notebook" },
@@ -562,7 +594,8 @@
         },
         {
           id: "rafael",
-          sol: "9.RL.1.C",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "Which statement best describes Rafael as a character?",
           choices: [
             { letter: "A", text: "He is strict about accuracy but willing to encourage." },
@@ -574,7 +607,8 @@
         },
         {
           id: "setting",
-          sol: "9.RL.3.A",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "The setting described in sentence 1 contributes to the scene mainly by —",
           choices: [
             { letter: "A", text: "suggesting that the characters are lost" },
@@ -587,6 +621,7 @@
         {
           id: "theme",
           sol: "9.RL.1.A",
+          sub: "9.RL.1.A.1",
           stem: "Which theme is best developed in \"Survey Line\"?",
           choices: [
             { letter: "A", text: "Leaders should never admit that a task is difficult." },
@@ -599,6 +634,7 @@
         {
           id: "asides",
           sol: "9.RL.1.D",
+          sub: "9.RL.1.D.2",
           stem: "How does Mei's aside in sentence 15 differ from her aside in sentence 5?",
           choices: [
             { letter: "A", text: "In sentence 15 she is complaining about the cold." },
@@ -641,6 +677,7 @@
         {
           id: "purpose",
           sol: "9.RI.1.A",
+          sub: "9.RI.1.A.1",
           stem: "The main purpose of the banding station guide is to —",
           choices: [
             { letter: "A", text: "persuade readers to study birds in college" },
@@ -652,7 +689,8 @@
         },
         {
           id: "spray",
-          sol: "9.RI.1.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.1",
           stem: "According to the guide, volunteers should not bring insect spray because —",
           choices: [
             { letter: "A", text: "its chemicals can harm birds' feathers and skin" },
@@ -665,6 +703,7 @@
         {
           id: "org",
           sol: "9.RI.2.A",
+          sub: "9.RI.2.A.1",
           stem: "How is the volunteer guide organized?",
           choices: [
             { letter: "A", text: "As a story about one volunteer's first season" },
@@ -676,7 +715,8 @@
         },
         {
           id: "evid",
-          sol: "9.RI.3.A",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "Which sentence best supports the idea that volunteers must earn the chance to handle birds?",
           choices: [
             { letter: "A", text: "Sentence 2" },
@@ -688,7 +728,8 @@
         },
         {
           id: "intro",
-          sol: "9.RI.1.C",
+          sol: "9.RI.2.A",
+          sub: "9.RI.2.A.1",
           stem: "Sentence 1 differs from most of the other sentences in the guide because it —",
           choices: [
             { letter: "A", text: "warns volunteers about a danger" },
@@ -700,7 +741,8 @@
         },
         {
           id: "heading",
-          sol: "9.RI.2.B",
+          sol: "9.RI.2.A",
+          sub: "9.RI.2.A.1",
           stem: "The section headed \"Your First Day\" mainly serves to —",
           choices: [
             { letter: "A", text: "explain that new volunteers begin with a limited role" },
@@ -740,6 +782,7 @@
         {
           id: "claim",
           sol: "9.RI.1.A",
+          sub: "9.RI.1.A.1",
           stem: "Which statement best expresses the writer's central claim?",
           choices: [
             { letter: "A", text: "Cats are the greatest danger to birds downtown." },
@@ -751,7 +794,8 @@
         },
         {
           id: "evid",
-          sol: "9.RI.3.A",
+          sol: "9.RI.1.C",
+          sub: "9.RI.1.C.2",
           stem: "Which sentence provides the strongest local evidence that lights are harming birds in the writer's town?",
           choices: [
             { letter: "A", text: "Sentence 2" },
@@ -764,6 +808,7 @@
         {
           id: "judg",
           sol: "9.RI.1.C",
+          sub: "9.RI.1.C.1",
           stem: "Which sentence presents the writer's judgment rather than a reported finding?",
           choices: [
             { letter: "A", text: "Sentence 5" },
@@ -776,6 +821,7 @@
         {
           id: "struct",
           sol: "9.RI.2.A",
+          sub: "9.RI.2.A.1",
           stem: "Sentences 8 through 11 are organized mainly as —",
           choices: [
             { letter: "A", text: "a list of steps the council must follow in order" },
@@ -788,6 +834,7 @@
         {
           id: "craft",
           sol: "9.RI.2.B",
+          sub: "9.RI.2.B.2",
           stem: "The writer includes sentence 11 mainly to —",
           choices: [
             { letter: "A", text: "answer the claim that a small town's effort cannot matter" },
@@ -799,7 +846,8 @@
         },
         {
           id: "under",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In sentence 5, the word <em>understates</em> most nearly means —",
           choices: [
             { letter: "A", text: "explains clearly" },
@@ -839,7 +887,8 @@
       claims: [
         {
           id: "start",
-          sol: "9.RL.1.C",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "In sentences 1 through 3, Diego is best described as —",
           choices: [
             { letter: "A", text: "curious about how ants build tunnels" },
@@ -851,7 +900,8 @@
         },
         {
           id: "simile",
-          sol: "9.RL.2.A",
+          sol: "9.RL.2.B",
+          sub: "9.RL.2.B.2",
           stem: "In sentence 4, Nico's face is compared to a crumpled paper bag mainly to show that he is —",
           choices: [
             { letter: "A", text: "upset and close to tears" },
@@ -863,7 +913,8 @@
         },
         {
           id: "infer",
-          sol: "9.RL.1.B",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "What can readers infer from Diego's choice in sentence 7?",
           choices: [
             { letter: "A", text: "He believes the ants will never rebuild." },
@@ -875,7 +926,8 @@
         },
         {
           id: "pov",
-          sol: "9.RL.3.B",
+          sol: "9.RL.2.C",
+          sub: "9.RL.2.C.1",
           stem: "Because the story is told mostly through Diego's thoughts and actions, the reader mainly learns —",
           choices: [
             { letter: "A", text: "how the ants organize their colony" },
@@ -887,7 +939,8 @@
         },
         {
           id: "ending",
-          sol: "9.RL.3.A",
+          sol: "9.RL.1.B",
+          sub: "9.RL.1.B.2",
           stem: "The author ends the story with sentence 14 mainly to show that Diego —",
           choices: [
             { letter: "A", text: "now cares about the ants, even if he won't say so" },
@@ -900,6 +953,7 @@
         {
           id: "theme",
           sol: "9.RL.1.A",
+          sub: "9.RL.1.A.1",
           stem: "Which statement best expresses a theme of \"Diego's Road\"?",
           choices: [
             { letter: "A", text: "Younger siblings should solve their own problems." },
@@ -939,6 +993,7 @@
         {
           id: "main",
           sol: "9.RI.1.A",
+          sub: "9.RI.1.A.1",
           stem: "Which statement best expresses the central idea of \"Stone That Drips\"?",
           choices: [
             { letter: "A", text: "Caves are dangerous because their ceilings drip acid." },
@@ -951,6 +1006,7 @@
         {
           id: "seq",
           sol: "9.RI.2.A",
+          sub: "9.RI.2.A.1",
           stem: "The author organizes sentences 2 through 10 mainly by —",
           choices: [
             { letter: "A", text: "describing the steps of a process in order" },
@@ -962,7 +1018,8 @@
         },
         {
           id: "soda",
-          sol: "9.RI.2.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "The comparison to a newly opened bottle of soda in sentence 5 helps the reader understand that —",
           choices: [
             { letter: "A", text: "cave water tastes sweet and fizzy" },
@@ -974,7 +1031,8 @@
         },
         {
           id: "clog",
-          sol: "9.RI.1.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.1",
           stem: "According to the passage, a soda straw becomes a stalactite when —",
           choices: [
             { letter: "A", text: "it meets a stalagmite rising from the floor" },
@@ -986,7 +1044,8 @@
         },
         {
           id: "evid",
-          sol: "9.RI.3.A",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "Which sentence best supports the idea that cave formations are useful to scientists?",
           choices: [
             { letter: "A", text: "Sentence 12" },
@@ -998,7 +1057,8 @@
         },
         {
           id: "deposit",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "As used in sentence 9, the word <em>deposits</em> most nearly means —",
           choices: [
             { letter: "A", text: "washes away" },
@@ -1036,7 +1096,8 @@
       claims: [
         {
           id: "leth",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In sentence 2, the word <strong>lethargic</strong> most nearly means —",
           choices: [
             { letter: "A", text: "frightened" },
@@ -1048,7 +1109,8 @@
         },
         {
           id: "re",
-          sol: "9.RV.1.B",
+          sol: "9.RV.1.C",
+          sub: "9.RV.1.C.1",
           stem: "The prefix <em>re-</em> in <strong>rehabilitate</strong> (sentence 3) signals that the center tries to —",
           choices: [
             { letter: "A", text: "move animals to a new home" },
@@ -1060,7 +1122,8 @@
         },
         {
           id: "vig",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "Which phrase from sentence 7 best helps the reader understand the meaning of <strong>vigilant</strong>?",
           choices: [
             { letter: "A", text: "\"record every movement\"" },
@@ -1072,7 +1135,8 @@
         },
         {
           id: "tent",
-          sol: "9.RV.1.E",
+          sol: "9.RV.1.D",
+          sub: "9.RV.1.D.2",
           stem: "If the author had described Pebble's lunge as <em>quick</em> instead of <strong>tentative</strong>, the sentence would lose the sense that Pebble was —",
           choices: [
             { letter: "A", text: "angry at the herring" },
@@ -1085,6 +1149,7 @@
         {
           id: "wave",
           sol: "9.RV.1.F",
+          sub: "9.RV.1.F.1",
           stem: "In sentence 12, Pebble vanishes \"as if she had never been away.\" This comparison suggests that —",
           choices: [
             { letter: "A", text: "Kenji is unsure whether she was really released" },
@@ -1097,6 +1162,7 @@
         {
           id: "robust",
           sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "Which word from sentence 1 is most nearly the opposite of <strong>robust</strong>?",
           choices: [
             { letter: "A", text: "spotted" },
@@ -1140,6 +1206,7 @@
         {
           id: "agree",
           sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "On which point do the two texts agree?",
           choices: [
             { letter: "A", text: "Cicadas are too loud for people to tolerate." },
@@ -1152,6 +1219,7 @@
         {
           id: "differ",
           sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "Which statement best describes how the two texts differ?",
           choices: [
             { letter: "A", text: "Text 1 argues for spraying; Text 2 argues against it." },
@@ -1163,7 +1231,8 @@
         },
         {
           id: "combine",
-          sol: "9.DSR.E",
+          sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "A reader combining both texts could best conclude that —",
           choices: [
             { letter: "A", text: "the problems cicadas cause are brief and can be managed without spraying" },
@@ -1176,6 +1245,7 @@
         {
           id: "opinion",
           sol: "9.RI.1.C",
+          sub: "9.RI.1.C.1",
           stem: "Which sentence expresses an opinion rather than a fact that could be checked?",
           choices: [
             { letter: "A", text: "Sentence 3" },
@@ -1188,6 +1258,7 @@
         {
           id: "war",
           sol: "9.RV.1.F",
+          sub: "9.RV.1.F.1",
           stem: "In sentence 8, the writer's figurative use of <em>war</em> and <em>truce</em> suggests that her neighbors are —",
           choices: [
             { letter: "A", text: "reacting to the insects with needless hostility" },
@@ -1199,7 +1270,8 @@
         },
         {
           id: "two",
-          sol: "9.DSR.E",
+          sol: "9.DSR.C",
+          sub: "9.DSR.C.1",
           stem: "Which TWO sentences from Text 1 would the writer of Text 2 most likely use to support her argument? Select TWO.",
           choices: [
             { letter: "A", text: "Sentence 4" },
@@ -1238,7 +1310,8 @@
       claims: [
         {
           id: "library",
-          sol: "9.RL.2.A",
+          sol: "9.RL.2.B",
+          sub: "9.RL.2.B.2",
           stem: "In sentence 2, the author compares the road cut to a library mainly to suggest that Grandpa sees the rock as —",
           choices: [
             { letter: "A", text: "a quiet place to escape from his family" },
@@ -1250,7 +1323,8 @@
         },
         {
           id: "lucia",
-          sol: "9.RL.1.C",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "Which statement best describes Lucía in sentences 4 through 6?",
           choices: [
             { letter: "A", text: "She is nervous about getting hurt near the wall." },
@@ -1263,6 +1337,7 @@
         {
           id: "mood",
           sol: "9.RL.2.B",
+          sub: "9.RL.2.B.2",
           stem: "In sentence 9, Grandpa speaks \"as if the sea might still be listening.\" This phrase mainly creates a mood of —",
           choices: [
             { letter: "A", text: "hushed wonder" },
@@ -1274,7 +1349,8 @@
         },
         {
           id: "solid",
-          sol: "9.RL.1.B",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "Sentence 11 suggests that Lucía —",
           choices: [
             { letter: "A", text: "is dizzy from standing in the sun too long" },
@@ -1286,7 +1362,8 @@
         },
         {
           id: "frame",
-          sol: "9.RL.3.A",
+          sol: "9.RL.1.B",
+          sub: "9.RL.1.B.2",
           stem: "How does sentence 13 connect to sentence 5?",
           choices: [
             { letter: "A", text: "It shows that Grandpa has stopped repeating his stories." },
@@ -1299,6 +1376,7 @@
         {
           id: "theme",
           sol: "9.RL.1.A",
+          sub: "9.RL.1.A.1",
           stem: "Which theme is best supported by \"The Road Cut\"?",
           choices: [
             { letter: "A", text: "A discovery made firsthand can awaken interest in what once seemed dull." },
@@ -1338,6 +1416,7 @@
         {
           id: "summary",
           sol: "9.RI.1.A",
+          sub: "9.RI.1.A.1",
           stem: "Which statement best summarizes \"Navigating in the Dark\"?",
           choices: [
             { letter: "A", text: "Thrushes are the only songbirds that travel at night." },
@@ -1349,7 +1428,8 @@
         },
         {
           id: "question",
-          sol: "9.RI.2.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "The author includes the question in sentence 2 mainly to —",
           choices: [
             { letter: "A", text: "introduce the first topic the passage will explain" },
@@ -1362,6 +1442,7 @@
         {
           id: "org",
           sol: "9.RI.2.A",
+          sub: "9.RI.2.A.1",
           stem: "How does the author mostly organize \"Navigating in the Dark\"?",
           choices: [
             { letter: "A", text: "By tracing one thrush's trip from start to finish" },
@@ -1374,6 +1455,7 @@
         {
           id: "debate",
           sol: "9.RI.1.C",
+          sub: "9.RI.1.C.1",
           stem: "Which sentence presents an idea that scientists have not yet settled?",
           choices: [
             { letter: "A", text: "Sentence 5" },
@@ -1385,7 +1467,8 @@
         },
         {
           id: "energy",
-          sol: "9.RI.3.A",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "Which detail best supports the idea that night flight helps birds save energy?",
           choices: [
             { letter: "A", text: "Hawks and falcons mostly hunt during the day." },
@@ -1397,7 +1480,8 @@
         },
         {
           id: "backup",
-          sol: "9.RI.1.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.1",
           stem: "According to sentence 12, what happens when clouds hide the stars?",
           choices: [
             { letter: "A", text: "Birds land and wait for the sky to clear." },
@@ -1440,7 +1524,8 @@
       claims: [
         {
           id: "speaker",
-          sol: "9.RL.3.B",
+          sol: "9.RL.2.C",
+          sub: "9.RL.2.C.1",
           stem: "\"What the Cave Keeps\" is told from the point of view of —",
           choices: [
             { letter: "A", text: "a tour guide leading visitors" },
@@ -1453,6 +1538,7 @@
         {
           id: "pebbles",
           sol: "9.RL.2.A",
+          sub: "9.RL.2.A.2",
           stem: "In line 11, voices are compared to pebbles mainly to suggest that the echoes are —",
           choices: [
             { letter: "A", text: "sharp and scattered" },
@@ -1464,7 +1550,8 @@
         },
         {
           id: "cargo",
-          sol: "9.RL.2.B",
+          sol: "9.RL.2.A",
+          sub: "9.RL.2.A.2",
           stem: "In line 6, the \"tiny cargo\" that each drop lets go most likely refers to —",
           choices: [
             { letter: "A", text: "the names that visitors scratch" },
@@ -1476,7 +1563,8 @@
         },
         {
           id: "contrast",
-          sol: "9.RL.3.A",
+          sol: "9.RL.1.B",
+          sub: "9.RL.1.B.2",
           stem: "How do lines 10 through 13 contrast with lines 7 through 9?",
           choices: [
             { letter: "A", text: "They shift from the cave's slow patience to the quick, brief visits of people." },
@@ -1488,7 +1576,8 @@
         },
         {
           id: "tone",
-          sol: "9.RL.2.C",
+          sol: "9.RL.2.B",
+          sub: "9.RL.2.B.1",
           stem: "The tone of lines 14 through 16 is best described as —",
           choices: [
             { letter: "A", text: "joking and lighthearted" },
@@ -1501,6 +1590,7 @@
         {
           id: "theme",
           sol: "9.RL.1.A",
+          sub: "9.RL.1.A.1",
           stem: "Which statement best expresses a theme of \"What the Cave Keeps\"?",
           choices: [
             { letter: "A", text: "Caves are too dangerous for people to explore." },
@@ -1538,7 +1628,8 @@
       claims: [
         {
           id: "myriad",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In sentence 2, the word <strong>myriad</strong> most nearly means —",
           choices: [
             { letter: "A", text: "small variety" },
@@ -1550,7 +1641,8 @@
         },
         {
           id: "incon",
-          sol: "9.RV.1.B",
+          sol: "9.RV.1.C",
+          sub: "9.RV.1.C.1",
           stem: "<em>Conspicuous</em> means \"easy to see.\" Knowing this and the prefix <em>in-</em>, the reader can tell that <strong>inconspicuous</strong> beetles are —",
           choices: [
             { letter: "A", text: "brightly colored" },
@@ -1563,6 +1655,7 @@
         {
           id: "carving",
           sol: "9.RV.1.F",
+          sub: "9.RV.1.F.1",
           stem: "In sentence 5, the beetles' patterns are compared to the carving on an old wooden door. This comparison mainly emphasizes that the patterns are —",
           choices: [
             { letter: "A", text: "worn down and faded" },
@@ -1574,7 +1667,8 @@
         },
         {
           id: "reclusive",
-          sol: "9.RV.1.E",
+          sol: "9.RV.1.D",
+          sub: "9.RV.1.D.2",
           stem: "Compared with <em>rare</em>, the word <strong>reclusive</strong> in sentence 6 suggests that these beetles —",
           choices: [
             { letter: "A", text: "keep themselves hidden away from open places" },
@@ -1587,6 +1681,7 @@
         {
           id: "crew",
           sol: "9.RV.1.F",
+          sub: "9.RV.1.F.1",
           stem: "The survey leader's description of the beetles as \"the cleanup crew nobody thanks\" (sentence 9) suggests that they —",
           choices: [
             { letter: "A", text: "are paid by the county to work" },
@@ -1598,7 +1693,8 @@
         },
         {
           id: "indisp",
-          sol: "9.RV.1.E",
+          sol: "9.RV.1.D",
+          sub: "9.RV.1.D.2",
           stem: "In sentence 11, connecting <strong>indispensable</strong> to doctors and firefighters shows that Halima now views the beetles with —",
           choices: [
             { letter: "A", text: "mild amusement" },
@@ -1641,6 +1737,7 @@
         {
           id: "both",
           sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "Which idea is supported by both texts about dolphins?",
           choices: [
             { letter: "A", text: "Dolphins see best in murky water." },
@@ -1653,6 +1750,7 @@
         {
           id: "differ",
           sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "How does Text 2 mainly differ from Text 1?",
           choices: [
             { letter: "A", text: "Text 2 shows echolocation in action instead of explaining its parts." },
@@ -1664,7 +1762,8 @@
         },
         {
           id: "explain",
-          sol: "9.DSR.E",
+          sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "Which sentence from Text 1 best explains how Sunny is able to choose the metal ring in Text 2?",
           choices: [
             { letter: "A", text: "Sentence 1" },
@@ -1676,7 +1775,8 @@
         },
         {
           id: "jaw",
-          sol: "9.RI.1.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.1",
           stem: "According to Text 1, a dolphin receives returning echoes through its —",
           choices: [
             { letter: "A", text: "forehead" },
@@ -1689,6 +1789,7 @@
         {
           id: "org",
           sol: "9.RI.2.A",
+          sub: "9.RI.2.A.1",
           stem: "Text 1 is organized mainly as —",
           choices: [
             { letter: "A", text: "a comparison of dolphins and bats" },
@@ -1701,6 +1802,7 @@
         {
           id: "purpose",
           sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "Mendes covers Sunny's eyes mainly to —",
           choices: [
             { letter: "A", text: "protect Sunny from the metal ring" },
@@ -1738,7 +1840,8 @@
       claims: [
         {
           id: "pov",
-          sol: "9.RL.3.B",
+          sol: "9.RL.2.C",
+          sub: "9.RL.2.C.1",
           stem: "Because the story is told by the narrator looking back from age sixteen, the reader is able to —",
           choices: [
             { letter: "A", text: "see how the narrator's feelings about the swifts have grown" },
@@ -1751,6 +1854,7 @@
         {
           id: "sparks",
           sol: "9.RL.2.B",
+          sub: "9.RL.2.B.2",
           stem: "The image of birds \"flickering like sparks above a campfire\" in sentence 3 mainly creates a feeling of —",
           choices: [
             { letter: "A", text: "sudden danger and alarm" },
@@ -1762,7 +1866,8 @@
         },
         {
           id: "motel",
-          sol: "9.RL.2.A",
+          sol: "9.RL.2.B",
+          sub: "9.RL.2.B.2",
           stem: "When Grandma Odette calls the chimney the swifts' \"motel\" in sentence 5, she means that it is —",
           choices: [
             { letter: "A", text: "a place the town rents out to visitors" },
@@ -1774,7 +1879,8 @@
         },
         {
           id: "notice",
-          sol: "9.RL.1.B",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "What does sentence 8 suggest about the narrator?",
           choices: [
             { letter: "A", text: "She has trouble reading in the dark." },
@@ -1786,7 +1892,8 @@
         },
         {
           id: "dialogue",
-          sol: "9.RL.1.D",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "Grandma Odette's words in sentence 11 mainly reveal that she —",
           choices: [
             { letter: "A", text: "is too tired to care about the chimney" },
@@ -1798,7 +1905,8 @@
         },
         {
           id: "tone",
-          sol: "9.RL.2.C",
+          sol: "9.RL.2.B",
+          sub: "9.RL.2.B.1",
           stem: "The short final sentence, \"I wrote until midnight,\" gives the ending a tone that is —",
           choices: [
             { letter: "A", text: "uncertain and fearful" },
@@ -1837,6 +1945,7 @@
         {
           id: "main",
           sol: "9.RI.1.A",
+          sub: "9.RI.1.A.1",
           stem: "What is the central idea of \"Warm Water Refuges\"?",
           choices: [
             { letter: "A", text: "Manatees depend on warm-water refuges, and people are working to keep them available." },
@@ -1848,7 +1957,8 @@
         },
         {
           id: "cold",
-          sol: "9.RI.1.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.1",
           stem: "According to the passage, manatees are sensitive to cold mainly because they —",
           choices: [
             { letter: "A", text: "spend too much time near the surface" },
@@ -1861,6 +1971,7 @@
         {
           id: "struct",
           sol: "9.RI.2.A",
+          sub: "9.RI.2.A.1",
           stem: "Sentences 8 through 11 are organized mainly by —",
           choices: [
             { letter: "A", text: "comparing natural springs with ocean water" },
@@ -1872,7 +1983,8 @@
         },
         {
           id: "stones",
-          sol: "9.RI.2.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "The comparison to \"a field of stones\" in sentence 7 helps the reader picture —",
           choices: [
             { letter: "A", text: "the rocky bottom of a natural spring" },
@@ -1884,7 +1996,8 @@
         },
         {
           id: "risk",
-          sol: "9.RI.3.A",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "Which sentence best supports the claim that depending on power-plant refuges is risky?",
           choices: [
             { letter: "A", text: "Sentence 5" },
@@ -1897,6 +2010,7 @@
         {
           id: "possible",
           sol: "9.RI.1.C",
+          sub: "9.RI.1.C.1",
           stem: "Which sentence describes a possible future benefit rather than a present fact?",
           choices: [
             { letter: "A", text: "Sentence 11" },
