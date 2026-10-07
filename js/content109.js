@@ -55,6 +55,7 @@
         {
           id: "theme",
           sol: "11.RL.1.A",
+          sub: "11.RL.1.A.1",
           stem: "Which theme does Anjali's experience in Mr. Lindqvist's shop most clearly develop?",
           choices: [
             { letter: "A", text: "Skill in a craft depends mostly on owning expensive tools." },
@@ -67,6 +68,7 @@
         {
           id: "complaint",
           sol: "11.RL.1.C",
+          sub: "11.RL.1.C.1",
           stem: "Anjali's complaint in sentences 14 and 15 reveals that at this point in the story she —",
           choices: [
             { letter: "A", text: "distrusts Mr. Lindqvist's skill as a woodworker" },
@@ -78,7 +80,8 @@
         },
         {
           id: "conversation",
-          sol: "11.RL.2.A",
+          sol: "11.RL.2.C",
+          sub: "11.RL.2.C.2",
           stem: "In sentence 6, Mr. Lindqvist's description of dovetails as a conversation between two boards suggests that a good joint —",
           choices: [
             { letter: "A", text: "depends on each part being shaped to fit the other" },
@@ -91,6 +94,7 @@
         {
           id: "drawer",
           sol: "11.RL.1.B",
+          sub: "11.RL.1.B.1",
           stem: "The drawer of old pine joints described in sentences 18–22 mainly serves to —",
           choices: [
             { letter: "A", text: "show that Mr. Lindqvist has stopped practicing his craft" },
@@ -102,7 +106,8 @@
         },
         {
           id: "ending",
-          sol: "11.RL.3.A",
+          sol: "11.RL.1.B",
+          sub: "11.RL.1.B.1",
           stem: "How does the final paragraph (sentences 31–34) resolve the story of Anjali's jewelry box?",
           choices: [
             { letter: "A", text: "Anjali decides to quit the shop now that the box is done." },
@@ -115,6 +120,7 @@
         {
           id: "mood",
           sol: "11.RL.2.B",
+          sub: "11.RL.2.B.1",
           stem: "The narrator's description of the shop in sentences 1 and 2 creates a mood of —",
           choices: [
             { letter: "A", text: "long, steady use and quiet history" },
@@ -126,7 +132,8 @@
         },
         {
           id: "paring",
-          sol: "11.RV.1.C",
+          sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "In sentence 10, the word paring most nearly means —",
           choices: [
             { letter: "A", text: "matching pieces in sets of two" },
@@ -138,7 +145,8 @@
         },
         {
           id: "desperation",
-          sol: "11.RL.2.C",
+          sol: "11.RL.2.B",
+          sub: "11.RL.2.B.2",
           stem: "In sentence 19, the phrase glued shut in desperation suggests that the young Mr. Lindqvist —",
           choices: [
             { letter: "A", text: "preferred glue to nails in all of his work" },
@@ -198,7 +206,8 @@
       claims: [
         {
           id: "frame",
-          sol: "11.RL.3.A",
+          sol: "11.RL.1.B",
+          sub: "11.RL.1.B.1",
           stem: "The story opens with the watch being returned and then moves back to the day Nnamdi handed it over. This structure mainly allows the reader to —",
           choices: [
             { letter: "A", text: "follow Mr. Castellano's thoughts throughout the week" },
@@ -210,7 +219,8 @@
         },
         {
           id: "student",
-          sol: "11.RL.2.A",
+          sol: "11.RL.2.C",
+          sub: "11.RL.2.C.2",
           stem: "In sentence 3, comparing the watch's beat to a student talking too fast in front of a class mainly conveys that the watch is —",
           choices: [
             { letter: "A", text: "running nervously ahead of where it should be" },
@@ -223,6 +233,7 @@
         {
           id: "cruel",
           sol: "11.RL.1.C",
+          sub: "11.RL.1.C.2",
           stem: "Sentence 19 suggests that Nnamdi returned the watch early mainly because he —",
           choices: [
             { letter: "A", text: "doubted that Señora Ruiz's timing rack was useful" },
@@ -235,6 +246,7 @@
         {
           id: "tomorrow",
           sol: "11.RL.2.B",
+          sub: "11.RL.2.B.1",
           stem: "Mr. Castellano's remark in sentence 6 that by supper the watch is already living in tomorrow creates a tone that is —",
           choices: [
             { letter: "A", text: "bitter and accusing" },
@@ -247,6 +259,7 @@
         {
           id: "theme",
           sol: "11.RL.1.A",
+          sub: "11.RL.1.A.1",
           stem: "Which theme is most clearly developed across the two times Nnamdi returns Mr. Castellano's watch?",
           choices: [
             { letter: "A", text: "Caring for someone sometimes means asking that person to wait." },
@@ -259,6 +272,7 @@
         {
           id: "positions",
           sol: "11.RL.1.B",
+          sub: "11.RL.1.B.1",
           stem: "Señora Ruiz's explanation in sentences 12–14 that a watch lives in many positions mainly helps the reader understand —",
           choices: [
             { letter: "A", text: "why Nnamdi enjoys cleaning gears with tweezers" },
@@ -271,6 +285,7 @@
         {
           id: "rate",
           sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "Based on sentences 30 and 31, the rate that Nnamdi records in his notebook refers to —",
           choices: [
             { letter: "A", text: "the price charged for timing a watch" },
@@ -282,7 +297,8 @@
         },
         {
           id: "kindly",
-          sol: "11.RL.2.C",
+          sol: "11.RL.1.C",
+          sub: "11.RL.1.C.1",
           stem: "In sentence 7, the narrator says Mr. Castellano spoke kindly, which was worse. This wording suggests that Nnamdi —",
           choices: [
             { letter: "A", text: "thinks Mr. Castellano is hiding his real anger" },
@@ -339,6 +355,7 @@
         {
           id: "theme",
           sol: "11.RL.1.A",
+          sub: "11.RL.1.A.1",
           stem: "Which statement best expresses a theme of the story about Farah's assigned side?",
           choices: [
             { letter: "A", text: "Winning a debate matters less than having a strong partner." },
@@ -351,6 +368,7 @@
         {
           id: "unfair",
           sol: "11.RL.1.C",
+          sub: "11.RL.1.C.1",
           stem: "Farah's response to the assignment in sentences 7 and 8 shows that, at first, she —",
           choices: [
             { letter: "A", text: "expects Desmond to argue the side alone" },
@@ -363,6 +381,7 @@
         {
           id: "cause",
           sol: "11.RL.1.B",
+          sub: "11.RL.1.B.1",
           stem: "What event leads Farah to change the way she prepares for the tournament?",
           choices: [
             { letter: "A", text: "Desmond warns her that her weak notes will lose the round." },
@@ -374,7 +393,8 @@
         },
         {
           id: "notebook",
-          sol: "11.RL.2.A",
+          sol: "11.RL.2.C",
+          sub: "11.RL.2.C.1",
           stem: "The notebook page in sentence 31, with both sides written under the topic, most clearly symbolizes —",
           choices: [
             { letter: "A", text: "the tournament's final score" },
@@ -386,7 +406,8 @@
         },
         {
           id: "resolve",
-          sol: "11.RL.3.A",
+          sol: "11.RL.1.B",
+          sub: "11.RL.1.B.1",
           stem: "How do sentences 29–31, on the bus home, resolve Farah's story?",
           choices: [
             { letter: "A", text: "They show Farah planning to quit the debate team." },
@@ -399,6 +420,7 @@
         {
           id: "macaroni",
           sol: "11.RL.2.B",
+          sub: "11.RL.2.B.2",
           stem: "The list in sentence 28 (the diapers and homework and macaroni) mainly makes Farah's rebuttal —",
           choices: [
             { letter: "A", text: "humorous enough to make the judges laugh" },
@@ -410,7 +432,8 @@
         },
         {
           id: "rebuttal",
-          sol: "11.RV.1.C",
+          sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "In sentence 28, the word rebuttal most nearly means —",
           choices: [
             { letter: "A", text: "a speech that opens the debate" },
@@ -422,7 +445,8 @@
         },
         {
           id: "stung",
-          sol: "11.RL.2.C",
+          sol: "11.RL.2.B",
+          sub: "11.RL.2.B.2",
           stem: "In sentence 17, Farah says Desmond's comment stung. The word stung suggests that his words —",
           choices: [
             { letter: "A", text: "hurt her because she knew they were true" },
@@ -474,6 +498,7 @@
         {
           id: "central",
           sol: "11.RI.1.A",
+          sub: "11.RI.1.A.2",
           stem: "Which statement best expresses the central idea of the article on how mapmakers handled unknown places?",
           choices: [
             { letter: "A", text: "Honest maps show the limits of what their makers truly know." },
@@ -486,6 +511,7 @@
         {
           id: "organize",
           sol: "11.RI.2.A",
+          sub: "11.RI.2.A.1",
           stem: "How does the author mainly organize sentences 4–24 of the article about blank spaces?",
           choices: [
             { letter: "A", text: "by comparing land maps with sea charts point by point" },
@@ -497,7 +523,8 @@
         },
         {
           id: "repeated",
-          sol: "11.RI.2.B",
+          sol: "11.RI.2.C",
+          sub: "11.RI.2.C.2",
           stem: "In sentence 9, the author says a mistake could become a fact simply by being repeated mainly to —",
           choices: [
             { letter: "A", text: "praise the speed of early printing methods" },
@@ -509,7 +536,8 @@
         },
         {
           id: "danger",
-          sol: "11.RI.1.B",
+          sol: "11.RI.1.C",
+          sub: "11.RI.1.C.2",
           stem: "Which sentence best supports the idea that invented map features could put travelers at real risk?",
           choices: [
             { letter: "A", text: "Sentence 5, about rumored kingdoms and borrowed mountains" },
@@ -521,7 +549,8 @@
         },
         {
           id: "attitude",
-          sol: "11.RI.1.C",
+          sol: "11.RI.2.C",
+          sub: "11.RI.2.C.1",
           stem: "The author's attitude toward the mapmakers who began leaving blank spaces is best described as —",
           choices: [
             { letter: "A", text: "puzzled by their lack of ambition" },
@@ -533,7 +562,8 @@
         },
         {
           id: "seafloor",
-          sol: "11.RI.2.C",
+          sol: "11.RI.2.A",
+          sub: "11.RI.2.A.2",
           stem: "The author includes sentences 19–24 about the deep ocean floor mainly to —",
           choices: [
             { letter: "A", text: "argue that ships are more useful than satellites" },
@@ -545,7 +575,8 @@
         },
         {
           id: "patrons",
-          sol: "11.RV.1.C",
+          sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "In sentence 5, the word patrons most nearly refers to —",
           choices: [
             { letter: "A", text: "artists who drew the margins" },
@@ -558,6 +589,7 @@
         {
           id: "shading",
           sol: "11.RI.1.B",
+          sub: "11.RI.1.B.2",
           stem: "Based on sentences 23 and 24, a seafloor map that uses shading to separate measured and estimated areas would most help a reader —",
           choices: [
             { letter: "A", text: "judge which parts of the map are most reliable" },
@@ -607,6 +639,7 @@
         {
           id: "summary",
           sol: "11.RI.1.A",
+          sub: "11.RI.1.A.2",
           stem: "Which choice best summarizes the central idea of the article about mechanical watches?",
           choices: [
             { letter: "A", text: "Quartz watches have replaced mechanical ones in nearly every home." },
@@ -619,6 +652,7 @@
         {
           id: "sequence",
           sol: "11.RI.2.A",
+          sub: "11.RI.2.A.1",
           stem: "How does the author organize sentences 4–14 of the watch article?",
           choices: [
             { letter: "A", text: "by comparing quartz watches with mechanical ones" },
@@ -630,7 +664,8 @@
         },
         {
           id: "swing",
-          sol: "11.RI.2.B",
+          sol: "11.RI.2.A",
+          sub: "11.RI.2.A.2",
           stem: "The comparison to a child on a playground swing in sentence 13 helps the reader understand that the balance wheel —",
           choices: [
             { letter: "A", text: "repeats each swing in nearly equal time" },
@@ -643,6 +678,7 @@
         {
           id: "amplitude",
           sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "In sentence 17, the explanation set off by commas shows that amplitude means —",
           choices: [
             { letter: "A", text: "the speed of the escape wheel's teeth" },
@@ -654,7 +690,8 @@
         },
         {
           id: "gravity",
-          sol: "11.RI.1.B",
+          sol: "11.RI.2.B",
+          sub: "11.RI.2.B.2",
           stem: "According to the article, why must a watchmaker test a serviced watch in several positions?",
           choices: [
             { letter: "A", text: "Gravity affects the balance differently as the watch's position changes." },
@@ -666,7 +703,8 @@
         },
         {
           id: "rush",
-          sol: "11.RI.2.C",
+          sol: "11.RI.2.A",
+          sub: "11.RI.2.A.2",
           stem: "The author includes sentence 6, about a spring unwinding in a single rush, mainly to —",
           choices: [
             { letter: "A", text: "warn readers not to overwind their watches" },
@@ -678,7 +716,8 @@
         },
         {
           id: "dis",
-          sol: "11.RV.1.A",
+          sol: "11.RV.1.C",
+          sub: "11.RV.1.C.1",
           stem: "The word disassemble in sentence 20 begins with the prefix dis-, as do disconnect and disappear. In all three words, the prefix dis- signals —",
           choices: [
             { letter: "A", text: "doing something again" },
@@ -690,7 +729,8 @@
         },
         {
           id: "future",
-          sol: "11.RI.1.C",
+          sol: "11.RI.2.C",
+          sub: "11.RI.2.C.1",
           stem: "Sentences 21–24 suggest that the author views the future of watch repair as —",
           choices: [
             { letter: "A", text: "doomed by cheaper technology" },
@@ -742,6 +782,7 @@
         {
           id: "salvaged",
           sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "In sentence 5, the information after the semicolon shows that salvaged means —",
           choices: [
             { letter: "A", text: "sold at a high price to a buyer" },
@@ -754,6 +795,7 @@
         {
           id: "meticulous",
           sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "Which detail from the passage best shows what the narrator means by calling Ms. Takahashi meticulous?",
           choices: [
             { letter: "A", text: "She sends back strips that are off by a paper's thickness." },
@@ -765,7 +807,8 @@
         },
         {
           id: "warp",
-          sol: "11.RV.1.C",
+          sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "In sentence 15, the word warp most nearly means —",
           choices: [
             { letter: "A", text: "crack apart along the grain" },
@@ -777,7 +820,8 @@
         },
         {
           id: "adhesive",
-          sol: "11.RV.1.A",
+          sol: "11.RV.1.C",
+          sub: "11.RV.1.C.1",
           stem: "The word adhesive in sentence 17 comes from a Latin root meaning to stick to. Based on this root and the context, an adhesive is —",
           choices: [
             { letter: "A", text: "a tool for squeezing boards" },
@@ -789,7 +833,8 @@
         },
         {
           id: "abrasive",
-          sol: "11.RV.1.C",
+          sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "In sentence 21, describing the first sandpaper as coarse and abrasive suggests that it —",
           choices: [
             { letter: "A", text: "was too weak to remove the saw marks" },
@@ -801,7 +846,8 @@
         },
         {
           id: "durable",
-          sol: "11.RV.1.A",
+          sol: "11.RV.1.C",
+          sub: "11.RV.1.C.1",
           stem: "The word durable in sentence 23 shares a Latin root with duration and endure. These related words all have to do with —",
           choices: [
             { letter: "A", text: "strength of color" },
@@ -814,6 +860,7 @@
         {
           id: "clue",
           sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "Which phrase from sentences 23–25 best helps the reader understand the meaning of durable?",
           choices: [
             { letter: "A", text: "has not cracked or bent at all" },
@@ -825,7 +872,8 @@
         },
         {
           id: "bomb",
-          sol: "11.RV.1.C",
+          sol: "11.RV.1.F",
+          sub: "11.RV.1.F.1",
           stem: "In sentence 12, Priya's comparison of Ms. Takahashi to someone defusing a bomb mainly emphasizes the teacher's —",
           choices: [
             { letter: "A", text: "fear of the shop's power tools" },
@@ -877,6 +925,7 @@
         {
           id: "agree",
           sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "Which idea do the Calloway transit notice and Tomás's letter both accept?",
           choices: [
             { letter: "A", text: "The diagram should show true walking distances." },
@@ -888,7 +937,8 @@
         },
         {
           id: "disclaimer",
-          sol: "11.DSR.E",
+          sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "In sentence 22, Tomás responds to the statement in sentence 11 by arguing that —",
           choices: [
             { letter: "A", text: "the street maps at station exits are out of date" },
@@ -900,7 +950,8 @@
         },
         {
           id: "mislead",
-          sol: "11.RI.1.B",
+          sol: "11.RI.1.C",
+          sub: "11.RI.1.C.1",
           stem: "Select TWO sentences from Text 2 that give evidence the diagram's even spacing can mislead riders about distance.",
           choices: [
             { letter: "A", text: "Sentence 20, about a two-mile walk across a highway" },
@@ -913,6 +964,7 @@
         {
           id: "purposes",
           sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "Which statement best describes how the purposes of the transit notice and the letter differ?",
           choices: [
             { letter: "A", text: "Text 1 asks riders to vote on a design; Text 2 reports the result." },
@@ -924,7 +976,8 @@
         },
         {
           id: "conclude",
-          sol: "11.DSR.E",
+          sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "A reader of both texts about the Calloway map could best conclude that the new diagram —",
           choices: [
             { letter: "A", text: "speeds trip planning but can mislead riders about distance" },
@@ -936,7 +989,8 @@
         },
         {
           id: "seconds",
-          sol: "11.RI.2.C",
+          sol: "11.RI.1.C",
+          sub: "11.RI.1.C.1",
           stem: "In Text 1, the times given in sentence 7 are included mainly to —",
           choices: [
             { letter: "A", text: "show how long a typical train ride takes" },
@@ -948,7 +1002,8 @@
         },
         {
           id: "closing",
-          sol: "11.DSR.E",
+          sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "Tomás's closing sentence (sentence 24) most directly answers which sentence from Text 1?",
           choices: [
             { letter: "A", text: "Sentence 6, about transfer points marked with white circles" },
@@ -961,6 +1016,7 @@
         {
           id: "only2",
           sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "Which detail appears in Tomás's letter but not in the transit notice?",
           choices: [
             { letter: "A", text: "that stations are spaced evenly on the diagram" },
@@ -1008,6 +1064,7 @@
         {
           id: "both",
           sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "Both Principal Nwosu's memo and Seo-yeon's article acknowledge that —",
           choices: [
             { letter: "A", text: "online rounds give novices an unfair disadvantage" },
@@ -1019,7 +1076,8 @@
         },
         {
           id: "memo",
-          sol: "11.RI.1.C",
+          sol: "11.RI.1.A",
+          sub: "11.RI.1.A.2",
           stem: "Principal Nwosu's main purpose in writing the memo is to —",
           choices: [
             { letter: "A", text: "ask families to vote on next season's schedule" },
@@ -1031,7 +1089,8 @@
         },
         {
           id: "frowning",
-          sol: "11.RI.2.B",
+          sol: "11.RI.2.A",
+          sub: "11.RI.2.A.2",
           stem: "In sentence 13, Seo-yeon lists actions such as reading a frowning judge mainly to —",
           choices: [
             { letter: "A", text: "criticize the judges at last year's tournaments" },
@@ -1043,7 +1102,8 @@
         },
         {
           id: "compromise",
-          sol: "11.DSR.E",
+          sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "Seo-yeon's proposal in sentence 19 differs from the plan in the memo mainly because it —",
           choices: [
             { letter: "A", text: "adds in-person spring tournaments and offers student fundraising" },
@@ -1055,7 +1115,8 @@
         },
         {
           id: "relies",
-          sol: "11.DSR.E",
+          sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "Compared with the principal's memo, Seo-yeon's article relies more on —",
           choices: [
             { letter: "A", text: "budget figures and dollar amounts" },
@@ -1067,7 +1128,8 @@
         },
         {
           id: "advantages",
-          sol: "11.DSR.D",
+          sol: "11.DSR.C",
+          sub: "11.DSR.C.1",
           stem: "Select TWO sentences that a reader could use to support the claim that online tournaments have real advantages.",
           choices: [
             { letter: "A", text: "Sentence 3, about a $60 entry fee per student" },
@@ -1080,6 +1142,7 @@
         {
           id: "travel",
           sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "Which statement best describes how the two writers view the value of travel?",
           choices: [
             { letter: "A", text: "Both writers see travel mainly as a way to save class days." },
@@ -1091,7 +1154,8 @@
         },
         {
           id: "enough",
-          sol: "11.DSR.E",
+          sol: "11.DSR.B",
+          sub: "11.DSR.B.1",
           stem: "Seo-yeon's final sentence, We are asking not for everything, but for enough, presents the team as —",
           choices: [
             { letter: "A", text: "reasonable and willing to compromise" },
@@ -1143,6 +1207,7 @@
         {
           id: "theme",
           sol: "11.RL.1.A",
+          sub: "11.RL.1.A.1",
           stem: "Which statement best expresses a theme of the poem about the grandfather's repair bench?",
           choices: [
             { letter: "A", text: "Careful repair restores not just a machine but a tie to the past." },
@@ -1155,6 +1220,7 @@
         {
           id: "heron",
           sol: "11.RL.2.A",
+          sub: "11.RL.2.A.2",
           stem: "In line 2, comparing the grandfather to a heron over water mainly emphasizes his —",
           choices: [
             { letter: "A", text: "fear of the lamp's bright heat" },
@@ -1166,7 +1232,8 @@
         },
         {
           id: "relatives",
-          sol: "11.RL.2.B",
+          sol: "11.RL.2.A",
+          sub: "11.RL.2.A.2",
           stem: "The simile in line 11, comparing the clocks to relatives arguing at a holiday table, creates a tone that is —",
           choices: [
             { letter: "A", text: "tense and frightening" },
@@ -1179,6 +1246,7 @@
         {
           id: "slow",
           sol: "11.RL.1.B",
+          sub: "11.RL.1.B.1",
           stem: "Lines 5–8 suggest that, according to the grandfather, watches usually fail because —",
           choices: [
             { letter: "A", text: "their owners drop them on hard floors" },
@@ -1190,7 +1258,8 @@
         },
         {
           id: "stanza4",
-          sol: "11.RL.3.A",
+          sol: "11.RL.1.B",
+          sub: "11.RL.1.B.1",
           stem: "How does the fourth stanza (lines 15–21) develop the poem?",
           choices: [
             { letter: "A", text: "It describes the tools the grandfather keeps at his bench." },
@@ -1203,6 +1272,7 @@
         {
           id: "enormous",
           sol: "11.RL.2.C",
+          sub: "11.RL.2.C.2",
           stem: "In line 24, the sound of a repaired watch is called ordinary and enormous. This pairing suggests that the sound is —",
           choices: [
             { letter: "A", text: "common, yet deeply meaningful to the listener" },
@@ -1215,6 +1285,7 @@
         {
           id: "tweezers",
           sol: "11.RL.1.C",
+          sub: "11.RL.1.C.1",
           stem: "Lines 12–14, about the one watch in the tweezers, reveal that the grandfather —",
           choices: [
             { letter: "A", text: "has lost much of his hearing with age" },
@@ -1226,7 +1297,8 @@
         },
         {
           id: "loupe",
-          sol: "11.RV.1.C",
+          sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "In line 3, the word loupe most likely refers to —",
           choices: [
             { letter: "A", text: "a band that holds the watch in place" },
@@ -1277,6 +1349,7 @@
         {
           id: "theme",
           sol: "11.RL.1.A",
+          sub: "11.RL.1.A.1",
           stem: "Which theme is most clearly developed through Marisol and Ikenna's argument over the card?",
           choices: [
             { letter: "A", text: "Winning is worth any risk after years of hard work." },
@@ -1289,6 +1362,7 @@
         {
           id: "sells",
           sol: "11.RL.1.C",
+          sub: "11.RL.1.C.1",
           stem: "Marisol's line in sentence 6, Someone who sells debate camp, shows that she —",
           choices: [
             { letter: "A", text: "is jealous of students who attend summer camps" },
@@ -1300,7 +1374,8 @@
         },
         {
           id: "shoulders",
-          sol: "11.RL.1.B",
+          sol: "11.RL.1.D",
+          sub: "11.RL.1.D.1",
           stem: "What do the stage directions in sentence 9 reveal about the moment Ikenna checks the blog?",
           choices: [
             { letter: "A", text: "He is pleased to find the exact study he needs." },
@@ -1312,7 +1387,8 @@
         },
         {
           id: "laptop",
-          sol: "11.RL.2.B",
+          sol: "11.RL.1.D",
+          sub: "11.RL.1.D.1",
           stem: "Ikenna closes the laptop harder than necessary (sentence 12) and later turns the card over and over (sentence 16). Together, these details create a sense of —",
           choices: [
             { letter: "A", text: "frustration giving way to uncertain reflection" },
@@ -1324,7 +1400,8 @@
         },
         {
           id: "vacuum",
-          sol: "11.RL.3.A",
+          sol: "11.RL.1.D",
+          sub: "11.RL.1.D.1",
           stem: "The vacuum stops in sentence 16 and starts again in sentence 24. The playwright uses this sound mainly to —",
           choices: [
             { letter: "A", text: "frame the quiet moment in which Ikenna decides" },
@@ -1336,7 +1413,8 @@
         },
         {
           id: "line",
-          sol: "11.RL.2.A",
+          sol: "11.RL.2.C",
+          sub: "11.RL.2.C.1",
           stem: "Ikenna's act of drawing a line through the card and dropping it in the bin (sentence 21) is best understood as a symbol of —",
           choices: [
             { letter: "A", text: "his anger at Mr. Delacroix's judging" },
@@ -1349,6 +1427,7 @@
         {
           id: "less",
           sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "In sentence 20, Marisol says If it's less, then we argue it better. In this context, the word less refers to —",
           choices: [
             { letter: "A", text: "fewer hours of sleep before the final" },
@@ -1360,7 +1439,8 @@
         },
         {
           id: "fault",
-          sol: "11.RL.2.C",
+          sol: "11.RL.2.D",
+          sub: "11.RL.2.D.2",
           stem: "In sentence 22, Ikenna's line If we lose, I'm telling everyone it was your fault is best read as —",
           choices: [
             { letter: "A", text: "a serious threat to end the partnership" },
@@ -1408,6 +1488,7 @@
         {
           id: "purpose",
           sol: "11.RI.1.A",
+          sub: "11.RI.1.A.2",
           stem: "What is the main purpose of the Maple Street orientation guide?",
           choices: [
             { letter: "A", text: "to advertise woodworking classes to young children" },
@@ -1419,7 +1500,8 @@
         },
         {
           id: "permission",
-          sol: "11.RI.1.B",
+          sol: "11.RI.1.A",
+          sub: "11.RI.1.A.2",
           stem: "According to the guide, what must a seventeen-year-old have before a first visit, in addition to completing orientation?",
           choices: [
             { letter: "A", text: "a signed permission form from a parent on file" },
@@ -1431,7 +1513,8 @@
         },
         {
           id: "reason",
-          sol: "11.RI.2.C",
+          sol: "11.RI.1.A",
+          sub: "11.RI.1.A.2",
           stem: "Which sentence in the woodshop guide explains the reason behind a rule rather than only stating the rule?",
           choices: [
             { letter: "A", text: "Sentence 4, about the shop's weekly hours" },
@@ -1444,6 +1527,7 @@
         {
           id: "headings",
           sol: "11.RI.2.A",
+          sub: "11.RI.2.A.2",
           stem: "How do the bold headings help a reader use the Maple Street guide?",
           choices: [
             { letter: "A", text: "They show the order in which machines must be used." },
@@ -1455,7 +1539,8 @@
         },
         {
           id: "audience",
-          sol: "11.RI.1.C",
+          sol: "11.RI.1.A",
+          sub: "11.RI.1.A.2",
           stem: "The woodshop guide is written mainly for an audience of —",
           choices: [
             { letter: "A", text: "professional carpenters selling furniture" },
@@ -1467,7 +1552,8 @@
         },
         {
           id: "supervision",
-          sol: "11.RI.2.B",
+          sol: "11.RI.1.A",
+          sub: "11.RI.1.A.2",
           stem: "The guide ends sentence 15 with the words even under supervision mainly to —",
           choices: [
             { letter: "A", text: "make clear that a monitor cannot replace certification" },
@@ -1479,7 +1565,8 @@
         },
         {
           id: "reclaimed",
-          sol: "11.RV.1.A",
+          sol: "11.RV.1.C",
+          sub: "11.RV.1.C.1",
           stem: "The word reclaimed in sentence 17 begins with the prefix re-, as do rebuild and reuse. In reclaimed wood, the prefix re- suggests that the wood —",
           choices: [
             { letter: "A", text: "has never been cut before" },
@@ -1491,7 +1578,8 @@
         },
         {
           id: "suspended",
-          sol: "11.RV.1.C",
+          sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "In sentence 21, the word suspended most nearly means —",
           choices: [
             { letter: "A", text: "hung from above" },
@@ -1546,7 +1634,8 @@
       claims: [
         {
           id: "claim",
-          sol: "11.RI.1.A",
+          sol: "11.RI.1.C",
+          sub: "11.RI.1.C.1",
           stem: "Which sentence best states Mr. Herrera's central claim about paper maps?",
           choices: [
             { letter: "A", text: "Sentence 3, about the club following a trail app" },
@@ -1559,6 +1648,7 @@
         {
           id: "body",
           sol: "11.RI.2.A",
+          sub: "11.RI.2.A.1",
           stem: "How does Mr. Herrera organize the body of his argument in sentences 9–25?",
           choices: [
             { letter: "A", text: "as a series of reasons, with an objection answered along the way" },
@@ -1570,7 +1660,8 @@
         },
         {
           id: "frame",
-          sol: "11.RI.2.B",
+          sol: "11.RI.2.A",
+          sub: "11.RI.2.A.2",
           stem: "Mr. Herrera begins and ends the essay with the story of the hiking club mainly to —",
           choices: [
             { letter: "A", text: "show that the hiking club should be canceled" },
@@ -1582,7 +1673,8 @@
         },
         {
           id: "memory",
-          sol: "11.RI.1.B",
+          sol: "11.RI.1.C",
+          sub: "11.RI.1.C.1",
           stem: "Which sentence gives evidence that relying only on step-by-step directions may weaken a person's memory of places?",
           choices: [
             { letter: "A", text: "Sentence 10, about apps using closed roads" },
@@ -1594,7 +1686,8 @@
         },
         {
           id: "typewriter",
-          sol: "11.RI.2.C",
+          sol: "11.RI.1.C",
+          sub: "11.RI.1.C.2",
           stem: "In sentence 21, the statement No one's safety depends on a typewriter mainly serves to —",
           choices: [
             { letter: "A", text: "point out the key way the typewriter comparison fails" },
@@ -1607,6 +1700,7 @@
         {
           id: "opinion",
           sol: "11.RI.1.C",
+          sub: "11.RI.1.C.1",
           stem: "Which statement from Mr. Herrera's essay is an opinion rather than a fact that could be checked?",
           choices: [
             { letter: "A", text: "Sentence 3, that the phones lost signal in a valley" },
@@ -1618,7 +1712,8 @@
         },
         {
           id: "aim",
-          sol: "11.RI.1.A",
+          sol: "11.RI.1.C",
+          sub: "11.RI.1.C.1",
           stem: "Mr. Herrera's primary purpose in the essay about paper maps is to —",
           choices: [
             { letter: "A", text: "tell the full story of a frightening hike" },
@@ -1630,7 +1725,8 @@
         },
         {
           id: "navigation",
-          sol: "11.RV.1.A",
+          sol: "11.RV.1.C",
+          sub: "11.RV.1.C.1",
           stem: "The word navigation in sentence 17 comes from the Latin root nav-, meaning ship, as in naval. Over time, navigation has come to mean —",
           choices: [
             { letter: "A", text: "the study of ships and their history" },
