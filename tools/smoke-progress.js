@@ -273,16 +273,30 @@ function makeZip(files) {
     return true;
   });
   /* v5.15: the Teacher screen inside the game */
-  check(await page.isVisible("#btn-teacher-screen"), "title screen: a small Teacher link");
-  await page.click("#btn-teacher-screen");
+  check(!(await page.isVisible("#btn-teacher-screen")), "title screen: the Teacher link is hidden (students never see it)");
+  var dlg = [];
+  page.on("dialog", function (d) { dlg.push(d.message()); d.accept(); });
+  await page.fill("#join-nick", "teacher");
+  await page.waitForSelector("#teacher-overlay:not(.hidden)");
+  check(/Show the Teacher link on this computer/.test(dlg.join(" ")) && await page.evaluate(function () { return !document.getElementById("btn-teacher-screen").hidden && localStorage.getItem("afterHours.v1.teacherLink") === "1" && document.getElementById("join-nick").value === ""; }),
+    "typing teacher in the nickname box asks to show the Teacher link on this computer, opens the teacher screen and clears the box");
+  await page.waitForSelector("#teacher-overlay:not(.hidden) iframe");
   await page.waitForSelector("#teacher-overlay:not(.hidden) iframe");
   var tf = page.frames().filter(function (f) { return f !== page.mainFrame() && f.parentFrame() === page.mainFrame(); }).pop();
   await tf.waitForSelector("h1");
   var tin = await tf.evaluate(function () { return { h1: document.querySelector("h1").textContent, close: !document.getElementById("close-teacher").hidden, drop: !!document.getElementById("drop") }; });
   check(/Sol's Labyrinth \(Virginia\)/.test(tin.h1) && tin.close && tin.drop, "Teacher opens the teacher screen inside the game, with a Close button: " + tin.h1);
   await page.screenshot({ path: path.join(shots, "pg-13-teacher-in-game.png") });
+  check(await tf.isVisible("#hide-link"), "the teacher screen in the game has Hide the Teacher link on this computer");
   await tf.click("#close-teacher");
   check(!(await page.isVisible("#teacher-overlay")), "Close goes back to the game");
+  await page.click("#btn-teacher-screen");
+  await page.waitForSelector("#teacher-overlay:not(.hidden) iframe");
+  await tf.click("#hide-link");
+  await page.waitForTimeout(200);
+  check(!(await page.isVisible("#teacher-overlay")) && !(await page.isVisible("#btn-teacher-screen")) && await page.evaluate(function () { return localStorage.getItem("afterHours.v1.teacherLink") === null; }),
+    "Hide the Teacher link closes the screen and hides the link again");
+  await page.fill("#join-nick", "Ann S");
   /* each game mode keeps its own level */
   var nights = await page.evaluate(function () { return { all: localStorage.getItem("afterHours.v1.night.ALL"), raid: localStorage.getItem("afterHours.v1.night.raid"), last: localStorage.getItem("afterHours.v1.night") }; });
   check(nights.all === "3" && nights.raid === null && nights.last === "3", "Mixed keeps its own level (3); Eagle Swoop has none yet: " + JSON.stringify(nights));

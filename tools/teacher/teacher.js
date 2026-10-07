@@ -796,6 +796,10 @@
     if (window.parent && window.parent !== window && window.parent.SolTeacher) {
       $("close-teacher").hidden = false;
       $("close-teacher").addEventListener("click", function () { window.parent.SolTeacher.hide(); });
+      $("hide-link").hidden = false;
+      $("hide-link").addEventListener("click", function () {
+        if (window.confirm("Hide the Teacher link on this computer? To show it again, type the word teacher in the nickname box on the game's title screen.")) window.parent.SolTeacher.forget();
+      });
     }
   } catch (e) {}
   if (!rows.length && !roster) $("how").open = true;

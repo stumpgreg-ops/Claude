@@ -152,18 +152,28 @@ function S_embed() {
     "",
     "Too small or too tall? Change height=\"700\" (try 600 or 800).",
     "",
-    "There is no separate embed code for the teacher screen: it is inside the game (the Teacher link, SECTION 4)."
+    "There is no separate embed code for the teacher screen: it is inside the game (the hidden Teacher link,",
+    "SECTION 4.0)."
   ];
 }
 function S_grading() {
   return [].concat(
     ["Students' progress stays on their Chromebooks: the game can't send anything out of Canvas. So each student",
      "taps Submit my progress in the game and turns in a PROGRESS CODE to the assignment, and the TEACHER SCREEN",
-     "reads every code at once and suggests a participation grade. The teacher screen is inside the game: the small",
-     "\"Teacher\" link at the bottom of the game's title screen. Students who open it see an empty page."],
+     "reads every code at once and suggests a participation grade. The teacher screen is inside the game."],
+    sub("4.0  Turn on the Teacher link (once on each of your computers)"),
+    ["The Teacher link is HIDDEN, so students never see it. To show it on your computer:",
+     "1. Open the game in Canvas (your assignment or Page).",
+     "2. On the game's title screen, type the word  teacher  in the nickname box.",
+     "3. Click OK when it asks \"Show the Teacher link on this computer?\". The teacher screen opens.",
+     "From then on a small \"Teacher\" link shows at the bottom of the title screen, on this computer only (the",
+     "nickname box is cleared, so \"teacher\" never becomes your nickname). Do the same on any other computer you",
+     "grade on. \"Hide the Teacher link on this computer\" (on the teacher screen) turns it off again.",
+     "A student who typed teacher would only see an empty teacher screen: it shows nothing until you drop in the",
+     "submissions .zip, which students don't have."],
     sub("4.1  Grading - THE EASIEST WAY: the ZIP download (recommended)"),
     ["1. Open the assignment and click \"Download Submissions\". Canvas saves a .zip file with every student's code.",
-     "2. In the same assignment, click the game's \"Teacher\" link (bottom of the title screen).",
+     "2. In the same assignment, click the game's \"Teacher\" link (bottom of the title screen; see 4.0).",
      "3. Drag the .zip file onto the teacher screen (or click Choose files and pick it).",
      "That's it: every student appears with their numbers and a suggested grade. Nothing to unzip or type."],
     sub("4.2  Grading rounds: only the work since last time counts"),

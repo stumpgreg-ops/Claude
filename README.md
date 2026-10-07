@@ -29,6 +29,10 @@ A game uploaded to Canvas can't send anything anywhere, so progress is shown to 
 
 Tests: `node tools/smoke-progress.js` (after `node tools/build-games.js`, `node tools/build-appsscript.js VA|ODY` and `node tools/build-canvas.js VA|ODY`).
 
+## v5.15.2 (2026-10-07) — the Teacher link is hidden from students
+
+The Teacher link starts hidden. A teacher turns it on for their own computer by typing the word **teacher** in the nickname box on the title screen and clicking OK (`afterHours.v1.teacherLink`; the box is cleared, so it never becomes a nickname). The teacher screen has **Hide the Teacher link on this computer**. The READ ME explains it (SECTION 4.0).
+
 ## v5.15.1 (2026-10-07) — grading rounds: only the work since last time counts
 
 The teacher screen always grades "since last time". A code is a running total, so after the teacher enters a round's grades and clicks **Finish this grading round**, each student's code is kept on that computer (`solTeacher.<ST>.rounds`, matched by Canvas ID, roster, name or nickname) as the start of the next round; every number then counts only the work after it (minutes, levels won, questions, accuracy, days, standards, new badges, perfect levels; the highest level stays the student's highest). The first round counts everything. A student whose totals went down (a new Chromebook, a restore from an older code) is counted from the new code alone and flagged. **Undo** goes back one round; **Use an earlier .zip as the starting point** rebuilds the start on another computer. The READ ME's grading section explains rounds (4.2).

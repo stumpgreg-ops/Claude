@@ -132,7 +132,10 @@ table.std tr.cls td { font-weight: 700; border-bottom: 2px solid var(--gold); }
       <h1>{{HEADING}}</h1>
       <p class="sub">For the teacher only · made for game version {{VERSION}} · everything stays on this computer: this page sends nothing anywhere</p>
     </div>
-    <button type="button" class="btn noprint" id="close-teacher" hidden>Close the teacher screen</button>
+    <div class="row noprint" style="margin:0">
+      <button type="button" class="btn noprint" id="hide-link" hidden title="Students never see the Teacher link; this hides it on this computer too">Hide the Teacher link on this computer</button>
+      <button type="button" class="btn noprint" id="close-teacher" hidden>Close the teacher screen</button>
+    </div>
   </div>
 
   <section class="panel noprint">
