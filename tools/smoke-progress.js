@@ -566,6 +566,39 @@ function makeZip(files) {
   check(/^CLASS TOTAL/.test(sd.csv.replace(/^\ufeff/, "")) && /STUDENT BY STUDENT/.test(sd.csv) && /\nStudent,Nickname,9\./.test(sd.csv), "the standards CSV has the class total, then student by student");
   await page.click('#std .tab[data-sp="class"]');
   await page.screenshot({ path: path.join(shots, "pg-12-standards.png"), fullPage: true });
+  /* v5.17: skills (LOTS/HOTS) under each standard, in their own page so the rest of this page's checks stay as they were */
+  var skPage = await browser.newPage({ viewport: { width: 1366, height: 900 } });
+  watch(skPage);
+  await skPage.goto("http://127.0.0.1:" + tsrv.address().port + "/" + tfile, { waitUntil: "load" });
+  await openPaste(skPage);
+  function skCode(nick, std) {
+    return C.encode("VA", { first: "2026-10-01", last: "2026-10-05", days: 3, minutes: 40, started: 6, won: 5, lost: 1, hiReached: 6, hiWon: 5, answered: 40, right: 30, wrong: 8, modes: 1,
+      skills: { RL: { a: 40, r: 30 } }, std: std }, { nick: nick, version: "5.17.0", save: { night: 6 } });
+  }
+  await skPage.fill("#paste", "Ann Smith: " + skCode("Ann", { "9.RL.2.A.1": { a: 10, r: 9 }, "9.RL.2.A.2": { a: 10, r: 4 }, "9.RL.1.A": { a: 5, r: 5 } }) +
+    "\nBob Jones: " + skCode("Bob", { "9.RL.2.A.1": { a: 10, r: 10 }, "9.RL.2.A.2": { a: 10, r: 5 }, "9.RI.3.B.1": { a: 4, r: 1 } }));
+  await skPage.click("#read");
+  await skPage.waitForTimeout(200);
+  await skPage.click('.tab[data-view="std"]');
+  var sk = await skPage.evaluate(function () {
+    var rows = Array.prototype.map.call(document.querySelectorAll("#std table.std tbody tr"), function (tr) { return tr.className + "|" + tr.children[0].textContent + "|" + tr.children[2].textContent + "|" + tr.children[6].textContent.trim(); });
+    return { rows: rows, text: document.getElementById("std").innerText, csv: TeacherPage.stdCsv() };
+  });
+  check(sk.rows.indexOf("sd|9.RL.2.A|Analyze how the author uses rhyme, rhythm, sound, imagery, and other literary devices to convey a message and elicit the reader's emotions.|70%") !== -1 ||
+    sk.rows.some(function (r) { return /^sd\|9\.RL\.2\.A\|.+\|70%$/.test(r); }), "a split standard shows its own total (9.RL.2.A 28/40 = 70%): " + sk.rows.join(" / "));
+  check(sk.rows.some(function (r) { return /^sk\|9\.RL\.2\.A\.1\|LOTSIdentify .*poetry\|95%$/.test(r); }) && sk.rows.some(function (r) { return /^sk\|9\.RL\.2\.A\.2\|HOTSAnalyze how poetic devices.*\|45%$/.test(r); }),
+    "and its skills under it: identify (LOTS, 95%) and analyze (HOTS, 45%)");
+  check(/95%\s*LOTS\s*lower-order skills \(20 questions\)/.test(sk.text) && /42%\s*HOTS\s*higher-order skills \(24 questions\)/.test(sk.text) && /LOTS vs HOTS: the class is 53 points lower/.test(sk.text), "the class total shows LOTS and HOTS, and calls out the HOTS gap");
+  check(sk.rows.some(function (r) { return /^\|9\.RL\.1\.A\|Explain stated or implied themes|.*\|100%$/.test(r); }) || sk.rows.some(function (r) { return /^sd\|9\.RL\.1\.A\|/.test(r); }) || sk.rows.some(function (r) { return /^\|9\.RL\.1\.A\|/.test(r); }),
+    "a standard from an older code (no skill) still shows as its standard");
+  await skPage.click('#std .tab[data-sp="students"]');
+  var skc = await skPage.evaluate(function () { return Array.prototype.map.call(document.querySelectorAll("#std table.std thead th"), function (t) { return t.textContent; }); });
+  check(skc[1] === "LOTS" && skc[2] === "HOTS" && skc.indexOf("9.RL.2.A.1LOTS") !== -1 && skc.indexOf("9.RL.2.A.2HOTS") !== -1, "Student by student: LOTS and HOTS columns, then each skill: " + skc.join(", "));
+  check(/\nAll LOTS skills,,LOTS,/.test(sk.csv) && /\n9\.RL\.2\.A,9\.RL\.2\.A\.2,HOTS,Literary,Analyze how poetic devices/.test(sk.csv) && /LOTS answered/.test(sk.csv), "the standards CSV lists LOTS/HOTS totals and each skill with its level");
+  await skPage.click('#std .tab[data-sp="class"]');
+  await skPage.screenshot({ path: path.join(shots, "pg-12b-skills.png"), fullPage: true });
+  await skPage.close();
+
   await page.click('.tab[data-view="table"]');
   /* more students for the picture, then CSV and Copy */
   var demo = [["Maria Lopez", 95, 14, 88, 70], ["Tyler Brooks", 22, 3, 18, 55], ["Priya Natarajan", 64, 10, 52, 81]].map(function (s, i) {

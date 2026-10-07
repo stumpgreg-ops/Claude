@@ -112,6 +112,10 @@ table.std tr.cls td { font-weight: 700; border-bottom: 2px solid var(--gold); }
 .sbar i { display: block; height: 100%; }
 .sbar i.c-hi { background: #3fa864; } .sbar i.c-mid { background: #c9a227; } .sbar i.c-lo { background: #c4553f; }
 .c-hi-t { color: var(--ok) !important; } .c-mid-t { color: var(--warn) !important; } .c-lo-t { color: var(--bad) !important; }
+table.std tr.sk td.l { padding-left: 26px; font-weight: 400; color: var(--dim); }
+table.std tr.sd td { font-weight: 700; background: var(--panel2); }
+.lv { display: inline-block; font-size: 11px; font-weight: 700; border-radius: 4px; padding: 1px 5px; margin-right: 6px; vertical-align: 1px; }
+.lv-L { background: #2f5d8a; color: #fff; } .lv-H { background: #7a3f8f; color: #fff; }
 table.std td.skl, table.std th.skl { text-align: left; white-space: normal; min-width: 220px; max-width: 360px; }
 .focus { background: var(--panel2); border-left: 4px solid var(--bad); border-radius: 8px; padding: 8px 12px; margin: 8px 0; }
 .sortby { margin-left: auto; align-self: center; font-size: 15px; }
@@ -256,6 +260,9 @@ table.std td.skl, table.std th.skl { text-align: left; white-space: normal; min-
   </section>
 </main>
 <script>window.TEACHER_STATE = "{{ST}}";</script>
+<script>
+{{STD_JS}}
+</script>
 <script>
 {{CODE_JS}}
 </script>

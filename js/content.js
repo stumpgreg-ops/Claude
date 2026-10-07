@@ -1582,6 +1582,7 @@
           id: p.id + ":" + c.id,
           packId: p.id,
           sol: c.sol,
+          sub: c.sub || null,
           strand: strandOf(c),
           level: lvl,
           words: passageWords(p),

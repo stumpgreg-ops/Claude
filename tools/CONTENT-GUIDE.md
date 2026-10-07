@@ -39,6 +39,7 @@ Fix warnings too where you can (spread answer keys, keep the correct choice from
     {
       id: "theme",               // unique within the pack
       sol: "9.RL.1.A",           // standard code (see below)
+      sub: "9.RL.1.A.2",         // Virginia: the skill within it (js/standards-va.js), LOTS or HOTS
       stem: "Which statement best expresses a theme of the story?",
       choices: [
         { letter: "A", text: "..." },
@@ -65,6 +66,20 @@ then `<p><strong>Text 2 — …</strong></p>`, each numbered continuously.
 pack may use 9.x or 10.x codes; a G11 pack 9.x–11.x. Kind strings: `Literary · 9.RL`,
 `Poetry · 10.RL`, `Drama · 9.RL`, `Informational · 11.RI`, `Functional text · 9.RI`,
 `Argument · 10.RI`, `Vocabulary · 9.RV`, `Paired texts · 11.DSR`.
+
+**Skills (v5.17).** `js/standards-va.js` holds every 2024 Virginia reading standard's official text
+and splits it into SKILLS, one per action verb: `9.RL.2.A` "Analyze the use of rhyme, rhythm, sound,
+imagery … to convey a message and elicit the reader's emotions" becomes `9.RL.2.A.1` *Identify rhyme,
+rhythm, sound, imagery, and other literary devices in poetry* (LOTS) and `9.RL.2.A.2` *Analyze how poetic
+devices convey a message and elicit a reader's emotions* (HOTS). LOTS = lower-order (Bloom's remember /
+understand / apply: identify, recognize, describe, explain, interpret, use); HOTS = higher-order (analyze /
+evaluate: analyze, compare, distinguish, differentiate, examine, evaluate, critique, relate). A standard that
+asks students to analyze named devices or elements is split into identifying them (LOTS) and analyzing their
+effect (HOTS). Every Virginia question gives its skill as `sub`, and its `sol` must be that skill's standard
+(`node tools/validate-content.js` checks both). Choose the skill the question really asks for: "Which word is
+an example of alliteration?" is `.1` (identify); "The alliteration in lines 3–4 mainly helps the poet —" is
+`.2` (analyze). The game records the skill, so the teacher's standards report shows each skill and LOTS
+vs HOTS for the class and for each student.
 
 **New Jersey (NJSLA-ELA grade 5, 2023 NJSLS-ELA).** `family: "NJ5"`. Each claim needs BOTH:
 - `sol`: an NJSLS code — `RL.CR.5.1` (cite evidence), `RL.CI.5.2` (theme/summary),
