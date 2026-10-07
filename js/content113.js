@@ -56,6 +56,7 @@
         {
           id: "theme",
           sol: "11.RL.1.A",
+          sub: "11.RL.1.A.1",
           stem: "Which statement best expresses a theme developed through Lucia's season on Cinder Ridge?",
           choices: [
             { letter: "A", text: "Experienced mentors should be obeyed without question." },
@@ -68,6 +69,7 @@
         {
           id: "change",
           sol: "11.RL.1.C",
+          sub: "11.RL.1.C.2",
           stem: "Which statement best describes how Lucia changes over the course of the passage?",
           choices: [
             { letter: "A", text: "She moves from enjoying solitude to longing for company." },
@@ -79,7 +81,8 @@
         },
         {
           id: "ice",
-          sol: "11.RL.2.A",
+          sol: "11.RL.2.C",
+          sub: "11.RL.2.C.2",
           stem: "In sentence 10, comparing Walt's way of speaking to the way some people walk on ice suggests that he —",
           choices: [
             { letter: "A", text: "chooses each word with deliberate care" },
@@ -91,7 +94,8 @@
         },
         {
           id: "braced",
-          sol: "11.RL.1.B",
+          sol: "11.RL.1.C",
+          sub: "11.RL.1.C.1",
           stem: "Sentence 12 suggests that when Walt mentions the busy road, Lucia expects him to —",
           choices: [
             { letter: "A", text: "order her to stop reporting smoke until training" },
@@ -103,7 +107,8 @@
         },
         {
           id: "breathe",
-          sol: "11.RL.2.B",
+          sol: "11.RL.2.C",
+          sub: "11.RL.2.C.2",
           stem: "Walt's advice to watch the smoke breathe (sentence 17) mainly suggests that real smoke —",
           choices: [
             { letter: "A", text: "is too dangerous to be studied from close by" },
@@ -115,7 +120,8 @@
         },
         {
           id: "flatness",
-          sol: "11.RL.2.C",
+          sol: "11.RL.2.B",
+          sub: "11.RL.2.B.2",
           stem: "In sentence 8, the flatness in the dispatcher's voice most nearly suggests —",
           choices: [
             { letter: "A", text: "weary disappointment that he does not say aloud" },
@@ -127,7 +133,8 @@
         },
         {
           id: "echo",
-          sol: "11.RL.3.A",
+          sol: "11.RL.1.B",
+          sub: "11.RL.1.B.1",
           stem: "The final sentence returns to the description in sentence 1 mainly to —",
           choices: [
             { letter: "A", text: "hint that Lucia plans to leave the tower at the end of the season" },
@@ -139,7 +146,8 @@
         },
         {
           id: "innocent",
-          sol: "11.RV.1.C",
+          sol: "11.RV.1.F",
+          sub: "11.RV.1.F.1",
           stem: "In sentence 21, the word innocent suggests that on the morning after the storm the forest —",
           choices: [
             { letter: "A", text: "had never before been struck by lightning" },
@@ -194,7 +202,8 @@
       claims: [
         {
           id: "tennis",
-          sol: "11.RL.2.A",
+          sol: "11.RL.2.C",
+          sub: "11.RL.2.C.2",
           stem: "In sentence 3, comparing Tobias to a spectator at a tennis match mainly emphasizes that he —",
           choices: [
             { letter: "A", text: "enjoys watching his family compete for attention" },
@@ -206,7 +215,8 @@
         },
         {
           id: "shrug",
-          sol: "11.RL.1.B",
+          sol: "11.RL.1.C",
+          sub: "11.RL.1.C.2",
           stem: "The narrator finds Tobias's shrug in sentence 9 worse than tears most likely because it —",
           choices: [
             { letter: "A", text: "shows he has come to accept being left out" },
@@ -219,6 +229,7 @@
         {
           id: "merciless",
           sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "Based on sentences 15 and 16, the word merciless means that as a teacher Tobias —",
           choices: [
             { letter: "A", text: "refused to help unless he was rewarded" },
@@ -231,6 +242,7 @@
         {
           id: "straighter",
           sol: "11.RL.1.C",
+          sub: "11.RL.1.C.1",
           stem: "Sentence 18 reveals that the narrator —",
           choices: [
             { letter: "A", text: "regrets letting her brother laugh at her errors" },
@@ -242,7 +254,8 @@
         },
         {
           id: "weather",
-          sol: "11.RL.2.B",
+          sol: "11.RL.2.C",
+          sub: "11.RL.2.C.2",
           stem: "In sentence 29, saying that the noise went on like weather mainly suggests that the family's talk —",
           choices: [
             { letter: "A", text: "carried on as an ordinary background to a private moment" },
@@ -254,7 +267,8 @@
         },
         {
           id: "pov",
-          sol: "11.RL.3.A",
+          sol: "11.RL.2.B",
+          sub: "11.RL.2.B.2",
           stem: "Because the story is told by Tobias's sister in the first person, the reader is able to —",
           choices: [
             { letter: "A", text: "know exactly what Tobias is thinking at every moment" },
@@ -267,6 +281,7 @@
         {
           id: "theme",
           sol: "11.RL.1.A",
+          sub: "11.RL.1.A.1",
           stem: "Which statement best expresses a theme of \"Hands at the Table\"?",
           choices: [
             { letter: "A", text: "A new language is easiest to learn while one is young." },
@@ -278,7 +293,8 @@
         },
         {
           id: "ontime",
-          sol: "11.RL.2.C",
+          sol: "11.RL.2.B",
+          sub: "11.RL.2.B.2",
           stem: "Read in light of sentence 7, the phrase laughed on time in sentence 24 most nearly means that Tobias —",
           choices: [
             { letter: "A", text: "laughed only when his sister signed correctly" },
@@ -334,6 +350,7 @@
         {
           id: "theme",
           sol: "11.RL.1.A",
+          sub: "11.RL.1.A.1",
           stem: "Which theme does Hamid's decision about the ammonite most clearly develop?",
           choices: [
             { letter: "A", text: "Some treasures grow in value when they are shared." },
@@ -346,6 +363,7 @@
         {
           id: "struggle",
           sol: "11.RL.1.C",
+          sub: "11.RL.1.C.1",
           stem: "Which sentence best shows that Hamid is torn about what to do with the fossil?",
           choices: [
             { letter: "A", text: "Sentence 11" },
@@ -357,7 +375,8 @@
         },
         {
           id: "oyster",
-          sol: "11.RL.2.A",
+          sol: "11.RL.2.C",
+          sub: "11.RL.2.C.2",
           stem: "In sentence 13, comparing the shell's shine to the inside of an oyster mainly helps the reader —",
           choices: [
             { letter: "A", text: "understand why ammonites lived in shallow seas" },
@@ -369,7 +388,8 @@
         },
         {
           id: "walking",
-          sol: "11.RL.1.B",
+          sol: "11.RL.1.C",
+          sub: "11.RL.1.C.2",
           stem: "Sentence 19 suggests that Hamid first carries the ammonite to the visitor center because he —",
           choices: [
             { letter: "A", text: "wants to learn how much money the fossil is worth" },
@@ -381,7 +401,8 @@
         },
         {
           id: "setting",
-          sol: "11.RL.3.A",
+          sol: "11.RL.1.B",
+          sub: "11.RL.1.B.1",
           stem: "How does the setting described in sentences 1–4 shape the plot of the story?",
           choices: [
             { letter: "A", text: "The cold water explains why Hamid must search alone." },
@@ -393,7 +414,8 @@
         },
         {
           id: "listen",
-          sol: "11.RL.2.B",
+          sol: "11.RL.2.C",
+          sub: "11.RL.2.C.1",
           stem: "The grandfather's statement in sentence 8 that the rock tells you where to look is best described as —",
           choices: [
             { letter: "A", text: "personification that stresses patient, careful observation" },
@@ -405,7 +427,8 @@
         },
         {
           id: "crumbled",
-          sol: "11.RV.1.C",
+          sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "In sentence 2, the word crumbled most nearly means —",
           choices: [
             { letter: "A", text: "grew slowly taller" },
@@ -417,7 +440,8 @@
         },
         {
           id: "bigger",
-          sol: "11.RL.2.C",
+          sol: "11.RL.2.B",
+          sub: "11.RL.2.B.2",
           stem: "Hamid laughs in sentence 30 because the phrase Bigger than a shoebox is true in more ways than one. The phrase most nearly means that the fossil —",
           choices: [
             { letter: "A", text: "is now too heavy for Hamid to carry home" },
@@ -470,6 +494,7 @@
         {
           id: "main",
           sol: "11.RI.1.A",
+          sub: "11.RI.1.A.2",
           stem: "Which statement best expresses the central idea of \"Reading the Trackways\"?",
           choices: [
             { letter: "A", text: "Footprints are the most common fossils that scientists find." },
@@ -482,6 +507,7 @@
         {
           id: "speed",
           sol: "11.RI.1.B",
+          sub: "11.RI.1.B.1",
           stem: "According to the passage, how do researchers estimate an animal's speed from a trackway?",
           choices: [
             { letter: "A", text: "They measure how deeply each print sank into the mud." },
@@ -493,7 +519,8 @@
         },
         {
           id: "interp",
-          sol: "11.RI.1.C",
+          sol: "11.RI.1.B",
+          sub: "11.RI.1.B.1",
           stem: "Which sentence presents an interpretation that the author attributes to only some scientists?",
           choices: [
             { letter: "A", text: "Sentence 16" },
@@ -506,6 +533,7 @@
         {
           id: "headings",
           sol: "11.RI.2.A",
+          sub: "11.RI.2.A.1",
           stem: "Taken in order, the three headings show that the article is organized to move from —",
           choices: [
             { letter: "A", text: "the oldest fossil discoveries to the most recent ones" },
@@ -517,7 +545,8 @@
         },
         {
           id: "soupy",
-          sol: "11.RI.2.B",
+          sol: "11.RI.2.A",
+          sub: "11.RI.2.A.2",
           stem: "The author includes the example of the three-toed track in sentence 20 mainly to —",
           choices: [
             { letter: "A", text: "show how mud conditions can mislead scientists about size" },
@@ -530,6 +559,7 @@
         {
           id: "frustrating",
           sol: "11.RI.2.C",
+          sub: "11.RI.2.C.1",
           stem: "By calling the lack of a signature a frustrating limitation in sentence 17, the author conveys an attitude toward trace fossils that is —",
           choices: [
             { letter: "A", text: "doubtful that they should be studied at all" },
@@ -541,7 +571,8 @@
         },
         {
           id: "paleo",
-          sol: "11.RV.1.A",
+          sol: "11.RV.1.C",
+          sub: "11.RV.1.C.1",
           stem: "The word paleontologists in sentence 4 begins with paleo-, as do Paleolithic and paleography. In all three words, paleo- most nearly means —",
           choices: [
             { letter: "A", text: "stone or rock" },
@@ -553,7 +584,8 @@
         },
         {
           id: "leisurely",
-          sol: "11.RV.1.C",
+          sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "In sentence 12, the word leisurely most nearly means —",
           choices: [
             { letter: "A", text: "uneven and limping" },
@@ -603,6 +635,7 @@
         {
           id: "central",
           sol: "11.RI.1.A",
+          sub: "11.RI.1.A.2",
           stem: "Which statement best expresses the central idea of \"The Grammar of the Hands\"?",
           choices: [
             { letter: "A", text: "Hearing adults should learn to sign before studying any spoken language." },
@@ -615,6 +648,7 @@
         {
           id: "develop",
           sol: "11.RI.2.A",
+          sub: "11.RI.2.A.1",
           stem: "How does the author develop the discussion of sign languages?",
           choices: [
             { letter: "A", text: "by naming common beliefs and answering each with evidence" },
@@ -626,7 +660,8 @@
         },
         {
           id: "notenglish",
-          sol: "11.RI.1.B",
+          sol: "11.RI.1.C",
+          sub: "11.RI.1.C.2",
           stem: "Which sentence best supports the claim that sign languages are not spoken languages translated onto the hands?",
           choices: [
             { letter: "A", text: "Sentence 10" },
@@ -638,7 +673,8 @@
         },
         {
           id: "attitude",
-          sol: "11.RI.1.C",
+          sol: "11.RI.2.C",
+          sub: "11.RI.2.C.1",
           stem: "The author's attitude toward the beliefs described in sentences 1 and 2 is best described as —",
           choices: [
             { letter: "A", text: "scornful of anyone who has ever held them" },
@@ -651,6 +687,7 @@
         {
           id: "calmer",
           sol: "11.RI.2.B",
+          sub: "11.RI.2.B.2",
           stem: "In sentence 15, the author says that leaving out facial expressions makes a sentence ungrammatical, not calmer, mainly to —",
           choices: [
             { letter: "A", text: "stress that the expressions work as grammar, not mood" },
@@ -662,7 +699,8 @@
         },
         {
           id: "born",
-          sol: "11.RI.2.C",
+          sol: "11.RI.2.A",
+          sub: "11.RI.2.A.2",
           stem: "The author includes the account of new sign languages in sentences 16–21 mainly to —",
           choices: [
             { letter: "A", text: "describe how a particular school taught its first students" },
@@ -675,6 +713,7 @@
         {
           id: "regularize",
           sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "The words after the semicolon in sentence 19 show that regularize most nearly means to —",
           choices: [
             { letter: "A", text: "simplify by dropping signs" },
@@ -686,7 +725,8 @@
         },
         {
           id: "diverge",
-          sol: "11.RV.1.A",
+          sol: "11.RV.1.C",
+          sub: "11.RV.1.C.1",
           stem: "The word diverge in sentence 8 comes from Latin parts meaning to turn apart. Based on this and the context, sign languages that diverge —",
           choices: [
             { letter: "A", text: "blend into a single shared system" },
@@ -740,6 +780,7 @@
         {
           id: "regimen",
           sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "The explanation after the comma in sentence 6 shows that a regimen is —",
           choices: [
             { letter: "A", text: "a set routine followed on a regular schedule" },
@@ -751,7 +792,8 @@
         },
         {
           id: "rapport",
-          sol: "11.RV.1.C",
+          sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "Which words from sentence 12 best help the reader understand the meaning of rapport?",
           choices: [
             { letter: "A", text: "Kesi, the oldest female" },
@@ -764,6 +806,7 @@
         {
           id: "lethargic",
           sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "Based on the details in sentence 15, the word lethargic in sentence 14 most nearly means —",
           choices: [
             { letter: "A", text: "hungry and restless" },
@@ -775,7 +818,8 @@
         },
         {
           id: "subtle",
-          sol: "11.RV.1.C",
+          sol: "11.RV.1.D",
+          sub: "11.RV.1.D.1",
           stem: "The author could have written small instead of subtle in sentence 16. Compared with small, the word subtle adds a sense that the signs are —",
           choices: [
             { letter: "A", text: "too minor to be worth reporting" },
@@ -787,7 +831,8 @@
         },
         {
           id: "intervene",
-          sol: "11.RV.1.A",
+          sol: "11.RV.1.C",
+          sub: "11.RV.1.C.1",
           stem: "The word intervene in sentence 18 begins with the prefix inter-, as do interrupt and international. Based on this, to intervene is to —",
           choices: [
             { letter: "A", text: "watch closely from a safe distance" },
@@ -799,7 +844,8 @@
         },
         {
           id: "squabble",
-          sol: "11.RV.1.C",
+          sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "In sentence 20, the word squabble most nearly means to —",
           choices: [
             { letter: "A", text: "quarrel over something minor" },
@@ -811,7 +857,8 @@
         },
         {
           id: "nocturnal",
-          sol: "11.RV.1.A",
+          sol: "11.RV.1.C",
+          sub: "11.RV.1.C.1",
           stem: "The word nocturnal in sentence 23 contains the Latin root noct-, meaning night, also found in nocturne. Sentence 23 confirms that nocturnal animals —",
           choices: [
             { letter: "A", text: "live in small, dark buildings" },
@@ -823,7 +870,8 @@
         },
         {
           id: "listen",
-          sol: "11.RV.1.B",
+          sol: "11.RV.1.F",
+          sub: "11.RV.1.F.1",
           stem: "Dalia's phrase listen without words in sentence 28 most nearly refers to —",
           choices: [
             { letter: "A", text: "keeping the barn quiet so animals can rest" },
@@ -878,6 +926,7 @@
         {
           id: "both",
           sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "Which idea is supported by both the district's statement and Baptiste's essay?",
           choices: [
             { letter: "A", text: "Human judgment still matters in detecting fires accurately." },
@@ -890,6 +939,7 @@
         {
           id: "purpose",
           sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "Which statement best describes how the purposes of the two texts differ?",
           choices: [
             { letter: "A", text: "Text 1 criticizes lookouts, while Text 2 praises cameras." },
@@ -901,7 +951,8 @@
         },
         {
           id: "replaces",
-          sol: "11.DSR.E",
+          sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "Sentence 17 of Text 2 most directly responds to which sentence from Text 1?",
           choices: [
             { letter: "A", text: "Sentence 2" },
@@ -913,7 +964,8 @@
         },
         {
           id: "knowledge",
-          sol: "11.DSR.E",
+          sol: "11.DSR.C",
+          sub: "11.DSR.C.1",
           stem: "Select TWO sentences from Text 2 that describe knowledge a lookout gains that, according to the writer, the cameras lack.",
           choices: [
             { letter: "A", text: "Sentence 19" },
@@ -925,7 +977,8 @@
         },
         {
           id: "fog",
-          sol: "11.DSR.E",
+          sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "In sentence 23, Baptiste uses the problem of fog mainly to —",
           choices: [
             { letter: "A", text: "show that the district has hidden the cameras' flaws" },
@@ -938,6 +991,7 @@
         {
           id: "conclude",
           sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "A reader who considers both texts could best conclude that the two sides disagree mainly about —",
           choices: [
             { letter: "A", text: "whether the cameras can see at night" },
@@ -949,7 +1003,8 @@
         },
         {
           id: "advantage",
-          sol: "11.RI.1.B",
+          sol: "11.RI.1.A",
+          sub: "11.RI.1.A.2",
           stem: "According to Text 1, which advantage do the cameras have over staffed lookouts?",
           choices: [
             { letter: "A", text: "They can predict which way a new fire will run." },
@@ -961,7 +1016,8 @@
         },
         {
           id: "honor",
-          sol: "11.RI.2.C",
+          sol: "11.RI.2.A",
+          sub: "11.RI.2.A.2",
           stem: "In Text 1, the statement in sentence 6 that the district honors its lookouts mainly functions to —",
           choices: [
             { letter: "A", text: "announce a ceremony for the retiring lookouts" },
@@ -1019,6 +1075,7 @@
         {
           id: "central",
           sol: "11.RI.1.A",
+          sub: "11.RI.1.A.2",
           stem: "Which statement best expresses the central idea of Text 1?",
           choices: [
             { letter: "A", text: "Visitors enjoy watching animals tear apart cardboard boxes." },
@@ -1030,7 +1087,8 @@
         },
         {
           id: "wild",
-          sol: "11.RI.2.B",
+          sol: "11.RI.2.A",
+          sub: "11.RI.2.A.2",
           stem: "Text 1 describes a wild snow leopard in sentence 3 mainly to —",
           choices: [
             { letter: "A", text: "explain why snow leopards are hard to see in zoos" },
@@ -1043,6 +1101,7 @@
         {
           id: "shared",
           sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "Which practice is described in both Text 1 and Text 2?",
           choices: [
             { letter: "A", text: "Visitors help choose which enrichment items are used." },
@@ -1054,7 +1113,8 @@
         },
         {
           id: "adds",
-          sol: "11.DSR.E",
+          sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "How does Text 2 add to the information in Text 1?",
           choices: [
             { letter: "A", text: "It shows that an item may work only after it is fitted to one animal." },
@@ -1066,7 +1126,8 @@
         },
         {
           id: "categories",
-          sol: "11.DSR.E",
+          sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "Using the categories in Text 1, the feeder that finally worked for Tashi on March 9 combined —",
           choices: [
             { letter: "A", text: "environmental enrichment and a visitor show" },
@@ -1078,7 +1139,8 @@
         },
         {
           id: "ignored",
-          sol: "11.DSR.D",
+          sol: "11.DSR.C",
+          sub: "11.DSR.C.1",
           stem: "Select TWO sentences from Text 2 that show an animal ignoring an enrichment item, the kind of response Text 1 says keepers track.",
           choices: [
             { letter: "A", text: "Sentence 16" },
@@ -1090,7 +1152,8 @@
         },
         {
           id: "qualify",
-          sol: "11.DSR.E",
+          sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "Sentence 29 of Text 2 most directly qualifies which idea from Text 1?",
           choices: [
             { letter: "A", text: "that every item must first be approved for safety" },
@@ -1103,6 +1166,7 @@
         {
           id: "differ",
           sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "The two texts differ mainly in that Text 1 —",
           choices: [
             { letter: "A", text: "argues against enrichment, while Text 2 supports it" },
@@ -1156,6 +1220,7 @@
         {
           id: "theme",
           sol: "11.RL.1.A",
+          sub: "11.RL.1.A.1",
           stem: "Which theme does the night in the Westmere nursery most clearly develop?",
           choices: [
             { letter: "A", text: "Young workers should not question their supervisors." },
@@ -1168,6 +1233,7 @@
         {
           id: "admits",
           sol: "11.RL.1.C",
+          sub: "11.RL.1.C.1",
           stem: "Which statement best describes how Benedikt responds once the dry tray is found?",
           choices: [
             { letter: "A", text: "He owns the mistake and gives Yesenia the credit." },
@@ -1179,7 +1245,8 @@
         },
         {
           id: "handled",
-          sol: "11.RL.1.B",
+          sol: "11.RL.1.C",
+          sub: "11.RL.1.C.1",
           stem: "Benedikt's reply in sentence 10, together with the stage direction that comes with it, suggests that he —",
           choices: [
             { letter: "A", text: "is annoyed that the intern is not watching the egg" },
@@ -1191,7 +1258,8 @@
         },
         {
           id: "gauge",
-          sol: "11.RL.2.A",
+          sol: "11.RL.1.D",
+          sub: "11.RL.1.D.1",
           stem: "In sentence 13, the stage direction that Benedikt taps the gauge as if it might change its mind suggests that he —",
           choices: [
             { letter: "A", text: "believes the gauge is old and should be replaced" },
@@ -1204,6 +1272,7 @@
         {
           id: "ugly",
           sol: "11.RL.2.B",
+          sub: "11.RL.2.B.1",
           stem: "The exchange between Yesenia and Okello in sentences 36–38 adds a tone that is —",
           choices: [
             { letter: "A", text: "bitter and disappointed" },
@@ -1215,7 +1284,8 @@
         },
         {
           id: "air",
-          sol: "11.RL.2.C",
+          sol: "11.RL.2.B",
+          sub: "11.RL.2.B.2",
           stem: "In sentence 34, the phrase give her the right air to do it in most nearly means that the keepers should —",
           choices: [
             { letter: "A", text: "open the incubator so the chick can breathe" },
@@ -1227,7 +1297,8 @@
         },
         {
           id: "clipboard",
-          sol: "11.RL.3.A",
+          sol: "11.RL.1.B",
+          sub: "11.RL.1.B.1",
           stem: "The clipboard appears in sentence 7 and again in sentences 39–41. How does its final use resolve the scene?",
           choices: [
             { letter: "A", text: "Benedikt hands over the log, showing new trust in Yesenia." },
@@ -1239,7 +1310,8 @@
         },
         {
           id: "pipping",
-          sol: "11.RV.1.C",
+          sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "Based on sentences 1–3, the word pipping in sentence 2 most nearly refers to the chick —",
           choices: [
             { letter: "A", text: "calling out to the keepers" },
@@ -1299,6 +1371,7 @@
         {
           id: "purpose",
           sol: "11.RI.1.A",
+          sub: "11.RI.1.A.2",
           stem: "The main purpose of the Pellham Lookout season guide is to —",
           choices: [
             { letter: "A", text: "persuade hikers to climb to the summit of Pellham Mountain" },
@@ -1310,7 +1383,8 @@
         },
         {
           id: "sixteen",
-          sol: "11.RI.1.B",
+          sol: "11.RI.1.A",
+          sub: "11.RI.1.A.1",
           stem: "According to the guide, a 16-year-old may volunteer only if —",
           choices: [
             { letter: "A", text: "the volunteer has fought a fire before" },
@@ -1322,7 +1396,8 @@
         },
         {
           id: "notscheduled",
-          sol: "11.RI.1.B",
+          sol: "11.RI.1.A",
+          sub: "11.RI.1.A.1",
           stem: "Based on the guide, which applicant would most likely NOT be scheduled for the season?",
           choices: [
             { letter: "A", text: "one who sends forms on time but can train only on June 21" },
@@ -1334,7 +1409,8 @@
         },
         {
           id: "encourage",
-          sol: "11.RI.1.C",
+          sol: "11.RI.1.A",
+          sub: "11.RI.1.A.2",
           stem: "Which sentence in the guide is meant mainly to reassure readers rather than to state a rule?",
           choices: [
             { letter: "A", text: "Sentence 11" },
@@ -1347,6 +1423,7 @@
         {
           id: "headings",
           sol: "11.RI.2.A",
+          sub: "11.RI.2.A.2",
           stem: "How does arranging the guide under headings such as Training and Safety Rules help an applicant?",
           choices: [
             { letter: "A", text: "It shows the order in which the tower was built." },
@@ -1358,7 +1435,8 @@
         },
         {
           id: "fillquickly",
-          sol: "11.RI.2.B",
+          sol: "11.RI.1.A",
+          sub: "11.RI.1.A.2",
           stem: "The guide includes the explanation in sentence 23 mainly to —",
           choices: [
             { letter: "A", text: "warn that the tower is too small to be comfortable" },
@@ -1370,7 +1448,8 @@
         },
         {
           id: "strict",
-          sol: "11.RI.2.C",
+          sol: "11.RI.1.A",
+          sub: "11.RI.1.A.2",
           stem: "Which sentence shows most clearly that the district will not bend its training requirement?",
           choices: [
             { letter: "A", text: "Sentence 8" },
@@ -1382,7 +1461,8 @@
         },
         {
           id: "consecutive",
-          sol: "11.RV.1.C",
+          sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "In sentence 12, the word consecutive most nearly means —",
           choices: [
             { letter: "A", text: "following one after another" },
@@ -1432,7 +1512,8 @@
       claims: [
         {
           id: "claim",
-          sol: "11.RI.1.A",
+          sol: "11.RI.1.C",
+          sub: "11.RI.1.C.1",
           stem: "Which statement best expresses the central claim of \"Let the Amateurs Dig\"?",
           choices: [
             { letter: "A", text: "Rules should welcome trained amateurs while protecting key fossils." },
@@ -1445,6 +1526,7 @@
         {
           id: "structure",
           sol: "11.RI.2.A",
+          sub: "11.RI.2.A.1",
           stem: "Which description best matches how the author builds the argument?",
           choices: [
             { letter: "A", text: "a history of fossil laws told in time order" },
@@ -1456,7 +1538,8 @@
         },
         {
           id: "strengthen",
-          sol: "11.RI.1.B",
+          sol: "11.RI.1.C",
+          sub: "11.RI.1.C.2",
           stem: "Which evidence, if added, would most strengthen the claim in sentence 6?",
           choices: [
             { letter: "A", text: "a list of rare fossils recently offered for sale online" },
@@ -1469,6 +1552,7 @@
         {
           id: "critics",
           sol: "11.RI.1.C",
+          sub: "11.RI.1.C.1",
           stem: "The author's attitude toward the critics described in sentences 13–16 is best described as —",
           choices: [
             { letter: "A", text: "dismissive of their concerns as exaggerated" },
@@ -1480,7 +1564,8 @@
         },
         {
           id: "hiker",
-          sol: "11.RI.2.B",
+          sol: "11.RI.2.A",
+          sub: "11.RI.2.A.2",
           stem: "The example of the unsure hiker in sentence 12 mainly serves to —",
           choices: [
             { letter: "A", text: "show how harsh rules can keep key finds from being reported" },
@@ -1492,7 +1577,8 @@
         },
         {
           id: "return",
-          sol: "11.RI.2.C",
+          sol: "11.RI.2.A",
+          sub: "11.RI.2.A.2",
           stem: "The author returns to the Halvorsen Flats story in sentence 20 mainly to —",
           choices: [
             { letter: "A", text: "admit that the bus driver made a few errors" },
@@ -1505,6 +1591,7 @@
         {
           id: "context",
           sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "In sentence 14, the explanation after the colon shows that a fossil's context is —",
           choices: [
             { letter: "A", text: "the price a museum would pay for it" },
@@ -1517,6 +1604,7 @@
         {
           id: "opinion",
           sol: "11.RI.1.C",
+          sub: "11.RI.1.C.1",
           stem: "Which statement from the passage is an opinion presented as if it were a general truth?",
           choices: [
             { letter: "A", text: "He photographed the bones, marked the location with his phone" },
