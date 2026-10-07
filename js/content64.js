@@ -37,6 +37,7 @@
         {
           id: "theme",
           sol: "10.RL.1.A",
+          sub: "10.RL.1.A.1",
           stem: "Which statement best expresses a theme of Marisol's story at the Harlow County Fair?",
           choices: [
             { letter: "A", text: "Hard practice at home always guarantees a top prize." },
@@ -49,6 +50,7 @@
         {
           id: "char",
           sol: "10.RL.1.C",
+          sub: "10.RL.1.C.1",
           stem: "Sentences 9 and 10 characterize Marisol as someone who —",
           choices: [
             { letter: "A", text: "blames others when her plans go wrong" },
@@ -60,7 +62,8 @@
         },
         {
           id: "simile",
-          sol: "10.RL.2.A",
+          sol: "10.RL.2.B",
+          sub: "10.RL.2.B.1",
           stem: "In sentence 8, comparing Biscuit to a stubborn suitcase with a broken wheel mainly suggests that the goat —",
           choices: [
             { letter: "A", text: "is heavy and resists being dragged forward" },
@@ -73,6 +76,7 @@
         {
           id: "turn",
           sol: "10.RL.1.B",
+          sub: "10.RL.1.B.1",
           stem: "Which sentence marks the turning point in Marisol's struggle with Biscuit?",
           choices: [
             { letter: "A", text: "Sentence 4" },
@@ -84,7 +88,8 @@
         },
         {
           id: "setting",
-          sol: "10.RL.3.A",
+          sol: "10.RL.1.B",
+          sub: "10.RL.1.B.2",
           stem: "The author includes the roaring fans and the waving pinwheel in sentence 5 mainly to —",
           choices: [
             { letter: "A", text: "show that the fair is crowded and poorly organized" },
@@ -97,6 +102,7 @@
         {
           id: "tone",
           sol: "10.RL.2.C",
+          sub: "10.RL.2.C.1",
           stem: "The tone of sentence 16, when Marisol pins the white ribbon to the pen, is best described as —",
           choices: [
             { letter: "A", text: "relieved and content" },
@@ -137,6 +143,7 @@
         {
           id: "central",
           sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "Which statement best expresses the central idea of \"When the Keepers Left\"?",
           choices: [
             { letter: "A", text: "Keepers were replaced because the work was too dangerous." },
@@ -149,6 +156,7 @@
         {
           id: "org",
           sol: "10.RI.2.A",
+          sub: "10.RI.2.A.1",
           stem: "How is the article about lighthouse keepers mainly organized?",
           choices: [
             { letter: "A", text: "as a history ending with a question and answer" },
@@ -160,7 +168,8 @@
         },
         {
           id: "sensor",
-          sol: "10.RI.1.B",
+          sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "Which sentence explains why automatic timers were no longer needed in lighthouses?",
           choices: [
             { letter: "A", text: "Sentence 6" },
@@ -172,7 +181,8 @@
         },
         {
           id: "question",
-          sol: "10.RI.2.B",
+          sol: "10.RI.2.A",
+          sub: "10.RI.2.A.2",
           stem: "The author includes the question in sentence 12 mainly to —",
           choices: [
             { letter: "A", text: "suggest that old towers should be torn down" },
@@ -184,7 +194,8 @@
         },
         {
           id: "attitude",
-          sol: "10.RI.2.C",
+          sol: "10.RI.1.C",
+          sub: "10.RI.1.C.1",
           stem: "In sentences 13 through 15, the author's attitude toward lighthouses is best described as —",
           choices: [
             { letter: "A", text: "nostalgic for the days of the keepers" },
@@ -196,7 +207,8 @@
         },
         {
           id: "trim",
-          sol: "10.RV.1.C",
+          sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "In sentence 2, the word trim most nearly means to —",
           choices: [
             { letter: "A", text: "decorate with strips of ribbon" },
@@ -237,7 +249,8 @@
       claims: [
         {
           id: "wave",
-          sol: "10.RL.2.A",
+          sol: "10.RL.2.B",
+          sub: "10.RL.2.B.1",
           stem: "In line 2, describing the lava field as a black sea frozen in the middle of a wave mainly suggests that the rock —",
           choices: [
             { letter: "A", text: "is still wet and dangerous to cross" },
@@ -249,7 +262,8 @@
         },
         {
           id: "mood",
-          sol: "10.RL.2.B",
+          sol: "10.RL.2.A",
+          sub: "10.RL.2.A.3",
           stem: "The images in line 6 (a bakery, a church bell, a porch swing) mainly create a sense of —",
           choices: [
             { letter: "A", text: "loss of ordinary community life" },
@@ -261,7 +275,8 @@
         },
         {
           id: "shift",
-          sol: "10.RL.3.A",
+          sol: "10.RL.2.A",
+          sub: "10.RL.2.A.1",
           stem: "Which line marks the shift in the speaker's feelings about the lava field?",
           choices: [
             { letter: "A", text: "Line 4" },
@@ -274,6 +289,7 @@
         {
           id: "theme",
           sol: "10.RL.1.A",
+          sub: "10.RL.1.A.1",
           stem: "Which statement best expresses a theme of \"Lava Field, Ten Years After\"?",
           choices: [
             { letter: "A", text: "Nature should be feared rather than studied." },
@@ -286,6 +302,7 @@
         {
           id: "tone",
           sol: "10.RL.2.C",
+          sub: "10.RL.2.C.1",
           stem: "In \"Lava Field, Ten Years After,\" the tone of the closing line about the sleeping mountain and the fern is best described as —",
           choices: [
             { letter: "A", text: "quietly hopeful" },
@@ -297,7 +314,8 @@
         },
         {
           id: "hunger",
-          sol: "10.RV.1.C",
+          sol: "10.RV.1.F",
+          sub: "10.RV.1.F.1",
           stem: "In line 9, the word hunger refers to the mountain's —",
           choices: [
             { letter: "A", text: "need for rain and fresh soil" },
@@ -334,7 +352,8 @@
       claims: [
         {
           id: "frantic",
-          sol: "10.RV.1.C",
+          sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "Which detail from sentence 1 best helps the reader understand the meaning of frantic?",
           choices: [
             { letter: "A", text: "the time, which was 11:45 in the morning" },
@@ -347,6 +366,7 @@
         {
           id: "novice",
           sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "In sentence 2, the word novice most nearly means —",
           choices: [
             { letter: "A", text: "a relative who works for free" },
@@ -359,6 +379,7 @@
         {
           id: "meager",
           sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "As used in sentence 4 to describe the pineapple salsa, meager most nearly means —",
           choices: [
             { letter: "A", text: "barely enough" },
@@ -370,7 +391,8 @@
         },
         {
           id: "improvise",
-          sol: "10.RV.1.C",
+          sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "How do sentences 5 and 6 help the reader understand the word improvise?",
           choices: [
             { letter: "A", text: "They show Leilani following a written recipe exactly." },
@@ -382,7 +404,8 @@
         },
         {
           id: "replenish",
-          sol: "10.RV.1.A",
+          sol: "10.RV.1.C",
+          sub: "10.RV.1.C.1",
           stem: "The prefix re- means again, and the root plen- (as in plenty) means full. Based on these parts, to replenish their energy in sentence 8 means to —",
           choices: [
             { letter: "A", text: "use it up quickly" },
@@ -395,6 +418,7 @@
         {
           id: "consensus",
           sol: "10.RV.1.D",
+          sub: "10.RV.1.D.1",
           stem: "The author chose consensus rather than decision in sentence 11. Compared with decision, consensus suggests a choice that —",
           choices: [
             { letter: "A", text: "both cousins agreed on together" },
@@ -436,6 +460,7 @@
         {
           id: "agree",
           sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "On which point do the Delmore fair board and Hana Okafor agree?",
           choices: [
             { letter: "A", text: "The fair should be held in late September." },
@@ -448,6 +473,7 @@
         {
           id: "differ",
           sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "Which statement best describes a key difference between the board's notice and Hana's letter?",
           choices: [
             { letter: "A", text: "The board focuses on heat; Hana focuses on students' schedules." },
@@ -459,7 +485,8 @@
         },
         {
           id: "two",
-          sol: "10.DSR.D",
+          sol: "10.DSR.C",
+          sub: "10.DSR.C.1",
           stem: "Select TWO sentences from Text 2 that best explain why a September fair would be hard for student exhibitors.",
           choices: [
             { letter: "A", text: "Sentence 7" },
@@ -471,7 +498,8 @@
         },
         {
           id: "respond",
-          sol: "10.DSR.E",
+          sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "How does Hana's suggestion in sentence 13 respond to the problem described in sentence 2?",
           choices: [
             { letter: "A", text: "It argues that the heat records are exaggerated." },
@@ -483,7 +511,8 @@
         },
         {
           id: "conclude",
-          sol: "10.DSR.E",
+          sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "A reader who uses both texts about the Delmore County Fair could best conclude that —",
           choices: [
             { letter: "A", text: "the fair will probably be canceled within a few years" },
@@ -495,7 +524,8 @@
         },
         {
           id: "voice",
-          sol: "10.DSR.E",
+          sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "Compared with the fair board's notice, Hana's letter sounds more —",
           choices: [
             { letter: "A", text: "personal and persuasive" },
@@ -536,7 +566,8 @@
       claims: [
         {
           id: "irony",
-          sol: "10.RL.2.C",
+          sol: "10.RL.2.D",
+          sub: "10.RL.2.D.2",
           stem: "Which situation in the story about Gull Point Light is most ironic?",
           choices: [
             { letter: "A", text: "Amaya grew up in the keeper's house beneath the tower." },
@@ -549,6 +580,7 @@
         {
           id: "char",
           sol: "10.RL.1.C",
+          sub: "10.RL.1.C.1",
           stem: "Sentence 3 characterizes Amaya as someone who —",
           choices: [
             { letter: "A", text: "wishes she could forget her childhood" },
@@ -560,7 +592,8 @@
         },
         {
           id: "ruler",
-          sol: "10.RL.2.A",
+          sol: "10.RL.2.B",
+          sub: "10.RL.2.B.1",
           stem: "In sentence 13, describing Amaya's voice as steady as a ruler suggests that she is —",
           choices: [
             { letter: "A", text: "calm, exact, and in control" },
@@ -573,6 +606,7 @@
         {
           id: "conflict",
           sol: "10.RL.1.B",
+          sub: "10.RL.1.B.2",
           stem: "The disagreement between the narrator and Amaya in sentences 4 through 7 is mainly about —",
           choices: [
             { letter: "A", text: "whether the narrator should stay longer" },
@@ -584,7 +618,8 @@
         },
         {
           id: "ending",
-          sol: "10.RL.3.A",
+          sol: "10.RL.1.B",
+          sub: "10.RL.1.B.1",
           stem: "The author ends the story with sentence 16, in which the narrator pulls a second chair to the window, mainly to —",
           choices: [
             { letter: "A", text: "hint that the storm will return the next night" },
@@ -597,6 +632,7 @@
         {
           id: "theme",
           sol: "10.RL.1.A",
+          sub: "10.RL.1.A.1",
           stem: "Which statement best expresses a theme of \"Three Flashes\"?",
           choices: [
             { letter: "A", text: "Young people should never question their elders." },
@@ -637,6 +673,7 @@
         {
           id: "main",
           sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "What is the main idea of \"Listening to a Restless Mountain\"?",
           choices: [
             { letter: "A", text: "Scientists watch several clues to tell when a volcano may erupt." },
@@ -649,6 +686,7 @@
         {
           id: "org",
           sol: "10.RI.2.A",
+          sub: "10.RI.2.A.1",
           stem: "Sentences 4 through 13 of the volcano article are organized mainly by —",
           choices: [
             { letter: "A", text: "comparing two famous eruptions in history" },
@@ -660,7 +698,8 @@
         },
         {
           id: "quakes",
-          sol: "10.RI.1.B",
+          sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "According to the article, what can a sudden jump in the number of small earthquakes near a volcano mean?",
           choices: [
             { letter: "A", text: "The seismometers need to be repaired." },
@@ -672,7 +711,8 @@
         },
         {
           id: "balloon",
-          sol: "10.RI.2.B",
+          sol: "10.RI.2.C",
+          sub: "10.RI.2.C.2",
           stem: "The comparison in sentence 9 to a balloon slowly filling with air helps the reader understand that the ground —",
           choices: [
             { letter: "A", text: "may pop and collapse at any moment" },
@@ -684,7 +724,8 @@
         },
         {
           id: "purpose",
-          sol: "10.RI.1.C",
+          sol: "10.RI.1.B",
+          sub: "10.RI.1.B.1",
           stem: "The author wrote \"Listening to a Restless Mountain\" mainly to —",
           choices: [
             { letter: "A", text: "explain how scientists look for signs of an eruption" },
@@ -696,7 +737,8 @@
         },
         {
           id: "together",
-          sol: "10.RI.1.B",
+          sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "Based on sentences 14 and 15, which statement would the author of the volcano article most likely agree with?",
           choices: [
             { letter: "A", text: "One strong earthquake is enough to order an evacuation." },
@@ -735,7 +777,8 @@
       claims: [
         {
           id: "irony",
-          sol: "10.RL.2.C",
+          sol: "10.RL.2.D",
+          sub: "10.RL.2.D.2",
           stem: "Femi's claim in sentence 7 that his head is a better filing cabinet than any folder is ironic because —",
           choices: [
             { letter: "A", text: "Adaeze agrees with him in her aside" },
@@ -747,7 +790,8 @@
         },
         {
           id: "aside",
-          sol: "10.RL.3.A",
+          sol: "10.RL.1.D",
+          sub: "10.RL.1.D.2",
           stem: "The playwright gives Adaeze the aside in sentence 8 mainly to —",
           choices: [
             { letter: "A", text: "reveal her private, joking doubt about Femi's system" },
@@ -760,6 +804,7 @@
         {
           id: "char",
           sol: "10.RL.1.C",
+          sub: "10.RL.1.C.1",
           stem: "Taken together, sentences 17 and 18 characterize Adaeze as —",
           choices: [
             { letter: "A", text: "careless about kitchen safety" },
@@ -772,6 +817,7 @@
         {
           id: "tension",
           sol: "10.RL.1.B",
+          sub: "10.RL.1.B.2",
           stem: "The tension between Femi and Ms. Halvorsen comes mainly from —",
           choices: [
             { letter: "A", text: "the inspector's dislike of the truck's food" },
@@ -783,7 +829,8 @@
         },
         {
           id: "mood",
-          sol: "10.RL.2.B",
+          sol: "10.RL.1.D",
+          sub: "10.RL.1.D.2",
           stem: "The stage directions in which Femi knocks over cups and laughs too loudly mainly create a mood of —",
           choices: [
             { letter: "A", text: "quiet sorrow" },
@@ -796,6 +843,7 @@
         {
           id: "theme",
           sol: "10.RL.1.A",
+          sub: "10.RL.1.A.1",
           stem: "Which theme is best supported by the inspection scene in \"The Green Notebook\"?",
           choices: [
             { letter: "A", text: "Family members should never keep secrets." },
@@ -835,6 +883,7 @@
         {
           id: "headings",
           sol: "10.RI.2.A",
+          sub: "10.RI.2.A.1",
           stem: "The bold headings in the Rook Valley baking rules help a reader mainly by —",
           choices: [
             { letter: "A", text: "showing which rules matter most to judges" },
@@ -847,6 +896,7 @@
         {
           id: "frosting",
           sol: "10.RI.1.B",
+          sub: "10.RI.1.B.2",
           stem: "According to the Rook Valley rules, why are entries with cream cheese frosting not accepted?",
           choices: [
             { letter: "A", text: "They are allowed only on decorated cakes." },
@@ -859,6 +909,7 @@
         {
           id: "late",
           sol: "10.RI.1.B",
+          sub: "10.RI.1.B.2",
           stem: "Based on the rules, a young baker who arrives with a plate of cookies at 10:30 on Tuesday will most likely —",
           choices: [
             { letter: "A", text: "be turned away because drop-off has ended" },
@@ -870,7 +921,8 @@
         },
         {
           id: "audience",
-          sol: "10.RI.1.C",
+          sol: "10.RI.1.B",
+          sub: "10.RI.1.B.1",
           stem: "The Rook Valley baking rules are written mainly for —",
           choices: [
             { letter: "A", text: "young bakers who plan to enter" },
@@ -882,7 +934,8 @@
         },
         {
           id: "foam",
-          sol: "10.RI.2.B",
+          sol: "10.RI.1.B",
+          sub: "10.RI.1.B.2",
           stem: "The rule in sentence 10 allowing decorated cakes to be built on a foam form makes sense because those cakes —",
           choices: [
             { letter: "A", text: "must be kept cold until judging" },
@@ -894,7 +947,8 @@
         },
         {
           id: "tone",
-          sol: "10.RI.2.C",
+          sol: "10.RI.1.B",
+          sub: "10.RI.1.B.1",
           stem: "The tone of sentence 6 in the drop-off rules is best described as —",
           choices: [
             { letter: "A", text: "apologetic and warm" },
@@ -931,7 +985,8 @@
       claims: [
         {
           id: "claim",
-          sol: "10.RI.1.A",
+          sol: "10.RI.1.C",
+          sub: "10.RI.1.C.1",
           stem: "Which sentence best states the author's central claim about the Cape Wren Lighthouse?",
           choices: [
             { letter: "A", text: "Sentence 3" },
@@ -943,7 +998,8 @@
         },
         {
           id: "counter",
-          sol: "10.RI.2.B",
+          sol: "10.RI.1.C",
+          sub: "10.RI.1.C.2",
           stem: "In sentence 4, the author admits that the repair costs are a real concern mainly to —",
           choices: [
             { letter: "A", text: "treat the other side fairly before arguing against it" },
@@ -955,7 +1011,8 @@
         },
         {
           id: "evidence",
-          sol: "10.RI.1.B",
+          sol: "10.RI.1.C",
+          sub: "10.RI.1.C.2",
           stem: "Which detail most directly supports the author's claim that a nonprofit group could handle the lighthouse's costs?",
           choices: [
             { letter: "A", text: "the private buyer's offer of $410,000" },
@@ -968,6 +1025,7 @@
         {
           id: "opinion",
           sol: "10.RI.1.C",
+          sub: "10.RI.1.C.2",
           stem: "Which statement from the Cape Wren argument is an opinion rather than a fact?",
           choices: [
             { letter: "A", text: "The sale would bring the town $410,000." },
@@ -979,7 +1037,8 @@
         },
         {
           id: "tone",
-          sol: "10.RI.2.C",
+          sol: "10.RI.1.C",
+          sub: "10.RI.1.C.1",
           stem: "The author's tone toward the proposed sale of Cape Wren is best described as —",
           choices: [
             { letter: "A", text: "concerned but reasonable" },
@@ -991,7 +1050,8 @@
         },
         {
           id: "surplus",
-          sol: "10.RV.1.C",
+          sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "Based on the examples of an old garage and an empty office in sentence 6, the word surplus most nearly means —",
           choices: [
             { letter: "A", text: "very expensive" },
@@ -1030,6 +1090,7 @@
         {
           id: "conflict",
           sol: "10.RL.1.B",
+          sub: "10.RL.1.B.2",
           stem: "The conflict between Linh and Bao in sentences 2 through 5 is best described as a clash between —",
           choices: [
             { letter: "A", text: "keeping their father's ways and trying new ones" },
@@ -1042,6 +1103,7 @@
         {
           id: "strengths",
           sol: "10.RL.1.C",
+          sub: "10.RL.1.C.1",
           stem: "Sentences 7 and 8 together show that Linh and Bao —",
           choices: [
             { letter: "A", text: "dislike working with customers of any age" },
@@ -1053,7 +1115,8 @@
         },
         {
           id: "song",
-          sol: "10.RL.2.A",
+          sol: "10.RL.2.B",
+          sub: "10.RL.2.B.1",
           stem: "In sentence 12, comparing the moving line to a song they both finally knew the words to suggests that the siblings —",
           choices: [
             { letter: "A", text: "are singing to entertain their customers" },
@@ -1065,7 +1128,8 @@
         },
         {
           id: "ending",
-          sol: "10.RL.3.A",
+          sol: "10.RL.1.B",
+          sub: "10.RL.1.B.1",
           stem: "The author ends the story with the line Bao adds to the chalkboard in sentence 13 mainly to —",
           choices: [
             { letter: "A", text: "suggest that Linh secretly wrote the line herself" },
@@ -1078,6 +1142,7 @@
         {
           id: "theme",
           sol: "10.RL.1.A",
+          sub: "10.RL.1.A.1",
           stem: "Which statement best expresses a theme of \"The Usual\"?",
           choices: [
             { letter: "A", text: "Younger siblings should always follow older ones." },
@@ -1090,6 +1155,7 @@
         {
           id: "patter",
           sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "In sentence 7, the phrase a showman's patter most nearly refers to —",
           choices: [
             { letter: "A", text: "quick, entertaining talk" },
@@ -1127,6 +1193,7 @@
         {
           id: "summary",
           sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "Which of these best summarizes \"Where Food Trucks Sleep\"?",
           choices: [
             { letter: "A", text: "Food trucks are much less safe than restaurants." },
@@ -1138,7 +1205,8 @@
         },
         {
           id: "gray",
-          sol: "10.RV.1.C",
+          sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "Which words in sentence 5 help the reader understand the meaning of gray water?",
           choices: [
             { letter: "A", text: "back into numbered spaces" },
@@ -1151,6 +1219,7 @@
         {
           id: "org",
           sol: "10.RI.2.A",
+          sub: "10.RI.2.A.1",
           stem: "How does the author organize the three paragraphs about commissaries?",
           choices: [
             { letter: "A", text: "what a commissary is, how it works, and why it matters" },
@@ -1162,7 +1231,8 @@
         },
         {
           id: "port",
-          sol: "10.RI.2.B",
+          sol: "10.RI.2.C",
+          sub: "10.RI.2.C.2",
           stem: "In sentence 12, calling the commissary a home port rather than a garage mainly emphasizes that it is —",
           choices: [
             { letter: "A", text: "located close to the ocean and docks" },
@@ -1174,7 +1244,8 @@
         },
         {
           id: "community",
-          sol: "10.RI.1.B",
+          sol: "10.RI.1.C",
+          sub: "10.RI.1.C.2",
           stem: "Which sentence best supports the idea that commissaries create a community among food truck owners?",
           choices: [
             { letter: "A", text: "Sentence 6" },
@@ -1186,7 +1257,8 @@
         },
         {
           id: "audience",
-          sol: "10.RI.1.C",
+          sol: "10.RI.1.B",
+          sub: "10.RI.1.B.1",
           stem: "Which reader would find the article about commissaries most useful?",
           choices: [
             { letter: "A", text: "a diner choosing where to eat lunch" },
@@ -1223,7 +1295,8 @@
       claims: [
         {
           id: "conjecture",
-          sol: "10.RV.1.C",
+          sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "Which phrase from sentence 4 best helps the reader understand the meaning of conjecture?",
           choices: [
             { letter: "A", text: "At first, the cause was" },
@@ -1235,7 +1308,8 @@
         },
         {
           id: "subterranean",
-          sol: "10.RV.1.A",
+          sol: "10.RV.1.C",
+          sub: "10.RV.1.C.1",
           stem: "Subterranean joins the prefix sub-, meaning under, with the root terra, meaning earth. In sentence 5, subterranean movement is movement that —",
           choices: [
             { letter: "A", text: "happens beneath the ground" },
@@ -1248,6 +1322,7 @@
         {
           id: "imminent",
           sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "In sentence 6, Dr. Maranga's statement that an eruption was not imminent means that the eruption —",
           choices: [
             { letter: "A", text: "would not be dangerous" },
@@ -1260,6 +1335,7 @@
         {
           id: "alarmist",
           sol: "10.RV.1.D",
+          sub: "10.RV.1.D.1",
           stem: "The farmers call the scientists alarmist in sentence 8 rather than careful. Compared with careful, alarmist suggests that the scientists are —",
           choices: [
             { letter: "A", text: "thoughtfully planning ahead" },
@@ -1271,7 +1347,8 @@
         },
         {
           id: "vigilant",
-          sol: "10.RV.1.C",
+          sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "How do Dr. Maranga's words in sentences 10 and 11 clarify what she meant by vigilant?",
           choices: [
             { letter: "A", text: "Being vigilant means staying watchful without living in fear." },
@@ -1284,6 +1361,7 @@
         {
           id: "dormant",
           sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "The comparison of Mount Teyra to an old dog asleep on a porch in sentence 2 reinforces the meaning of dormant by suggesting the volcano was —",
           choices: [
             { letter: "A", text: "wild and ready to attack" },
@@ -1325,6 +1403,7 @@
         {
           id: "both",
           sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "Which idea is supported by both the Kelloway bulletin and Céline's blog post?",
           choices: [
             { letter: "A", text: "An eruption of Mount Halu is now certain." },
@@ -1337,6 +1416,7 @@
         {
           id: "differ",
           sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "The two texts about the Mount Halu evacuation differ mainly in that the bulletin —",
           choices: [
             { letter: "A", text: "doubts the scientists, while the blog defends them" },
@@ -1348,7 +1428,8 @@
         },
         {
           id: "empty",
-          sol: "10.DSR.E",
+          sol: "10.DSR.C",
+          sub: "10.DSR.C.2",
           stem: "Céline's statement in sentence 13 that fear grows fastest in empty spaces mainly suggests that —",
           choices: [
             { letter: "A", text: "missing information makes residents more anxious" },
@@ -1360,7 +1441,8 @@
         },
         {
           id: "challenge",
-          sol: "10.DSR.E",
+          sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "Which sentence from the bulletin does Céline most directly question in sentence 12?",
           choices: [
             { letter: "A", text: "Sentence 2" },
@@ -1372,7 +1454,8 @@
         },
         {
           id: "two",
-          sol: "10.DSR.D",
+          sol: "10.DSR.C",
+          sub: "10.DSR.C.3",
           stem: "Select TWO sentences from Text 2 that name information Port Amis residents still need.",
           choices: [
             { letter: "A", text: "Sentence 9" },
@@ -1384,7 +1467,8 @@
         },
         {
           id: "next",
-          sol: "10.DSR.E",
+          sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "Using both texts, what is the most reasonable next step for the Kelloway Island Emergency Office?",
           choices: [
             { letter: "A", text: "shrink the zone back to five kilometers" },
@@ -1427,7 +1511,8 @@
       claims: [
         {
           id: "irony",
-          sol: "10.RL.2.C",
+          sol: "10.RL.2.D",
+          sub: "10.RL.2.D.2",
           stem: "Mateo's complaint in sentence 12 that Teodora always reads the signs becomes ironic because —",
           choices: [
             { letter: "A", text: "reading the signs is what keeps them safe" },
@@ -1440,6 +1525,7 @@
         {
           id: "climax",
           sol: "10.RL.1.B",
+          sub: "10.RL.1.B.1",
           stem: "Which sentence marks the turning point in the disagreement between Teodora and Mateo on the trail?",
           choices: [
             { letter: "A", text: "Sentence 8" },
@@ -1451,7 +1537,8 @@
         },
         {
           id: "mood",
-          sol: "10.RL.2.B",
+          sol: "10.RL.2.C",
+          sub: "10.RL.2.C.2",
           stem: "The details in sentences 5 through 7 (the black, sliding cinders and the growing smell) mainly create a mood of —",
           choices: [
             { letter: "A", text: "peaceful wonder" },
@@ -1464,6 +1551,7 @@
         {
           id: "char",
           sol: "10.RL.1.C",
+          sub: "10.RL.1.C.1",
           stem: "Sentence 14 characterizes Teodora as someone who —",
           choices: [
             { letter: "A", text: "gives in whenever her brother objects" },
@@ -1475,7 +1563,8 @@
         },
         {
           id: "ending",
-          sol: "10.RL.3.A",
+          sol: "10.RL.1.B",
+          sub: "10.RL.1.B.1",
           stem: "The author ends the story with Mateo reading the visitor guide all the way home mainly to —",
           choices: [
             { letter: "A", text: "show a quiet change in his attitude" },
@@ -1488,6 +1577,7 @@
         {
           id: "theme",
           sol: "10.RL.1.A",
+          sub: "10.RL.1.A.1",
           stem: "Which statement best expresses a theme of \"When to Turn Back\"?",
           choices: [
             { letter: "A", text: "Older siblings are usually wiser than younger ones." },
@@ -1526,7 +1616,8 @@
       claims: [
         {
           id: "noise",
-          sol: "10.RL.2.B",
+          sol: "10.RL.2.A",
+          sub: "10.RL.2.A.3",
           stem: "The images in lines 1 through 3 of \"Top of the Wheel\" mainly show that at first the speaker finds the fair —",
           choices: [
             { letter: "A", text: "peaceful and quiet" },
@@ -1538,7 +1629,8 @@
         },
         {
           id: "beads",
-          sol: "10.RL.2.A",
+          sol: "10.RL.2.B",
+          sub: "10.RL.2.B.1",
           stem: "In line 8, comparing the midway to a box of spilled beads mainly suggests that from above it looks —",
           choices: [
             { letter: "A", text: "broken and long abandoned" },
@@ -1550,7 +1642,8 @@
         },
         {
           id: "line4",
-          sol: "10.RL.3.A",
+          sol: "10.RL.2.A",
+          sub: "10.RL.2.A.1",
           stem: "How does line 4 function in \"Top of the Wheel\"?",
           choices: [
             { letter: "A", text: "It marks the moment the speaker's day begins to change." },
@@ -1563,6 +1656,7 @@
         {
           id: "theme",
           sol: "10.RL.1.A",
+          sub: "10.RL.1.A.1",
           stem: "Which statement best expresses a theme of \"Top of the Wheel\"?",
           choices: [
             { letter: "A", text: "Younger siblings often push us into danger." },
@@ -1575,6 +1669,7 @@
         {
           id: "tone",
           sol: "10.RL.2.C",
+          sub: "10.RL.2.C.1",
           stem: "Compared with lines 1 through 3, the tone of line 12 is more —",
           choices: [
             { letter: "A", text: "angry and bitter" },
@@ -1587,6 +1682,7 @@
         {
           id: "sister",
           sol: "10.RL.1.C",
+          sub: "10.RL.1.C.1",
           stem: "Line 11, in which the sister points out their home, suggests that the sister —",
           choices: [
             { letter: "A", text: "wants to leave the fair right away" },
@@ -1623,6 +1719,7 @@
         {
           id: "central",
           sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "Which statement best expresses the central idea of \"What a Ribbon Teaches\"?",
           choices: [
             { letter: "A", text: "Ribbons today are given out too freely to mean much." },
@@ -1634,7 +1731,8 @@
         },
         {
           id: "wheat",
-          sol: "10.RI.2.B",
+          sol: "10.RI.2.A",
+          sub: "10.RI.2.A.2",
           stem: "Sentence 4, about a prize for the heaviest wheat, develops the author's point by —",
           choices: [
             { letter: "A", text: "showing how a prize could teach a farming method" },
@@ -1647,6 +1745,7 @@
         {
           id: "org",
           sol: "10.RI.2.A",
+          sub: "10.RI.2.A.1",
           stem: "Sentences 6 through 8 of \"What a Ribbon Teaches\" are organized mainly as —",
           choices: [
             { letter: "A", text: "a timeline of how fair rules have changed" },
@@ -1658,7 +1757,8 @@
         },
         {
           id: "counter",
-          sol: "10.RI.1.B",
+          sol: "10.RI.1.C",
+          sub: "10.RI.1.C.1",
           stem: "Which sentence presents an objection to the Danish system of judging?",
           choices: [
             { letter: "A", text: "Sentence 6" },
@@ -1670,7 +1770,8 @@
         },
         {
           id: "attitude",
-          sol: "10.RI.2.C",
+          sol: "10.RI.1.C",
+          sub: "10.RI.1.C.1",
           stem: "The author's attitude toward the modern county fair is best described as —",
           choices: [
             { letter: "A", text: "critical of its outdated contests" },
@@ -1682,7 +1783,8 @@
         },
         {
           id: "mastery",
-          sol: "10.RV.1.C",
+          sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "As contrasted with luck in sentence 7, the word mastery most nearly means —",
           choices: [
             { letter: "A", text: "control over other people" },
@@ -1716,7 +1818,8 @@
       claims: [
         {
           id: "treacherous",
-          sol: "10.RV.1.C",
+          sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "Which phrase from sentence 2 best helps the reader understand the meaning of treacherous?",
           choices: [
             { letter: "A", text: "a mile offshore" },
@@ -1729,6 +1832,7 @@
         {
           id: "solitary",
           sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "In sentence 3, the word solitary describes Byrne's life as —",
           choices: [
             { letter: "A", text: "spent mostly alone" },
@@ -1740,7 +1844,8 @@
         },
         {
           id: "meticulous",
-          sol: "10.RV.1.C",
+          sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "Which detail best shows the meaning of meticulous in sentence 5?",
           choices: [
             { letter: "A", text: "the old, water-stained wooden trunk" },
@@ -1752,7 +1857,8 @@
         },
         {
           id: "illuminate",
-          sol: "10.RV.1.A",
+          sol: "10.RV.1.C",
+          sub: "10.RV.1.C.1",
           stem: "Illuminate contains the Latin root lumin, meaning light. Based on this root, to illuminate the channel in sentence 6 means to —",
           choices: [
             { letter: "A", text: "measure its depth" },
@@ -1764,7 +1870,8 @@
         },
         {
           id: "chronicle",
-          sol: "10.RV.1.A",
+          sol: "10.RV.1.C",
+          sub: "10.RV.1.C.1",
           stem: "The root chron- in chronicle also appears in chronological and chronometer. Based on this root, the chronicle in sentence 8 is a record that —",
           choices: [
             { letter: "A", text: "follows events through time" },
@@ -1777,6 +1884,7 @@
         {
           id: "steadfast",
           sol: "10.RV.1.D",
+          sub: "10.RV.1.D.1",
           stem: "The volunteer calls Byrne steadfast rather than stubborn in sentence 9. Compared with stubborn, steadfast suggests a quality that is —",
           choices: [
             { letter: "A", text: "foolish and inflexible" },
@@ -1818,6 +1926,7 @@
         {
           id: "agree",
           sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "On which point do Principal Varga and the Westbrook Herald editors agree?",
           choices: [
             { letter: "A", text: "Crossing Linden Avenue for food was unsafe." },
@@ -1830,6 +1939,7 @@
         {
           id: "differ",
           sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "The two texts about food trucks at Westbrook High differ mainly in that the editorial —",
           choices: [
             { letter: "A", text: "denies that students crossed the street" },
@@ -1841,7 +1951,8 @@
         },
         {
           id: "respond",
-          sol: "10.DSR.E",
+          sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "How does the editorial's proposal in sentence 11 respond to the problem described in sentence 2?",
           choices: [
             { letter: "A", text: "It requires students to cross only at the corner." },
@@ -1853,7 +1964,8 @@
         },
         {
           id: "two",
-          sol: "10.DSR.D",
+          sol: "10.DSR.C",
+          sub: "10.DSR.C.3",
           stem: "Select TWO sentences from Text 2 that describe benefits of the Friday truck plan.",
           choices: [
             { letter: "A", text: "Sentence 9" },
@@ -1865,7 +1977,8 @@
         },
         {
           id: "focus",
-          sol: "10.DSR.E",
+          sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "Compared with Principal Varga's announcement, the Herald editorial is more focused on —",
           choices: [
             { letter: "A", text: "punishing students who break rules" },
@@ -1877,7 +1990,8 @@
         },
         {
           id: "willing",
-          sol: "10.DSR.E",
+          sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "Based on both texts, why might Principal Varga be willing to try the editors' Friday plan?",
           choices: [
             { letter: "A", text: "It meets her concern by keeping students off the road." },
@@ -1921,6 +2035,7 @@
         {
           id: "char",
           sol: "10.RL.1.C",
+          sub: "10.RL.1.C.1",
           stem: "Sentences 11 through 13 characterize Tomasz as —",
           choices: [
             { letter: "A", text: "careless about his boss's instructions" },
@@ -1932,7 +2047,8 @@
         },
         {
           id: "match",
-          sol: "10.RL.2.A",
+          sol: "10.RL.2.B",
+          sub: "10.RL.2.B.1",
           stem: "In sentence 9, comparing the boy's last ring to a last match on a cold night mainly shows that —",
           choices: [
             { letter: "A", text: "the fairgrounds are growing colder" },
@@ -1945,6 +2061,7 @@
         {
           id: "bounce",
           sol: "10.RL.1.B",
+          sub: "10.RL.1.B.2",
           stem: "Based on the story, why does the boy miss with his first two rings?",
           choices: [
             { letter: "A", text: "He throws them far too hard." },
@@ -1956,7 +2073,8 @@
         },
         {
           id: "rule",
-          sol: "10.RL.3.A",
+          sol: "10.RL.1.B",
+          sub: "10.RL.1.B.1",
           stem: "Mrs. Delacroix's words in sentences 3 through 5 matter to the plot mainly because they —",
           choices: [
             { letter: "A", text: "explain why the young boy is so upset" },
@@ -1968,7 +2086,8 @@
         },
         {
           id: "mood",
-          sol: "10.RL.2.B",
+          sol: "10.RL.2.C",
+          sub: "10.RL.2.C.2",
           stem: "The details in sentences 15 and 16 (the small clink and the shriek of delight) mainly create a mood of —",
           choices: [
             { letter: "A", text: "joyful triumph" },
@@ -1981,6 +2100,7 @@
         {
           id: "theme",
           sol: "10.RL.1.A",
+          sub: "10.RL.1.A.1",
           stem: "Which theme is best supported by the ring-toss story \"Float It\"?",
           choices: [
             { letter: "A", text: "Fair games are designed so no one can win." },
@@ -2019,6 +2139,7 @@
         {
           id: "central",
           sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "Which statement best states the central idea of \"Sound in the Fog\"?",
           choices: [
             { letter: "A", text: "Hand-rung bells worked better than modern horns." },
@@ -2030,7 +2151,8 @@
         },
         {
           id: "cause",
-          sol: "10.RI.1.B",
+          sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "According to \"Sound in the Fog,\" what causes the silent zones described in sentence 6?",
           choices: [
             { letter: "A", text: "Keepers switch the horns off at night." },
@@ -2042,7 +2164,8 @@
         },
         {
           id: "danger",
-          sol: "10.RI.2.B",
+          sol: "10.RI.2.A",
+          sub: "10.RI.2.A.2",
           stem: "The author includes sentence 8, about a captain who heard nothing, mainly to —",
           choices: [
             { letter: "A", text: "show why silent zones were so dangerous" },
@@ -2055,6 +2178,7 @@
         {
           id: "org",
           sol: "10.RI.2.A",
+          sub: "10.RI.2.A.1",
           stem: "How is the second paragraph of \"Sound in the Fog\" (sentences 5 through 8) organized?",
           choices: [
             { letter: "A", text: "as steps for building a fog horn" },
@@ -2066,7 +2190,8 @@
         },
         {
           id: "tone",
-          sol: "10.RI.2.C",
+          sol: "10.RI.1.C",
+          sub: "10.RI.1.C.1",
           stem: "The tone of sentence 13, about the deep notes heard in harbor towns, is best described as —",
           choices: [
             { letter: "A", text: "warm and affectionate" },
@@ -2079,6 +2204,7 @@
         {
           id: "claim",
           sol: "10.RI.1.C",
+          sub: "10.RI.1.C.2",
           stem: "Which statement from \"Sound in the Fog\" is reported as something people say rather than as a confirmed fact?",
           choices: [
             { letter: "A", text: "Detectors switch horns on when visibility drops." },
