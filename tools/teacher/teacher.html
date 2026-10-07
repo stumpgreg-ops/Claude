@@ -151,22 +151,38 @@ table.std td.skl, table.std th.skl { text-align: left; white-space: normal; min-
       <ol>
         <li><b>Students</b> tap <b>Submit my progress</b> in the game, tap <b>Copy code</b>, and turn the code in to your Canvas assignment
           <b>“{{ASSIGNMENT}}”</b> (Online, <b>Text Entry</b>). Putting the game in that assignment puts both on one page.</li>
-        <li><b>The easiest way to grade:</b> on the assignment's page click <b>Download Submissions</b>, then drop that .zip file in box 1 below.
+        <li><b>The easiest way to grade:</b> on the assignment's page click <b>Download Submissions</b>, then drop that .zip file in box 2 below.
           Nothing to unzip or type.</li>
         <li><b>Real names (once a term):</b> in Canvas open <b>Grades</b>, click <b>Export</b> → <b>Export Entire Gradebook</b>, and drop that .csv file
-          in box 1 too. The page then shows names like <b>Ann S.</b>, lists who hasn't turned in, and can make a file that puts every grade into the
+          in box 2 too. The page then shows names like <b>Ann S.</b>, lists who hasn't turned in, and can make a file that puts every grade into the
           Canvas gradebook at once (<b>Grades → Import</b>). The class list is kept on this computer only (<b>Forget the class list</b> removes it).</li>
-        <li>Set your goals in box 2: every suggested grade updates. Then look at the students, the leaderboard or the standards report.</li>
-        <li><b>Grading rounds:</b> the page always grades the work since last time. After you enter a round's grades, click <b>Finish this grading round</b>;
-          next round, drop the new .zip and only the new work counts (put each round's grades in a new assignment column). The first round counts everything.</li>
+        <li>Set your scoring criteria in box 1: every suggested grade updates. Then look at the students, the leaderboard or the standards report.</li>
+        <li><b>Only the new work counts:</b> after you enter the grades, click <b>Submit codes</b>. Next time, drop the new .zip and the page counts only the work
+          students did after those codes (put each round's grades in a new assignment column). Before you first submit codes, everything counts.</li>
       </ol>
       <p class="hint">Each code holds everything a student has done on one Chromebook up to the moment it was made (a running total); the page subtracts
-        the code from the last round, so a student never gets credit twice. Codes from before version 5.15 have no standards detail.</p>
+        the codes you submitted last, so a student never gets credit twice. Codes from before version 5.15 have no standards detail.</p>
     </details>
   </section>
 
+  <section class="panel" id="goals-panel">
+    <details id="goals-box" open>
+      <summary>1. Scoring criteria</summary>
+      <table class="goals">
+        <thead><tr><th>Goal</th><th>Full credit at</th><th>How much it counts</th></tr></thead>
+        <tbody id="goal-rows"></tbody>
+      </table>
+      <div class="row">
+        <label>Points possible <input type="number" id="points" min="1" max="1000" step="1" /></label>
+        <button type="button" class="btn noprint" id="goals-reset">Back to the usual goals</button>
+      </div>
+      <p class="hint" id="goal-explain">Each goal gives full credit when the student reaches it, and part credit on the way. “How much it counts” weighs the goals against each other (0 leaves a goal out). Remembered on this computer.</p>
+    </details>
+    <p class="goal-line" id="goal-line"></p>
+  </section>
+
   <section class="panel noprint">
-    <h2>1. Add the codes (and your class list)</h2>
+    <h2>2. Add the codes (and your class list)</h2>
     <div class="drop" id="drop">
       <p><b>Drop the Canvas “Download Submissions” .zip here</b><br><span class="hint">and, for real names, your gradebook export (.csv)</span></p>
       <button type="button" class="btn" id="choose">Choose files…</button>
@@ -185,35 +201,19 @@ table.std td.skl, table.std th.skl { text-align: left; white-space: normal; min-
       <button type="button" class="btn" id="forget">Forget the class list</button>
     </div>
     <p id="msg" aria-live="polite"></p>
-  </section>
-
-  <section class="panel" id="goals-panel">
-    <details id="goals-box" open>
-      <summary>2. Your goals for full participation credit</summary>
-      <table class="goals">
-        <thead><tr><th>Goal</th><th>Full credit at</th><th>How much it counts</th></tr></thead>
-        <tbody id="goal-rows"></tbody>
-      </table>
-      <div class="row">
-        <label>Points possible <input type="number" id="points" min="1" max="1000" step="1" /></label>
-        <button type="button" class="btn noprint" id="goals-reset">Back to the usual goals</button>
-      </div>
-      <p class="hint" id="goal-explain">Each goal gives full credit when the student reaches it, and part credit on the way. “How much it counts” weighs the goals against each other (0 leaves a goal out). Remembered on this computer.</p>
-    </details>
-    <p class="goal-line" id="goal-line"></p>
-  </section>
-
-  <section class="panel" id="results">
-    <h2>3. Your class</h2>
-    <div class="round">
+    <div class="round noprint">
       <p id="round-line"></p>
       <div class="row noprint">
-        <button type="button" class="btn primary" id="finish-round">Finish this grading round</button>
-        <button type="button" class="btn" id="undo-round" hidden>Undo: back to the round before</button>
+        <button type="button" class="btn primary" id="finish-round">Submit codes</button>
+        <button type="button" class="btn" id="undo-round" hidden>Undo: return to the previous codes</button>
         <button type="button" class="btn" id="base-choose" title="Grading on a different computer? Choose the Download Submissions .zip you graded last time">Use an earlier .zip as the starting point…</button>
         <input type="file" id="base-file" multiple accept=".zip,.txt,.html,.htm,text/plain,text/html,application/zip" hidden />
       </div>
     </div>
+  </section>
+
+  <section class="panel" id="results">
+    <h2>3. Your class</h2>
     <div class="summary" id="summary"></div>
     <div class="tabs noprint" role="tablist">
       <button type="button" class="tab on" data-view="cards" role="tab">Students</button>

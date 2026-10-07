@@ -79,7 +79,7 @@
   });
   function goalLine() {
     var on = GOALS.filter(function (x) { return goals[x.k].w > 0; });
-    return "Full credit (" + goals.points + " points) at: " + on.map(function (x) { return goals[x.k].t + (x.k === "acc" ? "%" : " " + x.unit) + (x.k === "acc" ? " right on the first try" : ""); }).join(", ") + ". Open box 2 to change the goals.";
+    return "Full credit (" + goals.points + " points) at: " + on.map(function (x) { return goals[x.k].t + (x.k === "acc" ? "%" : " " + x.unit) + (x.k === "acc" ? " right on the first try" : ""); }).join(", ") + ". Open box 1 to change the scoring criteria.";
   }
   function goalVal(x, d) { return x.k === "acc" ? (d.answered ? 100 * d.right / d.answered : 0) : d[x.k]; }
   function grade(r) {
@@ -358,28 +358,28 @@
   function applyRounds() { rows.forEach(function (r) { r.data = r.ok && r.build === ST ? roundOf(r) : r.full; }); }
   function finishRound() {
     var mineRows = rows.filter(function (r) { return r.ok && r.build === ST; });
-    if (!mineRows.length) { msg("Add this round's codes first: the round ends with the codes you have graded.", true); return; }
-    if (!window.confirm("Finish this grading round? The next round counts only the work students do after the codes on this page (" + mineRows.length +
-      " student" + (mineRows.length === 1 ? "" : "s") + "). Do this after you have entered this round's grades.")) return;
+    if (!mineRows.length) { msg("Add the codes first: Submit codes keeps the codes on this page as the new starting point.", true); return; }
+    if (!window.confirm("Submit these codes? From now on the page counts only the work students do after these codes (" + mineRows.length +
+      " student" + (mineRows.length === 1 ? "" : "s") + "). Do this after you have entered these grades in Canvas.")) return;
     var base = {}, k;
     for (k in rounds.base) base[k] = rounds.base[k];
     mineRows.forEach(function (r) { baseKeys(r).forEach(function (key) { base[key] = r.raw; }); });
     rounds = { since: Date.now(), base: base, prev: { since: rounds.since, base: rounds.base } };
     saveRounds();
     paint(); paintRounds();
-    msg("Round finished. Next time, drop the new Download Submissions .zip: the grades will count only what students do from now on.");
+    msg("Codes submitted. Next time, drop the new Download Submissions .zip: the grades will count only what students do from now on.");
   }
   function undoRound() {
     if (!rounds.prev) return;
-    if (!window.confirm("Go back to the round before? The starting point you saved last is forgotten.")) return;
+    if (!window.confirm("Return to the previous codes? The codes you submitted last are forgotten.")) return;
     rounds = { since: rounds.prev.since, base: rounds.prev.base || {}, prev: null };
-    saveRounds(); paint(); paintRounds(); msg("Back to the round before.");
+    saveRounds(); paint(); paintRounds(); msg("Back to the previous codes.");
   }
   function paintRounds() {
     var el = $("round-line");
-    if (rounds.since) el.innerHTML = "<b>This grading round: since " + esc(new Date(rounds.since).toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" })) + "</b>. " +
-      "Every number below counts only the work students did after the codes you graded then. Put each round's grades in a new assignment column.";
-    else el.innerHTML = "<b>First grading round:</b> everything students have done so far counts. When you have entered this round's grades, click <b>Finish this grading round</b>: next time, only the new work counts.";
+    if (rounds.since) el.innerHTML = "<b>Counting the work since " + esc(new Date(rounds.since).toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" })) + "</b> (the codes you submitted then). " +
+      "Every number on this page counts only the work students did after them. Put each round's grades in a new assignment column.";
+    else el.innerHTML = "<b>No codes submitted yet:</b> everything students have done so far counts. When you have entered these grades in Canvas, click <b>Submit codes</b>: next time, only the new work counts.";
     $("undo-round").hidden = !rounds.prev;
   }
   function D(r) { return r && r.ok ? r.data : null; }
@@ -444,7 +444,7 @@
   function head(c) { return c.h.replace("{P}", goals.points); }
   function paintTable() {
     var t = $("table");
-    if (!rows.length) { t.innerHTML = '<tbody><tr><td class="empty">No codes yet. Add them in box 1.</td></tr></tbody>'; return; }
+    if (!rows.length) { t.innerHTML = '<tbody><tr><td class="empty">No codes yet. Add them in box 2.</td></tr></tbody>'; return; }
     var h = "<thead><tr>" + COLS.map(function (c) {
       return '<th class="' + (c.cls || "") + '" data-k="' + c.k + '" title="Sort by ' + esc(head(c)) + '">' + esc(head(c)) +
         (sortBy.k === c.k ? ' <span class="arr">' + (sortBy.dir > 0 ? "▲" : "▼") + "</span>" : "") + "</th>";
@@ -501,7 +501,7 @@
   /* ── student cards ── */
   function paintCards() {
     var el = $("cards"), list = sortedRows(), miss = missing();
-    if (!list.length && !miss.length) { el.innerHTML = '<p class="empty">No codes yet. Drop the Download Submissions .zip in box 1.</p>'; return; }
+    if (!list.length && !miss.length) { el.innerHTML = '<p class="empty">No codes yet. Drop the Download Submissions .zip in box 2.</p>'; return; }
     var on = GOALS.filter(function (x) { return goals[x.k].w > 0; });
     var h = list.map(function (r) {
       var d = D(r), g = grade(r), b = mine(r) ? band(g) : "none", p = person(r);
@@ -640,7 +640,7 @@
   function paintStd() {
     var s = stdData(), el = $("std");
     if (!s.codes.length) {
-      el.innerHTML = '<p class="empty">No standards detail yet. ' + (s.old ? s.old + " code" + (s.old === 1 ? " is" : "s are") + " from before version 5.15, which didn't record standards: ask for new codes." : "Add codes in box 1.") + "</p>";
+      el.innerHTML = '<p class="empty">No standards detail yet. ' + (s.old ? s.old + " code" + (s.old === 1 ? " is" : "s are") + " from before version 5.15, which didn't record standards: ask for new codes." : "Add codes in box 2.") + "</p>";
       return;
     }
     var h = '<div class="tabs noprint" role="tablist"><button type="button" class="tab' + (stdPage === "class" ? " on" : "") + '" data-sp="class">Class total</button>' +
@@ -722,7 +722,7 @@
     link($("std-csv"), rows.some(mine) ? stdCsv() : null, fileStem() + "standards-" + isoTime(Date.now()).slice(0, 10) + ".csv");
     var imp = importCsv(), hint = $("import-hint"), cols = assignCols();
     link($("import"), imp, fileStem() + "canvas-gradebook-import-" + isoTime(Date.now()).slice(0, 10) + ".csv");
-    if (!roster) hint.textContent = "The Canvas gradebook import file needs your class list: drop your gradebook export in box 1.";
+    if (!roster) hint.textContent = "The Canvas gradebook import file needs your class list: drop your gradebook export in box 2.";
     else if (!cols.length) hint.textContent = "Your gradebook export has no assignments yet. Make the \"" + B.assignment + "\" assignment, then export the gradebook again.";
     else {
       hint.innerHTML = "Import file: fills the column <b>" + esc(assignCol() || "?") + "</b>. In Canvas: Grades → Import → choose the file → Upload, check the changes, then Save. " +
