@@ -39,6 +39,7 @@
         {
           id: "theme",
           sol: "9.RL.1.A",
+          sub: "9.RL.1.A.1",
           stem: "Which theme does the story's ending best support?",
           choices: [
             { letter: "A", text: "Family businesses should never be trusted to teenagers." },
@@ -50,7 +51,8 @@
         },
         {
           id: "char",
-          sol: "9.RL.1.C",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "Which sentence best shows that Tomas stays steady under pressure?",
           choices: [
             { letter: "A", text: "Sentence 3: He lifts the handle and turns the key at the same time." },
@@ -62,7 +64,8 @@
         },
         {
           id: "simile",
-          sol: "9.RL.2.A",
+          sol: "9.RL.2.B",
+          sub: "9.RL.2.B.2",
           stem: "In sentence 9, the author compares the dough to a stone mainly to show that it —",
           choices: [
             { letter: "A", text: "has not risen at all" },
@@ -74,7 +77,8 @@
         },
         {
           id: "setting",
-          sol: "9.RL.3.A",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "The details in sentence 2 about the time and the empty street mainly emphasize that Tomas —",
           choices: [
             { letter: "A", text: "is running late for his very first shift" },
@@ -86,7 +90,8 @@
         },
         {
           id: "word",
-          sol: "9.RL.2.C",
+          sol: "9.RL.2.B",
+          sub: "9.RL.2.B.2",
           stem: "In sentence 3, the phrase gave way most nearly means —",
           choices: [
             { letter: "A", text: "broke into pieces" },
@@ -98,7 +103,8 @@
         },
         {
           id: "plot",
-          sol: "9.RL.1.B",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "Why does Aunt Rosa push the key back across the counter in sentence 17?",
           choices: [
             { letter: "A", text: "She wants Tomas to lock the door before he leaves for school." },
@@ -142,6 +148,7 @@
         {
           id: "theme",
           sol: "9.RL.1.A",
+          sub: "9.RL.1.A.1",
           stem: "Which idea does the story most clearly develop?",
           choices: [
             { letter: "A", text: "Helping without being asked can bring rewards you did not plan for." },
@@ -153,7 +160,8 @@
         },
         {
           id: "char",
-          sol: "9.RL.1.C",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "Sentences 8 and 9 mainly show that Yara —",
           choices: [
             { letter: "A", text: "is worried that the mailbox has been damaged by the plow" },
@@ -166,6 +174,7 @@
         {
           id: "simile",
           sol: "9.RL.2.A",
+          sub: "9.RL.2.A.1",
           stem: "In sentence 10, Kwame groaned like a door that needed oil is an example of —",
           choices: [
             { letter: "A", text: "a metaphor" },
@@ -177,7 +186,8 @@
         },
         {
           id: "plot",
-          sol: "9.RL.1.B",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "What causes the neighbors in sentence 13 to offer the pair money?",
           choices: [
             { letter: "A", text: "Mrs. Halvorsen tells them about the free shoveling." },
@@ -189,7 +199,8 @@
         },
         {
           id: "word",
-          sol: "9.RL.2.C",
+          sol: "9.RL.2.B",
+          sub: "9.RL.2.B.2",
           stem: "In sentence 17, Yara calls the long driveway the ad. She most nearly means that it —",
           choices: [
             { letter: "A", text: "cost them more time than it earned" },
@@ -201,7 +212,8 @@
         },
         {
           id: "setting",
-          sol: "9.RL.3.A",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "How does the setting in sentences 1 and 2 shape the plot of the story?",
           choices: [
             { letter: "A", text: "The fresh snow creates the chance to earn money for the bike." },
@@ -241,6 +253,7 @@
         {
           id: "theme",
           sol: "9.RL.1.A",
+          sub: "9.RL.1.A.1",
           stem: "Which statement best states the poem's central idea?",
           choices: [
             { letter: "A", text: "Learning a skill means being allowed to do it yourself." },
@@ -253,6 +266,7 @@
         {
           id: "simile",
           sol: "9.RL.2.A",
+          sub: "9.RL.2.A.2",
           stem: "In line 3, the bike is compared to a beetle on its back mainly to show that it is —",
           choices: [
             { letter: "A", text: "small and easy to carry" },
@@ -264,7 +278,8 @@
         },
         {
           id: "char",
-          sol: "9.RL.1.C",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "Line 5, She does not tell me what to do. She waits, shows that the sister —",
           choices: [
             { letter: "A", text: "is bored by the repair and wants to leave" },
@@ -276,7 +291,8 @@
         },
         {
           id: "mood",
-          sol: "9.RL.2.B",
+          sol: "9.RL.2.A",
+          sub: "9.RL.2.A.2",
           stem: "The images in lines 9 and 10 (the sun climbing the fence, the radio through the boards) mainly create a mood that is —",
           choices: [
             { letter: "A", text: "tense and hurried" },
@@ -288,7 +304,8 @@
         },
         {
           id: "word",
-          sol: "9.RL.2.C",
+          sol: "9.RL.2.B",
+          sub: "9.RL.2.B.2",
           stem: "In line 10, the word leaks most nearly means —",
           choices: [
             { letter: "A", text: "drips like water" },
@@ -300,7 +317,8 @@
         },
         {
           id: "pov",
-          sol: "9.RL.3.B",
+          sol: "9.RL.2.C",
+          sub: "9.RL.2.C.1",
           stem: "The poem is told from the point of view of —",
           choices: [
             { letter: "A", text: "the sister, who is teaching the repair" },
@@ -343,6 +361,7 @@
         {
           id: "theme",
           sol: "9.RL.1.A",
+          sub: "9.RL.1.A.1",
           stem: "Which theme is best supported by sentences 7 through 10?",
           choices: [
             { letter: "A", text: "Anger is the best tool when someone accuses you unfairly." },
@@ -354,7 +373,8 @@
         },
         {
           id: "char",
-          sol: "9.RL.1.C",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "Which statement best describes Mr. Petrov in the passage?",
           choices: [
             { letter: "A", text: "He is careless and refuses to look at the roof himself." },
@@ -366,7 +386,8 @@
         },
         {
           id: "ziptie",
-          sol: "9.RL.1.B",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "What does the new zip tie in sentence 17 most likely show?",
           choices: [
             { letter: "A", text: "Mr. Petrov has quietly accepted the station and helped secure it." },
@@ -378,7 +399,8 @@
         },
         {
           id: "word",
-          sol: "9.RL.2.C",
+          sol: "9.RL.2.B",
+          sub: "9.RL.2.B.2",
           stem: "In sentence 7, the phrase swallowed it most nearly means that Naledi —",
           choices: [
             { letter: "A", text: "drank some water to calm herself down" },
@@ -391,6 +413,7 @@
         {
           id: "vane",
           sol: "9.RL.2.B",
+          sub: "9.RL.2.B.2",
           stem: "The author includes the wind vane ticking around to the east in sentence 11 mainly to —",
           choices: [
             { letter: "A", text: "prove that Naledi's instruments are not working" },
@@ -402,7 +425,8 @@
         },
         {
           id: "setting",
-          sol: "9.RL.3.A",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "The details describing the weather station in sentence 3 (a produce crate, a coat hanger, a plastic spoon) mainly emphasize that —",
           choices: [
             { letter: "A", text: "Naledi built the station herself from ordinary materials" },
@@ -444,6 +468,7 @@
         {
           id: "aside",
           sol: "9.RL.1.D",
+          sub: "9.RL.1.D.2",
           stem: "The playwright uses the aside in sentence 4 mainly to —",
           choices: [
             { letter: "A", text: "let the audience know something Lupe does not yet know" },
@@ -455,7 +480,8 @@
         },
         {
           id: "stagedir",
-          sol: "9.RL.1.C",
+          sol: "9.RL.1.D",
+          sub: "9.RL.1.D.2",
           stem: "The stage direction in sentence 11, LUPE slowly turns to look at him, mainly shows that Lupe —",
           choices: [
             { letter: "A", text: "has realized who is responsible for the missing forms" },
@@ -468,6 +494,7 @@
         {
           id: "theme",
           sol: "9.RL.1.A",
+          sub: "9.RL.1.A.1",
           stem: "Which theme does Dev's choice in sentences 10 through 12 best support?",
           choices: [
             { letter: "A", text: "Bad news should be delivered by someone who is not involved." },
@@ -479,7 +506,8 @@
         },
         {
           id: "plot",
-          sol: "9.RL.1.B",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "Lupe's final line in sentence 16 suggests that she —",
           choices: [
             { letter: "A", text: "plans to report Dev to the principal right away" },
@@ -491,7 +519,8 @@
         },
         {
           id: "word",
-          sol: "9.RL.2.C",
+          sol: "9.RL.2.B",
+          sub: "9.RL.2.B.2",
           stem: "In sentence 6, the stage direction bright most nearly means that Dev speaks —",
           choices: [
             { letter: "A", text: "in a loud and angry voice" },
@@ -504,6 +533,7 @@
         {
           id: "tone",
           sol: "9.RL.2.B",
+          sub: "9.RL.2.B.1",
           stem: "The tone of the exchange in sentences 14 and 15 is best described as —",
           choices: [
             { letter: "A", text: "loud and furious" },
@@ -544,6 +574,7 @@
         {
           id: "theme",
           sol: "9.RL.1.A",
+          sub: "9.RL.1.A.1",
           stem: "Which idea does the poem develop most fully?",
           choices: [
             { letter: "A", text: "Carrying on what someone left behind can ease their absence." },
@@ -556,6 +587,7 @@
         {
           id: "simile",
           sol: "9.RL.2.A",
+          sub: "9.RL.2.A.2",
           stem: "In lines 4 and 5, the speaker compares the trumpet to a sleeping cat mainly to suggest that —",
           choices: [
             { letter: "A", text: "the case is soft and covered with fur" },
@@ -567,7 +599,8 @@
         },
         {
           id: "imagery",
-          sol: "9.RL.2.B",
+          sol: "9.RL.2.A",
+          sub: "9.RL.2.A.2",
           stem: "Lines 6 and 7 (a door / opened on a room where the furniture has moved) describe the first note as —",
           choices: [
             { letter: "A", text: "loud enough to wake the whole house" },
@@ -579,7 +612,8 @@
         },
         {
           id: "word",
-          sol: "9.RL.2.C",
+          sol: "9.RL.2.A",
+          sub: "9.RL.2.A.2",
           stem: "In line 12, the note stands up straight most nearly means that the note is —",
           choices: [
             { letter: "A", text: "held for a much longer time" },
@@ -591,7 +625,8 @@
         },
         {
           id: "char",
-          sol: "9.RL.1.C",
+          sol: "9.RL.2.A",
+          sub: "9.RL.2.A.2",
           stem: "Line 11 (handwriting that slants the same way mine does) mainly suggests that the speaker —",
           choices: [
             { letter: "A", text: "copied the scale from a music textbook" },
@@ -604,6 +639,7 @@
         {
           id: "ending",
           sol: "9.RL.1.B",
+          sub: "9.RL.1.B.2",
           stem: "The last line contrasts with line 1 mainly to show that —",
           choices: [
             { letter: "A", text: "the speaker has brought sound back into the house" },
@@ -646,6 +682,7 @@
         {
           id: "theme",
           sol: "9.RL.1.A",
+          sub: "9.RL.1.A.1",
           stem: "Which theme is most fully developed in the story?",
           choices: [
             { letter: "A", text: "Rituals and small objects help people carry what they cannot keep." },
@@ -657,7 +694,8 @@
         },
         {
           id: "pov",
-          sol: "9.RL.3.B",
+          sol: "9.RL.2.C",
+          sub: "9.RL.2.C.1",
           stem: "Because the story is told from Ines's first-person point of view, the reader —",
           choices: [
             { letter: "A", text: "learns exactly what the father is thinking at the door" },
@@ -669,7 +707,8 @@
         },
         {
           id: "irony",
-          sol: "9.RL.1.B",
+          sol: "9.RL.2.C",
+          sub: "9.RL.2.C.2",
           stem: "Sentences 6 through 8 present a situation that is ironic because —",
           choices: [
             { letter: "A", text: "the store's most successful day is the day it closes for good" },
@@ -681,7 +720,8 @@
         },
         {
           id: "simile",
-          sol: "9.RL.2.A",
+          sol: "9.RL.2.B",
+          sub: "9.RL.2.B.2",
           stem: "In sentence 5, comparing the store to a horse that needed calming mainly suggests that the father —",
           choices: [
             { letter: "A", text: "is afraid the shelves might fall over on him" },
@@ -694,6 +734,7 @@
         {
           id: "tone",
           sol: "9.RL.2.B",
+          sub: "9.RL.2.B.1",
           stem: "The description of the emptiness in sentence 9 (a small ringing, like the moment after a bell) creates a tone that is —",
           choices: [
             { letter: "A", text: "cheerful and hopeful" },
@@ -705,7 +746,8 @@
         },
         {
           id: "char",
-          sol: "9.RL.1.C",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "Which sentence best shows that the father keeps his routines even when they no longer serve a purpose?",
           choices: [
             { letter: "A", text: "Sentence 1: He counts every item in the store a second time." },
@@ -748,6 +790,7 @@
         {
           id: "irony",
           sol: "9.RL.1.D",
+          sub: "9.RL.1.D.2",
           stem: "The aside in sentence 6 creates dramatic irony because —",
           choices: [
             { letter: "A", text: "Owen already knows what Marisol promised Mr. Sato" },
@@ -759,7 +802,8 @@
         },
         {
           id: "char",
-          sol: "9.RL.1.C",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "In sentence 6, I said it the way you say yes when the other person looks tired reveals that Marisol —",
           choices: [
             { letter: "A", text: "said yes out of sympathy rather than certainty" },
@@ -771,7 +815,8 @@
         },
         {
           id: "plot",
-          sol: "9.RL.1.B",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "What causes Owen to change his mind in sentences 13 and 14?",
           choices: [
             { letter: "A", text: "Marisol finally admits what she told Mr. Sato on Wednesday." },
@@ -784,6 +829,7 @@
         {
           id: "stagedir",
           sol: "9.RL.1.D",
+          sub: "9.RL.1.D.2",
           stem: "The stage direction in sentence 13 mainly serves to —",
           choices: [
             { letter: "A", text: "show that the football game has ended in a loss" },
@@ -795,7 +841,8 @@
         },
         {
           id: "beat",
-          sol: "9.RL.2.C",
+          sol: "9.RL.1.D",
+          sub: "9.RL.1.D.1",
           stem: "In sentence 12, the stage direction a beat indicates that Marisol —",
           choices: [
             { letter: "A", text: "taps the counter in time with the drums" },
@@ -807,7 +854,8 @@
         },
         {
           id: "setting",
-          sol: "9.RL.3.A",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "The details in the opening stage direction (fourth quarter, cold drizzle, a handwritten sign) mainly —",
           choices: [
             { letter: "A", text: "create pressure by showing time and customers running out" },
