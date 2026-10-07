@@ -46,6 +46,7 @@
         {
           id: "theme",
           sol: "11.RL.1.A",
+          sub: "11.RL.1.A.1",
           stem: "Which theme does Teodora's handling of the cafeteria story most clearly develop?",
           choices: [
             { letter: "A", text: "A reporter earns trust by owning her mistakes openly." },
@@ -57,7 +58,8 @@
         },
         {
           id: "pageone",
-          sol: "11.RL.1.B",
+          sol: "11.RL.1.C",
+          sub: "11.RL.1.C.2",
           stem: "Mr. Okonkwo's decision to move the correction to page one (sentences 20–21) suggests that he believes —",
           choices: [
             { letter: "A", text: "the cafeteria story was too long to share the front page" },
@@ -70,6 +72,7 @@
         {
           id: "drafts",
           sol: "11.RL.1.C",
+          sub: "11.RL.1.C.2",
           stem: "The progression of Teodora's drafts in sentences 16–18 shows that she moves from —",
           choices: [
             { letter: "A", text: "defending her argument to giving up on journalism altogether" },
@@ -81,7 +84,8 @@
         },
         {
           id: "stovetop",
-          sol: "11.RL.2.A",
+          sol: "11.RL.2.C",
+          sub: "11.RL.2.C.2",
           stem: "In sentence 14, comparing Teodora's face to a stovetop someone had forgotten to turn off mainly conveys —",
           choices: [
             { letter: "A", text: "her anger toward Kwabena's mother for complaining" },
@@ -93,7 +97,8 @@
         },
         {
           id: "standon",
-          sol: "11.RL.2.B",
+          sol: "11.RL.2.C",
+          sub: "11.RL.2.C.2",
           stem: "Sentence 19 says Teodora's line about luxury no longer had anything to stand on. This figurative phrase means the line —",
           choices: [
             { letter: "A", text: "had offended the members of the facilities committee" },
@@ -105,7 +110,8 @@
         },
         {
           id: "buried",
-          sol: "11.RL.2.C",
+          sol: "11.RL.2.B",
+          sub: "11.RL.2.B.2",
           stem: "In sentence 17, the word buried most nearly means —",
           choices: [
             { letter: "A", text: "removed completely from the draft" },
@@ -117,7 +123,8 @@
         },
         {
           id: "ending",
-          sol: "11.RL.3.A",
+          sol: "11.RL.1.B",
+          sub: "11.RL.1.B.1",
           stem: "How does sentence 23 function in the structure of \"The Correction\"?",
           choices: [
             { letter: "A", text: "It introduces a new conflict between Teodora and the district board." },
@@ -163,6 +170,7 @@
         {
           id: "theme",
           sol: "11.RL.1.A",
+          sub: "11.RL.1.A.1",
           stem: "Which idea about fear does Kiri's climb up Tower 14 most clearly develop?",
           choices: [
             { letter: "A", text: "Fear disappears completely once a hard task has been done once." },
@@ -174,7 +182,8 @@
         },
         {
           id: "clips",
-          sol: "11.RL.1.B",
+          sol: "11.RL.1.C",
+          sub: "11.RL.1.C.2",
           stem: "Aunt Mereana's remark in sentence 19 implies that she values —",
           choices: [
             { letter: "A", text: "speed over safety on a long job" },
@@ -187,6 +196,7 @@
         {
           id: "confession",
           sol: "11.RL.1.C",
+          sub: "11.RL.1.C.2",
           stem: "Aunt Mereana's confession in sentences 13–14 reveals that she —",
           choices: [
             { letter: "A", text: "is willing to share a past weakness to steady her niece" },
@@ -198,7 +208,8 @@
         },
         {
           id: "passenger",
-          sol: "11.RL.2.A",
+          sol: "11.RL.2.C",
+          sub: "11.RL.2.C.2",
           stem: "In sentence 7, the idea that fear was a passenger, not a driver suggests that Aunt Mereana —",
           choices: [
             { letter: "A", text: "no longer feels any fear while she climbs" },
@@ -211,6 +222,7 @@
         {
           id: "clocks",
           sol: "11.RL.2.B",
+          sub: "11.RL.2.B.1",
           stem: "In sentence 12, comparing the turbine blades to the hands of enormous, patient clocks creates a mood that is —",
           choices: [
             { letter: "A", text: "tense and threatening" },
@@ -223,6 +235,7 @@
         {
           id: "rope",
           sol: "11.RL.2.C",
+          sub: "11.RL.2.C.2",
           stem: "In sentence 20, the phrase her legs had turned to rope most nearly means that Kiri's legs —",
           choices: [
             { letter: "A", text: "were tangled in the straps of her harness" },
@@ -234,7 +247,8 @@
         },
         {
           id: "frame",
-          sol: "11.RL.3.A",
+          sol: "11.RL.1.B",
+          sub: "11.RL.1.B.1",
           stem: "How does the final sentence of \"Inside the Nacelle\" connect to the story's opening?",
           choices: [
             { letter: "A", text: "Kiri, who froze at the foot of the ladder, now looks ahead to the next climb." },
@@ -283,6 +297,7 @@
         {
           id: "theme",
           sol: "11.RL.1.A",
+          sub: "11.RL.1.A.1",
           stem: "Which theme is best developed by Anwar's hours in the control van?",
           choices: [
             { letter: "A", text: "Scientists rarely explain their work to younger helpers." },
@@ -294,7 +309,8 @@
         },
         {
           id: "notebook",
-          sol: "11.RL.1.B",
+          sol: "11.RL.1.C",
+          sub: "11.RL.1.C.2",
           stem: "Based on sentences 24–25, the reader can infer that by the end of the dive Anwar —",
           choices: [
             { letter: "A", text: "has begun to notice details in the mud that he once ignored" },
@@ -307,6 +323,7 @@
         {
           id: "szabo",
           sol: "11.RL.1.C",
+          sub: "11.RL.1.C.1",
           stem: "Which statement best describes Dr. Szabo as she is shown in sentences 5–9?",
           choices: [
             { letter: "A", text: "She is impatient with Anwar's lack of experience." },
@@ -318,7 +335,8 @@
         },
         {
           id: "blanket",
-          sol: "11.RL.2.A",
+          sol: "11.RL.2.C",
+          sub: "11.RL.2.C.2",
           stem: "In sentence 15, comparing the octopus's grip to a person pulling a blanket closer mainly suggests that the octopus is —",
           choices: [
             { letter: "A", text: "frightened and about to flee into the dark" },
@@ -331,6 +349,7 @@
         {
           id: "secret",
           sol: "11.RL.2.B",
+          sub: "11.RL.2.B.1",
           stem: "The detail in sentence 7, that Dr. Szabo leans in as though the mud might tell her a secret, contributes a tone of —",
           choices: [
             { letter: "A", text: "mocking humor" },
@@ -342,7 +361,8 @@
         },
         {
           id: "waiting",
-          sol: "11.RL.2.C",
+          sol: "11.RL.2.B",
+          sub: "11.RL.2.B.2",
           stem: "In sentence 20, Anwar's realization that waiting was not the same as nothing happening most nearly means that —",
           choices: [
             { letter: "A", text: "slow change in the deep sea is still real change" },
@@ -354,7 +374,8 @@
         },
         {
           id: "fourthhour",
-          sol: "11.RL.3.A",
+          sol: "11.RL.1.B",
+          sub: "11.RL.1.B.1",
           stem: "The author places the octopus in the fourth hour, after sentences 1–10 describe only mud, mainly to —",
           choices: [
             { letter: "A", text: "show that the vehicle's camera was broken for most of the dive" },
@@ -401,6 +422,7 @@
         {
           id: "theme",
           sol: "11.RL.1.A",
+          sub: "11.RL.1.A.1",
           stem: "Which theme does the blooming of the plain behind Meekulu Selma's house most clearly support?",
           choices: [
             { letter: "A", text: "Grandparents usually know more than their grandchildren." },
@@ -412,7 +434,8 @@
         },
         {
           id: "smile",
-          sol: "11.RL.1.B",
+          sol: "11.RL.1.C",
+          sub: "11.RL.1.C.2",
           stem: "Meekulu Selma's smile in sentence 3 suggests that she —",
           choices: [
             { letter: "A", text: "agrees that the plain behind the house is lifeless" },
@@ -425,6 +448,7 @@
         {
           id: "change",
           sol: "11.RL.1.C",
+          sub: "11.RL.1.C.2",
           stem: "Which statement best describes how Ndapewa changes from sentence 3 to sentence 23?",
           choices: [
             { letter: "A", text: "She moves from dismissing the plain to helping save its seeds." },
@@ -436,7 +460,8 @@
         },
         {
           id: "invitation",
-          sol: "11.RL.2.A",
+          sol: "11.RL.2.C",
+          sub: "11.RL.2.C.2",
           stem: "In sentence 14, the beetles moving as if they had been waiting for an invitation suggests that the insects —",
           choices: [
             { letter: "A", text: "were confused by the bright morning light" },
@@ -448,7 +473,8 @@
         },
         {
           id: "politerain",
-          sol: "11.RL.2.B",
+          sol: "11.RL.2.C",
+          sub: "11.RL.2.C.2",
           stem: "The contrast between the polite rain of the city (sentence 5) and the storm in sentence 6 mainly emphasizes that the desert rain is —",
           choices: [
             { letter: "A", text: "gentle and steady" },
@@ -461,6 +487,7 @@
         {
           id: "listening",
           sol: "11.RL.2.C",
+          sub: "11.RL.2.C.2",
           stem: "In sentence 9, when Meekulu Selma says The plain is listening, she most nearly means that —",
           choices: [
             { letter: "A", text: "someone is hiding out on the plain" },
@@ -472,7 +499,8 @@
         },
         {
           id: "jar",
-          sol: "11.RL.3.A",
+          sol: "11.RL.1.B",
+          sub: "11.RL.1.B.1",
           stem: "Why does the author include the jar of seeds in sentences 19–20?",
           choices: [
             { letter: "A", text: "to reveal that the grandmother planted the flowers in secret" },
@@ -519,6 +547,7 @@
         {
           id: "theme",
           sol: "11.RL.1.A",
+          sub: "11.RL.1.A.1",
           stem: "Which idea does \"Turbines at Dusk\" develop about the grandfather and the turbines?",
           choices: [
             { letter: "A", text: "Farming matters more than producing electricity." },
@@ -530,7 +559,8 @@
         },
         {
           id: "liked",
-          sol: "11.RL.1.B",
+          sol: "11.RL.1.C",
+          sub: "11.RL.1.C.2",
           stem: "Lines 18–19 suggest that the speaker believes the grandfather —",
           choices: [
             { letter: "A", text: "would have admired the turbines' endurance despite disliking them" },
@@ -543,6 +573,7 @@
         {
           id: "owed",
           sol: "11.RL.1.C",
+          sub: "11.RL.1.C.2",
           stem: "Line 2, bent to the ground as if it owed him an answer, characterizes the grandfather as —",
           choices: [
             { letter: "A", text: "lazy and easily discouraged" },
@@ -555,6 +586,7 @@
         {
           id: "swimmer",
           sol: "11.RL.2.A",
+          sub: "11.RL.2.A.1",
           stem: "In line 7, the turbine arms are compared to a swimmer who never reaches shore mainly to suggest that the turbines —",
           choices: [
             { letter: "A", text: "are struggling and close to breaking down" },
@@ -567,6 +599,7 @@
         {
           id: "thief",
           sol: "11.RL.2.B",
+          sub: "11.RL.2.B.1",
           stem: "Lines 8–12 describe the wind first as a thief and then as something that pays back what it took. This shift mainly creates a tone of —",
           choices: [
             { letter: "A", text: "lasting bitterness" },
@@ -578,7 +611,8 @@
         },
         {
           id: "crop",
-          sol: "11.RL.2.C",
+          sol: "11.RL.2.A",
+          sub: "11.RL.2.A.1",
           stem: "In line 3, the word crop is used to suggest that the turbines are —",
           choices: [
             { letter: "A", text: "plants that grow wild along the fence line" },
@@ -590,7 +624,8 @@
         },
         {
           id: "structure",
-          sol: "11.RL.3.A",
+          sol: "11.RL.1.B",
+          sub: "11.RL.1.B.1",
           stem: "How is \"Turbines at Dusk\" organized?",
           choices: [
             { letter: "A", text: "It moves from the grandfather's past on the ridge to the speaker's present there." },
@@ -636,6 +671,7 @@
         {
           id: "theme",
           sol: "11.RL.1.A",
+          sub: "11.RL.1.A.1",
           stem: "Which idea about human exploration does \"Hadal\" most clearly develop?",
           choices: [
             { letter: "A", text: "The deep sea is too dangerous and should be left unexplored." },
@@ -647,7 +683,8 @@
         },
         {
           id: "name",
-          sol: "11.RL.1.B",
+          sol: "11.RL.1.C",
+          sub: "11.RL.1.C.2",
           stem: "Line 14, as if the dark had been waiting for our name, implies that the speaker views the word discovery as —",
           choices: [
             { letter: "A", text: "a perfect description of the camera's important work" },
@@ -660,6 +697,7 @@
         {
           id: "speaker",
           sol: "11.RL.1.C",
+          sub: "11.RL.1.C.2",
           stem: "Lines 12–17 reveal that the speaker of \"Hadal\" is —",
           choices: [
             { letter: "A", text: "humble about humanity's place in the deep sea" },
@@ -672,6 +710,7 @@
         {
           id: "watchman",
           sol: "11.RL.2.A",
+          sub: "11.RL.2.A.1",
           stem: "In line 7, comparing the fish to a night watchman who has forgotten what he guards mainly suggests that the fish —",
           choices: [
             { letter: "A", text: "is fiercely protecting a hidden nest of eggs" },
@@ -683,7 +722,8 @@
         },
         {
           id: "snow",
-          sol: "11.RL.2.B",
+          sol: "11.RL.2.C",
+          sub: "11.RL.2.C.1",
           stem: "Lines 8–9 describe snow that was never cold. This image is best described as —",
           choices: [
             { letter: "A", text: "a literal description of winter weather at sea" },
@@ -695,7 +735,8 @@
         },
         {
           id: "weather",
-          sol: "11.RL.2.C",
+          sol: "11.RL.2.A",
+          sub: "11.RL.2.A.1",
           stem: "In line 19, calling humans the strangest weather their world has ever had most nearly means that, to the deep-sea animals, people are —",
           choices: [
             { letter: "A", text: "a constant danger that changes the water's temperature" },
@@ -707,7 +748,8 @@
         },
         {
           id: "frame",
-          sol: "11.RL.3.A",
+          sol: "11.RL.1.B",
+          sub: "11.RL.1.B.1",
           stem: "How does the last line of \"Hadal\" relate to lines 1–3?",
           choices: [
             { letter: "A", text: "It returns to the lasting dark, framing the human visit as a brief interruption." },
@@ -766,6 +808,7 @@
         {
           id: "theme",
           sol: "11.RL.1.A",
+          sub: "11.RL.1.A.1",
           stem: "Which theme does the debate over the front-page photograph in \"Press Night\" most clearly develop?",
           choices: [
             { letter: "A", text: "Sports coverage matters less than academic news." },
@@ -778,6 +821,7 @@
         {
           id: "didntknow",
           sol: "11.RL.1.B",
+          sub: "11.RL.1.B.1",
           stem: "Jung-hoon's report in sentences 16–17 affects the plot mainly by —",
           choices: [
             { letter: "A", text: "raising the player's uncertainty, which makes the editors pause" },
@@ -790,6 +834,7 @@
         {
           id: "desta",
           sol: "11.RL.1.C",
+          sub: "11.RL.1.C.2",
           stem: "Desta's actions in sentences 29 and 34 show that she is —",
           choices: [
             { letter: "A", text: "stubborn and unwilling to hear any other opinion" },
@@ -801,7 +846,8 @@
         },
         {
           id: "oneframe",
-          sol: "11.RL.2.A",
+          sol: "11.RL.2.C",
+          sub: "11.RL.2.C.2",
           stem: "In sentence 15, Desta calls the photograph the story of the season in one frame. She means that the image —",
           choices: [
             { letter: "A", text: "is the only photo Jung-hoon took all season" },
@@ -813,7 +859,8 @@
         },
         {
           id: "hum",
-          sol: "11.RL.2.B",
+          sol: "11.RL.1.D",
+          sub: "11.RL.1.D.1",
           stem: "The stage direction in sentence 31, in which the only sound is the hum of the laptops, mainly creates a mood of —",
           choices: [
             { letter: "A", text: "celebration" },
@@ -825,7 +872,8 @@
         },
         {
           id: "call",
-          sol: "11.RL.2.C",
+          sol: "11.RL.2.B",
+          sub: "11.RL.2.B.2",
           stem: "In sentence 20, the phrase make this call most nearly means —",
           choices: [
             { letter: "A", text: "telephone the printer" },
@@ -837,7 +885,8 @@
         },
         {
           id: "resolve",
-          sol: "11.RL.3.A",
+          sol: "11.RL.1.B",
+          sub: "11.RL.1.B.1",
           stem: "How does the playwright resolve the central conflict of \"Press Night\"?",
           choices: [
             { letter: "A", text: "by having Ms. Lindqvist choose the photograph herself" },
@@ -883,6 +932,7 @@
         {
           id: "summary",
           sol: "11.RI.1.A",
+          sub: "11.RI.1.A.2",
           stem: "Which statement best summarizes the article about the saguaro?",
           choices: [
             { letter: "A", text: "Its deep central root lets the saguaro reach underground rivers." },
@@ -895,6 +945,7 @@
         {
           id: "pleats",
           sol: "11.RI.1.B",
+          sub: "11.RI.1.B.1",
           stem: "According to the article, what happens to a saguaro's pleats during dry months?",
           choices: [
             { letter: "A", text: "They split open to collect dew from the morning air." },
@@ -907,6 +958,7 @@
         {
           id: "attitude",
           sol: "11.RI.1.C",
+          sub: "11.RI.1.C.1",
           stem: "The author's attitude toward the saguaro's slow growth, as shown in sentences 20–21, is best described as —",
           choices: [
             { letter: "A", text: "admiring" },
@@ -919,6 +971,7 @@
         {
           id: "organize",
           sol: "11.RI.2.A",
+          sub: "11.RI.2.A.1",
           stem: "How does the author organize sentences 3–11 of the saguaro article?",
           choices: [
             { letter: "A", text: "by comparing the saguaro with other desert plants one at a time" },
@@ -931,6 +984,7 @@
         {
           id: "accordion",
           sol: "11.RI.2.B",
+          sub: "11.RI.2.B.2",
           stem: "In sentence 8, the comparison of the pleats to the folds of an accordion helps the reader understand that the pleats —",
           choices: [
             { letter: "A", text: "let the trunk expand and contract" },
@@ -942,7 +996,8 @@
         },
         {
           id: "quote",
-          sol: "11.RI.2.C",
+          sol: "11.RI.2.A",
+          sub: "11.RI.2.A.2",
           stem: "The author includes the quotation from Odalys Ferrer in sentences 18–19 mainly to —",
           choices: [
             { letter: "A", text: "prove that rangers disagree with scientists about saguaros" },
@@ -954,7 +1009,8 @@
         },
         {
           id: "shields",
-          sol: "11.RV.1.C",
+          sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "In sentence 16, the word shields most nearly means —",
           choices: [
             { letter: "A", text: "hides" },
@@ -998,6 +1054,7 @@
         {
           id: "central",
           sol: "11.RI.1.A",
+          sub: "11.RI.1.A.2",
           stem: "Which statement best expresses the central idea of the article on marine snow?",
           choices: [
             { letter: "A", text: "Sea cucumbers are the most important animals on the sea floor." },
@@ -1010,6 +1067,7 @@
         {
           id: "measure",
           sol: "11.RI.1.B",
+          sub: "11.RI.1.B.1",
           stem: "Select TWO details that explain why marine snow is difficult for scientists to measure.",
           choices: [
             { letter: "A", text: "Flakes can fall apart when they are collected." },
@@ -1021,7 +1079,8 @@
         },
         {
           id: "uncertain",
-          sol: "11.RI.1.C",
+          sol: "11.RI.1.B",
+          sub: "11.RI.1.B.1",
           stem: "Which of the following does the article on marine snow present as still uncertain?",
           choices: [
             { letter: "A", text: "whether algae near the surface take in carbon dioxide" },
@@ -1034,6 +1093,7 @@
         {
           id: "organize",
           sol: "11.RI.2.A",
+          sub: "11.RI.2.A.1",
           stem: "How does the author organize the article's discussion of marine snow?",
           choices: [
             { letter: "A", text: "by following the flakes down to the sea floor, then turning to why they are studied" },
@@ -1046,6 +1106,7 @@
         {
           id: "sunbeam",
           sol: "11.RI.2.B",
+          sub: "11.RI.2.B.2",
           stem: "In sentence 3, the comparison to dust in a sunbeam helps the reader picture the flakes as —",
           choices: [
             { letter: "A", text: "bright and dangerous" },
@@ -1057,7 +1118,8 @@
         },
         {
           id: "lastline",
-          sol: "11.RI.2.C",
+          sol: "11.RI.2.A",
+          sub: "11.RI.2.A.2",
           stem: "The author ends the marine snow article with sentence 20 mainly to —",
           choices: [
             { letter: "A", text: "suggest that scientists should stop studying the deep sea" },
@@ -1069,7 +1131,8 @@
         },
         {
           id: "fragile",
-          sol: "11.RV.1.C",
+          sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "In sentence 17, the word fragile most nearly means —",
           choices: [
             { letter: "A", text: "very heavy" },
@@ -1113,6 +1176,7 @@
         {
           id: "summary",
           sol: "11.RI.1.A",
+          sub: "11.RI.1.A.2",
           stem: "Which statement best summarizes the article's explanation of solar panels and heat?",
           choices: [
             { letter: "A", text: "Panels work best in deserts because heat adds energy to the light." },
@@ -1125,6 +1189,7 @@
         {
           id: "voltage",
           sol: "11.RI.1.B",
+          sub: "11.RI.1.B.1",
           stem: "According to the article, what happens to a solar cell as its temperature rises?",
           choices: [
             { letter: "A", text: "The voltage it produces falls." },
@@ -1136,7 +1201,8 @@
         },
         {
           id: "purpose",
-          sol: "11.RI.1.C",
+          sol: "11.RI.2.A",
+          sub: "11.RI.2.A.2",
           stem: "The author's main purpose in the article about panel temperature is to —",
           choices: [
             { letter: "A", text: "persuade readers to install solar panels on their own roofs" },
@@ -1149,6 +1215,7 @@
         {
           id: "tradeoff",
           sol: "11.RI.2.A",
+          sub: "11.RI.2.A.1",
           stem: "Which statement best describes how sentences 9–14 are organized?",
           choices: [
             { letter: "A", text: "A series of events is told in the order in which they occurred." },
@@ -1160,7 +1227,8 @@
         },
         {
           id: "opening",
-          sol: "11.RI.2.B",
+          sol: "11.RI.2.A",
+          sub: "11.RI.2.A.2",
           stem: "The author opens the article about panel temperature with sentences 1–3 mainly to —",
           choices: [
             { letter: "A", text: "argue that deserts are poor places to build solar farms" },
@@ -1173,6 +1241,7 @@
         {
           id: "enemy",
           sol: "11.RI.2.C",
+          sub: "11.RI.2.C.2",
           stem: "In sentence 20, describing heat as the enemy, quietly, mainly functions to —",
           choices: [
             { letter: "A", text: "stress that heat's harm is easy to miss because it arrives with the light" },
@@ -1184,7 +1253,8 @@
         },
         {
           id: "clawback",
-          sol: "11.RV.1.C",
+          sol: "11.RV.1.E",
+          sub: "11.RV.1.E.1",
           stem: "In sentence 11, the phrase claw back most nearly means —",
           choices: [
             { letter: "A", text: "give up willingly" },
@@ -1228,7 +1298,8 @@
       claims: [
         {
           id: "claim",
-          sol: "11.RI.1.A",
+          sol: "11.RI.1.C",
+          sub: "11.RI.1.C.1",
           stem: "Which sentence best states the central claim of the editorial about Fairmont High's parking lot?",
           choices: [
             { letter: "A", text: "Sentence 1, which says the spaces in the lot do one thing: they get hot" },
@@ -1240,7 +1311,8 @@
         },
         {
           id: "classrooms",
-          sol: "11.RI.1.B",
+          sol: "11.RI.1.C",
+          sub: "11.RI.1.C.1",
           stem: "Which detail does the writer use to answer the concern that the money belongs in classrooms?",
           choices: [
             { letter: "A", text: "the number of parking spaces in the student lot" },
@@ -1252,7 +1324,8 @@
         },
         {
           id: "audience",
-          sol: "11.RI.1.C",
+          sol: "11.RI.2.A",
+          sub: "11.RI.2.A.2",
           stem: "The editorial about solar canopies is written mainly for —",
           choices: [
             { letter: "A", text: "engineers who design and build solar canopies" },
@@ -1265,6 +1338,7 @@
         {
           id: "rebuttal",
           sol: "11.RI.2.A",
+          sub: "11.RI.2.A.1",
           stem: "How does the writer organize sentences 7–10 of the editorial?",
           choices: [
             { letter: "A", text: "by stating an opposing view and then answering it with evidence" },
@@ -1276,7 +1350,8 @@
         },
         {
           id: "parallel",
-          sol: "11.RI.2.B",
+          sol: "11.RI.2.A",
+          sub: "11.RI.2.A.2",
           stem: "Sentences 18–19 are built as a parallel pair mainly to —",
           choices: [
             { letter: "A", text: "show that the two options would cost exactly the same" },
@@ -1288,7 +1363,8 @@
         },
         {
           id: "concede",
-          sol: "11.RI.2.C",
+          sol: "11.RI.1.C",
+          sub: "11.RI.1.C.2",
           stem: "In sentences 16–17, the writer admits that canopies are not beautiful mainly in order to —",
           choices: [
             { letter: "A", text: "withdraw the writer's support for the canopy plan" },
@@ -1301,6 +1377,7 @@
         {
           id: "projected",
           sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "In sentence 6, the word projected most nearly means —",
           choices: [
             { letter: "A", text: "estimated for the future" },
@@ -1345,6 +1422,7 @@
         {
           id: "mainidea",
           sol: "11.RI.1.A",
+          sub: "11.RI.1.A.2",
           stem: "Which statement best expresses the main idea of The Mesa Ledger's guidelines?",
           choices: [
             { letter: "A", text: "Only journalism students may publish news stories in the Ledger." },
@@ -1356,7 +1434,8 @@
         },
         {
           id: "late",
-          sol: "11.RI.1.B",
+          sol: "11.RI.1.A",
+          sub: "11.RI.1.A.2",
           stem: "According to the guidelines, what happens to a story received at 5:00 p.m. on the Monday before an issue?",
           choices: [
             { letter: "A", text: "It is returned to the writer without any review." },
@@ -1368,7 +1447,8 @@
         },
         {
           id: "audience",
-          sol: "11.RI.1.C",
+          sol: "11.RI.1.A",
+          sub: "11.RI.1.A.2",
           stem: "The Mesa Ledger's guidelines are written mainly for —",
           choices: [
             { letter: "A", text: "students outside the staff who want to contribute work" },
@@ -1381,6 +1461,7 @@
         {
           id: "headings",
           sol: "11.RI.2.A",
+          sub: "11.RI.2.A.2",
           stem: "The bold headings in The Mesa Ledger's guidelines mainly help a reader —",
           choices: [
             { letter: "A", text: "understand the order in which the paper was founded" },
@@ -1392,7 +1473,8 @@
         },
         {
           id: "private",
-          sol: "11.RI.2.B",
+          sol: "11.RI.2.A",
+          sub: "11.RI.2.A.2",
           stem: "Sentence 11 is placed right after sentence 10 mainly to —",
           choices: [
             { letter: "A", text: "warn writers that their quotations may be removed" },
@@ -1404,7 +1486,8 @@
         },
         {
           id: "meaning",
-          sol: "11.RI.2.C",
+          sol: "11.RI.1.A",
+          sub: "11.RI.1.A.2",
           stem: "Which sentence makes clear that an editor will not change what a writer means without first consulting the writer?",
           choices: [
             { letter: "A", text: "Sentence 13" },
@@ -1416,7 +1499,8 @@
         },
         {
           id: "anonymous",
-          sol: "11.RV.1.A",
+          sol: "11.RV.1.C",
+          sub: "11.RV.1.C.1",
           stem: "The word anonymous in sentence 4 comes from Greek parts meaning without and name. Based on this, anonymous opinions are ones that —",
           choices: [
             { letter: "A", text: "do not identify their writer" },
@@ -1460,7 +1544,8 @@
       claims: [
         {
           id: "inhospitable",
-          sol: "11.RV.1.A",
+          sol: "11.RV.1.C",
+          sub: "11.RV.1.C.1",
           stem: "The word inhospitable in sentence 1 contains the prefix in-, as in incomplete and inactive. Based on this, an inhospitable place is one that —",
           choices: [
             { letter: "A", text: "is crowded with human visitors" },
@@ -1472,7 +1557,8 @@
         },
         {
           id: "symbiotic",
-          sol: "11.RV.1.A",
+          sol: "11.RV.1.C",
+          sub: "11.RV.1.C.1",
           stem: "The word symbiotic in sentence 6 joins sym-, meaning together, with bio, meaning life. This suggests that a symbiotic partnership is one in which two organisms —",
           choices: [
             { letter: "A", text: "live together in a close relationship" },
@@ -1485,6 +1571,7 @@
         {
           id: "tenacious",
           sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "Sentences 9–10 help clarify that tenacious in sentence 8 means —",
           choices: [
             { letter: "A", text: "fragile and easily injured" },
@@ -1497,6 +1584,7 @@
         {
           id: "transient",
           sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "Which sentence best helps the reader understand the meaning of transient in sentence 11?",
           choices: [
             { letter: "A", text: "Sentence 4" },
@@ -1509,6 +1597,7 @@
         {
           id: "conjecture",
           sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "In sentence 14, conjecture most nearly means —",
           choices: [
             { letter: "A", text: "a measurement taken with precise tools" },
@@ -1520,7 +1609,8 @@
         },
         {
           id: "proliferate",
-          sol: "11.RV.1.C",
+          sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "Based on sentences 18–19, the word proliferate most nearly means to —",
           choices: [
             { letter: "A", text: "travel to distant vents" },
@@ -1532,7 +1622,8 @@
         },
         {
           id: "boomtowns",
-          sol: "11.RV.1.C",
+          sol: "11.RV.1.F",
+          sub: "11.RV.1.F.1",
           stem: "In sentence 20, comparing the vent field to a series of boomtowns suggests that vent communities —",
           choices: [
             { letter: "A", text: "are laid out like human cities with streets" },
@@ -1577,7 +1668,8 @@
       claims: [
         {
           id: "inconspicuous",
-          sol: "11.RV.1.A",
+          sol: "11.RV.1.C",
+          sub: "11.RV.1.C.1",
           stem: "The word inconspicuous in sentence 7 adds the prefix in-, meaning not, to conspicuous, meaning easy to notice. Based on this, inconspicuous means —",
           choices: [
             { letter: "A", text: "very easy to see" },
@@ -1589,7 +1681,8 @@
         },
         {
           id: "regenerate",
-          sol: "11.RV.1.A",
+          sol: "11.RV.1.C",
+          sub: "11.RV.1.C.1",
           stem: "The word regenerate in sentence 17 combines re-, meaning again, with a root meaning to produce. To regenerate, a crushed patch of crust must —",
           choices: [
             { letter: "A", text: "dry out during a drought" },
@@ -1602,6 +1695,7 @@
         {
           id: "arid",
           sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "In sentence 4, the clue about rainfall shows that arid means —",
           choices: [
             { letter: "A", text: "very dry" },
@@ -1614,6 +1708,7 @@
         {
           id: "cohesive",
           sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "Sentences 9–10 suggest that a cohesive layer is one that —",
           choices: [
             { letter: "A", text: "breaks apart easily in wind" },
@@ -1626,6 +1721,7 @@
         {
           id: "impede",
           sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "In sentence 11, the word impede most nearly means —",
           choices: [
             { letter: "A", text: "speed up" },
@@ -1637,7 +1733,8 @@
         },
         {
           id: "dormant",
-          sol: "11.RV.1.C",
+          sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "In sentence 13, the phrase appearing dead, and then turn green helps show that dormant means —",
           choices: [
             { letter: "A", text: "inactive but still alive" },
@@ -1649,7 +1746,8 @@
         },
         {
           id: "boots",
-          sol: "11.RV.1.C",
+          sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "In sentence 16, the ranger's reply Not against boots most nearly means that the crust —",
           choices: [
             { letter: "A", text: "can survive almost any kind of harm" },
@@ -1694,6 +1792,7 @@
         {
           id: "both",
           sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "Which fact about the Sawback Ridge proposal appears in both texts?",
           choices: [
             { letter: "A", text: "The turbines would power about nine thousand homes." },
@@ -1706,6 +1805,7 @@
         {
           id: "differ",
           sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "Which statement best describes the main difference between the commission report and Sami's op-ed?",
           choices: [
             { letter: "A", text: "Text 1 reports several viewpoints, while Text 2 argues for one course of action." },
@@ -1718,6 +1818,7 @@
         {
           id: "selecttwo",
           sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "Select TWO details from Text 1 that support the argument Sami makes in Text 2.",
           choices: [
             { letter: "A", text: "the company would pay the county about $600,000 a year" },
@@ -1729,7 +1830,8 @@
         },
         {
           id: "challenge",
-          sol: "11.DSR.E",
+          sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "Which sentence from the commission report does Sami's op-ed most directly challenge?",
           choices: [
             { letter: "A", text: "Sentence 2" },
@@ -1741,7 +1843,8 @@
         },
         {
           id: "disagree",
-          sol: "11.DSR.E",
+          sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "A county resident who read both texts could best conclude that the main disagreement is about —",
           choices: [
             { letter: "A", text: "whether hawks really migrate along the ridge" },
@@ -1753,7 +1856,8 @@
         },
         {
           id: "surveys",
-          sol: "11.RI.1.B",
+          sol: "11.RI.1.A",
+          sub: "11.RI.1.A.2",
           stem: "According to Text 1, why did the wildlife biologist ask for a full year of bird surveys?",
           choices: [
             { letter: "A", text: "Turbine lights confuse birds that fly at night." },
@@ -1765,7 +1869,8 @@
         },
         {
           id: "biologist",
-          sol: "11.RV.1.A",
+          sol: "11.RV.1.C",
+          sub: "11.RV.1.C.1",
           stem: "In sentence 6, biologist combines bio-, meaning life, with -logist, meaning one who studies. A biologist is therefore —",
           choices: [
             { letter: "A", text: "someone who builds wind turbines" },
@@ -1812,6 +1917,7 @@
         {
           id: "agree",
           sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "On which point do Nomvula Dube and Esperanza Ruiz agree?",
           choices: [
             { letter: "A", text: "Most students prefer reading news on phones." },
@@ -1824,6 +1930,7 @@
         {
           id: "survey",
           sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "How does Ruiz's view of the student survey differ from Dube's?",
           choices: [
             { letter: "A", text: "Ruiz claims the survey asked far too few students." },
@@ -1835,7 +1942,8 @@
         },
         {
           id: "costs",
-          sol: "11.DSR.E",
+          sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "Ruiz's suggestion in sentence 20 responds most directly to the problem described in which sentence of Text 1?",
           choices: [
             { letter: "A", text: "Sentence 3" },
@@ -1847,7 +1955,8 @@
         },
         {
           id: "tone",
-          sol: "11.DSR.E",
+          sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "Compared with the tone of Dube's memo, the tone of Ruiz's letter is best described as —",
           choices: [
             { letter: "A", text: "angry and accusing" },
@@ -1859,7 +1968,8 @@
         },
         {
           id: "plan",
-          sol: "11.DSR.E",
+          sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "Using both texts, the plan most likely to satisfy both writers would be —",
           choices: [
             { letter: "A", text: "printing every week and shutting down the website" },
@@ -1871,7 +1981,8 @@
         },
         {
           id: "purpose",
-          sol: "11.RI.1.C",
+          sol: "11.RI.1.A",
+          sub: "11.RI.1.A.2",
           stem: "Dube's main purpose in Text 1 is to —",
           choices: [
             { letter: "A", text: "ask readers to vote on whether to keep printing" },
@@ -1884,6 +1995,7 @@
         {
           id: "waits",
           sol: "11.RI.2.C",
+          sub: "11.RI.2.C.2",
           stem: "In sentence 18, Ruiz contrasts a website that waits with a paper that finds its readers mainly to —",
           choices: [
             { letter: "A", text: "show that print reaches students who would not seek out news" },
@@ -1929,6 +2041,7 @@
         {
           id: "both",
           sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "Which detail about Coyote Wash appears in both the field report and the journal?",
           choices: [
             { letter: "A", text: "The water dropped below one foot by 5:30 p.m." },
@@ -1941,6 +2054,7 @@
         {
           id: "differ",
           sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "How does Tenzin's journal differ from Ranger Mbeki's report in presenting the flood?",
           choices: [
             { letter: "A", text: "It gives exact times and depths that the report leaves out." },
@@ -1952,7 +2066,8 @@
         },
         {
           id: "surprised",
-          sol: "11.DSR.E",
+          sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "Read together, the two texts make clear that the hikers were surprised mainly because —",
           choices: [
             { letter: "A", text: "the trail had been closed, but they ignored the sign" },
@@ -1964,7 +2079,8 @@
         },
         {
           id: "explains",
-          sol: "11.DSR.E",
+          sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "Tenzin's thought in sentence 20 is best explained by which sentence in the field report?",
           choices: [
             { letter: "A", text: "Sentence 1" },
@@ -1977,6 +2093,7 @@
         {
           id: "summary",
           sol: "11.RI.1.A",
+          sub: "11.RI.1.A.2",
           stem: "Which statement best summarizes Ranger Mbeki's field report?",
           choices: [
             { letter: "A", text: "Two hikers were hurt after ignoring a flood warning sign." },
@@ -1989,6 +2106,7 @@
         {
           id: "organize",
           sol: "11.RI.2.A",
+          sub: "11.RI.2.A.1",
           stem: "How is the field report in Text 1 mainly organized?",
           choices: [
             { letter: "A", text: "in time order, followed by recommendations" },
@@ -2000,7 +2118,8 @@
         },
         {
           id: "uninjured",
-          sol: "11.RV.1.A",
+          sol: "11.RV.1.C",
+          sub: "11.RV.1.C.1",
           stem: "The word uninjured in sentence 6 is formed from the prefix un- and the word injured. Based on this, uninjured means —",
           choices: [
             { letter: "A", text: "badly hurt" },
