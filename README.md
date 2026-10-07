@@ -29,6 +29,10 @@ A game uploaded to Canvas can't send anything anywhere, so progress is shown to 
 
 Tests: `node tools/smoke-progress.js` (after `node tools/build-games.js`, `node tools/build-appsscript.js VA|ODY` and `node tools/build-canvas.js VA|ODY`).
 
+## v5.16.0 (2026-10-07) — 9,400 new Virginia questions: every mode, 100 levels, no repeats
+
+The Virginia question bank grew from about 1,180 to about 10,560 questions: **1,407 new packs** in `js/content32.js`–`js/content113.js` (82 files, written to `tools/expansion/PLAN.md` and checked with `tools/expansion/check.js`), the same amount for each grade so Grades 10 and 11 keep their own grade-level questions. Each grade now has about 3,520 questions of its own (G9 3,521, G10 3,521, G11 3,520), enough for all 7 game modes × 100 levels × 5 questions without a repeat; Grade 10's pool (with Grade 9's) is about 7,040 and Grade 11's about 10,560. The new packs follow the levels' passage lengths (tiny for levels 1–8 up to epic for 95–100; Grade 9 now has 298 questions in the level-1 band, more than the 7 modes × 40 the first levels use), use only their grade's own standard codes and spread across all of them. The Canvas bundle is 7.4 MiB gzip in 14 data files (576 KB each, as before); the Canvas zip is 7.5 MiB. `tools/build-games.js` takes the new files from `tools/expansion/accepted.json`.
+
 ## v5.15.2 (2026-10-07) — the Teacher link is hidden from students
 
 The Teacher link starts hidden. A teacher turns it on for their own computer by typing the word **teacher** in the nickname box on the title screen and clicking OK (`afterHours.v1.teacherLink`; the box is cleared, so it never becomes a nickname). The teacher screen has **Hide the Teacher link on this computer**. The READ ME explains it (SECTION 4.0).
