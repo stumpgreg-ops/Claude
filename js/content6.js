@@ -35,6 +35,7 @@
         {
           id: "conflict",
           sol: "10.RL.1.B",
+          sub: "10.RL.1.B.1",
           stem: "The central conflict of the story is best described as a struggle between —",
           choices: [
             { letter: "A", text: "Tobi and the impatient customers in line" },
@@ -47,6 +48,7 @@
         {
           id: "uncle",
           sol: "10.RL.1.C",
+          sub: "10.RL.1.C.1",
           stem: "Sentences 5–6 characterize Uncle Emeka as —",
           choices: [
             { letter: "A", text: "calm and guided by principle" },
@@ -58,7 +60,8 @@
         },
         {
           id: "wrench",
-          sol: "10.RL.2.A",
+          sol: "10.RL.2.B",
+          sub: "10.RL.2.B.2",
           stem: "The comparison in sentence 6, as if he were explaining how a wrench worked, suggests that to Uncle Emeka the decision is —",
           choices: [
             { letter: "A", text: "a difficult sacrifice he makes reluctantly" },
@@ -71,6 +74,7 @@
         {
           id: "dissolved",
           sol: "10.RL.2.C",
+          sub: "10.RL.2.C.2",
           stem: "In sentence 9, the word dissolved most nearly means —",
           choices: [
             { letter: "A", text: "argued loudly" },
@@ -83,6 +87,7 @@
         {
           id: "theme",
           sol: "10.RL.1.A",
+          sub: "10.RL.1.A.1",
           stem: "Which theme does the story of the outage most clearly develop?",
           choices: [
             { letter: "A", text: "People remember how they were treated when they were in need." },
@@ -94,7 +99,8 @@
         },
         {
           id: "structure",
-          sol: "10.RL.3.A",
+          sol: "10.RL.1.B",
+          sub: "10.RL.1.B.1",
           stem: "The author places the very short sentences 10 and 11 right after the line of customers leaves mainly to —",
           choices: [
             { letter: "A", text: "show that Tobi is too tired to think clearly" },
@@ -132,6 +138,7 @@
         {
           id: "inherit",
           sol: "10.RL.1.C",
+          sub: "10.RL.1.C.1",
           stem: "Sentence 5 shows that, at first, Mara —",
           choices: [
             { letter: "A", text: "wants to sell the weather station" },
@@ -144,6 +151,7 @@
         {
           id: "turn",
           sol: "10.RL.1.B",
+          sub: "10.RL.1.B.1",
           stem: "Which sentence marks the turning point in the story's action?",
           choices: [
             { letter: "A", text: "Sentence 2" },
@@ -155,7 +163,8 @@
         },
         {
           id: "mood",
-          sol: "10.RL.2.B",
+          sol: "10.RL.2.C",
+          sub: "10.RL.2.C.1",
           stem: "The details in sentence 3 — the frost, the shut door, the untouched box — mainly create a mood of —",
           choices: [
             { letter: "A", text: "stillness and loss" },
@@ -168,6 +177,7 @@
         {
           id: "crust",
           sol: "10.RL.2.C",
+          sub: "10.RL.2.C.2",
           stem: "In sentence 8, the word crust most nearly means —",
           choices: [
             { letter: "A", text: "a deep pool" },
@@ -180,6 +190,7 @@
         {
           id: "theme",
           sol: "10.RL.1.A",
+          sub: "10.RL.1.A.1",
           stem: "Which statement best expresses the story's theme about inheritance?",
           choices: [
             { letter: "A", text: "Teenagers should be required to continue family traditions." },
@@ -191,7 +202,8 @@
         },
         {
           id: "ending",
-          sol: "10.RL.3.A",
+          sol: "10.RL.1.B",
+          sub: "10.RL.1.B.1",
           stem: "The final two sentences (12–13) mainly serve to —",
           choices: [
             { letter: "A", text: "explain why Mara has stopped trusting her phone" },
@@ -232,7 +244,8 @@
       claims: [
         {
           id: "stagedir",
-          sol: "9.RL.3.B",
+          sol: "9.RL.1.D",
+          sub: "9.RL.1.D.2",
           stem: "The stage direction in sentence 9, in which Dev whistles and points, mainly shows that Dev —",
           choices: [
             { letter: "A", text: "is impatient for the drill to be over" },
@@ -245,6 +258,7 @@
         {
           id: "renata",
           sol: "10.RL.1.C",
+          sub: "10.RL.1.C.1",
           stem: "In sentences 1–5, Renata is best described as —",
           choices: [
             { letter: "A", text: "anxious and rule-following" },
@@ -257,6 +271,7 @@
         {
           id: "evidence",
           sol: "10.RL.1.B",
+          sub: "10.RL.1.B.2",
           stem: "Which sentence best explains why Dev is certain the alarm is only a drill?",
           choices: [
             { letter: "A", text: "Sentence 2" },
@@ -269,6 +284,7 @@
         {
           id: "decided",
           sol: "10.RL.2.C",
+          sub: "10.RL.2.C.2",
           stem: "In sentence 11, Dev's use of the word decided suggests that his classmates —",
           choices: [
             { letter: "A", text: "voted on which students would lead the drill" },
@@ -281,6 +297,7 @@
         {
           id: "theme",
           sol: "10.RL.1.A",
+          sub: "10.RL.1.A.1",
           stem: "Which idea does the fire-drill scene most clearly develop?",
           choices: [
             { letter: "A", text: "Fire drills waste valuable class time." },
@@ -292,7 +309,8 @@
         },
         {
           id: "ending",
-          sol: "10.RL.3.A",
+          sol: "10.RL.1.B",
+          sub: "10.RL.1.B.2",
           stem: "The scene ends with Ask me next drill (sentence 16) mainly to —",
           choices: [
             { letter: "A", text: "suggest that Dev is avoiding Renata's question forever" },
@@ -331,6 +349,7 @@
         {
           id: "secondchair",
           sol: "10.RL.1.C",
+          sub: "10.RL.1.C.1",
           stem: "Sentences 2–3 suggest that Jonah's preference for second chair is really about —",
           choices: [
             { letter: "A", text: "loyalty to Ines and the rest of the section" },
@@ -343,6 +362,7 @@
         {
           id: "paradox",
           sol: "10.RL.2.B",
+          sub: "10.RL.2.B.2",
           stem: "Sentence 6, Jonah played every note correctly, and none of it was right, is best understood to mean that —",
           choices: [
             { letter: "A", text: "the sheet music Jonah was given contained errors" },
@@ -355,6 +375,7 @@
         {
           id: "ines",
           sol: "10.RL.1.B",
+          sub: "10.RL.1.B.1",
           stem: "Ines's words in sentence 10 function in the plot as —",
           choices: [
             { letter: "A", text: "a warning that Jonah will lose his chair when she returns" },
@@ -366,7 +387,8 @@
         },
         {
           id: "stair",
-          sol: "10.RL.2.A",
+          sol: "10.RL.2.B",
+          sub: "10.RL.2.B.2",
           stem: "The simile in sentence 11, a feeling like missing a stair, conveys Jonah's —",
           choices: [
             { letter: "A", text: "sudden, unsettling recognition of a truth about himself" },
@@ -378,7 +400,8 @@
         },
         {
           id: "ending",
-          sol: "10.RL.3.A",
+          sol: "10.RL.2.C",
+          sub: "10.RL.2.C.2",
           stem: "In sentence 12, the repetition of and it was wrong, and it was his mainly emphasizes that —",
           choices: [
             { letter: "A", text: "Jonah's mistake ruined the spring concert" },
@@ -391,6 +414,7 @@
         {
           id: "theme",
           sol: "10.RL.1.A",
+          sub: "10.RL.1.A.1",
           stem: "Which theme does Jonah's promotion to first chair most fully develop?",
           choices: [
             { letter: "A", text: "Leading means accepting that your mistakes are yours alone." },
@@ -430,6 +454,7 @@
         {
           id: "goalposts",
           sol: "10.RL.2.A",
+          sub: "10.RL.2.A.3",
           stem: "In lines 2–3, comparing the goalposts to letters spelling a word nobody will read till April mainly suggests that —",
           choices: [
             { letter: "A", text: "the field's purpose is suspended until spring" },
@@ -441,7 +466,8 @@
         },
         {
           id: "tone",
-          sol: "10.RL.2.B",
+          sol: "10.RL.2.C",
+          sub: "10.RL.2.C.1",
           stem: "The speaker's tone in the final three lines is best described as —",
           choices: [
             { letter: "A", text: "bitter and defeated" },
@@ -453,7 +479,8 @@
         },
         {
           id: "liars",
-          sol: "10.RL.2.C",
+          sol: "10.RL.2.B",
+          sub: "10.RL.2.B.2",
           stem: "The speaker calls the seedlings small green liars (line 14) because they —",
           choices: [
             { letter: "A", text: "have been planted in the wrong season" },
@@ -466,6 +493,7 @@
         {
           id: "theme",
           sol: "10.RL.1.A",
+          sub: "10.RL.1.A.1",
           stem: "Which statement best expresses the central idea of the greenhouse poem?",
           choices: [
             { letter: "A", text: "Winter is the hardest season for a school garden." },
@@ -477,7 +505,8 @@
         },
         {
           id: "structure",
-          sol: "10.RL.3.A",
+          sol: "10.RL.2.A",
+          sub: "10.RL.2.A.1",
           stem: "How does the structure of the greenhouse poem develop its meaning?",
           choices: [
             { letter: "A", text: "It moves from a general statement to a list of examples." },
@@ -490,6 +519,7 @@
         {
           id: "ferreira",
           sol: "10.RL.1.C",
+          sub: "10.RL.1.C.1",
           stem: "Lines 7–11 characterize Mr. Ferreira as —",
           choices: [
             { letter: "A", text: "strict about following gardening rules" },
@@ -535,6 +565,7 @@
         {
           id: "conflict",
           sol: "10.RL.1.B",
+          sub: "10.RL.1.B.1",
           stem: "The tension in the closing-shift scene comes mainly from —",
           choices: [
             { letter: "A", text: "Kwame's refusal to let Samira leave early" },
@@ -546,7 +577,8 @@
         },
         {
           id: "metaphor",
-          sol: "10.RL.2.A",
+          sol: "10.RL.2.B",
+          sub: "10.RL.2.B.2",
           stem: "In sentence 7, a person mopping around a conversation, Kwame uses the image of mopping to suggest that Samira is —",
           choices: [
             { letter: "A", text: "working harder than he is" },
@@ -559,6 +591,7 @@
         {
           id: "kwame",
           sol: "10.RL.1.C",
+          sub: "10.RL.1.C.1",
           stem: "Sentence 19 reveals that Kwame —",
           choices: [
             { letter: "A", text: "can move past his hurt feelings to support his friend" },
@@ -571,6 +604,7 @@
         {
           id: "wreck",
           sol: "10.RL.2.C",
+          sub: "10.RL.2.C.2",
           stem: "In sentence 15, the word wreck most nearly means —",
           choices: [
             { letter: "A", text: "delay" },
@@ -582,7 +616,8 @@
         },
         {
           id: "stagedir",
-          sol: "9.RL.3.B",
+          sol: "9.RL.1.D",
+          sub: "9.RL.1.D.2",
           stem: "The stage direction in sentence 16 about the sound of the drawer mainly serves to —",
           choices: [
             { letter: "A", text: "show that the shop is about to be robbed" },
@@ -594,7 +629,8 @@
         },
         {
           id: "final",
-          sol: "10.RL.3.A",
+          sol: "10.RL.2.B",
+          sub: "10.RL.2.B.2",
           stem: "The final stage direction (sentence 20), in which the two clean squares meet in the middle, most likely symbolizes —",
           choices: [
             { letter: "A", text: "the friends' reconciliation after the argument" },
@@ -634,6 +670,7 @@
         {
           id: "curator",
           sol: "10.RL.2.C",
+          sub: "10.RL.2.C.2",
           stem: "In sentence 2, the word curator most nearly refers to someone who —",
           choices: [
             { letter: "A", text: "cleans and repairs damaged items" },
@@ -645,7 +682,8 @@
         },
         {
           id: "census",
-          sol: "10.RL.2.A",
+          sol: "10.RL.2.B",
+          sub: "10.RL.2.B.2",
           stem: "In sentence 4, comparing the log to a census of the building's private life suggests that the log —",
           choices: [
             { letter: "A", text: "lists every student enrolled at the school" },
@@ -658,6 +696,7 @@
         {
           id: "confidence",
           sol: "10.RL.1.C",
+          sub: "10.RL.1.C.1",
           stem: "The phrase in sentence 8, with the confidence of somebody who has never been in the bin, characterizes the narrator as —",
           choices: [
             { letter: "A", text: "certain of her theory because she never imagines herself as one of its subjects" },
@@ -669,7 +708,8 @@
         },
         {
           id: "irony",
-          sol: "10.RL.2.B",
+          sol: "10.RL.2.D",
+          sub: "10.RL.2.D.2",
           stem: "The ending of the lost-and-found story is ironic mainly because the narrator —",
           choices: [
             { letter: "A", text: "finds the scarf in the library rather than at her cousin's house" },
@@ -681,7 +721,8 @@
         },
         {
           id: "pov",
-          sol: "10.RL.3.A",
+          sol: "10.RL.2.D",
+          sub: "10.RL.2.D.1",
           stem: "The first-person point of view is important to the lost-and-found story mainly because it —",
           choices: [
             { letter: "A", text: "lets the reader learn the history of the school's lost-and-found" },
@@ -694,6 +735,7 @@
         {
           id: "theme",
           sol: "10.RL.1.A",
+          sub: "10.RL.1.A.1",
           stem: "Which theme is most fully developed by the narrator's discovery of the scarf?",
           choices: [
             { letter: "A", text: "Adults usually know more about students than students realize." },
@@ -734,6 +776,7 @@
         {
           id: "package",
           sol: "10.RL.2.A",
+          sub: "10.RL.2.A.3",
           stem: "In line 2, comparing the mother's words to a package I was signing for suggests that the pharmacist —",
           choices: [
             { letter: "A", text: "is in a hurry to finish with the family" },
@@ -745,7 +788,8 @@
         },
         {
           id: "mirror",
-          sol: "10.RL.2.B",
+          sol: "10.RL.2.A",
+          sub: "10.RL.2.A.3",
           stem: "The image in line 8 — a room shrinks when you carry a mirror out of it — most strongly conveys that translation —",
           choices: [
             { letter: "A", text: "removes some fullness from what is said" },
@@ -757,7 +801,8 @@
         },
         {
           id: "structure",
-          sol: "10.RL.3.A",
+          sol: "10.RL.2.A",
+          sub: "10.RL.2.A.1",
           stem: "Lines 9–11 are arranged mainly to —",
           choices: [
             { letter: "A", text: "explain why the mother stopped learning the speaker's language" },
@@ -770,6 +815,7 @@
         {
           id: "generic",
           sol: "10.RL.2.C",
+          sub: "10.RL.2.C.2",
           stem: "As used in line 11, the word generic most nearly refers to —",
           choices: [
             { letter: "A", text: "a common, ordinary experience" },
@@ -781,7 +827,8 @@
         },
         {
           id: "tone",
-          sol: "10.RL.2.B",
+          sol: "10.RL.2.C",
+          sub: "10.RL.2.C.1",
           stem: "The tone of line 15 is best described as —",
           choices: [
             { letter: "A", text: "quietly tender" },
@@ -794,6 +841,7 @@
         {
           id: "paradox",
           sol: "10.RL.1.A",
+          sub: "10.RL.1.A.1",
           stem: "Line 12, Between us we own a whole language, and neither of us can speak it, best supports which theme?",
           choices: [
             { letter: "A", text: "Children should always translate for their parents." },

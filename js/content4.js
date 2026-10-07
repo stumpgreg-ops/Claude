@@ -40,6 +40,7 @@
         {
           id: "central",
           sol: "9.RI.1.A",
+          sub: "9.RI.1.A.1",
           stem: "Which sentence best expresses the article's central idea?",
           choices: [
             { letter: "A", text: "Sentence 1" },
@@ -51,7 +52,8 @@
         },
         {
           id: "detail",
-          sol: "9.RI.1.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "According to the passage, what happened to pigeons whose sense of smell was blocked?",
           choices: [
             { letter: "A", text: "They flew in circles rather than heading toward the loft." },
@@ -64,6 +66,7 @@
         {
           id: "structure",
           sol: "9.RI.2.A",
+          sub: "9.RI.2.A.1",
           stem: "The author organizes sentences 5–13 mainly by —",
           choices: [
             { letter: "A", text: "comparing young pigeons with older, experienced pigeons" },
@@ -75,7 +78,8 @@
         },
         {
           id: "wordmean",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In sentence 15, the word scramble most nearly means to —",
           choices: [
             { letter: "A", text: "climb quickly over" },
@@ -87,7 +91,8 @@
         },
         {
           id: "question",
-          sol: "9.RI.2.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "The author includes the question in sentence 3 mainly to —",
           choices: [
             { letter: "A", text: "set up the explanation that the rest of the article provides" },
@@ -99,7 +104,8 @@
         },
         {
           id: "evidence",
-          sol: "9.RI.3.A",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "Which sentence offers the strongest evidence that smell helps pigeons navigate?",
           choices: [
             { letter: "A", text: "Sentence 8" },
@@ -143,6 +149,7 @@
         {
           id: "mainidea",
           sol: "9.RI.1.A",
+          sub: "9.RI.1.A.1",
           stem: "The passage is mainly about —",
           choices: [
             { letter: "A", text: "how mowing direction creates the light and dark stripes on a field" },
@@ -154,7 +161,8 @@
         },
         {
           id: "detail",
-          sol: "9.RI.1.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "According to the passage, what happens to the stripes when a viewer walks to the opposite end of the field?",
           choices: [
             { letter: "A", text: "They disappear until the field is mowed again." },
@@ -167,6 +175,7 @@
         {
           id: "structure",
           sol: "9.RI.2.A",
+          sub: "9.RI.2.A.1",
           stem: "Sentences 5–8 are organized mainly as —",
           choices: [
             { letter: "A", text: "a comparison between two different kinds of grass" },
@@ -178,7 +187,8 @@
         },
         {
           id: "wordmean",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In sentence 16, the word crisp most nearly means —",
           choices: [
             { letter: "A", text: "cool and dry" },
@@ -190,7 +200,8 @@
         },
         {
           id: "purpose",
-          sol: "9.RI.1.C",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "The author includes sentences 12 and 13 mainly to —",
           choices: [
             { letter: "A", text: "explain why referees prefer to stand on the sideline" },
@@ -202,7 +213,8 @@
         },
         {
           id: "opening",
-          sol: "9.RI.2.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "The author begins with sentences 1–3 mainly to —",
           choices: [
             { letter: "A", text: "describe the colors used to paint the field" },
@@ -243,6 +255,7 @@
         {
           id: "central",
           sol: "9.RI.1.A",
+          sub: "9.RI.1.A.1",
           stem: "Which statement best expresses the central idea of the passage?",
           choices: [
             { letter: "A", text: "A snow-day decision is a careful, step-by-step process that balances safety against real costs." },
@@ -254,7 +267,8 @@
         },
         {
           id: "detail",
-          sol: "9.RI.1.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "Which factor does the passage say can close school even when no snow has fallen?",
           choices: [
             { letter: "A", text: "a forecast that the temperature will rise" },
@@ -267,6 +281,7 @@
         {
           id: "structure",
           sol: "9.RI.2.A",
+          sub: "9.RI.2.A.1",
           stem: "Sentences 1–15 are arranged mainly in —",
           choices: [
             { letter: "A", text: "order of importance, from the least serious risk to the most" },
@@ -278,7 +293,8 @@
         },
         {
           id: "wordmean",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In sentence 7, the word passable most nearly means —",
           choices: [
             { letter: "A", text: "covered with salt" },
@@ -290,7 +306,8 @@
         },
         {
           id: "contrast",
-          sol: "9.RI.2.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "The author pairs sentences 4 and 5 mainly to —",
           choices: [
             { letter: "A", text: "emphasize that the road check uses a stricter standard than ordinary driving" },
@@ -302,7 +319,8 @@
         },
         {
           id: "evidence",
-          sol: "9.RI.3.A",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "Which sentence best supports the idea that staying open also carries a risk?",
           choices: [
             { letter: "A", text: "Sentence 9" },
@@ -344,6 +362,7 @@
         {
           id: "central",
           sol: "9.RI.1.A",
+          sub: "9.RI.1.A.1",
           stem: "Which statement best captures the passage's central idea?",
           choices: [
             { letter: "A", text: "Tree rings, read carefully and in large numbers, preserve a long record of regional weather." },
@@ -356,6 +375,7 @@
         {
           id: "structure",
           sol: "9.RI.2.A",
+          sub: "9.RI.2.A.1",
           stem: "How does the author organize sentences 11–15?",
           choices: [
             { letter: "A", text: "by listing the steps a researcher follows to date a wooden beam" },
@@ -367,7 +387,8 @@
         },
         {
           id: "evidence",
-          sol: "9.RI.3.A",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "Which sentence gives the strongest support for the claim in sentence 7 that the work reaches beyond a single stump?",
           choices: [
             { letter: "A", text: "Sentence 4" },
@@ -379,7 +400,8 @@
         },
         {
           id: "wordmean",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In sentence 11, the word practitioners refers to —",
           choices: [
             { letter: "A", text: "the trees that record the weather" },
@@ -391,7 +413,8 @@
         },
         {
           id: "barcode",
-          sol: "9.RI.2.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "The comparison to bar codes in sentence 8 helps the reader understand that ring patterns —",
           choices: [
             { letter: "A", text: "can be matched from one tree to another like identical labels" },
@@ -403,7 +426,8 @@
         },
         {
           id: "ending",
-          sol: "9.RI.1.C",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "The author ends with sentences 16 and 17 mainly to —",
           choices: [
             { letter: "A", text: "argue that trees are unreliable witnesses because they cannot speak" },
@@ -447,7 +471,8 @@
       claims: [
         {
           id: "purpose",
-          sol: "9.RI.1.C",
+          sol: "9.RI.2.A",
+          sub: "9.RI.2.A.1",
           stem: "This form was written mainly to —",
           choices: [
             { letter: "A", text: "persuade students to visit the aquarium on their own" },
@@ -459,7 +484,8 @@
         },
         {
           id: "report",
-          sol: "9.RI.1.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "According to the form, where should students report on the morning of the trip?",
           choices: [
             { letter: "A", text: "the front loop" },
@@ -471,7 +497,8 @@
         },
         {
           id: "deadline",
-          sol: "9.RI.1.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "Why can forms not be accepted after October 16?",
           choices: [
             { letter: "A", text: "The aquarium needs the final count a week before the trip." },
@@ -483,7 +510,8 @@
         },
         {
           id: "headings",
-          sol: "9.RI.2.B",
+          sol: "9.RI.2.A",
+          sub: "9.RI.2.A.1",
           stem: "The bold headings on the form mainly help the reader —",
           choices: [
             { letter: "A", text: "understand why the trip is important" },
@@ -495,7 +523,8 @@
         },
         {
           id: "wordmean",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In sentence 12, the word busywork most nearly means —",
           choices: [
             { letter: "A", text: "a task that keeps students occupied but has little real value" },
@@ -508,6 +537,7 @@
         {
           id: "inference",
           sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "Which statement is best supported by sentences 12 and 13?",
           choices: [
             { letter: "A", text: "Students who attend the trip will not receive a grade for the unit." },
@@ -546,7 +576,8 @@
       claims: [
         {
           id: "note",
-          sol: "9.RI.1.C",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "The booster club's note in sentences 12–14 is included mainly to —",
           choices: [
             { letter: "A", text: "accuse last season's volunteers of stealing from the stand" },
@@ -558,7 +589,8 @@
         },
         {
           id: "tally",
-          sol: "9.RI.1.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "According to the sheet, why must sales be recorded by item rather than only by dollar amount?",
           choices: [
             { letter: "A", text: "The boosters use the item counts to reorder supplies." },
@@ -571,6 +603,7 @@
         {
           id: "grouping",
           sol: "9.RI.2.A",
+          sub: "9.RI.2.A.1",
           stem: "The instructions in sentences 2–11 are grouped mainly according to —",
           choices: [
             { letter: "A", text: "how difficult each task is for a new volunteer" },
@@ -582,7 +615,8 @@
         },
         {
           id: "wordmean",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In sentence 4, the word negotiable most nearly means —",
           choices: [
             { letter: "A", text: "printed in large letters" },
@@ -594,7 +628,8 @@
         },
         {
           id: "response",
-          sol: "9.RI.3.A",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "Which TWO rules on the sheet most directly respond to the problem described in sentence 13? Select TWO.",
           choices: [
             { letter: "A", text: "Every sale is written on the tally sheet by item (sentence 5)." },
@@ -606,7 +641,8 @@
         },
         {
           id: "whistle",
-          sol: "9.RI.2.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "The phrase the final whistle plus cleanup in sentence 1 tells second-shift volunteers that —",
           choices: [
             { letter: "A", text: "they may leave as soon as the game ends" },
@@ -652,6 +688,7 @@
         {
           id: "proposal",
           sol: "9.RI.1.A",
+          sub: "9.RI.1.A.1",
           stem: "Which sentence states the writer's proposal most directly?",
           choices: [
             { letter: "A", text: "Sentence 1" },
@@ -663,7 +700,8 @@
         },
         {
           id: "research",
-          sol: "9.RI.3.A",
+          sol: "9.RI.1.C",
+          sub: "9.RI.1.C.1",
           stem: "Which sentence supplies research evidence rather than personal observation?",
           choices: [
             { letter: "A", text: "Sentence 3" },
@@ -675,7 +713,8 @@
         },
         {
           id: "objections",
-          sol: "9.RI.2.A",
+          sol: "9.RI.1.C",
+          sub: "9.RI.1.C.2",
           stem: "In sentences 10–16, the writer handles the objections to the plan by —",
           choices: [
             { letter: "A", text: "answering the first briefly and treating the second as a problem to solve" },
@@ -687,7 +726,8 @@
         },
         {
           id: "wordmean",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In sentence 15, the word logistics most nearly means —",
           choices: [
             { letter: "A", text: "the reasons a plan should be rejected" },
@@ -700,6 +740,7 @@
         {
           id: "arriving",
           sol: "9.RI.2.B",
+          sub: "9.RI.2.B.2",
           stem: "The phrase present but no longer arriving in sentence 8 describes students who are —",
           choices: [
             { letter: "A", text: "in the room but no longer mentally engaged" },
@@ -711,7 +752,8 @@
         },
         {
           id: "ending",
-          sol: "9.RI.1.C",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "The writer ends with sentences 17–19 mainly to —",
           choices: [
             { letter: "A", text: "admit that the plan will probably fail" },
@@ -751,6 +793,7 @@
         {
           id: "claim",
           sol: "9.RI.1.A",
+          sub: "9.RI.1.A.1",
           stem: "Which sentence best expresses the writer's central claim?",
           choices: [
             { letter: "A", text: "Sentence 1" },
@@ -762,7 +805,8 @@
         },
         {
           id: "evidence",
-          sol: "9.RI.3.A",
+          sol: "9.RI.3.B",
+          sub: "9.RI.3.B.1",
           stem: "Which choice best describes the evidence offered in sentence 13?",
           choices: [
             { letter: "A", text: "a district-wide study that settles the question" },
@@ -774,7 +818,8 @@
         },
         {
           id: "workplace",
-          sol: "9.RI.2.A",
+          sol: "9.RI.1.C",
+          sub: "9.RI.1.C.2",
           stem: "How does the writer respond to the argument presented in sentence 5?",
           choices: [
             { letter: "A", text: "by showing that the workplace comparison leaves out individual consequences" },
@@ -786,7 +831,8 @@
         },
         {
           id: "wordmean",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In sentence 10, the word breeds most nearly means —",
           choices: [
             { letter: "A", text: "trains or teaches" },
@@ -799,6 +845,7 @@
         {
           id: "vanish",
           sol: "9.RI.2.B",
+          sub: "9.RI.2.B.2",
           stem: "The writer's repeated use of forms of the word vanish in sentences 1, 7, and 13 mainly emphasizes —",
           choices: [
             { letter: "A", text: "how quickly most group projects are finished" },
@@ -811,6 +858,7 @@
         {
           id: "narrowing",
           sol: "9.RI.1.C",
+          sub: "9.RI.1.C.2",
           stem: "The writer includes sentences 2 and 3 mainly to —",
           choices: [
             { letter: "A", text: "prove that adults are paid more when they work in groups" },

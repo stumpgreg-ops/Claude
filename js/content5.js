@@ -32,7 +32,8 @@
       claims: [
         {
           id: "novice",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In sentence 1, the word novice most nearly means —",
           choices: [
             { letter: "A", text: "an expert" },
@@ -44,7 +45,8 @@
         },
         {
           id: "assess",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "Rafael's advice in sentence 5, that looking is cheaper than guessing, helps show that assess in sentence 4 means to —",
           choices: [
             { letter: "A", text: "examine something carefully before acting" },
@@ -56,7 +58,8 @@
         },
         {
           id: "tedious",
-          sol: "9.RV.1.E",
+          sol: "9.RV.1.D",
+          sub: "9.RV.1.D.1",
           stem: "The author could have written slow instead of tedious in sentence 6. Compared with slow, the word tedious adds a sense that the work was —",
           choices: [
             { letter: "A", text: "dangerous" },
@@ -68,7 +71,8 @@
         },
         {
           id: "improvise",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In sentence 8, improvise most nearly means to —",
           choices: [
             { letter: "A", text: "follow written directions exactly" },
@@ -80,7 +84,8 @@
         },
         {
           id: "durable",
-          sol: "9.RV.1.B",
+          sol: "9.RV.1.C",
+          sub: "9.RV.1.C.1",
           stem: "The word durable in sentence 10 shares a root with endure and duration. That root carries the idea of —",
           choices: [
             { letter: "A", text: "lasting through time" },
@@ -93,6 +98,7 @@
         {
           id: "patient",
           sol: "9.RV.1.F",
+          sub: "9.RV.1.F.1",
           stem: "In sentence 7, comparing the bike to a patient mainly suggests that the owner —",
           choices: [
             { letter: "A", text: "hopes to become a doctor someday" },
@@ -126,7 +132,8 @@
       claims: [
         {
           id: "calibrated",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In sentence 1, a thermometer that has been calibrated is one that has been —",
           choices: [
             { letter: "A", text: "mounted on a high roof" },
@@ -138,7 +145,8 @@
         },
         {
           id: "erratic",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "Which words from sentence 3 best help the reader understand the meaning of erratic?",
           choices: [
             { letter: "A", text: "For the first week their wind readings" },
@@ -150,7 +158,8 @@
         },
         {
           id: "negligible",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In sentence 5, negligible most nearly means —",
           choices: [
             { letter: "A", text: "too small to matter" },
@@ -162,7 +171,8 @@
         },
         {
           id: "consensus",
-          sol: "9.RV.1.B",
+          sol: "9.RV.1.C",
+          sub: "9.RV.1.C.1",
           stem: "The word consensus in sentence 9 begins with the prefix con-, as in connect and combine. The prefix helps show that a consensus is an opinion that —",
           choices: [
             { letter: "A", text: "changes from one day to the next" },
@@ -174,7 +184,8 @@
         },
         {
           id: "persistent",
-          sol: "9.RV.1.E",
+          sol: "9.RV.1.D",
+          sub: "9.RV.1.D.1",
           stem: "Sentence 10 calls the quality behind the notebook a certain stubbornness. Compared with stubborn, the word persistent in sentence 8 has a connotation that is more —",
           choices: [
             { letter: "A", text: "negative, suggesting a refusal to listen" },
@@ -187,6 +198,7 @@
         {
           id: "straightface",
           sol: "9.RV.1.F",
+          sub: "9.RV.1.F.1",
           stem: "In sentence 2, saying that a bad thermometer lies with a straight face means that it —",
           choices: [
             { letter: "A", text: "shows wrong numbers while looking reliable" },
@@ -220,7 +232,8 @@
       claims: [
         {
           id: "apprentice",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In sentence 1, an apprentice is best described as someone who —",
           choices: [
             { letter: "A", text: "owns a small family business" },
@@ -232,7 +245,8 @@
         },
         {
           id: "monotonous",
-          sol: "9.RV.1.B",
+          sol: "9.RV.1.C",
+          sub: "9.RV.1.C.1",
           stem: "The word monotonous in sentence 3 begins with mono-, as in monologue and monorail. This prefix helps show that monotonous work is work that —",
           choices: [
             { letter: "A", text: "is done by one person alone" },
@@ -244,7 +258,8 @@
         },
         {
           id: "diligent",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In sentence 4, a diligent eye is one that is —",
           choices: [
             { letter: "A", text: "tired and slow" },
@@ -256,7 +271,8 @@
         },
         {
           id: "immaculate",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In sentence 6, immaculate most nearly means —",
           choices: [
             { letter: "A", text: "perfectly clean" },
@@ -268,7 +284,8 @@
         },
         {
           id: "brisk",
-          sol: "9.RV.1.E",
+          sol: "9.RV.1.D",
+          sub: "9.RV.1.D.1",
           stem: "The author could have written busy instead of brisk in sentence 7. Compared with busy, the word brisk adds a sense of —",
           choices: [
             { letter: "A", text: "confusion and stress" },
@@ -281,6 +298,7 @@
         {
           id: "bakedin",
           sol: "9.RV.1.F",
+          sub: "9.RV.1.F.1",
           stem: "In sentence 10, saying the praise had been baked in as carefully as the rolls suggests that Mariko —",
           choices: [
             { letter: "A", text: "forgot to thank Kenji for his help" },
@@ -318,7 +336,8 @@
       claims: [
         {
           id: "formidable",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In sentence 2, the word formidable most nearly means —",
           choices: [
             { letter: "A", text: "friendly and talkative" },
@@ -330,7 +349,8 @@
         },
         {
           id: "deliberate",
-          sol: "9.RV.1.E",
+          sol: "9.RV.1.D",
+          sub: "9.RV.1.D.1",
           stem: "The author could have written slow instead of deliberate in sentence 3. Compared with slow, the word deliberate suggests that Rowan's climbs were —",
           choices: [
             { letter: "A", text: "lazy" },
@@ -342,7 +362,8 @@
         },
         {
           id: "audacious",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In sentence 6, audacious most nearly means —",
           choices: [
             { letter: "A", text: "cautious" },
@@ -354,7 +375,8 @@
         },
         {
           id: "concede",
-          sol: "9.RV.1.B",
+          sol: "9.RV.1.C",
+          sub: "9.RV.1.C.1",
           stem: "The word concede in sentence 10 shares the root cede, meaning to go or yield, with recede and proceed. In the sentence, to concede is to —",
           choices: [
             { letter: "A", text: "give the game to an opponent" },
@@ -366,7 +388,8 @@
         },
         {
           id: "tenacity",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In sentence 12, tenacity most nearly means —",
           choices: [
             { letter: "A", text: "a flash of sudden inspiration" },
@@ -379,6 +402,7 @@
         {
           id: "room",
           sol: "9.RV.1.F",
+          sub: "9.RV.1.F.2",
           stem: "In sentence 13, describing Rowan as someone who had refused to leave a room mainly emphasizes that his victory came from —",
           choices: [
             { letter: "A", text: "endurance rather than brilliance" },
@@ -419,6 +443,7 @@
         {
           id: "agree",
           sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "Which statement would both writers most likely accept?",
           choices: [
             { letter: "A", text: "The machines should be removed for good." },
@@ -431,6 +456,7 @@
         {
           id: "differ",
           sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "Which statement best describes how the two texts differ?",
           choices: [
             { letter: "A", text: "Text 1 blames teachers for the litter; Text 2 blames the custodians." },
@@ -442,7 +468,8 @@
         },
         {
           id: "challenge",
-          sol: "9.DSR.E",
+          sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "Which sentence from Text 1 does the council most directly challenge in sentence 7?",
           choices: [
             { letter: "A", text: "Sentence 1" },
@@ -454,7 +481,8 @@
         },
         {
           id: "selecttwo",
-          sol: "9.DSR.E",
+          sol: "9.DSR.C",
+          sub: "9.DSR.C.1",
           stem: "Select TWO details the council uses to argue against a daytime shutdown.",
           choices: [
             { letter: "A", text: "the cafeteria closes at 12:40" },
@@ -466,7 +494,8 @@
         },
         {
           id: "purpose",
-          sol: "9.RI.1.C",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "The council includes sentence 8 mainly to —",
           choices: [
             { letter: "A", text: "explain why the cafeteria closes early" },
@@ -478,7 +507,8 @@
         },
         {
           id: "synth",
-          sol: "9.DSR.E",
+          sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "Taken together, the two texts best support the conclusion that —",
           choices: [
             { letter: "A", text: "the office intends to remove the machines for good" },
@@ -518,6 +548,7 @@
         {
           id: "agree",
           sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "Which idea do both writers accept?",
           choices: [
             { letter: "A", text: "The walk to Fifth Street is easy for everyone." },
@@ -530,6 +561,7 @@
         {
           id: "differ",
           sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "The two texts differ mainly in how they describe —",
           choices: [
             { letter: "A", text: "the number of students who ride Route 14" },
@@ -541,7 +573,8 @@
         },
         {
           id: "question",
-          sol: "9.DSR.E",
+          sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "Which sentence from Text 1 does the rider most directly question in sentence 9?",
           choices: [
             { letter: "A", text: "Sentence 2" },
@@ -553,7 +586,8 @@
         },
         {
           id: "selecttwo",
-          sol: "9.DSR.E",
+          sol: "9.DSR.C",
+          sub: "9.DSR.C.1",
           stem: "Select TWO details from Text 2 that support the rider's claim that the walk is harder than the notice suggests.",
           choices: [
             { letter: "A", text: "the bus waits through three light cycles" },
@@ -565,7 +599,8 @@
         },
         {
           id: "trade",
-          sol: "9.RV.1.F",
+          sol: "9.RV.1.D",
+          sub: "9.RV.1.D.1",
           stem: "In sentence 13, the rider's distinction between a trade and an upgrade mainly suggests that the change —",
           choices: [
             { letter: "A", text: "helps drivers and riders equally" },
@@ -577,7 +612,8 @@
         },
         {
           id: "synth",
-          sol: "9.DSR.E",
+          sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "Using both texts, a reader can best conclude that the courtesy stop mentioned in sentence 5 —",
           choices: [
             { letter: "A", text: "has already been approved for every family" },
@@ -617,6 +653,7 @@
         {
           id: "agree",
           sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "Both writers would most likely agree that —",
           choices: [
             { letter: "A", text: "the open meetings should be canceled" },
@@ -629,6 +666,7 @@
         {
           id: "differ",
           sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "The two texts differ mainly on the question of —",
           choices: [
             { letter: "A", text: "whether residents have a real voice in the design" },
@@ -640,7 +678,8 @@
         },
         {
           id: "builds",
-          sol: "9.DSR.E",
+          sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "How does sentence 13 of Text 2 use an idea from Text 1?",
           choices: [
             { letter: "A", text: "It repeats the cost figure from sentence 3 to argue that the mural is too expensive." },
@@ -652,7 +691,8 @@
         },
         {
           id: "selecttwo",
-          sol: "9.DSR.E",
+          sol: "9.DSR.C",
+          sub: "9.DSR.C.1",
           stem: "Select TWO sentences from Text 2 that give reasons the columnist thinks the neighborhood's voice may be missing from the design.",
           choices: [
             { letter: "A", text: "Sentence 8" },
@@ -664,7 +704,8 @@
         },
         {
           id: "purpose",
-          sol: "9.RI.1.C",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "The grant summary includes sentence 6 mainly to —",
           choices: [
             { letter: "A", text: "explain how the artists will choose their colors" },
@@ -676,7 +717,8 @@
         },
         {
           id: "synth",
-          sol: "9.DSR.E",
+          sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "Reading the two texts together, a reader learns that —",
           choices: [
             { letter: "A", text: "the plan's meeting schedule may exclude working residents" },
@@ -716,6 +758,7 @@
         {
           id: "agree",
           sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "The two writers agree that the boardwalk has —",
           choices: [
             { letter: "A", text: "made the wetland harder to reach" },
@@ -728,6 +771,7 @@
         {
           id: "differ",
           sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "Which statement best describes a key difference between the texts?",
           choices: [
             { letter: "A", text: "Text 1 measures the boardwalk in numbers; Text 2 records what the numbers miss." },
@@ -739,7 +783,8 @@
         },
         {
           id: "respond",
-          sol: "9.DSR.E",
+          sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "Which sentence from Text 1 does sentence 11 of Text 2 most directly respond to?",
           choices: [
             { letter: "A", text: "Sentence 1" },
@@ -751,7 +796,8 @@
         },
         {
           id: "selecttwo",
-          sol: "9.DSR.E",
+          sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "Select TWO sentences from Text 2 that acknowledge a benefit also reported in Text 1.",
           choices: [
             { letter: "A", text: "Sentence 7" },
@@ -764,6 +810,7 @@
         {
           id: "cracks",
           sol: "9.RV.1.F",
+          sub: "9.RV.1.F.2",
           stem: "In sentence 1, comparing the footpaths to cracks in glass mainly emphasizes that the paths —",
           choices: [
             { letter: "A", text: "were beautiful in the morning light" },
@@ -775,7 +822,8 @@
         },
         {
           id: "synth",
-          sol: "9.DSR.E",
+          sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "Taken together, the texts best support which conclusion?",
           choices: [
             { letter: "A", text: "The boardwalk should be removed so the marsh can recover." },
