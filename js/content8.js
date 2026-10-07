@@ -36,6 +36,7 @@
         {
           id: "novice",
           sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "In sentence 1, novice most nearly means —",
           choices: [
             { letter: "A", text: "beginner" },
@@ -48,6 +49,7 @@
         {
           id: "brittle",
           sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "Which phrase from the passage best shows the meaning of brittle in sentence 6?",
           choices: [
             { letter: "A", text: "old plastic reflectors and sun-baked grips" },
@@ -59,7 +61,8 @@
         },
         {
           id: "durable",
-          sol: "10.RV.1.A",
+          sol: "10.RV.1.C",
+          sub: "10.RV.1.C.1",
           stem: "The word durable in sentence 5 shares a root with endure and duration. The root dur- most nearly means —",
           choices: [
             { letter: "A", text: "to break" },
@@ -71,7 +74,8 @@
         },
         {
           id: "diligent",
-          sol: "10.RV.1.C",
+          sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "In sentence 8, the description of Mr. Ruiz as diligent is supported by the detail that he —",
           choices: [
             { letter: "A", text: "hands out rags and chain oil" },
@@ -83,7 +87,8 @@
         },
         {
           id: "revive",
-          sol: "10.RV.1.A",
+          sol: "10.RV.1.C",
+          sub: "10.RV.1.C.1",
           stem: "The prefix re- and the root viv- (as in survive and vivid) suggest that to revive the bike in sentence 10 means to —",
           choices: [
             { letter: "A", text: "bring it back to life" },
@@ -96,6 +101,7 @@
         {
           id: "frugal",
           sol: "10.RV.1.D",
+          sub: "10.RV.1.D.1",
           stem: "The author chose frugal rather than cheap to describe Mr. Ruiz in sentence 12. Compared with cheap, frugal suggests that he —",
           choices: [
             { letter: "A", text: "refuses to pay his workers fairly" },
@@ -136,6 +142,7 @@
         {
           id: "vigilant",
           sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "Which part of sentence 2 best explains the meaning of vigilant?",
           choices: [
             { letter: "A", text: "a guard's most important skill" },
@@ -147,7 +154,8 @@
         },
         {
           id: "submerged",
-          sol: "10.RV.1.A",
+          sol: "10.RV.1.C",
+          sub: "10.RV.1.C.1",
           stem: "The word submerged in sentence 4 begins with the prefix sub-, as in submarine and subway. Based on this, submerged most nearly means —",
           choices: [
             { letter: "A", text: "floated on the surface" },
@@ -160,6 +168,7 @@
         {
           id: "monotonous",
           sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "In sentence 7, the phrase every length looks exactly like the last one helps show that monotonous means —",
           choices: [
             { letter: "A", text: "painful and tiring" },
@@ -171,7 +180,8 @@
         },
         {
           id: "stamina",
-          sol: "10.RV.1.C",
+          sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "In sentence 8, stamina most nearly means the ability to —",
           choices: [
             { letter: "A", text: "keep going without tiring" },
@@ -184,6 +194,7 @@
         {
           id: "assertive",
           sol: "10.RV.1.D",
+          sub: "10.RV.1.D.1",
           stem: "Ms. Okafor tells the trainees to be assertive rather than bossy. Compared with bossy, the word assertive suggests a manner that is —",
           choices: [
             { letter: "A", text: "loud and angry toward swimmers" },
@@ -195,7 +206,8 @@
         },
         {
           id: "abrupt",
-          sol: "10.RV.1.C",
+          sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "In sentence 13, the word abrupt describes a sound that is —",
           choices: [
             { letter: "A", text: "soft and musical" },
@@ -230,7 +242,8 @@
       claims: [
         {
           id: "cacophony",
-          sol: "10.RV.1.A",
+          sol: "10.RV.1.C",
+          sub: "10.RV.1.C.1",
           stem: "The word cacophony in sentence 2 contains the root phon-, as in telephone and symphony. This root suggests that a cacophony is a kind of —",
           choices: [
             { letter: "A", text: "crowd" },
@@ -243,6 +256,7 @@
         {
           id: "improvise",
           sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "Which detail from sentence 4 best clarifies the meaning of improvise?",
           choices: [
             { letter: "A", text: "Aunt Mei never writes anything down" },
@@ -254,7 +268,8 @@
         },
         {
           id: "surplus",
-          sol: "10.RV.1.A",
+          sol: "10.RV.1.C",
+          sub: "10.RV.1.C.1",
           stem: "The prefix sur- in surplus (sentence 5) means over or above, as in surpass. A surplus is therefore an amount that is —",
           choices: [
             { letter: "A", text: "more than what was needed" },
@@ -266,7 +281,8 @@
         },
         {
           id: "haggle",
-          sol: "10.RV.1.C",
+          sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "In sentence 6, customers who haggle are trying to —",
           choices: [
             { letter: "A", text: "move ahead of others in line" },
@@ -278,7 +294,8 @@
         },
         {
           id: "resourceful",
-          sol: "10.RV.1.C",
+          sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "The examples in sentence 7 show that a resourceful person is one who —",
           choices: [
             { letter: "A", text: "buys new equipment whenever something breaks" },
@@ -291,6 +308,7 @@
         {
           id: "brusque",
           sol: "10.RV.1.D",
+          sub: "10.RV.1.D.2",
           stem: "The author compares Aunt Mei's reply to a slammed drawer in sentence 9. Used this way, brusque carries a connotation of —",
           choices: [
             { letter: "A", text: "shortness caused by hurry" },
@@ -323,7 +341,8 @@
       claims: [
         {
           id: "chronological",
-          sol: "10.RV.1.A",
+          sol: "10.RV.1.C",
+          sub: "10.RV.1.C.1",
           stem: "The word chronological in sentence 2 shares the root chron- with chronic and chronicle. The root carries the idea of —",
           choices: [
             { letter: "A", text: "measurement" },
@@ -335,7 +354,8 @@
         },
         {
           id: "illegible",
-          sol: "10.RV.1.B",
+          sol: "10.RV.1.C",
+          sub: "10.RV.1.C.1",
           stem: "In sentence 4, illegible is built from the prefix il- (not) and the root leg- (read). Which detail from the sentence confirms this meaning?",
           choices: [
             { letter: "A", text: "Decades of moisture had bled the ink" },
@@ -347,7 +367,8 @@
         },
         {
           id: "obsolete",
-          sol: "10.RV.1.C",
+          sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "In sentence 5, obsolete most nearly means —",
           choices: [
             { letter: "A", text: "out of date and no longer used" },
@@ -360,6 +381,7 @@
         {
           id: "scrutinize",
           sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "The phrase checking the corners for cut-off text and the center for the shadow of the binding in sentence 6 shows that to scrutinize something is to —",
           choices: [
             { letter: "A", text: "examine it closely" },
@@ -372,6 +394,7 @@
         {
           id: "nostalgic",
           sol: "10.RV.1.D",
+          sub: "10.RV.1.D.1",
           stem: "In sentence 7, the narrator says the teachers are nostalgic rather than sad. The word nostalgic adds a connotation of —",
           choices: [
             { letter: "A", text: "anger at how the school has changed" },
@@ -383,7 +406,8 @@
         },
         {
           id: "salvaged",
-          sol: "10.RV.1.C",
+          sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "Based on sentence 8, salvaged most nearly means —",
           choices: [
             { letter: "A", text: "sorted into order" },
@@ -424,6 +448,7 @@
         {
           id: "agree",
           sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "Both writers would most likely agree that —",
           choices: [
             { letter: "A", text: "students should not paint in April" },
@@ -436,6 +461,7 @@
         {
           id: "differ",
           sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "Which statement best describes a key difference between the texts?",
           choices: [
             { letter: "A", text: "Text 1 focuses on the design, while Text 2 focuses on preparing the wall safely." },
@@ -447,7 +473,8 @@
         },
         {
           id: "why-may",
-          sol: "10.DSR.E",
+          sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "Based on both texts, why does Mr. Adebayo ask the club to move its painting days to May?",
           choices: [
             { letter: "A", text: "The paint will not arrive until May." },
@@ -459,7 +486,8 @@
         },
         {
           id: "ladder",
-          sol: "10.RI.2.B",
+          sol: "10.RI.2.A",
+          sub: "10.RI.2.A.2",
           stem: "Sentence 12 mainly shows that Mr. Adebayo —",
           choices: [
             { letter: "A", text: "doubts the club can finish" },
@@ -471,7 +499,8 @@
         },
         {
           id: "two",
-          sol: "10.DSR.E",
+          sol: "10.DSR.C",
+          sub: "10.DSR.C.1",
           stem: "Select TWO sentences from Text 2 that explain why the club cannot paint in April.",
           choices: [
             { letter: "A", text: "Sentence 8" },
@@ -483,7 +512,8 @@
         },
         {
           id: "cost",
-          sol: "9.DSR.D",
+          sol: "9.DSR.C",
+          sub: "9.DSR.C.1",
           stem: "Which sentence from Text 1 best supports the claim that the club has planned for the cost of the project?",
           choices: [
             { letter: "A", text: "Sentence 2" },
@@ -524,6 +554,7 @@
         {
           id: "differ",
           sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "The texts differ mainly in that Text 1 —",
           choices: [
             { letter: "A", text: "describes the count as a competition, while Text 2 treats it as a science project" },
@@ -536,6 +567,7 @@
         {
           id: "hawk",
           sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "The detail that the hawk circled the practice field twice (sentence 9) most directly connects to which rule from Text 1?",
           choices: [
             { letter: "A", text: "stay on your route" },
@@ -547,7 +579,8 @@
         },
         {
           id: "route-a",
-          sol: "10.DSR.E",
+          sol: "10.DSR.C",
+          sub: "10.DSR.C.1",
           stem: "Based on the texts, the most likely reason Route A recorded more species than Route C is that —",
           choices: [
             { letter: "A", text: "its team started earlier than Dani's team" },
@@ -559,7 +592,8 @@
         },
         {
           id: "two",
-          sol: "10.DSR.E",
+          sol: "10.DSR.C",
+          sub: "10.DSR.C.1",
           stem: "Select TWO details from Text 2 that together best support Dani's claim in sentence 13.",
           choices: [
             { letter: "A", text: "Sentence 8" },
@@ -571,7 +605,8 @@
         },
         {
           id: "purpose",
-          sol: "10.RI.2.B",
+          sol: "10.RI.2.A",
+          sub: "10.RI.2.A.2",
           stem: "Mr. Lindqvist includes sentence 3 mainly to —",
           choices: [
             { letter: "A", text: "show that the count has real value beyond the school" },
@@ -583,7 +618,8 @@
         },
         {
           id: "suggestion",
-          sol: "10.DSR.E",
+          sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "Which detail from Text 1 would make Dani's second suggestion in sentence 14 hard to carry out?",
           choices: [
             { letter: "A", text: "Binoculars are provided by the school." },
@@ -624,6 +660,7 @@
         {
           id: "possible",
           sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "Which detail from Text 1 makes Amara's plan in sentence 10 possible?",
           choices: [
             { letter: "A", text: "the lower loop remains open" },
@@ -636,6 +673,7 @@
         {
           id: "freshmen",
           sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "Which requirement from Text 1 affects the three freshmen mentioned in sentence 9?",
           choices: [
             { letter: "A", text: "the safety briefing" },
@@ -647,7 +685,8 @@
         },
         {
           id: "shared",
-          sol: "10.DSR.E",
+          sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "Both texts support the idea that —",
           choices: [
             { letter: "A", text: "the park has enough staff to finish quickly" },
@@ -659,7 +698,8 @@
         },
         {
           id: "trust",
-          sol: "10.RI.2.B",
+          sol: "10.RI.2.A",
+          sub: "10.RI.2.A.2",
           stem: "In sentence 13, Amara's statement that she would rather lose a course than lose the park's trust mainly reveals that she —",
           choices: [
             { letter: "A", text: "expects the meet to be canceled" },
@@ -671,7 +711,8 @@
         },
         {
           id: "two",
-          sol: "10.DSR.E",
+          sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "Select TWO sentences that together show the gap between the park's timeline and the team's need.",
           choices: [
             { letter: "A", text: "Sentence 3" },
@@ -683,7 +724,8 @@
         },
         {
           id: "objection",
-          sol: "9.DSR.E",
+          sol: "9.DSR.C",
+          sub: "9.DSR.C.1",
           stem: "Amara's sentence 11 answers an objection that teammates would most likely raise about —",
           choices: [
             { letter: "A", text: "missing their regular long runs" },
@@ -725,6 +767,7 @@
         {
           id: "contradict",
           sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "Which part of the club's working theory in sentence 7 does Text 2 contradict?",
           choices: [
             { letter: "A", text: "that the payload landed east of the reservoir" },
@@ -736,7 +779,8 @@
         },
         {
           id: "clocks",
-          sol: "10.DSR.E",
+          sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "Taken together, the tracker's last report in sentence 4 and the sensor clock in sentence 12 suggest that —",
           choices: [
             { letter: "A", text: "the balloon burst at exactly 10:31" },
@@ -748,7 +792,8 @@
         },
         {
           id: "crack",
-          sol: "10.DSR.E",
+          sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "Which detail from Text 2 best explains the cracked corner mentioned in sentence 13?",
           choices: [
             { letter: "A", text: "the box sat on the ridge for a week" },
@@ -760,7 +805,8 @@
         },
         {
           id: "tone",
-          sol: "10.RI.2.B",
+          sol: "10.RI.3.A",
+          sub: "10.RI.3.A.1",
           stem: "Compared with the tone of Text 1, the tone of Text 2 is more —",
           choices: [
             { letter: "A", text: "technical" },
@@ -772,7 +818,8 @@
         },
         {
           id: "two",
-          sol: "10.DSR.E",
+          sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "Select TWO details that together show that the wind at high altitude differed from the club's forecast.",
           choices: [
             { letter: "A", text: "Sentence 2" },
@@ -784,7 +831,8 @@
         },
         {
           id: "daughter",
-          sol: "9.DSR.E",
+          sol: "9.DSR.B",
+          sub: "9.DSR.B.1",
           stem: "Sentence 15 suggests that the farmer's daughter —",
           choices: [
             { letter: "A", text: "is curious to see what the camera recorded" },

@@ -35,6 +35,7 @@
         {
           id: "central",
           sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "Which statement best expresses the central idea of the passage?",
           choices: [
             { letter: "A", text: "A school weather station gives students real data and teaches them to judge what numbers mean." },
@@ -46,7 +47,8 @@
         },
         {
           id: "detail",
-          sol: "10.RI.1.B",
+          sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "Which sentence explains why the roof readings differ from the airport readings?",
           choices: [
             { letter: "A", text: "Sentence 3" },
@@ -58,7 +60,8 @@
         },
         {
           id: "example",
-          sol: "10.RI.1.C",
+          sol: "10.RI.2.A",
+          sub: "10.RI.2.A.2",
           stem: "The author includes the story in sentence 9 mainly to —",
           choices: [
             { letter: "A", text: "show that the forecast on the morning news is often wrong" },
@@ -71,6 +74,7 @@
         {
           id: "structure",
           sol: "10.RI.2.A",
+          sub: "10.RI.2.A.1",
           stem: "Sentences 3 through 5 are organized mainly to —",
           choices: [
             { letter: "A", text: "compare the school station with the airport station" },
@@ -82,7 +86,8 @@
         },
         {
           id: "wordmean",
-          sol: "10.RV.1.C",
+          sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "In sentence 5, the word pools most nearly means —",
           choices: [
             { letter: "A", text: "drains away" },
@@ -94,7 +99,8 @@
         },
         {
           id: "quote",
-          sol: "10.RI.2.B",
+          sol: "10.RI.2.A",
+          sub: "10.RI.2.A.2",
           stem: "The quotation in sentence 11 mainly emphasizes that —",
           choices: [
             { letter: "A", text: "students should trust the weather service more than their own data" },
@@ -133,6 +139,7 @@
         {
           id: "summary",
           sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "Which of these best summarizes the passage?",
           choices: [
             { letter: "A", text: "Painted turtles cross Mill Road every June to reach a sandy nesting field across from the pond." },
@@ -145,6 +152,7 @@
         {
           id: "numbers",
           sol: "10.RI.1.B",
+          sub: "10.RI.1.B.2",
           stem: "Which pair of numbers from the passage best shows that the changes worked?",
           choices: [
             { letter: "A", text: "143 and 138" },
@@ -156,7 +164,8 @@
         },
         {
           id: "quote",
-          sol: "10.RI.1.C",
+          sol: "10.RI.2.A",
+          sub: "10.RI.2.A.2",
           stem: "The author includes the quotation in sentence 14 mainly to —",
           choices: [
             { letter: "A", text: "explain why the fence works even when drivers ignore the signs" },
@@ -169,6 +178,7 @@
         {
           id: "structure",
           sol: "10.RI.2.A",
+          sub: "10.RI.2.A.1",
           stem: "How are sentences 8 through 10 organized?",
           choices: [
             { letter: "A", text: "in the order the club members discovered each problem" },
@@ -180,7 +190,8 @@
         },
         {
           id: "wordmean",
-          sol: "10.RV.1.C",
+          sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "In sentence 6, the word tally most nearly means —",
           choices: [
             { letter: "A", text: "request" },
@@ -193,6 +204,7 @@
         {
           id: "phrase",
           sol: "10.RI.2.B",
+          sub: "10.RI.2.B.1",
           stem: "In sentence 3, the phrase count instead of complain mainly suggests that the club —",
           choices: [
             { letter: "A", text: "had grown tired of attending town council meetings" },
@@ -231,7 +243,8 @@
       claims: [
         {
           id: "audience",
-          sol: "10.RI.1.C",
+          sol: "10.RI.1.B",
+          sub: "10.RI.1.B.1",
           stem: "This posting is written mainly for —",
           choices: [
             { letter: "A", text: "parents looking for swim lessons for young children" },
@@ -243,7 +256,8 @@
         },
         {
           id: "detail",
-          sol: "10.RI.1.B",
+          sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "According to the posting, which applicant will be contacted first?",
           choices: [
             { letter: "A", text: "one who is already 16 years old" },
@@ -256,6 +270,7 @@
         {
           id: "headings",
           sol: "10.RI.2.A",
+          sub: "10.RI.2.A.1",
           stem: "The bold headings help a reader mainly by —",
           choices: [
             { letter: "A", text: "ranking the duties from most important to least important" },
@@ -268,6 +283,7 @@
         {
           id: "duties",
           sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "Taken together, sentences 3 and 4 show that the job mainly involves —",
           choices: [
             { letter: "A", text: "keeping the deck safe, clean, and orderly" },
@@ -279,7 +295,8 @@
         },
         {
           id: "wordmean",
-          sol: "10.RV.1.C",
+          sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "In sentence 6, the word permit most nearly means —",
           choices: [
             { letter: "A", text: "a document giving official permission" },
@@ -291,7 +308,8 @@
         },
         {
           id: "raise",
-          sol: "10.RI.2.B",
+          sol: "10.RI.2.A",
+          sub: "10.RI.2.A.2",
           stem: "The posting mentions the $0.75 raise in sentence 9 mainly to —",
           choices: [
             { letter: "A", text: "explain why the pay is lower than at other pools" },
@@ -330,6 +348,7 @@
         {
           id: "central",
           sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "Which sentence best expresses the idea that the whole passage develops?",
           choices: [
             { letter: "A", text: "Sentence 1" },
@@ -342,6 +361,7 @@
         {
           id: "structure",
           sol: "10.RI.2.A",
+          sub: "10.RI.2.A.1",
           stem: "Sentences 8 through 11 are organized as —",
           choices: [
             { letter: "A", text: "a problem followed by a solution and its result" },
@@ -353,7 +373,8 @@
         },
         {
           id: "detail",
-          sol: "10.RI.1.B",
+          sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "Which detail best supports the idea that the library depends on its own neighborhood?",
           choices: [
             { letter: "A", text: "Members can borrow up to five tools at a time." },
@@ -365,7 +386,8 @@
         },
         {
           id: "evidence",
-          sol: "10.RI.2.C",
+          sol: "10.RI.1.C",
+          sub: "10.RI.1.C.2",
           stem: "Which sentence provides the strongest evidence that the change described in sentence 10 succeeded?",
           choices: [
             { letter: "A", text: "Sentence 7" },
@@ -377,7 +399,8 @@
         },
         {
           id: "wordmean",
-          sol: "10.RV.1.C",
+          sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "In sentence 5, the phrase sliding annual fee most nearly means a fee that —",
           choices: [
             { letter: "A", text: "increases each year a member stays" },
@@ -389,7 +412,8 @@
         },
         {
           id: "remark",
-          sol: "10.RI.2.B",
+          sol: "10.RI.2.C",
+          sub: "10.RI.2.C.2",
           stem: "In sentence 13, Arriaga's remark that the building still answers emergencies is meant to —",
           choices: [
             { letter: "A", text: "warn that the fire station could be needed again during a disaster" },
@@ -425,7 +449,8 @@
       claims: [
         {
           id: "purpose",
-          sol: "10.RI.1.C",
+          sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "The main purpose of Article III is to —",
           choices: [
             { letter: "A", text: "describe the history of the garden club" },
@@ -437,7 +462,8 @@
         },
         {
           id: "vacancy",
-          sol: "10.RI.1.B",
+          sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "According to Section 4, what happens if the treasurer resigns in April?",
           choices: [
             { letter: "A", text: "A special election is held within three weeks." },
@@ -450,6 +476,7 @@
         {
           id: "structure",
           sol: "10.RI.2.A",
+          sub: "10.RI.2.A.1",
           stem: "How is Article III organized?",
           choices: [
             { letter: "A", text: "as a timeline of one club year from September to June" },
@@ -461,7 +488,8 @@
         },
         {
           id: "inference",
-          sol: "10.RI.2.C",
+          sol: "10.RI.2.A",
+          sub: "10.RI.2.A.2",
           stem: "Which statement is best supported by sentences 2 and 5 together?",
           choices: [
             { letter: "A", text: "Some club rules were written to keep past problems with the beds from repeating." },
@@ -473,7 +501,8 @@
         },
         {
           id: "wordmean",
-          sol: "10.RV.1.C",
+          sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "In sentence 4, the word consecutive most nearly means —",
           choices: [
             { letter: "A", text: "elected" },
@@ -486,6 +515,7 @@
         {
           id: "condition",
           sol: "10.RI.2.B",
+          sub: "10.RI.2.B.2",
           stem: "The phrase provided that in sentence 10 is included mainly to —",
           choices: [
             { letter: "A", text: "make sure an officer is not removed without warning" },
@@ -526,6 +556,7 @@
         {
           id: "claim",
           sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "Which statement best expresses the author's main claim?",
           choices: [
             { letter: "A", text: "The school should unlock the courtyard so students and classes can use it." },
@@ -537,7 +568,8 @@
         },
         {
           id: "evidence",
-          sol: "10.RI.2.C",
+          sol: "10.RI.1.C",
+          sub: "10.RI.1.C.2",
           stem: "Which sentence gives the strongest evidence that the rule in sentence 6 rarely needs to be enforced?",
           choices: [
             { letter: "A", text: "Sentence 5" },
@@ -550,6 +582,7 @@
         {
           id: "structure",
           sol: "10.RI.2.A",
+          sub: "10.RI.2.A.1",
           stem: "The author organizes sentences 3 through 7 by —",
           choices: [
             { letter: "A", text: "describing the courtyard from the outside to the inside" },
@@ -561,7 +594,8 @@
         },
         {
           id: "contrast",
-          sol: "10.RI.2.B",
+          sol: "10.RI.2.A",
+          sub: "10.RI.2.A.2",
           stem: "In sentence 15, the author contrasts a safety policy with a habit in order to —",
           choices: [
             { letter: "A", text: "admit that supervising the courtyard would be unsafe for teachers" },
@@ -574,6 +608,7 @@
         {
           id: "test",
           sol: "10.RI.1.C",
+          sub: "10.RI.1.C.1",
           stem: "The author includes sentence 14 mainly to —",
           choices: [
             { letter: "A", text: "warn that students will stop using the courtyard by October" },
@@ -585,7 +620,8 @@
         },
         {
           id: "wordmean",
-          sol: "10.RV.1.C",
+          sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "In sentence 8, the word vague most nearly means —",
           choices: [
             { letter: "A", text: "expensive" },
@@ -624,6 +660,7 @@
         {
           id: "central",
           sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "The passage as a whole mainly develops the idea that —",
           choices: [
             { letter: "A", text: "careful observation can shape a public project to serve people and wildlife alike" },
@@ -635,7 +672,8 @@
         },
         {
           id: "evidence",
-          sol: "10.RI.2.C",
+          sol: "10.RI.1.C",
+          sub: "10.RI.1.C.2",
           stem: "Which sentence best supports the idea that fixed dates were the wrong tool for scheduling the work?",
           choices: [
             { letter: "A", text: "Sentence 3" },
@@ -648,6 +686,7 @@
         {
           id: "structure",
           sol: "10.RI.2.A",
+          sub: "10.RI.2.A.1",
           stem: "The author structures sentences 4 through 7 mainly to —",
           choices: [
             { letter: "A", text: "compare the bats' behavior in spring with their behavior in autumn" },
@@ -659,7 +698,8 @@
         },
         {
           id: "tenants",
-          sol: "10.RI.2.B",
+          sol: "10.RI.2.C",
+          sub: "10.RI.2.C.2",
           stem: "In sentence 13, the author calls the bats the bridge's oldest tenants in order to —",
           choices: [
             { letter: "A", text: "complain that the colony damages the concrete deck" },
@@ -672,6 +712,7 @@
         {
           id: "honest",
           sol: "10.RI.1.C",
+          sub: "10.RI.1.C.2",
           stem: "Sentence 12 is included mainly to —",
           choices: [
             { letter: "A", text: "reveal that the bat boxes failed to attract any of the colony's bats" },
@@ -683,7 +724,8 @@
         },
         {
           id: "wordmean",
-          sol: "10.RV.1.C",
+          sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "In sentence 6, the word complicated most nearly means —",
           choices: [
             { letter: "A", text: "confirmed" },
@@ -725,6 +767,7 @@
         {
           id: "proposal",
           sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "Which sentence best states the author's proposal?",
           choices: [
             { letter: "A", text: "Sentence 4" },
@@ -736,7 +779,8 @@
         },
         {
           id: "support",
-          sol: "10.RI.2.C",
+          sol: "10.RI.1.C",
+          sub: "10.RI.1.C.2",
           stem: "The author supports the claim in sentence 4 mainly by —",
           choices: [
             { letter: "A", text: "citing rubric points and the cost of professional printing" },
@@ -748,7 +792,8 @@
         },
         {
           id: "questions",
-          sol: "10.RI.2.B",
+          sol: "10.RI.1.C",
+          sub: "10.RI.1.C.1",
           stem: "The author asks the questions in sentences 11 and 13 mainly to —",
           choices: [
             { letter: "A", text: "show uncertainty about whether the proposal will work" },
@@ -761,6 +806,7 @@
         {
           id: "structure",
           sol: "10.RI.2.A",
+          sub: "10.RI.2.A.1",
           stem: "How does the author organize sentences 2 through 4?",
           choices: [
             { letter: "A", text: "by describing the fair's history from its founding to the present" },
@@ -772,7 +818,8 @@
         },
         {
           id: "echo",
-          sol: "10.RI.2.B",
+          sol: "10.RI.2.C",
+          sub: "10.RI.2.C.2",
           stem: "Sentence 8 is effective mainly because it —",
           choices: [
             { letter: "A", text: "introduces new evidence about the soil bacteria project" },
@@ -784,7 +831,8 @@
         },
         {
           id: "wordmean",
-          sol: "10.RV.1.C",
+          sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "In sentence 7, the word rigorous most nearly means —",
           choices: [
             { letter: "A", text: "colorful and neat" },
