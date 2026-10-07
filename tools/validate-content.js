@@ -74,7 +74,7 @@ packs.forEach(function (p, pi) {
         if (!k) errors.push(w + ": sub " + c.sub + " is not a skill in js/standards-va.js");
         else if (k.code !== c.sol) errors.push(w + ": sub " + c.sub + " is a skill of " + k.code + ", not of its sol " + c.sol);
         subs.yes++;
-      } else if (p.family !== "ODY") subs.no++;
+      } else if (p.family !== "ODY") { subs.no++; errors.push(w + ": no sub (the skill: node tools/expansion/tags.js skills " + parseInt(c.sol, 10) + ")"); }
     }
     if (c.partB != null) {
       var pb = p.claims.filter(function (x) { return x.id === c.partB; })[0];

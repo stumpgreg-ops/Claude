@@ -563,7 +563,7 @@ function makeZip(files) {
   await page.click('#std .tab[data-sp="students"]');
   var sd2 = await page.evaluate(function () { return document.getElementById("std").innerText; });
   check(/Ann Smith/.test(sd2) && /Class total/.test(sd2), "Student by student shows each student and the class total row");
-  check(/^CLASS TOTAL/.test(sd.csv.replace(/^\ufeff/, "")) && /STUDENT BY STUDENT/.test(sd.csv) && /\nStudent,Nickname,9\./.test(sd.csv), "the standards CSV has the class total, then student by student");
+  check(/^CLASS TOTAL/.test(sd.csv.replace(/^\ufeff/, "")) && /STUDENT BY STUDENT/.test(sd.csv) && /\nStudent,Nickname,(LOTS answered|9\.)/.test(sd.csv), "the standards CSV has the class total, then student by student");
   await page.click('#std .tab[data-sp="class"]');
   await page.screenshot({ path: path.join(shots, "pg-12-standards.png"), fullPage: true });
   /* v5.17: skills (LOTS/HOTS) under each standard, in their own page so the rest of this page's checks stay as they were */

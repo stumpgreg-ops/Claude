@@ -29,6 +29,10 @@ A game uploaded to Canvas can't send anything anywhere, so progress is shown to 
 
 Tests: `node tools/smoke-progress.js` (after `node tools/build-games.js`, `node tools/build-appsscript.js VA|ODY` and `node tools/build-canvas.js VA|ODY`).
 
+## v5.17.1 (2026-10-07) — every Virginia question names its skill
+
+All 10,562 Virginia questions now carry the 2024 standard they assess and their skill (`sub`), checked against `js/standards-va.js` (`tools/expansion/TAGGING.md`, `node tools/expansion/tags.js status`). Many older tags used pre-2024 letters (context clues were tagged `9.RV.1.C`, which in 2024 is roots and affixes; context is `9.RV.1.B`); those are corrected. Each question kept its grade and its strand, so the game's grade pools and skill filter are unchanged. Grade 9: 2,143 LOTS / 1,405 HOTS questions; Grade 10: 1,850 / 1,687; Grade 11: 1,985 / 1,492. Some skills have no questions yet (fluency, general vocabulary use, a few comparing-texts skills whose questions sit in Paired texts); `tools/validate-content.js` now requires a skill on every new Virginia question.
+
 ## v5.17.0 (2026-10-07) — skills under each standard, LOTS and HOTS
 
 - **The 2024 standards, word for word, split into skills.** `js/standards-va.js` holds the official text of all 91 Grade 9–11 reading standards (DSR, RV, RL, RI) from the *English Standards of Learning for Virginia Public Schools* (2024), and splits each one into skills, one per action verb: 153 skills, 90 LOTS (lower-order: identify, describe, explain, interpret) and 63 HOTS (higher-order: analyze, compare, distinguish, evaluate). A standard that asks students to analyze named devices or elements is split into identifying them (LOTS) and analyzing their effect (HOTS): `9.RL.2.A.1` Identify rhyme, rhythm, sound, imagery, and other literary devices in poetry (LOTS); `9.RL.2.A.2` Analyze how poetic devices convey a message and elicit a reader's emotions (HOTS). To move a skill between LOTS and HOTS, change its `level` there.

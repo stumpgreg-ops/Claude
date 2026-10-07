@@ -1,3 +1,5 @@
+> **v5.17: superseded.** The letters below are from before the 2024 standards were checked against the official document. Use `node tools/expansion/tags.js skills 9` (10, 11) for the 2024 standards and their skills, and `tools/expansion/TAGGING.md` for how to choose; every Virginia question needs `sol` and `sub`.
+
 # Virginia standards used by the question packs, with example stems
 
 Write new questions for a grade with THAT grade's own codes (G9: 9.x, G10: 10.x, G11: 11.x) and spread them across
