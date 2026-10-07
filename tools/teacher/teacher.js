@@ -7,11 +7,18 @@
    class four ways: student cards with a suggested participation grade from the teacher's goals, the full table, a
    leaderboard (First name + last initial by default, or nicknames, or ranks only) and a standards report (each
    standard's % right on the first try, class and student by student). Writes a CSV of the table, a standards CSV and
-   a Canvas gradebook import file (the export's student columns + the assignment's column). */
+   a Canvas gradebook import file (the export's student columns + the assignment's column).
+
+   GRADING ROUNDS (v5.15.1): a code is a running total, so the page always grades "since last time". When the
+   teacher finishes a round, each student's code is kept (on this computer) as the starting point of the next round;
+   every number on the page then counts only the work since then (minutes, levels, questions, accuracy, standards,
+   new badges; the highest level stays the student's highest). The first round counts everything. A student whose
+   totals went DOWN (a new Chromebook, or a restore from an older code) is counted from this code alone and flagged.
+   An earlier Download Submissions .zip can set the starting point too (a new computer), and a round can be undone. */
 (function () {
   "use strict";
   var C = window.SolProgressCode, ST = window.TEACHER_STATE, B = C.BUILDS[ST];
-  var LS = "solTeacher." + ST + ".goals", LS_ROSTER = "solTeacher." + ST + ".roster", LS_VIEW = "solTeacher." + ST + ".view";
+  var LS = "solTeacher." + ST + ".goals", LS_ROSTER = "solTeacher." + ST + ".roster", LS_VIEW = "solTeacher." + ST + ".view", LS_ROUNDS = "solTeacher." + ST + ".rounds";
   var GOALS = [
     { k: "minutes", label: "Minutes played", short: "Minutes", unit: "minutes", def: 60, w: 1 },
     { k: "won", label: "Levels won", short: "Levels won", unit: "levels", def: 10, w: 1 },
@@ -194,7 +201,7 @@
   }
   function addRow(f, name, source, fi) {
     var res = f.result, r = { name: name, source: source, raw: res.ok ? res.code : f.raw, ok: !!res.ok, build: res.build,
-      data: res.ok ? res.data : null, why: res.ok ? "" : res.why, count: 1, userId: fi ? fi.id : null, squash: fi ? fi.squash : null };
+      data: res.ok ? res.data : null, full: res.ok ? res.data : null, why: res.ok ? "" : res.why, count: 1, userId: fi ? fi.id : null, squash: fi ? fi.squash : null };
     r.student = name || (r.data && r.data.nick ? r.data.nick : "");
     r.key = r.userId ? "i:" + r.userId : name ? "n:" + norm(name) : (r.data && r.data.nick ? "k:" + norm(r.data.nick) : "c:" + norm(r.raw));
     var old = null, i;
@@ -299,6 +306,82 @@
   }
 
   /* ── people: names ── */
+  /* ── grading rounds: grade only what changed since last time ── */
+  var rounds = loadRounds();
+  function loadRounds() {
+    var x = null;
+    try { x = JSON.parse(localStorage.getItem(LS_ROUNDS) || "null"); } catch (e) {}
+    if (!x || typeof x !== "object" || !x.base || typeof x.base !== "object") x = { since: null, base: {}, prev: null };
+    return x;
+  }
+  function saveRounds() { try { localStorage.setItem(LS_ROUNDS, JSON.stringify(rounds)); } catch (e) {} }
+  function baseKeys(r) {
+    var ro = rosterFor(r), d = r.full, k = [];
+    if (r.userId) k.push("i:" + r.userId);
+    if (ro) k.push("i:" + ro.id);
+    if (r.name && !r.squash) k.push("n:" + norm(r.name));
+    if (ro) k.push("n:" + norm(ro.first + " " + ro.last));
+    if (d && d.nick) k.push("k:" + norm(d.nick));
+    return k;
+  }
+  /* the code this student's round starts from (null: the first round, everything counts) */
+  function baseFor(r) {
+    var ks = baseKeys(r), i, e;
+    for (i = 0; i < ks.length; i++) {
+      e = rounds.base[ks[i]];
+      if (e) { var res = C.decode(e); if (res.ok && res.build === ST) return res.data; }
+    }
+    return null;
+  }
+  function sub(a, b) { return Math.max(0, (a || 0) - (b || 0)); }
+  /* this round's numbers: the newest code minus the starting point */
+  function roundOf(r) {
+    var cur = r.full, prev = baseFor(r);
+    r.reset = false; r.since = prev ? prev.made : null;
+    if (!prev) return cur;
+    if (cur.answered < prev.answered || cur.minutes < prev.minutes || cur.started < prev.started) { r.reset = true; r.since = null; return cur; }
+    var d = {};
+    Object.keys(cur).forEach(function (k) { d[k] = cur[k]; });
+    ["days", "minutes", "started", "won", "lost", "answered", "right", "wrong"].forEach(function (k) { d[k] = sub(cur[k], prev[k]); });
+    d.perfect = sub(cur.perfect, prev.perfect);
+    d.levelsUp = sub(cur.hiWon, prev.hiWon);
+    d.skills = (cur.skills || []).map(function (s, i) { var p = (prev.skills || [])[i] || {}; return { key: s.key, name: s.name, a: sub(s.a, p.a), r: sub(s.r, p.r) }; });
+    if (cur.std) {
+      var pm = {};
+      (prev.std || []).forEach(function (s) { pm[s.code] = s; });
+      d.std = cur.std.map(function (s) { var p = pm[s.code] || {}; return { code: s.code, a: sub(s.a, p.a), r: sub(s.r, p.r) }; }).filter(function (s) { return s.a > 0; });
+    }
+    if (cur.badges) d.badges = cur.badges.filter(function (b) { return (prev.badges || []).indexOf(b) === -1; });
+    d.first = prev.last || cur.first;
+    return d;
+  }
+  function applyRounds() { rows.forEach(function (r) { r.data = r.ok && r.build === ST ? roundOf(r) : r.full; }); }
+  function finishRound() {
+    var mineRows = rows.filter(function (r) { return r.ok && r.build === ST; });
+    if (!mineRows.length) { msg("Add this round's codes first: the round ends with the codes you have graded.", true); return; }
+    if (!window.confirm("Finish this grading round? The next round counts only the work students do after the codes on this page (" + mineRows.length +
+      " student" + (mineRows.length === 1 ? "" : "s") + "). Do this after you have entered this round's grades.")) return;
+    var base = {}, k;
+    for (k in rounds.base) base[k] = rounds.base[k];
+    mineRows.forEach(function (r) { baseKeys(r).forEach(function (key) { base[key] = r.raw; }); });
+    rounds = { since: Date.now(), base: base, prev: { since: rounds.since, base: rounds.base } };
+    saveRounds();
+    paint(); paintRounds();
+    msg("Round finished. Next time, drop the new Download Submissions .zip: the grades will count only what students do from now on.");
+  }
+  function undoRound() {
+    if (!rounds.prev) return;
+    if (!window.confirm("Go back to the round before? The starting point you saved last is forgotten.")) return;
+    rounds = { since: rounds.prev.since, base: rounds.prev.base || {}, prev: null };
+    saveRounds(); paint(); paintRounds(); msg("Back to the round before.");
+  }
+  function paintRounds() {
+    var el = $("round-line");
+    if (rounds.since) el.innerHTML = "<b>This grading round: since " + esc(new Date(rounds.since).toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" })) + "</b>. " +
+      "Every number below counts only the work students did after the codes you graded then. Put each round's grades in a new assignment column.";
+    else el.innerHTML = "<b>First grading round:</b> everything students have done so far counts. When you have entered this round's grades, click <b>Finish this grading round</b>: next time, only the new work counts.";
+    $("undo-round").hidden = !rounds.prev;
+  }
   function D(r) { return r && r.ok ? r.data : null; }
   function mine(r) { return !!(r && r.ok && r.build === ST); }
   function person(r) {
@@ -408,7 +491,7 @@
     function st(n, label) { return '<div class="st"><b>' + esc(n) + "</b><span>" + esc(label) + "</span></div>"; }
     var h = st(v.length + (roster ? " of " + roster.list.length : ""), "students with a valid code") +
       st(avg == null ? "–" : avg, "average suggested grade (of " + goals.points + ")") + st(full, "at full credit") + st(low, "below 70%") +
-      st(ans ? pct(right, ans) + "%" : "–", "right on the first try (class)") + st(mins, "minutes played (class)");
+      st(ans ? pct(right, ans) + "%" : "–", "right on the first try (class" + (rounds.since ? ", this round" : "") + ")") + st(mins, "minutes played (class" + (rounds.since ? ", this round" : "") + ")");
     if (bad || other) h += st(bad + other, (bad ? bad + " INVALID" : "") + (bad && other ? ", " : "") + (other ? other + " other game" : ""));
     if (roster) h += '<div class="st wide"><b style="display:inline;font-size:18px">' + (miss.length ? miss.length + " not turned in: " : "Everyone on the class list turned in a code.") + "</b> " +
       esc(miss.map(function (s) { return s.first + " " + s.last; }).join(", ")) + "</div>";
@@ -431,7 +514,8 @@
         out += '<div class="lbl"><span>' + esc(x.short) + "</span><span>" + Math.round(val) + (x.k === "acc" ? "%" : "") + " / " + goals[x.k].t + (x.k === "acc" ? "%" : "") + "</span></div>" +
           '<div class="bar"><i style="width:' + Math.round(100 * f) + '%"></i></div>';
       });
-      out += '<div class="meta">Highest level ' + d.hiReached + " · " + d.won + " levels won · " + badgesOf(r) + " badges" + (d.last ? " · last played " + esc(fmtDay(d.last)) : "") + "</div>";
+      var rd = !!(rounds.since && !r.reset);
+      out += '<div class="meta">Highest level ' + d.hiReached + " · " + d.won + " levels won" + (rd ? " this round" : "") + " · " + badgesOf(r) + (rd ? " new" : "") + " badges" + (d.last ? " · last played " + esc(fmtDay(d.last)) : "") + (r.reset ? " · <b>counted from a new start</b>" : "") + "</div>";
       return out + "</div>";
     }).join("");
     h += miss.map(function (s) { return '<div class="card missing g-none"><h3>' + esc(s.first + " " + s.last) + '</h3><div class="gr" style="color:var(--dim)">No code</div><div class="meta">Not turned in yet.</div></div>'; }).join("");
@@ -619,6 +703,7 @@
   }
   Array.prototype.forEach.call(document.querySelectorAll(".tab"), function (t) { t.addEventListener("click", function () { setView(t.getAttribute("data-view")); }); });
   function paint() {
+    applyRounds();
     $("goal-line").textContent = goalLine();
     paintSummary();
     if (view === "cards") paintCards();
@@ -630,6 +715,7 @@
       if (r.count > 1) list.push(fullName(r) + ": " + r.count + " different codes; the newest one (made " + (r.ok ? fmtTime(r.data.made) : "?") + ") is used.");
       if (!r.ok) list.push(fullName(r) + ": INVALID: " + r.why + " Ask the student to copy the code again with the Copy code button. (What was read: " + r.raw + ")");
       if (roster && mine(r) && !rosterFor(r)) list.push(fullName(r) + ": not on your class list (a student who joined later? export the gradebook again).");
+      if (mine(r) && r.reset) list.push(fullName(r) + ": their totals went down since last round (a new Chromebook, or restored from an older code), so this round counts their new code from its start.");
     });
     list = list.concat(notes);
     nl.innerHTML = list.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("");
@@ -687,6 +773,24 @@
     ta.focus(); ta.select();
   }
   $("print").addEventListener("click", function () { window.print(); });
+  $("finish-round").addEventListener("click", finishRound);
+  $("undo-round").addEventListener("click", undoRound);
+  $("base-choose").addEventListener("click", function () { $("base-file").click(); });
+  /* an earlier Download Submissions .zip as the starting point (grading on a new computer) */
+  $("base-file").addEventListener("change", function () {
+    var keep = rows, keepNotes = notes;
+    rows = [];
+    readFiles($("base-file").files).then(function () {
+      var got = rows.filter(function (r) { return r.ok && r.build === ST; }), base = {};
+      got.forEach(function (r) { baseKeys(r).forEach(function (key) { base[key] = r.raw; }); });
+      rows = keep; notes = keepNotes; $("base-file").value = "";
+      if (!got.length) { paint(); msg("No codes found in that file, so the starting point didn't change.", true); return; }
+      var newest = got.reduce(function (m, r) { return Math.max(m, r.full.made); }, 0);
+      rounds = { since: newest, base: base, prev: { since: rounds.since, base: rounds.base } };
+      saveRounds(); paint(); paintRounds();
+      msg("Starting point set from that file (" + got.length + " students): this round counts only the work since then.");
+    });
+  });
   /* inside the game (js/teacher-screen.js): a Close button that goes back to the game */
   try {
     if (window.parent && window.parent !== window && window.parent.SolTeacher) {
@@ -698,7 +802,9 @@
 
   paintGoals();
   paintRoster();
+  paintRounds();
   setView(view);
   window.TeacherPage = { addText: addText, readFiles: readFiles, rows: function () { return rows; }, table: table, grade: grade, readZip: readZip, nameFromFile: nameFromFile,
-    importCsv: importCsv, stdCsv: stdCsv, roster: function () { return roster; }, setView: setView, readRoster: readRoster, fileInfo: fileInfo };
+    importCsv: importCsv, stdCsv: stdCsv, roster: function () { return roster; }, setView: setView, readRoster: readRoster, fileInfo: fileInfo,
+    finishRound: finishRound, undoRound: undoRound, rounds: function () { return rounds; } };
 })();

@@ -568,6 +568,37 @@ function makeZip(files) {
   await page.waitForTimeout(300);
   var cp = await page.evaluate(function () { return { msg: document.getElementById("msg").textContent, box: !document.getElementById("copybox").hidden }; });
   check(/Copied the table/.test(cp.msg) || cp.box, "Copy the table copies it, or shows it selected with Ctrl+C");
+  /* v5.15.1: grading rounds — only the work since last time counts */
+  page.on("dialog", function (d) { d.accept(); });
+  var r0 = await page.evaluate(function () { var a = TeacherPage.rows().filter(function (r) { return r.userId === "123456"; })[0]; return { won: a.data.won, ans: a.data.answered, line: document.getElementById("round-line").innerText }; });
+  check(/First grading round/.test(r0.line), "the first grading round counts everything: " + r0.line.slice(0, 60));
+  await page.click("#finish-round");
+  await page.waitForTimeout(200);
+  var newer = C.encode("VA", { first: "2026-09-01", last: "2026-10-09", days: 4, minutes: 80, started: 20, won: 17, lost: 3, hiReached: 18, hiWon: 17, answered: r0.ans + 40, right: 30 + 8, wrong: 20, modes: 3,
+    skills: { RL: { a: 20, r: 15 }, RI: { a: 20, r: 16 } }, std: { "9.RL.1.A": { a: 50, r: 40 } }, badges: ["first-win", "q25"] }, { nick: "Ann S", version: "5.15.0", now: Date.now() + 120000, save: { night: 18 } });
+  var gone = C.encode("VA", { first: "2026-10-08", last: "2026-10-09", days: 1, minutes: 3, started: 1, won: 1, lost: 0, hiReached: 1, hiWon: 1, answered: 2, right: 2, wrong: 0, modes: 1 }, { nick: "", version: "5.15.0", now: Date.now() + 120000, save: { night: 2 } });
+  var zip2 = makeZip([
+    { name: "smithann_123456_7890999_text.html", deflate: true, text: "<p>" + newer + "</p>" },
+    { name: "jonesbob_234567_8901999_text.html", deflate: true, text: "<p>" + gone + "</p>" }
+  ]);
+  var z2 = path.join(shots, "pg-submissions-week2.zip");
+  fs.writeFileSync(z2, zip2);
+  await page.setInputFiles("#file", z2);
+  await page.waitForTimeout(600);
+  var r1 = await page.evaluate(function () {
+    var a = TeacherPage.rows().filter(function (r) { return r.userId === "123456"; })[0], b = TeacherPage.rows().filter(function (r) { return r.userId === "234567"; })[0];
+    return { a: a.data, b: b.data, bReset: b.reset, line: document.getElementById("round-line").innerText, notes: document.getElementById("notes").innerText, imp: TeacherPage.importCsv(), undo: !document.getElementById("undo-round").hidden };
+  });
+  check(/This grading round: since/.test(r1.line) && r1.undo, "after Finish this grading round, the page says the round runs since then, with Undo");
+  check(r1.a.won === 15 && r1.a.answered === 40 && r1.a.minutes === 80 && r1.a.hiReached === 18 && r1.a.badges.join() === "q25",
+    "the next round counts only the new work: 15 levels won, 40 questions, 80 minutes, 1 new badge (highest level stays 18): " + JSON.stringify({ won: r1.a.won, ans: r1.a.answered, min: r1.a.minutes, b: r1.a.badges }));
+  check(r1.bReset && r1.b.won === 1 && /totals went down since last round/.test(r1.notes), "a student whose totals went down (new Chromebook) is counted from the new code alone, and noted");
+  var g100 = /^"Smith, Ann",123456,S-1,asmith,Period 2,93\.3\r?$/m.test((r1.imp || "").replace(/^\ufeff/, ""));
+  check(g100, "the Canvas import file carries this round's grade (Ann: 93.3 for 80 minutes, 15 levels, 40 of 50 questions): " + (r1.imp || "").split("\n").slice(0, 3).join(" | "));
+  await page.click("#undo-round");
+  await page.waitForTimeout(200);
+  var r2 = await page.evaluate(function () { var a = TeacherPage.rows().filter(function (r) { return r.userId === "123456"; })[0]; return { won: a.data.won, line: document.getElementById("round-line").innerText }; });
+  check(r2.won === 17 && /First grading round/.test(r2.line), "Undo goes back to the round before (everything counts again)");
   await page.evaluate(function () { document.getElementById("copybox").hidden = true; window.scrollTo(0, 0); });
   await page.screenshot({ path: path.join(shots, "pg-04-teacher-va.png"), fullPage: true });
   await page.emulateMedia({ media: "print" });

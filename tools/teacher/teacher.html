@@ -63,6 +63,9 @@ ul.notes { margin: 10px 0 0; padding-left: 22px; color: var(--dim); }
 .roster { margin: 6px 0 4px; font-size: 16px; }
 .roster b { color: var(--gold); }
 .goal-line { margin: 8px 0 0; color: var(--dim); }
+.round { background: var(--panel2); border: 2px solid var(--gold); border-radius: 12px; padding: 10px 14px; margin: 0 0 12px; }
+.round p { margin: 0; }
+.round b { color: var(--gold); }
 select { font: inherit; min-height: 42px; padding: 4px 8px; border-radius: 8px; border: 2px solid var(--line); background: #fffdf6; color: #1a1408; }
 .summary { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; margin: 0 0 12px; }
 .summary .st { background: var(--panel2); border: 2px solid var(--line); border-radius: 12px; padding: 8px 10px; text-align: center; }
@@ -144,9 +147,11 @@ table.std tr.cls td { font-weight: 700; border-bottom: 2px solid var(--gold); }
           in box 1 too. The page then shows names like <b>Ann S.</b>, lists who hasn't turned in, and can make a file that puts every grade into the
           Canvas gradebook at once (<b>Grades → Import</b>). The class list is kept on this computer only (<b>Forget the class list</b> removes it).</li>
         <li>Set your goals in box 2: every suggested grade updates. Then look at the students, the leaderboard or the standards report.</li>
+        <li><b>Grading rounds:</b> the page always grades the work since last time. After you enter a round's grades, click <b>Finish this grading round</b>;
+          next round, drop the new .zip and only the new work counts (put each round's grades in a new assignment column). The first round counts everything.</li>
       </ol>
-      <p class="hint">Each code holds everything a student has done on one Chromebook up to the moment it was made (a running total), so the newest
-        code is the one to grade. Codes from before version 5.15 have no standards detail.</p>
+      <p class="hint">Each code holds everything a student has done on one Chromebook up to the moment it was made (a running total); the page subtracts
+        the code from the last round, so a student never gets credit twice. Codes from before version 5.15 have no standards detail.</p>
     </details>
   </section>
 
@@ -190,6 +195,15 @@ table.std tr.cls td { font-weight: 700; border-bottom: 2px solid var(--gold); }
 
   <section class="panel" id="results">
     <h2>3. Your class</h2>
+    <div class="round">
+      <p id="round-line"></p>
+      <div class="row noprint">
+        <button type="button" class="btn primary" id="finish-round">Finish this grading round</button>
+        <button type="button" class="btn" id="undo-round" hidden>Undo: back to the round before</button>
+        <button type="button" class="btn" id="base-choose" title="Grading on a different computer? Choose the Download Submissions .zip you graded last time">Use an earlier .zip as the starting point…</button>
+        <input type="file" id="base-file" multiple accept=".zip,.txt,.html,.htm,text/plain,text/html,application/zip" hidden />
+      </div>
+    </div>
     <div class="summary" id="summary"></div>
     <div class="tabs noprint" role="tablist">
       <button type="button" class="tab on" data-view="cards" role="tab">Students</button>

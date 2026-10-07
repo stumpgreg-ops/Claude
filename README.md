@@ -29,6 +29,10 @@ A game uploaded to Canvas can't send anything anywhere, so progress is shown to 
 
 Tests: `node tools/smoke-progress.js` (after `node tools/build-games.js`, `node tools/build-appsscript.js VA|ODY` and `node tools/build-canvas.js VA|ODY`).
 
+## v5.15.1 (2026-10-07) — grading rounds: only the work since last time counts
+
+The teacher screen always grades "since last time". A code is a running total, so after the teacher enters a round's grades and clicks **Finish this grading round**, each student's code is kept on that computer (`solTeacher.<ST>.rounds`, matched by Canvas ID, roster, name or nickname) as the start of the next round; every number then counts only the work after it (minutes, levels won, questions, accuracy, days, standards, new badges, perfect levels; the highest level stays the student's highest). The first round counts everything. A student whose totals went down (a new Chromebook, a restore from an older code) is counted from the new code alone and flagged. **Undo** goes back one round; **Use an earlier .zip as the starting point** rebuilds the start on another computer. The READ ME's grading section explains rounds (4.2).
+
 ## v5.15.0 (2026-10-07) — a level per mode, standards, badges, Submit my progress, the Teacher screen in the game
 
 - **A level per game mode.** Each mode (Mixed, Labyrinth, Eagle Swoop …) keeps its own level 1–100 (`afterHours.v1.night.<mode>`; `afterHours.v1.night` still holds the level last played). An older single level moves to the mode last picked. The question picker already never repeats a question across modes until the pool is used up (the used list is per grade and skill, not per mode); the question expansion (`tools/expansion/`) gives each Virginia selection enough questions for all 7 modes × 100 levels.
