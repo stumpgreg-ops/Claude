@@ -85,6 +85,30 @@ var teacherBuild = require("./build-teacher"), PB = require("../js/progress-code
 var teacherName = teacherBuild.fileName(st), teacherPath = path.join(outAll, teacherName);
 fs.writeFileSync(teacherPath, teacherBuild.build(st, man.version));
 var EMBED = '<iframe src="/courses/COURSE/files/NUMBER/preview" width="100%" height="700" allowfullscreen="allowfullscreen"></iframe>';
+/* v5.13.1: the teacher page's embed code, for a Canvas Page kept unpublished (Copy falls back to select-and-Ctrl+C
+   if Canvas drops allow="clipboard-write") */
+var EMBED_TEACHER = '<iframe src="/courses/COURSE/files/NUMBER/preview" width="100%" height="900" allow="clipboard-write"></iframe>';
+/* v5.13.1: both embed codes, near the top of each READ ME */
+function embedCodes() {
+  return [
+    "THE TWO CANVAS EMBED CODES (copy and paste them; the steps below say where)",
+    "",
+    "1) THE GAME - for a Canvas Page students can see. NUMBER is the number of " + base + ".html:",
+    "",
+    "   " + EMBED,
+    "",
+    "2) THE TEACHER PAGE - for a Canvas Page you keep UNPUBLISHED, so only teachers see it.",
+    "   NUMBER is the number of " + teacherName + ":",
+    "",
+    "   " + EMBED_TEACHER,
+    "",
+    "In both, replace COURSE and NUMBER with your numbers. To find them, click the file once in Canvas Files and",
+    "look at the address bar: https://yourschool.instructure.com/courses/152432/files/60512345?...",
+    "COURSE is the number after /courses/ (152432) and NUMBER is the number after /files/ (60512345).",
+    "Each file has its own NUMBER, so the game and the teacher page have different ones. COURSE is the same.",
+    "Paste a code with the </> button (HTML Editor) while editing the Canvas Page, then Save."
+  ];
+}
 /* v5.13: tracking progress with progress codes and the teacher page */
 function teacherSteps() {
   return [
@@ -100,13 +124,17 @@ function teacherSteps() {
     "   Submission type: Online, with Text Entry checked (nothing else). Points: whatever you like. Save and Publish.",
     "3. Tell students: open the game, tap My progress code, tap Copy code, and paste it into that assignment",
     "   as a Text Entry, then Submit. A new code each time you grade: the newest code shows everything so far.",
-    "4. Read the codes: open " + teacherName + " from Files (click it, then open it in a new tab if Canvas shows only",
-    "   a preview). Or download it once and open it from your computer: it needs no internet. Then EITHER",
+    "4. Put the teacher page on its own Canvas Page: Pages > + Page, title it \"Teacher - progress codes\",",
+    "   click </> (HTML Editor), paste the TEACHER PAGE embed code from the top of this READ ME with your COURSE",
+    "   and the NUMBER of " + teacherName + ", and Save. Do NOT publish this Canvas Page: leave it unpublished.",
+    "   (Or open " + teacherName + " straight from Files, or download it once and open it on your computer:",
+    "   it needs no internet. If Download CSV or Copy doesn't work inside Canvas, use one of these.)",
+    "5. Read the codes on the teacher page. EITHER",
     "   (a) open SpeedGrader, copy each student's code and paste it into the box on the teacher page",
     "       (type the name first if you like: Ann Smith: SOL1-...), OR",
     "   (b) on the assignment's page click \"Download Submissions\", and drop that .zip file on the teacher page",
     "       (student names come from the file names Canvas gives them).",
-    "5. Set your goals at the top of the teacher page (minutes, levels won, questions; how much each counts;",
+    "6. Set your goals at the top of the teacher page (minutes, levels won, questions; how much each counts;",
     "   points possible). The table shows each student and a suggested grade; Download (CSV) or Copy it.",
     "A typo or a changed code shows as INVALID. The code stops typos and casual tampering, not a determined",
     "student. A student who plays on two Chromebooks has two codes; the page keeps the newest one."
@@ -115,6 +143,7 @@ function teacherSteps() {
 function readme(update) {
   var n = files.length + (update ? 1 : 2), L = [];
   L.push(gameName + " - version " + man.version + (update ? " (UPDATE)" : ""), "");
+  L.push.apply(L, embedCodes().concat(["", "--------------------------------------------------------------------------------", ""]));
   if (update) {
     L.push("THIS ZIP UPDATES A GAME THAT IS ALREADY IN CANVAS.",
       "It holds the game's .js files (" + n + " files) and the teacher page. It has no game .html page on purpose: the page already in",

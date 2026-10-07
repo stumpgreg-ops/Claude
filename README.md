@@ -50,6 +50,8 @@ Tests: `node tools/smoke-progress.js` (after `node tools/build-games.js`, `node 
 
 `node tools/build-canvas.js VA` now writes **`dist/canvas/SOL Lab VA Eng.zip`** (first-time setup) and **`dist/canvas/SOL Lab VA Eng update.zip`** (update). Only the zip names changed: the files inside keep their `SOLLabyrinth-VA-*` names, so an update still replaces the files already in Canvas, and the embed code and students' saves are untouched. The READ ME in each zip names the new zips. NJ and Odyssey zips keep their `SOLLabyrinth-<NJ|Odyssey>-Canvas*.zip` names.
 
+Every READ ME (all games, full and update) now opens with **both Canvas embed codes**: the game's (`height="700"`, for a Page students see) and the teacher page's (`<iframe src="/courses/COURSE/files/NUMBER/preview" width="100%" height="900" allow="clipboard-write"></iframe>`, for a Canvas Page kept unpublished), with how to find COURSE and each file's NUMBER. The teacher steps now say to put the teacher page on its own unpublished Canvas Page; opening it from Files or from the computer stays as the fallback if Download CSV or Copy is blocked inside Canvas (in an iframe, Copy falls back to select-and-Ctrl+C).
+
 ## v5.12.1 (2026-10-06) — a READ ME in every Canvas zip
 
 `tools/build-canvas.js` puts a plain-text file in each zip:
