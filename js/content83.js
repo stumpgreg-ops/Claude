@@ -47,6 +47,7 @@
         {
           id: "theme",
           sol: "10.RL.1.A",
+          sub: "10.RL.1.A.1",
           stem: "Which theme does the story of the laundromat heron best develop?",
           choices: [
             { letter: "A", text: "Old artwork should be left alone rather than changed by new painters." },
@@ -59,6 +60,7 @@
         {
           id: "decide",
           sol: "10.RL.1.B",
+          sub: "10.RL.1.B.2",
           stem: "Which sentence marks the moment Adaeze decides to join the mural project?",
           choices: [
             { letter: "A", text: "Sentence 5" },
@@ -71,6 +73,7 @@
         {
           id: "adaeze",
           sol: "10.RL.1.C",
+          sub: "10.RL.1.C.1",
           stem: "Sentences 6 and 7 characterize Adaeze at the start of the story as —",
           choices: [
             { letter: "A", text: "skilled at drawing but shy about letting others see it" },
@@ -82,7 +85,8 @@
         },
         {
           id: "knee",
-          sol: "10.RL.2.A",
+          sol: "10.RL.2.B",
+          sub: "10.RL.2.B.2",
           stem: "In sentence 12, comparing the wall to a scraped knee mainly suggests that the wall —",
           choices: [
             { letter: "A", text: "was damaged by the twins during the cleanup" },
@@ -95,6 +99,7 @@
         {
           id: "reeds",
           sol: "10.RL.2.B",
+          sub: "10.RL.2.B.2",
           stem: "Sentences 16 and 17 about the thin green blades of the reeds mainly suggest that —",
           choices: [
             { letter: "A", text: "small efforts that seem useless alone can add up to something larger" },
@@ -106,7 +111,8 @@
         },
         {
           id: "frame",
-          sol: "10.RL.3.A",
+          sol: "10.RL.1.B",
+          sub: "10.RL.1.B.1",
           stem: "The author begins and ends the story with Adaeze walking past the laundromat on her way to school mainly to —",
           choices: [
             { letter: "A", text: "show that her daily schedule never changes" },
@@ -118,7 +124,8 @@
         },
         {
           id: "bleached",
-          sol: "10.RV.1.C",
+          sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "In sentence 4, the phrase to the color of dishwater helps show that bleached most nearly means —",
           choices: [
             { letter: "A", text: "scrubbed clean" },
@@ -131,6 +138,7 @@
         {
           id: "tone",
           sol: "10.RL.2.C",
+          sub: "10.RL.2.C.1",
           stem: "The tone of the final paragraph, when Adaeze passes the finished heron, is best described as —",
           choices: [
             { letter: "A", text: "boastful and loud" },
@@ -182,6 +190,7 @@
         {
           id: "theme",
           sol: "10.RL.1.A",
+          sub: "10.RL.1.A.1",
           stem: "Which theme is developed through Junho's visits to Room 417?",
           choices: [
             { letter: "A", text: "Hospital rules often keep volunteers from helping patients." },
@@ -194,6 +203,7 @@
         {
           id: "habit",
           sol: "10.RL.1.B",
+          sub: "10.RL.1.B.2",
           stem: "Which sentence first shows Mrs. Ferraz's request beginning to change Junho's habits?",
           choices: [
             { letter: "A", text: "Sentence 12" },
@@ -206,6 +216,7 @@
         {
           id: "junho",
           sol: "10.RL.1.C",
+          sub: "10.RL.1.C.1",
           stem: "In sentences 1–3, Junho is best described as —",
           choices: [
             { letter: "A", text: "proud of his speed and sure that it serves patients well" },
@@ -217,7 +228,8 @@
         },
         {
           id: "hem",
-          sol: "10.RL.2.A",
+          sol: "10.RL.2.B",
+          sub: "10.RL.2.B.2",
           stem: "In sentence 10, comparing Mrs. Ferraz's look to the way Junho's grandmother eyed a crooked hem suggests that Mrs. Ferraz —",
           choices: [
             { letter: "A", text: "is confused about what Junho has said" },
@@ -229,7 +241,8 @@
         },
         {
           id: "irony",
-          sol: "10.RL.2.C",
+          sol: "10.RL.2.D",
+          sub: "10.RL.2.D.2",
           stem: "What is ironic about the note Mrs. Ferraz leaves for Junho in sentences 24 and 25?",
           choices: [
             { letter: "A", text: "She praises his speed, though he was usually late." },
@@ -241,7 +254,8 @@
         },
         {
           id: "brick",
-          sol: "10.RL.3.A",
+          sol: "10.RL.2.C",
+          sub: "10.RL.2.C.2",
           stem: "The author mentions the window still full of brick in sentence 22 mainly to —",
           choices: [
             { letter: "A", text: "recall how little Mrs. Ferraz could see without Junho" },
@@ -254,6 +268,7 @@
         {
           id: "efficient",
           sol: "10.RV.1.D",
+          sub: "10.RV.1.D.2",
           stem: "In sentence 3, Junho insists he is efficient rather than rushed. Compared with rushed, the word efficient suggests that he sees his speed as —",
           choices: [
             { letter: "A", text: "careless and sloppy" },
@@ -266,6 +281,7 @@
         {
           id: "mood",
           sol: "10.RL.2.B",
+          sub: "10.RL.2.B.2",
           stem: "The image in sentence 26 of Junho standing still beside a cart of unrequested books mainly creates a mood of —",
           choices: [
             { letter: "A", text: "frustrated impatience" },
@@ -314,6 +330,7 @@
         {
           id: "central",
           sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "Which statement best expresses the central idea of the article about harbor seals?",
           choices: [
             { letter: "A", text: "Harbor seals hunt mostly at night because fish are slower then." },
@@ -325,7 +342,8 @@
         },
         {
           id: "evidence",
-          sol: "10.RI.1.B",
+          sol: "10.RI.1.C",
+          sub: "10.RI.1.C.2",
           stem: "Which sentence gives the strongest evidence that the whiskers themselves, and not sight or hearing, let a seal follow a wake?",
           choices: [
             { letter: "A", text: "Sentence 8" },
@@ -338,6 +356,7 @@
         {
           id: "uncertain",
           sol: "10.RI.1.C",
+          sub: "10.RI.1.C.2",
           stem: "Which idea does the article present as uncertain rather than as an established result?",
           choices: [
             { letter: "A", text: "that whisker-style sensors may someday help robots in harbors" },
@@ -350,6 +369,7 @@
         {
           id: "organize",
           sol: "10.RI.2.A",
+          sub: "10.RI.2.A.1",
           stem: "How is the seal-whisker article organized as a whole?",
           choices: [
             { letter: "A", text: "It compares harbor seals with sea lions point by point throughout." },
@@ -361,7 +381,8 @@
         },
         {
           id: "opening",
-          sol: "10.RI.2.B",
+          sol: "10.RI.2.A",
+          sub: "10.RI.2.A.2",
           stem: "The author opens with the night-hunting scene in sentences 1–4 mainly to —",
           choices: [
             { letter: "A", text: "show how hard the problem is before explaining how seals solve it" },
@@ -374,6 +395,7 @@
         {
           id: "attitude",
           sol: "10.RI.2.C",
+          sub: "10.RI.2.C.2",
           stem: "The author's attitude toward the whisker-inspired sensors in sentences 18–20 is best described as —",
           choices: [
             { letter: "A", text: "openly dismissive" },
@@ -385,7 +407,8 @@
         },
         {
           id: "vibrissae",
-          sol: "10.RV.1.A",
+          sol: "10.RV.1.C",
+          sub: "10.RV.1.C.1",
           stem: "The word vibrissae in sentence 7 comes from a Latin root meaning to vibrate. Based on this root and the article, the name fits because the whiskers —",
           choices: [
             { letter: "A", text: "grow back quickly after they fall out" },
@@ -397,7 +420,8 @@
         },
         {
           id: "wavy",
-          sol: "10.RI.1.B",
+          sol: "10.RI.2.B",
+          sub: "10.RI.2.B.2",
           stem: "According to the article, how does the wavy shape of a harbor seal's whisker help it hunt?",
           choices: [
             { letter: "A", text: "It lets the whisker reach farther ahead of the seal's face." },
@@ -450,6 +474,7 @@
         {
           id: "main",
           sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "What is the main idea of the article about dung beetles?",
           choices: [
             { letter: "A", text: "Dung beetles use light in the sky, even the Milky Way, to roll straight." },
@@ -461,7 +486,8 @@
         },
         {
           id: "why-straight",
-          sol: "10.RI.1.B",
+          sol: "10.RI.2.B",
+          sub: "10.RI.2.B.2",
           stem: "According to the article, why does a dung beetle try to roll its ball in a straight line?",
           choices: [
             { letter: "A", text: "to reach the spot where the sun is brightest" },
@@ -473,7 +499,8 @@
         },
         {
           id: "purpose",
-          sol: "10.RI.1.C",
+          sol: "10.RI.2.C",
+          sub: "10.RI.2.C.2",
           stem: "The author's main purpose in the dung beetle article is to —",
           choices: [
             { letter: "A", text: "persuade readers to protect beetles in southern Africa" },
@@ -486,6 +513,7 @@
         {
           id: "experiments",
           sol: "10.RI.2.A",
+          sub: "10.RI.2.A.1",
           stem: "How are sentences 17–22 organized?",
           choices: [
             { letter: "A", text: "as a list of reasons beetles prefer to work at night" },
@@ -497,7 +525,8 @@
         },
         {
           id: "head-down",
-          sol: "10.RI.2.B",
+          sol: "10.RI.2.A",
+          sub: "10.RI.2.A.2",
           stem: "The author includes sentences 7 and 8 about the beetle's body position mainly to —",
           choices: [
             { letter: "A", text: "show that dung beetles are stronger than they look" },
@@ -510,6 +539,7 @@
         {
           id: "closing-tone",
           sol: "10.RI.2.C",
+          sub: "10.RI.2.C.2",
           stem: "The tone of sentence 27, the article's closing remark about ordinary questions, is best described as —",
           choices: [
             { letter: "A", text: "appreciative" },
@@ -522,6 +552,7 @@
         {
           id: "shift",
           sol: "10.RI.2.A",
+          sub: "10.RI.2.A.1",
           stem: "Which sentence signals that the article is shifting from daytime research to nighttime research?",
           choices: [
             { letter: "A", text: "Sentence 11" },
@@ -534,6 +565,7 @@
         {
           id: "interpret",
           sol: "10.RI.1.C",
+          sub: "10.RI.1.C.2",
           stem: "Which statement from the beetle article is an interpretation rather than a directly observed result?",
           choices: [
             { letter: "A", text: "The capped beetles wandered in loops." },
@@ -582,7 +614,8 @@
       claims: [
         {
           id: "deteriorated",
-          sol: "10.RV.1.C",
+          sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "Which words from sentence 3 best help the reader understand the meaning of deteriorated in sentence 2?",
           choices: [
             { letter: "A", text: "a crowd of neighborhood kids" },
@@ -595,6 +628,7 @@
         {
           id: "pigments",
           sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "As used in sentence 7, the word pigments most nearly means —",
           choices: [
             { letter: "A", text: "brushes used for fine lines" },
@@ -606,7 +640,8 @@
         },
         {
           id: "reversible",
-          sol: "10.RV.1.A",
+          sol: "10.RV.1.C",
+          sub: "10.RV.1.C.1",
           stem: "The word reversible in sentence 13 combines re- (back), vers (turn), and -ible (able to be). Based on these parts and sentence 14, reversible work is work that —",
           choices: [
             { letter: "A", text: "can be undone later without harming the original" },
@@ -619,6 +654,7 @@
         {
           id: "painstaking",
           sol: "10.RV.1.D",
+          sub: "10.RV.1.D.2",
           stem: "The author chose painstaking rather than slow in sentence 8. Compared with slow, the word painstaking suggests work that —",
           choices: [
             { letter: "A", text: "causes the workers physical pain" },
@@ -631,6 +667,7 @@
         {
           id: "restraint",
           sol: "10.RV.1.D",
+          sub: "10.RV.1.D.2",
           stem: "In sentence 15, the word restraint carries a positive connotation in this passage because it suggests —",
           choices: [
             { letter: "A", text: "wise self-control that protects the original work" },
@@ -642,7 +679,8 @@
         },
         {
           id: "translucent",
-          sol: "10.RV.1.C",
+          sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "In sentence 17, the phrase like a watercolor wash helps the reader understand that translucent layers are —",
           choices: [
             { letter: "A", text: "thick enough to hide every crack" },
@@ -655,6 +693,7 @@
         {
           id: "thao",
           sol: "10.RL.1.C",
+          sub: "10.RL.1.C.1",
           stem: "How does Thao's attitude toward the restoration change between sentence 9 and sentence 24?",
           choices: [
             { letter: "A", text: "She grows bored and wishes she had chosen another internship." },
@@ -666,7 +705,8 @@
         },
         {
           id: "nineties",
-          sol: "10.RL.3.A",
+          sol: "10.RL.1.B",
+          sub: "10.RL.1.B.1",
           stem: "Mr. Lindqvist's account of the 1990s crew in sentence 12 mainly serves to —",
           choices: [
             { letter: "A", text: "show that he dislikes the city's earlier workers" },
@@ -713,7 +753,8 @@
       claims: [
         {
           id: "nocturnal",
-          sol: "10.RV.1.A",
+          sol: "10.RV.1.C",
+          sub: "10.RV.1.C.1",
           stem: "The word nocturnal in sentence 4 contains the Latin root noct-, as in nocturne. Based on this root, nocturnal moths are moths that are —",
           choices: [
             { letter: "A", text: "attracted mainly to bright colors" },
@@ -726,6 +767,7 @@
         {
           id: "inconspicuous",
           sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "As used in sentence 5, the word inconspicuous most nearly means —",
           choices: [
             { letter: "A", text: "not easily noticed" },
@@ -737,7 +779,8 @@
         },
         {
           id: "proboscis",
-          sol: "10.RV.1.C",
+          sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "Which part of sentence 9 best helps the reader understand what a proboscis is?",
           choices: [
             { letter: "A", text: "It uncoils a long, hollow" },
@@ -750,6 +793,7 @@
         {
           id: "unheralded",
           sol: "10.RV.1.D",
+          sub: "10.RV.1.D.2",
           stem: "The author calls moths unheralded partners rather than unknown partners in sentence 14. Compared with unknown, unheralded suggests that moths —",
           choices: [
             { letter: "A", text: "have only recently been discovered by science" },
@@ -761,7 +805,8 @@
         },
         {
           id: "disrupt",
-          sol: "10.RV.1.A",
+          sol: "10.RV.1.C",
+          sub: "10.RV.1.C.1",
           stem: "In disrupt (sentence 16), the prefix dis- means apart and the root rupt means break, as in rupture. Based on these parts, lamps that disrupt a moth's guidance —",
           choices: [
             { letter: "A", text: "break up or throw off its sense of direction" },
@@ -774,6 +819,7 @@
         {
           id: "diminish",
           sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "In sentence 19, the word diminish most nearly means —",
           choices: [
             { letter: "A", text: "spread out" },
@@ -786,6 +832,7 @@
         {
           id: "summary",
           sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "Which statement best summarizes the article about night-flying moths?",
           choices: [
             { letter: "A", text: "Moths do more harm than good because they confuse birds and gardeners." },
@@ -797,7 +844,8 @@
         },
         {
           id: "porch",
-          sol: "10.RI.2.B",
+          sol: "10.RI.2.A",
+          sub: "10.RI.2.A.2",
           stem: "The author ends with the porch-light example in sentence 22 mainly to —",
           choices: [
             { letter: "A", text: "warn readers that porch lights waste electricity" },
@@ -851,6 +899,7 @@
         {
           id: "agree",
           sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "On which point do the hospital newsletter and the volunteer's essay agree?",
           choices: [
             { letter: "A", text: "The hospital should add weekend volunteer shifts." },
@@ -863,6 +912,7 @@
         {
           id: "differ",
           sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "The two texts differ mainly in how they judge the value of the volunteer program. Which statement best describes that difference?",
           choices: [
             { letter: "A", text: "Text 1 criticizes the program, while Text 2 defends it against critics." },
@@ -874,7 +924,8 @@
         },
         {
           id: "respond",
-          sol: "10.DSR.E",
+          sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "Sentences 24–26 of the essay respond most directly to which sentence from the newsletter?",
           choices: [
             { letter: "A", text: "Sentence 1" },
@@ -886,7 +937,8 @@
         },
         {
           id: "hours",
-          sol: "10.DSR.E",
+          sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "Using both texts, a reader can best conclude that the 6,200 hours reported in sentence 5 —",
           choices: [
             { letter: "A", text: "were mostly spent restocking supply carts" },
@@ -898,7 +950,8 @@
         },
         {
           id: "two-sentences",
-          sol: "10.DSR.D",
+          sol: "10.DSR.C",
+          sub: "10.DSR.C.1",
           stem: "Select TWO sentences, one from each text, that together best show the gap between how the program is officially measured and what the essay writer values.",
           choices: [
             { letter: "A", text: "Sentence 3" },
@@ -911,6 +964,7 @@
         {
           id: "central-1",
           sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "Which statement best expresses the central idea of the Harborview newsletter article?",
           choices: [
             { letter: "A", text: "The teen program has grown and benefits both hospital staff and students." },
@@ -922,7 +976,8 @@
         },
         {
           id: "counts",
-          sol: "10.RI.2.B",
+          sol: "10.RI.2.A",
+          sub: "10.RI.2.A.2",
           stem: "The essay writer opens with the counts in sentences 12 and 13 mainly to —",
           choices: [
             { letter: "A", text: "prove that new volunteers need a longer orientation" },
@@ -934,7 +989,8 @@
         },
         {
           id: "audience",
-          sol: "10.RI.1.C",
+          sol: "10.RI.2.C",
+          sub: "10.RI.2.C.2",
           stem: "Based on its details and its final sentence, the newsletter article is written mainly for —",
           choices: [
             { letter: "A", text: "students deciding whether to apply" },
@@ -982,6 +1038,7 @@
         {
           id: "agree",
           sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "Both the magazine writer and the tour boat captain would most likely agree that —",
           choices: [
             { letter: "A", text: "the slow zone should be made permanent all year long" },
@@ -994,6 +1051,7 @@
         {
           id: "differ",
           sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "The texts about Caldera Bay differ mainly in that Text 2 —",
           choices: [
             { letter: "A", text: "offers scientific studies from other coastlines" },
@@ -1005,7 +1063,8 @@
         },
         {
           id: "small-boats",
-          sol: "10.DSR.E",
+          sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "Using both texts, which conclusion about smaller tour boats in Caldera Bay is best supported?",
           choices: [
             { letter: "A", text: "The zone has been harder on them, and they have followed it less consistently." },
@@ -1017,7 +1076,8 @@
         },
         {
           id: "short-record",
-          sol: "10.DSR.E",
+          sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "How does Text 2 treat the caution researchers raise in sentence 9 of Text 1?",
           choices: [
             { letter: "A", text: "It agrees that no decision should be made for many more years." },
@@ -1029,7 +1089,8 @@
         },
         {
           id: "challenge",
-          sol: "10.DSR.E",
+          sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "In sentence 14, the captain most directly challenges which sentence from Text 1?",
           choices: [
             { letter: "A", text: "Sentence 3" },
@@ -1042,6 +1103,7 @@
         {
           id: "goodwill",
           sol: "10.RI.2.C",
+          sub: "10.RI.2.C.2",
           stem: "In sentences 11 and 12, the captain mainly establishes a tone of —",
           choices: [
             { letter: "A", text: "anger at the marine authority" },
@@ -1054,6 +1116,7 @@
         {
           id: "letter-structure",
           sol: "10.RI.2.A",
+          sub: "10.RI.2.A.1",
           stem: "How is the captain's letter organized?",
           choices: [
             { letter: "A", text: "It tells the history of whale watching in time order." },
@@ -1065,7 +1128,8 @@
         },
         {
           id: "acoustic",
-          sol: "10.RV.1.A",
+          sol: "10.RV.1.C",
+          sub: "10.RV.1.C.1",
           stem: "The word acoustic in sentence 18 comes from a Greek root meaning to hear, as in acoustics. Based on this root, acoustic buoys are buoys that —",
           choices: [
             { letter: "A", text: "mark the edges of the slow zone" },
@@ -1116,6 +1180,7 @@
         {
           id: "theme",
           sol: "10.RL.1.A",
+          sub: "10.RL.1.A.1",
           stem: "Which theme is best supported by the cicada poem as a whole?",
           choices: [
             { letter: "A", text: "Small rituals of memory can connect people across long spans of time." },
@@ -1128,6 +1193,7 @@
         {
           id: "stitches",
           sol: "10.RL.2.A",
+          sub: "10.RL.2.A.3",
           stem: "In lines 7–8, comparing the holes in the lawn to stitches pulled out overnight mainly suggests that the ground —",
           choices: [
             { letter: "A", text: "has been torn up by careless digging" },
@@ -1140,6 +1206,7 @@
         {
           id: "coat",
           sol: "10.RL.2.B",
+          sub: "10.RL.2.B.2",
           stem: "Besides describing the empty shells, the image in lines 14–15 of a coat no one will come back for most likely hints at —",
           choices: [
             { letter: "A", text: "the speaker's plan to move out of the house" },
@@ -1152,6 +1219,7 @@
         {
           id: "tone",
           sol: "10.RL.2.C",
+          sub: "10.RL.2.C.1",
           stem: "The tone of lines 22–24, as the speaker sits on the steps and writes, is best described as —",
           choices: [
             { letter: "A", text: "bitter and resentful" },
@@ -1163,7 +1231,8 @@
         },
         {
           id: "echo",
-          sol: "10.RL.3.A",
+          sol: "10.RL.2.A",
+          sub: "10.RL.2.A.1",
           stem: "How does the ending of the poem (lines 23–24) connect to its beginning (lines 3–4)?",
           choices: [
             { letter: "A", text: "The speaker repeats the grandfather's note and carries on his record." },
@@ -1176,6 +1245,7 @@
         {
           id: "grandfather",
           sol: "10.RL.1.C",
+          sub: "10.RL.1.C.1",
           stem: "Line 3, my grandfather, who kept a list of everything, characterizes the grandfather as —",
           choices: [
             { letter: "A", text: "forgetful and easily confused" },
@@ -1187,7 +1257,8 @@
         },
         {
           id: "armor",
-          sol: "10.RV.1.B",
+          sol: "10.RV.1.F",
+          sub: "10.RV.1.F.1",
           stem: "As used in line 9, the word armor most nearly refers to the cicadas' —",
           choices: [
             { letter: "A", text: "loud, steady calls" },
@@ -1199,7 +1270,8 @@
         },
         {
           id: "turn",
-          sol: "10.RL.1.B",
+          sol: "10.RL.2.A",
+          sub: "10.RL.2.A.1",
           stem: "Which line marks the turn from describing the cicadas to facing the speaker's loss?",
           choices: [
             { letter: "A", text: "Line 12" },
@@ -1246,6 +1318,7 @@
         {
           id: "theme",
           sol: "10.RL.1.A",
+          sub: "10.RL.1.A.1",
           stem: "Which theme does the scene at the tide pool most clearly develop?",
           choices: [
             { letter: "A", text: "Young people often know more about nature than adults do." },
@@ -1258,6 +1331,7 @@
         {
           id: "conflict",
           sol: "10.RL.1.B",
+          sub: "10.RL.1.B.1",
           stem: "The central conflict between Keola and Aunty Mahina is a disagreement over whether to —",
           choices: [
             { letter: "A", text: "call the response team or handle the rescue alone" },
@@ -1270,6 +1344,7 @@
         {
           id: "towel",
           sol: "10.RL.1.C",
+          sub: "10.RL.1.C.1",
           stem: "Keola's action and question in sentence 15 show that she —",
           choices: [
             { letter: "A", text: "has begun to accept Aunty Mahina's way of helping" },
@@ -1281,7 +1356,8 @@
         },
         {
           id: "surf",
-          sol: "10.RL.2.B",
+          sol: "10.RL.1.D",
+          sub: "10.RL.1.D.2",
           stem: "The stage direction in sentence 12, with the surf rolling closer and the dolphin lifting its head, mainly creates a mood of —",
           choices: [
             { letter: "A", text: "playful excitement" },
@@ -1294,6 +1370,7 @@
         {
           id: "blunt",
           sol: "10.RL.2.C",
+          sub: "10.RL.2.C.1",
           stem: "Aunty Mahina's remark at the end of sentence 9, that pushing the dolphin back just makes us feel better, has a tone that is best described as —",
           choices: [
             { letter: "A", text: "blunt but honest" },
@@ -1305,7 +1382,8 @@
         },
         {
           id: "ending",
-          sol: "10.RL.3.A",
+          sol: "10.RL.1.B",
+          sub: "10.RL.1.B.1",
           stem: "The playwright ends the scene with Keola whispering We waited (sentence 20) mainly to —",
           choices: [
             { letter: "A", text: "suggest that the dolphin will certainly survive" },
@@ -1317,7 +1395,8 @@
         },
         {
           id: "tuck",
-          sol: "10.RL.2.A",
+          sol: "10.RL.2.B",
+          sub: "10.RL.2.B.2",
           stem: "In sentence 19, comparing the way Keola smooths the towel to tucking in someone who is sleeping suggests that she —",
           choices: [
             { letter: "A", text: "believes the dolphin is no longer alive" },
@@ -1329,7 +1408,8 @@
         },
         {
           id: "out",
-          sol: "10.RV.1.C",
+          sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "Keola's reply in sentence 3 helps show that the phrase twenty minutes out in sentence 2 means the team is —",
           choices: [
             { letter: "A", text: "twenty minutes late for its shift" },
@@ -1379,6 +1459,7 @@
         {
           id: "summary",
           sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "Which statement best summarizes the Riverbend shift guide?",
           choices: [
             { letter: "A", text: "It describes the history and goals of the hospital's volunteer program." },
@@ -1390,7 +1471,8 @@
         },
         {
           id: "water",
-          sol: "10.RI.1.B",
+          sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "According to the guide, what should a volunteer do if a patient asks for a glass of water?",
           choices: [
             { letter: "A", text: "Bring the water after cleaning their hands." },
@@ -1403,6 +1485,7 @@
         {
           id: "opinion",
           sol: "10.RI.1.C",
+          sub: "10.RI.1.C.2",
           stem: "Which sentence from the Riverbend guide is closest to an opinion rather than a rule or procedure?",
           choices: [
             { letter: "A", text: "Sentence 6" },
@@ -1415,6 +1498,7 @@
         {
           id: "headings",
           sol: "10.RI.2.A",
+          sub: "10.RI.2.A.2",
           stem: "The bold headings in the Riverbend guide help a reader mainly by —",
           choices: [
             { letter: "A", text: "grouping the rules by when in a shift they apply" },
@@ -1426,7 +1510,8 @@
         },
         {
           id: "touched",
-          sol: "10.RI.2.B",
+          sol: "10.RI.2.A",
+          sub: "10.RI.2.A.2",
           stem: "The guide adds the phrase even if you touched nothing in sentence 10 mainly to —",
           choices: [
             { letter: "A", text: "suggest that most volunteers forget to wash" },
@@ -1439,6 +1524,7 @@
         {
           id: "welcome",
           sol: "10.RI.2.C",
+          sub: "10.RI.2.C.2",
           stem: "The tone of sentences 1 and 23, which open and close the shift guide, is best described as —",
           choices: [
             { letter: "A", text: "stern and warning" },
@@ -1450,7 +1536,8 @@
         },
         {
           id: "hours",
-          sol: "10.RI.1.B",
+          sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "According to the guide, which TWO actions must a volunteer complete for the shift's hours to be counted? Select TWO.",
           choices: [
             { letter: "A", text: "signing in on the tablet at the start" },
@@ -1463,6 +1550,7 @@
         {
           id: "isolation",
           sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "Based on sentence 12, a room with a yellow isolation sign is most likely one that —",
           choices: [
             { letter: "A", text: "is kept apart to stop illness from spreading" },
@@ -1510,7 +1598,8 @@
       claims: [
         {
           id: "claim",
-          sol: "10.RI.1.A",
+          sol: "10.RI.1.C",
+          sub: "10.RI.1.C.1",
           stem: "Which sentence best states the writer's central claim about the Route 4 underpass?",
           choices: [
             { letter: "A", text: "Sentence 1" },
@@ -1522,7 +1611,8 @@
         },
         {
           id: "outside",
-          sol: "10.RI.1.B",
+          sol: "10.RI.1.C",
+          sub: "10.RI.1.C.2",
           stem: "Which detail does the writer offer as evidence from a town other than Millbrook?",
           choices: [
             { letter: "A", text: "Cleanup calls at four walls fell by more than half." },
@@ -1535,6 +1625,7 @@
         {
           id: "prediction",
           sol: "10.RI.1.C",
+          sub: "10.RI.1.C.2",
           stem: "Which statement in the mural editorial is presented as a prediction rather than a reported fact?",
           choices: [
             { letter: "A", text: "The town repaints the underpass gray every spring." },
@@ -1547,6 +1638,7 @@
         {
           id: "objections",
           sol: "10.RI.2.A",
+          sub: "10.RI.2.A.1",
           stem: "How does the writer organize sentences 13–21 of the editorial?",
           choices: [
             { letter: "A", text: "by describing the mural's design from left to right" },
@@ -1558,7 +1650,8 @@
         },
         {
           id: "cost",
-          sol: "10.RI.2.B",
+          sol: "10.RI.1.C",
+          sub: "10.RI.1.C.2",
           stem: "The writer includes the figure of $11,400 in sentence 3 mainly to —",
           choices: [
             { letter: "A", text: "show that the town already spends money on the wall" },
@@ -1571,6 +1664,7 @@
         {
           id: "serious",
           sol: "10.RI.2.C",
+          sub: "10.RI.2.C.2",
           stem: "In sentence 14, the writer says the council members' concern deserves a serious answer mainly to —",
           choices: [
             { letter: "A", text: "admit that the mural plan should be dropped" },
@@ -1583,6 +1677,7 @@
         {
           id: "last-line",
           sol: "10.RI.2.C",
+          sub: "10.RI.2.C.2",
           stem: "The editorial's closing line, Let's stop paying, every spring, to say nothing, is best described as —",
           choices: [
             { letter: "A", text: "a neutral summary of the council's options" },
@@ -1595,6 +1690,7 @@
         {
           id: "blankness",
           sol: "10.RV.1.D",
+          sub: "10.RV.1.D.2",
           stem: "In sentence 20, the writer chose blankness rather than simplicity. Compared with simplicity, blankness suggests that a gray wall is —",
           choices: [
             { letter: "A", text: "tasteful and calm" },
