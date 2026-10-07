@@ -592,35 +592,74 @@
     });
     return { codes: Object.keys(codes).sort(stdOrder), tot: codes, per: per.sort(function (a, b) { return fullName(a.r).localeCompare(fullName(b.r)); }), old: old };
   }
+  /* the skill a standard names (filled in from the standards table when there is one) */
+  var SKILLS = window.SOL_SKILLS || {};
+  function skillText(c) { return SKILLS[c] || ""; }
   function cellCls(p) { return p == null ? "" : p >= 80 ? "c-hi" : p >= 60 ? "c-mid" : "c-lo"; }
-  function paintStd() {
-    var s = stdData(), el = $("std");
-    if (!s.codes.length) {
-      el.innerHTML = '<p class="empty">No standards detail yet. ' + (s.old ? s.old + " code" + (s.old === 1 ? " is" : "s are") + " from before version 5.15, which didn't record standards: ask for new codes." : "Add codes in box 1.") + "</p>";
-      return;
-    }
-    var h = '<p class="std-key">Each cell: % right on the first try (questions answered). Green 80%+, yellow 60–79%, red below 60%. Sorted by grade and skill.' +
-      (s.old ? " " + s.old + " student" + (s.old === 1 ? "'s code is" : "s' codes are") + " from before version 5.15 and not included." : "") + "</p>";
-    h += '<div class="std-wrap"><table class="std"><thead><tr><th class="l">Standard</th><th>Skill</th><th>Students</th><th>Questions</th><th>Class % right</th></tr></thead><tbody>';
-    s.codes.forEach(function (c) {
-      var t = s.tot[c], p = pct(t.r, t.a);
-      h += '<tr><td class="l">' + esc(c) + "</td><td>" + esc(STRAND[strandOf(c)] || "") + "</td><td>" + t.n + "</td><td>" + t.a + '</td><td class="' + cellCls(p) + '">' + p + "%</td></tr>";
+  var stdPage = "class", stdSort = "std";
+  function bar(p) { return '<span class="sbar"><i class="' + cellCls(p) + '" style="width:' + (p == null ? 0 : p) + '%"></i></span>'; }
+  /* v5.16.2: the CLASS TOTAL page: every student's answers added together, standard by standard, with how many
+     students are at 80%+, 60-79% and below 60% on it, the skill areas in total, and the weakest standards first */
+  function paintStdClass(s) {
+    var areas = {}, h = "";
+    s.codes.forEach(function (c) { var sd = strandOf(c) || "?", a = areas[sd] || (areas[sd] = { a: 0, r: 0 }); a.a += s.tot[c].a; a.r += s.tot[c].r; });
+    var all = s.codes.reduce(function (m, c) { m.a += s.tot[c].a; m.r += s.tot[c].r; return m; }, { a: 0, r: 0 });
+    h += '<div class="summary">' + ['<div class="st"><b>' + pct(all.r, all.a) + '%</b><span>the class, all standards (' + all.a + ' questions)</span></div>']
+      .concat(["RL", "RI", "RV", "DSR"].filter(function (k) { return areas[k]; }).map(function (k) {
+        var p = pct(areas[k].r, areas[k].a);
+        return '<div class="st"><b class="' + cellCls(p) + '-t">' + p + "%</b><span>" + esc(STRAND[k]) + " (" + areas[k].a + " questions)</span></div>";
+      })).join("") + "</div>";
+    var buckets = {};
+    s.codes.forEach(function (c) { buckets[c] = { hi: 0, mid: 0, lo: 0 }; });
+    s.per.forEach(function (x) { Object.keys(x.m).forEach(function (c) { var m = x.m[c]; if (!m.a || !buckets[c]) return; var p = pct(m.r, m.a); buckets[c][p >= 80 ? "hi" : p >= 60 ? "mid" : "lo"]++; }); });
+    var weak = s.codes.filter(function (c) { return s.tot[c].a >= 10; }).sort(function (x, y) { return pct(s.tot[x].r, s.tot[x].a) - pct(s.tot[y].r, s.tot[y].a); }).slice(0, 3);
+    if (weak.length) h += '<p class="focus"><b>Reteach first:</b> ' + weak.map(function (c) { return esc(c) + " " + esc(skillText(c)) + " (" + pct(s.tot[c].r, s.tot[c].a) + "%)"; }).join(" · ") + "</p>";
+    var list = s.codes.slice();
+    if (stdSort === "weak") list.sort(function (x, y) { return pct(s.tot[x].r, s.tot[x].a) - pct(s.tot[y].r, s.tot[y].a); });
+    h += '<div class="std-wrap"><table class="std"><thead><tr><th class="l">Standard</th><th>Skill area</th><th class="skl">Skill</th><th>Students</th><th>Questions</th><th>Right first try</th><th>Class % right</th>' +
+      '<th>Students 80%+</th><th>60–79%</th><th>Below 60%</th></tr></thead><tbody>';
+    list.forEach(function (c) {
+      var t = s.tot[c], p = pct(t.r, t.a), bk = buckets[c];
+      h += '<tr><td class="l">' + esc(c) + "</td><td>" + esc(STRAND[strandOf(c)] || "") + '</td><td class="skl">' + esc(skillText(c)) + "</td><td>" + t.n + "</td><td>" + t.a + "</td><td>" + t.r +
+        '</td><td class="' + cellCls(p) + '">' + p + "% " + bar(p) + '</td><td class="c-hi">' + bk.hi + '</td><td class="c-mid">' + bk.mid + '</td><td class="c-lo">' + bk.lo + "</td></tr>";
     });
-    h += "</tbody></table></div>";
-    h += '<h3 style="margin:16px 0 4px">Student by student</h3><div class="std-wrap"><table class="std"><thead><tr><th class="l">Student</th>' +
-      s.codes.map(function (c) { return "<th>" + esc(c) + "</th>"; }).join("") + "</tr></thead><tbody>";
-    h += '<tr class="cls"><td class="l">Class</td>' + s.codes.map(function (c) { var t = s.tot[c], p = pct(t.r, t.a); return '<td class="' + cellCls(p) + '">' + p + "% (" + t.a + ")</td>"; }).join("") + "</tr>";
+    return h + "</tbody></table></div>";
+  }
+  function paintStdStudents(s) {
+    var h = '<div class="std-wrap"><table class="std"><thead><tr><th class="l">Student</th>' +
+      s.codes.map(function (c) { return '<th title="' + esc(skillText(c)) + '">' + esc(c) + "</th>"; }).join("") + "</tr></thead><tbody>";
+    h += '<tr class="cls"><td class="l">Class total</td>' + s.codes.map(function (c) { var t = s.tot[c], p = pct(t.r, t.a); return '<td class="' + cellCls(p) + '">' + p + "% (" + t.a + ")</td>"; }).join("") + "</tr>";
     s.per.forEach(function (x) {
       h += '<tr><td class="l">' + esc(fullName(x.r)) + "</td>" + s.codes.map(function (c) {
         var m = x.m[c]; if (!m || !m.a) return "<td>–</td>";
         var p = pct(m.r, m.a); return '<td class="' + cellCls(p) + '">' + p + "% (" + m.a + ")</td>";
       }).join("") + "</tr>";
     });
-    el.innerHTML = h + "</tbody></table></div>";
+    return h + "</tbody></table></div>";
+  }
+  function paintStd() {
+    var s = stdData(), el = $("std");
+    if (!s.codes.length) {
+      el.innerHTML = '<p class="empty">No standards detail yet. ' + (s.old ? s.old + " code" + (s.old === 1 ? " is" : "s are") + " from before version 5.15, which didn't record standards: ask for new codes." : "Add codes in box 1.") + "</p>";
+      return;
+    }
+    var h = '<div class="tabs noprint" role="tablist"><button type="button" class="tab' + (stdPage === "class" ? " on" : "") + '" data-sp="class">Class total</button>' +
+      '<button type="button" class="tab' + (stdPage === "students" ? " on" : "") + '" data-sp="students">Student by student</button>' +
+      (stdPage === "class" ? '<label class="sortby">Order <select id="std-sort"><option value="std"' + (stdSort === "std" ? " selected" : "") + '>By standard</option><option value="weak"' + (stdSort === "weak" ? " selected" : "") + '>Weakest first</option></select></label>' : "") + "</div>";
+    h += '<p class="std-key">' + (stdPage === "class" ? "Every student's answers added together. Class % right = right on the first try ÷ questions answered. The last three columns count students by their own % on that standard." :
+      "Each cell: % right on the first try (questions answered).") + " Green 80%+, yellow 60–79%, red below 60%." +
+      (s.old ? " " + s.old + " student" + (s.old === 1 ? "'s code is" : "s' codes are") + " from before version 5.15 and not included." : "") + "</p>";
+    h += stdPage === "class" ? paintStdClass(s) : paintStdStudents(s);
+    el.innerHTML = h;
+    Array.prototype.forEach.call(el.querySelectorAll(".tab[data-sp]"), function (t) { t.addEventListener("click", function () { stdPage = t.getAttribute("data-sp"); paintStd(); }); });
+    var so = $("std-sort"); if (so) so.addEventListener("change", function () { stdSort = so.value; paintStd(); });
   }
   function stdCsv() {
-    var s = stdData(), out = [["Student", "Nickname"].concat([].concat.apply([], s.codes.map(function (c) { return [c + " answered", c + " right first try", c + " % right"]; })))];
-    out.push(["Class", ""].concat([].concat.apply([], s.codes.map(function (c) { var t = s.tot[c]; return [t.a, t.r, pct(t.r, t.a)]; }))));
+    var s = stdData(), out = [["CLASS TOTAL"], ["Standard", "Skill area", "Skill", "Students", "Questions", "Right first try", "Class % right"]];
+    s.codes.forEach(function (c) { var t = s.tot[c]; out.push([c, STRAND[strandOf(c)] || "", skillText(c), t.n, t.a, t.r, pct(t.r, t.a)]); });
+    out.push([], ["STUDENT BY STUDENT"]);
+    out.push(["Student", "Nickname"].concat([].concat.apply([], s.codes.map(function (c) { return [c + " answered", c + " right first try", c + " % right"]; }))));
+    out.push(["Class total", ""].concat([].concat.apply([], s.codes.map(function (c) { var t = s.tot[c]; return [t.a, t.r, pct(t.r, t.a)]; }))));
     s.per.forEach(function (x) {
       out.push([fullName(x.r), x.r.data.nick || ""].concat([].concat.apply([], s.codes.map(function (c) { var m = x.m[c]; return m && m.a ? [m.a, m.r, pct(m.r, m.a)] : ["", "", ""]; }))));
     });

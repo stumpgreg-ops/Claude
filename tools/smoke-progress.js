@@ -558,8 +558,13 @@ function makeZip(files) {
   await page.keyboard.press("Escape");
   await page.click('.tab[data-view="std"]');
   var sd = await page.evaluate(function () { return { text: document.getElementById("std").innerText, rows: document.querySelectorAll("#std table.std").length, csv: TeacherPage.stdCsv() }; });
-  check(sd.rows === 2 && /9\.R[LIV]\.\d\.[A-F]/.test(sd.text) && /Class/.test(sd.text) && /Ann Smith/.test(sd.text) && /from before version 5\.15/.test(sd.text) && /^\ufeff?Student,Nickname,9\./.test(sd.csv.replace(/^\ufeff/, "")),
-    "the standards report: each standard for the class and student by student, older codes noted, and a CSV");
+  check(sd.rows === 1 && /Class total/.test(sd.text) && /9\.R[LIV]\.\d\.[A-F]/.test(sd.text) && /Students 80%\+/.test(sd.text) && /Below 60%/.test(sd.text) && /from before version 5\.15/.test(sd.text) && /Literary \(\d+ questions\)/.test(sd.text),
+    "the standards report opens on the Class total page: every standard with the class's %, the students at 80%+ / 60-79% / below 60%, and the skill areas");
+  await page.click('#std .tab[data-sp="students"]');
+  var sd2 = await page.evaluate(function () { return document.getElementById("std").innerText; });
+  check(/Ann Smith/.test(sd2) && /Class total/.test(sd2), "Student by student shows each student and the class total row");
+  check(/^CLASS TOTAL/.test(sd.csv.replace(/^\ufeff/, "")) && /STUDENT BY STUDENT/.test(sd.csv) && /\nStudent,Nickname,9\./.test(sd.csv), "the standards CSV has the class total, then student by student");
+  await page.click('#std .tab[data-sp="class"]');
   await page.screenshot({ path: path.join(shots, "pg-12-standards.png"), fullPage: true });
   await page.click('.tab[data-view="table"]');
   /* more students for the picture, then CSV and Copy */

@@ -108,6 +108,13 @@ table.std th.l { z-index: 3; background: var(--panel2); }
 table.std td.c-hi { background: rgba(63,168,100,.35); } table.std td.c-mid { background: rgba(201,162,39,.32); } table.std td.c-lo { background: rgba(196,85,63,.38); }
 table.std tr.cls td { font-weight: 700; border-bottom: 2px solid var(--gold); }
 .std-key { font-size: 14px; color: var(--dim); margin: 8px 0; }
+.sbar { display: inline-block; width: 70px; height: 8px; background: rgba(255,255,255,.1); border-radius: 5px; vertical-align: middle; overflow: hidden; margin-left: 6px; }
+.sbar i { display: block; height: 100%; }
+.sbar i.c-hi { background: #3fa864; } .sbar i.c-mid { background: #c9a227; } .sbar i.c-lo { background: #c4553f; }
+.c-hi-t { color: var(--ok) !important; } .c-mid-t { color: var(--warn) !important; } .c-lo-t { color: var(--bad) !important; }
+table.std td.skl, table.std th.skl { text-align: left; white-space: normal; min-width: 220px; max-width: 360px; }
+.focus { background: var(--panel2); border-left: 4px solid var(--bad); border-radius: 8px; padding: 8px 12px; margin: 8px 0; }
+.sortby { margin-left: auto; align-self: center; font-size: 15px; }
 
 @media print {
   @page { size: landscape; margin: 10mm; }
