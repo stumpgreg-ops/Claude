@@ -28,7 +28,8 @@
       claims: [
         {
           id: "char",
-          sol: "9.RL.1.C",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "Sentence 4 mainly shows that Priya —",
           choices: [
             { letter: "A", text: "hopes Luis will finally notice her backpack" },
@@ -40,7 +41,8 @@
         },
         {
           id: "plot",
-          sol: "9.RL.1.B",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "Why does Luis stop at Priya's row in sentence 6?",
           choices: [
             { letter: "A", text: "The seats at the back of the bus are all taken." },
@@ -52,7 +54,8 @@
         },
         {
           id: "word",
-          sol: "9.RL.2.C",
+          sol: "9.RL.2.B",
+          sub: "9.RL.2.B.2",
           stem: "In sentence 4, the word cleared most nearly means —",
           choices: [
             { letter: "A", text: "cleaned" },
@@ -64,7 +67,8 @@
         },
         {
           id: "craft",
-          sol: "9.RL.3.A",
+          sol: "9.RL.2.B",
+          sub: "9.RL.2.B.2",
           stem: "The author repeats the phrase every morning in sentence 1 mainly to show that Priya's action is —",
           choices: [
             { letter: "A", text: "a habit she keeps up whether or not it is noticed" },
@@ -77,6 +81,7 @@
         {
           id: "theme",
           sol: "9.RL.1.A",
+          sub: "9.RL.1.A.1",
           stem: "Which statement best expresses a theme of this story about the bus?",
           choices: [
             { letter: "A", text: "Friendships are formed only on the first day of school." },
@@ -109,6 +114,7 @@
         {
           id: "meta",
           sol: "9.RL.2.A",
+          sub: "9.RL.2.A.2",
           stem: "In line 3, the porch light is called a small and stubborn sun. This metaphor suggests that the light is —",
           choices: [
             { letter: "A", text: "too bright for the neighbors" },
@@ -120,7 +126,8 @@
         },
         {
           id: "speaker",
-          sol: "9.RL.1.C",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "Line 5 mainly shows that the speaker —",
           choices: [
             { letter: "A", text: "has lost the key to the house" },
@@ -133,6 +140,7 @@
         {
           id: "theme",
           sol: "9.RL.1.A",
+          sub: "9.RL.1.A.1",
           stem: "Which idea does line 7 best express?",
           choices: [
             { letter: "A", text: "Care can be shown through actions instead of speech." },
@@ -144,7 +152,8 @@
         },
         {
           id: "line6",
-          sol: "9.RL.1.B",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "In line 6, the mother nods but leaves the light on. This action shows that she —",
           choices: [
             { letter: "A", text: "did not hear what the speaker said about the way" },
@@ -175,6 +184,7 @@
         {
           id: "main",
           sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "The main purpose of this notice is to —",
           choices: [
             { letter: "A", text: "recruit new members for the Environmental Club" },
@@ -186,7 +196,8 @@
         },
         {
           id: "detail",
-          sol: "9.RI.1.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "According to the notice, which item belongs in a green bin?",
           choices: [
             { letter: "A", text: "a plastic fork" },
@@ -198,7 +209,8 @@
         },
         {
           id: "why",
-          sol: "9.RI.2.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "The author includes the reason in sentence 3 mainly to —",
           choices: [
             { letter: "A", text: "explain why a doubtful item should go in the trash" },
@@ -210,7 +222,8 @@
         },
         {
           id: "word",
-          sol: "9.RI.2.A",
+          sol: "9.RI.2.B",
+          sub: "9.RI.2.B.1",
           stem: "In sentence 3, the word spoil most nearly means —",
           choices: [
             { letter: "A", text: "ruin" },
@@ -222,7 +235,8 @@
         },
         {
           id: "infer",
-          sol: "9.RI.1.C",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "Sentence 5 suggests that the compost program will —",
           choices: [
             { letter: "A", text: "end after the first two weeks" },
@@ -252,6 +266,7 @@
         {
           id: "main",
           sol: "9.RI.1.A",
+          sub: "9.RI.1.A.1",
           stem: "Which statement best states the main idea of the passage about lenses?",
           choices: [
             { letter: "A", text: "Oil lamps were dangerous to use in lighthouses." },
@@ -263,7 +278,8 @@
         },
         {
           id: "detail",
-          sol: "9.RI.1.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "According to sentence 3, the rings of glass work by —",
           choices: [
             { letter: "A", text: "making the flame burn hotter" },
@@ -275,7 +291,8 @@
         },
         {
           id: "structure",
-          sol: "9.RI.2.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "The author includes sentence 1 mainly to —",
           choices: [
             { letter: "A", text: "describe the problem the new lens solved" },
@@ -287,7 +304,8 @@
         },
         {
           id: "word",
-          sol: "9.RI.2.A",
+          sol: "9.RI.2.B",
+          sub: "9.RI.2.B.1",
           stem: "In sentence 3, a beam parallel to the water is one that —",
           choices: [
             { letter: "A", text: "dips down into the waves" },
@@ -299,7 +317,8 @@
         },
         {
           id: "evidence",
-          sol: "9.RI.3.A",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "Which sentence best supports the idea that the new lens improved how far a light could be seen?",
           choices: [
             { letter: "A", text: "Sentence 1" },
@@ -329,7 +348,8 @@
       claims: [
         {
           id: "simile",
-          sol: "9.RL.2.A",
+          sol: "9.RL.2.B",
+          sub: "9.RL.2.B.2",
           stem: "In sentence 1, comparing the whistle to a stone mainly suggests that Dana —",
           choices: [
             { letter: "A", text: "has been given the wrong kind of whistle" },
@@ -341,7 +361,8 @@
         },
         {
           id: "coach",
-          sol: "9.RL.1.B",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "In sentence 3, the coach opens his hands mainly to —",
           choices: [
             { letter: "A", text: "ask Dana whether she is going to make the call" },
@@ -353,7 +374,8 @@
         },
         {
           id: "char",
-          sol: "9.RL.1.C",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "Which sentence best shows Dana gaining confidence?",
           choices: [
             { letter: "A", text: "Sentence 1" },
@@ -366,6 +388,7 @@
         {
           id: "point",
           sol: "9.RL.1.A",
+          sub: "9.RL.1.A.1",
           stem: "What does Dana realize is the point in sentence 6?",
           choices: [
             { letter: "A", text: "A referee should not care about the score." },
@@ -377,7 +400,8 @@
         },
         {
           id: "word",
-          sol: "9.RL.2.C",
+          sol: "9.RL.2.B",
+          sub: "9.RL.2.B.2",
           stem: "In sentence 5, the word steadier most nearly means —",
           choices: [
             { letter: "A", text: "louder" },
@@ -407,6 +431,7 @@
         {
           id: "devoted",
           sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In sentence 2, the word devoted most nearly means —",
           choices: [
             { letter: "A", text: "closed off" },
@@ -418,7 +443,8 @@
         },
         {
           id: "fragile",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "Which detail in sentence 3 best helps a reader understand fragile?",
           choices: [
             { letter: "A", text: "the model ships are upstairs" },
@@ -431,6 +457,7 @@
         {
           id: "gladly",
           sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In sentence 4, the word gladly tells the reader that the guides answer questions —",
           choices: [
             { letter: "A", text: "quickly" },
@@ -442,7 +469,8 @@
         },
         {
           id: "parts",
-          sol: "9.RV.1.E",
+          sol: "9.RV.1.C",
+          sub: "9.RV.1.C.1",
           stem: "The suffix -ly in gladly changes the word glad into —",
           choices: [
             { letter: "A", text: "an adverb that describes how something is done" },
@@ -474,6 +502,7 @@
         {
           id: "shared",
           sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "Which idea do both texts share?",
           choices: [
             { letter: "A", text: "A garden can be grown in very different spaces." },
@@ -485,7 +514,8 @@
         },
         {
           id: "differ",
-          sol: "9.DSR.E",
+          sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "Which statement best describes how the two gardens differ?",
           choices: [
             { letter: "A", text: "Mateo grows tomatoes, while Grandma Ruth grows something else." },
@@ -497,7 +527,8 @@
         },
         {
           id: "ev1",
-          sol: "9.DSR.D",
+          sol: "9.DSR.C",
+          sub: "9.DSR.C.3",
           stem: "Which sentence from Text 1 shows an advantage of the rooftop?",
           choices: [
             { letter: "A", text: "Sentence 1" },
@@ -509,7 +540,8 @@
         },
         {
           id: "ev2",
-          sol: "9.DSR.E",
+          sol: "9.DSR.B",
+          sub: "9.DSR.B.1",
           stem: "According to Text 2, why do Grandma Ruth's tomatoes ripen later?",
           choices: [
             { letter: "A", text: "Rabbits eat the early ones." },
@@ -522,6 +554,7 @@
         {
           id: "two",
           sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "Select TWO details that appear in both texts.",
           choices: [
             { letter: "A", text: "Each gardener has an animal to deal with." },
@@ -551,6 +584,7 @@
         {
           id: "main",
           sol: "9.RI.1.A",
+          sub: "9.RI.1.A.1",
           stem: "This passage about the bridge is mainly about —",
           choices: [
             { letter: "A", text: "how bats find insects over water" },
@@ -562,7 +596,8 @@
         },
         {
           id: "word",
-          sol: "9.RI.2.A",
+          sol: "9.RI.2.B",
+          sub: "9.RI.2.B.1",
           stem: "In sentence 4, the word consistency most nearly means —",
           choices: [
             { letter: "A", text: "doing something the same way each time" },
@@ -574,7 +609,8 @@
         },
         {
           id: "evidence",
-          sol: "9.RI.3.A",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "Which sentence best explains why farmers should care about the count?",
           choices: [
             { letter: "A", text: "Sentence 1" },
@@ -586,7 +622,8 @@
         },
         {
           id: "infer",
-          sol: "9.RI.1.C",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "Based on sentence 4, a count that dropped by a few hundred bats would most likely —",
           choices: [
             { letter: "A", text: "prove that the colony is dying" },
@@ -616,7 +653,8 @@
       claims: [
         {
           id: "plot",
-          sol: "9.RL.1.B",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "Why does Amara ask for the definition in sentence 4?",
           choices: [
             { letter: "A", text: "She has never heard the word before." },
@@ -628,7 +666,8 @@
         },
         {
           id: "simile",
-          sol: "9.RL.2.A",
+          sol: "9.RL.2.B",
+          sub: "9.RL.2.B.2",
           stem: "In sentence 3, the letters slide around like ice in a glass. This simile suggests that the middle of the word is —",
           choices: [
             { letter: "A", text: "cold and unpleasant" },
@@ -640,7 +679,8 @@
         },
         {
           id: "ending",
-          sol: "9.RL.3.A",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "What does sentence 6 tell the reader?",
           choices: [
             { letter: "A", text: "Amara spelled the word correctly." },
@@ -652,7 +692,8 @@
         },
         {
           id: "setting",
-          sol: "9.RL.3.B",
+          sol: "9.RL.2.B",
+          sub: "9.RL.2.B.1",
           stem: "The detail in sentence 1 that the gym went quiet in a way she could hear mainly creates a feeling of —",
           choices: [
             { letter: "A", text: "boredom" },
@@ -664,7 +705,8 @@
         },
         {
           id: "char",
-          sol: "9.RL.1.C",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "Sentences 4 and 5 together show that Amara is —",
           choices: [
             { letter: "A", text: "careless under pressure" },
@@ -698,6 +740,7 @@
         {
           id: "person",
           sol: "9.RL.2.A",
+          sub: "9.RL.2.A.1",
           stem: "In lines 2 and 8, the barrel asks why and grins. The poet uses these details to —",
           choices: [
             { letter: "A", text: "show that the barrel is broken" },
@@ -709,7 +752,8 @@
         },
         {
           id: "speaker",
-          sol: "9.RL.1.C",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "Lines 5 and 6 mainly show that the speaker is —",
           choices: [
             { letter: "A", text: "angry at the clouds" },
@@ -721,7 +765,8 @@
         },
         {
           id: "drum",
-          sol: "9.RL.2.C",
+          sol: "9.RL.2.A",
+          sub: "9.RL.2.A.1",
           stem: "In line 7, the first slow drum most likely refers to —",
           choices: [
             { letter: "A", text: "thunder far away" },
@@ -733,7 +778,8 @@
         },
         {
           id: "shift",
-          sol: "9.RL.3.A",
+          sol: "9.RL.2.A",
+          sub: "9.RL.2.A.2",
           stem: "How does the mood of the poem change from line 1 to line 8?",
           choices: [
             { letter: "A", text: "from longing to satisfaction" },
@@ -769,7 +815,8 @@
       claims: [
         {
           id: "plot",
-          sol: "9.RL.1.B",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "What problem does Theo discover in sentence 4?",
           choices: [
             { letter: "A", text: "The screws on the radio have rusted shut." },
@@ -781,7 +828,8 @@
         },
         {
           id: "simile",
-          sol: "9.RL.2.A",
+          sol: "9.RL.2.B",
+          sub: "9.RL.2.B.2",
           stem: "In sentence 4, the wire's end is compared to a paintbrush to show that it is —",
           choices: [
             { letter: "A", text: "covered in paint" },
@@ -793,7 +841,8 @@
         },
         {
           id: "char",
-          sol: "9.RL.1.C",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "Sentences 5 and 6 together show that Theo is —",
           choices: [
             { letter: "A", text: "resourceful but honest about the limits of his fix" },
@@ -805,7 +854,8 @@
         },
         {
           id: "word",
-          sol: "9.RL.2.C",
+          sol: "9.RL.2.B",
+          sub: "9.RL.2.B.2",
           stem: "In sentence 8, the word crackled most nearly means —",
           choices: [
             { letter: "A", text: "was shouted from across the room" },
@@ -817,7 +867,8 @@
         },
         {
           id: "ending",
-          sol: "9.RL.3.A",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "The grandfather's comment in sentence 9 mainly shows that he —",
           choices: [
             { letter: "A", text: "is upset that the radio is fuzzy" },
@@ -830,6 +881,7 @@
         {
           id: "theme",
           sol: "9.RL.1.A",
+          sub: "9.RL.1.A.1",
           stem: "The story as a whole mainly suggests that —",
           choices: [
             { letter: "A", text: "old machines should be replaced rather than repaired" },
@@ -863,6 +915,7 @@
         {
           id: "main",
           sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "The main purpose of the passenger card is to —",
           choices: [
             { letter: "A", text: "advertise the island to new visitors" },
@@ -874,7 +927,8 @@
         },
         {
           id: "detail",
-          sol: "9.RI.1.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "According to the card, when may the crew close the upper deck?",
           choices: [
             { letter: "A", text: "when there are dogs on board" },
@@ -886,7 +940,8 @@
         },
         {
           id: "why",
-          sol: "9.RI.2.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "The author includes the reason at the end of sentence 7 mainly to —",
           choices: [
             { letter: "A", text: "explain why bike riders exit after walkers" },
@@ -899,6 +954,7 @@
         {
           id: "structure",
           sol: "9.RI.2.A",
+          sub: "9.RI.2.A.1",
           stem: "How is the card organized?",
           choices: [
             { letter: "A", text: "from the most to the least important rule" },
@@ -910,7 +966,8 @@
         },
         {
           id: "infer",
-          sol: "9.RI.1.C",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "Based on sentence 6, a passenger would know the ferry is about to dock when —",
           choices: [
             { letter: "A", text: "the crew opens the upper deck" },
@@ -943,6 +1000,7 @@
         {
           id: "main",
           sol: "9.RI.1.A",
+          sub: "9.RI.1.A.1",
           stem: "Which statement best summarizes the passage?",
           choices: [
             { letter: "A", text: "Glass frogs live on the undersides of leaves." },
@@ -954,7 +1012,8 @@
         },
         {
           id: "problem",
-          sol: "9.RI.2.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "The author includes sentence 3 mainly to —",
           choices: [
             { letter: "A", text: "describe the color of the frog's skin" },
@@ -966,7 +1025,8 @@
         },
         {
           id: "detail",
-          sol: "9.RI.1.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "According to sentence 4, where does a sleeping glass frog store its red blood cells?",
           choices: [
             { letter: "A", text: "in its liver" },
@@ -978,7 +1038,8 @@
         },
         {
           id: "word",
-          sol: "9.RI.2.A",
+          sol: "9.RI.2.B",
+          sub: "9.RI.2.B.1",
           stem: "In sentence 2, the word transparency most nearly means —",
           choices: [
             { letter: "A", text: "the ability to hold very still" },
@@ -990,7 +1051,8 @@
         },
         {
           id: "evidence",
-          sol: "9.RI.3.A",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "Which sentence best supports the idea that the frog's ability could matter to humans?",
           choices: [
             { letter: "A", text: "Sentence 2" },
@@ -1003,6 +1065,7 @@
         {
           id: "infer",
           sol: "9.RI.1.C",
+          sub: "9.RI.1.C.1",
           stem: "Which statement from the passage is a hope rather than a confirmed finding?",
           choices: [
             { letter: "A", text: "The frog's organs can be seen through its belly." },
@@ -1033,6 +1096,7 @@
         {
           id: "temperamental",
           sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In sentence 1, the word temperamental most nearly means —",
           choices: [
             { letter: "A", text: "extremely old and rusty" },
@@ -1044,7 +1108,8 @@
         },
         {
           id: "rotate",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "Which words in sentence 2 best help a reader understand rotate?",
           choices: [
             { letter: "A", text: "halfway through" },
@@ -1057,6 +1122,7 @@
         {
           id: "complacent",
           sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In sentence 3, Mr. Okafor warns Noor not to be complacent. He most nearly means she should not —",
           choices: [
             { letter: "A", text: "work too slowly" },
@@ -1068,7 +1134,8 @@
         },
         {
           id: "satisfaction",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "The phrase that had nothing to do with her paycheck in sentence 5 helps show that satisfaction refers to —",
           choices: [
             { letter: "A", text: "a feeling of pride in work done well" },
@@ -1080,7 +1147,8 @@
         },
         {
           id: "figurative",
-          sol: "9.RV.1.E",
+          sol: "9.RV.1.F",
+          sub: "9.RV.1.F.1",
           stem: "In sentence 3, the oven changes its mind is an example of —",
           choices: [
             { letter: "A", text: "a simile" },
@@ -1115,6 +1183,7 @@
         {
           id: "simile",
           sol: "9.RL.2.A",
+          sub: "9.RL.2.A.2",
           stem: "In line 1, the crossing guard wears the morning like a coat. This comparison suggests that —",
           choices: [
             { letter: "A", text: "his coat is too thin for the weather" },
@@ -1126,7 +1195,8 @@
         },
         {
           id: "line4",
-          sol: "9.RL.2.B",
+          sol: "9.RL.2.A",
+          sub: "9.RL.2.A.2",
           stem: "Line 4 mainly suggests that the guard —",
           choices: [
             { letter: "A", text: "owns several of the cars" },
@@ -1138,7 +1208,8 @@
         },
         {
           id: "line5",
-          sol: "9.RL.1.C",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "Line 5 shows that the students —",
           choices: [
             { letter: "A", text: "dislike the crossing guard" },
@@ -1150,7 +1221,8 @@
         },
         {
           id: "shift",
-          sol: "9.RL.3.A",
+          sol: "9.RL.1.B",
+          sub: "9.RL.1.B.2",
           stem: "The word But at the start of line 7 signals that the poem is about to —",
           choices: [
             { letter: "A", text: "describe a memory that changed the speaker's view" },
@@ -1163,6 +1235,7 @@
         {
           id: "theme",
           sol: "9.RL.1.A",
+          sub: "9.RL.1.A.1",
           stem: "Which statement best expresses the central idea of \"Crossing Guard\"?",
           choices: [
             { letter: "A", text: "Snow days are the best part of winter." },
@@ -1199,7 +1272,8 @@
       claims: [
         {
           id: "problem",
-          sol: "9.DSR.D",
+          sol: "9.DSR.B",
+          sub: "9.DSR.B.1",
           stem: "According to Text 1, what problem does Wren face on Day 12?",
           choices: [
             { letter: "A", text: "The charger does not work at all." },
@@ -1211,7 +1285,8 @@
         },
         {
           id: "judge",
-          sol: "9.DSR.E",
+          sol: "9.DSR.B",
+          sub: "9.DSR.B.1",
           stem: "Which part of the project does the judge in Text 2 value most?",
           choices: [
             { letter: "A", text: "the standard design of the charger itself" },
@@ -1223,7 +1298,8 @@
         },
         {
           id: "differ",
-          sol: "9.DSR.E",
+          sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "Which statement best describes how the journal and the comment card differ?",
           choices: [
             { letter: "A", text: "Text 1 records a problem as it happens, while Text 2 evaluates the finished result." },
@@ -1235,7 +1311,8 @@
         },
         {
           id: "ev1",
-          sol: "9.DSR.D",
+          sol: "9.DSR.C",
+          sub: "9.DSR.C.3",
           stem: "Which sentence from Text 1 best explains why Wren avoids using a motor?",
           choices: [
             { letter: "A", text: "Sentence 2" },
@@ -1247,7 +1324,8 @@
         },
         {
           id: "ev2",
-          sol: "9.DSR.E",
+          sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "Sentence 10 shows that the judge read Text 1 because it —",
           choices: [
             { letter: "A", text: "mentions the water bottle" },
@@ -1260,6 +1338,7 @@
         {
           id: "two",
           sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "Select TWO ideas that both texts support.",
           choices: [
             { letter: "A", text: "The stand works by slowly draining water." },
@@ -1293,6 +1372,7 @@
         {
           id: "main",
           sol: "9.RI.1.A",
+          sub: "9.RI.1.A.1",
           stem: "What is the central idea of the passage?",
           choices: [
             { letter: "A", text: "Black roofs are the most common kind in cities." },
@@ -1304,7 +1384,8 @@
         },
         {
           id: "detail",
-          sol: "9.RI.1.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "According to sentence 4, a white roof stays cooler because it —",
           choices: [
             { letter: "A", text: "reflects most of the sunlight" },
@@ -1316,7 +1397,8 @@
         },
         {
           id: "hook",
-          sol: "9.RI.2.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "The author includes the detail about frying an egg in sentence 1 mainly to —",
           choices: [
             { letter: "A", text: "suggest a use for hot rooftops" },
@@ -1328,7 +1410,8 @@
         },
         {
           id: "structure",
-          sol: "9.RI.2.A",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "Sentence 8 is included mainly to —",
           choices: [
             { letter: "A", text: "argue that white roofs should not be used" },
@@ -1340,7 +1423,8 @@
         },
         {
           id: "word",
-          sol: "9.RI.2.A",
+          sol: "9.RI.2.B",
+          sub: "9.RI.2.B.1",
           stem: "In sentence 2, the word seeps most nearly means —",
           choices: [
             { letter: "A", text: "spreads slowly" },
@@ -1371,6 +1455,7 @@
         {
           id: "bustling",
           sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In sentence 1, the word bustling most nearly means —",
           choices: [
             { letter: "A", text: "quiet and nearly empty" },
@@ -1382,7 +1467,8 @@
         },
         {
           id: "arranged",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "Which phrase in sentence 2 best helps a reader understand arranged?",
           choices: [
             { letter: "A", text: "ran the honey stall" },
@@ -1395,6 +1481,7 @@
         {
           id: "hesitated",
           sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In sentence 3, the word hesitated most nearly means —",
           choices: [
             { letter: "A", text: "paused" },
@@ -1406,7 +1493,8 @@
         },
         {
           id: "confident",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In sentence 6, the author contrasts a confident answer with a careful one to show that confident means —",
           choices: [
             { letter: "A", text: "completely correct" },
@@ -1418,7 +1506,8 @@
         },
         {
           id: "parts",
-          sol: "9.RV.1.E",
+          sol: "9.RV.1.C",
+          sub: "9.RV.1.C.1",
           stem: "The word vendors in sentence 1 shares a root with the word vending. Based on this, vendors most nearly means —",
           choices: [
             { letter: "A", text: "shoppers" },

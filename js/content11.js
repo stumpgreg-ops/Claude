@@ -33,6 +33,7 @@
         {
           id: "propagate",
           sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "In sentence 1, the explanation after the colon shows that propagate means —",
           choices: [
             { letter: "A", text: "to grow new plants from an existing one" },
@@ -44,7 +45,8 @@
         },
         {
           id: "sparse",
-          sol: "11.RV.1.C",
+          sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "Which phrase in sentence 2 best helps a reader understand sparse?",
           choices: [
             { letter: "A", text: "in February this year" },
@@ -57,6 +59,7 @@
         {
           id: "tentative",
           sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "In sentence 4, the words slowly and checking the chart twice show that tentative means —",
           choices: [
             { letter: "A", text: "careless and rushed" },
@@ -69,6 +72,7 @@
         {
           id: "resilient",
           sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "In sentence 6, resilient most nearly means —",
           choices: [
             { letter: "A", text: "easily damaged" },
@@ -80,7 +84,8 @@
         },
         {
           id: "deplete-prefix",
-          sol: "11.RV.1.A",
+          sol: "11.RV.1.C",
+          sub: "11.RV.1.C.1",
           stem: "The word deplete in sentence 7 begins with the prefix de-, as do the words defrost and derail. In all three words, the prefix de- signals —",
           choices: [
             { letter: "A", text: "doing something again" },
@@ -92,7 +97,8 @@
         },
         {
           id: "abundant-connotation",
-          sol: "10.RV.1.A",
+          sol: "10.RV.1.D",
+          sub: "10.RV.1.D.1",
           stem: "In sentence 8, the author chose abundant rather than full. Compared with full, the word abundant adds a sense of —",
           choices: [
             { letter: "A", text: "generous, overflowing plenty" },
@@ -126,6 +132,7 @@
         {
           id: "vigilant",
           sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "In sentence 1, the instructor's own explanation shows that vigilant means —",
           choices: [
             { letter: "A", text: "strong enough to swim far" },
@@ -137,7 +144,8 @@
         },
         {
           id: "protocol",
-          sol: "11.RV.1.C",
+          sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "Which words from sentence 2 best clarify the meaning of protocol?",
           choices: [
             { letter: "A", text: "nobody would have to think about what came next" },
@@ -150,6 +158,7 @@
         {
           id: "complacent",
           sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "In sentence 4, the phrase one who feels so safe that he stops paying attention restates complacent as meaning —",
           choices: [
             { letter: "A", text: "overly self-satisfied and careless" },
@@ -162,6 +171,7 @@
         {
           id: "adept",
           sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "In sentence 5, adept most nearly means —",
           choices: [
             { letter: "A", text: "nervous" },
@@ -173,7 +183,8 @@
         },
         {
           id: "scrutinize-suffix",
-          sol: "11.RV.1.A",
+          sol: "11.RV.1.C",
+          sub: "11.RV.1.C.1",
           stem: "The word scrutinize in sentence 6 ends with the suffix -ize, as do memorize and organize. The suffix -ize turns a word into —",
           choices: [
             { letter: "A", text: "a noun naming a person" },
@@ -185,7 +196,8 @@
         },
         {
           id: "precarious-connotation",
-          sol: "10.RV.1.A",
+          sol: "10.RV.1.D",
+          sub: "10.RV.1.D.1",
           stem: "In sentence 7, the author could have described the ladder edge as narrow. Compared with narrow, the word precarious emphasizes —",
           choices: [
             { letter: "A", text: "how far the ladder is from the wall" },
@@ -219,6 +231,7 @@
         {
           id: "improvise",
           sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "In sentence 2, Priya's instruction to make it up as we went helps a reader understand that improvise means to —",
           choices: [
             { letter: "A", text: "read aloud from a prepared text" },
@@ -230,7 +243,8 @@
         },
         {
           id: "monotonous",
-          sol: "11.RV.1.C",
+          sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "Which phrase in sentence 4 best clarifies the meaning of monotonous?",
           choices: [
             { letter: "A", text: "listening back" },
@@ -243,6 +257,7 @@
         {
           id: "articulate",
           sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "In sentence 5, articulate most nearly means —",
           choices: [
             { letter: "A", text: "able to express ideas clearly" },
@@ -255,6 +270,7 @@
         {
           id: "discrepancy",
           sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "In sentence 6, the survey result described after the colon shows that a discrepancy is —",
           choices: [
             { letter: "A", text: "a majority opinion" },
@@ -266,7 +282,8 @@
         },
         {
           id: "mundane-connotation",
-          sol: "10.RV.1.A",
+          sol: "10.RV.1.D",
+          sub: "10.RV.1.D.1",
           stem: "The author describes the hall pass system as mundane in sentence 5. Compared with the word ordinary, mundane carries a stronger sense of —",
           choices: [
             { letter: "A", text: "being dull and unremarkable" },
@@ -278,7 +295,8 @@
         },
         {
           id: "mono-prefix",
-          sol: "11.RV.1.A",
+          sol: "11.RV.1.C",
+          sub: "11.RV.1.C.1",
           stem: "The word monotonous in sentence 4 begins with the prefix mono-, as in monologue and monorail. The prefix mono- means —",
           choices: [
             { letter: "A", text: "many" },
@@ -311,6 +329,7 @@
         {
           id: "chronological",
           sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "In sentence 1, the phrase earliest first shows that chronological order arranges items —",
           choices: [
             { letter: "A", text: "by size, smallest to largest" },
@@ -322,7 +341,8 @@
         },
         {
           id: "obsolete",
-          sol: "11.RV.1.C",
+          sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "The examples that follow the colon in sentence 2 show that obsolete describes technology that is —",
           choices: [
             { letter: "A", text: "too expensive to repair" },
@@ -335,6 +355,7 @@
         {
           id: "incongruous",
           sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "In sentence 3, the comparison to two books shuffled together shows that incongruous means —",
           choices: [
             { letter: "A", text: "carefully organized" },
@@ -347,6 +368,7 @@
         {
           id: "reticent",
           sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "In sentence 4, the phrase refusing to explain a single one indicates that reticent means —",
           choices: [
             { letter: "A", text: "unwilling to speak or reveal information" },
@@ -358,7 +380,8 @@
         },
         {
           id: "poignant-connotation",
-          sol: "10.RV.1.A",
+          sol: "10.RV.1.D",
+          sub: "10.RV.1.D.1",
           stem: "The author could have called the image in sentence 5 sad. Compared with sad, poignant suggests a feeling that is —",
           choices: [
             { letter: "A", text: "harsh and angry" },
@@ -370,7 +393,8 @@
         },
         {
           id: "provenance-root",
-          sol: "11.RV.1.A",
+          sol: "11.RV.1.C",
+          sub: "11.RV.1.C.1",
           stem: "The word provenance in sentence 6 comes from a Latin root meaning to come forth. Ms. Okafor's answer confirms that provenance refers to —",
           choices: [
             { letter: "A", text: "the price a book would sell for" },
@@ -414,6 +438,7 @@
         {
           id: "shared",
           sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "Which idea is supported by both texts?",
           choices: [
             { letter: "A", text: "Most students who ride bikes lock them somewhere other than the rack." },
@@ -426,6 +451,7 @@
         {
           id: "purpose",
           sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "Which statement best describes how the two texts differ in purpose?",
           choices: [
             { letter: "A", text: "Text 1 explains how bikes are stolen; Text 2 argues for a new rack." },
@@ -437,7 +463,8 @@
         },
         {
           id: "only-text2",
-          sol: "10.DSR.D",
+          sol: "10.DSR.C",
+          sub: "10.DSR.C.3",
           stem: "Which detail appears only in the facilities brief?",
           choices: [
             { letter: "A", text: "Three bikes were stolen." },
@@ -450,6 +477,7 @@
         {
           id: "craft",
           sol: "11.RI.2.C",
+          sub: "11.RI.2.C.2",
           stem: "In sentence 3, the writer says We are not asking for anything fancy mainly to —",
           choices: [
             { letter: "A", text: "admit that the plan is unlikely to be approved" },
@@ -461,7 +489,8 @@
         },
         {
           id: "select2",
-          sol: "11.DSR.E",
+          sol: "11.DSR.C",
+          sub: "11.DSR.C.1",
           stem: "Select TWO sentences from Text 2 that support the editorial's claim that the current rack is barely used.",
           choices: [
             { letter: "A", text: "Sentence 10" },
@@ -473,7 +502,8 @@
         },
         {
           id: "synth",
-          sol: "11.DSR.E",
+          sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "A student council member who read both texts could best conclude that —",
           choices: [
             { letter: "A", text: "the editorial's cost claim is proven false by the brief" },
@@ -515,6 +545,7 @@
         {
           id: "shared",
           sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "Which idea is central to both texts?",
           choices: [
             { letter: "A", text: "A performer who recovers alone gains something a rescue would not give." },
@@ -527,6 +558,7 @@
         {
           id: "difference",
           sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "Which statement best describes a key difference between the texts?",
           choices: [
             { letter: "A", text: "Text 1 shows the moment through the student; Text 2 looks back on it as a teacher." },
@@ -539,6 +571,7 @@
         {
           id: "echo",
           sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "The teacher in Text 2 sits with her program folded and her hands still (sentence 12). This detail most closely echoes which sentence in Text 1?",
           choices: [
             { letter: "A", text: "Sentence 1" },
@@ -550,7 +583,8 @@
         },
         {
           id: "figurative",
-          sol: "11.RL.2.B",
+          sol: "11.RL.2.C",
+          sub: "11.RL.2.C.2",
           stem: "In sentence 1, comparing Tomas's hands to two birds that had forgotten how to fly mainly emphasizes —",
           choices: [
             { letter: "A", text: "how quickly he played the first measure" },
@@ -562,7 +596,8 @@
         },
         {
           id: "select2",
-          sol: "11.DSR.E",
+          sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "Select TWO sentences from Text 2 that state directly the lesson Text 1 shows through Tomas's restart in sentence 6.",
           choices: [
             { letter: "A", text: "Sentence 9" },
@@ -574,7 +609,8 @@
         },
         {
           id: "synth",
-          sol: "11.DSR.E",
+          sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "Read together, the two texts suggest that the teacher's silence in each text is best understood as —",
           choices: [
             { letter: "A", text: "a sign that the teacher had lost interest in the performance" },
@@ -617,6 +653,7 @@
         {
           id: "shared",
           sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "Both texts support the idea that —",
           choices: [
             { letter: "A", text: "students rarely use the science-wing fountain" },
@@ -628,7 +665,8 @@
         },
         {
           id: "limitations",
-          sol: "11.DSR.E",
+          sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "The limitations noted in sentence 16 matter to a reader of Text 1 because they —",
           choices: [
             { letter: "A", text: "prove that the editorial's count of sixty-one bottles was wrong" },
@@ -641,6 +679,7 @@
         {
           id: "tone",
           sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "Which statement best describes how the texts differ in tone?",
           choices: [
             { letter: "A", text: "Text 1 is urgent and persuasive; Text 2 is neutral and factual." },
@@ -652,7 +691,8 @@
         },
         {
           id: "craft",
-          sol: "11.RI.2.C",
+          sol: "11.RI.2.A",
+          sub: "11.RI.2.A.2",
           stem: "In sentences 8 and 9, the writer says This is not an environmental lecture mainly to —",
           choices: [
             { letter: "A", text: "apologize for the length of the editorial" },
@@ -664,7 +704,8 @@
         },
         {
           id: "select2",
-          sol: "11.DSR.E",
+          sol: "11.DSR.C",
+          sub: "11.DSR.C.1",
           stem: "Select TWO sentences from Text 2 that support the editorial's prediction in sentence 5 that a refill station would be used and would produce a number worth being proud of.",
           choices: [
             { letter: "A", text: "Sentence 11" },
@@ -676,7 +717,8 @@
         },
         {
           id: "synth",
-          sol: "10.DSR.E",
+          sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "Taken together, the texts suggest that the strongest argument for a refill station is that —",
           choices: [
             { letter: "A", text: "the middle school has more students than the high school does" },
@@ -717,6 +759,7 @@
         {
           id: "shared",
           sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "Which statement expresses an idea developed in both texts?",
           choices: [
             { letter: "A", text: "Silence from a mentor can be a form of trust rather than neglect." },
@@ -729,6 +772,7 @@
         {
           id: "difference",
           sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "Which statement best describes how the two narrators' positions differ?",
           choices: [
             { letter: "A", text: "Nadia is a paid employee; the narrator of Text 2 was never paid for his work." },
@@ -740,7 +784,8 @@
         },
         {
           id: "parallel",
-          sol: "11.DSR.E",
+          sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "The uncle's action in sentence 5 most closely parallels which moment in Text 2?",
           choices: [
             { letter: "A", text: "The father explaining a task once (sentence 10)" },
@@ -752,7 +797,8 @@
         },
         {
           id: "telling",
-          sol: "11.RL.1.B",
+          sol: "11.RL.2.C",
+          sub: "11.RL.2.C.2",
           stem: "In sentence 6, the phrase the telling was the leaving most nearly means that —",
           choices: [
             { letter: "A", text: "the uncle was quitting the bakery" },
@@ -764,7 +810,8 @@
         },
         {
           id: "select2",
-          sol: "11.DSR.E",
+          sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "Select TWO sentences, one from each text, in which the young worker learns to interpret communication that is not spoken.",
           choices: [
             { letter: "A", text: "Sentence 3" },
@@ -776,7 +823,8 @@
         },
         {
           id: "faith",
-          sol: "10.DSR.E",
+          sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "The final sentence of Text 2 calls explaining things once a kind of faith. Read alongside Text 1, this idea is best illustrated by —",
           choices: [
             { letter: "A", text: "the uncle naming tools for Nadia in sentence 2" },
