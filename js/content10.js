@@ -33,6 +33,7 @@
         {
           id: "mainidea",
           sol: "11.RI.1.A",
+          sub: "11.RI.1.A.2",
           stem: "Which statement best expresses the main idea of the passage?",
           choices: [
             { letter: "A", text: "Crows are a nuisance that no city has managed to control." },
@@ -45,6 +46,7 @@
         {
           id: "detail",
           sol: "11.RI.1.B",
+          sub: "11.RI.1.B.1",
           stem: "According to the passage, what did the census reveal about the size of the roost?",
           choices: [
             { letter: "A", text: "It had doubled since the city began using hawk calls." },
@@ -57,6 +59,7 @@
         {
           id: "structure",
           sol: "11.RI.2.A",
+          sub: "11.RI.2.A.1",
           stem: "Which description best matches the structure of the passage?",
           choices: [
             { letter: "A", text: "a problem, a new approach, its findings, and the results of those findings" },
@@ -68,7 +71,8 @@
         },
         {
           id: "sentence6",
-          sol: "11.RI.2.B",
+          sol: "11.RI.2.A",
+          sub: "11.RI.2.A.2",
           stem: "Sentence 6 serves mainly to —",
           choices: [
             { letter: "A", text: "signal that the findings that follow were unexpected" },
@@ -80,7 +84,8 @@
         },
         {
           id: "nuisance",
-          sol: "11.RV.1.C",
+          sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "In sentence 2, the word nuisance most nearly means —",
           choices: [
             { letter: "A", text: "a natural wonder" },
@@ -93,6 +98,7 @@
         {
           id: "inference",
           sol: "11.RI.1.B",
+          sub: "11.RI.1.B.1",
           stem: "Based on sentence 11, the reader can conclude that the students' data —",
           choices: [
             { letter: "A", text: "was rejected by the regional bird surveys" },
@@ -129,6 +135,7 @@
         {
           id: "central",
           sol: "11.RI.1.A",
+          sub: "11.RI.1.A.2",
           stem: "Which sentence best states the central idea of the passage?",
           choices: [
             { letter: "A", text: "Sentence 2" },
@@ -140,7 +147,8 @@
         },
         {
           id: "origin",
-          sol: "11.RI.1.B",
+          sol: "11.RI.1.A",
+          sub: "11.RI.1.A.2",
           stem: "According to the passage, what prompted the library to start lending tools?",
           choices: [
             { letter: "A", text: "A donation of forty items from a hardware store" },
@@ -152,7 +160,8 @@
         },
         {
           id: "purpose",
-          sol: "11.RI.1.C",
+          sol: "11.RI.1.A",
+          sub: "11.RI.1.A.2",
           stem: "The author wrote this passage mainly to —",
           choices: [
             { letter: "A", text: "inform readers about how a library's tool collection works and why it succeeds" },
@@ -165,6 +174,7 @@
         {
           id: "novel",
           sol: "11.RI.2.B",
+          sub: "11.RI.2.B.2",
           stem: "In sentence 6, comparing a drill to a novel helps the reader understand that —",
           choices: [
             { letter: "A", text: "tools are more fragile than books" },
@@ -176,7 +186,8 @@
         },
         {
           id: "circulation",
-          sol: "11.RV.1.C",
+          sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "In sentence 10, the word circulation most nearly refers to —",
           choices: [
             { letter: "A", text: "the flow of air through the building" },
@@ -188,7 +199,8 @@
         },
         {
           id: "evidence",
-          sol: "11.RI.2.C",
+          sol: "11.RI.1.B",
+          sub: "11.RI.1.B.1",
           stem: "Which sentence gives numerical evidence of how often the tools are borrowed?",
           choices: [
             { letter: "A", text: "Sentence 3" },
@@ -225,6 +237,7 @@
         {
           id: "central",
           sol: "11.RI.1.A",
+          sub: "11.RI.1.A.2",
           stem: "Which of the following best summarizes the central idea of the passage?",
           choices: [
             { letter: "A", text: "Turning residents' complaints into measured data gave the city a reason to act." },
@@ -237,6 +250,7 @@
         {
           id: "select2",
           sol: "11.RI.1.B",
+          sub: "11.RI.1.B.1",
           stem: "Select TWO sentences that identify physical features that affect a street's temperature.",
           choices: [
             { letter: "A", text: "Sentence 4" },
@@ -248,7 +262,8 @@
         },
         {
           id: "rounding",
-          sol: "11.RI.2.B",
+          sol: "11.RI.2.C",
+          sub: "11.RI.2.C.2",
           stem: "In sentence 4, the author calls the thirteen-degree gap not a rounding error mainly to —",
           choices: [
             { letter: "A", text: "stress that the difference is large enough to matter for safety" },
@@ -260,7 +275,8 @@
         },
         {
           id: "anecdotes",
-          sol: "11.RV.1.C",
+          sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "In sentence 8, the word anecdotes most nearly means —",
           choices: [
             { letter: "A", text: "official measurements" },
@@ -273,6 +289,7 @@
         {
           id: "organize",
           sol: "11.RI.2.A",
+          sub: "11.RI.2.A.1",
           stem: "How does the author organize sentences 8–10?",
           choices: [
             { letter: "A", text: "by contrasting the experiences of two different neighborhoods" },
@@ -284,7 +301,8 @@
         },
         {
           id: "ending",
-          sol: "11.RI.1.C",
+          sol: "11.RI.1.B",
+          sub: "11.RI.1.B.1",
           stem: "The final sentence mainly suggests that —",
           choices: [
             { letter: "A", text: "the heat problem was created by the survey itself" },
@@ -320,6 +338,7 @@
         {
           id: "central",
           sol: "11.RI.1.A",
+          sub: "11.RI.1.A.2",
           stem: "Which statement best captures the essay's central idea?",
           choices: [
             { letter: "A", text: "Anechoic chambers are used mainly by phone and car manufacturers." },
@@ -331,7 +350,8 @@
         },
         {
           id: "substance",
-          sol: "11.RI.2.B",
+          sol: "11.RI.2.C",
+          sub: "11.RI.2.C.2",
           stem: "In sentence 1, the author contrasts absence with substance mainly to —",
           choices: [
             { letter: "A", text: "explain how the chambers are constructed" },
@@ -343,7 +363,8 @@
         },
         {
           id: "edges",
-          sol: "11.RI.1.B",
+          sol: "11.RI.2.A",
+          sub: "11.RI.2.A.2",
           stem: "Sentence 7 supports the explanation in sentence 6 by —",
           choices: [
             { letter: "A", text: "giving an example of a luxury the brain enjoys" },
@@ -355,7 +376,8 @@
         },
         {
           id: "calibrate",
-          sol: "11.RV.1.C",
+          sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "In sentence 9, the word calibrate most nearly means —",
           choices: [
             { letter: "A", text: "adjust for accuracy" },
@@ -368,6 +390,7 @@
         {
           id: "practical",
           sol: "11.RI.2.A",
+          sub: "11.RI.2.A.2",
           stem: "The author includes sentences 8 and 9 mainly to —",
           choices: [
             { letter: "A", text: "prove that the chambers are dangerous to most visitors" },
@@ -379,7 +402,8 @@
         },
         {
           id: "attitude",
-          sol: "11.RI.1.C",
+          sol: "11.RI.2.C",
+          sub: "11.RI.2.C.1",
           stem: "The author's attitude toward the visitors in sentence 11 is best described as —",
           choices: [
             { letter: "A", text: "mocking and impatient" },
@@ -416,7 +440,8 @@
       claims: [
         {
           id: "audience",
-          sol: "11.RI.1.C",
+          sol: "11.RI.1.A",
+          sub: "11.RI.1.A.2",
           stem: "The intended audience for this text is —",
           choices: [
             { letter: "A", text: "teachers writing recommendation letters" },
@@ -428,7 +453,8 @@
         },
         {
           id: "payment",
-          sol: "11.RI.1.B",
+          sol: "11.RI.1.A",
+          sub: "11.RI.1.A.2",
           stem: "According to the FAQ, the $2,000 award is —",
           choices: [
             { letter: "A", text: "mailed to the student's home address" },
@@ -440,7 +466,8 @@
         },
         {
           id: "bestchance",
-          sol: "11.RI.1.B",
+          sol: "11.RI.1.A",
+          sub: "11.RI.1.A.1",
           stem: "A student who wants the best chance of winning should most likely —",
           choices: [
             { letter: "A", text: "describe a community project that has already been completed" },
@@ -453,6 +480,7 @@
         {
           id: "headings",
           sol: "11.RI.2.A",
+          sub: "11.RI.2.A.2",
           stem: "The bold headings in the text help the reader by —",
           choices: [
             { letter: "A", text: "ranking the requirements from most to least important" },
@@ -464,7 +492,8 @@
         },
         {
           id: "renew",
-          sol: "11.RV.1.C",
+          sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "In sentence 4, the word renew most nearly means —",
           choices: [
             { letter: "A", text: "apply for a different scholarship" },
@@ -476,7 +505,8 @@
         },
         {
           id: "deadline",
-          sol: "11.RI.2.C",
+          sol: "11.RI.1.A",
+          sub: "11.RI.1.A.1",
           stem: "Which sentence makes clear that the deadline will be enforced strictly?",
           choices: [
             { letter: "A", text: "Sentence 5" },
@@ -511,7 +541,8 @@
       claims: [
         {
           id: "controls",
-          sol: "11.RI.1.C",
+          sol: "11.RI.1.A",
+          sub: "11.RI.1.A.2",
           stem: "The note in the heading that the lease controls mainly warns readers that —",
           choices: [
             { letter: "A", text: "the summary has more legal weight than the signed lease" },
@@ -523,7 +554,8 @@
         },
         {
           id: "furnace",
-          sol: "11.RI.1.B",
+          sol: "11.RI.1.A",
+          sub: "11.RI.1.A.2",
           stem: "Based on sentences 5 and 6, a tenant whose furnace stops working may hire an outside repair worker and deduct the cost only if —",
           choices: [
             { letter: "A", text: "the repair bill comes to less than one month's rent" },
@@ -535,7 +567,8 @@
         },
         {
           id: "deposit",
-          sol: "11.RI.1.B",
+          sol: "11.RI.1.A",
+          sub: "11.RI.1.A.2",
           stem: "According to the summary, which of the following would be deducted from a security deposit?",
           choices: [
             { letter: "A", text: "Faded paint in the living room" },
@@ -548,6 +581,7 @@
         {
           id: "organized",
           sol: "11.RI.2.A",
+          sub: "11.RI.2.A.1",
           stem: "How is the information in the summary organized?",
           choices: [
             { letter: "A", text: "In the order a tenant would encounter each issue during a single day" },
@@ -559,7 +593,8 @@
         },
         {
           id: "grounds",
-          sol: "11.RV.1.C",
+          sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "In sentence 8, the phrase grounds for non-renewal most nearly means —",
           choices: [
             { letter: "A", text: "a reason management may decline to offer a new lease" },
@@ -571,7 +606,8 @@
         },
         {
           id: "sentence10",
-          sol: "11.RI.2.C",
+          sol: "11.RI.2.A",
+          sub: "11.RI.2.A.2",
           stem: "Sentence 10 is included mainly to —",
           choices: [
             { letter: "A", text: "reassure a departing tenant that the cost of leaving early is limited" },
@@ -610,7 +646,8 @@
       claims: [
         {
           id: "action",
-          sol: "11.RI.1.A",
+          sol: "11.RI.1.C",
+          sub: "11.RI.1.C.1",
           stem: "Which sentence most directly states the action the author wants the league to take?",
           choices: [
             { letter: "A", text: "Sentence 6" },
@@ -622,7 +659,8 @@
         },
         {
           id: "otherleague",
-          sol: "11.RI.2.C",
+          sol: "11.RI.1.C",
+          sub: "11.RI.1.C.1",
           stem: "Which sentence offers evidence that another league has succeeded by paying referees?",
           choices: [
             { letter: "A", text: "Sentence 4" },
@@ -634,7 +672,8 @@
         },
         {
           id: "concern",
-          sol: "11.RI.2.C",
+          sol: "11.RI.1.C",
+          sub: "11.RI.1.C.2",
           stem: "The author responds to the board members' concern in sentence 8 by —",
           choices: [
             { letter: "A", text: "denying that registration fees would change at all" },
@@ -646,7 +685,8 @@
         },
         {
           id: "icecream",
-          sol: "11.RI.2.B",
+          sol: "11.RI.2.A",
+          sub: "11.RI.2.A.2",
           stem: "The author mentions the ice cream shop in sentences 7 and 13 mainly to —",
           choices: [
             { letter: "A", text: "illustrate the paid work that competes with refereeing" },
@@ -658,7 +698,8 @@
         },
         {
           id: "stipend",
-          sol: "11.RV.1.C",
+          sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "In sentence 13, the word stipend most nearly means —",
           choices: [
             { letter: "A", text: "a training program" },
@@ -670,7 +711,8 @@
         },
         {
           id: "poster",
-          sol: "11.RI.1.C",
+          sol: "11.RI.2.C",
+          sub: "11.RI.2.C.1",
           stem: "The author's tone in sentence 5 is best described as —",
           choices: [
             { letter: "A", text: "hopeful" },
@@ -706,7 +748,8 @@
       claims: [
         {
           id: "position",
-          sol: "11.RI.1.A",
+          sol: "11.RI.1.C",
+          sub: "11.RI.1.C.1",
           stem: "Which statement best summarizes the author's position?",
           choices: [
             { letter: "A", text: "Perfect attendance awards reward luck, discourage sensible choices, and do not improve attendance." },
@@ -718,7 +761,8 @@
         },
         {
           id: "select2",
-          sol: "11.RI.2.C",
+          sol: "11.RI.1.C",
+          sub: "11.RI.1.C.1",
           stem: "Select TWO sentences that describe a study or a statistical finding.",
           choices: [
             { letter: "A", text: "Sentence 3" },
@@ -731,6 +775,7 @@
         {
           id: "lever",
           sol: "11.RI.2.B",
+          sub: "11.RI.2.B.1",
           stem: "In sentence 6, the statement a correlation is not a lever mainly means that —",
           choices: [
             { letter: "A", text: "attendance and graduation are unrelated in most districts" },
@@ -742,7 +787,8 @@
         },
         {
           id: "concession",
-          sol: "11.RI.2.C",
+          sol: "11.RI.1.C",
+          sub: "11.RI.1.C.2",
           stem: "The author's concession in sentence 5 strengthens the argument mainly by —",
           choices: [
             { letter: "A", text: "showing that the defenders of the award are being dishonest" },
@@ -754,7 +800,8 @@
         },
         {
           id: "unglamorous",
-          sol: "11.RV.1.C",
+          sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "In sentence 11, the word unglamorous most nearly means —",
           choices: [
             { letter: "A", text: "expensive and untested" },
@@ -767,6 +814,7 @@
         {
           id: "cameback",
           sol: "11.RI.1.C",
+          sub: "11.RI.1.C.1",
           stem: "The proposal in the final sentence reveals that the author values —",
           choices: [
             { letter: "A", text: "perseverance after setbacks over unbroken streaks" },

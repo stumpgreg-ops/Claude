@@ -34,6 +34,7 @@
         {
           id: "theme",
           sol: "11.RL.1.A",
+          sub: "11.RL.1.A.1",
           stem: "Which theme does the passage most clearly develop?",
           choices: [
             { letter: "A", text: "Lessons absorbed without noticing can surface when they are needed." },
@@ -46,6 +47,7 @@
         {
           id: "shortsent",
           sol: "11.RL.1.B",
+          sub: "11.RL.1.B.1",
           stem: "Sentence 5 is set apart as its own short sentence mainly to —",
           choices: [
             { letter: "A", text: "show that Priya has stopped worrying about her brother" },
@@ -58,6 +60,7 @@
         {
           id: "listened",
           sol: "11.RL.1.C",
+          sub: "11.RL.1.C.2",
           stem: "Sentence 7 reveals that Priya —",
           choices: [
             { letter: "A", text: "resents her father for talking too much during their drives" },
@@ -69,7 +72,8 @@
         },
         {
           id: "coaster",
-          sol: "11.RL.2.A",
+          sol: "11.RL.2.C",
+          sub: "11.RL.2.C.2",
           stem: "In sentence 3, the comparison to the first hill of a roller coaster conveys Priya's —",
           choices: [
             { letter: "A", text: "excitement about driving alone for the first time" },
@@ -81,7 +85,8 @@
         },
         {
           id: "narrating",
-          sol: "11.RL.2.C",
+          sol: "11.RL.2.B",
+          sub: "11.RL.2.B.2",
           stem: "In sentence 1, the word narrating most nearly means —",
           choices: [
             { letter: "A", text: "timing" },
@@ -93,7 +98,8 @@
         },
         {
           id: "victory",
-          sol: "11.RL.3.A",
+          sol: "11.RL.1.C",
+          sub: "11.RL.1.C.2",
           stem: "The narrator's comment in sentence 12 that some victories are too small to hand to anyone else suggests that Priya —",
           choices: [
             { letter: "A", text: "is embarrassed that she left her phone at home" },
@@ -132,6 +138,7 @@
         {
           id: "theme",
           sol: "11.RL.1.A",
+          sub: "11.RL.1.A.1",
           stem: "Which idea is most clearly supported by the story as a whole?",
           choices: [
             { letter: "A", text: "Honesty can cost approval and still be worth choosing." },
@@ -144,6 +151,7 @@
         {
           id: "easy",
           sol: "11.RL.1.C",
+          sub: "11.RL.1.C.2",
           stem: "Sentence 10 is important to the development of Theo's character because it shows that he —",
           choices: [
             { letter: "A", text: "blames the referee for not catching the error" },
@@ -155,7 +163,8 @@
         },
         {
           id: "runway",
-          sol: "11.RL.2.A",
+          sol: "11.RL.2.C",
+          sub: "11.RL.2.C.2",
           stem: "The simile in sentence 1 comparing the gym to a runway mainly emphasizes —",
           choices: [
             { letter: "A", text: "how dangerous the game has become for the players" },
@@ -167,7 +176,8 @@
         },
         {
           id: "irony",
-          sol: "10.RL.2.C",
+          sol: "10.RL.2.D",
+          sub: "10.RL.2.D.2",
           stem: "Sentence 4 is ironic because the crowd —",
           choices: [
             { letter: "A", text: "cheers for a score that only the scoreboard says is real" },
@@ -180,6 +190,7 @@
         {
           id: "thumb",
           sol: "11.RL.2.C",
+          sub: "11.RL.2.C.2",
           stem: "In sentence 3, describing Theo's thumb as moving faster than his attention most nearly means that he —",
           choices: [
             { letter: "A", text: "pressed the button deliberately to help his team" },
@@ -191,7 +202,8 @@
         },
         {
           id: "light",
-          sol: "11.RL.3.A",
+          sol: "11.RL.1.B",
+          sub: "11.RL.1.B.1",
           stem: "Which statement best explains how the final sentence resolves the story?",
           choices: [
             { letter: "A", text: "Theo is relieved that the home team lost so the crowd will leave him alone." },
@@ -229,6 +241,7 @@
         {
           id: "theme",
           sol: "11.RL.1.A",
+          sub: "11.RL.1.A.1",
           stem: "Which statement best expresses a central idea of the passage?",
           choices: [
             { letter: "A", text: "Small businesses cannot compete with larger stores." },
@@ -240,7 +253,8 @@
         },
         {
           id: "key",
-          sol: "11.RL.2.A",
+          sol: "11.RL.2.C",
+          sub: "11.RL.2.C.2",
           stem: "The key on the hook (sentences 7–12) most clearly symbolizes —",
           choices: [
             { letter: "A", text: "the store's failure to keep track of its inventory" },
@@ -253,6 +267,7 @@
         {
           id: "father",
           sol: "11.RL.1.C",
+          sub: "11.RL.1.C.2",
           stem: "The father's answer in sentence 3, that counting is not about selling, reveals that he —",
           choices: [
             { letter: "A", text: "has already sold the inventory to another store" },
@@ -264,7 +279,8 @@
         },
         {
           id: "pov",
-          sol: "11.RL.3.A",
+          sol: "11.RL.2.B",
+          sub: "11.RL.2.B.2",
           stem: "The passage is told from the narrator's first-person point of view. This choice mainly allows the reader to —",
           choices: [
             { letter: "A", text: "follow the narrator's gradual understanding of the father's purpose" },
@@ -276,7 +292,8 @@
         },
         {
           id: "reciting",
-          sol: "11.RL.2.C",
+          sol: "11.RL.2.B",
+          sub: "11.RL.2.B.2",
           stem: "In sentence 6, the word reciting suggests that the father's list is —",
           choices: [
             { letter: "A", text: "a set of complaints he has repeated for years" },
@@ -289,6 +306,7 @@
         {
           id: "tone",
           sol: "11.RL.2.B",
+          sub: "11.RL.2.B.1",
           stem: "The phrase worth exactly nothing to anyone but him in sentence 13 creates a tone that is —",
           choices: [
             { letter: "A", text: "bitter, because the father has lost everything" },
@@ -326,6 +344,7 @@
         {
           id: "theme",
           sol: "11.RL.1.A",
+          sub: "11.RL.1.A.1",
           stem: "Which theme is most fully developed by the events of the passage?",
           choices: [
             { letter: "A", text: "Parents often understand more than their children give them credit for." },
@@ -337,7 +356,8 @@
         },
         {
           id: "irony",
-          sol: "10.RL.2.C",
+          sol: "10.RL.2.D",
+          sub: "10.RL.2.D.2",
           stem: "The reader recognizes the irony of sentence 8 most fully after reading —",
           choices: [
             { letter: "A", text: "sentence 3, which praises Lin's reading" },
@@ -349,7 +369,8 @@
         },
         {
           id: "polished",
-          sol: "11.RL.2.A",
+          sol: "11.RL.2.C",
+          sub: "11.RL.2.C.2",
           stem: "In sentence 8, the description of the lie as already polished suggests that Lin —",
           choices: [
             { letter: "A", text: "is proud of how well she speaks both languages" },
@@ -362,6 +383,7 @@
         {
           id: "mother",
           sol: "11.RL.1.C",
+          sub: "11.RL.1.C.2",
           stem: "The mother's behavior with the mints in sentence 1 and her speech in sentence 9 together show that she —",
           choices: [
             { letter: "A", text: "is more comfortable with the teacher than with her daughter" },
@@ -374,6 +396,7 @@
         {
           id: "pause",
           sol: "11.RL.1.B",
+          sub: "11.RL.1.B.1",
           stem: "Sentences 6 and 7 slow the pace of the passage in order to —",
           choices: [
             { letter: "A", text: "suggest that the conference is nearly over" },
@@ -385,7 +408,8 @@
         },
         {
           id: "hungry",
-          sol: "11.RL.2.B",
+          sol: "11.RL.2.D",
+          sub: "11.RL.2.D.2",
           stem: "The final sentence's question about hunger is best understood as —",
           choices: [
             { letter: "A", text: "a sign that the mother is avoiding the subject out of embarrassment" },
@@ -428,6 +452,7 @@
         {
           id: "theme",
           sol: "11.RL.1.A",
+          sub: "11.RL.1.A.1",
           stem: "Which statement best expresses the poem's central idea?",
           choices: [
             { letter: "A", text: "Skills passed down from a parent stay with us long after we learn them." },
@@ -440,6 +465,7 @@
         {
           id: "sleeping",
           sol: "11.RL.2.A",
+          sub: "11.RL.2.A.1",
           stem: "In line 3, comparing the bike to something sleeping mainly suggests —",
           choices: [
             { letter: "A", text: "that the speaker is too tired to keep riding" },
@@ -451,7 +477,8 @@
         },
         {
           id: "hands",
-          sol: "11.RL.2.B",
+          sol: "11.RL.1.C",
+          sub: "11.RL.1.C.1",
           stem: "Lines 4–6 characterize the mother as someone who —",
           choices: [
             { letter: "A", text: "taught through demonstration rather than lecture" },
@@ -463,7 +490,8 @@
         },
         {
           id: "agrees",
-          sol: "11.RL.2.C",
+          sol: "11.RL.2.A",
+          sub: "11.RL.2.A.1",
           stem: "In line 9, the word agrees is used to suggest that the chain —",
           choices: [
             { letter: "A", text: "was damaged beyond what the speaker could repair" },
@@ -476,6 +504,7 @@
         {
           id: "standing",
           sol: "11.RL.1.C",
+          sub: "11.RL.1.C.1",
           stem: "Lines 10–12 suggest that the speaker rides standing up in order to —",
           choices: [
             { letter: "A", text: "get home before it grows dark" },
@@ -487,7 +516,8 @@
         },
         {
           id: "grease",
-          sol: "11.RL.3.A",
+          sol: "11.RL.2.A",
+          sub: "11.RL.2.A.2",
           stem: "The speaker leaves some grease on their fingers (lines 13–15) because it —",
           choices: [
             { letter: "A", text: "is impossible to wash off completely" },
@@ -529,6 +559,7 @@
         {
           id: "theme",
           sol: "11.RL.1.A",
+          sub: "11.RL.1.A.1",
           stem: "The poem as a whole most strongly supports which theme?",
           choices: [
             { letter: "A", text: "Careful planning eliminates the need for exploration." },
@@ -541,6 +572,7 @@
         {
           id: "country",
           sol: "11.RL.2.A",
+          sub: "11.RL.2.A.1",
           stem: "In lines 2–3, describing the table as a country the speaker could not put elbows on suggests that —",
           choices: [
             { letter: "A", text: "the mother's work took up space in the home and demanded respect" },
@@ -552,7 +584,8 @@
         },
         {
           id: "lost",
-          sol: "10.RL.2.C",
+          sol: "10.RL.2.B",
+          sub: "10.RL.2.B.1",
           stem: "Line 6, I got lost on purpose, is best described as —",
           choices: [
             { letter: "A", text: "a metaphor comparing the road to the mother's ink" },
@@ -564,7 +597,8 @@
         },
         {
           id: "tamed",
-          sol: "11.RL.2.B",
+          sol: "11.RL.2.A",
+          sub: "11.RL.2.A.1",
           stem: "In line 10, the word tamed characterizes the mother's mapmaking as —",
           choices: [
             { letter: "A", text: "careless, hurried work done from memory" },
@@ -576,7 +610,8 @@
         },
         {
           id: "turn",
-          sol: "11.RL.3.A",
+          sol: "11.RL.1.B",
+          sub: "11.RL.1.B.1",
           stem: "The pencil note in line 13 functions as the poem's turning point because it —",
           choices: [
             { letter: "A", text: "proves that the mother's maps contained many errors" },
@@ -588,7 +623,8 @@
         },
         {
           id: "door",
-          sol: "11.RL.1.C",
+          sol: "11.RL.2.A",
+          sub: "11.RL.2.A.1",
           stem: "The comparison in lines 15–16 to an unlocked door conveys the mother's —",
           choices: [
             { letter: "A", text: "fear that the speaker would never return home" },
@@ -637,6 +673,7 @@
         {
           id: "theme",
           sol: "11.RL.1.A",
+          sub: "11.RL.1.A.1",
           stem: "Which idea does the scene most clearly develop?",
           choices: [
             { letter: "A", text: "Fairness sometimes means giving up the right to decide." },
@@ -648,7 +685,8 @@
         },
         {
           id: "gooff",
-          sol: "11.RL.2.A",
+          sol: "11.RL.1.D",
+          sub: "11.RL.1.D.1",
           stem: "The stage direction in sentence 12 compares the ballot to something that might go off in order to —",
           choices: [
             { letter: "A", text: "suggest that Dev is angry enough to tear it up" },
@@ -661,6 +699,7 @@
         {
           id: "mirror",
           sol: "11.RL.1.C",
+          sub: "11.RL.1.C.2",
           stem: "Sentences 15 and 16 reveal that June and Dev —",
           choices: [
             { letter: "A", text: "each privately suspect the other of planning to cheat" },
@@ -672,7 +711,8 @@
         },
         {
           id: "spoiled",
-          sol: "11.RL.2.C",
+          sol: "11.RL.2.B",
+          sub: "11.RL.2.B.2",
           stem: "In sentence 5, the word spoiled most nearly means —",
           choices: [
             { letter: "A", text: "rotten from being left too long" },
@@ -685,6 +725,7 @@
         {
           id: "envelope",
           sol: "11.RL.1.B",
+          sub: "11.RL.1.B.1",
           stem: "June's action in sentence 17 resolves the argument by —",
           choices: [
             { letter: "A", text: "counting the ballot as a vote for Amara" },
@@ -696,7 +737,8 @@
         },
         {
           id: "point",
-          sol: "11.RL.2.B",
+          sol: "11.RL.1.C",
+          sub: "11.RL.1.C.2",
           stem: "June's final line, That's the point, most nearly means that —",
           choices: [
             { letter: "A", text: "she is frustrated that Dev did not understand her plan sooner" },
@@ -742,6 +784,7 @@
         {
           id: "theme",
           sol: "11.RL.1.A",
+          sub: "11.RL.1.A.1",
           stem: "Which theme is best supported by the scene?",
           choices: [
             { letter: "A", text: "Small, familiar routines are what people miss most when they leave a place." },
@@ -754,6 +797,7 @@
         {
           id: "predict",
           sol: "11.RL.1.C",
+          sub: "11.RL.1.C.2",
           stem: "Rosa's answer in sentence 4 shows that she values —",
           choices: [
             { letter: "A", text: "the tips she earns from regular customers" },
@@ -765,7 +809,8 @@
         },
         {
           id: "schedule",
-          sol: "11.RL.2.A",
+          sol: "11.RL.2.C",
+          sub: "11.RL.2.C.2",
           stem: "The September schedule with Rosa's name on it (sentences 10–15) most clearly represents —",
           choices: [
             { letter: "A", text: "Kwame's mistake in forgetting that Rosa is moving" },
@@ -777,7 +822,8 @@
         },
         {
           id: "wiping",
-          sol: "9.RL.3.B",
+          sol: "9.RL.1.D",
+          sub: "9.RL.1.D.2",
           stem: "The stage direction wiping the same spot twice in sentence 4 mainly reveals that Rosa is —",
           choices: [
             { letter: "A", text: "distracted by feelings she is not saying aloud" },
@@ -789,7 +835,8 @@
         },
         {
           id: "cheap",
-          sol: "11.RL.2.C",
+          sol: "11.RL.1.C",
+          sub: "11.RL.1.C.2",
           stem: "In sentence 14, Kwame says paper's cheap to suggest that the schedule —",
           choices: [
             { letter: "A", text: "was printed on low-quality paper" },
@@ -801,7 +848,8 @@
         },
         {
           id: "hum",
-          sol: "11.RL.3.A",
+          sol: "11.RL.1.B",
+          sub: "11.RL.1.B.1",
           stem: "The playwright ends the scene with the freezer humming (sentence 20) mainly to —",
           choices: [
             { letter: "A", text: "show that the freezer is broken and needs repair" },
