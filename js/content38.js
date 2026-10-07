@@ -35,6 +35,7 @@
         {
           id: "theme",
           sol: "9.RL.1.A",
+          sub: "9.RL.1.A.1",
           stem: "Which theme does Ayla's experience in square C4 best support?",
           choices: [
             { letter: "A", text: "Luck matters more than effort in making a discovery." },
@@ -47,6 +48,7 @@
         {
           id: "change",
           sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
           stem: "Which statement best describes how Ayla changes between sentence 6 and sentence 13?",
           choices: [
             { letter: "A", text: "She moves from seeing her work as pointless to valuing careful recording." },
@@ -58,7 +60,8 @@
         },
         {
           id: "setting",
-          sol: "9.RL.3.A",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "The details about square C4 in sentence 2 mainly emphasize that Ayla —",
           choices: [
             { letter: "A", text: "chose the spot because she expected the best finds there" },
@@ -70,7 +73,8 @@
         },
         {
           id: "record",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In sentence 13, the word record most nearly refers to —",
           choices: [
             { letter: "A", text: "the best result anyone on the crew has achieved" },
@@ -82,7 +86,8 @@
         },
         {
           id: "puzzle",
-          sol: "9.RL.2.A",
+          sol: "9.RL.2.B",
+          sub: "9.RL.2.B.2",
           stem: "In sentence 8, Dr. Haddad compares Marcus's pottery without Ayla's notes to a puzzle missing its edges mainly to show that —",
           choices: [
             { letter: "A", text: "the finds cannot be understood without information about their surroundings" },
@@ -94,7 +99,8 @@
         },
         {
           id: "glance",
-          sol: "9.RL.1.B",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "Readers can best infer that Ayla barely glances up when Marcus runs over in sentence 12 because she —",
           choices: [
             { letter: "A", text: "is still annoyed that he found pottery before she did" },
@@ -131,7 +137,8 @@
       claims: [
         {
           id: "ruined",
-          sol: "9.RL.1.B",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "Readers can best infer that the narrator almost tells Lupe the shot is ruined (sentence 7) because he —",
           choices: [
             { letter: "A", text: "is angry that she did not call to warn him about the tire" },
@@ -143,7 +150,8 @@
         },
         {
           id: "pov",
-          sol: "9.RL.3.B",
+          sol: "9.RL.2.C",
+          sub: "9.RL.2.C.1",
           stem: "Because the water-tower story is told by the director in the first person, the reader —",
           choices: [
             { letter: "A", text: "learns how Lupe feels about the race in the first scene" },
@@ -156,6 +164,7 @@
         {
           id: "juice",
           sol: "9.RL.2.B",
+          sub: "9.RL.2.B.2",
           stem: "In sentence 5, the image of gold draining from the sky like juice from a cracked cup mainly creates a sense of —",
           choices: [
             { letter: "A", text: "something valuable slipping away beyond his control" },
@@ -168,6 +177,7 @@
         {
           id: "theme",
           sol: "9.RL.1.A",
+          sub: "9.RL.1.A.1",
           stem: "Which idea about creative work does the night at the water tower most clearly develop?",
           choices: [
             { letter: "A", text: "A good director should never change a plan once filming begins." },
@@ -180,6 +190,7 @@
         {
           id: "lamps",
           sol: "9.RV.1.F",
+          sub: "9.RV.1.F.1",
           stem: "In sentence 6, the phrase the streetlamps were buzzing awake suggests that —",
           choices: [
             { letter: "A", text: "the lamps were broken and making an alarming noise" },
@@ -191,7 +202,8 @@
         },
         {
           id: "dario",
-          sol: "9.RL.1.C",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "Dario's comment in sentence 4 and his raised eyebrow in sentence 12 show that he is —",
           choices: [
             { letter: "A", text: "eager to take over as director of the film" },
@@ -228,7 +240,8 @@
       claims: [
         {
           id: "tone",
-          sol: "9.RL.2.C",
+          sol: "9.RL.2.B",
+          sub: "9.RL.2.B.1",
           stem: "In sentence 1, Teo's remark that the joke about watching paint dry was literally true creates a tone that is —",
           choices: [
             { letter: "A", text: "anxious and fearful" },
@@ -240,7 +253,8 @@
         },
         {
           id: "timing",
-          sol: "9.RL.3.A",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "The author places Teo's timing of the woman in the raincoat (sentences 7–8) before his secret catalog (sentence 9) mainly to —",
           choices: [
             { letter: "A", text: "mark the moment Lola's claim proves true and Teo starts to look closely" },
@@ -252,7 +266,8 @@
         },
         {
           id: "lola",
-          sol: "9.RL.1.C",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "Sentence 10 characterizes Lola as someone whose knowledge of the paintings is —",
           choices: [
             { letter: "A", text: "less reliable than the curators' because she lacks training" },
@@ -264,7 +279,8 @@
         },
         {
           id: "bench",
-          sol: "9.RL.2.A",
+          sol: "9.RL.2.B",
+          sub: "9.RL.2.B.2",
           stem: "In sentence 2, comparing Lola to one of the marble benches mainly suggests that she —",
           choices: [
             { letter: "A", text: "is tired and wishes she could sit down" },
@@ -277,6 +293,7 @@
         {
           id: "theme",
           sol: "9.RL.1.A",
+          sub: "9.RL.1.A.1",
           stem: "Which theme do Teo's week in Gallery Nine and the counting boy at the end most clearly develop?",
           choices: [
             { letter: "A", text: "Close attention can reveal meaning in what first seems dull." },
@@ -288,7 +305,8 @@
         },
         {
           id: "catalog",
-          sol: "9.RV.1.E",
+          sol: "9.RV.1.D",
+          sub: "9.RV.1.D.1",
           stem: "Teo calls his notes a secret catalog in sentence 9. Compared with list, the word catalog suggests that his notes are —",
           choices: [
             { letter: "A", text: "hurried and careless" },
@@ -325,7 +343,8 @@
       claims: [
         {
           id: "setting",
-          sol: "9.RL.3.A",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "How does the change in setting between sentence 1 and sentence 5 shape the events of the story?",
           choices: [
             { letter: "A", text: "The heat of the day forces Samira to cancel her study." },
@@ -338,6 +357,7 @@
         {
           id: "mood",
           sol: "9.RL.2.B",
+          sub: "9.RL.2.B.2",
           stem: "The details in sentence 2 about bushes that seem to have quarreled and sand hot through sneakers mainly create a mood of —",
           choices: [
             { letter: "A", text: "cheerful adventure" },
@@ -349,7 +369,8 @@
         },
         {
           id: "quiet",
-          sol: "9.RL.1.B",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "Noor stops talking without deciding to in sentence 9 most likely because she —",
           choices: [
             { letter: "A", text: "is absorbed by wonder at what she is seeing" },
@@ -361,7 +382,8 @@
         },
         {
           id: "pov",
-          sol: "9.RL.3.B",
+          sol: "9.RL.2.C",
+          sub: "9.RL.2.C.1",
           stem: "The story stays close to Noor's thoughts rather than Samira's mainly so that the reader —",
           choices: [
             { letter: "A", text: "learns the scientific names of every desert animal" },
@@ -374,6 +396,7 @@
         {
           id: "business",
           sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In sentence 11, the phrase crowded with business most nearly means the field was —",
           choices: [
             { letter: "A", text: "filled with researchers selling equipment" },
@@ -386,6 +409,7 @@
         {
           id: "theme",
           sol: "9.RL.1.A",
+          sub: "9.RL.1.A.1",
           stem: "Which idea does Noor's night of counting with her aunt Samira best support?",
           choices: [
             { letter: "A", text: "Scientists rarely explain their work to young people." },
@@ -423,6 +447,7 @@
         {
           id: "central",
           sol: "9.RI.1.A",
+          sub: "9.RI.1.A.1",
           stem: "Which sentence best expresses the central idea of the article about how desert plants survive drought?",
           choices: [
             { letter: "A", text: "Sentence 1" },
@@ -434,7 +459,8 @@
         },
         {
           id: "roots",
-          sol: "9.RI.1.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "According to the passage, why does a large cactus spread its roots wide and shallow?",
           choices: [
             { letter: "A", text: "to anchor itself firmly against strong desert winds" },
@@ -447,6 +473,7 @@
         {
           id: "signals",
           sol: "9.RI.2.A",
+          sub: "9.RI.2.A.1",
           stem: "Sentences 6 and 9, Roots help, too and Timing matters as well, mainly serve to —",
           choices: [
             { letter: "A", text: "introduce new strategies in a list of ways plants save water" },
@@ -458,7 +485,8 @@
         },
         {
           id: "canteen",
-          sol: "9.RI.2.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "The author compares desert plants to a traveler with one canteen in sentence 12 mainly to —",
           choices: [
             { letter: "A", text: "warn hikers to carry extra water when they visit a desert" },
@@ -470,7 +498,8 @@
         },
         {
           id: "hoard",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In sentence 12, the word hoard most nearly means to —",
           choices: [
             { letter: "A", text: "waste carelessly" },
@@ -482,7 +511,8 @@
         },
         {
           id: "seeds",
-          sol: "9.RI.3.A",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "Which sentence best supports the idea that some desert plants survive a drought without storing any water?",
           choices: [
             { letter: "A", text: "Sentence 4" },
@@ -519,6 +549,7 @@
         {
           id: "summary",
           sol: "9.RI.1.A",
+          sub: "9.RI.1.A.1",
           stem: "Which statement best summarizes the article about how archaeologists dig?",
           choices: [
             { letter: "A", text: "Grids and layer-by-layer digging let teams record context, since digging destroys the evidence." },
@@ -530,7 +561,8 @@
         },
         {
           id: "drawn",
-          sol: "9.RI.1.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "According to the passage, why is every layer measured, photographed, and drawn before it is removed?",
           choices: [
             { letter: "A", text: "Visitors want pictures of each square to take home." },
@@ -543,6 +575,7 @@
         {
           id: "qualify",
           sol: "9.RI.1.C",
+          sub: "9.RI.1.C.2",
           stem: "Which part of sentence 10 shows that the author is careful not to overstate the rule that deeper layers are older?",
           choices: [
             { letter: "A", text: "If a team finds coins in an upper layer" },
@@ -555,6 +588,7 @@
         {
           id: "organize",
           sol: "9.RI.2.A",
+          sub: "9.RI.2.A.1",
           stem: "How does the author mainly organize sentences 3 through 9?",
           choices: [
             { letter: "A", text: "by telling the history of one dig from start to finish" },
@@ -566,7 +600,8 @@
         },
         {
           id: "evidence",
-          sol: "9.RI.3.A",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "Which sentence best supports the claim in sentence 5 that an artifact on its own says surprisingly little?",
           choices: [
             { letter: "A", text: "Sentence 3" },
@@ -579,6 +614,7 @@
         {
           id: "context",
           sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "As the author defines it in sentence 4, an object's context is —",
           choices: [
             { letter: "A", text: "the age of the object in years" },
@@ -613,7 +649,8 @@
       claims: [
         {
           id: "attitude",
-          sol: "9.RI.1.C",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "The author's attitude toward the conservators' approach in sentence 11 is best described as —",
           choices: [
             { letter: "A", text: "mild suspicion" },
@@ -625,7 +662,8 @@
         },
         {
           id: "tea",
-          sol: "9.RI.2.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "The author describes the sky as the color of weak tea in sentence 2 mainly to —",
           choices: [
             { letter: "A", text: "suggest that the artist made a poor choice of colors" },
@@ -637,7 +675,8 @@
         },
         {
           id: "uv",
-          sol: "9.RI.1.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "According to the passage, how does ultraviolet light help a conservator?",
           choices: [
             { letter: "A", text: "It shows earlier repairs as dark spots so they can be mapped." },
@@ -649,7 +688,8 @@
         },
         {
           id: "why",
-          sol: "9.RI.3.A",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "Which sentence best explains why conservators follow the principle of reversibility?",
           choices: [
             { letter: "A", text: "Sentence 2" },
@@ -661,7 +701,8 @@
         },
         {
           id: "humbler",
-          sol: "9.RV.1.E",
+          sol: "9.RV.1.D",
+          sub: "9.RV.1.D.1",
           stem: "In sentence 11, the author calls the conservator's goal humbler. Compared with smaller, the word humbler suggests a goal that is —",
           choices: [
             { letter: "A", text: "modest by choice and free of pride" },
@@ -674,6 +715,7 @@
         {
           id: "central",
           sol: "9.RI.1.A",
+          sub: "9.RI.1.A.1",
           stem: "Which statement best expresses the central idea of the passage about varnish and reversibility?",
           choices: [
             { letter: "A", text: "Old varnish should be left on paintings because removing it is risky." },
@@ -710,6 +752,7 @@
         {
           id: "organize",
           sol: "9.RI.2.A",
+          sub: "9.RI.2.A.1",
           stem: "How does the author mainly organize sentences 1 through 7?",
           choices: [
             { letter: "A", text: "by listing the jobs on a film crew in order of importance" },
@@ -721,7 +764,8 @@
         },
         {
           id: "opening",
-          sol: "9.RI.2.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "The author begins with Mina and Cole at a cafeteria table mainly to —",
           choices: [
             { letter: "A", text: "give a concrete case that lets readers feel the confusion" },
@@ -733,7 +777,8 @@
         },
         {
           id: "break",
-          sol: "9.RI.1.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "According to the passage, why do experienced directors sometimes cross the line on purpose?",
           choices: [
             { letter: "A", text: "to save time when they have only one camera" },
@@ -745,7 +790,8 @@
         },
         {
           id: "purpose",
-          sol: "9.RI.1.C",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "Sentence 11 suggests that the author's main purpose in writing about the 180-degree rule is to —",
           choices: [
             { letter: "A", text: "argue that the rule should be dropped from film classes" },
@@ -758,6 +804,7 @@
         {
           id: "jolt",
           sol: "9.RV.1.F",
+          sub: "9.RV.1.F.1",
           stem: "In sentence 4, saying viewers feel a small jolt, as if the characters have swapped seats, means that viewers —",
           choices: [
             { letter: "A", text: "notice that the actors were replaced between takes" },
@@ -770,6 +817,7 @@
         {
           id: "main",
           sol: "9.RI.1.A",
+          sub: "9.RI.1.A.1",
           stem: "Which statement best expresses the main idea of the passage on the 180-degree rule?",
           choices: [
             { letter: "A", text: "Keeping cameras on one side of a line helps viewers follow a scene." },
@@ -806,7 +854,8 @@
       claims: [
         {
           id: "scarce",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In sentence 3, the instruction to bring two full bottles helps show that scarce means —",
           choices: [
             { letter: "A", text: "in short supply" },
@@ -819,6 +868,7 @@
         {
           id: "nocturnal",
           sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "Mr. Okafor's explanation in sentence 5 shows that a nocturnal animal is one that —",
           choices: [
             { letter: "A", text: "lives underground for its whole life" },
@@ -830,7 +880,8 @@
         },
         {
           id: "dormant",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "Which phrase from the Sandstone Wash passage best helps the reader understand the meaning of dormant?",
           choices: [
             { letter: "A", text: "gray, brittle-looking plants" },
@@ -842,7 +893,8 @@
         },
         {
           id: "arid",
-          sol: "9.RV.1.E",
+          sol: "9.RV.1.D",
+          sub: "9.RV.1.D.1",
           stem: "The author could have written dry instead of arid in sentence 1. Compared with dry, the word arid suggests a dryness that is —",
           choices: [
             { letter: "A", text: "pleasant and refreshing" },
@@ -854,7 +906,8 @@
         },
         {
           id: "egg",
-          sol: "9.RV.1.F",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In sentence 9, describing the stones as hot enough to fry an egg is an example of —",
           choices: [
             { letter: "A", text: "a literal measurement of the temperature" },
@@ -867,6 +920,7 @@
         {
           id: "resilient",
           sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "Mr. Okafor's comment in sentence 11 about things that could not bounce back shows that resilient most nearly means —",
           choices: [
             { letter: "A", text: "fast enough to escape" },
@@ -902,6 +956,7 @@
         {
           id: "curate",
           sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In sentence 1, the explanation after the semicolon shows that to curate an exhibit is to —",
           choices: [
             { letter: "A", text: "repair damaged works before they go on display" },
@@ -913,7 +968,8 @@
         },
         {
           id: "pristine",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In sentence 4, the comparison to silk woven last spring helps show that pristine means —",
           choices: [
             { letter: "A", text: "faded with age" },
@@ -925,7 +981,8 @@
         },
         {
           id: "ornate",
-          sol: "9.RV.1.E",
+          sol: "9.RV.1.D",
+          sub: "9.RV.1.D.1",
           stem: "The author could have called the shawl decorated instead of ornate in sentence 3. Compared with decorated, ornate suggests decoration that is —",
           choices: [
             { letter: "A", text: "elaborate and abundant" },
@@ -938,6 +995,7 @@
         {
           id: "thief",
           sol: "9.RV.1.F",
+          sub: "9.RV.1.F.1",
           stem: "In sentence 5, Ms. Ferreira calls light a slow thief mainly to suggest that light —",
           choices: [
             { letter: "A", text: "makes it easier for real thieves to see the shawl" },
@@ -949,7 +1007,8 @@
         },
         {
           id: "replica",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "Which detail from sentence 7 best helps the reader understand the meaning of replica?",
           choices: [
             { letter: "A", text: "an exact copy printed on cotton" },
@@ -961,7 +1020,8 @@
         },
         {
           id: "inconspicuous",
-          sol: "9.RV.1.E",
+          sol: "9.RV.1.D",
+          sub: "9.RV.1.D.1",
           stem: "Hana keeps the monitors inconspicuous rather than hidden. Compared with hidden, inconspicuous suggests that the monitors are —",
           choices: [
             { letter: "A", text: "locked away where no one can reach them" },
@@ -998,6 +1058,7 @@
         {
           id: "conjecture",
           sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In sentence 4, Dr. Nwosu's own explanation shows that a conjecture is —",
           choices: [
             { letter: "A", text: "a fact proven by laboratory tests" },
@@ -1009,7 +1070,8 @@
         },
         {
           id: "painstaking",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "Which detail from the Jar Handle passage best helps the reader understand the meaning of painstaking?",
           choices: [
             { letter: "A", text: "labeling each bag with its depth to the centimeter" },
@@ -1021,7 +1083,8 @@
         },
         {
           id: "tentative",
-          sol: "9.RV.1.E",
+          sol: "9.RV.1.D",
+          sub: "9.RV.1.D.1",
           stem: "The author could have written uncertain instead of tentative in sentence 11. Compared with uncertain, tentative suggests a finding that is —",
           choices: [
             { letter: "A", text: "mistaken and soon to be thrown out" },
@@ -1034,6 +1097,7 @@
         {
           id: "thin",
           sol: "9.RV.1.F",
+          sub: "9.RV.1.F.1",
           stem: "In sentence 7, saying that Diego's patience had worn as thin as the screen mainly suggests that he —",
           choices: [
             { letter: "A", text: "had torn the screen by sifting too roughly" },
@@ -1045,7 +1109,8 @@
         },
         {
           id: "fragmentary",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In sentence 1, the word fragmentary most nearly means —",
           choices: [
             { letter: "A", text: "made up of incomplete pieces" },
@@ -1058,6 +1123,7 @@
         {
           id: "corroborate",
           sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "Dr. Nwosu's remark in sentence 10 that two handles and a date are a pattern shows that corroborate means to —",
           choices: [
             { letter: "A", text: "break apart into smaller pieces" },
@@ -1099,7 +1165,8 @@
       claims: [
         {
           id: "cut",
-          sol: "9.DSR.E",
+          sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "Which rule in Text 1 explains Zara's decision to cut the diner scene?",
           choices: [
             { letter: "A", text: "Every person on screen must sign a permission form." },
@@ -1112,6 +1179,7 @@
         {
           id: "two",
           sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "Select TWO sentences from Zara's email that respond directly to a rule in the showcase's Text 1.",
           choices: [
             { letter: "A", text: "Sentence 8" },
@@ -1123,7 +1191,8 @@
         },
         {
           id: "kenji",
-          sol: "9.DSR.E",
+          sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "Zara's mention of Kenji's team in sentence 13 connects most directly to which warning in Text 1?",
           choices: [
             { letter: "A", text: "Late entries are refused even when technology fails." },
@@ -1136,6 +1205,7 @@
         {
           id: "differ",
           sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "Which statement best describes how the showcase rules differ from Zara's email?",
           choices: [
             { letter: "A", text: "The rules praise particular films; the email criticizes them." },
@@ -1147,7 +1217,8 @@
         },
         {
           id: "early",
-          sol: "9.RI.1.C",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "The showcase organizers include the advice in sentence 5 mainly to —",
           choices: [
             { letter: "A", text: "explain how judges decide which films win" },
@@ -1159,7 +1230,8 @@
         },
         {
           id: "tone",
-          sol: "9.RL.2.C",
+          sol: "9.RL.2.B",
+          sub: "9.RL.2.B.1",
           stem: "The tone of Zara's closing line in sentence 14 is best described as —",
           choices: [
             { letter: "A", text: "wistful but good-humored" },
@@ -1200,6 +1272,7 @@
         {
           id: "both",
           sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "Which detail appears in both the Oak Hollow season report and Talia's blog post?",
           choices: [
             { letter: "A", text: "the exact size of the ring of stones" },
@@ -1211,7 +1284,8 @@
         },
         {
           id: "further",
-          sol: "9.DSR.E",
+          sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "Talia's claim in sentence 7 goes further than Text 1 does because the report —",
           choices: [
             { letter: "A", text: "calls the hearth only a provisional idea and is still waiting on the dating results" },
@@ -1224,6 +1298,7 @@
         {
           id: "interpret",
           sol: "9.RI.1.C",
+          sub: "9.RI.1.C.1",
           stem: "Which sentence from the season report is most clearly an interpretation rather than an observation?",
           choices: [
             { letter: "A", text: "Sentence 1" },
@@ -1235,7 +1310,8 @@
         },
         {
           id: "quotes",
-          sol: "9.RI.2.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "In sentence 8, Talia puts the word feature in quotation marks mainly to —",
           choices: [
             { letter: "A", text: "show that she has misread the report" },
@@ -1248,6 +1324,7 @@
         {
           id: "uncertain",
           sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "Which statement best describes how the report and the blog differ in their handling of uncertainty?",
           choices: [
             { letter: "A", text: "The report guesses freely, while the blog sticks to measurements." },
@@ -1259,7 +1336,8 @@
         },
         {
           id: "travelers",
-          sol: "9.DSR.E",
+          sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "Talia's question in sentence 12 is best understood as a response to which part of Text 1?",
           choices: [
             { letter: "A", text: "the note that missing pottery is unusual for the region" },
@@ -1298,7 +1376,8 @@
       claims: [
         {
           id: "risk",
-          sol: "9.RI.1.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "According to Text 1, why are desert tortoise burrows at risk during the spring?",
           choices: [
             { letter: "A", text: "Tortoises are active then, and burrows lie close to where hikers step." },
@@ -1311,6 +1390,7 @@
         {
           id: "agree",
           sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "On which point do the park notice and Mr. Ruiz's letter agree?",
           choices: [
             { letter: "A", text: "A boardwalk would solve the problem." },
@@ -1322,7 +1402,8 @@
         },
         {
           id: "change",
-          sol: "9.DSR.E",
+          sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "Which sentence from Text 1 most directly changes Mr. Ruiz's attitude in Text 2?",
           choices: [
             { letter: "A", text: "Sentence 1" },
@@ -1335,6 +1416,7 @@
         {
           id: "differ",
           sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "How does Mr. Ruiz's view of the closure differ from the park's view?",
           choices: [
             { letter: "A", text: "He denies that hikers have ever damaged a burrow." },
@@ -1346,7 +1428,8 @@
         },
         {
           id: "eggs",
-          sol: "9.RI.3.A",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "Which sentence from Text 1 gives the strongest reason that losing even a few tortoise burrows matters?",
           choices: [
             { letter: "A", text: "Sentence 1" },
@@ -1358,7 +1441,8 @@
         },
         {
           id: "next",
-          sol: "9.DSR.E",
+          sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "Based on both texts, what will Mr. Ruiz most likely do this spring?",
           choices: [
             { letter: "A", text: "hike Coyote Ridge early in the morning" },
@@ -1401,6 +1485,7 @@
         {
           id: "door",
           sol: "9.RL.2.A",
+          sub: "9.RL.2.A.2",
           stem: "In line 1, the speaker compares the dry ground on Cactus Flats to a locked door mainly to suggest that —",
           choices: [
             { letter: "A", text: "the family has been shut out of their own land" },
@@ -1412,7 +1497,8 @@
         },
         {
           id: "ending",
-          sol: "9.RL.3.A",
+          sol: "9.RL.1.B",
+          sub: "9.RL.1.B.2",
           stem: "How does the ending of the Cactus Flats poem (lines 15–16) differ from its middle (lines 9–12)?",
           choices: [
             { letter: "A", text: "It describes a second storm that is even stronger than the first." },
@@ -1425,6 +1511,7 @@
         {
           id: "theme",
           sol: "9.RL.1.A",
+          sub: "9.RL.1.A.1",
           stem: "Which statement best expresses a theme of the poem about the rain on Cactus Flats?",
           choices: [
             { letter: "A", text: "Remembering renewal can carry a person through hard seasons." },
@@ -1436,7 +1523,8 @@
         },
         {
           id: "speaker",
-          sol: "9.RL.3.B",
+          sol: "9.RL.2.C",
+          sub: "9.RL.2.C.1",
           stem: "The Cactus Flats poem is told from the point of view of —",
           choices: [
             { letter: "A", text: "the grandmother, warning her grandchildren" },
@@ -1448,7 +1536,8 @@
         },
         {
           id: "arroyo",
-          sol: "9.RL.2.B",
+          sol: "9.RL.2.A",
+          sub: "9.RL.2.A.2",
           stem: "In lines 7 and 8, describing the arroyo as talking in a brown voice creates a mood that is —",
           choices: [
             { letter: "A", text: "gloomy and threatening" },
@@ -1460,7 +1549,8 @@
         },
         {
           id: "key",
-          sol: "9.RL.2.C",
+          sol: "9.RL.1.B",
+          sub: "9.RL.1.B.2",
           stem: "The poet returns to the door and key in line 16 most likely to —",
           choices: [
             { letter: "A", text: "link the dry present to the earlier renewal" },
@@ -1501,7 +1591,8 @@
       claims: [
         {
           id: "know",
-          sol: "9.RL.1.B",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "Lines 9–12 of the Case 14 poem suggest that the speaker —",
           choices: [
             { letter: "A", text: "feels a personal bond with the potter despite the label" },
@@ -1514,6 +1605,7 @@
         {
           id: "giftshop",
           sol: "9.RL.2.B",
+          sub: "9.RL.2.B.1",
           stem: "In lines 3 and 4, the suggestion that the jar's lost name might turn up in the gift shop creates a tone that is —",
           choices: [
             { letter: "A", text: "angry and accusing" },
@@ -1525,7 +1617,8 @@
         },
         {
           id: "hurry",
-          sol: "9.RL.2.C",
+          sol: "9.RL.2.B",
+          sub: "9.RL.2.B.2",
           stem: "In line 10, the word hurry suggests that the potter —",
           choices: [
             { letter: "A", text: "was careless and did not care how the jar looked" },
@@ -1537,7 +1630,8 @@
         },
         {
           id: "address",
-          sol: "9.RL.3.B",
+          sol: "9.RL.2.C",
+          sub: "9.RL.2.C.1",
           stem: "Throughout the poem, the speaker talks directly to —",
           choices: [
             { letter: "A", text: "the other visitors in the gallery" },
@@ -1550,6 +1644,7 @@
         {
           id: "storm",
           sol: "9.RL.2.A",
+          sub: "9.RL.2.A.2",
           stem: "In line 7, comparing the potter's thumbprint to a tiny storm mainly emphasizes —",
           choices: [
             { letter: "A", text: "the damage the jar suffered over the centuries" },
@@ -1561,7 +1656,8 @@
         },
         {
           id: "mark",
-          sol: "9.RL.3.A",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "The poem ends with the speaker leaving a thumbprint on the glass (lines 15–16) mainly to show that the speaker —",
           choices: [
             { letter: "A", text: "has broken a museum rule and expects to be caught" },
@@ -1602,6 +1698,7 @@
         {
           id: "aside1",
           sol: "9.RL.1.D",
+          sub: "9.RL.1.D.2",
           stem: "The playwright uses June's aside in sentences 7 and 8 mainly to —",
           choices: [
             { letter: "A", text: "show that June has forgotten why she filmed the roof" },
@@ -1614,6 +1711,7 @@
         {
           id: "aside2",
           sol: "9.RL.1.D",
+          sub: "9.RL.1.D.2",
           stem: "Rafael's aside in sentence 15 shows that he —",
           choices: [
             { letter: "A", text: "feels caught between June's feelings and the rules" },
@@ -1626,6 +1724,7 @@
         {
           id: "scrolling",
           sol: "9.RL.1.D",
+          sub: "9.RL.1.D.2",
           stem: "The stage direction in sentence 17, in which Rafael slowly stops scrolling, mainly signals that —",
           choices: [
             { letter: "A", text: "the laptop has frozen in the middle of the clip" },
@@ -1637,7 +1736,8 @@
         },
         {
           id: "irony",
-          sol: "9.RL.3.B",
+          sol: "9.RL.1.D",
+          sub: "9.RL.1.D.2",
           stem: "Because the audience hears June's aside but Rafael does not, the audience —",
           choices: [
             { letter: "A", text: "knows the film will win the contest" },
@@ -1649,7 +1749,8 @@
         },
         {
           id: "rafael",
-          sol: "9.RL.1.C",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "Which statement best describes Rafael in the editing-room scene?",
           choices: [
             { letter: "A", text: "He is careless about the contest's rules and deadlines." },
@@ -1662,6 +1763,7 @@
         {
           id: "final",
           sol: "9.RL.1.D",
+          sub: "9.RL.1.D.2",
           stem: "The final stage direction (sentence 22) mainly serves to show that June —",
           choices: [
             { letter: "A", text: "accepts the cut with sadness but without argument" },
@@ -1697,7 +1799,8 @@
       claims: [
         {
           id: "pens",
-          sol: "9.RI.1.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "According to the sketching rules, why are pens and paints not permitted in the galleries?",
           choices: [
             { letter: "A", text: "They are too expensive for most visitors." },
@@ -1709,7 +1812,8 @@
         },
         {
           id: "audience",
-          sol: "9.RI.1.C",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "The Marigold Hill guide to sketching is written mainly for —",
           choices: [
             { letter: "A", text: "artists whose work hangs in the museum" },
@@ -1722,6 +1826,7 @@
         {
           id: "headings",
           sol: "9.RI.2.A",
+          sub: "9.RI.2.A.1",
           stem: "The bold headings in the sketching guide help a reader mainly by —",
           choices: [
             { letter: "A", text: "listing the artworks in the order they hang" },
@@ -1733,7 +1838,8 @@
         },
         {
           id: "teacher",
-          sol: "9.RI.3.A",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "A teacher plans to bring 25 students with markers to sketch next Tuesday. Which TWO sentences from the guide matter most for this plan? Select TWO.",
           choices: [
             { letter: "A", text: "Sentence 2" },
@@ -1745,7 +1851,8 @@
         },
         {
           id: "stool",
-          sol: "9.RI.1.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "According to the guide, where can a sketcher get a folding stool?",
           choices: [
             { letter: "A", text: "at the front desk, by reservation" },
@@ -1758,6 +1865,7 @@
         {
           id: "main",
           sol: "9.RI.1.A",
+          sub: "9.RI.1.A.1",
           stem: "Which statement best expresses the main idea of the Marigold Hill sketching guide?",
           choices: [
             { letter: "A", text: "Only professional artists may draw inside the museum." },
@@ -1796,6 +1904,7 @@
         {
           id: "claim",
           sol: "9.RI.1.A",
+          sub: "9.RI.1.A.1",
           stem: "Which sentence best states the writer's central claim about the Juniper Flats courtyard?",
           choices: [
             { letter: "A", text: "Sentence 1" },
@@ -1807,7 +1916,8 @@
         },
         {
           id: "money",
-          sol: "9.RI.3.A",
+          sol: "9.RI.1.C",
+          sub: "9.RI.1.C.2",
           stem: "Which sentence provides the strongest evidence that a native garden would save the district money over time?",
           choices: [
             { letter: "A", text: "Sentence 4" },
@@ -1819,7 +1929,8 @@
         },
         {
           id: "counter",
-          sol: "9.RI.1.C",
+          sol: "9.RI.2.B",
+          sub: "9.RI.2.B.2",
           stem: "In sentences 5 and 6, the writer raises the worry about gravel and spines mainly to —",
           choices: [
             { letter: "A", text: "acknowledge a concern and answer it with evidence" },
@@ -1832,6 +1943,7 @@
         {
           id: "habit",
           sol: "9.RI.2.B",
+          sub: "9.RI.2.B.2",
           stem: "In sentence 12, the writer calls a desert lawn a habit, not a necessity, mainly to suggest that —",
           choices: [
             { letter: "A", text: "students have grown too used to sitting on the grass" },
@@ -1844,6 +1956,7 @@
         {
           id: "understandable",
           sol: "9.RI.2.B",
+          sub: "9.RI.2.B.2",
           stem: "The writer calls the students' fear understandable in sentence 6 rather than foolish. This word choice gives the argument a tone that is —",
           choices: [
             { letter: "A", text: "respectful toward people who disagree" },
@@ -1856,6 +1969,7 @@
         {
           id: "organize",
           sol: "9.RI.2.A",
+          sub: "9.RI.2.A.1",
           stem: "How does the writer mainly organize sentences 5 through 10 of the courtyard argument?",
           choices: [
             { letter: "A", text: "by describing the garden season by season" },
