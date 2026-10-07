@@ -32,6 +32,7 @@
         {
           id: "mother",
           sol: "10.RL.1.C",
+          sub: "10.RL.1.C.1",
           stem: "Sentence 5 shows that Dev's mother —",
           choices: [
             { letter: "A", text: "is too tired to hurry" },
@@ -43,7 +44,8 @@
         },
         {
           id: "house",
-          sol: "10.RL.2.A",
+          sol: "10.RL.2.B",
+          sub: "10.RL.2.B.2",
           stem: "The simile in sentence 6, windows lit like a small moving house, mainly makes the bus seem —",
           choices: [
             { letter: "A", text: "warm and inviting as it leaves" },
@@ -55,7 +57,8 @@
         },
         {
           id: "walked",
-          sol: "10.RL.3.A",
+          sol: "10.RL.1.B",
+          sub: "10.RL.1.B.1",
           stem: "The author includes the short sentence 2, Tonight he walked, mainly to —",
           choices: [
             { letter: "A", text: "explain why the bus was running late" },
@@ -68,6 +71,7 @@
         {
           id: "theme",
           sol: "10.RL.1.A",
+          sub: "10.RL.1.A.1",
           stem: "Which statement best expresses the theme of the story about the bus?",
           choices: [
             { letter: "A", text: "Missing a bus can ruin an evening." },
@@ -80,6 +84,7 @@
         {
           id: "short",
           sol: "10.RL.2.C",
+          sub: "10.RL.2.C.2",
           stem: "In sentence 7, the phrase had never felt so short mainly conveys that Dev —",
           choices: [
             { letter: "A", text: "wishes the walk had taken longer" },
@@ -113,6 +118,7 @@
         {
           id: "thread",
           sol: "10.RL.2.A",
+          sub: "10.RL.2.A.2",
           stem: "In line 2, the poet describes the frost as if it were —",
           choices: [
             { letter: "A", text: "a needle stitching thread" },
@@ -125,6 +131,7 @@
         {
           id: "father",
           sol: "10.RL.1.C",
+          sub: "10.RL.1.C.1",
           stem: "Line 6 characterizes the father as —",
           choices: [
             { letter: "A", text: "angry about the ruined garden" },
@@ -137,6 +144,7 @@
         {
           id: "stiff",
           sol: "10.RL.2.C",
+          sub: "10.RL.2.C.2",
           stem: "In line 4, the word stiff most nearly means —",
           choices: [
             { letter: "A", text: "tall" },
@@ -148,7 +156,8 @@
         },
         {
           id: "ending",
-          sol: "10.RL.1.A",
+          sol: "10.RL.2.A",
+          sub: "10.RL.2.A.3",
           stem: "The last two lines suggest that the speaker —",
           choices: [
             { letter: "A", text: "doubts the father's words but shares his mood" },
@@ -160,7 +169,8 @@
         },
         {
           id: "contrast",
-          sol: "10.RL.3.A",
+          sol: "10.RL.2.A",
+          sub: "10.RL.2.A.1",
           stem: "The poet places lines 3 and 4 side by side mainly to —",
           choices: [
             { letter: "A", text: "explain why the father planted beans" },
@@ -191,6 +201,7 @@
         {
           id: "conflict",
           sol: "10.RL.1.B",
+          sub: "10.RL.1.B.1",
           stem: "Sentence 3 presents Rosa's conflict as a choice between —",
           choices: [
             { letter: "A", text: "calling for help and waiting outside" },
@@ -202,7 +213,8 @@
         },
         {
           id: "unlocked",
-          sol: "10.RL.2.A",
+          sol: "10.RL.2.B",
+          sub: "10.RL.2.B.2",
           stem: "The phrase an unlocked friendship in sentence 3 suggests that using the key would —",
           choices: [
             { letter: "A", text: "change how close the two of them are" },
@@ -214,7 +226,8 @@
         },
         {
           id: "turned",
-          sol: "10.RL.3.A",
+          sol: "10.RL.1.B",
+          sub: "10.RL.1.B.1",
           stem: "The author makes sentence 4 very short mainly to —",
           choices: [
             { letter: "A", text: "show that Rosa is in a hurry" },
@@ -226,7 +239,8 @@
         },
         {
           id: "point",
-          sol: "10.RL.2.B",
+          sol: "10.RL.1.C",
+          sub: "10.RL.1.C.1",
           stem: "Sentence 6 suggests that Mrs. Halvorsen gave Rosa the key mainly because she —",
           choices: [
             { letter: "A", text: "often forgets to answer the door" },
@@ -239,6 +253,7 @@
         {
           id: "weighing",
           sol: "10.RL.2.C",
+          sub: "10.RL.2.C.2",
           stem: "In sentence 3, the word weighing most nearly means —",
           choices: [
             { letter: "A", text: "considering carefully" },
@@ -269,6 +284,7 @@
         {
           id: "main",
           sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "The passage is mainly about —",
           choices: [
             { letter: "A", text: "how bakers choose their flour" },
@@ -280,7 +296,8 @@
         },
         {
           id: "feeds",
-          sol: "10.RI.1.B",
+          sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "According to sentence 2, yeast produces gas when it —",
           choices: [
             { letter: "A", text: "is cooled" },
@@ -293,6 +310,7 @@
         {
           id: "stove",
           sol: "10.RI.2.A",
+          sub: "10.RI.2.A.2",
           stem: "The author includes sentence 4 mainly to —",
           choices: [
             { letter: "A", text: "warn readers about stoves" },
@@ -304,7 +322,8 @@
         },
         {
           id: "trapped",
-          sol: "10.RI.2.C",
+          sol: "10.RI.2.B",
+          sub: "10.RI.2.B.1",
           stem: "In sentence 3, the word trapped most nearly means —",
           choices: [
             { letter: "A", text: "held inside" },
@@ -316,7 +335,8 @@
         },
         {
           id: "stops",
-          sol: "10.RI.1.C",
+          sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "Which sentence explains why the rising stops during baking?",
           choices: [
             { letter: "A", text: "Sentence 2" },
@@ -347,7 +367,8 @@
       claims: [
         {
           id: "family",
-          sol: "10.RI.1.B",
+          sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "According to the notice, a family that wants to swim together should arrive —",
           choices: [
             { letter: "A", text: "before 10 a.m. on a weekday" },
@@ -359,7 +380,8 @@
         },
         {
           id: "carry",
-          sol: "10.RI.1.C",
+          sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "A pass bought on August 20 can be used next summer only if the holder —",
           choices: [
             { letter: "A", text: "buys a second pass at full price" },
@@ -371,7 +393,8 @@
         },
         {
           id: "lost",
-          sol: "10.RI.2.B",
+          sol: "10.RI.2.A",
+          sub: "10.RI.2.A.2",
           stem: "The author includes sentence 5 mainly to —",
           choices: [
             { letter: "A", text: "make clear a limit on the carry-over offer" },
@@ -384,6 +407,7 @@
         {
           id: "purpose",
           sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "The main purpose of the notice is to —",
           choices: [
             { letter: "A", text: "persuade readers to swim more often" },
@@ -413,6 +437,7 @@
         {
           id: "reluctant",
           sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "In sentence 1, reluctant most nearly means —",
           choices: [
             { letter: "A", text: "excited" },
@@ -424,7 +449,8 @@
         },
         {
           id: "exuberant",
-          sol: "10.RV.1.C",
+          sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "Which phrase from sentence 2 best shows the meaning of exuberant?",
           choices: [
             { letter: "A", text: "bouncing down the sidewalk" },
@@ -436,7 +462,8 @@
         },
         {
           id: "luminous",
-          sol: "10.RV.1.B",
+          sol: "10.RV.1.C",
+          sub: "10.RV.1.C.1",
           stem: "The word luminous in sentence 3 shares a root with illuminate. Together with the context, luminous most nearly means —",
           choices: [
             { letter: "A", text: "long and narrow" },
@@ -448,7 +475,8 @@
         },
         {
           id: "lingered",
-          sol: "10.RV.1.C",
+          sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "In sentence 5, lingered means \"stayed longer than needed.\" Which detail in the sentence best supports this meaning?",
           choices: [
             { letter: "A", text: "when we reached the park at last" },
@@ -461,6 +489,7 @@
         {
           id: "connote",
           sol: "10.RV.1.D",
+          sub: "10.RV.1.D.1",
           stem: "The author chose exuberant rather than happy to describe the brother. Compared with happy, exuberant suggests a feeling that is —",
           choices: [
             { letter: "A", text: "quieter and calmer" },
@@ -495,6 +524,7 @@
         {
           id: "agree",
           sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "Both writers agree that —",
           choices: [
             { letter: "A", text: "the sale was a success" },
@@ -507,6 +537,7 @@
         {
           id: "differ",
           sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "Which statement best describes how the two texts differ?",
           choices: [
             { letter: "A", text: "Jamal wants a smaller sale; Ms. Ortiz wants a larger one." },
@@ -518,7 +549,8 @@
         },
         {
           id: "game",
-          sol: "10.DSR.E",
+          sol: "10.DSR.C",
+          sub: "10.DSR.C.1",
           stem: "Ms. Ortiz mentions the home game in sentence 6 mainly to —",
           choices: [
             { letter: "A", text: "praise the school's team" },
@@ -530,7 +562,8 @@
         },
         {
           id: "two",
-          sol: "10.DSR.D",
+          sol: "10.DSR.C",
+          sub: "10.DSR.C.1",
           stem: "Select TWO sentences that together best support the idea that the $212 total might not repeat.",
           choices: [
             { letter: "A", text: "Sentence 2" },
@@ -542,7 +575,8 @@
         },
         {
           id: "together",
-          sol: "10.DSR.E",
+          sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "Taken together, the texts suggest that the best next step is to —",
           choices: [
             { letter: "A", text: "cancel the next sale altogether" },
@@ -573,6 +607,7 @@
         {
           id: "wen",
           sol: "10.RL.1.C",
+          sub: "10.RL.1.C.1",
           stem: "Sentences 4 and 5 characterize Wen as —",
           choices: [
             { letter: "A", text: "boastful about his gift" },
@@ -584,7 +619,8 @@
         },
         {
           id: "withhold",
-          sol: "10.RL.3.A",
+          sol: "10.RL.1.B",
+          sub: "10.RL.1.B.1",
           stem: "The author waits until sentence 3 to reveal what is in the case mainly to —",
           choices: [
             { letter: "A", text: "build curiosity before the reveal" },
@@ -596,7 +632,8 @@
         },
         {
           id: "silent",
-          sol: "10.RL.2.B",
+          sol: "10.RL.1.C",
+          sub: "10.RL.1.C.1",
           stem: "The silence in sentence 6 most likely shows that the band members are —",
           choices: [
             { letter: "A", text: "angry at being interrupted" },
@@ -609,6 +646,7 @@
         {
           id: "ceremony",
           sol: "10.RL.2.C",
+          sub: "10.RL.2.C.2",
           stem: "In sentence 5, the phrase without ceremony most nearly means —",
           choices: [
             { letter: "A", text: "with a long speech" },
@@ -639,6 +677,7 @@
         {
           id: "main",
           sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "Which statement best expresses the main idea of the passage about fog?",
           choices: [
             { letter: "A", text: "Fog is a danger to airplanes." },
@@ -651,6 +690,7 @@
         {
           id: "transition",
           sol: "10.RI.2.A",
+          sub: "10.RI.2.A.2",
           stem: "Sentence 3 functions in the passage as a —",
           choices: [
             { letter: "A", text: "summary of the first two sentences" },
@@ -662,7 +702,8 @@
         },
         {
           id: "nets",
-          sol: "10.RI.1.B",
+          sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "Which sentence gives evidence that people deliberately collect fog?",
           choices: [
             { letter: "A", text: "Sentence 2" },
@@ -674,7 +715,8 @@
         },
         {
           id: "condenses",
-          sol: "10.RI.2.C",
+          sol: "10.RI.2.B",
+          sub: "10.RI.2.B.1",
           stem: "In sentence 2, the word condenses most nearly means —",
           choices: [
             { letter: "A", text: "changes from vapor into liquid" },
@@ -686,7 +728,8 @@
         },
         {
           id: "last",
-          sol: "10.RI.2.B",
+          sol: "10.RI.2.A",
+          sub: "10.RI.2.A.2",
           stem: "The author ends with sentence 6 mainly to —",
           choices: [
             { letter: "A", text: "argue that flights should not be canceled" },
@@ -715,7 +758,8 @@
       claims: [
         {
           id: "serene",
-          sol: "10.RV.1.C",
+          sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "Which phrase from sentence 1 best helps the reader understand serene?",
           choices: [
             { letter: "A", text: "with no lesson plan" },
@@ -728,6 +772,7 @@
         {
           id: "ponder",
           sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "In sentence 2, ponder most nearly means —",
           choices: [
             { letter: "A", text: "think carefully about" },
@@ -740,6 +785,7 @@
         {
           id: "restive",
           sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "In sentence 3, restive is closest in meaning to —",
           choices: [
             { letter: "A", text: "calm and peaceful" },
@@ -752,6 +798,7 @@
         {
           id: "animated",
           sol: "10.RV.1.D",
+          sub: "10.RV.1.D.1",
           stem: "The author describes the discussion as animated rather than loud. Compared with loud, animated suggests the discussion was —",
           choices: [
             { letter: "A", text: "too hard to hear clearly" },
@@ -763,7 +810,8 @@
         },
         {
           id: "contrast",
-          sol: "10.RV.1.A",
+          sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "The word restive in sentence 3 contrasts most sharply with which word from sentence 1?",
           choices: [
             { letter: "A", text: "substitute" },
@@ -800,6 +848,7 @@
         {
           id: "grandfather",
           sol: "10.RL.1.C",
+          sub: "10.RL.1.C.1",
           stem: "Sentence 3 characterizes the grandfather as —",
           choices: [
             { letter: "A", text: "quiet but constant" },
@@ -812,6 +861,7 @@
         {
           id: "tension",
           sol: "10.RL.1.B",
+          sub: "10.RL.1.B.1",
           stem: "Which sentence marks the moment of greatest tension in the story?",
           choices: [
             { letter: "A", text: "Sentence 2" },
@@ -823,7 +873,8 @@
         },
         {
           id: "boy",
-          sol: "10.RL.2.B",
+          sol: "10.RL.1.C",
+          sub: "10.RL.1.C.1",
           stem: "The detail of the grandfather explaining the count to a boy in sentence 6 mainly suggests that he —",
           choices: [
             { letter: "A", text: "has lost interest in Priyanka's game" },
@@ -836,6 +887,7 @@
         {
           id: "theme",
           sol: "10.RL.1.A",
+          sub: "10.RL.1.A.1",
           stem: "Which statement best expresses a theme of the passage about the notebook?",
           choices: [
             { letter: "A", text: "Winning matters more than how a game is played." },
@@ -848,6 +900,7 @@
         {
           id: "italics",
           sol: "10.RL.2.C",
+          sub: "10.RL.2.C.2",
           stem: "The author sets the words I am here apart in sentence 8 mainly to —",
           choices: [
             { letter: "A", text: "show that the grandfather says them aloud" },
@@ -859,7 +912,8 @@
         },
         {
           id: "opening",
-          sol: "10.RL.3.A",
+          sol: "10.RL.1.B",
+          sub: "10.RL.1.B.1",
           stem: "The author opens with the broken scoreboard in sentence 1 mainly to —",
           choices: [
             { letter: "A", text: "explain why the grandfather keeps score by hand" },
@@ -895,6 +949,7 @@
         {
           id: "loaves",
           sol: "10.RL.2.A",
+          sub: "10.RL.2.A.3",
           stem: "In lines 6–7, comparing the speaker's grades to loaves suggests that the mother —",
           choices: [
             { letter: "A", text: "thinks school is easier than baking" },
@@ -906,7 +961,8 @@
         },
         {
           id: "secret",
-          sol: "10.RL.2.C",
+          sol: "10.RL.2.A",
+          sub: "10.RL.2.A.3",
           stem: "In line 4, calling each loaf a small warm secret mainly conveys that the mother's work is —",
           choices: [
             { letter: "A", text: "dishonest and hidden" },
@@ -918,7 +974,8 @@
         },
         {
           id: "sunrise",
-          sol: "10.RL.2.B",
+          sol: "10.RL.2.A",
+          sub: "10.RL.2.A.3",
           stem: "The simile in line 8, like something ordered fresh, links the sunrise to —",
           choices: [
             { letter: "A", text: "the bakery's products" },
@@ -931,6 +988,7 @@
         {
           id: "central",
           sol: "10.RL.1.A",
+          sub: "10.RL.1.A.1",
           stem: "Which statement best expresses the central idea of the poem about the bakery?",
           choices: [
             { letter: "A", text: "Night work is lonely and unrewarding." },
@@ -942,7 +1000,8 @@
         },
         {
           id: "dusted",
-          sol: "10.RL.3.A",
+          sol: "10.RL.2.A",
+          sub: "10.RL.2.A.3",
           stem: "The poet describes the speaker and the mother as both dusted white in line 9 mainly to —",
           choices: [
             { letter: "A", text: "show that the speaker has been baking too" },
@@ -978,6 +1037,7 @@
         {
           id: "idris",
           sol: "10.RL.1.C",
+          sub: "10.RL.1.C.1",
           stem: "Sentences 3 and 4 characterize Idris as —",
           choices: [
             { letter: "A", text: "disobedient and reckless" },
@@ -989,7 +1049,8 @@
         },
         {
           id: "invisible",
-          sol: "10.RL.2.A",
+          sol: "10.RL.2.B",
+          sub: "10.RL.2.B.2",
           stem: "In sentence 11, broken so long they had turned invisible means the problems —",
           choices: [
             { letter: "A", text: "were hidden on purpose" },
@@ -1001,7 +1062,8 @@
         },
         {
           id: "petrakis",
-          sol: "10.RL.2.B",
+          sol: "10.RL.1.C",
+          sub: "10.RL.1.C.1",
           stem: "Sentences 9 and 10 suggest that Mrs. Petrakis feels —",
           choices: [
             { letter: "A", text: "rueful that she never fixed the clock herself" },
@@ -1013,7 +1075,8 @@
         },
         {
           id: "block",
-          sol: "10.RL.3.A",
+          sol: "10.RL.1.B",
+          sub: "10.RL.1.B.2",
           stem: "The author includes sentences 6 and 7 mainly to —",
           choices: [
             { letter: "A", text: "show that the street has become noisy" },
@@ -1026,6 +1089,7 @@
         {
           id: "theme",
           sol: "10.RL.1.A",
+          sub: "10.RL.1.A.1",
           stem: "Which theme does the story of the clock most clearly develop?",
           choices: [
             { letter: "A", text: "Employees should always follow instructions." },
@@ -1038,6 +1102,7 @@
         {
           id: "turning",
           sol: "10.RL.1.B",
+          sub: "10.RL.1.B.1",
           stem: "The turning point in the story's action comes when —",
           choices: [
             { letter: "A", text: "Idris takes the summer job" },
@@ -1070,6 +1135,7 @@
         {
           id: "main",
           sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "The passage about road salt is mainly about —",
           choices: [
             { letter: "A", text: "how road salt works and what it costs" },
@@ -1081,7 +1147,8 @@
         },
         {
           id: "fifteen",
-          sol: "10.RI.1.B",
+          sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "According to the passage, ordinary salt stops being useful on roads below about —",
           choices: [
             { letter: "A", text: "32 degrees" },
@@ -1094,6 +1161,7 @@
         {
           id: "shift",
           sol: "10.RI.2.A",
+          sub: "10.RI.2.A.1",
           stem: "Sentences 6 and 7 mark a shift in the passage from —",
           choices: [
             { letter: "A", text: "cause to effect" },
@@ -1105,7 +1173,8 @@
         },
         {
           id: "brine",
-          sol: "10.RI.2.C",
+          sol: "10.RI.2.B",
+          sub: "10.RI.2.B.1",
           stem: "In sentence 4, the word brine most nearly means —",
           choices: [
             { letter: "A", text: "a layer of ice" },
@@ -1117,7 +1186,8 @@
         },
         {
           id: "reduce",
-          sol: "10.RI.1.C",
+          sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "Which sentence best supports the idea that there are ways to use less salt?",
           choices: [
             { letter: "A", text: "Sentence 3" },
@@ -1129,7 +1199,8 @@
         },
         {
           id: "baseline",
-          sol: "10.RI.2.B",
+          sol: "10.RI.2.A",
+          sub: "10.RI.2.A.2",
           stem: "The author includes sentence 2 mainly to —",
           choices: [
             { letter: "A", text: "give a baseline before explaining how salt changes it" },
@@ -1162,7 +1233,8 @@
       claims: [
         {
           id: "log",
-          sol: "10.RI.1.B",
+          sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "A student who signs the log only at check-in will —",
           choices: [
             { letter: "A", text: "be assigned to the creek zone" },
@@ -1174,7 +1246,8 @@
         },
         {
           id: "late",
-          sol: "10.RI.1.C",
+          sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "A group that arrives at 9:20 a.m. can expect to —",
           choices: [
             { letter: "A", text: "be given a zone right away" },
@@ -1186,7 +1259,8 @@
         },
         {
           id: "rain",
-          sol: "10.RI.2.B",
+          sol: "10.RI.2.A",
+          sub: "10.RI.2.A.2",
           stem: "The author includes sentence 7 mainly to —",
           choices: [
             { letter: "A", text: "prevent a likely misunderstanding about weather" },
@@ -1199,6 +1273,7 @@
         {
           id: "creek",
           sol: "10.RI.2.A",
+          sub: "10.RI.2.A.2",
           stem: "Why does sentence 2 mention the creek bank?",
           choices: [
             { letter: "A", text: "to warn that swimming is not allowed" },
@@ -1211,6 +1286,7 @@
         {
           id: "purpose",
           sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "The main purpose of the sign-up text is to —",
           choices: [
             { letter: "A", text: "persuade readers to volunteer" },
@@ -1244,6 +1320,7 @@
         {
           id: "central",
           sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "Which statement best expresses the central idea of the passage about leaves?",
           choices: [
             { letter: "A", text: "Yellow leaves are more common than red ones in most forests." },
@@ -1256,6 +1333,7 @@
         {
           id: "yellow",
           sol: "10.RI.2.A",
+          sub: "10.RI.2.A.2",
           stem: "The author begins with yellow leaves in sentence 1 mainly to —",
           choices: [
             { letter: "A", text: "set up a contrast with the puzzle of red" },
@@ -1268,6 +1346,7 @@
         {
           id: "uncertain",
           sol: "10.RI.1.C",
+          sub: "10.RI.1.C.2",
           stem: "Which sentence presents an idea as uncertain rather than as established fact?",
           choices: [
             { letter: "A", text: "Sentence 1" },
@@ -1280,6 +1359,7 @@
         {
           id: "sunscreen",
           sol: "10.RI.2.C",
+          sub: "10.RI.2.C.2",
           stem: "In sentence 5, the word sunscreen is used to suggest that anthocyanins —",
           choices: [
             { letter: "A", text: "make the leaf smell sweet" },
@@ -1291,7 +1371,8 @@
         },
         {
           id: "costly",
-          sol: "10.RI.1.B",
+          sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "Which detail best supports the claim that making red pigment costs the tree something?",
           choices: [
             { letter: "A", text: "the green fades (sentence 1)" },
@@ -1303,7 +1384,8 @@
         },
         {
           id: "question",
-          sol: "10.RI.2.B",
+          sol: "10.RI.2.A",
+          sub: "10.RI.2.A.2",
           stem: "The question in sentence 4 mainly serves to —",
           choices: [
             { letter: "A", text: "show that the author does not know the answer" },
@@ -1336,6 +1418,7 @@
         {
           id: "apprehensive",
           sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "In sentence 1, apprehensive most nearly means —",
           choices: [
             { letter: "A", text: "excited" },
@@ -1347,7 +1430,8 @@
         },
         {
           id: "meticulous",
-          sol: "10.RV.1.C",
+          sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "Which detail from sentence 2 best shows the meaning of meticulous?",
           choices: [
             { letter: "A", text: "rewriting our opening" },
@@ -1360,6 +1444,7 @@
         {
           id: "rigid",
           sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "In sentence 7, rigid describes opponents who —",
           choices: [
             { letter: "A", text: "spoke too quietly" },
@@ -1372,6 +1457,7 @@
         {
           id: "grudging",
           sol: "10.RV.1.D",
+          sub: "10.RV.1.D.1",
           stem: "The author describes Lucía's smile in sentence 8 as grudging rather than warm. Compared with warm, grudging suggests that she —",
           choices: [
             { letter: "A", text: "admits the point reluctantly" },
@@ -1383,7 +1469,8 @@
         },
         {
           id: "improvising",
-          sol: "10.RV.1.A",
+          sol: "10.RV.1.D",
+          sub: "10.RV.1.D.2",
           stem: "Lucía's remark in sentence 4 gives the word improvising a connotation of —",
           choices: [
             { letter: "A", text: "creativity" },
@@ -1395,7 +1482,8 @@
         },
         {
           id: "balance",
-          sol: "10.RV.1.A",
+          sol: "10.RV.1.D",
+          sub: "10.RV.1.D.2",
           stem: "Sentence 6 helps the reader see the narrator's improvising as —",
           choices: [
             { letter: "A", text: "a weakness that Lucía corrected" },
@@ -1433,6 +1521,7 @@
         {
           id: "agree",
           sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "Both writers would most likely agree that —",
           choices: [
             { letter: "A", text: "fines raise too little money to be worth collecting" },
@@ -1445,6 +1534,7 @@
         {
           id: "differ",
           sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "Which statement best describes a key difference between the two texts?",
           choices: [
             { letter: "A", text: "Noor uses numbers; Mr. Beltran uses none." },
@@ -1456,7 +1546,8 @@
         },
         {
           id: "challenge",
-          sol: "10.DSR.E",
+          sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "Mr. Beltran's point in sentence 9 mainly challenges Noor's use of —",
           choices: [
             { letter: "A", text: "the $340 total in sentence 2" },
@@ -1468,7 +1559,8 @@
         },
         {
           id: "two",
-          sol: "10.DSR.D",
+          sol: "10.DSR.C",
+          sub: "10.DSR.C.1",
           stem: "Select TWO sentences that together best support Noor's claim that fines do more harm than good.",
           choices: [
             { letter: "A", text: "Sentence 2" },
@@ -1480,7 +1572,8 @@
         },
         {
           id: "endings",
-          sol: "10.DSR.E",
+          sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "The final sentences of the two texts (6 and 11) are alike in that each —",
           choices: [
             { letter: "A", text: "states a conclusion in a short, firm sentence" },
@@ -1492,7 +1585,8 @@
         },
         {
           id: "compromise",
-          sol: "10.DSR.E",
+          sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "Taken together, the texts suggest that the most likely compromise is to —",
           choices: [
             { letter: "A", text: "keep fines but lower them to five cents" },

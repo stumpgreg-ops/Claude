@@ -53,6 +53,7 @@
         {
           id: "theme",
           sol: "9.RL.1.A",
+          sub: "9.RL.1.A.1",
           stem: "Which statement best expresses a theme the story develops?",
           choices: [
             { letter: "A", text: "Old objects should be left where they were first placed." },
@@ -64,7 +65,8 @@
         },
         {
           id: "char",
-          sol: "9.RL.1.C",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "Sentence 10 mainly suggests that Devin's grandfather —",
           choices: [
             { letter: "A", text: "does not trust the tape measure Devin is using" },
@@ -76,7 +78,8 @@
         },
         {
           id: "fig",
-          sol: "9.RL.2.A",
+          sol: "9.RL.2.B",
+          sub: "9.RL.2.B.2",
           stem: "In sentence 8, the author says the piano stopped as if it had made a decision mainly to —",
           choices: [
             { letter: "A", text: "suggest that the old house is haunted" },
@@ -88,7 +91,8 @@
         },
         {
           id: "plot",
-          sol: "9.RL.1.B",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "What finally allows the piano to fit through the doorway?",
           choices: [
             { letter: "A", text: "Tipping it onto the dolly at a sharp angle." },
@@ -100,7 +104,8 @@
         },
         {
           id: "word",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.F",
+          sub: "9.RV.1.F.1",
           stem: "In sentence 14, the word forgive is used to suggest that the piano —",
           choices: [
             { letter: "A", text: "will not give even a little" },
@@ -112,7 +117,8 @@
         },
         {
           id: "structure",
-          sol: "9.RL.3.B",
+          sol: "9.RL.1.B",
+          sub: "9.RL.1.B.2",
           stem: "How does the fourth paragraph (sentences 17–24) function in the story?",
           choices: [
             { letter: "A", text: "It introduces a new conflict between Devin and his grandfather." },
@@ -124,7 +130,8 @@
         },
         {
           id: "early",
-          sol: "9.RL.3.A",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "Sentence 5 is important to the rest of the story because it —",
           choices: [
             { letter: "A", text: "explains why the new owners do not want the piano" },
@@ -137,6 +144,7 @@
         {
           id: "craft",
           sol: "9.RL.2.B",
+          sub: "9.RL.2.B.2",
           stem: "The description in sentence 2 of the grandfather's hand resting on the lid mainly conveys his —",
           choices: [
             { letter: "A", text: "fondness for the piano" },
@@ -193,6 +201,7 @@
         {
           id: "theme",
           sol: "9.RL.1.A",
+          sub: "9.RL.1.A.1",
           stem: "Which statement best states a theme developed in the story?",
           choices: [
             { letter: "A", text: "Helping someone can quietly become a way of underestimating them." },
@@ -204,7 +213,8 @@
         },
         {
           id: "fig",
-          sol: "9.RL.2.A",
+          sol: "9.RL.2.B",
+          sub: "9.RL.2.B.2",
           stem: "In sentence 4, the comparison to ivy on a fence mainly suggests that the arrangement —",
           choices: [
             { letter: "A", text: "was unwelcome to both Lucía and her grandmother" },
@@ -216,7 +226,8 @@
         },
         {
           id: "foreshadow",
-          sol: "9.RL.1.C",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "Sentence 9 hints that Abuela Carmen —",
           choices: [
             { letter: "A", text: "is confused by the layout of the store" },
@@ -228,7 +239,8 @@
         },
         {
           id: "word",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.D",
+          sub: "9.RV.1.D.2",
           stem: "In sentence 13, the word careful suggests that Abuela Carmen's English is —",
           choices: [
             { letter: "A", text: "deliberate and thought out" },
@@ -241,6 +253,7 @@
         {
           id: "craft",
           sol: "9.RL.2.B",
+          sub: "9.RL.2.B.2",
           stem: "The image in sentence 18 of words held like a bag of groceries nobody had asked her to carry mainly conveys Lucía's —",
           choices: [
             { letter: "A", text: "relief at being freed from a chore" },
@@ -252,7 +265,8 @@
         },
         {
           id: "link",
-          sol: "9.RL.1.B",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "Sentence 25 connects back to sentence 9 by showing that Abuela Carmen —",
           choices: [
             { letter: "A", text: "had planned the shopping trip for weeks" },
@@ -264,7 +278,8 @@
         },
         {
           id: "structure",
-          sol: "9.RL.3.B",
+          sol: "9.RL.1.B",
+          sub: "9.RL.1.B.2",
           stem: "How does the final paragraph resolve the situation introduced in the first paragraph?",
           choices: [
             { letter: "A", text: "Lucía agrees to keep translating whenever her grandmother asks." },
@@ -276,7 +291,8 @@
         },
         {
           id: "tone",
-          sol: "9.RL.1.D",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "In sentence 29, the shift from English to Spanish, more gently, suggests that Abuela Carmen wants to —",
           choices: [
             { letter: "A", text: "correct Lucía's grammar" },
@@ -335,6 +351,7 @@
         {
           id: "theme",
           sol: "9.RL.1.A",
+          sub: "9.RL.1.A.1",
           stem: "Which idea does the story most fully develop?",
           choices: [
             { letter: "A", text: "Winning matters more than how a race is run." },
@@ -346,7 +363,8 @@
         },
         {
           id: "simile",
-          sol: "9.RL.2.A",
+          sol: "9.RL.2.B",
+          sub: "9.RL.2.B.2",
           stem: "In sentence 6, the fog is compared to milk in a bowl mainly to emphasize that it —",
           choices: [
             { letter: "A", text: "is thick and settles into the low ground" },
@@ -358,7 +376,8 @@
         },
         {
           id: "char",
-          sol: "9.RL.1.C",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "Marcus's decision in sentence 19 is significant mainly because —",
           choices: [
             { letter: "A", text: "he has never stopped during a race before" },
@@ -370,7 +389,8 @@
         },
         {
           id: "word",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In sentence 26, the phrase by a single point suggests that —",
           choices: [
             { letter: "A", text: "the meet was decided by a vote of the officials" },
@@ -382,7 +402,8 @@
         },
         {
           id: "craft",
-          sol: "9.RL.2.B",
+          sol: "9.RL.2.C",
+          sub: "9.RL.2.C.2",
           stem: "The statement in sentence 8 that Tomas had never lost a race on this course because he had never run this course mainly serves to —",
           choices: [
             { letter: "A", text: "show that Tomas runs poorly in the fog" },
@@ -394,7 +415,8 @@
         },
         {
           id: "early",
-          sol: "9.RL.1.B",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "How does the detail in sentence 5 prepare readers for what happens at the water tower?",
           choices: [
             { letter: "A", text: "It explains why Marcus recognizes the missing flag and the wrong turn." },
@@ -407,6 +429,7 @@
         {
           id: "ending",
           sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "Tomas repeats Sharp left at the tower in sentence 34 mainly to —",
           choices: [
             { letter: "A", text: "tease Marcus for giving unnecessary advice" },
@@ -459,6 +482,7 @@
         {
           id: "central",
           sol: "9.RL.1.A",
+          sub: "9.RL.1.A.1",
           stem: "Which statement best captures the central idea of the poem?",
           choices: [
             { letter: "A", text: "Traditions survive only through repeated care and patience." },
@@ -471,6 +495,7 @@
         {
           id: "simile",
           sol: "9.RL.2.A",
+          sub: "9.RL.2.A.2",
           stem: "In line 7, comparing the shine to something that has been forgiven suggests that —",
           choices: [
             { letter: "A", text: "the pan was once stolen and returned" },
@@ -482,7 +507,8 @@
         },
         {
           id: "structure",
-          sol: "9.RL.3.B",
+          sol: "9.RL.1.B",
+          sub: "9.RL.1.B.2",
           stem: "How does the poem's structure develop its meaning?",
           choices: [
             { letter: "A", text: "It alternates between the grandmother's voice and the speaker's voice." },
@@ -494,7 +520,8 @@
         },
         {
           id: "word",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In line 24, the word ruin most nearly refers to —",
           choices: [
             { letter: "A", text: "the rust the speaker caused" },
@@ -507,6 +534,7 @@
         {
           id: "link",
           sol: "9.RL.1.B",
+          sub: "9.RL.1.B.2",
           stem: "Lines 20–22 connect back to lines 3–4 by showing that —",
           choices: [
             { letter: "A", text: "the speaker has replaced the pan's worn handle" },
@@ -518,7 +546,8 @@
         },
         {
           id: "tone",
-          sol: "9.RL.1.D",
+          sol: "9.RL.2.B",
+          sub: "9.RL.2.B.1",
           stem: "The tone of the final four lines is best described as —",
           choices: [
             { letter: "A", text: "bitter" },
@@ -530,7 +559,8 @@
         },
         {
           id: "infer",
-          sol: "9.RL.1.C",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "Lines 8–9 suggest that the speaker at fourteen —",
           choices: [
             { letter: "A", text: "respected the rule but forgot it once" },
@@ -581,6 +611,7 @@
         {
           id: "main",
           sol: "9.RI.1.A",
+          sub: "9.RI.1.A.1",
           stem: "Which statement best sums up the central idea of the passage?",
           choices: [
             { letter: "A", text: "Fixed-time signals are better than actuated signals in every setting." },
@@ -593,6 +624,7 @@
         {
           id: "structure",
           sol: "9.RI.2.A",
+          sub: "9.RI.2.A.1",
           stem: "The second and third paragraphs (sentences 6–16) are organized mainly by —",
           choices: [
             { letter: "A", text: "comparing the costs of different kinds of signals" },
@@ -604,7 +636,8 @@
         },
         {
           id: "purpose",
-          sol: "9.RI.2.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "The author includes sentence 11 mainly to —",
           choices: [
             { letter: "A", text: "warn drivers about damage to the road surface" },
@@ -616,7 +649,8 @@
         },
         {
           id: "word",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In sentence 6, the word actuated most nearly means —",
           choices: [
             { letter: "A", text: "set in motion by a request" },
@@ -628,7 +662,8 @@
         },
         {
           id: "link",
-          sol: "9.RI.1.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "How does the example in sentence 5 relate to the explanation in sentence 7?",
           choices: [
             { letter: "A", text: "It shows a problem that the actuated signal is designed to solve." },
@@ -640,7 +675,8 @@
         },
         {
           id: "infer",
-          sol: "9.RI.1.C",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "Based on sentences 20 and 21, a driver who wants to meet a string of green lights should —",
           choices: [
             { letter: "A", text: "press the pedestrian button at each corner" },
@@ -653,6 +689,7 @@
         {
           id: "ending",
           sol: "9.RI.2.B",
+          sub: "9.RI.2.B.2",
           stem: "The final two sentences (25–26) mainly serve to —",
           choices: [
             { letter: "A", text: "summarize the steps engineers use to tune a signal" },
@@ -700,6 +737,7 @@
         {
           id: "central",
           sol: "9.RI.1.A",
+          sub: "9.RI.1.A.1",
           stem: "Which statement best expresses the passage's central idea?",
           choices: [
             { letter: "A", text: "Fishermen tend to exaggerate the size of the catches they remember." },
@@ -711,7 +749,8 @@
         },
         {
           id: "structure",
-          sol: "9.RI.2.A",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "The author opens with the story of the three generations mainly to —",
           choices: [
             { letter: "A", text: "prove that the harbor has fully recovered" },
@@ -723,7 +762,8 @@
         },
         {
           id: "word",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In sentence 7, the word baseline most nearly means —",
           choices: [
             { letter: "A", text: "the lowest point a population can reach" },
@@ -735,7 +775,8 @@
         },
         {
           id: "link",
-          sol: "9.RI.1.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "The example of the a little cloudy river in sentence 13 is most similar to which detail from the first paragraph?",
           choices: [
             { letter: "A", text: "The oldest men's memory of week-long catches." },
@@ -747,7 +788,8 @@
         },
         {
           id: "infer",
-          sol: "9.RI.1.C",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "Based on sentences 17 and 18, the author would most likely say that a restoration project should —",
           choices: [
             { letter: "A", text: "use the earliest reliable records to set its goal" },
@@ -759,7 +801,8 @@
         },
         {
           id: "purpose",
-          sol: "9.RI.2.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "Sentence 14 is important to the passage because it —",
           choices: [
             { letter: "A", text: "explains why the problem is hardest to see for the people best placed to see it" },
@@ -771,7 +814,8 @@
         },
         {
           id: "ending",
-          sol: "9.RI.2.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "The final two sentences (23–24) mainly serve to —",
           choices: [
             { letter: "A", text: "dismiss memory as unreliable compared with data" },
@@ -783,7 +827,8 @@
         },
         {
           id: "evidence",
-          sol: "9.RI.1.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "Which sentence best supports the idea that shifting baselines affect the choices a community makes?",
           choices: [
             { letter: "A", text: "Sentence 4" },
@@ -836,7 +881,8 @@
       claims: [
         {
           id: "claim",
-          sol: "9.RI.3.A",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.1",
           stem: "Which statement best expresses the central claim of the argument?",
           choices: [
             { letter: "A", text: "High schools should require a one-semester course in basic repair skills." },
@@ -848,7 +894,8 @@
         },
         {
           id: "evidence",
-          sol: "9.RI.1.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "The author includes the survey results in sentences 1–3 mainly to —",
           choices: [
             { letter: "A", text: "show that most juniors dislike riding bicycles" },
@@ -861,6 +908,7 @@
         {
           id: "structure",
           sol: "9.RI.2.A",
+          sub: "9.RI.2.A.1",
           stem: "How does the author organize the fourth and fifth paragraphs (sentences 15–26)?",
           choices: [
             { letter: "A", text: "By listing the tools the course would require." },
@@ -872,7 +920,8 @@
         },
         {
           id: "word",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In sentence 17, the phrase false choice most nearly means —",
           choices: [
             { letter: "A", text: "a decision made without enough information" },
@@ -884,7 +933,8 @@
         },
         {
           id: "counter",
-          sol: "9.RI.3.A",
+          sol: "9.RI.1.C",
+          sub: "9.RI.1.C.2",
           stem: "How does the author's response to the cost objection (sentences 22–26) differ from the response to the schedule objection?",
           choices: [
             { letter: "A", text: "The author admits the cost objection is stronger before answering it." },
@@ -897,6 +947,7 @@
         {
           id: "reason",
           sol: "9.RI.1.C",
+          sub: "9.RI.1.C.2",
           stem: "Sentences 18–21 support the author's argument by —",
           choices: [
             { letter: "A", text: "listing the subjects that appear on state tests" },
@@ -909,6 +960,7 @@
         {
           id: "craft",
           sol: "9.RI.2.B",
+          sub: "9.RI.2.B.2",
           stem: "The two-word paragraph opener in sentence 27 (They are.) mainly serves to —",
           choices: [
             { letter: "A", text: "introduce one more objection to the course" },
@@ -920,7 +972,8 @@
         },
         {
           id: "link",
-          sol: "9.RI.1.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "The mention of the paycheck stub in sentence 21 refers back to sentence 3 in order to —",
           choices: [
             { letter: "A", text: "show that the survey question was poorly written" },
@@ -973,6 +1026,7 @@
         {
           id: "shared",
           sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "Which idea is supported by both Text 1 and Text 2?",
           choices: [
             { letter: "A", text: "The trolley line should be rebuilt and reopened." },
@@ -984,7 +1038,8 @@
         },
         {
           id: "differ",
-          sol: "9.DSR.E",
+          sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "Which statement best describes how the two texts differ in perspective?",
           choices: [
             { letter: "A", text: "Text 1 views the greenway from the town's point of view, while Text 2 describes its effect on one household." },
@@ -997,6 +1052,7 @@
         {
           id: "two",
           sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "Select TWO details, one from each text, that together show that the greenway's level route matters to families.",
           choices: [
             { letter: "A", text: "Sentence 6: the nearly flat route makes the path usable for strollers and children on bicycles." },
@@ -1008,7 +1064,8 @@
         },
         {
           id: "word",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In sentence 18, the phrase at ground level most nearly means —",
           choices: [
             { letter: "A", text: "measured from the surface of the pavement" },
@@ -1020,7 +1077,8 @@
         },
         {
           id: "evidence",
-          sol: "9.DSR.D",
+          sol: "9.DSR.C",
+          sub: "9.DSR.C.1",
           stem: "Which sentence from Text 2 gives the strongest evidence that the greenway intrudes on the writer's daily life?",
           choices: [
             { letter: "A", text: "Sentence 14" },
@@ -1032,7 +1090,8 @@
         },
         {
           id: "craft",
-          sol: "9.DSR.E",
+          sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "The final sentence of Text 2 refers to the trolley's nickel fare mainly to —",
           choices: [
             { letter: "A", text: "suggest that the town should charge a fee to use the path" },
@@ -1044,7 +1103,8 @@
         },
         {
           id: "infer",
-          sol: "9.DSR.E",
+          sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "A reader who has read both texts can best conclude that —",
           choices: [
             { letter: "A", text: "the town's count of 40,000 trips is exaggerated" },
@@ -1117,6 +1177,7 @@
         {
           id: "theme",
           sol: "9.RL.1.A",
+          sub: "9.RL.1.A.1",
           stem: "Which statement best expresses a central theme of the story?",
           choices: [
             { letter: "A", text: "Fear is best handled by acting as quickly as possible." },
@@ -1128,7 +1189,8 @@
         },
         {
           id: "char",
-          sol: "9.RL.1.C",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "The details in sentence 14 mainly reveal that Jonah —",
           choices: [
             { letter: "A", text: "is fascinated by the size of the swarm" },
@@ -1140,7 +1202,8 @@
         },
         {
           id: "simile",
-          sol: "9.RL.2.A",
+          sol: "9.RL.2.B",
+          sub: "9.RL.2.B.2",
           stem: "In sentence 21, comparing the bees to a crowd going into a stadium mainly suggests that they will move —",
           choices: [
             { letter: "A", text: "together, toward a shared destination" },
@@ -1152,7 +1215,8 @@
         },
         {
           id: "word",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In sentence 23, the word inspect suggests that the bees landing on Jonah are —",
           choices: [
             { letter: "A", text: "attacking him" },
@@ -1164,7 +1228,8 @@
         },
         {
           id: "structure",
-          sol: "9.RL.3.B",
+          sol: "9.RL.1.B",
+          sub: "9.RL.1.B.2",
           stem: "How does the author build suspense in the fourth and fifth paragraphs (sentences 22–35)?",
           choices: [
             { letter: "A", text: "By describing the events from the bees' point of view." },
@@ -1176,7 +1241,8 @@
         },
         {
           id: "early",
-          sol: "9.RL.1.B",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "How does Mr. Aldana's explanation in sentences 10–13 prepare readers for the events in sentences 38–39?",
           choices: [
             { letter: "A", text: "It explains why the bees follow the queen calmly instead of attacking." },
@@ -1188,7 +1254,8 @@
         },
         {
           id: "fig",
-          sol: "9.RL.2.A",
+          sol: "9.RL.2.B",
+          sub: "9.RL.2.B.2",
           stem: "The image of a slow brown river flowing uphill in sentence 39 mainly emphasizes that the bees' movement is —",
           choices: [
             { letter: "A", text: "dangerous and very fast" },
@@ -1200,7 +1267,8 @@
         },
         {
           id: "ending",
-          sol: "9.RL.1.D",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "Mr. Aldana's reply in sentence 48 (That's what I mean.) suggests that he —",
           choices: [
             { letter: "A", text: "is disappointed that Jonah did not help more" },
@@ -1271,6 +1339,7 @@
         {
           id: "theme",
           sol: "9.RL.1.A",
+          sub: "9.RL.1.A.1",
           stem: "Which statement best expresses a theme of this story?",
           choices: [
             { letter: "A", text: "Science fairs reward the most colorful posters." },
@@ -1282,7 +1351,8 @@
         },
         {
           id: "plot",
-          sol: "9.RL.1.B",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "What does Ravi discover in sentences 15–19 that changes his plan?",
           choices: [
             { letter: "A", text: "Keisha's data had been entirely invented." },
@@ -1294,7 +1364,8 @@
         },
         {
           id: "char",
-          sol: "9.RL.1.C",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "Deepa's response in sentences 23–28 mainly shows that she —",
           choices: [
             { letter: "A", text: "sees the flaw as a legitimate finding rather than a failure" },
@@ -1306,7 +1377,8 @@
         },
         {
           id: "word",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In sentence 27, the word variable most nearly means —",
           choices: [
             { letter: "A", text: "a factor that can affect the result" },
@@ -1319,6 +1391,7 @@
         {
           id: "structure",
           sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "The author describes the poster's two halves in sentences 32–34 mainly to —",
           choices: [
             { letter: "A", text: "show how Ravi divides credit between himself and Keisha" },
@@ -1330,7 +1403,8 @@
         },
         {
           id: "early",
-          sol: "9.RL.3.A",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "How does the detail in sentence 2 about the narrow laundry-room closet become important later?",
           choices: [
             { letter: "A", text: "It explains why Ravi cannot find the spreadsheet." },
@@ -1342,7 +1416,8 @@
         },
         {
           id: "infer",
-          sol: "9.RL.1.C",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "Why does Ravi answer Mine in sentence 38, even though he thinks of Keisha first?",
           choices: [
             { letter: "A", text: "He is afraid the judge will disqualify a two-person project." },
@@ -1354,7 +1429,8 @@
         },
         {
           id: "ending",
-          sol: "9.RL.2.B",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "The final sentence (47) mainly suggests that Ravi —",
           choices: [
             { letter: "A", text: "has given up on the experiment" },
@@ -1411,6 +1487,7 @@
         {
           id: "central",
           sol: "9.RI.1.A",
+          sub: "9.RI.1.A.1",
           stem: "Which statement best expresses the central idea of this passage?",
           choices: [
             { letter: "A", text: "Ice harvesting was a dangerous job that few people were willing to do." },
@@ -1423,6 +1500,7 @@
         {
           id: "structure",
           sol: "9.RI.2.A",
+          sub: "9.RI.2.A.1",
           stem: "The second and third paragraphs (sentences 5–14) are organized mainly —",
           choices: [
             { letter: "A", text: "in the order in which the harvest and storage took place" },
@@ -1434,7 +1512,8 @@
         },
         {
           id: "word",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In sentence 6, the word insulates most nearly means —",
           choices: [
             { letter: "A", text: "melts away completely" },
@@ -1446,7 +1525,8 @@
         },
         {
           id: "evidence",
-          sol: "9.RI.1.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "Which sentence best supports the idea that ice made it possible to sell goods farther away?",
           choices: [
             { letter: "A", text: "Sentence 7" },
@@ -1458,7 +1538,8 @@
         },
         {
           id: "infer",
-          sol: "9.RI.1.C",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "Based on sentence 26, why did ice-making machines appear first in the South?",
           choices: [
             { letter: "A", text: "There was no natural ice there to compete with." },
@@ -1470,7 +1551,8 @@
         },
         {
           id: "link",
-          sol: "9.RI.1.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "The claim in sentence 4 that the industry shaped how far food could travel is developed most fully in —",
           choices: [
             { letter: "A", text: "the second paragraph" },
@@ -1482,7 +1564,8 @@
         },
         {
           id: "ending",
-          sol: "9.RI.2.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "The author ends with the word icebox mainly to —",
           choices: [
             { letter: "A", text: "argue that people should stop using an outdated word" },
@@ -1495,6 +1578,7 @@
         {
           id: "tone",
           sol: "9.RI.2.B",
+          sub: "9.RI.2.B.2",
           stem: "In sentence 28, the phrase the lakes were left to the skaters mainly conveys —",
           choices: [
             { letter: "A", text: "anger at the machines that replaced the harvest" },
@@ -1554,6 +1638,7 @@
         {
           id: "central",
           sol: "9.RI.1.A",
+          sub: "9.RI.1.A.1",
           stem: "Which statement best states the central idea of the article?",
           choices: [
             { letter: "A", text: "Public libraries should preserve every book they have ever owned." },
@@ -1566,6 +1651,7 @@
         {
           id: "structure",
           sol: "9.RI.2.A",
+          sub: "9.RI.2.A.1",
           stem: "How does the author organize the second, third, and fourth paragraphs (sentences 7–20)?",
           choices: [
             { letter: "A", text: "In the order in which a librarian works through a shelf." },
@@ -1577,7 +1663,8 @@
         },
         {
           id: "word",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In sentence 7, the word finite most nearly means —",
           choices: [
             { letter: "A", text: "limited in amount" },
@@ -1589,7 +1676,8 @@
         },
         {
           id: "evidence",
-          sol: "9.RI.1.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "Which sentence best supports the claim that removing books can increase how much the remaining ones are read?",
           choices: [
             { letter: "A", text: "Sentence 9" },
@@ -1601,7 +1689,8 @@
         },
         {
           id: "infer",
-          sol: "9.RI.1.C",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "According to sentences 23–25, a worn book with outdated information that is the last copy in the regional system would most likely be —",
           choices: [
             { letter: "A", text: "removed from the shelf immediately" },
@@ -1613,7 +1702,8 @@
         },
         {
           id: "purpose",
-          sol: "9.RI.2.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "The author includes sentence 6 mainly in order to —",
           choices: [
             { letter: "A", text: "state the common assumption that the rest of the article challenges" },
@@ -1625,7 +1715,8 @@
         },
         {
           id: "link",
-          sol: "9.RI.1.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "The claim in sentence 3 that shelf space can be worth more than the books themselves is best explained by which later sentence?",
           choices: [
             { letter: "A", text: "Sentence 14" },
@@ -1638,6 +1729,7 @@
         {
           id: "tone",
           sol: "9.RI.2.B",
+          sub: "9.RI.2.B.1",
           stem: "The tone of the final sentence (36) is best described as —",
           choices: [
             { letter: "A", text: "critical of librarians who weed" },
