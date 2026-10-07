@@ -10,7 +10,11 @@
    3. The teacher page (dist/canvas/SOLLabyrinth-VA-Teacher.html): pasted text with names, the game's code, a
       tampered copy and an Odyssey code; a newer code for the same student; the goals change the grade; CSV and Copy;
       a Canvas "Download Submissions" .zip with two students (one deflated, one stored). No page errors, nothing
-      loaded from outside. Screenshots: tools/shots/pg-*.png */
+      loaded from outside. Screenshots: tools/shots/pg-*.png
+   4. Restore (v5.14): the code is SOL2 and carries the level, the Fangs and the town or castle; "Restore my progress"
+      on a cleared Chromebook brings them all back (and the totals, so the next code goes on from them); a SOL1 code
+      restores the totals and the level; another game's code and a typo are refused; WORDS has every theme, style and
+      piece in pieces.json. */
 var path = require("path"), fs = require("fs"), http = require("http"), url = require("url"), zlib = require("zlib");
 var { chromium } = require("/opt/node22/lib/node_modules/playwright");
 var root = path.join(__dirname, ".."), shots = path.join(__dirname, "shots");
@@ -224,7 +228,7 @@ function makeZip(files) {
   await page.screenshot({ path: path.join(shots, "pg-01-modal-va.png") });
   var dec = C.decode(modal.code);
   console.log("code", modal.code, modal.code.length + " chars");
-  check(/^SOL1-VA-[0-9A-Z]{4}(-[0-9A-Z]{1,4})+$/.test(modal.code) && modal.code.length <= 120, "the window shows a code: SOL1-VA- in blocks of 4, " + modal.code.length + " characters");
+  check(/^SOL2-VA-[0-9A-Z]{4}(-[0-9A-Z]{1,4})+$/.test(modal.code) && modal.code.length <= 120, "the window shows a code: SOL2-VA- in blocks of 4, " + modal.code.length + " characters (no castle yet)");
   check(dec.ok && dec.data.nick === "Ann S" && dec.data.won === 2 && dec.data.started === 3 && dec.data.lost === 1 && dec.data.answered === modal.sum.answered && dec.data.right === modal.sum.right &&
     dec.data.wrong === modal.sum.wrong && dec.data.hiReached === 3 && dec.data.hiWon === 2 && dec.data.days === 1 && dec.data.modes === 2 && dec.data.version === (fs.readFileSync(path.join(__dirname, "..", "index.html"), "utf8").match(/\?v=([0-9.]+)/) || [])[1] && Math.abs(dec.data.made - Date.now()) < 120000,
     "the code decodes to the record, with the nickname: " + JSON.stringify(dec.data).slice(0, 200));
@@ -248,6 +252,83 @@ function makeZip(files) {
   await page.keyboard.press("Escape");
   check(!(await page.isVisible("#progress-overlay")), "Escape closes it");
   var vaCode = modal.code;
+
+  /* ════ 4. restore ════ */
+  var PJ = JSON.parse(fs.readFileSync(path.join(root, "assets", "build", "pieces.json"), "utf8"));
+  var allWords = Object.keys(PJ.themes).concat([].concat.apply([], Object.keys(PJ.themes).map(function (k) { return (PJ.themes[k].styles || []).map(function (x) { return x.id; }); })), PJ.pieces.map(function (x) { return x.id; }));
+  var missing = allWords.filter(function (w) { return C.WORDS.indexOf(w) === -1; });
+  check(missing.length === 0, "WORDS has every theme, style and piece in pieces.json (append new ones at the end)" + (missing.length ? ": missing " + missing.join(", ") : ""));
+  check(await page.isVisible("#btn-restore"), "title screen: a Restore my progress button");
+  /* a castle like a student's: real castle pieces, styles, a shop piece, a decoration, a turned piece */
+  var castle = PJ.pieces.filter(function (x) { return x.theme === "castle"; }), cdeco = castle.filter(function (x) { return x.role === "deco"; }), cbuild = castle.filter(function (x) { return x.role !== "deco"; });
+  var picks = [];
+  for (var pi = 0; pi < 14; pi++) picks.push({ night: 1, piece: cbuild[pi % cbuild.length].id, style: ["blue", "red", "green"][pi % 3], src: pi < 4 ? "reward" : pi % 2 ? "shop" : "auto", deco: false, rot: pi % 4, cx: (pi % 5) - 2, cy: Math.floor(pi / 5) * 2 - 1 });
+  for (pi = 0; pi < 6; pi++) picks.push({ night: 1, piece: cdeco[pi % cdeco.length].id, style: "", src: "shop", deco: true, rot: 0, cx: 4 + pi, cy: -3 });
+  var before = await page.evaluate(function (picks) {
+    localStorage.setItem("afterHours.v1.build", JSON.stringify({ v: 4, theme: "castle", salt: 123456789, coins: 437, kit: 2, owned: {}, rewards: { 5: picks[0].piece, 10: picks[1].piece, 15: picks[2].piece, 20: picks[3].piece },
+      picks: picks, view: { a: 0, z: 1, px: 0, py: 0 }, code: "" }));
+    localStorage.setItem("afterHours.v1.night", "21");
+    localStorage.setItem("afterHours.v1.fangs", JSON.stringify([SolRealms.REALMS[0].id, SolRealms.REALMS[1].id]));
+    SolBuild._reload();                                /* the game's own clean-up of the record, as in play */
+    return { build: JSON.parse(localStorage.getItem("afterHours.v1.build")), code: SolProgress.code("VA"), sum: SolProgress.summary("VA"), fangs: localStorage.getItem("afterHours.v1.fangs") };
+  }, picks);
+  var rd = C.decode(before.code);
+  console.log("castle code", before.code.length + " chars for " + before.build.picks.length + " pieces");
+  check(/^SOL2-VA-/.test(before.code) && rd.ok && rd.data.save && rd.data.save.night === 21 && rd.data.save.fangs.join() === "0,1" && rd.data.save.build && rd.data.save.build.theme === "castle" &&
+    rd.data.save.build.picks.length === before.build.picks.length && rd.data.save.build.coins === 437, "the code carries the level (21), two Fangs and the castle (" + before.build.picks.length + " pieces, 437 coins): " + before.code.length + " characters");
+  /* a cleared Chromebook */
+  await page.evaluate(function () { localStorage.clear(); });
+  await page.reload({ waitUntil: "load" }); await page.waitForTimeout(800);
+  await page.click('#state-screen .card[data-state="VA"]');
+  await page.waitForSelector("#title-screen:not(.hidden)");
+  await page.click("#btn-restore");
+  await page.waitForSelector("#restore-overlay:not(.hidden)");
+  /* refused: a typo, another game's code */
+  var typo = before.code.slice(0, 30) + (before.code.charAt(30) === "7" ? "8" : "7") + before.code.slice(31);
+  await page.fill("#restore-code", typo); await page.click("#restore-check");
+  var r1 = await page.evaluate(function () { return { msg: document.querySelector("#restore-overlay .rest-msg").textContent, go: !document.getElementById("restore-go").classList.contains("hidden") }; });
+  check(/Does not check out/.test(r1.msg) && !r1.go, "a typo is refused, with no Restore button: " + r1.msg);
+  var odyFake = C.encode("ODY", { won: 1, started: 1, hiReached: 1, hiWon: 1 }, { save: { night: 2 } });
+  await page.fill("#restore-code", odyFake); await page.click("#restore-check");
+  var r2 = await page.evaluate(function () { return document.querySelector("#restore-overlay .rest-msg").textContent; });
+  check(/another game/.test(r2), "another game's code is refused: " + r2);
+  /* the real code, pasted with the words a student might type around it */
+  await page.fill("#restore-code", "my code is " + before.code + " thanks");
+  await page.click("#restore-check");
+  var r3 = await page.evaluate(function () { return { msg: document.querySelector("#restore-overlay .rest-msg").innerText, go: !document.getElementById("restore-go").classList.contains("hidden") }; });
+  await page.screenshot({ path: path.join(shots, "pg-07-restore.png") });
+  check(r3.go && /Level 21 to play next/.test(r3.msg) && /castle: 20 pieces, 437 coins/.test(r3.msg) && /2 Fangs/.test(r3.msg) && /Ann S/.test(r3.msg), "Check code shows what comes back: " + r3.msg.replace(/\n/g, " | "));
+  await Promise.all([page.waitForNavigation({ waitUntil: "load" }), page.click("#restore-go")]);
+  await page.waitForTimeout(1200);
+  var after = await page.evaluate(function () {
+    return { build: JSON.parse(localStorage.getItem("afterHours.v1.build") || "null"), night: localStorage.getItem("afterHours.v1.night"), fangs: localStorage.getItem("afterHours.v1.fangs"),
+      nick: localStorage.getItem("afterHours.v1.nick"), rec: JSON.parse(localStorage.getItem("afterHours.v1.progress.VA") || "null") };
+  });
+  await page.click('#state-screen .card[data-state="VA"]').catch(function () {});
+  await page.waitForSelector("#title-screen:not(.hidden)");
+  var after2 = await page.evaluate(function () { var st = SolBuild._reload(); return { sum: SolProgress.summary("VA"), code: SolProgress.code("VA"), nickBox: document.getElementById("join-nick").value, picks: JSON.parse(localStorage.getItem("afterHours.v1.build")).picks.length, coins: SolBuild.coins() }; });
+  var key = function (p) { return [p.piece, p.style || "", p.src, !!p.deco, p.rot || 0, p.cx, p.cy].join(":"); };
+  check(after.build && after.build.theme === "castle" && after.build.salt === before.build.salt && after.build.coins === 437 && JSON.stringify(after.build.rewards) === JSON.stringify(before.build.rewards) &&
+    after.build.picks.map(key).join("|") === before.build.picks.map(key).join("|"), "the castle comes back piece for piece: theme, salt, coins, rewards, each piece's style, turn and cell");
+  check(after2.picks === before.build.picks.length && after2.coins === 437, "the game loads the restored castle as it is (" + after2.picks + " pieces, " + after2.coins + " coins)");
+  check(after.night === "21" && after.fangs === before.fangs && after.nick === "Ann S" && after2.nickBox === "Ann S", "the level (21), the Fangs and the nickname come back");
+  var s0 = before.sum, s1 = after2.sum;
+  check(s1.won === s0.won && s1.started === s0.started && s1.answered === s0.answered && s1.right === s0.right && s1.wrong === s0.wrong && s1.hiReached === s0.hiReached && s1.days === s0.days && s1.modes === s0.modes && Math.abs(s1.minutes - s0.minutes) <= 1 &&
+    Object.keys(s0.skills).concat(Object.keys(s1.skills)).every(function (k) { var a = s0.skills[k] || {}, b = s1.skills[k] || {}; return (a.a || 0) === (b.a || 0) && (a.r || 0) === (b.r || 0); }), "the totals come back, so the next code goes on from them: " + JSON.stringify(s1).slice(0, 160));
+  var nd = C.decode(after2.code);
+  check(nd.ok && nd.data.save.build.picks.length === 20 && nd.data.save.night === 21 && nd.data.won === s0.won, "a code made after the restore carries the same game");
+  /* a SOL1 code (before v5.14): the totals and the level, and it says the castle isn't in it */
+  var old1 = C.encode("VA", { first: "2026-09-01", last: "2026-09-20", days: 4, minutes: 50, started: 9, won: 8, lost: 1, hiReached: 8, hiWon: 8, answered: 40, right: 30, wrong: 12, modes: 3, skills: { RL: { a: 40, r: 30 } } }, { nick: "Bo", version: "5.13.0" });
+  await page.click("#btn-restore");
+  await page.waitForSelector("#restore-overlay:not(.hidden)");
+  await page.fill("#restore-code", old1); await page.click("#restore-check");
+  var r4 = await page.evaluate(function () { return document.querySelector("#restore-overlay .rest-msg").innerText; });
+  check(/Level 9 to play next/.test(r4) && /older version/.test(r4) && /replaces what is on this Chromebook now \(level 21/.test(r4), "a SOL1 code: level 9 next, says the castle isn't in it, and warns it replaces level 21: " + r4.replace(/\n/g, " | "));
+  await Promise.all([page.waitForNavigation({ waitUntil: "load" }), page.click("#restore-go")]);
+  await page.waitForTimeout(1000);
+  var after3 = await page.evaluate(function () { return { night: localStorage.getItem("afterHours.v1.night"), rec: JSON.parse(localStorage.getItem("afterHours.v1.progress.VA")), build: localStorage.getItem("afterHours.v1.build") }; });
+  check(after3.night === "9" && after3.rec.levels.won === 8 && after3.rec.q.answered === 40 && after3.rec.dayCount === 4 && after3.build && JSON.parse(after3.build).picks.length === 20,
+    "the SOL1 restore sets level 9 and the totals and leaves the castle on this Chromebook alone");
   await page.close();
   dev.close();
 
@@ -275,7 +356,7 @@ function makeZip(files) {
   var om = await page.evaluate(function () { var o = document.getElementById("progress-overlay"); return { text: o.innerText, code: o.querySelector(".prog-code").textContent }; });
   await page.screenshot({ path: path.join(shots, "pg-03-modal-ody.png") });
   var odec = C.decode(om.code);
-  check(/^SOL1-ODY-/.test(om.code) && odec.ok && odec.data.nick === "Odie" && odec.data.answered === 1 && odec.data.skills.length === 6, "the Odyssey's code: SOL1-ODY-, six episodes, the nickname");
+  check(/^SOL2-ODY-/.test(om.code) && odec.ok && odec.data.nick === "Odie" && odec.data.answered === 1 && odec.data.skills.length === 6, "the Odyssey's code: SOL1-ODY-, six episodes, the nickname");
   check(/Odyssey game progress/.test(om.text) && !/\b(Sol|Hati|Fenrir|Norse|Odin)\b|realm|rune/i.test(om.text), "the Odyssey's window names its own assignment and no Norse words");
   var odyCode = om.code;
   await page.close();

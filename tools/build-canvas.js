@@ -131,13 +131,18 @@ function teacherSteps() {
     "   it needs no internet. If Download CSV or Copy doesn't work inside Canvas, use one of these.)",
     "5. Read the codes on the teacher page. EITHER",
     "   (a) open SpeedGrader, copy each student's code and paste it into the box on the teacher page",
-    "       (type the name first if you like: Ann Smith: SOL1-...), OR",
+    "       (type the name first if you like: Ann Smith: SOL2-...), OR",
     "   (b) on the assignment's page click \"Download Submissions\", and drop that .zip file on the teacher page",
     "       (student names come from the file names Canvas gives them).",
     "6. Set your goals at the top of the teacher page (minutes, levels won, questions; how much each counts;",
     "   points possible). The table shows each student and a suggested grade; Download (CSV) or Copy it.",
     "A typo or a changed code shows as INVALID. The code stops typos and casual tampering, not a determined",
-    "student. A student who plays on two Chromebooks has two codes; the page keeps the newest one."
+    "student. A student who plays on two Chromebooks has two codes; the page keeps the newest one.",
+    "NEW CHROMEBOOK OR LOST PROGRESS? A student's newest code also holds their level and their town or castle.",
+    "On the game's title screen they tap Restore my progress, paste their last code (it is in their submission",
+    "to the assignment), tap Check code, then Restore. The game brings back their level, town or castle, coins and",
+    "totals, so their next code goes on from there. (A code made before version 5.14 brings back the level and",
+    "totals only.) The code gets longer as the town or castle grows, so students should use the Copy code button."
   ];
 }
 function readme(update) {

@@ -343,7 +343,7 @@
     notes = [];
     paint();
     if (n) { $("paste").value = ""; msg("Found " + n + " code" + (n === 1 ? "" : "s") + "."); }
-    else msg("No code found. A code starts with SOL1-" + ST + "-", true);
+    else msg("No code found. A code starts with SOL2-" + ST + "- (or SOL1-" + ST + "- from before v5.14)", true);
   });
   $("clear").addEventListener("click", function () { rows = []; notes = []; paint(); msg(""); $("copybox").hidden = true; });
   $("choose").addEventListener("click", function () { $("file").click(); });

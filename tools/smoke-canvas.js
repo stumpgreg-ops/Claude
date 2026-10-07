@@ -120,6 +120,32 @@ var lms = http.createServer(function (req, res) {
   var other = await f.evaluate(function () { return localStorage["afterHours.v1.night"]; });
   check(other === "57", "the other game's save is untouched");
 
+  /* v5.14 restore, inside Canvas: the code from this castle brings it back on a cleared Chromebook (the page reloads) */
+  var made = await f.evaluate(function (K) {
+    localStorage.setItem(K + "night", "14");
+    return { code: SolProgress.code(), picks: JSON.parse(localStorage.getItem(K + "build")).picks.length };
+  }, K);
+  await f.evaluate(function (pre) {
+    Object.keys(localStorage).filter(function (k) { return k.indexOf(pre) === 0; }).forEach(function (k) { localStorage.removeItem(k.slice(pre.length)); });
+  }, "solReading." + st + ":");
+  await page.reload();
+  f = await frame();
+  await f.waitForSelector("#title-screen:not(.hidden)", { timeout: 60000 });
+  var gone = await f.evaluate(function (K) { return localStorage.getItem(K + "build"); }, K);
+  await f.click("#btn-restore");
+  await f.waitForSelector("#restore-overlay:not(.hidden)");
+  await f.fill("#restore-code", made.code);
+  await f.click("#restore-check");
+  await f.waitForSelector("#restore-go:not(.hidden)");
+  await f.click("#restore-go");
+  await page.waitForTimeout(2500);
+  f = await frame();
+  await f.waitForSelector("#title-screen:not(.hidden)", { timeout: 60000 });
+  var back = await f.evaluate(function (K) { var b = JSON.parse(localStorage.getItem(K + "build") || "null"); return { night: localStorage.getItem(K + "night"), picks: b && b.picks.length, theme: b && b.theme }; }, K);
+  check(!gone && back.night === "14" && back.picks === made.picks && back.theme === "castle", "Restore my progress works inside Canvas: level 14 and the " + made.picks + "-piece castle come back after the page reloads (" + JSON.stringify(back) + ")");
+  var other2 = await f.evaluate(function () { return localStorage["afterHours.v1.night"]; });
+  check(other2 === "57", "the restore leaves the other game's save alone");
+
   function own(p) { return p === "/blank" || (p.indexOf(FOLDER) === 0 && uploaded.indexOf(p.slice(FOLDER.length)) >= 0); }
   check(served.every(own), "the page asked its server for nothing but its own files: " + served.filter(function (p) { return !own(p); }).join(", "));
   check(uploaded.every(function (f) { return served.indexOf(FOLDER + f) >= 0; }), "every uploaded file was read");

@@ -16,12 +16,19 @@
 
    js/game.js reports what happens (SolProgress.levelStart / answer / levelEnd, all in try/catch) and tells this file
    which game is open, the nickname and whether play is active (SolProgress.hook). Nothing here can stop the game:
-   every storage call is in try/catch, and an old save without a record starts a fresh one. */
+   every storage call is in try/catch, and an old save without a record starts a fresh one.
+
+   RESTORE (v5.14): the code is format 2 ("SOL2-..."), so it also carries the level to play next, the Fangs and the
+   town or castle (js/progress-code.js). "Restore my progress" on the title screen reads a student's last code and,
+   after they confirm, writes it all back on this Chromebook and reloads the game: the record (its totals, so the next
+   code goes on from them), the level, the Fangs, the town or castle and the nickname. A format 1 code (made before
+   v5.14) restores the totals and the level only. */
 (function () {
   "use strict";
   var C = window.SolProgressCode;
   var KEY = "afterHours.v1.progress.";
   var NICK_KEY = "afterHours.v1.nick";
+  var NIGHT_KEY = "afterHours.v1.night", FANG_KEY = "afterHours.v1.fangs", BUILD_KEY = "afterHours.v1.build";
   var LOG_MAX = 30, DAYS_MAX = 400, IDLE_MS = 90000, TICK_MS = 1000, FLUSH_MS = 15000;
   var hooks = { state: null, nick: null, active: null };
   var cache = { st: null, rec: null };
@@ -35,7 +42,7 @@
   }
   function blank() {
     return { v: 1, first: null, last: null, days: [], dayCount: 0, activeMs: 0,
-      levels: { started: 0, won: 0, lost: 0 }, hiReached: 0, hiWon: 0,
+      levels: { started: 0, won: 0, lost: 0 }, hiReached: 0, hiWon: 0, modesMin: 0,
       q: { answered: 0, right: 0, wrong: 0 }, skills: {}, modes: {}, log: [] };
   }
   /* an old or damaged save: keep what is usable, fill in the rest */
@@ -48,6 +55,7 @@
     r.days = Array.isArray(x.days) ? x.days.filter(function (d) { return ymd.test(d); }).slice(-DAYS_MAX) : [];
     r.dayCount = Math.max(num(x.dayCount), r.days.length);
     r.activeMs = num(x.activeMs);
+    r.modesMin = num(x.modesMin);
     if (x.levels) { r.levels.started = num(x.levels.started); r.levels.won = num(x.levels.won); r.levels.lost = num(x.levels.lost); }
     r.hiReached = Math.min(100, num(x.hiReached)); r.hiWon = Math.min(r.hiReached, num(x.hiWon));
     if (x.q) { r.q.answered = num(x.q.answered); r.q.right = Math.min(r.q.answered, num(x.q.right)); r.q.wrong = num(x.q.wrong); }
@@ -207,14 +215,88 @@
       first: rec.first, last: rec.last, days: rec.dayCount, minutes: Math.round(rec.activeMs / 60000),
       started: rec.levels.started, won: rec.levels.won, lost: rec.levels.lost, hiReached: rec.hiReached, hiWon: rec.hiWon,
       answered: rec.q.answered, right: rec.q.right, wrong: rec.q.wrong,
-      modes: Object.keys(rec.modes).filter(function (k) { return rec.modes[k].played > 0; }).length,
+      modes: Math.max(rec.modesMin || 0, Object.keys(rec.modes).filter(function (k) { return rec.modes[k].played > 0; }).length),
       skills: rec.skills
     };
+  }
+  /* format 2's restore part: what is saved on this Chromebook now */
+  function realmIds() {
+    var R = window.SolRealms && window.SolRealms.REALMS;
+    return Array.isArray(R) ? R.map(function (rm) { return rm && rm.id; }) : [];
+  }
+  function saveNow() {
+    var sv = { night: 1, fangs: [], build: null }, ids = realmIds();
+    try { var n = parseInt(localStorage.getItem(NIGHT_KEY) || "1", 10); if (n >= 1 && n <= 100) sv.night = n; } catch (e) {}
+    try {
+      var f = JSON.parse(localStorage.getItem(FANG_KEY) || "[]");
+      if (Array.isArray(f)) f.forEach(function (id) { var i = ids.indexOf(id); if (i !== -1 && sv.fangs.indexOf(i) === -1) sv.fangs.push(i); });
+    } catch (e2) {}
+    try {
+      var b = JSON.parse(localStorage.getItem(BUILD_KEY) || "null");
+      if (b && typeof b === "object" && (b.theme || (Array.isArray(b.picks) && b.picks.length) || num(b.coins))) {
+        sv.build = { theme: typeof b.theme === "string" ? b.theme : "", salt: num(b.salt), coins: num(b.coins), kit: num(b.kit),
+          owned: Object.keys(b.owned || {}).filter(function (k) { return b.owned[k]; }), rewards: b.rewards || {},
+          picks: (Array.isArray(b.picks) ? b.picks : []).filter(function (p) { return p && typeof p.piece === "string"; }) };
+      }
+    } catch (e3) {}
+    return sv;
   }
   function makeCode(st) {
     st = st || stateNow();
     flush();
-    return C.encode(st, summary(st), { nick: nickNow(), version: versionNow() });
+    return C.encode(st, summary(st), { nick: nickNow(), version: versionNow(), save: saveNow() });
+  }
+
+  /* ── restore from a code ── */
+  /* check(text) -> { ok, why } or { ok: true, st, d, have } : what the code holds and what this Chromebook has now */
+  function checkRestore(text) {
+    if (!C) return { ok: false, why: "The game could not read codes." };
+    var found = C.findCodes(text), res = found.length ? found[found.length - 1].result : C.decode(text), st = stateNow();
+    if (!res.ok) return { ok: false, why: res.build && res.build !== st && C.BUILDS[res.build] ? "That code is from another game (" + C.BUILDS[res.build].name + ")." : res.why };
+    if (res.build !== st) return { ok: false, why: "That code is from another game (" + C.BUILDS[res.build].name + ")." };
+    flush();
+    var rec = load(st), night = 1;
+    try { night = parseInt(localStorage.getItem(NIGHT_KEY) || "1", 10) || 1; } catch (e) {}
+    return { ok: true, st: st, d: res.data, code: res.code, have: { started: rec.levels.started, won: rec.levels.won, night: night } };
+  }
+  function nightFrom(d) {
+    if (d.save) return d.save.night;
+    return Math.max(1, Math.min(100, d.hiReached > d.hiWon ? d.hiReached : d.hiWon + 1));
+  }
+  function applyRestore(chk) {
+    var d = chk.d, st = chk.st, rec = blank(), ids = realmIds();
+    rec.first = d.first; rec.last = d.last || d.first;
+    rec.days = d.last ? [d.last] : [];                /* that day is already counted: playing on it again adds nothing */
+    rec.dayCount = d.days;
+    rec.activeMs = d.minutes * 60000;
+    rec.levels = { started: d.started, won: d.won, lost: d.lost };
+    rec.hiReached = d.hiReached; rec.hiWon = d.hiWon;
+    rec.q = { answered: d.answered, right: d.right, wrong: d.wrong };
+    (d.skills || []).forEach(function (k) { if (k.a) rec.skills[k.key] = { a: k.a, r: k.r }; });
+    rec.modesMin = d.modes;
+    rec = tidy(rec);
+    cur = null; pendingMs = 0;
+    save(st, rec); cache.st = null; cache.rec = null;
+    try { localStorage.setItem(NIGHT_KEY, String(nightFrom(d))); } catch (e) {}
+    try { if (d.nick) localStorage.setItem(NICK_KEY, d.nick); } catch (e2) {}
+    if (d.save) {
+      try { localStorage.setItem(FANG_KEY, JSON.stringify(d.save.fangs.map(function (i) { return ids[i]; }).filter(Boolean))); } catch (e3) {}
+      var b = d.save.build;
+      try {
+        if (b) {
+          var owned = {};
+          b.owned.concat(b.picks.map(function (p) { return p.piece; })).forEach(function (id) { if (id) owned[id] = 1; });
+          Object.keys(b.rewards).forEach(function (k) { owned[b.rewards[k]] = 1; });
+          localStorage.setItem(BUILD_KEY, JSON.stringify({ v: 4, theme: b.theme || null, salt: b.salt || 1, coins: b.coins, kit: b.kit, owned: owned,
+            rewards: b.rewards, picks: b.picks.map(function (p) {
+              var o = { night: 1, piece: p.piece, style: p.style, src: p.src, deco: p.deco, rot: p.rot };
+              if (p.cx != null) { o.cx = p.cx; o.cy = p.cy; }
+              return o;
+            }), view: { a: 0, z: 1, px: 0, py: 0 }, code: "" }));
+        } else localStorage.removeItem(BUILD_KEY);
+      } catch (e4) {}
+    }
+    return true;
   }
 
   /* ── the "My progress code" window ── */
@@ -228,6 +310,7 @@
     ".prog-stats b{display:block;font-size:24px;color:var(--gold)}",
     ".prog-stats span{font-size:13px;color:var(--dim)}",
     ".prog-code{font:700 22px/1.45 Consolas,'Courier New',monospace;letter-spacing:.04em;background:#fffbea;color:#1a1408;border:2px solid var(--gold);border-radius:10px;padding:10px 12px;word-break:normal;overflow-wrap:anywhere;user-select:all;-webkit-user-select:all;cursor:text}",
+    ".prog-code.long{font-size:14px;line-height:1.4;letter-spacing:0;max-height:170px;overflow:auto}",
     ".prog-copied{margin:8px 0 0;color:var(--gold);font-weight:700}",
     ".prog-copied:empty{display:none}",
     ".prog-how{margin:0 0 8px;font-size:17px;line-height:1.4}",
@@ -305,6 +388,7 @@
     stats.appendChild(stat(s.days, s.days === 1 ? "day played" : "days played"));
     ov.querySelector(".prog-title").textContent = s.started ? "Your progress in " + B.short : "No levels played yet";
     ov.querySelector(".prog-code").textContent = code;
+    ov.querySelector(".prog-code").classList.toggle("long", code.length > 120);
     ov.querySelector(".prog-copied").textContent = "";
     var how = ov.querySelector(".prog-how");
     how.innerHTML = "";
@@ -312,13 +396,99 @@
     how.appendChild(el("b", null, B.assignment));
     how.appendChild(document.createTextNode(" assignment in Canvas."));
     ov.querySelector(".prog-note").textContent = (s.started ? "" : "Play a level, then come back for a code that shows it. ") +
-      "Your progress is saved on this Chromebook only. You get a new code each time, and your newest code shows everything so far." +
+      "Your progress is saved on this Chromebook only. You get a new code each time, and your newest code shows everything so far. " +
+      "It also holds your level and your town or castle: on a new Chromebook, tap Restore my progress on the title screen and paste it." +
       (nick ? " Your nickname “" + nick + "” is in the code." : " Add a nickname on the title screen to put it in the code.");
     ov.classList.remove("hidden");
     setTimeout(function () { try { ov.querySelector(".btn.primary").focus(); } catch (e) {} }, 30);
   }
   function hide() { if (ov) ov.classList.add("hidden"); }
-  function isOpen() { return !!ov && !ov.classList.contains("hidden"); }
+
+  /* ── the "Restore my progress" window ── */
+  var RSTYLE = [
+    "#restore-overlay{position:fixed;inset:0;z-index:9000;display:flex;align-items:center;justify-content:center;background:rgba(8,10,14,.72);padding:12px;overflow:auto}",
+    "#restore-overlay.hidden{display:none!important}",
+    "#restore-overlay .tut-card{max-width:600px;width:min(600px,96%)}",
+    "#restore-overlay h2{margin:0 0 10px;font-size:26px}",
+    "#restore-overlay textarea{width:100%;box-sizing:border-box;min-height:96px;font:600 15px/1.4 Consolas,'Courier New',monospace;padding:8px 10px;border-radius:10px;border:2px solid var(--gold);background:#fffbea;color:#1a1408;resize:vertical}",
+    ".rest-how{margin:0 0 8px;font-size:17px;line-height:1.4}",
+    ".rest-msg{margin:10px 0 0;font-size:16px;line-height:1.45}",
+    ".rest-msg:empty{display:none}",
+    ".rest-msg.bad{color:#ff9a8a;font-weight:700}",
+    ".rest-msg ul{margin:6px 0;padding-left:22px}",
+    ".rest-warn{color:var(--gold);font-weight:700}",
+    "#restore-overlay .row{justify-content:flex-start;margin-top:12px;flex-wrap:wrap;gap:8px}"
+  ].join("\n");
+  var rov = null, rchk = null;
+  function buildRestore() {
+    if (rov) return rov;
+    var css = el("style"); css.textContent = RSTYLE; document.head.appendChild(css);
+    rov = el("div", "hidden"); rov.id = "restore-overlay";
+    rov.setAttribute("role", "dialog"); rov.setAttribute("aria-modal", "true"); rov.setAttribute("aria-label", "Restore my progress");
+    var card = el("div", "tut-card"); rov.appendChild(card);
+    card.appendChild(el("p", "tut-kicker", "Restore my progress"));
+    card.appendChild(el("h2", null, "Paste your last progress code"));
+    card.appendChild(el("p", "rest-how", "New Chromebook, or your progress is gone? Paste the newest code you got from My progress code " +
+      "(it is in your Canvas assignment), then tap Check code."));
+    var ta = el("textarea"); ta.id = "restore-code"; ta.setAttribute("spellcheck", "false"); ta.setAttribute("autocomplete", "off");
+    ta.setAttribute("aria-label", "Your progress code"); ta.placeholder = "SOL2-..."; card.appendChild(ta);
+    var msg = el("div", "rest-msg"); msg.setAttribute("aria-live", "polite"); card.appendChild(msg);
+    var row = el("div", "row"); card.appendChild(row);
+    var check = el("button", "btn", "Check code"); check.type = "button"; check.id = "restore-check"; row.appendChild(check);
+    var go = el("button", "btn primary hidden", "Restore"); go.type = "button"; go.id = "restore-go"; row.appendChild(go);
+    var close = el("button", "btn", "Cancel"); close.type = "button"; row.appendChild(close);
+    check.addEventListener("click", function (e) { e.stopPropagation(); runCheck(); });
+    go.addEventListener("click", function (e) { e.stopPropagation(); runRestore(); });
+    close.addEventListener("click", function (e) { e.stopPropagation(); hideRestore(); });
+    ta.addEventListener("input", function () { rchk = null; go.classList.add("hidden"); msg.textContent = ""; msg.className = "rest-msg"; });
+    rov.addEventListener("click", function (e) { if (e.target === rov) hideRestore(); });
+    rov.addEventListener("keydown", function (e) { e.stopPropagation(); if (e.key === "Escape") hideRestore(); }, true);
+    rov.addEventListener("keyup", function (e) { e.stopPropagation(); }, true);
+    rov.addEventListener("pointerup", function (e) { e.stopPropagation(); });
+    (document.getElementById("app") || document.body).appendChild(rov);
+    return rov;
+  }
+  function li(ul, text) { ul.appendChild(el("li", null, text)); }
+  function runCheck() {
+    var msg = rov.querySelector(".rest-msg"), go = rov.querySelector("#restore-go");
+    rchk = checkRestore(rov.querySelector("#restore-code").value);
+    msg.innerHTML = "";
+    if (!rchk.ok) { msg.className = "rest-msg bad"; msg.textContent = rchk.why; go.classList.add("hidden"); return; }
+    var d = rchk.d, b = d.save && d.save.build, ul = el("ul");
+    msg.className = "rest-msg";
+    msg.appendChild(el("div", null, "This code " + (d.nick ? "(“" + d.nick + "”) " : "") + "will bring back:"));
+    li(ul, "Level " + nightFrom(d) + " to play next");
+    li(ul, d.won + (d.won === 1 ? " level won, " : " levels won, ") + d.answered + (d.answered === 1 ? " question, " : " questions, ") + d.minutes + (d.minutes === 1 ? " minute played" : " minutes played"));
+    if (b) li(ul, "Your " + (b.theme === "castle" ? "castle" : b.theme === "village" ? "town" : "town or castle") + ": " + b.picks.length + (b.picks.length === 1 ? " piece, " : " pieces, ") + b.coins + (b.coins === 1 ? " coin" : " coins"));
+    else if (d.save) li(ul, "No town or castle yet");
+    var nf = d.save ? d.save.fangs.length : 0, ody = rchk.st === "ODY";
+    if (nf) li(ul, nf + (ody ? (nf === 1 ? " Ram's Fleece" : " Ram's Fleeces") : (nf === 1 ? " Fang" : " Fangs")));
+    msg.appendChild(ul);
+    if (!d.save) msg.appendChild(el("div", "rest-warn", "This code is from an older version of the game: it brings back your level and totals, but not your town or castle."));
+    if (rchk.have.started) msg.appendChild(el("div", "rest-warn", "This replaces what is on this Chromebook now (level " + rchk.have.night + ", " + rchk.have.won + (rchk.have.won === 1 ? " level won" : " levels won") + ")."));
+    go.classList.remove("hidden");
+    try { go.focus(); } catch (e) {}
+  }
+  function runRestore() {
+    if (!rchk || !rchk.ok) return;
+    var msg = rov.querySelector(".rest-msg");
+    applyRestore(rchk);
+    msg.className = "rest-msg"; msg.textContent = "Restored! The game is starting again...";
+    rov.querySelector("#restore-go").classList.add("hidden");
+    setTimeout(function () { try { window.location.reload(); } catch (e) {} }, 900);
+  }
+  function showRestore() {
+    buildRestore();
+    rchk = null;
+    rov.querySelector("#restore-code").value = "";
+    rov.querySelector(".rest-msg").textContent = "";
+    rov.querySelector(".rest-msg").className = "rest-msg";
+    rov.querySelector("#restore-go").classList.add("hidden");
+    rov.classList.remove("hidden");
+    setTimeout(function () { try { rov.querySelector("#restore-code").focus(); } catch (e) {} }, 30);
+  }
+  function hideRestore() { if (rov) rov.classList.add("hidden"); }
+  function isOpen() { return (!!ov && !ov.classList.contains("hidden")) || (!!rov && !rov.classList.contains("hidden")); }
 
   function bindButtons() {
     ["btn-progress", "btn-progress-end"].forEach(function (id) {
@@ -330,6 +500,12 @@
         show();
       });
     });
+    var rb = document.getElementById("btn-restore"), rlast = 0;
+    if (rb) rb.addEventListener("click", function (e) {
+      e.stopPropagation();
+      var now = Date.now(); if (now - rlast < 400) return; rlast = now;
+      showRestore();
+    });
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bindButtons); else bindButtons();
 
@@ -339,6 +515,7 @@
     record: function (st) { flush(); return JSON.parse(JSON.stringify(load(st || stateNow()))); },
     summary: function (st) { flush(); return summary(st || stateNow()); },
     code: makeCode, show: show, hide: hide, isOpen: isOpen,
+    checkRestore: checkRestore, restore: applyRestore, showRestore: showRestore, hideRestore: hideRestore, saveNow: saveNow,
     current: function () { return cur ? JSON.parse(JSON.stringify(cur)) : null; },
     _reset: function (st) { try { localStorage.removeItem(KEY + (st || stateNow())); } catch (e) {} cache.st = null; cache.rec = null; cur = null; pendingMs = 0; },
     _tick: tick, IDLE_MS: IDLE_MS
