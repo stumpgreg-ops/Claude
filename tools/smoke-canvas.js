@@ -143,7 +143,15 @@ var lms = http.createServer(function (req, res) {
   await f.waitForSelector("#title-screen:not(.hidden)", { timeout: 60000 });
   var back = await f.evaluate(function (K) { var b = JSON.parse(localStorage.getItem(K + "build") || "null"); return { night: localStorage.getItem(K + "night"), picks: b && b.picks.length, theme: b && b.theme }; }, K);
   check(!gone && back.night === "14" && back.picks === made.picks && back.theme === "castle", "Restore my progress works inside Canvas: level 14 and the " + made.picks + "-piece castle come back after the page reloads (" + JSON.stringify(back) + ")");
-  var other2 = await f.evaluate(function () { return localStorage["afterHours.v1.night"]; });
+  /* v5.15: the Teacher screen opens inside the Canvas game (its page comes out of the game's own files) */
+  await f.click("#btn-teacher-screen");
+  await f.waitForSelector("#teacher-overlay:not(.hidden) iframe", { timeout: 20000 });
+  var tfr = f.childFrames().pop();
+  await tfr.waitForSelector("h1", { timeout: 20000 });
+  var th1 = await tfr.evaluate(function () { return { h1: document.querySelector("h1").textContent, close: !document.getElementById("close-teacher").hidden }; });
+  check(/teacher progress page/.test(th1.h1) && th1.close, "the Teacher link opens the teacher screen inside the Canvas game: " + th1.h1);
+  await tfr.click("#close-teacher");
+    var other2 = await f.evaluate(function () { return localStorage["afterHours.v1.night"]; });
   check(other2 === "57", "the restore leaves the other game's save alone");
 
   function own(p) { return p === "/blank" || (p.indexOf(FOLDER) === 0 && uploaded.indexOf(p.slice(FOLDER.length)) >= 0); }

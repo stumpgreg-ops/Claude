@@ -1,5 +1,6 @@
 /* The teacher progress page for one game: one self-contained HTML file (no outside scripts, fonts or images; Canvas
-   and school filters block them), well under the 64 KB Canvas runs. It reads students' progress codes and suggests
+   and school filters block them). v5.15: it is the game's Teacher screen (tools/build-games.js puts it in each game
+   as teacher/<STATE>.html) and a file in each Canvas zip that a teacher opens on their own computer. It reads students' progress codes and suggests
    a participation grade (see README: "Progress codes and the teacher page").
      require("./build-teacher").build("VA", "5.12.2") -> the page's HTML
      node tools/build-teacher.js VA [out.html]         -> writes it (default dist/teacher/SOLLabyrinth-VA-Teacher.html)
@@ -53,7 +54,9 @@ function build(st, version) {
     return vals[k];
   });
   var size = Buffer.byteLength(html);
-  if (size > 60 * 1024) throw new Error("tools/build-teacher.js: the teacher page is " + size + " bytes; Canvas runs only small pages (keep it under 60 KB)");
+  /* v5.15: the page opens inside the game (Teacher) or from the teacher's own computer, never as a Canvas page of its
+     own, so Canvas's limit on a page's size doesn't apply; this only catches a page that grew by mistake. */
+  if (size > 200 * 1024) throw new Error("tools/build-teacher.js: the teacher page is " + size + " bytes (more than 200 KB)");
   return html;
 }
 module.exports = { build: build, fileName: fileName, minifyJs: minifyJs };

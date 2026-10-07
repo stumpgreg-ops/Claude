@@ -85,9 +85,6 @@ var teacherBuild = require("./build-teacher"), PB = require("../js/progress-code
 var teacherName = teacherBuild.fileName(st), teacherPath = path.join(outAll, teacherName);
 fs.writeFileSync(teacherPath, teacherBuild.build(st, man.version));
 var EMBED = '<iframe src="/courses/COURSE/files/NUMBER/preview" width="100%" height="700" allowfullscreen="allowfullscreen"></iframe>';
-/* v5.13.1: the teacher page's embed code, for a Canvas Page kept unpublished (Copy falls back to select-and-Ctrl+C
-   if Canvas drops allow="clipboard-write") */
-var EMBED_TEACHER = '<iframe src="/courses/COURSE/files/NUMBER/preview" width="100%" height="900" allow="clipboard-write"></iframe>';
 /* v5.15: the READ ME is in numbered SECTIONS with a contents list, so a teacher can jump (Ctrl+F "SECTION 4") to
    what they need instead of reading it all. The full zip and the update zip share the sections; only the order
    and the first steps differ. */
@@ -100,14 +97,16 @@ function S_inZip(update) {
   var n = files.length + (update ? 1 : 2);
   return update ? [
     "- " + n + " game files (.js): they replace the ones already in your Canvas folder.",
-    "- " + teacherName + ": the teacher page that reads progress codes (keep it hidden from students).",
+    "- " + teacherName + ": a copy of the teacher screen to open on your own computer if you ever need it",
+    "  (SECTION 4). You don't upload it.",
     "- This READ ME. You don't upload it.",
     "There is no game .html page in this zip on purpose: the page already in Canvas stays, so your embed code keeps",
     "working and students keep their progress."
   ] : [
     "- " + n + " game files: one small page (" + base + ".html) and the .js files it loads.",
     "  All of them go in the SAME Canvas folder.",
-    "- " + teacherName + ": the teacher page that reads progress codes (keep it hidden from students).",
+    "- " + teacherName + ": a copy of the teacher screen to open on your own computer if you ever need it",
+    "  (SECTION 4). You don't upload it.",
     "- This READ ME. You don't upload it."
   ];
 }
@@ -117,7 +116,7 @@ function S_setup() {
     ["1. Unzip this file on your computer.",
      "2. In Canvas, open your course, then Files.",
      "3. Click + Folder and make a new folder for the game (for example: " + (st === "ODY" ? "Odyssey Game" : "Sol Game") + ").",
-     "4. Open that folder, click Upload, and select ALL " + (files.length + 2) + " game files and " + teacherName + ".",
+     "4. Open that folder, click Upload, and select ALL " + (files.length + 2) + " game files (" + base + ".html and every .js file).",
      "   If Canvas asks, choose Replace."],
     sub("Step 2 - Find your numbers"),
     ["1. In that folder, click " + base + ".html once to open its preview.",
@@ -126,88 +125,106 @@ function S_setup() {
      "   COURSE is the number after /courses/   (in the example: 152432)",
      "   NUMBER is the number after /files/     (in the example: 60512345)",
      "Every file has its own NUMBER. COURSE is the same for all of them."],
-    sub("Step 3 - Put the game where students will play"),
-    ["Put it in an ASSIGNMENT (recommended) or on a Page. In an assignment, the game and the box students paste",
-     "their progress code into are on the same screen.",
-     "1. Open (or create) the assignment or Page and click Edit.",
-     "2. Click the </> button (HTML Editor). On some Canvas versions it is at the bottom right of the editor.",
-     "3. Paste the GAME embed code (SECTION 3) and replace COURSE and NUMBER with your numbers.",
-     "4. Click Save (and Publish when you are ready for students)."],
-    sub("Step 4 - Set up grading (optional)"),
-    ["See SECTION 4. It takes about five minutes the first time."]);
+    sub("Step 3 - Put the game in an assignment (recommended)"),
+    ["In an assignment, the game and the box students turn their progress code in to are on the same page.",
+     "1. Assignments > + Assignment. Name it \"" + PB.assignment + "\". Submission type: Online, with Text Entry",
+     "   checked (nothing else). Points: whatever you like.",
+     "2. In the description box, click the </> button (HTML Editor). On some Canvas versions it is at the bottom right.",
+     "3. Paste the embed code (SECTION 3) and replace COURSE and NUMBER with your numbers.",
+     "4. Click Save, and Publish when you are ready for students.",
+     "(You can put the game on a Page instead with the same embed code; students then turn codes in to a",
+     "separate assignment.)"],
+    sub("Step 4 - That's it"),
+    ["Grading is built into the game: see SECTION 4."]);
 }
 function S_embed() {
   return [
-    "Paste an embed code with the </> button (HTML Editor) while editing an assignment or Page, then Save.",
+    "Paste the embed code with the </> button (HTML Editor) while editing an assignment or Page, then Save.",
     "Replace COURSE and NUMBER with your numbers. To find them, click the file once in Canvas Files and look at the",
     "address bar:  https://yourschool.instructure.com/courses/COURSE/files/NUMBER?...",
     "",
-    "THE GAME - for the assignment or Page students use. NUMBER is the number of " + base + ".html:",
+    "THE GAME - NUMBER is the number of " + base + ".html:",
     "",
     "   " + EMBED,
     "",
     "   With the example numbers it would be:",
     "   " + EMBED.replace("COURSE", "152432").replace("NUMBER", "60512345"),
     "",
-    "THE TEACHER PAGE - for a Page you keep UNPUBLISHED. NUMBER is the number of " + teacherName + ":",
+    "Too small or too tall? Change height=\"700\" (try 600 or 800).",
     "",
-    "   " + EMBED_TEACHER,
-    "",
-    "Too small or too tall? Change height=\"700\" (try 600 or 800)."
+    "There is no separate embed code for the teacher screen: it is inside the game (the Teacher link, SECTION 4)."
   ];
 }
 function S_grading() {
   return [].concat(
     ["Students' progress stays on their Chromebooks: the game can't send anything out of Canvas. So each student",
-     "gets a PROGRESS CODE in the game and turns it in to a Canvas assignment, and the teacher page reads every",
-     "code at once and suggests a participation grade."],
-    sub("4.1  One-time setup"),
-    ["1. Hide the teacher page from students: in Files, click the cloud (publish) icon next to " + teacherName,
-     "   and choose Unpublish (not \"Only available to students with link\"). Only teachers can open it then.",
-     "2. Put it on its own Page: Pages > + Page, title it \"Teacher - progress codes\", click </>, paste the",
-     "   TEACHER PAGE embed code (SECTION 3) and Save. Do NOT publish this Page.",
-     "3. Make the assignment students turn codes in to: Assignments > + Assignment, name it",
-     "   \"" + PB.assignment + "\", Submission type: Online with Text Entry checked (nothing else). Save and Publish.",
-     "   Tip: put the game itself in this assignment (SECTION 2, Step 3) so students play and turn in on one page."],
-    sub("4.2  Grading - THE EASIEST WAY: the ZIP download (recommended)"),
+     "taps Submit my progress in the game and turns in a PROGRESS CODE to the assignment, and the TEACHER SCREEN",
+     "reads every code at once and suggests a participation grade. The teacher screen is inside the game: the small",
+     "\"Teacher\" link at the bottom of the game's title screen. Students who open it see an empty page."],
+    sub("4.1  Grading - THE EASIEST WAY: the ZIP download (recommended)"),
     ["1. Open the assignment and click \"Download Submissions\". Canvas saves a .zip file with every student's code.",
-     "2. Open the teacher page (your unpublished Page from 4.1).",
-     "3. Drag that .zip file onto the teacher page (or click the box and pick it).",
-     "That's it: every student appears with their name (from Canvas), their numbers and a suggested grade. You",
-     "don't unzip anything or type any names."],
-    sub("4.3  The other way: copy codes from SpeedGrader"),
-    ["Open SpeedGrader, copy each student's code and paste it into the box on the teacher page. Type the name",
-     "first if you want it in the table, like:  Ann Smith: SOL2-...   (Without a name the row shows the nickname.)"],
+     "2. In the same assignment, click the game's \"Teacher\" link (bottom of the title screen).",
+     "3. Drag the .zip file onto the teacher screen (or click Choose files and pick it).",
+     "That's it: every student appears with their numbers and a suggested grade. Nothing to unzip or type."],
+    sub("4.2  Real names, who hasn't turned in, and grades straight into Canvas (once a term)"),
+    ["1. In Canvas open Grades, click Export, then Export Entire Gradebook. Canvas saves a .csv file.",
+     "2. Drop that .csv file on the teacher screen too (with the zip, or on its own).",
+     "The teacher screen then shows real names (\"Ann S.\" on the leaderboard), lists who hasn't turned in, and",
+     "makes a CANVAS GRADEBOOK IMPORT FILE: click that button, then in Canvas Grades > Import, choose the file,",
+     "Upload, check the changes and Save. Every suggested grade goes into the assignment's column at once.",
+     "The class list is kept on your computer only. \"Forget the class list\" removes it. Export again when",
+     "students join or leave."],
+    sub("4.3  What the teacher screen shows"),
+    ["- Students: a card for each student with the suggested grade (green, yellow, red) and their progress.",
+     "- Table: every number, sortable. Download the table (CSV), Copy it or Print it.",
+     "- Leaderboard: rank by levels won, highest level, questions, accuracy, badges, minutes or best streak.",
+     "  Names: First name + last initial (the default, needs the class list), nicknames only, or no names.",
+     "  \"Show to the class\" makes it full screen; \"Hide\" leaves a student off it.",
+     "- Standards report: % right on the first try for each standard (like 9.RL.1.A), for the class and for each",
+     "  student, with its own CSV download."],
     sub("4.4  Your goals and the suggested grade"),
-    ["At the top of the teacher page set the goals (minutes played, levels won, questions answered), how much each",
-     "counts and the points possible. The page remembers them on your computer. Download CSV saves the table for a",
-     "spreadsheet; Copy copies it; Print prints it."],
-    sub("4.5  Good to know"),
+    ["In box 2 of the teacher screen set the goals (minutes played, levels won, questions answered, days, % right),",
+     "how much each counts and the points possible. The teacher screen remembers them on your computer."],
+    sub("4.5  The other way: copy codes from SpeedGrader"),
+    ["Open SpeedGrader, copy each student's code and paste it into \"Or paste codes\" on the teacher screen. Type",
+     "the name first if you want it, like:  Ann Smith: SOL3-...   (Without a name the row shows the nickname.)"],
+    sub("4.6  Good to know"),
     ["- A typo or a changed code shows as INVALID. The code stops typos and casual tampering, not a determined student.",
-     "- Each code holds everything so far (it is a running total), so the newest code is the one to grade.",
-     "- A student who plays on two Chromebooks has two codes; the page keeps the newest one.",
-     "- Codes made before version 5.14 start with SOL1; newer ones with SOL2. The page reads both."]);
+     "- Each code holds everything so far (a running total), so the newest code is the one to grade. Students can",
+     "  turn in a new code any time (New Attempt); the teacher screen keeps each student's newest.",
+     "- A student who plays on two Chromebooks has two codes; the teacher screen keeps the newest one.",
+     "- Codes from version 5.15 start with SOL3 and include standards and badges. SOL1 and SOL2 codes still read,",
+     "  without the standards detail.",
+     "- If downloads don't work inside Canvas, open " + teacherName + " from this zip on your computer: it is the",
+     "  same teacher screen and needs no internet."]);
 }
 function S_students() {
   return [].concat(
-    sub("Getting a progress code"),
-    ["In the game, students tap \"My progress code\" (on the title screen or after a level), tap Copy code, and",
-     "paste it into the assignment as a Text Entry, then Submit. The code gets longer as their town or castle grows,",
-     "so they should always use Copy code rather than typing it."],
+    sub("Turning in progress"),
+    ["In the game, students tap \"Submit my progress\" (on the title screen or after a level) and follow the steps",
+     "on screen: Copy code, scroll down to the assignment, Start Assignment (or New Attempt), paste with Ctrl+V,",
+     "Submit Assignment. The code gets longer as they play, so they should always use Copy code, not type it."],
+    sub("Levels, badges and the leaderboard"),
+    ["Each game mode keeps its own level (1 to 100), so a student can be on level 40 in one mode and 12 in another.",
+     "Students earn badges for levels in each mode, questions, streaks, perfect levels, skills, standards, days",
+     "and time; \"My badges\" on the title screen shows them all. The Submit window shows the student's nickname, which",
+     "is how they find themselves on a nickname leaderboard."],
     sub("Restore my progress (new Chromebook or lost progress)"),
     ["A student's newest code also holds their level and their town or castle. On the game's title screen they tap",
      "Restore my progress, paste their last code (it is in their submission to the assignment), tap Check code,",
      "then Restore. The game brings back their level, town or castle, coins and totals, so their next code goes on",
-     "from there. (A code made before version 5.14 brings back the level and totals only.)"]);
+     "from there, with their badges and every mode's level. (A code made before version 5.14 brings back the level",
+    "and totals only.)"]);
 }
 function S_update(update) {
   return update ? [
     "1. Unzip this file on your computer.",
     "2. In Canvas, open Files and go to the folder that already holds " + base + ".html.",
-    "3. Click Upload and select ALL the .js files and " + teacherName + " from the unzipped folder.",
+    "3. Click Upload and select ALL the .js files from the unzipped folder.",
     "4. When Canvas asks, choose Replace for every file.",
     "5. Done. Nothing changes on your assignment or Page. Students may need to refresh the page once.",
-    "If " + teacherName + " is new in your folder, hide it (SECTION 4.1).",
+    "If an older version put " + teacherName + " in your Canvas folder, you can delete it: the teacher",
+    "screen is now inside the game (SECTION 4).",
     "Setting the game up for the first time? Use the full zip (" + zipFull + ") instead."
   ] : [
     "When you get a new version, use the update zip (" + zipUpd + "): upload its files to the same folder and",
@@ -220,8 +237,8 @@ function S_trouble() {
     "- The game says \"Can't find ...\": that file is missing from the folder. Upload it with exactly the same name.",
     "- The game is too small or too tall: change height=\"700\" in the embed code (try 600 or 800).",
     "- Students want it bigger: the game has its own full-screen button.",
-    "- Download CSV or Copy doesn't work on the teacher page inside Canvas: open " + teacherName + " straight from",
-    "  Files, or download it once and open it on your computer (it needs no internet).",
+    "- Download CSV or the import file doesn't download inside Canvas: open " + teacherName + " from this zip on your",
+    "  computer (double-click it) and drop the files there. It is the same teacher screen.",
     "- A student's code shows INVALID: ask them to copy it again with the Copy code button.",
     "- A student lost their progress: see SECTION 5, Restore my progress."
   ];

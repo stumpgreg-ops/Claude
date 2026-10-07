@@ -272,6 +272,17 @@ function makeZip(files) {
     localStorage.setItem("afterHours.v1.progress.VA", JSON.stringify(rec)); SolProgress._reset && 0;
     return true;
   });
+  /* v5.15: the Teacher screen inside the game */
+  check(await page.isVisible("#btn-teacher-screen"), "title screen: a small Teacher link");
+  await page.click("#btn-teacher-screen");
+  await page.waitForSelector("#teacher-overlay:not(.hidden) iframe");
+  var tf = page.frames().filter(function (f) { return f !== page.mainFrame() && f.parentFrame() === page.mainFrame(); }).pop();
+  await tf.waitForSelector("h1");
+  var tin = await tf.evaluate(function () { return { h1: document.querySelector("h1").textContent, close: !document.getElementById("close-teacher").hidden, drop: !!document.getElementById("drop") }; });
+  check(/Sol's Labyrinth \(Virginia\)/.test(tin.h1) && tin.close && tin.drop, "Teacher opens the teacher screen inside the game, with a Close button: " + tin.h1);
+  await page.screenshot({ path: path.join(shots, "pg-13-teacher-in-game.png") });
+  await tf.click("#close-teacher");
+  check(!(await page.isVisible("#teacher-overlay")), "Close goes back to the game");
   /* each game mode keeps its own level */
   var nights = await page.evaluate(function () { return { all: localStorage.getItem("afterHours.v1.night.ALL"), raid: localStorage.getItem("afterHours.v1.night.raid"), last: localStorage.getItem("afterHours.v1.night") }; });
   check(nights.all === "3" && nights.raid === null && nights.last === "3", "Mixed keeps its own level (3); Eagle Swoop has none yet: " + JSON.stringify(nights));
@@ -419,7 +430,8 @@ function makeZip(files) {
 
   /* ════ 3. the teacher page ════ */
   var tdir = path.join(root, "dist", "canvas"), tfile = "SOLLabyrinth-VA-Teacher.html";
-  check(fs.existsSync(path.join(tdir, tfile)) && fs.statSync(path.join(tdir, tfile)).size < 64 * 1024, "build-canvas wrote " + tfile + " (" + (fs.statSync(path.join(tdir, tfile)).size / 1024).toFixed(1) + " KiB)");
+  check(fs.existsSync(path.join(tdir, tfile)) && fs.statSync(path.join(tdir, tfile)).size < 200 * 1024, "build-canvas wrote " + tfile + " (" + (fs.statSync(path.join(tdir, tfile)).size / 1024).toFixed(1) + " KiB)");
+  async function openPaste(pg) { await pg.evaluate(function () { document.getElementById("paste").closest("details").open = true; }); }
   var zipList = require("child_process").execFileSync("unzip", ["-Z1", path.join(tdir, "SOL Lab VA Eng.zip")]).toString();
   check(zipList.indexOf(tfile) !== -1, "the Canvas zip carries the teacher page");
   var tsrv = await serve(tdir), served = [];
@@ -440,6 +452,7 @@ function makeZip(files) {
   groups[gi] = (gch[0] === "7" ? "8" : "7") + gch.slice(1);
   var tampered = groups.join("-");
   var text = "Ann Smith: " + vaCode + "\n" + "Carl Diaz\t" + tampered + "\n" + "Dee Park, " + odyCode + "\n" + other + "  thanks!\n";
+  await openPaste(page);
   await page.fill("#paste", text);
   await page.click("#read");
   await page.waitForTimeout(300);
@@ -452,15 +465,18 @@ function makeZip(files) {
   check(carl && !carl.ok && carl.g === null, "a tampered code (one character changed) is INVALID: " + (carl && carl.why));
   check(dee && dee.ok && dee.b === "ODY" && dee.g === null, "an Odyssey code on the Virginia page: from another game, no grade");
   check(anon && anon.ok && anon.d.won === 5 && anon.g === Math.round(10 * 100 * (30 / 60 + 5 / 10 + 25 / 50) / 3) / 10, "a code with a word typed after it still reads (grade " + (anon && anon.g) + ")");
-  var shown = await page.evaluate(function () { return { cells: document.getElementById("table").innerText, counts: document.getElementById("counts").innerText }; });
-  check(/INVALID/.test(shown.cells) && /Other game/.test(shown.cells) && /Literary/.test(shown.cells) && /4 students/.test(shown.counts) && /1 INVALID/.test(shown.counts), "the table shows the codes' status, the skills and the counts");
+  await page.click('.tab[data-view="table"]');
+  var shown = await page.evaluate(function () { return { cells: document.getElementById("table").innerText, counts: document.getElementById("summary").innerText }; });
+  check(/INVALID/.test(shown.cells) && /Other game/.test(shown.cells) && /Literary/.test(shown.cells) && /2\s*students with a valid code/.test(shown.counts) && /1 INVALID, 1 other game/.test(shown.counts), "the table shows the codes' status and the skills; the summary counts them: " + shown.counts.replace(/\n/g, " "));
   /* a newer code for Ann: kept, and noted */
+  await openPaste(page);
   await page.fill("#paste", "Ann Smith: " + later);
   await page.click("#read");
   await page.waitForTimeout(200);
   var ann2 = await page.evaluate(function () { var r = TeacherPage.rows().filter(function (x) { return x.student === "Ann Smith"; }); return { n: r.length, won: r[0].data.won, count: r[0].count, notes: document.getElementById("notes").innerText }; });
   check(ann2.n === 1 && ann2.won === 12 && ann2.count === 2 && /2 different codes/.test(ann2.notes), "the same student twice: the newest code is kept, and noted");
   /* the goals change the grade */
+  await page.evaluate(function () { document.getElementById("goals-box").open = true; });
   await page.fill('input[data-k="minutes"][data-f="w"]', "0");
   await page.fill('input[data-k="won"][data-f="w"]', "0");
   await page.fill('input[data-k="answered"][data-f="t"]', "140");
@@ -471,6 +487,7 @@ function makeZip(files) {
   await page.reload({ waitUntil: "load" });
   var kept = await page.evaluate(function () { return document.getElementById("points").value + "/" + document.querySelector('input[data-k="answered"][data-f="t"]').value; });
   check(kept === "20/140", "the goals are still there after a reload");
+  await page.evaluate(function () { document.getElementById("goals-box").open = true; });
   await page.click("#goals-reset");
   /* a Canvas "Download Submissions" zip */
   var zip = makeZip([
@@ -488,12 +505,56 @@ function makeZip(files) {
   check(zr.rows.length === 2 && zr.rows.some(function (r) { return r[0] === "smithann" && r[1] && r[2] === 2; }) && zr.rows.some(function (r) { return r[0] === "jonesbob" && r[1] && r[2] === 5; }),
     "the Canvas zip: names from the file names (smithann, jonesbob), codes from the submissions (deflated and stored)");
   check(/Found 2 codes in 3 files/.test(zr.msg) && /leeemma: no code/.test(zr.notes), "a submission without a code is named in the notes: " + zr.msg);
+  /* v5.15: the class list from Canvas's gradebook export: real names, who hasn't turned in, the import file */
+  var gb = '"Student","ID","SIS User ID","SIS Login ID","Section","Quiz 1 (111)","Sol\'s Labyrinth progress (98765)"\r\n' +
+    '"    Points Possible","","","","","10","100"\r\n' +
+    '"Smith, Ann","123456","S-1","asmith","Period 2","9",""\r\n"Jones, Bob","234567","S-2","bjones","Period 2","8",""\r\n' +
+    '"Lee, Emma","345678","S-3","elee","Period 2","10",""\r\n"Student, Test","999999","","","Period 2","",""\r\n';
+  var gpath = path.join(shots, "pg-gradebook-export.csv");
+  fs.writeFileSync(gpath, gb);
+  await page.setInputFiles("#file", gpath);
+  await page.waitForTimeout(500);
+  var rst = await page.evaluate(function () {
+    TeacherPage.setView("cards");
+    return { msg: document.getElementById("msg").textContent, roster: document.getElementById("roster-line").innerText, summary: document.getElementById("summary").innerText,
+      cards: Array.prototype.map.call(document.querySelectorAll("#cards .card h3"), function (h) { return h.textContent; }), imp: TeacherPage.importCsv(), saved: !!localStorage.getItem("solTeacher.VA.roster") };
+  });
+  check(/Class list: 3 students/.test(rst.msg) && /3 students/.test(rst.roster) && rst.saved, "the gradebook export is read as the class list (3 students; the Points Possible row and the Test Student left out) and kept: " + rst.msg);
+  check(rst.cards.indexOf("Ann Smith") !== -1 && rst.cards.indexOf("Bob Jones") !== -1 && rst.cards.indexOf("Emma Lee") !== -1 && /1 not turned in: Emma Lee/.test(rst.summary),
+    "the student cards use real names from the class list (matched by Canvas ID), with a card for the student who didn't turn in: " + rst.cards.join(", "));
+  var impL = (rst.imp || "").replace(/^\ufeff/, "").split("\r\n");
+  check(impL[0] === "Student,ID,SIS User ID,SIS Login ID,Section,Sol's Labyrinth progress (98765)" && /^"Smith, Ann",123456,S-1,asmith,Period 2,\d/.test(impL[1]) && /^"Lee, Emma",345678,S-3,elee,Period 2,$/.test(impL[3]) && impL.length === 5,
+    "the Canvas gradebook import file: the export's student columns, the assignment's column, a grade for each student with a code and blank for the rest: " + impL.slice(0, 4).join(" | "));
+  await page.screenshot({ path: path.join(shots, "pg-10-teacher-cards.png"), fullPage: true });
+  await page.click('.tab[data-view="board"]');
+  var bd = await page.evaluate(function () { return Array.prototype.map.call(document.querySelectorAll("#board li"), function (li) { return li.querySelector(".nm").textContent + "=" + li.querySelector(".val").textContent; }); });
+  check(bd.length === 2 && /^Bob J\.=5$/.test(bd[0]) && /^Ann S\.=2$/.test(bd[1]), "the leaderboard ranks by levels won with First name + last initial: " + bd.join(", "));
+  await page.selectOption("#board-names", "nick");
+  var bdn = await page.evaluate(function () { return Array.prototype.map.call(document.querySelectorAll("#board li .nm"), function (x) { return x.textContent; }); });
+  await page.selectOption("#board-names", "none");
+  var bdx = await page.evaluate(function () { return Array.prototype.map.call(document.querySelectorAll("#board li .nm"), function (x) { return x.textContent; }); });
+  await page.selectOption("#board-names", "first");
+  check(bdn.join() === "Player 1,Ann S" && bdx.join() === ",", "nicknames only (no nickname shows as Player 1), or no names: " + bdn.join(", "));
+  await page.click("#board li .hide");
+  var bdh = await page.evaluate(function () { return { n: document.querySelectorAll("#board li").length, un: !document.getElementById("board-unhide").hidden }; });
+  check(bdh.n === 1 && bdh.un, "Hide leaves a student off the leaderboard, and Show hidden students brings them back");
+  await page.click("#board-unhide");
+  await page.click("#board-full");
+  await page.screenshot({ path: path.join(shots, "pg-11-leaderboard.png") });
+  await page.keyboard.press("Escape");
+  await page.click('.tab[data-view="std"]');
+  var sd = await page.evaluate(function () { return { text: document.getElementById("std").innerText, rows: document.querySelectorAll("#std table.std").length, csv: TeacherPage.stdCsv() }; });
+  check(sd.rows === 2 && /9\.R[LIV]\.\d\.[A-F]/.test(sd.text) && /Class/.test(sd.text) && /Ann Smith/.test(sd.text) && /from before version 5\.15/.test(sd.text) && /^\ufeff?Student,Nickname,9\./.test(sd.csv.replace(/^\ufeff/, "")),
+    "the standards report: each standard for the class and student by student, older codes noted, and a CSV");
+  await page.screenshot({ path: path.join(shots, "pg-12-standards.png"), fullPage: true });
+  await page.click('.tab[data-view="table"]');
   /* more students for the picture, then CSV and Copy */
   var demo = [["Maria Lopez", 95, 14, 88, 70], ["Tyler Brooks", 22, 3, 18, 55], ["Priya Natarajan", 64, 10, 52, 81]].map(function (s, i) {
     return s[0] + ": " + C.encode("VA", { first: "2026-09-0" + (i + 2), last: "2026-10-0" + (i + 3), days: 3 + i * 2, minutes: s[1], started: s[2] + 2, won: s[2], lost: 2, hiReached: s[2] + 1, hiWon: s[2], answered: s[3],
       right: Math.round(s[3] * s[4] / 100), wrong: 9, modes: 3, skills: { RL: { a: Math.round(s[3] * .3), r: Math.round(s[3] * .3 * s[4] / 100) }, RI: { a: Math.round(s[3] * .3), r: Math.round(s[3] * .25) }, RV: { a: Math.round(s[3] * .2), r: Math.round(s[3] * .15) }, DSR: { a: Math.round(s[3] * .2), r: Math.round(s[3] * .1) } } },
       { nick: s[0].split(" ")[0], version: "5.12.2" });
   }).join("\n");
+  await openPaste(page);
   await page.fill("#paste", demo + "\nCarl Diaz: " + tampered + "\nDee Park: " + odyCode);
   await page.click("#read");
   await page.waitForTimeout(200);
@@ -520,11 +581,13 @@ function makeZip(files) {
   page = await browser.newPage({ viewport: { width: 1366, height: 900 } });
   watch(page);
   await page.goto("http://127.0.0.1:" + tsrv.address().port + "/SOLLabyrinth-Odyssey-Teacher.html", { waitUntil: "load" });
+  await openPaste(page);
   await page.fill("#paste", "Dee Park: " + odyCode + "\nAnn Smith: " + vaCode);
   await page.click("#read");
   await page.waitForTimeout(200);
+  await page.click('.tab[data-view="table"]');
   var ot = await page.evaluate(function () { return { h1: document.querySelector("h1").textContent, text: document.body.innerText, rows: TeacherPage.rows().map(function (r) { return [r.student, r.ok, r.build, TeacherPage.grade(r)]; }) }; });
-  check(/The Odyssey: Labyrinth of the Wine-Dark Sea/.test(ot.h1) && /Odyssey game progress/.test(ot.text) && /Lotus-Eaters/.test(ot.text) && !/\b(Sol|Hati|Fenrir)\b/.test(ot.text.replace(/SOL1-/g, "")), "the Odyssey's teacher page names its game, its assignment and the episodes");
+  check(/The Odyssey: Labyrinth of the Wine-Dark Sea/.test(ot.h1) && /Odyssey game progress/.test(ot.text) && /Lotus-Eaters/.test(ot.text) && !/\b(Sol|Hati|Fenrir)\b/.test(ot.text.replace(/SOL1-/g, "")), "the Odyssey's teacher page names its game, its assignment and the episodes: " + [/The Odyssey: Labyrinth/.test(ot.h1), /Odyssey game progress/.test(ot.text), /Lotus-Eaters/.test(ot.text), (ot.text.replace(/SOL\d-/g, "").match(/\b(Sol|Hati|Fenrir)\b/) || [""])[0]].join(","));
   check(ot.rows.some(function (r) { return r[0] === "Dee Park" && r[1] && r[2] === "ODY" && r[3] != null; }) && ot.rows.some(function (r) { return r[0] === "Ann Smith" && r[2] === "VA" && r[3] === null; }), "on the Odyssey page an Odyssey code is graded and a Virginia code is from another game");
   await page.screenshot({ path: path.join(shots, "pg-06-teacher-ody.png"), fullPage: true });
   await page.close();

@@ -31,6 +31,14 @@ var CONTENT = {
   /* v5.9: the Odyssey game (English 9, Unit 2) — one file per episode plus the cross-episode paired texts */
   ODY: ["content26.js", "content27.js", "content28.js", "content29.js", "content30.js", "content31.js"]
 };
+/* v5.15: the question expansion (tools/expansion/PLAN.md). A new file joins the Virginia game once it is checked and
+   listed in tools/expansion/accepted.json; until then it is left out of every build (and of index.html). */
+var EXP_DIR = path.join(root, "tools", "expansion");
+var PLANNED = fs.existsSync(path.join(EXP_DIR, "plan.json")) ? JSON.parse(fs.readFileSync(path.join(EXP_DIR, "plan.json"), "utf8")).map(function (r) { return r.file + ".js"; }) : [];
+var ACCEPTED = fs.existsSync(path.join(EXP_DIR, "accepted.json")) ? JSON.parse(fs.readFileSync(path.join(EXP_DIR, "accepted.json"), "utf8")) : [];
+ACCEPTED.forEach(function (f) { if (PLANNED.indexOf(f) === -1) throw new Error("tools/build-games.js: " + f + " is accepted but not in tools/expansion/plan.json"); });
+CONTENT.VA = CONTENT.VA.concat(ACCEPTED);
+var PENDING = PLANNED.filter(function (f) { return ACCEPTED.indexOf(f) === -1; });
 var STATES = {
   NJ: { name: "New Jersey", families: ["NJ5"], def: "NJ5", zip: "SOLLabyrinth-NJ" },
   VA: { name: "Virginia", families: ["G9", "G10", "G11"], def: "G9", zip: "SOLLabyrinth-VA" },
@@ -49,7 +57,7 @@ function dropFor(st) {
 /* every content file must be claimed by exactly one list, so a new file is never silently dropped */
 var allContent = fs.readdirSync(path.join(root, "js")).filter(function (f) { return /^content\d*\.js$/.test(f); });
 var claimed = CONTENT.shared.concat(CONTENT.VA, CONTENT.NJ, CONTENT.ODY);
-allContent.forEach(function (f) { if (claimed.indexOf(f) === -1) throw new Error("tools/build-games.js: js/" + f + " is not assigned to a state"); });
+allContent.forEach(function (f) { if (claimed.indexOf(f) === -1 && PENDING.indexOf(f) === -1) throw new Error("tools/build-games.js: js/" + f + " is not assigned to a state"); });
 claimed.forEach(function (f) { if (allContent.indexOf(f) === -1) throw new Error("tools/build-games.js: js/" + f + " is listed but missing"); });
 
 function copyTree(src, dst, skip) {
@@ -109,17 +117,25 @@ function rewriteIndex(html, st) {
   return out;
 }
 
+var teacherPage = require("./build-teacher");
+/* the dev page (index.html in the repository) opens teacher/VA.html, NJ.html or ODY.html too (not committed) */
+fs.mkdirSync(path.join(root, "teacher"), { recursive: true });
+Object.keys(STATES).forEach(function (st) { fs.writeFileSync(path.join(root, "teacher", st + ".html"), teacherPage.build(st, version)); });
 fs.rmSync(dist, { recursive: true, force: true });
 Object.keys(STATES).forEach(function (st) {
   var def = STATES[st], out = path.join(dist, st.toLowerCase()), drop = dropFor(st);
   copyTree(root, out, function (rel, name) {
     if (rel === "tools" || rel === "dist" || rel === "docs" || rel === ".git" || rel === "node_modules" || rel === ".claude") return true;
     if (name === ".DS_Store" || name === "Thumbs.db" || name === ".gitignore") return true;
-    if (/^js\/content\d*\.js$/.test(rel) && drop.indexOf(name) !== -1) return true;
+    if (/^js\/content\d*\.js$/.test(rel) && (drop.indexOf(name) !== -1 || PENDING.indexOf(name) !== -1)) return true;
+    if (rel === "teacher") return true;   /* the dev copies of the teacher pages; each build gets its own below */
     if (st !== "ODY" && /^(js\/odyssey\.js|css\/odyssey\.css|assets\/logo\/odyssey-)/.test(rel.split(path.sep).join("/"))) return true;
     return false;
   });
   fs.writeFileSync(path.join(out, "index.html"), rewriteIndex(fs.readFileSync(path.join(root, "index.html"), "utf8"), st));
+  /* v5.15: the game's Teacher screen (js/teacher-screen.js) opens teacher/<STATE>.html */
+  fs.mkdirSync(path.join(out, "teacher"), { recursive: true });
+  fs.writeFileSync(path.join(out, "teacher", st + ".html"), teacherPage.build(st, version));
   if (def.theme) {
     if (def.logo && !fs.existsSync(path.join(out, def.logo))) console.warn("tools/build-games.js: warning: " + def.logo + " is missing — the title screen of " + def.name + " will show no logo");
     var th = require(def.theme).apply(out);

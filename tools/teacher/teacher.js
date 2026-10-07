@@ -1,21 +1,28 @@
-/* The teacher progress page's script (tools/build-teacher.js inlines it after js/progress-code.js).
+/* The teacher page's script (tools/build-teacher.js inlines it after js/progress-code.js). The same page is the
+   game's Teacher screen (js/teacher-screen.js shows it inside the game) and a file the teacher can open on their
+   own computer.
    Reads progress codes from pasted text, from .txt / .html files and from Canvas's "Download Submissions" .zip
-   (unzipped here: the zip's central directory or local headers, and DecompressionStream("deflate-raw")), checks
-   each code, and shows one row per student with a suggested participation grade from the teacher's goals. */
+   (unzipped here: the zip's central directory or local headers, and DecompressionStream("deflate-raw")), and the
+   class list from Canvas's gradebook export (.csv: Student "Smith, Ann", ID ...), kept on this computer. Shows the
+   class four ways: student cards with a suggested participation grade from the teacher's goals, the full table, a
+   leaderboard (First name + last initial by default, or nicknames, or ranks only) and a standards report (each
+   standard's % right on the first try, class and student by student). Writes a CSV of the table, a standards CSV and
+   a Canvas gradebook import file (the export's student columns + the assignment's column). */
 (function () {
   "use strict";
   var C = window.SolProgressCode, ST = window.TEACHER_STATE, B = C.BUILDS[ST];
-  var LS = "solTeacher." + ST + ".goals";
+  var LS = "solTeacher." + ST + ".goals", LS_ROSTER = "solTeacher." + ST + ".roster", LS_VIEW = "solTeacher." + ST + ".view";
   var GOALS = [
-    { k: "minutes", label: "Minutes played", unit: "minutes", def: 60, w: 1 },
-    { k: "won", label: "Levels won", unit: "levels", def: 10, w: 1 },
-    { k: "answered", label: "Questions answered", unit: "questions", def: 50, w: 1 },
-    { k: "days", label: "Days played", unit: "days", def: 5, w: 0 },
-    { k: "acc", label: "Right on the first try", unit: "%", def: 70, w: 0 }
+    { k: "minutes", label: "Minutes played", short: "Minutes", unit: "minutes", def: 60, w: 1 },
+    { k: "won", label: "Levels won", short: "Levels won", unit: "levels", def: 10, w: 1 },
+    { k: "answered", label: "Questions answered", short: "Questions", unit: "questions", def: 50, w: 1 },
+    { k: "days", label: "Days played", short: "Days", unit: "days", def: 5, w: 0 },
+    { k: "acc", label: "Right on the first try", short: "% right", unit: "%", def: 70, w: 0 }
   ];
   var DEF_POINTS = 100;
   var $ = function (id) { return document.getElementById(id); };
-  var rows = [], notes = [], sortBy = { k: "student", dir: 1 };
+  var rows = [], notes = [], sortBy = { k: "student", dir: 1 }, view = "cards", hidden = {};
+  try { var v0 = localStorage.getItem(LS_VIEW); if (/^(cards|table|board|std)$/.test(v0 || "")) view = v0; } catch (e) {}
 
   /* ── goals (remembered in this browser) ── */
   var goals = loadGoals();
@@ -63,18 +70,91 @@
     try { localStorage.removeItem(LS); } catch (e) {}
     goals = loadGoals(); paintGoals(); paint();
   });
-
+  function goalLine() {
+    var on = GOALS.filter(function (x) { return goals[x.k].w > 0; });
+    return "Full credit (" + goals.points + " points) at: " + on.map(function (x) { return goals[x.k].t + (x.k === "acc" ? "%" : " " + x.unit) + (x.k === "acc" ? " right on the first try" : ""); }).join(", ") + ". Change the goals in box 2.";
+  }
+  function goalVal(x, d) { return x.k === "acc" ? (d.answered ? 100 * d.right / d.answered : 0) : d[x.k]; }
   function grade(r) {
-    if (!r.ok || r.build !== ST) return null;
+    if (!r || !r.ok || r.build !== ST) return null;
     var d = r.data, sumW = 0, got = 0;
     GOALS.forEach(function (x) {
       var g = goals[x.k], w = g.w;
       if (!(w > 0)) return;
-      var v = x.k === "acc" ? (d.answered ? 100 * d.right / d.answered : 0) : d[x.k];
-      sumW += w; got += w * Math.min(1, v / g.t);
+      sumW += w; got += w * Math.min(1, goalVal(x, d) / g.t);
     });
     if (!sumW) return null;
     return Math.round(10 * goals.points * got / sumW) / 10;
+  }
+  function band(g) { if (g == null) return "none"; var f = g / goals.points; return f >= 0.9 ? "hi" : f >= 0.7 ? "mid" : "lo"; }
+
+  /* ── the class list: Canvas's gradebook export ── */
+  var roster = loadRoster();
+  function loadRoster() { try { var r = JSON.parse(localStorage.getItem(LS_ROSTER) || "null"); return r && Array.isArray(r.header) && Array.isArray(r.list) ? r : null; } catch (e) { return null; } }
+  function saveRoster() { try { if (roster) localStorage.setItem(LS_ROSTER, JSON.stringify(roster)); else localStorage.removeItem(LS_ROSTER); } catch (e) {} }
+  function parseCsv(text) {
+    var out = [], row = [], cell = "", q = false, i, ch;
+    text = String(text).replace(/^﻿/, "");
+    for (i = 0; i < text.length; i++) {
+      ch = text.charAt(i);
+      if (q) {
+        if (ch === '"') { if (text.charAt(i + 1) === '"') { cell += '"'; i++; } else q = false; }
+        else cell += ch;
+      } else if (ch === '"') q = true;
+      else if (ch === ",") { row.push(cell); cell = ""; }
+      else if (ch === "\n" || ch === "\r") { if (ch === "\r" && text.charAt(i + 1) === "\n") i++; row.push(cell); out.push(row); row = []; cell = ""; }
+      else cell += ch;
+    }
+    if (cell !== "" || row.length) { row.push(cell); out.push(row); }
+    return out;
+  }
+  /* a gradebook export: a header with Student and ID; rows like "Smith, Ann","12345",... (the "Points Possible" row and
+     the Test Student are left out) */
+  function readRoster(text) {
+    var t = parseCsv(text), h = t[0] || [], iS = h.indexOf("Student"), iI = h.indexOf("ID");
+    if (iS < 0 || iI < 0) return null;
+    var list = [];
+    t.slice(1).forEach(function (r) {
+      var nm = String(r[iS] || "").trim(), id = String(r[iI] || "").trim();
+      if (!nm || !/^\d+$/.test(id) || /points possible/i.test(nm) || /^student,\s*test$/i.test(nm) || /^test student$/i.test(nm)) return;
+      var first, last;
+      if (nm.indexOf(",") !== -1) { last = nm.slice(0, nm.indexOf(",")).trim(); first = nm.slice(nm.indexOf(",") + 1).trim(); }
+      else { var ps = nm.split(/\s+/); first = ps[0]; last = ps.slice(1).join(" "); }
+      list.push({ id: id, student: nm, first: first, last: last, cells: r.slice(0, h.length) });
+    });
+    if (!list.length) return null;
+    return { header: h, list: list, saved: Date.now(), pick: null };
+  }
+  var ID_COLS = ["Student", "ID", "SIS User ID", "SIS Login ID", "Integration ID", "Section"];
+  function assignCols() {
+    if (!roster) return [];
+    return roster.header.filter(function (x) { return /\(\d+\)\s*$/.test(x) && ID_COLS.indexOf(x) === -1; });
+  }
+  function assignCol() {
+    var cols = assignCols();
+    if (roster && roster.pick && cols.indexOf(roster.pick) !== -1) return roster.pick;
+    var a = norm(B.assignment);
+    return cols.filter(function (x) { return norm(x.replace(/\(\d+\)\s*$/, "")) === a; })[0] || cols.filter(function (x) { return norm(x).indexOf(a) === 0; })[0] || null;
+  }
+  function rosterFor(r) {
+    if (!roster) return null;
+    var i, s;
+    if (r.userId) for (i = 0; i < roster.list.length; i++) if (roster.list[i].id === r.userId) return roster.list[i];
+    var keys = [r.squash, r.name ? norm(r.name) : ""].filter(Boolean);
+    for (i = 0; i < roster.list.length; i++) {
+      s = roster.list[i];
+      if (keys.indexOf(norm(s.last + s.first)) !== -1 || keys.indexOf(norm(s.first + s.last)) !== -1 || keys.indexOf(norm(s.student)) !== -1) return s;
+    }
+    return null;
+  }
+  function paintRoster() {
+    var l = $("roster-line");
+    if (roster) {
+      l.innerHTML = "Class list: <b>" + roster.list.length + " students</b> from your gradebook export (saved " + new Date(roster.saved).toLocaleDateString() + "). " +
+        "Real names show as <b>Ann S.</b> on the leaderboard.";
+    } else l.innerHTML = "No class list yet. For real names, the list of who hasn't turned in and a Canvas import file, drop your <b>gradebook export</b> " +
+      "(Canvas: Grades → Export → Export Entire Gradebook) above. Without it, students show by their nicknames.";
+    $("forget").hidden = !roster;
   }
 
   /* ── reading codes ── */
@@ -82,13 +162,16 @@
   function cleanName(s) {
     return String(s || "").replace(/[\t:,;=|]+\s*$/, "").replace(/^[\s\-*•·>\d.)]+/, "").replace(/\s+/g, " ").trim().slice(0, 60);
   }
-  /* Canvas names a submission file after the student: "smithann_12345_67890_text.html" (or "smithann_LATE_...") */
-  function nameFromFile(f) {
-    var base = String(f).split(/[\\/]/).pop().replace(/\.[a-z0-9]+$/i, "");
-    var parts = base.split("_");
-    if (parts.length >= 3 && /^\d+$/.test(parts[parts.length - 2] || "") || parts.length >= 2 && /^(LATE|\d+)$/i.test(parts[1])) return parts[0];
-    return base;
+  /* Canvas names a submission file after the student and their Canvas ID: "smithann_12345_67890_text.html"
+     (or "smithann_LATE_12345_67890_text.html") */
+  function fileInfo(f) {
+    var base = String(f).split(/[\\/]/).pop().replace(/\.[a-z0-9]+$/i, ""), parts = base.split("_"), k = 1;
+    if (/^LATE$/i.test(parts[1] || "")) k = 2;
+    if (parts.length >= 2 && /^\d+$/.test(parts[k] || "")) return { squash: parts[0], id: parts[k] };
+    if (parts.length >= 3 && /^\d+$/.test(parts[parts.length - 2] || "")) return { squash: parts[0], id: null };
+    return { squash: base, id: null };
   }
+  function nameFromFile(f) { return fileInfo(f).squash; }
   /* text from an HTML submission: block tags become line breaks, entities are decoded */
   function htmlText(html) {
     var t = String(html).replace(/<(script|style)[\s\S]*?<\/\1>/gi, " ")
@@ -99,21 +182,21 @@
     return ta.value;
   }
   function addText(text, source, fileName) {
-    var found = C.findCodes(text), n = 0;
+    var found = C.findCodes(text), n = 0, fi = fileName ? fileInfo(fileName) : null;
     found.forEach(function (f) {
       var name = "";
-      if (fileName) name = nameFromFile(fileName);
+      if (fi) name = fi.squash;
       else if (/[\t:,;=|]\s*$/.test(f.before)) name = cleanName(f.before);
-      addRow(f, name, source);
+      addRow(f, name, source, fi);
       n++;
     });
     return n;
   }
-  function addRow(f, name, source) {
+  function addRow(f, name, source, fi) {
     var res = f.result, r = { name: name, source: source, raw: res.ok ? res.code : f.raw, ok: !!res.ok, build: res.build,
-      data: res.ok ? res.data : null, why: res.ok ? "" : res.why, count: 1 };
+      data: res.ok ? res.data : null, why: res.ok ? "" : res.why, count: 1, userId: fi ? fi.id : null, squash: fi ? fi.squash : null };
     r.student = name || (r.data && r.data.nick ? r.data.nick : "");
-    r.key = name ? "n:" + norm(name) : (r.data && r.data.nick ? "k:" + norm(r.data.nick) : "c:" + norm(r.raw));
+    r.key = r.userId ? "i:" + r.userId : name ? "n:" + norm(name) : (r.data && r.data.nick ? "k:" + norm(r.data.nick) : "c:" + norm(r.raw));
     var old = null, i;
     for (i = 0; i < rows.length; i++) if (rows[i].key === r.key) { old = rows[i]; break; }
     if (!old) { rows.push(r); return; }
@@ -172,11 +255,11 @@
     }, Promise.resolve()).then(function () { return out; });
   }
   function readFiles(files) {
-    var total = 0, filesRead = 0, problems = [];
+    var total = 0, filesRead = 0, problems = [], gotRoster = null;
     files = Array.prototype.slice.call(files || []);
-    if (!files.length) return;
+    if (!files.length) return Promise.resolve();
     msg("Reading " + files.length + " file" + (files.length === 1 ? "" : "s") + "…");
-    files.reduce(function (p, f) {
+    return files.reduce(function (p, f) {
       return p.then(function () {
         return f.arrayBuffer().then(function (buf) {
           var u = new Uint8Array(buf);
@@ -192,21 +275,40 @@
               problems.push(err.message === "nozip" ? f.name + ": this browser can't open .zip files. Use Chrome (or unzip the file and choose the files inside it)." : f.name + ": not a .zip file Canvas made, or it is damaged.");
             });
           }
+          var text = utf8.decode(u);
+          if (/\.csv$/i.test(f.name) || /^﻿?"?Student"?,/.test(text)) {
+            var ro = readRoster(text);
+            if (ro) { gotRoster = ro; return; }
+          }
           filesRead++;
-          var text = utf8.decode(u), n2 = addText(/\.html?$/i.test(f.name) || /^\s*</.test(text) ? htmlText(text) : text, "file", /\.(html?|txt)$/i.test(f.name) && /_/.test(f.name) ? f.name : "");
+          var n2 = addText(/\.html?$/i.test(f.name) || /^\s*</.test(text) ? htmlText(text) : text, "file", /\.(html?|txt)$/i.test(f.name) && /_/.test(f.name) ? f.name : "");
           total += n2;
           if (!n2) problems.push(f.name + ": no code in the file");
         });
       });
     }, Promise.resolve()).then(function () {
+      if (gotRoster) { if (roster && roster.pick) gotRoster.pick = roster.pick; roster = gotRoster; saveRoster(); paintRoster(); }
       notes = problems;
       paint();
-      if (!total && problems.length && /browser can't open/.test(problems.join(" "))) msg(problems[0], true);
-      else msg("Found " + total + " code" + (total === 1 ? "" : "s") + " in " + filesRead + " file" + (filesRead === 1 ? "" : "s") + "." + (problems.length ? " See the notes under the table." : ""), !total);
+      var said = [];
+      if (gotRoster) said.push("Class list: " + gotRoster.list.length + " students.");
+      if (filesRead || !gotRoster) said.push("Found " + total + " code" + (total === 1 ? "" : "s") + " in " + filesRead + " file" + (filesRead === 1 ? "" : "s") + ".");
+      if (!total && !gotRoster && problems.length && /browser can't open/.test(problems.join(" "))) msg(problems[0], true);
+      else msg(said.join(" ") + (problems.length ? " See the notes at the bottom." : ""), !total && !gotRoster);
     }, function (e) { msg("Could not read the file: " + e.message, true); });
   }
 
-  /* ── the table ── */
+  /* ── people: names ── */
+  function D(r) { return r && r.ok ? r.data : null; }
+  function mine(r) { return !!(r && r.ok && r.build === ST); }
+  function person(r) {
+    var ro = rosterFor(r);
+    if (ro) return { full: ro.first + " " + ro.last, first: ro.first, last: ro.last, ro: ro };
+    var nm = r.name && !r.squash ? r.name : "";
+    if (nm && /\s/.test(nm)) { var ps = nm.split(/\s+/); return { full: nm, first: ps[0], last: ps[ps.length - 1] }; }
+    return { full: r.student || "(no name)", first: null, last: null };
+  }
+  function fullName(r) { return person(r).full; }
   function pct(a, b) { return b ? Math.round(100 * a / b) : null; }
   function fmtDay(s) {
     if (!s) return "";
@@ -218,17 +320,16 @@
     return d.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" }) + " " + d.toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" });
   }
   function isoTime(ms) { var d = new Date(ms); return d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2) + " " + ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2); }
-  function D(r) { return r.ok ? r.data : null; }
-  function status(r) {
-    if (!r.ok) return "INVALID";
-    if (r.build !== ST) return "Other game";
-    return "Valid";
-  }
+  function status(r) { return !r.ok ? "INVALID" : r.build !== ST ? "Other game" : "Valid"; }
+  function badgesOf(r) { var d = D(r); return d && d.badges ? d.badges.length : 0; }
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+
+  /* ── the table ── */
   var COLS = [
-    { k: "student", h: "Student", v: function (r) { return r.student || "(no name)"; }, cls: "name l" },
+    { k: "student", h: "Student", v: fullName, cls: "name l" },
     { k: "nick", h: "Nickname in code", v: function (r) { return D(r) ? D(r).nick : ""; }, cls: "l" },
     { k: "status", h: "Code", v: status, cls: "l status" },
-    { k: "grade", h: "Suggested grade (of " + "{P})", v: grade, num: true, cls: "grade" },
+    { k: "grade", h: "Suggested grade (of {P})", v: grade, num: true, cls: "grade" },
     { k: "hi", h: "Highest level", v: function (r) { return D(r) && D(r).hiReached; }, num: true, show: function (r) { var d = D(r); return d ? d.hiReached + (d.hiWon !== d.hiReached ? " (won " + d.hiWon + ")" : "") : ""; } },
     { k: "won", h: "Levels won", v: function (r) { return D(r) && D(r).won; }, num: true },
     { k: "started", h: "Levels played", v: function (r) { return D(r) && D(r).started; }, num: true },
@@ -236,6 +337,8 @@
     { k: "acc", h: "% right first try", v: function (r) { return D(r) && pct(D(r).right, D(r).answered); }, num: true, show: function (r) { var p = D(r) && pct(D(r).right, D(r).answered); return p == null ? "" : p + "%"; } },
     { k: "minutes", h: "Minutes played", v: function (r) { return D(r) && D(r).minutes; }, num: true },
     { k: "days", h: "Days played", v: function (r) { return D(r) && D(r).days; }, num: true },
+    { k: "badges", h: "Badges", v: function (r) { return D(r) ? badgesOf(r) : null; }, num: true },
+    { k: "streak", h: "Best streak", v: function (r) { return D(r) && D(r).bestStreak; }, num: true },
     { k: "first", h: "First played", v: function (r) { return D(r) && D(r).first; }, show: function (r) { return fmtDay(D(r) && D(r).first); } },
     { k: "last", h: "Last played", v: function (r) { return D(r) && D(r).last; }, show: function (r) { return fmtDay(D(r) && D(r).last); } }
   ];
@@ -254,78 +357,194 @@
     if (c.num) return (x - y) * sortBy.dir;
     return String(x).localeCompare(String(y), undefined, { numeric: true, sensitivity: "base" }) * sortBy.dir;
   }
-  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function sortedRows() { return rows.slice().sort(function (a, b) { return cmp(a, b) || String(fullName(a)).localeCompare(String(fullName(b))); }); }
   function head(c) { return c.h.replace("{P}", goals.points); }
-  function paint() {
-    var t = $("table"), sorted = rows.slice().sort(function (a, b) { return cmp(a, b) || String(a.student).localeCompare(String(b.student)); });
-    var valid = rows.filter(function (r) { return r.ok && r.build === ST; }).length, bad = rows.filter(function (r) { return !r.ok; }).length;
-    var other = rows.length - valid - bad;
-    $("counts").innerHTML = rows.length ? "<span><b>" + rows.length + "</b> student" + (rows.length === 1 ? "" : "s") + "</span><span class=\"st-ok\">" + valid + " valid</span>" +
-      (bad ? "<span class=\"st-bad\">" + bad + " INVALID</span>" : "") + (other ? "<span class=\"st-other\">" + other + " from another game</span>" : "") : "";
-    if (!rows.length) {
-      t.innerHTML = '<tbody><tr><td class="empty">No codes yet. Add them in box 2.</td></tr></tbody>';
-    } else {
-      var h = "<thead><tr>" + COLS.map(function (c) {
-        return '<th class="' + (c.cls || "") + '" data-k="' + c.k + '" title="Sort by ' + esc(head(c)) + '">' + esc(head(c)) +
-          (sortBy.k === c.k ? ' <span class="arr">' + (sortBy.dir > 0 ? "▲" : "▼") + "</span>" : "") + "</th>";
-      }).join("") + "</tr></thead><tbody>";
-      sorted.forEach(function (r) {
-        var cls = !r.ok ? "invalid" : r.build !== ST ? "other" : "";
-        h += '<tr class="' + cls + '">' + COLS.map(function (c) {
-          var v;
-          if (c.k === "status") {
-            v = !r.ok ? '<span class="st-bad">INVALID</span><div class="small" title="' + esc(r.raw) + '">' + esc(r.why) + "</div>" :
-              r.build !== ST ? '<span class="st-other">Other game</span><div class="small">' + esc(C.BUILDS[r.build].short) + ": use that game's teacher page</div>" :
-              '<span class="st-ok">Valid</span>' + (r.count > 1 ? '<div class="small">' + r.count + " codes: newest kept</div>" : "");
-          } else if (c.k === "grade") {
-            var g = grade(r); v = g == null ? (r.ok && r.build === ST ? "–" : "") : String(g);
-          } else v = esc(c.show ? c.show(r) : c.v(r));
-          return '<td class="' + (c.cls || "") + '">' + (v == null ? "" : v) + "</td>";
-        }).join("") + "</tr>";
-      });
-      t.innerHTML = h + "</tbody>";
-      Array.prototype.forEach.call(t.querySelectorAll("th"), function (th) {
-        th.addEventListener("click", function () {
-          var k = th.getAttribute("data-k");
-          sortBy = { k: k, dir: sortBy.k === k ? -sortBy.dir : (COLS.filter(function (c) { return c.k === k; })[0].num ? -1 : 1) };
-          paint();
-        });
-      });
-    }
-    var nl = $("notes"), list = [];
-    rows.forEach(function (r) {
-      if (r.count > 1) list.push((r.student || r.raw) + ": " + r.count + " different codes; the table shows " + (r.ok ? "the newest one (made " + fmtTime(r.data.made) + ")" : "the last one") + ".");
-      if (!r.ok) list.push((r.student || "A code") + ": INVALID: " + r.why + " Ask the student to copy the code again with the Copy code button. (What was read: " + r.raw + ")");
+  function paintTable() {
+    var t = $("table");
+    if (!rows.length) { t.innerHTML = '<tbody><tr><td class="empty">No codes yet. Add them in box 1.</td></tr></tbody>'; return; }
+    var h = "<thead><tr>" + COLS.map(function (c) {
+      return '<th class="' + (c.cls || "") + '" data-k="' + c.k + '" title="Sort by ' + esc(head(c)) + '">' + esc(head(c)) +
+        (sortBy.k === c.k ? ' <span class="arr">' + (sortBy.dir > 0 ? "▲" : "▼") + "</span>" : "") + "</th>";
+    }).join("") + "</tr></thead><tbody>";
+    sortedRows().forEach(function (r) {
+      var cls = !r.ok ? "invalid" : r.build !== ST ? "other" : "";
+      h += '<tr class="' + cls + '">' + COLS.map(function (c) {
+        var v;
+        if (c.k === "status") {
+          v = !r.ok ? '<span class="st-bad">INVALID</span><div class="small" title="' + esc(r.raw) + '">' + esc(r.why) + "</div>" :
+            r.build !== ST ? '<span class="st-other">Other game</span><div class="small">' + esc(C.BUILDS[r.build].short) + ": use that game's teacher screen</div>" :
+            '<span class="st-ok">Valid</span>' + (r.count > 1 ? '<div class="small">' + r.count + " codes: newest kept</div>" : "");
+        } else if (c.k === "grade") {
+          var g = grade(r); v = g == null ? (mine(r) ? "–" : "") : String(g);
+        } else v = esc(c.show ? c.show(r) : c.v(r));
+        return '<td class="' + (c.cls || "") + '">' + (v == null ? "" : v) + "</td>";
+      }).join("") + "</tr>";
     });
-    list = list.concat(notes);
-    nl.innerHTML = list.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("");
-    var csv = $("csv"), enable = rows.length > 0;
-    csv.classList.toggle("disabled", !enable);
-    if (enable) {
-      try {
-        if (csv._url) URL.revokeObjectURL(csv._url);
-        csv._url = URL.createObjectURL(new Blob(["﻿" + table(",")], { type: "text/csv" }));
-        csv.href = csv._url;
-        csv.download = B.short.replace(/[^A-Za-z0-9]+/g, "-").replace(/^-|-$/g, "") + "-progress-" + isoTime(Date.now()).slice(0, 10) + ".csv";
-      } catch (e) { csv.href = "#"; }
-    } else csv.href = "#";
+    t.innerHTML = h + "</tbody>";
+    Array.prototype.forEach.call(t.querySelectorAll("th"), function (th) {
+      th.addEventListener("click", function () {
+        var k = th.getAttribute("data-k");
+        sortBy = { k: k, dir: sortBy.k === k ? -sortBy.dir : (COLS.filter(function (c) { return c.k === k; })[0].num ? -1 : 1) };
+        paint();
+      });
+    });
   }
-  /* the table as text: CSV (",") or tab-separated for pasting into a spreadsheet ("\t") */
-  function table(sep) {
-    var hdr = ["Student", "Nickname in code", "Code status", "Suggested grade", "Points possible", "Highest level", "Highest level won", "Levels played", "Levels won", "Levels lost",
-      "Questions answered", "Right on first try", "% right first try", "Wrong picks", "Minutes played", "Days played", "First played", "Last played", "Game modes tried"];
-    B.skills.forEach(function (s) { hdr.push(s[1] + " answered", s[1] + " right first try", s[1] + " % right"); });
-    hdr.push("Code made", "Game", "Game version", "Code", "Note");
-    var out = [hdr], sorted = rows.slice().sort(function (a, b) { return cmp(a, b) || String(a.student).localeCompare(String(b.student)); });
-    sorted.forEach(function (r) {
-      var d = D(r), g = grade(r), mine = r.ok && r.build === ST;
-      var line = [r.student || "", d ? d.nick : "", r.ok ? (mine ? "Valid" : "Other game") : "INVALID", g == null ? "" : g, mine ? goals.points : ""];
-      if (d) line.push(d.hiReached, d.hiWon, d.started, d.won, d.lost, d.answered, d.right, pct(d.right, d.answered) == null ? "" : pct(d.right, d.answered), d.wrong, d.minutes, d.days, d.first || "", d.last || "", d.modes);
-      else line.push("", "", "", "", "", "", "", "", "", "", "", "", "", "");
-      B.skills.forEach(function (s, i) { var x = mine && d.skills[i]; line.push(x ? x.a : "", x ? x.r : "", x && x.a ? pct(x.r, x.a) : ""); });
-      line.push(d ? isoTime(d.made) : "", r.build ? C.BUILDS[r.build].short : "", d ? d.version : "", r.raw, !r.ok ? r.why : r.count > 1 ? r.count + " codes, newest kept" : "");
-      out.push(line);
+
+  /* ── the class summary ── */
+  function missing() {
+    if (!roster) return [];
+    var got = {};
+    rows.forEach(function (r) { if (mine(r)) { var ro = rosterFor(r); if (ro) got[ro.id] = 1; } });
+    return roster.list.filter(function (s) { return !got[s.id]; });
+  }
+  function paintSummary() {
+    var v = rows.filter(mine), gs = v.map(grade).filter(function (g) { return g != null; }), el = $("summary");
+    if (!rows.length && !roster) { el.innerHTML = ""; return; }
+    var avg = gs.length ? Math.round(10 * gs.reduce(function (a, b) { return a + b; }, 0) / gs.length) / 10 : null;
+    var full = gs.filter(function (g) { return g >= goals.points; }).length, low = gs.filter(function (g) { return g < 0.7 * goals.points; }).length;
+    var ans = v.reduce(function (a, r) { return a + r.data.answered; }, 0), right = v.reduce(function (a, r) { return a + r.data.right; }, 0);
+    var mins = v.reduce(function (a, r) { return a + r.data.minutes; }, 0), bad = rows.filter(function (r) { return !r.ok; }).length, other = rows.length - v.length - bad;
+    var miss = missing();
+    function st(n, label) { return '<div class="st"><b>' + esc(n) + "</b><span>" + esc(label) + "</span></div>"; }
+    var h = st(v.length + (roster ? " of " + roster.list.length : ""), "students with a valid code") +
+      st(avg == null ? "–" : avg, "average suggested grade (of " + goals.points + ")") + st(full, "at full credit") + st(low, "below 70%") +
+      st(ans ? pct(right, ans) + "%" : "–", "right on the first try (class)") + st(mins, "minutes played (class)");
+    if (bad || other) h += st(bad + other, (bad ? bad + " INVALID" : "") + (bad && other ? ", " : "") + (other ? other + " other game" : ""));
+    if (roster) h += '<div class="st wide"><b style="display:inline;font-size:18px">' + (miss.length ? miss.length + " not turned in: " : "Everyone on the class list turned in a code.") + "</b> " +
+      esc(miss.map(function (s) { return s.first + " " + s.last; }).join(", ")) + "</div>";
+    el.innerHTML = h;
+  }
+
+  /* ── student cards ── */
+  function paintCards() {
+    var el = $("cards"), list = sortedRows(), miss = missing();
+    if (!list.length && !miss.length) { el.innerHTML = '<p class="empty">No codes yet. Drop the Download Submissions .zip in box 1.</p>'; return; }
+    var on = GOALS.filter(function (x) { return goals[x.k].w > 0; });
+    var h = list.map(function (r) {
+      var d = D(r), g = grade(r), b = mine(r) ? band(g) : "none", p = person(r);
+      var out = '<div class="card g-' + b + '"><h3>' + esc(p.full) + "</h3>" + (d && d.nick ? '<div class="nick">“' + esc(d.nick) + "”</div>" : "");
+      if (!r.ok) return out + '<div class="gr" style="color:var(--bad)">INVALID</div><div class="meta">' + esc(r.why) + "</div></div>";
+      if (!mine(r)) return out + '<div class="gr" style="color:var(--warn)">Other game</div><div class="meta">' + esc(C.BUILDS[r.build].short) + "</div></div>";
+      out += '<div class="gr">' + (g == null ? "–" : g) + ' <span class="small">/ ' + goals.points + "</span></div>";
+      on.forEach(function (x) {
+        var val = goalVal(x, d), f = Math.min(1, val / goals[x.k].t);
+        out += '<div class="lbl"><span>' + esc(x.short) + "</span><span>" + Math.round(val) + (x.k === "acc" ? "%" : "") + " / " + goals[x.k].t + (x.k === "acc" ? "%" : "") + "</span></div>" +
+          '<div class="bar"><i style="width:' + Math.round(100 * f) + '%"></i></div>';
+      });
+      out += '<div class="meta">Highest level ' + d.hiReached + " · " + d.won + " levels won · " + badgesOf(r) + " badges" + (d.last ? " · last played " + esc(fmtDay(d.last)) : "") + "</div>";
+      return out + "</div>";
+    }).join("");
+    h += miss.map(function (s) { return '<div class="card missing g-none"><h3>' + esc(s.first + " " + s.last) + '</h3><div class="gr" style="color:var(--dim)">No code</div><div class="meta">Not turned in yet.</div></div>'; }).join("");
+    el.innerHTML = h;
+  }
+
+  /* ── the leaderboard ── */
+  var BOARD = [
+    ["won", "Levels won", function (d) { return d.won; }],
+    ["hi", "Highest level", function (d) { return d.hiReached; }],
+    ["answered", "Questions answered", function (d) { return d.answered; }],
+    ["acc", "% right on the first try (20+ questions)", function (d) { return d.answered >= 20 ? pct(d.right, d.answered) : null; }, "%"],
+    ["badges", "Badges earned", function (d) { return d.badges ? d.badges.length : 0; }],
+    ["minutes", "Minutes played", function (d) { return d.minutes; }],
+    ["streak", "Best streak (in a row, first try)", function (d) { return d.bestStreak || 0; }]
+  ];
+  function boardName(r, mode, i) {
+    var d = D(r), p = person(r);
+    if (mode === "none") return "";
+    if (mode === "first" && p.first) return p.first + (p.last ? " " + p.last.charAt(0).toUpperCase() + "." : "");
+    return d && d.nick ? d.nick : "Player " + (i + 1);
+  }
+  function paintBoard() {
+    var sel = $("board-by");
+    if (!sel.options.length) BOARD.forEach(function (b) { var o = document.createElement("option"); o.value = b[0]; o.textContent = b[1]; sel.appendChild(o); });
+    var by = BOARD.filter(function (b) { return b[0] === sel.value; })[0] || BOARD[0], n = +$("board-n").value, names = $("board-names").value;
+    var list = rows.filter(function (r) { return mine(r) && !hidden[r.key]; }).map(function (r) { return { r: r, v: by[2](r.data) }; })
+      .filter(function (x) { return x.v != null; }).sort(function (a, b) { return b.v - a.v; });
+    var shown = n ? list.slice(0, n) : list, seen = {}, rank = 0, lastV = null;
+    var items = shown.map(function (x, i) {
+      if (x.v !== lastV) { rank = i + 1; lastV = x.v; }
+      var nm = boardName(x.r, names, i);
+      if (nm) { seen[nm] = (seen[nm] || 0) + 1; if (seen[nm] > 1) nm += " (" + seen[nm] + ")"; }
+      return '<li><span class="rk">' + rank + '</span><span class="nm">' + esc(nm || "") + '</span><span class="val">' + x.v + (by[3] || "") +
+        '</span><button type="button" class="btn hide noprint" data-key="' + esc(x.r.key) + '" title="Leave this student off the leaderboard">Hide</button></li>';
     });
+    var nh = Object.keys(hidden).length, el = $("board");
+    el.innerHTML = '<p class="board-title">Class leaderboard · ' + esc(by[1]) + "</p>" + (items.length ? "<ol>" + items.join("") + "</ol>" : '<p class="empty">No valid codes yet.</p>') +
+      (el.classList.contains("full") ? '<button type="button" class="btn" id="board-exit">Close full screen</button>' : "");
+    Array.prototype.forEach.call(el.querySelectorAll(".hide"), function (b) { b.addEventListener("click", function () { hidden[b.getAttribute("data-key")] = 1; paintBoard(); }); });
+    var ex = $("board-exit"); if (ex) ex.addEventListener("click", function () { el.classList.remove("full"); paintBoard(); });
+    $("board-unhide").hidden = !nh;
+    $("board-unhide").textContent = "Show hidden students (" + nh + ")";
+    $("board-hint").textContent = (names === "first" && !roster ? "Without your class list, students show by nickname. " : "") +
+      "Hide leaves a student off this leaderboard (for example, an unkind nickname) until you reload this page.";
+  }
+  ["board-by", "board-n", "board-names"].forEach(function (id) { $(id).addEventListener("change", paintBoard); });
+  $("board-unhide").addEventListener("click", function () { hidden = {}; paintBoard(); });
+  $("board-full").addEventListener("click", function () { $("board").classList.add("full"); paintBoard(); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && $("board").classList.contains("full")) { $("board").classList.remove("full"); paintBoard(); } });
+
+  /* ── the standards report ── */
+  var STRAND = { RL: "Literary", RI: "Informational", RV: "Vocabulary", DSR: "Paired texts" };
+  function strandOf(code) {
+    var m = /^\d+\.(RL|RI|RV|DSR)\./.exec(code + ".");
+    if (m) return m[1];
+    if (/^L\./.test(code)) return "RV";
+    if (/\.CT\./.test(code)) return "DSR";
+    return /^RI\./.test(code) ? "RI" : /^RL\./.test(code) ? "RL" : "";
+  }
+  function stdOrder(a, b) {
+    var pa = a.split("."), pb = b.split("."), ga = parseInt(pa[0], 10), gb = parseInt(pb[0], 10);
+    if (ga !== gb) return (isNaN(ga) ? 99 : ga) - (isNaN(gb) ? 99 : gb);
+    var so = ["RL", "RI", "RV", "DSR"], sa = so.indexOf(strandOf(a)), sb = so.indexOf(strandOf(b));
+    return sa !== sb ? sa - sb : a.localeCompare(b, undefined, { numeric: true });
+  }
+  function stdData() {
+    var v = rows.filter(mine), codes = {}, per = [], old = 0;
+    v.forEach(function (r) {
+      var m = {};
+      if (!r.data.std) { old++; return; }
+      r.data.std.forEach(function (s) { m[s.code] = s; var c = codes[s.code] || (codes[s.code] = { a: 0, r: 0, n: 0 }); c.a += s.a; c.r += s.r; c.n++; });
+      per.push({ r: r, m: m });
+    });
+    return { codes: Object.keys(codes).sort(stdOrder), tot: codes, per: per.sort(function (a, b) { return fullName(a.r).localeCompare(fullName(b.r)); }), old: old };
+  }
+  function cellCls(p) { return p == null ? "" : p >= 80 ? "c-hi" : p >= 60 ? "c-mid" : "c-lo"; }
+  function paintStd() {
+    var s = stdData(), el = $("std");
+    if (!s.codes.length) {
+      el.innerHTML = '<p class="empty">No standards detail yet. ' + (s.old ? s.old + " code" + (s.old === 1 ? " is" : "s are") + " from before version 5.15, which didn't record standards: ask for new codes." : "Add codes in box 1.") + "</p>";
+      return;
+    }
+    var h = '<p class="std-key">Each cell: % right on the first try (questions answered). Green 80%+, yellow 60–79%, red below 60%. Sorted by grade and skill.' +
+      (s.old ? " " + s.old + " student" + (s.old === 1 ? "'s code is" : "s' codes are") + " from before version 5.15 and not included." : "") + "</p>";
+    h += '<div class="std-wrap"><table class="std"><thead><tr><th class="l">Standard</th><th>Skill</th><th>Students</th><th>Questions</th><th>Class % right</th></tr></thead><tbody>';
+    s.codes.forEach(function (c) {
+      var t = s.tot[c], p = pct(t.r, t.a);
+      h += '<tr><td class="l">' + esc(c) + "</td><td>" + esc(STRAND[strandOf(c)] || "") + "</td><td>" + t.n + "</td><td>" + t.a + '</td><td class="' + cellCls(p) + '">' + p + "%</td></tr>";
+    });
+    h += "</tbody></table></div>";
+    h += '<h3 style="margin:16px 0 4px">Student by student</h3><div class="std-wrap"><table class="std"><thead><tr><th class="l">Student</th>' +
+      s.codes.map(function (c) { return "<th>" + esc(c) + "</th>"; }).join("") + "</tr></thead><tbody>";
+    h += '<tr class="cls"><td class="l">Class</td>' + s.codes.map(function (c) { var t = s.tot[c], p = pct(t.r, t.a); return '<td class="' + cellCls(p) + '">' + p + "% (" + t.a + ")</td>"; }).join("") + "</tr>";
+    s.per.forEach(function (x) {
+      h += '<tr><td class="l">' + esc(fullName(x.r)) + "</td>" + s.codes.map(function (c) {
+        var m = x.m[c]; if (!m || !m.a) return "<td>–</td>";
+        var p = pct(m.r, m.a); return '<td class="' + cellCls(p) + '">' + p + "% (" + m.a + ")</td>";
+      }).join("") + "</tr>";
+    });
+    el.innerHTML = h + "</tbody></table></div>";
+  }
+  function stdCsv() {
+    var s = stdData(), out = [["Student", "Nickname"].concat([].concat.apply([], s.codes.map(function (c) { return [c + " answered", c + " right first try", c + " % right"]; })))];
+    out.push(["Class", ""].concat([].concat.apply([], s.codes.map(function (c) { var t = s.tot[c]; return [t.a, t.r, pct(t.r, t.a)]; }))));
+    s.per.forEach(function (x) {
+      out.push([fullName(x.r), x.r.data.nick || ""].concat([].concat.apply([], s.codes.map(function (c) { var m = x.m[c]; return m && m.a ? [m.a, m.r, pct(m.r, m.a)] : ["", "", ""]; }))));
+    });
+    return csvText(out, ",");
+  }
+
+  /* ── files out ── */
+  function csvText(out, sep) {
     return out.map(function (l) {
       return l.map(function (v) {
         v = String(v == null ? "" : v);
@@ -333,6 +552,88 @@
         return /[",\r\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v;
       }).join(sep);
     }).join("\r\n") + "\r\n";
+  }
+  /* the table as text: CSV (",") or tab-separated for pasting into a spreadsheet ("\t") */
+  function table(sep) {
+    var hdr = ["Student", "Nickname in code", "Code status", "Suggested grade", "Points possible", "Highest level", "Highest level won", "Levels played", "Levels won", "Levels lost",
+      "Questions answered", "Right on first try", "% right first try", "Wrong picks", "Minutes played", "Days played", "First played", "Last played", "Game modes tried", "Badges", "Best streak", "Perfect levels"];
+    B.skills.forEach(function (s) { hdr.push(s[1] + " answered", s[1] + " right first try", s[1] + " % right"); });
+    hdr.push("Code made", "Game", "Game version", "Code", "Note");
+    var out = [hdr];
+    sortedRows().forEach(function (r) {
+      var d = D(r), g = grade(r), my = mine(r);
+      var line = [fullName(r), d ? d.nick : "", r.ok ? (my ? "Valid" : "Other game") : "INVALID", g == null ? "" : g, my ? goals.points : ""];
+      if (d) line.push(d.hiReached, d.hiWon, d.started, d.won, d.lost, d.answered, d.right, pct(d.right, d.answered) == null ? "" : pct(d.right, d.answered), d.wrong, d.minutes, d.days, d.first || "", d.last || "", d.modes,
+        badgesOf(r), d.bestStreak == null ? "" : d.bestStreak, d.perfect == null ? "" : d.perfect);
+      else line.push("", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+      B.skills.forEach(function (s, i) { var x = my && d.skills[i]; line.push(x ? x.a : "", x ? x.r : "", x && x.a ? pct(x.r, x.a) : ""); });
+      line.push(d ? isoTime(d.made) : "", r.build ? C.BUILDS[r.build].short : "", d ? d.version : "", r.raw, !r.ok ? r.why : r.count > 1 ? r.count + " codes, newest kept" : "");
+      out.push(line);
+    });
+    return csvText(out, sep);
+  }
+  /* Canvas's gradebook import: the export's student columns and the assignment's column, a grade for each student with
+     a valid code (a blank cell leaves that student's grade alone) */
+  function importCsv() {
+    var col = assignCol();
+    if (!roster || !col) return null;
+    var idc = roster.header.filter(function (h) { return ID_COLS.indexOf(h) !== -1; }), idx = idc.map(function (h) { return roster.header.indexOf(h); });
+    var best = {};
+    rows.forEach(function (r) { if (!mine(r)) return; var ro = rosterFor(r); if (ro) best[ro.id] = grade(r); });
+    var out = [idc.concat([col])];
+    roster.list.forEach(function (s) { out.push(idx.map(function (i) { return s.cells[i]; }).concat([best[s.id] == null ? "" : best[s.id]])); });
+    return csvText(out, ",");
+  }
+  function link(a, text, name) {
+    try {
+      if (a._url) URL.revokeObjectURL(a._url);
+      a._url = text == null ? null : URL.createObjectURL(new Blob(["﻿" + text], { type: "text/csv" }));
+      a.href = a._url || "#";
+      a.download = name;
+    } catch (e) { a.href = "#"; }
+    a.classList.toggle("disabled", text == null);
+  }
+  function fileStem() { return B.short.replace(/[^A-Za-z0-9]+/g, "-").replace(/^-|-$/g, "") + "-"; }
+  function paintFiles() {
+    link($("csv"), rows.length ? table(",") : null, fileStem() + "progress-" + isoTime(Date.now()).slice(0, 10) + ".csv");
+    link($("std-csv"), rows.some(mine) ? stdCsv() : null, fileStem() + "standards-" + isoTime(Date.now()).slice(0, 10) + ".csv");
+    var imp = importCsv(), hint = $("import-hint"), cols = assignCols();
+    link($("import"), imp, fileStem() + "canvas-gradebook-import-" + isoTime(Date.now()).slice(0, 10) + ".csv");
+    if (!roster) hint.textContent = "The Canvas gradebook import file needs your class list: drop your gradebook export in box 1.";
+    else if (!cols.length) hint.textContent = "Your gradebook export has no assignments yet. Make the \"" + B.assignment + "\" assignment, then export the gradebook again.";
+    else {
+      hint.innerHTML = "Import file: fills the column <b>" + esc(assignCol() || "?") + "</b>. In Canvas: Grades → Import → choose the file → Upload, check the changes, then Save. " +
+        (cols.length > 1 ? 'Wrong column? <select id="import-col">' + cols.map(function (c) { return "<option" + (c === assignCol() ? " selected" : "") + ">" + esc(c) + "</option>"; }).join("") + "</select>" : "");
+      var sel = $("import-col");
+      if (sel) sel.addEventListener("change", function () { roster.pick = sel.value; saveRoster(); paint(); });
+    }
+  }
+
+  /* ── views ── */
+  function setView(v) {
+    view = v;
+    try { localStorage.setItem(LS_VIEW, v); } catch (e) {}
+    Array.prototype.forEach.call(document.querySelectorAll(".tab"), function (t) { t.classList.toggle("on", t.getAttribute("data-view") === v); });
+    ["cards", "table", "board", "std"].forEach(function (k) { $("view-" + k).hidden = k !== v; });
+    paint();
+  }
+  Array.prototype.forEach.call(document.querySelectorAll(".tab"), function (t) { t.addEventListener("click", function () { setView(t.getAttribute("data-view")); }); });
+  function paint() {
+    $("goal-line").textContent = goalLine();
+    paintSummary();
+    if (view === "cards") paintCards();
+    else if (view === "table") paintTable();
+    else if (view === "board") paintBoard();
+    else paintStd();
+    var nl = $("notes"), list = [];
+    rows.forEach(function (r) {
+      if (r.count > 1) list.push(fullName(r) + ": " + r.count + " different codes; the newest one (made " + (r.ok ? fmtTime(r.data.made) : "?") + ") is used.");
+      if (!r.ok) list.push(fullName(r) + ": INVALID: " + r.why + " Ask the student to copy the code again with the Copy code button. (What was read: " + r.raw + ")");
+      if (roster && mine(r) && !rosterFor(r)) list.push(fullName(r) + ": not on your class list (a student who joined later? export the gradebook again).");
+    });
+    list = list.concat(notes);
+    nl.innerHTML = list.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("");
+    paintFiles();
   }
 
   /* ── buttons ── */
@@ -343,9 +644,13 @@
     notes = [];
     paint();
     if (n) { $("paste").value = ""; msg("Found " + n + " code" + (n === 1 ? "" : "s") + "."); }
-    else msg("No code found. A code starts with SOL2-" + ST + "- (or SOL1-" + ST + "- from before v5.14)", true);
+    else msg("No code found. A code starts with SOL3-" + ST + "- (or SOL1- / SOL2- from older versions).", true);
   });
-  $("clear").addEventListener("click", function () { rows = []; notes = []; paint(); msg(""); $("copybox").hidden = true; });
+  $("clear").addEventListener("click", function () { rows = []; notes = []; hidden = {}; paint(); msg(""); $("copybox").hidden = true; });
+  $("forget").addEventListener("click", function () {
+    if (!window.confirm("Forget the class list on this computer? Your goals stay.")) return;
+    roster = null; saveRoster(); paintRoster(); paint(); msg("The class list is forgotten on this computer.");
+  });
   $("choose").addEventListener("click", function () { $("file").click(); });
   $("file").addEventListener("change", function () { readFiles($("file").files); $("file").value = ""; });
   var drop = $("drop");
@@ -355,9 +660,12 @@
   /* a file dropped anywhere else on the page is read too, instead of the browser opening it */
   window.addEventListener("dragover", function (e) { e.preventDefault(); });
   window.addEventListener("drop", function (e) { e.preventDefault(); if (e.target !== drop && !drop.contains(e.target)) readFiles(e.dataTransfer && e.dataTransfer.files); });
-  $("csv").addEventListener("click", function (e) {
-    if (!rows.length) { e.preventDefault(); msg("Add some codes first.", true); return; }
-    showCopy(table(","), "If the download didn't start (Canvas can block downloads in a preview), copy this text instead: press Ctrl+C, paste it into a spreadsheet.");
+  [["csv", function () { return table(","); }], ["std-csv", stdCsv], ["import", importCsv]].forEach(function (x) {
+    $(x[0]).addEventListener("click", function (e) {
+      var text = rows.length ? x[1]() : null;
+      if (!text) { e.preventDefault(); msg(x[0] === "import" ? $("import-hint").textContent : "Add some codes first.", true); return; }
+      showCopy(text, "If the download didn't start (Canvas can block downloads), copy this text instead: press Ctrl+C, paste it into a spreadsheet and save it as .csv.");
+    });
   });
   $("copy").addEventListener("click", function () {
     if (!rows.length) { msg("Add some codes first.", true); return; }
@@ -379,8 +687,18 @@
     ta.focus(); ta.select();
   }
   $("print").addEventListener("click", function () { window.print(); });
+  /* inside the game (js/teacher-screen.js): a Close button that goes back to the game */
+  try {
+    if (window.parent && window.parent !== window && window.parent.SolTeacher) {
+      $("close-teacher").hidden = false;
+      $("close-teacher").addEventListener("click", function () { window.parent.SolTeacher.hide(); });
+    }
+  } catch (e) {}
+  if (!rows.length && !roster) $("how").open = true;
 
   paintGoals();
-  paint();
-  window.TeacherPage = { addText: addText, readFiles: readFiles, rows: function () { return rows; }, table: table, grade: grade, readZip: readZip, nameFromFile: nameFromFile };
+  paintRoster();
+  setView(view);
+  window.TeacherPage = { addText: addText, readFiles: readFiles, rows: function () { return rows; }, table: table, grade: grade, readZip: readZip, nameFromFile: nameFromFile,
+    importCsv: importCsv, stdCsv: stdCsv, roster: function () { return roster; }, setView: setView, readRoster: readRoster, fileInfo: fileInfo };
 })();
