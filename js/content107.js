@@ -51,6 +51,7 @@
         {
           id: "theme",
           sol: "11.RL.1.A",
+          sub: "11.RL.1.A.1",
           stem: "Which theme does Roz's experience at the festival most clearly develop?",
           choices: [
             { letter: "A", text: "Family recipes are best kept private and shared only on holidays." },
@@ -62,7 +63,8 @@
         },
         {
           id: "since-march",
-          sol: "11.RL.1.B",
+          sol: "11.RL.1.C",
+          sub: "11.RL.1.C.1",
           stem: "Roz's reply in sentences 22 and 23 suggests that she —",
           choices: [
             { letter: "A", text: "wanted her aunt to feel guilty for ignoring her ideas" },
@@ -74,7 +76,8 @@
         },
         {
           id: "resting",
-          sol: "11.RL.2.A",
+          sol: "11.RL.2.C",
+          sub: "11.RL.2.C.1",
           stem: "The fried items crossed out with a single neat line \"as if they were only resting\" (sentence 24) most clearly symbolize —",
           choices: [
             { letter: "A", text: "traditions set aside for now but not discarded" },
@@ -86,7 +89,8 @@
         },
         {
           id: "nothing",
-          sol: "11.RL.1.B",
+          sol: "11.RL.2.B",
+          sub: "11.RL.2.B.2",
           stem: "Sentence 9 is set apart as a one-word sentence mainly to —",
           choices: [
             { letter: "A", text: "show that Tita Nena is too tired to speak" },
@@ -98,7 +102,8 @@
         },
         {
           id: "short-menu",
-          sol: "11.RL.2.C",
+          sol: "11.RL.2.B",
+          sub: "11.RL.2.B.2",
           stem: "In sentence 3, Tita Nena's saying \"A short menu is a fast menu\" most nearly means that —",
           choices: [
             { letter: "A", text: "customers prefer food they can eat quickly" },
@@ -110,7 +115,8 @@
         },
         {
           id: "resolution",
-          sol: "11.RL.3.A",
+          sol: "11.RL.1.B",
+          sub: "11.RL.1.B.1",
           stem: "How does the final paragraph resolve the disagreement introduced in sentences 2 and 3?",
           choices: [
             { letter: "A", text: "Tita Nena restores the old menu but adds Roz's dish to it." },
@@ -123,6 +129,7 @@
         {
           id: "visor-tone",
           sol: "11.RL.2.B",
+          sub: "11.RL.2.B.1",
           stem: "The customer's question in sentence 10 creates a tone that is —",
           choices: [
             { letter: "A", text: "warm and encouraging" },
@@ -135,6 +142,7 @@
         {
           id: "hands",
           sol: "11.RL.1.C",
+          sub: "11.RL.1.C.1",
           stem: "In sentence 25, Roz describes her grandmother's hands instead of the ingredients. This detail mainly reveals that Roz —",
           choices: [
             { letter: "A", text: "has forgotten what the rolls actually contain" },
@@ -189,6 +197,7 @@
         {
           id: "theme",
           sol: "11.RL.1.A",
+          sub: "11.RL.1.A.1",
           stem: "Which statement best expresses a theme developed through the narrator's work on the pickup?",
           choices: [
             { letter: "A", text: "Older repair methods are always more reliable than new tools." },
@@ -200,7 +209,8 @@
         },
         {
           id: "weather-app",
-          sol: "11.RL.2.A",
+          sol: "11.RL.2.C",
+          sub: "11.RL.2.C.2",
           stem: "In sentence 3, comparing the scanner to a weather app that is \"not the sky\" suggests that Almaz sees the scanner as —",
           choices: [
             { letter: "A", text: "a helpful report that cannot replace direct observation" },
@@ -212,7 +222,8 @@
         },
         {
           id: "folded-arms",
-          sol: "11.RL.1.B",
+          sol: "11.RL.1.C",
+          sub: "11.RL.1.C.2",
           stem: "The description of Mrs. Lindqvist's posture in sentence 10 mainly serves to —",
           choices: [
             { letter: "A", text: "show that she is angry about the garage's high prices" },
@@ -224,7 +235,8 @@
         },
         {
           id: "knocking",
-          sol: "11.RL.2.B",
+          sol: "11.RL.2.C",
+          sub: "11.RL.2.C.2",
           stem: "The simile in sentence 15, \"a dull metallic tap like someone knocking politely,\" mainly emphasizes that the sound is —",
           choices: [
             { letter: "A", text: "loud enough to alarm everyone in the truck" },
@@ -237,6 +249,7 @@
         {
           id: "no-charge",
           sol: "11.RL.1.C",
+          sub: "11.RL.1.C.1",
           stem: "Almaz's decision not to charge for the drive (sentence 23) suggests that she —",
           choices: [
             { letter: "A", text: "considers listening to the customer part of fair service" },
@@ -248,7 +261,8 @@
         },
         {
           id: "ending",
-          sol: "11.RL.3.A",
+          sol: "11.RL.1.B",
+          sub: "11.RL.1.B.1",
           stem: "How does the final paragraph (sentences 28 and 29) resolve the story?",
           choices: [
             { letter: "A", text: "It shows the narrator rejecting the scanner as useless." },
@@ -260,7 +274,8 @@
         },
         {
           id: "shrugged",
-          sol: "11.RL.2.C",
+          sol: "11.RL.2.B",
+          sub: "11.RL.2.B.2",
           stem: "In sentence 1, saying that the scanner \"never shrugged\" most nearly means that it —",
           choices: [
             { letter: "A", text: "was too complicated for a beginner to use" },
@@ -272,7 +287,8 @@
         },
         {
           id: "first-person",
-          sol: "11.RL.3.A",
+          sol: "11.RL.2.B",
+          sub: "11.RL.2.B.2",
           stem: "Because the narrator tells the story in first person, the reader is able to —",
           choices: [
             { letter: "A", text: "learn what Mrs. Lindqvist privately thinks of the garage" },
@@ -325,6 +341,7 @@
         {
           id: "theme",
           sol: "11.RL.1.A",
+          sub: "11.RL.1.A.1",
           stem: "Which statement best expresses a theme of Keziah's story?",
           choices: [
             { letter: "A", text: "An honest result has value even when it disappoints." },
@@ -337,6 +354,7 @@
         {
           id: "problem",
           sol: "11.RL.1.B",
+          sub: "11.RL.1.B.1",
           stem: "What problem does Keziah face in sentences 6 through 9?",
           choices: [
             { letter: "A", text: "Her bread slices were ruined before the fair." },
@@ -348,7 +366,8 @@
         },
         {
           id: "race",
-          sol: "11.RL.2.A",
+          sol: "11.RL.2.C",
+          sub: "11.RL.2.C.2",
           stem: "In sentence 9, Keziah's feeling that she had \"trained for a race that was then canceled\" suggests that she feels —",
           choices: [
             { letter: "A", text: "relieved that the long work is finally over" },
@@ -361,6 +380,7 @@
         {
           id: "every-row",
           sol: "11.RL.1.C",
+          sub: "11.RL.1.C.1",
           stem: "Which sentence best shows that Keziah values honesty over a better-looking result?",
           choices: [
             { letter: "A", text: "\"Keziah knew he was trying to help.\"" },
@@ -372,7 +392,8 @@
         },
         {
           id: "story-test",
-          sol: "11.RL.2.C",
+          sol: "11.RL.2.B",
+          sub: "11.RL.2.B.2",
           stem: "In sentence 14, the phrase \"turn her project into a story instead of a test\" means that leaving out data would —",
           choices: [
             { letter: "A", text: "make the poster more exciting for visitors" },
@@ -385,6 +406,7 @@
         {
           id: "title-tone",
           sol: "11.RL.2.B",
+          sub: "11.RL.2.B.1",
           stem: "The new poster title in sentence 16 has a tone that is best described as —",
           choices: [
             { letter: "A", text: "bitter and defeated" },
@@ -396,7 +418,8 @@
         },
         {
           id: "fresh-loaf",
-          sol: "11.RL.3.A",
+          sol: "11.RL.1.B",
+          sub: "11.RL.1.B.1",
           stem: "Why does the author end the story with Keziah slicing a fresh loaf of bread (sentence 27)?",
           choices: [
             { letter: "A", text: "to show she plans to repeat the experiment with improvements" },
@@ -408,7 +431,8 @@
         },
         {
           id: "puzzled",
-          sol: "11.RV.1.C",
+          sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "In sentence 21, the word puzzled most nearly means —",
           choices: [
             { letter: "A", text: "amused" },
@@ -460,6 +484,7 @@
         {
           id: "central",
           sol: "11.RL.1.A",
+          sub: "11.RL.1.A.1",
           stem: "Which idea does the poem as a whole most clearly develop?",
           choices: [
             { letter: "A", text: "Volcanoes are too dangerous for scientists to study up close." },
@@ -472,6 +497,7 @@
         {
           id: "porch-dog",
           sol: "11.RL.2.A",
+          sub: "11.RL.2.A.1",
           stem: "In lines 1–3, comparing the word dormant to a dog asleep with \"one ear still turning toward the road\" suggests that the volcano —",
           choices: [
             { letter: "A", text: "is resting but still capable of responding" },
@@ -483,7 +509,8 @@
         },
         {
           id: "throat",
-          sol: "11.RL.2.A",
+          sol: "11.RL.2.C",
+          sub: "11.RL.2.C.2",
           stem: "Lines 11–13 personify the mountain (\"a stammer,\" \"clearing its throat\") mainly to —",
           choices: [
             { letter: "A", text: "show that the speaker is frightened of the summit" },
@@ -495,7 +522,8 @@
         },
         {
           id: "not-nothing",
-          sol: "11.RL.2.C",
+          sol: "11.RL.2.D",
+          sub: "11.RL.2.D.2",
           stem: "In line 18, the phrase \"also not nothing at all\" suggests that the drift of the GPS stake is —",
           choices: [
             { letter: "A", text: "a measurement error that should be ignored" },
@@ -507,7 +535,8 @@
         },
         {
           id: "stanza-shift",
-          sol: "11.RL.3.A",
+          sol: "11.RL.1.B",
+          sub: "11.RL.1.B.1",
           stem: "How does the third stanza (lines 19–24) differ from the first stanza (lines 1–8)?",
           choices: [
             { letter: "A", text: "It shifts from scientific data to a story about a child." },
@@ -519,7 +548,8 @@
         },
         {
           id: "wind",
-          sol: "11.RL.1.B",
+          sol: "11.RL.2.A",
+          sub: "11.RL.2.A.1",
           stem: "Line 8, \"a wind that does not know our names,\" implies that the speaker —",
           choices: [
             { letter: "A", text: "is lost and cannot find the right trail" },
@@ -532,6 +562,7 @@
         {
           id: "used-to",
           sol: "11.RL.1.C",
+          sub: "11.RL.1.C.1",
           stem: "Lines 19 and 20 reveal that the speaker once believed that —",
           choices: [
             { letter: "A", text: "quiet things had nothing more to offer" },
@@ -544,6 +575,7 @@
         {
           id: "closing-tone",
           sol: "11.RL.2.B",
+          sub: "11.RL.2.B.1",
           stem: "The tone of the poem's final two lines (lines 23 and 24) is best described as —",
           choices: [
             { letter: "A", text: "fearful and urgent" },
@@ -591,6 +623,7 @@
         {
           id: "theme",
           sol: "11.RL.1.A",
+          sub: "11.RL.1.A.1",
           stem: "Which theme does the scene between Ji-ah and Daniel most clearly develop?",
           choices: [
             { letter: "A", text: "Family businesses should avoid any change in routine." },
@@ -603,6 +636,7 @@
         {
           id: "siblings",
           sol: "11.RL.1.C",
+          sub: "11.RL.1.C.1",
           stem: "Which statement best describes the difference between Ji-ah and Daniel at the start of the scene?",
           choices: [
             { letter: "A", text: "Ji-ah wants to sell the truck, while Daniel wants to keep it." },
@@ -614,7 +648,8 @@
         },
         {
           id: "laptop",
-          sol: "11.RL.1.B",
+          sol: "11.RL.1.D",
+          sub: "11.RL.1.D.1",
           stem: "The stage direction in sentence 8, in which Ji-ah closes the laptop \"harder than necessary,\" mainly reveals that she —",
           choices: [
             { letter: "A", text: "is frustrated by Daniel's version of their mother" },
@@ -626,7 +661,8 @@
         },
         {
           id: "okafor",
-          sol: "11.RL.3.A",
+          sol: "11.RL.1.B",
+          sub: "11.RL.1.B.1",
           stem: "How does Mr. Okafor's arrival function in the structure of the scene?",
           choices: [
             { letter: "A", text: "It interrupts the argument and ends the scene without a decision." },
@@ -639,6 +675,7 @@
         {
           id: "cabbages",
           sol: "11.RL.2.B",
+          sub: "11.RL.2.B.1",
           stem: "Daniel's opening complaint that \"these cabbages are judging me\" (sentence 1) creates a tone that is —",
           choices: [
             { letter: "A", text: "lightly humorous" },
@@ -650,7 +687,8 @@
         },
         {
           id: "books",
-          sol: "11.RL.2.C",
+          sol: "11.RL.2.B",
+          sub: "11.RL.2.B.2",
           stem: "In sentence 8, Ji-ah says that doing the books \"is not the same as playing it safe.\" She most nearly means that —",
           choices: [
             { letter: "A", text: "their mother never took any risks with money" },
@@ -663,6 +701,7 @@
         {
           id: "umma",
           sol: "11.RL.1.C",
+          sub: "11.RL.1.C.1",
           stem: "Ji-ah's reply \"Like Umma's business\" (sentence 18) suggests that she now sees the test run as —",
           choices: [
             { letter: "A", text: "a rejection of the way her mother worked" },
@@ -674,7 +713,8 @@
         },
         {
           id: "light",
-          sol: "11.RL.2.A",
+          sol: "11.RL.2.C",
+          sub: "11.RL.2.C.1",
           stem: "The final stage direction, in which morning light falls across the menu board, most likely symbolizes —",
           choices: [
             { letter: "A", text: "the end of the family's business" },
@@ -725,6 +765,7 @@
         {
           id: "central",
           sol: "11.RI.1.A",
+          sub: "11.RI.1.A.2",
           stem: "Which statement best summarizes the central idea of the article on volcano monitoring?",
           choices: [
             { letter: "A", text: "Satellites have replaced ground instruments as the best way to study volcanoes." },
@@ -737,6 +778,7 @@
         {
           id: "structure",
           sol: "11.RI.2.A",
+          sub: "11.RI.2.A.1",
           stem: "How does the author organize the sections that follow sentence 3?",
           choices: [
             { letter: "A", text: "by tracing the history of one volcano from birth to eruption" },
@@ -748,7 +790,8 @@
         },
         {
           id: "balloon",
-          sol: "11.RI.2.B",
+          sol: "11.RI.2.A",
+          sub: "11.RI.2.A.2",
           stem: "In sentence 10, comparing the swelling ground to a balloon inflated beneath a blanket helps the reader understand that —",
           choices: [
             { letter: "A", text: "volcanoes are hollow and filled mostly with air" },
@@ -761,6 +804,7 @@
         {
           id: "gas-drop",
           sol: "11.RI.1.B",
+          sub: "11.RI.1.B.1",
           stem: "According to the passage, why might a drop in sulfur dioxide fail to be reassuring?",
           choices: [
             { letter: "A", text: "Blocked vents may be trapping gas and building pressure." },
@@ -772,7 +816,8 @@
         },
         {
           id: "attitude",
-          sol: "11.RI.1.C",
+          sol: "11.RI.2.C",
+          sub: "11.RI.2.C.1",
           stem: "The author's attitude toward volcano forecasting is best described as —",
           choices: [
             { letter: "A", text: "appreciative but realistic about its limits" },
@@ -784,7 +829,8 @@
         },
         {
           id: "pinatubo",
-          sol: "11.RI.2.C",
+          sol: "11.RI.2.A",
+          sub: "11.RI.2.A.2",
           stem: "The author includes the example of Mount Pinatubo in sentence 23 mainly to —",
           choices: [
             { letter: "A", text: "show that eruptions in Asia are larger than elsewhere" },
@@ -797,6 +843,7 @@
         {
           id: "prophecy",
           sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "In sentence 25, the contrast between \"a probability\" and \"a prophecy\" shows that a volcano forecast is —",
           choices: [
             { letter: "A", text: "a guess that scientists rarely take seriously" },
@@ -808,7 +855,8 @@
         },
         {
           id: "several-signals",
-          sol: "11.RI.2.C",
+          sol: "11.RI.1.B",
+          sub: "11.RI.1.B.1",
           stem: "Which sentence best explains why forecasters look for several signals changing together?",
           choices: [
             { letter: "A", text: "\"Seismometers placed on a volcano's slopes record these tremors continuously.\"" },
@@ -856,6 +904,7 @@
         {
           id: "main-idea",
           sol: "11.RI.1.A",
+          sub: "11.RI.1.A.2",
           stem: "What is the main idea of the article about the check engine light?",
           choices: [
             { letter: "A", text: "Drivers should replace the catalytic converter whenever the light appears." },
@@ -867,7 +916,8 @@
         },
         {
           id: "letter-p",
-          sol: "11.RI.1.B",
+          sol: "11.RI.2.B",
+          sub: "11.RI.2.B.1",
           stem: "According to the passage, what does the letter P at the start of a trouble code indicate?",
           choices: [
             { letter: "A", text: "The problem involves the engine or transmission." },
@@ -880,6 +930,7 @@
         {
           id: "headings",
           sol: "11.RI.2.A",
+          sub: "11.RI.2.A.2",
           stem: "How do the headings, such as \"A Clue, Not a Verdict,\" help organize the article?",
           choices: [
             { letter: "A", text: "They list the steps for repairing an engine in order." },
@@ -891,7 +942,8 @@
         },
         {
           id: "investigation",
-          sol: "11.RI.2.B",
+          sol: "11.RI.2.A",
+          sub: "11.RI.2.A.2",
           stem: "In sentence 13, the author contrasts the start of an investigation with the end of one mainly to emphasize that —",
           choices: [
             { letter: "A", text: "mechanics often take too long to finish a repair" },
@@ -903,7 +955,8 @@
         },
         {
           id: "flashing",
-          sol: "11.RI.2.C",
+          sol: "11.RI.2.B",
+          sub: "11.RI.2.B.2",
           stem: "Which sentence best explains why a flashing light calls for faster action than a steady one?",
           choices: [
             { letter: "A", text: "Sentence 15" },
@@ -915,7 +968,8 @@
         },
         {
           id: "purpose",
-          sol: "11.RI.1.C",
+          sol: "11.RI.1.A",
+          sub: "11.RI.1.A.2",
           stem: "The author's main purpose in writing the article is to —",
           choices: [
             { letter: "A", text: "persuade drivers to buy their own code readers" },
@@ -927,7 +981,8 @@
         },
         {
           id: "diagnostics",
-          sol: "11.RV.1.A",
+          sol: "11.RV.1.C",
+          sub: "11.RV.1.C.1",
           stem: "The word diagnostics in sentence 5 comes from the Greek prefix dia-, meaning through, and a root meaning to know. Based on these parts, diagnostics refers to —",
           choices: [
             { letter: "A", text: "replacing broken parts quickly" },
@@ -939,7 +994,8 @@
         },
         {
           id: "verdict",
-          sol: "11.RV.1.C",
+          sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "In the heading \"A Clue, Not a Verdict,\" the word verdict most nearly means —",
           choices: [
             { letter: "A", text: "a final judgment" },
@@ -988,6 +1044,7 @@
         {
           id: "preliminary",
           sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "In sentence 2, the phrase set off by commas shows that preliminary trials are —",
           choices: [
             { letter: "A", text: "early tests done before the final design" },
@@ -999,7 +1056,8 @@
         },
         {
           id: "anomaly",
-          sol: "11.RV.1.C",
+          sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "Which words from sentence 8 best clarify the meaning of anomaly?",
           choices: [
             { letter: "A", text: "\"Leilani explained that the reading\"" },
@@ -1011,7 +1069,8 @@
         },
         {
           id: "replicate",
-          sol: "11.RV.1.A",
+          sol: "11.RV.1.C",
+          sub: "11.RV.1.C.1",
           stem: "The word replicate in sentence 10 begins with the prefix re-, as in redo and rewrite. Based on this prefix and sentence 11, replicate means to —",
           choices: [
             { letter: "A", text: "explain a result to a judge" },
@@ -1024,6 +1083,7 @@
         {
           id: "rigorous",
           sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "In sentence 13, Mr. Abernathy's explanation shows that rigorous means —",
           choices: [
             { letter: "A", text: "quick and efficient" },
@@ -1035,7 +1095,8 @@
         },
         {
           id: "concede",
-          sol: "11.RV.1.C",
+          sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "In sentence 18, the word concede most nearly means to —",
           choices: [
             { letter: "A", text: "deny" },
@@ -1048,6 +1109,7 @@
         {
           id: "candid",
           sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "In sentence 20, the words that follow candid show that it most nearly means —",
           choices: [
             { letter: "A", text: "frank and truthful" },
@@ -1060,6 +1122,7 @@
         {
           id: "marked",
           sol: "11.RL.1.C",
+          sub: "11.RL.1.C.1",
           stem: "Leilani's decision in sentence 9 to mark the unusual reading rather than delete it shows that she —",
           choices: [
             { letter: "A", text: "did not understand what the reading meant" },
@@ -1071,7 +1134,8 @@
         },
         {
           id: "three-creeks",
-          sol: "11.RL.3.A",
+          sol: "11.RL.1.B",
+          sub: "11.RL.1.B.1",
           stem: "The final sentence, in which Leilani writes the names of three creeks, mainly shows that she —",
           choices: [
             { letter: "A", text: "plans to give up on water filters" },
@@ -1117,6 +1181,7 @@
         {
           id: "both-acknowledge",
           sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "Which point do the council summary and the op-ed both acknowledge?",
           choices: [
             { letter: "A", text: "Restaurants on Linden Street pay no property taxes." },
@@ -1128,7 +1193,8 @@
         },
         {
           id: "level-field",
-          sol: "11.DSR.E",
+          sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "How does the op-ed writer respond to Councilmember Ruiz's description of the buffer in sentence 3?",
           choices: [
             { letter: "A", text: "He argues that it would push trucks away from customers instead of leveling anything." },
@@ -1141,6 +1207,7 @@
         {
           id: "differ",
           sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "The two texts differ mainly because Text 1 —",
           choices: [
             { letter: "A", text: "argues against the proposal, while Text 2 supports it" },
@@ -1152,7 +1219,8 @@
         },
         {
           id: "weaken-sales",
-          sol: "11.DSR.E",
+          sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "Which detail recorded in Text 1 does the op-ed writer use to weaken the claim about lost restaurant sales?",
           choices: [
             { letter: "A", text: "the fire marshal's complaints about blocked access" },
@@ -1164,7 +1232,8 @@
         },
         {
           id: "pigeons",
-          sol: "11.RI.1.C",
+          sol: "11.RI.2.C",
+          sub: "11.RI.2.C.1",
           stem: "In sentence 12, the writer's remark that \"the only lunchtime crowd is pigeons\" creates a tone that is —",
           choices: [
             { letter: "A", text: "fearful" },
@@ -1176,7 +1245,8 @@
         },
         {
           id: "concession",
-          sol: "11.RI.2.B",
+          sol: "11.RI.1.C",
+          sub: "11.RI.1.C.1",
           stem: "In sentences 16 and 17, the op-ed writer concedes one point mainly in order to —",
           choices: [
             { letter: "A", text: "admit that the proposal is fair after all" },
@@ -1189,6 +1259,7 @@
         {
           id: "support-request",
           sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "Which detail from Text 1 would the op-ed writer most likely use to support his request in sentence 18?",
           choices: [
             { letter: "A", text: "Councilmember Osei's request to study moving the zones to busier blocks" },
@@ -1200,7 +1271,8 @@
         },
         {
           id: "conclude",
-          sol: "11.DSR.E",
+          sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "A council member who read both texts could most reasonably conclude that —",
           choices: [
             { letter: "A", text: "food trucks should be banned from the downtown area entirely" },
@@ -1248,6 +1320,7 @@
         {
           id: "shared",
           sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "Which idea appears in both the journal and the safety bulletin?",
           choices: [
             { letter: "A", text: "Carbon dioxide gathers in hollows on calm days." },
@@ -1259,7 +1332,8 @@
         },
         {
           id: "explains-fade",
-          sol: "11.DSR.E",
+          sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "Which sentence from Text 2 best explains what Arjun noticed in sentence 9?",
           choices: [
             { letter: "A", text: "Sentence 12" },
@@ -1272,6 +1346,7 @@
         {
           id: "purposes",
           sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "How does the purpose of Text 1 differ from the purpose of Text 2?",
           choices: [
             { letter: "A", text: "Text 1 records a personal experience; Text 2 gives safety instructions." },
@@ -1283,7 +1358,8 @@
         },
         {
           id: "called-back",
-          sol: "11.DSR.E",
+          sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "Based on both texts, why did Ranger Bettencourt call the boy back so sharply?",
           choices: [
             { letter: "A", text: "He was blocking other visitors from taking photos." },
@@ -1295,7 +1371,8 @@
         },
         {
           id: "kettle",
-          sol: "11.RL.2.A",
+          sol: "11.RL.2.C",
+          sub: "11.RL.2.C.2",
           stem: "In sentence 5, comparing the steam to \"a kettle someone had forgotten on the stove\" mainly suggests that the vents —",
           choices: [
             { letter: "A", text: "hiss constantly with a familiar, unattended sound" },
@@ -1308,6 +1385,7 @@
         {
           id: "bulletin-structure",
           sol: "11.RI.2.A",
+          sub: "11.RI.2.A.1",
           stem: "How is Text 2 mainly organized?",
           choices: [
             { letter: "A", text: "as a story told in the order events happened" },
@@ -1319,7 +1397,8 @@
         },
         {
           id: "low-areas",
-          sol: "11.RI.1.B",
+          sol: "11.RI.1.A",
+          sub: "11.RI.1.A.2",
           stem: "According to Text 2, why should visitors stay out of low areas in the Steam Fields?",
           choices: [
             { letter: "A", text: "Hydrogen sulfide is lighter than air and rises from them." },
@@ -1331,7 +1410,8 @@
         },
         {
           id: "good-news",
-          sol: "11.DSR.E",
+          sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "Using both texts, a reader can conclude that the \"good news\" Arjun mentions in sentence 11 would have been —",
           choices: [
             { letter: "A", text: "accurate, because the gas had blown away" },
@@ -1378,7 +1458,8 @@
       claims: [
         {
           id: "audience",
-          sol: "11.RI.1.C",
+          sol: "11.RI.1.A",
+          sub: "11.RI.1.A.2",
           stem: "These guidelines are written mainly for —",
           choices: [
             { letter: "A", text: "judges who score projects at the state fair" },
@@ -1390,7 +1471,8 @@
         },
         {
           id: "survey",
-          sol: "11.RI.1.B",
+          sol: "11.RI.1.A",
+          sub: "11.RI.1.A.2",
           stem: "According to the guidelines, a student who wants to survey classmates about their sleep habits must —",
           choices: [
             { letter: "A", text: "get review approval and parent permission before starting" },
@@ -1402,7 +1484,8 @@
         },
         {
           id: "no-exceptions",
-          sol: "11.RI.2.C",
+          sol: "11.RI.1.A",
+          sub: "11.RI.1.A.2",
           stem: "Which sentence shows most clearly that the fair will make no exceptions to its registration deadline?",
           choices: [
             { letter: "A", text: "Sentence 3" },
@@ -1414,7 +1497,8 @@
         },
         {
           id: "most-points",
-          sol: "11.RI.1.B",
+          sol: "11.RI.1.A",
+          sub: "11.RI.1.A.2",
           stem: "Based on the scoring categories in sentence 14, which part of a project is worth the most points?",
           choices: [
             { letter: "A", text: "the research question" },
@@ -1427,6 +1511,7 @@
         {
           id: "organized",
           sol: "11.RI.2.A",
+          sub: "11.RI.2.A.1",
           stem: "How are the entry guidelines mainly organized?",
           choices: [
             { letter: "A", text: "as a timeline of one student's project from start to finish" },
@@ -1439,6 +1524,7 @@
         {
           id: "absent-rule",
           sol: "11.RI.1.A",
+          sub: "11.RI.1.A.2",
           stem: "Which statement best summarizes the rule in sentence 16?",
           choices: [
             { letter: "A", text: "Judges visit every project exactly one time." },
@@ -1450,7 +1536,8 @@
         },
         {
           id: "dis-prefix",
-          sol: "11.RV.1.A",
+          sol: "11.RV.1.C",
+          sub: "11.RV.1.C.1",
           stem: "The word disqualified in sentence 13 begins with the prefix dis-, as do disconnect and disagree. In all three words, the prefix dis- signals —",
           choices: [
             { letter: "A", text: "a reversal or removal" },
@@ -1462,7 +1549,8 @@
         },
         {
           id: "even-if-safe",
-          sol: "11.RI.2.B",
+          sol: "11.RI.1.A",
+          sub: "11.RI.1.A.2",
           stem: "Sentence 13 states that projects will be disqualified \"even if the research was performed safely\" mainly to emphasize that —",
           choices: [
             { letter: "A", text: "most student research is dangerous" },
@@ -1510,7 +1598,8 @@
       claims: [
         {
           id: "position",
-          sol: "11.RI.1.A",
+          sol: "11.RI.1.C",
+          sub: "11.RI.1.C.1",
           stem: "Which sentence most directly states the position the editorial defends?",
           choices: [
             { letter: "A", text: "Sentence 4" },
@@ -1523,6 +1612,7 @@
         {
           id: "second-para",
           sol: "11.RI.2.A",
+          sub: "11.RI.2.A.1",
           stem: "How does the writer develop the argument in the second paragraph (sentences 5–7)?",
           choices: [
             { letter: "A", text: "by telling a personal story about repairing a car" },
@@ -1534,7 +1624,8 @@
         },
         {
           id: "turn",
-          sol: "11.RI.2.C",
+          sol: "11.RI.1.C",
+          sub: "11.RI.1.C.1",
           stem: "In sentence 8, the writer claims that the opponents' last point \"actually argues for the garage.\" This move mainly serves to —",
           choices: [
             { letter: "A", text: "admit that the program is too expensive to save" },
@@ -1546,7 +1637,8 @@
         },
         {
           id: "evidence-work",
-          sol: "11.RI.1.B",
+          sol: "11.RI.1.C",
+          sub: "11.RI.1.C.2",
           stem: "Which sentence provides the strongest evidence that the program prepares students for work?",
           choices: [
             { letter: "A", text: "Sentence 1" },
@@ -1559,6 +1651,7 @@
         {
           id: "opinion",
           sol: "11.RI.1.C",
+          sub: "11.RI.1.C.1",
           stem: "Which statement from the editorial is an opinion rather than a verifiable fact?",
           choices: [
             { letter: "A", text: "\"For forty years, it has housed the school's automotive technology program.\"" },
@@ -1570,7 +1663,8 @@
         },
         {
           id: "pipeline",
-          sol: "11.RI.2.B",
+          sol: "11.RI.2.A",
+          sub: "11.RI.2.A.2",
           stem: "In sentence 16, the writer calls the program a pipeline mainly to suggest that it —",
           choices: [
             { letter: "A", text: "steadily delivers trained workers to local employers" },
@@ -1582,7 +1676,8 @@
         },
         {
           id: "bulldozing",
-          sol: "11.RV.1.C",
+          sol: "11.RV.1.D",
+          sub: "11.RV.1.D.1",
           stem: "In sentence 22, the word bulldozing suggests that closing the program would be —",
           choices: [
             { letter: "A", text: "a careful and gradual change" },
@@ -1594,7 +1689,8 @@
         },
         {
           id: "concession",
-          sol: "11.RI.2.A",
+          sol: "11.RI.1.C",
+          sub: "11.RI.1.C.2",
           stem: "The writer's concession in sentences 20 and 21 mainly strengthens the argument by —",
           choices: [
             { letter: "A", text: "proving that the computer lab will never be built" },
