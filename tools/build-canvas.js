@@ -13,6 +13,7 @@
 
    Writes dist/canvas/<ST>/, dist/canvas/SOLLabyrinth-<ST>-Canvas.zip (the same files, for one upload) and
    dist/canvas/SOLLabyrinth-<ST>-Canvas-update.zip (the .js files only, for updating a game already in Canvas).
+   v5.13.1: for VA the two zips are "SOL Lab VA Eng.zip" and "SOL Lab VA Eng update.zip".
    v5.13: both zips also carry the teacher progress page, dist/canvas/SOLLabyrinth-<ST>-Teacher.html (tools/build-teacher.js):
    it reads the progress codes students paste into a Canvas assignment. It is not in dist/canvas/<ST>/ (the files the
    game itself loads); the teacher uploads it next to them but keeps it hidden from students. */
@@ -31,6 +32,10 @@ var m = page.match(/<script>([\s\S]*)<\/script>/);
 if (!m) throw new Error("tools/build-canvas.js: no loader script in loader.html");
 var loaderJs = m[1];
 var base = st === "ODY" ? "SOLLabyrinth-Odyssey" : "SOLLabyrinth-" + st;   /* v5.9: the Odyssey game has its own file names */
+/* v5.13.1: the zips' own names. VA's are "SOL Lab VA Eng.zip" and "SOL Lab VA Eng update.zip"; the files inside keep
+   their SOLLabyrinth-VA-* names, so an update still replaces the files already in Canvas. */
+var zipFull = st === "VA" ? "SOL Lab VA Eng.zip" : base + "-Canvas.zip";
+var zipUpd = st === "VA" ? "SOL Lab VA Eng update.zip" : base + "-Canvas-update.zip";
 
 /* ── the data files: 576 KB of bundle each (768 KB of base64; Canvas has served an 800 KB one to a page) ── */
 var PIECE = 576 * 1024, files = [];
@@ -122,7 +127,7 @@ function readme(update) {
       "5. Done. Nothing changes on your Canvas page. Students may need to refresh the page once.",
       "6. New in this version: the teacher progress page (" + teacherName + "). If your folder doesn't have it yet,",
       "   upload it too and keep it hidden from students - see TRACKING STUDENT PROGRESS below.", "",
-      "Setting the game up for the first time? Use the full zip (" + base + "-Canvas.zip) instead.", "");
+      "Setting the game up for the first time? Use the full zip (" + zipFull + ") instead.", "");
   } else {
     L.push("THIS ZIP SETS UP THE GAME IN CANVAS FOR THE FIRST TIME.",
       "It holds " + n + " game files: one small page (" + base + ".html) and the .js files it loads.",
@@ -149,7 +154,7 @@ function readme(update) {
       "5. Click Save. The game appears on the page.", "",
       teacherSteps().join("\r\n"), "",
       "UPDATING LATER",
-      "When you get a new version, use the update zip (" + base + "-Canvas-update.zip): upload its .js files to the",
+      "When you get a new version, use the update zip (" + zipUpd + "): upload its .js files to the",
       "same folder and choose Replace. Do not replace or delete " + base + ".html - the embed code and the",
       "students' saved progress stay with it.", "");
   }
@@ -167,11 +172,11 @@ var RM_FULL = path.join(tmpDir, "READ ME FIRST - Canvas setup.txt"), RM_UPD = pa
 fs.writeFileSync(RM_FULL, readme(false));
 fs.writeFileSync(RM_UPD, readme(true));
 
-var zip = path.join(outAll, base + "-Canvas.zip");
+var zip = path.join(outAll, zipFull);
 if (fs.existsSync(zip)) fs.unlinkSync(zip);
 cp.execFileSync("zip", ["-q", "-X", "-j", zip].concat([RM_FULL, teacherPath]).concat([base + ".html", game].concat(files).map(function (f) { return path.join(out, f); })));
 /* an update: the .js files only, so the starter page already in Canvas (and its saves) stays */
-var upd = path.join(outAll, base + "-Canvas-update.zip");
+var upd = path.join(outAll, zipUpd);
 if (fs.existsSync(upd)) fs.unlinkSync(upd);
 cp.execFileSync("zip", ["-q", "-X", "-j", upd].concat([RM_UPD, teacherPath]).concat([game].concat(files).map(function (f) { return path.join(out, f); })));
 fs.rmSync(tmpDir, { recursive: true, force: true });

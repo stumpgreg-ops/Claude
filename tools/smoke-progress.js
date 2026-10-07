@@ -284,7 +284,7 @@ function makeZip(files) {
   /* ════ 3. the teacher page ════ */
   var tdir = path.join(root, "dist", "canvas"), tfile = "SOLLabyrinth-VA-Teacher.html";
   check(fs.existsSync(path.join(tdir, tfile)) && fs.statSync(path.join(tdir, tfile)).size < 64 * 1024, "build-canvas wrote " + tfile + " (" + (fs.statSync(path.join(tdir, tfile)).size / 1024).toFixed(1) + " KiB)");
-  var zipList = require("child_process").execFileSync("unzip", ["-Z1", path.join(tdir, "SOLLabyrinth-VA-Canvas.zip")]).toString();
+  var zipList = require("child_process").execFileSync("unzip", ["-Z1", path.join(tdir, "SOL Lab VA Eng.zip")]).toString();
   check(zipList.indexOf(tfile) !== -1, "the Canvas zip carries the teacher page");
   var tsrv = await serve(tdir), served = [];
   page = await browser.newPage({ viewport: { width: 1366, height: 900 } });

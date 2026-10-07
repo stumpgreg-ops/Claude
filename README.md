@@ -46,6 +46,10 @@ Tests: `node tools/smoke-progress.js` (after `node tools/build-games.js`, `node 
 - **"All episodes":** first the frame at the Phaeacian court, then the Lotus-Eaters, the Cyclops, Circe, the Cattle of the Sun and Calypso, then the paired texts.
 - **Other games:** the Virginia and New Jersey games keep their length-based picker.
 
+## VA zip names (2026-10-07)
+
+`node tools/build-canvas.js VA` now writes **`dist/canvas/SOL Lab VA Eng.zip`** (first-time setup) and **`dist/canvas/SOL Lab VA Eng update.zip`** (update). Only the zip names changed: the files inside keep their `SOLLabyrinth-VA-*` names, so an update still replaces the files already in Canvas, and the embed code and students' saves are untouched. The READ ME in each zip names the new zips. NJ and Odyssey zips keep their `SOLLabyrinth-<NJ|Odyssey>-Canvas*.zip` names.
+
 ## v5.12.1 (2026-10-06) — a READ ME in every Canvas zip
 
 `tools/build-canvas.js` puts a plain-text file in each zip:
