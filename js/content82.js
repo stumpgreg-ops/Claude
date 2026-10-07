@@ -51,6 +51,7 @@
         {
           id: "theme",
           sol: "10.RL.1.A",
+          sub: "10.RL.1.A.1",
           stem: "Which theme does Ruthie's loss in the fifth round best develop?",
           choices: [
             { letter: "A", text: "Young players usually have a real edge over experienced adults." },
@@ -63,6 +64,7 @@
         {
           id: "seat",
           sol: "10.RL.1.C",
+          sub: "10.RL.1.C.1",
           stem: "Sentence 2, in which Ruthie sits with her back to the window, characterizes her as a player who —",
           choices: [
             { letter: "A", text: "dislikes playing in crowded, noisy school rooms" },
@@ -74,7 +76,8 @@
         },
         {
           id: "rug",
-          sol: "10.RL.2.A",
+          sol: "10.RL.2.B",
+          sub: "10.RL.2.B.2",
           stem: "In sentence 13, comparing the change in the position to a rug pulled an inch suggests that Ruthie feels —",
           choices: [
             { letter: "A", text: "suddenly unsteady after one small change" },
@@ -86,7 +89,8 @@
         },
         {
           id: "irony",
-          sol: "10.RL.2.C",
+          sol: "10.RL.2.D",
+          sub: "10.RL.2.D.2",
           stem: "Which situation in the story of Ruthie's game against Felix is most ironic?",
           choices: [
             { letter: "A", text: "Felix writes his moves in tiny capitals despite being young." },
@@ -99,6 +103,7 @@
         {
           id: "turn",
           sol: "10.RL.1.B",
+          sub: "10.RL.1.B.1",
           stem: "Which sentence marks the turning point in the game between Ruthie and Felix?",
           choices: [
             { letter: "A", text: "Sentence 13, when Felix plays the knight to the edge" },
@@ -110,7 +115,8 @@
         },
         {
           id: "orange",
-          sol: "10.RL.3.A",
+          sol: "10.RL.1.B",
+          sub: "10.RL.1.B.1",
           stem: "The orange in sentence 30 echoes the orange peels of sentence 1 and the vanished smell of sentence 18. The author returns to it at the end mainly to —",
           choices: [
             { letter: "A", text: "suggest that Ruthie skipped lunch before the round" },
@@ -122,7 +128,8 @@
         },
         {
           id: "mood",
-          sol: "10.RL.2.B",
+          sol: "10.RL.2.C",
+          sub: "10.RL.2.C.2",
           stem: "The details in sentence 18 (the quiet hall, the missing smell, the map of branching roads) mainly create a mood of —",
           choices: [
             { letter: "A", text: "restless, drifting boredom" },
@@ -134,7 +141,8 @@
         },
         {
           id: "passive",
-          sol: "10.RV.1.C",
+          sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "Based on the rest of sentence 15, a passive move in chess is one that —",
           choices: [
             { letter: "A", text: "breaks one of the tournament's written rules" },
@@ -188,6 +196,7 @@
         {
           id: "theme",
           sol: "10.RL.1.A",
+          sub: "10.RL.1.A.1",
           stem: "Which theme is developed through Wren and Jiddo's night in the low corner of the field?",
           choices: [
             { letter: "A", text: "Young people should trust their elders instead of new tools." },
@@ -200,6 +209,7 @@
         {
           id: "wren6",
           sol: "10.RL.1.C",
+          sub: "10.RL.1.C.1",
           stem: "Sentence 6 characterizes Wren, early in the story, as someone who —",
           choices: [
             { letter: "A", text: "trusts measurement over her grandfather's experience" },
@@ -211,7 +221,8 @@
         },
         {
           id: "water",
-          sol: "10.RL.2.A",
+          sol: "10.RL.2.B",
+          sub: "10.RL.2.B.2",
           stem: "In sentence 14, Jiddo compares cold air to water mainly to explain why —",
           choices: [
             { letter: "A", text: "the creek is likely to freeze before the field" },
@@ -223,7 +234,8 @@
         },
         {
           id: "lied",
-          sol: "10.RL.2.C",
+          sol: "10.RL.2.D",
+          sub: "10.RL.2.D.2",
           stem: "Sentence 22 says the stake had lied to Wren without meaning to. This description is ironic because —",
           choices: [
             { letter: "A", text: "Jiddo had warned her that the stakes would be stolen" },
@@ -236,6 +248,7 @@
         {
           id: "why17",
           sol: "10.RL.1.B",
+          sub: "10.RL.1.B.2",
           stem: "Which sentence best explains why Wren's phone gave no warning about the low corner of the field?",
           choices: [
             { letter: "A", text: "Sentence 17, which shows the stake's battery had died" },
@@ -247,7 +260,8 @@
         },
         {
           id: "ending",
-          sol: "10.RL.3.A",
+          sol: "10.RL.1.B",
+          sub: "10.RL.1.B.1",
           stem: "How does Jiddo's request in sentences 23 and 24 reshape the conflict set up in sentences 3 through 6?",
           choices: [
             { letter: "A", text: "It shows that Jiddo has finally given up on his own methods." },
@@ -260,6 +274,7 @@
         {
           id: "deliberate",
           sol: "10.RV.1.D",
+          sub: "10.RV.1.D.1",
           stem: "The author says Jiddo moved deliberately in sentence 19, not simply slowly. Compared with slowly, deliberately suggests that he moves —",
           choices: [
             { letter: "A", text: "with stiffness caused by the cold night air" },
@@ -271,7 +286,8 @@
         },
         {
           id: "silvered",
-          sol: "10.RV.1.B",
+          sol: "10.RV.1.F",
+          sub: "10.RV.1.F.1",
           stem: "In sentence 21, the frost had silvered the grass. Silvered most nearly means —",
           choices: [
             { letter: "A", text: "flattened the grass with its weight" },
@@ -327,6 +343,7 @@
         {
           id: "theme",
           sol: "10.RL.1.A",
+          sub: "10.RL.1.A.1",
           stem: "Which statement best expresses a theme of the story about Leo and Ba?",
           choices: [
             { letter: "A", text: "A mistake made while trying can open the way to friendship." },
@@ -339,6 +356,7 @@
         {
           id: "leo6",
           sol: "10.RL.1.C",
+          sub: "10.RL.1.C.1",
           stem: "Sentence 6, in which Leo finds the app and decides to change things, shows that he is someone who —",
           choices: [
             { letter: "A", text: "gives up quickly when a task becomes hard" },
@@ -351,6 +369,7 @@
         {
           id: "plot",
           sol: "10.RL.1.B",
+          sub: "10.RL.1.B.2",
           stem: "Leo's mistake at the fence in sentences 13 through 18 mainly leads to —",
           choices: [
             { letter: "A", text: "an argument between Leo and Thu" },
@@ -362,7 +381,8 @@
         },
         {
           id: "judge",
-          sol: "10.RL.2.A",
+          sol: "10.RL.2.B",
+          sub: "10.RL.2.B.2",
           stem: "In sentence 25, Ba nods like a judge awarding points. This comparison suggests that she —",
           choices: [
             { letter: "A", text: "is tired of correcting Leo's mistakes" },
@@ -374,7 +394,8 @@
         },
         {
           id: "tone",
-          sol: "10.RL.2.B",
+          sol: "10.RL.2.C",
+          sub: "10.RL.2.C.1",
           stem: "The tone of the final paragraph (sentences 26 through 30) is best described as —",
           choices: [
             { letter: "A", text: "anxious and uncertain" },
@@ -386,7 +407,8 @@
         },
         {
           id: "tones9",
-          sol: "10.RL.3.A",
+          sol: "10.RL.1.B",
+          sub: "10.RL.1.B.2",
           stem: "The author includes Thu's explanation of Vietnamese tones in sentence 9 mainly to —",
           choices: [
             { letter: "A", text: "show that Thu secretly wants Leo to quit the app" },
@@ -398,7 +420,8 @@
         },
         {
           id: "clumsy",
-          sol: "10.RV.1.C",
+          sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "In sentence 29, the contrast with careful and slow helps show that clumsy most nearly means —",
           choices: [
             { letter: "A", text: "awkward and not yet skillful" },
@@ -410,7 +433,8 @@
         },
         {
           id: "joke",
-          sol: "10.RL.2.C",
+          sol: "10.RL.2.B",
+          sub: "10.RL.2.B.2",
           stem: "The mention of tired tomatoes at the end of sentence 30 is humorous mainly because it —",
           choices: [
             { letter: "A", text: "proves that the garden needs more water" },
@@ -461,6 +485,7 @@
         {
           id: "central",
           sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "Which statement best expresses the central idea of the article about the Marlow County sorting center?",
           choices: [
             { letter: "A", text: "Sorting machines have made human workers almost unnecessary." },
@@ -473,6 +498,7 @@
         {
           id: "org",
           sol: "10.RI.2.A",
+          sub: "10.RI.2.A.1",
           stem: "How are sentences 4 through 19 of the sorting-center article mainly organized?",
           choices: [
             { letter: "A", text: "as a problem followed by several rejected solutions" },
@@ -484,7 +510,8 @@
         },
         {
           id: "alum",
-          sol: "10.RI.1.B",
+          sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "According to sentence 8, how does the center separate aluminum cans from the rest of the load?",
           choices: [
             { letter: "A", text: "A changing magnetic field pushes them off the belt." },
@@ -496,7 +523,8 @@
         },
         {
           id: "spool",
-          sol: "10.RI.2.B",
+          sol: "10.RI.2.C",
+          sub: "10.RI.2.C.2",
           stem: "The comparison in sentence 12 of bags and hoses wrapping like thread around a spool mainly emphasizes —",
           choices: [
             { letter: "A", text: "how colorful the holiday lights look on the belt" },
@@ -508,7 +536,8 @@
         },
         {
           id: "quote",
-          sol: "10.RI.1.C",
+          sol: "10.RI.2.A",
+          sub: "10.RI.2.A.2",
           stem: "The author includes Denise Okoro's words in sentences 14 and 15 mainly to —",
           choices: [
             { letter: "A", text: "show the real cost that wrong items create for the center" },
@@ -520,7 +549,8 @@
         },
         {
           id: "evidence22",
-          sol: "10.RI.2.C",
+          sol: "10.RI.2.A",
+          sub: "10.RI.2.A.2",
           stem: "Which sentence provides the strongest evidence for the claim in sentence 22 that wishcycling can backfire?",
           choices: [
             { letter: "A", text: "Sentence 2, about the dozen separate streams" },
@@ -532,7 +562,8 @@
         },
         {
           id: "wishcycling",
-          sol: "10.RV.1.C",
+          sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "Based on the explanation in sentence 21, wishcycling most nearly means —",
           choices: [
             { letter: "A", text: "sorting recycling at home into separate bins" },
@@ -544,7 +575,8 @@
         },
         {
           id: "label",
-          sol: "10.RI.1.B",
+          sol: "10.RI.2.A",
+          sub: "10.RI.2.A.2",
           stem: "Based on sentences 23 through 25, the county expects its new bin label to lower the rate mainly because the label —",
           choices: [
             { letter: "A", text: "warns residents that they will be fined for errors" },
@@ -593,6 +625,7 @@
         {
           id: "central",
           sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "Which statement best expresses the central idea of the article about teenagers learning a new language?",
           choices: [
             { letter: "A", text: "Students should begin a second language before age five." },
@@ -605,6 +638,7 @@
         {
           id: "org",
           sol: "10.RI.2.A",
+          sub: "10.RI.2.A.1",
           stem: "How does the author organize sentences 4 through 11 of the language article?",
           choices: [
             { letter: "A", text: "by granting a point about age and then showing its limits" },
@@ -616,7 +650,8 @@
         },
         {
           id: "teenedge",
-          sol: "10.RI.1.B",
+          sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "According to sentences 9 and 10, what gives teenagers an edge over young children during the first years of study?",
           choices: [
             { letter: "A", text: "They hear the language thousands of times at home." },
@@ -628,7 +663,8 @@
         },
         {
           id: "purpose",
-          sol: "10.RI.1.C",
+          sol: "10.RI.2.C",
+          sub: "10.RI.2.C.2",
           stem: "The author's main purpose in the article about learning languages as a teenager is to —",
           choices: [
             { letter: "A", text: "persuade schools to offer languages in kindergarten" },
@@ -640,7 +676,8 @@
         },
         {
           id: "door",
-          sol: "10.RI.2.B",
+          sol: "10.RI.2.C",
+          sub: "10.RI.2.C.2",
           stem: "In sentence 23, the image of a door that most classmates will leave shut mainly emphasizes —",
           choices: [
             { letter: "A", text: "how many classrooms lack enough language teachers" },
@@ -652,7 +689,8 @@
         },
         {
           id: "concede",
-          sol: "10.RI.2.C",
+          sol: "10.RI.1.C",
+          sub: "10.RI.1.C.1",
           stem: "In sentences 17 and 18, the author admits that learning a language as a teenager takes hundreds of hours mainly to —",
           choices: [
             { letter: "A", text: "warn readers that most teenagers will fail" },
@@ -664,7 +702,8 @@
         },
         {
           id: "retention",
-          sol: "10.RV.1.A",
+          sol: "10.RV.1.C",
+          sub: "10.RV.1.C.1",
           stem: "The word retention in sentence 15 comes from the Latin re- (back) and tenere (to hold). Based on these parts, retention refers to —",
           choices: [
             { letter: "A", text: "returning to a language after a long break" },
@@ -677,6 +716,7 @@
         {
           id: "plateau",
           sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "Which phrase from sentence 16 best helps the reader understand the meaning of plateau?",
           choices: [
             { letter: "A", text: "when progress seems to stop" },
@@ -727,7 +767,8 @@
       claims: [
         {
           id: "replenish",
-          sol: "10.RV.1.A",
+          sol: "10.RV.1.C",
+          sub: "10.RV.1.C.1",
           stem: "The word replenish in sentence 4 begins with re-, as in refill and return. Based on this prefix and sentence 5, replenish most nearly means to —",
           choices: [
             { letter: "A", text: "measure carefully" },
@@ -739,7 +780,8 @@
         },
         {
           id: "predecessor",
-          sol: "10.RV.1.A",
+          sol: "10.RV.1.C",
+          sub: "10.RV.1.C.1",
           stem: "The prefix pre- in predecessor (sentence 12) means before, as in preview. In this passage, the father's predecessor is —",
           choices: [
             { letter: "A", text: "the neighbor who buys the extra hay" },
@@ -752,6 +794,7 @@
         {
           id: "vigilant",
           sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "As used in sentence 8 about the milk numbers, the word vigilant most nearly means —",
           choices: [
             { letter: "A", text: "watchful and alert" },
@@ -764,6 +807,7 @@
         {
           id: "yield",
           sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "In sentence 21, the word yield, describing a good hay crop, most nearly means —",
           choices: [
             { letter: "A", text: "give way to others" },
@@ -775,7 +819,8 @@
         },
         {
           id: "inclement",
-          sol: "10.RV.1.C",
+          sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "Which words from sentence 16 best help the reader understand the meaning of inclement?",
           choices: [
             { letter: "A", text: "the milk truck sometimes" },
@@ -787,7 +832,8 @@
         },
         {
           id: "parlor",
-          sol: "10.RV.1.C",
+          sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "Parlor can mean a sitting room in a house. In sentence 3, the milking parlor is most likely —",
           choices: [
             { letter: "A", text: "a room in the barn where the cows are milked" },
@@ -800,6 +846,7 @@
         {
           id: "steadfast",
           sol: "10.RV.1.D",
+          sub: "10.RV.1.D.1",
           stem: "In sentence 23, the narrator calls his father steadfast. Compared with stubborn, the word steadfast suggests —",
           choices: [
             { letter: "A", text: "a refusal to listen to other people's ideas" },
@@ -812,6 +859,7 @@
         {
           id: "weathered",
           sol: "10.RV.1.D",
+          sub: "10.RV.1.D.1",
           stem: "The narrator calls the straw hat weathered in sentence 13 instead of simply old. Compared with old, weathered suggests that the hat —",
           choices: [
             { letter: "A", text: "was bought cheaply and never cared for" },
@@ -861,7 +909,8 @@
       claims: [
         {
           id: "retrospect",
-          sol: "10.RV.1.A",
+          sol: "10.RV.1.C",
+          sub: "10.RV.1.C.1",
           stem: "Retrospect in sentence 1 joins retro- (backward) with spect (look), as in spectator. The phrase in retrospect most nearly means —",
           choices: [
             { letter: "A", text: "looking back on past events" },
@@ -873,7 +922,8 @@
         },
         {
           id: "composure",
-          sol: "10.RV.1.A",
+          sol: "10.RV.1.C",
+          sub: "10.RV.1.C.1",
           stem: "Composure in sentence 11 shares the root pos (to put or place) with compose. Based on this root and sentences 12 through 14, composure most nearly means —",
           choices: [
             { letter: "A", text: "a talent for setting up the pieces" },
@@ -886,6 +936,7 @@
         {
           id: "concede",
           sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "As used in sentence 18, when the narrator tips over the king, the word concede most nearly means —",
           choices: [
             { letter: "A", text: "ask for a rematch" },
@@ -898,6 +949,7 @@
         {
           id: "scrutinize",
           sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "In sentence 16, the narrator needs nearly ten minutes to scrutinize the board. Scrutinize most nearly means —",
           choices: [
             { letter: "A", text: "rearrange quickly" },
@@ -909,7 +961,8 @@
         },
         {
           id: "gambit",
-          sol: "10.RV.1.C",
+          sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "Based on the explanation in sentences 7 and 8, a gambit in chess is —",
           choices: [
             { letter: "A", text: "an opening that gives up material to gain an edge" },
@@ -922,6 +975,7 @@
         {
           id: "reticent",
           sol: "10.RV.1.D",
+          sub: "10.RV.1.D.1",
           stem: "Sentence 4 calls Priya reticent, but sentence 5 says freshmen thought her unfriendly. Compared with unfriendly, reticent suggests that Priya is —",
           choices: [
             { letter: "A", text: "cold and scornful toward all newcomers" },
@@ -934,6 +988,7 @@
         {
           id: "audacious",
           sol: "10.RV.1.D",
+          sub: "10.RV.1.D.1",
           stem: "The narrator calls the queen trade in sentence 15 audacious, not reckless. Compared with reckless, audacious suggests a move that is —",
           choices: [
             { letter: "A", text: "careless and likely to fail" },
@@ -946,6 +1001,7 @@
         {
           id: "narrator",
           sol: "10.RL.1.C",
+          sub: "10.RL.1.C.1",
           stem: "Taken together, sentences 2, 6, and 24 characterize the narrator at the time of the championship final as someone who —",
           choices: [
             { letter: "A", text: "doubted any freshman could win the final" },
@@ -997,6 +1053,7 @@
         {
           id: "agree",
           sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "On which point do the Ridgefield public works notice and Hana Yoshida's letter agree?",
           choices: [
             { letter: "A", text: "The township should go back to two-bin recycling." },
@@ -1009,6 +1066,7 @@
         {
           id: "measure",
           sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "How does Text 2 differ from Text 1 in the way it judges whether the one-cart system succeeds?",
           choices: [
             { letter: "A", text: "Text 2 counts trucks and routes; Text 1 counts the new carts." },
@@ -1021,6 +1079,7 @@
         {
           id: "two",
           sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "Select TWO sentences that together best show the tension between convenience and clean recycling across the two Ridgefield texts.",
           choices: [
             { letter: "A", text: "Sentence 8, \"One cart makes the right thing the easy thing.\"" },
@@ -1032,7 +1091,8 @@
         },
         {
           id: "both",
-          sol: "10.DSR.E",
+          sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "Based on both texts, which result would most likely satisfy both Arturo Bell and Hana Yoshida?",
           choices: [
             { letter: "A", text: "fewer collection routes and much smaller carts" },
@@ -1044,7 +1104,8 @@
         },
         {
           id: "respond",
-          sol: "10.DSR.E",
+          sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "How does Hana Yoshida's letter respond to the pilot results reported in sentences 4 and 5 of Text 1?",
           choices: [
             { letter: "A", text: "She accepts them but says they leave out what is recycled." },
@@ -1056,7 +1117,8 @@
         },
         {
           id: "next",
-          sol: "10.DSR.E",
+          sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "Using both Ridgefield texts, what is the most reasonable step for the township to take before March 1?",
           choices: [
             { letter: "A", text: "Delay delivery of the carts until next year." },
@@ -1068,7 +1130,8 @@
         },
         {
           id: "reason",
-          sol: "10.RI.1.B",
+          sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "According to sentence 6 of Text 1, why do officials believe the one-cart system will raise participation?",
           choices: [
             { letter: "A", text: "It lets residents put out recycling every week." },
@@ -1080,7 +1143,8 @@
         },
         {
           id: "label",
-          sol: "10.RI.2.B",
+          sol: "10.RI.2.C",
+          sub: "10.RI.2.C.2",
           stem: "In sentence 19, the phrase a bigger pile of trash wearing a recycling label mainly suggests that —",
           choices: [
             { letter: "A", text: "the new carts are too large for most families" },
@@ -1131,6 +1195,7 @@
         {
           id: "agree",
           sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "Daniel Osei and Ms. Calderon would most likely agree that —",
           choices: [
             { letter: "A", text: "practicing every day builds a valuable habit" },
@@ -1143,6 +1208,7 @@
         {
           id: "differ",
           sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "The texts by Daniel Osei and Ms. Calderon differ mainly in that Text 2 —",
           choices: [
             { letter: "A", text: "claims that daily practice has no real value" },
@@ -1155,6 +1221,7 @@
         {
           id: "limit",
           sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "Select TWO sentences, one from each text, that together best show a limit of learning a language only through an app.",
           choices: [
             { letter: "A", text: "Sentence 6, about a habit that is never skipped" },
@@ -1166,7 +1233,8 @@
         },
         {
           id: "explain9",
-          sol: "10.DSR.E",
+          sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "How does Text 2 help explain the gap Daniel admits to in sentence 9 of Text 1?",
           choices: [
             { letter: "A", text: "It says apps use cartoon sentences that confuse learners." },
@@ -1178,7 +1246,8 @@
         },
         {
           id: "trip",
-          sol: "10.DSR.E",
+          sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "A reader who uses both texts could best conclude that a student preparing to visit relatives abroad should —",
           choices: [
             { letter: "A", text: "stop using an app once a streak is broken" },
@@ -1190,7 +1259,8 @@
         },
         {
           id: "warmup",
-          sol: "10.DSR.E",
+          sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "Ms. Calderon's comparison of the app to a warm-up in sentence 19 most closely fits which sentence from Text 1?",
           choices: [
             { letter: "A", text: "Sentence 4, about practicing during a fire drill" },
@@ -1203,6 +1273,7 @@
         {
           id: "central2",
           sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "Which statement best summarizes the central idea of Ms. Calderon's text, Talk First?",
           choices: [
             { letter: "A", text: "Apps build vocabulary, but speaking practice makes speakers." },
@@ -1214,7 +1285,8 @@
         },
         {
           id: "firedrill",
-          sol: "10.RI.1.C",
+          sol: "10.RI.2.A",
+          sub: "10.RI.2.A.2",
           stem: "Daniel mentions practicing during a fire drill in sentence 4 mainly to —",
           choices: [
             { letter: "A", text: "warn readers about breaking school safety rules" },
@@ -1266,6 +1338,7 @@
         {
           id: "theme",
           sol: "10.RL.1.A",
+          sub: "10.RL.1.A.1",
           stem: "Which idea is best supported by the poem Last Cutting as a whole?",
           choices: [
             { letter: "A", text: "Farm families rarely agree about the right time to harvest." },
@@ -1277,7 +1350,8 @@
         },
         {
           id: "book",
-          sol: "10.RL.2.A",
+          sol: "10.RL.2.B",
+          sub: "10.RL.2.B.2",
           stem: "In line 19, comparing the stacked bales to the pages of a book mainly suggests that the loft is —",
           choices: [
             { letter: "A", text: "packed full and tightly ordered" },
@@ -1289,7 +1363,8 @@
         },
         {
           id: "mood",
-          sol: "10.RL.2.B",
+          sol: "10.RL.2.A",
+          sub: "10.RL.2.A.3",
           stem: "The images in lines 7 through 9 (the drying hay, the smell of warm bread, the crickets ticking like clocks) create a mood that is —",
           choices: [
             { letter: "A", text: "gloomy and full of regret" },
@@ -1301,7 +1376,8 @@
         },
         {
           id: "rain",
-          sol: "10.RL.2.C",
+          sol: "10.RL.2.B",
+          sub: "10.RL.2.B.2",
           stem: "In lines 20 and 21, describing the rain as polite and late, tapping as if asking to be let in, suggests that the rain —",
           choices: [
             { letter: "A", text: "ruins the hay that was left in the field" },
@@ -1313,7 +1389,8 @@
         },
         {
           id: "shift",
-          sol: "10.RL.3.A",
+          sol: "10.RL.2.A",
+          sub: "10.RL.2.A.1",
           stem: "How does the final stanza of Last Cutting (lines 22 through 25) change the poem's focus?",
           choices: [
             { letter: "A", text: "It moves from the harvest to the winter when it pays off." },
@@ -1325,7 +1402,8 @@
         },
         {
           id: "west",
-          sol: "10.RL.1.B",
+          sol: "10.RL.2.B",
+          sub: "10.RL.2.B.2",
           stem: "Line 17 says the mother drives with one eye always on the west. This detail mainly adds to the poem's —",
           choices: [
             { letter: "A", text: "humor about the brother's search for clouds" },
@@ -1337,7 +1415,8 @@
         },
         {
           id: "arms",
-          sol: "10.RV.1.D",
+          sol: "10.RV.1.F",
+          sub: "10.RV.1.F.1",
           stem: "In line 16, the speaker says my arms forget they belong to me instead of simply saying the arms are tired. This wording suggests a tiredness that is —",
           choices: [
             { letter: "A", text: "mild and quickly forgotten" },
@@ -1350,6 +1429,7 @@
         {
           id: "mother",
           sol: "10.RL.1.C",
+          sub: "10.RL.1.C.1",
           stem: "Lines 1 through 3 characterize the speaker's mother as someone who —",
           choices: [
             { letter: "A", text: "worries about the farm more than the family" },
@@ -1402,6 +1482,7 @@
         {
           id: "theme",
           sol: "10.RL.1.A",
+          sub: "10.RL.1.A.1",
           stem: "Which theme is best developed in the analysis-room scene from Board Four?",
           choices: [
             { letter: "A", text: "Winning a title matters less than following tournament rules." },
@@ -1414,6 +1495,7 @@
         {
           id: "conflict",
           sol: "10.RL.1.B",
+          sub: "10.RL.1.B.1",
           stem: "The central conflict in the first half of Board Four (sentences 1 through 12) is best described as a struggle between —",
           choices: [
             { letter: "A", text: "Kofi's urge to step in and the rule that he must not" },
@@ -1426,6 +1508,7 @@
         {
           id: "kofi",
           sol: "10.RL.1.C",
+          sub: "10.RL.1.C.1",
           stem: "Kofi's lines in sentences 3 and 5 characterize him as —",
           choices: [
             { letter: "A", text: "calm and confident about the result" },
@@ -1437,7 +1520,8 @@
         },
         {
           id: "irony",
-          sol: "10.RL.2.C",
+          sol: "10.RL.2.D",
+          sub: "10.RL.2.D.2",
           stem: "Which situation in Board Four is most ironic?",
           choices: [
             { letter: "A", text: "Coach Diaz says he can count but never looks at the score." },
@@ -1449,7 +1533,8 @@
         },
         {
           id: "face",
-          sol: "10.RL.3.A",
+          sol: "10.RL.1.D",
+          sub: "10.RL.1.D.2",
           stem: "The stage direction in sentence 13, in which Kofi watches the coach's face instead of the board, mainly serves to —",
           choices: [
             { letter: "A", text: "show that Kofi has stopped caring about the result" },
@@ -1461,7 +1546,8 @@
         },
         {
           id: "peace",
-          sol: "10.RL.2.A",
+          sol: "10.RL.2.D",
+          sub: "10.RL.2.D.2",
           stem: "In sentence 21, June says her opponent wasn't offering peace but asking her not to look. This statement suggests that the draw offer was —",
           choices: [
             { letter: "A", text: "a nervous attempt to hide a mistake" },
@@ -1473,7 +1559,8 @@
         },
         {
           id: "tone",
-          sol: "10.RL.2.B",
+          sol: "10.RL.2.C",
+          sub: "10.RL.2.C.1",
           stem: "The tone of June's final line in sentence 25 is best described as —",
           choices: [
             { letter: "A", text: "bitter and quietly resentful" },
@@ -1486,6 +1573,7 @@
         {
           id: "forfeit",
           sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "In sentence 8, Coach Diaz warns that the team would forfeit the game and the match. Forfeit most nearly means —",
           choices: [
             { letter: "A", text: "replay from the beginning" },
@@ -1532,6 +1620,7 @@
         {
           id: "headings",
           sol: "10.RI.2.A",
+          sub: "10.RI.2.A.2",
           stem: "How do the bold headings in the Harlan Creek guide mainly help a reader?",
           choices: [
             { letter: "A", text: "They show the order in which rules were adopted." },
@@ -1543,7 +1632,8 @@
         },
         {
           id: "bags",
-          sol: "10.RI.1.B",
+          sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "According to the Harlan Creek guide, where should a resident take plastic grocery bags?",
           choices: [
             { letter: "A", text: "to Station 4 with the plastic tubs" },
@@ -1555,7 +1645,8 @@
         },
         {
           id: "battery",
-          sol: "10.RI.1.B",
+          sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "A resident wants to get rid of an old car battery in June. Based on the guide, what should the resident do?",
           choices: [
             { letter: "A", text: "Bring it on the first Saturday of October." },
@@ -1567,7 +1658,8 @@
         },
         {
           id: "audience",
-          sol: "10.RI.1.C",
+          sol: "10.RI.2.C",
+          sub: "10.RI.2.C.2",
           stem: "The Harlan Creek guide is written mainly for —",
           choices: [
             { letter: "A", text: "businesses that haul large loads of trash" },
@@ -1580,6 +1672,7 @@
         {
           id: "summary",
           sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "Which statement best summarizes what the Harlan Creek guide asks residents to do?",
           choices: [
             { letter: "A", text: "Call the county waste office before every visit to the center." },
@@ -1591,7 +1684,8 @@
         },
         {
           id: "commercial",
-          sol: "10.RV.1.C",
+          sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "In sentence 3, the contrast with county residents shows that commercial haulers are most likely —",
           choices: [
             { letter: "A", text: "trash haulers who are paid to run a business" },
@@ -1603,7 +1697,8 @@
         },
         {
           id: "fivetimes",
-          sol: "10.RI.2.B",
+          sol: "10.RI.2.A",
+          sub: "10.RI.2.A.2",
           stem: "The guide notes in sentence 5 that unflattened boxes take up five times as much space mainly to —",
           choices: [
             { letter: "A", text: "warn residents that cardboard is not accepted" },
@@ -1616,6 +1711,7 @@
         {
           id: "tone12",
           sol: "10.RI.2.C",
+          sub: "10.RI.2.C.2",
           stem: "The tone of the Not Accepted section, especially sentence 12 about illegal dumping, is best described as —",
           choices: [
             { letter: "A", text: "playful and joking" },
@@ -1663,7 +1759,8 @@
       claims: [
         {
           id: "claim",
-          sol: "10.RI.1.A",
+          sol: "10.RI.1.C",
+          sub: "10.RI.1.C.1",
           stem: "Which sentence best states the author's central claim in the essay about local food at Ferris County High School?",
           choices: [
             { letter: "A", text: "Sentence 1, about how far the cafeteria apples travel" },
@@ -1675,7 +1772,8 @@
         },
         {
           id: "support",
-          sol: "10.RI.1.B",
+          sol: "10.RI.1.C",
+          sub: "10.RI.1.C.1",
           stem: "Which detail from the essay best supports the claim that students will eat more fresh local food?",
           choices: [
             { letter: "A", text: "Sentence 11, about students who work on farms" },
@@ -1688,6 +1786,7 @@
         {
           id: "org",
           sol: "10.RI.2.A",
+          sub: "10.RI.2.A.1",
           stem: "How is the essay about local food at Ferris County High School mainly organized?",
           choices: [
             { letter: "A", text: "a claim, reasons, a reply to critics, then a call to act" },
@@ -1700,6 +1799,7 @@
         {
           id: "opinion",
           sol: "10.RI.1.C",
+          sub: "10.RI.1.C.2",
           stem: "Which statement from the local-food essay is an opinion rather than a fact that could be checked?",
           choices: [
             { letter: "A", text: "The apples come from a distributor four states away." },
@@ -1711,7 +1811,8 @@
         },
         {
           id: "critics",
-          sol: "10.RI.2.C",
+          sol: "10.RI.1.C",
+          sub: "10.RI.1.C.1",
           stem: "In sentences 12 through 17, the author takes up the critics' concerns about cost and supply mainly to —",
           choices: [
             { letter: "A", text: "admit that the plan cannot work at Ferris County" },
@@ -1723,7 +1824,8 @@
         },
         {
           id: "phonecall",
-          sol: "10.RI.2.B",
+          sol: "10.RI.2.C",
+          sub: "10.RI.2.C.2",
           stem: "Sentence 19 says adding local partners is not a revolution but a phone call. This contrast mainly emphasizes that the change is —",
           choices: [
             { letter: "A", text: "risky and likely to upset parents" },
@@ -1735,7 +1837,8 @@
         },
         {
           id: "distributor",
-          sol: "10.RV.1.A",
+          sol: "10.RV.1.C",
+          sub: "10.RV.1.C.1",
           stem: "Distributor in sentence 2 is built from distribute plus the suffix -or, as in inventor. A distributor is most likely —",
           choices: [
             { letter: "A", text: "a business that delivers goods to buyers" },
@@ -1748,6 +1851,7 @@
         {
           id: "mealy",
           sol: "10.RV.1.D",
+          sub: "10.RV.1.D.2",
           stem: "In sentence 21, the author calls the apple mealy and flavorless instead of simply old. These words give the distant apple a connotation that is —",
           choices: [
             { letter: "A", text: "familiar and comforting at lunch" },
