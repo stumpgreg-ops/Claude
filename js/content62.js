@@ -32,6 +32,7 @@
         {
           id: "nervous",
           sol: "10.RL.1.C",
+          sub: "10.RL.1.C.1",
           stem: "Sentence 5 shows that, early in the trip to the doors, Marisol is —",
           choices: [
             { letter: "A", text: "bored by such a simple assignment" },
@@ -44,6 +45,7 @@
         {
           id: "turn",
           sol: "10.RL.1.B",
+          sub: "10.RL.1.B.1",
           stem: "Which sentence marks the turning point in Marisol's trip with Mr. Haldane?",
           choices: [
             { letter: "A", text: "Sentence 2" },
@@ -56,6 +58,7 @@
         {
           id: "theme",
           sol: "10.RL.1.A",
+          sub: "10.RL.1.A.1",
           stem: "Which theme does the story of Marisol and Mr. Haldane best support?",
           choices: [
             { letter: "A", text: "Patience grows once we see what another person needs." },
@@ -67,7 +70,8 @@
         },
         {
           id: "stripe",
-          sol: "10.RL.2.B",
+          sol: "10.RL.2.C",
+          sub: "10.RL.2.C.2",
           stem: "The image of sunlight in a long gold stripe (sentence 7) mainly creates a mood of —",
           choices: [
             { letter: "A", text: "danger and alarm" },
@@ -79,7 +83,8 @@
         },
         {
           id: "cheeks",
-          sol: "10.RL.2.A",
+          sol: "10.RL.2.B",
+          sub: "10.RL.2.B.2",
           stem: "In sentence 5, the phrase Marisol's cheeks burned mainly suggests that she feels —",
           choices: [
             { letter: "A", text: "embarrassed by the criticism" },
@@ -91,7 +96,8 @@
         },
         {
           id: "short",
-          sol: "10.RL.3.A",
+          sol: "10.RL.1.B",
+          sub: "10.RL.1.B.1",
           stem: "The author places the short complaints in sentences 3 and 4 side by side mainly to —",
           choices: [
             { letter: "A", text: "show that the elevator is broken" },
@@ -125,6 +131,7 @@
         {
           id: "central",
           sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "Which statement best expresses the central idea of the passage about sea otters?",
           choices: [
             { letter: "A", text: "Sea otters eat more food each day than any other ocean mammal." },
@@ -136,7 +143,8 @@
         },
         {
           id: "dry",
-          sol: "10.RI.1.B",
+          sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "According to the passage, what keeps a sea otter's skin dry?",
           choices: [
             { letter: "A", text: "a thin layer of blubber" },
@@ -149,6 +157,7 @@
         {
           id: "chain",
           sol: "10.RI.2.A",
+          sub: "10.RI.2.A.1",
           stem: "Sentences 6 through 8 are organized mainly to show —",
           choices: [
             { letter: "A", text: "a chain of causes and effects" },
@@ -160,7 +169,8 @@
         },
         {
           id: "keystone",
-          sol: "10.RV.1.C",
+          sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "Which words in sentence 9 help the reader understand the meaning of keystone species?",
           choices: [
             { letter: "A", text: "For this reason, scientists call" },
@@ -172,7 +182,8 @@
         },
         {
           id: "seals",
-          sol: "10.RI.2.B",
+          sol: "10.RI.2.A",
+          sub: "10.RI.2.A.2",
           stem: "The author mentions seals and whales in sentence 1 mainly to —",
           choices: [
             { letter: "A", text: "name the otter's main predators" },
@@ -185,6 +196,7 @@
         {
           id: "hedge",
           sol: "10.RI.1.C",
+          sub: "10.RI.1.C.2",
           stem: "Which phrase shows the author presenting an effect as possible rather than certain?",
           choices: [
             { letter: "A", text: "the densest of any animal (sentence 3)" },
@@ -216,6 +228,7 @@
         {
           id: "arduous",
           sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "In sentence 1, the word arduous most nearly means —",
           choices: [
             { letter: "A", text: "colorful" },
@@ -227,7 +240,8 @@
         },
         {
           id: "innate",
-          sol: "10.RV.1.C",
+          sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "Which phrase in sentence 2 best helps the reader understand the meaning of innate?",
           choices: [
             { letter: "A", text: "built in from birth" },
@@ -239,7 +253,8 @@
         },
         {
           id: "converge",
-          sol: "10.RV.1.A",
+          sol: "10.RV.1.C",
+          sub: "10.RV.1.C.1",
           stem: "The prefix con- means \"together,\" as in connect and convene. Based on this, converge in sentence 5 most nearly means to —",
           choices: [
             { letter: "A", text: "fly away in many directions" },
@@ -252,6 +267,7 @@
         {
           id: "resilient",
           sol: "10.RV.1.D",
+          sub: "10.RV.1.D.2",
           stem: "The author could have called monarchs tough instead of resilient in sentence 7. Compared with tough, resilient adds a sense of —",
           choices: [
             { letter: "A", text: "being hard to catch" },
@@ -264,6 +280,7 @@
         {
           id: "sustain",
           sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "As used in sentence 4, the word sustain most nearly means —",
           choices: [
             { letter: "A", text: "keep going" },
@@ -276,6 +293,7 @@
         {
           id: "dwindled",
           sol: "10.RV.1.D",
+          sub: "10.RV.1.D.2",
           stem: "The author chose dwindled rather than dropped in sentence 6. Compared with dropped, dwindled suggests a decline that is —",
           choices: [
             { letter: "A", text: "sudden and complete" },
@@ -311,6 +329,7 @@
         {
           id: "agree",
           sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "On which point do the handbook and Imani's journal agree?",
           choices: [
             { letter: "A", text: "Volunteers should be thanked after every shift." },
@@ -322,7 +341,8 @@
         },
         {
           id: "conclude",
-          sol: "10.DSR.E",
+          sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "A reader who uses both texts could best conclude that Imani's weekly attendance —",
           choices: [
             { letter: "A", text: "is the very quality the handbook values most" },
@@ -335,6 +355,7 @@
         {
           id: "differ",
           sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "The two texts about volunteering differ mainly in that Text 1 —",
           choices: [
             { letter: "A", text: "complains about volunteers, while Text 2 defends their work" },
@@ -346,7 +367,8 @@
         },
         {
           id: "two",
-          sol: "10.DSR.E",
+          sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "Which TWO sentences from Text 2 best show the quality that Text 1 calls most important? Select TWO.",
           choices: [
             { letter: "A", text: "Sentence 6" },
@@ -358,7 +380,8 @@
         },
         {
           id: "audience",
-          sol: "10.RI.1.C",
+          sol: "10.RI.1.B",
+          sub: "10.RI.1.B.1",
           stem: "Text 1 is written mainly for —",
           choices: [
             { letter: "A", text: "patients who are leaving the hospital" },
@@ -371,6 +394,7 @@
         {
           id: "reliability",
           sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "In sentence 4, the word reliability most nearly means —",
           choices: [
             { letter: "A", text: "dependability" },
@@ -406,6 +430,7 @@
         {
           id: "cousins",
           sol: "10.RL.2.A",
+          sub: "10.RL.2.A.3",
           stem: "In lines 4 and 5, the speaker compares the geese to cousins taking turns driving mainly to suggest that the birds —",
           choices: [
             { letter: "A", text: "are lost and need directions" },
@@ -417,7 +442,8 @@
         },
         {
           id: "change",
-          sol: "10.RL.2.B",
+          sol: "10.RL.2.A",
+          sub: "10.RL.2.A.3",
           stem: "Line 6 compares the geese's voices to loose change dropping on a roof. This image mainly suggests that the sounds are —",
           choices: [
             { letter: "A", text: "scattered, small and ordinary" },
@@ -430,6 +456,7 @@
         {
           id: "theme",
           sol: "10.RL.1.A",
+          sub: "10.RL.1.A.1",
           stem: "Which statement best expresses a theme of the poem about the geese?",
           choices: [
             { letter: "A", text: "City life leaves little room for noticing nature." },
@@ -441,7 +468,8 @@
         },
         {
           id: "shift",
-          sol: "10.RL.3.A",
+          sol: "10.RL.2.A",
+          sub: "10.RL.2.A.1",
           stem: "How do lines 7 through 10 shift the focus of the poem about the geese?",
           choices: [
             { letter: "A", text: "from the people below to the weather" },
@@ -454,6 +482,7 @@
         {
           id: "tone",
           sol: "10.RL.2.C",
+          sub: "10.RL.2.C.1",
           stem: "The tone of lines 8 through 10 is best described as —",
           choices: [
             { letter: "A", text: "impatient and annoyed" },
@@ -465,7 +494,8 @@
         },
         {
           id: "surged",
-          sol: "10.RV.1.C",
+          sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "In line 3, the word surged most nearly means —",
           choices: [
             { letter: "A", text: "drifted slowly" },
@@ -496,7 +526,8 @@
       claims: [
         {
           id: "sick",
-          sol: "10.RI.1.B",
+          sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "According to the guide, what should a volunteer who wakes up sick on the morning of a shift do?",
           choices: [
             { letter: "A", text: "Release the shift in the portal." },
@@ -509,6 +540,7 @@
         {
           id: "headings",
           sol: "10.RI.2.A",
+          sub: "10.RI.2.A.1",
           stem: "The bold headings in the shift guide mainly help a reader —",
           choices: [
             { letter: "A", text: "find the rule for a particular situation quickly" },
@@ -520,7 +552,8 @@
         },
         {
           id: "audience",
-          sol: "10.RI.1.C",
+          sol: "10.RI.1.B",
+          sub: "10.RI.1.B.1",
           stem: "The shift guide is written mainly for —",
           choices: [
             { letter: "A", text: "patients waiting for a ride in the lobby" },
@@ -533,6 +566,7 @@
         {
           id: "summary",
           sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "Which statement best summarizes the volunteer shift guide?",
           choices: [
             { letter: "A", text: "Volunteers who are late lose their badges for a month." },
@@ -544,7 +578,8 @@
         },
         {
           id: "claim",
-          sol: "10.RI.2.B",
+          sol: "10.RI.2.A",
+          sub: "10.RI.2.A.2",
           stem: "The guide explains in sentence 3 that a released shift lets another volunteer claim it mainly to —",
           choices: [
             { letter: "A", text: "give a reason for the 48-hour rule" },
@@ -556,7 +591,8 @@
         },
         {
           id: "tone",
-          sol: "10.RI.2.C",
+          sol: "10.RI.1.C",
+          sub: "10.RI.1.C.1",
           stem: "The tone of the volunteer shift guide is best described as —",
           choices: [
             { letter: "A", text: "warm and chatty" },
@@ -590,7 +626,8 @@
       claims: [
         {
           id: "irony",
-          sol: "10.RL.2.C",
+          sol: "10.RL.2.D",
+          sub: "10.RL.2.D.2",
           stem: "Which situation in the whale-watching story is most ironic?",
           choices: [
             { letter: "A", text: "Ilona waits hours for a whale photo, then misses it while wiping her lens." },
@@ -603,6 +640,7 @@
         {
           id: "tension",
           sol: "10.RL.1.B",
+          sub: "10.RL.1.B.2",
           stem: "The tension in the first part of the whale story comes mainly from —",
           choices: [
             { letter: "A", text: "an argument between Ilona and Tomasz" },
@@ -614,7 +652,8 @@
         },
         {
           id: "split",
-          sol: "10.RL.2.A",
+          sol: "10.RL.2.B",
+          sub: "10.RL.2.B.2",
           stem: "Sentence 5, That was when the ocean split open, mainly suggests that the whale's appearance is —",
           choices: [
             { letter: "A", text: "slow and expected" },
@@ -627,6 +666,7 @@
         {
           id: "tomasz",
           sol: "10.RL.1.C",
+          sub: "10.RL.1.C.1",
           stem: "Tomasz's words in sentence 10 characterize him as —",
           choices: [
             { letter: "A", text: "jealous of his sister's camera" },
@@ -638,7 +678,8 @@
         },
         {
           id: "guide",
-          sol: "10.RL.3.A",
+          sol: "10.RL.1.B",
+          sub: "10.RL.1.B.1",
           stem: "The author includes the guide's repeated line in sentence 3 mainly to —",
           choices: [
             { letter: "A", text: "show how long and doubtful the wait has become" },
@@ -651,6 +692,7 @@
         {
           id: "grim",
           sol: "10.RV.1.D",
+          sub: "10.RV.1.D.2",
           stem: "Sentence 2 says Tomasz eats crackers with grim focus. Compared with steady, the word grim suggests that he is —",
           choices: [
             { letter: "A", text: "hungry and enjoying his snack" },
@@ -684,6 +726,7 @@
         {
           id: "central",
           sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "Which statement best expresses the central idea of the passage about fireflies?",
           choices: [
             { letter: "A", text: "Fireflies are beetles whose light comes from a reaction that makes almost no heat." },
@@ -695,7 +738,8 @@
         },
         {
           id: "female",
-          sol: "10.RI.1.B",
+          sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "According to the passage, how does a female firefly usually respond to a flashing male?",
           choices: [
             { letter: "A", text: "She flies up to meet him high in the air." },
@@ -708,6 +752,7 @@
         {
           id: "however",
           sol: "10.RI.2.A",
+          sub: "10.RI.2.A.2",
           stem: "In sentence 6, the passage shifts mainly from —",
           choices: [
             { letter: "A", text: "explaining the signal system to showing how it can be misused" },
@@ -719,7 +764,8 @@
         },
         {
           id: "coded",
-          sol: "10.RI.2.B",
+          sol: "10.RI.2.C",
+          sub: "10.RI.2.C.2",
           stem: "The author uses the phrase a coded message in sentence 1 mainly to —",
           choices: [
             { letter: "A", text: "suggest that scientists invented the flashes" },
@@ -731,7 +777,8 @@
         },
         {
           id: "quieter",
-          sol: "10.RI.2.C",
+          sol: "10.RI.1.C",
+          sub: "10.RI.1.C.1",
           stem: "The phrase a quieter threat in sentence 8 gives the end of the firefly passage a tone that is —",
           choices: [
             { letter: "A", text: "worried" },
@@ -743,7 +790,8 @@
         },
         {
           id: "lure",
-          sol: "10.RV.1.C",
+          sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "In sentence 7, the word lure most nearly means —",
           choices: [
             { letter: "A", text: "warn away loudly" },
@@ -775,7 +823,8 @@
       claims: [
         {
           id: "claim",
-          sol: "10.RI.1.A",
+          sol: "10.RI.1.C",
+          sub: "10.RI.1.C.1",
           stem: "Which sentence best states the central claim of the editorial about the towers?",
           choices: [
             { letter: "A", text: "Sentence 1" },
@@ -787,7 +836,8 @@
         },
         {
           id: "evidence",
-          sol: "10.RI.1.B",
+          sol: "10.RI.1.C",
+          sub: "10.RI.1.C.2",
           stem: "Which detail provides the most direct evidence that lit towers harm birds?",
           choices: [
             { letter: "A", text: "Songbirds flying over the city steer partly by the stars." },
@@ -799,7 +849,8 @@
         },
         {
           id: "counter",
-          sol: "10.RI.2.C",
+          sol: "10.RI.1.C",
+          sub: "10.RI.1.C.2",
           stem: "In sentences 5 and 6, the author responds to the building managers mainly by —",
           choices: [
             { letter: "A", text: "admitting that the skyline would look much less attractive at night" },
@@ -811,7 +862,8 @@
         },
         {
           id: "floor",
-          sol: "10.RI.2.B",
+          sol: "10.RI.2.C",
+          sub: "10.RI.2.C.2",
           stem: "The author describes the towers as lit floor by floor until dawn in sentence 2 mainly to emphasize —",
           choices: [
             { letter: "A", text: "how beautiful the city looks at night" },
@@ -823,7 +875,8 @@
         },
         {
           id: "audience",
-          sol: "10.RI.1.C",
+          sol: "10.RI.1.B",
+          sub: "10.RI.1.B.1",
           stem: "The editorial about the towers is written mainly for —",
           choices: [
             { letter: "A", text: "scientists who study how birds navigate at night" },
@@ -836,6 +889,7 @@
         {
           id: "exhausted",
           sol: "10.RV.1.D",
+          sub: "10.RV.1.D.2",
           stem: "In sentence 3, the author writes that the birds circle until they are exhausted. Compared with tired, exhausted suggests that the birds are —",
           choices: [
             { letter: "A", text: "completely drained of strength" },
@@ -869,6 +923,7 @@
         {
           id: "ruth",
           sol: "10.RL.1.C",
+          sub: "10.RL.1.C.1",
           stem: "Ruth's reply in sentence 4 characterizes her as —",
           choices: [
             { letter: "A", text: "bored and eager to leave" },
@@ -881,6 +936,7 @@
         {
           id: "conflict",
           sol: "10.RL.1.B",
+          sub: "10.RL.1.B.2",
           stem: "The conflict in the information desk scene begins when —",
           choices: [
             { letter: "A", text: "Kofi and Ruth disagree about sorting the badges" },
@@ -892,7 +948,8 @@
         },
         {
           id: "map",
-          sol: "10.RL.3.A",
+          sol: "10.RL.1.D",
+          sub: "10.RL.1.D.2",
           stem: "The stage direction in sentence 11 mainly reveals that Kofi —",
           choices: [
             { letter: "A", text: "has learned from Ruth and wants to be ready next time" },
@@ -905,6 +962,7 @@
         {
           id: "tone",
           sol: "10.RL.2.C",
+          sub: "10.RL.2.C.1",
           stem: "The tone of Ruth's words to the man in sentences 8 through 10 is best described as —",
           choices: [
             { letter: "A", text: "stern and impatient" },
@@ -916,7 +974,8 @@
         },
         {
           id: "coat",
-          sol: "10.RL.2.B",
+          sol: "10.RL.2.C",
+          sub: "10.RL.2.C.2",
           stem: "The detail of the man's coat buttoned wrong in sentence 5 mainly creates a sense of —",
           choices: [
             { letter: "A", text: "hurry and worry" },
@@ -929,6 +988,7 @@
         {
           id: "theme",
           sol: "10.RL.1.A",
+          sub: "10.RL.1.A.1",
           stem: "Which theme does the scene at the information desk best convey?",
           choices: [
             { letter: "A", text: "Technology always works faster than people do." },
@@ -962,6 +1022,7 @@
         {
           id: "theme",
           sol: "10.RL.1.A",
+          sub: "10.RL.1.A.1",
           stem: "The story about Farida and the ant best develops which theme?",
           choices: [
             { letter: "A", text: "Small creatures are often more interesting than schoolwork." },
@@ -974,6 +1035,7 @@
         {
           id: "farida",
           sol: "10.RL.1.C",
+          sub: "10.RL.1.C.1",
           stem: "Sentence 1 characterizes Farida as someone who —",
           choices: [
             { letter: "A", text: "sets goals but struggles to stay focused" },
@@ -985,7 +1047,8 @@
         },
         {
           id: "irony",
-          sol: "10.RL.2.C",
+          sol: "10.RL.2.D",
+          sub: "10.RL.2.D.2",
           stem: "What is ironic about how Farida spends most of her afternoon?",
           choices: [
             { letter: "A", text: "She drinks tea even though the weather is warm." },
@@ -997,7 +1060,8 @@
         },
         {
           id: "short",
-          sol: "10.RL.3.A",
+          sol: "10.RL.1.B",
+          sub: "10.RL.1.B.1",
           stem: "The author includes the very short sentence 8, Thirty-seven to go, mainly to —",
           choices: [
             { letter: "A", text: "show how quickly the cards can be finished" },
@@ -1010,6 +1074,7 @@
         {
           id: "resolve",
           sol: "10.RL.1.B",
+          sub: "10.RL.1.B.1",
           stem: "Sentence 9 functions in the plot of the ant story as —",
           choices: [
             { letter: "A", text: "the resolution, showing a change in Farida" },
@@ -1021,7 +1086,8 @@
         },
         {
           id: "hers",
-          sol: "10.RL.2.A",
+          sol: "10.RL.2.B",
+          sub: "10.RL.2.B.2",
           stem: "In sentence 3, the phrase had decided the whole crumb was hers presents the ant as —",
           choices: [
             { letter: "A", text: "lost and confused by the crack" },
@@ -1054,6 +1120,7 @@
         {
           id: "central",
           sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "Which statement best expresses the central idea of the passage about dolphins?",
           choices: [
             { letter: "A", text: "Dolphins use echoes of their own clicks to locate objects with great precision." },
@@ -1066,6 +1133,7 @@
         {
           id: "sequence",
           sol: "10.RI.2.A",
+          sub: "10.RI.2.A.1",
           stem: "How are sentences 3 through 5 of the dolphin passage organized?",
           choices: [
             { letter: "A", text: "as a comparison of dolphins and bats" },
@@ -1078,6 +1146,7 @@
         {
           id: "debated",
           sol: "10.RI.1.C",
+          sub: "10.RI.1.C.2",
           stem: "Which idea in the dolphin passage is presented as uncertain rather than established?",
           choices: [
             { letter: "A", text: "Echoes travel through the lower jaw to the ear." },
@@ -1089,7 +1158,8 @@
         },
         {
           id: "precise",
-          sol: "10.RI.1.B",
+          sol: "10.RI.1.C",
+          sub: "10.RI.1.C.2",
           stem: "Which sentence best supports the claim that dolphin echolocation is extremely precise?",
           choices: [
             { letter: "A", text: "Sentence 2" },
@@ -1101,7 +1171,8 @@
         },
         {
           id: "opening",
-          sol: "10.RI.2.B",
+          sol: "10.RI.2.A",
+          sub: "10.RI.2.A.2",
           stem: "The author opens with a dolphin finding a fish buried in murky sand mainly to —",
           choices: [
             { letter: "A", text: "warn readers that dolphins are fierce hunters" },
@@ -1113,7 +1184,8 @@
         },
         {
           id: "echoloc",
-          sol: "10.RV.1.A",
+          sol: "10.RV.1.C",
+          sub: "10.RV.1.C.1",
           stem: "The word echolocation joins echo with the root loc, found in location and local. Based on this, echolocation is —",
           choices: [
             { letter: "A", text: "finding a position by reflected sound" },
@@ -1144,6 +1216,7 @@
         {
           id: "docile",
           sol: "10.RV.1.D",
+          sub: "10.RV.1.D.2",
           stem: "The author calls manatees docile rather than timid. Compared with timid, docile suggests animals that are —",
           choices: [
             { letter: "A", text: "quick to hide from danger" },
@@ -1155,7 +1228,8 @@
         },
         {
           id: "congregate",
-          sol: "10.RV.1.C",
+          sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "Which words in sentence 5 help the reader understand the meaning of congregate?",
           choices: [
             { letter: "A", text: "when the ocean turns cold" },
@@ -1168,6 +1242,7 @@
         {
           id: "forage",
           sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "In sentence 3, the word forage most nearly means to —",
           choices: [
             { letter: "A", text: "search for food" },
@@ -1179,7 +1254,8 @@
         },
         {
           id: "vulnerable",
-          sol: "10.RV.1.A",
+          sol: "10.RV.1.C",
+          sub: "10.RV.1.C.1",
           stem: "The word vulnerable comes from a Latin root meaning \"wound.\" Based on this, an animal that is vulnerable is —",
           choices: [
             { letter: "A", text: "already badly hurt" },
@@ -1191,7 +1267,8 @@
         },
         {
           id: "sparse",
-          sol: "10.RV.1.C",
+          sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "In sentence 6, the phrase thin and patchy instead of thick shows that sparse means —",
           choices: [
             { letter: "A", text: "salty and unhealthy" },
@@ -1204,6 +1281,7 @@
         {
           id: "summary",
           sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "Which statement best summarizes the passage about manatees?",
           choices: [
             { letter: "A", text: "Manatees are slow, gentle grazers that face real dangers." },
@@ -1237,7 +1315,8 @@
       claims: [
         {
           id: "together",
-          sol: "10.DSR.E",
+          sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "Which idea about the seal pup is clearest only when both texts are read together?",
           choices: [
             { letter: "A", text: "Seal pups cry loudly whenever they are left hungry on a beach." },
@@ -1250,6 +1329,7 @@
         {
           id: "differ",
           sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "The notice and the visitor's post differ mainly in that Text 1 —",
           choices: [
             { letter: "A", text: "gives general guidance, while Text 2 shows it in one event" },
@@ -1261,7 +1341,8 @@
         },
         {
           id: "two",
-          sol: "10.DSR.E",
+          sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "Select TWO sentences from Text 1 that best explain why the teenager in Text 2 asked people to move back. Select TWO.",
           choices: [
             { letter: "A", text: "Sentence 3" },
@@ -1274,6 +1355,7 @@
         {
           id: "both",
           sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "Which idea do both the rescue notice and the beach post support?",
           choices: [
             { letter: "A", text: "Seal pups should be carried to deeper water." },
@@ -1285,7 +1367,8 @@
         },
         {
           id: "ready",
-          sol: "10.RI.2.B",
+          sol: "10.RI.2.A",
+          sub: "10.RI.2.A.2",
           stem: "The writer of Text 2 includes sentence 7, I was ready to help him, mainly to —",
           choices: [
             { letter: "A", text: "show that the man was a close friend of the writer" },
@@ -1298,6 +1381,7 @@
         {
           id: "abandoned",
           sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "In sentence 2, the word abandoned most nearly means —",
           choices: [
             { letter: "A", text: "injured" },
@@ -1332,6 +1416,7 @@
         {
           id: "clock",
           sol: "10.RL.2.A",
+          sub: "10.RL.2.A.3",
           stem: "In line 2, the cricket is compared to a clock mainly to show that its chirping is —",
           choices: [
             { letter: "A", text: "loud and very sudden" },
@@ -1344,6 +1429,7 @@
         {
           id: "family",
           sol: "10.RL.1.C",
+          sub: "10.RL.1.C.1",
           stem: "Lines 4 and 5 show that the speaker's brother and mother —",
           choices: [
             { letter: "A", text: "both want to catch the cricket" },
@@ -1355,7 +1441,8 @@
         },
         {
           id: "humming",
-          sol: "10.RL.2.B",
+          sol: "10.RL.2.A",
+          sub: "10.RL.2.A.3",
           stem: "The image in line 9, someone humming in the next room, suggests that the speaker now finds the dark —",
           choices: [
             { letter: "A", text: "comforting" },
@@ -1368,6 +1455,7 @@
         {
           id: "theme",
           sol: "10.RL.1.A",
+          sub: "10.RL.1.A.1",
           stem: "Which statement best expresses a theme of the cricket poem?",
           choices: [
             { letter: "A", text: "Insects do not belong in people's homes." },
@@ -1379,7 +1467,8 @@
         },
         {
           id: "shift",
-          sol: "10.RL.3.A",
+          sol: "10.RL.2.A",
+          sub: "10.RL.2.A.1",
           stem: "Lines 6 through 9 differ from lines 1 through 5 mainly because they —",
           choices: [
             { letter: "A", text: "describe the cricket's appearance" },
@@ -1392,6 +1481,7 @@
         {
           id: "broom",
           sol: "10.RL.2.C",
+          sub: "10.RL.2.C.1",
           stem: "The tone of line 5, My mother says it's calling for a broom, is best described as —",
           choices: [
             { letter: "A", text: "gently sorrowful" },
@@ -1426,6 +1516,7 @@
         {
           id: "adaeze",
           sol: "10.RL.1.C",
+          sub: "10.RL.1.C.1",
           stem: "Which statement best describes Adaeze in the banding story?",
           choices: [
             { letter: "A", text: "She is careful and eager to learn." },
@@ -1438,6 +1529,7 @@
         {
           id: "climax",
           sol: "10.RL.1.B",
+          sub: "10.RL.1.B.2",
           stem: "Which event is the high point of the banding story?",
           choices: [
             { letter: "A", text: "Adaeze walks along the row of nets." },
@@ -1449,7 +1541,8 @@
         },
         {
           id: "spark",
-          sol: "10.RL.2.A",
+          sol: "10.RL.2.B",
+          sub: "10.RL.2.B.2",
           stem: "In sentence 10, describing the warbler as a yellow spark mainly suggests that it —",
           choices: [
             { letter: "A", text: "is hurt and cannot fly very far" },
@@ -1462,6 +1555,7 @@
         {
           id: "theme",
           sol: "10.RL.1.A",
+          sub: "10.RL.1.A.1",
           stem: "Which idea does the story about the banding station most clearly develop?",
           choices: [
             { letter: "A", text: "Science is far too difficult for most beginners to learn." },
@@ -1473,7 +1567,8 @@
         },
         {
           id: "november",
-          sol: "10.RL.3.A",
+          sol: "10.RL.1.B",
+          sub: "10.RL.1.B.1",
           stem: "The author includes Mr. Lindqvist's words in sentences 6 and 7 mainly to —",
           choices: [
             { letter: "A", text: "show that he is growing tired of the work" },
@@ -1485,7 +1580,8 @@
         },
         {
           id: "mood",
-          sol: "10.RL.2.B",
+          sol: "10.RL.2.C",
+          sub: "10.RL.2.C.2",
           stem: "The details in sentences 1 and 2, the dew and the breath making small clouds, mainly create a mood that is —",
           choices: [
             { letter: "A", text: "tense and dangerous" },
@@ -1517,6 +1613,7 @@
         {
           id: "main",
           sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "What is the main idea of the passage about the Arctic tern?",
           choices: [
             { letter: "A", text: "Tracking devices have become small enough to fit on the legs of birds." },
@@ -1528,7 +1625,8 @@
         },
         {
           id: "sshape",
-          sol: "10.RI.1.B",
+          sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "According to the passage, why do terns fly winding, S-shaped paths?",
           choices: [
             { letter: "A", text: "to make use of ocean winds" },
@@ -1540,7 +1638,8 @@
         },
         {
           id: "moon",
-          sol: "10.RI.2.B",
+          sol: "10.RI.2.C",
+          sub: "10.RI.2.C.2",
           stem: "The author compares a tern's lifetime of travel to trips to the moon mainly to —",
           choices: [
             { letter: "A", text: "suggest that terns can fly into space" },
@@ -1553,6 +1652,7 @@
         {
           id: "method",
           sol: "10.RI.2.A",
+          sub: "10.RI.2.A.2",
           stem: "How does sentence 4 relate to sentences 5 and 6 of the tern passage?",
           choices: [
             { letter: "A", text: "It argues against the findings that come after it." },
@@ -1564,7 +1664,8 @@
         },
         {
           id: "purpose",
-          sol: "10.RI.1.C",
+          sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "The author's main purpose in the passage about the Arctic tern is to —",
           choices: [
             { letter: "A", text: "persuade readers to protect seabird nests" },
@@ -1576,7 +1677,8 @@
         },
         {
           id: "attitude",
-          sol: "10.RI.2.C",
+          sol: "10.RI.1.C",
+          sub: "10.RI.1.C.1",
           stem: "The author's attitude toward the Arctic tern is best described as —",
           choices: [
             { letter: "A", text: "doubtful" },
@@ -1606,7 +1708,8 @@
       claims: [
         {
           id: "convalescing",
-          sol: "10.RV.1.C",
+          sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "Which phrase in sentence 1 best helps the reader understand the meaning of convalescing?",
           choices: [
             { letter: "A", text: "On Wednesday evenings" },
@@ -1618,7 +1721,8 @@
         },
         {
           id: "unobtrusive",
-          sol: "10.RV.1.A",
+          sol: "10.RV.1.C",
+          sub: "10.RV.1.C.1",
           stem: "The word unobtrusive begins with the prefix un-, meaning \"not.\" Based on this and sentence 2, an unobtrusive volunteer is one who —",
           choices: [
             { letter: "A", text: "does not push in or draw attention" },
@@ -1631,6 +1735,7 @@
         {
           id: "tentative",
           sol: "10.RV.1.D",
+          sub: "10.RV.1.D.2",
           stem: "The author could have called Lucía's first notes shy instead of tentative. Compared with shy, tentative suggests notes that are —",
           choices: [
             { letter: "A", text: "embarrassed and blushing red" },
@@ -1642,7 +1747,8 @@
         },
         {
           id: "ambient",
-          sol: "10.RV.1.A",
+          sol: "10.RV.1.C",
+          sub: "10.RV.1.C.1",
           stem: "The word ambient comes from a Latin word meaning \"to go around.\" Based on this, the ambient hum in sentence 3 is —",
           choices: [
             { letter: "A", text: "a song that Lucía plays at each door" },
@@ -1655,6 +1761,7 @@
         {
           id: "reprieve",
           sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "As used in sentence 5, the word reprieve most nearly means —",
           choices: [
             { letter: "A", text: "a painful memory" },
@@ -1667,6 +1774,7 @@
         {
           id: "solace",
           sol: "10.RL.1.C",
+          sub: "10.RL.1.C.1",
           stem: "Sentence 6 reveals that Lucía —",
           choices: [
             { letter: "A", text: "plans to quit volunteering after exams" },
@@ -1701,6 +1809,7 @@
         {
           id: "both",
           sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "Which idea do the garden flyer and the club blog both support?",
           choices: [
             { letter: "A", text: "Pesticides are safe if gardeners use them carefully." },
@@ -1712,7 +1821,8 @@
         },
         {
           id: "action",
-          sol: "10.DSR.E",
+          sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "How does the science club put the advice in sentence 3 of Text 1 into action?",
           choices: [
             { letter: "A", text: "It chooses plants so that something blooms in every season." },
@@ -1725,6 +1835,7 @@
         {
           id: "differ",
           sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "The flyer and the blog differ mainly in that Text 2 —",
           choices: [
             { letter: "A", text: "gives general advice to all gardeners" },
@@ -1736,7 +1847,8 @@
         },
         {
           id: "two",
-          sol: "10.DSR.E",
+          sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "Select TWO sentences from Text 2 that describe a result or a challenge that Text 1 does not mention. Select TWO.",
           choices: [
             { letter: "A", text: "Sentence 5" },
@@ -1748,7 +1860,8 @@
         },
         {
           id: "tone",
-          sol: "10.RI.2.C",
+          sol: "10.RI.1.C",
+          sub: "10.RI.1.C.1",
           stem: "Compared with the garden flyer, the tone of the club blog is more —",
           choices: [
             { letter: "A", text: "formal and very scientific" },
@@ -1760,7 +1873,8 @@
         },
         {
           id: "sign",
-          sol: "10.RV.1.C",
+          sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "The club's sign in sentence 9, Wild on Purpose, mainly tells readers that the patch —",
           choices: [
             { letter: "A", text: "is meant to look natural, not neglected" },
@@ -1791,7 +1905,8 @@
       claims: [
         {
           id: "unsure",
-          sol: "10.RV.1.B",
+          sol: "10.RV.1.E",
+          sub: "10.RV.1.E.2",
           stem: "In sentence 2, the phrase with confidence most nearly means —",
           choices: [
             { letter: "A", text: "with certainty" },
@@ -1804,6 +1919,7 @@
         {
           id: "example",
           sol: "10.RI.2.A",
+          sub: "10.RI.2.A.2",
           stem: "Sentence 5 of the bird count instructions serves mainly to —",
           choices: [
             { letter: "A", text: "introduce a new rule just for cardinals" },
@@ -1816,6 +1932,7 @@
         {
           id: "summary",
           sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "Which statement best summarizes the bird count instructions?",
           choices: [
             { letter: "A", text: "Count only birds that visit a feeder more than once." },
@@ -1827,7 +1944,8 @@
         },
         {
           id: "effort",
-          sol: "10.RI.2.B",
+          sol: "10.RI.2.A",
+          sub: "10.RI.2.A.2",
           stem: "The instructions include the reason in sentence 7 mainly to —",
           choices: [
             { letter: "A", text: "show that late lists will be rejected" },
@@ -1839,7 +1957,8 @@
         },
         {
           id: "audience",
-          sol: "10.RI.1.C",
+          sol: "10.RI.1.B",
+          sub: "10.RI.1.B.1",
           stem: "The bird count instructions are written mainly for —",
           choices: [
             { letter: "A", text: "scientists who design bird studies" },
@@ -1852,6 +1971,7 @@
         {
           id: "jays",
           sol: "10.RI.1.B",
+          sub: "10.RI.1.B.2",
           stem: "A counter sees three blue jays at the feeder, and later sees five blue jays together. Based on the instructions, what should she record?",
           choices: [
             { letter: "A", text: "three blue jays" },
@@ -1886,6 +2006,7 @@
         {
           id: "turn",
           sol: "10.RL.1.B",
+          sub: "10.RL.1.B.1",
           stem: "Which sentence marks the turning point in Yusuf's visits with Bea?",
           choices: [
             { letter: "A", text: "Sentence 2" },
@@ -1898,6 +2019,7 @@
         {
           id: "window",
           sol: "10.RL.1.C",
+          sub: "10.RL.1.C.1",
           stem: "In sentence 1, Bea's face turned to the window mainly suggests that she —",
           choices: [
             { letter: "A", text: "seems withdrawn and uninterested" },
@@ -1909,7 +2031,8 @@
         },
         {
           id: "irony",
-          sol: "10.RL.2.C",
+          sol: "10.RL.2.D",
+          sub: "10.RL.2.D.2",
           stem: "Which detail in the story about Yusuf and Bea is most ironic?",
           choices: [
             { letter: "A", text: "Yusuf does all the voices even though no one has asked him to." },
@@ -1922,6 +2045,7 @@
         {
           id: "theme",
           sol: "10.RL.1.A",
+          sub: "10.RL.1.A.1",
           stem: "What theme does the story of Yusuf and Bea develop?",
           choices: [
             { letter: "A", text: "Children prefer reading alone to being read to." },
@@ -1933,7 +2057,8 @@
         },
         {
           id: "doubt",
-          sol: "10.RL.3.A",
+          sol: "10.RL.1.B",
+          sub: "10.RL.1.B.1",
           stem: "The author includes Yusuf's doubt in sentence 3 mainly to —",
           choices: [
             { letter: "A", text: "show that Bea's mother is not truthful" },
@@ -1945,7 +2070,8 @@
         },
         {
           id: "mood",
-          sol: "10.RL.2.B",
+          sol: "10.RL.2.C",
+          sub: "10.RL.2.C.2",
           stem: "The final sentence of the story about Yusuf and Bea mainly creates a mood of —",
           choices: [
             { letter: "A", text: "quiet delight" },
@@ -1978,6 +2104,7 @@
         {
           id: "central",
           sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "Which statement best expresses the central idea of the passage about humpback songs?",
           choices: [
             { letter: "A", text: "Humpback songs are long, but scientists rarely study them." },
@@ -1989,7 +2116,8 @@
         },
         {
           id: "strangely",
-          sol: "10.RI.2.B",
+          sol: "10.RI.2.A",
+          sub: "10.RI.2.A.2",
           stem: "The author begins sentences 3 and 4 with Strangely and Even more strangely mainly to —",
           choices: [
             { letter: "A", text: "build toward the passage's most surprising facts" },
@@ -2001,7 +2129,8 @@
         },
         {
           id: "spread",
-          sol: "10.RI.1.B",
+          sol: "10.RI.1.C",
+          sub: "10.RI.1.C.2",
           stem: "Which detail best supports the idea that whale songs are passed from one population to another?",
           choices: [
             { letter: "A", text: "A single song can last as long as twenty minutes." },
@@ -2014,6 +2143,7 @@
         {
           id: "theory",
           sol: "10.RI.1.C",
+          sub: "10.RI.1.C.2",
           stem: "Which statement in the humpback passage is presented as a theory rather than an established fact?",
           choices: [
             { letter: "A", text: "Songs help attract mates or signal to other males." },
@@ -2025,7 +2155,8 @@
         },
         {
           id: "evolves",
-          sol: "10.RV.1.C",
+          sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "In sentence 5, the word evolves most nearly means —",
           choices: [
             { letter: "A", text: "grows much louder" },
@@ -2037,7 +2168,8 @@
         },
         {
           id: "tone",
-          sol: "10.RI.2.C",
+          sol: "10.RI.1.C",
+          sub: "10.RI.1.C.1",
           stem: "The author's tone in sentences 7 and 8 is best described as —",
           choices: [
             { letter: "A", text: "confident and final" },
@@ -2069,6 +2201,7 @@
         {
           id: "agile",
           sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "In sentence 1, the word agile most nearly means —",
           choices: [
             { letter: "A", text: "large and heavy" },
@@ -2080,7 +2213,8 @@
         },
         {
           id: "transparent",
-          sol: "10.RV.1.A",
+          sol: "10.RV.1.C",
+          sub: "10.RV.1.C.1",
           stem: "The word transparent contains the prefix trans-, meaning \"through,\" and a root meaning \"to appear.\" Based on this, transparent wings are wings that —",
           choices: [
             { letter: "A", text: "can be seen through" },
@@ -2093,6 +2227,7 @@
         {
           id: "voracious",
           sol: "10.RV.1.D",
+          sub: "10.RV.1.D.2",
           stem: "The author could have called the dragonfly hungry instead of voracious in sentence 4. Compared with hungry, voracious suggests an appetite that is —",
           choices: [
             { letter: "A", text: "picky and easily satisfied" },
@@ -2104,7 +2239,8 @@
         },
         {
           id: "transformation",
-          sol: "10.RV.1.C",
+          sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "In sentence 6, the word transformation most nearly means —",
           choices: [
             { letter: "A", text: "a long period of rest" },
@@ -2116,7 +2252,8 @@
         },
         {
           id: "aerial",
-          sol: "10.RV.1.A",
+          sol: "10.RV.1.C",
+          sub: "10.RV.1.C.1",
           stem: "The word aerial shares a root with aerospace and aerobic, a root meaning \"air.\" Based on this, an aerial hunter is one that —",
           choices: [
             { letter: "A", text: "hunts only at night" },
@@ -2129,6 +2266,7 @@
         {
           id: "though",
           sol: "10.RI.2.A",
+          sub: "10.RI.2.A.2",
           stem: "The word though in sentence 5 signals a shift in the dragonfly passage from —",
           choices: [
             { letter: "A", text: "the adult's hunting life to its early life underwater" },
@@ -2164,7 +2302,8 @@
       claims: [
         {
           id: "respond",
-          sol: "10.DSR.E",
+          sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "How does Text 2 respond to the claim in sentence 2 of Text 1?",
           choices: [
             { letter: "A", text: "It argues that the researchers are wrong." },
@@ -2177,6 +2316,7 @@
         {
           id: "belief",
           sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "Which sentence from Text 2 describes the belief that Text 1 calls unfounded?",
           choices: [
             { letter: "A", text: "Sentence 6" },
@@ -2189,6 +2329,7 @@
         {
           id: "differ",
           sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "The newsletter article and the reader's letter differ mainly in that Text 1 relies on —",
           choices: [
             { letter: "A", text: "family tradition, while Text 2 relies on research" },
@@ -2200,7 +2341,8 @@
         },
         {
           id: "two",
-          sol: "10.DSR.E",
+          sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "Select TWO sentences from Text 2 that are consistent with the advice and research in Text 1. Select TWO.",
           choices: [
             { letter: "A", text: "Sentence 7" },
@@ -2212,7 +2354,8 @@
         },
         {
           id: "tone",
-          sol: "10.RI.2.C",
+          sol: "10.RI.1.C",
+          sub: "10.RI.1.C.1",
           stem: "The tone of sentence 11 in the reader's letter is best described as —",
           choices: [
             { letter: "A", text: "bitter and resentful" },
@@ -2225,6 +2368,7 @@
         {
           id: "unfounded",
           sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "In sentence 2, the word unfounded most nearly means —",
           choices: [
             { letter: "A", text: "widely shared" },
@@ -2260,6 +2404,7 @@
         {
           id: "conflict",
           sol: "10.RL.1.B",
+          sub: "10.RL.1.B.2",
           stem: "The central conflict of the stranding story is best described as a struggle between —",
           choices: [
             { letter: "A", text: "Haruto and Rosa over who should be in charge" },
@@ -2272,6 +2417,7 @@
         {
           id: "haruto",
           sol: "10.RL.1.C",
+          sub: "10.RL.1.C.1",
           stem: "Sentences 5 and 6 characterize Haruto as —",
           choices: [
             { letter: "A", text: "hardworking and determined" },
@@ -2284,6 +2430,7 @@
         {
           id: "theme",
           sol: "10.RL.1.A",
+          sub: "10.RL.1.A.1",
           stem: "Which theme is best supported by the story of the stranded dolphin?",
           choices: [
             { letter: "A", text: "Dangerous rescues should be left to adults." },
@@ -2295,7 +2442,8 @@
         },
         {
           id: "repeat",
-          sol: "10.RL.3.A",
+          sol: "10.RL.2.C",
+          sub: "10.RL.2.C.2",
           stem: "The author repeats scooped and poured in sentence 5 mainly to —",
           choices: [
             { letter: "A", text: "show that Haruto is doing the job wrong" },
@@ -2307,7 +2455,8 @@
         },
         {
           id: "shaking",
-          sol: "10.RL.2.B",
+          sol: "10.RL.1.C",
+          sub: "10.RL.1.C.1",
           stem: "The detail in sentence 9 that Haruto's hands were shaking mainly suggests that he —",
           choices: [
             { letter: "A", text: "is cold from the wind off the water" },
@@ -2319,7 +2468,8 @@
         },
         {
           id: "halfjob",
-          sol: "10.RL.2.C",
+          sol: "10.RL.2.D",
+          sub: "10.RL.2.D.2",
           stem: "Rosa's remark in sentence 11, That bucket is half the job, is best described as —",
           choices: [
             { letter: "A", text: "understated praise" },
@@ -2351,6 +2501,7 @@
         {
           id: "central",
           sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "Which statement best expresses the central idea of the passage about desert locusts?",
           choices: [
             { letter: "A", text: "Desert locusts are green and shy and avoid one another." },
@@ -2363,6 +2514,7 @@
         {
           id: "cause",
           sol: "10.RI.2.A",
+          sub: "10.RI.2.A.1",
           stem: "Sentences 2 through 4 of the locust passage are organized mainly as —",
           choices: [
             { letter: "A", text: "a description of one locust's daily routine" },
@@ -2374,7 +2526,8 @@
         },
         {
           id: "trigger",
-          sol: "10.RI.1.B",
+          sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "According to the passage, what directly triggers the change in the locusts?",
           choices: [
             { letter: "A", text: "the color of the plants they eat" },
@@ -2386,7 +2539,8 @@
         },
         {
           id: "shy",
-          sol: "10.RI.2.B",
+          sol: "10.RI.2.A",
+          sub: "10.RI.2.A.2",
           stem: "The author describes the solitary locust as shy in sentence 1 mainly to —",
           choices: [
             { letter: "A", text: "sharpen the contrast with its later swarming" },
@@ -2398,7 +2552,8 @@
         },
         {
           id: "attitude",
-          sol: "10.RI.2.C",
+          sol: "10.RI.1.C",
+          sub: "10.RI.1.C.1",
           stem: "The author's attitude toward early-warning efforts against locusts is best described as —",
           choices: [
             { letter: "A", text: "doubtful" },
@@ -2410,7 +2565,8 @@
         },
         {
           id: "solitary",
-          sol: "10.RV.1.A",
+          sol: "10.RV.1.C",
+          sub: "10.RV.1.C.1",
           stem: "The word solitary shares a root with solo and solitude. That root most nearly means —",
           choices: [
             { letter: "A", text: "alone" },
@@ -2443,6 +2599,7 @@
         {
           id: "duty",
           sol: "10.RL.1.C",
+          sub: "10.RL.1.C.1",
           stem: "Sentence 1 suggests that, at the start, Thandi goes on the walks mainly —",
           choices: [
             { letter: "A", text: "because she loves watching birds" },
@@ -2454,7 +2611,8 @@
         },
         {
           id: "theater",
-          sol: "10.RL.2.A",
+          sol: "10.RL.2.B",
+          sub: "10.RL.2.B.2",
           stem: "In sentence 4, comparing the last swifts to latecomers slipping into a theater mainly suggests that they —",
           choices: [
             { letter: "A", text: "are lost and cannot find the chimney" },
@@ -2467,6 +2625,7 @@
         {
           id: "realize",
           sol: "10.RL.1.B",
+          sub: "10.RL.1.B.1",
           stem: "Sentence 7 functions in the swift story as —",
           choices: [
             { letter: "A", text: "the moment Thandi grasps what he really means" },
@@ -2478,7 +2637,8 @@
         },
         {
           id: "empty",
-          sol: "10.RL.2.B",
+          sol: "10.RL.2.C",
+          sub: "10.RL.2.C.2",
           stem: "Sentence 5, The sky was suddenly, completely empty, mainly creates a mood of —",
           choices: [
             { letter: "A", text: "excitement and celebration" },
@@ -2491,6 +2651,7 @@
         {
           id: "curb",
           sol: "10.RL.2.C",
+          sub: "10.RL.2.C.1",
           stem: "The final phrase of the swift story, though the curb was not the reason, gives the ending a tone that is —",
           choices: [
             { letter: "A", text: "playful and joking" },
@@ -2503,6 +2664,7 @@
         {
           id: "theme",
           sol: "10.RL.1.A",
+          sub: "10.RL.1.A.1",
           stem: "The story of Thandi and her grandfather best develops which theme?",
           choices: [
             { letter: "A", text: "Old buildings should be saved for wildlife." },
