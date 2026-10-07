@@ -52,6 +52,7 @@
         {
           id: "theme",
           sol: "9.RL.1.A",
+          sub: "9.RL.1.A.1",
           stem: "Which theme do Teo's afternoons with Pilot best develop?",
           choices: [
             { letter: "A", text: "Trust grows when people stop demanding quick proof of progress." },
@@ -63,7 +64,8 @@
         },
         {
           id: "char",
-          sol: "9.RL.1.C",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "Sentences 14 through 16 reveal that at this point in the story Teo is —",
           choices: [
             { letter: "A", text: "afraid that Pilot is about to bite him" },
@@ -75,7 +77,8 @@
         },
         {
           id: "infer",
-          sol: "9.RL.1.B",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "Based on sentence 8, Mrs. Adebayo most likely believes that Pilot —",
           choices: [
             { letter: "A", text: "needs far more running than the other shelter dogs do" },
@@ -87,7 +90,8 @@
         },
         {
           id: "fig",
-          sol: "9.RL.2.A",
+          sol: "9.RL.2.B",
+          sub: "9.RL.2.B.2",
           stem: "In sentence 20, comparing Pilot's ears to small satellite dishes mainly shows that Pilot is —",
           choices: [
             { letter: "A", text: "hearing frightening noises from other kennels" },
@@ -99,7 +103,8 @@
         },
         {
           id: "plot",
-          sol: "9.RL.3.A",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "How does the plot of the sailor's book connect to the events at the shelter?",
           choices: [
             { letter: "A", text: "The sailor sights land in the last chapter just as Pilot finally reaches Teo." },
@@ -111,7 +116,8 @@
         },
         {
           id: "pov",
-          sol: "9.RL.3.B",
+          sol: "9.RL.2.C",
+          sub: "9.RL.2.C.1",
           stem: "Because the narrator follows Teo closely throughout the story, the reader —",
           choices: [
             { letter: "A", text: "knows exactly what Pilot is thinking in every scene" },
@@ -123,7 +129,8 @@
         },
         {
           id: "word",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In sentence 12, the word futile most nearly means —",
           choices: [
             { letter: "A", text: "harmful" },
@@ -135,7 +142,8 @@
         },
         {
           id: "tone",
-          sol: "9.RL.2.C",
+          sol: "9.RL.2.B",
+          sub: "9.RL.2.B.1",
           stem: "The final two sentences, in which Teo carries the stool to kennel fourteen, give the ending a tone that is best described as —",
           choices: [
             { letter: "A", text: "openly heartbroken" },
@@ -189,6 +197,7 @@
         {
           id: "theme",
           sol: "9.RL.1.A",
+          sub: "9.RL.1.A.1",
           stem: "Which idea about backstage work does Odalys's opening night most clearly develop?",
           choices: [
             { letter: "A", text: "Actors deserve far more credit than the crew ever receives." },
@@ -200,7 +209,8 @@
         },
         {
           id: "infer",
-          sol: "9.RL.1.B",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "Ms. Ferreira's comment Nobody saw it in sentence 26 counts as praise because it shows that —",
           choices: [
             { letter: "A", text: "she did not notice the green lantern herself" },
@@ -212,7 +222,8 @@
         },
         {
           id: "char",
-          sol: "9.RL.1.C",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "Which sentence best shows that Rafael can think quickly under pressure?",
           choices: [
             { letter: "A", text: "Sentence 9, which explains when he lights the lantern" },
@@ -225,6 +236,7 @@
         {
           id: "image",
           sol: "9.RL.2.B",
+          sub: "9.RL.2.B.2",
           stem: "In sentence 4, describing the first act as a clock wound by careful hands mainly suggests that —",
           choices: [
             { letter: "A", text: "the crew's preparation made the act run smoothly" },
@@ -236,7 +248,8 @@
         },
         {
           id: "tone",
-          sol: "9.RL.2.C",
+          sol: "9.RL.2.B",
+          sub: "9.RL.2.B.2",
           stem: "Across sentences 10 through 14, the mood shifts from —",
           choices: [
             { letter: "A", text: "calm routine to sudden alarm" },
@@ -248,7 +261,8 @@
         },
         {
           id: "plot",
-          sol: "9.RL.3.A",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "The details in sentences 6 and 7 about the intermission check matter to the plot because they —",
           choices: [
             { letter: "A", text: "explain where the freshman later puts the lantern" },
@@ -261,6 +275,7 @@
         {
           id: "figure",
           sol: "9.RV.1.F",
+          sub: "9.RV.1.F.1",
           stem: "In sentence 14, comparing Odalys's mind to the dark stage suggests that she —",
           choices: [
             { letter: "A", text: "is angry at the crew for the blackout" },
@@ -272,7 +287,8 @@
         },
         {
           id: "nuance",
-          sol: "9.RV.1.E",
+          sol: "9.RV.1.D",
+          sub: "9.RV.1.D.2",
           stem: "The author could have written walked instead of ran in a crouch in sentence 16. Compared with walked, ran in a crouch adds a sense of —",
           choices: [
             { letter: "A", text: "confusion and embarrassment" },
@@ -322,6 +338,7 @@
         {
           id: "main",
           sol: "9.RI.1.A",
+          sub: "9.RI.1.A.1",
           stem: "Which statement best expresses the central idea of Built to Bend?",
           choices: [
             { letter: "A", text: "Expansion joints are the most important part of any bridge." },
@@ -333,7 +350,8 @@
         },
         {
           id: "detail",
-          sol: "9.RI.1.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.1",
           stem: "According to the passage, why do engineers install expansion joints?",
           choices: [
             { letter: "A", text: "To let the deck lengthen and shorten without damage." },
@@ -346,6 +364,7 @@
         {
           id: "factview",
           sol: "9.RI.1.C",
+          sub: "9.RI.1.C.1",
           stem: "Which sentence from Built to Bend presents a judgment that experts disagree about rather than an established fact?",
           choices: [
             { letter: "A", text: "Sentence 5, about steel and concrete expanding as they warm" },
@@ -358,6 +377,7 @@
         {
           id: "org",
           sol: "9.RI.2.A",
+          sub: "9.RI.2.A.1",
           stem: "After its introduction, the body of the passage is mainly organized by —",
           choices: [
             { letter: "A", text: "tracing the history of bridge building from oldest to newest" },
@@ -370,6 +390,7 @@
         {
           id: "craft",
           sol: "9.RI.2.B",
+          sub: "9.RI.2.B.2",
           stem: "The comparison to a child on a swing in sentence 13 helps the reader understand that —",
           choices: [
             { letter: "A", text: "children should not play on pedestrian bridges" },
@@ -381,7 +402,8 @@
         },
         {
           id: "evidence",
-          sol: "9.RI.3.A",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "Which sentence best supports the claim in sentence 3 that a structure that cannot give a little will eventually break?",
           choices: [
             { letter: "A", text: "Sentence 1" },
@@ -393,7 +415,8 @@
         },
         {
           id: "word",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In sentence 6, the contrast with a scorching July afternoon shows that frigid means —",
           choices: [
             { letter: "A", text: "bitterly cold" },
@@ -405,7 +428,8 @@
         },
         {
           id: "root",
-          sol: "9.RV.1.B",
+          sol: "9.RV.1.C",
+          sub: "9.RV.1.C.1",
           stem: "The word pedestrian in sentence 18 contains the Latin root ped, meaning foot. A pedestrian bridge is one that is —",
           choices: [
             { letter: "A", text: "held up by many small legs" },
@@ -459,6 +483,7 @@
         {
           id: "main",
           sol: "9.RI.1.A",
+          sub: "9.RI.1.A.1",
           stem: "What is the central idea of the article about the Wrenfield Lending Shelf?",
           choices: [
             { letter: "A", text: "Libraries should stop buying books and buy tools instead." },
@@ -470,7 +495,8 @@
         },
         {
           id: "detail",
-          sol: "9.RI.1.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.1",
           stem: "According to the article, what must a patron do the first time he or she borrows the tile saw?",
           choices: [
             { letter: "A", text: "Take a short safety lesson." },
@@ -483,6 +509,7 @@
         {
           id: "opinion",
           sol: "9.RI.1.C",
+          sub: "9.RI.1.C.1",
           stem: "Which sentence from the Lending Shelf article states an opinion rather than a fact that could be checked?",
           choices: [
             { letter: "A", text: "Sentence 10: patrons can take out up to three items." },
@@ -495,6 +522,7 @@
         {
           id: "org",
           sol: "9.RI.2.A",
+          sub: "9.RI.2.A.1",
           stem: "The author organizes sentences 9 through 13 mainly by —",
           choices: [
             { letter: "A", text: "comparing Wrenfield's library with libraries in other towns" },
@@ -506,7 +534,8 @@
         },
         {
           id: "purpose",
-          sol: "9.RI.2.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "The author includes Gerald Pike's quotation about the drill in sentence 18 mainly to —",
           choices: [
             { letter: "A", text: "show that the shelf draws people to other library services" },
@@ -518,7 +547,8 @@
         },
         {
           id: "evidence",
-          sol: "9.RI.3.A",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "Which sentence best supports the claim in sentence 14 that the Lending Shelf has been popular?",
           choices: [
             { letter: "A", text: "Sentence 11" },
@@ -530,7 +560,8 @@
         },
         {
           id: "phrase",
-          sol: "9.RV.1.B",
+          sol: "9.RV.1.E",
+          sub: "9.RV.1.E.2",
           stem: "In sentence 7, the phrase she had a point most nearly means that Amara —",
           choices: [
             { letter: "A", text: "had been rude to the board members" },
@@ -542,7 +573,8 @@
         },
         {
           id: "connote",
-          sol: "9.RV.1.E",
+          sol: "9.RV.1.D",
+          sub: "9.RV.1.D.2",
           stem: "In sentence 21, the author says some residents questioned the spending. Compared with attacked, the word questioned suggests that these residents were —",
           choices: [
             { letter: "A", text: "furious about the whole program" },
@@ -590,7 +622,8 @@
       claims: [
         {
           id: "provisional",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "The mother's explanation in sentence 3 shows that a provisional home in sentence 2 is one that is —",
           choices: [
             { letter: "A", text: "permanent and fully official" },
@@ -603,6 +636,7 @@
         {
           id: "acclimate",
           sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "As Ms. Halvorsen uses it in sentence 6, the word acclimate most nearly means to —",
           choices: [
             { letter: "A", text: "become used to new surroundings" },
@@ -614,7 +648,8 @@
         },
         {
           id: "wary",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "Which phrase best helps the reader understand the meaning of wary in sentence 8?",
           choices: [
             { letter: "A", text: "found living under a gas station" },
@@ -626,7 +661,8 @@
         },
         {
           id: "docile",
-          sol: "9.RV.1.E",
+          sol: "9.RV.1.D",
+          sub: "9.RV.1.D.2",
           stem: "Compared with the word calm, the word docile in sentence 11 adds a sense that Juniper had become —",
           choices: [
             { letter: "A", text: "sleepy and bored with the house" },
@@ -638,7 +674,8 @@
         },
         {
           id: "tenacious",
-          sol: "9.RV.1.E",
+          sol: "9.RV.1.D",
+          sub: "9.RV.1.D.2",
           stem: "The author could have called Biscuit determined instead of tenacious in sentence 13. Given the details about the sock, tenacious adds a sense of —",
           choices: [
             { letter: "A", text: "a stubborn grip that will not let go" },
@@ -651,6 +688,7 @@
         {
           id: "reciprocated",
           sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In sentence 16, the word reciprocated most nearly means —",
           choices: [
             { letter: "A", text: "ran away from the house" },
@@ -663,6 +701,7 @@
         {
           id: "bridges",
           sol: "9.RV.1.F",
+          sub: "9.RV.1.F.1",
           stem: "In sentence 21, Ms. Halvorsen compares foster homes to bridges mainly to show that a foster home is —",
           choices: [
             { letter: "A", text: "a structure that needs regular repair" },
@@ -675,6 +714,7 @@
         {
           id: "change",
           sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
           stem: "Which statement best describes how the narrator changes over the course of the fostering essay?",
           choices: [
             { letter: "A", text: "She stops fostering after Juniper is adopted." },
@@ -726,7 +766,8 @@
       claims: [
         {
           id: "scrutinize",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In sentence 5, the contrast with glance shows that scrutinize means to —",
           choices: [
             { letter: "A", text: "examine very closely" },
@@ -738,7 +779,8 @@
         },
         {
           id: "imperceptible",
-          sol: "9.RV.1.B",
+          sol: "9.RV.1.C",
+          sub: "9.RV.1.C.1",
           stem: "The word imperceptible joins the prefix im-, meaning not, with perceptible. Based on sentence 11, imperceptible changes are ones that —",
           choices: [
             { letter: "A", text: "are growing very rapidly" },
@@ -750,7 +792,8 @@
         },
         {
           id: "redundant",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "Which detail from sentences 15 through 19 best helps the reader understand the meaning of redundant?",
           choices: [
             { letter: "A", text: "The connection has six bolts but needs only four." },
@@ -763,6 +806,7 @@
         {
           id: "mitigate",
           sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In sentence 22, the word mitigate most nearly means —",
           choices: [
             { letter: "A", text: "measure" },
@@ -774,7 +818,8 @@
         },
         {
           id: "integrity",
-          sol: "9.RV.1.E",
+          sol: "9.RV.1.D",
+          sub: "9.RV.1.D.2",
           stem: "Aunt Samira says the bridge still has its integrity rather than saying it is still okay. Compared with okay, integrity suggests that the bridge is —",
           choices: [
             { letter: "A", text: "attractive and newly painted" },
@@ -787,6 +832,7 @@
         {
           id: "eats",
           sol: "9.RV.1.F",
+          sub: "9.RV.1.F.1",
           stem: "In sentence 8, saying that the steel slowly eats itself is a figurative way of showing that corrosion —",
           choices: [
             { letter: "A", text: "makes the bridge noisier for drivers" },
@@ -798,7 +844,8 @@
         },
         {
           id: "doctor",
-          sol: "9.RL.2.A",
+          sol: "9.RL.2.B",
+          sub: "9.RL.2.B.2",
           stem: "In sentence 12, comparing Aunt Samira to a doctor taking a pulse mainly suggests that she —",
           choices: [
             { letter: "A", text: "thinks the bridge is about to collapse" },
@@ -810,7 +857,8 @@
         },
         {
           id: "ending",
-          sol: "9.RL.1.B",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "Based on sentences 24 through 27, the reader can infer that by the end of the day Noor —",
           choices: [
             { letter: "A", text: "is afraid to drive across the bridge again" },
@@ -862,6 +910,7 @@
         {
           id: "shared",
           sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "Which idea about the old ten-dollar limit do both the article and the letter support?",
           choices: [
             { letter: "A", text: "Shutting young borrowers out of the library was wrong." },
@@ -874,6 +923,7 @@
         {
           id: "differ",
           sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "Fines Out, Readers In and Margaret Ellison's letter differ mainly in how they view —",
           choices: [
             { letter: "A", text: "whether more young people now use the library" },
@@ -885,7 +935,8 @@
         },
         {
           id: "respond",
-          sol: "9.DSR.E",
+          sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "In sentences 17 and 18, the letter writer responds most directly to which sentence from Text 1?",
           choices: [
             { letter: "A", text: "Sentence 3" },
@@ -897,7 +948,8 @@
         },
         {
           id: "combine",
-          sol: "9.DSR.E",
+          sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "A reader who considers both the Port Avalon article and the letter could best conclude that —",
           choices: [
             { letter: "A", text: "the twenty-five-cent fine should return at once" },
@@ -910,6 +962,7 @@
         {
           id: "guess",
           sol: "9.RI.1.C",
+          sub: "9.RI.1.C.1",
           stem: "Which sentence from Margaret Ellison's letter is based on a guess rather than on something she knows?",
           choices: [
             { letter: "A", text: "Sentence 13" },
@@ -921,7 +974,8 @@
         },
         {
           id: "evidence",
-          sol: "9.RI.3.A",
+          sol: "9.RI.1.C",
+          sub: "9.RI.1.C.2",
           stem: "Which sentence from Text 1 gives the strongest evidence that fines were not what made borrowers return books on time?",
           choices: [
             { letter: "A", text: "Sentence 2" },
@@ -934,6 +988,7 @@
         {
           id: "central",
           sol: "9.RI.1.A",
+          sub: "9.RI.1.A.1",
           stem: "Which statement best expresses the central idea of Fines Out, Readers In?",
           choices: [
             { letter: "A", text: "Port Avalon lost needed money when it stopped charging fines." },
@@ -945,7 +1000,8 @@
         },
         {
           id: "restored",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In sentence 5, the library restored the blocked accounts. In this context, restored most nearly means —",
           choices: [
             { letter: "A", text: "made usable again" },
@@ -997,6 +1053,7 @@
         {
           id: "pairing",
           sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "The author's purpose in pairing Ingrid's story with the Brightwater handout is most likely to —",
           choices: [
             { letter: "A", text: "prove that shelters give poor advice to new owners" },
@@ -1009,6 +1066,7 @@
         {
           id: "bowl",
           sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "Read alongside the handout, what does the empty food bowl in sentence 1 reveal about Domino?",
           choices: [
             { letter: "A", text: "He is settling in, even though Ingrid rarely sees him." },
@@ -1020,7 +1078,8 @@
         },
         {
           id: "two",
-          sol: "9.DSR.E",
+          sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "Select TWO sentences, one from each text, that together show the value of sitting quietly nearby instead of reaching for a shy cat.",
           choices: [
             { letter: "A", text: "Sentence 3: Ingrid imagined a cat on her lap." },
@@ -1032,7 +1091,8 @@
         },
         {
           id: "compare",
-          sol: "9.DSR.E",
+          sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "Compared with the shelter handout, Ingrid's story presents the first days with a shy cat in a way that is more —",
           choices: [
             { letter: "A", text: "scientific and precise" },
@@ -1045,6 +1105,7 @@
         {
           id: "ingrid",
           sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
           stem: "Between the first night and the second, Ingrid changes from —",
           choices: [
             { letter: "A", text: "coaxing Domino out to letting him choose when to approach" },
@@ -1056,7 +1117,8 @@
         },
         {
           id: "why",
-          sol: "9.RI.1.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.1",
           stem: "According to the handout, why should owners avoid pulling a cat out of its hiding spot?",
           choices: [
             { letter: "A", text: "The cat may badly scratch the owner's hands." },
@@ -1069,6 +1131,7 @@
         {
           id: "breathed",
           sol: "9.RL.2.B",
+          sub: "9.RL.2.B.2",
           stem: "In sentence 4, the image of a closet that breathed mainly suggests that —",
           choices: [
             { letter: "A", text: "the closet has grown too warm for the cat" },
@@ -1081,6 +1144,7 @@
         {
           id: "org",
           sol: "9.RI.2.A",
+          sub: "9.RI.2.A.1",
           stem: "How is the Brightwater shelter handout in Text 2 mainly organized?",
           choices: [
             { letter: "A", text: "It tells one owner's story from start to finish." },
@@ -1131,6 +1195,7 @@
         {
           id: "theme",
           sol: "9.RL.1.A",
+          sub: "9.RL.1.A.1",
           stem: "Which theme does the footbridge's description of the people who cross it best support?",
           choices: [
             { letter: "A", text: "Old structures should be replaced by stronger ones." },
@@ -1142,7 +1207,8 @@
         },
         {
           id: "pov",
-          sol: "9.RL.3.B",
+          sol: "9.RL.2.C",
+          sub: "9.RL.2.C.1",
           stem: "Because What the Footbridge Knows is spoken by the bridge itself, the reader —",
           choices: [
             { letter: "A", text: "hears each crosser explain where he or she is going" },
@@ -1155,6 +1221,7 @@
         {
           id: "hyphen",
           sol: "9.RL.2.A",
+          sub: "9.RL.2.A.2",
           stem: "In line 2, calling the bridge a hyphen of wood suggests that the bridge —",
           choices: [
             { letter: "A", text: "joins two places the way a hyphen joins two words" },
@@ -1166,7 +1233,8 @@
         },
         {
           id: "creek",
-          sol: "9.RL.2.B",
+          sol: "9.RL.2.A",
+          sub: "9.RL.2.A.2",
           stem: "In lines 15 through 17, the creek is described as a person who forgets its manners mainly to show that in spring the creek is —",
           choices: [
             { letter: "A", text: "too shallow for the fisherman's line" },
@@ -1178,7 +1246,8 @@
         },
         {
           id: "repeat",
-          sol: "9.RL.2.C",
+          sol: "9.RL.2.A",
+          sub: "9.RL.2.A.2",
           stem: "The poet repeats and I hold three times in line 18 most likely to —",
           choices: [
             { letter: "A", text: "stress the bridge's steady endurance in the flood" },
@@ -1190,7 +1259,8 @@
         },
         {
           id: "shift",
-          sol: "9.RL.3.A",
+          sol: "9.RL.1.B",
+          sub: "9.RL.1.B.2",
           stem: "Compared with lines 4 through 14, the final six lines of the footbridge poem shift from —",
           choices: [
             { letter: "A", text: "a calm morning to a frightening storm" },
@@ -1203,6 +1273,7 @@
         {
           id: "newspaper",
           sol: "9.RV.1.F",
+          sub: "9.RV.1.F.1",
           stem: "In line 11, saying that the fisherman reads the water like a newspaper suggests that he —",
           choices: [
             { letter: "A", text: "is bored by the view from the bridge" },
@@ -1214,7 +1285,8 @@
         },
         {
           id: "girl",
-          sol: "9.RL.1.B",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "What can the reader infer from lines 20 and 21 about the girl on the repair crew?",
           choices: [
             { letter: "A", text: "She did not trust the crew's new bolts." },
@@ -1280,6 +1352,7 @@
         {
           id: "aside1",
           sol: "9.RL.1.D",
+          sub: "9.RL.1.D.2",
           stem: "Sunny's aside in sentence 8 mainly lets the audience know that she —",
           choices: [
             { letter: "A", text: "is angry that Bex has lost track of the crown" },
@@ -1292,6 +1365,7 @@
         {
           id: "aside2",
           sol: "9.RL.1.D",
+          sub: "9.RL.1.D.2",
           stem: "Ikenna's aside in sentence 16 creates dramatic irony because —",
           choices: [
             { letter: "A", text: "the audience knows his panic while he insists he is fine" },
@@ -1304,6 +1378,7 @@
         {
           id: "direction",
           sol: "9.RL.1.D",
+          sub: "9.RL.1.D.2",
           stem: "The stage direction in sentence 19, in which Bex looks from one to the other and then nods, mainly shows that Bex —",
           choices: [
             { letter: "A", text: "is confused about which prop table to check" },
@@ -1316,6 +1391,7 @@
         {
           id: "setting",
           sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "How does the setting, a dressing room minutes before curtain, shape Ikenna's conflict?",
           choices: [
             { letter: "A", text: "The bright mirror makes him worry about his costume." },
@@ -1327,7 +1403,8 @@
         },
         {
           id: "sunny",
-          sol: "9.RL.1.C",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "Which statement best describes how Sunny handles Ikenna's stage fright?",
           choices: [
             { letter: "A", text: "She calms him by sharing her own nerves and a plan." },
@@ -1339,7 +1416,8 @@
         },
         {
           id: "tone",
-          sol: "9.RL.2.C",
+          sol: "9.RL.2.B",
+          sub: "9.RL.2.B.1",
           stem: "The tone of the final moments of Places, Please (sentences 35 through 40) is best described as —",
           choices: [
             { letter: "A", text: "tense and gloomy" },
@@ -1351,7 +1429,8 @@
         },
         {
           id: "kings",
-          sol: "9.RL.3.A",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "Sunny's line in sentence 30 that kings are allowed to take their time moves the scene forward by —",
           choices: [
             { letter: "A", text: "revealing that the show will start late" },
@@ -1363,7 +1442,8 @@
         },
         {
           id: "unanswered",
-          sol: "9.RL.1.B",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "Sunny leaves Ikenna's question in sentence 36 unanswered. The reader can best infer that —",
           choices: [
             { letter: "A", text: "she is embarrassed that she lied to him earlier" },
@@ -1414,7 +1494,8 @@
       claims: [
         {
           id: "join",
-          sol: "9.RI.1.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.1",
           stem: "According to the guide, what must a 15-year-old do before using the makerspace sewing machines for the first time?",
           choices: [
             { letter: "A", text: "Get a guardian's signature and attend orientation." },
@@ -1426,7 +1507,8 @@
         },
         {
           id: "late",
-          sol: "9.RI.1.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.1",
           stem: "According to the Reserving Equipment section, what happens if a member arrives 20 minutes late for a reservation?",
           choices: [
             { letter: "A", text: "The member must pay a late fee at the desk." },
@@ -1439,6 +1521,7 @@
         {
           id: "org",
           sol: "9.RI.2.A",
+          sub: "9.RI.2.A.1",
           stem: "How is the Teen Makerspace Member Guide mainly organized?",
           choices: [
             { letter: "A", text: "As a story about one member's first visit." },
@@ -1450,7 +1533,8 @@
         },
         {
           id: "s8",
-          sol: "9.RI.2.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "The guide includes sentence 8 at the start of the Earning Badges section mainly to —",
           choices: [
             { letter: "A", text: "warn members that the room is unsafe" },
@@ -1463,6 +1547,7 @@
         {
           id: "purpose",
           sol: "9.RI.1.A",
+          sub: "9.RI.1.A.1",
           stem: "What is the main purpose of the Northgate makerspace guide?",
           choices: [
             { letter: "A", text: "To explain how teens can join and use the space properly." },
@@ -1474,7 +1559,8 @@
         },
         {
           id: "cheap",
-          sol: "9.RI.3.A",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "Which sentence from the guide best supports the idea that most makerspace projects cost very little?",
           choices: [
             { letter: "A", text: "Sentence 12" },
@@ -1487,6 +1573,7 @@
         {
           id: "opinion",
           sol: "9.RI.1.C",
+          sub: "9.RI.1.C.1",
           stem: "Which sentence from the makerspace guide expresses the library's opinion rather than a rule or a fact?",
           choices: [
             { letter: "A", text: "Sentence 9" },
@@ -1499,6 +1586,7 @@
         {
           id: "privileges",
           sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In sentence 24, the word privileges most nearly means —",
           choices: [
             { letter: "A", text: "required training sessions" },
@@ -1551,6 +1639,7 @@
         {
           id: "claim",
           sol: "9.RI.1.A",
+          sub: "9.RI.1.A.1",
           stem: "Which statement best expresses the writer's central claim about the Mill Road bridge?",
           choices: [
             { letter: "A", text: "The county should save it as a crossing for walkers and cyclists." },
@@ -1562,7 +1651,8 @@
         },
         {
           id: "safety",
-          sol: "9.RI.3.A",
+          sol: "9.RI.1.C",
+          sub: "9.RI.1.C.2",
           stem: "Which sentence gives the strongest evidence that many students would benefit from a car-free crossing?",
           choices: [
             { letter: "A", text: "Sentence 5" },
@@ -1574,7 +1664,8 @@
         },
         {
           id: "cost",
-          sol: "9.RI.3.A",
+          sol: "9.RI.3.B",
+          sub: "9.RI.3.B.1",
           stem: "Which statement best evaluates the cost evidence in sentence 11?",
           choices: [
             { letter: "A", text: "It proves that repair would save the county money." },
@@ -1587,6 +1678,7 @@
         {
           id: "limits",
           sol: "9.RI.1.C",
+          sub: "9.RI.1.C.2",
           stem: "In which sentence does the writer admit that the evidence on one issue is limited?",
           choices: [
             { letter: "A", text: "Sentence 3" },
@@ -1599,6 +1691,7 @@
         {
           id: "counter",
           sol: "9.RI.2.B",
+          sub: "9.RI.2.B.2",
           stem: "The writer includes sentences 18 through 20 mainly to —",
           choices: [
             { letter: "A", text: "answer an opposing view with the engineer's findings" },
@@ -1611,6 +1704,7 @@
         {
           id: "structure",
           sol: "9.RI.2.A",
+          sub: "9.RI.2.A.1",
           stem: "The body of the iron bridge editorial (sentences 5 through 23) is organized mainly as —",
           choices: [
             { letter: "A", text: "a timeline of the bridge's long history" },
@@ -1623,6 +1717,7 @@
         {
           id: "scrapbook",
           sol: "9.RV.1.F",
+          sub: "9.RV.1.F.1",
           stem: "In sentence 16, comparing demolition to ripping the first page out of the town's scrapbook suggests that the bridge —",
           choices: [
             { letter: "A", text: "is made of thin and easily damaged material" },
@@ -1634,7 +1729,8 @@
         },
         {
           id: "career",
-          sol: "9.RV.1.E",
+          sol: "9.RV.1.D",
+          sub: "9.RV.1.D.2",
           stem: "In sentence 26, the writer asks for a second career for the bridge rather than a new use. Compared with new use, second career suggests that the bridge —",
           choices: [
             { letter: "A", text: "will earn money for the county" },
