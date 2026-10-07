@@ -48,6 +48,7 @@
         {
           id: "theme",
           sol: "11.RL.1.A",
+          sub: "11.RL.1.A.1",
           stem: "Which theme does the story of Lucía and the cicada emergence most clearly develop?",
           choices: [
             { letter: "A", text: "Events in nature that return can help people measure and value shared time." },
@@ -59,7 +60,8 @@
         },
         {
           id: "earbuds",
-          sol: "11.RL.1.B",
+          sol: "11.RL.2.C",
+          sub: "11.RL.2.C.2",
           stem: "The earbuds Lucía wears in sentence 6 and leaves inside in sentence 26 mainly serve to —",
           choices: [
             { letter: "A", text: "show that she enjoys music more than the sounds of nature" },
@@ -72,6 +74,7 @@
         {
           id: "insult",
           sol: "11.RL.1.C",
+          sub: "11.RL.1.C.1",
           stem: "Sentence 2 suggests that, at the start of the story, Lucía —",
           choices: [
             { letter: "A", text: "is afraid the insects will harm her grandmother's garden" },
@@ -83,7 +86,8 @@
         },
         {
           id: "machine",
-          sol: "11.RL.2.A",
+          sol: "11.RL.2.C",
+          sub: "11.RL.2.C.2",
           stem: "In sentence 5, comparing the cicadas' song to a machine no one knew how to switch off mainly conveys that the sound —",
           choices: [
             { letter: "A", text: "was caused by equipment the neighbors were running" },
@@ -95,7 +99,8 @@
         },
         {
           id: "contrast",
-          sol: "11.RL.2.B",
+          sol: "11.RL.1.A",
+          sub: "11.RL.1.A.2",
           stem: "Avó Rosa's remark in sentence 17 that she was a different person each time while the cicadas were exactly the same creates a contrast between —",
           choices: [
             { letter: "A", text: "human change over a lifetime and nature's steady repetition" },
@@ -107,7 +112,8 @@
         },
         {
           id: "satwith",
-          sol: "11.RL.2.C",
+          sol: "11.RL.2.B",
+          sub: "11.RL.2.B.2",
           stem: "In sentence 24, the phrase sat with that thought most nearly means that Lucía —",
           choices: [
             { letter: "A", text: "tried to push the idea out of her mind quickly" },
@@ -119,7 +125,8 @@
         },
         {
           id: "ending",
-          sol: "11.RL.3.A",
+          sol: "11.RL.1.B",
+          sub: "11.RL.1.B.1",
           stem: "Which statement best explains how sentences 25 and 26 resolve the story of the cicada summer?",
           choices: [
             { letter: "A", text: "Lucía decides she has come to enjoy the sound of the insects." },
@@ -131,7 +138,8 @@
         },
         {
           id: "nymphs",
-          sol: "11.RV.1.C",
+          sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "In sentence 20, the word nymphs most nearly refers to —",
           choices: [
             { letter: "A", text: "adult cicadas whose wings have hardened" },
@@ -181,6 +189,7 @@
         {
           id: "central",
           sol: "11.RI.1.A",
+          sub: "11.RI.1.A.2",
           stem: "Which statement best expresses the central idea of the passage about how songbirds find their way?",
           choices: [
             { letter: "A", text: "Migrating birds rely on several navigation tools that back one another up." },
@@ -193,6 +202,7 @@
         {
           id: "sleep",
           sol: "11.RI.1.B",
+          sub: "11.RI.1.B.1",
           stem: "According to sentence 5, what happened when researchers shifted the birds' sleep schedules?",
           choices: [
             { letter: "A", text: "The birds refused to migrate until their schedules returned to normal." },
@@ -204,7 +214,8 @@
         },
         {
           id: "attitude",
-          sol: "11.RI.1.C",
+          sol: "11.RI.2.C",
+          sub: "11.RI.2.C.1",
           stem: "In sentences 23 and 24, the author's attitude toward the songbird's navigation abilities is best described as —",
           choices: [
             { letter: "A", text: "doubtful" },
@@ -217,6 +228,7 @@
         {
           id: "organize",
           sol: "11.RI.2.A",
+          sub: "11.RI.2.A.1",
           stem: "How does the author organize sentences 3 through 15 of the navigation passage?",
           choices: [
             { letter: "A", text: "by tracing one bird's journey from its start to its finish" },
@@ -228,7 +240,8 @@
         },
         {
           id: "hiker",
-          sol: "11.RI.2.B",
+          sol: "11.RI.2.A",
+          sub: "11.RI.2.A.2",
           stem: "In sentence 11, comparing the bird to a hiker who can feel the ground growing steeper mainly helps the reader understand that —",
           choices: [
             { letter: "A", text: "a changing angle can tell a bird roughly where it is" },
@@ -240,7 +253,8 @@
         },
         {
           id: "question",
-          sol: "11.RI.2.C",
+          sol: "11.RI.2.A",
+          sub: "11.RI.2.A.2",
           stem: "The author includes the question and answer in sentences 16 and 17 mainly to —",
           choices: [
             { letter: "A", text: "admit that scientists still do not know why birds migrate" },
@@ -252,7 +266,8 @@
         },
         {
           id: "prefix",
-          sol: "11.RV.1.A",
+          sol: "11.RV.1.C",
+          sub: "11.RV.1.C.1",
           stem: "The word predictable in sentence 5 begins with the prefix pre-, as do preview and prehistoric. In these words, pre- means —",
           choices: [
             { letter: "A", text: "again" },
@@ -264,7 +279,8 @@
         },
         {
           id: "rails",
-          sol: "11.RV.1.C",
+          sol: "11.RV.1.F",
+          sub: "11.RV.1.F.1",
           stem: "In sentence 14, calling coastlines and ridges guide rails suggests that these landmarks —",
           choices: [
             { letter: "A", text: "slow birds down as they near the end of the trip" },
@@ -317,6 +333,7 @@
         {
           id: "theme",
           sol: "11.RL.1.A",
+          sub: "11.RL.1.A.1",
           stem: "Which statement best expresses a theme of the poem \"Dripstone\"?",
           choices: [
             { letter: "A", text: "Fear of the dark fades once people learn the facts about caves." },
@@ -329,6 +346,7 @@
         {
           id: "list",
           sol: "11.RL.1.B",
+          sub: "11.RL.1.B.1",
           stem: "In \"Dripstone,\" the list in lines 10–12 mainly serves to —",
           choices: [
             { letter: "A", text: "name rushed habits that contrast with the cave's slow growth" },
@@ -341,6 +359,7 @@
         {
           id: "speaker",
           sol: "11.RL.1.C",
+          sub: "11.RL.1.C.1",
           stem: "Lines 21–22 suggest that, after the guide's lamp comes back on, the speaker —",
           choices: [
             { letter: "A", text: "is still shaken and wants to leave the cave quickly" },
@@ -353,6 +372,7 @@
         {
           id: "diver",
           sol: "11.RL.2.A",
+          sub: "11.RL.2.A.1",
           stem: "In lines 3–4, comparing the cave's dark to deep water pressing on a diver mainly conveys that the darkness feels —",
           choices: [
             { letter: "A", text: "cold and wet against the speaker's skin" },
@@ -364,7 +384,8 @@
         },
         {
           id: "healed",
-          sol: "11.RL.2.B",
+          sol: "11.RL.2.A",
+          sub: "11.RL.2.A.1",
           stem: "In line 6 of \"Dripstone,\" the phrase the silence healed suggests that —",
           choices: [
             { letter: "A", text: "the quiet closed back over the sound like a mended cut" },
@@ -376,7 +397,8 @@
         },
         {
           id: "unwatched",
-          sol: "11.RL.2.C",
+          sol: "11.RL.2.B",
+          sub: "11.RL.2.B.2",
           stem: "In line 15, the word unwatched emphasizes that the column grew —",
           choices: [
             { letter: "A", text: "in a part of the cave that is closed to visitors" },
@@ -388,7 +410,8 @@
         },
         {
           id: "stanzas",
-          sol: "11.RL.3.A",
+          sol: "11.RL.1.B",
+          sub: "11.RL.1.B.1",
           stem: "How does the shift from the first stanza to the third stanza help develop the poem's meaning?",
           choices: [
             { letter: "A", text: "The move from dark to light shows the speaker forgetting the drop." },
@@ -401,6 +424,7 @@
         {
           id: "patient",
           sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "The meaning of patient in line 22 is clarified by the guide's statement in lines 7–8 that the drop —",
           choices: [
             { letter: "A", text: "falls only when the visitors are silent" },
@@ -457,6 +481,7 @@
         {
           id: "theme",
           sol: "11.RL.1.A",
+          sub: "11.RL.1.A.1",
           stem: "Which theme is most clearly developed through Daru's choice at the Flood Stair?",
           choices: [
             { letter: "A", text: "Young people should replace their elders once they make mistakes." },
@@ -469,6 +494,7 @@
         {
           id: "farmers",
           sol: "11.RL.1.B",
+          sub: "11.RL.1.B.1",
           stem: "The author includes sentences 3 through 5, about the farmers and merchants of Amarund, mainly to —",
           choices: [
             { letter: "A", text: "show why an error on the Stair would matter to the whole city" },
@@ -481,6 +507,7 @@
         {
           id: "torn",
           sol: "11.RL.1.C",
+          sub: "11.RL.1.C.1",
           stem: "Sentences 16 and 17 reveal that Daru —",
           choices: [
             { letter: "A", text: "is mostly afraid that he will be blamed for the error" },
@@ -492,7 +519,8 @@
         },
         {
           id: "block",
-          sol: "11.RL.2.A",
+          sol: "11.RL.2.C",
+          sub: "11.RL.2.C.2",
           stem: "In sentence 18, comparing Daru's choice to a limestone block on his chest mainly emphasizes —",
           choices: [
             { letter: "A", text: "how tired he is from carrying chisels all day" },
@@ -504,7 +532,8 @@
         },
         {
           id: "animal",
-          sol: "11.RL.2.B",
+          sol: "11.RL.2.C",
+          sub: "11.RL.2.C.2",
           stem: "In sentence 2, describing the flood marks as the scratches of some patient animal gives the Stair a sense of being —",
           choices: [
             { letter: "A", text: "wild and threatening to the people of the city" },
@@ -516,7 +545,8 @@
         },
         {
           id: "resolve",
-          sol: "11.RL.3.A",
+          sol: "11.RL.1.B",
+          sub: "11.RL.1.B.1",
           stem: "Which statement best explains how sentences 29 through 31 resolve the conflict at the Flood Stair?",
           choices: [
             { letter: "A", text: "Ossiel takes responsibility and turns the correction into a lesson." },
@@ -529,6 +559,7 @@
         {
           id: "exact",
           sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "In sentence 20, the contrast between Daru's line and Ossiel's mistaken mark helps show that exact means —",
           choices: [
             { letter: "A", text: "deeply carved" },
@@ -540,7 +571,8 @@
         },
         {
           id: "descended",
-          sol: "11.RV.1.C",
+          sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "In sentence 2, the word descended most nearly means —",
           choices: [
             { letter: "A", text: "grew narrower" },
@@ -591,7 +623,8 @@
       claims: [
         {
           id: "forage",
-          sol: "11.RV.1.C",
+          sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "In sentence 5, the word forage most nearly means to —",
           choices: [
             { letter: "A", text: "fight off enemies" },
@@ -603,7 +636,8 @@
         },
         {
           id: "co",
-          sol: "11.RV.1.A",
+          sol: "11.RV.1.C",
+          sub: "11.RV.1.C.1",
           stem: "The word cooperative in sentence 13 begins with the prefix co-, as do coworker and coauthor. In these words, co- means —",
           choices: [
             { letter: "A", text: "together or with" },
@@ -616,6 +650,7 @@
         {
           id: "intricate",
           sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "Which detail from sentences 14–16 best clarifies the meaning of intricate?",
           choices: [
             { letter: "A", text: "\"Below ground, the nest is more\"" },
@@ -628,6 +663,7 @@
         {
           id: "resilient",
           sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "Sentences 18 and 19 about flooded and crushed nests help show that resilient in sentence 17 means —",
           choices: [
             { letter: "A", text: "unwilling to leave a damaged home" },
@@ -639,7 +675,8 @@
         },
         {
           id: "re",
-          sol: "11.RV.1.A",
+          sol: "11.RV.1.C",
+          sub: "11.RV.1.C.1",
           stem: "The word reconstruct in sentence 19 begins with the prefix re-, as do rebuild and rewrite. The prefix re- signals that an action is —",
           choices: [
             { letter: "A", text: "done badly" },
@@ -651,7 +688,8 @@
         },
         {
           id: "dormant",
-          sol: "11.RV.1.C",
+          sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "In sentence 20, the word dormant most nearly means —",
           choices: [
             { letter: "A", text: "hungry" },
@@ -664,6 +702,7 @@
         {
           id: "central",
           sol: "11.RI.1.A",
+          sub: "11.RI.1.A.2",
           stem: "Which sentence best states the central idea of the article about the ant colony?",
           choices: [
             { letter: "A", text: "Ant queens control every action that happens in the colony." },
@@ -675,7 +714,8 @@
         },
         {
           id: "uses",
-          sol: "11.RI.2.C",
+          sol: "11.RI.2.A",
+          sub: "11.RI.2.A.2",
           stem: "The author includes sentences 22 through 24 about delivery routes and building air mainly to —",
           choices: [
             { letter: "A", text: "show that studying ants has useful applications for people" },
@@ -728,6 +768,7 @@
         {
           id: "shared",
           sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "Which idea about migrating birds is central to both texts?",
           choices: [
             { letter: "A", text: "Banding is the most reliable way to prevent window collisions." },
@@ -740,6 +781,7 @@
         {
           id: "purpose",
           sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "Which statement best describes how the banding notes and the Lights Out article differ in purpose?",
           choices: [
             { letter: "A", text: "Text 1 argues for new city laws, while Text 2 tells a personal story." },
@@ -751,7 +793,8 @@
         },
         {
           id: "data",
-          sol: "11.DSR.D",
+          sol: "11.DSR.C",
+          sub: "11.DSR.C.1",
           stem: "Select TWO sentences, one from each text, that show volunteers collecting information about birds.",
           choices: [
             { letter: "A", text: "Sentence 4: \"My job as a volunteer is mostly to hold birds gently and record what the bander tells me.\"" },
@@ -763,7 +806,8 @@
         },
         {
           id: "tone",
-          sol: "11.DSR.E",
+          sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "Compared with the Lights Out article, the tone of the banding notes is more —",
           choices: [
             { letter: "A", text: "urgent and alarmed" },
@@ -775,7 +819,8 @@
         },
         {
           id: "evidence",
-          sol: "11.DSR.E",
+          sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "Text 1 calls each band a question sent out into the world (sentence 8), and Text 2 says programs are judged by data rather than hope (sentence 20). Together these details suggest that both writers value —",
           choices: [
             { letter: "A", text: "gathering evidence to learn what really happens to birds" },
@@ -787,7 +832,8 @@
         },
         {
           id: "planner",
-          sol: "11.DSR.E",
+          sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "A city planner who read both bird texts could best conclude that —",
           choices: [
             { letter: "A", text: "banding stations should be placed on top of tall buildings" },
@@ -799,7 +845,8 @@
         },
         {
           id: "lights",
-          sol: "11.RI.1.B",
+          sol: "11.RI.2.B",
+          sub: "11.RI.2.B.2",
           stem: "According to sentences 15 and 16 of Text 2, how do bright lights harm migrating birds?",
           choices: [
             { letter: "A", text: "They heat the air so that birds cannot fly as high." },
@@ -811,7 +858,8 @@
         },
         {
           id: "heartbeat",
-          sol: "11.RI.2.B",
+          sol: "11.RI.2.A",
+          sub: "11.RI.2.A.2",
           stem: "In sentence 13, the writer of Text 1 describes migration as a heartbeat against my fingers mainly to show that —",
           choices: [
             { letter: "A", text: "the writer worries about hurting the birds she holds" },
@@ -862,6 +910,7 @@
         {
           id: "theme",
           sol: "11.RL.1.A",
+          sub: "11.RL.1.A.1",
           stem: "Which theme is best supported by the scene at the hawk-watch overlook?",
           choices: [
             { letter: "A", text: "Older people rarely understand the habits of teenagers." },
@@ -873,7 +922,8 @@
         },
         {
           id: "direction",
-          sol: "11.RL.1.B",
+          sol: "11.RL.1.D",
+          sub: "11.RL.1.D.1",
           stem: "The stage direction in line 23, in which Rafi pockets his phone and holds out his hand, mainly serves to —",
           choices: [
             { letter: "A", text: "show that Rafi has become genuinely interested in the count" },
@@ -886,6 +936,7 @@
         {
           id: "honest",
           sol: "11.RL.1.C",
+          sub: "11.RL.1.C.1",
           stem: "Mr. Yazzie's advice in line 15, Don't try to be perfect. Try to be honest, reveals that he —",
           choices: [
             { letter: "A", text: "doubts that Zainab can count large numbers" },
@@ -897,7 +948,8 @@
         },
         {
           id: "escalator",
-          sol: "11.RL.2.A",
+          sol: "11.RL.2.C",
+          sub: "11.RL.2.C.2",
           stem: "In line 9, Mr. Yazzie compares the rising air to a free escalator mainly to suggest that —",
           choices: [
             { letter: "A", text: "the ridge is crowded with hikers and visitors" },
@@ -909,7 +961,8 @@
         },
         {
           id: "steam",
-          sol: "11.RL.2.B",
+          sol: "11.RL.2.C",
+          sub: "11.RL.2.C.2",
           stem: "In line 16, the comparison of the hawks to steam rising from a pot creates an image that is —",
           choices: [
             { letter: "A", text: "swirling and steadily moving upward" },
@@ -921,7 +974,8 @@
         },
         {
           id: "soft",
-          sol: "11.RL.2.C",
+          sol: "11.RL.2.B",
+          sub: "11.RL.2.B.2",
           stem: "In line 25, the phrase let your eyes go soft most nearly means to —",
           choices: [
             { letter: "A", text: "close your eyes to rest them" },
@@ -933,7 +987,8 @@
         },
         {
           id: "change",
-          sol: "11.RL.3.A",
+          sol: "11.RL.1.C",
+          sub: "11.RL.1.C.2",
           stem: "How does Rafi's attitude change over the course of the ridge scene?",
           choices: [
             { letter: "A", text: "from excited and talkative to quiet and let down" },
@@ -945,7 +1000,8 @@
         },
         {
           id: "kettles",
-          sol: "11.RV.1.C",
+          sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "In line 15, the word kettles most nearly refers to —",
           choices: [
             { letter: "A", text: "metal pots used for cooking at a camp" },
@@ -992,6 +1048,7 @@
         {
           id: "purpose",
           sol: "11.RI.1.A",
+          sub: "11.RI.1.A.2",
           stem: "What is the main purpose of the Hollow Spring Caverns visitor guide?",
           choices: [
             { letter: "A", text: "to persuade readers to study caves as a future career" },
@@ -1003,7 +1060,8 @@
         },
         {
           id: "wild",
-          sol: "11.RI.1.B",
+          sol: "11.RI.1.A",
+          sub: "11.RI.1.A.2",
           stem: "According to the guide, a thirteen-year-old who wants to take the Wild Passage Tour at 3:00 p.m. —",
           choices: [
             { letter: "A", text: "may go if a parent comes along on the tour" },
@@ -1016,6 +1074,7 @@
         {
           id: "headings",
           sol: "11.RI.2.A",
+          sub: "11.RI.2.A.2",
           stem: "The bold headings in the Hollow Spring Caverns guide help the reader mainly by —",
           choices: [
             { letter: "A", text: "dividing the information into topics easy to find" },
@@ -1027,7 +1086,8 @@
         },
         {
           id: "marks",
-          sol: "11.RI.2.C",
+          sol: "11.RI.2.A",
+          sub: "11.RI.2.A.2",
           stem: "The guide includes the detail about touch marks from the early 1900s in sentence 12 mainly to —",
           choices: [
             { letter: "A", text: "prove that the cave has been open longer than others" },
@@ -1039,7 +1099,8 @@
         },
         {
           id: "audience",
-          sol: "11.RI.1.C",
+          sol: "11.RI.1.A",
+          sub: "11.RI.1.A.2",
           stem: "The intended audience for the Hollow Spring Caverns guide is mainly —",
           choices: [
             { letter: "A", text: "people planning a visit to the cave" },
@@ -1051,7 +1112,8 @@
         },
         {
           id: "decon",
-          sol: "11.RV.1.A",
+          sol: "11.RV.1.C",
+          sub: "11.RV.1.C.1",
           stem: "In sentence 16, decontaminate begins with the prefix de-, as do dehydrate and declutter. Based on this prefix, to decontaminate shoes is to —",
           choices: [
             { letter: "A", text: "spread germs more widely" },
@@ -1063,7 +1125,8 @@
         },
         {
           id: "second",
-          sol: "11.RI.2.B",
+          sol: "11.RI.2.A",
+          sub: "11.RI.2.A.2",
           stem: "Sentence 11, which says a formation that took ten thousand years to grow can be stained in a second, mainly serves to —",
           choices: [
             { letter: "A", text: "explain how scientists measure the age of formations" },
@@ -1076,6 +1139,7 @@
         {
           id: "halt",
           sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "Sentence 10, about skin oils that keep new mineral from attaching, helps show that the word halt in sentence 11 means —",
           choices: [
             { letter: "A", text: "speed up" },
@@ -1125,7 +1189,8 @@
       claims: [
         {
           id: "claim",
-          sol: "11.RI.1.A",
+          sol: "11.RI.1.C",
+          sub: "11.RI.1.C.1",
           stem: "Which statement best expresses the central claim of the editorial about the back field at Linden Ridge?",
           choices: [
             { letter: "A", text: "The district should spend more money mowing all school grounds." },
@@ -1137,7 +1202,8 @@
         },
         {
           id: "messy",
-          sol: "11.RI.1.B",
+          sol: "11.RI.1.C",
+          sub: "11.RI.1.C.1",
           stem: "Which evidence does the author offer to answer the concern in sentence 9 that a meadow looks messy?",
           choices: [
             { letter: "A", text: "Native flowers bloom in sequence from spring to fall." },
@@ -1150,6 +1216,7 @@
         {
           id: "objectors",
           sol: "11.RI.1.C",
+          sub: "11.RI.1.C.1",
           stem: "In sentences 9 through 15, the author's attitude toward people who object to the meadow is best described as —",
           choices: [
             { letter: "A", text: "respectful but firm" },
@@ -1162,6 +1229,7 @@
         {
           id: "opinion",
           sol: "11.RI.1.C",
+          sub: "11.RI.1.C.1",
           stem: "Which statement from the pollinator editorial is an opinion rather than a fact that could be checked?",
           choices: [
             { letter: "A", text: "The district estimates the mowing cost at about nineteen hundred dollars a year." },
@@ -1174,6 +1242,7 @@
         {
           id: "structure",
           sol: "11.RI.2.A",
+          sub: "11.RI.2.A.1",
           stem: "How does the author organize sentences 9 through 15 of the editorial?",
           choices: [
             { letter: "A", text: "by listing the meadow's benefits in order of importance" },
@@ -1185,7 +1254,8 @@
         },
         {
           id: "desert",
-          sol: "11.RI.2.B",
+          sol: "11.RI.2.C",
+          sub: "11.RI.2.C.2",
           stem: "In sentence 7, the author calls a mowed lawn nearly a desert to a bee mainly to —",
           choices: [
             { letter: "A", text: "stress that a lawn offers bees almost nothing to eat" },
@@ -1197,7 +1267,8 @@
         },
         {
           id: "concede",
-          sol: "11.RI.2.C",
+          sol: "11.RI.1.C",
+          sub: "11.RI.1.C.1",
           stem: "The author includes the admission in sentences 21 and 22 that no single field is a cure mainly to —",
           choices: [
             { letter: "A", text: "suggest that the plan is probably not worth trying" },
@@ -1209,7 +1280,8 @@
         },
         {
           id: "suffix",
-          sol: "11.RV.1.A",
+          sol: "11.RV.1.C",
+          sub: "11.RV.1.C.1",
           stem: "The word foragers in sentence 14 ends with the suffix -er, as do gardener and builder. In these words, the suffix -er signals —",
           choices: [
             { letter: "A", text: "an action that happened in the past" },
@@ -1256,6 +1328,7 @@
         {
           id: "summary",
           sol: "11.RI.1.A",
+          sub: "11.RI.1.A.2",
           stem: "Which statement best summarizes the central idea of the passage about limestone caves?",
           choices: [
             { letter: "A", text: "Caves form mainly when earthquakes split solid rock apart." },
@@ -1267,7 +1340,8 @@
         },
         {
           id: "calcite",
-          sol: "11.RI.1.B",
+          sol: "11.RI.2.B",
+          sub: "11.RI.2.B.2",
           stem: "According to sentences 12 and 13, why does dripping water leave calcite behind inside a cave?",
           choices: [
             { letter: "A", text: "It loses carbon dioxide and can no longer hold all its mineral." },
@@ -1279,7 +1353,8 @@
         },
         {
           id: "attitude",
-          sol: "11.RI.1.C",
+          sol: "11.RI.2.C",
+          sub: "11.RI.2.C.1",
           stem: "The author's attitude toward the slow processes described in sentences 19 through 22 is best described as —",
           choices: [
             { letter: "A", text: "impatient" },
@@ -1292,6 +1367,7 @@
         {
           id: "structure",
           sol: "11.RI.2.A",
+          sub: "11.RI.2.A.1",
           stem: "Which description best matches the structure of sentences 3 through 14 of the cave passage?",
           choices: [
             { letter: "A", text: "It compares famous caves found on several different continents." },
@@ -1303,7 +1379,8 @@
         },
         {
           id: "violence",
-          sol: "11.RI.2.B",
+          sol: "11.RI.2.A",
+          sub: "11.RI.2.A.2",
           stem: "In sentence 1, the author says a cave looks like the work of violence mainly to —",
           choices: [
             { letter: "A", text: "set up a contrast with the gentle process that truly forms caves" },
@@ -1315,7 +1392,8 @@
         },
         {
           id: "soda",
-          sol: "11.RI.2.C",
+          sol: "11.RI.2.A",
+          sub: "11.RI.2.A.2",
           stem: "The author includes the comparison to a soda going flat in sentence 12 mainly to —",
           choices: [
             { letter: "A", text: "suggest that water found in caves is unsafe to drink" },
@@ -1328,6 +1406,7 @@
         {
           id: "karst",
           sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "In sentence 10, the list of sinkholes, disappearing streams, and underground rivers helps show that karst refers to —",
           choices: [
             { letter: "A", text: "a kind of fossil left by ancient sea creatures" },
@@ -1339,7 +1418,8 @@
         },
         {
           id: "root",
-          sol: "11.RV.1.A",
+          sol: "11.RV.1.C",
+          sub: "11.RV.1.C.1",
           stem: "The words stalactite and stalagmite (sentence 14) come from a Greek root meaning to drip. Based on this root and the passage, both words name formations that —",
           choices: [
             { letter: "A", text: "grow only upward from the floor" },
@@ -1400,6 +1480,7 @@
         {
           id: "theme",
           sol: "11.RL.1.A",
+          sub: "11.RL.1.A.1",
           stem: "Which theme is best supported by Tamsin's night on the Long Road?",
           choices: [
             { letter: "A", text: "Children should never be asked to do the work of adults." },
@@ -1412,6 +1493,7 @@
         {
           id: "whistle",
           sol: "11.RL.1.B",
+          sub: "11.RL.1.B.1",
           stem: "The detail in sentence 15 that Tamsin's father always whistled at the Narrow Stair mainly serves to —",
           choices: [
             { letter: "A", text: "show that her father was a gifted musician" },
@@ -1424,6 +1506,7 @@
         {
           id: "alone",
           sol: "11.RL.1.C",
+          sub: "11.RL.1.C.1",
           stem: "Sentence 8 shows that, as she begins her task, Tamsin —",
           choices: [
             { letter: "A", text: "is nervous about doing the job without her father" },
@@ -1435,7 +1518,8 @@
         },
         {
           id: "soldier",
-          sol: "11.RL.2.A",
+          sol: "11.RL.2.C",
+          sub: "11.RL.2.C.2",
           stem: "In sentence 11, comparing the lamp flame to a small yellow soldier suggests that the flame —",
           choices: [
             { letter: "A", text: "is in danger of going out" },
@@ -1447,7 +1531,8 @@
         },
         {
           id: "bird",
-          sol: "11.RL.2.B",
+          sol: "11.RL.2.C",
+          sub: "11.RL.2.C.2",
           stem: "In sentence 16, comparing Tamsin's whistle to a bird that had forgotten its song emphasizes her —",
           choices: [
             { letter: "A", text: "growing excitement" },
@@ -1459,7 +1544,8 @@
         },
         {
           id: "flared",
-          sol: "11.RL.2.C",
+          sol: "11.RL.2.B",
+          sub: "11.RL.2.B.2",
           stem: "In sentence 27, the phrase flared to life most nearly means that each lamp —",
           choices: [
             { letter: "A", text: "swung on its hook" },
@@ -1471,7 +1557,8 @@
         },
         {
           id: "resolve",
-          sol: "11.RL.3.A",
+          sol: "11.RL.1.B",
+          sub: "11.RL.1.B.1",
           stem: "Sentence 35 resolves the story of the Long Road by showing that Tamsin —",
           choices: [
             { letter: "A", text: "has decided to become a weaver like Neyla" },
@@ -1483,7 +1570,8 @@
         },
         {
           id: "realized",
-          sol: "11.RV.1.C",
+          sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "In sentence 31, the word realized most nearly means —",
           choices: [
             { letter: "A", text: "understood clearly" },
@@ -1531,6 +1619,7 @@
         {
           id: "fact",
           sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "Which fact about the cistern of Sarnet-Ul appears in both texts?",
           choices: [
             { letter: "A", text: "Three men were hurt when a wall gave way." },
@@ -1543,6 +1632,7 @@
         {
           id: "focus",
           sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "Which statement best describes how the chronicle and Ruma's letter differ in focus?",
           choices: [
             { letter: "A", text: "Text 1 describes the accidents, while Text 2 describes the ceremony." },
@@ -1555,6 +1645,7 @@
         {
           id: "leftout",
           sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "Select TWO details about the cistern that Ruma's letter includes but the chronicle leaves out.",
           choices: [
             { letter: "A", text: "A section of the wall gave way and injured workers." },
@@ -1566,7 +1657,8 @@
         },
         {
           id: "tone",
-          sol: "11.DSR.E",
+          sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "Compared with the Chronicle of Sarnet-Ul, the tone of Ruma's letter is more —",
           choices: [
             { letter: "A", text: "formal and ceremonial" },
@@ -1578,7 +1670,8 @@
         },
         {
           id: "pouring",
-          sol: "11.DSR.E",
+          sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "The two texts describe the first pouring of water (sentences 5 and 17) differently. Ruma's letter presents the moment as one that —",
           choices: [
             { letter: "A", text: "her father led in front of the whole city" },
@@ -1590,7 +1683,8 @@
         },
         {
           id: "conclude",
-          sol: "11.DSR.E",
+          sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "A reader of both the chronicle and the letter could best conclude that —",
           choices: [
             { letter: "A", text: "an official record may leave out the people who did the work" },
@@ -1603,6 +1697,7 @@
         {
           id: "eats",
           sol: "11.RL.2.C",
+          sub: "11.RL.2.C.2",
           stem: "In sentence 13, Ruma's statement that the sandstone eats chisels suggests that the stone —",
           choices: [
             { letter: "A", text: "is much softer than it first appears" },
@@ -1615,6 +1710,7 @@
         {
           id: "order",
           sol: "11.RI.2.A",
+          sub: "11.RI.2.A.1",
           stem: "How does the writer of the chronicle organize sentences 3 through 5?",
           choices: [
             { letter: "A", text: "by comparing the cistern to the city's old wells" },
