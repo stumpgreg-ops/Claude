@@ -13,12 +13,15 @@ var problems = [], notes = [];
 try { cp.execFileSync("node", [path.join(root, "tools", "validate-content.js"), path.join("js", file)], { cwd: root, stdio: "pipe" }); }
 catch (e) { problems.push("tools/validate-content.js reports errors:\n" + String(e.stdout).split("\n").filter(function (l) { return /ERROR/.test(l); }).join("\n")); }
 var warn = ""; try { warn = cp.execFileSync("node", [path.join(root, "tools", "validate-content.js"), path.join("js", file)], { cwd: root }).toString(); } catch (e) { warn = String(e.stdout); }
-warn.split("\n").filter(function (l) { return /^WARN/.test(l); }).forEach(function (l) { problems.push(l); });
+var ownIds = null;   /* filled in below: only this file's packs' warnings count (js/content.js has old ones of its own) */
+var warnLines = warn.split("\n").filter(function (l) { return /^WARN/.test(l); });
 var sb = { window: {}, console: console }; sb.global = sb.window;
 vm.runInNewContext(fs.readFileSync(path.join(root, "js", "content.js"), "utf8"), sb);
 var before = sb.window.HEIST_PACKS.length;
 vm.runInNewContext(fs.readFileSync(path.join(root, "js", file), "utf8"), sb);
 var packs = sb.window.HEIST_PACKS.slice(before);
+ownIds = packs.map(function (p) { return p.id; });
+warnLines.forEach(function (l) { var m = /^WARN\s+([^:\s]+)/.exec(l); if (m && ownIds.indexOf(m[1]) !== -1) problems.push(l); });
 function words(html) { return String(html).replace(/<span class="n">[^<]*<\/span>/g, " ").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim().split(" ").filter(Boolean).length; }
 var band = { tiny: [45, 100], short: [95, 165], medium: [165, 300], mid: [300, 380], long: [385, 530], epic: [535, 680] }[row.tier];
 var gnum = row.grade.slice(1), tag = "-c" + row.file.replace("content", "") + "-";
