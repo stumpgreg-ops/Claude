@@ -79,7 +79,7 @@
   });
   function goalLine() {
     var on = GOALS.filter(function (x) { return goals[x.k].w > 0; });
-    return "Full credit (" + goals.points + " points) at: " + on.map(function (x) { return goals[x.k].t + (x.k === "acc" ? "%" : " " + x.unit) + (x.k === "acc" ? " right on the first try" : ""); }).join(", ") + ". Change the goals in box 2.";
+    return "Full credit (" + goals.points + " points) at: " + on.map(function (x) { return goals[x.k].t + (x.k === "acc" ? "%" : " " + x.unit) + (x.k === "acc" ? " right on the first try" : ""); }).join(", ") + ". Open box 2 to change the goals.";
   }
   function goalVal(x, d) { return x.k === "acc" ? (d.answered ? 100 * d.right / d.answered : 0) : d[x.k]; }
   function grade(r) {
@@ -705,6 +705,7 @@
   function paint() {
     applyRounds();
     $("goal-line").textContent = goalLine();
+    $("goal-line").hidden = $("goals-box").open;   /* the summary line only when the goals box is folded */
     paintSummary();
     if (view === "cards") paintCards();
     else if (view === "table") paintTable();
@@ -804,6 +805,7 @@
   } catch (e) {}
   if (!rows.length && !roster) $("how").open = true;
 
+  $("goals-box").addEventListener("toggle", function () { $("goal-line").hidden = $("goals-box").open; });
   paintGoals();
   paintRoster();
   paintRounds();
