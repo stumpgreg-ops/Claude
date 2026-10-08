@@ -29,6 +29,17 @@ A game uploaded to Canvas can't send anything anywhere, so progress is shown to 
 
 Tests: `node tools/smoke-progress.js` (after `node tools/build-games.js`, `node tools/build-appsscript.js VA|ODY` and `node tools/build-canvas.js VA|ODY`).
 
+## v5.17.3 (2026-10-08) — fits a Canvas Page 500 px tall
+
+- **The embed code** in every Canvas READ ME is now `<iframe src="/courses/COURSE/files/NUMBER/preview" width="100%" height="500" allowfullscreen="allowfullscreen"></iframe>` (the teacher's choice; it was height 700). The READ ME says to change height="500" if the game is too small or too tall.
+- **The game fits a frame that short** (`css/after-hours.css`, "short frames"):
+  - **Play screen:** when the frame is 640 px tall or less and 700–1099 px wide, the question panel stays at the side (instead of a strip across the top). The game gets the frame's full height: at 1000 × 500 it plays in 690 × 500, where it had 1000 × 360.
+  - **Smaller controls in short frames:** the panel text, the touch pad, the action buttons and the buttons over the game are smaller.
+  - **The reading pop-up:** the whole card scrolls when it is taller than the frame, and "Got it — play" stays pinned at its foot. Before, a long mode card on a shooter level pushed the button out of reach in a 500 px frame, so the level could not start.
+  - **Other pop-ups:** the tutorial, field guide, character, end-of-level and Rune Rocks beam pop-ups fit the frame and scroll inside it.
+  - **Menus:** a menu screen taller than the frame scrolls from its top (centering used to cut off its top).
+  - Checked at 760, 1000 and 1366 px wide by 500 tall: every screen and level reached, no page errors.
+
 ## v5.17.2 (2026-10-08) — the Odyssey: rowing to the Sirens' song, a fair raft jump, a harder bow
 
 After the teacher's notes on three Odyssey modes:
