@@ -99,7 +99,7 @@
           sub: "ES.1.b.2",
           stem: "Which tool and metric unit are best for measuring the water added to each beaker?",
           choices: [
-            { letter: "A", text: "a graduated cylinder, read in milliliters" },
+            { letter: "A", text: "a graduated cylinder, in milliliters" },
             { letter: "B", text: "a metric ruler, read in centimeters" },
             { letter: "C", text: "a thermometer, read in degrees Celsius" },
             { letter: "D", text: "a spring scale, read in newtons" }
@@ -141,7 +141,7 @@
             { letter: "A", text: "Coarse sand is the most common sediment in Virginia streams." },
             { letter: "B", text: "If water is poured in faster, then the sand will hold more silt." },
             { letter: "C", text: "If silt is added, then the beaker will still be filled to 200 mL." },
-            { letter: "D", text: "If more silt is mixed in, then porosity will drop as silt fills pores." }
+            { letter: "D", text: "If more silt is added, then the porosity will decrease." }
           ],
           correct: "D"
         },
@@ -167,7 +167,7 @@
       kind: "Investigation · ES.1",
       blurb: "Latitude, longitude and the 111 km rule, from the Bay to Roanoke.",
       level: 1,
-      passage: "<p>" + N(1) + "Lines of <strong>latitude</strong> run east–west and measure degrees north or south of the equator; lines of <strong>longitude</strong> run north–south and measure degrees east or west of the prime meridian. " + N(2) + "On a map of Virginia, a student marked three points. " + N(3) + "Point P, near the mouth of the Chesapeake Bay, is at 37° N, 76° W. " + N(4) + "Point Q, near Roanoke, is at 37° N, 80° W. " + N(5) + "Point R, in the Piedmont near Charlottesville, is at 38° N, 78° W. " + N(6) + "One degree of latitude spans about 111 km.</p>",
+      passage: "<p>" + N(1) + "Lines of <strong>latitude</strong> run east–west and measure degrees north or south of the equator; lines of <strong>longitude</strong> run north–south. " + N(2) + "On a Virginia map, a student marked three points. " + N(3) + "Point P, near the Chesapeake Bay's mouth, is at 37° N, 76° W. " + N(4) + "Point Q, near Roanoke, is at 37° N, 80° W. " + N(5) + "Point R, near Charlottesville, is at 38° N, 78° W. " + N(6) + "One degree of latitude spans about 111 km.</p>",
       claims: [
         {
           id: "same-lat",
@@ -306,7 +306,7 @@
           sub: "ES.1.b.3",
           stem: "Which change would most improve what the class can conclude about slope and erosion?",
           choices: [
-            { letter: "A", text: "testing more slopes, such as 20° and 25°, three times each" },
+            { letter: "A", text: "adding 20° and 25° slopes, with three runs of each" },
             { letter: "B", text: "changing the water flow rate and slope in the same runs" },
             { letter: "C", text: "running each slope once instead of three times" },
             { letter: "D", text: "using a different type of sand for each slope" }
@@ -321,7 +321,7 @@
           choices: [
             { letter: "A", text: "It shows that faster water carries more sediment." },
             { letter: "B", text: "It lets students control the slope and flow rate." },
-            { letter: "C", text: "It runs for minutes, but rivers erode for many years." },
+            { letter: "C", text: "It runs for minutes; rivers erode for years." },
             { letter: "D", text: "It uses flowing water to move sediment downhill." }
           ],
           correct: "C"
@@ -424,7 +424,7 @@
       kind: "Investigation · ES.1",
       blurb: "A hypothesis, a theory, a law, a flyer and a report: sort them and weigh them.",
       level: 2,
-      passage: "<p>" + N(1) + "While writing a report on a limestone cavern, a student collected four statements. " + N(2) + "<strong>W:</strong> \"If water drips onto a stalactite faster, then the stalactite will grow longer each year.\" " + N(3) + "<strong>X:</strong> \"The theory of plate tectonics explains how the rock layers around the cavern were folded.\" " + N(4) + "<strong>Y:</strong> \"The law of superposition states that in undisturbed rock layers, the oldest layer is at the bottom.\" " + N(5) + "<strong>Z:</strong> A souvenir flyer with no author says, \"Stalactites here grow 10 cm every year.\" " + N(6) + "The student also found a cave scientist's report, checked by other scientists before it was published, that measured stalactite growth in the same cavern for 12 years and found about 0.2 mm per year.</p>",
+      passage: "<p>" + N(1) + "While writing a report on a limestone cavern, a student collected four statements. " + N(2) + "<strong>W:</strong> \"If water drips onto a stalactite faster, then it will grow longer each year.\" " + N(3) + "<strong>X:</strong> \"The theory of plate tectonics explains how the rock layers around the cavern were folded.\" " + N(4) + "<strong>Y:</strong> \"The law of superposition states that in undisturbed rock layers, the oldest layer is at the bottom.\" " + N(5) + "<strong>Z:</strong> A souvenir flyer with no author says, \"Stalactites here grow 10 cm every year.\" " + N(6) + "She also found a cave scientist's report, checked by other scientists before publication, that measured stalactite growth in the same cavern for 12 years and found about 0.2 mm per year.</p>",
       claims: [
         {
           id: "classify-w",
@@ -434,7 +434,7 @@
           choices: [
             { letter: "A", text: "a law, because it describes what always happens in caves" },
             { letter: "B", text: "a theory, because it explains a wide range of observations" },
-            { letter: "C", text: "a hypothesis, because it makes a prediction that can be tested" },
+            { letter: "C", text: "a hypothesis, because it makes a testable prediction" },
             { letter: "D", text: "an observation, because it was written down inside a cave" }
           ],
           correct: "C"
@@ -445,7 +445,7 @@
           sub: "ES.1.f.1",
           stem: "Which statement correctly compares a scientific law, such as Y, with a scientific theory, such as X?",
           choices: [
-            { letter: "A", text: "A law describes what happens; a theory explains how or why." },
+            { letter: "A", text: "A law describes what happens; a theory explains why." },
             { letter: "B", text: "A theory becomes a law once it has been proven true." },
             { letter: "C", text: "A law is an idea that scientists have not yet tested." },
             { letter: "D", text: "A theory has less evidence behind it than a hypothesis." }
@@ -486,7 +486,7 @@
           choices: [
             { letter: "A", text: "It is wrong, because 200 mm at 0.2 mm per year is only 100 years." },
             { letter: "B", text: "It is certain, because a measured growth rate is a scientific law." },
-            { letter: "C", text: "It is reasonable, but the rate may have changed, so it is an estimate." },
+            { letter: "C", text: "It is reasonable, but it is an estimate, since rates can change." },
             { letter: "D", text: "It is wrong, because stalactites in this cavern grow 10 cm a year." }
           ],
           correct: "C"
@@ -678,10 +678,10 @@
           sub: "ES.1.f.2",
           stem: "Which is the best reason to rely on the forecast in sentence 6 rather than the post in sentence 5?",
           choices: [
-            { letter: "A", text: "The forecast uses wide data, and rising pressure suggests clear skies." },
-            { letter: "B", text: "The forecast agrees with what most students hoped would happen." },
-            { letter: "C", text: "The post is short, and short messages are almost always wrong." },
-            { letter: "D", text: "The post was read in the morning, before any snow could fall." }
+            { letter: "A", text: "It draws on many data sources, and rising pressure points to clearing." },
+            { letter: "B", text: "The forecast agrees with what most of the students hoped would happen." },
+            { letter: "C", text: "The post is short, and short messages are almost always found wrong." },
+            { letter: "D", text: "The post was read in the morning, before any of the snow could fall." }
           ],
           correct: "A"
         }
@@ -705,7 +705,7 @@
           choices: [
             { letter: "A", text: "If the pans sit in sunlight, then the salt will evaporate too." },
             { letter: "B", text: "If more water evaporates, then the salt concentration will fall." },
-            { letter: "C", text: "If the salt concentration is higher, then less water will evaporate." },
+            { letter: "C", text: "If water holds more salt, then less of it will evaporate." },
             { letter: "D", text: "If a day is cloudy, then the pans will gain mass from the air." }
           ],
           correct: "C"
@@ -755,7 +755,7 @@
           sub: "ES.1.b.3",
           stem: "Which change would most improve the reliability of her results?",
           choices: [
-            { letter: "A", text: "setting up three pans at each salt level and averaging them" },
+            { letter: "A", text: "using three pans at each salt level and averaging them" },
             { letter: "B", text: "moving Pan 3 to a shadier windowsill than the others" },
             { letter: "C", text: "using a different volume of liquid in each of the pans" },
             { letter: "D", text: "weighing the pans only on the first and the last day" }
@@ -786,7 +786,7 @@
       kind: "Investigation · ES.1",
       blurb: "Dye goes into a Shenandoah Valley sinkhole. Where does it come out?",
       level: 3,
-      passage: "<p>" + N(1) + "Much of Virginia's Shenandoah Valley sits on limestone, a rock that slowly dissolves in slightly acidic groundwater. " + N(2) + "Over thousands of years this forms <strong>karst</strong>: sinkholes, caves and springs connected by underground passages. " + N(3) + "After storms, the water in a farm's well turns cloudy, so a county team asked where water that enters a large sinkhole on the farm travels. " + N(4) + "During a rain on April 2, the team poured a harmless fluorescent dye into the sinkhole. " + N(5) + "They placed charcoal packets, which absorb the dye, in the farm well and in three springs, and checked them every day for 14 days. " + N(6) + "The table shows the results. " + N(7) + "Springs A and C lie northeast of the sinkhole, the same direction the limestone layers run; Spring B lies to the south. " + N(8) + "The team's model shows sinkhole water moving through connected passages that run northeast along the limestone layers. " + N(9) + "A neighbor's website, which cites no measurements, says sinkhole water \"always flows straight to the nearest spring.\"</p>" +
+      passage: "<p>" + N(1) + "Much of Virginia's Shenandoah Valley sits on limestone, a rock that slowly dissolves in slightly acidic groundwater. " + N(2) + "Over thousands of years this forms <strong>karst</strong>: sinkholes, caves and springs connected by underground passages. " + N(3) + "After storms, the water in a farm's well turns cloudy, so a county water team asked where water that enters a large sinkhole on the farm travels. " + N(4) + "During a rain on April 2, the team poured a harmless fluorescent dye into the sinkhole. " + N(5) + "They placed charcoal packets, which absorb the dye, in the farm well and in three springs, and checked them every day for the next 14 days. " + N(6) + "The table shows the results. " + N(7) + "Springs A and C lie northeast of the sinkhole, the same direction the limestone layers run; Spring B lies to the south. " + N(8) + "The team's model shows sinkhole water moving through connected passages that run northeast along the limestone layers. " + N(9) + "A neighbor's website, which cites no measurements, says sinkhole water \"always flows straight to the nearest spring.\"</p>" +
         "<table><tr><th>Site</th><th>Distance from sinkhole (km)</th><th>Days until dye found</th></tr><tr><td>Farm well</td><td>0.8</td><td>1</td></tr><tr><td>Spring A</td><td>3.0</td><td>2</td></tr><tr><td>Spring B</td><td>1.2</td><td>not found</td></tr><tr><td>Spring C</td><td>6.0</td><td>5</td></tr></table>",
       claims: [
         {
@@ -823,7 +823,7 @@
           choices: [
             { letter: "A", text: "The well draws all of its water from Spring B." },
             { letter: "B", text: "Limestone filters storm water slowly, as fine sand does." },
-            { letter: "C", text: "Muddy runoff reaches the well quickly through open passages." },
+            { letter: "C", text: "Muddy runoff reaches the well fast through open passages." },
             { letter: "D", text: "Dye from the April test is what clouded the well water." }
           ],
           correct: "C"
@@ -899,9 +899,9 @@
           stem: "Which hypothesis best fits the students' question in sentence 3?",
           choices: [
             { letter: "A", text: "If waves are taller, then more sand will wash off a bank." },
-            { letter: "B", text: "If a bank loses sand, then the waves will grow larger." },
+            { letter: "B", text: "If a bank loses more sand, then the waves will grow larger." },
             { letter: "C", text: "If sand is damp, then marsh grass will grow faster in it." },
-            { letter: "D", text: "If a bank has grass and a sill, then waves will remove less sand." }
+            { letter: "D", text: "If a bank has grass and a sill, then it will lose less sand." }
           ],
           correct: "D"
         },
@@ -924,10 +924,10 @@
           sub: "ES.1.b.3",
           stem: "Which change to the investigation would best address the point about storms in sentence 10?",
           choices: [
-            { letter: "A", text: "repeating the test with several different wave heights" },
-            { letter: "B", text: "using more sand in Bank 1 than in Bank 2" },
+            { letter: "A", text: "repeating the tests with several wave heights" },
+            { letter: "B", text: "using more sand in Bank 1 than in Bank 2 each trial" },
             { letter: "C", text: "running each setup once instead of three times" },
-            { letter: "D", text: "giving Bank 2 more trials than Bank 1" }
+            { letter: "D", text: "running more trials on Bank 2 than on Bank 1" }
           ],
           correct: "A"
         },
@@ -953,7 +953,7 @@
             { letter: "A", text: "Three matching trials turned their hypothesis into a law." },
             { letter: "B", text: "Their hypothesis was proven true for every Bay shoreline." },
             { letter: "C", text: "Their prediction became a theory once averages were found." },
-            { letter: "D", text: "Their prediction was a hypothesis, and their data supported it." }
+            { letter: "D", text: "Their hypothesis was supported by the data they collected." }
           ],
           correct: "D"
         }
