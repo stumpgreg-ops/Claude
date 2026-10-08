@@ -36,7 +36,7 @@ var srv = http.createServer(function (req, res) {
   check((await page.$$eval("#title-screen .card[data-family]", function (l) { return l.length; })) === 9, "nine unit cards (Full review + 8 units)");
   check(await page.isVisible('#title-screen .card.selected[data-family="ALL"]'), "Full review is selected by default");
   check((await page.textContent("#title-kicker")).indexOf("Earth Science") !== -1, "kicker names Earth Science");
-  check(await page.isVisible("#title-screen h1.logo img") && /v6\./.test(await page.textContent("#title-screen .ver")), "logo and version label on the title screen");
+  check(await page.isVisible("#title-screen h1.logo img") && /v1\./.test(await page.textContent("#title-screen .ver")), "logo and version label on the title screen");
   await shot("01-title");
 
   /* content pools: every unit has a pool, every skill card of every unit has items, and the
@@ -322,11 +322,11 @@ var srv = http.createServer(function (req, res) {
   await page.click('#mode-packs .card[data-gamemode="ALL"]');
   await page.waitForSelector("#skill-screen:not(.hidden)");
   gm.all = await page.evaluate(function () { return (SolModes.modeFor(2) || {}).id + "," + (SolModes.modeFor(1) ? "x" : "-"); });
-  check(gm.cards === "ALL,maze,raid,rocks,sky,ring,worms" && !gm.skill && /Ecology/.test(gm.kick), "after the unit, a game mode screen: all modes, the maze, or one of the five shooters (Root Worms too): " + JSON.stringify(gm));
+  check(gm.cards === "ALL,maze,raid,rocks,sky,ring,worms" && !gm.skill && /Earth History/.test(gm.kick), "after the unit, a game mode screen: all modes, the maze, or one of the five shooters (Root Worms too): " + JSON.stringify(gm));
   check(gm.one.l1 === "raid" && gm.one.l10 === "raid" && /Eagle Swoop/.test(gm.one.kick) && gm.one.saved === "raid" && gm.one.modeHidden && gm.backSel === "raid", "one mode: every level (a boss level too) is that mode, the skill screen names it, and it is remembered: " + JSON.stringify(gm.one));
   check(gm.maze === "---" && gm.backToUnits && gm.all === "raid,-", "maze only: no shooter levels; Back goes skill → mode → units; All modes brings the rotation back: " + JSON.stringify(gm));
   check((await page.$$eval("#skill-packs .card", function (l) { return l.length; })) === 5, "five Earth History skill cards (ES.9 a–d + All)");
-  check(/Ecology/.test(await page.textContent("#skill-kicker")), "skill kicker names the unit");
+  check(/Earth History/.test(await page.textContent("#skill-kicker")), "skill kicker names the unit");
   await shot("10-skills-eco");
   await page.click("#btn-skill-start");
   await page.waitForTimeout(300);
