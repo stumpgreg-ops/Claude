@@ -1170,7 +1170,7 @@ Standards in this unit:
    - D. became hot and dense enough for hydrogen to fuse
    - **Key: D**
 
-6. **[ES.2.d.2 · HOTS]** Space telescopes have photographed many young stars surrounded by flat, spinning disks of gas and dust, some with gaps where planets may be forming. How does this evidence relate to the solar nebular theory?  
+6. **[ES.2.d.2 · HOTS]** Space telescopes have photographed young stars inside flat, spinning disks of gas and dust, some with gaps where planets may be forming. How does this evidence relate to the solar nebular theory?  
    _Skill: Evaluate how new evidence from space exploration changed a scientific explanation_
    - A. It disproves the theory, because our own solar system has no such disk today.
    - B. It supports the theory, because the theory predicts disks around new stars.

@@ -769,7 +769,7 @@
           id: "disks",
           sol: "ES.2.d",
           sub: "ES.2.d.2",
-          stem: "Space telescopes have photographed many young stars surrounded by flat, spinning disks of gas and dust, some with gaps where planets may be forming. How does this evidence relate to the solar nebular theory?",
+          stem: "Space telescopes have photographed young stars inside flat, spinning disks of gas and dust, some with gaps where planets may be forming. How does this evidence relate to the solar nebular theory?",
           choices: [
             { letter: "A", text: "It disproves the theory, because our own solar system has no such disk today." },
             { letter: "B", text: "It supports the theory, because the theory predicts disks around new stars." },
