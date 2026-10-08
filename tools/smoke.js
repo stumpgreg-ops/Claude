@@ -1660,7 +1660,8 @@ var srv = http.createServer(function (req, res) {
   var retry = await page.evaluate(async function () {
     var s = SolScene; s.spareLives = 0; s.perks = {}; s.strikes = s.needStrikes - 1;
     s.answerWrong("Z", "WRONG LETTER");
-    await new Promise(function (r) { setTimeout(r, 1500); });
+    for (var w = 0; w < 40 && !(s.ended && !document.getElementById("overlay").classList.contains("hidden")); w++) await new Promise(function (r) { setTimeout(r, 100); });   /* the end sequence takes a moment; longer under load */
+    await new Promise(function (r) { setTimeout(r, 300); });
     return { ended: s.ended, title: document.getElementById("win-title").textContent, msg: document.getElementById("win-msg").textContent, retry: !document.getElementById("btn-retry").classList.contains("hidden") };
   });
   await page.click("#btn-retry");
