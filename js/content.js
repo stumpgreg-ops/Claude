@@ -13,6 +13,7 @@
         {
           id: "theme",
           sol: "9.RL.1.A",
+          sub: "9.RL.1.A.2",
           stem: "Which sentence best supports the idea that Jordan values loyalty more than the roster?",
           choices: [
             { letter: "A", text: "Maya texted that the late bus was already waiting for her at the curb." },
@@ -25,6 +26,7 @@
         {
           id: "static",
           sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
           stem: "Which statement best describes DeShawn as a character?",
           choices: [
             { letter: "A", text: "He drops the morning run to protect his own grocery store paycheck." },
@@ -37,6 +39,7 @@
         {
           id: "setting",
           sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "How does the gym foyer setting affect Jordan?",
           choices: [
             { letter: "A", text: "It slows his walk through the foyer, as if the building itself had taken a side." },
@@ -49,6 +52,7 @@
         {
           id: "fig",
           sol: "9.RL.2.B",
+          sub: "9.RL.2.B.2",
           stem: "In sentence 1, the phrase unread bubbles stacked like they wanted to trip him is used to —",
           choices: [
             { letter: "A", text: "prove that DeShawn was the one who posted the screenshot first" },
@@ -61,6 +65,7 @@
         {
           id: "aside",
           sol: "9.RL.1.D",
+          sub: "9.RL.1.D.1",
           stem: "Which sentence best shows Jordan speaking a private reason others are not meant to hear?",
           choices: [
             { letter: "A", text: "Alone at his locker he muttered that he would be there at six so the morning version of him had no excuse." },
@@ -73,6 +78,7 @@
         {
           id: "metaphor",
           sol: "9.RL.2.A",
+          sub: "9.RL.2.A.1",
           stem: "Which sentence best uses a comparison to carry the meaning of the tryout list?",
           choices: [
             { letter: "A", text: "Coach had taped the JV names to the glass early that morning before most players arrived." },
@@ -96,6 +102,7 @@
         {
           id: "char",
           sol: "11.RL.1.C",
+          sub: "11.RL.1.C.1",
           stem: "Dana is best described as —",
           choices: [
             { letter: "A", text: "a comic side character who stays backstage the whole night and never enters the stage no matter what" },
@@ -107,7 +114,8 @@
         },
         {
           id: "fig",
-          sol: "11.RL.2.B",
+          sol: "11.RL.2.C",
+          sub: "11.RL.2.C.2",
           stem: "Applause arrived like weather she had not ordered emphasizes that Dana —",
           choices: [
             { letter: "A", text: "controls the audience's reaction the way a magician controls a trick" },
@@ -119,7 +127,8 @@
         },
         {
           id: "irony",
-          sol: "10.RL.2.C",
+          sol: "10.RL.2.D",
+          sub: "10.RL.2.D.2",
           stem: "Which situation is most ironic?",
           choices: [
             { letter: "A", text: "Dana knows every line by heart just from watching quietly in the wings" },
@@ -132,6 +141,7 @@
         {
           id: "theme",
           sol: "11.RL.1.A",
+          sub: "11.RL.1.A.1",
           stem: "Which theme is best supported?",
           choices: [
             { letter: "A", text: "Rumors that spread backstage during any live show are always completely true no matter what" },
@@ -143,7 +153,8 @@
         },
         {
           id: "note",
-          sol: "9.RL.1.B",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "The taped note Play the person, not the vacancy most nearly helps Dana —",
           choices: [
             { letter: "A", text: "focus on portraying a character instead of apologizing for replacing someone" },
@@ -155,7 +166,8 @@
         },
         {
           id: "except",
-          sol: "11.RL.1.A",
+          sol: "11.RL.1.C",
+          sub: "11.RL.1.C.2",
           stem: "All of the following support Dana's integrity EXCEPT —",
           choices: [
             { letter: "A", text: "she texts the lead a photo with both of their names still on the callboard" },
@@ -178,7 +190,8 @@
       claims: [
         {
           id: "flash",
-          sol: "9.RL.3.A",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "The author includes the spring memory mainly to —",
           choices: [
             { letter: "A", text: "prove that the robotics club always meets during B lunch period" },
@@ -190,7 +203,8 @@
         },
         {
           id: "char",
-          sol: "9.RL.1.C",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "Which statement best describes Nina in this scene?",
           choices: [
             { letter: "A", text: "She still reaches for a connection even while protecting her pride." },
@@ -203,6 +217,7 @@
         {
           id: "fig2",
           sol: "9.RL.2.B",
+          sub: "9.RL.2.B.2",
           stem: "In sentence 2, open seats shrink like tide pools suggests that —",
           choices: [
             { letter: "A", text: "the lunch trays themselves are made from recycled ocean plastic" },
@@ -214,7 +229,8 @@
         },
         {
           id: "tone2",
-          sol: "9.RL.2.C",
+          sol: "9.RL.2.B",
+          sub: "9.RL.2.B.1",
           stem: "The overall tone of the passage is best described as —",
           choices: [
             { letter: "A", text: "triumphant and loud, like a team celebrating a big win together" },
@@ -226,7 +242,8 @@
         },
         {
           id: "infer2",
-          sol: "9.RL.1.B",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "Based on the passage, readers can best infer that Lena —",
           choices: [
             { letter: "A", text: "has forgotten Nina completely and does not notice her at all" },
@@ -249,7 +266,8 @@
       claims: [
         {
           id: "facade",
-          sol: "10.RV.1.C",
+          sol: "10.RV.1.D",
+          sub: "10.RV.1.D.2",
           stem: "In this passage, the sticker's phrase Open Community Hub most nearly functions as —",
           choices: [
             { letter: "A", text: "a printed schedule listing cafe prices for drinks and snacks" },
@@ -262,6 +280,7 @@
         {
           id: "context",
           sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "As used by Ms. Ortega, gentle reminder most nearly means —",
           choices: [
             { letter: "A", text: "a soft-sounding description of a rule that still blocks entry" },
@@ -273,7 +292,8 @@
         },
         {
           id: "connote",
-          sol: "10.RV.1.B",
+          sol: "10.RV.1.D",
+          sub: "10.RV.1.D.2",
           stem: "Kai's comment about collaborate suggests the word feels —",
           choices: [
             { letter: "A", text: "neutral and technical only, with no emotional weight at all" },
@@ -285,7 +305,8 @@
         },
         {
           id: "fig",
-          sol: "9.RV.1.E",
+          sol: "9.RV.1.F",
+          sub: "9.RV.1.F.2",
           stem: "The image of Hub curling up like it wanted to leave mainly emphasizes —",
           choices: [
             { letter: "A", text: "that vinyl stickers simply dislike cold winter weather outside" },
@@ -297,7 +318,8 @@
         },
         {
           id: "checkpoint",
-          sol: "10.RV.1.B",
+          sol: "10.RV.1.F",
+          sub: "10.RV.1.F.1",
           stem: "When Luis says the hub felt like a checkpoint, he most nearly means —",
           choices: [
             { letter: "A", text: "teachers now grade finished posters right at the door itself" },
@@ -320,7 +342,8 @@
       claims: [
         {
           id: "select2",
-          sol: "11.DSR.D",
+          sol: "11.DSR.C",
+          sub: "11.DSR.C.1",
           stem: "Select the TWO details that together best support Jules's claim that the change hits students without another workspace.",
           choices: [
             { letter: "A", text: "The library closes to student study at 4:00 p.m. on weekdays now." },
@@ -333,6 +356,7 @@
         {
           id: "purpose",
           sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "Pairing the email with the chat primarily helps readers —",
           choices: [
             { letter: "A", text: "schedule every single club meeting for the entire semester ahead of time" },
@@ -344,7 +368,8 @@
         },
         {
           id: "tone",
-          sol: "11.DSR.E",
+          sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "Compared with the email, the group chat's tone is more —",
           choices: [
             { letter: "A", text: "skeptical and pointed, questioning who the change truly helps" },
@@ -356,7 +381,8 @@
         },
         {
           id: "rhetoric",
-          sol: "11.DSR.E",
+          sol: "11.DSR.D",
+          sub: "11.DSR.D.2",
           stem: "In the email, protect a calm learning environment for all is best read as —",
           choices: [
             { letter: "A", text: "a promise that the library printers will stay running all through the entire night" },
@@ -368,7 +394,8 @@
         },
         {
           id: "infer",
-          sol: "9.DSR.E",
+          sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "Which inference is best supported by both texts?",
           choices: [
             { letter: "A", text: "Every single student already has a completely quiet desk waiting for them at home" },
@@ -392,6 +419,7 @@
         {
           id: "main",
           sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "The author's purpose in mentioning pass holders is to —",
           choices: [
             { letter: "A", text: "argue that the grocery job should pay more than the phone bill" },
@@ -404,6 +432,7 @@
         {
           id: "spec",
           sol: "9.RI.1.C",
+          sub: "9.RI.1.C.1",
           stem: "Based on the passage, which statement is a speculation rather than a confirmed fact?",
           choices: [
             { letter: "A", text: "Some parents guess grades will climb if kids get home earlier." },
@@ -416,6 +445,7 @@
         {
           id: "table",
           sol: "9.RI.1.B",
+          sub: "9.RI.1.B.2",
           stem: "Which numbers from the passage show that the late loop became smaller?",
           choices: [
             { letter: "A", text: "A junior dropped JV to keep a grocery job for her phone." },
@@ -428,6 +458,7 @@
         {
           id: "words",
           sol: "9.RI.2.B",
+          sub: "9.RI.2.B.2",
           stem: "In this passage, the word optional is used to —",
           choices: [
             { letter: "A", text: "describe the grocery job she took as a shift that she is free to drop anytime" },
@@ -440,6 +471,7 @@
         {
           id: "two",
           sol: "9.RI.3.A",
+          sub: "9.RI.3.A.1",
           stem: "How do Coach Patel's words and the activities office notice differ?",
           choices: [
             { letter: "A", text: "Both promise a brand-new second late bus running every Tuesday." },
@@ -452,6 +484,7 @@
         {
           id: "except",
           sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "All of the following are supported by the passage EXCEPT —",
           choices: [
             { letter: "A", text: "the office published rising GPA numbers after the cut" },
@@ -475,6 +508,7 @@
         {
           id: "main",
           sol: "11.RI.1.A",
+          sub: "11.RI.1.A.2",
           stem: "The author's primary purpose is to —",
           choices: [
             { letter: "A", text: "prove that GPA always rises once the pouches are installed everywhere" },
@@ -487,6 +521,7 @@
         {
           id: "factop",
           sol: "11.RI.1.C",
+          sub: "11.RI.1.C.1",
           stem: "Which statement is closest to an opinion framed as settled fact by pouch supporters?",
           choices: [
             { letter: "A", text: "Three nearby peer schools were surveyed." },
@@ -498,7 +533,8 @@
         },
         {
           id: "evidence",
-          sol: "10.RI.1.B",
+          sol: "10.RI.1.C",
+          sub: "10.RI.1.C.2",
           stem: "Which detail most weakens the claim that pouches alone caused the conflict drop?",
           choices: [
             { letter: "A", text: "Student government filed a counterbrief." },
@@ -511,6 +547,7 @@
         {
           id: "org",
           sol: "9.RI.2.A",
+          sub: "9.RI.2.A.1",
           stem: "The passage is mainly organized as —",
           choices: [
             { letter: "A", text: "a claim-and-counterclaim analysis of a policy and its evidence" },
@@ -523,6 +560,7 @@
         {
           id: "rhetoric",
           sol: "11.RI.2.C",
+          sub: "11.RI.2.C.2",
           stem: "Calling pouches a focus gift most nearly functions to —",
           choices: [
             { letter: "A", text: "announce free phones for all seniors this year" },
@@ -534,7 +572,8 @@
         },
         {
           id: "except",
-          sol: "10.RI.1.A",
+          sol: "10.RI.1.C",
+          sub: "10.RI.1.C.1",
           stem: "All of the following appear as evidence or counterevidence EXCEPT —",
           choices: [
             { letter: "A", text: "a claim that late work rose for students who used phones as planners" },
@@ -558,6 +597,7 @@
         {
           id: "org",
           sol: "9.RI.2.A",
+          sub: "9.RI.2.A.1",
           stem: "How is this passage primarily organized?",
           choices: [
             { letter: "A", text: "as a ranked list of club winners from last September" },
@@ -570,6 +610,7 @@
         {
           id: "main2",
           sol: "9.RI.1.A",
+          sub: "9.RI.1.A.1",
           stem: "What is the main idea of the passage?",
           choices: [
             { letter: "A", text: "The club fair follows a fixed order so setup, safety, and records stay consistent." },
@@ -581,7 +622,8 @@
         },
         {
           id: "detail",
-          sol: "9.RI.1.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "According to the passage, ambassadors check the line mainly to —",
           choices: [
             { letter: "A", text: "rewrite every single club flyer during ninth grade advisory" },
@@ -594,6 +636,7 @@
         {
           id: "purpose2",
           sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "Why does the author end with teachers saying the order never changes?",
           choices: [
             { letter: "A", text: "to prove that scanning attendance on Friday is optional" },
@@ -606,6 +649,7 @@
         {
           id: "factop",
           sol: "9.RI.1.C",
+          sub: "9.RI.1.C.1",
           stem: "Which statement from the passage is closest to an opinion rather than a procedure?",
           choices: [
             { letter: "A", text: "Teachers say the fair works because the order never changes." },
@@ -628,7 +672,8 @@
       claims: [
         {
           id: "select2",
-          sol: "10.DSR.D",
+          sol: "10.DSR.C",
+          sub: "10.DSR.C.1",
           stem: "Select the TWO pieces of evidence that together best support Samira's claim that access shrank even as the memo promised a welcome.",
           choices: [
             { letter: "A", text: "Families must arrange rides because no late bus is provided." },
@@ -641,6 +686,7 @@
         {
           id: "purpose",
           sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "The author's purpose in pairing the memo with the log is to —",
           choices: [
             { letter: "A", text: "list every travel club's exact fee prices for the upcoming season schedule" },
@@ -652,7 +698,8 @@
         },
         {
           id: "tone",
-          sol: "10.DSR.E",
+          sol: "10.DSR.B",
+          sub: "10.DSR.B.1",
           stem: "Samira's final sentence about a smaller door with a bigger smile mainly conveys —",
           choices: [
             { letter: "A", text: "confusion about the gym's exact light switch timing" },
@@ -664,7 +711,8 @@
         },
         {
           id: "infer",
-          sol: "10.DSR.E",
+          sol: "10.DSR.D",
+          sub: "10.DSR.D.2",
           stem: "Which idea is clearest only when both texts are read together?",
           choices: [
             { letter: "A", text: "A policy framed as wellness can still shrink practice chances for school-floor kids." },
@@ -676,7 +724,8 @@
         },
         {
           id: "except",
-          sol: "9.DSR.E",
+          sol: "9.DSR.C",
+          sub: "9.DSR.C.3",
           stem: "All of the following appear in the memo EXCEPT —",
           choices: [
             { letter: "A", text: "sign-in rules and probation limits on scrimmage" },
@@ -700,6 +749,7 @@
         {
           id: "main",
           sol: "11.RI.1.A",
+          sub: "11.RI.1.A.2",
           stem: "What is the main idea?",
           choices: [
             { letter: "A", text: "Pep rallies should be banned completely because they take valuable class time away from every student." },
@@ -712,6 +762,7 @@
         {
           id: "evidence",
           sol: "11.RI.1.B",
+          sub: "11.RI.1.B.2",
           stem: "Which evidence most directly challenges the idea that shorter rallies are required for bus safety?",
           choices: [
             { letter: "A", text: "The newly shortened rally now sits between second and third period." },
@@ -724,6 +775,7 @@
         {
           id: "tone",
           sol: "10.RI.2.C",
+          sub: "10.RI.2.C.1",
           stem: "The final sentence's tone is best described as —",
           choices: [
             { letter: "A", text: "open-ended and slightly skeptical" },
@@ -736,6 +788,7 @@
         {
           id: "factop",
           sol: "9.RI.1.C",
+          sub: "9.RI.1.C.1",
           stem: "Which statement is a clear factual report rather than interpretation?",
           choices: [
             { letter: "A", text: "Spirit surely cannot survive on just twenty-five short minutes." },
@@ -748,6 +801,7 @@
         {
           id: "org",
           sol: "11.RI.2.A",
+          sub: "11.RI.2.A.1",
           stem: "How does the author develop the discussion?",
           choices: [
             { letter: "A", text: "by interviewing only the school bus drivers and printing their answers word for word in a long dialogue format throughout the piece" },
@@ -770,7 +824,8 @@
       claims: [
         {
           id: "flash",
-          sol: "10.RL.3.A",
+          sol: "10.RL.1.B",
+          sub: "10.RL.1.B.1",
           stem: "The author uses the two-years-ago memory mainly to —",
           choices: [
             { letter: "A", text: "contrast Ava's past failure with her present attempt to control fear" },
@@ -783,6 +838,7 @@
         {
           id: "char",
           sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
           stem: "Which statement best describes Ava as a character in this passage?",
           choices: [
             { letter: "A", text: "She only cares about carefully reading every single name carved into the old dusty trophy case glass." },
@@ -795,6 +851,7 @@
         {
           id: "fig",
           sol: "10.RL.2.B",
+          sub: "10.RL.2.B.2",
           stem: "In sentence 5, setting panic on the floor beside her script suggests that Ava —",
           choices: [
             { letter: "A", text: "literally drops her bag and script onto the floor of the stage" },
@@ -807,6 +864,7 @@
         {
           id: "tone",
           sol: "10.RL.2.C",
+          sub: "10.RL.2.C.1",
           stem: "The tone of the final two sentences is best described as —",
           choices: [
             { letter: "A", text: "openly bitter toward the director" },
@@ -818,7 +876,8 @@
         },
         {
           id: "infer",
-          sol: "9.RL.1.B",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "Based on the passage, readers can best infer that callbacks —",
           choices: [
             { letter: "A", text: "require every student to text a sibling mid-scene" },
@@ -830,7 +889,8 @@
         },
         {
           id: "except",
-          sol: "10.RL.1.A",
+          sol: "10.RL.1.C",
+          sub: "10.RL.1.C.1",
           stem: "All of the following support the idea that Ava is confronting an old fear EXCEPT —",
           choices: [
             { letter: "A", text: "she texts that the building still remembered her worst night" },
@@ -854,6 +914,7 @@
         {
           id: "char",
           sol: "11.RL.1.C",
+          sub: "11.RL.1.C.1",
           stem: "Which statement best describes the change in Omar and Priya?",
           choices: [
             { letter: "A", text: "They become bitter enemies after the elevator suddenly stalls." },
@@ -866,6 +927,7 @@
         {
           id: "fig",
           sol: "10.RL.2.B",
+          sub: "10.RL.2.B.2",
           stem: "Silence felt like a third passenger suggests that —",
           choices: [
             { letter: "A", text: "the lack of talk itself pressured them as if a person were present" },
@@ -877,7 +939,8 @@
         },
         {
           id: "struct",
-          sol: "11.RL.3.A",
+          sol: "11.RL.1.B",
+          sub: "11.RL.1.B.1",
           stem: "The narrative is structured primarily around —",
           choices: [
             { letter: "A", text: "a heated courtroom argument about missing tutoring funds" },
@@ -889,7 +952,8 @@
         },
         {
           id: "tone",
-          sol: "9.RL.2.C",
+          sol: "9.RL.2.B",
+          sub: "9.RL.2.B.1",
           stem: "The tone of the ending (the text exchange) is best described as —",
           choices: [
             { letter: "A", text: "furious and accusatory" },
@@ -901,7 +965,8 @@
         },
         {
           id: "infer",
-          sol: "11.RL.1.B",
+          sol: "11.RL.1.C",
+          sub: "11.RL.1.C.2",
           stem: "Priya's reply with a time, not a speech, most nearly suggests she —",
           choices: [
             { letter: "A", text: "rejects Omar completely and wants absolutely nothing more to do with him" },
@@ -913,7 +978,8 @@
         },
         {
           id: "except",
-          sol: "10.RL.1.A",
+          sol: "10.RL.1.C",
+          sub: "10.RL.1.C.1",
           stem: "All of the following signal a shift in their relationship EXCEPT —",
           choices: [
             { letter: "A", text: "the emergency button changes color to celebrate them" },
@@ -936,7 +1002,8 @@
       claims: [
         {
           id: "char2",
-          sol: "9.RL.1.C",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "Which choice best describes Tariq's decision?",
           choices: [
             { letter: "A", text: "He argues loudly with the bus driver about the broken heater vents." },
@@ -949,6 +1016,7 @@
         {
           id: "fig3",
           sol: "9.RL.2.B",
+          sub: "9.RL.2.B.2",
           stem: "In sentence 7, noise that belonged to someone else's forecast mainly suggests that —",
           choices: [
             { letter: "A", text: "the bus driver quietly changed the route because of heavy rain" },
@@ -961,6 +1029,7 @@
         {
           id: "theme2",
           sol: "9.RL.1.A",
+          sub: "9.RL.1.A.1",
           stem: "Which theme is best supported by the passage?",
           choices: [
             { letter: "A", text: "Freshmen should never bring large instruments onto the bus." },
@@ -972,7 +1041,8 @@
         },
         {
           id: "infer3",
-          sol: "9.RL.1.B",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "Readers can best infer that the freshman —",
           choices: [
             { letter: "A", text: "felt uneasy and avoided looking up" },
@@ -984,7 +1054,8 @@
         },
         {
           id: "except2",
-          sol: "9.RL.1.A",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "All of the following help build the scene EXCEPT —",
           choices: [
             { letter: "A", text: "two juniors sprawling comfortably across an entire bench" },
@@ -1007,7 +1078,8 @@
       claims: [
         {
           id: "analogue",
-          sol: "10.RI.1.B",
+          sol: "10.RI.2.C",
+          sub: "10.RI.2.C.2",
           stem: "The planting-season comparison is used mainly to —",
           choices: [
             { letter: "A", text: "explain why delayed makeup work is harder to finish successfully" },
@@ -1019,7 +1091,8 @@
         },
         {
           id: "evidence",
-          sol: "10.RI.1.B",
+          sol: "10.RI.1.C",
+          sub: "10.RI.1.C.1",
           stem: "Which detail best supports the claim that early makeup requests work better?",
           choices: [
             { letter: "A", text: "The makeup window itself officially lasts exactly ten full school days in total." },
@@ -1032,6 +1105,7 @@
         {
           id: "main",
           sol: "9.RI.1.A",
+          sub: "9.RI.1.A.1",
           stem: "What is the main idea of the passage?",
           choices: [
             { letter: "A", text: "Counselors reportedly want to remove every single grading deadline for labs entirely now." },
@@ -1044,6 +1118,7 @@
         {
           id: "tone",
           sol: "10.RI.2.C",
+          sub: "10.RI.2.C.1",
           stem: "The author's tone toward the policy is best described as —",
           choices: [
             { letter: "A", text: "explanatory and firm" },
@@ -1056,6 +1131,7 @@
         {
           id: "opinion",
           sol: "9.RI.1.C",
+          sub: "9.RI.1.C.1",
           stem: "Which sentence best mixes interpretation with reported information?",
           choices: [
             { letter: "A", text: "The makeup window officially opens for exactly ten full school days during each full academic term." },
@@ -1079,6 +1155,7 @@
         {
           id: "char",
           sol: "10.RL.1.C",
+          sub: "10.RL.1.C.1",
           stem: "Which statement best captures Nora's response?",
           choices: [
             { letter: "A", text: "She asks Coach to ban every group chat for the rest of the season." },
@@ -1091,6 +1168,7 @@
         {
           id: "tone",
           sol: "10.RL.2.C",
+          sub: "10.RL.2.C.1",
           stem: "The tone after the screenshot appears is best described as —",
           choices: [
             { letter: "A", text: "bored and sleepy, like it was an ordinary afternoon" },
@@ -1103,6 +1181,7 @@
         {
           id: "fig",
           sol: "9.RL.2.B",
+          sub: "9.RL.2.B.2",
           stem: "The cursor blink like a dare suggests that Nora —",
           choices: [
             { letter: "A", text: "forgot Coach's full name during the team meeting" },
@@ -1115,6 +1194,7 @@
         {
           id: "theme",
           sol: "10.RL.1.A",
+          sub: "10.RL.1.A.1",
           stem: "Which theme is best supported?",
           choices: [
             { letter: "A", text: "Group chats exist mainly so teammates can argue about who owed a Gatorade." },
@@ -1126,7 +1206,8 @@
         },
         {
           id: "infer",
-          sol: "9.RL.1.B",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
           stem: "Readers can best infer that Malik leaves the chat because —",
           choices: [
             { letter: "A", text: "his phone battery died and never turned back on" },
@@ -1138,7 +1219,8 @@
         },
         {
           id: "except",
-          sol: "10.RL.1.A",
+          sol: "10.RL.1.B",
+          sub: "10.RL.1.B.1",
           stem: "All of the following contribute to the passage's tension EXCEPT —",
           choices: [
             { letter: "A", text: "a detailed box score from last season's championship game" },
@@ -1162,6 +1244,7 @@
         {
           id: "context",
           sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In this passage, the word temporary most nearly means —",
           choices: [
             { letter: "A", text: "required only by the championship playoff schedule this spring" },
@@ -1173,7 +1256,8 @@
         },
         {
           id: "connote",
-          sol: "9.RV.1.B",
+          sol: "9.RV.1.D",
+          sub: "9.RV.1.D.2",
           stem: "As used in sentence 6, the word privilege most nearly means —",
           choices: [
             { letter: "A", text: "a library checkout sticker every student must display on their own binder" },
@@ -1186,6 +1270,7 @@
         {
           id: "idiom",
           sol: "9.RV.1.E",
+          sub: "9.RV.1.E.2",
           stem: "Maya's warning not to catch a fade most nearly means —",
           choices: [
             { letter: "A", text: "do not let the flyer lose its ink out in the rain" },
@@ -1198,6 +1283,7 @@
         {
           id: "allude",
           sol: "9.RV.1.F",
+          sub: "9.RV.1.F.2",
           stem: "DeShawn mentions Achilles mainly to —",
           choices: [
             { letter: "A", text: "excuse a slow first step by borrowing a famous weakness" },
@@ -1209,7 +1295,8 @@
         },
         {
           id: "paper",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "When Jordan calls the list just paper, he most nearly means the roster is —",
           choices: [
             { letter: "A", text: "less important than the people who still show up daily" },
@@ -1232,7 +1319,8 @@
       claims: [
         {
           id: "both",
-          sol: "9.DSR.D",
+          sol: "9.DSR.C",
+          sub: "9.DSR.C.1",
           stem: "Select the TWO details that together best show a conflict between school messaging and a student's schedule.",
           choices: [
             { letter: "A", text: "September ridership numbers included only students with a monthly pass." },
@@ -1245,6 +1333,7 @@
         {
           id: "purpose",
           sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "The author's purpose in placing Maya's note next to the flyer is to —",
           choices: [
             { letter: "A", text: "argue that JV tryout lists should always stay completely secret" },
@@ -1256,7 +1345,8 @@
         },
         {
           id: "tone",
-          sol: "9.DSR.E",
+          sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "Compared with the flyer, Maya's note sounds more —",
           choices: [
             { letter: "A", text: "excited about championship pep talks from the coach" },
@@ -1268,7 +1358,8 @@
         },
         {
           id: "infer",
-          sol: "9.DSR.E",
+          sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "Which inference is best supported by both texts?",
           choices: [
             { letter: "A", text: "Every student on the varsity team owns a car by the time tryouts finish." },
@@ -1281,6 +1372,7 @@
         {
           id: "clear",
           sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
           stem: "Which idea becomes fully clear only when both texts are read together?",
           choices: [
             { letter: "A", text: "A 5:10 departure can erase the bridge between rehearsal and a paid shift." },
@@ -1304,6 +1396,7 @@
         {
           id: "main",
           sol: "10.RI.1.A",
+          sub: "10.RI.1.A.1",
           stem: "What is the author's main idea?",
           choices: [
             { letter: "A", text: "Counselors are quoted as wanting phones allowed and fully unlocked during every class period." },
@@ -1316,6 +1409,7 @@
         {
           id: "org",
           sol: "9.RI.2.A",
+          sub: "9.RI.2.A.1",
           stem: "How does the author mostly organize the passage?",
           choices: [
             { letter: "A", text: "by presenting a policy change and then tracing its effects and competing interpretations" },
@@ -1328,6 +1422,7 @@
         {
           id: "factop",
           sol: "10.RI.1.C",
+          sub: "10.RI.1.C.2",
           stem: "Which statement is presented as speculation rather than a reported result?",
           choices: [
             { letter: "A", text: "The schedule still remains labeled advisory on the printed bell chart." },
@@ -1340,6 +1435,7 @@
         {
           id: "rhetoric",
           sol: "10.RI.2.C",
+          sub: "10.RI.2.C.2",
           stem: "Calling the change a wellness reset while omitting complaint numbers most nearly functions to —",
           choices: [
             { letter: "A", text: "prove that counselors completely invented the detention referrals" },
@@ -1352,6 +1448,7 @@
         {
           id: "except",
           sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
           stem: "All of the following are supported by the passage EXCEPT —",
           choices: [
             { letter: "A", text: "the printed bell chart still says advisory even after the change" },
@@ -1375,6 +1472,7 @@
         {
           id: "multi",
           sol: "11.RV.1.B",
+          sub: "11.RV.1.B.1",
           stem: "In sentence 1, sanction is ambiguous because it can mean —",
           choices: [
             { letter: "A", text: "simply a type of tray handed out in the cafeteria lunch line" },
@@ -1387,6 +1485,7 @@
         {
           id: "clarify",
           sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "The sponsor's clarification most nearly defines sanctioned as —",
           choices: [
             { letter: "A", text: "immediately and permanently punished by the administration" },
@@ -1398,7 +1497,8 @@
         },
         {
           id: "impact",
-          sol: "11.RV.1.C",
+          sol: "11.RV.1.D",
+          sub: "11.RV.1.D.1",
           stem: "The author includes the split hallway reaction mainly to show that —",
           choices: [
             { letter: "A", text: "juniors generally dislike the whole idea of peer tutoring clubs" },
@@ -1410,7 +1510,8 @@
         },
         {
           id: "climate",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
           stem: "In the sponsor's note, climate most nearly means —",
           choices: [
             { letter: "A", text: "the overall emotional and social atmosphere of the school" },
@@ -1422,7 +1523,8 @@
         },
         {
           id: "except",
-          sol: "10.RV.1.A",
+          sol: "10.RV.1.B",
+          sub: "10.RV.1.B.1",
           stem: "All of the following contribute to the misunderstanding EXCEPT —",
           choices: [
             { letter: "A", text: "the sponsor later clarified exactly which meaning was intended" },
@@ -1440,7 +1542,34 @@
     { id: "G9", label: "Selection 1 · Grade 9", meta: "9.RL / 9.RI / 9.RV / 9.DSR. An item never repeats until the pack is used up." },
     { id: "G10", label: "Selection 2 · Grade 10", meta: "9th + 10th skills. Mix literary, informational, vocab, and paired evidence." },
     { id: "G11", label: "Selection 3 · Grade 11", meta: "All skills 9–11. Heavier analysis, tone, organization, and Select TWO." },
-    { id: "ALL", label: "All skills", meta: "Legacy Grade 9 mix — same pool as Selection 1." }
+    { id: "ALL", label: "All skills", meta: "Legacy Grade 9 mix — same pool as Selection 1." },
+    { id: "NJ5", label: "New Jersey · Grade 5", meta: "NJSLA-ELA grade 5: literature, informational, vocabulary and paired texts, with Part A / Part B evidence pairs." },
+    { id: "ODY", label: "The Odyssey · English 9", meta: "Unit 2: the Lotus-Eaters, the Cyclops, Circe, the cattle of Helios and Calypso." },
+    { id: "GEO", label: "Geometry · Virginia SOL", meta: "2023 Geometry SOL: logic, lines and transformations; triangles; polygons and circles; 3-D figures." }
+  ];
+  /* Which pack families feed each selection. Virginia selections are cumulative
+     (the Grade 10 card promises "Grade 9 and Grade 10 skills mixed"). */
+  var FAMILY_POOL = { G9: ["G9"], G10: ["G9", "G10"], G11: ["G9", "G10", "G11"], NJ5: ["NJ5"], ODY: ["ODY"], GEO: ["GEO"], ALL: ["G9"] };
+  /* v5.9: the Odyssey game's skill screen picks an episode; every ODY pack names one. */
+  var EPISODES = ["LOTUS", "CYCLOPS", "CIRCE", "HELIOS", "CALYPSO", "VOYAGE"];
+  /* v5.12.2: the Odyssey is read in story order, not by passage length. Within an episode the scenes come in the
+     order they happen (a passage never tells an event before the one that sets it up — "Nobody is killing me!"
+     comes after Odysseus names himself Nobody); passages that retell a whole episode come after its scenes.
+     "All episodes" follows the voyage: the frame at the Phaeacian court, the five episodes in the order Odysseus
+     lived them, then the paired texts that compare episodes. buildPack orders the claims by this list. */
+  var ODY_STORY = [
+    "ody-voyage-epithet-hero", "ody-voyage-i-am-odysseus", "ody-voyage-court-tale", "ody-voyage-greek-values",
+    "ody-lotus-nine-days", "ody-lotus-gift", "ody-lotus-vocab-forgetting", "ody-lotus-benches", "ody-lotus-paired-nostos",
+    "ody-lotus-poem-shore", "ody-lotus-choice", "ody-lotus-epic-telling",
+    "ody-cyclops-lawless", "ody-cyclops-cheese", "ody-cyclops-cave", "ody-cyclops-wine", "ody-cyclops-stake",
+    "ody-cyclops-nobody", "ody-cyclops-ram", "ody-cyclops-name",
+    "ody-circe-winds", "ody-circe-smoke", "ody-circe-lots", "ody-circe-feast-vocab", "ody-circe-eurylochus-verse",
+    "ody-circe-moly", "ody-circe-oath", "ody-circe-year",
+    "ody-helios-two-warnings", "ody-helios-one-against-many", "ody-helios-wrong-winds", "ody-helios-forbidden-herds",
+    "ody-helios-sweet-sleep", "ody-helios-eurylochus-speech", "ody-helios-sun-complaint", "ody-helios-wrath-of-sun",
+    "ody-calypso-shore", "ody-calypso-council-vocab", "ody-calypso-hermes-flight", "ody-calypso-cave",
+    "ody-calypso-reply", "ody-calypso-dinner", "ody-calypso-raft", "ody-calypso-storm",
+    "ody-voyage-two-temptations", "ody-voyage-eurylochus", "ody-voyage-setbacks-raft", "ody-voyage-tie-me-tighter"
   ];
 
   function wordCount(s) {
@@ -1471,29 +1600,82 @@
     return correctList(claim).length > 1;
   }
 
-  function strandMatch(sol, strand) {
+  function strandOf(claim) {
+    if (claim && claim.strand) return String(claim.strand).toUpperCase();
+    var sol = String((claim && claim.sol) || "");
+    var m = /^G\.(RLT|TR|PC|DF)\./.exec(sol);                      /* v5.19 Geometry: G.TR.4 */
+    if (m) return m[1];
+    m = /(?:^|\.)(RL|RI|RV|DSR)(?:\.|$)/.exec(sol);              /* Virginia: 9.RL.1.A */
+    if (m) return m[1];
+    if (/^L\./.test(sol)) return "RV";                               /* NJSLS language standards */
+    if (/^(RL|RI)\.CT\./.test(sol)) return "DSR";                   /* NJSLS compare-texts standards */
+    m = /^(RL|RI)\./.exec(sol);
+    return m ? m[1] : "RL";
+  }
+  function strandMatch(claim, strand, pack) {
     strand = String(strand || "ALL").toUpperCase();
     if (!strand || strand === "ALL" || strand === "NULL") return true;
-    if (!/^(RL|RI|RV|DSR)$/.test(strand)) return true;
-    /* Match strand letters in sol (e.g. 9.RL.1.A / 10.RI.2.C) — ignore grade digit. */
-    return new RegExp("\\." + strand + "(?:\\.|$)").test(String(sol || ""));
+    if (EPISODES.indexOf(strand) !== -1) return String((pack && pack.episode) || "").toUpperCase() === strand;
+    if (!/^(RL|RI|RV|DSR|RLT|TR|PC|DF)$/.test(strand)) return true;
+    return strandOf(claim) === strand;
+  }
+
+  /* Reading level 1–3 for the adaptive picker: the pack's own `level` tag, or an
+     estimate from sentence length and long words when a pack has none. */
+  function syllables(word) {
+    word = word.toLowerCase().replace(/[^a-z]/g, "");
+    if (!word) return 0;
+    if (word.length <= 3) return 1;
+    var v = word.replace(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/, "").replace(/^y/, "").match(/[aeiouy]{1,2}/g);
+    return v ? v.length : 1;
+  }
+  function readingGrade(html) {
+    var text = String(html).replace(/<[^>]+>/g, " ").replace(/\(\d+\)/g, " ");
+    var words = text.split(/\s+/).filter(Boolean), sents = text.split(/[.!?]+\s/).filter(Boolean).length || 1, syl = 0;
+    if (!words.length) return 5;
+    words.forEach(function (w) { syl += syllables(w); });
+    return 0.39 * (words.length / sents) + 11.8 * (syl / words.length) - 15.59;   /* Flesch–Kincaid grade */
+  }
+  function passageWords(p) {
+    if (p._words) return p._words;
+    var text = String(p.passage || "").replace(/<[^>]+>/g, " ").replace(/\(\d+\)/g, " ");
+    p._words = text.split(/\s+/).filter(Boolean).length;
+    return p._words;
+  }
+  /* Stamina schedule: the passage length the picker aims for on a given night.
+     Night 1 targets ~60 words (a few sentences); every 2 nights the target grows
+     by 10 words, reaching ~550 words by night 99. Tune in STAMINA. */
+  var STAMINA = { start: 60, step: 10, every: 2, max: 650 };
+  function targetWords(night) {
+    night = Math.max(1, parseInt(night, 10) || 1);
+    return Math.min(STAMINA.max, STAMINA.start + STAMINA.step * Math.floor((night - 1) / STAMINA.every));
+  }
+  function packLevel(p) {
+    if (p.level === 1 || p.level === 2 || p.level === 3) return p.level;
+    var g = readingGrade(p.passage || ""), nj = p.family === "NJ5";
+    if (nj) return g < 4.5 ? 1 : g < 6.5 ? 2 : 3;
+    return g < 7.5 ? 1 : g < 10 ? 2 : 3;
   }
 
   function buildPack(family, strand) {
     family = family || "ALL";
     strand = String(strand == null ? "ALL" : strand).toUpperCase();
     if (!strand || strand === "NULL") strand = "ALL";
-    var want = family === "ALL" ? "G9" : family;
+    var pool = FAMILY_POOL[family] || FAMILY_POOL.G9;
     var src = PACKS.filter(function (p) {
-      return p.family === want;
+      return pool.indexOf(p.family) !== -1;
     });
     if (!src.length) src = PACKS.filter(function (p) { return p.family === "G9"; });
     if (!src.length) src = PACKS.slice();
     var slips = [];
     var claims = [];
     src.forEach(function (p) {
+      var lvl = packLevel(p);
       p.claims.forEach(function (c) {
-        if (!strandMatch(c.sol, strand)) return;
+        /* A Part B item is only ever asked right after its Part A, so the strand
+           filter follows the Part A and Part B is never drawn on its own. */
+        var isPartB = p.claims.some(function (o) { return o.partB === c.id; });
+        if (!isPartB && !strandMatch(c, strand, p)) return;
         var choices = (c.choices || []).map(function (ch, i) {
           return {
             letter: ch.letter,
@@ -1503,7 +1685,14 @@
         });
         claims.push({
           id: p.id + ":" + c.id,
+          packId: p.id,
           sol: c.sol,
+          sub: c.sub || null,
+          strand: strandOf(c),
+          level: lvl,
+          words: p.family === "GEO" ? null : passageWords(p),   /* v5.19: a figure has no reading length; levels pick by p.level */
+          partB: c.partB ? p.id + ":" + c.partB : null,
+          isPartB: isPartB,
           stem: c.stem,
           doThis: c.stem,
           claim: c.stem,
@@ -1511,10 +1700,14 @@
           correct: c.correct,
           passage: p.passage,
           packTitle: p.title,
+          episode: p.episode || null,
+          seq: p.family === "ODY" && ODY_STORY.indexOf(p.id) !== -1 ? ODY_STORY.indexOf(p.id) * 100 + p.claims.indexOf(c) : null,
           family: p.family
         });
       });
     });
+    /* v5.12.2: story order for the Odyssey (ODY_STORY); a pack missing from the list goes last */
+    if (family === "ODY") claims.sort(function (a, b) { return (a.seq == null ? 1e9 : a.seq) - (b.seq == null ? 1e9 : b.seq); });
     /* If strand filter emptied the pool (sparse strand in a family), fall back to family-all. */
     if (!claims.length && strand !== "ALL") {
       return buildPack(family, "ALL");
@@ -1536,5 +1729,10 @@
   global.heistWordCount = wordCount;
   global.heistBuildPack = buildPack;
   global.heistCorrectList = correctList;
+  global.heistStrandOf = strandOf;
+  global.heistOdyStory = ODY_STORY;
+  global.heistPackLevel = packLevel;
+  global.heistTargetWords = targetWords;
+  global.heistStamina = STAMINA;
   global.heistIsMulti = isMulti;
 })(typeof window !== "undefined" ? window : global);
