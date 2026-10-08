@@ -790,7 +790,9 @@ h1.logo img { width: min(300px, 60vw, 48vh); height: auto; display: block; margi
   #hud { padding: 6px; }
   .eoc { padding: 6px; }
   #eoc-passage-wrap { min-height: 36px; }
-  .eoc-body { gap: 5px; }
+  /* Earth Science 1.0: a long question (the longest tenth of the bank) can be taller than the panel at 700 x 500; the
+     panel body then scrolls instead of cutting off the last answer choices */
+  .eoc-body { gap: 5px; overflow-y: auto; overscroll-behavior: contain; }
   .stem { margin: 0 0 4px; font-size: 13px; }
   .choices { gap: 3px; }
   .choices li { font-size: 12px; padding: 3px 6px; }
