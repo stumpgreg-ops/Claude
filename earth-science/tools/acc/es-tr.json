@@ -14969,6 +14969,12 @@
 "fa": "موج",
 "ru": "волна"
 },
+"wave-tank": {
+"es": "tanque de olas",
+"ar": "حوض الأمواج",
+"fa": "مخزن موج",
+"ru": "волновой бассейн"
+},
 "wavelength": {
 "es": "longitud de onda",
 "ar": "الطول الموجي",

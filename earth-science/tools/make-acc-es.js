@@ -5,8 +5,8 @@
      tools/acc/es-tr.json   word → {es, ar, fa, ru}: a word-to-word dictionary of every word in the questions and
                              answers, in the sense the question uses ("—" where a word has no translation).
    Checks that every word in a question or answer has a translation in all four languages, and that every defined
-   word is used somewhere in the packs. --report lists the questions whose right answer alone contains a defined
-   word, for a person to read over. Run it again whenever questions change (tools/validate-content.js reminds you). */
+   word is used somewhere in the packs, and that no defined (underlined) word appears only in a question's right answer.
+   --report lists those questions instead of failing. Run it again whenever questions change (tools/validate-content.js reminds you). */
 var fs = require("fs"), path = require("path");
 var root = path.join(__dirname, ".."), dir = path.join(__dirname, "acc");
 var g = {}; g.window = g;
@@ -40,14 +40,20 @@ Object.keys(def).sort().forEach(function (w) {
   if (typeof def[w] !== "string" || !def[w].trim()) { problems.push("empty definition: " + w); return; }
   defOut[k] = def[w].trim().replace(/\.$/, "");
 });
-if (process.argv.indexOf("--report") !== -1) {
+/* Earth Science 1.0: a defined word is underlined, so a word defined only in a question's right answer (not in its
+   stem or any other choice) would single that answer out. Such a word is an error here, not just a --report line. */
+var report = process.argv.indexOf("--report") !== -1;
+{
   P.forEach(function (p) { (p.claims || []).forEach(function (c) {
     var right = (c.choices || []).filter(function (x) { return x.letter === c.correct; })[0];
     if (!right) return;
     var others = {}; (c.choices || []).forEach(function (x) { if (x !== right) words(x.text).forEach(function (w) { others[w] = 1; }); });
     words(c.stem).forEach(function (w) { others[w] = 1; });
     var hit = words(right.text).filter(function (w) { return defOut[w] && !others[w]; });
-    if (hit.length) console.log("check " + p.id + ":" + c.id + "  right answer alone has: " + hit.join(", ") + "  — " + txt(right.text).trim());
+    if (hit.length) {
+      var line = p.id + ":" + c.id + "  right answer alone has: " + hit.join(", ") + "  — " + txt(right.text).trim();
+      if (report) console.log("check " + line); else problems.push("defined word singles out the right answer: " + line);
+    }
   }); });
 }
 if (problems.length) { console.error(problems.slice(0, 40).join("\n") + (problems.length > 40 ? "\n… " + (problems.length - 40) + " more" : "")); process.exit(1); }
