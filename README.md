@@ -29,6 +29,13 @@ A game uploaded to Canvas can't send anything anywhere, so progress is shown to 
 
 Tests: `node tools/smoke-progress.js` (after `node tools/build-games.js`, `node tools/build-appsscript.js VA|ODY` and `node tools/build-canvas.js VA|ODY`).
 
+## v5.17.2 (2026-10-08) — the game fits a 500-pixel Canvas frame
+
+- **New embed code:** `<iframe src="/courses/COURSE/files/NUMBER/preview" width="100%" height="500" allowfullscreen="allowfullscreen"></iframe>` (in every READ ME): as wide as the Canvas page and 500 pixels tall.
+- **Every screen fits in 500 pixels of height**, from 640 to 1280 pixels wide: when the frame is short (620 or less) the start screens, windows, the town builder and the shop tighten up (a smaller logo, smaller cards and buttons; the long how-to paragraphs on the first two screens are left out), and `js/fit.js` shrinks any screen or window that still doesn't fit (CSS zoom, down to 60% for a screen and 72% for a window; it measures and searches for the largest size that fits, and undoes it when the frame grows). Screens also centre safely now: a screen taller than its frame scrolls from its top instead of losing it.
+- **The play area in a short frame keeps the HUD on the left** (it used to move to a strip across the top below 1100 pixels wide, where the question's last answers were cut off); the HUD narrows with the frame, the passage box gives way to the question and all four answers, and the Look / full-screen buttons move under the minimap when the maze is narrow. Full screen (taller than 620) looks as before.
+- **Checked by `node tools/audit-500.js [va|ody] [WxH ...]`**: it opens every screen and window (start screens, Submit / Restore / badges windows, the town and shop, the Teacher screen, mode and skill pickers, the character and tutorial cards, the reading pop-up, play, the level-end window, a shooter level) at 640x500, 700x500, 1000x500, 1280x500 and full screen, saves screenshots, and fails on anything off the frame, cut off, or only reachable by scrolling (the passage, the shop grid, the badge list and the teacher page may scroll). `tools/smoke-canvas.js` now embeds the game with the READ ME's 500-pixel code and checks the start button and all four answers are in view.
+
 ## v5.17.1 (2026-10-07) — every Virginia question names its skill
 
 All 10,562 Virginia questions now carry the 2024 standard they assess and their skill (`sub`), checked against `js/standards-va.js` (`tools/expansion/TAGGING.md`, `node tools/expansion/tags.js status`). Many older tags used pre-2024 letters (context clues were tagged `9.RV.1.C`, which in 2024 is roots and affixes; context is `9.RV.1.B`); those are corrected. Each question kept its grade and its strand, so the game's grade pools and skill filter are unchanged. Grade 9: 2,143 LOTS / 1,405 HOTS questions; Grade 10: 1,850 / 1,687; Grade 11: 1,985 / 1,492. Some skills have no questions yet (fluency, general vocabulary use, a few comparing-texts skills whose questions sit in Paired texts); `tools/validate-content.js` now requires a skill on every new Virginia question.
@@ -228,7 +235,7 @@ So `node tools/build-canvas.js VA` now writes **`dist/canvas/VA/`** and the same
 
 - **In Canvas:**
   1. Upload the zip to one folder in **Files** and let Canvas expand it.
-  2. Embed `SOLLabyrinth-VA.html` in a Page: `<iframe src="/courses/<course>/files/<file id>/preview" width="100%" height="700" allowfullscreen></iframe>`.
+  2. Embed `SOLLabyrinth-VA.html` in a Page or assignment: `<iframe src="/courses/<course>/files/<file id>/preview" width="100%" height="500" allowfullscreen></iframe>` (v5.17.2: every screen fits in 500 pixels of height).
 - **Saves:** Canvas gives each uploaded file its own web address, and the saves live with the starter page's. An update replaces only the `.js` files, so the starter page and every student's progress stay. `SOLLabyrinth-VA-Canvas-update.zip` holds just those `.js` files.
 - **A missing or renamed file is named on screen** (for example, "can't find SOLLabyrinth-VA-data-03.js: upload it to the same folder as this page, with the same name").
 - **Test:** `node tools/smoke-canvas.js va` serves the files from a Canvas-like folder path (with a space in it) and embeds the starter page in a "course page" on another origin. It checks that the page reads only its own files, that every file is read, and that a missing data file is named. The v5.8.1 checks (level, 3D castle, music, separate saves) still run.

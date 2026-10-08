@@ -30,7 +30,7 @@ html, body {
     radial-gradient(ellipse at 50% 20%, rgba(245,200,66,.08), transparent 50%),
     linear-gradient(180deg, rgba(7,8,13,.94), rgba(7,8,13,.82)),
     repeating-linear-gradient(90deg, #161922 0 18px, #10131a 18px 36px);
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; justify-content: safe center;
   padding: 16px; overflow: auto; touch-action: pan-y;
 }
 #title-screen { z-index: 20; }
@@ -300,7 +300,9 @@ h1.logo img { width: min(300px, 60vw); height: auto; display: block; margin: 0 a
 }
 #overlay h2 { margin: 0 0 8px; }
 
-@media (max-width: 1099px) {
+/* the HUD across the top on a narrow screen. v5.17.2: not in a short frame (the Canvas embed is 500 tall): there
+   the HUD stays on the left (see "short frames" below), where the passage and all four answers fit */
+@media (max-width: 1099px) and (min-height: 621px), (max-width: 599px) {
   #play { flex-direction: column; }
   #hud {
     flex: 0 0 28vh;
@@ -707,3 +709,85 @@ h1.logo img { width: min(300px, 60vw); height: auto; display: block; margin: 0 a
 .fang-row .fang small { font-size: 10px; margin-top: 3px; color: #7a8594; }
 .fang-row .fang.on { color: #fff3c4; text-shadow: 0 0 8px rgba(255, 216, 74, .7); }
 .fang-row .fang.on small { color: var(--gold); }
+
+/* ── v5.17.2: short frames. The Canvas embed code is width="100%" height="500", so the game is often only 500
+   pixels tall. Everything tightens up; js/fit.js then shrinks whatever still doesn't fit. Full screen (taller than
+   620) looks as before. ── */
+@media (max-height: 620px) {
+  .screen { padding: 8px 12px; }
+  .kicker { font-size: 11px; margin: 0 0 2px; }
+  h1 { font-size: 30px; }
+  h1.logo img { width: auto; height: min(104px, 20vh); }
+  .ver { font-size: 10px; margin: 0 0 2px; }
+  .tag { font-size: 14px; margin: 2px 0 6px; }
+  .save-line { font-size: 13px; margin: 0 0 6px; }
+  .packs { gap: 8px; margin-bottom: 6px; }
+  .card { padding: 6px 12px; min-height: 40px; }
+  .card .name { font-size: 16px; }
+  .card .meta { font-size: 12px; margin-top: 2px; line-height: 1.3; }
+  #mode-screen .card, #skill-screen .card { width: min(240px, 46vw); }
+  #mode-screen .card .name, #skill-screen .card .name { font-size: 15px; }
+  .btn { padding: 6px 12px; min-height: 38px; }
+  .btn.primary { min-width: 130px; }
+  .row { margin: 4px 0; gap: 8px; }
+  .title-tools { gap: 6px; margin: 2px 0 6px; }
+  .join-row { margin: 2px 0 4px; gap: 8px; }
+  .join-row input { min-height: 34px; padding: 4px 8px; }
+  /* the long how-to paragraphs: the cards and buttons already say what to do */
+  #title-screen .howto, #state-screen .howto { display: none; }
+  .state-tag { font-size: 16px; }
+  .state-packs { gap: 12px; margin-top: 4px; }
+  .state-card { min-height: 0; padding: 12px 14px; gap: 4px; width: min(300px, calc((100vw - 64px) / 3)); }
+  .state-card .name { font-size: 28px; }
+  .state-card .kind { font-size: 12px; }
+  .state-card .meta { font-size: 12px; }
+  .music-pick { margin: 0 0 4px; }
+  .chips { gap: 4px; }
+  .chip { min-height: 30px; padding: 3px 10px; font-size: 12px; }
+  .music-vol-row { margin: 4px 0 0; }
+  .music-vol { height: 20px; }
+  /* windows */
+  .read-card { padding: 10px 14px 10px; gap: 6px; max-height: calc(100vh - 16px); }
+  #read-overlay { padding: 8px; }
+  .read-head h2 { font-size: 18px; }
+  .realm-card { margin: 0 0 4px; padding: 6px 10px; font-size: 13px; }
+  .read-scroll { padding: 8px 12px; }
+  .read-scroll .passage { font-size: 15px; line-height: 1.5; }
+  .read-scroll .stem { margin-top: 8px; font-size: 15px; }
+  .tut-card { padding: 14px 16px 12px; }
+  .tut-card h2 { font-size: 21px; margin: 0 0 6px; }
+  .trap-card { padding: 16px 18px 14px; }
+  .trap-card h2 { font-size: 24px; }
+  .trap-card #trap-body { font-size: 16px; margin: 0 0 10px; }
+  .char-panel { padding: 12px 14px 10px; max-height: calc(100vh - 16px); }
+  .char-panel h2 { font-size: 22px; }
+  .char-tag { margin: 0 0 8px; }
+  .char-grid { gap: 6px; margin: 0 0 8px; }
+  .char-preset { min-height: 0; padding: 6px 4px; }
+  .char-preset img { width: 48px; height: 48px; }
+  #char-overlay, #tut-overlay, #trap-overlay, #codex-overlay { padding: 8px; }
+  .codex-card { max-height: calc(100vh - 16px); padding: 12px 14px 10px; }
+  #overlay .box { padding: 14px 16px; max-height: calc(100vh - 16px); overflow: auto; }
+  #overlay .box .row { margin-top: 8px; }
+}
+/* the play area in a short frame: the HUD stays on the left (narrower when the frame is), smaller touch pads */
+@media (max-height: 620px) and (min-width: 600px) {
+  :root { --hud: clamp(250px, 34vw, 340px); --hit: 44px; }
+  #hud { padding: 6px; }
+  .eoc { padding: 6px; }
+  #eoc-passage-wrap { min-height: 36px; }
+  .eoc-body { gap: 5px; }
+  .stem { margin: 0 0 4px; font-size: 13px; }
+  .choices { gap: 3px; }
+  .choices li { font-size: 12px; padding: 3px 6px; }
+  .eoc-bar { margin-bottom: 4px; gap: 6px; }
+  .carry-flag { margin-top: 4px; padding-top: 4px; }
+  #btn-action { width: 70px; height: 70px; }
+  #btn-shutter { width: 56px; height: 56px; }
+  #controls { padding: 6px 10px 8px; }
+}
+/* a narrow maze beside the HUD: the Look and full-screen buttons go under the minimap */
+@media (max-height: 620px) and (min-width: 600px) and (max-width: 1060px) {
+  #btn-char { right: 12px; top: 128px; }
+  #btn-fs { right: 12px; top: 172px; }
+}

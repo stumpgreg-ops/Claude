@@ -84,7 +84,8 @@ var gameName = GAME_NAMES[st] || ("Sol's Labyrinth (" + st + ")");
 var teacherBuild = require("./build-teacher"), PB = require("../js/progress-code.js").BUILDS[st];
 var teacherName = teacherBuild.fileName(st), teacherPath = path.join(outAll, teacherName);
 fs.writeFileSync(teacherPath, teacherBuild.build(st, man.version));
-var EMBED = '<iframe src="/courses/COURSE/files/NUMBER/preview" width="100%" height="700" allowfullscreen="allowfullscreen"></iframe>';
+/* v5.17.2: as wide as the Canvas page and 500 pixels tall; every screen of the game fits in 500 (js/fit.js) */
+var EMBED = '<iframe src="/courses/COURSE/files/NUMBER/preview" width="100%" height="500" allowfullscreen="allowfullscreen"></iframe>';
 /* v5.15: the READ ME is in numbered SECTIONS with a contents list, so a teacher can jump (Ctrl+F "SECTION 4") to
    what they need instead of reading it all. The full zip and the update zip share the sections; only the order
    and the first steps differ. */
@@ -150,7 +151,8 @@ function S_embed() {
     "   With the example numbers it would be:",
     "   " + EMBED.replace("COURSE", "152432").replace("NUMBER", "60512345"),
     "",
-    "Too small or too tall? Change height=\"700\" (try 600 or 800).",
+    "The game fits completely in 500 pixels of height: every screen, window and button. Want it bigger? Change",
+    "height=\"500\" (try 600 or 700), or have students use the game's full-screen button.",
     "",
     "There is no separate embed code for the teacher screen: it is inside the game (the hidden Teacher link,",
     "SECTION 4.0)."
@@ -260,7 +262,8 @@ function S_update(update) {
 function S_trouble() {
   return [
     "- The game says \"Can't find ...\": that file is missing from the folder. Upload it with exactly the same name.",
-    "- The game is too small or too tall: change height=\"700\" in the embed code (try 600 or 800).",
+    "- The game looks small: it is made to fit height=\"500\". Change it to 600 or 700 in the embed code, or use",
+    "  the game's full-screen button.",
     "- Students want it bigger: the game has its own full-screen button.",
     "- Download CSV or the import file doesn't download inside Canvas: open " + teacherName + " from this zip on your",
     "  computer (double-click it) and drop the files there. It is the same teacher screen.",
