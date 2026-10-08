@@ -31,6 +31,8 @@ Tests: `node tools/smoke-progress.js` (after `node tools/build-games.js`, `node 
 
 ## v5.18.1 (2026-10-08) — every screen fits the 500 px Canvas frame, a "Main menu" way out, a one-window how-to
 
+- **The Odyssey question pool in Word:** `docs/questions/The-Odyssey-question-pool.docx`, 76 pages. It covers all 48 passages and 296 questions in the order the game asks them, episode by episode. Each passage is in full, followed by its questions, with the keyed answer in green with ✓ and the standard named. A summary is on the cover and an answer key at the end. Rebuild with `node tools/make-odyssey-questions-doc.js`.
+
 - **Every screen fits the embed (width 100%, height 500) without scrolling.** Checked at 1000 × 500 and 760 × 500 by `node tools/smoke-frame.js`:
   - **Title:** a smaller logo, the cards in one row and the buttons compact. The how-to paragraph is left to the tutorial.
   - **Mode and episode screens:** the cards are in a grid of four, with their descriptions cut to one or two lines. The music chips are smaller.
