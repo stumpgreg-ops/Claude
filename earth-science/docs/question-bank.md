@@ -1170,9 +1170,9 @@ Standards in this unit:
    - D. became hot and dense enough for hydrogen to fuse
    - **Key: D**
 
-6. **[ES.2.d.2 · HOTS]** Space telescopes have photographed young stars inside flat, spinning disks of gas and dust, some with gaps where planets may be forming. How does this evidence relate to the solar nebular theory?  
+6. **[ES.2.d.2 · HOTS]** Space telescopes have photographed young stars inside flat, spinning disks of gas and dust, some with gaps where planets may form. How does this evidence relate to the solar nebular theory?  
    _Skill: Evaluate how new evidence from space exploration changed a scientific explanation_
-   - A. It disproves the theory, because our own solar system has no such disk today.
+   - A. It disproves the theory, because our solar system has no such disk today.
    - B. It supports the theory, because the theory predicts disks around new stars.
    - C. It has no bearing on the theory, because those stars are not the sun.
    - D. It shows that planets form first and their stars form much later.
@@ -2126,7 +2126,7 @@ Standards in this unit:
    - D. A river drops sediment in a low, round basin.
    - **Key: C**
 
-3. **[ES.8.a.3 · HOTS]** The Blue Ridge, just east of the valley, is made mostly of granite and other rocks that do not dissolve easily in weak acid. Compared with the valley, the Blue Ridge most likely has —  
+3. **[ES.8.a.3 · HOTS]** The Blue Ridge, just east of the valley, is mostly granite and other rocks that do not dissolve easily in weak acid. Compared with the valley, the Blue Ridge most likely has —  
    _Skill: Analyze how climate, parent rock, slope and time affect soil and karst development_
    - A. fewer caverns and sinkholes, because its rock resists carbonic acid
    - B. more caverns, because granite has more cracks than limestone does

@@ -375,7 +375,7 @@
           id: "blue-ridge",
           sol: "ES.8.a",
           sub: "ES.8.a.3",
-          stem: "The Blue Ridge, just east of the valley, is made mostly of granite and other rocks that do not dissolve easily in weak acid. Compared with the valley, the Blue Ridge most likely has —",
+          stem: "The Blue Ridge, just east of the valley, is mostly granite and other rocks that do not dissolve easily in weak acid. Compared with the valley, the Blue Ridge most likely has —",
           choices: [
             { letter: "A", text: "fewer caverns and sinkholes, because its rock resists carbonic acid" },
             { letter: "B", text: "more caverns, because granite has more cracks than limestone does" },
