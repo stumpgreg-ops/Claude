@@ -796,3 +796,47 @@ h1.logo img { width: min(300px, 60vw); height: auto; display: block; margin: 0 a
   #btn-music-hud { right: 12px; top: 216px; }
   #music-vol-hud { right: 12px; top: 262px; width: 96px; }
 }
+
+/* ── v5.18: accommodations a teacher turns on for one student (js/accommodations.js) ───────────────────── */
+.acc-w { cursor: pointer; border-radius: 3px; }
+.acc-w.acc-def { text-decoration: underline dotted rgba(255, 224, 138, .85); text-underline-offset: 3px; text-decoration-thickness: 2px; }
+.acc-w:hover, .acc-w:focus-visible { background: rgba(255, 224, 138, .18); outline: none; }
+.acc-dict .acc-w.acc-tr:hover { background: rgba(159, 211, 214, .22); }
+#acc-pop {
+  position: fixed; z-index: 9800; display: none; max-width: min(320px, 90vw);
+  background: #1b1410; color: #f1ede4; border: 2px solid #e8b04a; border-radius: 10px;
+  padding: 8px 12px; box-shadow: 0 8px 24px rgba(0,0,0,.55); font: 15px/1.35 "Trebuchet MS", sans-serif;
+}
+#acc-pop .acc-pop-w { font-weight: 800; color: #ffe08a; font-size: 16px; }
+#acc-pop .acc-pop-def { margin-top: 4px; }
+#acc-pop .acc-pop-tr { margin-top: 6px; font-size: 18px; }
+#acc-pop .acc-pop-l { font-size: 12px; color: #c8c2b4; }
+.acc-say {
+  appearance: none; border: 1px solid #6a5a3a; background: rgba(40, 30, 20, .85); color: #ffe08a;
+  border-radius: 8px; padding: 1px 6px; font-size: 13px; line-height: 1.4; cursor: pointer; min-height: 0; vertical-align: middle;
+}
+.acc-say.on { background: #e8b04a; color: #140c0a; }
+.acc-say-q { margin-right: 6px; }
+.acc-bar { margin: 0 0 6px; }
+body.acc-audio .choices li { grid-template-columns: 18px 1fr auto; }
+.acc-s.acc-reading { background: rgba(255, 224, 138, .28); box-shadow: 0 0 0 2px rgba(255, 224, 138, .28); border-radius: 3px; }
+body.acc-big .passage { font-size: 17px; line-height: 1.5; }
+body.acc-big .stem { font-size: 17px; }
+body.acc-big .choices li { font-size: 15.5px; line-height: 1.35; }
+body.acc-big .read-scroll .passage { font-size: 19px; }
+body.acc-big .read-scroll .stem { font-size: 19px; }
+body.acc-big .read-scroll .choices li { font-size: 17px; }
+#acc-overlay { position: fixed; inset: 0; z-index: 9750; display: flex; align-items: center; justify-content: center; background: rgba(6, 8, 12, .86); padding: 8px; }
+#acc-overlay.hidden { display: none !important; }
+#acc-overlay .acc-card { max-width: 560px; width: min(560px, 96%); }
+#acc-overlay input[type=password], #acc-overlay input[type=date], #acc-overlay select {
+  min-height: 40px; border-radius: 8px; border: 2px solid #3a4150; background: #141822; color: var(--ink); padding: 6px 8px; font: inherit;
+}
+.acc-opt { border-top: 1px solid rgba(232, 176, 74, .25); padding: 8px 0; }
+.acc-opt label { cursor: pointer; }
+.acc-opt.dis { opacity: .55; }
+.acc-opt input[type=checkbox] { width: 18px; height: 18px; vertical-align: -3px; }
+.acc-row { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 6px; font-size: 13px; color: var(--dim); }
+.acc-small { font-size: 13px; color: var(--dim); margin: 2px 0 6px; }
+.acc-msg { min-height: 1.2em; color: #9aefc0; font-weight: 700; margin: 8px 0 0; }
+#acc-note { margin: 10px 0 0; color: #9fd3d6; font-size: 13px; text-align: center; }

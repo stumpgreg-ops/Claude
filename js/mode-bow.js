@@ -7,7 +7,8 @@
  * row ending at a plaque with its letter. The rows fan out from Odysseus's shoulder and every row's
  * rings sit on the path of a fully drawn arrow, so a row can be threaded from where he stands.
  *
- * Aim (▲ ▼ / W S / the pad, or point), hold to draw (the meter: drawing → the gold band → shaking),
+ * Aim (▲ ▼ / W S / the pad, or point), hold to draw (the meter: drawing → the gold band → shaking; let go
+ * in the shaking red and the arrow always flies wide, v5.17.2),
  * let go: the arrow flies with slight gravity (and, from level 41, the draft from the open side door).
  * Through all twelve rings into the plaque picks that letter (answerPick); an axe blade, a haft, a plank,
  * the floor or the wall stops it — a wasted arrow. The suitors' patience drains with time and with every
@@ -27,7 +28,6 @@
   var C = { terra: "#d9772b", ochre: "#e8b04a", glaze: "#140c0a", wine: "#3a0f2a", blue: "#1e5f8c", foam: "#9fd3d6", bone: "#efe6d2",
     clay2: "#e79a52", dilute: "#7a3c1c" };
   var TAU = Math.PI * 2, DEG = Math.PI / 180;
-  var DRAW_MS = 900;      /* rest to a full draw */
   var FLIGHT = 0.5;       /* seconds a fully drawn arrow takes to reach the plaques */
   var DROP = 0.07;        /* gravity: a fully drawn arrow drops this share of the distance on its way */
   var AX_W = 26, BL = 12, RIM = 4, HF = 10;   /* the axe texture: width, blade, ring rim, haft below the ring */
@@ -42,8 +42,9 @@
       gap: 36 - n * 0.14,                                         /* the hole through a ring, px: 33.3 at 19, 22.1 at 99 */
       sway: n >= 11 ? Math.min(42, 8 + (n - 11) * 0.38) : 0,      /* rows sway up and down, px at the plaques */
       swaySpd: 0.5 + n * 0.009,                                   /* rad a second */
-      sweetMs: 1400 - n * 9.5,                                    /* the gold band: a full draw held steady, ms */
-      shakeDeg: 1.2 + n * 0.03,                                   /* how far the aim shakes when held too long */
+      drawMs: 700 - n * 2.8,                                      /* rest to a full draw, ms: the meter rises faster (697 at 1, 423 at 99) */
+      sweetMs: 400 - n * 2.7,                                     /* the gold band: a full draw held steady, ms (397 at 1, 133 at 99) */
+      shakeDeg: 3 + n * 0.03,                                     /* how far the aim shakes when held too long */
       shakeMs: 1500 - n * 7,                                      /* from the first tremble to the worst */
       wind: n >= 41 ? 10 + (n - 41) * 0.45 : 0,                   /* the draft: px it pushes an arrow at the plaques */
       guide: 0.95 - n * 0.006,                                    /* how much of the way to the first axe the dotted line shows */
@@ -341,7 +342,7 @@
 
   M.extend("bow", {
     name: "Bend the Bow", kind: "archery level", level: "archery level", act: "DRAW",
-    how: "Penelope's contest: string Odysseus's great bow and shoot an arrow through the rings of twelve axe heads. None of the suitors could even string it; now Odysseus, still in his beggar's rags, has it. Each letter has its own row of twelve axes, ending at a plaque. Aim along the right row (its axes light up when you are lined up), hold to draw, and let go while the meter is in the gold band: too soon and the arrow drops, too late and your arms shake. The arrow must fly through all twelve rings. The suitors lose patience while you wait or miss; then one throws a footstool or a cup along a dotted arc, so step back into the doorway.",
+    how: "Penelope's contest: string Odysseus's great bow and shoot an arrow through the rings of twelve axe heads. None of the suitors could even string it; now Odysseus, still in his beggar's rags, has it. Each letter has its own row of twelve axes, ending at a plaque. Aim along the right row (its axes light up when you are lined up), hold to draw, and let go while the meter is in the gold band: too soon and the arrow drops, too late and your arms shake and the arrow flies wild. The arrow must fly through all twelve rings. The suitors lose patience while you wait or miss; then one throws a footstool or a cup along a dotted arc, so step back into the doorway.",
     rules: "Shooting through a wrong row costs a life. So does a thrown footstool or cup (Antinous threw a footstool at the beggar in Book 17), or using up your quiver (the swineherd Eumaeus brings a fresh one). An arrow that hits an axe costs no life, but it angers the suitors.",
     keys: "▲ ▼, W / S or the on-screen pad aim (or point with the mouse or a finger) · hold Space, DRAW or a mouse button to draw the bow, let go to shoot · hold ◀ or A to step back into the doorway.",
     tip: "BEND THE BOW — shoot through all twelve rings of the row with the right letter. Hold ◀ to step back when a suitor throws.",
@@ -605,12 +606,13 @@
       else if (inp.fire && B.armed && !atMark && !B.toldBack) { B.toldBack = true; this.toast("Step back out of the doorway (let go of ◀) to shoot.", 2400); }
       var shake = 0;
       if (B.drawing) {
-        var over = B.hold - DRAW_MS - P.sweetMs;
+        var over = B.hold - P.drawMs - P.sweetMs;
         if (over > 0) {
-          shake = P.shakeDeg * DEG * (0.3 + 0.7 * Math.min(1, over / P.shakeMs));
+          shake = P.shakeDeg * DEG * (0.7 + 0.3 * Math.min(1, over / P.shakeMs));
           if (!B.toldShake) { B.toldShake = true; this.toast("Your arms are shaking! Let go sooner, while the meter is in the gold band.", 3200); }
         }
       }
+      B.shakeAmp = shake;
       B.shakeA = shake * (0.6 * Math.sin(B.t * 33) + 0.4 * Math.sin(B.t * 51 + 1));
 
       /* the draft from the side door (level 41 on): a slow gust, up or down */
@@ -671,9 +673,25 @@
         if (!B.toldTap) { B.toldTap = true; this.toast("Hold to draw the bow, then let go to shoot.", 2400); }
         return null;
       }
-      var pw = hold >= DRAW_MS ? 1 : 0.5 + 0.5 * hold / DRAW_MS;
+      var P = B.P, pw = hold >= P.drawMs ? 1 : 0.5 + 0.5 * hold / P.drawMs;
       if (pw < 1 && !B.toldWeak) { B.toldWeak = true; this.toast("Too soon! A half-drawn bow shoots a weak arrow that drops. Hold until the meter reaches the gold band.", 3600); }
-      return this.bowShoot(B.aim + B.shakeA, pw);
+      return this.bowShoot(B.aim + this.bowShakeErr(hold), pw);
+    },
+    /* v5.17.2: let go in the red and the shaking arms throw the arrow off the row: at least far enough to strike
+       the first axe, whatever point of the tremble the release catches (before, a lucky moment still threaded it) */
+    bowShakeErr: function (hold) {
+      var B = this.bw, P = B.P, k = B.k;
+      if (!(hold > P.drawMs + P.sweetMs) || !(B.shakeAmp > 0)) return B.shakeA || 0;
+      var miss = Math.atan((P.gap * 0.5 + RIM + 6) * k / Math.max(60 * k, B.x0 - B.sx)) * 1.3;
+      var e = B.shakeA || 0, sgn = e < 0 ? -1 : 1, m0 = Math.max(Math.abs(e), miss, B.shakeAmp * 0.6), self = this, i, j;
+      if (!B.toldWild) { B.toldWild = true; this.toast("Your arms shook and the arrow flew wild! Let go while the meter is in the gold band.", 3400); }
+      /* ... and never into another row: the first error, growing, either way, that stays clear of every row */
+      var aims = B.rows.map(function (r, ri) { return self.bowRowAim(ri); });
+      for (i = 0; i < 12; i++) for (j = 0; j < 2; j++) {
+        var err = (j ? -sgn : sgn) * m0 * (1 + i * 0.25), ang = B.aim + err;
+        if (aims.every(function (ra) { return Math.abs(ang - ra) > miss; })) return err;
+      }
+      return sgn * m0;
     },
     /* an arrow leaves the bow at this angle and power (1 = a full draw) */
     bowShoot: function (ang, pw) {
@@ -937,7 +955,7 @@
       this.player.setPosition(ox, fy - 140 * k);
       var a = B.aim + B.shakeA, c = Math.cos(a), sn = Math.sin(a);
       var dx = c, dy = -sn, ux = -sn, uy = -c;                    /* along the aim, and "up" across it */
-      var pw = B.drawing ? Math.min(1, B.hold / DRAW_MS) : 0;
+      var pw = B.drawing ? Math.min(1, B.hold / B.P.drawMs) : 0;
       var sfx = ox + 6 * k, sfy = fy - 92 * k, srx = ox - 1 * k, sry = fy - 90 * k;
       var gx = sfx + dx * 34 * k, gy = sfy + dy * 34 * k;          /* the bow hand */
       var nx = gx - dx * (6 + 40 * pw) * k, ny = gy - dy * (6 + 40 * pw) * k;   /* the nock and the drawing hand */
@@ -1000,14 +1018,14 @@
       var B = this.bw, P = B.P, k = B.k, g = B.uiG, i;
       /* the draw meter: drawing (dim) → the gold band (steady) → shaking (red) */
       var mx = B.meterX, mw = B.meterW, top = B.meterTop, bot = B.meterBot, hgt = bot - top;
-      var total = DRAW_MS + P.sweetMs + P.shakeMs, y1 = bot - hgt * DRAW_MS / total, y2 = bot - hgt * (DRAW_MS + P.sweetMs) / total;
+      var total = P.drawMs + P.sweetMs + P.shakeMs, y1 = bot - hgt * P.drawMs / total, y2 = bot - hgt * (P.drawMs + P.sweetMs) / total;
       g.fillStyle(0x140c0a, 0.9); g.fillRect(mx - 3 * k, top - 3 * k, mw + 6 * k, hgt + 6 * k);
       g.fillStyle(0x5a3a22, 1); g.fillRect(mx, y1, mw, bot - y1);
       g.fillStyle(0xe8b04a, 1); g.fillRect(mx, y2, mw, y1 - y2);
       g.fillStyle(0x8a2a1a, 1); g.fillRect(mx, top, mw, y2 - top);
       var f = B.drawing ? Math.min(1, B.hold / total) : 0;
       if (f > 0) {
-        var fy = bot - hgt * f, inGold = B.hold >= DRAW_MS && B.hold <= DRAW_MS + P.sweetMs;
+        var fy = bot - hgt * f, inGold = B.hold >= P.drawMs && B.hold <= P.drawMs + P.sweetMs;
         g.fillStyle(inGold ? 0xfff6d0 : 0xefe6d2, inGold ? 0.75 : 0.5); g.fillRect(mx, fy, mw, bot - fy);
         g.lineStyle(2.5 * k, inGold ? 0x9aefc0 : 0xefe6d2, 1); g.lineBetween(mx - 5 * k, fy, mx + mw + 5 * k, fy);
         if (inGold) { g.lineStyle(2 * k, 0x9aefc0, 0.8 + 0.2 * Math.sin(B.t * 12)); g.strokeRect(mx - 3 * k, y2 - 2 * k, mw + 6 * k, y1 - y2 + 4 * k); }

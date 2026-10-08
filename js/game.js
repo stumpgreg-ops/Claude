@@ -26019,7 +26019,10 @@
        killing the run for a student. */
     update(t, dt) {
       try {
-        this._updateInner(t, dt);
+        /* v5.18: the "slower game" accommodation (js/accommodations.js) */
+        var accK = window.SolAcc ? SolAcc.speedK() : 1;
+        if (this._accK !== accK) { this._accK = accK; SolAcc.applyScene(this, accK); }
+        this._updateInner(t, dt * accK);
       } catch (err) {
         this._reportCrash(err);
       }
@@ -26999,7 +27002,7 @@
     { id: "ram", kind: "Sneak out of the cave", name: "Under the Ram", meta: "Cling under a ram and slip out of the Cyclops's cave past blind Polyphemus's groping hands — ride out on the ram with the right letter.", ody: true },
     { id: "bow", kind: "Archery", name: "Bend the Bow", meta: "String Odysseus's great bow and shoot an arrow through the twelve axe heads — the row with the right letter.", ody: true },
     { id: "raft", kind: "Ride the waves", name: "Calypso's Raft", meta: "Sail the raft from Ogygia, steer by the stars and ride Poseidon's waves to the right letter.", ody: true },
-    { id: "row", kind: "Keep the beat", name: "Row Past the Sirens", meta: "Keep the crew rowing to the beat while Odysseus, tied to the mast, strains toward the Sirens — row to the right letter.", ody: true }
+    { id: "row", kind: "Row to the song", name: "Row Past the Sirens", meta: "Row as each note of the Sirens' song lands on the ship while Odysseus, tied to the mast, strains toward them — row to the right letter.", ody: true }
   );
   /* the cards this build offers: the Odyssey-only modes appear only in the Odyssey build, and the modes
      marked noOdy (v5.12: Root Worms) only in the others; a saved pick of a card not offered falls back to All */

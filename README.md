@@ -29,6 +29,48 @@ A game uploaded to Canvas can't send anything anywhere, so progress is shown to 
 
 Tests: `node tools/smoke-progress.js` (after `node tools/build-games.js`, `node tools/build-appsscript.js VA|ODY` and `node tools/build-canvas.js VA|ODY`).
 
+## v5.18.1 (2026-10-08) — one version again: accommodations + the 500-pixel fit
+
+The Odyssey session's v5.17.2–v5.18.0 (the Sirens' song, the raft and the bow, accommodations) and this session's v5.17.0–v5.17.2 (skills under each standard, every question tagged, the 500-pixel fit and its review fixes) are merged. Where both had made the game fit a 500-pixel frame, this session's version (`js/fit.js`, the "short frames" CSS, checked by `tools/audit-500.js`) is kept; the accommodations keep their own styles and `js/accommodations.js`. Virginia gets read aloud, larger text and the slower game now; its word lists for tap-to-define and the dictionary are still to be written.
+
+## v5.18.0 (2026-10-08) — accommodations a teacher turns on for one student
+
+Not the standard setup: everything is off until a teacher turns it on for one Chromebook. The teacher types the word **accommodations** in the nickname box on the title screen, enters the **teacher PIN** (4826, in each Canvas READ ME's SECTION 6; "Change the PIN on this Chromebook" sets another one), ticks options and saves. The settings live in `localStorage` `afterHours.v1.acc.<STATE>`. Each option can carry an **end date**, after which it switches itself off, so a support meant to fade can be planned. While anything is on, the title screen says "Accommodations on: …". Code: `js/accommodations.js` (all games), styles in `css/after-hours.css`; test: `node tools/smoke-acc.js` (after `node tools/build-games.js`).
+
+- **Tap a word for its meaning:** difficult words in the passage, question and answers are underlined, and a click shows a short definition. The Odyssey has 801 definitions, written for its passages (names, gods and places included).
+- **Word-to-word dictionary, questions and answers only:** a click on any word in the question or the answers shows it in Spanish, Arabic, Farsi or Russian (the teacher picks the language). Arabic and Farsi read right to left. The Odyssey's 2,266 question-and-answer words are in `js/acc-ody.js`, with the sense used in the question. `tools/build-games.js` loads that file only in the Odyssey build.
+- **Vocabulary questions:** on a question with a `.RV.` standard, the word it asks about is never defined or translated. That is any word in the stem, or in a one- or two-word answer, that also appears in the passage.
+- **Read aloud:** "🔊 Read the passage" reads it sentence by sentence and highlights each sentence; 🔊 buttons read the question and each answer ("A. …"). It uses the Chromebook's own voice (`speechSynthesis`, offline, no audio files), at normal or slower speed. The sentence numbers are not read.
+- **Larger text:** bigger passage, question and answer text in the side panel and the reading pop-up.
+- **Slower game:** the whole game runs at 85, 75 or 60 % speed. Both scene loops scale each frame (`SolAcc.speedK()`), and Phaser's clock, tweens, animations and physics follow.
+- **Virginia and New Jersey:** they get read aloud, larger text and the slower game; the two word options say "not in this game yet" until those games have word lists.
+- **Regenerating the Odyssey word lists** after its questions change: list the words with their sentences (the passages' for definitions, the questions' and answers' for the dictionary), write the entries, and merge them into `js/acc-ody.js` (`window.SOL_ACC_DATA = { def, tr }`).
+
+## v5.17.3 (2026-10-08) — fits a Canvas Page 500 px tall
+
+- **The embed code** in every Canvas READ ME is now `<iframe src="/courses/COURSE/files/NUMBER/preview" width="100%" height="500" allowfullscreen="allowfullscreen"></iframe>` (the teacher's choice; it was height 700). The READ ME says to change height="500" if the game is too small or too tall.
+- **The game fits a frame that short** (`css/after-hours.css`, "short frames"):
+  - **Play screen:** when the frame is 640 px tall or less and 700–1099 px wide, the question panel stays at the side (instead of a strip across the top). The game gets the frame's full height: at 1000 × 500 it plays in 690 × 500, where it had 1000 × 360.
+  - **Smaller controls in short frames:** the panel text, the touch pad, the action buttons and the buttons over the game are smaller.
+  - **The reading pop-up:** the whole card scrolls when it is taller than the frame, and "Got it — play" stays pinned at its foot. Before, a long mode card on a shooter level pushed the button out of reach in a 500 px frame, so the level could not start.
+  - **Other pop-ups:** the tutorial, field guide, character, end-of-level and Rune Rocks beam pop-ups fit the frame and scroll inside it.
+  - **Menus:** a menu screen taller than the frame scrolls from its top (centering used to cut off its top).
+  - Checked at 760, 1000 and 1366 px wide by 500 tall: every screen and level reached, no page errors.
+
+## v5.17.2 (2026-10-08) — the Odyssey: rowing to the Sirens' song, a fair raft jump, a harder bow
+
+After the teacher's notes on three Odyssey modes:
+
+- **Row Past the Sirens** (`js/mode-row.js`):
+  - *"Looking at the bottom of the screen for timing and steering in the middle: the student can't look in two places at once."* The drum band at the bottom is gone. Each beat is now a note of the Sirens' song: a big gold note, or a sea-foam one off the beat, outlined on a dark halo. It flies from the Sirens' meadow and lands on a gold ring round the mast. The student rows as it lands. The ring also shows the crew's stroke and glows as a note comes in. PERFECT / GOOD / MISS show under the ship, and the count-in shows over its bow. The small drifting song notes are gone, so the only notes on the sea are the ones to row on.
+  - *"Not a set count; it should change like a song."* The beat is a tune made of four-bar phrases (A, A again with a new last note, B, a closing bar). Each bar mixes long and short notes and rests from level 1. Quick notes come from level 21 (`quickP`), syncopation from 41 (`syncP`) and busy runs from 71 (`denseP`); these replace `offP` / `dblP` / `restP`.
+  - *Actual music.* Each note is sung at its pitch (D dorian) over a lyre chord progression, a bass and the boatswain's frame drum on the first beat of each bar, all synthesized (`rowMusic`, no audio files). The level's background track is ducked while the song plays.
+- **Calypso's Raft** (`js/mode-raft.js`), *"the jump is too short; there is no path to clear the wrong letter."* Letters now touch only the middle of the hull (`LBOX`; rocks, waves and the veil still use the whole raft). A trough buoy's touch radius is 15 (was 18). A held ▲ glides down slower (`GLIDE_V` 85, was 120). A held ▲ now clears a wrong buoy by at least 1.7× the distance needed at every level and screen size; with the extra lift in the air it clears two wrong buoys in back-to-back troughs. The help says "hold ▲ to sail over a wrong buoy".
+- **Bend the Bow** (`js/mode-bow.js`), *"the first levels are extremely easy; anything in the yellow hits, some of the red hits too."*
+  - The meter rises faster: `drawMs` is 697 ms at level 1 and 423 at 99 (it was a fixed 900).
+  - The gold band is much shorter: `sweetMs` is 397 ms at level 1 and 133 at 99 (it was 1,390 and 460).
+  - Letting go in the red always flies wild: the arrow goes far enough off its row to strike the first axe, and never into another row (`bowShakeErr`). The shaking also starts stronger.
+
 ## v5.17.2 (2026-10-08) — the game fits a 500-pixel Canvas frame
 
 - **New embed code:** `<iframe src="/courses/COURSE/files/NUMBER/preview" width="100%" height="500" allowfullscreen="allowfullscreen"></iframe>` (in every READ ME): as wide as the Canvas page and 500 pixels tall.

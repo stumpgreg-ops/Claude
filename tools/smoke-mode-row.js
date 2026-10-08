@@ -116,18 +116,39 @@ var srv = http.createServer(function (req, res) {
   if (await page.isVisible("#read-go")) await page.click("#read-go");
   await page.waitForFunction(function () { return !SolScene.readOpen; }, null, { timeout: 8000 }).catch(function () {});
 
-  /* the count-in, then the beat: marks close in on the drum and the drum sounds */
+  /* the count-in, then the song: its notes fly to the ring on the ship (v5.17.2: no drum band at the bottom) */
   var beat = await page.evaluate(async function () {
     var T = window.__rowT, s = SolScene, R = s.rw, o = {};
     s.spareLives = 9; R.auto = true;
     o.countIn = R.countIn.length; o.liveFromAhead = R.liveFrom > R.clock;
     await T.until(function () { return R.stats.perfect >= 3; }, 90000);
-    o.perfect = R.stats.perfect; o.notes = R.notes.length; o.marks = R.notes.filter(function (n) { return n.mL && n.mL.visible; }).length;
+    o.perfect = R.stats.perfect; o.notes = R.notes.length; o.marks = R.notes.filter(function (n) { return n.m && n.m.visible; }).length;
+    var mast = R.ship.y, flying = R.notes.filter(function (n) { return n.m && n.m.visible && !n.judged; });
+    o.nearShip = flying.length > 0 && flying.every(function (n) { return n.m.y <= mast + 2 && n.m.y >= mast - 420 * R.k; });
+    o.big = flying.length ? Math.round(flying[0].m.displayHeight) : 0; o.band = !!(R.drum || R.laneG);
     o.mom = R.mom;
     return o;
   });
   await shot("03-level-12");
-  check(beat.countIn === 3 && beat.liveFromAhead && beat.perfect >= 3 && beat.marks >= 2 && beat.mom > 0.7, "after a 3-2-1 count-in the drum keeps the beat: marks close in on the drum, and strokes on the beat build the crew's stroke: " + JSON.stringify(beat));
+  check(beat.countIn === 3 && beat.liveFromAhead && beat.perfect >= 3 && beat.marks >= 2 && beat.nearShip && beat.big >= 50 && !beat.band && beat.mom > 0.7, "after a 3-2-1 count-in the song's notes fly in big over the sea to the ring on the ship (no band at the bottom), and strokes as they land build the crew's stroke: " + JSON.stringify(beat));
+
+  /* the song is not a steady count: phrases of long and short notes and rests (level 12: no off-beats yet) */
+  var song = await page.evaluate(function () {
+    var s = SolScene, R = s.rw, o = {}, bars = [], j;
+    s.rowStop(); R.plainLeft = 0;
+    for (j = 0; j < 40; j++) { var n0 = R.notes.length; s.rowMeasure(R.clock + 1e6 + j * R.bd * 4); bars.push(R.notes.slice(n0)); }
+    var key = function (b) { return b.map(function (n) { return Math.round((n.t - b[0].t) / R.bd * 2) / 2; }).join(","); };
+    var pats = {}; bars.forEach(function (b) { pats[key(b) + "@" + Math.round(((b[0].t - R.clock - 1e6) % (R.bd * 4)) / R.bd * 2) / 2] = 1; });
+    o.patterns = Object.keys(pats).length;
+    o.long = bars.filter(function (b) { return b.length < 4; }).length;
+    o.off = R.notes.filter(function (n) { return n.kind !== "beat"; }).length;
+    o.pitches = Object.keys(R.notes.reduce(function (a, n) { a[n.f] = 1; return a; }, {})).length;
+    o.acc = R.acc.length;
+    s.rowStop();
+    return o;
+  });
+  check(song.patterns >= 5 && song.long >= 10 && song.off === 0 && song.pitches >= 4 && song.acc >= 40,
+    "level 12's song changes from bar to bar (long notes, rests), sung on several pitches over a lyre, with no off-beats yet: " + JSON.stringify(song));
 
   /* strokes judged: PERFECT, GOOD, MISS (early) and a stroke off the beat; misses snap Odysseus's ropes */
   var judge = await page.evaluate(async function () {
@@ -285,23 +306,23 @@ var srv = http.createServer(function (req, res) {
   /* ── 3. the difficulty ramp ── */
   var ramp = await page.evaluate(function () {
     var f = SolModes.MODES.row.params, s = SolScene, easier = [], flat = [], n;
-    var up = ["bpm", "offP", "dblP", "restP", "pull", "tug", "swellMul", "swellMs", "scroll", "sway"], down = ["perfectW", "goodW", "breakAt", "swellEvery", "swellWarn", "rowGap", "chanFrac"];
+    var up = ["bpm", "quickP", "syncP", "denseP", "pull", "tug", "swellMul", "swellMs", "scroll", "sway"], down = ["perfectW", "goodW", "breakAt", "swellEvery", "swellWarn", "rowGap", "chanFrac"];
     for (n = 2; n <= 100; n++) {
       var a = f(n - 1), b = f(n), harder = false, worse = false;
       up.forEach(function (k) { if (b[k] > a[k] + 1e-9) harder = true; if (b[k] < a[k] - 1e-9) worse = true; });
       down.forEach(function (k) { if (b[k] < a[k] - 1e-9) harder = true; if (b[k] > a[k] + 1e-9) worse = true; });
       if (worse) easier.push(n); if (!harder) flat.push(n);
     }
-    var pick = function (p) { return { bpm: +p.bpm.toFixed(1), perfectW: +p.perfectW.toFixed(0), goodW: +p.goodW.toFixed(0), breakAt: p.breakAt, offP: +p.offP.toFixed(2), dblP: +p.dblP.toFixed(2), restP: +p.restP.toFixed(2), pull: +p.pull.toFixed(0), swellMul: +p.swellMul.toFixed(2), swellEvery: Math.round(p.swellEvery), swellMs: Math.round(p.swellMs), scroll: Math.round(p.scroll), rowGap: Math.round(p.rowGap), chanFrac: +p.chanFrac.toFixed(3), sway: +p.sway.toFixed(2) }; };
+    var pick = function (p) { return { bpm: +p.bpm.toFixed(1), perfectW: +p.perfectW.toFixed(0), goodW: +p.goodW.toFixed(0), breakAt: p.breakAt, quickP: +p.quickP.toFixed(2), syncP: +p.syncP.toFixed(2), denseP: +p.denseP.toFixed(2), pull: +p.pull.toFixed(0), swellMul: +p.swellMul.toFixed(2), swellEvery: Math.round(p.swellEvery), swellMs: Math.round(p.swellMs), scroll: Math.round(p.scroll), rowGap: Math.round(p.rowGap), chanFrac: +p.chanFrac.toFixed(3), sway: +p.sway.toFixed(2) }; };
     return { easier: easier, flat: flat, same: JSON.stringify(s.rowParams(37)) === JSON.stringify(f(37)), l2: pick(f(2)), l12: pick(f(12)), l50: pick(f(50)), l99: pick(f(99)) };
   });
   console.log("ramp", JSON.stringify({ l2: ramp.l2, l12: ramp.l12, l50: ramp.l50, l99: ramp.l99 }));
   check(ramp.easier.length === 0 && ramp.flat.length === 0 && ramp.same, "rowParams: every level 2-100 is harder than the one before and never easier on any setting: " + JSON.stringify({ easier: ramp.easier, flat: ramp.flat }));
   var a12 = ramp.l12, a99 = ramp.l99;
-  check(a12.bpm <= 75 && a12.perfectW >= 70 && a12.goodW >= 150 && a12.breakAt === 4 && a12.offP === 0 && a12.dblP === 0 && a12.restP === 0 && a12.pull <= 30 && a12.swellEvery >= 9000 && a12.chanFrac >= 0.95,
-    "level 12 is fair for a first try: a slow drum, wide timing windows, plain beats, 4 ropes, a gentle song, a wide channel: " + JSON.stringify(a12));
-  check(a99.bpm >= 125 && a99.perfectW <= 40 && a99.goodW <= 95 && a99.breakAt === 3 && a99.offP >= 0.6 && a99.dblP >= 0.5 && a99.restP >= 0.4 && a99.pull >= 3 * a12.pull && a99.swellEvery <= 4000 && a99.rowGap <= 0.6 * a12.rowGap && a99.chanFrac <= 0.75 && a99.sway > 0,
-    "level 99 is intense: a fast drum, narrow windows, off-beats, doubles and rests, 3 ropes, a strong song that swells often, posts coming fast through a narrow, drifting channel: " + JSON.stringify(a99));
+  check(a12.bpm <= 75 && a12.perfectW >= 70 && a12.goodW >= 150 && a12.breakAt === 4 && a12.quickP === 0 && a12.syncP === 0 && a12.denseP === 0 && a12.pull <= 30 && a12.swellEvery >= 9000 && a12.chanFrac >= 0.95,
+    "level 12 is fair for a first try: a slow song, wide timing windows, no quick notes or syncopation, 4 ropes, a gentle song, a wide channel: " + JSON.stringify(a12));
+  check(a99.bpm >= 125 && a99.perfectW <= 40 && a99.goodW <= 95 && a99.breakAt === 3 && a99.quickP >= 0.7 && a99.syncP >= 0.55 && a99.denseP >= 0.4 && a99.pull >= 3 * a12.pull && a99.swellEvery <= 4000 && a99.rowGap <= 0.6 * a12.rowGap && a99.chanFrac <= 0.75 && a99.sway > 0,
+    "level 99 is intense: a fast song, narrow windows, quick notes, syncopation and busy runs, 3 ropes, a strong song that swells often, posts coming fast through a narrow, drifting channel: " + JSON.stringify(a99));
 
   /* ── 4. level 98: the late features run ── */
   await gotoLevel(98);
@@ -313,7 +334,9 @@ var srv = http.createServer(function (req, res) {
     for (var j = 0; j < 60; j++) { var n0 = R.notes.length; s.rowMeasure(R.clock + 1e6 + j * R.bd * 4); bars.push(R.notes.slice(n0)); }
     R.notes.forEach(function (n) { kinds[n.kind] = (kinds[n.kind] || 0) + 1; });
     o.kinds = kinds; o.perBar = R.notes.length / 60;
-    o.rests = bars.filter(function (b) { return b.length === 3 && b.every(function (n) { return n.kind !== "dbl"; }); }).length;
+    o.quick = bars.filter(function (b) { return b.some(function (n, i) { return i && Math.abs(n.t - b[i - 1].t - R.bd / 2) < 1; }); }).length;
+    o.sync = bars.filter(function (b) { return b.some(function (n) { return n.kind === "off" && !b.some(function (x) { return Math.abs(n.t - x.t - R.bd / 2) < 1; }); }); }).length;
+    o.busy = bars.filter(function (b) { return b.length >= 6; }).length;
     s.rowRestart(300);
     var row = s.rowMakeRow(s.choiceLetters(), 120), b0 = row.b[1];
     await T.until(function () { return Math.abs(row.b[1] - b0) > 3; }, 8000);
@@ -325,8 +348,8 @@ var srv = http.createServer(function (req, res) {
     return o;
   });
   await shot("05-play-98");
-  check(late.mode === "row" && late.tier === 9 && /New this time/.test(late.card) && /Ithaca/.test(late.card) && late.breakAt === 3 && /^ROPES [●○]{3}$/.test(late.ropes) && late.kinds.off > 0 && late.kinds.dbl > 0 && late.rests > 0 && late.drift && late.reef > 150,
-    "level 98: three ropes, off-beat and double strokes and rests in the bars, drifting posts, a reef narrowing the channel, and the card says what's new: " + JSON.stringify({ mode: late.mode, tier: late.tier, ropes: late.ropes, card: late.card.slice(-120), breakAt: late.breakAt, kinds: late.kinds, rests: late.rests, perBar: +late.perBar.toFixed(2), drift: late.drift, reef: Math.round(late.reef) }));
+  check(late.mode === "row" && late.tier === 9 && /New this time/.test(late.card) && /Ithaca/.test(late.card) && late.breakAt === 3 && /^ROPES [●○]{3}$/.test(late.ropes) && late.kinds.off > 0 && late.quick > 0 && late.sync > 0 && late.busy > 0 && late.drift && late.reef > 150,
+    "level 98: three ropes, quick notes, syncopation and busy runs in the song, drifting posts, a reef narrowing the channel, and the card says what's new: " + JSON.stringify({ mode: late.mode, tier: late.tier, ropes: late.ropes, card: late.card.slice(-120), breakAt: late.breakAt, kinds: late.kinds, quick: late.quick, sync: late.sync, busy: late.busy, perBar: +late.perBar.toFixed(2), drift: late.drift, reef: Math.round(late.reef) }));
 
   console.log("errors (dev page):", errors.length ? errors : "none");
   check(errors.length === 0, "no page errors on the dev page acting as the Odyssey build");
