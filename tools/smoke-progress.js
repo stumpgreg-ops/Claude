@@ -387,6 +387,8 @@ function makeZip(files) {
     after.build.picks.map(key).join("|") === before.build.picks.map(key).join("|"), "the castle comes back piece for piece: theme, salt, coins, rewards, each piece's style, turn and cell");
   check(after2.picks === before.build.picks.length && after2.coins === 437, "the game loads the restored castle as it is (" + after2.picks + " pieces, " + after2.coins + " coins)");
   check(after.night === "21" && after.fangs === before.fangs && after.nick === "Ann S" && after2.nickBox === "Ann S", "the level (21), the Fangs and the nickname come back");
+  /* js/badges.js looks at the restored record 1.5 s after the page loads: wait for it */
+  await page.waitForFunction(function () { var r = SolProgress.record("VA"); return r && r.badges && r.badges.indexOf("town20") !== -1; }, null, { timeout: 6000 }).catch(function () {});
   var modeNights = await page.evaluate(function () { return { all: localStorage.getItem("afterHours.v1.night.ALL"), raid: localStorage.getItem("afterHours.v1.night.raid"), rec: SolProgress.record("VA") }; });
   check(modeNights.all === "21" && modeNights.raid === "6", "each mode's level comes back (Mixed 21, Eagle Swoop 6)");
   var s0 = before.sum, s1 = after2.sum;
