@@ -874,7 +874,7 @@
             { letter: "A", text: "It contains mica, which bends and flakes off easily." },
             { letter: "B", text: "Its minerals dissolve in water, so spills wipe away." },
             { letter: "C", text: "It is a sedimentary rock that splits into thin slabs." },
-            { letter: "D", text: "It is mostly feldspar and quartz, which a knife cannot scratch." }
+            { letter: "D", text: "Its feldspar and quartz are harder than a steel knife." }
           ],
           correct: "D"
         },

@@ -860,7 +860,7 @@
           sub: "ES.1.f.2",
           stem: "Which is the best evaluation of the website's claim in sentence 9?",
           choices: [
-            { letter: "A", text: "It is not reliable: the nearest spring, B, never received dye." },
+            { letter: "A", text: "It is not reliable: the nearest spring, B, showed no dye in 14 days." },
             { letter: "B", text: "It is reliable, because water always flows straight downhill." },
             { letter: "C", text: "It is reliable, because the neighbor lives near the sinkhole." },
             { letter: "D", text: "It cannot be judged, because dye traces are not evidence." }
