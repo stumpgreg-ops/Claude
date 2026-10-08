@@ -99,7 +99,14 @@
     "11.RL.2.B.2", "11.RL.2.C.1", "11.RL.2.C.2", "11.RL.2.D", "11.RL.2.D.1", "11.RL.2.D.2", "11.RL.3.A.1",
     "11.RL.3.B", "11.RL.3.B.1", "11.RL.3.C", "11.RL.3.C.1", "11.RI.1.A.1", "11.RI.1.A.2", "11.RI.1.B.1",
     "11.RI.1.B.2", "11.RI.1.C.1", "11.RI.1.C.2", "11.RI.2.A.1", "11.RI.2.A.2", "11.RI.2.B.1", "11.RI.2.B.2",
-    "11.RI.2.C.1", "11.RI.2.C.2", "11.RI.3.A", "11.RI.3.A.1", "11.RI.3.B", "11.RI.3.B.1"
+    "11.RI.2.C.1", "11.RI.2.C.2", "11.RI.3.A", "11.RI.3.A.1", "11.RI.3.B", "11.RI.3.B.1",
+    /* v5.19: the Virginia 2023 Geometry standards and their skills (js/standards-geo.js) */
+    "G.RLT.1", "G.RLT.1.1", "G.RLT.1.2", "G.RLT.1.3", "G.RLT.1.4", "G.RLT.2", "G.RLT.2.1", "G.RLT.2.2", "G.RLT.2.3",
+    "G.RLT.3", "G.RLT.3.1", "G.RLT.3.2", "G.RLT.3.3", "G.TR.1", "G.TR.1.1", "G.TR.1.2", "G.TR.1.3", "G.TR.2",
+    "G.TR.2.1", "G.TR.2.2", "G.TR.2.3", "G.TR.3", "G.TR.3.1", "G.TR.3.2", "G.TR.3.3", "G.TR.4", "G.TR.4.1",
+    "G.TR.4.2", "G.TR.4.3", "G.TR.4.4", "G.PC.1", "G.PC.1.1", "G.PC.1.2", "G.PC.1.3", "G.PC.2", "G.PC.2.1",
+    "G.PC.2.2", "G.PC.3", "G.PC.3.1", "G.PC.3.2", "G.PC.3.3", "G.PC.3.4", "G.PC.4", "G.PC.4.1", "G.PC.4.2",
+    "G.PC.4.3", "G.DF.1", "G.DF.1.1", "G.DF.1.2", "G.DF.1.3", "G.DF.2", "G.DF.2.1", "G.DF.2.2", "G.DF.2.3"
   ];
   var STD_CHARS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ.abcdefghijklmnopqrstuvwxyz-_", STD_MAX = 24;
   /* format 3: the badges, by number. APPEND ONLY. "m-<mode>-<level>" = win that level in that game mode. */
@@ -164,7 +171,11 @@
       skills: [["RL", "Literature"], ["RI", "Informational"], ["RV", "Vocabulary"], ["DSR", "Paired texts"]] },
     ODY: { id: 3, tag: "ODY", name: "The Odyssey: Labyrinth of the Wine-Dark Sea", short: "The Odyssey", assignment: "Odyssey game progress",
       skillWord: "Episode", secret: "ody.9Kd4-dolphin-e17a-saffron",
-      skills: [["LOTUS", "Lotus-Eaters"], ["CYCLOPS", "Cyclops"], ["CIRCE", "Circe"], ["HELIOS", "Cattle of the Sun"], ["CALYPSO", "Calypso"], ["VOYAGE", "Whole voyage"]] }
+      skills: [["LOTUS", "Lotus-Eaters"], ["CYCLOPS", "Cyclops"], ["CIRCE", "Circe"], ["HELIOS", "Cattle of the Sun"], ["CALYPSO", "Calypso"], ["VOYAGE", "Whole voyage"]] },
+    /* v5.19: the Geometry game; its "skills" are the four strands of the 2023 Geometry SOL */
+    GEO: { id: 4, tag: "GEO", name: "Sol's Labyrinth: Geometry", short: "Geometry", assignment: "Geometry game progress",
+      skillWord: "Strand", secret: "geo.5Tw7-compass-c38f-indigo",
+      skills: [["RLT", "Logic, lines and transformations"], ["TR", "Triangles"], ["PC", "Polygons and circles"], ["DF", "3-D figures"]] }
   };
   function buildById(id) { for (var k in BUILDS) if (BUILDS[k].id === id) return k; return null; }
 
@@ -393,7 +404,7 @@
      also has .format 2 and .save (see readSave) */
   function decode(text) {
     var t = String(text || "").toUpperCase().replace(/[\s-]+/g, "");
-    var m = /^SOL(\d+)(VA|NJ|ODY)([0-9A-Z]*)$/.exec(t);
+    var m = /^SOL(\d+)(VA|NJ|ODY|GEO)([0-9A-Z]*)$/.exec(t);
     if (!m) return { ok: false, build: null, why: "This is not a progress code." };
     var build = m[2], B = BUILDS[build];
     var fmt = +m[1];
@@ -447,7 +458,7 @@
   }
   /* the canonical way to write a code (blocks of 4) */
   function format(t) {
-    var m = /^SOL(\d+)(VA|NJ|ODY)([0-9A-Z]*)$/.exec(String(t).toUpperCase().replace(/[\s-]+/g, ""));
+    var m = /^SOL(\d+)(VA|NJ|ODY|GEO)([0-9A-Z]*)$/.exec(String(t).toUpperCase().replace(/[\s-]+/g, ""));
     return m ? "SOL" + m[1] + "-" + m[2] + "-" + (m[3].match(/.{1,4}/g) || []).join("-") : String(t);
   }
 
@@ -455,7 +466,7 @@
      word typed after it (on the same line) breaks it, the last space-separated pieces are dropped one at a time until
      it checks out. `before` is the text on the line before the code (a "Name: CODE" line gives the name). */
   function findCodes(text) {
-    var out = [], re = /SOL[ \t]*(\d+)[ \t]*-?[ \t]*(VA|NJ|ODY)([0-9A-Za-z \t-]*)/gi, m;
+    var out = [], re = /SOL[ \t]*(\d+)[ \t]*-?[ \t]*(VA|NJ|ODY|GEO)([0-9A-Za-z \t-]*)/gi, m;
     text = String(text || "");
     while ((m = re.exec(text))) {
       var lineStart = text.lastIndexOf("\n", m.index) + 1;

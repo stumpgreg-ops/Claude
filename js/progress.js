@@ -110,7 +110,7 @@
       rec.dayCount++;
     }
   }
-  function stateOfFamily(f) { return f === "NJ5" ? "NJ" : f === "ODY" ? "ODY" : f ? "VA" : null; }
+  function stateOfFamily(f) { return f === "NJ5" ? "NJ" : f === "ODY" ? "ODY" : f === "GEO" ? "GEO" : f ? "VA" : null; }
   function skillOf(claim) {
     if (!claim) return null;
     if (claim.episode) return String(claim.episode).toUpperCase();

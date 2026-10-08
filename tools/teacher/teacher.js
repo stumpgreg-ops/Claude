@@ -568,8 +568,11 @@
   document.addEventListener("keydown", function (e) { if (e.key === "Escape" && $("board").classList.contains("full")) { $("board").classList.remove("full"); paintBoard(); } });
 
   /* ── the standards report ── */
-  var STRAND = { RL: "Literary", RI: "Informational", RV: "Vocabulary", DSR: "Paired texts" };
+  var STRAND = { RL: "Literary", RI: "Informational", RV: "Vocabulary", DSR: "Paired texts",
+    RLT: "Logic, lines & transformations", TR: "Triangles", PC: "Polygons & circles", DF: "3-D figures" };
   function strandOf(code) {
+    var g = /^G\.(RLT|TR|PC|DF)\./.exec(code + ".");   /* v5.19: Geometry, G.TR.4.3 */
+    if (g) return g[1];
     var m = /^\d+\.(RL|RI|RV|DSR)\./.exec(code + ".");
     if (m) return m[1];
     if (/^L\./.test(code)) return "RV";
@@ -579,7 +582,7 @@
   function stdOrder(a, b) {
     var pa = a.split("."), pb = b.split("."), ga = parseInt(pa[0], 10), gb = parseInt(pb[0], 10);
     if (ga !== gb) return (isNaN(ga) ? 99 : ga) - (isNaN(gb) ? 99 : gb);
-    var so = ["RL", "RI", "RV", "DSR"], sa = so.indexOf(strandOf(a)), sb = so.indexOf(strandOf(b));
+    var so = ["RL", "RI", "RV", "DSR", "RLT", "TR", "PC", "DF"], sa = so.indexOf(strandOf(a)), sb = so.indexOf(strandOf(b));
     return sa !== sb ? sa - sb : a.localeCompare(b, undefined, { numeric: true });
   }
   /* v5.17: Virginia's standards are split into SKILLS (js/standards-va.js, inlined in the Virginia page): one skill

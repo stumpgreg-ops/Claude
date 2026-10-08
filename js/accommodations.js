@@ -80,7 +80,7 @@
     var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
       acceptNode: function (n) {
         for (var p = n.parentNode; p && p !== root; p = p.parentNode) {
-          if (p.nodeType === 1 && (p.classList.contains("n") || p.classList.contains("let") || p.classList.contains("acc-w") || p.tagName === "BUTTON")) return NodeFilter.FILTER_REJECT;
+          if (p.nodeType === 1 && (String(p.tagName).toLowerCase() === "svg" || (p.classList && (p.classList.contains("n") || p.classList.contains("let") || p.classList.contains("acc-w"))) || p.tagName === "BUTTON")) return NodeFilter.FILTER_REJECT;   /* v5.19: never inside a Geometry figure */
         }
         return NodeFilter.FILTER_ACCEPT;
       }
@@ -229,7 +229,7 @@
   }
   function textOf(el) {
     var c = el.cloneNode(true);
-    Array.prototype.forEach.call(c.querySelectorAll("button,.n,.let"), function (x) { x.parentNode.removeChild(x); });
+    Array.prototype.forEach.call(c.querySelectorAll("button,.n,.let,svg"), function (x) { x.parentNode.removeChild(x); });   /* v5.19: a figure's labels are not read one by one */
     return c.textContent.replace(/\s+/g, " ").trim();
   }
   function addPassageTools(el) {

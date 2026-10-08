@@ -57,8 +57,12 @@
   }
   /* the badges this game shows: every general badge, and the mode badges of this game's modes */
   function relevant() {
-    var here = modesHere();
-    return C.BADGES.filter(function (id) { var m = /^m-([A-Za-z]+)-/.exec(id); return !m || here.indexOf(m[1]) !== -1; });
+    var here = modesHere(), geo = false;
+    try { geo = P().state() === "GEO"; } catch (e) {}
+    return C.BADGES.filter(function (id) {
+      if (geo && /^(rl|ri|rv|dsr)\d+$/.test(id)) return false;   /* v5.19: the reading-strand badges are not in the Geometry game */
+      var m = /^m-([A-Za-z]+)-/.exec(id); return !m || here.indexOf(m[1]) !== -1;
+    });
   }
   function met(id, f) {
     var r = f.rec, q = num(r.q && r.q.answered), m, here = modesHere();

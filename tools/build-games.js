@@ -29,7 +29,9 @@ var CONTENT = {
        "content18.js", "content19.js", "content20.js", "content21.js", "content22.js", "content23.js"],
   NJ: ["content12.js", "content13.js", "content14.js", "content15.js", "content16.js", "content17.js", "content24.js", "content25.js"],
   /* v5.9: the Odyssey game (English 9, Unit 2) — one file per episode plus the cross-episode paired texts */
-  ODY: ["content26.js", "content27.js", "content28.js", "content29.js", "content30.js", "content31.js"]
+  ODY: ["content26.js", "content27.js", "content28.js", "content29.js", "content30.js", "content31.js"],
+  /* v5.19: the Geometry game (Virginia 2023 Geometry SOL), one file per reporting strand: G.RLT, G.TR, G.PC, G.DF */
+  GEO: ["content201.js", "content202.js", "content203.js", "content204.js"]
 };
 /* v5.15: the question expansion (tools/expansion/PLAN.md). A new file joins the Virginia game once it is checked and
    listed in tools/expansion/accepted.json; until then it is left out of every build (and of index.html). */
@@ -45,7 +47,9 @@ var STATES = {
   /* its own saves (afterHours.ody.*), so it never shares a level, town or used-question list
      with the Virginia game when both are opened from the same site */
   ODY: { name: "The Odyssey", families: ["ODY"], def: "ODY", zip: "SOLLabyrinth-Odyssey", savePrefix: "afterHours.ody.",
-         title: "The Odyssey: Labyrinth of the Wine-Dark Sea", logo: "assets/logo/odyssey-labyrinth-512.png", theme: "./ody-theme" }
+         title: "The Odyssey: Labyrinth of the Wine-Dark Sea", logo: "assets/logo/odyssey-labyrinth-512.png", theme: "./ody-theme" },
+  /* v5.19: its own saves too (afterHours.geo.*); the Sol's Labyrinth look, with figures instead of passages */
+  GEO: { name: "Geometry", families: ["GEO"], def: "GEO", zip: "SOLLabyrinth-Geometry", savePrefix: "afterHours.geo.", title: "Sol's Labyrinth: Geometry" }
 };
 /* every other state's content files are left out of a build */
 function dropFor(st) {
@@ -56,7 +60,7 @@ function dropFor(st) {
 
 /* every content file must be claimed by exactly one list, so a new file is never silently dropped */
 var allContent = fs.readdirSync(path.join(root, "js")).filter(function (f) { return /^content\d*\.js$/.test(f); });
-var claimed = CONTENT.shared.concat(CONTENT.VA, CONTENT.NJ, CONTENT.ODY);
+var claimed = CONTENT.shared.concat(CONTENT.VA, CONTENT.NJ, CONTENT.ODY, CONTENT.GEO);
 allContent.forEach(function (f) { if (claimed.indexOf(f) === -1 && PENDING.indexOf(f) === -1) throw new Error("tools/build-games.js: js/" + f + " is not assigned to a state"); });
 claimed.forEach(function (f) { if (allContent.indexOf(f) === -1) throw new Error("tools/build-games.js: js/" + f + " is listed but missing"); });
 
@@ -107,6 +111,10 @@ function rewriteIndex(html, st) {
       '\n$2<script>document.title = ' + JSON.stringify(def.title) + ';</script>', "game.js script tag");
     /* v5.18: the Odyssey's word lists for the accommodations (definitions, the word-to-word dictionary) */
     must(/(\n(\s*)<script src="js\/accommodations\.js\?v=[0-9.]+"><\/script>)/, '\n$2<script src="js/acc-ody.js?v=' + version + '"></script>$1', "accommodations.js script tag");
+  }
+  if (st === "GEO") {
+    must(/Tap Grade 9, 10, or 11 — then choose a skill \(or All\)/, "Tap Geometry — then choose a strand (or All)", "how-to grade line");
+    must(/Tap a grade to pick your skill focus\. Read the passage in the side panel\./, "Tap Geometry to pick a strand. Study the figure in the side panel.", "title tag line");
   }
   /* no "change state" button */
   must(/\s*<button type="button" class="btn" id="btn-state"[^>]*>[^<]*<\/button>/, "", "btn-state");

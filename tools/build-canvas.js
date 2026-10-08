@@ -31,7 +31,7 @@ var page = fs.readFileSync(path.join(src, "loader.html"), "utf8");
 var m = page.match(/<script>([\s\S]*)<\/script>/);
 if (!m) throw new Error("tools/build-canvas.js: no loader script in loader.html");
 var loaderJs = m[1];
-var base = st === "ODY" ? "SOLLabyrinth-Odyssey" : "SOLLabyrinth-" + st;   /* v5.9: the Odyssey game has its own file names */
+var base = st === "ODY" ? "SOLLabyrinth-Odyssey" : st === "GEO" ? "SOLLabyrinth-Geometry" : "SOLLabyrinth-" + st;   /* v5.19: and the Geometry game's */   /* v5.9: the Odyssey game has its own file names */
 /* v5.13.1: the zips' own names. VA's are "SOL Lab VA Eng.zip" and "SOL Lab VA Eng update.zip"; the files inside keep
    their SOLLabyrinth-VA-* names, so an update still replaces the files already in Canvas. */
 var zipFull = st === "VA" ? "SOL Lab VA Eng.zip" : base + "-Canvas.zip";
@@ -78,7 +78,7 @@ if (fs.existsSync(old)) fs.unlinkSync(old);
 
 /* v5.12.1: each zip carries a plain-text READ ME with the steps and the Canvas embed code, so a teacher never has
    to ask for them. It sits next to the game files in the zip (not in out/, which holds only what goes to Canvas). */
-var GAME_NAMES = { VA: "Sol's Labyrinth (Virginia)", NJ: "Sol's Labyrinth (New Jersey)", ODY: "The Odyssey: Labyrinth of the Wine-Dark Sea" };
+var GAME_NAMES = { VA: "Sol's Labyrinth (Virginia)", NJ: "Sol's Labyrinth (New Jersey)", ODY: "The Odyssey: Labyrinth of the Wine-Dark Sea", GEO: "Sol's Labyrinth: Geometry" };
 var gameName = GAME_NAMES[st] || ("Sol's Labyrinth (" + st + ")");
 /* v5.13: the teacher progress page (it reads the students' progress codes) */
 var teacherBuild = require("./build-teacher"), PB = require("../js/progress-code.js").BUILDS[st];
@@ -117,7 +117,7 @@ function S_setup() {
     sub("Step 1 - Upload the files"),
     ["1. Unzip this file on your computer.",
      "2. In Canvas, open your course, then Files.",
-     "3. Click + Folder and make a new folder for the game (for example: " + (st === "ODY" ? "Odyssey Game" : "Sol Game") + ").",
+     "3. Click + Folder and make a new folder for the game (for example: " + (st === "ODY" ? "Odyssey Game" : st === "GEO" ? "Geometry Game" : "Sol Game") + ").",
      "4. Open that folder, click Upload, and select ALL " + (files.length + 2) + " game files (" + base + ".html and every .js file).",
      "   If Canvas asks, choose Replace."],
     sub("Step 2 - Find your numbers"),

@@ -50,13 +50,30 @@
     VA: { name: "Virginia", kicker: "NNPS · VA 2024 EOC Reading practice skills · 100 levels", families: ["G9", "G10", "G11"], def: "G9", hud: "Teacher" },
     NJ: { name: "New Jersey", kicker: "NJSLA-ELA · Grade 5 reading practice · 100 levels", families: ["NJ5"], def: "NJ5", hud: "NJSLS" },
     /* v5.9: the Odyssey game (English 9, Unit 2 "Challenge Accepted!") — its own build, tools/build-games.js ODY */
-    ODY: { name: "The Odyssey", kicker: "English 9 · Unit 2: Challenge Accepted! · The Odyssey · 100 levels", families: ["ODY"], def: "ODY", hud: "Teacher" }
+    ODY: { name: "The Odyssey", kicker: "English 9 · Unit 2: Challenge Accepted! · The Odyssey · 100 levels", families: ["ODY"], def: "ODY", hud: "Teacher" },
+    /* v5.19: the Geometry game (Virginia 2023 Geometry SOL) — its own build, tools/build-games.js GEO */
+    GEO: { name: "Geometry", kicker: "Virginia 2023 Geometry SOL practice · 100 levels", families: ["GEO"], def: "GEO", hud: "SOL" }
   };
   /* v5.2: the New Jersey and Virginia games are separate builds. tools/build-games.js writes
      window.SOL_STATE into each build's index.html; that build never shows the gateway, never
      offers the other state, and drops the other state's packs from the pool (the per-state
      content files are left out of the build, and content.js is pruned here). */
   var LOCKED_STATE = (typeof window !== "undefined" && window.SOL_STATE && STATE_DEFS[window.SOL_STATE]) ? String(window.SOL_STATE) : null;
+  /* v5.19: in the Geometry game a "passage" is a figure and its givens, and there is no reading level */
+  var GEO_GAME = LOCKED_STATE === "GEO";
+  if (GEO_GAME) {
+    /* the shooter modes' hints (js/modes.js) say where the passage is; in Geometry it is the figure */
+    try {
+      var _geoWord = function (o, d) {
+        if (!o || d > 4) return;
+        Object.keys(o).forEach(function (k) {
+          if (typeof o[k] === "string") o[k] = o[k].replace(/The passage stays in the side panel/g, "The figure stays in the side panel");
+          else if (o[k] && typeof o[k] === "object") _geoWord(o[k], d + 1);
+        });
+      };
+      if (window.SolModes && SolModes.MODES) _geoWord(SolModes.MODES, 0);
+    } catch (eGeo) {}
+  }
   if (LOCKED_STATE) {
     try {
       var _lockFams = STATE_DEFS[LOCKED_STATE].families, _lockPacks = window.HEIST_PACKS;
@@ -3384,8 +3401,9 @@
         body: "You are in the school after dark. Move with the arrow keys, WASD, or the pad on screen."
       },
       {
-        title: "Read the question",
-        body: "The passage and the question are in the panel on the left. Read it before you move — the answer is the only thing that gets you out."
+        title: GEO_GAME ? "Study the figure" : "Read the question",
+        body: GEO_GAME ? "The figure, its facts and the question are in the panel on the left. Work it out before you move — the answer is the only thing that gets you out."
+          : "The passage and the question are in the panel on the left. Read it before you move — the answer is the only thing that gets you out."
       },
       {
         title: "Go get your answer",
@@ -7355,7 +7373,7 @@
       this._hudClaimId = c.id;
       var tok = makeToken(this.night, this.score, this.strikes);
       var hudLabel = (STATE_DEFS[cfg.state] && STATE_DEFS[cfg.state].hud) || "Teacher";
-      document.getElementById("job-sol").textContent = hudLabel + " · " + (c.sol || "") + " · Reading level " + adaptLevelLabel(this.adapt) + (c.isPartB ? " · Part B" : c.partB ? " · Part A" : "");
+      document.getElementById("job-sol").textContent = hudLabel + " · " + (c.sol || "") + (GEO_GAME ? " · Level " : " · Reading level ") + adaptLevelLabel(this.adapt) + (c.isPartB ? " · Part B" : c.partB ? " · Part A" : "");
       document.getElementById("round-flag").textContent = "Level " + this.night + " / 100 · " + nightTheme(this.night).name;
       var juice = this.scoreJuice || 0;
       document.getElementById("score-pip").textContent = "Extracts " + this.score + " / " + this.needExtracts;
@@ -25899,8 +25917,8 @@
         var ol = document.getElementById("read-choices");
         var hint = document.getElementById("read-hint");
         var scroll = document.getElementById("read-scroll");
-        if (kick) kick.textContent = (reason === "start" ? "Read first · Level " : "Next question · Level ") + this.night + " · " + (c.sol || "") + (c.isPartB ? " · Part B (evidence)" : c.partB ? " · Part A" : "") + (c.words ? " · " + c.words + " words" : "");
-        if (title) title.textContent = c.packTitle || "Passage";
+        if (kick) kick.textContent = (reason === "start" ? (GEO_GAME ? "Study first · Level " : "Read first · Level ") : "Next question · Level ") + this.night + " · " + (c.sol || "") + (c.isPartB ? " · Part B (evidence)" : c.partB ? " · Part A" : "") + (c.words ? " · " + c.words + " words" : "");
+        if (title) title.textContent = c.packTitle || (GEO_GAME ? "Figure" : "Passage");
         if (pass) pass.innerHTML = c.passage || "";
         if (stem) stem.textContent = c.stem || c.doThis || "";
         if (ol) {
@@ -25914,8 +25932,8 @@
         var need = this.need || [];
         if (hint) {
           hint.textContent = need.length > 1
-            ? ("This question needs " + need.length + " letters. Grab them together or one at a time, then carry them to EXIT · SAFE. The passage stays in the side panel.")
-            : "Find the matching letter in the maze and carry it to EXIT · SAFE. The passage stays in the side panel while you play.";
+            ? ("This question needs " + need.length + " letters. Grab them together or one at a time, then carry them to EXIT · SAFE. The " + (GEO_GAME ? "figure" : "passage") + " stays in the side panel.")
+            : "Find the matching letter in the maze and carry it to EXIT · SAFE. The " + (GEO_GAME ? "figure" : "passage") + " stays in the side panel while you play.";
         }
         if (scroll) scroll.scrollTop = 0;
       } catch (eR) {}
@@ -26886,7 +26904,17 @@
     { strand: "ALL", kind: "All episodes", name: "All", meta: "Every episode mixed, leaning toward the skills you miss most." }
   ];
 
+  /* v5.19: the Geometry game's skill cards are the four strands of the 2023 Geometry SOL (js/standards-geo.js) */
+  SKILL_DEFS.GEO = [
+    { strand: "RLT", kind: "G.RLT.1–3", name: "Logic, lines & transformations", meta: "Conditional statements and Venn diagrams, parallel lines and transversals, symmetry and transformations." },
+    { strand: "TR", kind: "G.TR.1–4", name: "Triangles", meta: "Side and angle relationships, congruence and similarity proofs, right triangles and trigonometry." },
+    { strand: "PC", kind: "G.PC.1–4", name: "Polygons & circles", meta: "Quadrilaterals, polygon angles, circle angles, arcs and segments, equations of circles." },
+    { strand: "DF", kind: "G.DF.1–2", name: "3-D figures", meta: "Surface area and volume, cross sections, and how changing dimensions changes them." },
+    { strand: "ALL", kind: "All strands", name: "All", meta: "Everything mixed, leaning toward the skills you miss most." }
+  ];
+
   function gradeLabel(family) {
+    if (family === "GEO") return "Geometry · Virginia SOL";
     if (family === "ODY") return "The Odyssey · English 9";
     if (family === "NJ5") return "New Jersey · Grade 5";
     if (family === "G10") return "Selection 2 · Grade 10";
@@ -26895,7 +26923,7 @@
   }
 
   /* v5.8: a class session (Apps Script ?class=CODE, js/classes.js) plays one grade */
-  function classGrade() { var C = window.SOL_CLASS; return C && /^(G9|G10|G11|NJ5|ODY)$/.test(C.grade || "") ? C.grade : null; }
+  function classGrade() { var C = window.SOL_CLASS; return C && /^(G9|G10|G11|NJ5|ODY|GEO)$/.test(C.grade || "") ? C.grade : null; }
   function selectedFamily() {
     if (classGrade()) return classGrade();
     var el = document.querySelector("#title-screen .card.selected[data-family]:not(.hidden)");
@@ -27495,11 +27523,11 @@
     var cont = document.getElementById("btn-continue");
     if (!line) return;
     if (!hasSavedNight()) {
-      line.textContent = "No level saved on this Chromebook yet. " + (window.SOL_STATE === "ODY" ? "Tap The Odyssey" : "Tap a grade") + " to start Level 1. Each game mode keeps its own level.";
+      line.textContent = "No level saved on this Chromebook yet. " + (window.SOL_STATE === "ODY" ? "Tap The Odyssey" : window.SOL_STATE === "GEO" ? "Tap Geometry" : "Tap a grade") + " to start Level 1. Each game mode keeps its own level.";
       if (cont) cont.classList.add("hidden");
       return;
     }
-    line.textContent = "Level " + n + " saved in " + modeLabel(cfg.gameMode) + " on this Chromebook. " + (window.SOL_STATE === "ODY" ? "Tap The Odyssey" : "Tap a grade") + ", then pick a game mode: each mode keeps its own level.";
+    line.textContent = "Level " + n + " saved in " + modeLabel(cfg.gameMode) + " on this Chromebook. " + (window.SOL_STATE === "ODY" ? "Tap The Odyssey" : window.SOL_STATE === "GEO" ? "Tap Geometry" : "Tap a grade") + ", then pick a game mode: each mode keeps its own level.";
     if (cont) {
       cont.textContent = n > 1 ? ("Continue Level " + n) : "Continue";
       cont.classList.toggle("hidden", n <= 1 && !hasSavedNight());
@@ -27801,7 +27829,7 @@
     if (strand) cfg.strand = strand;
     /* v4.9.1: the gateway is always the first screen; the last choice is only pre-highlighted. */
     var savedState = localStorage.getItem(LS_STATE);
-    if (!(savedState && STATE_DEFS[savedState])) savedState = fam === "NJ5" ? "NJ" : fam === "ODY" ? "ODY" : (fam ? "VA" : null);
+    if (!(savedState && STATE_DEFS[savedState])) savedState = fam === "NJ5" ? "NJ" : fam === "ODY" ? "ODY" : fam === "GEO" ? "GEO" : (fam ? "VA" : null);
     if (LOCKED_STATE) savedState = null;
     if (savedState) {
       applyState(savedState, true);

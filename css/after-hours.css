@@ -659,6 +659,7 @@ h1.logo img { width: min(300px, 60vw); height: auto; display: block; margin: 0 a
 .state-card.state-nj { border-color: #4f9fe6; }
 .state-card.state-va { border-color: #e0703a; }
 .state-card.state-ody { border-color: #3fb8a6; }
+.state-card.state-geo { border-color: #7aa7ff; }
 .state-card:hover, .state-card:focus-visible { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(0,0,0,.5); border-color: var(--gold); outline: none; }
 .state-card.selected { box-shadow: 0 0 0 3px rgba(245,200,66,.35); border-color: var(--gold); }
 .state-card.selected::after { content: "Last time"; font: 700 11px/1 "Trebuchet MS", sans-serif; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin-top: 4px; }
@@ -751,7 +752,7 @@ h1.logo img { width: min(300px, 60vw); height: auto; display: block; margin: 0 a
   #title-screen .howto, #state-screen .howto { display: none; }
   .state-tag { font-size: 16px; }
   .state-packs { gap: 12px; margin-top: 4px; }
-  .state-card { min-height: 0; padding: 12px 14px; gap: 4px; width: min(300px, calc((100vw - 64px) / 3)); }
+  .state-card { min-height: 0; padding: 12px 14px; gap: 4px; width: min(300px, calc((100vw - 76px) / 4)); }
   .state-card .name { font-size: 28px; }
   .state-card .kind { font-size: 12px; }
   .state-card .meta { font-size: 12px; }
@@ -932,3 +933,8 @@ body.acc-big .read-scroll .choices li { font-size: 17px; }
 .passage table.geo-proof { width: 100%; border-collapse: collapse; margin: 4px 0 6px; font: 13px/1.3 system-ui, sans-serif; }
 .passage table.geo-proof th, .passage table.geo-proof td { border: 1px solid rgba(255, 255, 255, .22); padding: 3px 6px; text-align: left; vertical-align: top; }
 .passage table.geo-proof th { color: var(--gold, #f5c842); font-weight: 700; }
+/* a short frame (the 500-pixel Canvas embed): the pop-up's figure leaves room for the givens and the question */
+@media (max-height: 620px) {
+  .read-scroll .geo-fig svg { max-height: min(220px, 30vh); }
+  #eoc-passage .geo-fig svg { max-height: min(170px, 28vh); }
+}

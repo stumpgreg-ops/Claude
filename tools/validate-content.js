@@ -29,6 +29,9 @@ var ids = {}, stems = {}, passages = {};
    its sub (the skill, "9.RL.2.A.2") must be one of that standard's skills */
 var SS = require(path.join(root, "js", "standards-va.js")), subs = { yes: 0, no: 0 };
 var strandOf = function (sol) { var m = /^\d+\.(RL|RI|RV|DSR)/.exec(sol || ""); return m ? m[1] : null; };
+/* v5.19: the Geometry game (family GEO): the Virginia 2023 Geometry standards (js/standards-geo.js) */
+var GS = require(path.join(root, "js", "standards-geo.js"));
+var geoStrandOf = function (sol) { var m = /^G\.(RLT|TR|PC|DF)\.\d$/.exec(sol || ""); return m ? m[1] : null; };
 var stats = {};
 function words(html) { return String(html).replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim().split(" ").filter(Boolean).length; }
 
@@ -36,7 +39,20 @@ packs.forEach(function (p, pi) {
   var where = (p.id || ("pack#" + pi));
   if (!p.id || typeof p.id !== "string") errors.push(where + ": missing id");
   if (ids[p.id]) errors.push(where + ": duplicate pack id"); ids[p.id] = true;
-  if (!/^(G9|G10|G11|NJ5|ODY)$/.test(p.family)) errors.push(where + ": family must be G9/G10/G11/NJ5/ODY, got " + p.family);
+  if (!/^(G9|G10|G11|NJ5|ODY|GEO)$/.test(p.family)) errors.push(where + ": family must be G9/G10/G11/NJ5/ODY/GEO, got " + p.family);
+  var isGEO = p.family === "GEO";
+  /* GEO: a figure is inline SVG that scales with the panel (a viewBox, no width/height), drawn with the .geo-fig classes */
+  if (isGEO && typeof p.passage === "string") {
+    var opens = (p.passage.match(/<svg\b/g) || []).length, closes = (p.passage.match(/<\/svg>/g) || []).length;
+    if (opens !== closes) errors.push(where + ": <svg> and </svg> do not pair up");
+    (p.passage.match(/<svg\b[^>]*>/g) || []).forEach(function (tag) {
+      if (!/viewBox="[\d.\s-]+"/.test(tag)) errors.push(where + ": an <svg> needs a viewBox");
+      if (/\s(width|height)="/.test(tag)) errors.push(where + ": an <svg> must not set width or height (CSS sizes it)");
+      if (!/role="img"/.test(tag) || !/aria-label="[^"]{8,}"/.test(tag)) errors.push(where + ": an <svg> needs role=\"img\" and an aria-label describing the figure");
+    });
+    if (/<script|on[a-z]+=|javascript:/i.test(p.passage)) errors.push(where + ": no scripts or event handlers in a passage");
+    if (!/^(Logic|Lines|Transformations|Triangles|Quadrilaterals|Polygons|Circles|Equations of circles|3-D figures|Changing dimensions) · G\.(RLT|TR|PC|DF)\.\d$/.test(p.kind || "")) errors.push(where + ": GEO kind should look like \"Triangles · G.TR.4\", got " + p.kind);
+  }
   /* ODY: the Odyssey game (English 9, Unit 2). Every pack names its episode, which the skill screen filters on. */
   if (p.family === "ODY" && !/^(lotus|cyclops|circe|helios|calypso|voyage)$/.test(p.episode || "")) errors.push(where + ": ODY packs need episode: lotus | cyclops | circe | helios | calypso | voyage");
   var isNJ = p.family === "NJ5";
@@ -49,8 +65,8 @@ packs.forEach(function (p, pi) {
   var isPoem = /poem/i.test(p.passage.slice(0, 40)) || /Poetry/i.test(p.kind);
   var isPaired = /Paired/i.test(p.kind);
   var lo = isPoem ? 30 : 45, hi = isPaired ? 800 : 720;   /* tiny packs ~50 words, epic packs up to ~650 */
-  if (wc < lo || wc > hi) warnings.push(where + ": passage is " + wc + " words (expected " + lo + "-" + hi + ")");
-  var key = p.passage.replace(/<[^>]+>/g, "").slice(0, 120);
+  if (!isGEO && (wc < lo || wc > hi)) warnings.push(where + ": passage is " + wc + " words (expected " + lo + "-" + hi + ")");
+  var key = isGEO ? p.passage : p.passage.replace(/<[^>]+>/g, "").slice(0, 120);
   if (passages[key]) errors.push(where + ": passage text duplicates " + passages[key]); passages[key] = where;
   if (!Array.isArray(p.claims) || !p.claims.length) { errors.push(where + ": no claims"); return; }
   if (p.claims.length < 4 || (p.claims.length < 5 && wc > 100)) warnings.push(where + ": only " + p.claims.length + " claims (aim for 6; 4–5 on a tiny pack)");
@@ -59,7 +75,18 @@ packs.forEach(function (p, pi) {
     var w = where + ":" + (c.id || ("claim#" + ci));
     if (!c.id) errors.push(w + ": missing claim id");
     if (p.claims.filter(function (x) { return x.id === c.id; }).length > 1) errors.push(w + ": duplicate claim id in pack");
-    if (isNJ) {
+    if (isGEO) {
+      if (/[<>]/.test(c.stem || "")) errors.push(w + ": a stem is plain text (no < or >; write ≤ ≥ or 'less than')");
+      var gs = geoStrandOf(c.sol);
+      if (!gs || !GS.STANDARDS[c.sol]) errors.push(w + ": " + c.sol + " is not a 2023 Virginia Geometry standard (js/standards-geo.js)");
+      else {
+        stats["GEO." + gs] = (stats["GEO." + gs] || 0) + 1;
+        var gk = GS.SKILL[c.sub];
+        if (!gk) errors.push(w + ": sub " + c.sub + " is not a skill in js/standards-geo.js");
+        else if (gk.code !== c.sol) errors.push(w + ": sub " + c.sub + " is a skill of " + gk.code + ", not of its sol " + c.sol);
+        else { subs.yes++; stats["GEO." + gs + "." + gk.level] = (stats["GEO." + gs + "." + gk.level] || 0) + 1; }
+      }
+    } else if (isNJ) {
       if (!/^(RL|RI|L|W|SL)\.[A-Z]{1,3}\.5\.\d+[a-z]?$/.test(c.sol || "")) errors.push(w + ": NJSLS code should look like RL.CI.5.2 / RI.CR.5.1 / L.VL.5.2, got " + c.sol);
       if (!/^(RL|RI|RV|DSR)$/.test(c.strand || "")) errors.push(w + ": NJ5 claims need strand: RL | RI | RV | DSR");
       else stats[p.family + "." + c.strand] = (stats[p.family + "." + c.strand] || 0) + 1;

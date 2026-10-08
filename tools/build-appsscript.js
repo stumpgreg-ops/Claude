@@ -25,7 +25,7 @@ var src = path.join(dist, lo), out = path.join(dist, "appsscript"), outSt = path
 var REPO_RAW = "https://raw.githubusercontent.com/stumpgreg-ops/Claude/gh-pages/appsscript/" + lo + "/";
 var REPO_CDN = "https://cdn.jsdelivr.net/gh/stumpgreg-ops/Claude@gh-pages/appsscript/" + lo + "/";
 var PART_BYTES = 3 * 1024 * 1024;
-var NAMES = { VA: "Virginia", NJ: "New Jersey", ODY: "The Odyssey" };
+var NAMES = { VA: "Virginia", NJ: "New Jersey", ODY: "The Odyssey", GEO: "Geometry" };
 if (!fs.existsSync(path.join(src, "index.html"))) throw new Error("tools/build-appsscript.js: run tools/build-games.js first (no dist/" + lo + ")");
 
 var html = fs.readFileSync(path.join(src, "index.html"), "utf8");

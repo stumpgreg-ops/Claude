@@ -1,4 +1,4 @@
-/* Headless check of the Canvas build: node tools/smoke-canvas.js [va|nj|ody]
+/* Headless check of the Canvas build: node tools/smoke-canvas.js [va|nj|ody|geo]
    (run tools/build-games.js, tools/build-appsscript.js and tools/build-canvas.js first).
    Plays Canvas's part: one server stands in for Canvas's file domain and serves only the uploaded files, from a
    folder path like Canvas's (with a space in it); a second one, on another origin, is the Canvas page that embeds
@@ -9,8 +9,8 @@ var path = require("path"), fs = require("fs"), http = require("http"), url = re
 var { chromium } = require("/opt/node22/lib/node_modules/playwright");
 var st = (process.argv[2] || "va").toLowerCase();
 var dir = path.join(__dirname, "..", "dist", "canvas", st.toUpperCase());
-var K = st === "ody" ? "afterHours.ody." : "afterHours.v1.";   /* the game's own save keys (the Odyssey build has its own) */
-var start = (st === "ody" ? "SOLLabyrinth-Odyssey" : "SOLLabyrinth-" + st.toUpperCase()) + ".html", uploaded = fs.readdirSync(dir), hide = null;
+var K = st === "ody" ? "afterHours.ody." : st === "geo" ? "afterHours.geo." : "afterHours.v1.";   /* the game's own save keys (the Odyssey build has its own) */
+var start = (st === "ody" ? "SOLLabyrinth-Odyssey" : st === "geo" ? "SOLLabyrinth-Geometry" : "SOLLabyrinth-" + st.toUpperCase()) + ".html", uploaded = fs.readdirSync(dir), hide = null;
 var FOLDER = "/courses/1~2/files/1~3/course files/SOL Test/";
 var shots = path.join(__dirname, "shots");
 fs.mkdirSync(shots, { recursive: true });
@@ -66,7 +66,7 @@ var lms = http.createServer(function (req, res) {
   check(s1.night !== "57", "the other game's save is not this game's");
   await page.screenshot({ path: path.join(shots, "cv-01-title.png") });
 
-  var fam = st === "va" ? "G9" : st === "ody" ? "ODY" : "NJ5";
+  var fam = st === "va" ? "G9" : st === "ody" ? "ODY" : st === "geo" ? "GEO" : "NJ5";
   await f.click('#title-screen .card[data-family="' + fam + '"]');
   await f.waitForSelector("#mode-screen:not(.hidden)");   /* v5.8.3: the game mode screen */
   await f.click('#mode-packs .card[data-gamemode="ALL"]');

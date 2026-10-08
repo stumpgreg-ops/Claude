@@ -1544,11 +1544,12 @@
     { id: "G11", label: "Selection 3 · Grade 11", meta: "All skills 9–11. Heavier analysis, tone, organization, and Select TWO." },
     { id: "ALL", label: "All skills", meta: "Legacy Grade 9 mix — same pool as Selection 1." },
     { id: "NJ5", label: "New Jersey · Grade 5", meta: "NJSLA-ELA grade 5: literature, informational, vocabulary and paired texts, with Part A / Part B evidence pairs." },
-    { id: "ODY", label: "The Odyssey · English 9", meta: "Unit 2: the Lotus-Eaters, the Cyclops, Circe, the cattle of Helios and Calypso." }
+    { id: "ODY", label: "The Odyssey · English 9", meta: "Unit 2: the Lotus-Eaters, the Cyclops, Circe, the cattle of Helios and Calypso." },
+    { id: "GEO", label: "Geometry · Virginia SOL", meta: "2023 Geometry SOL: logic, lines and transformations; triangles; polygons and circles; 3-D figures." }
   ];
   /* Which pack families feed each selection. Virginia selections are cumulative
      (the Grade 10 card promises "Grade 9 and Grade 10 skills mixed"). */
-  var FAMILY_POOL = { G9: ["G9"], G10: ["G9", "G10"], G11: ["G9", "G10", "G11"], NJ5: ["NJ5"], ODY: ["ODY"], ALL: ["G9"] };
+  var FAMILY_POOL = { G9: ["G9"], G10: ["G9", "G10"], G11: ["G9", "G10", "G11"], NJ5: ["NJ5"], ODY: ["ODY"], GEO: ["GEO"], ALL: ["G9"] };
   /* v5.9: the Odyssey game's skill screen picks an episode; every ODY pack names one. */
   var EPISODES = ["LOTUS", "CYCLOPS", "CIRCE", "HELIOS", "CALYPSO", "VOYAGE"];
   /* v5.12.2: the Odyssey is read in story order, not by passage length. Within an episode the scenes come in the
@@ -1602,7 +1603,9 @@
   function strandOf(claim) {
     if (claim && claim.strand) return String(claim.strand).toUpperCase();
     var sol = String((claim && claim.sol) || "");
-    var m = /(?:^|\.)(RL|RI|RV|DSR)(?:\.|$)/.exec(sol);          /* Virginia: 9.RL.1.A */
+    var m = /^G\.(RLT|TR|PC|DF)\./.exec(sol);                      /* v5.19 Geometry: G.TR.4 */
+    if (m) return m[1];
+    m = /(?:^|\.)(RL|RI|RV|DSR)(?:\.|$)/.exec(sol);              /* Virginia: 9.RL.1.A */
     if (m) return m[1];
     if (/^L\./.test(sol)) return "RV";                               /* NJSLS language standards */
     if (/^(RL|RI)\.CT\./.test(sol)) return "DSR";                   /* NJSLS compare-texts standards */
@@ -1613,7 +1616,7 @@
     strand = String(strand || "ALL").toUpperCase();
     if (!strand || strand === "ALL" || strand === "NULL") return true;
     if (EPISODES.indexOf(strand) !== -1) return String((pack && pack.episode) || "").toUpperCase() === strand;
-    if (!/^(RL|RI|RV|DSR)$/.test(strand)) return true;
+    if (!/^(RL|RI|RV|DSR|RLT|TR|PC|DF)$/.test(strand)) return true;
     return strandOf(claim) === strand;
   }
 
@@ -1687,7 +1690,7 @@
           sub: c.sub || null,
           strand: strandOf(c),
           level: lvl,
-          words: passageWords(p),
+          words: p.family === "GEO" ? null : passageWords(p),   /* v5.19: a figure has no reading length; levels pick by p.level */
           partB: c.partB ? p.id + ":" + c.partB : null,
           isPartB: isPartB,
           stem: c.stem,

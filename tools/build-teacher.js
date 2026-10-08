@@ -31,9 +31,10 @@ var LOOK = {
   VA: { BG: "#0b0d13", PANEL: "#151923", PANEL2: "#1d2230", LINE: "#3a4150", GOLD: "#f5c842" },
   NJ: { BG: "#0b0d13", PANEL: "#151923", PANEL2: "#1d2230", LINE: "#3a4150", GOLD: "#f5c842" },
   /* the Odyssey's black glaze, wine and ochre (css/odyssey.css) */
-  ODY: { BG: "#140c0a", PANEL: "#22130f", PANEL2: "#2e1a14", LINE: "#6a4430", GOLD: "#e8b04a" }
+  ODY: { BG: "#140c0a", PANEL: "#22130f", PANEL2: "#2e1a14", LINE: "#6a4430", GOLD: "#e8b04a" },
+  GEO: { BG: "#0b0d13", PANEL: "#151923", PANEL2: "#1d2230", LINE: "#3a4150", GOLD: "#f5c842" }
 };
-function fileName(st) { return (st === "ODY" ? "SOLLabyrinth-Odyssey" : "SOLLabyrinth-" + st) + "-Teacher.html"; }
+function fileName(st) { return (st === "ODY" ? "SOLLabyrinth-Odyssey" : st === "GEO" ? "SOLLabyrinth-Geometry" : "SOLLabyrinth-" + st) + "-Teacher.html"; }
 function build(st, version) {
   st = String(st || "VA").toUpperCase();
   var B = C.BUILDS[st];
@@ -43,6 +44,8 @@ function build(st, version) {
   var app = fs.readFileSync(path.join(__dirname, "teacher", "teacher.js"), "utf8");
   /* v5.17: Virginia's standards and their LOTS/HOTS skills (js/standards-va.js) for the standards report */
   var stds = st === "VA" ? fs.readFileSync(path.join(root, "js", "standards-va.js"), "utf8") : "";
+  /* v5.19: the Geometry standards and their skills (js/standards-geo.js), under the same name the report reads */
+  if (st === "GEO") stds = fs.readFileSync(path.join(root, "js", "standards-geo.js"), "utf8") + "\n;window.SolStandards = window.SolStandardsGeo;";
   [code, app, stds].forEach(function (js) { if (/<\/script/i.test(js)) throw new Error("tools/build-teacher.js: a script holds </script"); });
   var esc = function (s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;"); };
   var vals = Object.assign({

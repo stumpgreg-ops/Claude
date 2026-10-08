@@ -1,4 +1,4 @@
-/* v5.17.2: does every screen fit the Canvas frame?  node tools/audit-500.js [va|ody] [WxH ...]
+/* v5.17.2: does every screen fit the Canvas frame?  node tools/audit-500.js [va|ody|geo] [WxH ...]
    The Canvas embed code is width="100%" height="500": the frame is as wide as the Canvas page column (about 700
    to 1280 pixels) and 500 pixels tall, so every screen must fit in 500 pixels of height. This opens every screen
    and window at each size, saves a screenshot to tools/shots/w500/, and lists anything that runs off an edge, is
@@ -11,7 +11,7 @@ fs.mkdirSync(shots, { recursive: true });
 var game = (process.argv[2] || "va").toLowerCase();
 var sizes = process.argv.slice(3).map(function (s) { var m = /^(\d+)x(\d+)$/.exec(s); return m ? { w: +m[1], h: +m[2] } : null; }).filter(Boolean);
 if (!sizes.length) sizes = [{ w: 1000, h: 500 }, { w: 700, h: 500 }, { w: 1280, h: 500 }];
-var dir = game === "ody" ? path.join(root, "dist", "ody") : root;
+var dir = game === "ody" || game === "geo" ? path.join(root, "dist", game) : root;   /* ody, geo: the builds (node tools/build-games.js) */
 var MIME = { html: "text/html", js: "application/javascript", css: "text/css", json: "application/json", png: "image/png", webp: "image/webp", mp3: "audio/mpeg", glb: "model/gltf-binary", svg: "image/svg+xml" };
 var srv = http.createServer(function (req, res) {
   var f = path.join(dir, decodeURIComponent(url.parse(req.url).pathname));
@@ -105,7 +105,7 @@ function measure(opt) {
     await page.goto(base + "index.html", { waitUntil: "load" });
     await page.evaluate(function () { localStorage.clear(); });
     await page.reload({ waitUntil: "load" }); await page.waitForTimeout(900);
-    var ody = game === "ody";
+    var ody = game === "ody" || game === "geo";   /* a one-game build: its only card, not G9 */
     await step("gateway", async function () { if (await page.isVisible("#state-screen")) await check("01-gateway"); });
     await step("title", async function () {
       if (await page.isVisible("#state-screen")) await page.click('#state-screen .card[data-state="VA"]');
