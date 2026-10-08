@@ -541,6 +541,20 @@ h1.logo img { width: min(300px, 60vw); height: auto; display: block; margin: 0 a
   pointer-events: auto;
 }
 #btn-music-hud[aria-pressed="false"], #btn-music[aria-pressed="false"] { opacity: .55; text-decoration: line-through; }
+/* v5.18.1: Menu (top left of the game): pause, then leave the level for the main screen */
+#btn-menu {
+  position: absolute; left: 10px; top: 10px; z-index: 12;
+  min-height: 40px; padding: 8px 12px; font-size: 13px; white-space: nowrap;
+  pointer-events: auto;
+}
+#leave-overlay {
+  position: fixed; inset: 0; z-index: 9400; display: flex; align-items: center; justify-content: center;
+  background: rgba(8, 10, 14, .72); padding: 12px;
+}
+#leave-overlay.hidden { display: none !important; }
+.leave-card { max-height: calc(100vh - 24px); overflow: auto; }
+.leave-card #leave-msg { margin: 0 0 14px; color: var(--ink); font-size: 16px; line-height: 1.4; }
+.leave-card .row { justify-content: flex-start; margin: 0; }
 .title-tools { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: 2px 0 10px; }
 /* v4.8: music volume sliders (skill screen + HUD) */
 .music-vol { accent-color: var(--gold); cursor: pointer; height: 28px; }
@@ -708,6 +722,93 @@ h1.logo img { width: min(300px, 60vw); height: auto; display: block; margin: 0 a
 .fang-row .fang.on { color: #fff3c4; text-shadow: 0 0 8px rgba(255, 216, 74, .7); }
 .fang-row .fang.on small { color: var(--gold); }
 
+/* ── v5.17.2: short frames. The Canvas embed code is width="100%" height="500", so the game is often only 500
+   pixels tall. Everything tightens up; js/fit.js then shrinks whatever still doesn't fit. Full screen (taller than
+   620) looks as before. ── */
+@media (max-height: 620px) {
+  .screen { padding: 8px 12px; }
+  .kicker { font-size: 11px; margin: 0 0 2px; }
+  h1 { font-size: 30px; }
+  h1.logo img { width: auto; height: min(104px, 20vh); }
+  .ver { font-size: 10px; margin: 0 0 2px; }
+  .tag { font-size: 14px; margin: 2px 0 6px; }
+  .save-line { font-size: 13px; margin: 0 0 6px; }
+  .packs { gap: 8px; margin-bottom: 6px; }
+  .card { padding: 6px 12px; min-height: 40px; }
+  .card .name { font-size: 16px; }
+  .card .meta { font-size: 12px; margin-top: 2px; line-height: 1.3; }
+  #mode-screen .card, #skill-screen .card { width: min(220px, 30vw); padding: 5px 10px; }
+  #mode-screen .card .name, #skill-screen .card .name { font-size: 15px; }
+  #mode-screen .card .meta, #skill-screen .card .meta { font-size: 11.5px; }
+  .music-pick-label .dim { display: none; }   /* the music hint: too small once a crowded screen is shrunk */
+  .btn { padding: 6px 12px; min-height: 38px; }
+  .btn.primary { min-width: 130px; }
+  .row { margin: 4px 0; gap: 8px; }
+  .title-tools { gap: 6px; margin: 2px 0 6px; }
+  .join-row { margin: 2px 0 4px; gap: 8px; }
+  .join-row input { min-height: 34px; padding: 4px 8px; }
+  /* the long how-to paragraphs: the cards and buttons already say what to do */
+  #title-screen .howto, #state-screen .howto { display: none; }
+  .state-tag { font-size: 16px; }
+  .state-packs { gap: 12px; margin-top: 4px; }
+  .state-card { min-height: 0; padding: 12px 14px; gap: 4px; width: min(300px, calc((100vw - 64px) / 3)); }
+  .state-card .name { font-size: 28px; }
+  .state-card .kind { font-size: 12px; }
+  .state-card .meta { font-size: 12px; }
+  .music-pick { margin: 0 0 4px; }
+  .chips { gap: 4px; }
+  .chip { min-height: 30px; padding: 3px 10px; font-size: 12px; }
+  .music-vol-row { margin: 4px 0 0; }
+  .music-vol { height: 20px; }
+  /* windows */
+  .read-card { padding: 10px 14px 10px; gap: 6px; max-height: calc(100vh - 16px); }
+  #read-overlay { padding: 8px; }
+  .read-head h2 { font-size: 18px; }
+  .realm-card { margin: 0 0 4px; padding: 6px 10px; font-size: 13px; }
+  .read-scroll { padding: 8px 12px; }
+  .read-scroll .passage { font-size: 15px; line-height: 1.5; }
+  .read-scroll .stem { margin-top: 8px; font-size: 15px; }
+  .tut-card { padding: 14px 16px 12px; }
+  .tut-card h2 { font-size: 21px; margin: 0 0 6px; }
+  .trap-card { padding: 16px 18px 14px; }
+  .trap-card h2 { font-size: 24px; }
+  .trap-card #trap-body { font-size: 16px; margin: 0 0 10px; }
+  .char-panel { padding: 12px 14px 10px; max-height: calc(100vh - 16px); }
+  .char-panel h2 { font-size: 22px; }
+  .char-tag { margin: 0 0 8px; }
+  .char-grid { gap: 6px; margin: 0 0 8px; }
+  .char-preset { min-height: 0; padding: 6px 4px; }
+  .char-preset img { width: 48px; height: 48px; }
+  #char-overlay, #tut-overlay, #trap-overlay, #codex-overlay { padding: 8px; }
+  .codex-card { max-height: calc(100vh - 16px); padding: 12px 14px 10px; }
+  #overlay .box { padding: 14px 16px; max-height: calc(100vh - 16px); overflow: auto; }
+  #overlay .box .row { margin-top: 8px; }
+}
+/* the play area in a short frame: the HUD stays on the left (narrower when the frame is), smaller touch pads */
+@media (max-height: 620px) and (min-width: 600px) {
+  :root { --hud: clamp(280px, 36vw, 340px); --hit: 44px; }
+  #hud { padding: 6px; }
+  .eoc { padding: 6px; }
+  #eoc-passage-wrap { min-height: 36px; }
+  .eoc-body { gap: 5px; }
+  .stem { margin: 0 0 4px; font-size: 13px; }
+  .choices { gap: 3px; }
+  .choices li { font-size: 12px; padding: 3px 6px; }
+  .eoc-bar { margin-bottom: 4px; gap: 6px; }
+  .carry-flag { margin-top: 4px; padding-top: 4px; -webkit-line-clamp: 1; max-height: 1.4em; }
+  .eoc-body { overflow: auto; }   /* long answers in a narrow HUD: scroll rather than cut off */
+  #btn-action { width: 70px; height: 70px; }
+  #btn-shutter { width: 56px; height: 56px; }
+  #controls { padding: 6px 10px 8px; }
+}
+/* a narrow maze beside the HUD: the Look and full-screen buttons go under the minimap */
+@media (max-height: 620px) and (min-width: 600px) and (max-width: 1060px) {
+  #btn-char { right: 12px; top: 128px; }
+  #btn-fs { right: 12px; top: 172px; }
+  #btn-music-hud { right: 12px; top: 216px; }
+  #music-vol-hud { right: 12px; top: 262px; width: 96px; }
+}
+
 /* ── v5.17.2: short frames (the Canvas embed is the Page's full width and 500 px tall) ─────────────────── */
 /* menus: a screen taller than the frame scrolls from its top (plain centring cut the top off out of reach) */
 .screen { justify-content: safe center; }
@@ -755,7 +856,11 @@ h1.logo img { width: min(300px, 60vw); height: auto; display: block; margin: 0 a
   #controls { padding: 6px 8px 8px; }
   #btn-action { width: 68px; height: 68px; font-size: 12px; }
   #btn-shutter { width: 56px; height: 56px; font-size: 11px; }
-  #btn-fs, #btn-char, #btn-music-hud { min-height: 34px; padding: 5px 10px; font-size: 12px; white-space: nowrap; top: 8px; }
+  #btn-fs, #btn-char, #btn-music-hud, #btn-menu { min-height: 34px; padding: 5px 10px; font-size: 12px; white-space: nowrap; top: 8px; }
+  #btn-menu { left: 8px; }
+  .leave-card { padding: 14px 16px 12px; }
+  .leave-card h2 { font-size: 21px; margin: 0 0 6px; }
+  .leave-card #leave-msg { font-size: 14px; margin: 0 0 10px; }
   #music-vol-hud { top: 12px; }
 }
 
@@ -802,3 +907,28 @@ body.acc-big .read-scroll .choices li { font-size: 17px; }
 .acc-small { font-size: 13px; color: var(--dim); margin: 2px 0 6px; }
 .acc-msg { min-height: 1.2em; color: #9aefc0; font-weight: 700; margin: 8px 0 0; }
 #acc-note { margin: 10px 0 0; color: #9fd3d6; font-size: 13px; text-align: center; }
+
+/* ── v5.19: Geometry figures (inline SVG in a GEO pack's passage, js/content201.js …) ───────────────────────
+   A figure scales with its panel (viewBox, no width/height) and draws with these classes, in the panel's ink colour,
+   so it reads on the dark side panel and in the reading pop-up alike. */
+.geo-fig { margin: 0 0 6px; }
+.geo-fig svg { display: block; width: 100%; height: auto; max-height: 220px; margin: 0 auto; color: var(--ink, #f1ede4); overflow: visible; }
+#eoc-passage .geo-fig svg { max-height: 170px; }
+.geo-fig .ln { fill: none; stroke: currentColor; stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.geo-fig .thin { fill: none; stroke: currentColor; stroke-width: 1.25; }
+.geo-fig .ac { fill: none; stroke: var(--gold, #f5c842); stroke-width: 2.5; stroke-linejoin: round; }
+.geo-fig .sh { fill: rgba(245, 200, 66, .16); stroke: currentColor; stroke-width: 2; stroke-linejoin: round; }
+.geo-fig .sh2 { fill: rgba(120, 200, 255, .18); stroke: currentColor; stroke-width: 2; stroke-linejoin: round; }
+.geo-fig .dash { stroke-dasharray: 5 4; }
+.geo-fig .gr { stroke: currentColor; stroke-opacity: .16; stroke-width: 1; }
+.geo-fig .ax { stroke: currentColor; stroke-opacity: .6; stroke-width: 1.5; }
+.geo-fig .dt { fill: currentColor; stroke: none; }
+.geo-fig .dta { fill: var(--gold, #f5c842); stroke: none; }
+.geo-fig text { fill: currentColor; stroke: none; font: 600 15px system-ui, -apple-system, "Segoe UI", sans-serif; }
+.geo-fig text.sm { font-size: 12px; font-weight: 500; opacity: .85; }
+.geo-fig text.acc { fill: var(--gold, #f5c842); }
+.geo-fig figcaption { font-size: 11px; opacity: .7; text-align: center; margin-top: 2px; }
+.passage .geo-given { margin: 0 0 6px; }
+.passage table.geo-proof { width: 100%; border-collapse: collapse; margin: 4px 0 6px; font: 13px/1.3 system-ui, sans-serif; }
+.passage table.geo-proof th, .passage table.geo-proof td { border: 1px solid rgba(255, 255, 255, .22); padding: 3px 6px; text-align: left; vertical-align: top; }
+.passage table.geo-proof th { color: var(--gold, #f5c842); font-weight: 700; }

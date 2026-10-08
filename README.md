@@ -29,6 +29,11 @@ A game uploaded to Canvas can't send anything anywhere, so progress is shown to 
 
 Tests: `node tools/smoke-progress.js` (after `node tools/build-games.js`, `node tools/build-appsscript.js VA|ODY` and `node tools/build-canvas.js VA|ODY`).
 
+## v5.18.1 (2026-10-08) — every screen fits 500 px without scrolling; a Menu to leave a level
+
+- **No scrolling in the Canvas frame.** The embed code is `width="100%" height="500"`. v5.17.3 let a menu screen taller than the frame scroll from its top; now the short-frame layout from this branch's v5.17.2 (tighter start screens and windows, `css/after-hours.css` "short frames") is back on top of it, with `js/fit.js`, which shrinks whatever still doesn't fit (down to 70 % for a screen, 80 % for a window). Only the boxes that hold a long passage or list scroll inside themselves; the page never does. Check: `node tools/audit-500.js va [WxH ...]` (every screen and window at 700, 1000 and 1280 × 500; exit 1 if anything doesn't fit; `ody` after `node tools/build-games.js`).
+- **Menu: leave a level from its middle.** A **☰ Menu** button sits at the top left of every level (the maze and the shooters), and **Esc** does the same when no other window is open. It pauses the game and asks "Leave this level?": **Keep playing** (or Esc) goes on; **Leave level** goes back to the main screen. The saved level stays the level that was left, every answer already given is kept, and the progress record logs the level as `left` (not won or lost; `SolProgress.levelLeft()`). Test: `node tools/smoke-leave.js`.
+
 ## v5.18.0 (2026-10-08) — accommodations a teacher turns on for one student
 
 Not the standard setup: everything is off until a teacher turns it on for one Chromebook. The teacher types the word **accommodations** in the nickname box on the title screen, enters the **teacher PIN** (4826, in each Canvas READ ME's SECTION 6; "Change the PIN on this Chromebook" sets another one), ticks options and saves. The settings live in `localStorage` `afterHours.v1.acc.<STATE>`. Each option can carry an **end date**, after which it switches itself off, so a support meant to fade can be planned. While anything is on, the title screen says "Accommodations on: …". Code: `js/accommodations.js` (all games), styles in `css/after-hours.css`; test: `node tools/smoke-acc.js` (after `node tools/build-games.js`).

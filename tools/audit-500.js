@@ -145,6 +145,8 @@ function measure(opt) {
     });
     var fam = ody ? null : "G9";
     await step("mode", async function () {
+      /* a teacher screen that never loaded (no built teacher page) must not sit over the title screen */
+      await page.evaluate(function () { window.SolTeacher && SolTeacher.hide(); }); await page.waitForTimeout(200);
       await page.click(fam ? '#title-screen .card[data-family="' + fam + '"]' : "#title-screen .card[data-family]:not(.hidden)");
       await page.waitForSelector("#mode-screen:not(.hidden), #skill-screen:not(.hidden)", { timeout: 4000 });
       if (await page.isVisible("#mode-screen")) await check("09-mode");

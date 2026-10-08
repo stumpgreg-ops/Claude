@@ -26775,7 +26775,7 @@
     if (sc.readOpen || sc.tutOpen || sc.codexOpen || sc.trapOpen || sc.helpOpen || sc._tabHidden) return false;
     var play = document.getElementById("play");
     if (!play || play.classList.contains("hidden")) return false;
-    var cards = ["overlay", "read-overlay", "tut-overlay", "codex-overlay", "trap-overlay", "char-overlay", "build-overlay", "progress-overlay", "restore-overlay", "badge-overlay", "teacher-overlay"];
+    var cards = ["overlay", "read-overlay", "tut-overlay", "codex-overlay", "trap-overlay", "char-overlay", "build-overlay", "progress-overlay", "restore-overlay", "badge-overlay", "teacher-overlay", "leave-overlay"];
     for (var i = 0; i < cards.length; i++) { var c = document.getElementById(cards[i]); if (c && !c.classList.contains("hidden")) return false; }
     try { if (sc.scene && sc.scene.isPaused && sc.scene.isPaused()) return false; } catch (e) {}
     return true;
@@ -27714,15 +27714,67 @@
       window.location.href = "admin.html";
     });
   }
-  document.getElementById("btn-again").addEventListener("click", function () {
+  function backToTitle() {
     showPlayUi(false);
     wantNight1Tut = false;
     tutClosed = true;
     hideTut();
+    hideReading();
     if (window.SolRealms && SolRealms.stopAmbience) SolRealms.stopAmbience();
-    if (gameRef) { gameRef.destroy(true); gameRef = null; }
+    if (gameRef) { try { if (gameRef.isPaused) gameRef.resume(); } catch (eR) {} gameRef.destroy(true); gameRef = null; }
     refreshSaveLine();
+  }
+  document.getElementById("btn-again").addEventListener("click", backToTitle);
+
+  /* v5.18.1: leave a level from the middle of it. The Menu button over the game (or Esc when no other window is
+     open) pauses the game and asks; "Leave level" goes back to the main screen, "Keep playing" (or Esc) goes on.
+     The saved level is not changed, and the progress record logs the level as left, not lost. */
+  function leaveIsOpen() {
+    var ov = document.getElementById("leave-overlay");
+    return !!(ov && !ov.classList.contains("hidden"));
+  }
+  function playing() {
+    var play = document.getElementById("play");
+    return !!(gameRef && play && !play.classList.contains("hidden"));
+  }
+  function otherWindowOpen() {
+    var ids = ["overlay", "read-overlay", "tut-overlay", "codex-overlay", "trap-overlay", "char-overlay", "build-overlay", "progress-overlay", "restore-overlay", "badge-overlay", "teacher-overlay"];
+    for (var i = 0; i < ids.length; i++) { var e = document.getElementById(ids[i]); if (e && !e.classList.contains("hidden")) return true; }
+    return !!(playScene && playScene.ended);
+  }
+  function openLeave() {
+    if (!playing() || leaveIsOpen()) return;
+    var ov = document.getElementById("leave-overlay");
+    if (!ov) return;
+    try { if (gameRef && !gameRef.isPaused) gameRef.pause(); } catch (e) {}
+    ov.classList.remove("hidden");
+    ov.setAttribute("aria-hidden", "false");
+    var stay = document.getElementById("leave-stay");
+    if (stay) { try { stay.focus(); } catch (eF) {} }
+  }
+  function closeLeave(resume) {
+    var ov = document.getElementById("leave-overlay");
+    if (ov) { ov.classList.add("hidden"); ov.setAttribute("aria-hidden", "true"); }
+    if (resume) {
+      try { if (gameRef && gameRef.isPaused) gameRef.resume(); } catch (e) {}
+      var root = document.getElementById("game-root"), cv = root && root.querySelector("canvas");
+      if (cv) { try { cv.focus(); } catch (eF) {} }
+    }
+  }
+  bindTap(document.getElementById("btn-menu"), function () { if (!otherWindowOpen()) openLeave(); });
+  bindTap(document.getElementById("leave-stay"), function () { closeLeave(true); });
+  bindTap(document.getElementById("leave-go"), function () {
+    closeLeave(false);
+    if (window.SolProgress && SolProgress.levelLeft) { try { SolProgress.levelLeft(); } catch (eP) {} }
+    backToTitle();
   });
+  document.addEventListener("keydown", function (e) {
+    if (e.code !== "Escape" && e.key !== "Escape") return;
+    if (leaveIsOpen()) { e.preventDefault(); e.stopPropagation(); closeLeave(true); return; }
+    if (!playing() || otherWindowOpen()) return;   /* Esc closes those windows itself */
+    e.preventDefault();
+    openLeave();
+  }, true);
   document.getElementById("btn-next").addEventListener("click", function () {
     var n = parseInt(document.getElementById("btn-next").dataset.goto || "1", 10);
     restartNight(n);
