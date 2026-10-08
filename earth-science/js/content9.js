@@ -458,7 +458,7 @@
           id: "data",
           sol: "ES.12.c",
           sub: "ES.12.c.2",
-          stem: "Which conclusion is best supported by the data in the table?",
+          stem: "Based on the hurricane readings in the table, which conclusion is best supported?",
           choices: [
             { letter: "A", text: "The storm was strongest on day 1, when it first formed." },
             { letter: "B", text: "Water temperature had no effect on the storm's wind speed." },

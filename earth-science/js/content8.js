@@ -187,7 +187,7 @@
           id: "conclude",
           sol: "ES.10.a",
           sub: "ES.10.a.3",
-          stem: "Which conclusion is best supported by the data in the table?",
+          stem: "Based on the wave-tank data in the table, which conclusion is best supported?",
           choices: [
             { letter: "A", text: "Stronger wind makes waves that are taller and longer." },
             { letter: "B", text: "Wave height does not depend on the speed of the wind." },
