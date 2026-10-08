@@ -22,7 +22,7 @@
           sub: "ES.3.b.2",
           stem: "The moon's appearance changed from week to week because —",
           choices: [
-            { letter: "A", text: "Earth's shadow covered a different part of the moon each week" },
+            { letter: "A", text: "Earth's shadow covered a larger or smaller part of the moon each week" },
             { letter: "B", text: "the moon turned a different face toward Earth each week" },
             { letter: "C", text: "we saw different amounts of the moon's sunlit half as it orbited" },
             { letter: "D", text: "clouds of gas on the moon hid part of its surface each week" }
@@ -36,7 +36,7 @@
           stem: "Which arrangement best explains what the student saw in sentence 3?",
           choices: [
             { letter: "A", text: "Earth was between the sun and the moon, and Earth's shadow fell on the moon." },
-            { letter: "B", text: "The moon was between the sun and Earth, and its shadow fell on Earth." },
+            { letter: "B", text: "The moon was between the sun and Earth, and the moon's own shadow fell on Earth." },
             { letter: "C", text: "The sun was between Earth and the moon, so the moon got less light." },
             { letter: "D", text: "The moon was at a right angle to the sun and Earth, half in shadow." }
           ],
@@ -126,7 +126,7 @@
           choices: [
             { letter: "A", text: "The galaxies are moving toward Earth and will soon collide with it." },
             { letter: "B", text: "The galaxies are moving away from us, as expected in an expanding universe." },
-            { letter: "C", text: "The galaxies are made only of cool red stars, so their light looks red." },
+            { letter: "C", text: "The galaxies are made only of cool red stars, so all of their light looks red." },
             { letter: "D", text: "The galaxies are hidden behind dust clouds that turn their light red." }
           ],
           correct: "B"
@@ -137,7 +137,7 @@
           sub: "ES.2.a.2",
           stem: "A fourth galaxy is found to be twice as far away as Galaxy X. If the universe is expanding, its spectrum would most likely show —",
           choices: [
-            { letter: "A", text: "a blue shift, because it is moving toward Earth" },
+            { letter: "A", text: "a blue shift, because it is moving toward Earth instead" },
             { letter: "B", text: "the same red shift that Galaxy X shows" },
             { letter: "C", text: "no shift, because it is too far away to measure" },
             { letter: "D", text: "a larger red shift, because it is moving away faster" }
@@ -150,7 +150,7 @@
           sub: "ES.2.d.1",
           stem: "A telescope in orbit, such as the Hubble Space Telescope, takes sharper galaxy images than the school's telescope mainly because it —",
           choices: [
-            { letter: "A", text: "is much closer to the galaxies it photographs" },
+            { letter: "A", text: "is much closer to the faraway galaxies it photographs" },
             { letter: "B", text: "is above the air, which blurs and absorbs light" },
             { letter: "C", text: "moves at the same speed as the galaxies" },
             { letter: "D", text: "uses sunlight to make the galaxies brighter" }
@@ -177,7 +177,7 @@
           choices: [
             { letter: "A", text: "Earth's distance from the sun changes during the year" },
             { letter: "B", text: "Earth's axis is tilted as Earth revolves around the sun" },
-            { letter: "C", text: "the sun gives off more energy in summer than in winter" },
+            { letter: "C", text: "the sun gives off much more energy in summer than in winter" },
             { letter: "D", text: "Earth spins faster on its axis in summer than in winter" }
           ],
           correct: "B"
@@ -217,7 +217,7 @@
             { letter: "A", text: "winter, with a noon sun about 29° above the horizon" },
             { letter: "B", text: "spring, with about 12 hours of daylight" },
             { letter: "C", text: "summer, with a noon sun about 75° above the horizon" },
-            { letter: "D", text: "winter, because Earth is far from the sun" }
+            { letter: "D", text: "winter, because Earth is far from the sun in December" }
           ],
           correct: "C"
         },
@@ -230,7 +230,7 @@
             { letter: "A", text: "Earth was at its closest point to the sun on those dates" },
             { letter: "B", text: "the sun's most direct rays struck the equator on those dates" },
             { letter: "C", text: "the sun's most direct rays struck the Tropic of Cancer" },
-            { letter: "D", text: "Earth's axis was not tilted at all on those two dates" }
+            { letter: "D", text: "Earth's axis was not tilted at all on either of those two dates" }
           ],
           correct: "B"
         }
@@ -269,9 +269,9 @@
           stem: "Which conclusion is best supported by the data in the table?",
           choices: [
             { letter: "A", text: "Planets that formed far from the sun are made of denser materials." },
-            { letter: "B", text: "Planets near the sun are dense like rock and metal; far ones are much less dense." },
-            { letter: "C", text: "Each planet is denser than the planet just inside its orbit." },
-            { letter: "D", text: "All six planets have about the same density, whatever their distance." }
+            { letter: "B", text: "Inner planets are dense like rock and metal; outer planets are far less dense." },
+            { letter: "C", text: "Each planet is denser than the planet just inside its orbit around the sun." },
+            { letter: "D", text: "All six planets have about the same density, whatever their distance from the sun." }
           ],
           correct: "B"
         },
@@ -296,8 +296,8 @@
           choices: [
             { letter: "A", text: "Mars is denser than Earth, so its water sinks deep into its core." },
             { letter: "B", text: "Mars takes less time than Earth to orbit, so it has short summers." },
-            { letter: "C", text: "Mars is a gas planet with no solid surface where water can collect." },
-            { letter: "D", text: "Mars is farther out and its thin air holds little heat, so water freezes or escapes." }
+            { letter: "C", text: "Mars is a gas planet with no solid surface where liquid water could collect." },
+            { letter: "D", text: "Mars is farther out and its thin air holds little heat, so water freezes." }
           ],
           correct: "D"
         },
@@ -308,7 +308,7 @@
           stem: "Earth's distance of 1 AU from the sun is important for life mainly because it —",
           choices: [
             { letter: "A", text: "keeps surface temperatures in the range where water stays liquid" },
-            { letter: "B", text: "makes Earth the densest of all the planets in the solar system" },
+            { letter: "B", text: "makes Earth the densest of all eight planets in the whole solar system" },
             { letter: "C", text: "gives Earth the shortest orbit time of any planet in the table" },
             { letter: "D", text: "keeps Earth out of the path of every asteroid and comet" }
           ],
@@ -323,7 +323,7 @@
             { letter: "A", text: "crewed missions that landed on each of these planets" },
             { letter: "B", text: "telescopes that astronauts built on the moon's surface" },
             { letter: "C", text: "uncrewed probes that flew past or orbited these planets" },
-            { letter: "D", text: "samples of gas brought back to Earth from each planet" }
+            { letter: "D", text: "samples of gas brought back to Earth from each of the planets" }
           ],
           correct: "C"
         }
@@ -373,7 +373,7 @@
             { letter: "A", text: "the icy nucleus of a comet from beyond Neptune" },
             { letter: "B", text: "the metal-rich interior of an asteroid that broke apart" },
             { letter: "C", text: "the cloudy outer layers of a gas planet such as Jupiter" },
-            { letter: "D", text: "a piece of Virginia bedrock thrown up by the impact" }
+            { letter: "D", text: "a piece of Virginia bedrock thrown up when the stone hit the ground" }
           ],
           correct: "B"
         },
@@ -383,7 +383,7 @@
           sub: "ES.2.c.2",
           stem: "A classmate claims the stone is a piece of a comet. Which evidence best argues against this claim?",
           choices: [
-            { letter: "A", text: "It was found only a week after the streak of light was seen." },
+            { letter: "A", text: "It was found in a hayfield only a week after the streak of light was seen." },
             { letter: "B", text: "It made a loud boom as it passed through the air." },
             { letter: "C", text: "It is made of dense metal, while comets are mostly ice and dust." },
             { letter: "D", text: "It has a thin crust that is black and glassy." }
@@ -396,7 +396,7 @@
           sub: "ES.3.a.1",
           stem: "Most meteoroids that enter Earth's atmosphere never reach the ground. This shows that the atmosphere helps protect life on Earth by —",
           choices: [
-            { letter: "A", text: "blocking all sunlight from reaching the surface at night" },
+            { letter: "A", text: "blocking all of the sunlight from reaching the surface at night" },
             { letter: "B", text: "pulling most meteoroids into orbit around the planet" },
             { letter: "C", text: "producing the magnetic field that pushes rocks away" },
             { letter: "D", text: "heating and burning up most small space rocks as they fall" }
@@ -409,7 +409,7 @@
           sub: "ES.2.d.1",
           stem: "Which mission would give the most direct evidence about what asteroids are made of?",
           choices: [
-            { letter: "A", text: "a space telescope that photographs faraway galaxies" },
+            { letter: "A", text: "a space telescope that takes photographs of faraway galaxies" },
             { letter: "B", text: "a weather satellite that orbits above Earth's equator" },
             { letter: "C", text: "a probe that collects rock from an asteroid and returns it" },
             { letter: "D", text: "a crew that spends six months on the space station" }
@@ -434,7 +434,7 @@
           sub: "ES.3.b.2",
           stem: "The daily rise and fall of the water at the pier is caused mainly by —",
           choices: [
-            { letter: "A", text: "winds that push ocean water toward the shore each day" },
+            { letter: "A", text: "strong winds that push the ocean water toward the shore each day" },
             { letter: "B", text: "the gravitational pull of the moon and sun on Earth's oceans" },
             { letter: "C", text: "the moon's shadow passing over the ocean twice each day" },
             { letter: "D", text: "Earth's revolution around the sun once each year" }
@@ -448,7 +448,7 @@
           stem: "Which pattern is shown by the data in the table?",
           choices: [
             { letter: "A", text: "The tidal range was greatest at the new and full moons." },
-            { letter: "B", text: "The tidal range was greatest at the quarter moons." },
+            { letter: "B", text: "The tidal range was greatest at the first and third quarter moons." },
             { letter: "C", text: "The tidal range grew larger every week of the month." },
             { letter: "D", text: "The tidal range was the same at every moon phase." }
           ],
@@ -460,7 +460,7 @@
           sub: "ES.3.b.2",
           stem: "The large ranges on April 1 and April 16 are called spring tides. Spring tides happen when the sun, Earth and moon are —",
           choices: [
-            { letter: "A", text: "at right angles to one another" },
+            { letter: "A", text: "at right angles to one another in space" },
             { letter: "B", text: "at their greatest distances apart" },
             { letter: "C", text: "lined up in a nearly straight line" },
             { letter: "D", text: "moving in opposite directions" }
@@ -487,7 +487,7 @@
           stem: "Oceans like the one at Virginia Beach can exist on Earth's surface mainly because Earth —",
           choices: [
             { letter: "A", text: "has a moon large enough to raise tides" },
-            { letter: "B", text: "spins once on its axis about every 24 hours" },
+            { letter: "B", text: "is tilted on its axis, which gives most places four seasons" },
             { letter: "C", text: "is the largest planet in the solar system" },
             { letter: "D", text: "is at a distance from the sun where water stays liquid" }
           ],
@@ -527,7 +527,7 @@
           sub: "ES.2.b.1",
           stem: "According to the passage, a contracting ball of gas and dust becomes a true star when —",
           choices: [
-            { letter: "A", text: "a planet nearby collects enough gas to glow" },
+            { letter: "A", text: "a nearby planet collects enough gas to begin glowing" },
             { letter: "B", text: "hydrogen in its core begins to fuse into helium" },
             { letter: "C", text: "a supernova blows the nebula around it apart" },
             { letter: "D", text: "its outer layers cool and turn a deep red color" }
@@ -541,7 +541,7 @@
           stem: "Star S is hotter than the sun but gives off only one-thousandth as much energy. Which best explains this?",
           choices: [
             { letter: "A", text: "It is a white dwarf, the small leftover core of a sun-like star." },
-            { letter: "B", text: "It is a main-sequence star with more mass than the sun." },
+            { letter: "B", text: "It is a main-sequence star that has much more mass than our sun does." },
             { letter: "C", text: "It is a red supergiant that is near the end of its life." },
             { letter: "D", text: "It is much farther from Earth than the sun is." }
           ],
@@ -556,7 +556,7 @@
             { letter: "A", text: "a white dwarf, after a red giant stage" },
             { letter: "B", text: "a main-sequence star that never changes" },
             { letter: "C", text: "a supernova that leaves a neutron star or black hole" },
-            { letter: "D", text: "a cold nebula that forms new planets around it" }
+            { letter: "D", text: "a cold nebula that slowly forms new planets around it" }
           ],
           correct: "C"
         },
@@ -580,7 +580,7 @@
           stem: "The sun produces its energy by —",
           choices: [
             { letter: "A", text: "nuclear fusion of hydrogen into helium in its core" },
-            { letter: "B", text: "burning coal and natural gas in its outer layers" },
+            { letter: "B", text: "burning coal and natural gas throughout its outer layers" },
             { letter: "C", text: "reflecting the light of other stars near it" },
             { letter: "D", text: "slowly cooling from a molten iron center" }
           ],
@@ -592,7 +592,7 @@
           sub: "ES.2.d.1",
           stem: "The James Webb Space Telescope observes infrared light, which passes through dust that blocks visible light. This makes it especially useful for —",
           choices: [
-            { letter: "A", text: "measuring the temperature of Earth's oceans" },
+            { letter: "A", text: "measuring the surface temperature of Earth's oceans" },
             { letter: "B", text: "seeing new stars forming inside dusty nebulae" },
             { letter: "C", text: "landing on the surfaces of distant planets" },
             { letter: "D", text: "collecting samples of gas from the sun" }
@@ -618,7 +618,7 @@
           stem: "Why did the team need a satellite in orbit, rather than a counter on the ground, to measure the solar wind?",
           choices: [
             { letter: "A", text: "Earth's magnetic field and air keep most of these particles from reaching the ground." },
-            { letter: "B", text: "Charged particles can be counted only at night, and space is always dark." },
+            { letter: "B", text: "Charged particles can be counted only at night, and space far above Earth is always dark." },
             { letter: "C", text: "Particle counters are too large to be used inside a school laboratory." },
             { letter: "D", text: "The solar wind blows only over the oceans, where no stations are built." }
           ],
@@ -630,7 +630,7 @@
           sub: "ES.3.a.1",
           stem: "According to the passage, Earth's magnetic field helps make Earth suitable for life by —",
           choices: [
-            { letter: "A", text: "holding the moon in its orbit around Earth" },
+            { letter: "A", text: "holding the moon in its monthly orbit around Earth" },
             { letter: "B", text: "turning aside most charged particles from the sun" },
             { letter: "C", text: "keeping Earth at the right distance from the sun" },
             { letter: "D", text: "producing the oxygen found in Earth's atmosphere" }
@@ -644,7 +644,7 @@
           stem: "Which statement is best supported by the data in the table?",
           choices: [
             { letter: "A", text: "Particle counts were about the same everywhere along the orbit." },
-            { letter: "B", text: "Particle counts were lowest near the poles and highest at the equator." },
+            { letter: "B", text: "Particle counts were lowest near both poles and highest directly over the equator." },
             { letter: "C", text: "Particle counts were highest near the poles, where the field guides particles in." },
             { letter: "D", text: "Particle counts over Virginia were higher than near the North Pole." }
           ],
@@ -657,7 +657,7 @@
           stem: "Mars has had no global magnetic field for billions of years, and orbiters have measured gas escaping from the top of its atmosphere. Which inference is best supported?",
           choices: [
             { letter: "A", text: "The solar wind has stripped away much of Mars's air, leaving it thin and cold." },
-            { letter: "B", text: "Mars must be closer to the sun than Earth is, so its air boils away." },
+            { letter: "B", text: "Mars must be closer to the sun than Earth is, so its air simply boils away into space." },
             { letter: "C", text: "Mars will soon have a thicker atmosphere than Earth has today." },
             { letter: "D", text: "Mars lost its air because it has no liquid water on its surface today." }
           ],
@@ -669,7 +669,7 @@
           sub: "ES.2.d.2",
           stem: "How did the 1958 discovery described in sentences 6 and 7 change scientists' understanding of space near Earth?",
           choices: [
-            { letter: "A", text: "It showed that the moon has a magnetic field as strong as Earth's." },
+            { letter: "A", text: "It showed that the moon has a magnetic field that is as strong as Earth's." },
             { letter: "B", text: "It showed that the solar wind does not actually reach Earth." },
             { letter: "C", text: "It showed that the space around Earth holds trapped charged particles." },
             { letter: "D", text: "It showed that satellites cannot survive above the atmosphere." }
@@ -709,7 +709,7 @@
             { letter: "A", text: "formed where it was too hot for ice, so only rock and metal collected" },
             { letter: "B", text: "formed beyond the frost line, where the most gas was available" },
             { letter: "C", text: "lost all their ice when the sun grew much larger long afterward" },
-            { letter: "D", text: "were pulled away from the gas giants by the sun's strong gravity" }
+            { letter: "D", text: "were pulled away from the gas giants by the young sun's strong gravity" }
           ],
           correct: "A"
         },
@@ -732,7 +732,7 @@
           sub: "ES.2.c.1",
           stem: "Pluto is classified as a dwarf planet rather than a planet because it —",
           choices: [
-            { letter: "A", text: "is made of ice and rock rather than of gas" },
+            { letter: "A", text: "is made of ice and rock rather than of hydrogen and helium gas" },
             { letter: "B", text: "orbits Neptune instead of orbiting the sun" },
             { letter: "C", text: "is round but shares its orbit zone with many other objects" },
             { letter: "D", text: "is too far away to be seen with any telescope" }
@@ -745,9 +745,9 @@
           sub: "ES.2.c.1",
           stem: "When a comet's orbit brings it close to the sun, it grows a long, glowing tail because —",
           choices: [
-            { letter: "A", text: "its ice turns to gas, and the sun pushes gas and dust away from it" },
+            { letter: "A", text: "its ice turns to gas, and the sun blows the gas and dust outward" },
             { letter: "B", text: "it collides with asteroids and leaves a trail of broken rock" },
-            { letter: "C", text: "it catches fire from the oxygen in the sun's outer atmosphere" },
+            { letter: "C", text: "it catches fire from the oxygen it meets in the sun's outer atmosphere" },
             { letter: "D", text: "its rocky core melts and the lava flows out behind it" }
           ],
           correct: "A"
@@ -771,7 +771,7 @@
           sub: "ES.2.d.2",
           stem: "Space telescopes have photographed many young stars surrounded by flat, spinning disks of gas and dust, some with gaps where planets may be forming. How does this evidence relate to the solar nebular theory?",
           choices: [
-            { letter: "A", text: "It disproves the theory, because the solar system has no such disk today." },
+            { letter: "A", text: "It disproves the theory, because our own solar system has no such disk today." },
             { letter: "B", text: "It supports the theory, because the theory predicts disks around new stars." },
             { letter: "C", text: "It has no bearing on the theory, because those stars are not the sun." },
             { letter: "D", text: "It shows that planets form first and their stars form much later." }
@@ -789,9 +789,9 @@
       kind: "Universe & Solar System · ES.2",
       blurb: "Red shifts, a galaxy table and a faint microwave glow: weigh the evidence for the big bang.",
       level: 3,
-      passage: "<p>" + N(1) + "In the 1920s, astronomers using the largest telescopes of the time spread the light from distant galaxies into spectra. " + N(2) + "Dark lines made by elements such as hydrogen appeared at longer, redder wavelengths than the same lines measured in a laboratory, a pattern called <strong>red shift</strong>. " + N(3) + "A red shift shows that a light source is moving away from the observer. " + N(4) + "The table shows rounded values like the ones astronomers found.</p>" +
+      passage: "<p>" + N(1) + "In the 1920s, astronomers using the largest telescopes of the time spread the light from distant galaxies into spectra. " + N(2) + "Dark lines made by elements such as hydrogen appeared at longer, redder wavelengths than the same lines measured in a laboratory, a pattern called <strong>red shift</strong>. " + N(3) + "A red shift shows that a light source is moving away from the observer. " + N(4) + "The table shows rounded modern values for four galaxies.</p>" +
         "<table><tr><th>Galaxy</th><th>Distance (millions of light-years)</th><th>Speed away from us (km/s)</th></tr><tr><td>A</td><td>50</td><td>1,100</td></tr><tr><td>B</td><td>100</td><td>2,200</td></tr><tr><td>C</td><td>200</td><td>4,400</td></tr><tr><td>D</td><td>400</td><td>8,800</td></tr></table>" +
-        "<p>" + N(5) + "By the 1950s, most astronomers accepted that the universe is expanding, but they debated two explanations. " + N(6) + "A steady-state model said the universe has no beginning and that new matter forms as it expands, so it always looks about the same. " + N(7) + "The <strong>big bang theory</strong> said the universe began about 13.8 billion years ago in an extremely hot, dense state and has been expanding and cooling ever since, so a faint glow of leftover radiation should fill all of space. " + N(8) + "In 1965, two radio engineers in New Jersey detected a weak microwave signal coming equally from every direction in the sky. " + N(9) + "Later satellites mapped this <strong>cosmic microwave background</strong> in detail.</p>",
+        "<p>" + N(5) + "By the 1950s, most astronomers accepted that the universe is expanding, but they debated two explanations. " + N(6) + "A steady-state model said the universe has no beginning and that new matter forms as it expands, so it always looks about the same and never had a hot early stage. " + N(7) + "The <strong>big bang theory</strong> said the universe began about 13.8 billion years ago in an extremely hot, dense state and has been expanding and cooling ever since, so a faint glow of leftover radiation should fill all of space. " + N(8) + "In 1965, two radio engineers in New Jersey detected a weak microwave signal coming equally from every direction in the sky. " + N(9) + "Later satellites mapped this <strong>cosmic microwave background</strong> in detail.</p>",
       claims: [
         {
           id: "cmb",
@@ -801,7 +801,7 @@
           choices: [
             { letter: "A", text: "radio signals sent out by distant spacecraft" },
             { letter: "B", text: "heat given off by the sun and nearby stars" },
-            { letter: "C", text: "light reflected from gas clouds between galaxies" },
+            { letter: "C", text: "sunlight reflected from the gas clouds that lie between galaxies" },
             { letter: "D", text: "leftover radiation from the hot, dense early universe" }
           ],
           correct: "D"
@@ -867,7 +867,7 @@
             { letter: "A", text: "an elliptical galaxy made only of old red stars" },
             { letter: "B", text: "a spiral galaxy of billions of stars, one of them the sun" },
             { letter: "C", text: "the group of eight planets that orbit the sun" },
-            { letter: "D", text: "a cloud of gas and dust where the sun is forming" }
+            { letter: "D", text: "a cloud of gas and dust where the sun and new planets are forming" }
           ],
           correct: "B"
         }
@@ -918,7 +918,7 @@
           stem: "Which explanation of Mars's thin atmosphere is best supported by sentences 4 and 5?",
           choices: [
             { letter: "A", text: "Without a global magnetic field, Mars has slowly lost gas to the solar wind." },
-            { letter: "B", text: "Mars is too close to the sun for its gravity to hold on to any gases." },
+            { letter: "B", text: "Mars is much too close to the sun for its weak gravity to hold on to any gases." },
             { letter: "C", text: "The rovers on Mars have used up much of the gas in its atmosphere." },
             { letter: "D", text: "Mars's cold temperatures froze all of its air into solid rock." }
           ],
@@ -933,7 +933,7 @@
             { letter: "A", text: "They showed that Mars has always been as dry as it is today." },
             { letter: "B", text: "They showed that Mars has liquid oceans on its surface now." },
             { letter: "C", text: "They showed that Mars once had liquid water and was likely warmer." },
-            { letter: "D", text: "They showed that Mars has a stronger magnetic field than Earth." }
+            { letter: "D", text: "They showed that Mars has a much stronger magnetic field than Earth." }
           ],
           correct: "C"
         },
@@ -944,7 +944,7 @@
           stem: "According to the passage, Europa's ocean can stay liquid even though its surface averages −160 °C because —",
           choices: [
             { letter: "A", text: "sunlight at 5.2 AU is strong enough to melt its ice" },
-            { letter: "B", text: "its thick atmosphere traps heat like a blanket" },
+            { letter: "B", text: "its thick atmosphere traps the sun's heat like a warm blanket" },
             { letter: "C", text: "the solar wind warms the ocean through the crust" },
             { letter: "D", text: "Jupiter's gravity flexes the moon and heats its interior" }
           ],
@@ -959,7 +959,7 @@
             { letter: "A", text: "a telescope on Earth that photographed the ocean" },
             { letter: "B", text: "astronauts who drilled down through Europa's ice" },
             { letter: "C", text: "a rover that landed and drove on Europa's surface" },
-            { letter: "D", text: "a spacecraft orbiting Jupiter that measured magnetic signals" }
+            { letter: "D", text: "a Jupiter orbiter that measured magnetic signals" }
           ],
           correct: "D"
         }
