@@ -244,7 +244,7 @@
       kind: "Earth History · ES.9",
       blurb: "Ferns below, corals above, and the whole stack tilted: read the layers in order.",
       level: 1,
-      passage: "<p>" + N(1) + "A road cut in western Virginia exposes four layers of sedimentary rock, labeled from bottom to top. " + N(2) + "Layer A is sandstone with ripple marks. " + N(3) + "Layer B is dark shale holding thin black outlines of fern leaves. " + N(4) + "Layer C is limestone packed with fossil corals and brachiopods. " + N(5) + "Layer D is sandstone with no fossils. " + N(6) + "All four layers are now tilted about 30 degrees, but none of them has been overturned. " + N(7) + "A student identifies the corals in Layer C as a species known only from rocks of the Silurian Period.</p>",
+      passage: "<p>" + N(1) + "A road cut in western Virginia exposes four layers of sedimentary rock, labeled from bottom to top. " + N(2) + "Layer A is sandstone with ripple marks. " + N(3) + "Layer B is dark shale holding thin black outlines of fern leaves. " + N(4) + "Layer C is limestone packed with fossil corals and brachiopods. " + N(5) + "Layer D is sandstone with no fossils. " + N(6) + "All four layers are now tilted about 30 degrees, but none of them has been overturned. " + N(7) + "A student identifies the corals in Layer C as a species known only from rocks of the Mississippian Period.</p>",
       claims: [
         {
           id: "oldest",

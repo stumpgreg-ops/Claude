@@ -611,7 +611,7 @@
         {
           id: "classify",
           sol: "ES.7.b",
-          sub: "ES.7.b.1",
+          sub: "ES.7.b.2",
           stem: "The boundary in this cross-section is best classified as —",
           choices: [
             { letter: "A", text: "a divergent boundary where two plates pull apart" },
@@ -743,7 +743,7 @@
           sub: "ES.7.a.2",
           stem: "The motion of the GPS stations at Site W is driven mainly by —",
           choices: [
-            { letter: "A", text: "convection currents in the mantle that carry the plates" },
+            { letter: "A", text: "convection currents in the mantle" },
             { letter: "B", text: "the pull of the moon's gravity on the crust" },
             { letter: "C", text: "the spinning of the liquid outer core" },
             { letter: "D", text: "erosion that widens the valley floor" }
@@ -771,7 +771,7 @@
           choices: [
             { letter: "A", text: "Earthquakes at Site W happen only at shallow depths." },
             { letter: "B", text: "Site W lies far from any deep-ocean trench today." },
-            { letter: "C", text: "Its sides are spreading apart as basalt fills its sinking floor." },
+            { letter: "C", text: "Its sides spread apart as basalt fills its sinking floor." },
             { letter: "D", text: "Site W has no folded mountains or marine fossils." }
           ],
           correct: "C"
@@ -848,7 +848,7 @@
           stem: "Which process deep inside Earth supplied the force that moved the plates in these collisions?",
           choices: [
             { letter: "A", text: "the magnetic field produced in Earth's core" },
-            { letter: "B", text: "mantle convection, with sinking plates pulling plates along" },
+            { letter: "B", text: "mantle convection and the pull of sinking plates" },
             { letter: "C", text: "weathering and erosion of the growing mountains" },
             { letter: "D", text: "the pull of the moon and the sun on the oceans" }
           ],

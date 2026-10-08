@@ -154,7 +154,7 @@
             { letter: "A", text: "from above, by sunlight absorbed in the ozone layer" },
             { letter: "B", text: "by heat flowing upward from Earth's molten core" },
             { letter: "C", text: "by friction as the wind blows across the ocean" },
-            { letter: "D", text: "from below, by the ground, which absorbs sunlight and warms the air" }
+            { letter: "D", text: "from below, by contact with the warm ground" }
           ],
           correct: "D"
         }
@@ -296,14 +296,14 @@
             { letter: "A", text: "The pressure will rise to 1061.0 mb." },
             { letter: "B", text: "The wind will shift to come from the north." },
             { letter: "C", text: "The relative humidity will fall to about 50%." },
-            { letter: "D", text: "The air will become saturated, so fog or dew may form." }
+            { letter: "D", text: "The air will be saturated, so fog may form." }
           ],
           correct: "D"
         },
         {
           id: "mountain",
           sol: "ES.11.a",
-          sub: "ES.11.a.2",
+          sub: "ES.11.a.1",
           stem: "That afternoon a hiker carried a barometer from Roanoke to a mountaintop about 1,400 m higher, and its reading dropped by about 150 mb. The best explanation is that —",
           choices: [
             { letter: "A", text: "at a higher elevation there is less air above pressing down" },
@@ -447,7 +447,7 @@
           sub: "ES.12.c.2",
           stem: "Which best explains the change in top wind speed from day 5 to day 6?",
           choices: [
-            { letter: "A", text: "Over land the storm lost its supply of warm, moist air and was slowed by friction." },
+            { letter: "A", text: "Over land it lost its warm, moist air supply and was slowed by friction." },
             { letter: "B", text: "The storm moved into an area of warmer ocean water near the coast." },
             { letter: "C", text: "Rain falling from the storm cooled the ocean and doubled its strength." },
             { letter: "D", text: "The storm's low-pressure center grew even deeper over land." }
@@ -798,7 +798,7 @@
           choices: [
             { letter: "A", text: "Big Meadows is closer to the ocean, which cools it all year." },
             { letter: "B", text: "Big Meadows gets more direct sunlight because it is higher." },
-            { letter: "C", text: "Big Meadows is much higher, and air in the troposphere cools with altitude." },
+            { letter: "C", text: "Big Meadows is much higher, and air cools with altitude." },
             { letter: "D", text: "Big Meadows lies far south of Lynchburg, nearer the equator." }
           ],
           correct: "C"
@@ -819,7 +819,7 @@
         {
           id: "precip",
           sol: "ES.12.e",
-          sub: "ES.12.e.2",
+          sub: "ES.12.e.1",
           stem: "Big Meadows gets the most precipitation of the three stations. Which best explains this?",
           choices: [
             { letter: "A", text: "Air sinking down the mountain slopes warms and gains water vapor." },
@@ -914,7 +914,7 @@
           sub: "ES.12.d.2",
           stem: "Using sentences 5 and 8, which statement best explains a limit of computer weather models?",
           choices: [
-            { letter: "A", text: "Small errors in the starting data grow over time, so later days are less certain." },
+            { letter: "A", text: "Small starting errors grow over time, so later days are less certain." },
             { letter: "B", text: "Running a model more times makes the real storm grow weaker." },
             { letter: "C", text: "Models are most accurate for forecasts made many weeks ahead." },
             { letter: "D", text: "A model gives a wrong answer unless it is run exactly 20 times." }
@@ -937,7 +937,7 @@
         {
           id: "fuel",
           sol: "ES.12.c",
-          sub: "ES.12.c.2",
+          sub: "ES.12.c.1",
           stem: "Which condition described in the passage did the most to give the storm its energy?",
           choices: [
             { letter: "A", text: "the comma-shaped cloud shield seen on satellite images" },

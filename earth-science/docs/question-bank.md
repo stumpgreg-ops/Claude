@@ -2,7 +2,7 @@
 
 Every lab-notes pack and question in the game, grouped by unit and difficulty level, with the answer key and the 2018 Virginia Earth Science SOL skill each item is tagged with (ES.4.a.2 = standard ES.4, key idea a, skill 2) and whether that skill is **LOTS** (lower-order thinking: identify, describe, explain, calculate) or **HOTS** (higher-order thinking: analyze, compare, infer, predict, evaluate). Generated from `js/content*.js` by `node tools/question-bank.js`; edit the pack files, not this page.
 
-**Totals:** 89 packs · 506 questions · level 1: 165 · level 2: 191 · level 3: 150 · LOTS: 263 · HOTS: 243
+**Totals:** 89 packs · 506 questions · level 1: 165 · level 2: 191 · level 3: 150 · LOTS: 265 · HOTS: 241
 
 ## How the game chooses questions for a student
 
@@ -590,7 +590,7 @@ Standards in this unit:
 
 6. **[ES.1.f.2 · HOTS]** Which is the best evaluation of the website's claim in sentence 9?  
    _Skill: Evaluate the reliability of a source, a claim or a set of evidence_
-   - A. It is not reliable: the nearest spring, B, never received dye.
+   - A. It is not reliable: the nearest spring, B, showed no dye in 14 days.
    - B. It is reliable, because water always flows straight downhill.
    - C. It is reliable, because the neighbor lives near the sinkhole.
    - D. It cannot be judged, because dye traces are not evidence.
@@ -1853,7 +1853,7 @@ Standards in this unit:
    - A. It contains mica, which bends and flakes off easily.
    - B. Its minerals dissolve in water, so spills wipe away.
    - C. It is a sedimentary rock that splits into thin slabs.
-   - D. It is mostly feldspar and quartz, which a knife cannot scratch.
+   - D. Its feldspar and quartz are harder than a steel knife.
    - **Key: D**
 
 4. **[ES.4.b.1 · LOTS]** Quartz sand like the grains on the sandbar is the main raw material for making —  
@@ -2926,8 +2926,8 @@ Standards in this unit:
 
 > (1) A student drew a cross-section of the west coast of South America, from the Pacific Ocean on the left to the middle of the continent on the right. (2) On the left, the Nazca Plate, made of oceanic crust, moves east toward South America at about 7 cm per year. (3) It meets the South American Plate at a deep ocean **trench** just offshore. (4) The student marked the foci of recent earthquakes: those near the trench are shallow, and they get deeper toward the east, reaching about 600 km below the surface. (5) About 300 km east of the trench, a line of steep volcanoes rises along the Andes Mountains. (6) These volcanoes erupt thick, sticky, gas-rich magma. (7) Under both plates, the student shaded the **asthenosphere**, a hot layer of the upper mantle that flows slowly.
 
-1. **[ES.7.b.1 · LOTS]** The boundary in this cross-section is best classified as —  
-   _Skill: Identify plate boundary types and the features and processes at each (ridges, trenches, rifts, volcanic arcs, faults, hot spots)_
+1. **[ES.7.b.2 · HOTS]** The boundary in this cross-section is best classified as —  
+   _Skill: Analyze earthquake, volcano or landform data to infer the type of plate boundary_
    - A. a divergent boundary where two plates pull apart
    - B. a convergent boundary where an ocean plate subducts
    - C. a transform boundary where two plates slide past
@@ -3015,7 +3015,7 @@ Standards in this unit:
 
 4. **[ES.7.a.2 · LOTS]** The motion of the GPS stations at Site W is driven mainly by —  
    _Skill: Explain how convection in the mantle moves tectonic plates_
-   - A. convection currents in the mantle that carry the plates
+   - A. convection currents in the mantle
    - B. the pull of the moon's gravity on the crust
    - C. the spinning of the liquid outer core
    - D. erosion that widens the valley floor
@@ -3033,7 +3033,7 @@ Standards in this unit:
    _Skill: Evaluate evidence for plate tectonics (sea-floor spreading, magnetic stripes, fossils, rock ages, continental fit)_
    - A. Earthquakes at Site W happen only at shallow depths.
    - B. Site W lies far from any deep-ocean trench today.
-   - C. Its sides are spreading apart as basalt fills its sinking floor.
+   - C. Its sides spread apart as basalt fills its sinking floor.
    - D. Site W has no folded mountains or marine fossils.
    - **Key: C**
 
@@ -3077,7 +3077,7 @@ Standards in this unit:
 5. **[ES.7.a.2 · LOTS]** Which process deep inside Earth supplied the force that moved the plates in these collisions?  
    _Skill: Explain how convection in the mantle moves tectonic plates_
    - A. the magnetic field produced in Earth's core
-   - B. mantle convection, with sinking plates pulling plates along
+   - B. mantle convection and the pull of sinking plates
    - C. weathering and erosion of the growing mountains
    - D. the pull of the moon and the sun on the oceans
    - **Key: B**
@@ -3310,7 +3310,7 @@ Standards in this unit:
 ### Four layers in a road cut  
 `hist-tilted-roadcut` · Earth History · ES.9 · level 1 · 88 words · 6 questions
 
-> (1) A road cut in western Virginia exposes four layers of sedimentary rock, labeled from bottom to top. (2) Layer A is sandstone with ripple marks. (3) Layer B is dark shale holding thin black outlines of fern leaves. (4) Layer C is limestone packed with fossil corals and brachiopods. (5) Layer D is sandstone with no fossils. (6) All four layers are now tilted about 30 degrees, but none of them has been overturned. (7) A student identifies the corals in Layer C as a species known only from rocks of the Silurian Period.
+> (1) A road cut in western Virginia exposes four layers of sedimentary rock, labeled from bottom to top. (2) Layer A is sandstone with ripple marks. (3) Layer B is dark shale holding thin black outlines of fern leaves. (4) Layer C is limestone packed with fossil corals and brachiopods. (5) Layer D is sandstone with no fossils. (6) All four layers are now tilted about 30 degrees, but none of them has been overturned. (7) A student identifies the corals in Layer C as a species known only from rocks of the Mississippian Period.
 
 1. **[ES.9.b.1 · LOTS]** Which layer is the oldest, and why?  
    _Skill: Describe the principles of relative dating and how radioactive decay dates rock_
@@ -4545,7 +4545,7 @@ Standards in this unit:
    - A. from above, by sunlight absorbed in the ozone layer
    - B. by heat flowing upward from Earth's molten core
    - C. by friction as the wind blows across the ocean
-   - D. from below, by the ground, which absorbs sunlight and warms the air
+   - D. from below, by contact with the warm ground
    - **Key: D**
 
 ### Sand, sea and a boardwalk flag  
@@ -4632,11 +4632,11 @@ Standards in this unit:
    - A. The pressure will rise to 1061.0 mb.
    - B. The wind will shift to come from the north.
    - C. The relative humidity will fall to about 50%.
-   - D. The air will become saturated, so fog or dew may form.
+   - D. The air will be saturated, so fog may form.
    - **Key: D**
 
-5. **[ES.11.a.2 · HOTS]** That afternoon a hiker carried a barometer from Roanoke to a mountaintop about 1,400 m higher, and its reading dropped by about 150 mb. The best explanation is that —  
-   _Skill: Analyze data on the atmosphere's composition, temperature and pressure_
+5. **[ES.11.a.1 · LOTS]** That afternoon a hiker carried a barometer from Roanoke to a mountaintop about 1,400 m higher, and its reading dropped by about 150 mb. The best explanation is that —  
+   _Skill: Describe the composition and layers of the atmosphere_
    - A. at a higher elevation there is less air above pressing down
    - B. cold mountain air is heavier than the air in the valley
    - C. the clouds over the mountain pushed down on the barometer
@@ -4737,7 +4737,7 @@ Standards in this unit:
 
 2. **[ES.12.c.2 · HOTS]** Which best explains the change in top wind speed from day 5 to day 6?  
    _Skill: Analyze the conditions that lead to severe weather_
-   - A. Over land the storm lost its supply of warm, moist air and was slowed by friction.
+   - A. Over land it lost its warm, moist air supply and was slowed by friction.
    - B. The storm moved into an area of warmer ocean water near the coast.
    - C. Rain falling from the storm cooled the ocean and doubled its strength.
    - D. The storm's low-pressure center grew even deeper over land.
@@ -4973,7 +4973,7 @@ Standards in this unit:
    _Skill: Describe the factors that affect climate (latitude, elevation, nearness to water, ocean currents, greenhouse gases)_
    - A. Big Meadows is closer to the ocean, which cools it all year.
    - B. Big Meadows gets more direct sunlight because it is higher.
-   - C. Big Meadows is much higher, and air in the troposphere cools with altitude.
+   - C. Big Meadows is much higher, and air cools with altitude.
    - D. Big Meadows lies far south of Lynchburg, nearer the equator.
    - **Key: C**
 
@@ -4985,8 +4985,8 @@ Standards in this unit:
    - D. All three ranges are the same, because the stations share a latitude.
    - **Key: A**
 
-3. **[ES.12.e.2 · HOTS]** Big Meadows gets the most precipitation of the three stations. Which best explains this?  
-   _Skill: Analyze climate data to identify trends and natural and human causes of climate change_
+3. **[ES.12.e.1 · LOTS]** Big Meadows gets the most precipitation of the three stations. Which best explains this?  
+   _Skill: Describe the factors that affect climate (latitude, elevation, nearness to water, ocean currents, greenhouse gases)_
    - A. Air sinking down the mountain slopes warms and gains water vapor.
    - B. High places are closer to the sun, so more water evaporates there.
    - C. Snow on the ground reflects sunlight, and reflected light makes rain.
@@ -5045,7 +5045,7 @@ Standards in this unit:
 
 3. **[ES.12.d.2 · HOTS]** Using sentences 5 and 8, which statement best explains a limit of computer weather models?  
    _Skill: Evaluate a forecast and the limits of a weather model_
-   - A. Small errors in the starting data grow over time, so later days are less certain.
+   - A. Small starting errors grow over time, so later days are less certain.
    - B. Running a model more times makes the real storm grow weaker.
    - C. Models are most accurate for forecasts made many weeks ahead.
    - D. A model gives a wrong answer unless it is run exactly 20 times.
@@ -5059,8 +5059,8 @@ Standards in this unit:
    - D. it forms when two hurricanes meet in the North Atlantic
    - **Key: C**
 
-5. **[ES.12.c.2 · HOTS]** Which condition described in the passage did the most to give the storm its energy?  
-   _Skill: Analyze the conditions that lead to severe weather_
+5. **[ES.12.c.1 · LOTS]** Which condition described in the passage did the most to give the storm its energy?  
+   _Skill: Describe how thunderstorms, tornadoes and hurricanes form_
    - A. the comma-shaped cloud shield seen on satellite images
    - B. the radiosondes launched into the sky that morning
    - C. the computer model that was run 20 different times
