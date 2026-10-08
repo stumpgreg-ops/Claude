@@ -2,9 +2,11 @@
  *
  * The galley rows up the screen past the Sirens' island: their flowery meadow, the heap of bones, the two
  * Sirens singing on their rocks along the left of the channel. The crew's ears are stopped with beeswax;
- * Odysseus is tied to the mast (the vase panel, top left). The boatswain's drum sets the beat: marks slide
- * along the Greek-key band at the bottom, from both ends toward the drum in the middle, and the student
- * rows (Space, the ROW button, a click or a tap) when they meet it.
+ * Odysseus is tied to the mast (the vase panel, top left). The Sirens' song is the beat (v5.17.2): each note
+ * of their tune flies big and bright from their meadow to the galley, and the student rows (Space, the ROW
+ * button, a click or a tap) when it lands on the ring round the mast, so the eye stays on the ship and the
+ * passages ahead. The tune is a real song: four-bar phrases (A A B and a closing bar) of long and short
+ * notes, rests and, later, off-beats and syncopation, each note sung at its pitch over a lyre and a drum.
  *   PERFECT / GOOD  the crew's stroke (rw.mom) grows: more speed, full steering, less of the song's pull.
  *   MISS            late, early, off the beat, or a beat let pass: the ship slows, the song tugs it toward
  *                   the rocks, and one of Odysseus's ropes snaps. When the last rope snaps he breaks free:
@@ -27,12 +29,12 @@
   function rowParams(n) {
     n = clamp(Math.floor(Number(n) || 1), 1, 100);
     return {
-      bpm: (64 + n * 0.62) * (n >= 91 ? 1.06 : 1),                       /* the drum: 71 at 12, 95 at 50, 133 at 99 */
+      bpm: (64 + n * 0.62) * (n >= 91 ? 1.06 : 1),                       /* the song's tempo: 71 at 12, 95 at 50, 133 at 99 */
       perfectW: Math.max(38, 85 - n * 0.48),                              /* ms either side of the beat for PERFECT */
       goodW: Math.max(90, 175 - n * 0.85),                                /* ... and for GOOD */
-      offP: n >= 21 ? Math.min(0.7, 0.3 + (n - 21) * 0.006) : 0,          /* a bar with an off-beat stroke */
-      dblP: n >= 41 ? Math.min(0.6, 0.25 + (n - 41) * 0.006) : 0,         /* a bar with a double stroke */
-      restP: n >= 71 ? Math.min(0.45, 0.2 + (n - 71) * 0.008) : 0,        /* a bar with a silent beat */
+      quickP: n >= 21 ? Math.min(0.75, 0.35 + (n - 21) * 0.006) : 0,      /* a bar of the tune with quick notes (eighths) */
+      syncP: n >= 41 ? Math.min(0.6, 0.25 + (n - 41) * 0.006) : 0,        /* ... with syncopation (a note off the beat alone) */
+      denseP: n >= 71 ? Math.min(0.45, 0.2 + (n - 71) * 0.008) : 0,       /* ... with a busy run of notes */
       breakAt: n < 11 ? 5 : n < 51 ? 4 : 3,                               /* misses in a row that set Odysseus free */
       pull: 14 + n * 0.75,                                                /* the song's pull toward the rocks, px/s */
       tug: 50 + n * 0.8,                                                  /* the jerk toward the rocks on every miss */
@@ -46,6 +48,21 @@
       sway: n >= 61 ? Math.min(0.3, 0.1 + (n - 61) * 0.005) : 0           /* inner posts drifting, × a passage's width */
     };
   }
+
+  /* ── the Sirens' tune (v5.17.2): one bar is four beats; each pattern lists where its notes fall (0, 0.5 … 3.5).
+     PAT[0] long and short notes and rests (every level), PAT[1] quick notes (from level 21, quickP),
+     PAT[2] syncopation (from 41, syncP), PAT[3] busy runs (from 71, denseP); a phrase closes on a CADENCE bar. ── */
+  var PAT = [
+    [[0, 1, 2, 3], [0, 2], [0, 1, 2], [0, 2, 3], [0, 1, 3], [0, 3], [1, 2, 3], [0, 1]],
+    [[0, 1, 1.5, 2], [0, 1, 2, 2.5, 3], [0, 1.5, 2], [0, 1.5, 2, 3], [0, 0.5, 1, 2], [0, 2, 2.5, 3], [0, 0.5, 1, 1.5, 2], [0, 1, 2, 3, 3.5]],
+    [[0, 1.5, 2.5], [0, 0.5, 1.5, 2, 3], [0, 1.5, 2.5, 3], [0.5, 1, 2, 3], [0, 1, 1.5, 2.5, 3], [0, 2.5, 3], [0.5, 1.5, 2, 3]],
+    [[0, 0.5, 1, 1.5, 2, 3], [0, 0.5, 1.5, 2, 2.5, 3.5], [0.5, 1.5, 2, 2.5, 3], [0, 0.5, 1, 2, 2.5, 3, 3.5], [0, 1, 1.5, 2, 2.5, 3, 3.5]]
+  ];
+  var CADENCE = [[0, 2], [0], [0, 1, 2]];
+  /* the melody in D dorian without its sixth (D E F G A C D'), the chords under it (bass, two lyre strings) */
+  var SCALE = [293.66, 329.63, 349.23, 392.0, 440.0, 523.25, 587.33];
+  var CHORDS = { Dm: [73.42, 220.0, 349.23], C: [65.41, 196.0, 329.63], F: [87.31, 261.63, 440.0], Bb: [58.27, 174.61, 293.66], A: [55.0, 164.81, 277.18], G: [49.0, 146.83, 246.94] };
+  var PROGS = [["Dm", "Dm", "C", "Dm"], ["Dm", "F", "C", "Dm"], ["Dm", "C", "Bb", "A"], ["Dm", "G", "C", "Dm"], ["F", "C", "Dm", "A"]];
 
   /* ── art: canvas textures in the vase palette, drawn once (keys md-row-*) ── */
   var C = { glaze: ST.glaze, terra: ST.terra, ochre: ST.ochre, bone: ST.bone, foam: ST.foam, wine: ST.wine, wood: "#8a5a32", woodDk: "#5a3418", skin: "#f4ecda" };
@@ -310,46 +327,25 @@
     c.fillStyle = C.bone; dot(c, cx, cy, 19);
     c.strokeStyle = "rgba(217,119,43,0.55)"; c.lineWidth = 1.2; ell(c, cx, cy, 21.5, 21.5); c.stroke();
   }
-  /* a note of the song (bone, tinted in play) */
-  function drawNote(c, w, h) {
-    c.lineCap = "round"; c.lineJoin = "round";
-    c.strokeStyle = C.glaze; c.lineWidth = 6; line(c, 12.5, 22, 12.5, 4.5);
-    c.beginPath(); c.moveTo(12.5, 4.5); c.quadraticCurveTo(19.5, 9, 18.5, 16.5); c.stroke();
-    c.fillStyle = C.glaze; ell(c, 7.6, 23, 7.4, 5.8, -0.45); c.fill();
-    c.strokeStyle = C.bone; c.lineWidth = 2.6; line(c, 12.5, 22, 12.5, 4.5);
-    c.beginPath(); c.moveTo(12.5, 4.5); c.quadraticCurveTo(19.5, 9, 18.5, 16.5); c.stroke();
-    c.fillStyle = C.bone; ell(c, 7.6, 23, 5.4, 4, -0.45); c.fill();
-  }
-  /* the boatswain's drum, from above: terracotta rim, laced cords, a bone skin with an ochre rosette */
-  function drawDrum(c, w, h) {
-    var cx = w / 2, cy = h / 2, i, a;
-    c.fillStyle = C.glaze; dot(c, cx, cy, 33);
-    c.fillStyle = C.terra; dot(c, cx, cy, 31);
-    c.strokeStyle = C.bone; c.lineWidth = 1.8; c.beginPath();
-    for (i = 0; i <= 32; i++) { a = i / 32 * TAU; var rr = i % 2 ? 29.5 : 24.5; c[i ? "lineTo" : "moveTo"](cx + Math.cos(a) * rr, cy + Math.sin(a) * rr); }
-    c.stroke();
-    c.fillStyle = C.glaze; dot(c, cx, cy, 23.5);
-    var g = c.createRadialGradient(cx - 5, cy - 6, 2, cx, cy, 22);
-    g.addColorStop(0, "#fbf5e6"); g.addColorStop(1, "#d8c8a0");
-    c.fillStyle = g; dot(c, cx, cy, 22);
-    c.fillStyle = "rgba(232,176,74,0.55)";
-    for (i = 0; i < 8; i++) { a = i / 8 * TAU; ell(c, cx + Math.cos(a) * 15, cy + Math.sin(a) * 15, 3.4, 1.8, a); c.fill(); }
-  }
-  /* the beat marks: a beat (ochre), an off-beat (sea-foam, smaller), a double stroke (the vases' red) */
-  function drawMark(kind) {
+  /* v5.17.2: a beat note of the Sirens' song, big enough to follow without looking away from the ship: the
+     note in gold (on the beat) or sea-foam (off the beat), outlined in black glaze on a dark halo */
+  function drawBeatNote(kind) {
     return function (c, w, h) {
-      var cx = w / 2, cy = h / 2, r = kind === "off" ? 10.5 : 13.5;
-      c.fillStyle = C.glaze; dot(c, cx, cy, r + 1.8);
-      c.fillStyle = kind === "off" ? C.foam : kind === "dbl" ? "#b8321e" : C.ochre; dot(c, cx, cy, r);
-      c.fillStyle = kind === "dbl" ? C.bone : "rgba(255,250,235,0.75)";
-      if (kind === "dbl") dot(c, cx, cy, r * 0.32); else dot(c, cx - r * 0.3, cy - r * 0.3, r * 0.28);
+      var off = kind === "off", s = off ? 1.75 : 2.1, col = off ? "#9fe6e0" : "#ffcf4a";
+      var g = c.createRadialGradient(w / 2, h / 2, 2, w / 2, h / 2, w / 2);
+      g.addColorStop(0, "rgba(20,12,10,0.62)"); g.addColorStop(0.75, "rgba(20,12,10,0.42)"); g.addColorStop(1, "rgba(20,12,10,0)");
+      c.fillStyle = g; dot(c, w / 2, h / 2, w / 2);
+      c.save(); c.translate(w / 2 - 12 * s, h / 2 - 15 * s); c.scale(s, s);
+      c.lineCap = "round"; c.lineJoin = "round";
+      c.strokeStyle = C.glaze; c.lineWidth = 6.5; line(c, 12.5, 22, 12.5, 4.5);
+      c.beginPath(); c.moveTo(12.5, 4.5); c.quadraticCurveTo(19.5, 9, 18.5, 16.5); c.stroke();
+      c.fillStyle = C.glaze; ell(c, 7.6, 23, 7.8, 6.2, -0.45); c.fill();
+      c.strokeStyle = col; c.lineWidth = 3; line(c, 12.5, 22, 12.5, 4.5);
+      c.beginPath(); c.moveTo(12.5, 4.5); c.quadraticCurveTo(19.5, 9, 18.5, 16.5); c.stroke();
+      c.fillStyle = col; ell(c, 7.6, 23, 5.6, 4.2, -0.45); c.fill();
+      c.fillStyle = "rgba(255,250,235,0.8)"; ell(c, 6, 21.6, 1.8, 1.1, -0.45); c.fill();
+      c.restore();
     };
-  }
-  /* the Greek-key band (one unit; it tiles across) */
-  function drawKey(c, w, h) {
-    c.fillStyle = C.glaze; c.fillRect(0, 0, w, h);
-    c.strokeStyle = C.ochre; c.lineWidth = 2; c.lineCap = "square"; c.lineJoin = "miter";
-    keyUnit(c, 0, 2, w);
   }
   /* the vase panel, top left: Odysseus at the mast, black figure on the red clay, a meander above */
   var PAN_W = 160, PAN_H = 184, ROPE_Y0 = 50, ROPE_Y1 = 132;
@@ -413,12 +409,8 @@
     canvasTex(scene, "md-row-siren-1", SIR_W, SIR_H, drawSiren(1));
     canvasTex(scene, "md-row-post", 30, 30, drawPost);
     canvasTex(scene, "md-row-plaque", 56, 56, drawPlaque);
-    canvasTex(scene, "md-row-note", 22, 30, drawNote);
-    canvasTex(scene, "md-row-drum", 68, 68, drawDrum);
-    canvasTex(scene, "md-row-mark-beat", 32, 32, drawMark("beat"));
-    canvasTex(scene, "md-row-mark-off", 26, 26, drawMark("off"));
-    canvasTex(scene, "md-row-mark-dbl", 32, 32, drawMark("dbl"));
-    canvasTex(scene, "md-row-key", 24, 16, drawKey);
+    canvasTex(scene, "md-row-bnote-beat", 64, 72, drawBeatNote("beat"));
+    canvasTex(scene, "md-row-bnote-off", 56, 62, drawBeatNote("off"));
     canvasTex(scene, "md-row-panel", PAN_W, PAN_H, drawPanel);
     canvasTex(scene, "md-row-hero", HERO_W, HERO_H, drawHero);
   }
@@ -428,22 +420,22 @@
 
   M.extend("row", {
     name: "Row Past the Sirens", kind: "rhythm level", level: "rhythm level", act: "ROW",
-    how: "Odysseus's ship rows past the Sirens' island. The crew's ears are stopped with beeswax, and Odysseus is tied to the mast: he hears the song but cannot go to it. The boatswain beats the drum, and marks slide along the band at the bottom toward the drum in the middle — row each time they meet it. Good strokes give the ship speed and full steering. A missed or mistimed stroke slows it, and the Sirens' song pulls it toward their rocks. Between verses, a line of marker posts crosses the channel with one passage for each letter: steer through the passage with the right answer.",
+    how: "Odysseus's ship rows past the Sirens' island. The crew's ears are stopped with beeswax, and Odysseus is tied to the mast: he hears the song but cannot go to it. You can hear the song, and see it: each note flies from the Sirens' meadow to the ship. Row each time a note lands on the gold ring round the mast. The song has long notes, quick ones and rests, so follow the notes, not a steady count. Good strokes give the ship speed and full steering. A missed or mistimed stroke slows it, and the Sirens' song pulls it toward their rocks. Between verses, a line of marker posts crosses the channel with one passage for each letter: steer through the passage with the right answer.",
     rules: "Steering through a wrong letter's passage costs a life. So does running onto the Sirens' rocks. Each miss in a row snaps one of the ropes that hold Odysseus (top left); when the last rope snaps he breaks free, and that costs a life too. A good stroke ties the ropes again.",
-    keys: "Space, the ROW button, or a click or tap: row (on the drum beat) · ◀ ▶, A / D or the on-screen pad: steer.",
-    tip: "ROW PAST THE SIRENS — row (Space or ROW) when the marks meet the drum, and steer ◀ ▶ through the passage with the right letter.",
+    keys: "Space, the ROW button, or a click or tap: row (when a note lands on the ship) · ◀ ▶, A / D or the on-screen pad: steer.",
+    tip: "ROW PAST THE SIRENS — row (Space or ROW) each time a note of the song lands on the ship, and steer ◀ ▶ through the passage with the right letter.",
     hint1: "Row on the beat and steer through the passage marked with the right letter. The passage stays in the side panel.",
     hint2: "This question has two right letters. Steer through both passages that carry them.",
     news: ["",
       "The Sirens' song swells now and then: when the sea turns wine-dark and the song glows gold, it pulls much harder. Keep rowing on the beat and steer away from the rocks.",
-      "Off-beat strokes: a small pale-blue mark comes between two beats. Row on the mark, not on the beat.",
+      "The song gets quicker: some notes come in quick pairs, and pale-blue notes fall between the beats. Row on every note as it lands.",
       "A reef closes in from the right: the channel and its passages are narrower.",
-      "Double strokes: two red marks close together. Row twice, quickly.",
-      "Odysseus strains harder: three misses in a row now set him free. Watch for pale-blue off-beat marks (between the beats) and red double strokes (two marks close together).",
+      "Syncopation: some notes come off the beat on their own, with a rest where you expect a note. Watch the notes land; don't row on a count.",
+      "Odysseus strains harder: three misses in a row now set him free. Keep your eyes on the notes landing on the ship.",
       "The marker posts drift with the current, so the passages change width.",
-      "Rests: now and then the drummer skips a beat. Don't row where there is no mark. The marker posts drift, too.",
+      "Busy runs: some bars of the song are full of quick notes. Row on each one, and only when a note lands. The marker posts drift, too.",
       "The Sirens' song swells more often, and pulls harder.",
-      "Ithaca is close: the drum beats faster, on top of everything else."],
+      "Ithaca is close: the song is faster, on top of everything else."],
     params: rowParams
   }, {
     rowParams: function (n) { return rowParams(n); },
@@ -454,9 +446,9 @@
       var P = rowParams(this.night);
       var R = this.rw = { P: P, clock: 0, t: 0, trav: 0, dist: 0, mom: 0.5, kx: 0, missRun: 0, hitRun: 0, perfRun: 0,
         notes: [], presses: [], countIn: [], liveFrom: Infinity, genT: Infinity, bd: 60000 / P.bpm, catchW: P.goodW + 140, lastPress: -1e9,
-        plainLeft: 0, firstPending: false, rows: [], dead: [], pool: { post: [], plaque: [], letter: [], mark: [], beat: [], off: [], dbl: [] },
-        splashes: [], song: { state: "calm", t: 0, cd: P.swellEvery * 0.8 }, songWk: 0, noteCd: 400, flying: [],
-        oarT: -1e9, oarAmp: 0.8, rag: [], ragMs: 0, fbMs: 0, countMs: 0, burstMs: 0, burstCol: 0xffd36a, drumK: 0, lean: 0, freeMs: 0,
+        plainLeft: 0, firstPending: false, rows: [], dead: [], pool: { post: [], plaque: [], letter: [], mark: [], beat: [], off: [] },
+        splashes: [], song: { state: "calm", t: 0, cd: P.swellEvery * 0.8 }, songWk: 0, acc: [], phrase: [], ringK: 0,
+        oarT: -1e9, oarAmp: 0.8, rag: [], ragMs: 0, fbMs: 0, countMs: 0, burstMs: 0, burstCol: 0xffd36a, lean: 0, freeMs: 0,
         sirenMs: 0, sirenFrame: 0, ropesShown: -1, told: {}, auto: false, stats: { perfect: 0, good: 0, miss: 0, off: 0, breaks: 0, rocks: 0, presses: 0 } };
       for (i = 0; i < 10; i++) R.rag.push(0);
       this.cameras.main.setBackgroundColor(ST.deep);
@@ -468,18 +460,12 @@
       for (i = 0; i < 4; i++) R.sirens.push({ rock: i % 2, inst: i < 2 ? 0 : 1, spr: this.add.image(-200, -200, "md-row-siren-0").setOrigin(0.5, 1).setDepth(4).setVisible(false) });
       R.lowG = this.add.graphics().setDepth(7);
       R.songG = this.add.graphics().setDepth(8);
-      for (i = 0; i < 14; i++) R.flying.push({ on: false, spr: this.add.image(-99, -99, "md-row-note").setDepth(8).setVisible(false) });
       R.songLabel = this.add.text(0, 0, "", { fontFamily: SERIF, fontSize: 16, color: "#efe6d2", fontStyle: "bold", stroke: "#3a0f2a", strokeThickness: 6, align: "center" }).setOrigin(0.5, 0).setDepth(39);
       R.ship = { x: 0, y: 0 };
       R.oars = [];
       for (i = 0; i < 10; i++) R.oars.push(this.add.image(0, 0, "md-row-oar").setOrigin(2 / 64, 0.5).setDepth(18));
       R.shipSpr = this.add.image(0, 0, "md-row-ship").setDepth(19);
-      R.laneG = this.add.graphics().setDepth(30);
-      R.keyT = this.add.tileSprite(0, 0, 24, 16, "md-row-key").setOrigin(0, 0).setDepth(31);
-      R.keyB = this.add.tileSprite(0, 0, 24, 16, "md-row-key").setOrigin(0, 0).setDepth(31);
-      R.ringG = this.add.graphics().setDepth(33);
-      R.drum = this.add.image(0, 0, "md-row-drum").setDepth(34);
-      R.drumTxt = this.add.text(0, 0, "ROW", { fontFamily: SERIF, fontSize: 14, color: "#140c0a", fontStyle: "bold" }).setOrigin(0.5).setDepth(35);
+      R.ringG = this.add.graphics().setDepth(33);   /* the landing ring round the mast; the notes fly at depth 34 */
       var fbStyle = { fontFamily: SERIF, fontSize: 30, color: "#ffd36a", fontStyle: "bold", stroke: "#140c0a", strokeThickness: 7 };
       R.fb = this.add.text(0, 0, "", fbStyle).setOrigin(0.5).setDepth(36).setAlpha(0);
       R.fb2 = this.add.text(0, 0, "", { fontFamily: SERIF, fontSize: 15, color: "#efe6d2", fontStyle: "bold", stroke: "#140c0a", strokeThickness: 5 }).setOrigin(0.5).setDepth(36).setAlpha(0);
@@ -503,6 +489,7 @@
       if (act) act.addEventListener("pointerdown", onAct);
       var off = function () {
         try { self.input.keyboard.off("keydown-SPACE", onKey); self.input.off("pointerdown", onPtr); } catch (e) {}
+        if (self.rw && self.rw.ducked && window.SolMusic && SolMusic.duck) { self.rw.ducked = false; try { SolMusic.duck(false); } catch (e) {} }
         if (act) act.removeEventListener("pointerdown", onAct);
       };
       this.events.once("shutdown", off);
@@ -523,29 +510,12 @@
       R.coast.setSize(R.coastW, H).setTileScale(R.cs, R.cs);
       var rx = R.chanR - 12;
       R.reef.setPosition(rx, 0).setSize(Math.max(8, W - rx), H);
-      /* the drum band, between the on-screen pad (bottom left) and the ROW button (bottom right) */
+      /* the bottom strip stays clear for the on-screen pad (left) and the ROW button (right); v5.17.2: no
+         drum band there any more, the beat is the song's notes landing on the ship */
       R.laneH = Math.round(74 * R.k); R.laneT = H - 12 - R.laneH;
-      var l0 = 188, r0 = W - 110;
-      if (r0 - l0 < 320) { l0 = 12; r0 = W - 12; }
-      R.laneL = l0; R.laneR = r0; R.drumX = Math.round((l0 + r0) / 2); R.drumY = R.laneT + R.laneH / 2;
-      R.half = Math.min(R.drumX - l0, r0 - R.drumX) - 20;
-      var g = R.laneG, kh = Math.round(16 * R.k);
-      g.clear();
-      g.fillStyle(0x000000, 0.35); g.fillRoundedRect(l0 + 3, R.laneT + 4, r0 - l0, R.laneH, 10);
-      g.fillStyle(0x140c0a, 0.96); g.fillRoundedRect(l0, R.laneT, r0 - l0, R.laneH, 10);
-      g.fillStyle(0x2a140c, 1); g.fillRect(l0 + 6, R.laneT + kh + 5, r0 - l0 - 12, R.laneH - 2 * kh - 10);
-      g.lineStyle(2, 0xe8b04a, 0.9); g.strokeRoundedRect(l0, R.laneT, r0 - l0, R.laneH, 10);
-      g.lineStyle(1, 0xe8b04a, 0.5); g.lineBetween(l0 + 6, R.laneT + kh + 5, r0 - 6, R.laneT + kh + 5); g.lineBetween(l0 + 6, R.laneT + R.laneH - kh - 5, r0 - 6, R.laneT + R.laneH - kh - 5);
-      R.keyT.setPosition(l0 + 8, R.laneT + 3).setSize(r0 - l0 - 16, kh).setTileScale(R.k, R.k);
-      R.keyB.setPosition(l0 + 8, R.laneT + R.laneH - 3 - kh).setSize(r0 - l0 - 16, kh).setTileScale(R.k, R.k);
-      R.drumS = R.laneH * 1.02 / 68;
-      R.drum.setPosition(R.drumX, R.drumY).setScale(R.drumS);
-      R.drumTxt.setPosition(R.drumX, R.drumY).setFontSize(Math.round(14 * R.k));
-      R.fb.setPosition(R.drumX, R.laneT - 30 * R.k).setFontSize(Math.round(30 * R.k));
-      R.fb2.setPosition(R.drumX, R.laneT - 9 * R.k).setFontSize(Math.round(15 * R.k));
-      R.combo.setPosition(R.drumX + 84 * R.k, R.laneT - 28 * R.k).setFontSize(Math.round(17 * R.k));
-      R.countTxt.setPosition(R.drumX, R.laneT - 34 * R.k).setFontSize(Math.round(44 * R.k));
-      /* the ship sits just above the band */
+      R.fb.setFontSize(Math.round(30 * R.k)); R.fb2.setFontSize(Math.round(15 * R.k));
+      R.combo.setFontSize(Math.round(17 * R.k)); R.countTxt.setFontSize(Math.round(44 * R.k));
+      /* the ship sits just above that strip */
       R.shipS = clamp(H / 768 * 0.82, 0.56, 0.95);
       R.ship.y = R.laneT - 50 * R.k - SH * R.shipS / 2;
       R.hull = 15 * R.shipS;
@@ -562,7 +532,6 @@
       R.songLabel.setPosition(8 + PAN_W / 2 * R.ins, 8 + PAN_H * R.ins + 10).setFontSize(Math.round(16 * R.k)).setWordWrapWidth(Math.max(110, R.coastW - 14));
       R.sirS = clamp(R.cs * 1.1, 0.6, 1.05);
       R.sirens.forEach(function (sr) { sr.spr.setScale(R.sirS); });
-      R.flying.forEach(function (f) { f.spr.setScale(R.k); });
     },
     resize_row: function (oldW, oldH) {
       var R = this.rw, fx = this.W / (oldW || this.W), fy = this.H / (oldH || this.H);
@@ -580,11 +549,11 @@
       if (!(ts > 0) || ts > now + 1 || now - ts > 400) ts = now;
       R.presses.push(ts);
     },
-    /* a new count-in (3, 2, 1, ROW!) delay ms from now; the first bar after it is plain beats */
+    /* a new count-in (3, 2, 1, ROW!) delay ms from now; the first bar after it is four plain notes */
     rowRestart: function (delay) {
       var R = this.rw, P = R.P, self = this;
       R.notes.forEach(function (nt) { self.rowFreeNote(nt); });
-      R.notes = [];
+      R.notes = []; R.acc = []; R.phrase = [];
       R.bd = 60000 / P.bpm; R.catchW = P.goodW + 140; R.lead = R.bd * 4;
       var t0 = R.clock + (delay || 0);
       R.countIn = [{ t: t0, txt: "3" }, { t: t0 + R.bd, txt: "2" }, { t: t0 + 2 * R.bd, txt: "1" }];
@@ -596,70 +565,83 @@
     rowStop: function () {
       var R = this.rw, self = this;
       R.notes.forEach(function (nt) { self.rowFreeNote(nt); });
-      R.notes = []; R.countIn = []; R.liveFrom = Infinity; R.genT = Infinity; R.missRun = 0;
+      R.notes = []; R.acc = []; R.phrase = []; R.countIn = []; R.liveFrom = Infinity; R.genT = Infinity; R.missRun = 0;
     },
-    /* one bar of four beats from time t0: plain beats, with an off-beat, a double stroke or a rest as the level allows */
+    /* the next phrase of the Sirens' tune: bars A A' B and a closing bar, each with its notes' pitches and a chord */
+    rowPhrase: function () {
+      var R = this.rw, P = R.P, pick = function (a) { return a[Math.floor(Math.random() * a.length)]; };
+      var bar = function () {
+        var pool = Math.random() < P.denseP ? PAT[3] : Math.random() < P.syncP ? PAT[2] : Math.random() < P.quickP ? PAT[1] : PAT[0];
+        return pick(pool);
+      };
+      var walk = function (n, at) {
+        var out = [], i = at;
+        for (var k = 0; k < n; k++) { out.push(i); i = clamp(i + pick([-2, -1, -1, 1, 1, 2]), 0, SCALE.length - 1); }
+        return out;
+      };
+      var A = bar(), B = bar(), C = pick(CADENCE), tries = 0;
+      while (B === A && tries++ < 4) B = bar();
+      var pa = walk(A.length, 2 + Math.floor(Math.random() * 3)), pa2 = pa.slice();
+      pa2[pa2.length - 1] = clamp(pa2[pa2.length - 1] + pick([-2, 2]), 0, SCALE.length - 1);
+      var pb = walk(B.length, pa[pa.length - 1]), pc = [];
+      for (var k = 0; k < C.length; k++) pc.push(k === C.length - 1 ? 0 : pick([2, 4, 3]));
+      var prog = pick(PROGS);
+      R.phrase = [{ pat: A, pit: pa, ch: prog[0] }, { pat: A, pit: pa2, ch: prog[1] }, { pat: B, pit: pb, ch: prog[2] }, { pat: C, pit: pc, ch: prog[3] }];
+    },
+    /* one bar of four beats from time t0: the notes to row on (with their pitches) and the lyre and drum under them */
     rowMeasure: function (t0) {
-      var R = this.rw, P = R.P, self = this, list = [{ b: 0, kind: "beat" }, { b: 1, kind: "beat" }, { b: 2, kind: "beat" }, { b: 3, kind: "beat" }];
-      var pick = function (a) { return a[Math.floor(Math.random() * a.length)]; };
-      if (R.plainLeft > 0) R.plainLeft -= 1;
-      else {
-        if (P.restP && Math.random() < P.restP) list.splice(1 + Math.floor(Math.random() * 3), 1);
-        if (P.offP && Math.random() < P.offP) {
-          var c1 = list.filter(function (x) { return x.b > 0; });
-          if (c1.length) { var o = pick(c1); o.b += 0.5; o.kind = "off"; }
-        }
-        if (P.dblP && Math.random() < P.dblP) {
-          var c2 = list.filter(function (x) { return x.kind === "beat" && !list.some(function (y) { return y.b === x.b + 0.5; }); });
-          if (c2.length) { var d = pick(c2); d.kind = "dbl"; list.push({ b: d.b + 0.5, kind: "dbl" }); }
-        }
-        list.sort(function (a, b) { return a.b - b.b; });
-      }
-      list.forEach(function (x) {
-        var nt = { t: t0 + x.b * R.bd, kind: x.kind, judged: false, sounded: false, res: null, fade: 1, first: false };
+      var R = this.rw, self = this, b;
+      if (R.plainLeft > 0) { R.plainLeft -= 1; b = { pat: [0, 1, 2, 3], pit: [0, 2, 4, 2], ch: "Dm" }; }
+      else { if (!R.phrase.length) this.rowPhrase(); b = R.phrase.shift(); }
+      b.pat.forEach(function (x, i) {
+        var gap = (i + 1 < b.pat.length ? b.pat[i + 1] : 4) - x;
+        var nt = { t: t0 + x * R.bd, kind: x % 1 ? "off" : "beat", f: SCALE[b.pit[i]], dur: clamp(gap * R.bd / 1000 * 0.9, 0.14, 0.75),
+          judged: false, sounded: false, res: null, fade: 1, first: false };
         if (R.firstPending) { nt.first = true; R.firstPending = false; }
-        nt.mL = self.rowMarkGet(x.kind); nt.mR = self.rowMarkGet(x.kind);
+        nt.m = self.rowMarkGet(nt.kind);
         R.notes.push(nt);
       });
+      R.acc.push({ t: t0, kind: "bar", ch: b.ch }, { t: t0 + 2 * R.bd, kind: "half", ch: b.ch });
     },
     rowMarkGet: function (kind) {
-      var R = this.rw, p = R.pool[kind], m = p.length ? p.pop() : this.add.image(-99, -99, "md-row-mark-" + kind).setDepth(32);
-      return m.setVisible(false).setAlpha(1).setScale(R.k);
+      var R = this.rw, p = R.pool[kind], m = p.length ? p.pop() : this.add.image(-99, -99, "md-row-bnote-" + kind).setDepth(34);
+      return m.setVisible(false).setAlpha(1).setScale(R.k).clearTint();
     },
     rowFreeNote: function (nt) {
       var R = this.rw;
-      [nt.mL, nt.mR].forEach(function (m) { if (m) { m.setVisible(false); R.pool[nt.kind].push(m); } });
-      nt.mL = nt.mR = null;
+      if (nt.m) { nt.m.setVisible(false); R.pool[nt.kind].push(nt.m); }
+      nt.m = null;
     },
-    /* the drum: generate bars ahead, count in, sound every stroke, and a stroke let pass is a miss */
+    /* the song: generate bars ahead, count in, sing every note and play the lyre, and a note let pass is a miss */
     rowBeats: function () {
       var R = this.rw, i, nt;
       while (R.genT < R.clock + R.lead + R.bd * 4) { this.rowMeasure(R.genT); R.genT += R.bd * 4; }
       for (i = 0; i < R.countIn.length; i++) {
         var ci = R.countIn[i];
-        if (!ci.done && R.clock >= ci.t) { ci.done = true; this.rowCount(ci.txt); this.rowSnd("drum"); R.drumK = 1; }
+        if (!ci.done && R.clock >= ci.t) { ci.done = true; this.rowCount(ci.txt); this.rowSnd("drum"); }
       }
+      for (i = R.acc.length - 1; i >= 0; i--) if (R.clock >= R.acc[i].t) { this.rowMusic(R.acc[i]); R.acc.splice(i, 1); }
       var list = R.notes;
       for (i = 0; i < list.length; i++) {
         nt = list[i];
         if (!nt.sounded && R.clock >= nt.t) {
-          nt.sounded = true; R.drumK = 1;
-          this.rowSnd(nt.first ? "drumHi" : "drum");
-          if (nt.first) { this.rowCount("ROW!"); if (!R.told.start) { R.told.start = true; this.toast("Row on the drum: press Space (or ROW, or click) each time the marks meet the drum.", 4200); } }
+          nt.sounded = true; R.ringK = 1;
+          this.rowMusic({ kind: "note", f: nt.f, dur: nt.dur, first: nt.first });
+          if (nt.first) { this.rowCount("ROW!"); if (!R.told.start) { R.told.start = true; this.toast("Row on the song: press Space (or ROW, or click) each time a note lands on the ring round the mast.", 4200); } }
         }
         if (!nt.judged && R.clock - nt.t > R.catchW) {
           nt.judged = true; nt.res = "miss";
-          this.rowJudge("miss", "MISSED BEAT", nt, false);
+          this.rowJudge("miss", "MISSED NOTE", nt, false);
           if (this._finishing || R.notes !== list) return;
         }
       }
-      /* drop marks that are done */
+      /* drop notes that are done */
       for (i = R.notes.length - 1; i >= 0; i--) {
         nt = R.notes[i];
         if (nt.judged && (nt.res !== "miss" || nt.fade <= 0)) { this.rowFreeNote(nt); R.notes.splice(i, 1); }
       }
     },
-    /* a stroke at song time t: the nearest mark decides PERFECT, GOOD or MISS (early / late); none near = off the beat */
+    /* a stroke at song time t: the nearest note decides PERFECT, GOOD or MISS (early / late); none near = off the beat */
     rowPress: function (t) {
       var R = this.rw, P = R.P, best = null, bd = 1e9;
       if (t == null) t = R.clock;
@@ -705,7 +687,7 @@
         this.rowSplash();
       }
     },
-    /* the rhythm fell apart: Odysseus breaks free; the crew ties him again and the drum counts in */
+    /* the rhythm fell apart: Odysseus breaks free; the crew ties him again and the drum counts the song in */
     rowBreakFree: function () {
       var R = this.rw;
       R.stats.breaks += 1; R.missRun = 0; R.freeMs = 1300;
@@ -746,12 +728,40 @@
       if (!Rm || !Rm.blip) return;
       try {
         if (name === "drum") { Rm.blip(160, 70, 0.16, "triangle", 0.07); Rm.hiss(0.04, 900, 0.025); }
-        else if (name === "drumHi") { Rm.blip(200, 80, 0.2, "triangle", 0.09); Rm.hiss(0.05, 1100, 0.03); }
-        else if (name === "perfect") { Rm.hiss(0.16, 1500, 0.03); Rm.blip(784, 1046, 0.09, "triangle", 0.02); }
-        else if (name === "good") { Rm.hiss(0.14, 1100, 0.028); Rm.blip(587, 660, 0.07, "triangle", 0.014); }
+        else if (name === "perfect") Rm.hiss(0.16, 1500, 0.03);   /* the oars bite (no chime: it would clash with the tune) */
+        else if (name === "good") Rm.hiss(0.14, 1100, 0.028);
         else if (name === "miss") Rm.blip(190, 120, 0.12, "square", 0.014);
         else if (name === "song") { Rm.blip(659, 659, 0.55, "sine", 0.016); Rm.blip(880, 830, 0.6, "sine", 0.013, 0.28); Rm.blip(784, 698, 0.8, "sine", 0.013, 0.6); }
         else if (name === "snap") { Rm.hiss(0.09, 2600, 0.05); Rm.blip(420, 90, 0.2, "sawtooth", 0.016); }
+      } catch (e) {}
+    },
+
+    /* while the song plays, the level's background track stays low (SolMusic's duck, as under the reading card);
+       renewed every half second because closing a card lifts it */
+    rowDuck: function () {
+      var R = this.rw, want = R.liveFrom < Infinity && !this._between, now = Date.now();
+      if (!window.SolMusic || !SolMusic.duck) return;
+      if (want && (!R.ducked || now - R.duckAt > 500)) { R.ducked = true; R.duckAt = now; try { SolMusic.duck(true); } catch (e) {} }
+      else if (!want && R.ducked) { R.ducked = false; try { SolMusic.duck(false); } catch (e) {} }
+    },
+    /* the music: a sung note of the tune (a reedy voice with a soft octave over it), the bass and lyre on the
+       first beat of a bar with the boatswain's frame drum, the lyre again on the third beat */
+    rowMusic: function (ev) {
+      var Rm = window.SolRealms, ch;
+      if (!Rm || !Rm.blip) return;
+      try {
+        if (ev.kind === "note") {
+          Rm.blip(ev.f, ev.f * 0.997, ev.dur, "triangle", ev.first ? 0.085 : 0.07);
+          Rm.blip(ev.f * 2, ev.f * 2, ev.dur * 0.7, "sine", 0.014);
+        } else if (ev.kind === "bar") {
+          ch = CHORDS[ev.ch] || CHORDS.Dm;
+          Rm.blip(ch[0] * 2, ch[0] * 2 * 0.99, Math.min(1.4, this.rw.bd * 1.9 / 1000), "sine", 0.06);
+          Rm.blip(ch[1], ch[1], 0.6, "triangle", 0.022); Rm.blip(ch[2], ch[2], 0.55, "triangle", 0.018, 0.04);
+          Rm.blip(110, 60, 0.14, "triangle", 0.045); Rm.hiss(0.04, 700, 0.02);
+        } else if (ev.kind === "half") {
+          ch = CHORDS[ev.ch] || CHORDS.Dm;
+          Rm.blip(ch[1], ch[1], 0.45, "triangle", 0.016); Rm.blip(ch[2], ch[2], 0.4, "triangle", 0.013, 0.04);
+        }
       } catch (e) {}
     },
 
@@ -855,7 +865,7 @@
       var R = this.rw, P = R.P, W = this.W, H = this.H, sh = R.ship, self = this, i, j, lg = R.lowG;
       var wall = wallNow();
       R.t += s; R.clock += ms;
-      /* 1. strokes and the drum */
+      /* 1. strokes and the song */
       if (R.presses.length) { var q = R.presses; R.presses = []; for (i = 0; i < q.length; i++) this.rowPress(R.clock - clamp(wall - q[i], 0, ms)); }
       if (R.auto) R.notes.slice().forEach(function (nt) { if (!nt.judged && nt.t <= R.clock && nt.t >= R.liveFrom) self.rowPress(nt.t); });
       if (this._finishing) return;
@@ -951,7 +961,8 @@
         row.rel = rel;
         if (row.y > H + 80 * R.k && R.rows.indexOf(row) !== -1) { this.rowKillRow(row); R.rows.splice(R.rows.indexOf(row), 1); }
       }
-      /* 7. the band, the drum, the vase panel */
+      /* 7. the song's notes and the ring on the ship, the vase panel; the background music stays low under the song */
+      this.rowDuck();
       this.rowLane(ms);
       this.rowPanel(s, ms);
     },
@@ -1006,60 +1017,58 @@
         for (j = 0; j < 2; j++) {
           pts = [];
           for (k = 0; k <= 22; k++) { self.rowRibbon(v.x, v.y, mxx, myy, j, k / 22, pt); pts.push({ x: pt.x, y: pt.y }); }
-          /* faint while the song is calm (the notes carry it); a broad gold ribbon while it swells */
+          /* faint while the song is calm (the beat notes carry it); a broad gold ribbon while it swells */
           if (wk > 0) { g.lineStyle((6 + 6 * wk) * R.k, 0x3a0f2a, 0.3 * wk); g.strokePoints(pts); }
           g.lineStyle((1.2 + 3 * wk) * R.k, colr, 0.12 + 0.5 * wk); g.strokePoints(pts);
         }
       });
-      /* its notes drift along them */
-      R.noteCd -= ms;
-      if (R.noteCd <= 0 && vis.length) {
-        R.noteCd = wk > 0.5 ? 170 : wk > 0 ? 320 : 620;
-        for (i = 0; i < R.flying.length; i++) if (!R.flying[i].on) {
-          var f = R.flying[i], v0 = vis[Math.floor(Math.random() * vis.length)];
-          f.on = true; f.sir = v0.idx; f.j = Math.random() < 0.5 ? 0 : 1; f.u = 0; f.spd = rnd(0.28, 0.36);
-          f.spr.setVisible(true);
-          break;
-        }
-      }
-      for (i = 0; i < R.flying.length; i++) {
-        var fl = R.flying[i];
-        if (!fl.on) continue;
-        var src = vis.filter(function (v) { return v.idx === fl.sir; })[0];
-        fl.u += fl.spd * (1 + 1.2 * wk) * ms / 1000;
-        if (!src || fl.u >= 1) { fl.on = false; fl.spr.setVisible(false); continue; }
-        this.rowRibbon(src.x, src.y, mxx, myy, fl.j, fl.u, pt);
-        fl.spr.setPosition(pt.x, pt.y).setAlpha(Math.min(1, Math.sin(Math.PI * fl.u) * 1.6)).setTint(colr).setRotation(Math.sin(R.t * 4 + i) * 0.25);
-      }
     },
-    /* the drum band: marks closing in from both ends, the drum, the stroke ring, the words */
+    /* v5.17.2: the song's notes fly from the Sirens' meadow and land on the ring round the mast on their beat, so
+       the eye stays on the ship and the passages ahead; the ring shows the crew's stroke and lights up as a note
+       comes in; the words for a stroke show under the ship */
     rowLane: function (ms) {
-      var R = this.rw, i, nt;
+      var R = this.rw, sh = R.ship, W = this.W, H = this.H, i, nt;
+      var tx = sh.x, ty = sh.y + (MAST_Y - SH / 2) * R.shipS;
+      var sx = R.chanL - 8 * R.k, sy = Math.max(60 * R.k, ty - 360 * R.k), cx = (sx + tx) / 2, cy = sy - 50 * R.k;
+      var near = 0;
       for (i = 0; i < R.notes.length; i++) {
         nt = R.notes[i];
-        var u = (nt.t - R.clock) / R.lead, show = u < 1.04 && !(nt.judged && nt.res !== "miss");
-        if (nt.judged && nt.res === "miss") nt.fade -= ms / 260;
-        var al = show ? Math.min(1, (1.04 - u) * 8) * (nt.res === "miss" ? Math.max(0, nt.fade) : 1) : 0;
-        [nt.mL, nt.mR].forEach(function (m, sd) {
-          if (!m) return;
-          m.setVisible(al > 0.01);
-          if (al > 0.01) m.setPosition(R.drumX + (sd ? 1 : -1) * Math.max(u, -0.2) * R.half, R.drumY).setAlpha(al).setTint(nt.res === "miss" ? 0x8a8a8a : 0xffffff);
-        });
+        var m = nt.m;
+        if (!m) continue;
+        var u = 1 - (nt.t - R.clock) / R.lead;
+        if (!nt.judged) near = Math.max(near, clamp(1 - Math.abs(nt.t - R.clock) / (R.bd * 0.5), 0, 1));
+        if (nt.judged && nt.res === "miss") {
+          /* a missed note goes grey and sinks */
+          nt.fade -= ms / 260;
+          var mf = Math.max(0, nt.fade);
+          m.setVisible(mf > 0.01).setPosition(tx, ty + (1 - mf) * 46 * R.k).setAlpha(mf).setTint(0x8a8a8a).setScale(R.k * 0.85);
+          continue;
+        }
+        if (nt.judged || u < -0.02) { m.setVisible(false); continue; }
+        var uu = Math.min(u, 1), a1 = 1 - uu;
+        var px = a1 * a1 * sx + 2 * uu * a1 * cx + uu * uu * tx, py = a1 * a1 * sy + 2 * uu * a1 * cy + uu * uu * ty;
+        var al = Math.min(1, (u + 0.02) * 10);
+        if (u > 1) al *= clamp(1 - (u - 1) * R.lead / R.catchW, 0, 1);
+        m.setVisible(al > 0.01).setPosition(px, py).setAlpha(al).setScale(R.k * (0.9 + 0.35 * clamp((u - 0.82) / 0.18, 0, 1)));
       }
-      R.drumK = Math.max(0, R.drumK - ms / 160);
-      R.drum.setScale(R.drumS * (1 + 0.08 * R.drumK));
-      R.drumTxt.setScale(1 + 0.08 * R.drumK);
-      /* the stroke ring round the drum: how strong the crew is pulling */
-      var g = R.ringG, rr = 36 * R.drumS;
+      /* the landing ring round the mast: dark rim, the crew's stroke as a gold arc, a glow as a note comes in */
+      R.ringK = Math.max(0, R.ringK - ms / 200);
+      var g = R.ringG, rr = 34 * R.k;
       g.clear();
-      g.lineStyle(5 * R.k, 0x140c0a, 0.9); g.strokeCircle(R.drumX, R.drumY, rr);
+      g.fillStyle(0xffd36a, 0.1 + 0.32 * near); g.fillCircle(tx, ty, rr * 0.8);
+      g.lineStyle(6 * R.k, 0x140c0a, 0.85); g.strokeCircle(tx, ty, rr);
       g.lineStyle(3.5 * R.k, R.mom > 0.75 ? 0xffd36a : R.mom > 0.4 ? 0xe8b04a : 0xd9772b, 1);
-      g.beginPath(); g.arc(R.drumX, R.drumY, rr, -Math.PI / 2, -Math.PI / 2 + Math.max(0.02, R.mom) * TAU, false); g.strokePath();
+      g.beginPath(); g.arc(tx, ty, rr, -Math.PI / 2, -Math.PI / 2 + Math.max(0.02, R.mom) * TAU, false); g.strokePath();
+      if (R.ringK > 0) { g.lineStyle(3 * R.k, 0xfff4d0, 0.8 * R.ringK); g.strokeCircle(tx, ty, rr * (1.12 - 0.12 * R.ringK)); }
       if (R.burstMs > 0) {
         R.burstMs -= ms;
         var b = 1 - Math.max(0, R.burstMs) / 320;
-        g.lineStyle(4 * R.k, R.burstCol, 1 - b); g.strokeCircle(R.drumX, R.drumY, rr + b * 26 * R.k);
+        g.lineStyle(4 * R.k, R.burstCol, 1 - b); g.strokeCircle(tx, ty, rr + b * 26 * R.k);
       }
+      /* the words under the ship, the count-in over its bow */
+      var fx = clamp(sh.x, R.chanL + 70 * R.k, W - 90 * R.k), fy = Math.min(sh.y + SH * R.shipS / 2 + 24 * R.k, H - 46 * R.k);
+      R.fb.setPosition(fx, fy); R.fb2.setPosition(fx, fy + 22 * R.k); R.combo.setPosition(fx + 84 * R.k, fy);
+      R.countTxt.setPosition(sh.x, Math.max(40 * R.k, sh.y - SH * R.shipS / 2 - 36 * R.k));
       if (R.fbMs > 0) {
         R.fbMs -= ms;
         var fa = clamp(R.fbMs / 260, 0, 1), pop = 1 + 0.25 * clamp((R.fbMs - 560) / 140, 0, 1);

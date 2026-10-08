@@ -147,7 +147,7 @@ var srv = http.createServer(function (req, res) {
   /* a real Space press: aim between two rows (a wasted arrow), hold until the meter is in the gold band, let go */
   await page.evaluate(function () { var s = SolScene, B = s.bw; s.ptr.x = B.lpx; s.ptr.y = B.lpy; B.aim = (s.bowRowAim(1) + s.bowRowAim(2)) / 2; B.P.drain = 0; B.pat = 1; window.__q0 = B.quiver; window.__s0 = B.shots; window.__p0 = B.pat; });
   await page.keyboard.down("Space");
-  await page.waitForFunction(function () { var B = SolScene.bw; return B.drawing && B.hold >= 1000; }, null, { timeout: 30000 }).catch(function () {});
+  await page.waitForFunction(function () { var B = SolScene.bw; return B.drawing && B.hold >= B.P.drawMs + 60; }, null, { timeout: 30000 }).catch(function () {});
   var drawn = await page.evaluate(function () { var B = SolScene.bw; return { drawing: B.drawing, hold: B.hold, guide: B.fxG.commandBuffer.length > 0 }; });
   await shot("bow-02-drawing-19");
   await page.keyboard.up("Space");
@@ -158,7 +158,7 @@ var srv = http.createServer(function (req, res) {
   var abox = await page.evaluate(function () { var r = document.getElementById("btn-action").getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2 }; });
   await page.evaluate(function () { window.__s1 = SolScene.bw.shots; SolScene.bw.cd = 0; });
   await page.mouse.move(abox.x, abox.y); await page.mouse.down();
-  await page.waitForFunction(function () { var B = SolScene.bw; return B.drawing && B.hold >= 1000; }, null, { timeout: 30000 }).catch(function () {});
+  await page.waitForFunction(function () { var B = SolScene.bw; return B.drawing && B.hold >= B.P.drawMs + 60; }, null, { timeout: 30000 }).catch(function () {});
   await page.mouse.up();
   await page.waitForFunction(function () { return SolScene.bw.shots > window.__s1; }, null, { timeout: 5000 }).catch(function () {});
   run.button = await page.evaluate(function () { return SolScene.bw.shots - window.__s1; });
@@ -191,6 +191,13 @@ var srv = http.createServer(function (req, res) {
     var w0 = B.wastedQ, st0 = s.strikes, sc0 = s.score;
     var weak = await shootRow(idx(wrongs[0]), 0.6);
     o.weak = { wasted: B.wastedQ - w0, strikes: s.strikes - st0, score: s.score - sc0, rings: weak.rk };
+    /* v5.17.2: let go in the red, even at the calmest moment of the tremble, and the arrow flies wide of the row */
+    quiet(); w0 = B.wastedQ; st0 = s.strikes; sc0 = s.score;
+    B.aim = s.bowRowAim(idx(wrongs[0])); B.shakeAmp = B.P.shakeDeg * Math.PI / 180 * 0.7; B.shakeA = 0;
+    var errRed = s.bowShakeErr(B.P.drawMs + B.P.sweetMs + 20), errGold = s.bowShakeErr(B.P.drawMs + 20);
+    var red = await shootRow(idx(wrongs[0]), 1, errRed);
+    B.shakeAmp = 0; B.shakeA = 0;
+    o.red = { err: +(errRed * 180 / Math.PI).toFixed(2), gold: errGold, wasted: B.wastedQ - w0, strikes: s.strikes - st0, score: s.score - sc0, rings: red.rk };
     /* a fully drawn arrow just off the row hits an axe: a wasted arrow, no life, the suitors grow angrier */
     quiet(); var p0 = B.pat; w0 = B.wastedQ;
     var off = await shootRow(idx(wrongs[0]), 1, 3 * Math.PI / 180);
@@ -269,7 +276,7 @@ var srv = http.createServer(function (req, res) {
     s.keys.SPACE.isDown = false; await new Promise(function (r) { setTimeout(r, 300); });
     B.aim = s.bowRowAim(0) - 0.004; s.keys.SPACE.isDown = true;
     while (!B.drawing && Date.now() - t0 < 3000) await new Promise(function (r) { setTimeout(r, 30); });
-    B.hold = 1250;
+    B.hold = B.P.drawMs + 60;
     await new Promise(function (r) { setTimeout(r, 300); });
     s.bowShoot(s.bowRowAim(0), 1);
     await new Promise(function (r) { setTimeout(r, 90); });
@@ -287,6 +294,7 @@ var srv = http.createServer(function (req, res) {
   check(run.button === 1, "holding the on-screen DRAW button draws, letting go shoots: " + run.button);
   check(run2.glow, "the row the aim lines up with lights up (level 19)");
   check(run2.weak.wasted === 1 && run2.weak.strikes === 0 && run2.weak.score === 0 && run2.weak.rings < 12, "a half-drawn arrow drops into the axes: wasted, nothing picked: " + JSON.stringify(run2.weak));
+  check(run2.red.gold === 0 && run2.red.err > 0.5 && run2.red.wasted === 1 && run2.red.strikes === 0 && run2.red.score === 0 && run2.red.rings < 12, "let go in the red, even at the calmest moment of the shaking, and the arrow flies wide and strikes an axe (in the gold it flies true): " + JSON.stringify(run2.red));
   check(run2.off.wasted === 1 && run2.off.strikes === 0 && run2.off.patience > 0.1, "an arrow that hits an axe is wasted: no life, the suitors lose patience: " + JSON.stringify(run2.off));
   check(run2.wrong.strikes === 1 && run2.wrong.score === 0 && run2.wrong.rings === 12 && run2.wrong.state === "dead" && run2.wrong.plaque === "✕" && /WRONG LETTER/.test(run2.wrong.label || "") && run2.wrong.stuck && run2.again === 1,
     "through all twelve rings of a wrong row: a life, the row is crossed out, and shooting it again costs nothing: " + JSON.stringify(run2.wrong) + " again: " + run2.again);
@@ -302,7 +310,7 @@ var srv = http.createServer(function (req, res) {
   /* the difficulty: every level 2-100 harder than the one before, never easier on any setting */
   var ramp = await page.evaluate(function () {
     var f = SolModes.MODES.bow.params, s = SolScene, out = { same: f === SolModes.MODES.bow.params && typeof s.bowParams === "function" && JSON.stringify(s.bowParams(50)) === JSON.stringify(f(50)) };
-    var up = ["sway", "swaySpd", "shakeDeg", "wind", "drain", "missCost", "throwers", "doorP"], down = ["gap", "sweetMs", "shakeMs", "guide", "glow", "refill", "warnMs", "flightMs", "quiver"];
+    var up = ["sway", "swaySpd", "shakeDeg", "wind", "drain", "missCost", "throwers", "doorP"], down = ["gap", "drawMs", "sweetMs", "shakeMs", "guide", "glow", "refill", "warnMs", "flightMs", "quiver"];
     var easier = [], flat = [], n;
     for (n = 1; n < 100; n++) {
       var a = f(n), b = f(n + 1), harder = false, worse = false;
@@ -317,9 +325,9 @@ var srv = http.createServer(function (req, res) {
   console.log("ramp", JSON.stringify({ l2: ramp.l2, l50: ramp.l50, l99: ramp.l99 }));
   check(ramp.same && ramp.easier.length === 0 && ramp.flat.length === 0, "bowParams (on the def as params): every level 2-100 is harder than the one before and never easier: " + JSON.stringify({ easier: ramp.easier, flat: ramp.flat }));
   var e = ramp.l19, z = ramp.l99;
-  check(e.gap >= 32 && e.sway <= 12 && e.wind === 0 && e.throwers === 1 && e.warnMs >= 1200 && e.flightMs >= 900 && e.sweetMs >= 1100 && e.quiver === 10 && e.glow === 1 && e.drain <= 0.05,
-    "level 19, the first time it comes round, is fair: wide rings, a gentle sway, no draft, one thrower with a long warning, a long gold band, ten arrows: " + JSON.stringify(e));
-  check(z.gap <= 23 && z.sway >= 38 && z.wind >= 30 && z.throwers === 3 && z.doorP > 0.4 && z.warnMs <= 500 && z.sweetMs <= 500 && z.quiver === 5 && z.glow === 0 && z.drain >= 0.11,
+  check(e.gap >= 32 && e.sway <= 12 && e.wind === 0 && e.throwers === 1 && e.warnMs >= 1200 && e.flightMs >= 900 && e.drawMs <= 650 && e.sweetMs >= 300 && e.sweetMs <= 360 && e.quiver === 10 && e.glow === 1 && e.drain <= 0.05,
+    "level 19, the first time it comes round, is fair: wide rings, a gentle sway, no draft, one thrower with a long warning, a quick meter with a short gold band, ten arrows: " + JSON.stringify(e));
+  check(z.gap <= 23 && z.sway >= 38 && z.wind >= 30 && z.throwers === 3 && z.doorP > 0.4 && z.warnMs <= 500 && z.drawMs <= 430 && z.sweetMs <= 140 && z.quiver === 5 && z.glow === 0 && z.drain >= 0.11,
     "level 99 is intense: narrow rings, big fast sway, strong drafts, three throwers (some at the doorway), a short gold band, five arrows: " + JSON.stringify(z));
 
   /* level 68 (island 7) and 96 (island 10): the card says what's new; the late picture */

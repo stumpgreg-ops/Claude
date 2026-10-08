@@ -28,9 +28,12 @@
   var RAFT_W = 170, RAFT_H = 150, RAFT_WL = 124;   /* the raft texture and its waterline */
   /* the part of the raft that touches things, around its waterline point (texture px; low = sail lowered) */
   var BOX = { l: -48, r: 58, top: -102, low: -56, bot: 8 };
+  /* v5.17.2: letters touch only the middle of the hull (the sail still reaches up to a star), and a trough buoy only its
+     plate (BUOY_R): a held ▲ now clears a wrong buoy with room to spare at every level and screen size */
+  var LBOX = { l: -40, r: 46 }, BUOY_R = 15;
   /* px/s², px/s and px at 620 px high. Holding ▲ lightens the raft a little on the way up and lets the sail
-     glide it down (falling no faster than GLIDE_V); one more press of ▲ in the air lifts it again once (AIR_HOP of a hop) */
-  var G = 1500, G_RISE = 0.62, G_GLIDE = 0.32, GLIDE_V = 120, G_DIVE = 2.6, HOP = 560, AIR_HOP = 0.8, DIP = 40;
+     glide it down (falling no faster than GLIDE_V; 120 before v5.17.2); one more press of ▲ in the air lifts it again once (AIR_HOP of a hop) */
+  var G = 1500, G_RISE = 0.62, G_GLIDE = 0.32, GLIDE_V = 85, G_DIVE = 2.6, HOP = 560, AIR_HOP = 0.8, DIP = 40;
   var STEP = 10;                         /* px between the sea's polygon points */
   var BUOY_UP = 26, DEEP_DOWN = 42;      /* a buoy's plate above the water; a sunken one's below it */
 
@@ -378,11 +381,11 @@
 
   var DEF = {
     name: "Calypso's Raft", kind: "wave-riding level", level: "wave-riding level", act: "LIFT",
-    how: "Odysseus sails home from Calypso's island on the raft he built himself, steering by the stars as she told him: the Pleiades and the Great Bear. Big waves roll toward him and the raft rides them by itself. The letters ride the sea too: glowing stars hang in the air over the crests, marker buoys float in the troughs, and from the second island on some buoys are sunk just under the water. Touch the letter with the right answer: hop up (▲) to a star, let the waves carry you into a buoy, or dive (▼) to a sunken one. Keep clear of the wrong ones: don't hop at a wrong star, and hold ▲ to jump over a wrong buoy. Letters you pass come round again. Poseidon is still angry: when the sea on the right turns dark and rumbles, one of his great waves is rising. Hold ▲ as it reaches you to ride up on top of it. Sometimes Ino's white veil floats by: sail into it, and it saves you from one hit, as the sea goddess's veil saved Odysseus.",
+    how: "Odysseus sails home from Calypso's island on the raft he built himself, steering by the stars as she told him: the Pleiades and the Great Bear. Big waves roll toward him and the raft rides them by itself. The letters ride the sea too: glowing stars hang in the air over the crests, marker buoys float in the troughs, and from the second island on some buoys are sunk just under the water. Touch the letter with the right answer: hop up (▲) to a star, let the waves carry you into a buoy, or dive (▼) to a sunken one. Keep clear of the wrong ones: don't hop at a wrong star, and hold ▲ to sail over a wrong buoy (press ▲ again in the air to lift once more). Letters you pass come round again. Poseidon is still angry: when the sea on the right turns dark and rumbles, one of his great waves is rising. Hold ▲ as it reaches you to ride up on top of it. Sometimes Ino's white veil floats by: sail into it, and it saves you from one hit, as the sea goddess's veil saved Odysseus.",
     rules: "Touching a wrong letter costs a life, and that letter is crossed out from then on. So does being swamped by one of Poseidon's waves (anywhere but on top of it) or crashing into a rock. Ino's veil takes one wave or rock for you.",
     keys: "▲, W, Space, LIFT, the pad's ▲ or a click or tap: hop the raft up (hold it to glide; press it again in the air for one more lift) · ▼, S or the pad's ▼: dive low in the water.",
     tip: "CALYPSO'S RAFT — touch the right letter (▲ hop, ▼ dive) and jump the wrong ones. Hold ▲ as Poseidon's wave hits.",
-    hint1: "Touch the right letter with the raft: hop (▲) up to a star, ride into a buoy, dive (▼) to a sunken buoy. Jump over the wrong buoys. The passage stays in the side panel.",
+    hint1: "Touch the right letter with the raft: hop (▲) up to a star, ride into a buoy, dive (▼) to a sunken buoy. Hold ▲ to sail over the wrong buoys. The passage stays in the side panel.",
     hint2: "This question has two right letters. Touch both of them: the star or buoy with each one.",
     news: ["",
       "Sunken buoys: some buoys float below the surface in the troughs. Dive (▼) to reach one; sail over it if it's wrong.",
@@ -403,7 +406,7 @@
     setup_raft: function () {
       ensureRaftArt(this);
       var P = raftParams(this.night), W = this.W;
-      var S = this.rf = { P: P, box: BOX, t: 0, cam: 0, segs: [], segEnd: -STEP * 4, plans: [], planU: W * 0.55, lastLetU: 0, lastObsU: -1e9,
+      var S = this.rf = { P: P, box: BOX, lbox: LBOX, t: 0, cam: 0, segs: [], segEnd: -STEP * 4, plans: [], planU: W * 0.55, lastLetU: 0, lastObsU: -1e9,
         letters: [], pool: [], rocks: [], breakers: [], dead: [], queue: [], lastL: null, told: {}, tq: [], tqCd: 0,
         veil: null, hasVeil: false, veilDue: false, veilCd: Math.min(P.veilMs, 14000 + P.veilMs * 0.25),
         breakCd: Math.max(6500, P.breakEvery * 0.7), sq: { on: false, t: 0, next: 9000, lvl: 0 }, flash: 0, lightCd: 1500,
@@ -574,7 +577,7 @@
       }
       o.kind = kind; o.u = u; o.L = L; o.touched = false; o.ph = rnd(0, 6); o.state = "live";
       var star = o.kind === "star", deep = o.kind === "deep", dz = star ? 12 : deep ? 10.5 : 7;
-      o.r = (star ? 19 : 18) * S.LS;
+      o.r = (star ? 19 : deep ? 18 : BUOY_R) * S.LS;
       o.spr.setTexture(star ? "md-raft-star" : "md-raft-buoy").setOrigin(0.5, star ? 0.5 : 30 / 86).setScale(S.LS).setDepth(dz).setVisible(true);
       o.label.setFontSize(Math.round(23 * S.LS)).setDepth(dz + 0.1).setVisible(true);
       o.xm.setScale(0.8 * S.LS).setDepth(dz + 0.2).setVisible(false);
@@ -590,7 +593,7 @@
       this.raftPaint(o, S.dead.indexOf(L) !== -1 ? "wrong" : this.extracted.indexOf(L) !== -1 ? "right" : "live");
       this.raftTell(o.kind, star ? "A star: hop up to it (▲, Space or LIFT) if its letter is right."
         : deep ? "A sunken buoy: dive (▼ or S) to touch it if its letter is right."
-        : "A buoy: ride into it if it's right; hold ▲ to jump over it if it's wrong.");
+        : "A buoy: ride into it if it's right; hold ▲ to sail over it if it's wrong.");
       return o;
     },
     /* the next letter to send: every letter not found yet comes round in turn (the wrong ones crossed out) */
@@ -871,9 +874,10 @@
       } else S.mastVeil.setVisible(false);
       /* what touches things */
       var bx0 = rx + BOX.l * S.RS, bx1 = rx + BOX.r * S.RS, by0 = R.y + R.dip + (lowered ? BOX.low : BOX.top) * S.RS, by1 = R.y + R.dip + BOX.bot * S.RS;
-      var live = R.tumble <= 0;
-      function touches(x, y, r) {
-        var dx = x < bx0 ? bx0 - x : x > bx1 ? x - bx1 : 0, dy = y < by0 ? by0 - y : y > by1 ? y - by1 : 0;
+      var live = R.tumble <= 0, lx0 = rx + LBOX.l * S.RS, lx1 = rx + LBOX.r * S.RS;
+      function touches(x, y, r, letter) {
+        var x0 = letter ? lx0 : bx0, x1 = letter ? lx1 : bx1;
+        var dx = x < x0 ? x0 - x : x > x1 ? x - x1 : 0, dy = y < by0 ? by0 - y : y > by1 ? y - by1 : 0;
         return dx * dx + dy * dy < r * r;
       }
 
@@ -893,7 +897,7 @@
           if (o.state !== "live" || o.touched) o.hint.setVisible(false);
           else o.hint.setPosition(x, o.kind === "star" ? y + o.r + 16 * vs + Math.sin(S.t * 5) * 2 * vs : wl - 16 * vs - Math.sin(S.t * 5) * 2 * vs);
         }
-        if (live && !o.touched && touches(x, y, o.r)) {
+        if (live && !o.touched && touches(x, y, o.r, true)) {
           var res = this.raftTouch(o, x, y);
           if (this._finishing) return;
           if (res === "done") break;

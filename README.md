@@ -29,6 +29,20 @@ A game uploaded to Canvas can't send anything anywhere, so progress is shown to 
 
 Tests: `node tools/smoke-progress.js` (after `node tools/build-games.js`, `node tools/build-appsscript.js VA|ODY` and `node tools/build-canvas.js VA|ODY`).
 
+## v5.17.2 (2026-10-08) — the Odyssey: rowing to the Sirens' song, a fair raft jump, a harder bow
+
+After the teacher's notes on three Odyssey modes:
+
+- **Row Past the Sirens** (`js/mode-row.js`):
+  - *"Looking at the bottom of the screen for timing and steering in the middle: the student can't look in two places at once."* The drum band at the bottom is gone. Each beat is now a note of the Sirens' song: a big gold note, or a sea-foam one off the beat, outlined on a dark halo. It flies from the Sirens' meadow and lands on a gold ring round the mast. The student rows as it lands. The ring also shows the crew's stroke and glows as a note comes in. PERFECT / GOOD / MISS show under the ship, and the count-in shows over its bow. The small drifting song notes are gone, so the only notes on the sea are the ones to row on.
+  - *"Not a set count; it should change like a song."* The beat is a tune made of four-bar phrases (A, A again with a new last note, B, a closing bar). Each bar mixes long and short notes and rests from level 1. Quick notes come from level 21 (`quickP`), syncopation from 41 (`syncP`) and busy runs from 71 (`denseP`); these replace `offP` / `dblP` / `restP`.
+  - *Actual music.* Each note is sung at its pitch (D dorian) over a lyre chord progression, a bass and the boatswain's frame drum on the first beat of each bar, all synthesized (`rowMusic`, no audio files). The level's background track is ducked while the song plays.
+- **Calypso's Raft** (`js/mode-raft.js`), *"the jump is too short; there is no path to clear the wrong letter."* Letters now touch only the middle of the hull (`LBOX`; rocks, waves and the veil still use the whole raft). A trough buoy's touch radius is 15 (was 18). A held ▲ glides down slower (`GLIDE_V` 85, was 120). A held ▲ now clears a wrong buoy by at least 1.7× the distance needed at every level and screen size; with the extra lift in the air it clears two wrong buoys in back-to-back troughs. The help says "hold ▲ to sail over a wrong buoy".
+- **Bend the Bow** (`js/mode-bow.js`), *"the first levels are extremely easy; anything in the yellow hits, some of the red hits too."*
+  - The meter rises faster: `drawMs` is 697 ms at level 1 and 423 at 99 (it was a fixed 900).
+  - The gold band is much shorter: `sweetMs` is 397 ms at level 1 and 133 at 99 (it was 1,390 and 460).
+  - Letting go in the red always flies wild: the arrow goes far enough off its row to strike the first axe, and never into another row (`bowShakeErr`). The shaking also starts stronger.
+
 ## v5.17.1 (2026-10-07) — every Virginia question names its skill
 
 All 10,562 Virginia questions now carry the 2024 standard they assess and their skill (`sub`), checked against `js/standards-va.js` (`tools/expansion/TAGGING.md`, `node tools/expansion/tags.js status`). Many older tags used pre-2024 letters (context clues were tagged `9.RV.1.C`, which in 2024 is roots and affixes; context is `9.RV.1.B`); those are corrected. Each question kept its grade and its strand, so the game's grade pools and skill filter are unchanged. Grade 9: 2,143 LOTS / 1,405 HOTS questions; Grade 10: 1,850 / 1,687; Grade 11: 1,985 / 1,492. Some skills have no questions yet (fluency, general vocabulary use, a few comparing-texts skills whose questions sit in Paired texts); `tools/validate-content.js` now requires a skill on every new Virginia question.
