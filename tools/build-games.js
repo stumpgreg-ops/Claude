@@ -105,6 +105,8 @@ function rewriteIndex(html, st) {
       '\n$2<script src="js/odyssey.js?v=' + version + '"></script>$1' +
       /* game.js names the tab "SOL Labyrinth · The Odyssey" as it starts; the game's own title wins */
       '\n$2<script>document.title = ' + JSON.stringify(def.title) + ';</script>', "game.js script tag");
+    /* v5.18: the Odyssey's word lists for the accommodations (definitions, the word-to-word dictionary) */
+    must(/(\n(\s*)<script src="js\/accommodations\.js\?v=[0-9.]+"><\/script>)/, '\n$2<script src="js/acc-ody.js?v=' + version + '"></script>$1', "accommodations.js script tag");
   }
   /* no "change state" button */
   must(/\s*<button type="button" class="btn" id="btn-state"[^>]*>[^<]*<\/button>/, "", "btn-state");

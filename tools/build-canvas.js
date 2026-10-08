@@ -270,13 +270,40 @@ function S_trouble() {
     "- A student lost their progress: see SECTION 5, Restore my progress."
   ];
 }
+/* v5.18: the accommodations a teacher turns on for one student; the PIN comes from js/accommodations.js */
+var ACC_PIN = (/PIN0 = "(\d+)"/.exec(fs.readFileSync(path.join(__dirname, "..", "js", "accommodations.js"), "utf8")) || [])[1] || "(see js/accommodations.js)";
+function S_acc() {
+  var words = st === "ODY";
+  return [].concat(
+    ["Accommodations are NOT on for anyone until you turn them on, one Chromebook at a time. They are for the",
+     "student who uses that Chromebook (that browser profile) and stay until you turn them off or their end date",
+     "passes, so a support meant to fade can be planned (pick an \"Ends after\" date)."],
+    sub("Turn them on for a student"),
+    ["1. On the student's Chromebook, open the game. On the title screen type the word  accommodations  in the",
+     "   nickname box (it is cleared again).",
+     "2. Enter the teacher PIN:  " + ACC_PIN + "   (keep it from students; \"Change the PIN on this Chromebook\" sets",
+     "   another one for that Chromebook).",
+     "3. Tick what the student needs, pick the language or speed, add an end date if you want one, and click Save.",
+     "   The title screen then shows \"Accommodations on: ...\" so you can see at a glance what is on.",
+     "4. To change or stop them later, do the same and untick, or click Turn all off."],
+    sub("What each one does"),
+    words ? ["- Tap a word for its meaning: difficult words in the passage, question and answers are underlined; a click",
+     "  shows a short definition."] : ["- Tap a word for its meaning: not in this game yet (offered in the Odyssey game)."],
+    words ? ["- Word-to-word dictionary (questions and answers only): a click on any word in the question or the answers",
+     "  shows it in Spanish, Arabic, Farsi or Russian."] : ["- Word-to-word dictionary: not in this game yet (offered in the Odyssey game)."],
+    ["- On a vocabulary question, the word the question asks about is never defined or translated.",
+     "- Read aloud: speaker buttons read the passage (sentence by sentence, highlighted), the question and each",
+     "  answer, with the Chromebook's own voice (no internet needed). A slower voice can be chosen.",
+     "- Larger text: bigger text in the side panel and the reading pop-up.",
+     "- Slower game: the whole game runs at 85, 75 or 60 % speed (enemies, timers, rhythms, throws)."]);
+}
 function readme(update) {
   var order = update
     ? [["What's in this zip", S_inZip], ["Update the game already in Canvas", S_update], ["The embed codes (copy and paste)", S_embed],
-       ["Grading with progress codes (easiest: the ZIP download)", S_grading], ["Students: progress codes and Restore", S_students], ["Troubleshooting", S_trouble]]
+       ["Grading with progress codes (easiest: the ZIP download)", S_grading], ["Students: progress codes and Restore", S_students], ["Accommodations for a student (teacher PIN)", S_acc], ["Troubleshooting", S_trouble]]
     : [["What's in this zip", S_inZip], ["Set up the game in Canvas (first time)", S_setup], ["The embed codes (copy and paste)", S_embed],
        ["Grading with progress codes (easiest: the ZIP download)", S_grading], ["Students: progress codes and Restore", S_students],
-       ["Updating to a new version", S_update], ["Troubleshooting", S_trouble]];
+       ["Updating to a new version", S_update], ["Accommodations for a student (teacher PIN)", S_acc], ["Troubleshooting", S_trouble]];
   var L = [gameName + " - version " + man.version + (update ? " - UPDATE" : " - FIRST-TIME SETUP"), RULE, "",
     update ? "This zip UPDATES a game that is already in Canvas." : "This zip SETS UP the game in Canvas for the first time.",
     "Jump to a section with Ctrl+F (Cmd+F on a Mac) and its name, like SECTION 4.", "", "CONTENTS"];

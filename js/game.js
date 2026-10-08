@@ -26019,7 +26019,10 @@
        killing the run for a student. */
     update(t, dt) {
       try {
-        this._updateInner(t, dt);
+        /* v5.18: the "slower game" accommodation (js/accommodations.js) */
+        var accK = window.SolAcc ? SolAcc.speedK() : 1;
+        if (this._accK !== accK) { this._accK = accK; SolAcc.applyScene(this, accK); }
+        this._updateInner(t, dt * accK);
       } catch (err) {
         this._reportCrash(err);
       }

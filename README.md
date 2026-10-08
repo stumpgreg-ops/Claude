@@ -29,6 +29,19 @@ A game uploaded to Canvas can't send anything anywhere, so progress is shown to 
 
 Tests: `node tools/smoke-progress.js` (after `node tools/build-games.js`, `node tools/build-appsscript.js VA|ODY` and `node tools/build-canvas.js VA|ODY`).
 
+## v5.18.0 (2026-10-08) — accommodations a teacher turns on for one student
+
+Not the standard setup: everything is off until a teacher turns it on for one Chromebook. The teacher types the word **accommodations** in the nickname box on the title screen, enters the **teacher PIN** (4826, in each Canvas READ ME's SECTION 6; "Change the PIN on this Chromebook" sets another one), ticks options and saves. The settings live in `localStorage` `afterHours.v1.acc.<STATE>`. Each option can carry an **end date**, after which it switches itself off, so a support meant to fade can be planned. While anything is on, the title screen says "Accommodations on: …". Code: `js/accommodations.js` (all games), styles in `css/after-hours.css`; test: `node tools/smoke-acc.js` (after `node tools/build-games.js`).
+
+- **Tap a word for its meaning:** difficult words in the passage, question and answers are underlined, and a click shows a short definition. The Odyssey has 801 definitions, written for its passages (names, gods and places included).
+- **Word-to-word dictionary, questions and answers only:** a click on any word in the question or the answers shows it in Spanish, Arabic, Farsi or Russian (the teacher picks the language). Arabic and Farsi read right to left. The Odyssey's 2,266 question-and-answer words are in `js/acc-ody.js`, with the sense used in the question. `tools/build-games.js` loads that file only in the Odyssey build.
+- **Vocabulary questions:** on a question with a `.RV.` standard, the word it asks about is never defined or translated. That is any word in the stem, or in a one- or two-word answer, that also appears in the passage.
+- **Read aloud:** "🔊 Read the passage" reads it sentence by sentence and highlights each sentence; 🔊 buttons read the question and each answer ("A. …"). It uses the Chromebook's own voice (`speechSynthesis`, offline, no audio files), at normal or slower speed. The sentence numbers are not read.
+- **Larger text:** bigger passage, question and answer text in the side panel and the reading pop-up.
+- **Slower game:** the whole game runs at 85, 75 or 60 % speed. Both scene loops scale each frame (`SolAcc.speedK()`), and Phaser's clock, tweens, animations and physics follow.
+- **Virginia and New Jersey:** they get read aloud, larger text and the slower game; the two word options say "not in this game yet" until those games have word lists.
+- **Regenerating the Odyssey word lists** after its questions change: list the words with their sentences (the passages' for definitions, the questions' and answers' for the dictionary), write the entries, and merge them into `js/acc-ody.js` (`window.SOL_ACC_DATA = { def, tr }`).
+
 ## v5.17.3 (2026-10-08) — fits a Canvas Page 500 px tall
 
 - **The embed code** in every Canvas READ ME is now `<iframe src="/courses/COURSE/files/NUMBER/preview" width="100%" height="500" allowfullscreen="allowfullscreen"></iframe>` (the teacher's choice; it was height 700). The READ ME says to change height="500" if the game is too small or too tall.
