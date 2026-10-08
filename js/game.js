@@ -3375,45 +3375,21 @@
      rules jammed together, which is unreadable at a glance and taught nothing.
      Traps are deliberately NOT explained here — that is what the TAB field guide
      is for, and the last card teaches TAB instead. */
+  /* v5.18.2: ONE window (it was nine cards, and players skipped them): everything a first level needs, in a list */
   function tutorialCards(scene) {
     var need = (scene && scene.needExtracts) || 5;
     var strikes = (scene && scene.needStrikes) || 3;
     return [
       {
-        title: "You are Sol",
-        body: "You are in the school after dark. Move with the arrow keys, WASD, or the pad on screen."
-      },
-      {
-        title: "Read the question",
-        body: "The passage and the question are in the panel on the left. Read it before you move — the answer is the only thing that gets you out."
-      },
-      {
-        title: "Go get your answer",
-        body: "Letters A, B, C and D are sitting out on the map. Walk onto the one you think is right and press SPACE to pick it up."
-      },
-      {
-        title: "Carry it to the EXIT",
-        body: "Take your letter to the green EXIT · SAFE booth. That banks one extract. You need " + need + " to finish the level."
-      },
-      {
-        title: "Right answer, real reward",
-        body: "A correct letter calls Sol's CHARIOT — for a few seconds you can run straight over the wolves. A wrong letter sets off the alarm and costs you a life, just like a catch."
-      },
-      {
-        title: "The Hati hunt you",
-        body: "Wolves patrol the halls. If one catches you, that is a strike. " + strikes + " strikes and the level is over."
-      },
-      {
-        title: "Two safe booths",
-        body: "START and EXIT are safe. The Hati cannot see you inside either one. Duck in when a chase gets close."
-      },
-      {
-        title: "Sprint is loud",
-        body: "Hold SPRINT to run. You are faster, but the wolves hear you coming — so save it for when you are already caught out."
-      },
-      {
-        title: "Press TAB any time",
-        body: "The halls are full of pads and pickups. Press TAB to open your field guide: it lists everything you have unlocked, what each one does to you, and what is still coming. The game pauses while it is open — check it whenever you see something new."
+        title: "How to play",
+        html: "<ul>" +
+          "<li><b>Move</b> with the arrow keys, WASD or the pad on screen.</li>" +
+          "<li><b>Read</b> the passage and the question in the panel on the left.</li>" +
+          "<li><b>Find the answer:</b> letters A, B, C and D are out on the map. Walk onto the right one and press SPACE to pick it up, then carry it to the green <b>EXIT \u00b7 SAFE</b> booth. Bank " + need + " to finish the level.</li>" +
+          "<li>A <b>right letter</b> calls Sol's CHARIOT: for a few seconds you can run straight over the wolves. A <b>wrong letter</b> sets off the alarm and costs a life, like being caught. " + strikes + " strikes end the level.</li>" +
+          "<li>The <b>Hati</b> hunt you. START and EXIT are safe booths: they cannot see you inside. SPRINT is faster but loud.</li>" +
+          "<li>Press <b>TAB</b> any time for the field guide (the game pauses).</li>" +
+          "</ul>"
       }
     ];
   }
@@ -25828,13 +25804,11 @@
       revealTutDom(card, this.tutIndex, this.tutList.length, false);
       var total = (this.tutList && this.tutList.length) || 1;
       var step = this.tutIndex + 1;
-      if (kicker) kicker.textContent = "How to play · " + step + " of " + total;
+      if (kicker) kicker.textContent = total > 1 ? "How to play · " + step + " of " + total : "Level 1 · How to play";
       if (title) title.textContent = card.title;
-      if (body) body.textContent = card.body;
-      if (skip) skip.classList.remove("hidden");
-      /* Show progress so the player knows how much is left — the old single card
-         just said "Tap to play" with no sense of length. */
-      if (hint) hint.textContent = (step >= total) ? "Tap to start Level 1" : "Tap to continue";
+      if (body) { if (card.html) body.innerHTML = card.html; else body.textContent = card.body; }
+      if (skip) { skip.classList.remove("hidden"); skip.textContent = total > 1 && step < total ? "Skip intro" : "Play"; }
+      if (hint) hint.textContent = (step >= total) ? "Tap Play to start Level 1" : "Tap to continue";
     }
     advanceTut() {
       if (tutClosed || this.tutDone) { hideTut(); return; }
@@ -27267,9 +27241,9 @@
     var hint = document.getElementById("tut-hint");
     if (kicker) kicker.textContent = "Level 1 · How to play";
     if (title && card) title.textContent = card.title;
-    if (body && card) body.textContent = card.body;
-    if (skip) skip.classList.remove("hidden");
-    if (hint) hint.textContent = "Tap to play";
+    if (body && card) { if (card.html) body.innerHTML = card.html; else body.textContent = card.body; }
+    if (skip) { skip.classList.remove("hidden"); skip.textContent = "Play"; }
+    if (hint) hint.textContent = "Tap Play to start Level 1";
   }
   var tutBound = false;
   var codexBound = false;
@@ -27714,7 +27688,7 @@
       window.location.href = "admin.html";
     });
   }
-  document.getElementById("btn-again").addEventListener("click", function () {
+  function returnToTitle() {
     showPlayUi(false);
     wantNight1Tut = false;
     tutClosed = true;
@@ -27722,6 +27696,18 @@
     if (window.SolRealms && SolRealms.stopAmbience) SolRealms.stopAmbience();
     if (gameRef) { gameRef.destroy(true); gameRef = null; }
     refreshSaveLine();
+  }
+  document.getElementById("btn-again").addEventListener("click", returnToTitle);
+  /* v5.18.2: Menu, during a level: the game pauses and asks; yes leaves the level (it is neither won nor lost; the
+     level to play next and the progress record are already saved) and goes back to the title screen */
+  bindTap(document.getElementById("btn-quit"), function () {
+    var sc = playScene, paused = false;
+    try { if (sc && sc.scene && !sc.ended && !sc.scene.isPaused()) { sc.scene.pause(); paused = true; } } catch (e) {}
+    var yes = window.confirm("Leave this level and go back to the title screen?\n\nYour level and progress are saved. This level will not count as won.");
+    if (!yes) { try { if (paused) sc.scene.resume(); } catch (e2) {} return; }
+    hideReading(); hideCodex(); hideTrapIntro();
+    try { if (window.SolAcc && SolAcc.stop) SolAcc.stop(); } catch (e3) {}
+    returnToTitle();
   });
   document.getElementById("btn-next").addEventListener("click", function () {
     var n = parseInt(document.getElementById("btn-next").dataset.goto || "1", 10);

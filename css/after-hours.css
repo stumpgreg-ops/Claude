@@ -417,6 +417,11 @@ h1.logo img { width: min(300px, 60vw); height: auto; display: block; margin: 0 a
 .tut-card #tut-body {
   margin: 0 0 14px; color: var(--ink); font-size: 16px; line-height: 1.4;
 }
+/* v5.18.2: the one-window tutorial is a list */
+#tut-card { max-width: 560px; width: min(560px, 94%); }
+#tut-body ul { margin: 0; padding-left: 20px; }
+#tut-body li { margin: 0 0 6px; }
+#tut-body b { color: #ffe08a; }
 .tut-hint { margin: 0; color: var(--gold); font-size: 13px; font-weight: 700; }
 #tut-skip {
   margin-top: 12px; min-height: 44px;
@@ -564,6 +569,11 @@ h1.logo img { width: min(300px, 60vw); height: auto; display: block; margin: 0 a
 }
 .chip.selected { border-color: var(--gold); color: var(--gold); box-shadow: 0 0 0 2px rgba(245,200,66,.2); }
 #btn-fs { right: 450px; }
+/* v5.18.2: the way out of a level: top-left of the play area, clear of the minimap and the touch pad */
+#btn-quit {
+  position: absolute; left: 12px; top: 10px; z-index: 12;
+  min-height: 40px; padding: 8px 12px; font-size: 13px; pointer-events: auto;
+}
 @media (max-width: 700px) {
   #btn-char { right: 12px; top: 128px; }
   #btn-fs { right: 12px; top: 172px; }
@@ -758,6 +768,9 @@ h1.logo img { width: min(300px, 60vw); height: auto; display: block; margin: 0 a
   .read-scroll .stem { margin-top: 8px; font-size: 15px; }
   .tut-card { padding: 14px 16px 12px; }
   .tut-card h2 { font-size: 21px; margin: 0 0 6px; }
+  .tut-card #tut-body { font-size: 14px; line-height: 1.35; margin: 0 0 8px; }
+  #tut-body li { margin: 0 0 3px; }
+  #tut-skip { margin-top: 6px; min-height: 38px; }
   .trap-card { padding: 16px 18px 14px; }
   .trap-card h2 { font-size: 24px; }
   .trap-card #trap-body { font-size: 16px; margin: 0 0 10px; }
@@ -788,6 +801,7 @@ h1.logo img { width: min(300px, 60vw); height: auto; display: block; margin: 0 a
   #btn-action { width: 70px; height: 70px; }
   #btn-shutter { width: 56px; height: 56px; }
   #controls { padding: 6px 10px 8px; }
+  #btn-quit { min-height: 34px; padding: 5px 10px; font-size: 12px; }
 }
 /* a narrow maze beside the HUD: the Look and full-screen buttons go under the minimap */
 @media (max-height: 620px) and (min-width: 600px) and (max-width: 1060px) {

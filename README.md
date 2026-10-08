@@ -29,6 +29,11 @@ A game uploaded to Canvas can't send anything anywhere, so progress is shown to 
 
 Tests: `node tools/smoke-progress.js` (after `node tools/build-games.js`, `node tools/build-appsscript.js VA|ODY` and `node tools/build-canvas.js VA|ODY`).
 
+## v5.18.2 (2026-10-08) — a Menu button during play, a one-window tutorial
+
+- **Menu** (top-left of the play area): pauses the level and asks "Leave this level and go back to the title screen?"; No resumes, Yes returns to the title screen (the level is neither won nor lost; the level to play next and the progress record are already saved). Read-aloud stops and the pop-ups close on the way out.
+- **The tutorial is one window** (it was nine cards with "Skip intro", and players skipped them without learning the game): "How to play" lists move, read, find the letter and carry it to EXIT · SAFE, right letter = Chariot / wrong letter = a lost life, the safe booths and Sprint, and TAB for the field guide; its one button is **Play**. `tools/ody-theme.js` rewords its wolves line for the Odyssey.
+
 ## v5.18.1 (2026-10-08) — one version again: accommodations + the 500-pixel fit
 
 The Odyssey session's v5.17.2–v5.18.0 (the Sirens' song, the raft and the bow, accommodations) and this session's v5.17.0–v5.17.2 (skills under each standard, every question tagged, the 500-pixel fit and its review fixes) are merged. Where both had made the game fit a 500-pixel frame, this session's version (`js/fit.js`, the "short frames" CSS, checked by `tools/audit-500.js`) is kept; the accommodations keep their own styles and `js/accommodations.js`. Virginia gets read aloud, larger text and the slower game now; its word lists for tap-to-define and the dictionary are still to be written.

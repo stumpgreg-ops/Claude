@@ -33,8 +33,9 @@ var EXACT = {
     ["Hati", "wolf", /[{,]\s*patrol:\s*$/],
     ["Hati", "wolves", /patrolPlural:\s*$/],
     ["Norse", "Greek", /myth:\s*$/],
-    /* the tutorial */
-    ["The Hati hunt you", "Circe's wolves hunt you"],
+    /* the one-window tutorial (v5.18.2) */
+    ["<li>The <b>Hati</b> hunt you. START and EXIT are safe booths: they cannot see you inside. SPRINT is faster but loud.</li>",
+     "<li><b>Circe's wolves</b> hunt you. START and EXIT are safe booths: they cannot see you inside. SPRINT is faster but loud.</li>"],
     /* toasts whose count comes from the code ("... clipped " + n + " Hati!") */
     [" Hati!", " of Circe's wolves!"],
     [" Hati frozen (", " Wolves frozen ("],
@@ -325,8 +326,7 @@ function leftReason(rel, txt, inTable) {
 /* ── index.html: the words on the page (the structure is tools/build-games.js's) ── */
 var INDEX = [
   [/Correct letters call Sol's CHARIOT\./, "Correct letters call Helios's CHARIOT."],
-  [/Hati cannot see you in either booth\./, "Circe's wolves cannot see you in either booth."],
-  [/<h2 id="tut-title">You are Sol<\/h2>/, '<h2 id="tut-title">You are Odysseus</h2>']
+  [/Hati cannot see you in either booth\./, "Circe's wolves cannot see you in either booth."]
 ];
 function themeIndex(html) {
   var changes = [];

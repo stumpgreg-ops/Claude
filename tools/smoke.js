@@ -368,6 +368,31 @@ var srv = http.createServer(function (req, res) {
   if (await page.isVisible("#read-go")) await page.click("#read-go");
   await page.waitForTimeout(800);
   await shot("12-night-play");
+  /* v5.18.2: the Menu button during a level: a paused "leave?" question; No resumes, Yes goes back to the title screen */
+  var quitBtn = await page.evaluate(function () { var b = document.getElementById("btn-quit"); var r = b.getBoundingClientRect(); return { vis: !!b.offsetParent, inside: r.left >= 0 && r.top >= 0 && r.bottom <= innerHeight, text: b.textContent }; });
+  check(quitBtn.vis && quitBtn.inside && quitBtn.text === "Menu", "a Menu button is on the play screen: " + JSON.stringify(quitBtn));
+  page.once("dialog", function (d) { d.dismiss(); });
+  await page.click("#btn-quit"); await page.waitForTimeout(300);
+  var stayed = await page.evaluate(function () { return { play: !document.getElementById("play").classList.contains("hidden"), paused: SolScene.scene.isPaused() }; });
+  check(stayed.play && !stayed.paused, "No: the level goes on: " + JSON.stringify(stayed));
+  page.once("dialog", function (d) { d.accept(); });
+  await page.click("#btn-quit"); await page.waitForTimeout(600);
+  var left = await page.evaluate(function () { return { title: !document.getElementById("title-screen").classList.contains("hidden"), play: !document.getElementById("play").classList.contains("hidden"), night: localStorage.getItem("afterHours.v1.night") }; });
+  check(left.title && !left.play && left.night === "1", "Yes: back to the title screen, level 1 still saved to play: " + JSON.stringify(left));
+  /* back into the level for the rest of the checks */
+  await page.click('#title-screen .card[data-family="NJ5"]');
+  await page.waitForSelector("#mode-screen:not(.hidden)");
+  await page.click('#mode-packs .card[data-gamemode="ALL"]');
+  await page.waitForSelector("#skill-screen:not(.hidden)");
+  await page.waitForTimeout(500);
+  if (await page.isVisible("#btn-skill-continue")) await page.click("#btn-skill-continue"); else await page.click("#btn-skill-start");
+  await page.waitForTimeout(300);
+  if (await page.isVisible("#btn-char-confirm")) await page.click("#btn-char-confirm");
+  await page.waitForTimeout(3000);
+  for (var qi = 0; qi < 12; qi++) { if (await page.isVisible("#tut-skip")) { await page.click("#tut-skip"); break; } await page.waitForTimeout(300); }
+  await page.waitForTimeout(1500);
+  if (await page.isVisible("#read-go")) await page.click("#read-go");
+  await page.waitForTimeout(800);
 
   /* stamina: night 1 draws a tiny passage, night 90 a long one */
   var stamina = await page.evaluate(async function () {
