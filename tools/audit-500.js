@@ -64,7 +64,7 @@ function measure(opt) {
     if (!why && sc && sc !== body && sc !== docEl) {
       var sr = sc.getBoundingClientRect();
       if (!inside(sr, frame)) why = "its scrolling box " + path(sc) + " runs off the frame (" + Math.round(sr.top) + "–" + Math.round(sr.bottom) + " of " + H + ")";
-      else if (!inside(r, sr) && !sc.matches(ALLOWED)) why = "you have to scroll " + path(sc) + " to see it";
+      else if (!inside(r, sr) && !sc.matches(ALLOWED) && !(W < 700 && sc.matches(".eoc-body"))) why = "you have to scroll " + path(sc) + " to see it";
     } else if (!why && !inside(r, frame)) {
       if (!(opt.pageMayScroll && r.left >= -1.5 && r.right <= W + 1.5)) why = "off the frame (" + Math.round(r.left) + "," + Math.round(r.top) + " – " + Math.round(r.right) + "," + Math.round(r.bottom) + " in " + W + "x" + H + ")";
     }

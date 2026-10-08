@@ -169,14 +169,15 @@
 /* v5.17.2: the 500-pixel Canvas frame: small cards several to a row, a one-line note, a smaller preview */
 @media (max-height: 620px) {
   .build-card { padding: 6px 10px; gap: 6px; }
-  .build-sub { display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
-  .build-themes { grid-template-columns: 1fr 1fr; }
+  .build-sub { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .build-card.step-theme .build-sub { display: block; -webkit-line-clamp: none; }   /* "This choice is permanent" */
+  .build-themes { grid-template-columns: repeat(2, minmax(0, 380px)); justify-content: center; }
   .build-theme canvas { max-height: 26vh; }
   .build-options, .build-shop { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 6px; }
   .build-opt { min-height: 0; padding: 6px; gap: 3px; }
   .build-opt .pic, .build-shop .build-opt .pic, .build-styles .build-opt .pic { height: 44px; }
   .build-opt .name, .build-theme .name { font-size: 14px; }
-  .build-opt .meta { display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
+  .build-opt .meta { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
   .build-styles { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 6px; }
   .build-card.step-shop .build-main { flex: 0 0 104px; min-height: 104px; }
   .build-main { min-height: 120px; }

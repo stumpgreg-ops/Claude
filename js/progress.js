@@ -386,7 +386,14 @@
     ".prog-nick b{color:var(--gold)}",
     ".prog-note{margin:6px 0 0;color:var(--dim);font-size:13px;line-height:1.4}",
     "#progress-overlay .row{justify-content:flex-start;margin-top:12px}",
-    "#progress-overlay textarea{position:absolute;left:-9999px;top:0;width:10px;height:10px;opacity:0}"
+    "#progress-overlay textarea{position:absolute;left:-9999px;top:0;width:10px;height:10px;opacity:0}",
+    /* v5.17.2: a short frame (the 500-pixel Canvas embed): a wider, tighter window, the six numbers in one row */
+    "@media (max-height:620px){#progress-overlay{padding:8px}#progress-overlay .tut-card{max-width:820px;width:min(820px,98%);padding:10px 16px 10px;max-height:calc(100vh - 16px)}",
+    "#progress-overlay .tut-kicker{margin:0 0 2px}#progress-overlay h2{font-size:20px;margin:0 0 6px}",
+    ".prog-stats{grid-template-columns:repeat(6,1fr);gap:6px;margin:0 0 6px}.prog-stats li{padding:3px 6px}.prog-stats b{font-size:18px}.prog-stats span{font-size:12px}",
+    ".prog-how{font-size:15px;margin:0 0 4px}.prog-code{font-size:17px;line-height:1.35;padding:6px 10px}.prog-code.long{font-size:13px;max-height:64px}",
+    "#progress-overlay .row{margin-top:6px}.prog-copied{margin:4px 0 0}.prog-steps{font-size:14px;line-height:1.35;margin:6px 0 2px}.prog-steps li{margin:0}",
+    ".prog-nick{font-size:13px;margin:2px 0 0}.prog-note{font-size:12px;line-height:1.3;margin:3px 0 0}}"
   ].join("\n");
   var ov = null;
   function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
@@ -492,6 +499,7 @@
     "#restore-overlay.hidden{display:none!important}",
     "#restore-overlay .tut-card{max-width:600px;width:min(600px,96%);max-height:calc(100vh - 24px);overflow:auto}",
     "#restore-overlay h2{margin:0 0 10px;font-size:26px}",
+    "@media (max-height:620px){#restore-overlay{padding:8px}#restore-overlay .tut-card{max-width:760px;width:min(760px,98%);padding:10px 16px 10px;max-height:calc(100vh - 16px)}#restore-overlay h2{font-size:20px;margin:0 0 6px}#restore-overlay .tut-kicker{margin:0 0 2px}#restore-overlay textarea{min-height:56px;font-size:14px}#restore-overlay .row{margin-top:6px}}",
     "#restore-overlay textarea{width:100%;box-sizing:border-box;min-height:96px;font:600 15px/1.4 Consolas,'Courier New',monospace;padding:8px 10px;border-radius:10px;border:2px solid var(--gold);background:#fffbea;color:#1a1408;resize:vertical}",
     ".rest-how{margin:0 0 8px;font-size:17px;line-height:1.4}",
     ".rest-msg{margin:10px 0 0;font-size:16px;line-height:1.45}",
@@ -513,7 +521,7 @@
     card.appendChild(el("p", "rest-how", "New Chromebook, or your progress is gone? Paste the newest code you got from My progress code " +
       "(it is in your Canvas assignment), then tap Check code."));
     var ta = el("textarea"); ta.id = "restore-code"; ta.setAttribute("spellcheck", "false"); ta.setAttribute("autocomplete", "off");
-    ta.setAttribute("aria-label", "Your progress code"); ta.placeholder = "SOL2-..."; card.appendChild(ta);
+    ta.setAttribute("aria-label", "Your progress code"); ta.placeholder = "SOL3-..."; card.appendChild(ta);
     var msg = el("div", "rest-msg"); msg.setAttribute("aria-live", "polite"); card.appendChild(msg);
     var row = el("div", "row"); card.appendChild(row);
     var check = el("button", "btn", "Check code"); check.type = "button"; check.id = "restore-check"; row.appendChild(check);

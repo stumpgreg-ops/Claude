@@ -286,7 +286,7 @@ h1.logo img { width: min(300px, 60vw); height: auto; display: block; margin: 0 a
 #btn-shutter.held { background: rgba(255,170,68,.45); border-color: #ffcc66; color: #fff4d8; }
 
 #overlay {
-  position: absolute; inset: 0; z-index: 9; display: flex; align-items: center; justify-content: center;
+  position: absolute; inset: 0; z-index: 14; display: flex; align-items: center; justify-content: center;   /* v5.17.2: over the HUD buttons (Look, full screen, music) too */
   background: rgba(8,10,14,.62);
   pointer-events: auto;
 }
@@ -725,8 +725,10 @@ h1.logo img { width: min(300px, 60vw); height: auto; display: block; margin: 0 a
   .card { padding: 6px 12px; min-height: 40px; }
   .card .name { font-size: 16px; }
   .card .meta { font-size: 12px; margin-top: 2px; line-height: 1.3; }
-  #mode-screen .card, #skill-screen .card { width: min(240px, 46vw); }
+  #mode-screen .card, #skill-screen .card { width: min(220px, 30vw); padding: 5px 10px; }
   #mode-screen .card .name, #skill-screen .card .name { font-size: 15px; }
+  #mode-screen .card .meta, #skill-screen .card .meta { font-size: 11.5px; }
+  .music-pick-label .dim { display: none; }   /* the music hint: too small once a crowded screen is shrunk */
   .btn { padding: 6px 12px; min-height: 38px; }
   .btn.primary { min-width: 130px; }
   .row { margin: 4px 0; gap: 8px; }
@@ -772,7 +774,7 @@ h1.logo img { width: min(300px, 60vw); height: auto; display: block; margin: 0 a
 }
 /* the play area in a short frame: the HUD stays on the left (narrower when the frame is), smaller touch pads */
 @media (max-height: 620px) and (min-width: 600px) {
-  :root { --hud: clamp(250px, 34vw, 340px); --hit: 44px; }
+  :root { --hud: clamp(280px, 36vw, 340px); --hit: 44px; }
   #hud { padding: 6px; }
   .eoc { padding: 6px; }
   #eoc-passage-wrap { min-height: 36px; }
@@ -781,7 +783,8 @@ h1.logo img { width: min(300px, 60vw); height: auto; display: block; margin: 0 a
   .choices { gap: 3px; }
   .choices li { font-size: 12px; padding: 3px 6px; }
   .eoc-bar { margin-bottom: 4px; gap: 6px; }
-  .carry-flag { margin-top: 4px; padding-top: 4px; }
+  .carry-flag { margin-top: 4px; padding-top: 4px; -webkit-line-clamp: 1; max-height: 1.4em; }
+  .eoc-body { overflow: auto; }   /* long answers in a narrow HUD: scroll rather than cut off */
   #btn-action { width: 70px; height: 70px; }
   #btn-shutter { width: 56px; height: 56px; }
   #controls { padding: 6px 10px 8px; }
@@ -790,4 +793,6 @@ h1.logo img { width: min(300px, 60vw); height: auto; display: block; margin: 0 a
 @media (max-height: 620px) and (min-width: 600px) and (max-width: 1060px) {
   #btn-char { right: 12px; top: 128px; }
   #btn-fs { right: 12px; top: 172px; }
+  #btn-music-hud { right: 12px; top: 216px; }
+  #music-vol-hud { right: 12px; top: 262px; width: 96px; }
 }

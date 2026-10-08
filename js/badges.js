@@ -105,6 +105,7 @@
   /* ── look ── */
   var CSS = [
     "#badge-toasts{position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:9600;display:flex;flex-direction:column;gap:8px;align-items:center;pointer-events:none}",
+    "@media (max-height:620px){#badge-toasts{top:8px;left:8px;transform:none;align-items:flex-start}}",
     ".badge-toast{display:flex;align-items:center;gap:12px;background:#15181f;border:2px solid var(--gold,#f5d76e);border-radius:14px;padding:10px 16px 10px 10px;color:#fff;box-shadow:0 6px 24px rgba(0,0,0,.5);font:15px/1.3 system-ui,sans-serif;opacity:0;transform:translateY(-12px);transition:opacity .3s,transform .3s;max-width:min(460px,92vw)}",
     ".badge-toast.on{opacity:1;transform:none}",
     ".badge-toast small{display:block;color:var(--gold,#f5d76e);font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:11px}",
@@ -150,7 +151,7 @@
   }
   function pump() {
     var host = document.getElementById("badge-toasts");
-    while (queue.length && showing < 3) {
+    while (queue.length && showing < 1) {   /* v5.17.2: one at a time, so a stack never hides the level-end window */
       var b = queue.shift(), t = el("div", "badge-toast"), txt = el("div");
       showing++;
       t.appendChild(medal(b, false));
@@ -245,7 +246,8 @@
       var now = Date.now(); if (now - last < 400) return; last = now;
       show();
     });
-    setTimeout(function () { try { check(); } catch (e) {} }, 1500);
+    /* soon after the page opens (a restored record may already earn badges), and again once everything has loaded */
+    [400, 1500].forEach(function (ms) { setTimeout(function () { try { check(); } catch (e) {} }, ms); });
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", bind); else bind();
 

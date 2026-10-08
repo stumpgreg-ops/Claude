@@ -27492,11 +27492,11 @@
     var cont = document.getElementById("btn-continue");
     if (!line) return;
     if (!hasSavedNight()) {
-      line.textContent = "No level saved on this Chromebook yet. Tap a grade to start Level 1. Each game mode keeps its own level.";
+      line.textContent = "No level saved on this Chromebook yet. " + (window.SOL_STATE === "ODY" ? "Tap The Odyssey" : "Tap a grade") + " to start Level 1. Each game mode keeps its own level.";
       if (cont) cont.classList.add("hidden");
       return;
     }
-    line.textContent = "Level " + n + " saved in " + modeLabel(cfg.gameMode) + " on this Chromebook. Tap a grade, then pick a game mode: each mode keeps its own level.";
+    line.textContent = "Level " + n + " saved in " + modeLabel(cfg.gameMode) + " on this Chromebook. " + (window.SOL_STATE === "ODY" ? "Tap The Odyssey" : "Tap a grade") + ", then pick a game mode: each mode keeps its own level.";
     if (cont) {
       cont.textContent = n > 1 ? ("Continue Level " + n) : "Continue";
       cont.classList.toggle("hidden", n <= 1 && !hasSavedNight());

@@ -10,8 +10,8 @@
   "use strict";
   /* the boxes, the smallest zoom for each, and which children to leave alone (they scroll by themselves) */
   var TARGETS = [
-    { sel: "#state-screen, #title-screen, #mode-screen, #skill-screen", min: 0.6 },
-    { sel: "#overlay .box, #char-panel, #tut-card, #trap-card, #codex-card, #read-card, #progress-overlay .tut-card, #restore-overlay .tut-card", min: 0.72, card: true }
+    { sel: "#state-screen, #title-screen, #mode-screen, #skill-screen", min: 0.7 },
+    { sel: "#overlay .box, #char-panel, #tut-card, #trap-card, #codex-card, #progress-overlay .tut-card, #restore-overlay .tut-card", min: 0.8, card: true }
   ];
   var pending = false, lastW = 0, lastH = 0;
   function visible(el) {
@@ -59,7 +59,7 @@
     if (!kids.length) return;
     var have = room(box, t.card) - 1;
     if (have <= 0) return;
-    function fits(z) { setZoom(kids, z); return span(kids, z) <= have; }
+    function fits(z) { setZoom(kids, z); return span(kids, z) <= have + 3; }
     var z = 1;
     if (!fits(1)) {
       var lo = t.min, hi = 1;

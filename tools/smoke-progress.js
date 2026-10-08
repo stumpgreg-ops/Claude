@@ -317,10 +317,11 @@ function makeZip(files) {
   var ln2 = await page.evaluate(function () { return { line: document.getElementById("skill-save-line").textContent, cont: document.getElementById("btn-skill-continue").textContent }; });
   check(/Level 3 saved in Mixed/.test(ln2.line) && /Continue Level 3/.test(ln2.cont), "Mixed still continues at level 3: " + ln2.line);
   /* a badge that comes back is shown as earned again (the record was edited above to drop First Victory) */
-  var again = await page.evaluate(function () { return SolBadges.check(); });
+  /* v5.17.2: the game checks badges shortly after the page opens, so the check may already have run */
+  var again = await page.evaluate(function () { var fresh = SolBadges.check(); return { fresh: fresh, has: SolProgress.record("VA").badges.indexOf("first-win") !== -1 }; });
   await page.waitForTimeout(300);
   var toastTxt = await page.evaluate(function () { var t = document.getElementById("badge-toasts"); return t ? t.innerText : ""; });
-  check(again.indexOf("first-win") !== -1 && /Badge earned/i.test(toastTxt) && /First Victory/.test(toastTxt), "a newly earned badge pops up at the top: " + toastTxt.replace(/\n/g, " | "));
+  check(again.has && /Badge earned/i.test(toastTxt) && /First Victory/.test(toastTxt), "a newly earned badge pops up at the top: " + toastTxt.replace(/\n/g, " | "));
   await page.screenshot({ path: path.join(shots, "pg-09-badge-toast.png") });
   await page.click("#btn-skill-back").catch(function () {});
   await page.evaluate(function () { document.getElementById("skill-screen").classList.add("hidden"); document.getElementById("mode-screen").classList.add("hidden"); document.getElementById("title-screen").classList.remove("hidden"); });
@@ -374,7 +375,7 @@ function makeZip(files) {
   await page.screenshot({ path: path.join(shots, "pg-07-restore.png") });
   check(r3.go && /Your levels: Mixed \(all modes\) 21, Eagle Swoop 6/.test(r3.msg) && /\d+ badges?/.test(r3.msg) && /castle: 20 pieces, 437 coins/.test(r3.msg) && /2 Fangs/.test(r3.msg) && /Ann S/.test(r3.msg), "Check code shows what comes back: " + r3.msg.replace(/\n/g, " | "));
   await Promise.all([page.waitForNavigation({ waitUntil: "load" }), page.click("#restore-go")]);
-  await page.waitForTimeout(1200);
+  await page.waitForTimeout(2000);   /* the badge check runs shortly after the page opens */
   var after = await page.evaluate(function () {
     return { build: JSON.parse(localStorage.getItem("afterHours.v1.build") || "null"), night: localStorage.getItem("afterHours.v1.night"), fangs: localStorage.getItem("afterHours.v1.fangs"),
       nick: localStorage.getItem("afterHours.v1.nick"), rec: JSON.parse(localStorage.getItem("afterHours.v1.progress.VA") || "null") };
