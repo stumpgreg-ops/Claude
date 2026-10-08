@@ -802,3 +802,83 @@ body.acc-big .read-scroll .choices li { font-size: 17px; }
 .acc-small { font-size: 13px; color: var(--dim); margin: 2px 0 6px; }
 .acc-msg { min-height: 1.2em; color: #9aefc0; font-weight: 700; margin: 8px 0 0; }
 #acc-note { margin: 10px 0 0; color: #9fd3d6; font-size: 13px; text-align: center; }
+
+/* ── v5.18.1: "Main menu" during play (the side panel's top row, or Esc) ─────────────────────────────────── */
+#btn-quit {
+  margin-left: auto; min-height: 30px; padding: 3px 10px; font-size: 12px; border-radius: 8px; white-space: nowrap;
+  border-color: #6a5a3a; color: var(--gold);
+}
+.eoc-bar #job-sol { flex: 1 1 0; min-width: 0; }
+#quit-overlay { position: fixed; inset: 0; z-index: 95; display: flex; align-items: center; justify-content: center; background: rgba(6, 8, 12, .8); padding: 8px; }
+#quit-overlay.hidden { display: none !important; }
+#quit-overlay .quit-card p { margin: 0 0 12px; color: var(--ink); line-height: 1.4; }
+
+/* ── v5.18.1: the menus fit a frame 500 px tall without scrolling ───────────────────────────────────────── */
+@media (max-height: 640px) {
+  .screen { padding: 8px 12px; }
+  .screen .kicker { margin: 0 0 2px; font-size: 11px; }
+  .screen .ver { margin: 0 0 2px; font-size: 11px; }
+  .screen h1 { font-size: clamp(24px, 6.4vh, 40px); }
+  .screen .tag { margin: 2px 0 6px; font-size: 13px; line-height: 1.3; }
+  .screen .save-line { margin: 0 0 6px; font-size: 13px; }
+  .screen .row { margin: 4px 0; gap: 6px; }
+  .screen .btn { min-height: 38px; padding: 6px 12px; font-size: 14px; }
+  .screen .card { padding: 8px 12px; min-height: 0; }
+  .screen .card .kind { font-size: 11px; }
+  .screen .card .name { font-size: 16px; }
+  .screen .card .meta { font-size: 12px; line-height: 1.3; margin-top: 2px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .packs { gap: 8px; margin-bottom: 6px; }
+  /* the title screen: a small logo, the cards in one row, the how-to left to the tutorial */
+  h1.logo img { width: min(150px, 26vh) !important; }
+  #title-screen .packs .card { width: min(250px, 31vw); }
+  #title-screen .howto { display: none; }
+  .join-row { margin: 4px 0; gap: 8px; }
+  .join-row label { flex-direction: row; align-items: center; gap: 6px; }
+  .join-row input { min-height: 36px; min-width: 130px; padding: 4px 8px; }
+  .title-tools { margin: 2px 0 4px; }
+  #btn-teacher-screen { margin: 4px auto 0 !important; padding: 2px 8px !important; }
+  #acc-note { margin: 4px 0 0; }
+  /* the mode and episode screens: the cards in a grid of three */
+  #mode-screen .packs, #skill-screen .packs {
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); width: min(960px, 100%); margin-top: 2px;
+  }
+  #mode-screen .card, #skill-screen .card { width: auto !important; }
+  #mode-screen .card .meta { -webkit-line-clamp: 2; }
+  .music-pick { margin: 2px 0 4px; }
+  .music-pick-label { margin: 0 0 3px; }
+  .chips { gap: 4px; }
+  .chip { min-height: 28px; padding: 3px 9px; font-size: 12px; }
+  .music-vol-row { margin: 4px 0 0; }
+}
+
+/* v5.18.1: the Level 1 how-to in one window */
+.tut-list { margin: 0; padding-left: 20px; display: grid; gap: 5px; font-size: 15px; line-height: 1.35; }
+.tut-list b { color: var(--gold); }
+#tut-card { max-width: 520px; width: min(520px, 94%); }
+#tut-skip { min-width: 180px; margin-top: 10px; }
+.tut-hint:empty { display: none; }
+@media (max-height: 640px) { .tut-list { font-size: 13.5px; gap: 3px; } #tut-skip { margin-top: 6px; } }
+@media (max-height: 640px) {
+  #mode-screen .packs, #skill-screen .packs { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+  #mode-screen .card .meta, #skill-screen .card .meta { -webkit-line-clamp: 2; font-size: 11.5px; }
+  .screen h1 { font-size: clamp(22px, 6vh, 34px); }
+  .music-pick-label .dim { display: none; }
+  /* the reading pop-up fits the frame: the mode's how-to and the passage each scroll in their own box */
+  .read-card { overflow: hidden; }
+  .read-card > .realm-card { flex: 0 1 auto; min-height: 56px; max-height: 30%; overflow-y: auto; }
+  .read-card > .read-scroll { flex: 1 1 auto; min-height: 90px; }
+  .read-card > .row:last-child { position: static; margin: 0; padding: 0; border-top: none; background: none; }
+  .read-hint { font-size: 12px; }
+}
+@media (max-height: 640px) and (max-width: 900px) {
+  .chip { min-height: 24px; padding: 2px 7px; font-size: 11px; }
+  #skill-screen .card .meta, #mode-screen .card .meta { -webkit-line-clamp: 1; }
+}
+@media (max-height: 640px) {
+  /* the buttons over the game stay inside the play area (they are placed from its right edge) */
+  #music-vol-hud { display: none; }
+  #btn-fs { right: 340px; }
+}
+@media (max-height: 640px) and (max-width: 900px) {
+  #btn-fs { right: 286px; top: 50px; }
+}

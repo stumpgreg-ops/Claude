@@ -34,7 +34,7 @@ var EXACT = {
     ["Hati", "wolves", /patrolPlural:\s*$/],
     ["Norse", "Greek", /myth:\s*$/],
     /* the tutorial */
-    ["The Hati hunt you", "Circe's wolves hunt you"],
+    ["You are Sol", "You are Odysseus"],
     /* toasts whose count comes from the code ("... clipped " + n + " Hati!") */
     [" Hati!", " of Circe's wolves!"],
     [" Hati frozen (", " Wolves frozen ("],

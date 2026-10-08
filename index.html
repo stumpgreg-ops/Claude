@@ -6,18 +6,18 @@
   <meta name="color-scheme" content="dark" />
   <meta http-equiv="Cache-Control" content="no-cache" />
   <title>SOL Labyrinth</title>
-  <link rel="stylesheet" href="css/after-hours.css?v=5.18.0" />
-  <link rel="stylesheet" href="css/build.css?v=5.18.0" />
-  <link rel="icon" type="image/png" sizes="64x64" href="assets/logo/favicon-64.png?v=5.18.0" />
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/logo/favicon-32.png?v=5.18.0" />
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/logo/favicon-180.png?v=5.18.0" />
+  <link rel="stylesheet" href="css/after-hours.css?v=5.18.1" />
+  <link rel="stylesheet" href="css/build.css?v=5.18.1" />
+  <link rel="icon" type="image/png" sizes="64x64" href="assets/logo/favicon-64.png?v=5.18.1" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/logo/favicon-32.png?v=5.18.1" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/logo/favicon-180.png?v=5.18.1" />
 </head>
 <body>
   <div id="app">
     <section id="state-screen" class="screen">
       <p class="kicker">Reading practice · 100 levels</p>
-      <h1 class="logo"><img src="assets/logo/sols-labyrinth-512.png?v=5.18.0" alt="Sol's Labyrinth — SOL review game" width="512" height="512" /></h1>
-      <p class="ver">v5.18.0</p>
+      <h1 class="logo"><img src="assets/logo/sols-labyrinth-512.png?v=5.18.1" alt="Sol's Labyrinth — SOL review game" width="512" height="512" /></h1>
+      <p class="ver">v5.18.1</p>
       <p class="tag state-tag">Tap your state to start.</p>
       <div class="packs state-packs">
         <button type="button" class="card state-card state-nj" data-state="NJ">
@@ -41,8 +41,8 @@
 
     <section id="title-screen" class="screen hidden">
       <p class="kicker" id="title-kicker">NNPS · VA 2024 EOC Reading practice skills · 100 levels</p>
-      <h1 class="logo"><img src="assets/logo/sols-labyrinth-512.png?v=5.18.0" alt="Sol's Labyrinth — SOL review game" width="512" height="512" /></h1>
-      <p class="ver">v5.18.0</p>
+      <h1 class="logo"><img src="assets/logo/sols-labyrinth-512.png?v=5.18.1" alt="Sol's Labyrinth — SOL review game" width="512" height="512" /></h1>
+      <p class="ver">v5.18.1</p>
       <p class="tag">Tap a grade to pick your skill focus. Read the passage in the side panel. Grab the matching letter. Walk it to EXIT · SAFE. The janitor does not know the answer — only you do.</p>
       <p id="save-line" class="save-line">No level saved on this Chromebook yet.</p>
 
@@ -148,6 +148,7 @@
         <div class="eoc">
           <div class="eoc-bar">
             <p class="sol" id="job-sol">Teacher · 9.RI.1.C</p>
+            <button type="button" class="btn" id="btn-quit" title="Leave this level and go back to the main menu (Esc)">Main menu</button>
             <p class="round" id="round-flag">Level 1 / 100</p>
             <div class="scores">
               <span class="pip gold" id="score-pip">Extracts 0 / 5</span>
@@ -223,11 +224,11 @@
 
   <div id="tut-overlay" class="hidden" aria-hidden="true">
     <div class="tut-card" id="tut-card">
-      <p class="tut-kicker" id="tut-kicker">How to play · 1 of 9</p>
+      <p class="tut-kicker" id="tut-kicker">Level 1 · How to play</p>
       <h2 id="tut-title">You are Sol</h2>
-      <p id="tut-body">You are in the school after dark. Move with the arrow keys, WASD, or the pad on screen.</p>
-      <p class="tut-hint" id="tut-hint">Tap to continue</p>
-      <button type="button" id="tut-skip" class="btn">Skip intro</button>
+      <div id="tut-body">Move with the arrow keys, WASD, or the pad on screen.</div>
+      <p class="tut-hint" id="tut-hint"></p>
+      <button type="button" id="tut-skip" class="btn primary">Start Level 1</button>
     </div>
   </div>
 
@@ -289,139 +290,139 @@
     try { console.error("[SOL]", (e && e.message) || "error", e && e.error && e.error.stack ? e.error.stack : ""); } catch (x) {}
   });
   </script>
-  <script src="js/vendor/phaser.min.js?v=5.18.0"></script>
-  <script src="js/vendor/peerjs.min.js?v=5.18.0"></script>
-  <script src="js/content.js?v=5.18.0"></script>
-  <script src="js/content2.js?v=5.18.0"></script>
-  <script src="js/content3.js?v=5.18.0"></script>
-  <script src="js/content4.js?v=5.18.0"></script>
-  <script src="js/content5.js?v=5.18.0"></script>
-  <script src="js/content6.js?v=5.18.0"></script>
-  <script src="js/content7.js?v=5.18.0"></script>
-  <script src="js/content8.js?v=5.18.0"></script>
-  <script src="js/content9.js?v=5.18.0"></script>
-  <script src="js/content10.js?v=5.18.0"></script>
-  <script src="js/content11.js?v=5.18.0"></script>
-  <script src="js/content12.js?v=5.18.0"></script>
-  <script src="js/content13.js?v=5.18.0"></script>
-  <script src="js/content14.js?v=5.18.0"></script>
-  <script src="js/content15.js?v=5.18.0"></script>
-  <script src="js/content16.js?v=5.18.0"></script>
-  <script src="js/content17.js?v=5.18.0"></script>
-  <script src="js/content18.js?v=5.18.0"></script>
-  <script src="js/content19.js?v=5.18.0"></script>
-  <script src="js/content20.js?v=5.18.0"></script>
-  <script src="js/content21.js?v=5.18.0"></script>
-  <script src="js/content22.js?v=5.18.0"></script>
-  <script src="js/content23.js?v=5.18.0"></script>
-  <script src="js/content32.js?v=5.18.0"></script>
-  <script src="js/content33.js?v=5.18.0"></script>
-  <script src="js/content34.js?v=5.18.0"></script>
-  <script src="js/content35.js?v=5.18.0"></script>
-  <script src="js/content36.js?v=5.18.0"></script>
-  <script src="js/content37.js?v=5.18.0"></script>
-  <script src="js/content38.js?v=5.18.0"></script>
-  <script src="js/content39.js?v=5.18.0"></script>
-  <script src="js/content40.js?v=5.18.0"></script>
-  <script src="js/content41.js?v=5.18.0"></script>
-  <script src="js/content42.js?v=5.18.0"></script>
-  <script src="js/content43.js?v=5.18.0"></script>
-  <script src="js/content44.js?v=5.18.0"></script>
-  <script src="js/content45.js?v=5.18.0"></script>
-  <script src="js/content46.js?v=5.18.0"></script>
-  <script src="js/content47.js?v=5.18.0"></script>
-  <script src="js/content48.js?v=5.18.0"></script>
-  <script src="js/content49.js?v=5.18.0"></script>
-  <script src="js/content50.js?v=5.18.0"></script>
-  <script src="js/content51.js?v=5.18.0"></script>
-  <script src="js/content52.js?v=5.18.0"></script>
-  <script src="js/content53.js?v=5.18.0"></script>
-  <script src="js/content54.js?v=5.18.0"></script>
-  <script src="js/content55.js?v=5.18.0"></script>
-  <script src="js/content56.js?v=5.18.0"></script>
-  <script src="js/content57.js?v=5.18.0"></script>
-  <script src="js/content58.js?v=5.18.0"></script>
-  <script src="js/content59.js?v=5.18.0"></script>
-  <script src="js/content60.js?v=5.18.0"></script>
-  <script src="js/content61.js?v=5.18.0"></script>
-  <script src="js/content62.js?v=5.18.0"></script>
-  <script src="js/content63.js?v=5.18.0"></script>
-  <script src="js/content64.js?v=5.18.0"></script>
-  <script src="js/content65.js?v=5.18.0"></script>
-  <script src="js/content66.js?v=5.18.0"></script>
-  <script src="js/content67.js?v=5.18.0"></script>
-  <script src="js/content68.js?v=5.18.0"></script>
-  <script src="js/content69.js?v=5.18.0"></script>
-  <script src="js/content70.js?v=5.18.0"></script>
-  <script src="js/content71.js?v=5.18.0"></script>
-  <script src="js/content72.js?v=5.18.0"></script>
-  <script src="js/content73.js?v=5.18.0"></script>
-  <script src="js/content74.js?v=5.18.0"></script>
-  <script src="js/content75.js?v=5.18.0"></script>
-  <script src="js/content76.js?v=5.18.0"></script>
-  <script src="js/content77.js?v=5.18.0"></script>
-  <script src="js/content78.js?v=5.18.0"></script>
-  <script src="js/content79.js?v=5.18.0"></script>
-  <script src="js/content80.js?v=5.18.0"></script>
-  <script src="js/content81.js?v=5.18.0"></script>
-  <script src="js/content82.js?v=5.18.0"></script>
-  <script src="js/content83.js?v=5.18.0"></script>
-  <script src="js/content84.js?v=5.18.0"></script>
-  <script src="js/content85.js?v=5.18.0"></script>
-  <script src="js/content86.js?v=5.18.0"></script>
-  <script src="js/content87.js?v=5.18.0"></script>
-  <script src="js/content88.js?v=5.18.0"></script>
-  <script src="js/content89.js?v=5.18.0"></script>
-  <script src="js/content90.js?v=5.18.0"></script>
-  <script src="js/content91.js?v=5.18.0"></script>
-  <script src="js/content92.js?v=5.18.0"></script>
-  <script src="js/content93.js?v=5.18.0"></script>
-  <script src="js/content94.js?v=5.18.0"></script>
-  <script src="js/content95.js?v=5.18.0"></script>
-  <script src="js/content96.js?v=5.18.0"></script>
-  <script src="js/content97.js?v=5.18.0"></script>
-  <script src="js/content98.js?v=5.18.0"></script>
-  <script src="js/content99.js?v=5.18.0"></script>
-  <script src="js/content100.js?v=5.18.0"></script>
-  <script src="js/content101.js?v=5.18.0"></script>
-  <script src="js/content102.js?v=5.18.0"></script>
-  <script src="js/content103.js?v=5.18.0"></script>
-  <script src="js/content104.js?v=5.18.0"></script>
-  <script src="js/content105.js?v=5.18.0"></script>
-  <script src="js/content106.js?v=5.18.0"></script>
-  <script src="js/content107.js?v=5.18.0"></script>
-  <script src="js/content108.js?v=5.18.0"></script>
-  <script src="js/content109.js?v=5.18.0"></script>
-  <script src="js/content110.js?v=5.18.0"></script>
-  <script src="js/content111.js?v=5.18.0"></script>
-  <script src="js/content112.js?v=5.18.0"></script>
-  <script src="js/content113.js?v=5.18.0"></script>
-  <script src="js/content24.js?v=5.18.0"></script>
-  <script src="js/content25.js?v=5.18.0"></script>
-  <script src="js/content26.js?v=5.18.0"></script>
-  <script src="js/content27.js?v=5.18.0"></script>
-  <script src="js/content28.js?v=5.18.0"></script>
-  <script src="js/content29.js?v=5.18.0"></script>
-  <script src="js/content30.js?v=5.18.0"></script>
-  <script src="js/content31.js?v=5.18.0"></script>
-  <script src="js/classes.js?v=5.18.0"></script>
-  <script src="js/audio.js?v=5.18.0"></script>
-  <script src="js/music.js?v=5.18.0"></script>
-  <script src="js/net.js?v=5.18.0"></script>
-  <script src="js/vendor/three.min.js?v=5.18.0"></script>
-  <script src="js/build3d.js?v=5.18.0"></script>
-  <script src="js/build.js?v=5.18.0"></script>
-  <script src="js/realms.js?v=5.18.0"></script>
-  <script src="js/modes.js?v=5.18.0"></script>
-  <script src="js/mode-ram.js?v=5.18.0"></script>
-  <script src="js/mode-bow.js?v=5.18.0"></script>
-  <script src="js/mode-raft.js?v=5.18.0"></script>
-  <script src="js/mode-row.js?v=5.18.0"></script>
-  <script src="js/progress-code.js?v=5.18.0"></script>
-  <script src="js/progress.js?v=5.18.0"></script>
-  <script src="js/badges.js?v=5.18.0"></script>
-  <script src="js/teacher-screen.js?v=5.18.0"></script>
-  <script src="js/accommodations.js?v=5.18.0"></script>
-  <script src="js/game.js?v=5.18.0"></script>
+  <script src="js/vendor/phaser.min.js?v=5.18.1"></script>
+  <script src="js/vendor/peerjs.min.js?v=5.18.1"></script>
+  <script src="js/content.js?v=5.18.1"></script>
+  <script src="js/content2.js?v=5.18.1"></script>
+  <script src="js/content3.js?v=5.18.1"></script>
+  <script src="js/content4.js?v=5.18.1"></script>
+  <script src="js/content5.js?v=5.18.1"></script>
+  <script src="js/content6.js?v=5.18.1"></script>
+  <script src="js/content7.js?v=5.18.1"></script>
+  <script src="js/content8.js?v=5.18.1"></script>
+  <script src="js/content9.js?v=5.18.1"></script>
+  <script src="js/content10.js?v=5.18.1"></script>
+  <script src="js/content11.js?v=5.18.1"></script>
+  <script src="js/content12.js?v=5.18.1"></script>
+  <script src="js/content13.js?v=5.18.1"></script>
+  <script src="js/content14.js?v=5.18.1"></script>
+  <script src="js/content15.js?v=5.18.1"></script>
+  <script src="js/content16.js?v=5.18.1"></script>
+  <script src="js/content17.js?v=5.18.1"></script>
+  <script src="js/content18.js?v=5.18.1"></script>
+  <script src="js/content19.js?v=5.18.1"></script>
+  <script src="js/content20.js?v=5.18.1"></script>
+  <script src="js/content21.js?v=5.18.1"></script>
+  <script src="js/content22.js?v=5.18.1"></script>
+  <script src="js/content23.js?v=5.18.1"></script>
+  <script src="js/content32.js?v=5.18.1"></script>
+  <script src="js/content33.js?v=5.18.1"></script>
+  <script src="js/content34.js?v=5.18.1"></script>
+  <script src="js/content35.js?v=5.18.1"></script>
+  <script src="js/content36.js?v=5.18.1"></script>
+  <script src="js/content37.js?v=5.18.1"></script>
+  <script src="js/content38.js?v=5.18.1"></script>
+  <script src="js/content39.js?v=5.18.1"></script>
+  <script src="js/content40.js?v=5.18.1"></script>
+  <script src="js/content41.js?v=5.18.1"></script>
+  <script src="js/content42.js?v=5.18.1"></script>
+  <script src="js/content43.js?v=5.18.1"></script>
+  <script src="js/content44.js?v=5.18.1"></script>
+  <script src="js/content45.js?v=5.18.1"></script>
+  <script src="js/content46.js?v=5.18.1"></script>
+  <script src="js/content47.js?v=5.18.1"></script>
+  <script src="js/content48.js?v=5.18.1"></script>
+  <script src="js/content49.js?v=5.18.1"></script>
+  <script src="js/content50.js?v=5.18.1"></script>
+  <script src="js/content51.js?v=5.18.1"></script>
+  <script src="js/content52.js?v=5.18.1"></script>
+  <script src="js/content53.js?v=5.18.1"></script>
+  <script src="js/content54.js?v=5.18.1"></script>
+  <script src="js/content55.js?v=5.18.1"></script>
+  <script src="js/content56.js?v=5.18.1"></script>
+  <script src="js/content57.js?v=5.18.1"></script>
+  <script src="js/content58.js?v=5.18.1"></script>
+  <script src="js/content59.js?v=5.18.1"></script>
+  <script src="js/content60.js?v=5.18.1"></script>
+  <script src="js/content61.js?v=5.18.1"></script>
+  <script src="js/content62.js?v=5.18.1"></script>
+  <script src="js/content63.js?v=5.18.1"></script>
+  <script src="js/content64.js?v=5.18.1"></script>
+  <script src="js/content65.js?v=5.18.1"></script>
+  <script src="js/content66.js?v=5.18.1"></script>
+  <script src="js/content67.js?v=5.18.1"></script>
+  <script src="js/content68.js?v=5.18.1"></script>
+  <script src="js/content69.js?v=5.18.1"></script>
+  <script src="js/content70.js?v=5.18.1"></script>
+  <script src="js/content71.js?v=5.18.1"></script>
+  <script src="js/content72.js?v=5.18.1"></script>
+  <script src="js/content73.js?v=5.18.1"></script>
+  <script src="js/content74.js?v=5.18.1"></script>
+  <script src="js/content75.js?v=5.18.1"></script>
+  <script src="js/content76.js?v=5.18.1"></script>
+  <script src="js/content77.js?v=5.18.1"></script>
+  <script src="js/content78.js?v=5.18.1"></script>
+  <script src="js/content79.js?v=5.18.1"></script>
+  <script src="js/content80.js?v=5.18.1"></script>
+  <script src="js/content81.js?v=5.18.1"></script>
+  <script src="js/content82.js?v=5.18.1"></script>
+  <script src="js/content83.js?v=5.18.1"></script>
+  <script src="js/content84.js?v=5.18.1"></script>
+  <script src="js/content85.js?v=5.18.1"></script>
+  <script src="js/content86.js?v=5.18.1"></script>
+  <script src="js/content87.js?v=5.18.1"></script>
+  <script src="js/content88.js?v=5.18.1"></script>
+  <script src="js/content89.js?v=5.18.1"></script>
+  <script src="js/content90.js?v=5.18.1"></script>
+  <script src="js/content91.js?v=5.18.1"></script>
+  <script src="js/content92.js?v=5.18.1"></script>
+  <script src="js/content93.js?v=5.18.1"></script>
+  <script src="js/content94.js?v=5.18.1"></script>
+  <script src="js/content95.js?v=5.18.1"></script>
+  <script src="js/content96.js?v=5.18.1"></script>
+  <script src="js/content97.js?v=5.18.1"></script>
+  <script src="js/content98.js?v=5.18.1"></script>
+  <script src="js/content99.js?v=5.18.1"></script>
+  <script src="js/content100.js?v=5.18.1"></script>
+  <script src="js/content101.js?v=5.18.1"></script>
+  <script src="js/content102.js?v=5.18.1"></script>
+  <script src="js/content103.js?v=5.18.1"></script>
+  <script src="js/content104.js?v=5.18.1"></script>
+  <script src="js/content105.js?v=5.18.1"></script>
+  <script src="js/content106.js?v=5.18.1"></script>
+  <script src="js/content107.js?v=5.18.1"></script>
+  <script src="js/content108.js?v=5.18.1"></script>
+  <script src="js/content109.js?v=5.18.1"></script>
+  <script src="js/content110.js?v=5.18.1"></script>
+  <script src="js/content111.js?v=5.18.1"></script>
+  <script src="js/content112.js?v=5.18.1"></script>
+  <script src="js/content113.js?v=5.18.1"></script>
+  <script src="js/content24.js?v=5.18.1"></script>
+  <script src="js/content25.js?v=5.18.1"></script>
+  <script src="js/content26.js?v=5.18.1"></script>
+  <script src="js/content27.js?v=5.18.1"></script>
+  <script src="js/content28.js?v=5.18.1"></script>
+  <script src="js/content29.js?v=5.18.1"></script>
+  <script src="js/content30.js?v=5.18.1"></script>
+  <script src="js/content31.js?v=5.18.1"></script>
+  <script src="js/classes.js?v=5.18.1"></script>
+  <script src="js/audio.js?v=5.18.1"></script>
+  <script src="js/music.js?v=5.18.1"></script>
+  <script src="js/net.js?v=5.18.1"></script>
+  <script src="js/vendor/three.min.js?v=5.18.1"></script>
+  <script src="js/build3d.js?v=5.18.1"></script>
+  <script src="js/build.js?v=5.18.1"></script>
+  <script src="js/realms.js?v=5.18.1"></script>
+  <script src="js/modes.js?v=5.18.1"></script>
+  <script src="js/mode-ram.js?v=5.18.1"></script>
+  <script src="js/mode-bow.js?v=5.18.1"></script>
+  <script src="js/mode-raft.js?v=5.18.1"></script>
+  <script src="js/mode-row.js?v=5.18.1"></script>
+  <script src="js/progress-code.js?v=5.18.1"></script>
+  <script src="js/progress.js?v=5.18.1"></script>
+  <script src="js/badges.js?v=5.18.1"></script>
+  <script src="js/teacher-screen.js?v=5.18.1"></script>
+  <script src="js/accommodations.js?v=5.18.1"></script>
+  <script src="js/game.js?v=5.18.1"></script>
 </body>
 </html>

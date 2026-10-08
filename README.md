@@ -29,6 +29,16 @@ A game uploaded to Canvas can't send anything anywhere, so progress is shown to 
 
 Tests: `node tools/smoke-progress.js` (after `node tools/build-games.js`, `node tools/build-appsscript.js VA|ODY` and `node tools/build-canvas.js VA|ODY`).
 
+## v5.18.1 (2026-10-08) — every screen fits the 500 px Canvas frame, a "Main menu" way out, a one-window how-to
+
+- **Every screen fits the embed (width 100%, height 500) without scrolling.** Checked at 1000 × 500 and 760 × 500 by `node tools/smoke-frame.js`:
+  - **Title:** a smaller logo, the cards in one row and the buttons compact. The how-to paragraph is left to the tutorial.
+  - **Mode and episode screens:** the cards are in a grid of four, with their descriptions cut to one or two lines. The music chips are smaller.
+  - **Reading pop-up:** in a short frame the mode's how-to and the passage each scroll in their own box, so the card always fits and "Got it — play" is always in view.
+  - **Buttons over the game:** the volume slider is hidden in short frames (♪ still turns the music on and off, and the volume slider stays on the episode screen). "Exit full screen" moves so it stays inside the play area.
+- **"Main menu" during play:** a button in the side panel's top row, or Esc, pauses the level and asks "Leave this level?". "Keep playing" goes on; "Main menu" goes back to the title screen. The saved level, coins and progress stay; the level that was left starts over next time. Play time does not count while the question is up.
+- **The Level 1 how-to is one window** (it was nine cards behind "Tap to continue" with "Skip intro" beside them, and students skipped on the first card and never learned the game). Seven short lines (move, read, grab, bank it, right or wrong, danger, the field guide) and a big **Start Level N** button. The Odyssey game words it as Odysseus, Circe's wolves and Helios's chariot.
+
 ## v5.18.0 (2026-10-08) — accommodations a teacher turns on for one student
 
 Not the standard setup: everything is off until a teacher turns it on for one Chromebook. The teacher types the word **accommodations** in the nickname box on the title screen, enters the **teacher PIN** (4826, in each Canvas READ ME's SECTION 6; "Change the PIN on this Chromebook" sets another one), ticks options and saves. The settings live in `localStorage` `afterHours.v1.acc.<STATE>`. Each option can carry an **end date**, after which it switches itself off, so a support meant to fade can be planned. While anything is on, the title screen says "Accommodations on: …". Code: `js/accommodations.js` (all games), styles in `css/after-hours.css`; test: `node tools/smoke-acc.js` (after `node tools/build-games.js`).
