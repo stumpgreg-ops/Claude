@@ -34,8 +34,13 @@ html, body {
   padding: 16px; overflow: auto; touch-action: pan-y;
 }
 #title-screen { z-index: 20; }
+#state-screen { z-index: 22; }
 
 #skill-screen { z-index: 21; }
+#mode-screen { z-index: 21; }
+#mode-screen .packs { margin-top: 4px; }
+#mode-screen .card { width: min(280px, 92vw); }
+#mode-screen .card .name { font-size: 17px; }
 #skill-screen .packs { margin-top: 4px; }
 #skill-screen .card { width: min(280px, 92vw); }
 #skill-screen .card .name { font-size: 17px; }
@@ -50,8 +55,12 @@ html, body {
   pointer-events: none !important;
 }
 
+.ver { color: var(--dim); font-size: 12px; letter-spacing: .08em; margin: 0 0 8px; text-align: center; }   /* v5.4.1: the build's version, so a screen recording says which build it is */
 .kicker { letter-spacing: .14em; text-transform: uppercase; color: var(--gold); font-size: 12px; margin: 0 0 8px; }
 h1 { font-size: clamp(36px, 6vw, 64px); margin: 0; letter-spacing: .02em; }
+/* v5.5.1: the logo on the start screens (its glow already carries the dark plate; the heading text lives in the alt) */
+h1.logo { margin: 2px 0 0; line-height: 0; }
+h1.logo img { width: min(300px, 60vw); height: auto; display: block; margin: 0 auto; filter: drop-shadow(0 6px 18px rgba(245, 200, 66, .18)); }
 .tag { color: var(--dim); margin: 6px 0 18px; max-width: 640px; text-align: center; }
 .row { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin: 8px 0; }
 .packs { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 12px; }
@@ -618,4 +627,258 @@ h1 { font-size: clamp(36px, 6vw, 64px); margin: 0; letter-spacing: .02em; }
   .codex-card { padding: 14px; }
   .codex-head h2 { font-size: 20px; }
   .codex-list { grid-template-columns: 1fr; }
+}
+
+/* v4.9: state gateway — two big buttons, the whole point of the first screen */
+.state-tag { font-size: 20px; color: var(--ink); }
+.state-packs { margin-top: 10px; gap: 22px; }
+.state-card {
+  width: min(400px, 92vw); min-height: 220px; padding: 26px 24px; text-align: center;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+  border-width: 3px; border-radius: 18px;
+  background: radial-gradient(ellipse at 50% 0%, rgba(245,200,66,.10), transparent 60%), #141822;
+  transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+}
+.state-card .name { font-size: 44px; font-weight: 800; letter-spacing: .01em; line-height: 1.05; color: #fff; }
+.state-card .kind { font-size: 14px; letter-spacing: .12em; }
+.state-card .meta { font-size: 14px; max-width: 320px; }
+.state-card.state-nj { border-color: #4f9fe6; }
+.state-card.state-va { border-color: #e0703a; }
+.state-card.state-ody { border-color: #3fb8a6; }
+.state-card:hover, .state-card:focus-visible { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(0,0,0,.5); border-color: var(--gold); outline: none; }
+.state-card.selected { box-shadow: 0 0 0 3px rgba(245,200,66,.35); border-color: var(--gold); }
+.state-card.selected::after { content: "Last time"; font: 700 11px/1 "Trebuchet MS", sans-serif; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin-top: 4px; }
+#btn-state { color: var(--dim); }
+@media (max-width: 720px) { .state-card { min-height: 160px; } .state-card .name { font-size: 34px; } }
+
+/* v5.6: the realm card at the top of the reading pop-up, and the realm/perk pip in the HUD */
+.realm-card {
+  margin: 0 0 10px; padding: 10px 14px; border-radius: 12px; border: 1px solid rgba(245,200,66,.35);
+  background: linear-gradient(135deg, rgba(40,34,18,.92), rgba(18,20,28,.92)); color: var(--ink); font-size: 14px; line-height: 1.4;
+}
+.realm-card.hidden { display: none; }
+.realm-card .rk { margin: 0; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--dim); }
+.realm-card h3 { margin: 2px 0 4px; font-size: 22px; color: var(--gold); }
+.realm-card h3 span { font-size: 14px; font-weight: 600; color: var(--ink); }
+.realm-card p { margin: 3px 0; }
+.realm-card .foe b { color: #ffcf8a; }
+.realm-card .boss { color: #ffd0c8; }
+.realm-card .boss b { color: #ff8b7a; }
+.realm-card .perks b { color: #9aefc0; }
+.realm-card.mode-card .new { margin-top: 6px; padding: 4px 8px; border-left: 3px solid #ffd84a; background: rgba(255,216,74,.10); }
+.realm-card.mode-card .new b { color: #ffd84a; }
+/* v5.12: Eagle Swoop's card lists the birds in the rows */
+.realm-card.mode-card .birds { margin-top: 6px; padding: 4px 8px; border-left: 3px solid #9ad8ff; background: rgba(154,216,255,.08); }
+.realm-card.mode-card .birds b { color: #9ad8ff; }
+.realm-card.boss { border-color: rgba(255,120,100,.6); background: linear-gradient(135deg, rgba(60,14,10,.94), rgba(18,20,28,.94)); }
+.realm-card[data-realm="niflheim"] { border-color: rgba(160,210,255,.5); }
+.realm-card[data-realm="muspelheim"], .realm-card[data-realm="ragnarok"] { border-color: rgba(255,120,60,.55); }
+.realm-card[data-realm="vanaheim"], .realm-card[data-realm="midgard"] { border-color: rgba(140,210,120,.5); }
+.realm-card[data-realm="helheim"] { border-color: rgba(150,210,190,.45); }
+.pip.realm-pip { border-color: #8a6ad8; color: #d8c8ff; }
+.pip.realm-pip.boss { border-color: #ff6a4a; color: #ffb0a0; }
+.pip.realm-pip.hidden { display: none; }
+
+/* v5.7 shooter levels (js/modes.js): no minimap, FIRE on the big button, PULL only for Rune Rocks */
+#stage.mode-play #minimap { display: none; }
+#stage.mode-play #btn-shutter { display: none; }
+#stage.mode-play.mode-rocks #btn-shutter { display: inline-block; }
+.realm-card.mode-card { border-color: rgba(255,210,110,.6); background: linear-gradient(135deg, rgba(40,30,8,.94), rgba(18,20,28,.94)); }
+
+/* v5.7.3: Rune Rocks — the one-card "how to pull a rock in" pop-up */
+#beam-help {
+  position: absolute; inset: 0; z-index: 70;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(8, 10, 14, 0.62); padding: 16px;
+}
+#beam-help.hidden { display: none !important; }
+#beam-help .beam-card { max-width: 460px; width: min(460px, 94%); }
+#beam-help svg { display: block; margin: 4px 0 10px; background: #0b0f1a; border-radius: 10px; }
+#beam-help .beam-steps { margin: 0 0 10px; padding-left: 22px; color: var(--ink); font-size: 15px; line-height: 1.4; }
+#beam-help .beam-steps li { margin-bottom: 6px; }
+#beam-help .beam-warn { margin: 0 0 12px; color: #ffb89a; font-size: 14px; }
+#beam-help #beam-help-ok { min-height: 44px; min-width: 120px; }
+
+/* v5.7.6: Fenrir's Fangs on a boss level's win screen */
+.fang-row { margin: 8px 0 10px; text-align: center; }
+.fang-row.hidden { display: none; }
+.fang-row .fang-title { margin: 0 0 6px; color: var(--gold); font-weight: 700; letter-spacing: .06em; font-size: 13px; text-transform: uppercase; }
+.fang-row .fang { display: inline-flex; flex-direction: column; align-items: center; width: 64px; margin: 2px; color: #55606e; font-size: 20px; line-height: 1; }
+.fang-row .fang small { font-size: 10px; margin-top: 3px; color: #7a8594; }
+.fang-row .fang.on { color: #fff3c4; text-shadow: 0 0 8px rgba(255, 216, 74, .7); }
+.fang-row .fang.on small { color: var(--gold); }
+
+/* ── v5.17.2: short frames (the Canvas embed is the Page's full width and 500 px tall) ─────────────────── */
+/* menus: a screen taller than the frame scrolls from its top (plain centring cut the top off out of reach) */
+.screen { justify-content: safe center; }
+/* the reading pop-up: the whole card scrolls when it is taller than the frame, and "Got it — play" stays pinned
+   at its foot, so it can always be reached (a long mode card used to push it below the frame) */
+.read-card { overflow-y: auto; overscroll-behavior: contain; }
+.read-card > * { flex-shrink: 0; }
+.read-card > .read-scroll { flex-shrink: 1; min-height: 110px; }
+.read-card > .row:last-child {
+  position: sticky; bottom: -14px; z-index: 3; margin: 0 -20px -14px; padding: 8px 20px 14px;
+  background: inherit; border-top: 1px solid rgba(232, 176, 74, .25);
+}
+/* every other pop-up card fits the frame and scrolls inside it */
+.tut-card, .codex-card, .char-panel, #overlay .box { max-height: calc(100vh - 24px); overflow-y: auto; overscroll-behavior: contain; }
+#beam-help, #tut-overlay, #trap-overlay { padding: 8px; }
+#beam-help .beam-card { max-height: calc(100% - 4px); }
+/* a short, wide frame keeps the question panel at the side, so the game gets the frame's full height */
+@media (max-width: 1099px) and (min-width: 700px) and (max-height: 640px) {
+  #play { flex-direction: row; }
+  #hud {
+    flex: 0 0 clamp(250px, 31vw, 340px); width: clamp(250px, 31vw, 340px);
+    height: 100%; max-height: none;
+    border-bottom: none; border-right: 2px solid #c9b48a;
+  }
+  .eoc-body { display: flex; flex-direction: column; }
+  .choices { grid-template-columns: 1fr; }
+}
+@media (max-height: 640px) {
+  #hud { padding: 6px; }
+  .eoc { padding: 6px; }
+  .eoc-bar { gap: 4px 6px; margin-bottom: 4px; }
+  .pip { padding: 2px 8px; font-size: 11px; }
+  .passage { font-size: 13px; line-height: 1.36; }
+  .stem { font-size: 13px; }
+  .choices li { font-size: 12px; padding: 3px 6px; }
+  .read-card { padding: 12px 16px 14px; gap: 8px; }
+  .read-card > .row:last-child { margin: 0 -16px -14px; padding: 6px 16px 12px; }
+  .read-head h2 { font-size: 19px; }
+  .read-scroll .passage { font-size: 14.5px; line-height: 1.45; }
+  .tut-card { padding: 16px 18px 14px; }
+  .tut-card h2 { font-size: 21px; }
+  h1.logo img { width: min(190px, 34vh); }
+  /* the touch controls and the buttons over the game take less of a short frame */
+  :root { --hit: 42px; }
+  #controls { padding: 6px 8px 8px; }
+  #btn-action { width: 68px; height: 68px; font-size: 12px; }
+  #btn-shutter { width: 56px; height: 56px; font-size: 11px; }
+  #btn-fs, #btn-char, #btn-music-hud { min-height: 34px; padding: 5px 10px; font-size: 12px; white-space: nowrap; top: 8px; }
+  #music-vol-hud { top: 12px; }
+}
+
+/* ── v5.18: accommodations a teacher turns on for one student (js/accommodations.js) ───────────────────── */
+.acc-w { cursor: pointer; border-radius: 3px; }
+.acc-w.acc-def { text-decoration: underline dotted rgba(255, 224, 138, .85); text-underline-offset: 3px; text-decoration-thickness: 2px; }
+.acc-w:hover, .acc-w:focus-visible { background: rgba(255, 224, 138, .18); outline: none; }
+.acc-dict .acc-w.acc-tr:hover { background: rgba(159, 211, 214, .22); }
+#acc-pop {
+  position: fixed; z-index: 9800; display: none; max-width: min(320px, 90vw);
+  background: #1b1410; color: #f1ede4; border: 2px solid #e8b04a; border-radius: 10px;
+  padding: 8px 12px; box-shadow: 0 8px 24px rgba(0,0,0,.55); font: 15px/1.35 "Trebuchet MS", sans-serif;
+}
+#acc-pop .acc-pop-w { font-weight: 800; color: #ffe08a; font-size: 16px; }
+#acc-pop .acc-pop-def { margin-top: 4px; }
+#acc-pop .acc-pop-tr { margin-top: 6px; font-size: 18px; }
+#acc-pop .acc-pop-l { font-size: 12px; color: #c8c2b4; }
+.acc-say {
+  appearance: none; border: 1px solid #6a5a3a; background: rgba(40, 30, 20, .85); color: #ffe08a;
+  border-radius: 8px; padding: 1px 6px; font-size: 13px; line-height: 1.4; cursor: pointer; min-height: 0; vertical-align: middle;
+}
+.acc-say.on { background: #e8b04a; color: #140c0a; }
+.acc-say-q { margin-right: 6px; }
+.acc-bar { margin: 0 0 6px; }
+body.acc-audio .choices li { grid-template-columns: 18px 1fr auto; }
+.acc-s.acc-reading { background: rgba(255, 224, 138, .28); box-shadow: 0 0 0 2px rgba(255, 224, 138, .28); border-radius: 3px; }
+body.acc-big .passage { font-size: 17px; line-height: 1.5; }
+body.acc-big .stem { font-size: 17px; }
+body.acc-big .choices li { font-size: 15.5px; line-height: 1.35; }
+body.acc-big .read-scroll .passage { font-size: 19px; }
+body.acc-big .read-scroll .stem { font-size: 19px; }
+body.acc-big .read-scroll .choices li { font-size: 17px; }
+#acc-overlay { position: fixed; inset: 0; z-index: 9750; display: flex; align-items: center; justify-content: center; background: rgba(6, 8, 12, .86); padding: 8px; }
+#acc-overlay.hidden { display: none !important; }
+#acc-overlay .acc-card { max-width: 560px; width: min(560px, 96%); }
+#acc-overlay input[type=password], #acc-overlay input[type=date], #acc-overlay select {
+  min-height: 40px; border-radius: 8px; border: 2px solid #3a4150; background: #141822; color: var(--ink); padding: 6px 8px; font: inherit;
+}
+.acc-opt { border-top: 1px solid rgba(232, 176, 74, .25); padding: 8px 0; }
+.acc-opt label { cursor: pointer; }
+.acc-opt.dis { opacity: .55; }
+.acc-opt input[type=checkbox] { width: 18px; height: 18px; vertical-align: -3px; }
+.acc-row { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 6px; font-size: 13px; color: var(--dim); }
+.acc-small { font-size: 13px; color: var(--dim); margin: 2px 0 6px; }
+.acc-msg { min-height: 1.2em; color: #9aefc0; font-weight: 700; margin: 8px 0 0; }
+#acc-note { margin: 10px 0 0; color: #9fd3d6; font-size: 13px; text-align: center; }
+
+/* ── v5.18.1: "Main menu" during play (the side panel's top row, or Esc) ─────────────────────────────────── */
+#btn-quit {
+  margin-left: auto; min-height: 30px; padding: 3px 10px; font-size: 12px; border-radius: 8px; white-space: nowrap;
+  border-color: #6a5a3a; color: var(--gold);
+}
+.eoc-bar #job-sol { flex: 1 1 0; min-width: 0; }
+#quit-overlay { position: fixed; inset: 0; z-index: 95; display: flex; align-items: center; justify-content: center; background: rgba(6, 8, 12, .8); padding: 8px; }
+#quit-overlay.hidden { display: none !important; }
+#quit-overlay .quit-card p { margin: 0 0 12px; color: var(--ink); line-height: 1.4; }
+
+/* ── v5.18.1: the menus fit a frame 500 px tall without scrolling ───────────────────────────────────────── */
+@media (max-height: 640px) {
+  .screen { padding: 8px 12px; }
+  .screen .kicker { margin: 0 0 2px; font-size: 11px; }
+  .screen .ver { margin: 0 0 2px; font-size: 11px; }
+  .screen h1 { font-size: clamp(24px, 6.4vh, 40px); }
+  .screen .tag { margin: 2px 0 6px; font-size: 13px; line-height: 1.3; }
+  .screen .save-line { margin: 0 0 6px; font-size: 13px; }
+  .screen .row { margin: 4px 0; gap: 6px; }
+  .screen .btn { min-height: 38px; padding: 6px 12px; font-size: 14px; }
+  .screen .card { padding: 8px 12px; min-height: 0; }
+  .screen .card .kind { font-size: 11px; }
+  .screen .card .name { font-size: 16px; }
+  .screen .card .meta { font-size: 12px; line-height: 1.3; margin-top: 2px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .packs { gap: 8px; margin-bottom: 6px; }
+  /* the title screen: a small logo, the cards in one row, the how-to left to the tutorial */
+  h1.logo img { width: min(150px, 26vh) !important; }
+  #title-screen .packs .card { width: min(250px, 31vw); }
+  #title-screen .howto { display: none; }
+  .join-row { margin: 4px 0; gap: 8px; }
+  .join-row label { flex-direction: row; align-items: center; gap: 6px; }
+  .join-row input { min-height: 36px; min-width: 130px; padding: 4px 8px; }
+  .title-tools { margin: 2px 0 4px; }
+  #btn-teacher-screen { margin: 4px auto 0 !important; padding: 2px 8px !important; }
+  #acc-note { margin: 4px 0 0; }
+  /* the mode and episode screens: the cards in a grid of three */
+  #mode-screen .packs, #skill-screen .packs {
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); width: min(960px, 100%); margin-top: 2px;
+  }
+  #mode-screen .card, #skill-screen .card { width: auto !important; }
+  #mode-screen .card .meta { -webkit-line-clamp: 2; }
+  .music-pick { margin: 2px 0 4px; }
+  .music-pick-label { margin: 0 0 3px; }
+  .chips { gap: 4px; }
+  .chip { min-height: 28px; padding: 3px 9px; font-size: 12px; }
+  .music-vol-row { margin: 4px 0 0; }
+}
+
+/* v5.18.1: the Level 1 how-to in one window */
+.tut-list { margin: 0; padding-left: 20px; display: grid; gap: 5px; font-size: 15px; line-height: 1.35; }
+.tut-list b { color: var(--gold); }
+#tut-card { max-width: 520px; width: min(520px, 94%); }
+#tut-skip { min-width: 180px; margin-top: 10px; }
+.tut-hint:empty { display: none; }
+@media (max-height: 640px) { .tut-list { font-size: 13.5px; gap: 3px; } #tut-skip { margin-top: 6px; } }
+@media (max-height: 640px) {
+  #mode-screen .packs, #skill-screen .packs { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+  #mode-screen .card .meta, #skill-screen .card .meta { -webkit-line-clamp: 2; font-size: 11.5px; }
+  .screen h1 { font-size: clamp(22px, 6vh, 34px); }
+  .music-pick-label .dim { display: none; }
+  /* the reading pop-up fits the frame: the mode's how-to and the passage each scroll in their own box */
+  .read-card { overflow: hidden; }
+  .read-card > .realm-card { flex: 0 1 auto; min-height: 56px; max-height: 30%; overflow-y: auto; }
+  .read-card > .read-scroll { flex: 1 1 auto; min-height: 90px; }
+  .read-card > .row:last-child { position: static; margin: 0; padding: 0; border-top: none; background: none; }
+  .read-hint { font-size: 12px; }
+}
+@media (max-height: 640px) and (max-width: 900px) {
+  .chip { min-height: 24px; padding: 2px 7px; font-size: 11px; }
+  #skill-screen .card .meta, #mode-screen .card .meta { -webkit-line-clamp: 1; }
+}
+@media (max-height: 640px) {
+  /* the buttons over the game stay inside the play area (they are placed from its right edge) */
+  #music-vol-hud { display: none; }
+  #btn-fs { right: 340px; }
+}
+@media (max-height: 640px) and (max-width: 900px) {
+  #btn-fs { right: 286px; top: 50px; }
 }
