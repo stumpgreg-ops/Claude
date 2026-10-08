@@ -64,11 +64,11 @@
           id: "forest-rate",
           sol: "ES.6.b",
           sub: "ES.6.b.2",
-          stem: "A county's pine forests take about 30 years to regrow, so roughly 3 percent of the forest can be replaced each year. If the county cuts 5 percent of its forest every year, the forest will most likely —",
+          stem: "A county's pine forests take about 30 years to regrow, so roughly 3 percent of the forest can be replaced each year. If the county cuts 5 percent of its forest every year, its supply of mature timber will most likely —",
           choices: [
-            { letter: "A", text: "grow larger, because each cut area is replanted" },
-            { letter: "B", text: "stay the same size, because pine is renewable" },
-            { letter: "C", text: "turn into coal within a few hundred years" },
+            { letter: "A", text: "grow larger, because each cut area is replanted at once" },
+            { letter: "B", text: "stay the same, because pine is a renewable resource" },
+            { letter: "C", text: "turn into coal within a few hundred more years" },
             { letter: "D", text: "shrink, because cutting is faster than regrowth" }
           ],
           correct: "D"
@@ -566,12 +566,12 @@
           id: "data",
           sol: "ES.8.c",
           sub: "ES.8.c.2",
-          stem: "Which conclusion is best supported by the data in the table?",
+          stem: "Which conclusion about the creek is best supported by the pH and fish data?",
           choices: [
             { letter: "A", text: "The creek above the mine is more acidic than the mine water." },
             { letter: "B", text: "The limestone channel makes the water in the creek more strongly acidic." },
             { letter: "C", text: "The number of fish species rises as the pH goes down." },
-            { letter: "D", text: "The mine water is acidic, but some fish live below the treated water." }
+            { letter: "D", text: "The mine water is acidic, yet six fish species live where treated water enters." }
           ],
           correct: "D"
         },
@@ -743,7 +743,7 @@
           stem: "If these processes continue for hundreds of years, the meander will most likely —",
           choices: [
             { letter: "A", text: "straighten as sand fills in the outside of the bend" },
-            { letter: "B", text: "grow wider as the outside bank wears back and the bar builds" },
+            { letter: "B", text: "bend more sharply as the outside bank wears back and the bar builds" },
             { letter: "C", text: "stay in the same place, because tree roots hold every bank" },
             { letter: "D", text: "move uphill, away from the floodplain and toward the nearby ridges" }
           ],
