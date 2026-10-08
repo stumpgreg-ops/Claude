@@ -4,7 +4,8 @@
    deterministically: the sea is made flat and the random hazards are frozen, then letters, rocks,
    Poseidon's waves and Ino's veil are put on the sea right in front of the raft.
    It proves: the mode card shows on the mode screen; the right letter scores; a wrong letter costs a
-   life and is crossed out (also on later buoys); a hop clears a wrong buoy; stars need a hop and
+   life and is crossed out (also on later buoys); a hop clears a wrong buoy (one held ▲,
+   pressed a quarter second before the buoy, at level 1's and 99's sea speed); stars need a hop and
    sunken buoys a dive; Poseidon's wave is telegraphed, swamps a raft that is not on top of it (a life)
    and is ridden by a raft that is; rocks cost a life and can be jumped; Ino's veil takes a hit;
    Select TWO needs both letters; raftParams never gets easier from level 2 to 100 and is much harder
@@ -178,6 +179,20 @@ var srv = http.createServer(function (req, res) {
     await until(function () { return h1.touched || passed(h1); });
     o.hop = { touched: h1.touched, strikes: s.strikes, hops: S.hops - hops0, frames: frames - f0 };
 
+    /* one held ▲, pressed a quarter second before the hull reaches the buoy (a student's reaction), sails over a wrong buoy at level 1's and level 99's sea speed */
+    o.glide = {};
+    var scroll0 = S.P.scroll;
+    for (var gl = 0, gn = [1, 99]; gl < gn.length; gl++) {
+      quiet(); S.P.scroll = s.raftParams(gn[gl]).scroll;
+      await until(function () { return !R.air; });
+      var hg = add(wrong2, "buoy", 320), gh0 = S.hops, gs0 = s.strikes;
+      drive(function () { keys(hg.x - hg.r - (S.rx + S.lbox.r * S.RS) <= Math.max(30, 0.25 * S.P.scroll) && !passed(hg), false); });
+      await until(function () { return hg.touched || passed(hg); });
+      drive(null); keys(false, false);
+      o.glide["L" + gn[gl]] = { touched: hg.touched, strikes: s.strikes - gs0, hops: S.hops - gh0, behind: passed(hg) };
+    }
+    S.P.scroll = scroll0;
+
     /* a star: out of reach unless you hop; the right one answers */
     quiet();
     var s1 = add(wrong2, "star", 300);
@@ -300,6 +315,8 @@ var srv = http.createServer(function (req, res) {
   check(run.wrong.touched && run.wrong.strikes === 1 && /WRONG LETTER/.test(run.wrong.label) && run.wrong.state === "wrong" && run.wrong.cross, "a wrong letter costs a life and is crossed out: " + JSON.stringify(run.wrong));
   check(run.wrong.later.state === "wrong" && run.wrong.later.cross && run.wrong.laterTouched && run.wrong.laterCost === 0 && run.wrong.queue.length === run.letters.length, "the wrong letter is crossed out on later buoys too, and touching it again costs nothing: " + JSON.stringify(run.wrong.later) + " queue " + run.wrong.queue);
   check(!run.hop.touched && run.hop.strikes === 0 && run.hop.hops > 0, "holding ▲ hops the raft over a wrong buoy: " + JSON.stringify(run.hop));
+  check(["L1", "L99"].every(function (k) { var g = run.glide[k]; return g && !g.touched && g.strikes === 0 && g.hops === 1 && g.behind; }),
+    "one held ▲, pressed a quarter second ahead, sails the raft over a wrong buoy at level 1's and level 99's speed (no touch, no life, the buoy left behind): " + JSON.stringify(run.glide));
   check(!run.starSkip.touched && run.starSkip.strikes === 0 && run.star.touched && run.star.score === 1 && run.star.strikes === 0, "a star hangs out of reach unless you hop; hopping to the right one answers: " + JSON.stringify({ skip: run.starSkip, star: run.star }));
   check(!run.deepSkip.touched && run.deepSkip.strikes === 0 && run.deep.touched && run.deep.score === 1 && run.deep.lowered === "md-raft-raft-2", "a sunken buoy: the raft sails over it unless it dives (▼, sail lowered); diving to the right one answers: " + JSON.stringify({ skip: run.deepSkip, deep: run.deep }));
   check(run.warn.state === "warn" && run.warn.label && run.warn.x === run.warn.W + 60 && run.warn.rising && run.warn.after === "run", "Poseidon's wave is telegraphed: a dark swell rises at the right edge with a warning before it rolls in: " + JSON.stringify(run.warn));

@@ -84,7 +84,8 @@ var gameName = GAME_NAMES[st] || ("Sol's Labyrinth (" + st + ")");
 var teacherBuild = require("./build-teacher"), PB = require("../js/progress-code.js").BUILDS[st];
 var teacherName = teacherBuild.fileName(st), teacherPath = path.join(outAll, teacherName);
 fs.writeFileSync(teacherPath, teacherBuild.build(st, man.version));
-/* v5.17.2: as wide as the Canvas page and 500 pixels tall; every screen of the game fits in 500 (js/fit.js) */
+/* v5.17.2: the full width of the Page and 500 px tall (the teacher's choice; it was height 700). The game's layout
+   fits that short frame (css/after-hours.css, "short frames"). */
 var EMBED = '<iframe src="/courses/COURSE/files/NUMBER/preview" width="100%" height="500" allowfullscreen="allowfullscreen"></iframe>';
 /* v5.15: the READ ME is in numbered SECTIONS with a contents list, so a teacher can jump (Ctrl+F "SECTION 4") to
    what they need instead of reading it all. The full zip and the update zip share the sections; only the order
@@ -151,8 +152,7 @@ function S_embed() {
     "   With the example numbers it would be:",
     "   " + EMBED.replace("COURSE", "152432").replace("NUMBER", "60512345"),
     "",
-    "The game fits completely in 500 pixels of height: every screen, window and button. Want it bigger? Change",
-    "height=\"500\" (try 600 or 700), or have students use the game's full-screen button.",
+    "Too small or too tall? Change height=\"500\" (try 600 or 700). The game fits any height from 500 up.",
     "",
     "There is no separate embed code for the teacher screen: it is inside the game (the hidden Teacher link,",
     "SECTION 4.0)."
@@ -262,8 +262,7 @@ function S_update(update) {
 function S_trouble() {
   return [
     "- The game says \"Can't find ...\": that file is missing from the folder. Upload it with exactly the same name.",
-    "- The game looks small: it is made to fit height=\"500\". Change it to 600 or 700 in the embed code, or use",
-    "  the game's full-screen button.",
+    "- The game is too small or too tall: change height=\"500\" in the embed code (try 600 or 700).",
     "- Students want it bigger: the game has its own full-screen button.",
     "- Download CSV or the import file doesn't download inside Canvas: open " + teacherName + " from this zip on your",
     "  computer (double-click it) and drop the files there. It is the same teacher screen.",
@@ -271,13 +270,40 @@ function S_trouble() {
     "- A student lost their progress: see SECTION 5, Restore my progress."
   ];
 }
+/* v5.18: the accommodations a teacher turns on for one student; the PIN comes from js/accommodations.js */
+var ACC_PIN = (/PIN0 = "(\d+)"/.exec(fs.readFileSync(path.join(__dirname, "..", "js", "accommodations.js"), "utf8")) || [])[1] || "(see js/accommodations.js)";
+function S_acc() {
+  var words = st === "ODY";
+  return [].concat(
+    ["Accommodations are NOT on for anyone until you turn them on, one Chromebook at a time. They are for the",
+     "student who uses that Chromebook (that browser profile) and stay until you turn them off or their end date",
+     "passes, so a support meant to fade can be planned (pick an \"Ends after\" date)."],
+    sub("Turn them on for a student"),
+    ["1. On the student's Chromebook, open the game. On the title screen type the word  accommodations  in the",
+     "   nickname box (it is cleared again).",
+     "2. Enter the teacher PIN:  " + ACC_PIN + "   (keep it from students; \"Change the PIN on this Chromebook\" sets",
+     "   another one for that Chromebook).",
+     "3. Tick what the student needs, pick the language or speed, add an end date if you want one, and click Save.",
+     "   The title screen then shows \"Accommodations on: ...\" so you can see at a glance what is on.",
+     "4. To change or stop them later, do the same and untick, or click Turn all off."],
+    sub("What each one does"),
+    words ? ["- Tap a word for its meaning: difficult words in the passage, question and answers are underlined; a click",
+     "  shows a short definition."] : ["- Tap a word for its meaning: not in this game yet (offered in the Odyssey game)."],
+    words ? ["- Word-to-word dictionary (questions and answers only): a click on any word in the question or the answers",
+     "  shows it in Spanish, Arabic, Farsi or Russian."] : ["- Word-to-word dictionary: not in this game yet (offered in the Odyssey game)."],
+    ["- On a vocabulary question, the word the question asks about is never defined or translated.",
+     "- Read aloud: speaker buttons read the passage (sentence by sentence, highlighted), the question and each",
+     "  answer, with the Chromebook's own voice (no internet needed). A slower voice can be chosen.",
+     "- Larger text: bigger text in the side panel and the reading pop-up.",
+     "- Slower game: the whole game runs at 85, 75 or 60 % speed (enemies, timers, rhythms, throws)."]);
+}
 function readme(update) {
   var order = update
     ? [["What's in this zip", S_inZip], ["Update the game already in Canvas", S_update], ["The embed codes (copy and paste)", S_embed],
-       ["Grading with progress codes (easiest: the ZIP download)", S_grading], ["Students: progress codes and Restore", S_students], ["Troubleshooting", S_trouble]]
+       ["Grading with progress codes (easiest: the ZIP download)", S_grading], ["Students: progress codes and Restore", S_students], ["Accommodations for a student (teacher PIN)", S_acc], ["Troubleshooting", S_trouble]]
     : [["What's in this zip", S_inZip], ["Set up the game in Canvas (first time)", S_setup], ["The embed codes (copy and paste)", S_embed],
        ["Grading with progress codes (easiest: the ZIP download)", S_grading], ["Students: progress codes and Restore", S_students],
-       ["Updating to a new version", S_update], ["Troubleshooting", S_trouble]];
+       ["Updating to a new version", S_update], ["Accommodations for a student (teacher PIN)", S_acc], ["Troubleshooting", S_trouble]];
   var L = [gameName + " - version " + man.version + (update ? " - UPDATE" : " - FIRST-TIME SETUP"), RULE, "",
     update ? "This zip UPDATES a game that is already in Canvas." : "This zip SETS UP the game in Canvas for the first time.",
     "Jump to a section with Ctrl+F (Cmd+F on a Mac) and its name, like SECTION 4.", "", "CONTENTS"];
