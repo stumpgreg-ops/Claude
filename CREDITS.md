@@ -1,6 +1,6 @@
 # Credits
 
-SOL Labyrinth is built with Phaser 3 (MIT). Written for NNPS students practising the VA EOC Reading SOL.
+SOL Labyrinth is built with Phaser 3.80.1 (MIT, shipped in `js/vendor/phaser.min.js`) and PeerJS 1.5.4 (MIT, `js/vendor/peerjs.min.js`). Written for NNPS students practising the VA EOC Reading SOL.
 
 ## Music
 All background music is from **Game Background Music Pack** by **EpsilonGamesOfficial** (itch.io, name-your-own-price):
@@ -16,12 +16,15 @@ The reward pieces in `assets/build/` are 2D sprites pre-rendered from two 3D pac
 - **Modular Village Pack** by **Keith at Fertile Soil Productions** (itch.io, name-your-own-price):
   https://fertile-soil-productions.itch.io/modular-village-pack
   License: Creative Commons Zero v1.0 Universal (CC0). No attribution required; credited with thanks.
-  Used for the 29 Town pieces (cottages, houses, well, carts, market stalls, dock, windmill, watermill, bell tower, market square…).
+  Used for the Town pieces (cottages, houses, well, carts, market stalls, dock, windmill, watermill, bell tower, market square…). The Slate and Thatch style variants in `assets/build/styles/` are recolours of these renders.
 
 - **FREE Castle and Fort Builder Pack** by **MCSTEEG** (itch.io, name-your-own-price):
   https://mcsteeg.itch.io/castle-and-fort-builder-pack
   Terms (from the itch page): "You may use this asset in your animation or game projects, both personally and commercially. DO NOT redistribute this asset as your own."
-  Used for the 23 Castle pieces (walls, ramparts, gates, towers, keep, halls, citadel).
+  Used for the Castle pieces (walls, gates, towers, keep, halls, citadel). The Sandstone and Whitestone style variants in `assets/build/styles/` are recolours of these renders.
+
+## Castle tile kit
+The castle in the reward builder is built from **Castle Kit 1.0** by **Kenney** (www.kenney.nl), Creative Commons Zero (CC0). The isometric renders live in `assets/build/kit/`; the Crimson, Forest and Gold sets are recolours of Kenney's blue accents made by `tools/make-castle-kit.py`. No attribution required; credited with thanks.
 
 ## Characters, interiors and props
 - **Mana Seed Character Base** by Seliel the Shaper (free demo) — Sol's character sheets.
@@ -30,3 +33,16 @@ The reward pieces in `assets/build/` are 2D sprites pre-rendered from two 3D pac
 
 ## Sound effects
 All in-game sound effects (grab, alarm, camera beep, catch, chime…) are synthesised at runtime in `js/audio.js`; no sample files.
+
+## three.js (v5.5)
+The castle builder's 3D view uses **three.js** r160 (MIT licence, © 2010-2024 three.js authors), bundled with its glTF and OBJ loaders into `js/vendor/three.min.js`. https://threejs.org
+
+## KayKit castle (v5.3)
+The Great castle, town hall, barracks, houses, mills, towers, soldiers, carts and the other `k-` pieces are rendered from **KayKit Medieval Hexagon Pack** by **Kay Lousberg** (www.kaylousberg.com), Creative Commons Zero (CC0). "This content is free to use in personal, educational and commercial projects." Rendered to isometric sprites by `tools/render-kaykit.js` and, since v5.5, drawn from the pack's own glTF models in the browser (`tools/pack-models.js`); the four team colours are the game's four house colours. Credited with thanks. https://kaylousberg.itch.io/kaykit-medieval-hexagon
+
+## Extra castle decorations (v5)
+- **Kenney Fantasy Town Kit** (CC0) — house walls and roofs, market stalls, carts, hedges, fences, fountains, lanterns, windmill, water wheel, trees, rocks. https://kenney.nl/assets/fantasy-town-kit
+- **Kenney Nature Kit** (CC0) — trees, flowers, bushes, mushrooms, rocks, statues, obelisk, column, campfire, tent, crops, bridge. https://kenney.nl/assets/nature-kit
+- **Kenney Graveyard Kit** (CC0) — benches, lamp posts, urns, pillars and the great column. https://kenney.nl/assets/graveyard-kit
+- **Kenney Animal Pack Redux** (CC0) — the cow, horse, pig, goat, chicken, dog, rabbit, duck and owl stand-ups. https://kenney.nl/assets/animal-pack-redux
+All are cropped, re-anchored and scaled to the castle kit's cell by `tools/make-castle-kit.py`; the stone knight and king are desaturated Castle Kit figures.

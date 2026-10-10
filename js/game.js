@@ -1,4 +1,17 @@
 (function () {
+  /* v4.9.6: the state gateway is the first thing on screen on every visit. It is shown
+     before anything else in this file runs, so a slow load or an error further down can
+     never leave the title screen up first. index.html also ships with the gateway visible. */
+  /* v5.2: a build made for one state (tools/build-games.js sets window.SOL_STATE) has no
+     gateway at all — the title screen for that state is the first thing on screen. */
+  try {
+    var _gw = document.getElementById("state-screen"), _ts = document.getElementById("title-screen"), _ss = document.getElementById("skill-screen"), _ms = document.getElementById("mode-screen");
+    var _locked = !!(typeof window !== "undefined" && window.SOL_STATE);
+    if (_gw) _gw.classList.toggle("hidden", _locked);
+    if (_ts) _ts.classList.toggle("hidden", !_locked);
+    if (_ss) _ss.classList.add("hidden");
+    if (_ms) _ms.classList.add("hidden");
+  } catch (eGw) {}
   var WORLD_W = 2400;
   var WORLD_H = 2000;
   var WALK = 268;
@@ -28,13 +41,38 @@
   var LS_CLASS = "afterHours.v1.class";
   var LS_FAMILY = "afterHours.v1.family";
   var LS_STRAND = "afterHours.v1.strand";
+  var LS_GAMEMODE = "afterHours.v1.gameMode";   /* v5.8.3: "ALL", "maze" or a shooter's id */
   var LS_CHAR = "afterHours.v1.charPreset";
+  var LS_STATE = "afterHours.v1.state";
+  var LS_ADAPT = "afterHours.v1.adapt.";
+  /* v4.9: the gateway screen picks a state; each state has its own grade cards. */
+  var STATE_DEFS = {
+    VA: { name: "Virginia", kicker: "NNPS · VA 2024 EOC Reading practice skills · 100 levels", families: ["G9", "G10", "G11"], def: "G9", hud: "Teacher" },
+    NJ: { name: "New Jersey", kicker: "NJSLA-ELA · Grade 5 reading practice · 100 levels", families: ["NJ5"], def: "NJ5", hud: "NJSLS" },
+    /* v5.9: the Odyssey game (English 9, Unit 2 "Challenge Accepted!") — its own build, tools/build-games.js ODY */
+    ODY: { name: "The Odyssey", kicker: "English 9 · Unit 2: Challenge Accepted! · The Odyssey · 100 levels", families: ["ODY"], def: "ODY", hud: "Teacher" }
+  };
+  /* v5.2: the New Jersey and Virginia games are separate builds. tools/build-games.js writes
+     window.SOL_STATE into each build's index.html; that build never shows the gateway, never
+     offers the other state, and drops the other state's packs from the pool (the per-state
+     content files are left out of the build, and content.js is pruned here). */
+  var LOCKED_STATE = (typeof window !== "undefined" && window.SOL_STATE && STATE_DEFS[window.SOL_STATE]) ? String(window.SOL_STATE) : null;
+  if (LOCKED_STATE) {
+    try {
+      var _lockFams = STATE_DEFS[LOCKED_STATE].families, _lockPacks = window.HEIST_PACKS;
+      if (_lockPacks && _lockPacks.length) {
+        for (var _lp = _lockPacks.length - 1; _lp >= 0; _lp--) {
+          if (_lockFams.indexOf(_lockPacks[_lp].family) === -1) _lockPacks.splice(_lp, 1);
+        }
+      }
+    } catch (eLock) {}
+  }
 
-  var Input = { ax: 0, ay: 0, act: false, actEdge: false, sprint: false, shutterEdge: false };
+  var Input = { ax: 0, ay: 0, act: false, actEdge: false, sprint: false, shutterEdge: false, shutterHeld: false };
   var keysHeld = { n: 0, s: 0, w: 0, e: 0 };
   var gameRef = null;
   var playScene = null;
-  var cfg = { family: "G9", strand: "ALL", night: 1 };
+  var cfg = { family: "G9", strand: "ALL", night: 1, state: null };
   var pendingNight = 1;
 
   /* Mana Seed school presets (fstr/pfpn only — never undi/boxr) */
@@ -2946,6 +2984,33 @@
     usedMem[key] = (arr || []).slice();
     try { localStorage.setItem(LS_USED + key, JSON.stringify(usedMem[key])); } catch (e) {}
   }
+  /* ── v4.9 adaptive reading model ─────────────────────────────────────────
+     One record per family. ability 1..3 is the reading level the picker aims
+     for; it climbs when a question is answered with no wrong tile grabbed and
+     drops when a wrong tile is picked up. Per-strand right/wrong counts let
+     "All skills" nights lean toward the weaker strands. */
+  function loadAdapt(family) {
+    try {
+      var a = JSON.parse(localStorage.getItem(LS_ADAPT + family) || "null");
+      if (a && typeof a === "object" && a.v === 1 && a.ability >= 1 && a.ability <= 3) { a.strands = a.strands || {}; return a; }
+    } catch (e) {}
+    return { v: 1, ability: 1.6, strands: {}, seen: 0 };
+  }
+  function saveAdapt(family, a) { try { localStorage.setItem(LS_ADAPT + family, JSON.stringify(a)); } catch (e) {} }
+  function adaptEvent(scene, kind, claim) {
+    /* v5.13: every answer and wrong pick also goes to the progress record (js/progress.js) */
+    if (window.SolProgress) { try { SolProgress.answer(kind, claim); } catch (eP) {} }
+    var a = scene.adapt;
+    if (!a) return;
+    var st = (claim && claim.strand) || "RL";
+    var rec = a.strands[st] || (a.strands[st] = { r: 0, w: 0 });
+    if (kind === "wrong") { rec.w++; a.ability = Math.max(1, a.ability - 0.18); }
+    else if (kind === "clean") { rec.r++; a.ability = Math.min(3, a.ability + 0.12); }
+    else rec.r++;                                   /* right after a wrong grab: no level change */
+    a.seen++;
+    saveAdapt(scene.family, a);
+  }
+  function adaptLevelLabel(a) { var v = a ? a.ability : 1.6; return v < 1.5 ? 1 : v < 2.5 ? 2 : 3; }
   function trapSeen(key) {
     try { return localStorage.getItem(key) === "1"; } catch (e) { return false; }
   }
@@ -3310,45 +3375,21 @@
      rules jammed together, which is unreadable at a glance and taught nothing.
      Traps are deliberately NOT explained here — that is what the TAB field guide
      is for, and the last card teaches TAB instead. */
+  /* v5.18.2: ONE window (it was nine cards, and players skipped them): everything a first level needs, in a list */
   function tutorialCards(scene) {
     var need = (scene && scene.needExtracts) || 5;
     var strikes = (scene && scene.needStrikes) || 3;
     return [
       {
-        title: "You are Sol",
-        body: "You are in the school after dark. Move with the arrow keys, WASD, or the pad on screen."
-      },
-      {
-        title: "Read the question",
-        body: "The passage and the question are in the panel on the left. Read it before you move — the answer is the only thing that gets you out."
-      },
-      {
-        title: "Go get your answer",
-        body: "Letters A, B, C and D are sitting out on the map. Walk onto the one you think is right and press SPACE to pick it up."
-      },
-      {
-        title: "Carry it to the EXIT",
-        body: "Take your letter to the green EXIT · SAFE booth. That banks one extract. You need " + need + " to finish the night."
-      },
-      {
-        title: "Right answer, real reward",
-        body: "A correct letter calls Sol's CHARIOT — for a few seconds you can run straight over the wolves. A wrong letter sets off the alarm instead."
-      },
-      {
-        title: "The Hati hunt you",
-        body: "Wolves patrol the halls. If one catches you, that is a strike. " + strikes + " strikes and the night is over."
-      },
-      {
-        title: "Two safe booths",
-        body: "START and EXIT are safe. The Hati cannot see you inside either one. Duck in when a chase gets close."
-      },
-      {
-        title: "Sprint is loud",
-        body: "Hold SPRINT to run. You are faster, but the wolves hear you coming — so save it for when you are already caught out."
-      },
-      {
-        title: "Press TAB any time",
-        body: "The halls are full of pads and pickups. Press TAB to open your field guide: it lists everything you have unlocked, what each one does to you, and what is still coming. The game pauses while it is open — check it whenever you see something new."
+        title: "How to play",
+        html: "<ul>" +
+          "<li><b>Move</b> with the arrow keys, WASD or the pad on screen.</li>" +
+          "<li><b>Read</b> the passage and the question in the panel on the left.</li>" +
+          "<li><b>Find the answer:</b> letters A, B, C and D are out on the map. Walk onto the right one and press SPACE to pick it up, then carry it to the green <b>EXIT \u00b7 SAFE</b> booth. Bank " + need + " to finish the level.</li>" +
+          "<li>A <b>right letter</b> calls Sol's CHARIOT: for a few seconds you can run straight over the wolves. A <b>wrong letter</b> sets off the alarm and costs a life, like being caught. " + strikes + " strikes end the level.</li>" +
+          "<li>The <b>Hati</b> hunt you. START and EXIT are safe booths: they cannot see you inside. SPRINT is faster but loud.</li>" +
+          "<li>Press <b>TAB</b> any time for the field guide (the game pauses).</li>" +
+          "</ul>"
       }
     ];
   }
@@ -3499,7 +3540,7 @@
     var h = '<div class="codex-item" style="border-left-color:' + c.hue + '">';
     h += '<div class="row1"><span class="cicon">' + (e.icon || "•") + "</span>";
     h += '<span class="cname">' + e.name + "</span>" + codexCatChip(e.cat);
-    if (lockedNight) h += '<span class="cunlock">Night ' + lockedNight + "</span>";
+    if (lockedNight) h += '<span class="cunlock">Level ' + lockedNight + "</span>";
     h += "</div>";
     if (!lockedNight) {
       h += '<p class="ceffect">' + e.effect + "</p>";
@@ -3632,7 +3673,7 @@
       effect: "Freezes every Hati on the map for about 4 seconds.",
       tip: "Save it for when you are already being chased." },
     { key: "fruit", name: "Sun Fruit", cat: "SCORE", icon: "🍒",
-      effect: "Bonus points. Worth more on later nights.",
+      effect: "Bonus points. Worth more on later levels.",
       tip: "It bounces along a path — cut it off, don't chase it." },
     { key: "hotFoot", name: "Hot Foot", cat: "BOOST", icon: "👟",
       effect: "Short speed burst, and it stays quiet.",
@@ -3644,7 +3685,7 @@
       effect: "You breathe fire in front of you for 3 seconds. Any Hati in the cone goes back to the pen.",
       tip: "You have to aim it — face the wolf before you walk on." },
     { key: "treasure", name: "Stage Treasure", cat: "SCORE", icon: "🎁",
-      effect: "Bonus points that grow each night.",
+      effect: "Bonus points that grow each level.",
       tip: "Points only. Don't take a risk for it." },
     { key: "moneyBag", name: "Money Bag", cat: "FREEZE", icon: "💰",
       effect: "Freezes only the Hati near you, and pays more each time you chain it.",
@@ -3657,7 +3698,7 @@
       tip: "Breaks a chase, but they search YOUR spot — keep moving after." },
     { key: "bone", name: "Dog Bone", cat: "SMASH", icon: "🦴",
       effect: "Banks a bone (up to 3). Press SPACE to spend one: for 4 seconds, touching a Hati sends it to the pen.",
-      tip: "The only power you choose when to use. Bones carry to later nights." },
+      tip: "The only power you choose when to use. Bones carry to later levels." },
     { key: "lockGate", name: "Lock Gate", cat: "MAZE", icon: "🚧",
       effect: "Seals a bar across the hall for about 4 seconds. Hati have to go around.",
       tip: "It blocks you too. Don't seal yourself into a dead end." },
@@ -3785,7 +3826,7 @@
     if (n >= 40) iframe = Math.min(iframe, 700);
     return {
       n: n,
-      name: "Night " + n,
+      name: "Level " + n,
       extracts: extracts,
       strikes: strikes,
       startLanes: startLanes,
@@ -3845,14 +3886,33 @@
     return NIGHT_THEMES[Math.floor((n - 1) / 10) % NIGHT_THEMES.length];
   }
 
-  function readSavedNight() {
-    var v = parseInt(localStorage.getItem(LS_NIGHT) || "1", 10);
+  /* v5.15: each game mode keeps its own level (afterHours.v1.night.<mode>: ALL for Mixed, maze, raid ...), so a
+     student can be on level 40 in Eagle Swoop and level 12 in the Labyrinth. LS_NIGHT still holds the level last
+     played (in any mode). An older save had one level for every mode: it moves to the mode last picked. */
+  function nightKey(m) { return LS_NIGHT + "." + (m || (cfg && cfg.gameMode) || "ALL"); }
+  function migrateNight() {
+    try {
+      if (localStorage.getItem(LS_NIGHT + ".migrated")) return;
+      var old = localStorage.getItem(LS_NIGHT), m = localStorage.getItem(LS_GAMEMODE) || "ALL";
+      if (old && !localStorage.getItem(LS_NIGHT + "." + m)) localStorage.setItem(LS_NIGHT + "." + m, old);
+      localStorage.setItem(LS_NIGHT + ".migrated", "1");
+    } catch (e) {}
+  }
+  function hasSavedNight(m) {
+    migrateNight();
+    try { return !!localStorage.getItem(nightKey(m)); } catch (e) { return false; }
+  }
+  function readSavedNight(m) {
+    migrateNight();
+    var v = 1;
+    try { v = parseInt(localStorage.getItem(nightKey(m)) || "1", 10); } catch (e) {}
     if (!(v >= 1 && v <= 100)) v = 1;
     return v;
   }
-  function writeSavedNight(n) {
+  function writeSavedNight(n, m) {
     n = clamp(n, 1, 100);
-    try { localStorage.setItem(LS_NIGHT, String(n)); } catch (e) {}
+    migrateNight();
+    try { localStorage.setItem(nightKey(m), String(n)); localStorage.setItem(LS_NIGHT, String(n)); } catch (e) {}
   }
 
   function texRect(scene, key, w, h, fill, stroke, sw) {
@@ -4288,10 +4348,10 @@
   }
 
   class NightScene extends Phaser.Scene {
-    constructor() { super("night"); }
+    constructor(key) { super(key || "night"); }   /* v5.7: js/modes.js subclasses this as the "mode" scene */
 
     init(data) {
-      /* BUGFIX — "game locks up after Retry / Next night once I leave the safe zone".
+      /* BUGFIX — "game locks up after Retry / Next level once I leave the safe zone".
          scene.restart() destroys every game object on the display list, but the
          NightScene instance itself survives, so any object we cached lazily on
          `this` (darkOverlay, the *CheckGfx graphics, chiliConeGfx, ...) is now a
@@ -4303,6 +4363,7 @@
          Sweep every destroyed GameObject reference here, before preload/create,
          so the lazy creators see `undefined` again and rebuild. */
       this.dropDestroyedRefs();
+      window.SolScene = this;   /* v4.9.1: the live night scene, for the headless smoke test and console debugging */
       this.family = (data && data.family) || cfg.family || "ALL";
       this.strand = (data && data.strand) || cfg.strand || "ALL";
       this.night = clamp((data && data.night) || cfg.night || 1, 1, 100);
@@ -4423,6 +4484,7 @@
 
     create() {
       playScene = this;
+      progressLevelStart(this);
       /* Local-dev hook only (never on itch): lets a test harness read the maze,
          rail graph and scene without reaching into closures. */
       try {
@@ -4488,6 +4550,11 @@
       this.strikes = 0;
       this.round = 1;
       this.usedClaims = loadUsedClaims(this.family, this.strand);
+      this.adapt = loadAdapt(this.family);
+      this.nightPacks = [];
+      this.nightWrong = 0;
+      this.nightCoins = 0;
+      this.claimWrong = 0;
       this.extracted = [];
       this.trapOpen = false;
       this.alarmMs = 0;
@@ -4756,7 +4823,7 @@
       this._releaseRimWasOn = false;
       this._releaseRimProg = 0;
       /* engage-1855 creative: TURNSTILE — Lady Bug school swing gates.
-         BUGFIX (v4.1, "night 2 has no path to EXIT"): seedHazards() above has
+         BUGFIX (v4.1, "level 2 has no path to EXIT"): seedHazards() above has
          ALREADY spawned the gates and section doors. Resetting these arrays here
          orphaned them — solid colliders with no record, so a bump could never
          rotate them and a gate on the only route sealed the maze. Keep the
@@ -5397,6 +5464,8 @@
       this.scale.on("resize", this.onResize, this);
       this.onResize();
 
+      /* v5.6: realm look, creatures, Fenrir and castle perks (js/realms.js) */
+      if (this.setupRealm) { try { this.setupRealm(); } catch (eRealm) { if (window.console) console.warn("[realms] setup", eRealm); } }
       this.claim = null;
       this.nextClaim();
       pingTeacher(this, "playing");
@@ -5435,8 +5504,8 @@
       this.flickerFloorSprites = [];
       var g = this.add.graphics().setDepth(0);
       this.schoolFloorGfx = g;
-      /* SOL Labyrinth: dark void outside, Flicker corridor floors inside */
-      g.fillStyle(0x05070c, 1);
+      /* SOL Labyrinth: dark void outside, Flicker corridor floors inside (v5.6: in the realm's colour) */
+      g.fillStyle(nightTheme(this.night || (this.level && this.level.n) || 1).void || 0x05070c, 1);
       g.fillRect(0, 0, WORLD_W, WORLD_H);
 
       var TS = 32;
@@ -6002,6 +6071,8 @@
       rx.globalCompositeOperation = "destination-out";
       rx.save(); rx.translate(-3, -3); rx.fillStyle = "#000"; rx.fill(path, "nonzero"); rx.restore();
       ctx.drawImage(rim, 0, 0);
+      /* v5.6: realm touches on the walls (frost, moss, embers ...) */
+      if (this.decorateWallCanvas) { try { this.decorateWallCanvas(ctx, path, theme); } catch (eDw) {} }
       try {
         this.textures.addCanvas(key, cv);
         this.wallUnionImg = this.add.image(0, 0, key).setOrigin(0, 0).setDepth(2);
@@ -6386,7 +6457,7 @@
           this.clearAutoGreen();
           if (this.exitReachableNow()) return true;
         }
-        try { console.warn("[SOL] EXIT unreachable after clearing gates — night " + this.night); } catch (eW) {}
+        try { console.warn("[SOL] EXIT unreachable after clearing gates — level " + this.night); } catch (eW) {}
       } catch (eR) {}
       return false;
     }
@@ -6839,18 +6910,74 @@
     nextClaim() {
       var claims = (this.pack && this.pack.claims) || [];
       if (!claims.length) return;
-      var pool = [];
-      var i;
-      for (i = 0; i < claims.length; i++) {
-        if (this.usedClaims.indexOf(claims[i].id) === -1) pool.push(i);
+      var i, pick = -1, self = this;
+      var unused = function (c) { return self.usedClaims.indexOf(c.id) === -1; };
+      /* v4.9: an NJSLA Part B (evidence) item always follows its Part A. */
+      if (this.claim && this.claim.partB) {
+        for (i = 0; i < claims.length; i++) if (claims[i].id === this.claim.partB) { pick = i; break; }   /* v5.7.1: also when a Part A is asked again */
       }
-      if (!pool.length) {
-        this.usedClaims = [];
-        saveUsedClaims(this.family, this.strand, this.usedClaims);
-        for (i = 0; i < claims.length; i++) pool.push(i);
+      /* v5.12.2: the Odyssey reads in story order. The pack's claims arrive sorted by story position (content.js
+         ODY_STORY), so the next question is the first one not yet asked: a passage stays on screen until its questions
+         are done, then the story moves on. After the last passage the story starts again from the beginning. */
+      if (pick < 0 && claims[0] && claims[0].seq != null) {
+        for (i = 0; i < claims.length; i++) if (!claims[i].isPartB && unused(claims[i])) { pick = i; break; }
+        if (pick < 0) {
+          this.usedClaims = [];
+          saveUsedClaims(this.family, this.strand, this.usedClaims);
+          for (i = 0; i < claims.length; i++) if (!claims[i].isPartB) { pick = i; break; }
+        }
       }
-      var pick = pool[Math.floor(Math.random() * pool.length)];
+      if (pick < 0) {
+        var pool = [];
+        for (i = 0; i < claims.length; i++) if (!claims[i].isPartB && unused(claims[i]) && this.nightPacks.indexOf(claims[i].packId) === -1) pool.push(i);
+        if (!pool.length) for (i = 0; i < claims.length; i++) if (!claims[i].isPartB && unused(claims[i])) pool.push(i);   /* same passage again is better than none */
+        if (!pool.length) {
+          /* Pool spent: start over, but keep the most recent 20 out so the same items never come straight back. */
+          this.usedClaims = this.usedClaims.slice(-20);
+          saveUsedClaims(this.family, this.strand, this.usedClaims);
+          for (i = 0; i < claims.length; i++) if (!claims[i].isPartB && unused(claims[i])) pool.push(i);
+          if (!pool.length) for (i = 0; i < claims.length; i++) if (!claims[i].isPartB) pool.push(i);
+        }
+        /* Adaptive weighting: items near the student's level, and (on All-skills nights) weaker strands. */
+        var a = this.adapt, target = a ? a.ability : 1.6, allStrands = String(this.strand || "ALL").toUpperCase() === "ALL";
+        /* v4.9.2 stamina: prefer passages near tonight's target length (short early, longer every couple of nights) */
+        var wantWords = (typeof heistTargetWords === "function") ? heistTargetWords(this.night) : 250;
+        /* v4.9.6: when the pool has enough passages inside the night's length band (60%–160% of the
+           target) only those are drawn, so night 90 never serves a 250-word text; thin pools fall back. */
+        var band = [], loW = wantWords * 0.6, hiW = wantWords * 1.6;
+        for (i = 0; i < pool.length; i++) { var cw = claims[pool[i]].words; if (!cw || (cw >= loW && cw <= hiW)) band.push(pool[i]); }
+        if (band.length >= 12) pool = band;
+        else {
+          /* v5.7.1: few unused passages of the right length left (a small pool late in the campaign).
+             Asking again from right-length passages not seen recently beats dropping to a short one. */
+          var recent = this.usedClaims.slice(-20), again = [];
+          for (i = 0; i < claims.length; i++) {
+            var cc = claims[i];
+            if (cc.isPartB || recent.indexOf(cc.id) !== -1 || this.nightPacks.indexOf(cc.packId) !== -1) continue;
+            if (!cc.words || (cc.words >= loW && cc.words <= hiW)) again.push(i);
+          }
+          if (again.length >= 12) pool = again;
+        }
+        var weights = [], total = 0, w, rec, acc;
+        for (i = 0; i < pool.length; i++) {
+          var c = claims[pool[i]];
+          w = Math.exp(-Math.abs((c.level || 2) - target) * 1.3);
+          if (!unused(c)) w *= 0.35;   /* a question asked before only when the fresh ones are far off */
+          if (c.words) w *= Math.exp(-Math.abs(c.words - wantWords) / (0.18 * wantWords));
+          if (allStrands && a) {
+            rec = a.strands[c.strand || "RL"];
+            acc = rec ? (rec.r + 1) / (rec.r + rec.w + 2) : 0.5;
+            w *= 1 + (1 - acc) * 0.9;
+          }
+          weights.push(w); total += w;
+        }
+        var r = Math.random() * total;
+        for (i = 0; i < pool.length; i++) { r -= weights[i]; if (r <= 0) break; }
+        pick = pool[Math.min(i, pool.length - 1)];
+      }
       this.claim = claims[pick];
+      if (this.claim.packId && this.nightPacks.indexOf(this.claim.packId) === -1) this.nightPacks.push(this.claim.packId);
+      this.claimWrong = 0;
       this._hudClaimId = null; /* force passage panel refresh */
       this.usedClaims.push(this.claim.id);
       saveUsedClaims(this.family, this.strand, this.usedClaims);
@@ -6905,12 +7032,49 @@
       for (i = 0; i < ex.length; i++) if (ex[i]) out.push(ex[i]);
       return out;
     }
+    /* v5.7.9: remember a wrong pick so the end screen can say which letter was picked and which the
+       question's key wants (a teacher checking a question sees at once what the game expected). */
+    noteWrongLetter(L) {
+      this._lastWrongLetter = L || "";
+      try { console.log("[SOL] wrong letter " + L + " on " + (this.claim && this.claim.id) + "; key: " + (this.need || []).join("+")); } catch (e) {}
+    }
+    wrongLetterNote() {
+      var L = this._lastWrongLetter, need = this.need || [];
+      if (!L || !need.length) return "";
+      return "You picked " + L + "; the answer to that question was " + need.join(" and ") + ". ";
+    }
     carriedLetters() {
       return this.carriedSlips().map(function (s) { return s.letter; }).join(" + ");
     }
 
+    /* v4.9.4: true when (x, y) is within r px of any trap, pad, door, camera, skull or live pickup.
+       Letter tiles use it so they never land on a hazard or a power-up; hazard and pickup spawners
+       use it so nothing lands on a letter tile or on each other. */
+    spotBlocked(x, y, r) {
+      r = r || 70;
+      var i, o, rects = [], pts = [], k;
+      var inRect = function (b) { return b && x >= b.x - b.w / 2 - r && x <= b.x + b.w / 2 + r && y >= b.y - b.h / 2 - r && y <= b.y + b.h / 2 + r; };
+      var near = function (o2, rr) { return o2 && (o2.active !== false) && o2.x != null && hypot(o2.x - x, o2.y - y) < (rr || r); };
+      (this.puddles || []).forEach(function (b) { rects.push(b); });
+      (this.mats || []).forEach(function (b) { rects.push(b); });
+      if (this.autoGreen) rects.push(this.autoGreen);
+      (this.colorDoors || []).forEach(function (b) { rects.push(b); });
+      for (i = 0; i < rects.length; i++) if (inRect(rects[i])) return true;
+      (this.secCams || []).forEach(function (c) { pts.push(c); });
+      (this.skulls || []).forEach(function (sk) { if (sk && sk.live) pts.push(sk); });
+      (this.slips || []).forEach(function (sl) { if (sl && sl.visible && sl.active) pts.push(sl); });
+      ["zapPad", "mushPad", "firePad", "tarPad", "wheelSpr", "fruitBonus", "iceBonus", "hotFootBonus", "heartBonus", "moneyBagBonus",
+       "horseshoeBonus", "chiliBonus", "veggieBonus", "ivyBonus", "boneBonus", "extraBonus", "specialBonus", "treasureBonus", "lockPadBonus",
+       "pineappleBonus", "springBonus", "colorDoorBonus", "superBonus", "maskBonus", "signalBonus", "shinyBonus", "bellTrip"].forEach(function (k2) {
+        if (this[k2]) pts.push(this[k2]);
+      }, this);
+      for (k = 0; k < pts.length; k++) { o = pts[k]; if (near(o, r)) return true; }
+      return false;
+    }
+
     slipSpotBad(x, y, used) {
       if (nearExit(x, y) || inExitCluster(x, y) || inStartCluster(x, y) || inSafeZone(x, y)) return true;
+      if (this.spotBlocked(x, y, 76)) return true;
       if (hypot(x - EXIT_X, y - EXIT_Y) < SLIP_EXIT_R) return true;
       if (hypot(x - START_X, y - START_Y) < Math.max(SLIP_PLACE_R, 180)) return true;
       if (hitsSolid(x, y, 28)) return true;
@@ -7155,6 +7319,9 @@
       if (this.spawnFirePad) this.spawnFirePad(); /* engage-1302 — stay live after slip reshuffle */
       if (this.spawnTarPad) this.spawnTarPad(); /* engage-1342 — stay live after slip reshuffle */
       if (this.spawnAutoGreen) this.spawnAutoGreen(); /* engage-1350 — stay live after slip reshuffle */
+      /* v4.9.4: skulls are seeded before the maze's spread points exist on some paths, so make sure
+         a fresh set is on the floor (clear of the new tiles) whenever none are left. */
+      if (this.spawnSkulls && !(this.skulls || []).some(function (k) { return k && k.live; })) this.spawnSkulls();
     }
 
     paintHud() {
@@ -7163,8 +7330,9 @@
       var claimChanged = this._hudClaimId !== c.id;
       this._hudClaimId = c.id;
       var tok = makeToken(this.night, this.score, this.strikes);
-      document.getElementById("job-sol").textContent = "Teacher · " + (c.sol || "");
-      document.getElementById("round-flag").textContent = "Night " + this.night + " / 100 · " + nightTheme(this.night).name;
+      var hudLabel = (STATE_DEFS[cfg.state] && STATE_DEFS[cfg.state].hud) || "Teacher";
+      document.getElementById("job-sol").textContent = hudLabel + " · " + (c.sol || "") + " · Reading level " + adaptLevelLabel(this.adapt) + (c.isPartB ? " · Part B" : c.partB ? " · Part A" : "");
+      document.getElementById("round-flag").textContent = "Level " + this.night + " / 100 · " + nightTheme(this.night).name;
       var juice = this.scoreJuice || 0;
       document.getElementById("score-pip").textContent = "Extracts " + this.score + " / " + this.needExtracts;
       var strikeTxt = "Strikes " + this.strikes + " / " + this.needStrikes;
@@ -7198,7 +7366,11 @@
       if (this.autoGreen) strikeTxt += ((this.autoGreen.closed) ? " · AUTO LOCKED" : " · AUTO OPEN"); /* engage-1350 */
       document.getElementById("strike-pip").textContent = strikeTxt;
       var bonusEl = document.getElementById("bonus-pip");
-      if (bonusEl) bonusEl.textContent = "Bonus " + juice;
+      if (bonusEl) {
+        var coinsNow = 0;
+        try { if (window.SolBuild && SolBuild.coins) coinsNow = SolBuild.coins(); } catch (eCo) {}
+        bonusEl.textContent = "Coins " + coinsNow + ((this.nightCoins || 0) > 0 ? " (+" + this.nightCoins + ")" : "");
+      }
       var tokenEl = document.getElementById("token-pip");
       if (tokenEl) tokenEl.textContent = "Token " + tok;
       /* Only rewrite reading-passage chrome when the claim changes — tips must not fight the lesson UI */
@@ -7327,7 +7499,7 @@
         return;
       }
       if ((this.alarmMs || 0) > 0) {
-        this.setCarryFlagText("ALARM — wrong letter / mat. Get clear!", "prio-alarm");
+        this.setCarryFlagText("ALARM — wrong letter costs a life. Get clear!", "prio-alarm");
         return;
       }
       if ((this.bellTripFlash || 0) > 0) {
@@ -7459,7 +7631,7 @@
       }
       /* engage-2235: Pac-Man FRIGHT SHORT toast */
       if ((this.frightShortFlash || 0) > 0) {
-        this.setCarryFlagText("FRIGHT SHORT — CHARIOT window shrinks each night. Smash fast!", "prio-chariot");
+        this.setCarryFlagText("FRIGHT SHORT — CHARIOT window shrinks each level. Smash fast!", "prio-chariot");
         return;
       }
       /* engage-2214: Pac-Man SCATTER ROLE toast */
@@ -7752,11 +7924,11 @@
         return;
       }
       if ((this._exitFixedFlash || 0) > 0) {
-        this.setCarryFlagText("Slips reshuffle — same floor plan until next night. EXIT south / START west.", "");
+        this.setCarryFlagText("Slips reshuffle — same floor plan until next level. EXIT south / START west.", "");
         return;
       }
       if ((this.frightShortFlash || 0) > 0) {
-        this.setCarryFlagText("FRIGHT SHORT — CHARIOT window shrinks each night. Smash fast!", "");
+        this.setCarryFlagText("FRIGHT SHORT — CHARIOT window shrinks each level. Smash fast!", "");
         return;
       }
       if ((this.scatterRoleFlash || 0) > 0) {
@@ -7868,6 +8040,21 @@
       this.setCarryFlagText("Flashlight sees you. Walk in the dark. Sprint is noisy.", "");
     }
 
+    /* v4.9: the coin economy lives in assets/build/pieces.json (SolBuild.economy) */
+    coinEconomy() {
+      try { if (window.SolBuild && SolBuild.economy) return SolBuild.economy(); } catch (e) {}
+      return { answer: 10, perfectNight: 25, bonusMin: 3, bonusMax: 12, bonusPer: 500 };
+    }
+    giveCoins(n, why) {
+      n = Math.max(0, Math.round(n || 0));
+      if (!n) return 0;
+      this.nightCoins = (this.nightCoins || 0) + n;
+      try { if (window.SolBuild && SolBuild.addCoins) SolBuild.addCoins(n, why); } catch (e) {}
+      this.scoreToastMs = Math.max(this.scoreToastMs || 0, 2400);
+      this.scoreToastMsg = "+" + n + " coin" + (n === 1 ? "" : "s") + (why ? " · " + why : "");
+      this.paintHud();
+      return n;
+    }
     awardBonusPoints(pts, toastMsg) {
       pts = pts || 0;
       if ((this.heartMultMs || 0) > 0 && pts > 0) {
@@ -7876,12 +8063,17 @@
       }
       this.scoreJuice = (this.scoreJuice || 0) + pts;
       this._lastFruitPts = pts;
+      /* v4.9: fruit and the other pickups pay coins, not points */
+      var ec = this.coinEconomy();
+      var coins = Math.max(ec.bonusMin, Math.min(ec.bonusMax, ec.bonusMin + Math.floor(pts / ec.bonusPer)));
+      this.nightCoins = (this.nightCoins || 0) + coins;
+      try { if (window.SolBuild && SolBuild.addCoins) SolBuild.addCoins(coins, "bonus"); } catch (eC) {}
       this.scoreToastMs = Math.max(this.scoreToastMs || 0, 2400);
-      this.scoreToastMsg = toastMsg || ("+" + pts + " bonus points!");
+      this.scoreToastMsg = "+" + coins + " coins" + (toastMsg ? " · " + String(toastMsg).replace(/^\+\d+\s*/, "") : "!");
       if (this.player && this.add) {
         try {
           var tx = this.player.x, ty = this.player.y - 36;
-          var tag = this.add.text(tx, ty, "+" + pts, {
+          var tag = this.add.text(tx, ty, "+" + coins + " coins", {
             fontFamily: "Trebuchet MS", fontSize: 22, color: "#9aefc0", fontStyle: "bold",
             stroke: "#0a1814", strokeThickness: 5
           }).setOrigin(0.5).setDepth(40);
@@ -8251,6 +8443,29 @@
         try { this.expiryRim.clear(); this.expiryRim.setVisible(false); } catch (e) {}
       }
     }
+    /* v5.7.9: Sol rides the sun's chariot, pulled by two horses, while the CHARIOT power lasts (the Sun Chariot
+       level's own art): the car covers Sol's legs, the horses lead the way Sol runs, and it sheds sparks. It fades out in the
+       last half second so the end of the power is easy to see. */
+    tickChariotRide() {
+      var on = (this.lockerPowerMs || 0) > 0 && this.player && !this.ended, spr = this.chariotRide;
+      if (!on) { if (spr) spr.setVisible(false); return; }
+      if (!spr || !spr.active) {
+        if (window.SolModes && SolModes.ensureChariotArt) SolModes.ensureChariotArt(this);
+        if (!this.textures.exists("md-team-0")) return;
+        spr = this.chariotRide = this.add.image(0, 0, "md-team-0").setScale(0.62).setDepth(12.5);
+      }
+      /* the horses lead the way Sol runs (left or right; up and down keep the last way) */
+      var face = this.playerFaceDir || "down", t = (this.time && this.time.now) || 0, T = (window.SolModes && SolModes.TEAM) || { w: 200, car: 45 };
+      if (face === "left") spr.setFlipX(true); else if (face === "right") spr.setFlipX(false);
+      var dir = spr.flipX ? -1 : 1, off = (T.w / 2 - T.car) * spr.scaleX;
+      spr.setVisible(true).setTexture("md-team-" + (Math.floor(t / 140) % 2));
+      spr.setAlpha(this.lockerPowerMs < 500 ? Math.max(0.2, this.lockerPowerMs / 500) : 1);
+      spr.setPosition(this.player.x + dir * off, this.player.y + 4 + Math.sin(t / 110) * 1.5);
+      this._chariotSparkAcc = (this._chariotSparkAcc || 0) + 1;
+      if (this.sparks && this._chariotSparkAcc % 6 === 0) {
+        try { this.sparks.emitParticleAt(this.player.x - dir * 30, this.player.y + 16, 1); } catch (e) {}
+      }
+    }
     tickLockerPower(step) {
       if ((this.frightWanderFlash || 0) > 0) {
         var _fwPrev = this.frightWanderFlash;
@@ -8268,6 +8483,7 @@
           if (rj && (rj.roleFlipMs || 0) > 0) rj.roleFlipMs = Math.max(0, rj.roleFlipMs - step);
         }
       }
+      this.tickChariotRide();
       if ((this.lockerPowerMs || 0) <= 0) {
         if ((this.lockerPowerFlash || 0) > 0) {
           this.lockerPowerFlash = Math.max(0, this.lockerPowerFlash - step);
@@ -8392,6 +8608,7 @@
 
     fruitSpotOk(x, y) {
       if (hitsSolid(x, y, 36)) return false;
+      if (this.spotBlocked(x, y, 76)) return false;
       if (hypot(x - START_X, y - START_Y) < 280) return false;
       if (hypot(x - EXIT_X, y - EXIT_Y) < SLIP_EXIT_R) return false;
       if (inExitCluster(x, y) || inStartCluster(x, y)) return false;
@@ -8550,7 +8767,7 @@
       offerTrapIntro(this, {
         key: LS_TRAP_FRUIT,
         title: "Sun fruit ladder",
-        body: "Bouncing hall fruit. Points climb by night (cherry 100 → key 5000) like Pac-Man — not a power. Cut it off before the tour ends."
+        body: "Bouncing hall fruit. Points climb by level (cherry 100 → key 5000) like Pac-Man — not a power. Cut it off before the tour ends."
       });
       this.paintHud();
     }
@@ -8970,7 +9187,7 @@
     }
 
     /* engage-0255: SKULL — Lady Bug poison skull bait.
-     * Mid-hall skulls: Hati that touch return to Wolf Pen (+200). Sol is safe (classroom fair).
+     * Mid-hall skulls: Hati that touch are poison-stunned in place for ~3 s (+200). Sol is safe (classroom fair).
      * Sticky chase / catch-on-contact elsewhere unchanged. Night-only place (not per extract). */
     clearSkulls(silent) {
       var i, s;
@@ -8995,6 +9212,7 @@
       for (i = 0; i < cands.length; i++) {
         p = cands[i];
         if (hitsSolid(p[0], p[1], 36)) continue;
+        if (this.spotBlocked(p[0], p[1], 76)) continue;
         if (inSafeZone(p[0], p[1])) continue;
         if (hypot(p[0] - START_X, p[1] - START_Y) < 300) continue;
         if (hypot(p[0] - EXIT_X, p[1] - EXIT_Y) < SLIP_EXIT_R) continue;
@@ -9075,19 +9293,17 @@
         offerTrapIntro(this, {
           key: LS_TRAP_SKULL,
           title: "Poison skull",
-          body: "Purple SKULL marks in the hall. Sol can walk over them safely — lure a chasing Hati onto one to send that wolf back to the Wolf Pen (+200)."
+          body: "Purple SKULL marks in the hall. Sol can walk over them safely — lure a chasing Hati onto one and the poison stuns that wolf in its tracks for a few seconds (+200)."
         });
         this.skullFlash = Math.max(this.skullFlash || 0, 1800);
         this.paintHud();
       }
     }
 
+    /* v4.9.4: a poisoned Hati is stunned where it stands (about 3 s) — it no longer goes back to the Wolf Pen. */
     skullKillHati(j, skull) {
       if (!j || (j.eatenMs || 0) > 0 || (j.eyesMs || 0) > 0) return;
       if (!skull || !skull.live) return;
-      var pen = (MAZE && MAZE.ghostHouse) || null;
-      var px = pen ? pen.cx : ((MAZE && MAZE.vHallXC) || WORLD_W / 2);
-      var py = pen ? pen.cy : ((MAZE && MAZE.hallYC) || WORLD_H / 2);
       j.chasing = false;
       j.chaseMs = 0;
       j.chaseFor = 0;
@@ -9096,12 +9312,9 @@
       j.detFill = 0;
       j.radioMs = 0;
       j.radioSent = false;
-      j.eatenMs = 0;
-      j.eyesMs = 2800;
-      j.penX = px;
-      j.penY = py;
+      j.trogFreezeMs = Math.max(j.trogFreezeMs || 0, 3200);
       j.setVelocity(0, 0);
-      try { j.setAlpha(0.55); j.setTint(0xc8a0e8); } catch (e) {}
+      try { j.setAlpha(0.7); j.setTint(0xc8a0e8); } catch (e) {}
       safeCamFlash();
       skull.live = false;
       try { if (skull.spr) skull.spr.destroy(); } catch (e3) {}
@@ -9111,7 +9324,7 @@
       skull.spr = skull.ring = skull.floor = skull.label = null;
       if (window.AfterHoursAudio && AfterHoursAudio.skullChime) AfterHoursAudio.skullChime();
       else if (window.AfterHoursAudio && AfterHoursAudio.fruitChime) AfterHoursAudio.fruitChime();
-      this.awardBonusPoints(200, "SKULL! Hati poisoned — Wolf Pen!");
+      this.awardBonusPoints(200, "SKULL! Hati poisoned — stunned!");
       this.skullFlash = Math.max(this.skullFlash || 0, 1800);
       if (this.clearAmbientHudFlashes) this.clearAmbientHudFlashes();
       if (this.player && this.add) {
@@ -9155,7 +9368,7 @@
         for (ji = 0; ji < this.janitors.length; ji++) {
           j = this.janitors[ji];
           if (!j || (j.eatenMs || 0) > 0 || (j.eyesMs || 0) > 0) continue;
-          if (hypot(j.x - s.x, j.y - s.y) < 34) {
+          if (hypot(j.x - s.x, j.y - s.y) < 60) {
             this.skullKillHati(j, s);
             break;
           }
@@ -9708,7 +9921,7 @@
       offerTrapIntro(this, {
         key: LS_TRAP_BONE,
         title: "Dog Bone",
-        body: "Bank a BONE (cap 3). When you are clear of letter slips, tap DOG / Space to go dog ~4s and smash Hati. Bones carry to later nights."
+        body: "Bank a BONE (cap 3). When you are clear of letter slips, tap DOG / Space to go dog ~4s and smash Hati. Bones carry to later levels."
       });
       this.paintHud();
     }
@@ -11419,7 +11632,7 @@
       offerTrapIntro(this, {
         key: LS_TRAP_TREASURE,
         title: "Stage treasure",
-        body: "A Lock 'n' Chase vault treasure chest. Walk onto it for night-scaled bonus points (HAT→HEART). Points only — not a power. Catch still real."
+        body: "A Lock 'n' Chase vault treasure chest. Walk onto it for level-scaled bonus points (HAT→HEART). Points only — not a power. Catch still real."
       });
       this.paintHud();
     }
@@ -12931,6 +13144,7 @@
       for (i = 0; i < cands.length; i++) {
         p = cands[i];
         if (hitsSolid(p[0], p[1], 36)) continue;
+        if (this.spotBlocked(p[0], p[1], 76)) continue;
         if (inSafeZone(p[0], p[1])) continue;
         if (hypot(p[0] - START_X, p[1] - START_Y) < 320) continue;
         if (hypot(p[0] - EXIT_X, p[1] - EXIT_Y) < SLIP_EXIT_R) continue;
@@ -13163,6 +13377,7 @@
       for (i = 0; i < cands.length; i++) {
         p = cands[i];
         if (hitsSolid(p[0], p[1], 36)) continue;
+        if (this.spotBlocked(p[0], p[1], 76)) continue;
         if (inSafeZone(p[0], p[1])) continue;
         if (hypot(p[0] - START_X, p[1] - START_Y) < 320) continue;
         if (hypot(p[0] - EXIT_X, p[1] - EXIT_Y) < SLIP_EXIT_R) continue;
@@ -13560,6 +13775,7 @@
       for (i = 0; i < cands.length; i++) {
         p = cands[i];
         if (hitsSolid(p[0], p[1], 36)) continue;
+        if (this.spotBlocked(p[0], p[1], 76)) continue;
         if (inSafeZone(p[0], p[1])) continue;
         if (hypot(p[0] - START_X, p[1] - START_Y) < 320) continue;
         if (hypot(p[0] - EXIT_X, p[1] - EXIT_Y) < SLIP_EXIT_R) continue;
@@ -13781,6 +13997,7 @@
       for (i = 0; i < cands.length; i++) {
         p = cands[i];
         if (hitsSolid(p[0], p[1], 36)) continue;
+        if (this.spotBlocked(p[0], p[1], 76)) continue;
         if (inSafeZone(p[0], p[1])) continue;
         if (hypot(p[0] - START_X, p[1] - START_Y) < 320) continue;
         if (hypot(p[0] - EXIT_X, p[1] - EXIT_Y) < SLIP_EXIT_R) continue;
@@ -14021,6 +14238,7 @@
       for (i = 0; i < cands.length; i++) {
         p = cands[i];
         if (hitsSolid(p[0], p[1], 40)) continue;
+        if (this.spotBlocked(p[0], p[1], 90)) continue;
         if (inSafeZone(p[0], p[1])) continue;
         if (hypot(p[0] - START_X, p[1] - START_Y) < 360) continue;
         if (hypot(p[0] - EXIT_X, p[1] - EXIT_Y) < SLIP_EXIT_R) continue;
@@ -15064,6 +15282,30 @@
     }
 
     flagWrongAlarm(slipAt) {
+      /* v4.9: a wrong tile is the adaptive signal (and breaks the perfect-night bonus) */
+      this.claimWrong = (this.claimWrong || 0) + 1;
+      this.nightWrong = (this.nightWrong || 0) + 1;
+      adaptEvent(this, "wrong", this.claim);
+      /* v4.9.1: a wrong answer choice costs a life, exactly like a catch (a 1UP spare life is spent first) */
+      var spendSpare = (this.spareLives || 0) > 0;
+      if (spendSpare) {
+        this.spareLives -= 1;
+        this.oneUpFlash = Math.max(this.oneUpFlash || 0, 1800);
+        this.scoreToastMs = Math.max(this.scoreToastMs || 0, 1800);
+        this.scoreToastMsg = "1UP spent — wrong letter, strike blocked!";
+      } else {
+        this.strikes += 1;
+        this.lastStrikeReason = "wrong";
+      }
+      if (this.caughtFlashTag) {
+        var camW = this.cameras && this.cameras.main, livesLeftW = Math.max(0, (this.needStrikes || 3) - (this.strikes || 0));
+        var wlTag = this._lastWrongLetter ? "WRONG LETTER (" + this._lastWrongLetter + ")" : "WRONG LETTER";   /* v5.7.9: says which letter was picked */
+        this.caughtFlashTag.setText(spendSpare ? wlTag + " · 1UP saved you" : (livesLeftW > 0 ? wlTag + " · " + livesLeftW + " left" : wlTag));
+        this.caughtFlashTag.setPosition((camW && camW.width ? camW.width : 1280) / 2, (camW && camW.height ? camW.height : 720) * 0.38);
+        this.caughtFlashTag.setAlpha(1);
+        this.caughtFlashTag.setVisible(true);
+        this.caughtFlashMs = 1400;
+      }
       if (this.player.carrying) this.dropCarry(true);
       this.pendingShuffle = true;
       this.shuffleChaseSeen = false;
@@ -15101,6 +15343,7 @@
         }
       }
       this.paintHud();
+      if (this.strikes >= this.needStrikes && !this.ended) this.endRun(false);
     }
 
     playerEscapedForShuffle() {
@@ -15162,6 +15405,7 @@
       if (!best) return;
       var ok = this.need.indexOf(best.letter) !== -1;
       if (!ok) {
+        this.noteWrongLetter(best.letter);
         this.flagWrongAlarm({ x: best.homeX != null ? best.homeX : best.x, y: best.homeY != null ? best.homeY : best.y });
         return;
       }
@@ -16148,7 +16392,7 @@
       /* Do NOT call rebuildFloorPlan mid-night — that swapped the whole maze after every correct answer. */
       this._exitFixedFlash = 3400;
       this._floorPlanFlash = 0;
-      var tip = "Slips reshuffle — same floor plan until next night. EXIT south / START west.";
+      var tip = "Slips reshuffle — same floor plan until next level. EXIT south / START west.";
       try {
         var flag = document.getElementById("carry-flag");
         if (flag) flag.textContent = tip;
@@ -16854,6 +17098,7 @@
         LC = carried[ci].letter;
         if (this.need.indexOf(LC) === -1) {
           var bad = carried[ci];
+          this.noteWrongLetter(LC);
           this.flagWrongAlarm({ x: bad && bad.homeX != null ? bad.homeX : this.player.x, y: bad && bad.homeY != null ? bad.homeY : this.player.y });
           return;
         }
@@ -16888,6 +17133,9 @@
       }
       if (done) {
         this.score += 1;
+        /* v4.9: coins for every correct answer; the level climbs only when no wrong tile was grabbed */
+        adaptEvent(this, this.claimWrong ? "struggled" : "clean", this.claim);
+        this.giveCoins(this.coinEconomy().answer, "Correct answer");
         pingTeacher(this, "playing");
         if (this.score >= this.needExtracts) {
           this.paintHud();
@@ -17069,6 +17317,7 @@
         this.scoreToastMsg = "1UP spent — strike blocked!";
       } else {
         this.strikes += 1;
+        this.lastStrikeReason = "caught";
       }
       this.iframeMs = Math.max(this.iframeMax, 700);
       this.stunMs = STUN;
@@ -17118,6 +17367,7 @@
     }
 
     endRun(win) {
+      if (window.SolProgress && !this.ended) { try { SolProgress.levelEnd(!!win); } catch (eP) {} }   /* v5.13: the progress record */
       this.ended = true;
       this.player.setVelocity(0, 0);
       /* Cycle 18 refine-0547: restore timeScale on overlay */
@@ -17137,31 +17387,50 @@
       if (win) {
         pingTeacher(this, "cleared");
         if (this.night >= 100) {
-          document.getElementById("win-title").textContent = "All 100 nights";
+          document.getElementById("win-title").textContent = "All 100 levels";
           document.getElementById("win-msg").textContent = "Campaign complete on this Chromebook. Itch login does not store progress.";
-          nextBtn.textContent = "Play again from Night 1";
+          nextBtn.textContent = "Play again from Level 1";
           nextBtn.classList.remove("hidden");
           nextBtn.dataset.goto = "1";
         } else {
           writeSavedNight(this.night + 1);
-          document.getElementById("win-title").textContent = "Night cleared";
-          document.getElementById("win-msg").textContent = "Night " + this.night + " is done. Same skill pack. Next night is waiting on this Chromebook.";
-          nextBtn.textContent = "Next night";
+          document.getElementById("win-title").textContent = "Level cleared";
+          document.getElementById("win-msg").textContent = "Level " + this.night + " is done. Same skill pack. Next level is waiting on this Chromebook.";
+        }
+        /* v4.9: perfect night = every question banked with no wrong tile grabbed */
+        var winMsgEl = document.getElementById("win-msg");
+        if ((this.nightWrong || 0) === 0) {
+          var perfect = this.giveCoins(this.coinEconomy().perfectNight, "Perfect level");
+          winMsgEl.textContent += " Perfect level — no wrong letters: +" + perfect + " bonus coins!";
+        }
+        winMsgEl.textContent += " You earned " + (this.nightCoins || 0) + " coins this level.";
+        if (this.night < 100) {
+          nextBtn.textContent = "Next level";
           nextBtn.classList.remove("hidden");
           nextBtn.dataset.goto = String(this.night + 1);
         }
       } else {
         writeSavedNight(this.night);
         document.getElementById("win-title").textContent = "Run over";
-        document.getElementById("win-msg").textContent = "Caught in the cone. Retry this night — the campaign stays here.";
+        document.getElementById("win-msg").textContent = (this.lastStrikeReason === "wrong" ? "That wrong letter used your last life. " + this.wrongLetterNote() : "Caught in the cone. ") +
+          "Wrong letters and catches both cost a life. Retry this level — the campaign stays here.";
         retryBtn.classList.remove("hidden");
-        retryBtn.textContent = "Retry this night";
+        retryBtn.textContent = "Retry this level";
       }
       /* v4.8: every 5th night won opens the Town & Castle reward pop-up first;
-         the "Night cleared" overlay follows once the student has placed the piece. */
+         the "Level cleared" overlay follows once the student has placed the piece. */
+      var self = this;
       var showEndOverlay = function () {
         document.getElementById("overlay").classList.remove("hidden");
         if (window.SolMusic) { try { SolMusic.setChase(false); SolMusic.play("menu"); } catch (eM) {} }
+        /* v4.9: the coin shop is open after every night (v4.9.7: from night 1 — with no build yet it asks Town or Castle first) */
+        var shopBtn = document.getElementById("btn-shop"), canShop = false, coinsNow = 0;
+        try { if (window.SolBuild && SolBuild.state) { var bs = SolBuild.state(); canShop = !!bs.canShop; coinsNow = bs.coins || 0; } } catch (eS) {}
+        if (shopBtn) {
+          shopBtn.classList.toggle("hidden", !canShop);
+          shopBtn.textContent = "Shop · " + coinsNow + " coins";
+          shopBtn.dataset.night = String(self.night);
+        }
       };
       var rewardShown = false;
       if (win && window.SolBuild && SolBuild.rewardDue && SolBuild.rewardDue(this.night)) {
@@ -25535,13 +25804,11 @@
       revealTutDom(card, this.tutIndex, this.tutList.length, false);
       var total = (this.tutList && this.tutList.length) || 1;
       var step = this.tutIndex + 1;
-      if (kicker) kicker.textContent = "How to play · " + step + " of " + total;
+      if (kicker) kicker.textContent = total > 1 ? "How to play · " + step + " of " + total : "Level 1 · How to play";
       if (title) title.textContent = card.title;
-      if (body) body.textContent = card.body;
-      if (skip) skip.classList.remove("hidden");
-      /* Show progress so the player knows how much is left — the old single card
-         just said "Tap to play" with no sense of length. */
-      if (hint) hint.textContent = (step >= total) ? "Tap to start Night 1" : "Tap to continue";
+      if (body) { if (card.html) body.innerHTML = card.html; else body.textContent = card.body; }
+      if (skip) { skip.classList.remove("hidden"); skip.textContent = total > 1 && step < total ? "Skip intro" : "Play"; }
+      if (hint) hint.textContent = (step >= total) ? "Tap Play to start Level 1" : "Tap to continue";
     }
     advanceTut() {
       if (tutClosed || this.tutDone) { hideTut(); return; }
@@ -25606,7 +25873,7 @@
         var ol = document.getElementById("read-choices");
         var hint = document.getElementById("read-hint");
         var scroll = document.getElementById("read-scroll");
-        if (kick) kick.textContent = (reason === "start" ? "Read first · Night " : "Next question · Night ") + this.night + " · " + (c.sol || "");
+        if (kick) kick.textContent = (reason === "start" ? "Read first · Level " : "Next question · Level ") + this.night + " · " + (c.sol || "") + (c.isPartB ? " · Part B (evidence)" : c.partB ? " · Part A" : "") + (c.words ? " · " + c.words + " words" : "");
         if (title) title.textContent = c.packTitle || "Passage";
         if (pass) pass.innerHTML = c.passage || "";
         if (stem) stem.textContent = c.stem || c.doThis || "";
@@ -25726,7 +25993,10 @@
        killing the run for a student. */
     update(t, dt) {
       try {
-        this._updateInner(t, dt);
+        /* v5.18: the "slower game" accommodation (js/accommodations.js) */
+        var accK = window.SolAcc ? SolAcc.speedK() : 1;
+        if (this._accK !== accK) { this._accK = accK; SolAcc.applyScene(this, accK); }
+        this._updateInner(t, dt * accK);
       } catch (err) {
         this._reportCrash(err);
       }
@@ -25748,7 +26018,7 @@
     }
 
     _updateInner(t, dt) {
-      /* BUGFIX — "the entire game locks up on every new night / retry".
+      /* BUGFIX — "the entire game locks up on every new level / retry".
          This early return halts EVERYTHING: Sol, the Hati, the cones, the HUD.
          _tabHidden is set by the window "blur" listener but was only ever cleared
          by a window "focus" event. Clicking a DOM button — Next night, Retry this
@@ -25970,6 +26240,8 @@
       for (i = 0; i < this.puddles.length; i++) {
         if (this.playerInBox(this.puddles[i])) wet = true;
       }
+      /* v5.6: the Sure footing castle perk (a well) ignores wet floors */
+      if (wet && this.perks && this.perks.surefoot) wet = false;
       if (wet !== this.wetNow) {
         this.wetNow = wet;
         this.paintHud();
@@ -26184,6 +26456,8 @@
       if ((this.superPacMs || 0) > 0 && this.player && this.player.setTint) {
         try { this.player.setTint(0xa5d6a7); this._superTintOn = true; } catch (eSu) {}
       }
+      /* v5.6: castle perks (Swift feet, Iron boots) */
+      if (this.realmSpeed) spd = this.realmSpeed(spd, carrying, sprinting);
       if (ax || ay) this.player.setVelocity((ax / len) * spd, (ay / len) * spd);
       else this.player.setVelocity(0, 0);
       this.tickPlayerCharAnim(ax, ay, sprinting);
@@ -26390,6 +26664,8 @@
       for (i = 0; i < this.janitors.length; i++) this.updateJanitor(this.janitors[i], dt);
       this.tickHatiReturns(playStep(dt));
       this.tickCatchContacts();
+      /* v5.6: realm creatures, Fenrir, dazzle, ambience (js/realms.js) */
+      if (this.tickRealm) this.tickRealm(dt);
       if (!railGraph()) this.destackJanitors();
       for (i = 0; i < this.janitors.length; i++) {
         if ((this.janitors[i].trogFreezeMs || 0) > 0 || (this.iceWorldFreezeMs || 0) > 0 ||
@@ -26423,7 +26699,77 @@
     }
   }
 
+  /* v5.6: the realms, their creatures, Fenrir and the castle perks live in
+     js/realms.js; it wraps a few NightScene methods and needs these internals. */
+  if (window.SolRealms && SolRealms.install) {
+    try {
+      SolRealms.install(NightScene, {
+        maze: function () { return MAZE; },
+        railGraph: railGraph, railPath: railPath, nearestMazeNode: nearestMazeNode,
+        losBlocked: losBlocked, hitsSolid: hitsSolid, inSafeZone: inSafeZone, playStep: playStep,
+        exitPos: function () { return { x: EXIT_X, y: EXIT_Y }; },
+        startPos: function () { return { x: START_X, y: START_Y }; },
+        WALK: WALK, SPRINT: SPRINT, CARRY_WALK: CARRY_WALK, CARRY_SPRINT: CARRY_SPRINT,
+        WORLD_W: WORLD_W, WORLD_H: WORLD_H,
+        NIGHT_THEMES: NIGHT_THEMES, nightTheme: nightTheme
+      });
+    } catch (eInstall) { if (window.console) console.warn("[realms] install failed", eInstall); }
+  }
+
+  /* v5.7: the shooter levels (every other level: 2, 4, 6 and 8 of each realm) live in
+     js/modes.js. Its ModeScene subclasses NightScene, so coins, the reading pop-up, the HUD
+     and the end-of-level screens are shared; it needs these internals. */
+  var ModeScene = null;
+  if (window.SolModes && SolModes.install) {
+    try {
+      ModeScene = SolModes.install(NightScene, {
+        Input: Input,
+        setPlayScene: function (sc) { playScene = sc; progressLevelStart(sc); },   /* ModeScene.create() calls it first */
+        adaptEvent: adaptEvent, pingTeacher: function (sc, st) { pingTeacher(sc, st); },
+        loadUsedClaims: loadUsedClaims, loadAdapt: loadAdapt,
+        readingIsVisible: readingIsVisible, hideReading: hideReading,
+        hideTut: function () { try { hideTut(); } catch (e) {} },
+        hideTrapIntro: function () { try { hideTrapIntro(); } catch (e) {} },
+        installSafeCamFlash: installSafeCamFlash
+      });
+    } catch (eModes) { ModeScene = null; if (window.console) console.warn("[modes] install failed", eModes); }
+  }
+  /* v5.13: the progress record (js/progress.js) — a level starts when its scene is created (a retry is a new start) */
+  function progressLevelStart(sc) {
+    if (!window.SolProgress || !sc) return;
+    try {
+      SolProgress.levelStart({ family: sc.family, night: sc.night, campaign: cfg.gameMode || "ALL",
+        mode: sc.mode && sc.mode.id ? sc.mode.id : (sc.isBossLevel ? "boss" : "maze") });
+    } catch (eP) {}
+  }
+  /* play time counts only while a level is on screen and nothing pauses it */
+  function progressActive() {
+    var sc = playScene;
+    if (!sc || sc.ended || sc._finishing) return false;
+    if (sc.readOpen || sc.tutOpen || sc.codexOpen || sc.trapOpen || sc.helpOpen || sc._tabHidden) return false;
+    var play = document.getElementById("play");
+    if (!play || play.classList.contains("hidden")) return false;
+    var cards = ["overlay", "read-overlay", "tut-overlay", "codex-overlay", "trap-overlay", "char-overlay", "build-overlay", "progress-overlay", "restore-overlay", "badge-overlay", "teacher-overlay"];
+    for (var i = 0; i < cards.length; i++) { var c = document.getElementById(cards[i]); if (c && !c.classList.contains("hidden")) return false; }
+    try { if (sc.scene && sc.scene.isPaused && sc.scene.isPaused()) return false; } catch (e) {}
+    return true;
+  }
+  if (window.SolProgress) {
+    SolProgress.hook({
+      state: function () { return cfg.state || LOCKED_STATE; },
+      nick: function () { var n = document.getElementById("join-nick"); return n ? n.value : ""; },
+      active: progressActive,
+      modes: function () { return gameModeDefs().map(function (d) { return d.id; }); },
+      modeName: modeLabel
+    });
+  }
+  function sceneKeyFor(n) {
+    try { if (ModeScene && window.SolModes && SolModes.modeFor(n)) return "mode"; } catch (e) {}
+    return "night";
+  }
+
   function pingTeacher(scene, status) {
+    if (window.SolClass && SolClass.report) { try { SolClass.report(scene, status, adaptLevelLabel(scene.adapt)); } catch (eC) {} }
     var tokenEl = document.getElementById("token-pip");
     var tok = makeToken(scene.night, scene.score, scene.strikes);
     if (tokenEl) tokenEl.textContent = "Token " + tok;
@@ -26432,6 +26778,9 @@
         night: scene.night,
         extracts: scene.score,
         strikes: scene.strikes,
+        level: adaptLevelLabel(scene.adapt),
+        coins: scene.nightCoins || 0,
+        wrong: scene.nightWrong || 0,
         status: status || "playing"
       });
     }
@@ -26441,6 +26790,14 @@
     document.getElementById("title-screen").classList.toggle("hidden", on);
     var skill = document.getElementById("skill-screen");
     if (skill) skill.classList.add("hidden");
+    var modeScr = document.getElementById("mode-screen");
+    if (modeScr) modeScr.classList.add("hidden");
+    var stateScreen = document.getElementById("state-screen");
+    if (stateScreen) {
+      if (!on && !cfg.state && !LOCKED_STATE) { stateScreen.classList.remove("hidden"); document.getElementById("title-screen").classList.add("hidden"); }
+      else stateScreen.classList.add("hidden");
+    }
+    if (!on && LOCKED_STATE && !cfg.state) applyState(LOCKED_STATE);
     hideCharOverlay();
     document.getElementById("play").classList.toggle("hidden", !on);
     document.getElementById("overlay").classList.add("hidden");
@@ -26483,15 +26840,79 @@
     ]
   };
 
+  SKILL_DEFS.NJ5 = [
+    { strand: "RL", kind: "RL.5", name: "Literature", meta: "Stories, poems and plays: theme, characters, and how a text is built." },
+    { strand: "RI", kind: "RI.5", name: "Informational", meta: "Articles and real-world texts: main idea, evidence, structure." },
+    { strand: "RV", kind: "L.5", name: "Vocabulary", meta: "Word meaning from context, word parts, and figurative language." },
+    { strand: "DSR", kind: "RL/RI.5", name: "Paired texts", meta: "Two texts on one topic — compare, connect, and cite both." },
+    { strand: "ALL", kind: "All skills", name: "All", meta: "Everything mixed, leaning toward the skills you miss most." }
+  ];
+
+  /* v5.9: the Odyssey game's "skill" is an episode; each one tests the unit's skills
+     (character, plot and setting, theme, word choice and tone, vocabulary in context). */
+  SKILL_DEFS.ODY = [
+    { strand: "LOTUS", kind: "Book 9", name: "The Lotus-Eaters", meta: "Temptation and forgetting home. Character, setting and plot." },
+    { strand: "CYCLOPS", kind: "Book 9", name: "The Cyclops", meta: "Curiosity, pride and a clever escape. Character, epic similes, theme." },
+    { strand: "CIRCE", kind: "Book 10", name: "Circe", meta: "The goddess who turns men to pigs. Inference, character, word choice." },
+    { strand: "HELIOS", kind: "Book 12", name: "The Cattle of the Sun", meta: "Hunger against a promise. Theme, tone, and Odysseus against Eurylochus." },
+    { strand: "CALYPSO", kind: "Book 5", name: "Calypso", meta: "Seven years on a beautiful island. Setting, imagery, longing for home." },
+    { strand: "VOYAGE", kind: "Paired texts", name: "The Whole Voyage", meta: "Compare characters and episodes, Greek values, and facing challenges." },
+    { strand: "ALL", kind: "All episodes", name: "All", meta: "Every episode mixed, leaning toward the skills you miss most." }
+  ];
+
   function gradeLabel(family) {
+    if (family === "ODY") return "The Odyssey · English 9";
+    if (family === "NJ5") return "New Jersey · Grade 5";
     if (family === "G10") return "Selection 2 · Grade 10";
     if (family === "G11") return "Selection 3 · Grade 11";
     return "Selection 1 · Grade 9";
   }
 
+  /* v5.8: a class session (Apps Script ?class=CODE, js/classes.js) plays one grade */
+  function classGrade() { var C = window.SOL_CLASS; return C && /^(G9|G10|G11|NJ5|ODY)$/.test(C.grade || "") ? C.grade : null; }
   function selectedFamily() {
-    var el = document.querySelector("#title-screen .card.selected[data-family]");
-    return (el && el.getAttribute("data-family")) || "G9";
+    if (classGrade()) return classGrade();
+    var el = document.querySelector("#title-screen .card.selected[data-family]:not(.hidden)");
+    var st = STATE_DEFS[cfg.state];
+    return (el && el.getAttribute("data-family")) || (st && st.def) || "G9";
+  }
+
+  /* v4.9: state gateway (New Jersey / Virginia). Chooses which grade cards the title screen shows. */
+  function applyState(st, silent) {
+    if (LOCKED_STATE) st = LOCKED_STATE;
+    if (!STATE_DEFS[st]) st = "VA";
+    cfg.state = st;
+    try { localStorage.setItem(LS_STATE, st); } catch (e) {}
+    var def = STATE_DEFS[st], any = false, cg = classGrade();
+    if (cg && def.families.indexOf(cg) !== -1) cfg.family = cg;
+    document.querySelectorAll("#title-screen .card[data-family]").forEach(function (c) {
+      var fam = c.getAttribute("data-family"), ok = def.families.indexOf(fam) !== -1 && (!cg || fam === cg);
+      c.classList.toggle("hidden", !ok);
+      if (!ok) c.classList.remove("selected");
+      if (ok && c.classList.contains("selected")) any = true;
+    });
+    if (!any || def.families.indexOf(cfg.family) === -1) {
+      cfg.family = (cg && def.families.indexOf(cg) !== -1) ? cg : def.def;
+      document.querySelectorAll("#title-screen .card[data-family]").forEach(function (c) { c.classList.toggle("selected", c.getAttribute("data-family") === cfg.family); });
+    }
+    var kick = document.getElementById("title-kicker");
+    if (kick) kick.textContent = def.kicker + (window.SOL_CLASS ? " · Class: " + (window.SOL_CLASS.name || window.SOL_CLASS.code) : "");
+    var sw = document.getElementById("btn-state");
+    if (sw) { sw.textContent = def.name + " · change"; sw.classList.toggle("hidden", !!LOCKED_STATE); }
+    var stateScreen = document.getElementById("state-screen"), title = document.getElementById("title-screen");
+    if (!silent) {
+      if (stateScreen) stateScreen.classList.add("hidden");
+      if (title) title.classList.remove("hidden");
+    }
+  }
+  function showStateScreen() {
+    var stateScreen = document.getElementById("state-screen"), title = document.getElementById("title-screen"), skill = document.getElementById("skill-screen");
+    var modeScr = document.getElementById("mode-screen");
+    if (modeScr) modeScr.classList.add("hidden");
+    if (LOCKED_STATE) { if (skill) skill.classList.add("hidden"); if (stateScreen) stateScreen.classList.add("hidden"); applyState(LOCKED_STATE); return; }
+    if (title) title.classList.add("hidden");
+    if (skill) skill.classList.add("hidden");
+    if (stateScreen) stateScreen.classList.remove("hidden");
   }
 
   function selectedStrand() {
@@ -26504,14 +26925,14 @@
     var line = document.getElementById("skill-save-line");
     var cont = document.getElementById("btn-skill-continue");
     if (!line || !cont) return;
-    if (!localStorage.getItem(LS_NIGHT)) {
-      line.textContent = "No night saved on this Chromebook yet. Start Night 1.";
+    if (!hasSavedNight()) {
+      line.textContent = "No level saved in " + modeLabel(cfg.gameMode) + " on this Chromebook yet. Start Level 1. Each game mode keeps its own level.";
       cont.classList.add("hidden");
       return;
     }
-    line.textContent = "Night " + n + " saved on this Chromebook. Itch login does not store progress.";
-    cont.textContent = n > 1 ? ("Continue Night " + n) : "Continue";
-    cont.classList.toggle("hidden", n <= 1 && !localStorage.getItem(LS_NIGHT));
+    line.textContent = "Level " + n + " saved in " + modeLabel(cfg.gameMode) + " on this Chromebook. Each game mode keeps its own level.";
+    cont.textContent = n > 1 ? ("Continue Level " + n) : "Continue";
+    cont.classList.toggle("hidden", n <= 1 && !hasSavedNight());
   }
 
   function renderSkillCards(family) {
@@ -26537,6 +26958,84 @@
     });
   }
 
+  /* ── v5.8.3: the game mode screen, between the grade and the skill ── */
+  var GAME_MODE_DEFS = [
+    { id: "ALL", kind: "All modes", name: "Mixed", meta: "The full campaign: the maze on odd levels and Fenrir's boss levels, a shooter level on the even ones." },
+    { id: "maze", kind: "Maze", name: "Labyrinth", meta: "Sneak past Hati, grab the right letter and get out through EXIT · SAFE. Every level is the maze." },
+    { id: "raid", kind: "Galaga style", name: "Eagle Swoop", meta: "Shoot the eagle carrying the right letter while the flock dives at you." },
+    { id: "rocks", kind: "Asteroids style", name: "Rune Rocks", meta: "Pull the rock with the right letter in with your beam and blast the rest." },
+    { id: "sky", kind: "Flying shooter", name: "Sun Chariot", meta: "Fly the sun's chariot and shoot the right orb through the gap in its shield." },
+    { id: "ring", kind: "Arena", name: "Wolf Ring", meta: "Keep the wolves off and shoot the right runestone when it rises." },
+    /* v5.12: Virginia and New Jersey only (js/modes.js, MODES.worms) */
+    { id: "worms", kind: "Centipede style", name: "Root Worms", meta: "Shoot the glowing worm segment with the right letter as the worms wind down through the mushrooms.", noOdy: true }
+  ];
+  /* v5.10: the Odyssey build only (window.SOL_STATE === "ODY") */
+  GAME_MODE_DEFS.push({ id: "strait", kind: "Steer the strait", name: "Scylla and Charybdis", meta: "Steer Odysseus's ship through the gaps in the rocks and the gate with the right letter, to the end of the strait, while Charybdis pulls and Scylla strikes.", ody: true });
+  /* v5.11: four more Odyssey modes, each in its own file (js/mode-ram.js, mode-bow.js, mode-raft.js, mode-row.js) */
+  GAME_MODE_DEFS.push(
+    { id: "ram", kind: "Sneak out of the cave", name: "Under the Ram", meta: "Cling under a ram and slip out of the Cyclops's cave past blind Polyphemus's groping hands — ride out on the ram with the right letter.", ody: true },
+    { id: "bow", kind: "Archery", name: "Bend the Bow", meta: "String Odysseus's great bow and shoot an arrow through the twelve axe heads — the row with the right letter.", ody: true },
+    { id: "raft", kind: "Ride the waves", name: "Calypso's Raft", meta: "Sail the raft from Ogygia, steer by the stars and ride Poseidon's waves to the right letter.", ody: true },
+    { id: "row", kind: "Row to the song", name: "Row Past the Sirens", meta: "Row as each note of the Sirens' song lands on the ship while Odysseus, tied to the mast, strains toward them — row to the right letter.", ody: true }
+  );
+  /* the cards this build offers: the Odyssey-only modes appear only in the Odyssey build, and the modes
+     marked noOdy (v5.12: Root Worms) only in the others; a saved pick of a card not offered falls back to All */
+  function gameModeDefs() {
+    var ody = typeof window !== "undefined" && window.SOL_STATE === "ODY";
+    return GAME_MODE_DEFS.filter(function (d) { return ody ? !d.noOdy : !d.ody; });
+  }
+  function readGameMode() {
+    var m = "ALL";
+    try { m = localStorage.getItem(LS_GAMEMODE) || "ALL"; } catch (e) {}
+    return gameModeDefs().some(function (d) { return d.id === m; }) ? m : "ALL";
+  }
+  function applyGameMode(m) {
+    if (!gameModeDefs().some(function (d) { return d.id === m; })) m = "ALL";
+    cfg.gameMode = m;
+    if (window.SolModes) SolModes.only = m === "ALL" ? null : m;
+  }
+  applyGameMode(readGameMode());
+  function gameModeName(m) {
+    var d = GAME_MODE_DEFS.filter(function (x) { return x.id === m; })[0];
+    return d && d.id !== "ALL" ? d.name : "All modes";
+  }
+  /* v5.15: a mode's name in a sentence ("Level 5 saved in Eagle Swoop") */
+  function modeLabel(m) { var d = GAME_MODE_DEFS.filter(function (x) { return x.id === m; })[0]; return d ? (d.id === "ALL" ? "Mixed (all modes)" : d.name) : "Mixed (all modes)"; }
+  function showModeScreen() {
+    cfg.family = selectedFamily();
+    var title = document.getElementById("title-screen"), skill = document.getElementById("skill-screen"), scr = document.getElementById("mode-screen");
+    if (title) title.classList.add("hidden");
+    if (skill) skill.classList.add("hidden");
+    if (scr) scr.classList.remove("hidden");
+    var kicker = document.getElementById("mode-kicker");
+    if (kicker) kicker.textContent = gradeLabel(cfg.family) + " · game mode";
+    var host = document.getElementById("mode-packs");
+    if (!host) return;
+    var want = readGameMode();
+    host.innerHTML = "";
+    gameModeDefs().forEach(function (d) {
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = d.id === want ? "card selected" : "card";
+      btn.setAttribute("data-gamemode", d.id);
+      btn.innerHTML = '<span class="kind">' + d.kind + '</span><span class="name">' + d.name + '</span><span class="meta">' + d.meta + '</span>';
+      bindTap(btn, function () {
+        host.querySelectorAll(".card").forEach(function (c) { c.classList.remove("selected"); });
+        btn.classList.add("selected");
+        try { localStorage.setItem(LS_GAMEMODE, d.id); } catch (e) {}
+        applyGameMode(d.id);
+        showSkillScreen(1);
+      });
+      host.appendChild(btn);
+    });
+  }
+  function hideModeScreen() {
+    var scr = document.getElementById("mode-screen"), title = document.getElementById("title-screen");
+    if (scr) scr.classList.add("hidden");
+    if (title) title.classList.remove("hidden");
+    refreshSaveLine();
+  }
+
   function showSkillScreen(nightHint) {
     pendingNight = nightHint || 1;
     cfg.family = selectedFamily();
@@ -26547,20 +27046,17 @@
     } catch (e2) {}
     var title = document.getElementById("title-screen");
     var skill = document.getElementById("skill-screen");
+    var modeScr = document.getElementById("mode-screen");
     if (title) title.classList.add("hidden");
+    if (modeScr) modeScr.classList.add("hidden");
     if (skill) skill.classList.remove("hidden");
     var kicker = document.getElementById("skill-kicker");
-    if (kicker) kicker.textContent = gradeLabel(cfg.family) + " · skill focus";
+    var ody = cfg.family === "ODY", skT = document.getElementById("skill-title"), skG = document.getElementById("skill-tag");
+    if (kicker) kicker.textContent = gradeLabel(cfg.family) + " · " + gameModeName(cfg.gameMode) + (ody ? " · episode" : " · skill focus");
+    if (skT) skT.textContent = ody ? "Pick an episode" : "Pick a skill";
+    if (skG) skG.textContent = ody ? "Choose the episode your class is reading, or play them all mixed." : "Choose a skill focus for this level, or play with all skills mixed.";
     renderSkillCards(cfg.family);
     refreshSkillSaveLine();
-  }
-
-  function hideSkillScreen() {
-    var skill = document.getElementById("skill-screen");
-    var title = document.getElementById("title-screen");
-    if (skill) skill.classList.add("hidden");
-    if (title) title.classList.remove("hidden");
-    refreshSaveLine();
   }
 
   function bootPhaser() {
@@ -26584,7 +27080,8 @@
         width: w,
         height: h
       },
-      scene: NightScene,
+      /* v5.7: the first scene in the list starts; the other waits for restartNight() */
+      scene: ModeScene ? (sceneKeyFor(cfg.night) === "mode" ? [ModeScene, NightScene] : [NightScene, ModeScene]) : NightScene,
       input: { keyboard: true }
     });
     window.setTimeout(function () {
@@ -26636,7 +27133,14 @@
       playScene.tutDone = tutClosed;
       playScene.tutOpen = false;
       playScene.tutLockUntil = Date.now() + TUT_LOCK_MS;
-      playScene.scene.restart({ family: cfg.family, strand: cfg.strand, night: cfg.night });
+      var lvData = { family: cfg.family, strand: cfg.strand, night: cfg.night };
+      var wantKey = sceneKeyFor(cfg.night), curKey = (playScene.sys && playScene.sys.settings && playScene.sys.settings.key) || "night";
+      if (wantKey === curKey || !gameRef) playScene.scene.restart(lvData);
+      else {
+        /* v5.7: maze level <-> shooter level */
+        try { gameRef.scene.stop(curKey); } catch (eSt) {}
+        gameRef.scene.start(wantKey, lvData);
+      }
     } else {
       bootPhaser();
     }
@@ -26735,11 +27239,11 @@
     var skip = document.getElementById("tut-skip");
     var kicker = document.getElementById("tut-kicker");
     var hint = document.getElementById("tut-hint");
-    if (kicker) kicker.textContent = "Night 1 · How to play";
+    if (kicker) kicker.textContent = "Level 1 · How to play";
     if (title && card) title.textContent = card.title;
-    if (body && card) body.textContent = card.body;
-    if (skip) skip.classList.remove("hidden");
-    if (hint) hint.textContent = "Tap to play";
+    if (body && card) { if (card.html) body.innerHTML = card.html; else body.textContent = card.body; }
+    if (skip) { skip.classList.remove("hidden"); skip.textContent = "Play"; }
+    if (hint) hint.textContent = "Tap Play to start Level 1";
   }
   var tutBound = false;
   var codexBound = false;
@@ -26887,8 +27391,14 @@
     window.addEventListener("focus", function () {
       if (!document.hidden) resumeAfterTab();
     });
-    window.addEventListener("pageshow", function () {
+    window.addEventListener("pageshow", function (ev) {
       if (!document.hidden) resumeAfterTab();
+      /* v4.9.6: coming back to the page from the browser's back-forward cache counts as
+         opening it again — outside a night, the state gateway comes first. */
+      try {
+        var playEl = document.getElementById("play");
+        if (ev && ev.persisted && !LOCKED_STATE && (!playEl || playEl.classList.contains("hidden"))) { cfg.state = null; showStateScreen(); }
+      } catch (ePs) {}
     });
   }
   function unlockAudioEverywhere() {
@@ -26938,11 +27448,13 @@
         e.preventDefault();
         shut.classList.add("held");
         Input.shutterEdge = true;
+        Input.shutterHeld = true;
         if (window.AfterHoursAudio) AfterHoursAudio.unlock();
       }
       function shutOff(e) {
         e.preventDefault();
         shut.classList.remove("held");
+        Input.shutterHeld = false;
       }
       shut.addEventListener("pointerdown", shutOn);
       shut.addEventListener("pointerup", shutOff);
@@ -26956,15 +27468,15 @@
     var line = document.getElementById("save-line");
     var cont = document.getElementById("btn-continue");
     if (!line) return;
-    if (!localStorage.getItem(LS_NIGHT)) {
-      line.textContent = "No night saved on this Chromebook yet. Tap a grade to start Night 1. Itch login does not store progress.";
+    if (!hasSavedNight()) {
+      line.textContent = "No level saved on this Chromebook yet. " + (window.SOL_STATE === "ODY" ? "Tap The Odyssey" : "Tap a grade") + " to start Level 1. Each game mode keeps its own level.";
       if (cont) cont.classList.add("hidden");
       return;
     }
-    line.textContent = "Night " + n + " saved on this Chromebook. Tap a grade, then Continue on the skill screen. Itch login does not store progress.";
+    line.textContent = "Level " + n + " saved in " + modeLabel(cfg.gameMode) + " on this Chromebook. " + (window.SOL_STATE === "ODY" ? "Tap The Odyssey" : "Tap a grade") + ", then pick a game mode: each mode keeps its own level.";
     if (cont) {
-      cont.textContent = n > 1 ? ("Continue Night " + n) : "Continue";
-      cont.classList.toggle("hidden", n <= 1 && !localStorage.getItem(LS_NIGHT));
+      cont.textContent = n > 1 ? ("Continue Level " + n) : "Continue";
+      cont.classList.toggle("hidden", n <= 1 && !hasSavedNight());
     }
   }
 
@@ -27130,15 +27642,33 @@
     el.addEventListener("pointerup", go);
   }
 
+  /* v4.9: state gateway */
+  document.querySelectorAll("#state-screen .card[data-state]").forEach(function (card) {
+    bindTap(card, function () { applyState(card.getAttribute("data-state")); refreshSaveLine(); });
+  });
+  var btnState = document.getElementById("btn-state");
+  if (btnState) bindTap(btnState, function () { showStateScreen(); });
+  var btnShop = document.getElementById("btn-shop");
+  if (btnShop) bindTap(btnShop, function () {
+    if (!window.SolBuild || !SolBuild.showShop) return;
+    if (window.SolMusic) { try { SolMusic.play("builder"); } catch (e1) {} }
+    SolBuild.showShop(parseInt(btnShop.dataset.night || cfg.night || "1", 10), function () {
+      if (window.SolMusic) { try { SolMusic.play("menu"); } catch (e2) {} }
+      try { var bs = SolBuild.state(); btnShop.textContent = "Shop · " + (bs.coins || 0) + " coins"; } catch (e3) {}
+    });
+  });
+
   /* Title Start/Continue removed — grade card opens skill screen. */
-  bindTap(document.getElementById("btn-skill-back"), function () { hideSkillScreen(); });
+  /* v5.8.3: Back on the skill screen goes to the game mode screen; Back there goes to the grades */
+  bindTap(document.getElementById("btn-skill-back"), function () { showModeScreen(); });
+  bindTap(document.getElementById("btn-mode-back"), function () { hideModeScreen(); });
   document.querySelectorAll("#title-screen .card[data-family]").forEach(function (card) {
     bindTap(card, function () {
       document.querySelectorAll("#title-screen .card[data-family]").forEach(function (c) { c.classList.remove("selected"); });
       card.classList.add("selected");
       cfg.family = card.getAttribute("data-family") || "G9";
       try { localStorage.setItem(LS_FAMILY, cfg.family); } catch (e) {}
-      showSkillScreen(1);
+      showModeScreen();
     });
   });
   bindTap(document.getElementById("btn-skill-start"), function () { openCharPicker(1, false); });
@@ -27158,13 +27688,26 @@
       window.location.href = "admin.html";
     });
   }
-  document.getElementById("btn-again").addEventListener("click", function () {
+  function returnToTitle() {
     showPlayUi(false);
     wantNight1Tut = false;
     tutClosed = true;
     hideTut();
+    if (window.SolRealms && SolRealms.stopAmbience) SolRealms.stopAmbience();
     if (gameRef) { gameRef.destroy(true); gameRef = null; }
     refreshSaveLine();
+  }
+  document.getElementById("btn-again").addEventListener("click", returnToTitle);
+  /* v5.18.2: Menu, during a level: the game pauses and asks; yes leaves the level (it is neither won nor lost; the
+     level to play next and the progress record are already saved) and goes back to the title screen */
+  bindTap(document.getElementById("btn-quit"), function () {
+    var sc = playScene, paused = false;
+    try { if (sc && sc.scene && !sc.ended && !sc.scene.isPaused()) { sc.scene.pause(); paused = true; } } catch (e) {}
+    var yes = window.confirm("Leave this level and go back to the title screen?\n\nYour level and progress are saved. This level will not count as won.");
+    if (!yes) { try { if (paused) sc.scene.resume(); } catch (e2) {} return; }
+    hideReading(); hideCodex(); hideTrapIntro();
+    try { if (window.SolAcc && SolAcc.stop) SolAcc.stop(); } catch (e3) {}
+    returnToTitle();
   });
   document.getElementById("btn-next").addEventListener("click", function () {
     var n = parseInt(document.getElementById("btn-next").dataset.goto || "1", 10);
@@ -27190,7 +27733,18 @@
     }
     var strand = localStorage.getItem(LS_STRAND);
     if (strand) cfg.strand = strand;
+    /* v4.9.1: the gateway is always the first screen; the last choice is only pre-highlighted. */
+    var savedState = localStorage.getItem(LS_STATE);
+    if (!(savedState && STATE_DEFS[savedState])) savedState = fam === "NJ5" ? "NJ" : fam === "ODY" ? "ODY" : (fam ? "VA" : null);
+    if (LOCKED_STATE) savedState = null;
+    if (savedState) {
+      applyState(savedState, true);
+      cfg.state = null;
+      document.querySelectorAll("#state-screen .card[data-state]").forEach(function (c) { c.classList.toggle("selected", c.getAttribute("data-state") === savedState); });
+    }
   } catch (e) {}
+  showStateScreen();
+  if (LOCKED_STATE) { try { document.title = "SOL Labyrinth · " + STATE_DEFS[LOCKED_STATE].name; } catch (eT) {} }
 
   bindPads();
   bindVisibilityResume();
@@ -27234,7 +27788,7 @@
   (function buildMusicPicker() {
     var wrap = document.getElementById("music-chips");
     if (!wrap || !window.SolMusic || !SolMusic.TRACKS || !SolMusic.setPick) return;
-    var opts = [{ key: "auto", name: "Surprise me (suspense)" }];
+    var opts = [{ key: "auto", name: "Surprise me (a track for each realm)" }];
     Object.keys(SolMusic.TRACKS).forEach(function (k) { opts.push({ key: k, name: SolMusic.TRACKS[k].name }); });
     opts.push({ key: "off", name: "No music" });
     var cur = SolMusic.getPick ? SolMusic.getPick() : "auto";
