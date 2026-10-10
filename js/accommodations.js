@@ -11,8 +11,8 @@
      big     larger text in the side panel and the reading pop-up
      slow    the whole game runs slower (85, 75 or 60 % speed): game.js and modes.js scale each frame by speedK()
    On a vocabulary question (a .RV. standard) the word it asks about is never defined or translated.
-   The word lists are per game: js/acc-ody.js (The Odyssey) sets window.SOL_ACC_DATA; without it the two word
-   options are not offered. */
+   The word lists are per game: js/acc-va.js (Virginia, v5.19) or js/acc-ody.js (The Odyssey) sets
+   window.SOL_ACC_DATA; without it (New Jersey) the two word options are not offered. */
 (function () {
   "use strict";
   var STATE = window.SOL_STATE || "VA";

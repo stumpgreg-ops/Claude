@@ -6,7 +6,8 @@
    (Arabic right to left), the word a vocabulary question asks about is never defined or translated; read aloud reads
    the passage sentence by sentence (highlighted), the question and an answer; larger text; the slower game runs the
    scene at 75 %; an end date in the past switches an option off; "Turn all off" clears everything; and the Virginia
-   game (no word lists yet) offers read aloud, larger text and a slower game but not the word options. */
+   game loads its own word lists (js/acc-va.js, v5.19) and offers all five options, and in a level its passage words
+   are defined and its question words translated. */
 var path = require("path"), fs = require("fs"), http = require("http"), url = require("url");
 var { chromium } = require("/opt/node22/lib/node_modules/playwright");
 var repo = path.join(__dirname, ".."), shots = path.join(__dirname, "shots"), root = path.join(repo, "dist", "ody");
@@ -150,16 +151,38 @@ var srv = http.createServer(function (req, res) {
   console.log("errors (dist/ody):", errors.length ? errors : "none");
   check(errors.length === 0, "dist/ody: no page errors");
 
-  /* ── the Virginia game: no word lists yet ── */
+  /* ── the Virginia game: its own word lists (v5.19) ── */
   root = path.join(repo, "dist", "va");
   if (fs.existsSync(path.join(root, "index.html"))) {
     await page.goto(base + "index.html", { waitUntil: "load" }); await page.waitForTimeout(600);
-    var va = await page.evaluate(function () { return { acc: !!window.SolAcc, data: !!window.SOL_ACC_DATA }; });
+    var va = await page.evaluate(function () { var D = window.SOL_ACC_DATA; return { acc: !!window.SolAcc, data: !!D, def: D ? Object.keys(D.def).length : 0, tr: D ? Object.keys(D.tr).length : 0 }; });
     await page.fill("#join-nick", "accommodations");
     await page.waitForSelector("#acc-overlay:not(.hidden) #acc-pin", { timeout: 5000 }).catch(function () {});
     await page.fill("#acc-pin", "4826"); await page.click("#acc-pin-go");
     va.opts = await page.evaluate(function () { return ["define", "dict", "audio", "big", "slow"].map(function (id) { var c = document.getElementById("acc-" + id); return c && !c.disabled ? 1 : 0; }).join(""); });
-    check(va.acc && !va.data && va.opts === "00111", "the Virginia game offers read aloud, larger text and a slower game, not the word options (no word lists yet): " + JSON.stringify(va));
+    check(va.acc && va.data && va.def > 2000 && va.tr > 13000 && va.opts === "11111", "the Virginia game loads its word lists and offers all five options: " + JSON.stringify(va));
+    /* turn on the two word options (Arabic) and open a Grade 9 level: defined passage words, translated question words */
+    await page.check("#acc-define"); await page.check("#acc-dict"); await page.selectOption("#acc-lang", "ar"); await page.click("#acc-save");
+    await page.waitForTimeout(300);
+    await page.goto(base + "index.html", { waitUntil: "load" }); await page.waitForTimeout(600);
+    await page.click('#title-screen .card[data-family="G9"]');
+    await page.waitForSelector("#mode-screen:not(.hidden)");
+    await page.click('#mode-packs .card[data-gamemode="maze"]');
+    await page.waitForSelector("#skill-screen:not(.hidden)");
+    await page.click("#btn-skill-start"); await page.waitForTimeout(400);
+    if (await page.isVisible("#btn-char-confirm")) await page.click("#btn-char-confirm");
+    await page.waitForTimeout(2500);
+    if (await page.isVisible("#tut-skip")) await page.click("#tut-skip");
+    await page.waitForFunction(function () { var s = window.SolScene; return s && s.claim && s.readOpen; }, null, { timeout: 20000 }).catch(function () {});
+    await page.waitForTimeout(300);
+    var vaWords = await page.evaluate(function () {
+      var d = document.querySelectorAll("#read-passage .acc-def").length, t = document.querySelectorAll("#read-stem .acc-w, #read-choices .acc-w").length;
+      var sp = document.querySelector("#read-stem .acc-w, #read-choices .acc-w"), tr = "";
+      if (sp) { sp.click(); var p = document.getElementById("acc-pop"); tr = p ? (p.querySelector(".acc-pop-tr") || {}).textContent || "" : ""; }
+      return { passageDefs: d, qaWords: t, tr: tr };
+    });
+    check(vaWords.passageDefs > 0 && vaWords.qaWords > 0 && /[\u0600-\u06FF]/.test(vaWords.tr), "Virginia level: passage words are defined and a question word shows its Arabic: " + JSON.stringify(vaWords));
+    await page.evaluate(function () { localStorage.removeItem("afterHours.v1.acc.VA"); });
   }
   await browser.close(); srv.close();
   console.log(fails.length ? fails.length + " FAILED" : "ALL OK");

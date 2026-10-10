@@ -29,6 +29,12 @@ A game uploaded to Canvas can't send anything anywhere, so progress is shown to 
 
 Tests: `node tools/smoke-progress.js` (after `node tools/build-games.js`, `node tools/build-appsscript.js VA|ODY` and `node tools/build-canvas.js VA|ODY`).
 
+## v5.19.0 (2026-10-10) — Virginia word lists: tap a word for its meaning, the four-language dictionary
+
+The two word accommodations (v5.18.0) now work in the Virginia game too. `js/acc-va.js` carries a short definition of every difficult word in the Virginia passages, questions and answers and a word-to-word dictionary of every question-and-answer word in Spanish, Arabic, Farsi and Russian (the sense the question uses). `tools/build-games.js` loads it only in the Virginia build (and `js/acc-ody.js` only in the Odyssey build), the Canvas READ ME's accommodations section describes both word options for Virginia, and `node tools/smoke-acc.js` now also opens a Virginia level with both on. New Jersey still says "not in this game yet".
+
+**Regenerating the Virginia word lists** after its questions change (`tools/acc-words.js`): `node tools/acc-words.js list <dir>` writes the 17,741 distinct words (13,571 of them in questions and answers) with an example sentence each, 300 to a file; language agents write one `out-NN.jsonl` per file (the brief is in the tool's header: four translations for every question-and-answer word, a definition for the difficult ones only); `node tools/acc-words.js status <dir>` lists what is still missing and `merge <dir>` checks everything and writes `js/acc-va.js`. The translations were written by language models and not reviewed by native speakers; a teacher who finds a wrong one can send the word and the correction.
+
 ## v5.18.2 (2026-10-08) — a Menu button during play, a one-window tutorial
 
 - **Menu** (top-left of the play area): pauses the level and asks "Leave this level and go back to the title screen?"; No resumes, Yes returns to the title screen (the level is neither won nor lost; the level to play next and the progress record are already saved). Read-aloud stops and the pop-ups close on the way out.

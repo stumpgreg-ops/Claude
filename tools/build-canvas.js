@@ -274,7 +274,7 @@ function S_trouble() {
 /* v5.18: the accommodations a teacher turns on for one student; the PIN comes from js/accommodations.js */
 var ACC_PIN = (/PIN0 = "(\d+)"/.exec(fs.readFileSync(path.join(__dirname, "..", "js", "accommodations.js"), "utf8")) || [])[1] || "(see js/accommodations.js)";
 function S_acc() {
-  var words = st === "ODY";
+  var words = st === "ODY" || st === "VA";
   return [].concat(
     ["Accommodations are NOT on for anyone until you turn them on, one Chromebook at a time. They are for the",
      "student who uses that Chromebook (that browser profile) and stay until you turn them off or their end date",
@@ -289,9 +289,9 @@ function S_acc() {
      "4. To change or stop them later, do the same and untick, or click Turn all off."],
     sub("What each one does"),
     words ? ["- Tap a word for its meaning: difficult words in the passage, question and answers are underlined; a click",
-     "  shows a short definition."] : ["- Tap a word for its meaning: not in this game yet (offered in the Odyssey game)."],
+     "  shows a short definition."] : ["- Tap a word for its meaning: not in this game yet (offered in the Virginia and Odyssey games)."],
     words ? ["- Word-to-word dictionary (questions and answers only): a click on any word in the question or the answers",
-     "  shows it in Spanish, Arabic, Farsi or Russian."] : ["- Word-to-word dictionary: not in this game yet (offered in the Odyssey game)."],
+     "  shows it in Spanish, Arabic, Farsi or Russian."] : ["- Word-to-word dictionary: not in this game yet (offered in the Virginia and Odyssey games)."],
     ["- On a vocabulary question, the word the question asks about is never defined or translated.",
      "- Read aloud: speaker buttons read the passage (sentence by sentence, highlighted), the question and each",
      "  answer, with the Chromebook's own voice (no internet needed). A slower voice can be chosen.",

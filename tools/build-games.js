@@ -108,6 +108,8 @@ function rewriteIndex(html, st) {
     /* v5.18: the Odyssey's word lists for the accommodations (definitions, the word-to-word dictionary) */
     must(/(\n(\s*)<script src="js\/accommodations\.js\?v=[0-9.]+"><\/script>)/, '\n$2<script src="js/acc-ody.js?v=' + version + '"></script>$1', "accommodations.js script tag");
   }
+  /* v5.19: Virginia's word lists for the accommodations (tools/acc-words.js writes js/acc-va.js) */
+  if (st === "VA" && fs.existsSync(path.join(root, "js", "acc-va.js"))) must(/(\n(\s*)<script src="js\/accommodations\.js\?v=[0-9.]+"><\/script>)/, '\n$2<script src="js/acc-va.js?v=' + version + '"></script>$1', "accommodations.js script tag");
   /* no "change state" button */
   must(/\s*<button type="button" class="btn" id="btn-state"[^>]*>[^<]*<\/button>/, "", "btn-state");
   /* only this state's content files */
@@ -132,6 +134,9 @@ Object.keys(STATES).forEach(function (st) {
     if (/^js\/content\d*\.js$/.test(rel) && (drop.indexOf(name) !== -1 || PENDING.indexOf(name) !== -1)) return true;
     if (rel === "teacher") return true;   /* the dev copies of the teacher pages; each build gets its own below */
     if (st !== "ODY" && /^(js\/odyssey\.js|css\/odyssey\.css|assets\/logo\/odyssey-)/.test(rel.split(path.sep).join("/"))) return true;
+    /* each game's own word lists for the accommodations (v5.19) */
+    if (rel === path.join("js", "acc-ody.js") && st !== "ODY") return true;
+    if (rel === path.join("js", "acc-va.js") && st !== "VA") return true;
     return false;
   });
   fs.writeFileSync(path.join(out, "index.html"), rewriteIndex(fs.readFileSync(path.join(root, "index.html"), "utf8"), st));
