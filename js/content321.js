@@ -283,23 +283,23 @@
           "id": "hooks",
           "sol": "G.TR.4",
           "sub": "G.TR.4.4",
-          "stem": "The 40-in. wire is moved to hooks 24 in. apart, with the nail still directly above their midpoint. How far above that midpoint is the nail?",
+          "stem": "A larger painting has hooks 30 in. apart and a 50-in. wire over one nail, with the nail directly above the hooks' midpoint. How far above that midpoint is the nail?",
           "choices": [
             {
               "letter": "A",
-              "text": "8 in."
+              "text": "10 in."
             },
             {
               "letter": "B",
-              "text": "16 in."
+              "text": "20 in."
             },
             {
               "letter": "C",
-              "text": "about 23.3 in."
+              "text": "about 29.2 in."
             },
             {
               "letter": "D",
-              "text": "32 in."
+              "text": "40 in."
             }
           ],
           "correct": "B"
@@ -825,7 +825,7 @@
       "kind": "Triangles · G.TR.4",
       "blurb": "Lead lines cut a 21-by-8-inch panel into three triangles.",
       "level": 2,
-      "passage": "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 160\" role=\"img\" aria-label=\"Rectangle ABCD, 21 inches by 8 inches, with lead lines from A and from B to point E on the top side DC. DE is 6 inches and EC is 15 inches. Triangle ABE is shaded\"><polygon class=\"sh2\" points=\"24,138 297,138 102,34\"/><polygon class=\"ln\" points=\"24,138 297,138 297,34 24,34\"/><line class=\"ln\" x1=\"24\" y1=\"138\" x2=\"102\" y2=\"34\"/><line class=\"ln\" x1=\"297\" y1=\"138\" x2=\"102\" y2=\"34\"/><path class=\"thin\" d=\"M24 42 L32 42 L32 34\"/><path class=\"thin\" d=\"M297 42 L289 42 L289 34\"/><circle class=\"dt\" cx=\"24\" cy=\"138\" r=\"3\"/><circle class=\"dt\" cx=\"297\" cy=\"138\" r=\"3\"/><circle class=\"dt\" cx=\"297\" cy=\"34\" r=\"3\"/><circle class=\"dt\" cx=\"24\" cy=\"34\" r=\"3\"/><circle class=\"dt\" cx=\"102\" cy=\"34\" r=\"3\"/><text x=\"12\" y=\"152\" text-anchor=\"middle\">A</text><text x=\"308\" y=\"152\" text-anchor=\"middle\">B</text><text x=\"308\" y=\"30\" text-anchor=\"middle\">C</text><text x=\"12\" y=\"30\" text-anchor=\"middle\">D</text><text x=\"102\" y=\"26\" text-anchor=\"middle\">E</text><text x=\"61\" y=\"26\" text-anchor=\"middle\">6 in.</text><text x=\"200\" y=\"26\" text-anchor=\"middle\">15 in.</text><text x=\"38\" y=\"95\" text-anchor=\"middle\">8 in.</text><text x=\"160\" y=\"156\" text-anchor=\"middle\">21 in.</text></svg></figure><p class=\"geo-given\">A stained-glass panel is rectangle <strong>ABCD</strong>, 21 in. long and 8 in. tall. Lead lines run from <strong>A</strong> and <strong>B</strong> to point <strong>E</strong> on side DC, with DE = 6 in. and EC = 15 in.</p>",
+      "passage": "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 160\" role=\"img\" aria-label=\"Rectangle ABCD, 21 inches by 8 inches, with lead lines from A and from B to point E on the top side DC. DE is 6 inches and EC is 15 inches. Triangle ABE is shaded\"><polygon class=\"sh2\" points=\"40,138 302.5,138 115,38\"/><polygon class=\"ln\" points=\"40,138 302.5,138 302.5,38 40,38\"/><line class=\"ln\" x1=\"40\" y1=\"138\" x2=\"115\" y2=\"38\"/><line class=\"ln\" x1=\"302.5\" y1=\"138\" x2=\"115\" y2=\"38\"/><path class=\"thin\" d=\"M40 46 L48 46 L48 38\"/><path class=\"thin\" d=\"M302.5 46 L294.5 46 L294.5 38\"/><circle class=\"dt\" cx=\"40\" cy=\"138\" r=\"3\"/><circle class=\"dt\" cx=\"302.5\" cy=\"138\" r=\"3\"/><circle class=\"dt\" cx=\"302.5\" cy=\"38\" r=\"3\"/><circle class=\"dt\" cx=\"40\" cy=\"38\" r=\"3\"/><circle class=\"dt\" cx=\"115\" cy=\"38\" r=\"3\"/><text x=\"29\" y=\"152\" text-anchor=\"middle\">A</text><text x=\"313.5\" y=\"152\" text-anchor=\"middle\">B</text><text x=\"313.5\" y=\"34\" text-anchor=\"middle\">C</text><text x=\"29\" y=\"34\" text-anchor=\"middle\">D</text><text x=\"115\" y=\"30\" text-anchor=\"middle\">E</text><text x=\"77.5\" y=\"30\" text-anchor=\"middle\">6 in.</text><text x=\"208.75\" y=\"30\" text-anchor=\"middle\">15 in.</text><text x=\"34\" y=\"93\" text-anchor=\"end\">8 in.</text><text x=\"171.25\" y=\"156\" text-anchor=\"middle\">21 in.</text></svg></figure><p class=\"geo-given\">A stained-glass panel is rectangle <strong>ABCD</strong>, 21 in. long and 8 in. tall. Lead lines run from <strong>A</strong> and <strong>B</strong> to point <strong>E</strong> on side DC, with DE = 6 in. and EC = 15 in.</p>",
       "claims": [
         {
           "id": "ae",
@@ -1635,7 +1635,7 @@
       "kind": "Triangles · G.TR.4",
       "blurb": "Measuring a river's width without getting wet.",
       "level": 2,
-      "passage": "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 160\" role=\"img\" aria-label=\"Top view of a river with parallel banks. A and B are on the near bank, 40 meters apart. Tree T on the far bank is directly across from A, so AT is perpendicular to the banks. The angle at B between BA and BT is 58 degrees\"><line class=\"ln\" x1=\"10\" y1=\"18.37\" x2=\"310\" y2=\"18.37\"/><line class=\"ln\" x1=\"10\" y1=\"140\" x2=\"310\" y2=\"140\"/><path class=\"thin\" d=\"M180 56 q5 -4 10 0 t10 0 t10 0\"/><path class=\"thin\" d=\"M250 70 q5 -4 10 0 t10 0 t10 0\"/><path class=\"thin\" d=\"M170 112 q5 -4 10 0 t10 0 t10 0\"/><path class=\"thin\" d=\"M270 118 q5 -4 10 0 t10 0 t10 0\"/><line class=\"ac\" x1=\"60\" y1=\"140\" x2=\"60\" y2=\"18.37\"/><line class=\"ln\" x1=\"136\" y1=\"140\" x2=\"60\" y2=\"18.37\"/><path class=\"thin\" d=\"M68 140 L68 132 L60 132\"/><path class=\"thin\" d=\"M124.34 121.34 A22 22 0 0 0 114 140\"/><circle class=\"sh\" cx=\"60\" cy=\"9.37\" r=\"7\"/><circle class=\"dt\" cx=\"60\" cy=\"140\" r=\"3\"/><circle class=\"dt\" cx=\"136\" cy=\"140\" r=\"3\"/><circle class=\"dt\" cx=\"60\" cy=\"18.37\" r=\"3\"/><text x=\"60\" y=\"157\" text-anchor=\"middle\">A</text><text x=\"136\" y=\"157\" text-anchor=\"middle\">B</text><text x=\"44\" y=\"12.37\" text-anchor=\"middle\">T</text><text x=\"95.02\" y=\"124.61\" text-anchor=\"middle\">58°</text><text x=\"98\" y=\"157\" text-anchor=\"middle\">40 m</text><text class=\"sm\" x=\"232\" y=\"94\" text-anchor=\"middle\">river</text><text class=\"sm\" x=\"250\" y=\"13.37\" text-anchor=\"middle\">far bank</text><text class=\"sm\" x=\"250\" y=\"155\" text-anchor=\"middle\">near bank</text></svg></figure><p class=\"geo-given\">The banks of a river are parallel. <strong>A</strong> and <strong>B</strong> are on the near bank, 40 m apart. A tree <strong>T</strong> on the far bank is directly across from A, so AT is perpendicular to the banks. From B, the sight line to T makes a 58° angle with the bank (m∠ABT = 58°).</p>",
+      "passage": "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 166\" role=\"img\" aria-label=\"Top view of a river with parallel banks. A and B are on the near bank, 40 meters apart. Tree T on the far bank is directly across from A, so AT is perpendicular to the banks. The angle at B between BA and BT is 58 degrees\"><line class=\"ln\" x1=\"10\" y1=\"24.37\" x2=\"310\" y2=\"24.37\"/><line class=\"ln\" x1=\"10\" y1=\"146\" x2=\"310\" y2=\"146\"/><path class=\"thin\" d=\"M180 62 q5 -4 10 0 t10 0 t10 0\"/><path class=\"thin\" d=\"M250 76 q5 -4 10 0 t10 0 t10 0\"/><path class=\"thin\" d=\"M170 118 q5 -4 10 0 t10 0 t10 0\"/><path class=\"thin\" d=\"M270 124 q5 -4 10 0 t10 0 t10 0\"/><line class=\"ac\" x1=\"60\" y1=\"146\" x2=\"60\" y2=\"24.37\"/><line class=\"ln\" x1=\"136\" y1=\"146\" x2=\"60\" y2=\"24.37\"/><path class=\"thin\" d=\"M68 146 L68 138 L60 138\"/><path class=\"thin\" d=\"M124.34 127.34 A22 22 0 0 0 114 146\"/><circle class=\"sh\" cx=\"60\" cy=\"15.37\" r=\"7\"/><circle class=\"dt\" cx=\"60\" cy=\"146\" r=\"3\"/><circle class=\"dt\" cx=\"136\" cy=\"146\" r=\"3\"/><circle class=\"dt\" cx=\"60\" cy=\"24.37\" r=\"3\"/><text x=\"60\" y=\"163\" text-anchor=\"middle\">A</text><text x=\"136\" y=\"163\" text-anchor=\"middle\">B</text><text x=\"44\" y=\"18.37\" text-anchor=\"middle\">T</text><text x=\"95.02\" y=\"130.61\" text-anchor=\"middle\">58°</text><text x=\"98\" y=\"163\" text-anchor=\"middle\">40 m</text><text class=\"sm\" x=\"232\" y=\"100\" text-anchor=\"middle\">river</text><text class=\"sm\" x=\"250\" y=\"19.37\" text-anchor=\"middle\">far bank</text><text class=\"sm\" x=\"250\" y=\"161\" text-anchor=\"middle\">near bank</text></svg></figure><p class=\"geo-given\">The banks of a river are parallel. <strong>A</strong> and <strong>B</strong> are on the near bank, 40 m apart. A tree <strong>T</strong> on the far bank is directly across from A, so AT is perpendicular to the banks. From B, the sight line to T makes a 58° angle with the bank (m∠ABT = 58°).</p>",
       "claims": [
         {
           "id": "width",

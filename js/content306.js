@@ -333,8 +333,8 @@
         "<text x=\"310\" y=\"41\" text-anchor=\"middle\">a</text><text x=\"310\" y=\"121\" text-anchor=\"middle\">b</text>" +
         "<text x=\"82.1\" y=\"16\" text-anchor=\"middle\">c</text><text x=\"223\" y=\"16\" text-anchor=\"middle\">d</text><circle class=\"dt\" cx=\"95\" cy=\"36\" r=\"3\"/>" +
         "<circle class=\"dt\" cx=\"215\" cy=\"36\" r=\"3\"/><circle class=\"dt\" cx=\"103.4\" cy=\"116\" r=\"3\"/><circle class=\"dt\" cx=\"220.6\" cy=\"116\" r=\"3\"/>" +
-        "<text x=\"107.6\" y=\"52.4\" text-anchor=\"middle\">1</text><text x=\"114.8\" y=\"108.4\" text-anchor=\"middle\">2</text>" +
-        "<text x=\"203.4\" y=\"53.4\" text-anchor=\"middle\">3</text><text x=\"208.2\" y=\"109.4\" text-anchor=\"middle\">4</text></svg></figure>" +
+        "<text x=\"107.6\" y=\"60\" text-anchor=\"middle\">1</text><text x=\"114.8\" y=\"108.4\" text-anchor=\"middle\">2</text>" +
+        "<text x=\"203.4\" y=\"61\" text-anchor=\"middle\">3</text><text x=\"208.2\" y=\"109.4\" text-anchor=\"middle\">4</text></svg></figure>" +
         "<p class=\"geo-given\">A mural has two long stripes, <strong>a</strong> and <strong>b</strong>, and two slanted bands, <strong>c</strong> and <strong>d</strong>. The artist measures m∠1 = 84°, m∠2 = 96° and m∠3 = 94°. No lines are marked parallel.</p>",
       claims: [
         {
@@ -561,7 +561,7 @@
           id: "solve-x",
           sol: "G.RLT.2",
           sub: "G.RLT.2.3",
-          stem: "Solve for x using the two leg angles.",
+          stem: "Solve for x using ∠PAC and ∠PBD.",
           choices: [
             { letter: "A", text: "9" },
             { letter: "B", text: "19" },
@@ -845,7 +845,7 @@
         "<line class=\"ln\" x1=\"30\" y1=\"29.3\" x2=\"292\" y2=\"85\"/><line class=\"ln\" x1=\"30\" y1=\"77.1\" x2=\"292\" y2=\"132.8\"/>" +
         "<line class=\"ac\" x1=\"238.3\" y1=\"145.3\" x2=\"138\" y2=\"25.8\"/><path class=\"thin\" d=\"M249 71.8 L255 77.1 L247.3 79.6\"/>" +
         "<path class=\"thin\" d=\"M256.7 121.2 L262.8 126.6 L255.1 129.1\"/><path class=\"thin\" d=\"M150.9 41.1 A22 22 0 0 0 143.5 53.4\"/>" +
-        "<text x=\"135\" y=\"45\" text-anchor=\"middle\">38°</text><circle class=\"dt\" cx=\"30\" cy=\"29.3\" r=\"3\"/><circle class=\"dt\" cx=\"292\" cy=\"85\" r=\"3\"/>" +
+        "<text x=\"129\" y=\"45\" text-anchor=\"middle\">38°</text><circle class=\"dt\" cx=\"30\" cy=\"29.3\" r=\"3\"/><circle class=\"dt\" cx=\"292\" cy=\"85\" r=\"3\"/>" +
         "<circle class=\"dt\" cx=\"30\" cy=\"77.1\" r=\"3\"/><circle class=\"dt\" cx=\"292\" cy=\"132.8\" r=\"3\"/><circle class=\"dt\" cx=\"138\" cy=\"25.8\" r=\"3\"/>" +
         "<circle class=\"dt\" cx=\"238.3\" cy=\"145.3\" r=\"3\"/><circle class=\"dt\" cx=\"165\" cy=\"58\" r=\"3\"/><circle class=\"dt\" cx=\"213.9\" cy=\"116.2\" r=\"3\"/>" +
         "<text x=\"30\" y=\"20.3\" text-anchor=\"middle\">A</text><text x=\"292\" y=\"76\" text-anchor=\"middle\">B</text>" +
@@ -1368,15 +1368,15 @@
         "<line class=\"thin dash\" x1=\"16\" y1=\"160\" x2=\"300\" y2=\"160\"/><line class=\"ln\" x1=\"176\" y1=\"106\" x2=\"176\" y2=\"34\"/>" +
         "<line class=\"ln\" x1=\"224\" y1=\"81.5\" x2=\"224\" y2=\"9.5\"/><line class=\"ln\" x1=\"149.3\" y1=\"59.6\" x2=\"247.2\" y2=\"9.7\"/>" +
         "<line class=\"ln\" x1=\"149.3\" y1=\"105.6\" x2=\"247.2\" y2=\"55.7\"/><path class=\"thin\" d=\"M237.3 10.3 L245.4 10.6 L241 17.4\"/>" +
-        "<path class=\"thin\" d=\"M237.3 56.3 L245.4 56.6 L241 63.4\"/><path class=\"thin\" d=\"M232 59 L240 59.4 L235.6 66.1\"/>" +
+        "<path class=\"thin\" d=\"M237.3 56.3 L245.4 56.6 L241 63.4\"/>" +
         "<path class=\"thin\" d=\"M151.9 53.8 L160 54.2 L155.5 60.9\"/><path class=\"thin\" d=\"M151.9 99.8 L160 100.2 L155.5 106.9\"/>" +
-        "<path class=\"thin\" d=\"M146.6 102.5 L154.6 102.9 L150.2 109.6\"/><path class=\"thin\" d=\"M100 160 A30 30 0 0 0 96.7 146.4\"/>" +
+        "<path class=\"thin\" d=\"M100 160 A30 30 0 0 0 96.7 146.4\"/>" +
         "<text x=\"112.8\" y=\"154.7\" text-anchor=\"middle\">27°</text><text x=\"166\" y=\"44\" text-anchor=\"middle\">p</text>" +
         "<text x=\"214\" y=\"19.5\" text-anchor=\"middle\">q</text><text x=\"255.2\" y=\"13.7\" text-anchor=\"middle\">a</text>" +
         "<text x=\"255.2\" y=\"59.7\" text-anchor=\"middle\">b</text><circle class=\"dt\" cx=\"176\" cy=\"46\" r=\"3\"/><circle class=\"dt\" cx=\"176\" cy=\"92\" r=\"3\"/>" +
         "<circle class=\"dt\" cx=\"224\" cy=\"21.5\" r=\"3\"/><circle class=\"dt\" cx=\"224\" cy=\"67.5\" r=\"3\"/>" +
         "<text class=\"sm\" x=\"36\" y=\"154\" text-anchor=\"middle\">level</text><text x=\"186.4\" y=\"33.9\" text-anchor=\"middle\">1</text>" +
-        "<text x=\"236.8\" y=\"80.4\" text-anchor=\"middle\">2</text><text x=\"214.6\" y=\"41.9\" text-anchor=\"middle\">3</text>" +
+        "<text x=\"232\" y=\"74.5\" text-anchor=\"middle\">2</text><text x=\"214.6\" y=\"41.9\" text-anchor=\"middle\">3</text>" +
         "<text x=\"211.2\" y=\"64.7\" text-anchor=\"middle\">4</text></svg></figure>" +
         "<p class=\"geo-given\">A hillside rises 27° from level. Fence posts <strong>p</strong> and <strong>q</strong> stand vertical, so each is perpendicular to level ground. Rails <strong>a</strong> and <strong>b</strong> are parallel to the hillside.</p>",
       claims: [
