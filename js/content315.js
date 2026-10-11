@@ -1008,6 +1008,97 @@
       ]
     },
     {
+      id: "geo-tr2-worms-square-pens",
+      family: "GEO",
+      mode: "worms",
+      title: "Pipes Between the Square Pens",
+      kind: "Triangles · G.TR.2",
+      blurb: "Two square pens share a corner post, with water pipes between them.",
+      level: 2,
+      passage:
+        "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 170\" role=\"img\" aria-label=\"Square ABCD and a smaller square AEFG share the corner A, with right-angle marks at A in each square. Dashed segments BE and DG cross between them\"><polygon class=\"sh2\" points=\"122.2,95.7 200.1,150.2 254.5,72.3 176.7,17.8\"/><polygon class=\"sh\" points=\"122.2,95.7 127.2,38.9 70.4,33.9 65.5,90.7\"/><polygon class=\"ln\" points=\"122.2,95.7 200.1,150.2 254.5,72.3 176.7,17.8\"/><polygon class=\"ln\" points=\"122.2,95.7 127.2,38.9 70.4,33.9 65.5,90.7\"/><line class=\"ln dash\" x1=\"200.1\" y1=\"150.2\" x2=\"127.2\" y2=\"38.9\"/><line class=\"ln dash\" x1=\"176.7\" y1=\"17.8\" x2=\"65.5\" y2=\"90.7\"/><path class=\"thin\" d=\"M128.8 100.3 L133.4 93.7 L126.8 89.1\"/><path class=\"thin\" d=\"M122.8 88.7 L115.9 88.1 L115.3 95.1\"/><circle class=\"dt\" cx=\"122.2\" cy=\"95.7\" r=\"3\"/><circle class=\"dt\" cx=\"200.1\" cy=\"150.2\" r=\"3\"/><circle class=\"dt\" cx=\"254.5\" cy=\"72.3\" r=\"3\"/><circle class=\"dt\" cx=\"176.7\" cy=\"17.8\" r=\"3\"/><circle class=\"dt\" cx=\"127.2\" cy=\"38.9\" r=\"3\"/><circle class=\"dt\" cx=\"70.4\" cy=\"33.9\" r=\"3\"/><circle class=\"dt\" cx=\"65.5\" cy=\"90.7\" r=\"3\"/><text x=\"117.8\" y=\"112.9\" text-anchor=\"middle\">A</text><text x=\"202.1\" y=\"167\" text-anchor=\"middle\">B</text><text x=\"266.4\" y=\"75.3\" text-anchor=\"middle\">C</text><text x=\"174.6\" y=\"11\" text-anchor=\"middle\">D</text><text x=\"136.4\" y=\"36.2\" text-anchor=\"middle\">E</text><text x=\"62.7\" y=\"29.7\" text-anchor=\"middle\">F</text><text x=\"56.3\" y=\"103.4\" text-anchor=\"middle\">G</text></svg></figure><p class=\"geo-given\">Two square pens on a farm, <strong>ABCD</strong> and <strong>AEFG</strong>, share the corner post <strong>A</strong>. Water pipes <strong>BE</strong> and <strong>DG</strong> run between them. Prove that BE ≅ DG.</p><table class=\"geo-proof\"><tr><th>Statement</th><th>Reason</th></tr><tr><td>1. ABCD and AEFG are squares</td><td>Given</td></tr><tr><td>2. AB ≅ AD; AE ≅ AG</td><td>(a) ____</td></tr><tr><td>3. m∠BAD = m∠EAG = 90°</td><td>Definition of a square</td></tr><tr><td>4. m∠BAE = m∠DAG</td><td>Angle Addition: each is 90° + m∠DAE</td></tr><tr><td>5. △BAE ≅ △DAG</td><td>(b) ____</td></tr><tr><td>6. BE ≅ DG</td><td>CPCTC</td></tr></table>",
+      claims: [
+        {
+          id: "blankA",
+          sol: "G.TR.2",
+          sub: "G.TR.2.2",
+          stem: "Which reason justifies step 2, AB ≅ AD and AE ≅ AG (blank a)?",
+          choices: [
+            { letter: "A", text: "Diagonals of a square are congruent" },
+            { letter: "B", text: "Reflexive property of congruence" },
+            { letter: "C", text: "Corresponding parts of congruent triangles" },
+            { letter: "D", text: "All sides of a square are congruent" }
+          ],
+          correct: "D"
+        },
+        {
+          id: "blankB",
+          sol: "G.TR.2",
+          sub: "G.TR.2.2",
+          stem: "Which reason justifies step 5, △BAE ≅ △DAG (blank b)?",
+          choices: [
+            { letter: "A", text: "SAS" },
+            { letter: "B", text: "SSS" },
+            { letter: "C", text: "ASA" },
+            { letter: "D", text: "HL" }
+          ],
+          correct: "A"
+        },
+        {
+          id: "dg",
+          sol: "G.TR.2",
+          sub: "G.TR.2.3",
+          stem: "BE = (3c − 2) m and DG = (c + 4) m. How long is pipe DG?",
+          choices: [
+            { letter: "A", text: "3 m" },
+            { letter: "B", text: "14 m" },
+            { letter: "C", text: "7 m" },
+            { letter: "D", text: "5 m" }
+          ],
+          correct: "C"
+        },
+        {
+          id: "agd",
+          sol: "G.TR.2",
+          sub: "G.TR.2.3",
+          stem: "m∠AEB ≈ 38.2°. To the nearest tenth of a degree, what is m∠AGD?",
+          choices: [
+            { letter: "A", text: "21.8°" },
+            { letter: "B", text: "38.2°" },
+            { letter: "C", text: "51.8°" },
+            { letter: "D", text: "141.8°" }
+          ],
+          correct: "B"
+        },
+        {
+          id: "not",
+          sol: "G.TR.2",
+          sub: "G.TR.2.1",
+          stem: "With AB ≅ AD, which pair of facts would NOT prove △BAE ≅ △DAG?",
+          choices: [
+            { letter: "A", text: "AE ≅ AG and ∠BAE ≅ ∠DAG" },
+            { letter: "B", text: "AE ≅ AG and BE ≅ DG" },
+            { letter: "C", text: "AE ≅ AG and ∠ABE ≅ ∠ADG" },
+            { letter: "D", text: "∠BAE ≅ ∠DAG and ∠ABE ≅ ∠ADG" }
+          ],
+          correct: "C"
+        },
+        {
+          id: "bae",
+          sol: "G.TR.2",
+          sub: "G.TR.2.2",
+          stem: "Step 4 says each angle is 90° + m∠DAE. If m∠DAE = 30°, what is m∠BAE?",
+          choices: [
+            { letter: "A", text: "120°" },
+            { letter: "B", text: "60°" },
+            { letter: "C", text: "150°" },
+            { letter: "D", text: "90°" }
+          ],
+          correct: "A"
+        }
+      ]
+    },
+    {
       id: "geo-tr2-worms-birdhouse",
       family: "GEO",
       mode: "worms",
@@ -1186,97 +1277,6 @@
             { letter: "D", text: "RD = RE" }
           ],
           correct: "D"
-        }
-      ]
-    },
-    {
-      id: "geo-tr2-worms-square-pens",
-      family: "GEO",
-      mode: "worms",
-      title: "Pipes Between the Square Pens",
-      kind: "Triangles · G.TR.2",
-      blurb: "Two square pens share a corner post, with water pipes between them.",
-      level: 2,
-      passage:
-        "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 170\" role=\"img\" aria-label=\"Square ABCD and a smaller square AEFG share the corner A, with right-angle marks at A in each square. Dashed segments BE and DG cross between them\"><polygon class=\"sh2\" points=\"122.2,95.7 200.1,150.2 254.5,72.3 176.7,17.8\"/><polygon class=\"sh\" points=\"122.2,95.7 127.2,38.9 70.4,33.9 65.5,90.7\"/><polygon class=\"ln\" points=\"122.2,95.7 200.1,150.2 254.5,72.3 176.7,17.8\"/><polygon class=\"ln\" points=\"122.2,95.7 127.2,38.9 70.4,33.9 65.5,90.7\"/><line class=\"ln dash\" x1=\"200.1\" y1=\"150.2\" x2=\"127.2\" y2=\"38.9\"/><line class=\"ln dash\" x1=\"176.7\" y1=\"17.8\" x2=\"65.5\" y2=\"90.7\"/><path class=\"thin\" d=\"M128.8 100.3 L133.4 93.7 L126.8 89.1\"/><path class=\"thin\" d=\"M122.8 88.7 L115.9 88.1 L115.3 95.1\"/><circle class=\"dt\" cx=\"122.2\" cy=\"95.7\" r=\"3\"/><circle class=\"dt\" cx=\"200.1\" cy=\"150.2\" r=\"3\"/><circle class=\"dt\" cx=\"254.5\" cy=\"72.3\" r=\"3\"/><circle class=\"dt\" cx=\"176.7\" cy=\"17.8\" r=\"3\"/><circle class=\"dt\" cx=\"127.2\" cy=\"38.9\" r=\"3\"/><circle class=\"dt\" cx=\"70.4\" cy=\"33.9\" r=\"3\"/><circle class=\"dt\" cx=\"65.5\" cy=\"90.7\" r=\"3\"/><text x=\"117.8\" y=\"112.9\" text-anchor=\"middle\">A</text><text x=\"202.1\" y=\"167\" text-anchor=\"middle\">B</text><text x=\"266.4\" y=\"75.3\" text-anchor=\"middle\">C</text><text x=\"174.6\" y=\"11\" text-anchor=\"middle\">D</text><text x=\"136.4\" y=\"36.2\" text-anchor=\"middle\">E</text><text x=\"62.7\" y=\"29.7\" text-anchor=\"middle\">F</text><text x=\"56.3\" y=\"103.4\" text-anchor=\"middle\">G</text></svg></figure><p class=\"geo-given\">Two square pens on a farm, <strong>ABCD</strong> and <strong>AEFG</strong>, share the corner post <strong>A</strong>. Water pipes <strong>BE</strong> and <strong>DG</strong> run between them. Prove that BE ≅ DG.</p><table class=\"geo-proof\"><tr><th>Statement</th><th>Reason</th></tr><tr><td>1. ABCD and AEFG are squares</td><td>Given</td></tr><tr><td>2. AB ≅ AD; AE ≅ AG</td><td>(a) ____</td></tr><tr><td>3. m∠BAD = m∠EAG = 90°</td><td>Definition of a square</td></tr><tr><td>4. m∠BAE = m∠DAG</td><td>Angle Addition: each is 90° + m∠DAE</td></tr><tr><td>5. △BAE ≅ △DAG</td><td>(b) ____</td></tr><tr><td>6. BE ≅ DG</td><td>CPCTC</td></tr></table>",
-      claims: [
-        {
-          id: "blankA",
-          sol: "G.TR.2",
-          sub: "G.TR.2.2",
-          stem: "Which reason justifies step 2, AB ≅ AD and AE ≅ AG (blank a)?",
-          choices: [
-            { letter: "A", text: "Diagonals of a square are congruent" },
-            { letter: "B", text: "Reflexive property of congruence" },
-            { letter: "C", text: "Corresponding parts of congruent triangles" },
-            { letter: "D", text: "All sides of a square are congruent" }
-          ],
-          correct: "D"
-        },
-        {
-          id: "blankB",
-          sol: "G.TR.2",
-          sub: "G.TR.2.2",
-          stem: "Which reason justifies step 5, △BAE ≅ △DAG (blank b)?",
-          choices: [
-            { letter: "A", text: "SAS" },
-            { letter: "B", text: "SSS" },
-            { letter: "C", text: "ASA" },
-            { letter: "D", text: "HL" }
-          ],
-          correct: "A"
-        },
-        {
-          id: "dg",
-          sol: "G.TR.2",
-          sub: "G.TR.2.3",
-          stem: "BE = (3c − 2) m and DG = (c + 4) m. How long is pipe DG?",
-          choices: [
-            { letter: "A", text: "3 m" },
-            { letter: "B", text: "14 m" },
-            { letter: "C", text: "7 m" },
-            { letter: "D", text: "5 m" }
-          ],
-          correct: "C"
-        },
-        {
-          id: "agd",
-          sol: "G.TR.2",
-          sub: "G.TR.2.3",
-          stem: "m∠AEB ≈ 38.2°. To the nearest tenth of a degree, what is m∠AGD?",
-          choices: [
-            { letter: "A", text: "21.8°" },
-            { letter: "B", text: "38.2°" },
-            { letter: "C", text: "51.8°" },
-            { letter: "D", text: "141.8°" }
-          ],
-          correct: "B"
-        },
-        {
-          id: "not",
-          sol: "G.TR.2",
-          sub: "G.TR.2.1",
-          stem: "With AB ≅ AD, which pair of facts would NOT prove △BAE ≅ △DAG?",
-          choices: [
-            { letter: "A", text: "AE ≅ AG and ∠BAE ≅ ∠DAG" },
-            { letter: "B", text: "AE ≅ AG and BE ≅ DG" },
-            { letter: "C", text: "AE ≅ AG and ∠ABE ≅ ∠ADG" },
-            { letter: "D", text: "∠BAE ≅ ∠DAG and ∠ABE ≅ ∠ADG" }
-          ],
-          correct: "C"
-        },
-        {
-          id: "bae",
-          sol: "G.TR.2",
-          sub: "G.TR.2.2",
-          stem: "Step 4 says each angle is 90° + m∠DAE. If m∠DAE = 30°, what is m∠BAE?",
-          choices: [
-            { letter: "A", text: "120°" },
-            { letter: "B", text: "60°" },
-            { letter: "C", text: "150°" },
-            { letter: "D", text: "90°" }
-          ],
-          correct: "A"
         }
       ]
     }
