@@ -7,7 +7,8 @@
 <!--
   Ancient Greece: The Birthplace of Western Individualism — annotated model.
   One self-contained file for a Canvas Page: upload it to Files, then embed it with
-    <iframe src="/courses/COURSE/files/NUMBER/preview" width="100%" height="800"></iframe>
+    <iframe src="/courses/COURSE/files/NUMBER/preview" width="100%" height="800" allowfullscreen></iframe>
+  (allowfullscreen lets the Full screen button work inside Canvas.)
   Each page shows its handwritten margin notes when it is clicked (click again to hide them).
   Handwriting font: Caveat by Impallari Type, SIL Open Font License 1.1 (embedded below).
 -->
@@ -108,11 +109,22 @@ svg.ink path.on { opacity: .9; transition: stroke-dashoffset .5s ease .5s, opaci
   transition: opacity .25s;
 }
 
+.fs-btn {
+  position: fixed; top: 8px; right: 8px; z-index: 10;
+  display: flex; align-items: center; gap: 6px;
+  font: 600 13px/1 Calibri, Carlito, "Segoe UI", Arial, sans-serif; color: #fff;
+  background: rgba(40, 40, 40, .82); border: 0; border-radius: 6px; padding: 7px 10px; cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0,0,0,.25);
+}
+.fs-btn:hover { background: rgba(20, 20, 20, .92); }
+.fs-btn:focus-visible { outline: 3px solid #6b8fc7; outline-offset: 2px; }
+.fs-btn svg { width: 14px; height: 14px; }
+
 @media print {
   body { background: #fff; padding: 0; }
   .sheet-wrap { width: auto; height: auto !important; margin: 0; }
   .page { transform: none; box-shadow: none; break-after: page; }
-  .tap { display: none; }
+  .tap, .fs-btn { display: none; }
   .annotated mark { background-size: 100% 100%; }
   .note { opacity: 1; }
   svg.ink path { opacity: .9; stroke-dashoffset: 0 !important; }
@@ -120,6 +132,7 @@ svg.ink path.on { opacity: .9; transition: stroke-dashoffset .5s ease .5s, opaci
 </style>
 </head>
 <body>
+<button type="button" class="fs-btn" hidden></button>
 
 <!-- ───────────── Page 1 ───────────── -->
 <div class="sheet-wrap"><section class="page">
@@ -543,6 +556,29 @@ svg.ink path.on { opacity: .9; transition: stroke-dashoffset .5s ease .5s, opaci
     pages.forEach(function (p) { fit(p, s); });
     pages.forEach(function (p) { p.parentNode.style.height = (p.offsetHeight * s) + "px"; });
   }
+
+  // Full screen button. Inside Canvas it needs allowfullscreen on the iframe; without it, open the page in a new tab.
+  var fsBtn = document.querySelector(".fs-btn");
+  var ICON_IN = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M1 6V1h5M10 1h5v5M15 10v5h-5M6 15H1v-5"/></svg>';
+  var ICON_OUT = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 1v5H1M15 6h-5V1M10 15v-5h5M1 10h5v5"/></svg>';
+  function fsElement() { return document.fullscreenElement || document.webkitFullscreenElement; }
+  function fsLabel() { fsBtn.innerHTML = fsElement() ? ICON_OUT + "Exit full screen" : ICON_IN + "Full screen"; }
+  fsBtn.addEventListener("click", function () {
+    var el = document.documentElement;
+    if (fsElement()) { (document.exitFullscreen || document.webkitExitFullscreen).call(document); return; }
+    var req = el.requestFullscreen || el.webkitRequestFullscreen;
+    var allowed = document.fullscreenEnabled || document.webkitFullscreenEnabled;
+    if (req && allowed) {
+      var r = req.call(el);
+      if (r && r.catch) r.catch(function () { window.open(location.href, "_blank"); });
+    } else {
+      window.open(location.href, "_blank");
+    }
+  });
+  document.addEventListener("fullscreenchange", fsLabel);
+  document.addEventListener("webkitfullscreenchange", fsLabel);
+  fsLabel();
+  fsBtn.hidden = false;
 
   var t;
   window.addEventListener("resize", function () { clearTimeout(t); t = setTimeout(layout, 80); });
