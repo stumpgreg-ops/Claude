@@ -1364,7 +1364,7 @@
           id: "third",
           sol: "G.PC.4",
           sub: "G.PC.4.2",
-          stem: "A third feeder goes at the midpoint between feeders A and B. Birds come to it from as far away as feeder B. Which equation describes the edge of its range?",
+          stem: "A third feeder goes at the midpoint between feeders A and B. The edge of its range passes exactly through feeder B. Which equation describes that edge?",
           choices: [
             { letter: "A", text: "(x + 4)² + (y − 6)² = 10" },
             { letter: "B", text: "(x + 2)² + (y − 3)² = 40" },

@@ -291,7 +291,7 @@
       blurb: "A foam planet with radius 10 cm, sliced to show its layers.",
       level: 2,
       passage:
-        "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 160\" role=\"img\" aria-label=\"A model planet drawn as a sphere. A plane cuts it 6 cm above its center, making a circle drawn in gold. A dashed 6 cm segment runs up from the center of the sphere to the center of that circle, at a right angle to a radius of the circle; a 10 cm segment runs from the center of the sphere to the edge of the circle.\"><circle class=\"sh2\" cx=\"150\" cy=\"84\" r=\"65\"/><path class=\"ac\" d=\"M202 45 A52 13 0 0 1 98 45\"/><path class=\"ac dash\" d=\"M98 45 A52 13 0 0 1 202 45\"/><line class=\"thin dash\" x1=\"150\" y1=\"84\" x2=\"150\" y2=\"45\"/><line class=\"thin\" x1=\"150\" y1=\"45\" x2=\"202\" y2=\"45\"/><line class=\"thin\" x1=\"150\" y1=\"84\" x2=\"202\" y2=\"45\"/><path class=\"thin\" d=\"M150 51 L156 51 L156 45\"/><circle class=\"dt\" cx=\"150\" cy=\"84\" r=\"2.5\"/><circle class=\"dt\" cx=\"150\" cy=\"45\" r=\"2.5\"/><text x=\"144\" y=\"70.5\" text-anchor=\"end\">6 cm</text><text x=\"176\" y=\"88\" text-anchor=\"middle\">10 cm</text></svg></figure><p class=\"geo-given\">A science club makes a foam model of a planet. The model is a sphere with a radius of 10 cm. To show the layers inside, a plane cuts the model 6 cm from its center.</p>",
+        "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 160\" role=\"img\" aria-label=\"A model planet drawn as a sphere. A plane cuts it 6 cm above its center, making a circle drawn in gold. A dashed 6 cm segment runs up from the center of the sphere to the center of that circle, at a right angle to a radius of the circle; a 10 cm segment runs from the center of the sphere to the edge of the circle.\"><circle class=\"sh2\" cx=\"150\" cy=\"84\" r=\"65\"/><path class=\"ac\" d=\"M202 45 A52 13 0 0 1 98 45\"/><path class=\"ac dash\" d=\"M98 45 A52 13 0 0 1 202 45\"/><line class=\"thin dash\" x1=\"150\" y1=\"84\" x2=\"150\" y2=\"45\"/><line class=\"thin\" x1=\"150\" y1=\"45\" x2=\"202\" y2=\"45\"/><line class=\"thin\" x1=\"150\" y1=\"84\" x2=\"202\" y2=\"45\"/><path class=\"thin\" d=\"M150 51 L156 51 L156 45\"/><circle class=\"dt\" cx=\"150\" cy=\"84\" r=\"2.5\"/><circle class=\"dt\" cx=\"150\" cy=\"45\" r=\"2.5\"/><text x=\"144\" y=\"70.5\" text-anchor=\"end\">6 cm</text><text x=\"186\" y=\"93\" text-anchor=\"middle\">10 cm</text></svg></figure><p class=\"geo-given\">A science club makes a foam model of a planet. The model is a sphere with a radius of 10 cm. To show the layers inside, a plane cuts the model 6 cm from its center.</p>",
       claims: [
         {
           id: "volume",
@@ -837,7 +837,7 @@
       blurb: "A rubber wedge that keeps a parked plane from rolling.",
       level: 1,
       passage:
-        "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 140\" role=\"img\" aria-label=\"An airplane wheel chock drawn as a triangular prism. Each end is a right triangle with legs of 7 in (up) and 24 in (along the ground) and a 25 in sloped side; the chock is 10 in wide. Hidden edges are dashed.\"><polygon class=\"sh\" points=\"46,112 257.2,112 46,50.4\"/><path class=\"ln\" d=\"M257.2 112 L46 50.4 M46 112 L257.2 112 M46 112 L46 50.4 M295.3 90 L84.1 28.4 M257.2 112 L295.3 90 M46 50.4 L84.1 28.4\"/><path class=\"ln dash\" d=\"M84.1 90 L84.1 28.4 M84.1 90 L295.3 90 M46 112 L84.1 90\"/><path class=\"thin\" d=\"M54 112 V104 H46\"/><text x=\"151.6\" y=\"129\" text-anchor=\"middle\">24 in</text><text x=\"39\" y=\"86.2\" text-anchor=\"end\">7 in</text><text x=\"157.8\" y=\"64.1\" text-anchor=\"middle\">25 in</text><text x=\"280.3\" y=\"119\">10 in</text></svg></figure><p class=\"geo-given\">At the airport, a rubber wheel chock keeps a parked plane from rolling. The chock is a triangular prism. Each end is a right triangle with legs of 7 in and 24 in and a sloped side of 25 in, and the chock is 10 in wide.</p>",
+        "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 140\" role=\"img\" aria-label=\"An airplane wheel chock drawn as a triangular prism. Each end is a right triangle with legs of 7 in (up) and 24 in (along the ground) and a 25 in sloped side; the chock is 10 in wide. Hidden edges are dashed.\"><polygon class=\"sh\" points=\"46,112 257.2,112 46,50.4\"/><path class=\"ln\" d=\"M257.2 112 L46 50.4 M46 112 L257.2 112 M46 112 L46 50.4 M295.3 90 L84.1 28.4 M257.2 112 L295.3 90 M46 50.4 L84.1 28.4\"/><path class=\"ln dash\" d=\"M84.1 90 L84.1 28.4 M84.1 90 L295.3 90 M46 112 L84.1 90\"/><path class=\"thin\" d=\"M54 112 V104 H46\"/><text x=\"151.6\" y=\"129\" text-anchor=\"middle\">24 in</text><text x=\"39\" y=\"86.2\" text-anchor=\"end\">7 in</text><text x=\"155.8\" y=\"71.8\" text-anchor=\"middle\">25 in</text><text x=\"280.3\" y=\"119\">10 in</text></svg></figure><p class=\"geo-given\">At the airport, a rubber wheel chock keeps a parked plane from rolling. The chock is a triangular prism. Each end is a right triangle with legs of 7 in and 24 in and a sloped side of 25 in, and the chock is 10 in wide.</p>",
       claims: [
         {
           id: "volume",
@@ -1110,7 +1110,7 @@
       blurb: "A tall square tower with a pointed roof over the train platform.",
       level: 2,
       passage:
-        "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 168\" role=\"img\" aria-label=\"A train station clock tower drawn as a square prism 5 m wide and 12 m tall, topped by a square pyramid roof. A dashed segment marked 6 m runs from the tip of the roof straight down to the center of the roof's base. A clock face is on the front wall. Hidden edges are dashed.\"><polygon class=\"sh2\" points=\"128,144 164,144 164,57.6 128,57.6\"/><polygon class=\"sh\" points=\"128,57.6 164,57.6 153.8,9.9\"/><path class=\"ln\" d=\"M128 144 L164 144 M164 144 L179.6 135 M128 57.6 L164 57.6 M164 144 L164 57.6 M128 144 L128 57.6 M164 57.6 L179.6 48.6 M179.6 135 L179.6 48.6 M164 57.6 L153.8 9.9 M128 57.6 L153.8 9.9 M179.6 48.6 L153.8 9.9\"/><path class=\"ln dash\" d=\"M179.6 135 L143.6 135 M128 144 L143.6 135 M179.6 48.6 L143.6 48.6 M143.6 135 L143.6 48.6 M128 57.6 L143.6 48.6 M143.6 48.6 L153.8 9.9\"/><line class=\"thin dash\" x1=\"153.8\" y1=\"9.9\" x2=\"153.8\" y2=\"53.1\"/><circle class=\"dt\" cx=\"153.8\" cy=\"53.1\" r=\"2\"/><circle class=\"thin\" cx=\"146\" cy=\"75.6\" r=\"10.8\"/><path class=\"thin\" d=\"M146 75.6 V68 M146 75.6 L151.4 76.6\"/><line class=\"thin\" x1=\"198.6\" y1=\"31.5\" x2=\"155.8\" y2=\"31.5\"/><text x=\"201.6\" y=\"36.5\">6 m</text><text x=\"146\" y=\"161\" text-anchor=\"middle\">5 m</text><text x=\"121\" y=\"105.8\" text-anchor=\"end\">12 m</text></svg></figure><p class=\"geo-given\">A train station's clock tower is a square prism 5 m wide and 12 m tall. Its roof is a square pyramid with the same 5 m by 5 m base and a height of 6 m. A round clock face 3 m across is on each of the four walls.</p>",
+        "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 168\" role=\"img\" aria-label=\"A train station clock tower drawn as a square prism 5 m wide and 8 m tall, topped by a square pyramid roof. A dashed segment runs from the tip of the roof straight down to the center of the roof's base, and a bar beside the roof marks its 6 m height. A clock face is on the front wall. Hidden edges are dashed.\"><polygon class=\"sh2\" points=\"122,144 166,144 166,73.6 122,73.6\"/><polygon class=\"sh\" points=\"122,73.6 166,73.6 153.5,15.3\"/><path class=\"ln\" d=\"M122 144 L166 144 M166 144 L185.1 133 M122 73.6 L166 73.6 M166 144 L166 73.6 M122 144 L122 73.6 M166 73.6 L185.1 62.6 M185.1 133 L185.1 62.6 M166 73.6 L153.5 15.3 M122 73.6 L153.5 15.3 M185.1 62.6 L153.5 15.3\"/><path class=\"ln dash\" d=\"M185.1 133 L141.1 133 M122 144 L141.1 133 M185.1 62.6 L141.1 62.6 M141.1 133 L141.1 62.6 M122 73.6 L141.1 62.6 M141.1 62.6 L153.5 15.3\"/><line class=\"thin dash\" x1=\"153.5\" y1=\"15.3\" x2=\"153.5\" y2=\"68.1\"/><circle class=\"dt\" cx=\"153.5\" cy=\"68.1\" r=\"2\"/><circle class=\"thin\" cx=\"144\" cy=\"95.6\" r=\"13.2\"/><path class=\"thin\" d=\"M144 95.6 V86.4 M144 95.6 L150.6 96.6\"/><path class=\"thin\" d=\"M199.1 15.3 V68.1 M194.1 15.3 H204.1 M194.1 68.1 H204.1\"/><path class=\"thin dash\" d=\"M157.5 15.3 H195.1\"/><text x=\"208.1\" y=\"46.7\">6 m</text><text x=\"144\" y=\"161\" text-anchor=\"middle\">5 m</text><text x=\"115\" y=\"113.8\" text-anchor=\"end\">8 m</text></svg></figure><p class=\"geo-given\">A train station's clock tower is a square prism 5 m wide and 8 m tall. Its roof is a square pyramid with the same 5 m by 5 m base and a height of 6 m. A round clock face 3 m across is on each of the four walls.</p>",
       claims: [
         {
           id: "slant",
@@ -1144,10 +1144,10 @@
           sub: "G.DF.1.3",
           stem: "What is the volume of the whole tower, roof included?",
           choices: [
-            { letter: "A", text: "350 m³" },
-            { letter: "B", text: "450 m³" },
-            { letter: "C", text: "150 m³" },
-            { letter: "D", text: "375 m³" }
+            { letter: "A", text: "250 m³" },
+            { letter: "B", text: "350 m³" },
+            { letter: "C", text: "200 m³" },
+            { letter: "D", text: "275 m³" }
           ],
           correct: "A"
         },
@@ -1157,10 +1157,10 @@
           sub: "G.DF.1.1",
           stem: "A vertical plane parallel to the front wall passes through the tip of the roof. What is the area of the cross section?",
           choices: [
-            { letter: "A", text: "60 m²" },
-            { letter: "B", text: "90 m²" },
-            { letter: "C", text: "76.25 m²" },
-            { letter: "D", text: "75 m²" }
+            { letter: "A", text: "40 m²" },
+            { letter: "B", text: "70 m²" },
+            { letter: "C", text: "56.25 m²" },
+            { letter: "D", text: "55 m²" }
           ],
           correct: "D"
         },
@@ -1183,10 +1183,10 @@
           sub: "G.DF.1.3",
           stem: "The four walls are painted, but not the clock faces. Each can of paint covers 25 m². How many cans must be bought?",
           choices: [
-            { letter: "A", text: "10" },
-            { letter: "B", text: "9" },
-            { letter: "C", text: "8" },
-            { letter: "D", text: "6" }
+            { letter: "A", text: "7" },
+            { letter: "B", text: "6" },
+            { letter: "C", text: "5" },
+            { letter: "D", text: "2" }
           ],
           correct: "B"
         }

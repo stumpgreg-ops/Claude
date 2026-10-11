@@ -63,7 +63,7 @@
           id: "scale",
           sol: "G.TR.3",
           sub: "G.TR.3.3",
-          stem: "What is the scale factor from the full-size fin △ABC to the model fin △DEF?",
+          stem: "What is the scale factor from the full-size fin to the model fin?",
           choices: [
             { letter: "A", text: "1/5" },
             { letter: "B", text: "5" },
@@ -142,7 +142,7 @@
           id: "why",
           sol: "G.TR.3",
           sub: "G.TR.3.1",
-          stem: "Why is △PBA similar to △PCD?",
+          stem: "Why is the candle's triangle at P similar to the image's triangle at P?",
           choices: [
             { letter: "A", text: "SAS∼: PB/PC = 60/15 and the right angles" },
             { letter: "B", text: "SSS∼: all three sides of each are known" },
@@ -181,7 +181,7 @@
           id: "scale",
           sol: "G.TR.3",
           sub: "G.TR.3.3",
-          stem: "What is the scale factor from △PBA to △PCD?",
+          stem: "What is the scale factor from the candle's triangle to the image's triangle?",
           choices: [
             { letter: "A", text: "4" },
             { letter: "B", text: "1/5" },
@@ -241,7 +241,7 @@
         "<text x=\"172\" y=\"59.8\" text-anchor=\"middle\">R</text><text x=\"158\" y=\"164\" text-anchor=\"middle\">Q</text>" +
         "<text x=\"300\" y=\"164\" text-anchor=\"middle\">T</text><text class=\"sm\" x=\"24\" y=\"76\" text-anchor=\"middle\">1.8 km</text>" +
         "<text x=\"89.3\" y=\"115\" text-anchor=\"middle\">7.5 km</text><text x=\"234\" y=\"164\" text-anchor=\"middle\">12 km</text>" +
-        "<text class=\"acc\" x=\"156\" y=\"117\" text-anchor=\"middle\">h</text><text class=\"sm\" x=\"250\" y=\"48\" text-anchor=\"middle\">sun rays</text></svg>" +
+        "<text class=\"acc\" x=\"180\" y=\"110\" text-anchor=\"middle\">h</text><text class=\"sm\" x=\"250\" y=\"48\" text-anchor=\"middle\">sun rays</text></svg>" +
         "<figcaption>Not drawn to scale</figcaption></figure>" +
         "<p class=\"geo-given\">In a photo of the Moon, the Sun is low. A peak <strong>M</strong> stands 1.8 km above <strong>N</strong> on the flat plain, and its shadow NS is 7.5 km long. At the same moment, the rim <strong>R</strong> of a crater stands h km above <strong>Q</strong> on the flat crater floor, and its shadow QT is 12 km long. MN and RQ are vertical, and the sun rays MS and RT are parallel.</p>",
       claims: [
@@ -314,7 +314,7 @@
           id: "scale",
           sol: "G.TR.3",
           sub: "G.TR.3.3",
-          stem: "What is the scale factor from the peak's triangle △MNS to the rim's triangle △RQT?",
+          stem: "What is the scale factor from the peak's triangle to the rim's triangle?",
           choices: [
             { letter: "A", text: "0.625" },
             { letter: "B", text: "4.5" },
@@ -351,7 +351,7 @@
           id: "why",
           sol: "G.TR.3",
           sub: "G.TR.3.1",
-          stem: "Why is △ADE similar to △ABC?",
+          stem: "Why is the small triangle cut off by the post similar to the whole ramp triangle?",
           choices: [
             { letter: "A", text: "SSS∼: AD/DB = AE/EC = DE/BC" },
             { letter: "B", text: "AA: ∠A ≅ ∠C, and both have a right angle" },
@@ -390,11 +390,11 @@
           id: "second",
           sol: "G.TR.3",
           sub: "G.TR.3.2",
-          stem: "Jo adds a second post FG, with F on AB, G on AC, AF = 90 cm and AG = 100 cm. Is FG parallel to BC? Choose the answer with the correct reason.",
+          stem: "Jo adds a slanted brace FG, with F on AB, G on AC, AF = 90 cm and AG = 100 cm. Is FG parallel to BC? Choose the answer with the correct reason.",
           choices: [
             { letter: "A", text: "Yes; 90/100 = 120/130" },
             { letter: "B", text: "Yes; 90/120 = 100/130" },
-            { letter: "C", text: "No; a post must stand at the middle of AB" },
+            { letter: "C", text: "No; a brace must start at the middle of AB" },
             { letter: "D", text: "No; 90/120 ≠ 100/130" }
           ],
           correct: "D"
@@ -458,7 +458,7 @@
           id: "criterion",
           sol: "G.TR.3",
           sub: "G.TR.3.1",
-          stem: "Which criterion shows that △FND ∼ △FMA?",
+          stem: "Which criterion shows that the small mirror's half-cone triangle is similar to the main mirror's?",
           choices: [
             { letter: "A", text: "AA" },
             { letter: "B", text: "SAS∼" },
@@ -974,7 +974,7 @@
           id: "criterion",
           sol: "G.TR.3",
           sub: "G.TR.3.1",
-          stem: "Which criterion shows that △AED ∼ △ABC?",
+          stem: "Which criterion shows that the small road triangle is similar to the whole road triangle?",
           choices: [
             { letter: "A", text: "SAS∼" },
             { letter: "B", text: "AA" },
@@ -1039,7 +1039,7 @@
           id: "scale",
           sol: "G.TR.3",
           sub: "G.TR.3.3",
-          stem: "What is the scale factor from △AED to △ABC?",
+          stem: "What is the scale factor from the small road triangle to the whole road triangle?",
           choices: [
             { letter: "A", text: "5/12" },
             { letter: "B", text: "2.4" },
@@ -1351,7 +1351,7 @@
           id: "why",
           sol: "G.TR.3",
           sub: "G.TR.3.1",
-          stem: "Why is △TGF similar to △THW?",
+          stem: "Why is the firefighter's triangle similar to the ladder's triangle?",
           choices: [
             { letter: "A", text: "SAS∼: TG/TH = 6/15, with the right angles" },
             { letter: "B", text: "AA: shared ∠T and right angles at G and H" },
@@ -1457,7 +1457,7 @@
           id: "scale",
           sol: "G.TR.3",
           sub: "G.TR.3.3",
-          stem: "What is the scale factor from the pole's triangle △UVW to the kite's triangle △KGS?",
+          stem: "What is the scale factor from the pole's triangle to the kite's triangle?",
           choices: [
             { letter: "A", text: "1/18" },
             { letter: "B", text: "25.5" },
@@ -1497,7 +1497,7 @@
           id: "why",
           sol: "G.TR.3",
           sub: "G.TR.3.1",
-          stem: "Why is △TAC similar to △EDC?",
+          stem: "Why are Kim's two triangles similar?",
           choices: [
             { letter: "A", text: "AA: right angles at A and D, vertical angles at C" },
             { letter: "B", text: "SAS∼: AC/DC = 40/16, with the right angles" },
@@ -1554,7 +1554,7 @@
             { letter: "A", text: "No; 40/12 ≠ 28/8" },
             { letter: "B", text: "Yes; 40/28 = 12/8" },
             { letter: "C", text: "Yes; 40 − 12 = 28 + 8" },
-            { letter: "D", text: "No; the river must be 45 m wide" }
+            { letter: "D", text: "No; the river must be 36 m wide" }
           ],
           correct: "A"
         },
@@ -1562,11 +1562,11 @@
           id: "short",
           sol: "G.TR.3",
           sub: "G.TR.3.3",
-          stem: "Here the river is 45 m wide and AC = 40 m. Kim can walk only 9 m back from the bank (DE = 9 m). How far from C must D be?",
+          stem: "At another spot the river is 36 m wide and AC = 40 m. Kim can walk only 9 m back from the bank (DE = 9 m). How far from C must D be?",
           choices: [
-            { letter: "A", text: "about 10.1 m" },
-            { letter: "B", text: "16 m" },
-            { letter: "C", text: "8 m" },
+            { letter: "A", text: "8.1 m" },
+            { letter: "B", text: "32.4 m" },
+            { letter: "C", text: "10 m" },
             { letter: "D", text: "31 m" }
           ],
           correct: "C"
@@ -1627,7 +1627,7 @@
           id: "ninety",
           sol: "G.TR.3",
           sub: "G.TR.3.3",
-          stem: "How far from T is the plane when it is 90 m above the ground?",
+          stem: "How far from T, measured along the level ground, is the plane when it is 90 m above the ground?",
           choices: [
             { letter: "A", text: "1,800 m" },
             { letter: "B", text: "5,000 m" },
@@ -1653,7 +1653,7 @@
           id: "scale",
           sol: "G.TR.3",
           sub: "G.TR.3.3",
-          stem: "What is the scale factor from △TMQ to △TGP?",
+          stem: "What is the scale factor from the tower's triangle at T to the plane's triangle at T?",
           choices: [
             { letter: "A", text: "3/10" },
             { letter: "B", text: "10/3" },
