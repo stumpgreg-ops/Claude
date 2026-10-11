@@ -225,7 +225,7 @@
         "<line class=\"thin\" x1=\"90\" y1=\"51.7\" x2=\"81.9\" y2=\"45.9\"/><line class=\"thin\" x1=\"81.9\" y1=\"120.1\" x2=\"90\" y2=\"114.3\"/>" +
         "<line class=\"thin\" x1=\"187.2\" y1=\"45.1\" x2=\"182.9\" y2=\"54.2\"/><line class=\"thin\" x1=\"183.5\" y1=\"43.4\" x2=\"179.3\" y2=\"52.5\"/>" +
         "<line class=\"thin\" x1=\"182.9\" y1=\"111.8\" x2=\"187.2\" y2=\"120.9\"/><line class=\"thin\" x1=\"179.3\" y1=\"113.5\" x2=\"183.5\" y2=\"122.6\"/>" +
-        "<path class=\"thin\" d=\"M67.2 75.6 A9 9 0 0 1 67.2 90.4\"/><path class=\"thin\" d=\"M233 72 A26 26 0 0 0 233 94\"/><path class=\"thin\" d=\"M104.2 22.8 A10 10 0 0 0 119 18.8\"/>" +
+        "<path class=\"thin\" d=\"M67.2 75.6 A9 9 0 0 1 67.2 90.4\"/><path class=\"thin\" d=\"M104.2 22.8 A10 10 0 0 0 119 18.8\"/>" +
         "<path class=\"thin\" d=\"M104.2 143.2 A10 10 0 0 1 119 147.2\"/><circle class=\"dt\" cx=\"62\" cy=\"83\" r=\"3\"/><circle class=\"dt\" cx=\"109.9\" cy=\"14.6\" r=\"3\"/>" +
         "<circle class=\"dt\" cx=\"256.6\" cy=\"83\" r=\"3\"/><circle class=\"dt\" cx=\"109.9\" cy=\"151.4\" r=\"3\"/><circle class=\"dt\" cx=\"109.9\" cy=\"83\" r=\"3\"/>" +
         "<text x=\"51\" y=\"88\" text-anchor=\"middle\">A</text><text x=\"97.9\" y=\"18.6\" text-anchor=\"middle\">B</text><text x=\"267.6\" y=\"88\" text-anchor=\"middle\">C</text>" +
@@ -1156,7 +1156,7 @@
         "<line class=\"ln\" x1=\"20\" y1=\"128\" x2=\"300\" y2=\"128\"/><line class=\"thin\" x1=\"40.2\" y1=\"128\" x2=\"69.1\" y2=\"20.2\"/>" +
         "<line class=\"thin\" x1=\"211.6\" y1=\"128\" x2=\"240.5\" y2=\"20.2\"/><polygon class=\"sh\" points=\"96,128 155.8,128 184.7,20.2 124.9,20.2\"/>" +
         "<line class=\"thin dash\" x1=\"96\" y1=\"128\" x2=\"184.7\" y2=\"20.2\"/><line class=\"thin dash\" x1=\"155.8\" y1=\"128\" x2=\"124.9\" y2=\"20.2\"/>" +
-        "<path class=\"thin\" d=\"M110 128 A14 14 0 0 0 99.6 114.5\"/><path class=\"thin\" d=\"M158.6 117.4 A11 11 0 0 0 144.8 128\"/>" +
+        "" +
         "<path class=\"thin\" d=\"M107.8 99.6 L105.4 92.8 L100 97.5\"/><path class=\"thin\" d=\"M167.6 99.6 L165.2 92.8 L159.8 97.5\"/><circle class=\"dt\" cx=\"96\" cy=\"128\" r=\"3\"/>" +
         "<circle class=\"dt\" cx=\"155.8\" cy=\"128\" r=\"3\"/><circle class=\"dt\" cx=\"184.7\" cy=\"20.2\" r=\"3\"/><circle class=\"dt\" cx=\"124.9\" cy=\"20.2\" r=\"3\"/>" +
         "<circle class=\"dt\" cx=\"140.3\" cy=\"74.1\" r=\"3\"/><text x=\"84\" y=\"123\" text-anchor=\"middle\">A</text><text x=\"167.8\" y=\"123\" text-anchor=\"middle\">B</text>" +

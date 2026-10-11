@@ -121,9 +121,9 @@
       level: 1,
       passage:
         "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 150\" role=\"img\" aria-label=\"A gold star S at the center of two circles with the same center: a solid inner orbit with planet A on it, and a larger dashed outer orbit with planet B on it.\">" +
-        "<circle class=\"ln dash\" cx=\"110\" cy=\"75\" r=\"65\"/><circle class=\"ln\" cx=\"110\" cy=\"75\" r=\"26\"/><circle class=\"dta\" cx=\"110\" cy=\"75\" r=\"3\"/><circle class=\"dta\" cx=\"110\" cy=\"75\" r=\"5.5\"/><circle class=\"dt\" cx=\"136\" cy=\"75\" r=\"4\"/>" +
-        "<circle class=\"dt\" cx=\"58\" cy=\"36\" r=\"4.5\"/><text x=\"108\" y=\"96\" text-anchor=\"middle\">S</text><text x=\"144\" y=\"80\">A</text><text x=\"51\" y=\"31\" text-anchor=\"end\">B</text><text class=\"sm\" x=\"160\" y=\"139\">outer orbit</text>" +
-        "<text class=\"sm\" x=\"196\" y=\"40\">Star system model</text><text class=\"sm\" x=\"196\" y=\"56\">(units on a grid</text><text class=\"sm\" x=\"196\" y=\"70\">not shown)</text>" +
+        "<circle class=\"ln dash\" cx=\"110\" cy=\"75\" r=\"70\"/><circle class=\"ln\" cx=\"110\" cy=\"75\" r=\"28\"/><circle class=\"dta\" cx=\"110\" cy=\"75\" r=\"3\"/><circle class=\"dta\" cx=\"110\" cy=\"75\" r=\"5.5\"/><circle class=\"dt\" cx=\"138\" cy=\"75\" r=\"4\"/>" +
+        "<circle class=\"dt\" cx=\"54\" cy=\"33\" r=\"4.5\"/><text x=\"108\" y=\"96\" text-anchor=\"middle\">S</text><text x=\"146\" y=\"80\">A</text><text x=\"47\" y=\"28\" text-anchor=\"end\">B</text><text class=\"sm\" x=\"164\" y=\"143\">outer orbit</text>" +
+        "<text class=\"sm\" x=\"204\" y=\"40\">Star system model</text><text class=\"sm\" x=\"204\" y=\"58\">S: star</text><text class=\"sm\" x=\"204\" y=\"74\">A, B: planets</text>" +
         "</svg></figure>" +
         "<p class=\"geo-given\">In a model of a star system, the outer orbit is the circle (x + 3)² + (y + 2)² = 25. The inner orbit has the same center, the star <strong>S</strong>, and a radius of 2 units. Planet <strong>A</strong>(−1, −2) is on the inner orbit. Planet <strong>B</strong>(−7, 1) is on the outer orbit.</p>",
       claims: [
@@ -226,10 +226,10 @@
         "<line class=\"gr\" x1=\"30\" y1=\"40\" x2=\"170\" y2=\"40\"/><line class=\"gr\" x1=\"30\" y1=\"30\" x2=\"170\" y2=\"30\"/><line class=\"gr\" x1=\"30\" y1=\"20\" x2=\"170\" y2=\"20\"/><line class=\"gr\" x1=\"30\" y1=\"10\" x2=\"170\" y2=\"10\"/><line class=\"ax\" x1=\"30\" y1=\"90\" x2=\"170\" y2=\"90\"/>" +
         "<line class=\"ax\" x1=\"90\" y1=\"150\" x2=\"90\" y2=\"10\"/><text class=\"sm\" x=\"30\" y=\"163\" text-anchor=\"middle\">−6</text><text class=\"sm\" x=\"50\" y=\"163\" text-anchor=\"middle\">−4</text><text class=\"sm\" x=\"70\" y=\"163\" text-anchor=\"middle\">−2</text>" +
         "<text class=\"sm\" x=\"90\" y=\"163\" text-anchor=\"middle\">0</text><text class=\"sm\" x=\"110\" y=\"163\" text-anchor=\"middle\">2</text><text class=\"sm\" x=\"130\" y=\"163\" text-anchor=\"middle\">4</text><text class=\"sm\" x=\"150\" y=\"163\" text-anchor=\"middle\">6</text>" +
-        "<text class=\"sm\" x=\"170\" y=\"163\" text-anchor=\"middle\">8</text><text class=\"sm\" x=\"25\" y=\"154\" text-anchor=\"end\">−6</text><text class=\"sm\" x=\"25\" y=\"134\" text-anchor=\"end\">−4</text><text class=\"sm\" x=\"25\" y=\"114\" text-anchor=\"end\">−2</text>" +
-        "<text class=\"sm\" x=\"25\" y=\"94\" text-anchor=\"end\">0</text><text class=\"sm\" x=\"25\" y=\"74\" text-anchor=\"end\">2</text><text class=\"sm\" x=\"25\" y=\"54\" text-anchor=\"end\">4</text><text class=\"sm\" x=\"25\" y=\"34\" text-anchor=\"end\">6</text>" +
-        "<text class=\"sm\" x=\"25\" y=\"14\" text-anchor=\"end\">8</text><circle class=\"sh\" cx=\"100\" cy=\"80\" r=\"64\"/><line class=\"ac\" x1=\"60\" y1=\"30\" x2=\"140\" y2=\"130\"/><circle class=\"dt\" cx=\"60\" cy=\"30\" r=\"3\"/><circle class=\"dt\" cx=\"140\" cy=\"130\" r=\"3\"/>" +
-        "<text x=\"53\" y=\"25\" text-anchor=\"end\">A</text><text x=\"147\" y=\"145\">B</text><text class=\"sm\" x=\"186\" y=\"30\">Moon crater map</text><text class=\"sm\" x=\"186\" y=\"48\">1 unit = 1 km</text>" +
+        "<text class=\"sm\" x=\"170\" y=\"163\" text-anchor=\"middle\">8</text><text class=\"sm\" x=\"25\" y=\"134\" text-anchor=\"end\">−4</text><text class=\"sm\" x=\"25\" y=\"114\" text-anchor=\"end\">−2</text><text class=\"sm\" x=\"25\" y=\"94\" text-anchor=\"end\">0</text>" +
+        "<text class=\"sm\" x=\"25\" y=\"74\" text-anchor=\"end\">2</text><text class=\"sm\" x=\"25\" y=\"54\" text-anchor=\"end\">4</text><text class=\"sm\" x=\"25\" y=\"34\" text-anchor=\"end\">6</text><text class=\"sm\" x=\"25\" y=\"14\" text-anchor=\"end\">8</text>" +
+        "<circle class=\"sh\" cx=\"100\" cy=\"80\" r=\"64\"/><line class=\"ac\" x1=\"60\" y1=\"30\" x2=\"140\" y2=\"130\"/><circle class=\"dt\" cx=\"60\" cy=\"30\" r=\"3\"/><circle class=\"dt\" cx=\"140\" cy=\"130\" r=\"3\"/><text x=\"53\" y=\"25\" text-anchor=\"end\">A</text><text x=\"147\" y=\"145\">B</text>" +
+        "<text class=\"sm\" x=\"186\" y=\"30\">Moon crater map</text><text class=\"sm\" x=\"186\" y=\"48\">1 unit = 1 km</text>" +
         "</svg></figure>" +
         "<p class=\"geo-given\">On a map of a moon crater (units in kilometers), segment <strong>AB</strong> runs straight across the crater through its center, from <strong>A</strong>(−3, 6) to <strong>B</strong>(5, −4). Both ends are on the rim.</p>",
       claims: [
@@ -325,7 +325,7 @@
         "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 160\" role=\"img\" aria-label=\"A shaded circle is a telescope's field of view, with dashed crosshairs through its center C. Right triangle CQE: leg CQ runs right from C, leg QE runs up from Q with a right angle at Q, and the gold side CE reaches star E on the edge of the circle.\">" +
         "<circle class=\"sh2\" cx=\"110\" cy=\"80\" r=\"70.3\"/><line class=\"thin dash\" x1=\"39.7\" y1=\"80\" x2=\"180.3\" y2=\"80\"/><line class=\"thin dash\" x1=\"110\" y1=\"9.7\" x2=\"110\" y2=\"150.3\"/><line class=\"ln\" x1=\"110\" y1=\"80\" x2=\"155\" y2=\"80\"/>" +
         "<line class=\"ln\" x1=\"155\" y1=\"80\" x2=\"155\" y2=\"26\"/><line class=\"ac\" x1=\"110\" y1=\"80\" x2=\"155\" y2=\"26\"/><path class=\"thin\" d=\"M147 80 V72 H155\"/><circle class=\"dta\" cx=\"110\" cy=\"80\" r=\"3\"/><circle class=\"dt\" cx=\"155\" cy=\"80\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"155\" cy=\"26\" r=\"4\"/><text x=\"102\" y=\"97\" text-anchor=\"middle\">C</text><text x=\"161\" y=\"96\">Q</text><text x=\"163\" y=\"28\">E</text><text class=\"sm\" x=\"200\" y=\"128\">eyepiece view</text><text class=\"sm\" x=\"200\" y=\"144\">on a star chart</text>" +
+        "<circle class=\"dt\" cx=\"155\" cy=\"26\" r=\"4\"/><text x=\"104\" y=\"74\" text-anchor=\"end\">C</text><text x=\"161\" y=\"96\">Q</text><text x=\"163\" y=\"28\">E</text><text class=\"sm\" x=\"200\" y=\"128\">eyepiece view</text><text class=\"sm\" x=\"200\" y=\"144\">on a star chart</text>" +
         "</svg></figure>" +
         "<p class=\"geo-given\">A telescope's round field of view is drawn on a star chart grid. Its center is <strong>C</strong>(−2, 1). The star <strong>E</strong>(3, 7) is on the edge of the field. Point <strong>Q</strong>(3, 1) makes right triangle <strong>CQE</strong>.</p>",
       claims: [
@@ -613,7 +613,7 @@
         "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 162\" role=\"img\" aria-label=\"Map with a gold point G below a satellite and three towns A, B and C. Dashed segments join G to each town. A gold dashed circle centered at G passes through town A; towns B and C are inside it.\">" +
         "<circle class=\"ac dash\" cx=\"98\" cy=\"79\" r=\"65.5\"/><line class=\"thin dash\" x1=\"98\" y1=\"79\" x2=\"35\" y2=\"61\"/><line class=\"thin dash\" x1=\"98\" y1=\"79\" x2=\"134\" y2=\"43\"/><line class=\"thin dash\" x1=\"98\" y1=\"79\" x2=\"89\" y2=\"142\"/>" +
         "<circle class=\"dta\" cx=\"98\" cy=\"79\" r=\"3\"/><circle class=\"dt\" cx=\"35\" cy=\"61\" r=\"3\"/><circle class=\"dt\" cx=\"134\" cy=\"43\" r=\"3\"/><circle class=\"dt\" cx=\"89\" cy=\"142\" r=\"3\"/><text x=\"106\" y=\"95\">G</text><text x=\"28\" y=\"55\" text-anchor=\"end\">A</text>" +
-        "<text x=\"141\" y=\"38\">B</text><text x=\"97\" y=\"147\">C</text><rect class=\"ln\" x=\"236\" y=\"18\" width=\"16\" height=\"12\"/><line class=\"ln\" x1=\"222\" y1=\"24\" x2=\"236\" y2=\"24\"/><line class=\"ln\" x1=\"252\" y1=\"24\" x2=\"266\" y2=\"24\"/>" +
+        "<text x=\"127\" y=\"38\" text-anchor=\"end\">B</text><text x=\"97\" y=\"136\">C</text><rect class=\"ln\" x=\"236\" y=\"18\" width=\"16\" height=\"12\"/><line class=\"ln\" x1=\"222\" y1=\"24\" x2=\"236\" y2=\"24\"/><line class=\"ln\" x1=\"252\" y1=\"24\" x2=\"266\" y2=\"24\"/>" +
         "<rect class=\"sh2\" x=\"210\" y=\"19\" width=\"12\" height=\"10\"/><rect class=\"sh2\" x=\"266\" y=\"19\" width=\"12\" height=\"10\"/><text class=\"sm\" x=\"244\" y=\"50\" text-anchor=\"middle\">satellite above G</text>" +
         "<text class=\"sm\" x=\"244\" y=\"136\" text-anchor=\"middle\">1 unit = 100 km</text>" +
         "</svg></figure>" +
@@ -709,7 +709,7 @@
       level: 1,
       passage:
         "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 150\" role=\"img\" aria-label=\"Road map: Highway 1 runs across and Route 9 runs down; they meet at the town of Ash, A. A radio tower T stands below and to the right of Ash. A gold dashed circle around T shows the edge of its range.\">" +
-        "<line class=\"ln\" x1=\"11.4\" y1=\"40\" x2=\"177.5\" y2=\"40\"/><line class=\"ln\" x1=\"40\" y1=\"4.8\" x2=\"40\" y2=\"145.6\"/><text class=\"sm\" x=\"177.5\" y=\"34\" text-anchor=\"end\">Hwy 1</text><text class=\"sm\" x=\"35\" y=\"149.6\" text-anchor=\"end\">Rt 9</text>" +
+        "<line class=\"ln\" x1=\"11.4\" y1=\"40\" x2=\"177.5\" y2=\"40\"/><line class=\"ln\" x1=\"40\" y1=\"4.8\" x2=\"40\" y2=\"145.6\"/><text class=\"sm\" x=\"177.5\" y=\"34\" text-anchor=\"end\">Hwy 1</text><text class=\"sm\" x=\"46\" y=\"138\">Rt 9</text>" +
         "<circle class=\"ac dash\" cx=\"84\" cy=\"73\" r=\"66\"/><path class=\"ln\" d=\"M78 86 L84 73 L90 86\"/><circle class=\"dta\" cx=\"84\" cy=\"73\" r=\"3\"/><path class=\"thin\" d=\"M77 67 A9 9 0 0 1 91 67\"/><text x=\"94\" y=\"78\">T</text><circle class=\"dt\" cx=\"40\" cy=\"40\" r=\"3\"/>" +
         "<text x=\"46\" y=\"55\">A</text><text class=\"sm\" x=\"312\" y=\"100\" text-anchor=\"end\">road map</text><text class=\"sm\" x=\"312\" y=\"116\" text-anchor=\"end\">1 unit = 4 mi</text><text class=\"sm\" x=\"312\" y=\"132\" text-anchor=\"end\">A: Ash</text>" +
         "</svg></figure>" +
@@ -907,11 +907,11 @@
       blurb: "A circle around an airport that planes may not enter.",
       level: 2,
       passage:
-        "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 165\" role=\"img\" aria-label=\"Air map with x- and y-axes and no tick marks. Airport A, with a short runway, is the center of a gold dashed circle. Segment AB reaches beacon B on the circle. Dashed legs AK and KB, with a right angle at K, make right triangle AKB.\">" +
+        "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 165\" role=\"img\" aria-label=\"Air map with x- and y-axes and no tick marks. Airport A is the center of a gold dashed circle. Segment AB reaches beacon B on the circle. Dashed legs AK and KB, with a right angle at K, make right triangle AKB.\">" +
         "<line class=\"ax\" x1=\"16\" y1=\"75\" x2=\"173.7\" y2=\"75\"/><line class=\"ax\" x1=\"130\" y1=\"8.5\" x2=\"130\" y2=\"159.6\"/><text class=\"sm\" x=\"176.7\" y=\"79\">x</text><text class=\"sm\" x=\"135\" y=\"14.5\">y</text><circle class=\"ac dash\" cx=\"92\" cy=\"84.5\" r=\"72.3\"/>" +
         "<line class=\"thin dash\" x1=\"92\" y1=\"84.5\" x2=\"158.5\" y2=\"84.5\"/><line class=\"thin dash\" x1=\"158.5\" y1=\"84.5\" x2=\"158.5\" y2=\"56\"/><line class=\"ln\" x1=\"92\" y1=\"84.5\" x2=\"158.5\" y2=\"56\"/><path class=\"thin\" d=\"M151.5 84.5 V77.5 H158.5\"/>" +
-        "<line class=\"ln\" x1=\"83\" y1=\"95.5\" x2=\"101\" y2=\"73.5\"/><circle class=\"dta\" cx=\"92\" cy=\"84.5\" r=\"3\"/><circle class=\"dt\" cx=\"158.5\" cy=\"56\" r=\"3\"/><circle class=\"dt\" cx=\"158.5\" cy=\"84.5\" r=\"3\"/><text x=\"83\" y=\"81.5\" text-anchor=\"end\">A</text>" +
-        "<text x=\"164.5\" y=\"51\">B</text><text x=\"164.5\" y=\"99.5\">K</text><text class=\"sm\" x=\"312\" y=\"132\" text-anchor=\"end\">air map</text><text class=\"sm\" x=\"312\" y=\"148\" text-anchor=\"end\">units in km</text>" +
+        "<circle class=\"dta\" cx=\"92\" cy=\"84.5\" r=\"3\"/><circle class=\"dt\" cx=\"158.5\" cy=\"56\" r=\"3\"/><circle class=\"dt\" cx=\"158.5\" cy=\"84.5\" r=\"3\"/><text x=\"83\" y=\"81.5\" text-anchor=\"end\">A</text><text x=\"167.5\" y=\"59\">B</text>" +
+        "<text x=\"154.5\" y=\"101.5\" text-anchor=\"end\">K</text><text class=\"sm\" x=\"312\" y=\"132\" text-anchor=\"end\">air map</text><text class=\"sm\" x=\"312\" y=\"148\" text-anchor=\"end\">units in km</text>" +
         "</svg></figure>" +
         "<p class=\"geo-given\">On an air map (units in km), the airport is at <strong>A</strong>(−4, −1). Planes may not fly inside the dashed circle. Its edge passes through the beacon <strong>B</strong>(3, 2). Point <strong>K</strong>(3, −1) makes right triangle <strong>AKB</strong>.</p>",
       claims: [
@@ -1006,8 +1006,8 @@
       passage:
         "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 156\" role=\"img\" aria-label=\"Harbor map: two headlands of land, with lighthouse L at the tip of the upper left one and lighthouse M at the tip of the lower right one. A blue circle is the slow zone, and the gold segment LM crosses it through its center.\">" +
         "<path class=\"sh\" d=\"M0 0 H117 L55 24 L0 54 Z\"/><path class=\"sh\" d=\"M87 156 L127 132 L197 156 Z\"/><circle class=\"sh2\" cx=\"91\" cy=\"78\" r=\"64.9\"/><line class=\"ac\" x1=\"55\" y1=\"24\" x2=\"127\" y2=\"132\"/><circle class=\"dt\" cx=\"55\" cy=\"24\" r=\"4\"/>" +
-        "<circle class=\"dt\" cx=\"127\" cy=\"132\" r=\"4\"/><text x=\"64\" y=\"26\">L</text><text x=\"118\" y=\"134\" text-anchor=\"end\">M</text><text class=\"sm\" x=\"24\" y=\"12\">land</text><text class=\"sm\" x=\"175\" y=\"151\">land</text>" +
-        "<text class=\"sm\" x=\"312\" y=\"40\" text-anchor=\"end\">harbor map</text><text class=\"sm\" x=\"312\" y=\"56\" text-anchor=\"end\">1 unit = 100 m</text><text class=\"sm\" x=\"312\" y=\"80\" text-anchor=\"end\">blue: slow zone</text>" +
+        "<circle class=\"dt\" cx=\"127\" cy=\"132\" r=\"4\"/><text x=\"47\" y=\"18\" text-anchor=\"end\">L</text><text x=\"127\" y=\"153\" text-anchor=\"middle\">M</text><text class=\"sm\" x=\"6\" y=\"14\">land</text><text class=\"sm\" x=\"312\" y=\"40\" text-anchor=\"end\">harbor map</text>" +
+        "<text class=\"sm\" x=\"312\" y=\"56\" text-anchor=\"end\">1 unit = 100 m</text><text class=\"sm\" x=\"312\" y=\"80\" text-anchor=\"end\">blue: slow zone</text>" +
         "</svg></figure>" +
         "<p class=\"geo-given\">On a harbor map (1 unit = 100 m), boats must slow down inside a circle. Segment <strong>LM</strong> is a diameter of that circle, from lighthouse <strong>L</strong>(−5, 6) to lighthouse <strong>M</strong>(3, −6).</p>",
       claims: [
@@ -1102,9 +1102,8 @@
       passage:
         "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 156\" role=\"img\" aria-label=\"City map with two streets and a river. A delivery hub H, drawn as a small square with a gold dot, is the center of a gold dashed circle that marks the edge of the delivery range.\">" +
         "<path class=\"sh2\" d=\"M0 118 C 80 100, 150 150, 220 128 L 220 142 C 150 164, 80 114, 0 132 Z\"/><line class=\"thin\" x1=\"0\" y1=\"40\" x2=\"220\" y2=\"40\"/><line class=\"thin\" x1=\"150\" y1=\"0\" x2=\"150\" y2=\"156\"/><circle class=\"ac dash\" cx=\"100\" cy=\"78\" r=\"64\"/>" +
-        "<rect class=\"ln\" x=\"94\" y=\"72\" width=\"12\" height=\"12\"/><circle class=\"dta\" cx=\"100\" cy=\"78\" r=\"3\"/><text x=\"90\" y=\"83\" text-anchor=\"end\">H</text><text class=\"sm\" x=\"196\" y=\"146\" text-anchor=\"middle\">river</text>" +
-        "<text class=\"sm\" x=\"312\" y=\"60\" text-anchor=\"end\">city map</text><text class=\"sm\" x=\"312\" y=\"76\" text-anchor=\"end\">1 unit = 1 km</text><text class=\"sm\" x=\"312\" y=\"100\" text-anchor=\"end\">dashed: edge of</text>" +
-        "<text class=\"sm\" x=\"312\" y=\"116\" text-anchor=\"end\">delivery range</text>" +
+        "<rect class=\"ln\" x=\"94\" y=\"72\" width=\"12\" height=\"12\"/><circle class=\"dta\" cx=\"100\" cy=\"78\" r=\"3\"/><text x=\"90\" y=\"83\" text-anchor=\"end\">H</text><text class=\"sm\" x=\"226\" y=\"140\">river</text><text class=\"sm\" x=\"312\" y=\"60\" text-anchor=\"end\">city map</text>" +
+        "<text class=\"sm\" x=\"312\" y=\"76\" text-anchor=\"end\">1 unit = 1 km</text><text class=\"sm\" x=\"312\" y=\"100\" text-anchor=\"end\">dashed: edge of</text><text class=\"sm\" x=\"312\" y=\"116\" text-anchor=\"end\">delivery range</text>" +
         "</svg></figure>" +
         "<p class=\"geo-given\">A drone delivery hub <strong>H</strong> is at (−2, 4) on a city map (units in km). A drone can fly up to 8 km from the hub. The dashed circle is the edge of the delivery range.</p>",
       claims: [
@@ -1299,10 +1298,10 @@
       level: 3,
       passage:
         "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 145\" role=\"img\" aria-label=\"Street map with no grid. A blue circle is the pickup zone around train station S, which sits on a dashed rail line. Main Street is a straight horizontal line that cuts across the lower part of the circle. Taxi stand T is to the lower right, outside the circle.\">" +
-        "<circle class=\"sh2\" cx=\"70\" cy=\"62\" r=\"50\"/><line class=\"ln\" x1=\"4\" y1=\"92\" x2=\"236\" y2=\"92\"/><text class=\"sm\" x=\"236\" y=\"86\" text-anchor=\"end\">Main St</text><line class=\"thin dash\" x1=\"0\" y1=\"32\" x2=\"210\" y2=\"122\"/>" +
-        "<rect class=\"ln\" x=\"63\" y=\"57\" width=\"14\" height=\"10\"/><circle class=\"dta\" cx=\"70\" cy=\"62\" r=\"3\"/><text x=\"68\" y=\"52\" text-anchor=\"middle\">S</text><circle class=\"dt\" cx=\"150\" cy=\"122\" r=\"3\"/><text x=\"157\" y=\"136\">T</text>" +
-        "<text class=\"sm\" x=\"312\" y=\"24\" text-anchor=\"end\">street map</text><text class=\"sm\" x=\"312\" y=\"40\" text-anchor=\"end\">units: blocks</text><text class=\"sm\" x=\"312\" y=\"64\" text-anchor=\"end\">blue: pickup zone</text>" +
-        "<text class=\"sm\" x=\"312\" y=\"80\" text-anchor=\"end\">dashed: rail line</text>" +
+        "<circle class=\"sh2\" cx=\"70\" cy=\"62\" r=\"50\"/><line class=\"ln\" x1=\"4\" y1=\"92\" x2=\"240\" y2=\"92\"/><text class=\"sm\" x=\"240\" y=\"107\" text-anchor=\"end\">Main St</text><line class=\"thin dash\" x1=\"0\" y1=\"32\" x2=\"170\" y2=\"105\"/>" +
+        "<rect class=\"ln\" x=\"63\" y=\"57\" width=\"14\" height=\"10\"/><circle class=\"dta\" cx=\"70\" cy=\"62\" r=\"3\"/><text x=\"58\" y=\"52\" text-anchor=\"end\">S</text><circle class=\"dt\" cx=\"150\" cy=\"122\" r=\"3\"/><text x=\"157\" y=\"136\">T</text>" +
+        "<text class=\"sm\" x=\"312\" y=\"24\" text-anchor=\"end\">street map</text><text class=\"sm\" x=\"312\" y=\"40\" text-anchor=\"end\">units: blocks</text><text class=\"sm\" x=\"312\" y=\"58\" text-anchor=\"end\">blue: pickup zone</text>" +
+        "<text class=\"sm\" x=\"312\" y=\"74\" text-anchor=\"end\">dashed: rail line</text>" +
         "</svg></figure>" +
         "<p class=\"geo-given\">A train station <strong>S</strong> has a rideshare pickup zone: the circle (x + 3)² + (y − 2)² = 25 and its inside. Units are city blocks. Main Street is the line y = −1. The taxi stand is at <strong>T</strong>(5, −4).</p>",
       claims: [
