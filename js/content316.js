@@ -972,9 +972,9 @@
           sub: "G.TR.3.1",
           stem: "Why are the triangles above and below E similar?",
           choices: [
-            { letter: "A", text: "SAS∼: AE/CE = BE/DE, with vertical angles" },
+            { letter: "A", text: "SAS∼: AB/DC = AE/DE, with vertical angles" },
             { letter: "B", text: "AA: alternate interior angles and vertical angles" },
-            { letter: "C", text: "SSS∼: AB/DC = 3/5 for all three pairs" },
+            { letter: "C", text: "SSS∼: AB/DC = 30/50 is enough" },
             { letter: "D", text: "AA: ∠ABE ≅ ∠BAE, since AB is level" }
           ],
           correct: "B"
@@ -1070,7 +1070,7 @@
           id: "criterion",
           sol: "G.TR.3",
           sub: "G.TR.3.1",
-          stem: "Which criterion shows that △ADC is similar to △ACB?",
+          stem: "Using only the given facts, which criterion shows that △ADC is similar to △ACB?",
           choices: [
             { letter: "A", text: "SAS∼" },
             { letter: "B", text: "SSS∼" },

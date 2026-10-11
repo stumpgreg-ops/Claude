@@ -21,7 +21,7 @@
           id: "crit",
           sol: "G.TR.2",
           sub: "G.TR.2.1",
-          stem: "Which criterion proves △ABC ≅ △DEF?",
+          stem: "Which criterion proves △ABC ≅ △DEF directly from the marked parts?",
           choices: [
             { letter: "A", text: "AAS" },
             { letter: "B", text: "ASA" },
@@ -242,7 +242,7 @@
           id: "aas",
           sol: "G.TR.2",
           sub: "G.TR.2.1",
-          stem: "Suppose you knew ∠A ≅ ∠D, ∠AEC ≅ ∠DFB and AC ≅ DB, but not AE ≅ DF. Which criterion would prove △ACE ≅ △DBF?",
+          stem: "Suppose you knew ∠A ≅ ∠D, ∠AEC ≅ ∠DFB and AC ≅ DB, but not AE ≅ DF. Which criterion would prove △ACE ≅ △DBF directly from those parts?",
           choices: [
             { letter: "A", text: "ASA" },
             { letter: "B", text: "SAS" },
@@ -528,7 +528,7 @@
           id: "asa",
           sol: "G.TR.2",
           sub: "G.TR.2.1",
-          stem: "Ana starts again with only AB ≅ AC and ∠ABE ≅ ∠ACD. Which criterion lets her prove △ABE ≅ △ACD?",
+          stem: "Ana starts again with only AB ≅ AC and ∠ABE ≅ ∠ACD. Which criterion lets her prove △ABE ≅ △ACD directly from those parts and the shared angle A?",
           choices: [
             { letter: "A", text: "AAS" },
             { letter: "B", text: "SAS" },
@@ -621,7 +621,7 @@
           sub: "G.TR.2.1",
           stem: "AB = QR and BC = RP. Which added fact would NOT prove △ABC ≅ △QRP?",
           choices: [
-            { letter: "A", text: "∠A ≅ ∠Q" },
+            { letter: "A", text: "∠C ≅ ∠P" },
             { letter: "B", text: "AC = QP" },
             { letter: "C", text: "∠B ≅ ∠R" },
             { letter: "D", text: "△QRP is a rotation of △ABC" }
@@ -710,7 +710,7 @@
           id: "sss",
           sol: "G.TR.2",
           sub: "G.TR.2.1",
-          stem: "Suppose you knew only AD ≅ BC and AC ≅ BD, with no right angles. Which criterion proves △DAB ≅ △CBA?",
+          stem: "Suppose you knew only AD ≅ BC and AC ≅ BD, without using the right angles. Which criterion proves △DAB ≅ △CBA?",
           choices: [
             { letter: "A", text: "SAS" },
             { letter: "B", text: "HL" },
@@ -905,7 +905,7 @@
           id: "aas",
           sol: "G.TR.2",
           sub: "G.TR.2.1",
-          stem: "Raj starts over knowing only ∠P ≅ ∠Q, ∠PAD ≅ ∠QBA and DA ≅ AB. Which criterion proves △DPA ≅ △AQB?",
+          stem: "Raj starts over knowing only ∠P ≅ ∠Q, ∠PAD ≅ ∠QBA and DA ≅ AB. Which criterion proves △DPA ≅ △AQB directly from those parts?",
           choices: [
             { letter: "A", text: "ASA" },
             { letter: "B", text: "SAS" },
