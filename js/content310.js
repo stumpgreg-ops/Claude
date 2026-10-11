@@ -289,7 +289,7 @@
       blurb: "Kim, Luis and Maya pass on a soccer field.",
       level: 1,
       passage:
-        "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 166\" role=\"img\" aria-label=\"Triangle KLM of soccer players: KL is 18 yards, LM is 25 yards and KM is 30 yards; the line from K through M continues to the goal post G\"><path class=\"gr\" d=\"M8 10 H312 V158 H8 Z M160 10 V158\"/><rect class=\"thin\" x=\"286\" y=\"126\" width=\"10\" height=\"28\"/><polygon class=\"ln\" points=\"36,140 95.9,50.1 216,140\"/><line class=\"ln dash\" x1=\"216\" y1=\"140\" x2=\"286\" y2=\"140\"/><path class=\"ac\" d=\"M230 140 A14 14 0 0 0 204.8 131.6\"/><circle class=\"dt\" cx=\"36\" cy=\"140\" r=\"3\"/><circle class=\"dt\" cx=\"95.9\" cy=\"50.1\" r=\"3\"/><circle class=\"dt\" cx=\"216\" cy=\"140\" r=\"3\"/><circle class=\"dt\" cx=\"286\" cy=\"140\" r=\"3\"/><text x=\"23.8\" y=\"149.6\" text-anchor=\"middle\">K</text><text x=\"95.9\" y=\"42.1\" text-anchor=\"middle\">L</text><text x=\"216\" y=\"161\" text-anchor=\"middle\">M</text><text x=\"282\" y=\"123\" text-anchor=\"middle\">G</text><text x=\"51\" y=\"90.1\" text-anchor=\"middle\">18 yd</text><text x=\"167.9\" y=\"84\" text-anchor=\"middle\">25 yd</text><text x=\"126\" y=\"159\" text-anchor=\"middle\">30 yd</text></svg></figure><p class=\"geo-given\">Soccer players stand at <strong>K</strong> (Kim), <strong>L</strong> (Luis) and <strong>M</strong> (Maya): KL = 18 yd, LM = 25 yd and KM = 30 yd. The line from Kim through Maya continues straight to the goal post <strong>G</strong>.</p>",
+        "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 166\" role=\"img\" aria-label=\"Triangle KLM of soccer players: KL is 18 yards, LM is 25 yards and KM is 30 yards; the line from K through M continues to the goal post G\"><rect class=\"thin\" x=\"286\" y=\"126\" width=\"10\" height=\"28\"/><polygon class=\"ln\" points=\"36,140 95.9,50.1 216,140\"/><line class=\"ln dash\" x1=\"216\" y1=\"140\" x2=\"286\" y2=\"140\"/><path class=\"ac\" d=\"M230 140 A14 14 0 0 0 204.8 131.6\"/><circle class=\"dt\" cx=\"36\" cy=\"140\" r=\"3\"/><circle class=\"dt\" cx=\"95.9\" cy=\"50.1\" r=\"3\"/><circle class=\"dt\" cx=\"216\" cy=\"140\" r=\"3\"/><circle class=\"dt\" cx=\"286\" cy=\"140\" r=\"3\"/><text x=\"23.8\" y=\"149.6\" text-anchor=\"middle\">K</text><text x=\"95.9\" y=\"42.1\" text-anchor=\"middle\">L</text><text x=\"216\" y=\"161\" text-anchor=\"middle\">M</text><text x=\"282\" y=\"123\" text-anchor=\"middle\">G</text><text x=\"46\" y=\"86.7\" text-anchor=\"middle\">18 yd</text><text x=\"167.9\" y=\"84\" text-anchor=\"middle\">25 yd</text><text x=\"126\" y=\"159\" text-anchor=\"middle\">30 yd</text></svg></figure><p class=\"geo-given\">Soccer players stand at <strong>K</strong> (Kim), <strong>L</strong> (Luis) and <strong>M</strong> (Maya): KL = 18 yd, LM = 25 yd and KM = 30 yd. The line from Kim through Maya continues straight to the goal post <strong>G</strong>.</p>",
       claims: [
         {
           id: "largest",
@@ -562,7 +562,7 @@
       blurb: "Three checkpoints, a straight road and some algebra.",
       level: 2,
       passage:
-        "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 166\" role=\"img\" aria-label=\"Triangle ABC of checkpoints on a game map; angle A is 2x plus 7 degrees and angle C is 5x minus 9 degrees; road AB continues past B to D, and the exterior angle CBD is 6x plus 10 degrees\"><rect class=\"thin\" x=\"6\" y=\"6\" width=\"308\" height=\"154\" rx=\"10\"/><path class=\"gr\" d=\"M6 50 H314 M6 94 H314 M80 6 V160 M160 6 V160 M240 6 V160\"/><polygon class=\"ln\" points=\"34,138 196,138 210.9,31.7\"/><line class=\"ln\" x1=\"196\" y1=\"138\" x2=\"286\" y2=\"138\"/><path class=\"thin\" d=\"M60 138 A26 26 0 0 0 56.3 124.6\"/><path class=\"thin\" d=\"M195.5 41 A18 18 0 0 0 208.4 49.5\"/><path class=\"ac\" d=\"M212 138 A16 16 0 0 0 198.2 122.2\"/><circle class=\"dt\" cx=\"34\" cy=\"138\" r=\"3\"/><circle class=\"dt\" cx=\"196\" cy=\"138\" r=\"3\"/><circle class=\"dt\" cx=\"210.9\" cy=\"31.7\" r=\"3\"/><circle class=\"dt\" cx=\"286\" cy=\"138\" r=\"3\"/><text x=\"20.6\" y=\"147.2\" text-anchor=\"middle\">A</text><text x=\"194\" y=\"160\" text-anchor=\"middle\">B</text><text x=\"212.9\" y=\"23.7\" text-anchor=\"middle\">C</text><text x=\"286\" y=\"160\" text-anchor=\"middle\">D</text><text class=\"sm\" x=\"108\" y=\"133\" text-anchor=\"middle\">(2x + 7)°</text><text class=\"sm\" x=\"188.9\" y=\"81.7\" text-anchor=\"middle\">(5x − 9)°</text><text class=\"sm\" x=\"246\" y=\"116\" text-anchor=\"middle\">(6x + 10)°</text></svg></figure><p class=\"geo-given\">On a video game map, routes join the checkpoints <strong>A</strong>, <strong>B</strong> and <strong>C</strong>. The route from A through B goes straight on to <strong>D</strong>. m∠A = (2x + 7)⁠°, m∠BCA = (5x − 9)⁠° and m∠CBD = (6x + 10)⁠°.</p>",
+        "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 166\" role=\"img\" aria-label=\"Triangle ABC of checkpoints on a game map; angle A is 2x plus 7 degrees and angle C is 5x minus 9 degrees; road AB continues past B to D, and the exterior angle CBD is 6x plus 10 degrees\"><rect class=\"thin\" x=\"6\" y=\"6\" width=\"308\" height=\"154\" rx=\"10\"/><path class=\"gr\" fill=\"none\" d=\"M6 50 H314 M6 94 H314 M80 6 V160 M160 6 V160 M240 6 V160\"/><polygon class=\"ln\" points=\"34,138 196,138 210.9,31.7\"/><line class=\"ln\" x1=\"196\" y1=\"138\" x2=\"286\" y2=\"138\"/><path class=\"thin\" d=\"M60 138 A26 26 0 0 0 56.3 124.6\"/><path class=\"thin\" d=\"M195.5 41 A18 18 0 0 0 208.4 49.5\"/><path class=\"ac\" d=\"M212 138 A16 16 0 0 0 198.2 122.2\"/><circle class=\"dt\" cx=\"34\" cy=\"138\" r=\"3\"/><circle class=\"dt\" cx=\"196\" cy=\"138\" r=\"3\"/><circle class=\"dt\" cx=\"210.9\" cy=\"31.7\" r=\"3\"/><circle class=\"dt\" cx=\"286\" cy=\"138\" r=\"3\"/><text x=\"20.6\" y=\"147.2\" text-anchor=\"middle\">A</text><text x=\"194\" y=\"160\" text-anchor=\"middle\">B</text><text x=\"212.9\" y=\"23.7\" text-anchor=\"middle\">C</text><text x=\"286\" y=\"160\" text-anchor=\"middle\">D</text><text class=\"sm\" x=\"108\" y=\"133\" text-anchor=\"middle\">(2x + 7)°</text><text class=\"sm\" x=\"188.9\" y=\"81.7\" text-anchor=\"middle\">(5x − 9)°</text><text class=\"sm\" x=\"246\" y=\"116\" text-anchor=\"middle\">(6x + 10)°</text></svg></figure><p class=\"geo-given\">On a video game map, routes join the checkpoints <strong>A</strong>, <strong>B</strong> and <strong>C</strong>. The route from A through B goes straight on to <strong>D</strong>. m∠A = (2x + 7)⁠°, m∠BCA = (5x − 9)⁠° and m∠CBD = (6x + 10)⁠°.</p>",
       claims: [
         {
           id: "equation",
@@ -744,7 +744,7 @@
       blurb: "Home plate, the mound and first base make a triangle.",
       level: 3,
       passage:
-        "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 170\" role=\"img\" aria-label=\"Baseball diamond: home plate H, first base F and the pitcher's mound M on the line from home to second base; HM is 60.5 feet, HF is 90 feet, angle MHF is 45 degrees; the baseline HF continues past F to R\"><path class=\"gr\" d=\"M150 156 L86.4 92.4 L150 28.7 L213.6 92.4\"/><line class=\"ln dash\" x1=\"150\" y1=\"156\" x2=\"150\" y2=\"95.5\"/><path class=\"gr\" d=\"M150 95.5 L150 28.7\"/><polygon class=\"ln\" points=\"150,156 150,95.5 213.6,92.4\"/><line class=\"ln dash\" x1=\"213.6\" y1=\"92.4\" x2=\"241.9\" y2=\"64.1\"/><path class=\"thin\" d=\"M207.9 98.1 L202.3 92.4 L207.9 86.7\"/><path class=\"thin\" d=\"M150 134 A22 22 0 0 1 165.6 140.4\"/><path class=\"thin\" d=\"M187.6 93.7 A26 26 0 0 0 195.2 110.8\"/><path class=\"ac\" d=\"M222.1 83.9 A12 12 0 0 0 201.6 93\"/><circle class=\"dt\" cx=\"150\" cy=\"156\" r=\"3\"/><circle class=\"dt\" cx=\"150\" cy=\"95.5\" r=\"3\"/><circle class=\"dt\" cx=\"213.6\" cy=\"92.4\" r=\"3\"/><circle class=\"dt\" cx=\"241.9\" cy=\"64.1\" r=\"3\"/><circle class=\"dt\" cx=\"150\" cy=\"28.7\" r=\"2.5\"/><circle class=\"dt\" cx=\"86.4\" cy=\"92.4\" r=\"2.5\"/><text x=\"136\" y=\"163\" text-anchor=\"middle\">H</text><text x=\"137\" y=\"94.5\" text-anchor=\"middle\">M</text><text x=\"219.6\" y=\"113.4\" text-anchor=\"middle\">F</text><text x=\"253.9\" y=\"69.1\" text-anchor=\"middle\">R</text><text x=\"116\" y=\"134.8\" text-anchor=\"middle\">60.5 ft</text><text x=\"195.9\" y=\"143.3\" text-anchor=\"middle\">90 ft</text><text class=\"sm\" x=\"163\" y=\"128.6\" text-anchor=\"middle\">45°</text><text class=\"sm\" x=\"150\" y=\"22.7\" text-anchor=\"middle\">2nd</text><text class=\"sm\" x=\"82.4\" y=\"86.4\" text-anchor=\"middle\">3rd</text></svg></figure><p class=\"geo-given\">On a baseball field, the pitcher's mound <strong>M</strong> is on the line from home plate <strong>H</strong> to second base, so m∠MHF = 45°. HM = 60.5 ft and HF = 90 ft, and m∠HFM ≈ 42°. The baseline HF continues straight past first base <strong>F</strong> to <strong>R</strong>.</p>",
+        "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 170\" role=\"img\" aria-label=\"Baseball diamond: home plate H, first base F and the pitcher's mound M on the line from home to second base; HM is 60.5 feet, HF is 90 feet, angle MHF is 45 degrees; the baseline HF continues past F to R\"><path class=\"gr\" fill=\"none\" d=\"M150 156 L86.4 92.4 L150 28.7 L213.6 92.4\"/><line class=\"ln dash\" x1=\"150\" y1=\"156\" x2=\"150\" y2=\"95.5\"/><path class=\"gr\" fill=\"none\" d=\"M150 95.5 L150 28.7\"/><polygon class=\"ln\" points=\"150,156 150,95.5 213.6,92.4\"/><line class=\"ln dash\" x1=\"213.6\" y1=\"92.4\" x2=\"241.9\" y2=\"64.1\"/><path class=\"thin\" d=\"M207.9 98.1 L202.3 92.4 L207.9 86.7\"/><path class=\"thin\" d=\"M150 134 A22 22 0 0 1 165.6 140.4\"/><path class=\"thin\" d=\"M187.6 93.7 A26 26 0 0 0 195.2 110.8\"/><path class=\"ac\" d=\"M222.1 83.9 A12 12 0 0 0 201.6 93\"/><circle class=\"dt\" cx=\"150\" cy=\"156\" r=\"3\"/><circle class=\"dt\" cx=\"150\" cy=\"95.5\" r=\"3\"/><circle class=\"dt\" cx=\"213.6\" cy=\"92.4\" r=\"3\"/><circle class=\"dt\" cx=\"241.9\" cy=\"64.1\" r=\"3\"/><circle class=\"dt\" cx=\"150\" cy=\"28.7\" r=\"2.5\"/><circle class=\"dt\" cx=\"86.4\" cy=\"92.4\" r=\"2.5\"/><text x=\"136\" y=\"163\" text-anchor=\"middle\">H</text><text x=\"137\" y=\"94.5\" text-anchor=\"middle\">M</text><text x=\"219.6\" y=\"113.4\" text-anchor=\"middle\">F</text><text x=\"253.9\" y=\"69.1\" text-anchor=\"middle\">R</text><text x=\"116\" y=\"134.8\" text-anchor=\"middle\">60.5 ft</text><text x=\"195.9\" y=\"143.3\" text-anchor=\"middle\">90 ft</text><text class=\"sm\" x=\"163\" y=\"128.6\" text-anchor=\"middle\">45°</text><text class=\"sm\" x=\"150\" y=\"22.7\" text-anchor=\"middle\">2nd</text><text class=\"sm\" x=\"82.4\" y=\"86.4\" text-anchor=\"middle\">3rd</text></svg></figure><p class=\"geo-given\">On a baseball field, the pitcher's mound <strong>M</strong> is on the line from home plate <strong>H</strong> to second base, so m∠MHF = 45°. HM = 60.5 ft and HF = 90 ft, and m∠HFM ≈ 42°. The baseline HF continues straight past first base <strong>F</strong> to <strong>R</strong>.</p>",
       claims: [
         {
           id: "angle-m",
@@ -835,7 +835,7 @@
       blurb: "Four players on a court, two equal passes and a long one.",
       level: 3,
       passage:
-        "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 170\" role=\"img\" aria-label=\"Triangle ABC of basketball players with D on BC; tick marks show AB congruent to AD; angle ABD is 4x minus 4 degrees, angle ADB is 3x plus 14 degrees and angle C is 31 degrees\"><path class=\"thin\" d=\"M14 152 H306\"/><polygon class=\"ln\" points=\"81.7,32.9 36,146 269.9,146\"/><line class=\"ln\" x1=\"81.7\" y1=\"32.9\" x2=\"127.4\" y2=\"146\"/><line class=\"thin\" x1=\"53.3\" y1=\"87.2\" x2=\"64.4\" y2=\"91.7\"/><line class=\"thin\" x1=\"99\" y1=\"91.7\" x2=\"110.1\" y2=\"87.2\"/><path class=\"thin\" d=\"M51 146 A15 15 0 0 0 41.6 132.1\"/><path class=\"thin\" d=\"M112.4 146 A15 15 0 0 1 121.8 132.1\"/><path class=\"thin\" d=\"M247.6 132.6 A26 26 0 0 0 243.9 146\"/><path class=\"ac\" d=\"M92.9 60.7 A30 30 0 0 0 107.4 48.4\"/><circle class=\"dt\" cx=\"81.7\" cy=\"32.9\" r=\"3\"/><circle class=\"dt\" cx=\"36\" cy=\"146\" r=\"3\"/><circle class=\"dt\" cx=\"127.4\" cy=\"146\" r=\"3\"/><circle class=\"dt\" cx=\"269.9\" cy=\"146\" r=\"3\"/><text x=\"81.7\" y=\"24.9\" text-anchor=\"middle\">A</text><text x=\"24\" y=\"155\" text-anchor=\"middle\">B</text><text x=\"127.4\" y=\"170\" text-anchor=\"middle\">D</text><text x=\"281.9\" y=\"155\" text-anchor=\"middle\">C</text><text class=\"sm\" x=\"88\" y=\"140\" text-anchor=\"middle\">(4x − 4)°</text><text class=\"sm\" x=\"105.4\" y=\"116\" text-anchor=\"middle\">(3x + 14)°</text><text class=\"sm\" x=\"227.5\" y=\"138.2\" text-anchor=\"middle\">31°</text><text class=\"sm\" x=\"250\" y=\"166\" text-anchor=\"middle\">baseline</text></svg></figure><p class=\"geo-given\">In a passing drill, players stand at <strong>A</strong>, <strong>B</strong>, <strong>C</strong> and <strong>D</strong>, with D on the baseline BC. The passes AB and AD are equal: AB ≅ AD. m∠ABD = (4x − 4)⁠°, m∠ADB = (3x + 14)⁠° and m∠ACD = 31°.</p>",
+        "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 140\" role=\"img\" aria-label=\"Triangle ABC of basketball players with D on BC; tick marks show AB congruent to AD; angle ABD is 3x plus 20 degrees, angle ADB is 5x degrees and angle C is 22 degrees\"><path class=\"thin dash\" d=\"M6 120 H314\"/><polygon class=\"ln\" points=\"87.5,31.6 20,112 286.5,112\"/><line class=\"ln\" x1=\"87.5\" y1=\"31.6\" x2=\"155\" y2=\"112\"/><line class=\"thin\" x1=\"49.2\" y1=\"67.9\" x2=\"58.3\" y2=\"75.7\"/><line class=\"thin\" x1=\"116.7\" y1=\"75.7\" x2=\"125.8\" y2=\"67.9\"/><path class=\"thin\" d=\"M35 112 A15 15 0 0 0 29.6 100.5\"/><path class=\"thin\" d=\"M140 112 A15 15 0 0 1 145.4 100.5\"/><path class=\"thin\" d=\"M258.7 100.8 A30 30 0 0 0 256.5 112\"/><path class=\"ac\" d=\"M104.2 51.5 A26 26 0 0 0 111.6 41.3\"/><circle class=\"dt\" cx=\"87.5\" cy=\"31.6\" r=\"3\"/><circle class=\"dt\" cx=\"20\" cy=\"112\" r=\"3\"/><circle class=\"dt\" cx=\"155\" cy=\"112\" r=\"3\"/><circle class=\"dt\" cx=\"286.5\" cy=\"112\" r=\"3\"/><text x=\"87.5\" y=\"23.6\" text-anchor=\"middle\">A</text><text x=\"19\" y=\"135\" text-anchor=\"middle\">B</text><text x=\"155\" y=\"135\" text-anchor=\"middle\">D</text><text x=\"287.5\" y=\"135\" text-anchor=\"middle\">C</text><text class=\"sm\" x=\"72\" y=\"108\" text-anchor=\"middle\">(3x + 20)°</text><text class=\"sm\" x=\"123\" y=\"108\" text-anchor=\"middle\">5x°</text><text class=\"sm\" x=\"237.4\" y=\"106.5\" text-anchor=\"middle\">22°</text></svg></figure><p class=\"geo-given\">In a passing drill, players stand at <strong>A</strong>, <strong>B</strong>, <strong>C</strong> and <strong>D</strong>, with D on the baseline BC. The passes AB and AD are equal: AB ≅ AD. m∠ABD = (3x + 20)⁠°, m∠ADB = 5x° and m∠ACD = 22°.</p>",
       claims: [
         {
           id: "bad",
@@ -843,10 +843,10 @@
           sub: "G.TR.1.3",
           stem: "What is m∠BAD?",
           choices: [
-            { letter: "A", text: "44°" },
-            { letter: "B", text: "68°" },
-            { letter: "C", text: "112°" },
-            { letter: "D", text: "56°" }
+            { letter: "A", text: "80°" },
+            { letter: "B", text: "50°" },
+            { letter: "C", text: "130°" },
+            { letter: "D", text: "65°" }
           ],
           correct: "A"
         },
@@ -856,10 +856,10 @@
           sub: "G.TR.1.3",
           stem: "What is m∠ADC?",
           choices: [
-            { letter: "A", text: "68°" },
-            { letter: "B", text: "136°" },
-            { letter: "C", text: "149°" },
-            { letter: "D", text: "112°" }
+            { letter: "A", text: "50°" },
+            { letter: "B", text: "100°" },
+            { letter: "C", text: "158°" },
+            { letter: "D", text: "130°" }
           ],
           correct: "D"
         },
@@ -869,10 +869,10 @@
           sub: "G.TR.1.3",
           stem: "What is m∠DAC?",
           choices: [
-            { letter: "A", text: "81°" },
-            { letter: "B", text: "37°" },
-            { letter: "C", text: "149°" },
-            { letter: "D", text: "99°" }
+            { letter: "A", text: "108°" },
+            { letter: "B", text: "28°" },
+            { letter: "C", text: "158°" },
+            { letter: "D", text: "72°" }
           ],
           correct: "B"
         },
@@ -896,9 +896,9 @@
           stem: "Which statement about the distances is NOT true?",
           choices: [
             { letter: "A", text: "AC is longer than AD." },
-            { letter: "B", text: "DC is longer than AD." },
+            { letter: "B", text: "BD is longer than AB." },
             { letter: "C", text: "AB is shorter than AC." },
-            { letter: "D", text: "BD is longer than AB." }
+            { letter: "D", text: "AD is longer than DC." }
           ],
           correct: "D"
         },
@@ -911,7 +911,7 @@
             { letter: "A", text: "x < 15" },
             { letter: "B", text: "3 < x < 15" },
             { letter: "C", text: "x > 3" },
-            { letter: "D", text: "-5 < x < 15" }
+            { letter: "D", text: "−5 < x < 15" }
           ],
           correct: "B"
         }

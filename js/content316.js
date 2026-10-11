@@ -17,20 +17,20 @@
       level: 1,
       passage:
         "<figure class=\"geo-fig\">" +
-        "<svg viewBox=\"0 0 320 164\" role=\"img\" aria-label=\"Triangle ABC, the side of an A-frame display: D and F on AB, E and G on AC, shelves DE and FG parallel to the floor bar BC; AD 24, DF 18, FB 18, AE 20 and BC 40 inches\">" +
-        "<line class=\"thin\" x1=\"60\" y1=\"145\" x2=\"260\" y2=\"145\"/><polygon class=\"ln\" points=\"184.4,21 100,145 200,145\"/>" +
-        "<line class=\"ac\" x1=\"150.6\" y1=\"70.6\" x2=\"190.6\" y2=\"70.6\"/><line class=\"ln\" x1=\"125.3\" y1=\"107.8\" x2=\"195.3\" y2=\"107.8\"/>" +
-        "<path class=\"thin\" d=\"M169.4 74.6 L175.4 70.6 L169.4 66.6\"/><path class=\"thin\" d=\"M161.3 111.8 L167.3 107.8 L161.3 103.8\"/>" +
-        "<path class=\"thin\" d=\"M156 149 L162 145 L156 141\"/><circle class=\"dt\" cx=\"184.4\" cy=\"21\" r=\"3\"/><circle class=\"dt\" cx=\"100\" cy=\"145\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"200\" cy=\"145\" r=\"3\"/><circle class=\"dt\" cx=\"150.6\" cy=\"70.6\" r=\"3\"/><circle class=\"dt\" cx=\"190.6\" cy=\"70.6\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"125.3\" cy=\"107.8\" r=\"3\"/><circle class=\"dt\" cx=\"195.3\" cy=\"107.8\" r=\"3\"/><text x=\"184.4\" y=\"15\" text-anchor=\"middle\">A</text>" +
-        "<text x=\"89\" y=\"156\" text-anchor=\"middle\">B</text><text x=\"211\" y=\"156\" text-anchor=\"middle\">C</text>" +
-        "<text x=\"138.6\" y=\"72.6\" text-anchor=\"middle\">D</text><text x=\"113.3\" y=\"109.8\" text-anchor=\"middle\">F</text>" +
-        "<text x=\"202.6\" y=\"72.6\" text-anchor=\"middle\">E</text><text x=\"207.3\" y=\"109.8\" text-anchor=\"middle\">G</text>" +
-        "<text x=\"156.8\" y=\"43.5\" text-anchor=\"middle\">24</text><text x=\"127.2\" y=\"86.9\" text-anchor=\"middle\">18</text>" +
-        "<text x=\"101.9\" y=\"124.1\" text-anchor=\"middle\">18</text><text x=\"199.4\" y=\"49.3\" text-anchor=\"middle\">20</text>" +
-        "<text x=\"150\" y=\"161\" text-anchor=\"middle\">40</text></svg></figure>" +
-        "<p class=\"geo-given\">The side of an A-frame book display in the library is <strong>△ABC</strong>. Shelves <strong>DE</strong> and <strong>FG</strong> are parallel to the floor bar <strong>BC</strong>. AD = 24 in., DF = 18 in., FB = 18 in., AE = 20 in., AC = 50 in. and BC = 40 in.</p>",
+        "<svg viewBox=\"0 0 320 164\" role=\"img\" aria-label=\"Triangle ABC, the side of an A-frame display: D and F on AB, E and G on AC, shelves DE and FG parallel to the floor bar BC; AD 24, DF 18, FB 18, AE 20 and BC 70 inches\">" +
+        "<line class=\"thin\" x1=\"22\" y1=\"145\" x2=\"298\" y2=\"145\"/><polygon class=\"ln\" points=\"180.6,19 52,145 262,145\"/>" +
+        "<line class=\"ac\" x1=\"129.1\" y1=\"69.4\" x2=\"213.1\" y2=\"69.4\"/><line class=\"ln\" x1=\"90.6\" y1=\"107.2\" x2=\"237.6\" y2=\"107.2\"/>" +
+        "<path class=\"thin\" d=\"M175.2 73.4 L181.2 69.4 L175.2 65.4\"/><path class=\"thin\" d=\"M172.8 111.2 L178.8 107.2 L172.8 103.2\"/>" +
+        "<path class=\"thin\" d=\"M176.2 149 L182.2 145 L176.2 141\"/><circle class=\"dt\" cx=\"180.6\" cy=\"19\" r=\"3\"/><circle class=\"dt\" cx=\"52\" cy=\"145\" r=\"3\"/>" +
+        "<circle class=\"dt\" cx=\"262\" cy=\"145\" r=\"3\"/><circle class=\"dt\" cx=\"129.1\" cy=\"69.4\" r=\"3\"/><circle class=\"dt\" cx=\"213.1\" cy=\"69.4\" r=\"3\"/>" +
+        "<circle class=\"dt\" cx=\"90.6\" cy=\"107.2\" r=\"3\"/><circle class=\"dt\" cx=\"237.6\" cy=\"107.2\" r=\"3\"/><text x=\"180.6\" y=\"13\" text-anchor=\"middle\">A</text>" +
+        "<text x=\"41\" y=\"156\" text-anchor=\"middle\">B</text><text x=\"273\" y=\"156\" text-anchor=\"middle\">C</text>" +
+        "<text x=\"116.1\" y=\"77.4\" text-anchor=\"middle\">D</text><text x=\"77.6\" y=\"115.2\" text-anchor=\"middle\">F</text>" +
+        "<text x=\"225.1\" y=\"71.4\" text-anchor=\"middle\">E</text><text x=\"249.6\" y=\"109.2\" text-anchor=\"middle\">G</text>" +
+        "<text x=\"145.8\" y=\"39.9\" text-anchor=\"middle\">24</text><text x=\"100.8\" y=\"84\" text-anchor=\"middle\">18</text>" +
+        "<text x=\"62.2\" y=\"121.8\" text-anchor=\"middle\">18</text><text x=\"206.9\" y=\"42.7\" text-anchor=\"middle\">20</text>" +
+        "<text x=\"157\" y=\"161\" text-anchor=\"middle\">70</text></svg></figure>" +
+        "<p class=\"geo-given\">The side of an A-frame book display in the library is <strong>△ABC</strong>. Shelves <strong>DE</strong> and <strong>FG</strong> are parallel to the floor bar <strong>BC</strong>. AD = 24 in., DF = 18 in., FB = 18 in., AE = 20 in., AC = 50 in. and BC = 70 in.</p>",
       claims: [
         {
           id: "criterion",
@@ -64,10 +64,10 @@
           sub: "G.TR.3.3",
           stem: "How long is the top shelf DE?",
           choices: [
-            { letter: "A", text: "100 in." },
-            { letter: "B", text: "about 26.7 in." },
-            { letter: "C", text: "4 in." },
-            { letter: "D", text: "16 in." }
+            { letter: "A", text: "175 in." },
+            { letter: "B", text: "about 46.7 in." },
+            { letter: "C", text: "34 in." },
+            { letter: "D", text: "28 in." }
           ],
           correct: "D"
         },
@@ -77,10 +77,10 @@
           sub: "G.TR.3.3",
           stem: "How long is the lower shelf FG?",
           choices: [
-            { letter: "A", text: "12 in." },
-            { letter: "B", text: "28 in." },
-            { letter: "C", text: "22 in." },
-            { letter: "D", text: "about 57.1 in." }
+            { letter: "A", text: "21 in." },
+            { letter: "B", text: "49 in." },
+            { letter: "C", text: "52 in." },
+            { letter: "D", text: "100 in." }
           ],
           correct: "B"
         },
@@ -88,12 +88,12 @@
           id: "perimeter",
           sol: "G.TR.3",
           sub: "G.TR.3.3",
-          stem: "The perimeter of △ABC is 150 in. What is the perimeter of △ADE?",
+          stem: "The perimeter of △ABC is 180 in. What is the perimeter of △ADE?",
           choices: [
-            { letter: "A", text: "24 in." },
-            { letter: "B", text: "375 in." },
-            { letter: "C", text: "60 in." },
-            { letter: "D", text: "100 in." }
+            { letter: "A", text: "28.8 in." },
+            { letter: "B", text: "450 in." },
+            { letter: "C", text: "72 in." },
+            { letter: "D", text: "120 in." }
           ],
           correct: "C"
         },
@@ -101,12 +101,12 @@
           id: "tabletop",
           sol: "G.TR.3",
           sub: "G.TR.3.2",
-          stem: "A tabletop display has sides of 12 in., 10 in. and 8 in. Is it similar to △ABC?",
+          stem: "A tabletop display has sides of 12 in., 10 in. and 14 in. Is it similar to △ABC?",
           choices: [
-            { letter: "A", text: "Yes; 12/60 = 10/50 = 8/40" },
-            { letter: "B", text: "No; 12/8 ≠ 60/50" },
-            { letter: "C", text: "No; its sides are not 60, 50 and 40" },
-            { letter: "D", text: "No; 60 − 12 ≠ 40 − 8" }
+            { letter: "A", text: "Yes; 12/60 = 10/50 = 14/70" },
+            { letter: "B", text: "No; 12/14 ≠ 60/50" },
+            { letter: "C", text: "No; its sides are not 60, 50 and 70" },
+            { letter: "D", text: "No; 70 − 14 ≠ 60 − 12" }
           ],
           correct: "A"
         }
@@ -123,17 +123,17 @@
       passage:
         "<figure class=\"geo-fig\">" +
         "<svg viewBox=\"0 0 320 170\" role=\"img\" aria-label=\"A light pole TP and a student whose eyes are at E above point B; a mirror M lies on the ground between them; BM 4 feet, MP 30 feet, EB 5.2 feet; right angles at B and P; light travels from T to M to E\">" +
-        "<line class=\"thin\" x1=\"18\" y1=\"150\" x2=\"302\" y2=\"150\"/><rect class=\"sh2\" x=\"90\" y=\"146\" width=\"20\" height=\"4\"/>" +
-        "<line class=\"ln\" x1=\"50\" y1=\"150\" x2=\"50\" y2=\"85\"/><line class=\"ln\" x1=\"200\" y1=\"150\" x2=\"200\" y2=\"20\"/>" +
-        "<line class=\"ln\" x1=\"200\" y1=\"20\" x2=\"186\" y2=\"20\"/><line class=\"ac dash\" x1=\"50\" y1=\"85\" x2=\"100\" y2=\"150\"/>" +
-        "<line class=\"ac dash\" x1=\"100\" y1=\"150\" x2=\"200\" y2=\"20\"/><path class=\"thin\" d=\"M50 142 L58 142 L58 150\"/>" +
-        "<path class=\"thin\" d=\"M200 142 L192 142 L192 150\"/><path class=\"thin\" d=\"M90.2 137.3 A16 16 0 0 0 84 150\"/>" +
-        "<path class=\"thin\" d=\"M109.8 137.3 A16 16 0 0 1 116 150\"/><circle class=\"dt\" cx=\"50\" cy=\"85\" r=\"3\"/><circle class=\"dt\" cx=\"50\" cy=\"150\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"100\" cy=\"150\" r=\"3\"/><circle class=\"dt\" cx=\"200\" cy=\"150\" r=\"3\"/><circle class=\"dt\" cx=\"200\" cy=\"20\" r=\"3\"/>" +
-        "<text x=\"38\" y=\"86\" text-anchor=\"middle\">E</text><text x=\"50\" y=\"168\" text-anchor=\"middle\">B</text>" +
-        "<text x=\"100\" y=\"168\" text-anchor=\"middle\">M</text><text x=\"200\" y=\"168\" text-anchor=\"middle\">P</text>" +
-        "<text x=\"212\" y=\"23\" text-anchor=\"middle\">T</text><text class=\"sm\" x=\"28\" y=\"122\" text-anchor=\"middle\">5.2 ft</text>" +
-        "<text x=\"75\" y=\"168\" text-anchor=\"middle\">4 ft</text><text x=\"150\" y=\"168\" text-anchor=\"middle\">30 ft</text>" +
+        "<line class=\"thin\" x1=\"18\" y1=\"146\" x2=\"302\" y2=\"146\"/><rect class=\"sh2\" x=\"90\" y=\"142\" width=\"20\" height=\"4\"/>" +
+        "<line class=\"ln\" x1=\"50\" y1=\"146\" x2=\"50\" y2=\"81\"/><line class=\"ln\" x1=\"200\" y1=\"146\" x2=\"200\" y2=\"16\"/>" +
+        "<line class=\"ln\" x1=\"200\" y1=\"16\" x2=\"186\" y2=\"20\"/><line class=\"ac dash\" x1=\"50\" y1=\"81\" x2=\"100\" y2=\"146\"/>" +
+        "<line class=\"ac dash\" x1=\"100\" y1=\"146\" x2=\"200\" y2=\"16\"/><path class=\"thin\" d=\"M50 138 L58 138 L58 146\"/>" +
+        "<path class=\"thin\" d=\"M200 138 L192 138 L192 146\"/><path class=\"thin\" d=\"M90.2 133.3 A16 16 0 0 0 84 146\"/>" +
+        "<path class=\"thin\" d=\"M109.8 133.3 A16 16 0 0 1 116 146\"/><circle class=\"dt\" cx=\"50\" cy=\"81\" r=\"3\"/><circle class=\"dt\" cx=\"50\" cy=\"146\" r=\"3\"/>" +
+        "<circle class=\"dt\" cx=\"100\" cy=\"146\" r=\"3\"/><circle class=\"dt\" cx=\"200\" cy=\"146\" r=\"3\"/><circle class=\"dt\" cx=\"200\" cy=\"16\" r=\"3\"/>" +
+        "<text x=\"38\" y=\"82\" text-anchor=\"middle\">E</text><text x=\"50\" y=\"165\" text-anchor=\"middle\">B</text>" +
+        "<text x=\"100\" y=\"165\" text-anchor=\"middle\">M</text><text x=\"200\" y=\"165\" text-anchor=\"middle\">P</text>" +
+        "<text x=\"212\" y=\"19\" text-anchor=\"middle\">T</text><text class=\"sm\" x=\"28\" y=\"122\" text-anchor=\"middle\">5.2 ft</text>" +
+        "<text x=\"75\" y=\"165\" text-anchor=\"middle\">4 ft</text><text x=\"146\" y=\"165\" text-anchor=\"middle\">30 ft</text>" +
         "<text class=\"acc\" x=\"214\" y=\"91\" text-anchor=\"middle\">h</text><text class=\"sm\" x=\"268\" y=\"34\" text-anchor=\"middle\">light pole</text></svg>" +
         "<figcaption>Not drawn to scale</figcaption></figure>" +
         "<p class=\"geo-given\">Nia lays a mirror <strong>M</strong> flat on the level parking lot. She stands at <strong>B</strong>, 4 ft from the mirror, and sees the top <strong>T</strong> of a light pole in it. Her eyes <strong>E</strong> are 5.2 ft above the ground, and the mirror is 30 ft from the pole's base <strong>P</strong>. EB and TP are vertical. A mirror reflects at equal angles, so ∠EMB ≅ ∠TMP.</p>",
@@ -142,7 +142,7 @@
           id: "why",
           sol: "G.TR.3",
           sub: "G.TR.3.1",
-          stem: "Why is △EBM similar to △TPM?",
+          stem: "Why are the two triangles in Nia's figure similar?",
           choices: [
             { letter: "A", text: "SAS∼: BM/PM = 4/30 and the right angles" },
             { letter: "B", text: "AA: ∠EMB and ∠TMP are vertical angles" },
@@ -155,7 +155,7 @@
           id: "statement",
           sol: "G.TR.3",
           sub: "G.TR.3.1",
-          stem: "Which similarity statement matches the vertices correctly?",
+          stem: "Which similarity statement pairs Nia's triangle with the pole's triangle correctly?",
           choices: [
             { letter: "A", text: "△EBM ∼ △PTM" },
             { letter: "B", text: "△BEM ∼ △TPM" },
@@ -168,7 +168,7 @@
           id: "height",
           sol: "G.TR.3",
           sub: "G.TR.3.3",
-          stem: "How tall is the light pole (h)?",
+          stem: "How tall is the parking-lot light pole (h)?",
           choices: [
             { letter: "A", text: "39 ft" },
             { letter: "B", text: "about 23.1 ft" },
@@ -267,7 +267,7 @@
           id: "statement",
           sol: "G.TR.3",
           sub: "G.TR.3.1",
-          stem: "Which similarity statement matches the vertices correctly?",
+          stem: "Which similarity statement for the two mural triangles is correct?",
           choices: [
             { letter: "A", text: "△ABC ∼ △DEF" },
             { letter: "B", text: "△ABC ∼ △FDE" },
@@ -368,7 +368,7 @@
           id: "statement",
           sol: "G.TR.3",
           sub: "G.TR.3.1",
-          stem: "Which similarity statement matches the vertices correctly?",
+          stem: "Which similarity statement for the small triangle and the island is correct?",
           choices: [
             { letter: "A", text: "△ADE ∼ △ABC" },
             { letter: "B", text: "△ADE ∼ △ACB" },
@@ -485,7 +485,7 @@
           id: "statement",
           sol: "G.TR.3",
           sub: "G.TR.3.1",
-          stem: "Which similarity statement matches the vertices correctly?",
+          stem: "Which similarity statement for the two pennants is correct?",
           choices: [
             { letter: "A", text: "△ABC ∼ △DEF" },
             { letter: "B", text: "△ABC ∼ △EDF" },
@@ -545,7 +545,7 @@
       level: 1,
       passage:
         "<figure class=\"geo-fig\">" +
-        "<svg viewBox=\"0 0 320 152\" role=\"img\" aria-label=\"Two triangles on a game map: triangle JKL with JK 50, KL 80 and JL 60 meters, and triangle PQR with PQ 90, QR 75 and PR 120 meters, drawn in a different position\">" +
+        "<svg viewBox=\"0 0 320 158\" role=\"img\" aria-label=\"Two triangles on a game map: triangle JKL with JK 50, KL 80 and JL 60 meters, and triangle PQR with PQ 90, QR 75 and PR 120 meters, drawn in a different position\">" +
         "<polygon class=\"sh\" points=\"59.8,90.1 20,135 116,135\"/><polygon class=\"sh2\" points=\"170,135 278,135 282.5,45.1\"/>" +
         "<circle class=\"dt\" cx=\"59.8\" cy=\"90.1\" r=\"3\"/><circle class=\"dt\" cx=\"20\" cy=\"135\" r=\"3\"/><circle class=\"dt\" cx=\"116\" cy=\"135\" r=\"3\"/>" +
         "<circle class=\"dt\" cx=\"170\" cy=\"135\" r=\"3\"/><circle class=\"dt\" cx=\"278\" cy=\"135\" r=\"3\"/><circle class=\"dt\" cx=\"282.5\" cy=\"45.1\" r=\"3\"/>" +
@@ -574,7 +574,7 @@
           id: "statement",
           sol: "G.TR.3",
           sub: "G.TR.3.1",
-          stem: "Which similarity statement matches the vertices correctly?",
+          stem: "Which similarity statement for the two zones is correct?",
           choices: [
             { letter: "A", text: "△JKL ∼ △PQR" },
             { letter: "B", text: "△JKL ∼ △QRP" },
@@ -664,7 +664,7 @@
           id: "why",
           sol: "G.TR.3",
           sub: "G.TR.3.1",
-          stem: "Why is △SGH similar to △SQP?",
+          stem: "Why is the player's triangle similar to the pole's triangle?",
           choices: [
             { letter: "A", text: "SAS∼: SG/SQ = 8/24 and the right angles" },
             { letter: "B", text: "AA: ∠S is shared, and ∠G and ∠Q are right angles" },
@@ -677,7 +677,7 @@
           id: "height",
           sol: "G.TR.3",
           sub: "G.TR.3.3",
-          stem: "How tall is the light pole (h)?",
+          stem: "How tall is the light pole PQ (h)?",
           choices: [
             { letter: "A", text: "22 ft" },
             { letter: "B", text: "16.5 ft" },
@@ -690,7 +690,7 @@
           id: "statement",
           sol: "G.TR.3",
           sub: "G.TR.3.1",
-          stem: "Which similarity statement matches the vertices correctly?",
+          stem: "Which similarity statement for the player's and the pole's triangles is correct?",
           choices: [
             { letter: "A", text: "△SGH ∼ △QSP" },
             { letter: "B", text: "△GSH ∼ △SQP" },
@@ -751,16 +751,16 @@
       passage:
         "<figure class=\"geo-fig\">" +
         "<svg viewBox=\"0 0 320 170\" role=\"img\" aria-label=\"A coach's eye E 1.5 meters above the ground sights the top W of a climbing wall over the top T of a 2.5-meter pole; the pole is 2 meters from the coach and the wall is 10 meters beyond the pole; a level dashed line from E meets the pole at M and the wall at N\">" +
-        "<line class=\"thin\" x1=\"14\" y1=\"149\" x2=\"306\" y2=\"149\"/><rect class=\"sh2\" x=\"252\" y=\"14\" width=\"16\" height=\"135\"/>" +
-        "<line class=\"ln\" x1=\"36\" y1=\"149\" x2=\"36\" y2=\"122\"/><line class=\"ln\" x1=\"72\" y1=\"149\" x2=\"72\" y2=\"104\"/>" +
-        "<line class=\"ac dash\" x1=\"36\" y1=\"122\" x2=\"252\" y2=\"14\"/><line class=\"thin dash\" x1=\"36\" y1=\"122\" x2=\"252\" y2=\"122\"/>" +
-        "<path class=\"thin\" d=\"M65 122 L65 115 L72 115\"/><path class=\"thin\" d=\"M245 122 L245 115 L252 115\"/><circle class=\"dt\" cx=\"36\" cy=\"122\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"72\" cy=\"104\" r=\"3\"/><circle class=\"dt\" cx=\"72\" cy=\"122\" r=\"3\"/><circle class=\"dt\" cx=\"252\" cy=\"14\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"252\" cy=\"122\" r=\"3\"/><text x=\"25\" y=\"121\" text-anchor=\"middle\">E</text><text x=\"63\" y=\"100\" text-anchor=\"middle\">T</text>" +
-        "<text x=\"82\" y=\"137\" text-anchor=\"middle\">M</text><text x=\"241\" y=\"138\" text-anchor=\"middle\">N</text>" +
-        "<text x=\"240\" y=\"21\" text-anchor=\"middle\">W</text><text class=\"sm\" x=\"20\" y=\"142\" text-anchor=\"middle\">1.5 m</text>" +
-        "<text class=\"sm\" x=\"94\" y=\"141\" text-anchor=\"middle\">2.5 m</text><text x=\"54\" y=\"168\" text-anchor=\"middle\">2 m</text>" +
-        "<text x=\"162\" y=\"168\" text-anchor=\"middle\">10 m</text><text class=\"acc\" x=\"284\" y=\"91\" text-anchor=\"middle\">?</text>" +
+        "<line class=\"thin\" x1=\"14\" y1=\"146\" x2=\"306\" y2=\"146\"/><rect class=\"sh2\" x=\"252\" y=\"11\" width=\"16\" height=\"135\"/>" +
+        "<line class=\"ln\" x1=\"36\" y1=\"146\" x2=\"36\" y2=\"119\"/><line class=\"ln\" x1=\"72\" y1=\"146\" x2=\"72\" y2=\"101\"/>" +
+        "<line class=\"ac dash\" x1=\"36\" y1=\"119\" x2=\"252\" y2=\"11\"/><line class=\"thin dash\" x1=\"36\" y1=\"119\" x2=\"252\" y2=\"119\"/>" +
+        "<path class=\"thin\" d=\"M65 119 L65 112 L72 112\"/><path class=\"thin\" d=\"M245 119 L245 112 L252 112\"/><circle class=\"dt\" cx=\"36\" cy=\"119\" r=\"3\"/>" +
+        "<circle class=\"dt\" cx=\"72\" cy=\"101\" r=\"3\"/><circle class=\"dt\" cx=\"72\" cy=\"119\" r=\"3\"/><circle class=\"dt\" cx=\"252\" cy=\"11\" r=\"3\"/>" +
+        "<circle class=\"dt\" cx=\"252\" cy=\"119\" r=\"3\"/><text x=\"25\" y=\"118\" text-anchor=\"middle\">E</text><text x=\"63\" y=\"97\" text-anchor=\"middle\">T</text>" +
+        "<text x=\"62\" y=\"135\" text-anchor=\"middle\">M</text><text x=\"241\" y=\"135\" text-anchor=\"middle\">N</text>" +
+        "<text x=\"240\" y=\"18\" text-anchor=\"middle\">W</text><text class=\"sm\" x=\"20\" y=\"139\" text-anchor=\"middle\">1.5 m</text>" +
+        "<text class=\"sm\" x=\"93\" y=\"138\" text-anchor=\"middle\">2.5 m</text><text x=\"54\" y=\"165\" text-anchor=\"middle\">2 m</text>" +
+        "<text x=\"162\" y=\"165\" text-anchor=\"middle\">10 m</text><text class=\"acc\" x=\"284\" y=\"91\" text-anchor=\"middle\">?</text>" +
         "<text class=\"sm\" x=\"282\" y=\"114\" text-anchor=\"middle\">wall</text></svg></figure>" +
         "<p class=\"geo-given\">Coach Ruiz's eye <strong>E</strong> is 1.5 m above the ground. She sights the top <strong>W</strong> of the climbing wall over the top <strong>T</strong> of a 2.5-m pole. The pole is 2 m from her, and the wall is 10 m beyond the pole. The pole and the wall are vertical. The dashed level line from E meets the pole at <strong>M</strong> and the wall at <strong>N</strong>.</p>",
       claims: [
@@ -768,7 +768,7 @@
           id: "why",
           sol: "G.TR.3",
           sub: "G.TR.3.1",
-          stem: "Why is △EMT similar to △ENW?",
+          stem: "Why are the two sight triangles with vertex E similar?",
           choices: [
             { letter: "A", text: "SAS∼: EM/EN = 2/10 and the right angles" },
             { letter: "B", text: "SSS∼: EM, MT and ET are known" },
@@ -807,7 +807,7 @@
           id: "statement",
           sol: "G.TR.3",
           sub: "G.TR.3.1",
-          stem: "Which similarity statement matches the vertices correctly?",
+          stem: "Which similarity statement for the two sight triangles is correct?",
           choices: [
             { letter: "A", text: "△EMT ∼ △ENW" },
             { letter: "B", text: "△EMT ∼ △EWN" },
@@ -920,12 +920,12 @@
           id: "design",
           sol: "G.TR.3",
           sub: "G.TR.3.3",
-          stem: "A new ramp is to be similar to ramp P, with a rise of 3.5 ft. How long should its run be?",
+          stem: "A new ramp is to be similar to ramp P, with a rise of 4 ft. How long should its run be?",
           choices: [
-            { letter: "A", text: "6.5 ft" },
-            { letter: "B", text: "1.4 ft" },
-            { letter: "C", text: "7 ft" },
-            { letter: "D", text: "about 8.8 ft" }
+            { letter: "A", text: "7 ft" },
+            { letter: "B", text: "1.6 ft" },
+            { letter: "C", text: "8 ft" },
+            { letter: "D", text: "10 ft" }
           ],
           correct: "D"
         },
@@ -971,12 +971,12 @@
           id: "why",
           sol: "G.TR.3",
           sub: "G.TR.3.1",
-          stem: "Why is △ABE similar to △CDE?",
+          stem: "Why are the triangles above and below E similar?",
           choices: [
-            { letter: "A", text: "SAS∼: AE/CE = BE/DE" },
+            { letter: "A", text: "SAS∼: AE/CE = BE/DE, with vertical angles" },
             { letter: "B", text: "AA: alternate interior angles and vertical angles" },
-            { letter: "C", text: "SSS∼: AB/DC = 3/5" },
-            { letter: "D", text: "AA: ∠ABE ≅ ∠BAE" }
+            { letter: "C", text: "SSS∼: AB/DC = 3/5 for all three pairs" },
+            { letter: "D", text: "AA: ∠ABE ≅ ∠BAE, since AB is level" }
           ],
           correct: "B"
         },
@@ -984,7 +984,7 @@
           id: "statement",
           sol: "G.TR.3",
           sub: "G.TR.3.1",
-          stem: "Which similarity statement matches the vertices correctly?",
+          stem: "Which similarity statement for the triangles above and below E is correct?",
           choices: [
             { letter: "A", text: "△ABE ∼ △DCE" },
             { letter: "B", text: "△BAE ∼ △CDE" },
@@ -1172,7 +1172,7 @@
           id: "criterion",
           sol: "G.TR.3",
           sub: "G.TR.3.1",
-          stem: "Which criterion shows that △ABD is similar to △BDC?",
+          stem: "Which criterion shows that the two triangles on either side of trail BD are similar?",
           choices: [
             { letter: "A", text: "SSS∼" },
             { letter: "B", text: "SAS∼" },
@@ -1185,7 +1185,7 @@
           id: "statement",
           sol: "G.TR.3",
           sub: "G.TR.3.1",
-          stem: "Which similarity statement matches the vertices correctly?",
+          stem: "Which similarity statement for the triangles that share trail BD is correct?",
           choices: [
             { letter: "A", text: "△ABD ∼ △DBC" },
             { letter: "B", text: "△ABD ∼ △BCD" },
