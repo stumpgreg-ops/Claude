@@ -406,7 +406,7 @@
           id: "inscribed",
           sol: "G.PC.3",
           sub: "G.PC.3.1",
-          stem: "What is m∠AEB?",
+          stem: "What is m∠AEB, the angle at E between points A and B?",
           choices: [
             { letter: "A", text: "90°" },
             { letter: "B", text: "45°" },
@@ -509,7 +509,7 @@
           id: "abc",
           sol: "G.PC.3",
           sub: "G.PC.3.1",
-          stem: "What is m∠ABC?",
+          stem: "What is m∠ABC, the angle at B between segment BA and chord BC?",
           choices: [
             { letter: "A", text: "35°" },
             { letter: "B", text: "70°" },
@@ -663,7 +663,7 @@
           id: "not",
           sol: "G.PC.3",
           sub: "G.PC.3.1",
-          stem: "Which statement is NOT true?",
+          stem: "Which statement about the two laser beams is NOT true?",
           choices: [
             { letter: "A", text: "m∠APC = ½(arc BD + arc AC)" },
             { letter: "B", text: "PA · PB = PC · PD" },
@@ -740,7 +740,7 @@
           id: "be",
           sol: "G.PC.3",
           sub: "G.PC.3.2",
-          stem: "How long is BE?",
+          stem: "How long is BE, the part of rope BD from B to E?",
           choices: [
             { letter: "A", text: "6 m" },
             { letter: "B", text: "6.5 m" },
@@ -766,7 +766,7 @@
           id: "radius",
           sol: "G.PC.3",
           sub: "G.PC.3.2",
-          stem: "What is the radius of the pool?",
+          stem: "What is the radius of this round pool?",
           choices: [
             { letter: "A", text: "13 m" },
             { letter: "B", text: "6 m" },
@@ -959,7 +959,7 @@
           id: "acb",
           sol: "G.PC.3",
           sub: "G.PC.3.1",
-          stem: "What is m∠ACB?",
+          stem: "What is m∠ACB, the angle at arrow C between arrows A and B?",
           choices: [
             { letter: "A", text: "60°" },
             { letter: "B", text: "30°" },
