@@ -396,7 +396,7 @@
           id: "solve-x",
           sol: "G.RLT.2",
           sub: "G.RLT.2.3",
-          stem: "In a second sketch, the angle above c and left of f is (3x + 21)⁠°, and c is parallel to b. What is x?",
+          stem: "Suppose c were redrawn parallel to b, with the angles at b unchanged. If the angle above c and left of f were (3x + 21)⁠°, what would x be?",
           choices: [
             { letter: "A", text: "16" },
             { letter: "B", text: "28" },
@@ -751,7 +751,7 @@
         "<text x=\"87.1\" y=\"81.2\" text-anchor=\"middle\">4</text><text x=\"220.2\" y=\"76.8\" text-anchor=\"middle\">5</text>" +
         "<text x=\"243.7\" y=\"82\" text-anchor=\"middle\">6</text><text x=\"233.4\" y=\"103.7\" text-anchor=\"middle\">7</text>" +
         "<text x=\"209.9\" y=\"98.5\" text-anchor=\"middle\">8</text><text class=\"sm\" x=\"54.1\" y=\"142\" text-anchor=\"end\">runway</text>" +
-        "<text class=\"sm\" x=\"268\" y=\"140\" text-anchor=\"middle\">taxiway</text></svg></figure>" +
+        "<text class=\"sm\" x=\"283\" y=\"74\" text-anchor=\"middle\">taxiway</text></svg></figure>" +
         "<p class=\"geo-given\">At an airport, runways <strong>r</strong> and <strong>s</strong> are parallel. A straight taxiway, <strong>t</strong>, crosses both runways. m∠5 = 112°.</p>",
       claims: [
         {
@@ -1054,13 +1054,13 @@
         "<figure class=\"geo-fig\">" +
         "<svg viewBox=\"0 0 320 150\" role=\"img\" aria-label=\"Side view: parallel floor lines g (lower) and h (upper), with escalator line e rising to the right from P on g to Q on h. At P, angle 1 is above g and right of e, angle 5 above g and left of e. At Q, angle 2 is below h and left of e, angle 3 above h and left of e, angle 4 below h and right of e\">" +
         "<line class=\"ln\" x1=\"14\" y1=\"126\" x2=\"300\" y2=\"126\"/><line class=\"ln\" x1=\"14\" y1=\"40\" x2=\"300\" y2=\"40\"/>" +
-        "<line class=\"ac\" x1=\"38.7\" y1=\"140.9\" x2=\"224.1\" y2=\"25.1\"/><path class=\"thin\" d=\"M33 122 L40 126 L33 130\"/>" +
-        "<path class=\"thin\" d=\"M33 36 L40 40 L33 44\"/><circle class=\"dt\" cx=\"60\" cy=\"126\" r=\"3\"/><circle class=\"dt\" cx=\"202.8\" cy=\"40\" r=\"3\"/>" +
-        "<text x=\"72\" y=\"143\" text-anchor=\"middle\">P</text><text x=\"178.8\" y=\"33\" text-anchor=\"middle\">Q</text>" +
+        "<line class=\"ac\" x1=\"38.6\" y1=\"141\" x2=\"204.2\" y2=\"25\"/><path class=\"thin\" d=\"M33 122 L40 126 L33 130\"/>" +
+        "<path class=\"thin\" d=\"M33 36 L40 40 L33 44\"/><circle class=\"dt\" cx=\"60\" cy=\"126\" r=\"3\"/><circle class=\"dt\" cx=\"182.8\" cy=\"40\" r=\"3\"/>" +
+        "<text x=\"72\" y=\"143\" text-anchor=\"middle\">P</text><text x=\"158.8\" y=\"33\" text-anchor=\"middle\">Q</text>" +
         "<text x=\"100.1\" y=\"118.4\" text-anchor=\"middle\">1</text><text x=\"55.5\" y=\"116.7\" text-anchor=\"middle\">5</text>" +
-        "<text x=\"162.8\" y=\"57.6\" text-anchor=\"middle\">2</text><text x=\"199.7\" y=\"27.3\" text-anchor=\"middle\">3</text>" +
-        "<text x=\"207.3\" y=\"59.3\" text-anchor=\"middle\">4</text><text x=\"306\" y=\"131\">g</text><text x=\"306\" y=\"45\">h</text>" +
-        "<text class=\"acc\" x=\"230.1\" y=\"29.1\">e</text><text class=\"sm\" x=\"250\" y=\"66\" text-anchor=\"middle\">upper floor</text>" +
+        "<text x=\"142.8\" y=\"57.6\" text-anchor=\"middle\">2</text><text x=\"179.7\" y=\"27.3\" text-anchor=\"middle\">3</text>" +
+        "<text x=\"187.3\" y=\"59.3\" text-anchor=\"middle\">4</text><text x=\"306\" y=\"131\">g</text><text x=\"306\" y=\"45\">h</text>" +
+        "<text class=\"acc\" x=\"210.1\" y=\"29.1\">e</text><text class=\"sm\" x=\"250\" y=\"66\" text-anchor=\"middle\">upper floor</text>" +
         "<text class=\"sm\" x=\"250\" y=\"118\" text-anchor=\"middle\">lower floor</text></svg></figure>" +
         "<p class=\"geo-given\">In a subway station, the lower floor <strong>g</strong> and the upper floor <strong>h</strong> are parallel. The handrail of an escalator runs along line <strong>e</strong> from <strong>P</strong> to <strong>Q</strong>. m∠1 = (4x − 1)⁠° and m∠2 = (x + 26)⁠°.</p>",
       claims: [
@@ -1442,12 +1442,12 @@
           id: "pilot",
           sol: "G.RLT.2",
           sub: "G.RLT.2.2",
-          stem: "A pilot claims m∠ABC would still be 71° even if j and k were not parallel. Why is she wrong?",
+          stem: "A pilot says m∠PBA would still be 41° even if j and k were not parallel. Why is she wrong?",
           choices: [
-            { letter: "A", text: "The angles at B would add to 360° instead." },
-            { letter: "B", text: "She is right; the angles at B always add to 180°." },
-            { letter: "C", text: "She is right; alternate interior angles are always congruent." },
-            { letter: "D", text: "∠PBA and ∠QBC would no longer have to be 41° and 68°." }
+            { letter: "A", text: "She is right; alternate interior angles are always congruent." },
+            { letter: "B", text: "She is right; ∠PBA and ∠BAC are vertical angles." },
+            { letter: "C", text: "∠PBA and ∠BAC would have to add to 180° instead." },
+            { letter: "D", text: "Alternate interior angles are congruent only when the lines are parallel." }
           ],
           correct: "D"
         }

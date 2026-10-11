@@ -726,7 +726,7 @@
         "<path class=\"ac\" d=\"M160 55 Q115 55 115 85 M160 85 Q205 85 205 55\"/>" +
         "<circle class=\"dt\" cx=\"115\" cy=\"85\" r=\"3\"/><circle class=\"dt\" cx=\"205\" cy=\"55\" r=\"3\"/>" +
         "<text x=\"115\" y=\"102\" text-anchor=\"middle\">P</text><text x=\"205\" y=\"48\" text-anchor=\"middle\">U</text>" +
-        "<circle class=\"dt\" cx=\"160\" cy=\"70\" r=\"2.5\"/><text class=\"sm\" x=\"162\" y=\"67\">O</text>" +
+        "<circle class=\"dt\" cx=\"160\" cy=\"70\" r=\"2.5\"/><text class=\"sm\" x=\"151\" y=\"78\" text-anchor=\"end\">O</text>" +
         "</svg></figure>" +
         "<p class=\"geo-given\">A weather map marks a hurricane with the symbol shown, centered at the origin <strong>O</strong>. Each arm is the other arm turned 180° about O. The arm tips are <strong>P</strong>(−3, −1) and <strong>U</strong>(3, 1). Maps of the Southern Hemisphere use the mirror image of this symbol.</p>",
       claims: [
@@ -1378,7 +1378,7 @@
           id: "leg",
           sol: "G.RLT.3",
           sub: "G.RLT.3.3",
-          stem: "How long is leg A′B′ of route 2?",
+          stem: "Route 2 is route 1 turned about O. How long is leg A′B′ of route 2?",
           choices: [
             { letter: "A", text: "3 units" },
             { letter: "B", text: "√3 units" },
@@ -1609,7 +1609,7 @@
           sub: "G.RLT.3.3",
           stem: "Ana says, “A 90° turn about O maps the rose onto itself, so the rule (x, y) → (−y, x) leaves every point where it was.” What is her error?",
           choices: [
-            { letter: "A", text: "The outline lands on itself, but each point moves to another point." },
+            { letter: "A", text: "The outline lands on itself, but every point except O moves to a different point." },
             { letter: "B", text: "There is no error; every point stays where it was." },
             { letter: "C", text: "A 90° turn does not map the rose onto itself." },
             { letter: "D", text: "The rule should be (x, y) → (y, x)." }
