@@ -691,7 +691,7 @@
           id: "short",
           sol: "G.PC.4",
           sub: "G.PC.4.1",
-          stem: "The 14-meter line is the arc x² + y² = 196. Which landing point is short of that line?",
+          stem: "The 14-meter line is the arc x² + y² = 196. Which landing point is short of that line (inside the arc)?",
           choices: [
             { letter: "A", text: "(9, 11)" },
             { letter: "B", text: "(0, 14)" },
@@ -734,7 +734,7 @@
         "<line class=\"ax\" x1=\"160\" y1=\"122\" x2=\"160\" y2=\"14\"/><text class=\"sm\" x=\"88\" y=\"135\" text-anchor=\"middle\">−6</text><text class=\"sm\" x=\"112\" y=\"135\" text-anchor=\"middle\">−4</text><text class=\"sm\" x=\"136\" y=\"135\" text-anchor=\"middle\">−2</text>" +
         "<text class=\"sm\" x=\"160\" y=\"135\" text-anchor=\"middle\">0</text><text class=\"sm\" x=\"184\" y=\"135\" text-anchor=\"middle\">2</text><text class=\"sm\" x=\"208\" y=\"135\" text-anchor=\"middle\">4</text><text class=\"sm\" x=\"232\" y=\"135\" text-anchor=\"middle\">6</text>" +
         "<text class=\"sm\" x=\"71\" y=\"114\" text-anchor=\"end\">−4</text><text class=\"sm\" x=\"71\" y=\"90\" text-anchor=\"end\">−2</text><text class=\"sm\" x=\"71\" y=\"42\" text-anchor=\"end\">2</text><text class=\"sm\" x=\"71\" y=\"18\" text-anchor=\"end\">4</text>" +
-        "<circle class=\"sh2\" cx=\"112\" cy=\"50\" r=\"33.9\"/><circle class=\"sh2\" cx=\"196\" cy=\"74\" r=\"41.6\"/><circle class=\"dt\" cx=\"112\" cy=\"50\" r=\"3\"/><circle class=\"dt\" cx=\"196\" cy=\"74\" r=\"3\"/><text x=\"117\" y=\"45\">A</text><text x=\"201\" y=\"69\">B</text>" +
+        "<circle class=\"sh2\" cx=\"112\" cy=\"50\" r=\"33.9\"/><circle class=\"sh2\" cx=\"196\" cy=\"74\" r=\"41.6\"/><circle class=\"dt\" cx=\"112\" cy=\"50\" r=\"3\"/><circle class=\"dt\" cx=\"196\" cy=\"74\" r=\"3\"/><text x=\"117\" y=\"45\">A</text><text x=\"201\" y=\"90\">B</text>" +
         "</svg></figure>" +
         "<p class=\"geo-given\">Two round skate bowls are drawn on a grid in meters. Bowl A has center <strong>A</strong> and edge (x + 4)² + (y − 1)² = 8. Bowl B has center <strong>B</strong> and edge (x − 3)² + (y + 1)² = 12.</p>",
       claims: [
@@ -942,7 +942,8 @@
         "<text class=\"sm\" x=\"223\" y=\"151\" text-anchor=\"middle\">12</text><text class=\"sm\" x=\"92\" y=\"121\" text-anchor=\"end\">2</text><text class=\"sm\" x=\"92\" y=\"100\" text-anchor=\"end\">4</text><text class=\"sm\" x=\"92\" y=\"79\" text-anchor=\"end\">6</text>" +
         "<text class=\"sm\" x=\"92\" y=\"58\" text-anchor=\"end\">8</text><text class=\"sm\" x=\"92\" y=\"37\" text-anchor=\"end\">10</text><text class=\"sm\" x=\"92\" y=\"16\" text-anchor=\"end\">12</text><circle class=\"ac dash\" cx=\"160\" cy=\"75\" r=\"61.2\"/>" +
         "<circle class=\"dta\" cx=\"160\" cy=\"75\" r=\"3\"/><circle class=\"dt\" cx=\"107.5\" cy=\"106.5\" r=\"3\"/><circle class=\"dt\" cx=\"191.5\" cy=\"22.5\" r=\"3\"/><circle class=\"dt\" cx=\"118\" cy=\"33\" r=\"3\"/><circle class=\"dt\" cx=\"212.5\" cy=\"117\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"202\" cy=\"43.5\" r=\"3\"/><text x=\"166\" y=\"70\">B</text><text x=\"111.5\" y=\"120.5\">T</text><text x=\"197.5\" y=\"26.5\">A</text><text x=\"124\" y=\"30\">C</text><text x=\"206.5\" y=\"113\" text-anchor=\"end\">D</text><text x=\"208\" y=\"47.5\">E</text>" +
+        "<circle class=\"dt\" cx=\"202\" cy=\"43.5\" r=\"3\"/><text x=\"166\" y=\"70\">B</text><text x=\"113.5\" y=\"102.5\">T</text><text x=\"187.5\" y=\"38.5\" text-anchor=\"end\">A</text><text x=\"123\" y=\"47\">C</text><text x=\"214.5\" y=\"132\" text-anchor=\"middle\">D</text>" +
+        "<text x=\"202\" y=\"60.5\" text-anchor=\"middle\">E</text>" +
         "</svg></figure>" +
         "<p class=\"geo-given\">On a game board, the bomb token <strong>B</strong> is at (6, 6). Its blast reaches exactly as far as the tower <strong>T</strong>(1, 3) in every direction; the dashed circle is the edge of the blast. <strong>A</strong>, <strong>C</strong>, <strong>D</strong> and <strong>E</strong> are game pieces.</p>",
       claims: [

@@ -177,7 +177,7 @@
       "kind": "Triangles · G.TR.4",
       "blurb": "Bleachers that rise at 33° over an 18-ft floor.",
       "level": 2,
-      "passage": "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 162\" role=\"img\" aria-label=\"Side view of bleachers: right triangle FGT with the right angle at G, floor FG 18 feet, and the front edge FT rising at 33 degrees from F, with nine equal rows of steps\"><polygon class=\"sh2\" points=\"46,134 208,134 208,28.8\"/><polyline class=\"thin\" points=\"46,134 46,122.3 64,122.3 64,110.6 82,110.6 82,98.9 100,98.9 100,87.2 118,87.2 118,75.6 136,75.6 136,63.9 154,63.9 154,52.2 172,52.2 172,40.5 190,40.5 190,28.8 208,28.8\"/><line class=\"ac\" x1=\"46\" y1=\"134\" x2=\"208\" y2=\"28.8\"/><line class=\"ln\" x1=\"208\" y1=\"134\" x2=\"208\" y2=\"28.8\"/><line class=\"ln\" x1=\"46\" y1=\"134\" x2=\"208\" y2=\"134\"/><line class=\"thin dash\" x1=\"208\" y1=\"28.8\" x2=\"112\" y2=\"28.8\"/><path class=\"thin\" d=\"M199 134 L199 125 L208 125\"/><path class=\"thin\" d=\"M80 134 A34 34 0 0 0 74.5 115.5\"/><circle class=\"dt\" cx=\"46\" cy=\"134\" r=\"3\"/><circle class=\"dt\" cx=\"208\" cy=\"134\" r=\"3\"/><circle class=\"dt\" cx=\"208\" cy=\"28.8\" r=\"3\"/><text x=\"35\" y=\"149\" text-anchor=\"middle\">F</text><text x=\"219\" y=\"149\" text-anchor=\"middle\">G</text><text x=\"219\" y=\"29.8\" text-anchor=\"middle\">T</text><text x=\"127\" y=\"155\" text-anchor=\"middle\">18 ft</text><text x=\"97.8\" y=\"123.7\" text-anchor=\"middle\">33°</text><text class=\"sm\" x=\"248\" y=\"85.4\" text-anchor=\"middle\">back wall</text></svg></figure><p class=\"geo-given\">A side view of the gym bleachers is right triangle <strong>FGT</strong>, with the right angle at <strong>G</strong>. The floor depth <strong>FG</strong> is 18 ft, and the front edge <strong>FT</strong> rises at 33° from the floor at <strong>F</strong>.</p>",
+      "passage": "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 162\" role=\"img\" aria-label=\"Side view of bleachers: right triangle FGT with the right angle at G, floor FG 18 feet, and the front edge FT rising at 33 degrees from F, with nine equal rows of steps\"><polygon class=\"sh2\" points=\"46,134 208,134 208,28.8\"/><polyline class=\"thin\" points=\"46,134 46,122.3 64,122.3 64,110.6 82,110.6 82,98.9 100,98.9 100,87.2 118,87.2 118,75.6 136,75.6 136,63.9 154,63.9 154,52.2 172,52.2 172,40.5 190,40.5 190,28.8 208,28.8\"/><line class=\"ac\" x1=\"46\" y1=\"134\" x2=\"208\" y2=\"28.8\"/><line class=\"ln\" x1=\"208\" y1=\"134\" x2=\"208\" y2=\"28.8\"/><line class=\"ln\" x1=\"46\" y1=\"134\" x2=\"208\" y2=\"134\"/><line class=\"thin dash\" x1=\"208\" y1=\"28.8\" x2=\"112\" y2=\"28.8\"/><path class=\"thin\" d=\"M199 134 L199 125 L208 125\"/><path class=\"thin\" d=\"M80 134 A34 34 0 0 0 74.5 115.5\"/><circle class=\"dt\" cx=\"46\" cy=\"134\" r=\"3\"/><circle class=\"dt\" cx=\"208\" cy=\"134\" r=\"3\"/><circle class=\"dt\" cx=\"208\" cy=\"28.8\" r=\"3\"/><text x=\"35\" y=\"149\" text-anchor=\"middle\">F</text><text x=\"219\" y=\"149\" text-anchor=\"middle\">G</text><text x=\"219\" y=\"29.8\" text-anchor=\"middle\">T</text><text x=\"127\" y=\"155\" text-anchor=\"middle\">18 ft</text><text x=\"108.6\" y=\"125.7\" text-anchor=\"middle\">33°</text><text class=\"sm\" x=\"248\" y=\"85.4\" text-anchor=\"middle\">back wall</text></svg></figure><p class=\"geo-given\">A side view of the gym bleachers is right triangle <strong>FGT</strong>, with the right angle at <strong>G</strong>. The floor depth <strong>FG</strong> is 18 ft, and the front edge <strong>FT</strong> rises at 33° from the floor at <strong>F</strong>.</p>",
       "claims": [
         {
           "id": "height",
@@ -339,7 +339,7 @@
       "kind": "Triangles · G.TR.4",
       "blurb": "Parking stripes at 60° to the curb.",
       "level": 2,
-      "passage": "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 166\" role=\"img\" aria-label=\"Three parallel parking stripes meet a straight curb at 60 degree angles, 11 feet apart along the curb; stripe PQ is 16 feet long and QR is perpendicular to the curb\"><line class=\"ln\" x1=\"8\" y1=\"138\" x2=\"312\" y2=\"138\"/><line class=\"ln\" x1=\"22\" y1=\"138\" x2=\"86\" y2=\"27.1\"/><line class=\"ln\" x1=\"110\" y1=\"138\" x2=\"174\" y2=\"27.1\"/><line class=\"ac\" x1=\"198\" y1=\"138\" x2=\"262\" y2=\"27.1\"/><line class=\"thin dash\" x1=\"262\" y1=\"27.1\" x2=\"262\" y2=\"138\"/><path class=\"thin\" d=\"M253 138 L253 129 L262 129\"/><path class=\"thin\" d=\"M220 138 A22 22 0 0 0 209 118.9\"/><circle class=\"dt\" cx=\"198\" cy=\"138\" r=\"3\"/><circle class=\"dt\" cx=\"262\" cy=\"27.1\" r=\"3\"/><circle class=\"dt\" cx=\"262\" cy=\"138\" r=\"3\"/><text x=\"198\" y=\"159\" text-anchor=\"middle\">P</text><text x=\"262\" y=\"159\" text-anchor=\"middle\">R</text><text x=\"273\" y=\"29.1\" text-anchor=\"middle\">Q</text><text x=\"217\" y=\"80.1\" text-anchor=\"middle\">16 ft</text><text x=\"227.4\" y=\"126\" text-anchor=\"middle\">60°</text><text x=\"66\" y=\"158\" text-anchor=\"middle\">11 ft</text><text class=\"sm\" x=\"296\" y=\"155\" text-anchor=\"middle\">curb</text><line class=\"thin\" x1=\"22\" y1=\"144\" x2=\"22\" y2=\"150\"/><line class=\"thin\" x1=\"110\" y1=\"144\" x2=\"110\" y2=\"150\"/></svg></figure><p class=\"geo-given\">Stripes in the teacher lot make a 60° angle with the curb and are 11 ft apart along the curb. Stripe <strong>PQ</strong> is 16 ft long, and <strong>QR</strong> is perpendicular to the curb.</p>",
+      "passage": "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 170\" role=\"img\" aria-label=\"Three parallel parking stripes meet a straight curb at 60 degree angles, 11 feet apart along the curb; stripe PQ is 16 feet long and QR is perpendicular to the curb\"><line class=\"ln\" x1=\"8\" y1=\"138\" x2=\"312\" y2=\"138\"/><line class=\"ln\" x1=\"22\" y1=\"138\" x2=\"86\" y2=\"27.1\"/><line class=\"ln\" x1=\"110\" y1=\"138\" x2=\"174\" y2=\"27.1\"/><line class=\"ac\" x1=\"198\" y1=\"138\" x2=\"262\" y2=\"27.1\"/><line class=\"thin dash\" x1=\"262\" y1=\"27.1\" x2=\"262\" y2=\"138\"/><path class=\"thin\" d=\"M253 138 L253 129 L262 129\"/><path class=\"thin\" d=\"M220 138 A22 22 0 0 0 209 118.9\"/><circle class=\"dt\" cx=\"198\" cy=\"138\" r=\"3\"/><circle class=\"dt\" cx=\"262\" cy=\"27.1\" r=\"3\"/><circle class=\"dt\" cx=\"262\" cy=\"138\" r=\"3\"/><text x=\"198\" y=\"159\" text-anchor=\"middle\">P</text><text x=\"262\" y=\"159\" text-anchor=\"middle\">R</text><text x=\"273\" y=\"29.1\" text-anchor=\"middle\">Q</text><text x=\"212.7\" y=\"77.6\" text-anchor=\"middle\">16 ft</text><text x=\"236.8\" y=\"122.3\" text-anchor=\"middle\">60°</text><line class=\"thin\" x1=\"22\" y1=\"145\" x2=\"110\" y2=\"145\"/><line class=\"thin\" x1=\"22\" y1=\"141\" x2=\"22\" y2=\"149\"/><line class=\"thin\" x1=\"110\" y1=\"141\" x2=\"110\" y2=\"149\"/><text x=\"66\" y=\"163\" text-anchor=\"middle\">11 ft</text><text class=\"sm\" x=\"296\" y=\"155\" text-anchor=\"middle\">curb</text></svg></figure><p class=\"geo-given\">Stripes in the teacher lot make a 60° angle with the curb and are 11 ft apart along the curb. Stripe <strong>PQ</strong> is 16 ft long, and <strong>QR</strong> is perpendicular to the curb.</p>",
       "claims": [
         {
           "id": "depth",
@@ -501,7 +501,7 @@
       "kind": "Triangles · G.TR.4",
       "blurb": "Two angles of elevation, 50 ft apart, to one scoreboard.",
       "level": 3,
-      "passage": "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 160\" role=\"img\" aria-label=\"Scoreboard TS stands at S on level ground. From A the angle of elevation to the top T is 24 degrees; from B, 50 feet closer, it is 37 degrees. TS is perpendicular to the ground\"><line class=\"ln\" x1=\"10\" y1=\"132\" x2=\"312\" y2=\"132\"/><rect class=\"sh2\" x=\"250.4\" y=\"23.2\" width=\"40\" height=\"22\"/><line class=\"ac\" x1=\"270.4\" y1=\"132\" x2=\"270.4\" y2=\"23.2\"/><line class=\"ln\" x1=\"26\" y1=\"132\" x2=\"270.4\" y2=\"23.2\"/><line class=\"ln\" x1=\"126\" y1=\"132\" x2=\"270.4\" y2=\"23.2\"/><path class=\"thin\" d=\"M261.4 132 L261.4 123 L270.4 123\"/><path class=\"thin\" d=\"M62 132 A36 36 0 0 0 58.9 117.4\"/><path class=\"thin\" d=\"M152 132 A26 26 0 0 0 146.8 116.4\"/><circle class=\"dt\" cx=\"26\" cy=\"132\" r=\"3\"/><circle class=\"dt\" cx=\"126\" cy=\"132\" r=\"3\"/><circle class=\"dt\" cx=\"270.4\" cy=\"132\" r=\"3\"/><circle class=\"dt\" cx=\"270.4\" cy=\"23.2\" r=\"3\"/><text x=\"26\" y=\"153\" text-anchor=\"middle\">A</text><text x=\"126\" y=\"153\" text-anchor=\"middle\">B</text><text x=\"270.4\" y=\"153\" text-anchor=\"middle\">S</text><text x=\"270.4\" y=\"20.2\" text-anchor=\"middle\">T</text><text x=\"80.8\" y=\"125.4\" text-anchor=\"middle\">24°</text><text x=\"169.6\" y=\"122.4\" text-anchor=\"middle\">37°</text><text x=\"76\" y=\"153\" text-anchor=\"middle\">50 ft</text><text class=\"acc\" x=\"198.2\" y=\"153\" text-anchor=\"middle\">x</text><text class=\"acc\" x=\"281.4\" y=\"99.6\" text-anchor=\"middle\">h</text></svg></figure><p class=\"geo-given\">From <strong>A</strong> on the track, the angle of elevation to <strong>T</strong>, the top of the scoreboard, is 24°. From <strong>B</strong>, 50 ft closer, it is 37°. A, B and the base <strong>S</strong> are on level ground, and TS is perpendicular to it. Let h = TS and x = BS.</p>",
+      "passage": "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 160\" role=\"img\" aria-label=\"Scoreboard TS stands at S on level ground. From A the angle of elevation to the top T is 24 degrees; from B, 50 feet closer, it is 37 degrees. TS is perpendicular to the ground\"><line class=\"ln\" x1=\"10\" y1=\"132\" x2=\"312\" y2=\"132\"/><rect class=\"sh2\" x=\"250.4\" y=\"23.2\" width=\"40\" height=\"22\"/><line class=\"ac\" x1=\"270.4\" y1=\"132\" x2=\"270.4\" y2=\"23.2\"/><line class=\"ln\" x1=\"26\" y1=\"132\" x2=\"270.4\" y2=\"23.2\"/><line class=\"ln\" x1=\"126\" y1=\"132\" x2=\"270.4\" y2=\"23.2\"/><path class=\"thin\" d=\"M261.4 132 L261.4 123 L270.4 123\"/><path class=\"thin\" d=\"M62 132 A36 36 0 0 0 58.9 117.4\"/><path class=\"thin\" d=\"M152 132 A26 26 0 0 0 146.8 116.4\"/><circle class=\"dt\" cx=\"26\" cy=\"132\" r=\"3\"/><circle class=\"dt\" cx=\"126\" cy=\"132\" r=\"3\"/><circle class=\"dt\" cx=\"270.4\" cy=\"132\" r=\"3\"/><circle class=\"dt\" cx=\"270.4\" cy=\"23.2\" r=\"3\"/><text x=\"26\" y=\"153\" text-anchor=\"middle\">A</text><text x=\"126\" y=\"153\" text-anchor=\"middle\">B</text><text x=\"270.4\" y=\"153\" text-anchor=\"middle\">S</text><text x=\"240.4\" y=\"22.2\" text-anchor=\"middle\">T</text><text x=\"80.8\" y=\"125.4\" text-anchor=\"middle\">24°</text><text x=\"169.6\" y=\"122.4\" text-anchor=\"middle\">37°</text><text x=\"76\" y=\"153\" text-anchor=\"middle\">50 ft</text><text class=\"acc\" x=\"198.2\" y=\"153\" text-anchor=\"middle\">x</text><text class=\"acc\" x=\"281.4\" y=\"99.6\" text-anchor=\"middle\">h</text></svg></figure><p class=\"geo-given\">From <strong>A</strong> on the track, the angle of elevation to <strong>T</strong>, the top of the scoreboard, is 24°. From <strong>B</strong>, 50 ft closer, it is 37°. A, B and the base <strong>S</strong> are on level ground, and TS is perpendicular to it. Let h = TS and x = BS.</p>",
       "claims": [
         {
           "id": "eqB",
@@ -1149,7 +1149,7 @@
       "kind": "Triangles · G.TR.4",
       "blurb": "A straight-line serve from 10 ft over a 3-ft net.",
       "level": 2,
-      "passage": "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 154\" role=\"img\" aria-label=\"Side view of a tennis court: the ball is hit at B, 10 feet above the baseline point S, and travels in a straight line down to L, 60 feet away; a 3-foot net stands at N, 39 feet from S\"><line class=\"ln\" x1=\"10\" y1=\"126\" x2=\"312\" y2=\"126\"/><line class=\"ln\" x1=\"24\" y1=\"126\" x2=\"24\" y2=\"81\"/><line class=\"ln\" x1=\"199.5\" y1=\"126\" x2=\"199.5\" y2=\"112.5\"/><line class=\"thin\" x1=\"196.5\" y1=\"112.5\" x2=\"202.5\" y2=\"112.5\"/><line class=\"thin dash\" x1=\"24\" y1=\"81\" x2=\"174\" y2=\"81\"/><line class=\"ac\" x1=\"24\" y1=\"81\" x2=\"294\" y2=\"126\"/><path class=\"thin\" d=\"M32 126 L32 118 L24 118\"/><path class=\"thin\" d=\"M120 81 A96 96 0 0 1 118.7 96.8\"/><circle class=\"dt\" cx=\"24\" cy=\"81\" r=\"3\"/><circle class=\"dt\" cx=\"24\" cy=\"126\" r=\"3\"/><circle class=\"dt\" cx=\"294\" cy=\"126\" r=\"3\"/><text x=\"23\" y=\"74\" text-anchor=\"middle\">B</text><text x=\"24\" y=\"147\" text-anchor=\"middle\">S</text><text x=\"294\" y=\"147\" text-anchor=\"middle\">L</text><text x=\"199.5\" y=\"147\" text-anchor=\"middle\">N</text><text x=\"111.8\" y=\"147\" text-anchor=\"middle\">39 ft</text><text x=\"246.8\" y=\"147\" text-anchor=\"middle\">21 ft</text><text x=\"44\" y=\"116.5\" text-anchor=\"middle\">10 ft</text><text class=\"sm\" x=\"183.5\" y=\"123\" text-anchor=\"middle\">net</text></svg></figure><p class=\"geo-given\">A player hits a serve at <strong>B</strong>, 10 ft above point <strong>S</strong> on the baseline. Model its path as a straight line to <strong>L</strong>, 60 ft from S on the court. The net, 3 ft high, stands at <strong>N</strong>, 39 ft from S.</p>",
+      "passage": "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 128\" role=\"img\" aria-label=\"Side view of a tennis court: the ball is hit at B, 10 feet above the baseline point S, and travels in a straight line down to L, 60 feet away; a 3-foot net stands at N, 39 feet from S\"><line class=\"ln\" x1=\"10\" y1=\"100\" x2=\"312\" y2=\"100\"/><line class=\"ln\" x1=\"24\" y1=\"100\" x2=\"24\" y2=\"55\"/><line class=\"ln\" x1=\"199.5\" y1=\"100\" x2=\"199.5\" y2=\"86.5\"/><line class=\"thin\" x1=\"196.5\" y1=\"86.5\" x2=\"202.5\" y2=\"86.5\"/><line class=\"thin dash\" x1=\"24\" y1=\"55\" x2=\"174\" y2=\"55\"/><line class=\"ac\" x1=\"24\" y1=\"55\" x2=\"294\" y2=\"100\"/><path class=\"thin\" d=\"M32 100 L32 92 L24 92\"/><path class=\"thin\" d=\"M120 55 A96 96 0 0 1 118.7 70.8\"/><circle class=\"dt\" cx=\"24\" cy=\"55\" r=\"3\"/><circle class=\"dt\" cx=\"24\" cy=\"100\" r=\"3\"/><circle class=\"dt\" cx=\"294\" cy=\"100\" r=\"3\"/><text x=\"23\" y=\"48\" text-anchor=\"middle\">B</text><text x=\"24\" y=\"121\" text-anchor=\"middle\">S</text><text x=\"294\" y=\"121\" text-anchor=\"middle\">L</text><text x=\"199.5\" y=\"121\" text-anchor=\"middle\">N</text><text x=\"111.8\" y=\"121\" text-anchor=\"middle\">39 ft</text><text x=\"246.8\" y=\"121\" text-anchor=\"middle\">21 ft</text><text x=\"48\" y=\"90.5\" text-anchor=\"middle\">10 ft</text><text class=\"sm\" x=\"183.5\" y=\"97\" text-anchor=\"middle\">net</text></svg></figure><p class=\"geo-given\">A player hits a serve at <strong>B</strong>, 10 ft above point <strong>S</strong> on the baseline. Model its path as a straight line to <strong>L</strong>, 60 ft from S on the court. The net, 3 ft high, stands at <strong>N</strong>, 39 ft from S.</p>",
       "claims": [
         {
           "id": "dep",
@@ -1311,7 +1311,7 @@
       "kind": "Triangles · G.TR.4",
       "blurb": "An A-frame stand, its height and its rope.",
       "level": 2,
-      "passage": "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 166\" role=\"img\" aria-label=\"A-frame target stand: legs AL and AR are 8 feet, feet L and R are 6 feet apart with midpoint M, AM is perpendicular to the ground, and a rope runs from A to stake K, 5 feet past R\"><line class=\"ln\" x1=\"12\" y1=\"138\" x2=\"306\" y2=\"138\"/><circle class=\"sh\" cx=\"110\" cy=\"74\" r=\"24\"/><circle class=\"thin\" cx=\"110\" cy=\"74\" r=\"15\"/><circle class=\"thin\" cx=\"110\" cy=\"74\" r=\"6\"/><line class=\"ln\" x1=\"62\" y1=\"138\" x2=\"110\" y2=\"19.3\"/><line class=\"ln\" x1=\"110\" y1=\"19.3\" x2=\"158\" y2=\"138\"/><line class=\"thin dash\" x1=\"110\" y1=\"19.3\" x2=\"110\" y2=\"138\"/><line class=\"ac\" x1=\"110\" y1=\"19.3\" x2=\"238\" y2=\"138\"/><path class=\"thin\" d=\"M118 138 L118 130 L110 130\"/><line class=\"thin\" x1=\"90.6\" y1=\"80.5\" x2=\"81.4\" y2=\"76.8\"/><line class=\"thin\" x1=\"129.4\" y1=\"80.5\" x2=\"138.6\" y2=\"76.8\"/><line class=\"thin\" x1=\"84\" y1=\"143\" x2=\"84\" y2=\"133\"/><line class=\"thin\" x1=\"88\" y1=\"143\" x2=\"88\" y2=\"133\"/><line class=\"thin\" x1=\"132\" y1=\"143\" x2=\"132\" y2=\"133\"/><line class=\"thin\" x1=\"136\" y1=\"143\" x2=\"136\" y2=\"133\"/><circle class=\"dt\" cx=\"110\" cy=\"19.3\" r=\"3\"/><circle class=\"dt\" cx=\"62\" cy=\"138\" r=\"3\"/><circle class=\"dt\" cx=\"110\" cy=\"138\" r=\"3\"/><circle class=\"dt\" cx=\"158\" cy=\"138\" r=\"3\"/><circle class=\"dt\" cx=\"238\" cy=\"138\" r=\"3\"/><text x=\"110\" y=\"15.3\" text-anchor=\"middle\">A</text><text x=\"62\" y=\"159\" text-anchor=\"middle\">L</text><text x=\"110\" y=\"159\" text-anchor=\"middle\">M</text><text x=\"158\" y=\"159\" text-anchor=\"middle\">R</text><text x=\"238\" y=\"159\" text-anchor=\"middle\">K</text><text class=\"sm\" x=\"86\" y=\"158\" text-anchor=\"middle\">3 ft</text><text class=\"sm\" x=\"134\" y=\"158\" text-anchor=\"middle\">3 ft</text><text class=\"sm\" x=\"198\" y=\"158\" text-anchor=\"middle\">5 ft</text><text x=\"71.2\" y=\"77.7\" text-anchor=\"middle\">8 ft</text><text class=\"sm\" x=\"214\" y=\"80\" text-anchor=\"middle\">rope</text></svg></figure><p class=\"geo-given\">A target stand is an A-frame. Legs <strong>AL</strong> and <strong>AR</strong> are each 8 ft long, the feet L and R are 6 ft apart, and <strong>M</strong> is the midpoint of LR, with AM perpendicular to the ground. A rope runs from A to a stake <strong>K</strong> on the ground, 5 ft past R.</p>",
+      "passage": "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 166\" role=\"img\" aria-label=\"A-frame target stand: legs AL and AR are 8 feet, feet L and R are 6 feet apart with midpoint M, AM is perpendicular to the ground, and a rope runs from A to stake K, 5 feet past R\"><line class=\"ln\" x1=\"12\" y1=\"138\" x2=\"306\" y2=\"138\"/><circle class=\"sh\" cx=\"110\" cy=\"110\" r=\"14\"/><circle class=\"thin\" cx=\"110\" cy=\"110\" r=\"9\"/><circle class=\"thin\" cx=\"110\" cy=\"110\" r=\"4\"/><line class=\"ln\" x1=\"62\" y1=\"138\" x2=\"110\" y2=\"19.3\"/><line class=\"ln\" x1=\"110\" y1=\"19.3\" x2=\"158\" y2=\"138\"/><line class=\"thin dash\" x1=\"110\" y1=\"19.3\" x2=\"110\" y2=\"138\"/><line class=\"ac\" x1=\"110\" y1=\"19.3\" x2=\"238\" y2=\"138\"/><path class=\"thin\" d=\"M118 138 L118 130 L110 130\"/><line class=\"thin\" x1=\"90.6\" y1=\"80.5\" x2=\"81.4\" y2=\"76.8\"/><line class=\"thin\" x1=\"129.4\" y1=\"80.5\" x2=\"138.6\" y2=\"76.8\"/><line class=\"thin\" x1=\"84\" y1=\"143\" x2=\"84\" y2=\"133\"/><line class=\"thin\" x1=\"88\" y1=\"143\" x2=\"88\" y2=\"133\"/><line class=\"thin\" x1=\"132\" y1=\"143\" x2=\"132\" y2=\"133\"/><line class=\"thin\" x1=\"136\" y1=\"143\" x2=\"136\" y2=\"133\"/><circle class=\"dt\" cx=\"110\" cy=\"19.3\" r=\"3\"/><circle class=\"dt\" cx=\"62\" cy=\"138\" r=\"3\"/><circle class=\"dt\" cx=\"110\" cy=\"138\" r=\"3\"/><circle class=\"dt\" cx=\"158\" cy=\"138\" r=\"3\"/><circle class=\"dt\" cx=\"238\" cy=\"138\" r=\"3\"/><text x=\"110\" y=\"15.3\" text-anchor=\"middle\">A</text><text x=\"62\" y=\"159\" text-anchor=\"middle\">L</text><text x=\"110\" y=\"159\" text-anchor=\"middle\">M</text><text x=\"158\" y=\"159\" text-anchor=\"middle\">R</text><text x=\"238\" y=\"159\" text-anchor=\"middle\">K</text><text class=\"sm\" x=\"86\" y=\"158\" text-anchor=\"middle\">3 ft</text><text class=\"sm\" x=\"134\" y=\"158\" text-anchor=\"middle\">3 ft</text><text class=\"sm\" x=\"198\" y=\"158\" text-anchor=\"middle\">5 ft</text><text x=\"67.5\" y=\"76.2\" text-anchor=\"middle\">8 ft</text><text class=\"sm\" x=\"214\" y=\"80\" text-anchor=\"middle\">rope</text></svg></figure><p class=\"geo-given\">A target stand is an A-frame. Legs <strong>AL</strong> and <strong>AR</strong> are each 8 ft long, the feet L and R are 6 ft apart, and <strong>M</strong> is the midpoint of LR, with AM perpendicular to the ground. A rope runs from A to a stake <strong>K</strong> on the ground, 5 ft past R.</p>",
       "claims": [
         {
           "id": "tall",
@@ -1473,7 +1473,7 @@
       "kind": "Triangles · G.TR.4",
       "blurb": "Eye level, a 10-ft rim and a 15-ft distance.",
       "level": 2,
-      "passage": "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 168\" role=\"img\" aria-label=\"Right triangle EPR: a player's eyes E are 6 feet above the floor and 15 feet horizontally from the rim R, which is 10 feet above the floor; P is level with E directly below R\"><line class=\"ln\" x1=\"10\" y1=\"142\" x2=\"312\" y2=\"142\"/><line class=\"ln\" x1=\"286.5\" y1=\"142\" x2=\"286.5\" y2=\"23\"/><line class=\"ln\" x1=\"286.5\" y1=\"23\" x2=\"266.5\" y2=\"23\"/><line class=\"ln\" x1=\"266.5\" y1=\"7\" x2=\"266.5\" y2=\"37\"/><line class=\"thin\" x1=\"252.5\" y1=\"27\" x2=\"266.5\" y2=\"27\"/><line class=\"thin dash\" x1=\"80\" y1=\"142\" x2=\"80\" y2=\"73\"/><line class=\"thin dash\" x1=\"252.5\" y1=\"73\" x2=\"252.5\" y2=\"142\"/><line class=\"thin dash\" x1=\"80\" y1=\"73\" x2=\"252.5\" y2=\"73\"/><line class=\"ln\" x1=\"252.5\" y1=\"73\" x2=\"252.5\" y2=\"27\"/><line class=\"ac\" x1=\"80\" y1=\"73\" x2=\"252.5\" y2=\"27\"/><path class=\"thin\" d=\"M244.5 73 L244.5 65 L252.5 65\"/><path class=\"thin\" d=\"M120 73 A40 40 0 0 0 118.6 62.7\"/><circle class=\"dt\" cx=\"80\" cy=\"73\" r=\"3\"/><circle class=\"dt\" cx=\"252.5\" cy=\"27\" r=\"3\"/><circle class=\"dt\" cx=\"252.5\" cy=\"73\" r=\"3\"/><text x=\"68\" y=\"74\" text-anchor=\"middle\">E</text><text x=\"240.5\" y=\"28\" text-anchor=\"middle\">R</text><text x=\"263.5\" y=\"90\" text-anchor=\"middle\">P</text><text x=\"166.3\" y=\"162\" text-anchor=\"middle\">15 ft</text><text x=\"62\" y=\"112.5\" text-anchor=\"middle\">6 ft</text><text class=\"sm\" x=\"269.5\" y=\"121.5\" text-anchor=\"middle\">10 ft</text><text class=\"sm\" x=\"288.5\" y=\"51\" text-anchor=\"middle\">rim</text></svg></figure><p class=\"geo-given\">A player's eyes <strong>E</strong> are 6 ft above the floor, 15 ft (horizontally) from the point below the rim <strong>R</strong>. The rim is 10 ft above the floor. <strong>P</strong> is level with E, directly below R.</p>",
+      "passage": "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 168\" role=\"img\" aria-label=\"Right triangle EPR: a player's eyes E are 6 feet above the floor and 15 feet horizontally from the rim R, which is 10 feet above the floor; P is level with E directly below R\"><line class=\"ln\" x1=\"10\" y1=\"142\" x2=\"312\" y2=\"142\"/><line class=\"ln\" x1=\"262.5\" y1=\"142\" x2=\"262.5\" y2=\"23\"/><line class=\"ln\" x1=\"262.5\" y1=\"23\" x2=\"242.5\" y2=\"23\"/><line class=\"ln\" x1=\"242.5\" y1=\"7\" x2=\"242.5\" y2=\"37\"/><line class=\"thin\" x1=\"228.5\" y1=\"27\" x2=\"242.5\" y2=\"27\"/><line class=\"thin dash\" x1=\"56\" y1=\"142\" x2=\"56\" y2=\"73\"/><line class=\"thin dash\" x1=\"228.5\" y1=\"73\" x2=\"228.5\" y2=\"142\"/><line class=\"thin dash\" x1=\"56\" y1=\"73\" x2=\"228.5\" y2=\"73\"/><line class=\"ln\" x1=\"228.5\" y1=\"73\" x2=\"228.5\" y2=\"27\"/><line class=\"ac\" x1=\"56\" y1=\"73\" x2=\"228.5\" y2=\"27\"/><path class=\"thin\" d=\"M220.5 73 L220.5 65 L228.5 65\"/><path class=\"thin\" d=\"M96 73 A40 40 0 0 0 94.6 62.7\"/><circle class=\"dt\" cx=\"56\" cy=\"73\" r=\"3\"/><circle class=\"dt\" cx=\"228.5\" cy=\"27\" r=\"3\"/><circle class=\"dt\" cx=\"228.5\" cy=\"73\" r=\"3\"/><text x=\"44\" y=\"74\" text-anchor=\"middle\">E</text><text x=\"216.5\" y=\"28\" text-anchor=\"middle\">R</text><text x=\"239.5\" y=\"90\" text-anchor=\"middle\">P</text><text x=\"142.3\" y=\"162\" text-anchor=\"middle\">15 ft</text><text x=\"38\" y=\"112.5\" text-anchor=\"middle\">6 ft</text><line class=\"thin\" x1=\"276.5\" y1=\"142\" x2=\"276.5\" y2=\"27\"/><line class=\"thin\" x1=\"271.5\" y1=\"142\" x2=\"281.5\" y2=\"142\"/><line class=\"thin\" x1=\"271.5\" y1=\"27\" x2=\"281.5\" y2=\"27\"/><text class=\"sm\" x=\"293.5\" y=\"88.5\" text-anchor=\"middle\">10 ft</text></svg></figure><p class=\"geo-given\">A player's eyes <strong>E</strong> are 6 ft above the floor, 15 ft (horizontally) from the point below the rim <strong>R</strong>. The rim is 10 ft above the floor. <strong>P</strong> is level with E, directly below R.</p>",
       "claims": [
         {
           "id": "elev",
@@ -1604,7 +1604,7 @@
           "id": "board",
           "sol": "G.TR.4",
           "sub": "G.TR.4.4",
-          "stem": "A player whose eyes are 5.5 ft above the floor sees the top of the 13-ft backboard at a 28° angle of elevation. To the nearest tenth of a foot, how far is she from the backboard?",
+          "stem": "A player whose eyes are 5.5 ft above the floor sees the top of the 13-ft backboard at a 28° angle of elevation. To the nearest tenth of a foot, how far is she from the backboard, horizontally?",
           "choices": [
             {
               "letter": "A",
@@ -1635,7 +1635,7 @@
       "kind": "Triangles · G.TR.4",
       "blurb": "How wide is the goal from 18 yd out?",
       "level": 3,
-      "passage": "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 170\" role=\"img\" aria-label=\"Top view of a soccer goal: goal line through posts N and F, 8 yards apart, with midpoint G; player P is 18 yards from the goal line, and PN is perpendicular to the goal line\"><polygon class=\"sh2\" points=\"60,44 60,26 104,26 104,44\"/><line class=\"ln\" x1=\"12\" y1=\"44\" x2=\"306\" y2=\"44\"/><line class=\"ln\" x1=\"60\" y1=\"143\" x2=\"60\" y2=\"44\"/><line class=\"ac\" x1=\"60\" y1=\"143\" x2=\"104\" y2=\"44\"/><line class=\"thin dash\" x1=\"60\" y1=\"143\" x2=\"82\" y2=\"44\"/><path class=\"thin\" d=\"M60 52 L68 52 L68 44\"/><path class=\"thin\" d=\"M60 103 A40 40 0 0 1 76.2 106.4\"/><circle class=\"dt\" cx=\"60\" cy=\"44\" r=\"3\"/><circle class=\"dt\" cx=\"104\" cy=\"44\" r=\"3\"/><circle class=\"dt\" cx=\"82\" cy=\"44\" r=\"3\"/><circle class=\"dt\" cx=\"60\" cy=\"143\" r=\"3\"/><text x=\"49\" y=\"41\" text-anchor=\"middle\">N</text><text x=\"115\" y=\"41\" text-anchor=\"middle\">F</text><text x=\"82\" y=\"23\" text-anchor=\"middle\">G</text><text x=\"60\" y=\"164\" text-anchor=\"middle\">P</text><text x=\"38\" y=\"98.5\" text-anchor=\"middle\">18 yd</text><text class=\"sm\" x=\"134\" y=\"18\" text-anchor=\"middle\">8 yd goal</text><text class=\"sm\" x=\"262\" y=\"62\" text-anchor=\"middle\">goal line</text></svg></figure><p class=\"geo-given\">Top view of a goal. The posts <strong>N</strong> and <strong>F</strong> are 8 yd apart on the goal line, and <strong>G</strong> is the midpoint of NF. Player <strong>P</strong> is 18 yd from the goal line, in line with the near post: PN is perpendicular to the goal line.</p>",
+      "passage": "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 166\" role=\"img\" aria-label=\"Top view of a soccer goal: goal line through posts N and F, 8 yards apart, with midpoint G; player P is 18 yards from the goal line, and PN is perpendicular to the goal line\"><polygon class=\"sh2\" points=\"276,140 290,140 290,44 276,44\"/><line class=\"ln\" x1=\"276\" y1=\"8\" x2=\"276\" y2=\"160\"/><line class=\"ln\" x1=\"60\" y1=\"140\" x2=\"276\" y2=\"140\"/><line class=\"ac\" x1=\"60\" y1=\"140\" x2=\"276\" y2=\"44\"/><line class=\"thin dash\" x1=\"60\" y1=\"140\" x2=\"276\" y2=\"92\"/><path class=\"thin\" d=\"M268 140 L268 132 L276 132\"/><path class=\"thin\" d=\"M108 140 A48 48 0 0 0 103.9 120.5\"/><circle class=\"dt\" cx=\"276\" cy=\"140\" r=\"3\"/><circle class=\"dt\" cx=\"276\" cy=\"44\" r=\"3\"/><circle class=\"dt\" cx=\"276\" cy=\"92\" r=\"3\"/><circle class=\"dt\" cx=\"60\" cy=\"140\" r=\"3\"/><text x=\"302\" y=\"149\" text-anchor=\"middle\">N</text><text x=\"302\" y=\"53\" text-anchor=\"middle\">F</text><text x=\"302\" y=\"101\" text-anchor=\"middle\">G</text><text x=\"48\" y=\"149\" text-anchor=\"middle\">P</text><text x=\"168\" y=\"161\" text-anchor=\"middle\">18 yd</text><text class=\"sm\" x=\"274\" y=\"34\" text-anchor=\"middle\">8-yd goal</text><text class=\"sm\" x=\"242\" y=\"160\" text-anchor=\"middle\">goal line</text></svg></figure><p class=\"geo-given\">Top view of a goal. The posts <strong>N</strong> and <strong>F</strong> are 8 yd apart on the goal line, and <strong>G</strong> is the midpoint of NF. Player <strong>P</strong> is 18 yd from the goal line, in line with the near post: PN is perpendicular to the goal line.</p>",
       "claims": [
         {
           "id": "shot",
@@ -1797,7 +1797,7 @@
       "kind": "Triangles · G.TR.4",
       "blurb": "Two angles of elevation from one camera.",
       "level": 3,
-      "passage": "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 170\" role=\"img\" aria-label=\"A camera K on a tripod, 4 feet above the floor and 27 feet from a 40-foot climbing wall; X is on the wall level with K; the angle of elevation from K to the climber at P is 25 degrees and to the climber at Q is 50 degrees\"><line class=\"ln\" x1=\"12\" y1=\"144\" x2=\"312\" y2=\"144\"/><rect class=\"sh2\" x=\"214\" y=\"12\" width=\"16\" height=\"132\"/><line class=\"ln\" x1=\"214\" y1=\"144\" x2=\"214\" y2=\"12\"/><line class=\"thin\" x1=\"116.9\" y1=\"144\" x2=\"124.9\" y2=\"130.8\"/><line class=\"thin\" x1=\"132.9\" y1=\"144\" x2=\"124.9\" y2=\"130.8\"/><line class=\"thin dash\" x1=\"124.9\" y1=\"130.8\" x2=\"214\" y2=\"130.8\"/><line class=\"ln\" x1=\"124.9\" y1=\"130.8\" x2=\"214\" y2=\"89.3\"/><line class=\"ac\" x1=\"124.9\" y1=\"130.8\" x2=\"214\" y2=\"24.6\"/><path class=\"thin\" d=\"M207 130.8 L207 123.8 L214 123.8\"/><path class=\"thin\" d=\"M158.9 130.8 A34 34 0 0 0 155.7 116.4\"/><path class=\"thin\" d=\"M182.9 130.8 A58 58 0 0 0 162.2 86.4\"/><line class=\"thin\" x1=\"268\" y1=\"12\" x2=\"268\" y2=\"144\"/><line class=\"thin\" x1=\"263\" y1=\"12\" x2=\"273\" y2=\"12\"/><line class=\"thin\" x1=\"263\" y1=\"144\" x2=\"273\" y2=\"144\"/><circle class=\"dt\" cx=\"124.9\" cy=\"130.8\" r=\"3\"/><circle class=\"dt\" cx=\"214\" cy=\"130.8\" r=\"3\"/><circle class=\"dt\" cx=\"214\" cy=\"89.3\" r=\"3\"/><circle class=\"dt\" cx=\"214\" cy=\"24.6\" r=\"3\"/><circle class=\"dt\" cx=\"214\" cy=\"12\" r=\"3\"/><text x=\"114.9\" y=\"125.8\" text-anchor=\"middle\">K</text><text x=\"240\" y=\"137.8\" text-anchor=\"middle\">X</text><text x=\"240\" y=\"96.3\" text-anchor=\"middle\">P</text><text x=\"240\" y=\"33.6\" text-anchor=\"middle\">Q</text><text x=\"204\" y=\"15\" text-anchor=\"middle\">T</text><text x=\"175.7\" y=\"124.5\" text-anchor=\"middle\">25°</text><text x=\"179.2\" y=\"88.6\" text-anchor=\"middle\">50°</text><text x=\"169.5\" y=\"163\" text-anchor=\"middle\">27 ft</text><text class=\"sm\" x=\"100.9\" y=\"145\" text-anchor=\"middle\">4 ft</text><text x=\"292\" y=\"83\" text-anchor=\"middle\">40 ft</text></svg></figure><p class=\"geo-given\">A camera <strong>K</strong> on a tripod is 4 ft above the floor and 27 ft from a 40-ft climbing wall. <strong>X</strong> is on the wall, level with K, and <strong>T</strong> is the top of the wall. The angle of elevation from K to a climber is 25° when she is at <strong>P</strong> and 50° when she is at <strong>Q</strong>.</p>",
+      "passage": "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 170\" role=\"img\" aria-label=\"A camera K on a tripod, 4 feet above the floor and 48 feet from a 40-foot climbing wall; X is on the wall level with K; the angle of elevation from K to the climber at P is 20 degrees and to the climber at Q is 35 degrees\"><line class=\"ln\" x1=\"12\" y1=\"146\" x2=\"312\" y2=\"146\"/><rect class=\"sh2\" x=\"236\" y=\"14\" width=\"14\" height=\"132\"/><line class=\"ln\" x1=\"236\" y1=\"146\" x2=\"236\" y2=\"14\"/><line class=\"thin\" x1=\"69.6\" y1=\"146\" x2=\"77.6\" y2=\"132.8\"/><line class=\"thin\" x1=\"85.6\" y1=\"146\" x2=\"77.6\" y2=\"132.8\"/><line class=\"thin dash\" x1=\"77.6\" y1=\"132.8\" x2=\"236\" y2=\"132.8\"/><line class=\"ln\" x1=\"77.6\" y1=\"132.8\" x2=\"236\" y2=\"75.1\"/><line class=\"ac\" x1=\"77.6\" y1=\"132.8\" x2=\"236\" y2=\"21.9\"/><path class=\"thin\" d=\"M229 132.8 L229 125.8 L236 125.8\"/><path class=\"thin\" d=\"M123.6 132.8 A46 46 0 0 0 120.8 117.1\"/><path class=\"thin\" d=\"M161.6 132.8 A84 84 0 0 0 146.4 84.6\"/><line class=\"thin\" x1=\"278\" y1=\"14\" x2=\"278\" y2=\"146\"/><line class=\"thin\" x1=\"273\" y1=\"14\" x2=\"283\" y2=\"14\"/><line class=\"thin\" x1=\"273\" y1=\"146\" x2=\"283\" y2=\"146\"/><circle class=\"dt\" cx=\"77.6\" cy=\"132.8\" r=\"3\"/><circle class=\"dt\" cx=\"236\" cy=\"132.8\" r=\"3\"/><circle class=\"dt\" cx=\"236\" cy=\"75.1\" r=\"3\"/><circle class=\"dt\" cx=\"236\" cy=\"21.9\" r=\"3\"/><circle class=\"dt\" cx=\"236\" cy=\"14\" r=\"3\"/><text x=\"71.6\" y=\"124.8\" text-anchor=\"middle\">K</text><text x=\"261\" y=\"139.8\" text-anchor=\"middle\">X</text><text x=\"261\" y=\"82.1\" text-anchor=\"middle\">P</text><text x=\"261\" y=\"29.9\" text-anchor=\"middle\">Q</text><text x=\"226\" y=\"16\" text-anchor=\"middle\">T</text><text x=\"140.8\" y=\"127.8\" text-anchor=\"middle\">20°</text><text x=\"175.6\" y=\"87.9\" text-anchor=\"middle\">35°</text><text x=\"156.8\" y=\"165\" text-anchor=\"middle\">48 ft</text><text class=\"sm\" x=\"53.6\" y=\"142.4\" text-anchor=\"middle\">4 ft</text><text class=\"sm\" x=\"300\" y=\"84\" text-anchor=\"middle\">40 ft</text></svg></figure><p class=\"geo-given\">A camera <strong>K</strong> on a tripod is 4 ft above the floor and 48 ft from a 40-ft climbing wall. <strong>X</strong> is on the wall, level with K, and <strong>T</strong> is the top of the wall. The angle of elevation from K to a climber is 20° when she is at <strong>P</strong> and 35° when she is at <strong>Q</strong>.</p>",
       "claims": [
         {
           "id": "p",
@@ -1807,19 +1807,19 @@
           "choices": [
             {
               "letter": "A",
-              "text": "12.6 ft"
+              "text": "17.5 ft"
             },
             {
               "letter": "B",
-              "text": "15.4 ft"
+              "text": "20.4 ft"
             },
             {
               "letter": "C",
-              "text": "16.6 ft"
+              "text": "21.5 ft"
             },
             {
               "letter": "D",
-              "text": "61.9 ft"
+              "text": "135.9 ft"
             }
           ],
           "correct": "C"
@@ -1832,19 +1832,19 @@
           "choices": [
             {
               "letter": "A",
-              "text": "32.2 ft"
+              "text": "33.6 ft"
             },
             {
               "letter": "B",
-              "text": "19.6 ft"
+              "text": "16.1 ft"
             },
             {
               "letter": "C",
-              "text": "36.2 ft"
+              "text": "37.6 ft"
             },
             {
               "letter": "D",
-              "text": "12.6 ft"
+              "text": "12.9 ft"
             }
           ],
           "correct": "B"
@@ -1857,19 +1857,19 @@
           "choices": [
             {
               "letter": "A",
-              "text": "42 ft"
+              "text": "59 ft"
             },
             {
               "letter": "B",
-              "text": "35 ft"
+              "text": "84 ft"
             },
             {
               "letter": "C",
-              "text": "17 ft"
+              "text": "39 ft"
             },
             {
               "letter": "D",
-              "text": "32 ft"
+              "text": "34 ft"
             }
           ],
           "correct": "A"
@@ -1882,19 +1882,19 @@
           "choices": [
             {
               "letter": "A",
-              "text": "about 48.3 ft"
+              "text": "about 62.5 ft"
             },
             {
               "letter": "B",
-              "text": "63 ft"
+              "text": "84 ft"
             },
             {
               "letter": "C",
-              "text": "about 23.8 ft"
+              "text": "about 31.7 ft"
             },
             {
               "letter": "D",
-              "text": "45 ft"
+              "text": "60 ft"
             }
           ],
           "correct": "D"
@@ -1932,19 +1932,19 @@
           "choices": [
             {
               "letter": "A",
-              "text": "The angle of depression from Q to K is 50°."
+              "text": "The angle of depression from Q to K is 35°."
             },
             {
               "letter": "B",
-              "text": "m∠KPX = 65°"
+              "text": "m∠KPX = 70°"
             },
             {
               "letter": "C",
-              "text": "The angle of depression from P to K is 65°."
+              "text": "The angle of depression from P to K is 70°."
             },
             {
               "letter": "D",
-              "text": "m∠PKQ = 25°"
+              "text": "m∠PKQ = 15°"
             }
           ],
           "correct": "C"

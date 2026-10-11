@@ -644,7 +644,7 @@
         "</text><text x=\"100\" y=\"49\" text-anchor=\"middle\">2</text><text x=\"124.7\" y=\"40.1\" text-anchor=\"middle\">3</text>" +
         "<text x=\"153.5\" y=\"129.9\" text-anchor=\"middle\">4</text><text x=\"178.2\" y=\"121\" text-anchor=\"middle\">5</text>" +
         "<text x=\"203\" y=\"129.9\" text-anchor=\"middle\">6</text><text x=\"231.8\" y=\"40.1\" text-anchor=\"middle\">7</text>" +
-        "<text class=\"sm\" x=\"250\" y=\"130\" text-anchor=\"middle\">table</text></svg></figure>" +
+        "<text class=\"sm\" x=\"250\" y=\"130\" text-anchor=\"middle\">table</text><path class=\"thin\" d=\"M60 18 L67 22 L60 26\"/><path class=\"thin\" d=\"M60 134 L67 138 L60 142\"/></svg></figure>" +
         "<p class=\"geo-given\">The top and bottom rails of a pool table are parallel. A ball rolls from <strong>P</strong> to <strong>A</strong>, then <strong>B" +
         "</strong>, then <strong>D</strong>. At each bounce it leaves the rail at the same angle it arrives: ∠1 ≅ ∠3 and ∠4 ≅ ∠6. m∠1 = 56°.</p>",
       claims: [
@@ -851,7 +851,7 @@
         "</text><text x=\"182.4\" y=\"122.7\" text-anchor=\"middle\">3</text><text x=\"195.9\" y=\"43.9\" text-anchor=\"middle\">4</text></svg></figure>" +
         "<p class=\"geo-given\">In a puzzle video game, four straight laser beams <strong>a</strong>, <strong>b</strong>, <strong>c</strong> and <strong>d" +
         "</strong> cross. Given: a ∥ b and ∠1 ≅ ∠3. Prove: c ∥ d.</p>" +
-        "<table class=\"geo-proof\"><tr><th>Statement</th><th>Reason</th></tr><tr><td>1. a ∥ b</td><td>Given</td></tr><tr><td>2. ∠1 ≅ ∠2</td><td>____ (a)</td>" +
+        "<table class=\"geo-proof\"><tr><th>Statement</th><th>Reason</th></tr><tr><td>1. a ∥ b</td><td>Given</td></tr><tr><td>2. ∠2 ≅ ∠1</td><td>____ (a)</td>" +
         "</tr><tr><td>3. ∠1 ≅ ∠3</td><td>Given</td></tr><tr><td>4. ∠2 ≅ ∠3</td><td>____ (b)</td></tr><tr><td>5. c ∥ d</td><td>____ (c)</td></tr></table>",
       claims: [
         {

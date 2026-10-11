@@ -123,18 +123,18 @@
       passage:
         "<figure class=\"geo-fig\">" +
         "<svg viewBox=\"0 0 320 170\" role=\"img\" aria-label=\"A light pole TP and a student whose eyes are at E above point B; a mirror M lies on the ground between them; BM 4 feet, MP 30 feet, EB 5.2 feet; right angles at B and P; light travels from T to M to E\">" +
-        "<line class=\"thin\" x1=\"18\" y1=\"146\" x2=\"302\" y2=\"146\"/><rect class=\"sh2\" x=\"90\" y=\"142\" width=\"20\" height=\"4\"/>" +
-        "<line class=\"ln\" x1=\"50\" y1=\"146\" x2=\"50\" y2=\"81\"/><line class=\"ln\" x1=\"200\" y1=\"146\" x2=\"200\" y2=\"16\"/>" +
-        "<line class=\"ln\" x1=\"200\" y1=\"16\" x2=\"186\" y2=\"20\"/><line class=\"ac dash\" x1=\"50\" y1=\"81\" x2=\"100\" y2=\"146\"/>" +
-        "<line class=\"ac dash\" x1=\"100\" y1=\"146\" x2=\"200\" y2=\"16\"/><path class=\"thin\" d=\"M50 138 L58 138 L58 146\"/>" +
-        "<path class=\"thin\" d=\"M200 138 L192 138 L192 146\"/><path class=\"thin\" d=\"M90.2 133.3 A16 16 0 0 0 84 146\"/>" +
-        "<path class=\"thin\" d=\"M109.8 133.3 A16 16 0 0 1 116 146\"/><circle class=\"dt\" cx=\"50\" cy=\"81\" r=\"3\"/><circle class=\"dt\" cx=\"50\" cy=\"146\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"100\" cy=\"146\" r=\"3\"/><circle class=\"dt\" cx=\"200\" cy=\"146\" r=\"3\"/><circle class=\"dt\" cx=\"200\" cy=\"16\" r=\"3\"/>" +
-        "<text x=\"38\" y=\"82\" text-anchor=\"middle\">E</text><text x=\"50\" y=\"165\" text-anchor=\"middle\">B</text>" +
-        "<text x=\"100\" y=\"165\" text-anchor=\"middle\">M</text><text x=\"200\" y=\"165\" text-anchor=\"middle\">P</text>" +
-        "<text x=\"212\" y=\"19\" text-anchor=\"middle\">T</text><text class=\"sm\" x=\"28\" y=\"122\" text-anchor=\"middle\">5.2 ft</text>" +
-        "<text x=\"75\" y=\"165\" text-anchor=\"middle\">4 ft</text><text x=\"146\" y=\"165\" text-anchor=\"middle\">30 ft</text>" +
-        "<text class=\"acc\" x=\"214\" y=\"91\" text-anchor=\"middle\">h</text><text class=\"sm\" x=\"268\" y=\"34\" text-anchor=\"middle\">light pole</text></svg>" +
+        "<line class=\"thin\" x1=\"18\" y1=\"146\" x2=\"302\" y2=\"146\"/><rect class=\"sh2\" x=\"116\" y=\"142\" width=\"20\" height=\"4\"/>" +
+        "<line class=\"ln\" x1=\"66\" y1=\"146\" x2=\"66\" y2=\"68\"/><line class=\"ln\" x1=\"226\" y1=\"146\" x2=\"226\" y2=\"16\"/>" +
+        "<line class=\"ln\" x1=\"226\" y1=\"16\" x2=\"212\" y2=\"20\"/><line class=\"ac dash\" x1=\"66\" y1=\"68\" x2=\"126\" y2=\"146\"/>" +
+        "<line class=\"ac dash\" x1=\"126\" y1=\"146\" x2=\"226\" y2=\"16\"/><path class=\"thin\" d=\"M66 138 L74 138 L74 146\"/>" +
+        "<path class=\"thin\" d=\"M226 138 L218 138 L218 146\"/><path class=\"thin\" d=\"M116.2 133.3 A16 16 0 0 0 110 146\"/>" +
+        "<path class=\"thin\" d=\"M135.8 133.3 A16 16 0 0 1 142 146\"/><circle class=\"dt\" cx=\"66\" cy=\"68\" r=\"3\"/><circle class=\"dt\" cx=\"66\" cy=\"146\" r=\"3\"/>" +
+        "<circle class=\"dt\" cx=\"126\" cy=\"146\" r=\"3\"/><circle class=\"dt\" cx=\"226\" cy=\"146\" r=\"3\"/><circle class=\"dt\" cx=\"226\" cy=\"16\" r=\"3\"/>" +
+        "<text x=\"54\" y=\"69\" text-anchor=\"middle\">E</text><text x=\"66\" y=\"165\" text-anchor=\"middle\">B</text>" +
+        "<text x=\"126\" y=\"165\" text-anchor=\"middle\">M</text><text x=\"226\" y=\"165\" text-anchor=\"middle\">P</text>" +
+        "<text x=\"238\" y=\"19\" text-anchor=\"middle\">T</text><text class=\"sm\" x=\"44\" y=\"114\" text-anchor=\"middle\">5.2 ft</text>" +
+        "<text x=\"96\" y=\"165\" text-anchor=\"middle\">4 ft</text><text x=\"176\" y=\"165\" text-anchor=\"middle\">30 ft</text>" +
+        "<text class=\"acc\" x=\"240\" y=\"91\" text-anchor=\"middle\">h</text><text class=\"sm\" x=\"272\" y=\"64\" text-anchor=\"middle\">light pole</text></svg>" +
         "<figcaption>Not drawn to scale</figcaption></figure>" +
         "<p class=\"geo-given\">Nia lays a mirror <strong>M</strong> flat on the level parking lot. She stands at <strong>B</strong>, 4 ft from the mirror, and sees the top <strong>T</strong> of a light pole in it. Her eyes <strong>E</strong> are 5.2 ft above the ground, and the mirror is 30 ft from the pole's base <strong>P</strong>. EB and TP are vertical. A mirror reflects at equal angles, so ∠EMB ≅ ∠TMP.</p>",
       claims: [
@@ -441,18 +441,18 @@
       level: 1,
       passage:
         "<figure class=\"geo-fig\">" +
-        "<svg viewBox=\"0 0 320 140\" role=\"img\" aria-label=\"Two triangular pennants hanging from a rope: triangle ABC with AB 10 inches, angle A 40 degrees and angle B 75 degrees; triangle FED with FE 15 inches, angle E 40 degrees and angle D 65 degrees\">" +
-        "<line class=\"thin\" x1=\"12\" y1=\"34\" x2=\"308\" y2=\"34\"/><polygon class=\"sh\" points=\"30,34 110,34 95.3,88.8\"/>" +
-        "<polygon class=\"sh2\" points=\"156,34 276,34 178,116.2\"/><path class=\"thin\" d=\"M52 34 A22 22 0 0 1 46.9 48.1\"/>" +
-        "<path class=\"thin\" d=\"M96 34 A14 14 0 0 0 106.4 47.5\"/><path class=\"thin\" d=\"M254 34 A22 22 0 0 0 259.1 48.1\"/>" +
-        "<path class=\"thin\" d=\"M188.8 107.2 A14 14 0 0 0 174.4 102.7\"/><circle class=\"dt\" cx=\"30\" cy=\"34\" r=\"3\"/><circle class=\"dt\" cx=\"110\" cy=\"34\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"95.3\" cy=\"88.8\" r=\"3\"/><circle class=\"dt\" cx=\"178\" cy=\"116.2\" r=\"3\"/><circle class=\"dt\" cx=\"276\" cy=\"34\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"156\" cy=\"34\" r=\"3\"/><text x=\"30\" y=\"26\" text-anchor=\"middle\">A</text><text x=\"110\" y=\"26\" text-anchor=\"middle\">B</text>" +
-        "<text x=\"156\" y=\"26\" text-anchor=\"middle\">F</text><text x=\"276\" y=\"26\" text-anchor=\"middle\">E</text>" +
-        "<text x=\"99.3\" y=\"106.8\" text-anchor=\"middle\">C</text><text x=\"178\" y=\"135.2\" text-anchor=\"middle\">D</text>" +
-        "<text x=\"70\" y=\"26\" text-anchor=\"middle\">10 in.</text><text x=\"216\" y=\"26\" text-anchor=\"middle\">15 in.</text>" +
-        "<text class=\"sm\" x=\"63.8\" y=\"50.3\" text-anchor=\"middle\">40°</text><text class=\"sm\" x=\"89.4\" y=\"53.8\" text-anchor=\"middle\">75°</text>" +
-        "<text class=\"sm\" x=\"240.3\" y=\"51\" text-anchor=\"middle\">40°</text><text class=\"sm\" x=\"187\" y=\"91.6\" text-anchor=\"middle\">65°</text></svg></figure>" +
+        "<svg viewBox=\"0 0 320 150\" role=\"img\" aria-label=\"Two triangular pennants hanging from a rope: triangle ABC with AB 10 inches, angle A 40 degrees and angle B 75 degrees; triangle FED with FE 15 inches, angle E 40 degrees and angle D 65 degrees\">" +
+        "<line class=\"thin\" x1=\"12\" y1=\"34\" x2=\"308\" y2=\"34\"/><polygon class=\"sh\" points=\"22,34 112,34 95.5,95.7\"/>" +
+        "<polygon class=\"sh2\" points=\"150,34 285,34 174.8,126.5\"/><path class=\"thin\" d=\"M44 34 A22 22 0 0 1 38.9 48.1\"/>" +
+        "<path class=\"thin\" d=\"M98 34 A14 14 0 0 0 108.4 47.5\"/><path class=\"thin\" d=\"M263 34 A22 22 0 0 0 268.1 48.1\"/>" +
+        "<path class=\"thin\" d=\"M185.5 117.5 A14 14 0 0 0 171.2 113\"/><circle class=\"dt\" cx=\"22\" cy=\"34\" r=\"3\"/><circle class=\"dt\" cx=\"112\" cy=\"34\" r=\"3\"/>" +
+        "<circle class=\"dt\" cx=\"95.5\" cy=\"95.7\" r=\"3\"/><circle class=\"dt\" cx=\"174.8\" cy=\"126.5\" r=\"3\"/><circle class=\"dt\" cx=\"285\" cy=\"34\" r=\"3\"/>" +
+        "<circle class=\"dt\" cx=\"150\" cy=\"34\" r=\"3\"/><text x=\"22\" y=\"26\" text-anchor=\"middle\">A</text><text x=\"112\" y=\"26\" text-anchor=\"middle\">B</text>" +
+        "<text x=\"150\" y=\"26\" text-anchor=\"middle\">F</text><text x=\"285\" y=\"26\" text-anchor=\"middle\">E</text>" +
+        "<text x=\"99.5\" y=\"113.7\" text-anchor=\"middle\">C</text><text x=\"174.8\" y=\"145.5\" text-anchor=\"middle\">D</text>" +
+        "<text x=\"67\" y=\"26\" text-anchor=\"middle\">10 in.</text><text x=\"217.5\" y=\"26\" text-anchor=\"middle\">15 in.</text>" +
+        "<text class=\"sm\" x=\"55.8\" y=\"50.3\" text-anchor=\"middle\">40°</text><text class=\"sm\" x=\"91.4\" y=\"53.8\" text-anchor=\"middle\">75°</text>" +
+        "<text class=\"sm\" x=\"249.3\" y=\"51\" text-anchor=\"middle\">40°</text><text class=\"sm\" x=\"183.8\" y=\"101.9\" text-anchor=\"middle\">65°</text></svg></figure>" +
         "<p class=\"geo-given\">Two swim-team pennants hang from a rope. In <strong>△ABC</strong>, m∠A = 40°, m∠B = 75° and AB = 10 in. In <strong>△DEF</strong>, m∠D = 65°, m∠E = 40° and EF = 15 in.</p>",
       claims: [
         {
@@ -546,15 +546,15 @@
       passage:
         "<figure class=\"geo-fig\">" +
         "<svg viewBox=\"0 0 320 158\" role=\"img\" aria-label=\"Two triangles on a game map: triangle JKL with JK 50, KL 80 and JL 60 meters, and triangle PQR with PQ 90, QR 75 and PR 120 meters, drawn in a different position\">" +
-        "<polygon class=\"sh\" points=\"59.8,90.1 20,135 116,135\"/><polygon class=\"sh2\" points=\"170,135 278,135 282.5,45.1\"/>" +
-        "<circle class=\"dt\" cx=\"59.8\" cy=\"90.1\" r=\"3\"/><circle class=\"dt\" cx=\"20\" cy=\"135\" r=\"3\"/><circle class=\"dt\" cx=\"116\" cy=\"135\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"170\" cy=\"135\" r=\"3\"/><circle class=\"dt\" cx=\"278\" cy=\"135\" r=\"3\"/><circle class=\"dt\" cx=\"282.5\" cy=\"45.1\" r=\"3\"/>" +
-        "<text x=\"57.6\" y=\"83.3\" text-anchor=\"middle\">J</text><text x=\"8.6\" y=\"143.8\" text-anchor=\"middle\">K</text>" +
-        "<text x=\"127.5\" y=\"143.4\" text-anchor=\"middle\">L</text><text x=\"158.9\" y=\"144.5\" text-anchor=\"middle\">P</text>" +
-        "<text x=\"287.8\" y=\"148.5\" text-anchor=\"middle\">Q</text><text x=\"289\" y=\"40.1\" text-anchor=\"middle\">R</text>" +
-        "<text x=\"30.9\" y=\"109.6\" text-anchor=\"middle\">50</text><text x=\"68\" y=\"152\" text-anchor=\"middle\">80</text>" +
-        "<text x=\"95.4\" y=\"108.2\" text-anchor=\"middle\">60</text><text x=\"224\" y=\"152\" text-anchor=\"middle\">90</text>" +
-        "<text x=\"293.2\" y=\"95.7\" text-anchor=\"middle\">75</text><text x=\"217.5\" y=\"84.1\" text-anchor=\"middle\">120</text></svg></figure>" +
+        "<polygon class=\"sh\" points=\"62.7,87.4 18,138 126,138\"/><polygon class=\"sh2\" points=\"152,138 273.5,138 278.6,36.9\"/>" +
+        "<circle class=\"dt\" cx=\"62.7\" cy=\"87.4\" r=\"3\"/><circle class=\"dt\" cx=\"18\" cy=\"138\" r=\"3\"/><circle class=\"dt\" cx=\"126\" cy=\"138\" r=\"3\"/>" +
+        "<circle class=\"dt\" cx=\"152\" cy=\"138\" r=\"3\"/><circle class=\"dt\" cx=\"273.5\" cy=\"138\" r=\"3\"/><circle class=\"dt\" cx=\"278.6\" cy=\"36.9\" r=\"3\"/>" +
+        "<text x=\"60.6\" y=\"80.6\" text-anchor=\"middle\">J</text><text x=\"6.6\" y=\"146.8\" text-anchor=\"middle\">K</text>" +
+        "<text x=\"137.5\" y=\"146.4\" text-anchor=\"middle\">L</text><text x=\"140.9\" y=\"147.5\" text-anchor=\"middle\">P</text>" +
+        "<text x=\"283.3\" y=\"151.5\" text-anchor=\"middle\">Q</text><text x=\"285.1\" y=\"31.8\" text-anchor=\"middle\">R</text>" +
+        "<text x=\"31.4\" y=\"109.8\" text-anchor=\"middle\">50</text><text x=\"72\" y=\"155\" text-anchor=\"middle\">80</text>" +
+        "<text x=\"101.8\" y=\"108.3\" text-anchor=\"middle\">60</text><text x=\"212.8\" y=\"155\" text-anchor=\"middle\">90</text>" +
+        "<text x=\"289\" y=\"93.1\" text-anchor=\"middle\">75</text><text x=\"206.5\" y=\"81.5\" text-anchor=\"middle\">120</text></svg></figure>" +
         "<p class=\"geo-given\">A video game map has two triangular zones. In <strong>△JKL</strong>, JK = 50 m, KL = 80 m and JL = 60 m. In <strong>△PQR</strong>, PQ = 90 m, QR = 75 m and PR = 120 m.</p>",
       claims: [
         {
