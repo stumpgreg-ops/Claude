@@ -15,7 +15,9 @@
  * piece). Walls, hedges and fences auto-tile from their neighbours; towers,
  * keeps and houses are sprite stacks; the keep grows a storey as the castle
  * grows (theme.growAt); a curtain wall rises by itself at the 8th building.
- * Town theme: the older Modular Village sprites on the same grid.
+ * Town theme (v5.20): the same kit and 3D models as the castle (tools/make-town-kit.js copies every castle piece
+ * but the keeps); it starts from a home that grows a storey as the town grows, and a wooden fence rises round it
+ * at the 8th building. Towns saved before v5.20 (2D pictures) are moved onto the kit (TOWN_MAP).
  *
  * Public API
  *   SolBuild.init()                     load assets/build/pieces.json + saved build
@@ -119,19 +121,20 @@
      (each perk counts once, however many copies are placed). The maze reads
      SolBuild.perks() when a level starts; js/realms.js applies them. */
   var PERKS = [
-    { id: "swift",    name: "Swift feet",    desc: "Sol runs 6% faster.", pieces: ["k-stables", "stable", "bakery"] },
-    { id: "surefoot", name: "Sure footing",  desc: "Wet floors never slow Sol down or trip her.", pieces: ["k-well", "well", "fountain"] },
-    { id: "lookout",  name: "Lookout",       desc: "Ravens, trolls and the other realm creatures show on the map.", pieces: ["k-watchtower", "watchtower", "bell-tower"] },
-    { id: "guard",    name: "Castle guard",  desc: "The first catch in each level bounces off.", pieces: ["k-barracks", "manor"] },
-    { id: "blessing", name: "Blessing",      desc: "Start every level with a 1UP (a spare life).", pieces: ["k-church", "c-chapel", "chapel", "k-shrine"] },
-    { id: "trade",    name: "Trade",         desc: "+2 coins for every correct answer.", pieces: ["k-market", "square"] },
-    { id: "gold",     name: "Gold vein",     desc: "Pickups in the maze pay double coins.", pieces: ["k-mine", "harbour"] },
-    { id: "iron",     name: "Iron boots",    desc: "Slowing floors slow Sol only half as much.", pieces: ["k-blacksmith", "dock"] },
+    /* v5.20: the town uses the castle's pieces, so one list serves both (the old town pieces moved onto these, TOWN_MAP) */
+    { id: "swift",    name: "Swift feet",    desc: "Sol runs 6% faster.", pieces: ["k-stables", "stable"] },
+    { id: "surefoot", name: "Sure footing",  desc: "Wet floors never slow Sol down or trip her.", pieces: ["k-well", "fountain"] },
+    { id: "lookout",  name: "Lookout",       desc: "Ravens, trolls and the other realm creatures show on the map.", pieces: ["k-watchtower", "watchtower"] },
+    { id: "guard",    name: "Castle guard",  desc: "The first catch in each level bounces off.", pieces: ["k-barracks", "c-manor"] },
+    { id: "blessing", name: "Blessing",      desc: "Start every level with a 1UP (a spare life).", pieces: ["k-church", "c-chapel", "k-shrine"] },
+    { id: "trade",    name: "Trade",         desc: "+2 coins for every correct answer.", pieces: ["k-market"] },
+    { id: "gold",     name: "Gold vein",     desc: "Pickups in the maze pay double coins.", pieces: ["k-mine"] },
+    { id: "iron",     name: "Iron boots",    desc: "Slowing floors slow Sol only half as much.", pieces: ["k-blacksmith"] },
     { id: "archers",  name: "Archers",       desc: "The Hati wolves run 5% slower.", pieces: ["k-archery"] },
-    { id: "hearth",   name: "Warm hearth",   desc: "One extra second of safety after a catch.", pieces: ["k-inn", "c-tavern", "tavern"] },
+    { id: "hearth",   name: "Warm hearth",   desc: "One extra second of safety after a catch.", pieces: ["k-inn", "c-tavern"] },
     { id: "tinker",   name: "Tinkerer",      desc: "The chariot power lasts 25% longer.", pieces: ["k-workshop", "k-lumbermill"] },
-    { id: "charter",  name: "Royal charter", desc: "+10 coins for every level you clear.", pieces: ["k-townhall", "town-hall"] },
-    { id: "harvest",  name: "Harvest",       desc: "+5 coins for every level you clear.", pieces: ["k-windmill", "k-watermill", "c-windmill", "windmill", "watermill", "grand-mill", "barn"] },
+    { id: "charter",  name: "Royal charter", desc: "+10 coins for every level you clear.", pieces: ["k-townhall"] },
+    { id: "harvest",  name: "Harvest",       desc: "+5 coins for every level you clear.", pieces: ["k-windmill", "k-watermill", "c-windmill", "barn"] },
     { id: "rune",     name: "Rune of Sol",   desc: "Fenrir's first charge in each boss level misses.", pieces: ["k-castle", "great-tower", "royal-tower"] }
   ];
   var PERK_BY_PIECE = {};
@@ -151,10 +154,19 @@
     });
     return out;
   }
-  /* Once pieces.json is in: old castles map to kit pieces; picks that no longer exist are dropped. */
+  /* v5.20: a town saved before v5.20 (2D pictures, kit < 3) moves onto the castle kit: each old piece becomes the kit
+     piece that looks most like it and keeps its perk; Red Tile / Slate / Thatch become Crimson / Royal Blue / Gold. */
+  var TOWN_MAP = { stall: "stall-red", steps: "stone-stairs", "cottage-wing": "c-cottage", "stone-wing": "stone-hall", "lamp-path": "lamp-post",
+    "house-wing": "k-home-a", bakery: "stable", dock: "k-blacksmith", chapel: "c-chapel", arch: "arch-tower", tavern: "c-tavern", windmill: "c-windmill",
+    watermill: "k-watermill", square: "k-market", harbour: "k-mine", manor: "c-manor", "town-hall": "k-townhall", "bell-tower": "k-watchtower",
+    "grand-mill": "k-windmill", fence: "c-fence", well: "k-well", lamp: "lamp-post", barrels: "k-barrels", crates: "k-crates", "hay-cart": "c-hay-cart",
+    "barrel-cart": "k-merchant-cart", haystacks: "k-hay", cobbles: "stone-path", signpost: "well-sign" };
+  var TOWN_STYLE = { tile: "red", slate: "blue", thatch: "gold" };
+  var KIT_VERSION = { castle: 2, village: 3 };              /* save.kit once a theme's pieces are the current kit */
+  /* Once pieces.json is in: old castles and towns map to kit pieces; picks that no longer exist are dropped. */
   function migrateIfNeeded() {
     if (!save || !data) return;
-    var changed = false;
+    var changed = false, townMoved = false;
     if (save.theme && !themeDef(save.theme)) { save.theme = null; save.picks = []; save.owned = {}; changed = true; }
     if (save.theme === "castle" && isKit() && save.kit !== 2) {                /* v4.9.5: the old scattered castle becomes a kit castle */
       var MAP = { keep: "keep", storehouse: "watch-keep", hall: "round-keep", "lodge-wing": "wall", "tower-short": "round-tower", gate: "gate", "hall-wing": "wall",
@@ -172,6 +184,14 @@
       }
       save.kit = 2; changed = true;
     }
+    if (save.theme === "village" && isKit() && (save.kit || 0) < KIT_VERSION.village) {
+      var tm = function (id) { return TOWN_MAP[id] || id; }, own = {};
+      save.picks.forEach(function (p) { p.piece = tm(p.piece); p.style = TOWN_STYLE[p.style] || p.style; p.rot = 0; delete p.cx; delete p.cy; });
+      Object.keys(save.rewards).forEach(function (k) { if (save.rewards[k]) save.rewards[k] = tm(save.rewards[k]); });
+      Object.keys(save.owned || {}).forEach(function (id) { if (save.owned[id]) own[tm(id)] = 1; });
+      save.owned = own; save.view = freshView(); save.kit = KIT_VERSION.village;
+      changed = townMoved = true;
+    }
     var keep = [];
     save.picks.forEach(function (p) {
       var pc = pieceById(p.piece);
@@ -186,6 +206,7 @@
     if (save.migrate) { delete save.migrate; changed = true; }
     if (changed) persist();
     ensurePositions();
+    if (townMoved && raiseCastleWalls()) persist();       /* an old town past the wall level had its fence ring drawn round it */
   }
   function persist() {
     if (ui && ui.perks && step === "gallery") { try { fillPerks(); } catch (eP) {} }
@@ -233,6 +254,11 @@
   function bandFor(k) { return Math.max(1, Math.min(4, Math.ceil(k / 5))); }   /* reward 1-5 → tier 1 … 16-20 → tier 4 */
   function nextRewardNight() { var n; for (n = EVERY; n <= EVERY * TOTAL; n += EVERY) if (!save.rewards[n]) return n; return null; }
   function wallLevel() { var t = themeDef(save.theme); return (t && t.wallLevel) || 8; }
+  /* v5.20: what rises round a kit build at the wall level (castle: a curtain wall with a gate; town: a wooden fence) and its words */
+  function autoWall() { var t = themeDef(save.theme); return (t && t.autoWall) || { seg: "wall", gate: "gate" }; }
+  function wallsNote() { return autoWall().note || "The curtain walls went up around your castle — drag any wall to reshape them!"; }
+  function wallsSoon() { return autoWall().soon || "One more building and the walls go up."; }
+  function coreNoun() { var t = themeDef(save.theme); return (t && t.coreNoun) || "keep"; }
   function wallsUp() { return !!save.theme && (isKit() ? save.picks.some(function (p) { return p.src === "auto"; }) : buildingPicks().length >= wallLevel()); }
   /* The style the student has used most (ties → the first building's style). */
   function dominantStyle() {
@@ -297,7 +323,8 @@
     var band = bandOverride || bandFor(Math.min(k, TOTAL)), lot = lotFor(k), r = rng(night * 7 + k + save.salt), out = [], wantOwned, t;
     if (k === 1 || !hasCore()) return piecesOf(save.theme, "core");
     if (isKit()) {
-      var pool = piecesOf(save.theme, "module").filter(function (p) { return (p.tier || 1) <= band; }), kinds = {};
+      var cats = (themeDef(save.theme) || {}).offerCats, kinds = {};   /* v5.20: a town's rewards offer buildings, not towers and walls */
+      var pool = piecesOf(save.theme, "module").filter(function (p) { return (p.tier || 1) <= band && (!cats || cats.indexOf(catOf(p)) !== -1); });
       var fresh = pool.filter(function (p) { return !owned(p.id); }), known = pool.filter(function (p) { return owned(p.id); });
       shuffle(fresh.filter(function (p) { return (p.tier || 1) === band; }), r).concat(shuffle(fresh.filter(function (p) { return (p.tier || 1) < band; }), r))
         .forEach(function (p) { if (out.length < OPTIONS && (out.length < 2 || !kinds[p.kind])) { out.push(p); kinds[p.kind] = true; } });
@@ -1149,8 +1176,8 @@
     persist();
     if (cur) { cur.sel = pk; fillPieceBar(); }
     redraw();
-    ui.note.textContent = walls ? "The curtain walls went up around your castle — drag any wall to reshape them!"
-      : grew ? "Your keep grew a storey — " + grownCount() + " pieces strong!"
+    ui.note.textContent = walls ? wallsNote()
+      : grew ? "Your " + coreNoun() + " grew a storey — " + grownCount() + " pieces strong!"
       : (p.name || "Piece") + " placed — drag it anywhere, or tap it to recolour, copy or remove it.";
     if (step === "gallery") ui.badge.textContent = galleryBadge();
     return pk;
@@ -1452,7 +1479,7 @@
       ui.sub.textContent = cur.shop ? "Your coins buy pieces for one build, and you earn a free reward piece every 5 levels, all the way to level 100. This choice is permanent."
         : "You add a new piece every 5 levels, all the way to level 100. This choice is permanent.";
       var themeBtns = [{ label: "Tap one to choose", primary: true, disabled: true, onTap: function () {
-        if (!cur.themePick) return; save.theme = cur.themePick; save.kit = 2; save.view = freshView(); persist();
+        if (!cur.themePick) return; save.theme = cur.themePick; save.kit = KIT_VERSION[cur.themePick] || 2; save.view = freshView(); persist();
         if (cur.shop) { cur.tab = "build"; showStep("shop"); } else beginPick();
       } }];
       if (cur.shop) themeBtns.push({ label: "Not now", onTap: function () { if (cur.fromGallery) { mode = "gallery"; cur.shop = false; showStep("gallery"); return; } var cb = cur && cur.onClose; closeOverlay(); if (cb) cb(); } });
@@ -1483,9 +1510,9 @@
       ui.title.textContent = name + (cur.stylePick && styleable(cur.piece) ? " built in " + styleName(cur.stylePick) : " built") + "!" + (isKit() ? " " + rating().rank + " · " + rating().score + " pts" : "");
       ui.sub.textContent = cur.shop ? "Bought for " + priceOf(cur.piece) + " coins. " + coinLabel() + " left. It is unlocked — place more copies from your palette any time."
         : "Reward " + cur.k + " of " + TOTAL + " is in place and unlocked in your palette." + (cur.k < TOTAL ? " Next reward after level " + (cur.night + EVERY) + "." : " Every reward earned!");
-      ui.note.textContent = cur.wallsRaised ? "The curtain walls went up around your castle — drag any wall to reshape them!"
-        : cur.keepGrew ? "Your keep grew a storey — " + grownCount() + " pieces strong!"
-        : nb === wallLevel() - 1 && isKit() ? "One more building and the walls go up."
+      ui.note.textContent = cur.wallsRaised ? wallsNote()
+        : cur.keepGrew ? "Your " + coreNoun() + " grew a storey — " + grownCount() + " pieces strong!"
+        : nb === wallLevel() - 1 && isKit() ? wallsSoon()
         : "Added to your " + tn + "! Open My " + tn + " from the title screen to keep building.";
       setButtons(cur.shop ? [{ label: "Back to shop", primary: true, onTap: function () { cur.piece = null; cur.stylePick = null; showStep("shop"); } }]
         : [{ label: "Continue", primary: true, onTap: finish }]);
@@ -1523,19 +1550,20 @@
     persist();
     showStep("place");
   }
-  /* Castle: at the wall level a curtain wall (real, movable wall picks with one gate) goes up one cell out from everything built so far. */
+  /* Kit builds: at the wall level a ring (real, movable run picks with one gate) goes up one cell out from everything built
+     so far: a curtain wall round a castle, a wooden fence round a town (theme.autoWall). */
   function raiseCastleWalls() {
     if (!isKit() || grownCount() < wallLevel() || save.picks.some(function (pk) { return pk.src === "auto"; })) return false;
-    var b = bboxCells(), wall = pieceById("wall"), gate = pieceById("gate"), dom = dominantStyle(), u, v, n = 0;
+    var aw = autoWall(), b = bboxCells(), wall = pieceById(aw.seg), gate = aw.gate ? pieceById(aw.gate) : null, dom = dominantStyle(), u, v, n = 0;
     if (!b || !wall) return false;
     var u0 = b.u0 - 1, v0 = b.v0 - 1, u1 = b.u1, v1 = b.v1, gateAt = Math.floor((v0 + v1) / 2);
     function add(cx, cy, piece) {
       if (!spotFree(cx, cy, 1, null)) return;
-      save.picks.push({ night: cur ? cur.night : 1, piece: piece.id, style: dom, src: "auto", deco: false, ord: save.picks.length, cx: cx, cy: cy }); n++;
+      save.picks.push({ night: cur ? cur.night : 1, piece: piece.id, style: dom, src: "auto", deco: piece.role === "deco", ord: save.picks.length, cx: cx, cy: cy }); n++;
     }
     for (u = u0; u <= u1; u++) { add(u, v0, wall); add(u, v1, wall); }
     for (v = v0 + 1; v < v1; v++) { add(u0, v, wall); add(u1, v, (gate && v === gateAt) ? gate : wall); }
-    if (n) { unlock("wall"); if (gate) unlock("gate"); }
+    if (n) { unlock(wall.id); if (gate) unlock(gate.id); }
     return n > 0;
   }
   function coinLabel() { return (save.coins || 0) + " coin" + (save.coins === 1 ? "" : "s"); }
@@ -1578,8 +1606,9 @@
     var band = shopBand(), t = themeDef(save.theme), builds, decos;
     var order = function (a, b) { return ((a.tier || 1) - (b.tier || 1)) || (priceOf(a) - priceOf(b)) || (a.name > b.name ? 1 : -1); };
     if (isKit()) {
-      builds = [pieceById("wall"), pieceById("gate")].filter(Boolean)
-        .concat(piecesOf(save.theme, "module").filter(function (p) { return p.id !== "wall" && p.id !== "gate" && (p.tier || 1) <= band; }).sort(order))
+      var first = (t && t.shopFirst) || ["wall", "gate"];      /* the castle's shop opens on its wall and gate */
+      builds = first.map(pieceById).filter(Boolean)
+        .concat(piecesOf(save.theme, "module").filter(function (p) { return first.indexOf(p.id) === -1 && (p.tier || 1) <= band; }).sort(order))
         .concat(piecesOf(save.theme, "core").filter(function (p) { return !owned(p.id); }));
       decos = piecesOf(save.theme, "deco").filter(function (p) { return (p.tier || 1) <= band && !isTrophy(p); }).sort(order);
     } else {
@@ -1786,8 +1815,8 @@
     return save.coins;
   }
   function coins() { if (!save) save = loadSave(); return save.coins || 0; }
-  /* v5.7.6: beating Fenrir in a realm unlocks that realm's monument and sets one on the field.
-     Returns the monument's name, or null (no Castle yet, a Town, or build data not loaded). */
+  /* v5.7.6: beating Fenrir in a realm unlocks that realm's monument and sets one on the field (v5.20: in a town too).
+     Returns the monument's name, or null (no build yet, or build data not loaded). */
   function grantTrophy(realmId) {
     if (!save) save = loadSave();
     if (loadState !== "ok" || !data || !isKit()) return null;

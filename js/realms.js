@@ -1431,12 +1431,12 @@
           var fangs = loadFangs(), had = fangs.indexOf(rm.id) !== -1;
           if (!had) { fangs.push(rm.id); saveFangs(fangs); }
           this._fangNews = had ? "" : "You won Fenrir's Fang of " + rm.name + ": every correct answer now pays +" + fangs.length + " extra coin" + (fangs.length === 1 ? "" : "s") + ", for good.";
-          /* the realm's monument: a castle piece nobody can buy */
-          var trophy = null;
-          try { if (window.SolBuild && SolBuild.grantTrophy) trophy = SolBuild.grantTrophy(rm.id); } catch (eT) {}
+          /* the realm's monument: a castle (v5.20: or town) piece nobody can buy */
+          var trophy = null, place = "castle";
+          try { if (window.SolBuild && SolBuild.grantTrophy) trophy = SolBuild.grantTrophy(rm.id); if (trophy && SolBuild.state().theme === "village") place = "town"; } catch (eT) {}
           this._trophy = trophy;
-          if (trophy) this._fangNews += (this._fangNews ? " " : "") + "Fenrir's treasure: the " + trophy + " now stands in your castle — a monument only a Fenrir-beater can have.";
-          else if (!had) { this.giveCoins(50, "Fenrir's treasure"); this._fangNews += " Fenrir's treasure: +50 coins (choose the Castle in the builder to collect Fenrir's monuments)."; }
+          if (trophy) this._fangNews += (this._fangNews ? " " : "") + "Fenrir's treasure: the " + trophy + " now stands in your " + place + " — a monument only a Fenrir-beater can have.";
+          else if (!had) { this.giveCoins(50, "Fenrir's treasure"); this._fangNews += " Fenrir's treasure: +50 coins (choose a Town or a Castle in the builder to collect Fenrir's monuments)."; }
         }
         if (perk(this, "charter")) { this.giveCoins(10, "Royal charter"); bonus.push("+10 from your town hall"); }
         if (perk(this, "harvest")) { this.giveCoins(5, "Harvest"); bonus.push("+5 from your mills"); }

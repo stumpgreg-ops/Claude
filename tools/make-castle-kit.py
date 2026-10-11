@@ -629,6 +629,7 @@ def main():
     for m in d["pieces"]:
         if m.get("theme") == "castle": m["img"] = ""
     json.dump(d, open(pj, "w"), indent=1)
+    print("now run: node tools/make-town-kit.js   (v5.20: the Town is rebuilt from these castle pieces)")
 
 if __name__ == "__main__":
     main()

@@ -16,7 +16,7 @@ The reward pieces in `assets/build/` are 2D sprites pre-rendered from two 3D pac
 - **Modular Village Pack** by **Keith at Fertile Soil Productions** (itch.io, name-your-own-price):
   https://fertile-soil-productions.itch.io/modular-village-pack
   License: Creative Commons Zero v1.0 Universal (CC0). No attribution required; credited with thanks.
-  Used for the Town pieces (cottages, houses, well, carts, market stalls, dock, windmill, watermill, bell tower, market square…). The Slate and Thatch style variants in `assets/build/styles/` are recolours of these renders.
+  Used for the Town pieces until v5.19. Since v5.20 the Town is built from the same 3D models as the Castle (Kenney and KayKit, below), so these renders are no longer shipped.
 
 - **FREE Castle and Fort Builder Pack** by **MCSTEEG** (itch.io, name-your-own-price):
   https://mcsteeg.itch.io/castle-and-fort-builder-pack

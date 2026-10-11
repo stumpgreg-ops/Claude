@@ -84,9 +84,9 @@ var EXACT = {
     /* the boss prize: the Ram's Fleece, and the island's monument */
     [" coins for beating Fenrir in ", " coins for beating Polyphemus at "],
     ["You won Fenrir's Fang of ", "You won the Ram's Fleece of "],
-    [" now stands in your castle — a monument only a Fenrir-beater can have.", " now stands in your castle — a monument only a Cyclops-beater can have."],
-    [" Fenrir's treasure: +50 coins (choose the Castle in the builder to collect Fenrir's monuments).",
-     " Polyphemus's treasure: +50 coins (choose the Castle in the builder to collect the island monuments)."],
+    [" — a monument only a Fenrir-beater can have.", " — a monument only a Cyclops-beater can have."],
+    [" Fenrir's treasure: +50 coins (choose a Town or a Castle in the builder to collect Fenrir's monuments).",
+     " Polyphemus's treasure: +50 coins (choose a Town or a Castle in the builder to collect the island monuments)."],
     ["Fenrir's chains are broken and the gate is open. ", "The boulders are rolled away and the gate is open. "],
     ["You beat Ragnarok!", "You reached Ithaca!"]
   ],
@@ -372,7 +372,9 @@ function themePieces(text) {
     }
     ["name", "desc"].forEach(function (k) { if (p[k] && LEFT_RE.test(p[k])) left.push({ file: "assets/build/pieces.json", line: p.id, text: p[k], why: "UNEXPECTED — check" }); });
   });
-  if (seen !== Object.keys(TROPHIES).length) throw new Error("ody-theme: pieces.json has " + seen + " of the 10 boss trophies");
+  /* v5.20: the Town has its own copy of each monument (tools/make-town-kit.js), so each trophy id is there once per theme */
+  var nTheme = Object.keys(data.themes || {}).filter(function (k) { return data.themes[k].kit; }).length || 1;
+  if (seen !== Object.keys(TROPHIES).length * nTheme) throw new Error("ody-theme: pieces.json has " + seen + " boss trophies, not 10 for each of the " + nTheme + " kit themes");
   return { text: JSON.stringify(data, null, indent) + (/\n$/.test(text) ? "\n" : ""), changes: changes, left: left };
 }
 
