@@ -925,7 +925,7 @@
         "<text class=\"sm\" x=\"104\" y=\"56\" text-anchor=\"middle\">−2</text><text class=\"sm\" x=\"200\" y=\"56\" text-anchor=\"middle\">4</text><text class=\"sm\" x=\"132\" y=\"79\" text-anchor=\"end\">−2</text><text class=\"sm\" x=\"132\" y=\"111\" text-anchor=\"end\">−4</text><text class=\"sm\" x=\"236\" y=\"47\">x</text><text class=\"sm\" x=\"141\" y=\"21\">y</text>" +
         "<polygon class=\"sh\" points=\"168,59 216,75 152,107\"/>" +
         "<circle class=\"dt\" cx=\"168\" cy=\"59\" r=\"3\"/><circle class=\"dt\" cx=\"216\" cy=\"75\" r=\"3\"/><circle class=\"dt\" cx=\"152\" cy=\"107\" r=\"3\"/>" +
-        "<text x=\"176\" y=\"64\">J</text><text x=\"224\" y=\"80\">E</text><text x=\"152\" y=\"124\" text-anchor=\"middle\">T</text>" +
+        "<text x=\"163\" y=\"54\" text-anchor=\"end\">J</text><text x=\"224\" y=\"80\">E</text><text x=\"152\" y=\"124\" text-anchor=\"middle\">T</text>" +
         "</svg></figure>" +
         "<p class=\"geo-given\">An airport map is drawn on a grid with the control tower at the origin. A plane icon is <strong>△JET</strong> with J(2, −1), E(5, −2) and T(1, −4). The main runway lies along the y-axis.</p>",
       claims: [

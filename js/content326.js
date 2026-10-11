@@ -153,7 +153,7 @@
           id: "extsum",
           sol: "G.PC.2",
           sub: "G.PC.2.1",
-          stem: "Picture one exterior angle at each of the 20 corners of the rim. What is the sum of those exterior angles?",
+          stem: "The full rim has one exterior angle at each of its 20 corners. What do those 20 angles add to?",
           choices: [
             { letter: "A", text: "3240°" },
             { letter: "B", text: "360°" },
@@ -927,7 +927,7 @@
       blurb: "Tracks fan out from a turntable to a many-sided wall.",
       level: 2,
       passage:
-        "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 166\" role=\"img\" aria-label=\"A train roundhouse seen from above: tracks fan out from a turntable at O to straight wall sections whose corners are all the same distance from O. Angle 1, in gold, is the angle between two wall sections. One wall section is extended (dashed) and angle 2 is the exterior angle\"><circle class=\"sh2\" cx=\"160\" cy=\"150\" r=\"14\"/><line class=\"thin\" x1=\"153\" y1=\"137.9\" x2=\"96.2\" y2=\"39.6\"/><line class=\"thin\" x1=\"155.2\" y1=\"136.8\" x2=\"116.4\" y2=\"30.2\"/><line class=\"thin\" x1=\"157.6\" y1=\"136.2\" x2=\"137.9\" y2=\"24.4\"/><line class=\"thin\" x1=\"160\" y1=\"136\" x2=\"160\" y2=\"22.5\"/><line class=\"thin\" x1=\"162.4\" y1=\"136.2\" x2=\"182.1\" y2=\"24.4\"/><line class=\"thin\" x1=\"164.8\" y1=\"136.8\" x2=\"203.6\" y2=\"30.2\"/><line class=\"thin\" x1=\"167\" y1=\"137.9\" x2=\"223.8\" y2=\"39.6\"/><polyline class=\"ln\" points=\"86.6,45.1 105.9,34 126.9,26.4 148.8,22.5 171.2,22.5 193.1,26.4 214.1,34 233.4,45.1\"/><line class=\"thin dash\" x1=\"69.5\" y1=\"59.5\" x2=\"86.6\" y2=\"45.1\"/><line class=\"thin dash\" x1=\"233.4\" y1=\"45.1\" x2=\"250.5\" y2=\"59.5\"/><line class=\"ln dash\" x1=\"193.1\" y1=\"26.4\" x2=\"228.6\" y2=\"32.6\"/><path class=\"ac\" d=\"M138.7 24.3 A12 12 0 0 1 115.6 30.5\"/><path class=\"thin\" d=\"M214.8 30.2 A22 22 0 0 1 213.8 33.9\"/><text class=\"acc\" x=\"132.6\" y=\"52.6\" text-anchor=\"middle\">1</text><text x=\"215.4\" y=\"51.4\" text-anchor=\"middle\">2</text><circle class=\"dt\" cx=\"86.6\" cy=\"45.1\" r=\"3\"/><circle class=\"dt\" cx=\"105.9\" cy=\"34\" r=\"3\"/><circle class=\"dt\" cx=\"126.9\" cy=\"26.4\" r=\"3\"/><circle class=\"dt\" cx=\"148.8\" cy=\"22.5\" r=\"3\"/><circle class=\"dt\" cx=\"171.2\" cy=\"22.5\" r=\"3\"/><circle class=\"dt\" cx=\"193.1\" cy=\"26.4\" r=\"3\"/><circle class=\"dt\" cx=\"214.1\" cy=\"34\" r=\"3\"/><circle class=\"dt\" cx=\"233.4\" cy=\"45.1\" r=\"3\"/><circle class=\"dt\" cx=\"160\" cy=\"150\" r=\"3\"/><text x=\"136\" y=\"157\" text-anchor=\"middle\">O</text></svg></figure><p class=\"geo-given\">In a train roundhouse, tracks fan out from a turntable at <strong>O</strong>, 10° apart, to a wall made of straight sections. The wall corners are all the same distance from O, and each section spans 10° at O. If the stalls went all the way around, the wall would be a regular polygon.</p>",
+        "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 166\" role=\"img\" aria-label=\"A train roundhouse seen from above: tracks fan out from a turntable at O to straight wall sections whose corners are all the same distance from O. Angle 1, in gold, is the angle between two wall sections\"><circle class=\"sh2\" cx=\"160\" cy=\"150\" r=\"14\"/><line class=\"thin\" x1=\"153\" y1=\"137.9\" x2=\"96.2\" y2=\"39.6\"/><line class=\"thin\" x1=\"155.2\" y1=\"136.8\" x2=\"116.4\" y2=\"30.2\"/><line class=\"thin\" x1=\"157.6\" y1=\"136.2\" x2=\"137.9\" y2=\"24.4\"/><line class=\"thin\" x1=\"160\" y1=\"136\" x2=\"160\" y2=\"22.5\"/><line class=\"thin\" x1=\"162.4\" y1=\"136.2\" x2=\"182.1\" y2=\"24.4\"/><line class=\"thin\" x1=\"164.8\" y1=\"136.8\" x2=\"203.6\" y2=\"30.2\"/><line class=\"thin\" x1=\"167\" y1=\"137.9\" x2=\"223.8\" y2=\"39.6\"/><polyline class=\"ln\" points=\"86.6,45.1 105.9,34 126.9,26.4 148.8,22.5 171.2,22.5 193.1,26.4 214.1,34 233.4,45.1\"/><line class=\"thin dash\" x1=\"69.5\" y1=\"59.5\" x2=\"86.6\" y2=\"45.1\"/><line class=\"thin dash\" x1=\"233.4\" y1=\"45.1\" x2=\"250.5\" y2=\"59.5\"/><path class=\"ac\" d=\"M138.7 24.3 A12 12 0 0 1 115.6 30.5\"/><text class=\"acc\" x=\"132.6\" y=\"52.6\" text-anchor=\"middle\">1</text><circle class=\"dt\" cx=\"86.6\" cy=\"45.1\" r=\"3\"/><circle class=\"dt\" cx=\"105.9\" cy=\"34\" r=\"3\"/><circle class=\"dt\" cx=\"126.9\" cy=\"26.4\" r=\"3\"/><circle class=\"dt\" cx=\"148.8\" cy=\"22.5\" r=\"3\"/><circle class=\"dt\" cx=\"171.2\" cy=\"22.5\" r=\"3\"/><circle class=\"dt\" cx=\"193.1\" cy=\"26.4\" r=\"3\"/><circle class=\"dt\" cx=\"214.1\" cy=\"34\" r=\"3\"/><circle class=\"dt\" cx=\"233.4\" cy=\"45.1\" r=\"3\"/><circle class=\"dt\" cx=\"160\" cy=\"150\" r=\"3\"/><text x=\"136\" y=\"157\" text-anchor=\"middle\">O</text></svg></figure><p class=\"geo-given\">In a train roundhouse, tracks fan out from a turntable at <strong>O</strong>, 10° apart, to a wall made of straight sections. The wall corners are all the same distance from O, and each section spans 10° at O. If the stalls went all the way around, the wall would be a regular polygon.</p>",
       claims: [
         {
           id: "sides",
@@ -956,10 +956,10 @@
           correct: "D"
         },
         {
-          id: "angle2",
+          id: "extend",
           sol: "G.PC.2",
           sub: "G.PC.2.1",
-          stem: "What is m∠2, between the extended wall and the next section?",
+          stem: "One wall section is extended straight past a corner. What angle does the extension make with the next wall section?",
           choices: [
             { letter: "A", text: "170°" },
             { letter: "B", text: "10°" },
