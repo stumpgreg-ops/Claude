@@ -493,7 +493,7 @@
           id: "tool",
           sol: "G.PC.4",
           sub: "G.PC.4.1",
-          stem: "A trimming tool rests at (6, −9). Is it on the wheel head? Choose the answer with the correct reason.",
+          stem: "A trimming tool rests at (6, −9). Does it rest on the wheel head (inside or on its edge)? Choose the answer with the correct reason.",
           choices: [
             { letter: "A", text: "Yes: (6 − 2)² + (−9 + 4)² = 41, less than 65" },
             { letter: "B", text: "No: 4 + 5 = 9 in, more than the radius" },
@@ -609,7 +609,7 @@
       blurb: "A speaker cone and its dust cap share a center.",
       level: 3,
       passage:
-        "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 164\" role=\"img\" aria-label=\"A speaker seen from the front: a large shaded circle, the cone, and a small gold-shaded circle, the dust cap, in its middle. Gold segment PQ runs across the dust cap through its center, with P and Q on the cap's edge.\">" +
+        "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 164\" role=\"img\" aria-label=\"A speaker seen from the front: a large shaded circle, the cone, and a small gold-shaded circle, the dust cap, in its middle. Gold segment PQ runs across the dust cap through its center, with P and Q on the cap's edge. A thin outer ring is the speaker's frame, not part of the cone.\">" +
         "<rect class=\"thin\" x=\"84\" y=\"4\" width=\"152\" height=\"156\" rx=\"10\"/><circle class=\"thin\" cx=\"160\" cy=\"82\" r=\"72\"/><circle class=\"sh2\" cx=\"160\" cy=\"82\" r=\"66\"/><circle class=\"sh\" cx=\"160\" cy=\"82\" r=\"24.6\"/><line class=\"ac\" x1=\"149\" y1=\"104\" x2=\"171\" y2=\"60\"/>" +
         "<circle class=\"dt\" cx=\"149\" cy=\"104\" r=\"3\"/><circle class=\"dt\" cx=\"171\" cy=\"60\" r=\"3\"/><text x=\"143\" y=\"118\" text-anchor=\"end\">P</text><text x=\"177\" y=\"56\">Q</text><text class=\"sm\" x=\"246\" y=\"30\">speaker,</text><text class=\"sm\" x=\"246\" y=\"46\">front view</text>" +
         "</svg></figure>" +
@@ -1052,7 +1052,7 @@
           id: "log",
           sol: "G.PC.4",
           sub: "G.PC.4.3",
-          stem: "A log seat L is at (0, 5). A right triangle has its hypotenuse from the center of the fire pit to L, with one horizontal leg and one vertical leg. Which equation gives that distance d?",
+          stem: "A log seat L is at (0, 5). Which equation uses the Pythagorean theorem to find the distance d from the center of the fire pit to L?",
           choices: [
             { letter: "A", text: "0² + 5² = d²" },
             { letter: "B", text: "2 + 5 = d" },
@@ -1163,7 +1163,7 @@
           sub: "G.PC.4.1",
           stem: "Which point on the map gets water from the pivot?",
           choices: [
-            { letter: "A", text: "(12, 4)" },
+            { letter: "A", text: "(12, 5)" },
             { letter: "B", text: "(8, 9)" },
             { letter: "C", text: "(−3, 11)" },
             { letter: "D", text: "(11, 9)" }

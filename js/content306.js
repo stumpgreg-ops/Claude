@@ -600,12 +600,12 @@
           id: "tilted",
           sol: "G.RLT.2",
           sub: "G.RLT.2.2",
-          stem: "The tray slips. Now m∠PAC = 66° and m∠PCA = 77°. Is the tray still parallel to the floor? Choose the answer with the correct reason.",
+          stem: "The tray slips, but the legs do not move. Now m∠PAC = 66° and m∠PCA = 77°. Is the tray still parallel to the floor? Choose the answer with the correct reason.",
           choices: [
             { letter: "A", text: "Yes; ∠PAC and ∠PCA are alternate interior angles." },
             { letter: "B", text: "Yes; any segment joining the two legs is parallel to the floor." },
             { letter: "C", text: "No; ∠PAC and ∠PCA should be congruent." },
-            { letter: "D", text: "No; ∠PAC and ∠PBD are corresponding angles that are not congruent." }
+            { letter: "D", text: "No; ∠PCA and ∠PDB are corresponding angles that are not congruent." }
           ],
           correct: "D"
         },
@@ -1019,7 +1019,7 @@
           id: "not-parallel",
           sol: "G.RLT.2",
           sub: "G.RLT.2.2",
-          stem: "On a different path, which measures of ∠2 and ∠3 would show that rows b and c are NOT parallel?",
+          stem: "In another orchard, a path crosses two rows the same way it crosses rows b and c here. Which measures in the places of ∠2 and ∠3 would show that those two rows are NOT parallel?",
           choices: [
             { letter: "A", text: "m∠2 = 77° and m∠3 = 103°" },
             { letter: "B", text: "m∠2 = 77° and m∠3 = 105°" },
