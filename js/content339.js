@@ -17,7 +17,7 @@
       kind: "Changing dimensions · G.DF.2",
       blurb: "A 6 in by 4 in photo, blown up, stretched and cropped.",
       level: 1,
-      passage: "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 142\" role=\"img\" aria-label=\"A photo print 6 in wide and 4 in tall sits in the lower-left corner of a poster 15 in wide and 10 in tall; a dashed diagonal from that corner passes through the far corner of each\"><rect class=\"sh2\" x=\"40\" y=\"20\" width=\"165\" height=\"110\"/><rect class=\"sh\" x=\"40\" y=\"86\" width=\"66\" height=\"44\"/><line class=\"thin dash\" x1=\"40\" y1=\"130\" x2=\"205\" y2=\"20\"/><text x=\"122.5\" y=\"14\" text-anchor=\"middle\">15 in</text><text x=\"211\" y=\"80\" text-anchor=\"start\">10 in</text><text x=\"73\" y=\"80\" text-anchor=\"middle\">6 in</text><text x=\"111\" y=\"113\" text-anchor=\"start\">4 in</text><text class=\"sm\" x=\"73\" y=\"118\" text-anchor=\"middle\">print</text><text class=\"sm\" x=\"175\" y=\"118\" text-anchor=\"middle\">poster</text></svg></figure><p class=\"geo-given\">A photo print is 6 in wide and 4 in tall. Its perimeter is 20 in and its area is 24 in². A shop enlarges it to a poster 15 in wide and 10 in tall, so every length is multiplied by 2.5.</p>",
+      passage: "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 142\" role=\"img\" aria-label=\"A photo print 6 in wide and 4 in tall sits in the lower-left corner of a poster 15 in wide and 10 in tall; a dashed diagonal from that corner passes through the far corner of each\"><rect class=\"sh2\" x=\"66\" y=\"20\" width=\"165\" height=\"110\"/><rect class=\"sh\" x=\"66\" y=\"86\" width=\"66\" height=\"44\"/><line class=\"thin dash\" x1=\"66\" y1=\"130\" x2=\"231\" y2=\"20\"/><text x=\"148.5\" y=\"14\" text-anchor=\"middle\">15 in</text><text x=\"237\" y=\"80\" text-anchor=\"start\">10 in</text><text x=\"99\" y=\"80\" text-anchor=\"middle\">6 in</text><text x=\"137\" y=\"113\" text-anchor=\"start\">4 in</text><text class=\"sm\" x=\"127\" y=\"123\" text-anchor=\"end\">print</text><text class=\"sm\" x=\"201\" y=\"118\" text-anchor=\"middle\">poster</text></svg></figure><p class=\"geo-given\">A photo print is 6 in wide and 4 in tall. Its perimeter is 20 in and its area is 24 in². A shop enlarges it to a poster 15 in wide and 10 in tall, so every length is multiplied by 2.5.</p>",
       claims: [
         {
           id: "poster-area",
@@ -107,7 +107,7 @@
       kind: "Changing dimensions · G.DF.2",
       blurb: "Round tiers of one height but three different radii.",
       level: 1,
-      passage: "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 140\" role=\"img\" aria-label=\"A cake of three round tiers stacked on one another, each 4 in tall: the top tier (shaded) has radius 3 in, the middle tier 6 in and the bottom tier 9 in\"><path class=\"ln\" d=\"M47 90 L47 118 A63 13.9 0 0 0 173 118 L173 90\"/><path class=\"ln\" d=\"M47 90 A63 13.9 0 0 0 173 90\"/><path class=\"ln\" d=\"M47 90 A63 13.9 0 0 1 68 79.7 M152 79.7 A63 13.9 0 0 1 173 90\"/><text x=\"181\" y=\"109\" text-anchor=\"start\">r = 9 in</text><path class=\"ln\" d=\"M68 62 L68 90 A42 9.2 0 0 0 152 90 L152 62\"/><path class=\"ln\" d=\"M68 62 A42 9.2 0 0 0 152 62\"/><path class=\"ln\" d=\"M68 62 A42 9.2 0 0 1 89 54 M131 54 A42 9.2 0 0 1 152 62\"/><text x=\"160\" y=\"81\" text-anchor=\"start\">r = 6 in</text><path class=\"sh\" d=\"M89 34 L89 62 A21 4.6 0 0 0 131 62 L131 34 A21 4.6 0 0 0 89 34 Z\"/><ellipse class=\"ln\" cx=\"110\" cy=\"34\" rx=\"21\" ry=\"4.6\"/><path class=\"ln\" d=\"M89 34 L89 62 A21 4.6 0 0 0 131 62 L131 34\"/><text x=\"139\" y=\"53\" text-anchor=\"start\">r = 3 in</text><path class=\"thin\" d=\"M33 90 H41 M33 118 H41 M37 90 V118\"/><text x=\"31\" y=\"109\" text-anchor=\"end\">4 in</text></svg></figure><p class=\"geo-given\">A cake has three round tiers, and every tier is 4 in tall. The radii are 3 in (top), 6 in (middle) and 9 in (bottom). The top tier holds 36π in³ of cake, and the whole cake holds 504π in³.</p>",
+      passage: "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 158\" role=\"img\" aria-label=\"A cake of three round tiers stacked on one another, each 4 in tall: the top tier (shaded) has radius 3 in, the middle tier 6 in and the bottom tier 9 in\"><path class=\"ln\" d=\"M69 96 L69 132 A81 16.2 0 0 0 231 132 L231 96\"/><path class=\"ln\" d=\"M69 96 A81 16.2 0 0 0 231 96\"/><path class=\"ln\" d=\"M69 96 A81 16.2 0 0 1 96 83.9 M204 83.9 A81 16.2 0 0 1 231 96\"/><text x=\"150\" y=\"135.2\" text-anchor=\"middle\">r = 9 in</text><path class=\"ln\" d=\"M96 60 L96 96 A54 10.8 0 0 0 204 96 L204 60\"/><path class=\"ln\" d=\"M96 60 A54 10.8 0 0 0 204 60\"/><path class=\"ln\" d=\"M96 60 A54 10.8 0 0 1 123 50.6 M177 50.6 A54 10.8 0 0 1 204 60\"/><text x=\"150\" y=\"93.8\" text-anchor=\"middle\">r = 6 in</text><path class=\"sh\" d=\"M123 24 L123 60 A27 5.4 0 0 0 177 60 L177 24 A27 5.4 0 0 0 123 24 Z\"/><ellipse class=\"ln\" cx=\"150\" cy=\"24\" rx=\"27\" ry=\"5.4\"/><path class=\"ln\" d=\"M123 24 L123 60 A27 5.4 0 0 0 177 60 L177 24\"/><text class=\"sm\" x=\"150\" y=\"52.4\" text-anchor=\"middle\">r = 3 in</text><path class=\"thin\" d=\"M237 96 H245 M237 132 H245 M241 96 V132\"/><text x=\"247\" y=\"119\" text-anchor=\"start\">4 in</text></svg></figure><p class=\"geo-given\">A cake has three round tiers, and every tier is 4 in tall. The radii are 3 in (top), 6 in (middle) and 9 in (bottom). The top tier holds 36π in³ of cake, and the whole cake holds 504π in³.</p>",
       claims: [
         {
           id: "bottom-tier",
@@ -197,7 +197,7 @@
       kind: "Changing dimensions · G.DF.2",
       blurb: "Ribbon, wrapping paper and space in a set of similar boxes.",
       level: 2,
-      passage: "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 160\" role=\"img\" aria-label=\"A closed gift box, a rectangular prism 12 in long, 8 in wide and 6 in tall, drawn with hidden edges dashed; a gold ribbon crosses the top and runs down the front and the right side\"><polygon class=\"sh2\" points=\"50,140 170,140 170,80 50,80\"/><polygon class=\"sh2\" points=\"170,140 204.6,120 204.6,60 170,80\"/><polygon class=\"sh2\" points=\"50,80 170,80 204.6,60 84.6,60\"/><path class=\"thin dash\" d=\"M84.6 120 L50 140 M84.6 120 L204.6 120 M84.6 120 L84.6 60\"/><path class=\"ac\" d=\"M110 140 L110 80 L144.6 60 M67.3 70 L187.3 70 L187.3 130\"/><ellipse class=\"thin\" cx=\"120.3\" cy=\"67\" rx=\"7\" ry=\"4\"/><ellipse class=\"thin\" cx=\"134.3\" cy=\"67\" rx=\"7\" ry=\"4\"/><text x=\"110\" y=\"157\" text-anchor=\"middle\">12 in</text><text x=\"44\" y=\"115\" text-anchor=\"end\">6 in</text><text x=\"196.3\" y=\"142\" text-anchor=\"start\">8 in</text><text class=\"sm acc\" x=\"214.6\" y=\"62\" text-anchor=\"start\">ribbon</text></svg></figure><p class=\"geo-given\">A set of nesting gift boxes are similar rectangular prisms. The medium box, shown, is 12 in long, 8 in wide and 6 in tall. It holds 576 in³, its outside surface is 432 in², and a ribbon tied in a cross around it (not counting the bow) is 64 in long.</p>",
+      passage: "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 162\" role=\"img\" aria-label=\"A closed gift box, a rectangular prism 12 in long, 8 in wide and 6 in tall, drawn with hidden edges dashed; a gold ribbon crosses the top and runs down the front and the right side\"><polygon class=\"sh2\" points=\"58,140 214,140 214,62 58,62\"/><polygon class=\"sh2\" points=\"214,140 259,114 259,36 214,62\"/><polygon class=\"sh2\" points=\"58,62 214,62 259,36 103,36\"/><path class=\"thin dash\" d=\"M103 114 L58 140 M103 114 L259 114 M103 114 L103 36\"/><path class=\"ac\" d=\"M136 140 L136 62 L181 36 M80.5 49 L236.5 49 L236.5 127\"/><ellipse class=\"thin\" cx=\"151.5\" cy=\"46\" rx=\"8\" ry=\"4.5\"/><ellipse class=\"thin\" cx=\"165.5\" cy=\"46\" rx=\"8\" ry=\"4.5\"/><text x=\"136\" y=\"157\" text-anchor=\"middle\">12 in</text><text x=\"52\" y=\"106\" text-anchor=\"end\">6 in</text><text x=\"245.5\" y=\"139\" text-anchor=\"start\">8 in</text><text class=\"sm acc\" x=\"269\" y=\"38\" text-anchor=\"start\">ribbon</text></svg></figure><p class=\"geo-given\">A set of nesting gift boxes are similar rectangular prisms. The medium box, shown, is 12 in long, 8 in wide and 6 in tall. It holds 576 in³, its outside surface is 432 in², and a ribbon tied in a cross around it (not counting the bow) is 64 in long.</p>",
       claims: [
         {
           id: "large-paper",
@@ -467,7 +467,7 @@
       kind: "Changing dimensions · G.DF.2",
       blurb: "A small prism-and-pyramid model of a stone sculpture.",
       level: 3,
-      passage: "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 170\" role=\"img\" aria-label=\"A clay model: a square prism with 6 cm base edges and 20 cm tall, topped by a square pyramid 4 cm tall whose slant height, in gold, is 5 cm; hidden edges are dashed\"><polygon class=\"sh2\" points=\"120,150 153,150 153,40 120,40\"/><polygon class=\"sh2\" points=\"153,150 167.3,141.8 167.3,31.8 153,40\"/><path class=\"ln\" d=\"M120 40 L143.6 13.9 L153 40 M143.6 13.9 L167.3 31.8\"/><path class=\"thin dash\" d=\"M134.3 141.8 L120 150 M134.3 141.8 L167.3 141.8 M134.3 141.8 L134.3 31.8 L120 40 M134.3 31.8 L167.3 31.8 M134.3 31.8 L143.6 13.9 M143.6 13.9 L143.6 35.9\"/><line class=\"ac\" x1=\"143.6\" y1=\"13.9\" x2=\"136.5\" y2=\"40\"/><path class=\"thin dash\" d=\"M143.6 13.9 H183.3 M143.6 35.9 H183.3\"/><path class=\"thin\" d=\"M175.3 13.9 H183.3 M175.3 35.9 H183.3 M179.3 13.9 V35.9\"/><text x=\"187.3\" y=\"29.9\" text-anchor=\"start\">4 cm</text><text x=\"136.5\" y=\"166\" text-anchor=\"middle\">6 cm</text><text x=\"173.3\" y=\"106.8\" text-anchor=\"start\">20 cm</text><text class=\"acc\" x=\"132.1\" y=\"28.9\" text-anchor=\"end\">5 cm</text></svg></figure><p class=\"geo-given\">An artist makes a clay model of a stone sculpture: a square prism with a square pyramid on top. The prism has 6 cm base edges and is 20 cm tall. The pyramid is 4 cm tall, and its slant height is 5 cm. The model's volume is 768 cm³, and its outside, not counting the bottom, has an area of 540 cm². The sculpture will be similar to the model, with every length 25 times as long.</p>",
+      passage: "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 170\" role=\"img\" aria-label=\"A clay model: a square prism with 6 cm base edges and 12 cm tall, topped by a square pyramid 4 cm tall whose slant height, in gold, is 5 cm; hidden edges are dashed\"><polygon class=\"sh2\" points=\"128,150 170,150 170,66 128,66\"/><polygon class=\"sh2\" points=\"170,150 188.2,139.5 188.2,55.5 170,66\"/><path class=\"ln\" d=\"M128 66 L158.1 32.8 L170 66 M158.1 32.8 L188.2 55.5\"/><path class=\"thin dash\" d=\"M146.2 139.5 L128 150 M146.2 139.5 L188.2 139.5 M146.2 139.5 L146.2 55.5 L128 66 M146.2 55.5 L188.2 55.5 M146.2 55.5 L158.1 32.8 M158.1 32.8 L158.1 60.8\"/><line class=\"ac\" x1=\"158.1\" y1=\"32.8\" x2=\"149\" y2=\"66\"/><path class=\"thin dash\" d=\"M158.1 32.8 H206.2 M158.1 60.8 H206.2\"/><path class=\"thin\" d=\"M198.2 32.8 H206.2 M198.2 60.8 H206.2 M202.2 32.8 V60.8\"/><text x=\"210.2\" y=\"51.8\" text-anchor=\"start\">4 cm</text><text x=\"149\" y=\"166\" text-anchor=\"middle\">6 cm</text><text x=\"195.2\" y=\"109.5\" text-anchor=\"start\">12 cm</text><text class=\"acc\" x=\"122\" y=\"54.4\" text-anchor=\"end\">5 cm</text></svg></figure><p class=\"geo-given\">An artist makes a clay model of a stone sculpture: a square prism with a square pyramid on top. The prism has 6 cm base edges and is 12 cm tall. The pyramid is 4 cm tall, and its slant height is 5 cm. The model's volume is 480 cm³, and its outside, not counting the bottom, has an area of 348 cm². The sculpture will be similar to the model, with every length 25 times as long.</p>",
       claims: [
         {
           id: "real-height",
@@ -475,10 +475,10 @@
           sub: "G.DF.2.2",
           stem: "How tall will the sculpture be, from the ground to the tip of the pyramid?",
           choices: [
-            { letter: "A", text: "5 m" },
-            { letter: "B", text: "60 m" },
-            { letter: "C", text: "6 m" },
-            { letter: "D", text: "150 m" }
+            { letter: "A", text: "3 m" },
+            { letter: "B", text: "40 m" },
+            { letter: "C", text: "4 m" },
+            { letter: "D", text: "100 m" }
           ],
           correct: "C"
         },
@@ -488,10 +488,10 @@
           sub: "G.DF.2.2",
           stem: "The sculpture's outside, not counting the bottom, will be sealed. To the nearest tenth of a square meter, how much area needs sealer? (1 m² = 10,000 cm²)",
           choices: [
-            { letter: "A", text: "3.4 m²" },
-            { letter: "B", text: "33.8 m²" },
-            { letter: "C", text: "1.4 m²" },
-            { letter: "D", text: "843.8 m²" }
+            { letter: "A", text: "2.2 m²" },
+            { letter: "B", text: "21.8 m²" },
+            { letter: "C", text: "0.9 m²" },
+            { letter: "D", text: "543.8 m²" }
           ],
           correct: "B"
         },
@@ -501,10 +501,10 @@
           sub: "G.DF.2.2",
           stem: "The stone weighs 2,600 kg per cubic meter. How many kilograms will the sculpture weigh? (1 m³ = 1,000,000 cm³)",
           choices: [
-            { letter: "A", text: "1,248 kg" },
-            { letter: "B", text: "29,250 kg" },
-            { letter: "C", text: "49.92 kg" },
-            { letter: "D", text: "31,200 kg" }
+            { letter: "A", text: "780 kg" },
+            { letter: "B", text: "17,550 kg" },
+            { letter: "C", text: "31.2 kg" },
+            { letter: "D", text: "19,500 kg" }
           ],
           correct: "D"
         },
@@ -512,12 +512,12 @@
           id: "taller-prism",
           sol: "G.DF.2",
           sub: "G.DF.2.1",
-          stem: "On a second model, the artist keeps the 6 cm base edges and the same pyramid but makes the prism 30 cm tall instead of 20 cm. What is the volume of the second model?",
+          stem: "On a second model, the artist keeps the 6 cm base edges and the same pyramid but makes the prism 18 cm tall instead of 12 cm. What is the volume of the second model?",
           choices: [
-            { letter: "A", text: "2,592 cm³" },
-            { letter: "B", text: "1,128 cm³" },
-            { letter: "C", text: "1,152 cm³" },
-            { letter: "D", text: "1,080 cm³" }
+            { letter: "A", text: "1,620 cm³" },
+            { letter: "B", text: "696 cm³" },
+            { letter: "C", text: "720 cm³" },
+            { letter: "D", text: "648 cm³" }
           ],
           correct: "B"
         },
@@ -525,10 +525,10 @@
           id: "student-model",
           sol: "G.DF.2",
           sub: "G.DF.2.3",
-          stem: "A student's model has 9 cm base edges, a prism 30 cm tall and a pyramid 5 cm tall. Is it similar to the artist's model? Choose the answer with the correct reason.",
+          stem: "A student's model has 9 cm base edges, a prism 18 cm tall and a pyramid 5 cm tall. Is it similar to the artist's model? Choose the answer with the correct reason.",
           choices: [
-            { letter: "A", text: "No: 9/6 = 30/20 = 1.5, but 5/4 = 1.25." },
-            { letter: "B", text: "No: 9/6 = 1.5, but 30/20 = 2." },
+            { letter: "A", text: "No: 9/6 = 18/12 = 1.5, but 5/4 = 1.25." },
+            { letter: "B", text: "No: 9/6 = 1.5, but 18/12 = 2." },
             { letter: "C", text: "Yes: its volume is 1.5 times the model's volume." },
             { letter: "D", text: "Yes: all three ratios equal 1.5." }
           ],
@@ -538,12 +538,12 @@
           id: "bronze-copy",
           sol: "G.DF.2",
           sub: "G.DF.2.2",
-          stem: "A small bronze copy is similar to the model and has a volume of 96 cm³. How tall is the copy, from its base to the tip of the pyramid?",
+          stem: "A small bronze copy is similar to the model and has a volume of 60 cm³. How tall is the copy, from its base to the tip of the pyramid?",
           choices: [
-            { letter: "A", text: "3 cm" },
-            { letter: "B", text: "10 cm" },
-            { letter: "C", text: "12 cm" },
-            { letter: "D", text: "about 8.5 cm" }
+            { letter: "A", text: "2 cm" },
+            { letter: "B", text: "6 cm" },
+            { letter: "C", text: "8 cm" },
+            { letter: "D", text: "about 5.7 cm" }
           ],
           correct: "C"
         }
@@ -557,7 +557,7 @@
       kind: "Changing dimensions · G.DF.2",
       blurb: "Wax, wrappers and prices for candles of one shape.",
       level: 3,
-      passage: "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 160\" role=\"img\" aria-label=\"A cone-shaped candle, point up with a wick: base radius 4 cm, height 7.5 cm (dashed, with a right angle at the center of the base) and slant height 8.5 cm in gold\"><path class=\"sh\" d=\"M68 140 L120 42.5 L172 140 A52 13 0 0 1 68 140 Z\"/><path class=\"ln\" d=\"M68 140 L120 42.5 M68 140 A52 13 0 0 0 172 140\"/><path class=\"thin dash\" d=\"M68 140 A52 13 0 0 1 172 140\"/><line class=\"ac\" x1=\"120\" y1=\"42.5\" x2=\"172\" y2=\"140\"/><line class=\"thin dash\" x1=\"120\" y1=\"42.5\" x2=\"120\" y2=\"140\"/><line class=\"thin\" x1=\"120\" y1=\"140\" x2=\"172\" y2=\"140\"/><path class=\"thin\" d=\"M127 140 V133 H120\"/><path class=\"thin\" d=\"M120 42.5 V33.5\"/><path class=\"thin\" d=\"M120 20.5 C126 28.5 123 33.5 120 33.5 C117 33.5 114 28.5 120 20.5 Z\"/><circle class=\"dt\" cx=\"120\" cy=\"140\" r=\"2.5\"/><path class=\"thin\" d=\"M46 42.5 H54 M46 140 H54 M50 42.5 V140\"/><text x=\"44\" y=\"96.3\" text-anchor=\"end\">7.5 cm</text><text x=\"148\" y=\"134\" text-anchor=\"middle\">4 cm</text><text class=\"acc\" x=\"158\" y=\"91.3\" text-anchor=\"start\">8.5 cm</text></svg></figure><p class=\"geo-given\">A candle maker pours cone-shaped candles. The standard candle has a base radius of 4 cm, a height of 7.5 cm and a slant height of 8.5 cm. It uses 40π cm³ of wax, and its sloped side has an area of 34π cm².</p>",
+      passage: "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 166\" role=\"img\" aria-label=\"A cone-shaped candle, point up with a wick: base radius 4 cm, height 7.5 cm (dashed, with a right angle at the center of the base) and slant height 8.5 cm in gold\"><path class=\"sh\" d=\"M76 140 L140 20 L204 140 A64 19.2 0 0 1 76 140 Z\"/><path class=\"ln\" d=\"M76 140 L140 20 M76 140 A64 19.2 0 0 0 204 140\"/><path class=\"thin dash\" d=\"M76 140 A64 19.2 0 0 1 204 140\"/><line class=\"ac\" x1=\"140\" y1=\"20\" x2=\"204\" y2=\"140\"/><line class=\"thin dash\" x1=\"140\" y1=\"20\" x2=\"140\" y2=\"140\"/><line class=\"thin\" x1=\"140\" y1=\"140\" x2=\"204\" y2=\"140\"/><path class=\"thin\" d=\"M147 140 V133 H140\"/><path class=\"thin\" d=\"M140 20 V14\"/><path class=\"thin\" d=\"M140 1 C146 9 143 14 140 14 C137 14 134 9 140 1 Z\"/><circle class=\"dt\" cx=\"140\" cy=\"140\" r=\"2.5\"/><path class=\"thin\" d=\"M58 20 H66 M58 140 H66 M62 20 V140\"/><text x=\"56\" y=\"85\" text-anchor=\"end\">7.5 cm</text><text x=\"170\" y=\"153\" text-anchor=\"middle\">4 cm</text><text class=\"acc\" x=\"184\" y=\"80\" text-anchor=\"start\">8.5 cm</text></svg></figure><p class=\"geo-given\">A candle maker pours cone-shaped candles. The standard candle has a base radius of 4 cm, a height of 7.5 cm and a slant height of 8.5 cm. It uses 40π cm³ of wax, and its sloped side has an area of 34π cm².</p>",
       claims: [
         {
           id: "large-wax",
@@ -647,7 +647,7 @@
       kind: "Changing dimensions · G.DF.2",
       blurb: "Three snowballs: a head, a middle and a base.",
       level: 1,
-      passage: "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 166\" role=\"img\" aria-label=\"A snowman of three stacked spheres, each touching the next: the head has radius 6 in, the middle 9 in and the base 12 in; each radius is drawn from the center\"><line class=\"thin\" x1=\"24\" y1=\"160\" x2=\"296\" y2=\"160\"/><circle class=\"sh2\" cx=\"110\" cy=\"126.4\" r=\"33.6\"/><line class=\"thin\" x1=\"110\" y1=\"126.4\" x2=\"143.6\" y2=\"126.4\"/><circle class=\"dt\" cx=\"110\" cy=\"126.4\" r=\"2.5\"/><text x=\"151.6\" y=\"131.4\" text-anchor=\"start\">12 in</text><circle class=\"sh2\" cx=\"110\" cy=\"67.6\" r=\"25.2\"/><line class=\"thin\" x1=\"110\" y1=\"67.6\" x2=\"135.2\" y2=\"67.6\"/><circle class=\"dt\" cx=\"110\" cy=\"67.6\" r=\"2.5\"/><text x=\"143.2\" y=\"72.6\" text-anchor=\"start\">9 in</text><circle class=\"sh2\" cx=\"110\" cy=\"25.6\" r=\"16.8\"/><line class=\"thin\" x1=\"110\" y1=\"25.6\" x2=\"126.8\" y2=\"25.6\"/><circle class=\"dt\" cx=\"110\" cy=\"25.6\" r=\"2.5\"/><text x=\"134.8\" y=\"30.6\" text-anchor=\"start\">6 in</text><text class=\"sm\" x=\"172.8\" y=\"30.6\" text-anchor=\"start\">head</text><text class=\"sm\" x=\"181.2\" y=\"72.6\" text-anchor=\"start\">middle</text><text class=\"sm\" x=\"189.6\" y=\"131.4\" text-anchor=\"start\">base</text></svg></figure><p class=\"geo-given\">A snowman is made of three snowballs, each a sphere. Their radii are 6 in (head), 9 in (middle) and 12 in (base). The head has a surface area of 144π in² and a volume of 288π in³.</p>",
+      passage: "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 166\" role=\"img\" aria-label=\"A snowman of three stacked spheres, each touching the next: the head has radius 6 in, the middle 9 in and the base 12 in; each radius is drawn from the center\"><line class=\"thin\" x1=\"24\" y1=\"160\" x2=\"296\" y2=\"160\"/><circle class=\"sh2\" cx=\"110\" cy=\"126.4\" r=\"33.6\"/><line class=\"thin\" x1=\"110\" y1=\"126.4\" x2=\"143.6\" y2=\"126.4\"/><circle class=\"dt\" cx=\"110\" cy=\"126.4\" r=\"2.5\"/><text x=\"151.6\" y=\"131.4\" text-anchor=\"start\">12 in</text><circle class=\"sh2\" cx=\"110\" cy=\"67.6\" r=\"25.2\"/><line class=\"thin\" x1=\"110\" y1=\"67.6\" x2=\"135.2\" y2=\"67.6\"/><circle class=\"dt\" cx=\"110\" cy=\"67.6\" r=\"2.5\"/><text x=\"143.2\" y=\"72.6\" text-anchor=\"start\">9 in</text><circle class=\"sh2\" cx=\"110\" cy=\"25.6\" r=\"16.8\"/><line class=\"thin\" x1=\"110\" y1=\"25.6\" x2=\"126.8\" y2=\"25.6\"/><circle class=\"dt\" cx=\"110\" cy=\"25.6\" r=\"2.5\"/><text x=\"134.8\" y=\"30.6\" text-anchor=\"start\">6 in</text><text class=\"sm\" x=\"212\" y=\"30.6\" text-anchor=\"start\">(head)</text><text class=\"sm\" x=\"212\" y=\"72.6\" text-anchor=\"start\">(middle)</text><text class=\"sm\" x=\"212\" y=\"131.4\" text-anchor=\"start\">(base)</text></svg></figure><p class=\"geo-given\">A snowman is made of three snowballs, each a sphere. Their radii are 6 in (head), 9 in (middle) and 12 in (base). The head has a surface area of 144π in² and a volume of 288π in³.</p>",
       claims: [
         {
           id: "base-volume",
@@ -737,7 +737,7 @@
       kind: "Changing dimensions · G.DF.2",
       blurb: "Soil, boards and planting space in a backyard bed.",
       level: 1,
-      passage: "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 150\" role=\"img\" aria-label=\"A raised garden bed: a wooden box 8 ft long, 3 ft wide and 1.5 ft deep with no top or bottom, filled with soil (shaded) with sprouts; hidden edges dashed\"><polygon class=\"sh\" points=\"50,97 226,97 254.6,80.5 78.6,80.5\"/><polygon class=\"sh2\" points=\"50,130 226,130 226,97 50,97\"/><polygon class=\"sh2\" points=\"226,130 254.6,113.5 254.6,80.5 226,97\"/><path class=\"thin dash\" d=\"M78.6 113.5 L50 130 M78.6 113.5 L254.6 113.5 M78.6 113.5 L78.6 80.5\"/><path class=\"thin\" d=\"M50 113.5 L226 113.5 L254.6 97\"/><path class=\"thin\" d=\"M103.5 91.5 L99.5 84.5 M103.5 91.5 L107.5 84.5\"/><path class=\"thin\" d=\"M157.1 86 L153.1 79 M157.1 86 L161.1 79\"/><path class=\"thin\" d=\"M191.5 91.5 L187.5 84.5 M191.5 91.5 L195.5 84.5\"/><path class=\"thin\" d=\"M141.4 84.9 L137.4 77.9 M141.4 84.9 L145.4 77.9\"/><path class=\"thin\" d=\"M173 92.1 L169 85.1 M173 92.1 L177 85.1\"/><text x=\"138\" y=\"147\" text-anchor=\"middle\">8 ft</text><text x=\"44\" y=\"118.5\" text-anchor=\"end\">1.5 ft</text><text x=\"248.3\" y=\"135.8\" text-anchor=\"start\">3 ft</text><text class=\"sm\" x=\"166.6\" y=\"66.5\" text-anchor=\"middle\">soil</text></svg></figure><p class=\"geo-given\">A raised garden bed is a wooden frame with no top or bottom, 8 ft long, 3 ft wide and 1.5 ft deep. It holds 36 ft³ of soil. Its four wooden sides have an area of 33 ft², and its top is 24 ft² of planting space.</p>",
+      passage: "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 130\" role=\"img\" aria-label=\"A raised garden bed: a wooden box 8 ft long, 3 ft wide and 1.5 ft deep with no top or bottom, filled with soil (shaded) with sprouts; hidden edges dashed\"><polygon class=\"sh\" points=\"40,67 248,67 281.8,47.5 73.8,47.5\"/><polygon class=\"sh2\" points=\"40,106 248,106 248,67 40,67\"/><polygon class=\"sh2\" points=\"248,106 281.8,86.5 281.8,47.5 248,67\"/><path class=\"thin dash\" d=\"M73.8 86.5 L40 106 M73.8 86.5 L281.8 86.5 M73.8 86.5 L73.8 47.5\"/><path class=\"thin\" d=\"M40 86.5 L248 86.5 L281.8 67\"/><path class=\"thin\" d=\"M103.3 60.5 V54.5 L99.3 50.5 M103.3 54.5 L107.3 50.5\"/><path class=\"thin\" d=\"M166.5 54 V48 L162.5 44 M166.5 48 L170.5 44\"/><path class=\"thin\" d=\"M207.3 60.5 V54.5 L203.3 50.5 M207.3 54.5 L211.3 50.5\"/><path class=\"thin\" d=\"M148 52.7 V46.7 L144 42.7 M148 46.7 L152 42.7\"/><path class=\"thin\" d=\"M185.3 61.2 V55.2 L181.3 51.2 M185.3 55.2 L189.3 51.2\"/><text x=\"144\" y=\"123\" text-anchor=\"middle\">8 ft</text><text x=\"34\" y=\"91.5\" text-anchor=\"end\">1.5 ft</text><text x=\"272.9\" y=\"110.3\" text-anchor=\"start\">3 ft</text><text class=\"sm\" x=\"177.8\" y=\"33.5\" text-anchor=\"middle\">soil</text></svg></figure><p class=\"geo-given\">A raised garden bed is a wooden frame with no top or bottom, 8 ft long, 3 ft wide and 1.5 ft deep. It holds 36 ft³ of soil. Its four wooden sides have an area of 33 ft², and its top is 24 ft² of planting space.</p>",
       claims: [
         {
           id: "long-bed",
@@ -827,7 +827,7 @@
       kind: "Changing dimensions · G.DF.2",
       blurb: "Water, liner and edging stones for a round pond.",
       level: 2,
-      passage: "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 132\" role=\"img\" aria-label=\"A round backyard fish pond seen from above at an angle: the water surface is 10 ft across, a gold ring of edging stones runs around the rim, and dashed lines show the walls and floor 2 ft below the ground\"><line class=\"thin\" x1=\"20\" y1=\"46\" x2=\"62\" y2=\"46\"/><line class=\"thin\" x1=\"258\" y1=\"46\" x2=\"300\" y2=\"46\"/><path class=\"thin dash\" d=\"M70 46 V82 A90 27 0 0 0 250 82 V46\"/><ellipse class=\"sh2\" cx=\"160\" cy=\"46\" rx=\"90\" ry=\"27\"/><ellipse class=\"ac\" cx=\"160\" cy=\"46\" rx=\"94\" ry=\"30\"/><line class=\"thin dash\" x1=\"70\" y1=\"46\" x2=\"250\" y2=\"46\"/><text x=\"160\" y=\"39\" text-anchor=\"middle\">10 ft</text><path class=\"thin\" d=\"M262 46 H270 M262 82 H270 M266 46 V82\"/><text x=\"274\" y=\"69\" text-anchor=\"start\">2 ft</text><text class=\"sm\" x=\"60\" y=\"86\" text-anchor=\"end\">underground</text><text class=\"sm acc\" x=\"160\" y=\"91\" text-anchor=\"middle\">edging stones</text></svg></figure><p class=\"geo-given\">A backyard fish pond is a cylinder 10 ft across (radius 5 ft) and 2 ft deep. It holds 50π ft³ of water. Its liner covers the floor and the side: 45π ft². A ring of edging stones runs around its rim, 10π ft long.</p>",
+      passage: "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 132\" role=\"img\" aria-label=\"A round backyard fish pond seen from above at an angle: the water surface is 10 ft across, a gold ring of edging stones runs around the rim, and dashed lines show the walls and floor 2 ft below the ground\"><line class=\"thin\" x1=\"20\" y1=\"46\" x2=\"62\" y2=\"46\"/><line class=\"thin\" x1=\"258\" y1=\"46\" x2=\"300\" y2=\"46\"/><path class=\"thin dash\" d=\"M70 46 V82 A90 27 0 0 0 250 82 V46\"/><ellipse class=\"sh2\" cx=\"160\" cy=\"46\" rx=\"90\" ry=\"27\"/><ellipse class=\"ac\" cx=\"160\" cy=\"46\" rx=\"94\" ry=\"30\"/><line class=\"thin dash\" x1=\"70\" y1=\"46\" x2=\"250\" y2=\"46\"/><text x=\"160\" y=\"39\" text-anchor=\"middle\">10 ft</text><path class=\"thin\" d=\"M262 46 H270 M262 82 H270 M266 46 V82\"/><text x=\"274\" y=\"69\" text-anchor=\"start\">2 ft</text><text class=\"sm acc\" x=\"68\" y=\"15\" text-anchor=\"middle\">edging stones</text></svg></figure><p class=\"geo-given\">A backyard fish pond is a cylinder 10 ft across (radius 5 ft) and 2 ft deep. It holds 50π ft³ of water. Its liner covers the floor and the side: 45π ft². A ring of edging stones runs around its rim, 10π ft long.</p>",
       claims: [
         {
           id: "deeper",
@@ -917,7 +917,7 @@
       kind: "Changing dimensions · G.DF.2",
       blurb: "Chicken, goose, duck and robin eggs compared.",
       level: 2,
-      passage: "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 154\" role=\"img\" aria-label=\"Two eggs drawn to scale, lying on their sides: a chicken egg 6 cm long and 4.5 cm wide, and a goose egg 8 cm long and 6 cm wide\"><path class=\"sh2\" d=\"M97.8 28.5 A37.8 31.5 0 0 0 97.8 91.5 A46.2 31.5 0 0 0 97.8 28.5 Z\"/><path class=\"sh2\" d=\"M246.4 18 A50.4 42 0 0 0 246.4 102 A61.6 42 0 0 0 246.4 18 Z\"/><path class=\"thin\" d=\"M60 108 V116 M144 108 V116 M60 112 H144\"/><text x=\"102\" y=\"130\" text-anchor=\"middle\">6 cm</text><path class=\"thin\" d=\"M51 28.5 H59 M51 91.5 H59 M55 28.5 V91.5\"/><text x=\"49\" y=\"65\" text-anchor=\"end\">4.5 cm</text><text class=\"sm\" x=\"102\" y=\"148\" text-anchor=\"middle\">chicken</text><path class=\"thin\" d=\"M196 108 V116 M308 108 V116 M196 112 H308\"/><text x=\"252\" y=\"130\" text-anchor=\"middle\">8 cm</text><path class=\"thin\" d=\"M187 18 H195 M187 102 H195 M191 18 V102\"/><text x=\"185\" y=\"65\" text-anchor=\"end\">6 cm</text><text class=\"sm\" x=\"252\" y=\"148\" text-anchor=\"middle\">goose</text></svg></figure><p class=\"geo-given\">A nature center shows bird eggs. Eggs with the same shape are similar solids. A chicken egg is 6 cm long and 4.5 cm wide. Its shell has an area of 63 cm², and it holds 54 cm³. A goose egg has the same shape: it is 8 cm long and 6 cm wide.</p>",
+      passage: "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 154\" role=\"img\" aria-label=\"Two eggs drawn to scale, lying on their sides: a chicken egg 6 cm long and 4.5 cm wide, and a goose egg 8 cm long and 6 cm wide\"><path class=\"sh2\" d=\"M93.2 30.8 A31.2 29.3 0 0 0 93.2 89.3 A46.8 29.3 0 0 0 93.2 30.8 Z\"/><path class=\"sh2\" d=\"M243.6 21 A41.6 39 0 0 0 243.6 99 A62.4 39 0 0 0 243.6 21 Z\"/><path class=\"thin\" d=\"M62 108 V116 M140 108 V116 M62 112 H140\"/><text x=\"101\" y=\"130\" text-anchor=\"middle\">6 cm</text><path class=\"thin\" d=\"M53 30.8 H61 M53 89.3 H61 M57 30.8 V89.3\"/><text x=\"51\" y=\"65\" text-anchor=\"end\">4.5 cm</text><text class=\"sm\" x=\"101\" y=\"148\" text-anchor=\"middle\">chicken</text><path class=\"thin\" d=\"M202 108 V116 M306 108 V116 M202 112 H306\"/><text x=\"254\" y=\"130\" text-anchor=\"middle\">8 cm</text><path class=\"thin\" d=\"M193 21 H201 M193 99 H201 M197 21 V99\"/><text x=\"191\" y=\"65\" text-anchor=\"end\">6 cm</text><text class=\"sm\" x=\"254\" y=\"148\" text-anchor=\"middle\">goose</text></svg></figure><p class=\"geo-given\">A nature center shows bird eggs. Eggs with the same shape are similar solids. A chicken egg is 6 cm long and 4.5 cm wide. Its shell has an area of 63 cm², and it holds 54 cm³. A goose egg has the same shape: it is 8 cm long and 6 cm wide.</p>",
       claims: [
         {
           id: "same-shape",
@@ -1097,7 +1097,7 @@
       kind: "Changing dimensions · G.DF.2",
       blurb: "A domed silo and bales of hay, big and small.",
       level: 3,
-      passage: "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 170\" role=\"img\" aria-label=\"Left: a silo, a cylinder with radius 6 ft and walls 40 ft tall, topped by a half-sphere dome. Right: a small hay bale, a box 3 ft by 1.5 ft by 1.5 ft with two strings around it\"><path class=\"sh2\" d=\"M52 30 V150 A18 5.4 0 0 0 88 150 V30 A18 18 0 0 0 52 30 Z\"/><path class=\"ln\" d=\"M52 30 V150 A18 5.4 0 0 0 88 150 V30 A18 18 0 0 0 52 30\"/><path class=\"thin\" d=\"M52 30 A18 5.4 0 0 0 88 30\"/><path class=\"thin dash\" d=\"M52 150 A18 5.4 0 0 1 88 150\"/><line class=\"thin dash\" x1=\"70\" y1=\"30\" x2=\"88\" y2=\"30\"/><circle class=\"dt\" cx=\"70\" cy=\"30\" r=\"2.5\"/><text x=\"94\" y=\"32\" text-anchor=\"start\">6 ft</text><text x=\"46\" y=\"95\" text-anchor=\"end\">40 ft</text><text class=\"sm\" x=\"70\" y=\"169.4\" text-anchor=\"middle\">silo</text><polygon class=\"sh\" points=\"176,136 242,136 242,103 176,103\"/><polygon class=\"sh\" points=\"242,136 256.3,127.8 256.3,94.8 242,103\"/><polygon class=\"sh\" points=\"176,103 242,103 256.3,94.8 190.3,94.8\"/><path class=\"thin\" d=\"M198 136 L198 103 L212.3 94.8\"/><path class=\"thin\" d=\"M220 136 L220 103 L234.3 94.8\"/><text x=\"209\" y=\"153\" text-anchor=\"middle\">3 ft</text><text x=\"170\" y=\"124.5\" text-anchor=\"end\">1.5 ft</text><text x=\"257.1\" y=\"144.9\" text-anchor=\"start\">1.5 ft</text><text class=\"sm\" x=\"216.1\" y=\"84.8\" text-anchor=\"middle\">small hay bale</text></svg><figcaption>The silo and the bale are not drawn to the same scale.</figcaption></figure><p class=\"geo-given\">A farm stores grain in a silo: a cylinder with a radius of 6 ft and walls 40 ft tall, topped by a half-sphere dome. The silo holds 1,584π ft³, and its painted outside (side and dome) is 552π ft². A small hay bale is a box 3 ft long, 1.5 ft wide and 1.5 ft tall.</p>",
+      passage: "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 170\" role=\"img\" aria-label=\"Left: a silo, a cylinder with radius 6 ft and walls 40 ft tall, topped by a half-sphere dome. Right: a small hay bale, a box 3 ft by 1.5 ft by 1.5 ft with two strings around it\"><path class=\"sh2\" d=\"M52 30 V150 A18 5.4 0 0 0 88 150 V30 A18 18 0 0 0 52 30 Z\"/><path class=\"ln\" d=\"M52 30 V150 A18 5.4 0 0 0 88 150 V30 A18 18 0 0 0 52 30\"/><path class=\"thin\" d=\"M52 30 A18 5.4 0 0 0 88 30\"/><path class=\"thin dash\" d=\"M52 150 A18 5.4 0 0 1 88 150\"/><line class=\"thin dash\" x1=\"70\" y1=\"30\" x2=\"88\" y2=\"30\"/><circle class=\"dt\" cx=\"70\" cy=\"30\" r=\"2.5\"/><text x=\"94\" y=\"32\" text-anchor=\"start\">6 ft</text><text x=\"46\" y=\"95\" text-anchor=\"end\">40 ft</text><text class=\"sm\" x=\"46\" y=\"154\" text-anchor=\"end\">silo</text><polygon class=\"sh\" points=\"176,136 242,136 242,103 176,103\"/><polygon class=\"sh\" points=\"242,136 256.3,127.8 256.3,94.8 242,103\"/><polygon class=\"sh\" points=\"176,103 242,103 256.3,94.8 190.3,94.8\"/><path class=\"thin\" d=\"M198 136 L198 103 L212.3 94.8\"/><path class=\"thin\" d=\"M220 136 L220 103 L234.3 94.8\"/><text x=\"209\" y=\"153\" text-anchor=\"middle\">3 ft</text><text x=\"170\" y=\"124.5\" text-anchor=\"end\">1.5 ft</text><text x=\"257.1\" y=\"144.9\" text-anchor=\"start\">1.5 ft</text><text class=\"sm\" x=\"216.1\" y=\"84.8\" text-anchor=\"middle\">small hay bale</text></svg><figcaption>The silo and the bale are not drawn to the same scale.</figcaption></figure><p class=\"geo-given\">A farm stores grain in a silo: a cylinder with a radius of 6 ft and walls 40 ft tall, topped by a half-sphere dome. The silo holds 1,584π ft³, and its painted outside (side and dome) is 552π ft². A small hay bale is a box 3 ft long, 1.5 ft wide and 1.5 ft tall.</p>",
       claims: [
         {
           id: "half-silo",
@@ -1187,7 +1187,7 @@
       kind: "Changing dimensions · G.DF.2",
       blurb: "Cutting, comparing and weighing cylinder logs.",
       level: 3,
-      passage: "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 124\" role=\"img\" aria-label=\"A log lying on its side, shaped like a cylinder 3 ft across and 16 ft long; the near end shows tree rings and the hidden half of the far end is dashed\"><path class=\"sh2\" d=\"M52 45.4 H272 A8 20.6 0 0 1 272 86.6 H52 Z\"/><path class=\"ln\" d=\"M52 45.4 H272 A8 20.6 0 0 1 272 86.6 H52\"/><path class=\"thin dash\" d=\"M272 45.4 A8 20.6 0 0 0 272 86.6\"/><ellipse class=\"sh\" cx=\"52\" cy=\"66\" rx=\"8\" ry=\"20.6\"/><ellipse class=\"thin\" cx=\"52\" cy=\"66\" rx=\"5\" ry=\"12.8\"/><ellipse class=\"thin\" cx=\"52\" cy=\"66\" rx=\"2.2\" ry=\"5.8\"/><path class=\"thin\" d=\"M112 52.4 h18 M172 70 h22 M227 78.6 h16\"/><path class=\"thin\" d=\"M52 94.6 V102.6 M272 94.6 V102.6 M52 98.6 H272\"/><text x=\"162\" y=\"116.6\" text-anchor=\"middle\">16 ft</text><path class=\"thin\" d=\"M32 45.4 H40 M32 86.6 H40 M36 45.4 V86.6\"/><text x=\"30\" y=\"71\" text-anchor=\"end\">3 ft</text></svg></figure><p class=\"geo-given\">A logger cuts a tree trunk into logs. Treat each log as a cylinder. The first log is 3 ft across (radius 1.5 ft) and 16 ft long. It has 36π ft³ of wood, and its bark (the curved side) covers 48π ft².</p>",
+      passage: "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 124\" role=\"img\" aria-label=\"A log lying on its side, shaped like a cylinder 3 ft across and 16 ft long; the near end shows tree rings and the hidden half of the far end is dashed\"><path class=\"sh2\" d=\"M52 45.4 H272 A8 20.6 0 0 1 272 86.6 H52 Z\"/><path class=\"ln\" d=\"M52 45.4 H272 A8 20.6 0 0 1 272 86.6 H52\"/><path class=\"thin dash\" d=\"M272 45.4 A8 20.6 0 0 0 272 86.6\"/><ellipse class=\"sh\" cx=\"52\" cy=\"66\" rx=\"8\" ry=\"20.6\"/><ellipse class=\"thin\" cx=\"52\" cy=\"66\" rx=\"5\" ry=\"12.8\"/><ellipse class=\"thin\" cx=\"52\" cy=\"66\" rx=\"2.2\" ry=\"5.8\"/><path class=\"thin\" d=\"M52 94.6 V102.6 M272 94.6 V102.6 M52 98.6 H272\"/><text x=\"162\" y=\"116.6\" text-anchor=\"middle\">16 ft</text><path class=\"thin\" d=\"M32 45.4 H40 M32 86.6 H40 M36 45.4 V86.6\"/><text x=\"30\" y=\"71\" text-anchor=\"end\">3 ft</text></svg></figure><p class=\"geo-given\">A logger cuts a tree trunk into logs. Treat each log as a cylinder. The first log is 3 ft across (radius 1.5 ft) and 16 ft long. It has 36π ft³ of wood, and its bark (the curved side) covers 48π ft².</p>",
       claims: [
         {
           id: "thin-log",

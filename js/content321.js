@@ -1587,7 +1587,7 @@
             },
             {
               "letter": "B",
-              "text": "1"
+              "text": "√3/2"
             },
             {
               "letter": "C",
@@ -2368,19 +2368,19 @@
           "choices": [
             {
               "letter": "A",
-              "text": "It is 57°, because it is the complement of 33°."
+              "text": "It is 57°, because it is the complement of the 33° angle at L."
             },
             {
               "letter": "B",
-              "text": "It is 14°, because it matches the angle above the level line."
+              "text": "It is 14°, because it matches the angle above the level line through L."
             },
             {
               "letter": "C",
-              "text": "It is 47°, because it is 14° + 33°."
+              "text": "It is 47°, because it is the sum of the two angles marked at L."
             },
             {
               "letter": "D",
-              "text": "It is 33°, because the level line through L is parallel to the pool's surface."
+              "text": "It is 33°, because the level line through L is parallel to the pool."
             }
           ],
           "correct": "D"
