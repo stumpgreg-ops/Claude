@@ -29,6 +29,17 @@ A game uploaded to Canvas can't send anything anywhere, so progress is shown to 
 
 Tests: `node tools/smoke-progress.js` (after `node tools/build-games.js`, `node tools/build-appsscript.js VA|ODY` and `node tools/build-canvas.js VA|ODY`).
 
+## v5.20.0 (2026-10-11) — Geometry: every mode has its own questions
+
+The Geometry game now has a separate question pool for each of its six modes, so no two modes ever ask the same question. Each pool is 96 packs (576 questions), enough for a 100-level run (5–7 questions a level, about 567) without a repeat: 576 packs and 3,456 questions in all, up from 52 and 312.
+
+- **How it works:** every Geometry pack names its mode (`mode: "maze" | "raid" | "rocks" | "sky" | "ring" | "worms"`). A level asks only packs of its own mode (`SolModes.modeFor(level)`, so Mixed draws from each level's mode), through `heistBuildPack(family, strand, mode)` in `js/content.js`; the used-question list is kept per mode (`afterHours.geo.usedClaims.GEO.<strand>.<mode>`). Packs with no mode (the reading games) still serve every mode.
+- **Files:** the 52 v5.19 packs are the Labyrinth (maze) pool, in `js/content201.js`–`content204.js`. `js/content301.js`–`content339.js` hold the rest: three files per standard (13 standards), each with two modes, in standard order (301–303 G.RLT.1, … 337–339 G.DF.2; maze+raid, rocks+sky, ring+worms). 7 or 8 packs per standard per mode, levels 1–3, every skill of each standard in every mode.
+- **A theme per mode,** so the questions feel different: Labyrinth, a school; Eagle Swoop, sports and games; Rune Rocks, space, science and weather; Sun Chariot, travel; Wolf Ring, art, music and making things; Root Worms, nature and the outdoors.
+- **Checked twice:** each file was written with a script that computes every key and every named-mistake distractor and checks the figure's coordinates, then solved again blind by a separate reviewer from the no-key screenshots (`node tools/preview-geo.js … --no-key`). The reviewers' answers matched the keys; the problems they found (figures that contradicted the givens, matching marks on unequal parts, a stem that gave away another question's answer, two defensible criteria) were fixed and are listed in `tools/GEO-CONTENT-GUIDE.md` ("Lessons from the blind reviews").
+- **Question documents:** `node tools/make-geo-doc.js` writes one Word file per mode into `docs/questions/` (`SOL-Labyrinth-Geometry-<n>-<Mode>-questions.docx`), with the figures, the questions and the keys.
+- **Tests:** `node tools/smoke-geo.js` now also proves that a Labyrinth level asks only Labyrinth packs and that the six pools each hold about 96 packs and never share one.
+
 ## v5.19.0 (2026-10-08) — the Geometry game (Virginia 2023 Geometry SOL)
 
 A fourth game from the same code, built like the Odyssey one: `node tools/build-games.js` writes `dist/geo/` and `dist/SOLLabyrinth-Geometry-v<version>.zip`; `node tools/build-appsscript.js GEO` then `node tools/build-canvas.js GEO` make `dist/canvas/SOLLabyrinth-Geometry-Canvas.zip` (and the update zip and `SOLLabyrinth-Geometry-Teacher.html`). It has its own title ("Sol's Labyrinth: Geometry"), its own saves (`afterHours.geo.*`) and its own progress codes (`SOL3-GEO-…`, `BUILDS.GEO` in `js/progress-code.js`). The look, the realms, the modes, the town and castle, the Menu and the accommodations are the Virginia game's. In the combined dev page (`index.html`) it is a fourth card on the state screen.

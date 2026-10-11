@@ -1,10 +1,10 @@
-/* Headless test of the Geometry game (dist/geo, v5.19): node tools/build-games.js, then node tools/smoke-geo.js
+/* Headless test of the Geometry game (dist/geo, v5.20): node tools/build-games.js, then node tools/smoke-geo.js
    In the 500-pixel Canvas frame (1000 x 500) it proves: the title screen offers only Geometry; the skill screen has the
    four strands of the 2023 Geometry SOL and All; a level's reading pop-up shows a figure (inline SVG), says "Study first"
    and gives no word count; the side panel shows the figure and the question; a strand pick serves only that strand
    (G.TR.* for Triangles); a right answer is recorded under its Geometry skill (G.TR.x.y) and strand in the Geometry
    save (afterHours.geo.*, not the Virginia one); the progress code is a SOL3-GEO code that reads back; the reading
-   strand badges are not offered; and nothing logs a page error. Screenshots: tools/shots/geo-*.png. */
+   strand badges are not offered; a level asks only its own mode's packs and the six mode pools (about 96 packs each) never share a pack (v5.20); and nothing logs a page error. Screenshots: tools/shots/geo-*.png. */
 var path = require("path"), fs = require("fs"), http = require("http"), url = require("url");
 var { chromium } = require("/opt/node22/lib/node_modules/playwright");
 var repo = path.join(__dirname, ".."), root = path.join(repo, "dist", "geo"), shots = path.join(__dirname, "shots");

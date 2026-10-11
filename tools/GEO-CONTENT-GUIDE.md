@@ -98,3 +98,25 @@ standard; most packs should touch at least two skills, and each file should cove
 - Language: grade 9–10, short sentences, real but low-key contexts (a school, a park, a skate ramp, a garden, a
   cell tower, a pizza, a soup can). Original items only: never copy a released VDOE test item.
 - Levels within a standard: about one level-1 pack, two level-2 packs and one level-3 pack.
+
+## Lessons from the blind reviews (v5.20)
+
+Every v5.20 file was solved blind by a second writer (from `node tools/preview-geo.js … --no-key`) before it shipped.
+These are the problems those reviews kept finding; check for each one.
+
+- **Never contradict the givens.** "Suppose x were 4" when the givens fix x, a "second post" that must stand straight up
+  yet not be parallel, "the same shape" with different lengths: move the what-if to *another* figure ("Another stand
+  has sides of …").
+- **Matching marks mean congruent.** The same plain arc, tick or arrowhead on two parts says they are congruent (or
+  parallel). Never put the same arc on a 72° and a 108° angle, or single arrows on one rail and double on its parallel.
+- **No stem gives away another question's answer.** A pack's questions are asked together. Don't name both triangles
+  by letter ("Why is △ABC ∼ △DEF?") when another item asks for the similarity statement: say "the smaller triangle",
+  "the pole's triangle". Don't show a value (PH ≈ 9.2, √709, a tether's length) that another item asks for.
+- **One answer only.** When ASA and AAS (or SAS and HL) are both offered, say "directly" or "using only …", and make sure
+  no other given (a tick-marked side in the figure) makes a second criterion work. "Is it …? Choose the answer with the
+  correct reason": every wrong reason must be false.
+- **SSA must really be ambiguous** when an item says it proves nothing (two different triangles fit).
+- **Labels sit by their own part.** An angle measure goes inside its own arc (use a short leader when the angle is too
+  narrow); a length goes beside its own segment; two angles at one vertex each get their own arc.
+- **Rounding:** keep keys more than 0.1 of a rounding unit from a boundary; for "how many cans / trips", keep the
+  quotient well away from a whole number and say what is counted.
