@@ -10,8 +10,11 @@ const { Document, Packer, Paragraph, TextRun, HeadingLevel, Table, TableRow, Tab
   BorderStyle, ImageRun, Footer, PageNumber, LevelFormat } = D;
 
 var root = path.join(__dirname, ".."), outDir = path.join(root, "docs", "questions");
-var OUT = path.join(outDir, "SOL-Labyrinth-Geometry-questions-and-answers.docx");
-var FILES = ["content201.js", "content202.js", "content203.js", "content204.js"];
+/* v5.20: one document per game mode (each mode has its own questions) */
+var MODES = [["maze", "Labyrinth"], ["raid", "Eagle Swoop"], ["rocks", "Rune Rocks"], ["sky", "Sun Chariot"], ["ring", "Wolf Ring"], ["worms", "Root Worms"]];
+function outFor(i) { return path.join(outDir, "SOL-Labyrinth-Geometry-" + (i + 1) + "-" + MODES[i][1].replace(/\s+/g, "-") + "-questions.docx"); }
+var FILES = fs.readdirSync(path.join(root, "js")).filter(function (f) { return /^content(20[1-4]|3\d\d)\.js$/.test(f); })
+  .sort(function (a, b) { return parseInt(a.slice(7), 10) - parseInt(b.slice(7), 10); });
 var GS = require(path.join(root, "js", "standards-geo.js"));
 var version = (fs.readFileSync(path.join(root, "index.html"), "utf8").match(/\?v=([0-9.]+)/) || [0, "?"])[1];
 
@@ -20,11 +23,11 @@ var sb = { window: {}, console: console }; sb.global = sb.window;
 vm.runInNewContext(fs.readFileSync(path.join(root, "js", "content.js"), "utf8"), sb);
 var start = sb.window.HEIST_PACKS.length;
 FILES.forEach(function (f) { vm.runInNewContext(fs.readFileSync(path.join(root, "js", f), "utf8"), sb, { filename: f }); });
-var packs = sb.window.HEIST_PACKS.slice(start).filter(function (p) { return p.family === "GEO"; });
+var ALL = sb.window.HEIST_PACKS.slice(start).filter(function (p) { return p.family === "GEO"; }), packs = ALL;
 var STRANDS = GS.STRANDS;
 function codeOf(p) { return p.claims[0].sol; }
 function stdIndex(code) { var k = Object.keys(GS.STANDARDS); return k.indexOf(code); }
-packs.sort(function (a, b) { return stdIndex(codeOf(a)) - stdIndex(codeOf(b)) || (a.level - b.level); });
+ALL.sort(function (a, b) { return stdIndex(codeOf(a)) - stdIndex(codeOf(b)) || (a.level - b.level); });
 
 /* ── text helpers ── */
 var ENT = { "&nbsp;": " ", "&amp;": "&", "&lt;": "<", "&gt;": ">", "&quot;": '"', "&#39;": "'", "&mdash;": "—", "&ndash;": "–", "&rsquo;": "’", "&lsquo;": "‘", "&ldquo;": "“", "&rdquo;": "”" };
@@ -61,6 +64,7 @@ function table(rows, widths, opt) {
     }) }); }) });
 }
 
+var IMAGES = {};
 (async function () {
   /* ── 1. the figures, rendered in print colours ── */
   var browser = await chromium.launch({ executablePath: "/opt/pw-browsers/chromium/chrome-linux/chrome" }).catch(function () { return chromium.launch(); });
@@ -71,8 +75,8 @@ function table(rows, widths, opt) {
     '#fig{width:520px;padding:6px;background:#fff}#fig .geo-fig svg{max-height:none!important;width:100%}' +
     '#fig .geo-fig .sh{fill:rgba(154,106,0,.14)}#fig .geo-fig .sh2{fill:rgba(40,110,200,.14)}#fig .geo-fig .gr{stroke-opacity:.22}' +
     '</style></head><body><div id="fig"></div></body></html>');
-  var images = {};
-  for (var p of packs) {
+  var images = IMAGES;
+  for (var p of ALL) {
     var figs = p.passage.match(/<figure[\s\S]*?<\/figure>/g) || [];
     images[p.id] = [];
     for (var i = 0; i < figs.length; i++) {
@@ -86,14 +90,22 @@ function table(rows, widths, opt) {
   }
   await browser.close();
 
+  for (var mi = 0; mi < MODES.length; mi++) {
+    packs = ALL.filter(function (p) { return (p.mode || "maze") === MODES[mi][0]; });
+    if (packs.length) await writeDoc(mi);
+  }
+})().catch(function (e) { console.error(e); process.exit(1); });
+
+async function writeDoc(mi) {
+  var images = IMAGES, OUT = outFor(mi), modeName = MODES[mi][1];
   /* ── 2. the document ── */
   var kids = [], keyRows = [["Pack", "Question", "Standard", "Skill", "Level", "Answer"]];
   var count = packs.reduce(function (a, p) { return a + p.claims.length; }, 0);
-  kids.push(new Paragraph({ heading: HeadingLevel.TITLE, children: [new TextRun({ text: "Sol's Labyrinth: Geometry — question pool", font: FONT })] }));
+  kids.push(new Paragraph({ heading: HeadingLevel.TITLE, children: [new TextRun({ text: "Sol's Labyrinth: Geometry — " + modeName + " questions", font: FONT })] }));
   kids.push(para([r("Virginia 2023 Geometry Standards of Learning · game version " + version + " · " + packs.length + " question sets · " + count + " questions", { color: "555555" })]));
   kids.push(new Paragraph({ heading: HeadingLevel.HEADING_1, children: [new TextRun("How to read this list")] }));
   [
-    "Every question in the Geometry game is here, grouped by strand and standard. A question set is one figure and its given facts, then six questions about it. In the game, students see the figure before each question and keep it in the side panel while they play.",
+    "These are the questions of one game mode, " + modeName + ": a level in this mode asks only these, and no other mode asks them (each mode has its own document). They are grouped by strand and standard. A question set is one figure and its given facts, then six questions about it. In the game, students see the figure before each question and keep it in the side panel while they play.",
     "The correct answer is in bold with a check mark (✔). Under each question: its standard, its skill (from the game's standards list, at the end of this document) and whether that skill is lower-order (LOTS) or higher-order (HOTS) thinking.",
     "Level 1 sets are one-step problems, level 2 two-step, level 3 multistep, proof or modeling problems. The game picks questions by level to match how each student is doing, and never asks a question again until the student has seen the rest.",
     "The review line under each question is for checking: tick the boxes and write notes, then send the changes back to be made in the game. The standard statements are short summaries of the 2023 Geometry SOL; please check them and the skills against the VDOE document too."
@@ -170,7 +182,7 @@ function table(rows, widths, opt) {
   kids.push(table(srows, [1200, 1000, 5860, 1300], { size: 17 }));
 
   var doc = new Document({
-    creator: "Sol's Labyrinth", title: "Sol's Labyrinth: Geometry — question pool",
+    creator: "Sol's Labyrinth", title: "Sol's Labyrinth: Geometry — " + modeName + " questions",
     styles: { default: { document: { run: { font: FONT, size: 21 } } },
       paragraphStyles: [
         { id: "Title", name: "Title", basedOn: "Normal", run: { size: 40, bold: true, font: FONT, color: "1F2937" }, paragraph: { spacing: { after: 120 } } },
@@ -179,10 +191,10 @@ function table(rows, widths, opt) {
         { id: "Heading3", name: "Heading 3", basedOn: "Normal", next: "Normal", quickFormat: true, run: { size: 23, bold: true, font: FONT, color: "333333" }, paragraph: { spacing: { before: 200, after: 60 }, outlineLevel: 2 } }
       ] },
     sections: [{ properties: { page: { size: { width: 12240, height: 15840 }, margin: { top: 1080, bottom: 1080, left: 1300, right: 1300 } } },
-      footers: { default: new Footer({ children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [r("Sol's Labyrinth: Geometry · question pool · page ", { size: 16, color: "888888" }), new TextRun({ children: [PageNumber.CURRENT], size: 16, color: "888888", font: FONT })] })] }) },
+      footers: { default: new Footer({ children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [r("Sol's Labyrinth: Geometry · " + modeName + " questions · page ", { size: 16, color: "888888" }), new TextRun({ children: [PageNumber.CURRENT], size: 16, color: "888888", font: FONT })] })] }) },
       children: kids }]
   });
   fs.mkdirSync(outDir, { recursive: true });
   fs.writeFileSync(OUT, await Packer.toBuffer(doc));
-  console.log("wrote " + path.relative(root, OUT) + ": " + packs.length + " packs, " + count + " questions, " + Object.keys(images).reduce(function (a, k) { return a + images[k].length; }, 0) + " figures");
-})().catch(function (e) { console.error(e); process.exit(1); });
+  console.log("wrote " + path.relative(root, OUT) + ": " + packs.length + " packs, " + count + " questions");
+}

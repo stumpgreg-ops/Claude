@@ -10,6 +10,7 @@
     {
       id: "geo-rlt1-vertical",
       family: "GEO",
+      mode: "maze",
       title: "Vertical Angles, in Logic",
       kind: "Logic · G.RLT.1",
       blurb: "A true theorem written as p → q, then turned around.",
@@ -102,6 +103,7 @@
     {
       id: "geo-rlt1-clubs",
       family: "GEO",
+      mode: "maze",
       title: "Soccer and Band",
       kind: "Logic · G.RLT.1",
       blurb: "A Venn diagram of one homeroom's 40 students.",
@@ -198,6 +200,7 @@
     {
       id: "geo-rlt1-quads",
       family: "GEO",
+      mode: "maze",
       title: "The Quadrilateral Family",
       kind: "Logic · G.RLT.1",
       blurb: "Nested sets of quadrilaterals and the arguments they support.",
@@ -295,6 +298,7 @@
     {
       id: "geo-rlt1-activities",
       family: "GEO",
+      mode: "maze",
       title: "Three After-School Activities",
       kind: "Logic · G.RLT.1",
       blurb: "A survey of 60 students, three overlapping sets and one unknown.",
@@ -394,6 +398,7 @@
     {
       id: "geo-rlt2-parking",
       family: "GEO",
+      mode: "maze",
       title: "Stripes in the Parking Lot",
       kind: "Lines · G.RLT.2",
       blurb: "Two parallel stripes, one lane line and eight angles.",
@@ -494,6 +499,7 @@
     {
       id: "geo-rlt2-railroad",
       family: "GEO",
+      mode: "maze",
       title: "The Railroad Crossing",
       kind: "Lines · G.RLT.2",
       blurb: "A road crosses two parallel rails; solve for x.",
@@ -594,6 +600,7 @@
     {
       id: "geo-rlt2-trellis",
       family: "GEO",
+      mode: "maze",
       title: "The Garden Trellis",
       kind: "Lines · G.RLT.2",
       blurb: "Three boards, one brace: which boards are parallel?",
@@ -693,6 +700,7 @@
     {
       id: "geo-rlt2-proof",
       family: "GEO",
+      mode: "maze",
       title: "Proving Lines Parallel",
       kind: "Lines · G.RLT.2",
       blurb: "A two-column proof and an algebra check that ℓ ∥ m.",
@@ -795,6 +803,7 @@
     {
       id: "geo-rlt3-symmetry",
       family: "GEO",
+      mode: "maze",
       title: "Symmetry in Designs",
       kind: "Transformations · G.RLT.3",
       blurb: "A pentagon, a letter and a fan: lines and turns of symmetry.",
@@ -894,6 +903,7 @@
     {
       id: "geo-rlt3-triangle",
       family: "GEO",
+      mode: "maze",
       title: "Moving a Triangle",
       kind: "Transformations · G.RLT.3",
       blurb: "Translate, reflect and rotate triangle ABC.",
@@ -1000,6 +1010,7 @@
     {
       id: "geo-rlt3-logo",
       family: "GEO",
+      mode: "maze",
       title: "Shrinking a Logo",
       kind: "Transformations · G.RLT.3",
       blurb: "A trapezoid logo dilated about the origin.",
@@ -1112,6 +1123,7 @@
     {
       id: "geo-rlt3-sprite",
       family: "GEO",
+      mode: "maze",
       title: "The Game Sprite",
       kind: "Transformations · G.RLT.3",
       blurb: "A flag-shaped sprite turns, flips and slides across the screen.",

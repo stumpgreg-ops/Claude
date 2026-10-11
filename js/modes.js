@@ -965,7 +965,7 @@
         this.spareLives = (this.perks && this.perks.blessing) ? 1 : 0;
         this._guardUsed = false; this._hudClaimId = null;
         this.strikes = 0; this.round = 1; this.kills = 0;
-        this.usedClaims = K.loadUsedClaims(this.family, this.strand);
+        this.usedClaims = K.loadUsedClaims(this.family, this.strand, this.poolMode);
         this.adapt = K.loadAdapt(this.family);
         this.nightPacks = []; this.nightWrong = 0; this.nightCoins = 0; this.claimWrong = 0; this.extracted = [];
         this.iframeMs = 0; this.bigTagMs = 0; this.lastStrikeReason = ""; this._lastHitLabel = "";

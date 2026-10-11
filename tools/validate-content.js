@@ -41,6 +41,9 @@ packs.forEach(function (p, pi) {
   if (ids[p.id]) errors.push(where + ": duplicate pack id"); ids[p.id] = true;
   if (!/^(G9|G10|G11|NJ5|ODY|GEO)$/.test(p.family)) errors.push(where + ": family must be G9/G10/G11/NJ5/ODY/GEO, got " + p.family);
   var isGEO = p.family === "GEO";
+  /* v5.20: every Geometry pack belongs to one game mode; the modes never share questions */
+  if (isGEO && !/^(maze|raid|rocks|sky|ring|worms)$/.test(p.mode || "")) errors.push(where + ": GEO packs need mode: maze | raid | rocks | sky | ring | worms");
+  if (isGEO && p.mode) stats["GEO mode " + p.mode] = (stats["GEO mode " + p.mode] || 0) + p.claims.length;
   /* GEO: a figure is inline SVG that scales with the panel (a viewBox, no width/height), drawn with the .geo-fig classes */
   if (isGEO && typeof p.passage === "string") {
     var opens = (p.passage.match(/<svg\b/g) || []).length, closes = (p.passage.match(/<\/svg>/g) || []).length;

@@ -33,6 +33,10 @@ var CONTENT = {
   /* v5.19: the Geometry game (Virginia 2023 Geometry SOL), one file per reporting strand: G.RLT, G.TR, G.PC, G.DF */
   GEO: ["content201.js", "content202.js", "content203.js", "content204.js"]
 };
+/* v5.20: each Geometry mode has its own packs: content301.js … content339.js (three files per standard) */
+fs.readdirSync(path.join(root, "js")).filter(function (f) { return /^content3\d\d\.js$/.test(f); })
+  .sort(function (a, b) { return parseInt(a.slice(7), 10) - parseInt(b.slice(7), 10); })
+  .forEach(function (f) { CONTENT.GEO.push(f); });
 /* v5.15: the question expansion (tools/expansion/PLAN.md). A new file joins the Virginia game once it is checked and
    listed in tools/expansion/accepted.json; until then it is left out of every build (and of index.html). */
 var EXP_DIR = path.join(root, "tools", "expansion");

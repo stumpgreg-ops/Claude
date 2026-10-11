@@ -1657,14 +1657,18 @@
     return g < 7.5 ? 1 : g < 10 ? 2 : 3;
   }
 
-  function buildPack(family, strand) {
+  /* v5.20: mode (optional) is the game mode the level plays ("maze", "raid", ...). A pack that names a mode (the
+     Geometry packs) is only in that mode's pool, so the modes never share questions; packs without one are in every
+     mode's pool (the reading games). */
+  function buildPack(family, strand, mode) {
     family = family || "ALL";
     strand = String(strand == null ? "ALL" : strand).toUpperCase();
     if (!strand || strand === "NULL") strand = "ALL";
     var pool = FAMILY_POOL[family] || FAMILY_POOL.G9;
     var src = PACKS.filter(function (p) {
-      return pool.indexOf(p.family) !== -1;
+      return pool.indexOf(p.family) !== -1 && (!mode || !p.mode || p.mode === mode);
     });
+    if (!src.length && mode) return buildPack(family, strand);   /* no packs for this mode at all: the whole pool */
     if (!src.length) src = PACKS.filter(function (p) { return p.family === "G9"; });
     if (!src.length) src = PACKS.slice();
     var slips = [];
@@ -1702,7 +1706,8 @@
           packTitle: p.title,
           episode: p.episode || null,
           seq: p.family === "ODY" && ODY_STORY.indexOf(p.id) !== -1 ? ODY_STORY.indexOf(p.id) * 100 + p.claims.indexOf(c) : null,
-          family: p.family
+          family: p.family,
+          mode: p.mode || null
         });
       });
     });
@@ -1710,7 +1715,7 @@
     if (family === "ODY") claims.sort(function (a, b) { return (a.seq == null ? 1e9 : a.seq) - (b.seq == null ? 1e9 : b.seq); });
     /* If strand filter emptied the pool (sparse strand in a family), fall back to family-all. */
     if (!claims.length && strand !== "ALL") {
-      return buildPack(family, "ALL");
+      return buildPack(family, "ALL", mode);
     }
     var card = FAMILIES.filter(function (f) { return f.id === family; })[0];
     var title = card ? card.label : family;

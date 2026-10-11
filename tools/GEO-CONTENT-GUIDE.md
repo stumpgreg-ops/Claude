@@ -6,8 +6,16 @@ two, and every question is about that figure or situation. Students see the pass
 before each question, and in the side panel (about 324 px wide) while they play. The question and its four answers
 sit under it in the side panel.
 
-Files: `js/content201.js` (G.RLT), `js/content202.js` (G.TR), `js/content203.js` (G.PC), `js/content204.js` (G.DF).
+Files: `js/content201.js` (G.RLT), `js/content202.js` (G.TR), `js/content203.js` (G.PC), `js/content204.js` (G.DF) hold the
+Labyrinth (maze) packs; `js/content301.js` … `js/content339.js` hold the rest (v5.20), three files per standard.
 `js/content202.js` starts with the model pack, `geo-tr4-ladder`: copy its shape.
+
+**Every pack belongs to one game mode** (`mode: "maze" | "raid" | "rocks" | "sky" | "ring" | "worms"`), and a level
+only asks questions from its own mode's packs, so the modes never share questions. Each mode has about 96 packs
+(576 questions, enough for a 100-level run without a repeat): 7 or 8 per standard. Each mode has a theme for its
+contexts, so its questions feel different: maze — a school building and its grounds; raid (Eagle Swoop) — sports and
+games; rocks (Rune Rocks) — space, science and weather; sky (Sun Chariot) — travel and getting around; ring (Wolf
+Ring) — art, design, music and making things; worms (Root Worms) — nature and the outdoors.
 
 Check every file with all three:
 
@@ -22,8 +30,9 @@ node tools/preview-geo.js js/content20N.js        # screenshots in tools/shots/g
 
 ```js
 {
-  id: "geo-tr4-ladder",          // geo-<standard, e.g. rlt1 / tr4 / pc3 / df2>-<slug>, unique
+  id: "geo-tr4-ladder",          // geo-<standard, e.g. rlt1 / tr4 / pc3 / df2>-<slug>, unique (v5.20: geo-tr4-raid-<slug> outside the maze)
   family: "GEO",
+  mode: "maze",                   // the game mode whose levels ask this pack's questions
   title: "The Ladder on the Gym Wall",
   kind: "Triangles · G.TR.4",     // see the kind list below
   blurb: "A 13-foot ladder, a wall and level ground.",
@@ -74,6 +83,9 @@ standard; most packs should touch at least two skills, and each file should cove
   than"). Use Unicode: ° ∠ △ ≅ ∼ ∥ ⊥ √ π ² ³ ≈ ≠ ≤ ≥ ~ ∧ ∨ → ↔ ∩ ∪ ⊂ ∈ m∠ABC, AB̅ is not needed: write "segment AB" or "AB".
 - Answers are short (one value or a short sentence), with units when the given has units. State the rounding
   ("to the nearest tenth", "in terms of π"). Write radicals as `5√3`, not decimals, unless the stem asks to round.
+- **Every question stands alone.** The game asks one question at a time, in any order, with only the figure and
+  the givens on screen: a stem never relies on another question ("with that value of x", "the new figure", "as
+  before"). If a question needs a value, the figure, the givens or its own stem gives it.
 - **Every number must be computed**, not estimated: keep a check script (Node) that recomputes every key and every
   distractor, and run it before you hand the file back.
 - **Distractors are real mistakes**, one named error each: the complement instead of the angle, sin for cos, adding

@@ -11,6 +11,7 @@
     {
       id: "geo-df1-ballcan",
       family: "GEO",
+      mode: "maze",
       title: "Three Balls in a Can",
       kind: "3-D figures · G.DF.1",
       blurb: "A cylinder that holds three spheres.",
@@ -109,6 +110,7 @@
     {
       id: "geo-df1-waffle",
       family: "GEO",
+      mode: "maze",
       title: "The Waffle Cone",
       kind: "3-D figures · G.DF.1",
       blurb: "A cone, a scoop on top and a paper sleeve.",
@@ -207,6 +209,7 @@
     {
       id: "geo-df1-artsolids",
       family: "GEO",
+      mode: "maze",
       title: "Plaster Solids in the Art Room",
       kind: "3-D figures · G.DF.1",
       blurb: "A square pyramid and a cube, cut and unfolded.",
@@ -310,6 +313,7 @@
     {
       id: "geo-df1-farm",
       family: "GEO",
+      mode: "maze",
       title: "The Barn and the Silo",
       kind: "3-D figures · G.DF.1",
       blurb: "Grain space, a metal roof and paint for the silo.",
@@ -412,6 +416,7 @@
     {
       id: "geo-df1-tank",
       family: "GEO",
+      mode: "maze",
       title: "The Garden Water Tank",
       kind: "3-D figures · G.DF.1",
       blurb: "A cylinder on a cone: gallons, a hose and sheet metal.",
@@ -511,6 +516,7 @@
     {
       id: "geo-df2-paintcan",
       family: "GEO",
+      mode: "maze",
       title: "Bigger Paint Cans",
       kind: "Changing dimensions · G.DF.2",
       blurb: "Change the radius, the height, or both.",
@@ -609,6 +615,7 @@
     {
       id: "geo-df2-pizza",
       family: "GEO",
+      mode: "maze",
       title: "Pizza Night",
       kind: "Changing dimensions · G.DF.2",
       blurb: "Two pizza sizes, two prices and two boxes.",
@@ -707,6 +714,7 @@
     {
       id: "geo-df2-statue",
       family: "GEO",
+      mode: "maze",
       title: "The Statue and Its Model",
       kind: "Changing dimensions · G.DF.2",
       blurb: "A scale model in concrete, and two pedestals.",

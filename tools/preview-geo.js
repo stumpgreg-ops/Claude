@@ -9,7 +9,7 @@ var root = path.join(__dirname, ".."), out = path.join(__dirname, "shots", "geo"
 fs.mkdirSync(out, { recursive: true });
 var args = process.argv.slice(2), only = null, files = [];
 for (var i = 0; i < args.length; i++) { if (args[i] === "--id") only = args[++i]; else files.push(path.basename(args[i])); }
-if (!files.length) files = fs.readdirSync(path.join(root, "js")).filter(function (f) { return /^content2\d\d\.js$/.test(f); });
+if (!files.length) files = fs.readdirSync(path.join(root, "js")).filter(function (f) { return /^content[23]\d\d\.js$/.test(f); });
 var sandbox = { window: {}, console: console }; sandbox.global = sandbox.window;
 vm.runInNewContext(fs.readFileSync(path.join(root, "js", "content.js"), "utf8"), sandbox);
 var start = sandbox.window.HEIST_PACKS.length;

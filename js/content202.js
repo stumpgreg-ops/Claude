@@ -9,6 +9,7 @@
     {
       id: "geo-tr4-ladder",
       family: "GEO",
+      mode: "maze",
       title: "The Ladder on the Gym Wall",
       kind: "Triangles · G.TR.4",
       blurb: "A 13-foot ladder, a wall and level ground.",
@@ -111,6 +112,7 @@
     {
       id: "geo-tr1-towns",
       family: "GEO",
+      mode: "maze",
       title: "Three Towns, Three Roads",
       kind: "Triangles · G.TR.1",
       blurb: "Straight roads join Ashby, Bell and Carver.",
@@ -211,6 +213,7 @@
     {
       id: "geo-tr1-garden",
       family: "GEO",
+      mode: "maze",
       title: "The Corner Garden Bed",
       kind: "Triangles · G.TR.1",
       blurb: "Three angles written with x, and a gate post.",
@@ -311,6 +314,7 @@
     {
       id: "geo-tr1-brace",
       family: "GEO",
+      mode: "maze",
       title: "The Skate Ramp Brace",
       kind: "Triangles · G.TR.1",
       blurb: "An exterior angle, some algebra, and scrap boards.",
@@ -411,6 +415,7 @@
     {
       id: "geo-tr1-sail",
       family: "GEO",
+      mode: "maze",
       title: "The Shade Sail",
       kind: "Triangles · G.TR.1",
       blurb: "A triangular sail with edges of 15 ft, 8 ft and 12 ft.",
@@ -511,6 +516,7 @@
     {
       id: "geo-tr2-marks",
       family: "GEO",
+      mode: "maze",
       title: "Matching Marks",
       kind: "Triangles · G.TR.2",
       blurb: "Ticks and arcs on two triangles that mirror each other.",
@@ -610,6 +616,7 @@
     {
       id: "geo-tr2-bowtie",
       family: "GEO",
+      mode: "maze",
       title: "The Bridge Cross-Brace",
       kind: "Triangles · G.TR.2",
       blurb: "Two braces cross at C. Finish the proof.",
@@ -711,6 +718,7 @@
     {
       id: "geo-tr2-tent",
       family: "GEO",
+      mode: "maze",
       title: "The Tent and Its Pole",
       kind: "Triangles · G.TR.2",
       blurb: "A center pole meets the floor at a right angle.",
@@ -809,6 +817,7 @@
     {
       id: "geo-tr2-frame",
       family: "GEO",
+      mode: "maze",
       title: "The Gate Brace",
       kind: "Triangles · G.TR.2",
       blurb: "A gate frame, a diagonal brace, and an indirect proof.",
@@ -907,6 +916,7 @@
     {
       id: "geo-tr3-twins",
       family: "GEO",
+      mode: "maze",
       title: "Two Triangles, One Shape",
       kind: "Triangles · G.TR.3",
       blurb: "Matching angles, a scale factor and a missing side.",
@@ -1008,6 +1018,7 @@
     {
       id: "geo-tr3-shadow",
       family: "GEO",
+      mode: "maze",
       title: "The Flagpole's Shadow",
       kind: "Triangles · G.TR.3",
       blurb: "A student, a flagpole and two shadows at the same moment.",
@@ -1112,6 +1123,7 @@
     {
       id: "geo-tr3-bracket",
       family: "GEO",
+      mode: "maze",
       title: "The Shelf Bracket",
       kind: "Triangles · G.TR.3",
       blurb: "A crossbar parallel to one side makes a smaller triangle.",
@@ -1211,6 +1223,7 @@
     {
       id: "geo-tr3-pond",
       family: "GEO",
+      mode: "maze",
       title: "Across the Pond",
       kind: "Triangles · G.TR.3",
       blurb: "Stakes, crossing lines and a distance no one can walk.",
@@ -1314,6 +1327,7 @@
     {
       id: "geo-tr4-sign",
       family: "GEO",
+      mode: "maze",
       title: "A Square Tile and a Triangle Sign",
       kind: "Triangles · G.TR.4",
       blurb: "A diagonal and an altitude make special right triangles.",
@@ -1417,6 +1431,7 @@
     {
       id: "geo-tr4-ramp",
       family: "GEO",
+      mode: "maze",
       title: "The Skate Park Ramp",
       kind: "Triangles · G.TR.4",
       blurb: "Sine, cosine and tangent on a 10-foot ramp.",
@@ -1514,6 +1529,7 @@
     {
       id: "geo-tr4-lighthouse",
       family: "GEO",
+      mode: "maze",
       title: "The Lighthouse and the Boat",
       kind: "Triangles · G.TR.4",
       blurb: "Angles of depression from a 120-foot light.",

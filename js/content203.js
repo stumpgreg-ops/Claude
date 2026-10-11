@@ -11,6 +11,7 @@
     {
       id: "geo-pc1-kite",
       family: "GEO",
+      mode: "maze",
       title: "The Festival Kite",
       kind: "Quadrilaterals · G.PC.1",
       blurb: "A kite frame with two pairs of equal sides.",
@@ -123,6 +124,7 @@
     {
       id: "geo-pc1-shelf",
       family: "GEO",
+      mode: "maze",
       title: "The Leaning Bookshelf",
       kind: "Quadrilaterals · G.PC.1",
       blurb: "A shelf frame pushed out of square.",
@@ -236,6 +238,7 @@
     {
       id: "geo-pc1-garden",
       family: "GEO",
+      mode: "maze",
       title: "The Raised Garden Bed",
       kind: "Quadrilaterals · G.PC.1",
       blurb: "An isosceles trapezoid and its midsegment.",
@@ -354,6 +357,7 @@
     {
       id: "geo-pc1-grid",
       family: "GEO",
+      mode: "maze",
       title: "Four Points on a Grid",
       kind: "Quadrilaterals · G.PC.1",
       blurb: "Slope, distance and midpoint decide the shape.",
@@ -460,6 +464,7 @@
     {
       id: "geo-pc2-stopsign",
       family: "GEO",
+      mode: "maze",
       title: "The Stop Sign",
       kind: "Polygons · G.PC.2",
       blurb: "A regular octagon at the corner of School Street.",
@@ -557,6 +562,7 @@
     {
       id: "geo-pc2-tiles",
       family: "GEO",
+      mode: "maze",
       title: "Octagon and Square Tiles",
       kind: "Polygons · G.PC.2",
       blurb: "A tiled floor where octagons and squares meet.",
@@ -654,6 +660,7 @@
     {
       id: "geo-pc2-gazebo",
       family: "GEO",
+      mode: "maze",
       title: "The Park Gazebo",
       kind: "Polygons · G.PC.2",
       blurb: "A regular hexagon floor and a walkway.",
@@ -762,6 +769,7 @@
     {
       id: "geo-pc2-plot",
       family: "GEO",
+      mode: "maze",
       title: "The Five-Sided Garden Plot",
       kind: "Polygons · G.PC.2",
       blurb: "An irregular pentagon with angle expressions.",
@@ -874,6 +882,7 @@
     {
       id: "geo-pc3-pizza",
       family: "GEO",
+      mode: "maze",
       title: "Slicing the Pizza",
       kind: "Circles · G.PC.3",
       blurb: "A 16-inch pizza cut into 8 equal slices.",
@@ -976,6 +985,7 @@
     {
       id: "geo-pc3-ferris",
       family: "GEO",
+      mode: "maze",
       title: "The Ferris Wheel",
       kind: "Circles · G.PC.3",
       blurb: "Eight cars equally spaced on a 20 m wheel.",
@@ -1079,6 +1089,7 @@
     {
       id: "geo-pc3-tangents",
       family: "GEO",
+      mode: "maze",
       title: "Two Tangents and a Secant",
       kind: "Circles · G.PC.3",
       blurb: "Segments and angles from a point outside a circle.",
@@ -1193,6 +1204,7 @@
     {
       id: "geo-pc3-plate",
       family: "GEO",
+      mode: "maze",
       title: "The Broken Plate",
       kind: "Circles · G.PC.3",
       blurb: "Finding the size of a plate from one piece.",
@@ -1304,6 +1316,7 @@
     {
       id: "geo-pc4-grid",
       family: "GEO",
+      mode: "maze",
       title: "A Circle on the Grid",
       kind: "Equations of circles · G.PC.4",
       blurb: "Read the center and radius, then write the equation.",
@@ -1401,6 +1414,7 @@
     {
       id: "geo-pc4-diameter",
       family: "GEO",
+      mode: "maze",
       title: "Ends of a Diameter",
       kind: "Equations of circles · G.PC.4",
       blurb: "The midpoint and half the distance give the circle.",
@@ -1501,6 +1515,7 @@
     {
       id: "geo-pc4-wifi",
       family: "GEO",
+      mode: "maze",
       title: "The Wi-Fi Router",
       kind: "Equations of circles · G.PC.4",
       blurb: "A signal circle on the school map.",
@@ -1604,6 +1619,7 @@
     {
       id: "geo-pc4-derive",
       family: "GEO",
+      mode: "maze",
       title: "Deriving the Circle Equation",
       kind: "Equations of circles · G.PC.4",
       blurb: "The Pythagorean theorem behind the equation of a circle.",

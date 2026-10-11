@@ -2972,14 +2972,15 @@
     }
     return false;
   }
-  function usedClaimsKey(family, strand) {
+  function usedClaimsKey(family, strand, mode) {
     family = family || "ALL";
     strand = String(strand == null ? "ALL" : strand).toUpperCase() || "ALL";
     if (strand === "NULL") strand = "ALL";
-    return family + "." + strand;
+    /* v5.20: in the Geometry game each mode has its own questions, so it keeps its own list of the ones asked */
+    return family + "." + strand + (family === "GEO" && mode ? "." + mode : "");
   }
-  function loadUsedClaims(family, strand) {
-    var key = usedClaimsKey(family, strand);
+  function loadUsedClaims(family, strand, mode) {
+    var key = usedClaimsKey(family, strand, mode);
     if (usedMem[key] && usedMem[key].length) return usedMem[key].slice();
     try {
       var raw = localStorage.getItem(LS_USED + key);
@@ -2991,13 +2992,13 @@
       return usedMem[key] ? usedMem[key].slice() : [];
     }
   }
-  function saveUsedClaims(family, strand, arr) {
+  function saveUsedClaims(family, strand, arr, mode) {
     /* Back-compat: saveUsedClaims(family, arr) when strand omitted as array */
     if (Array.isArray(strand) && arr == null) {
       arr = strand;
       strand = "ALL";
     }
-    var key = usedClaimsKey(family, strand);
+    var key = usedClaimsKey(family, strand, mode);
     usedMem[key] = (arr || []).slice();
     try { localStorage.setItem(LS_USED + key, JSON.stringify(usedMem[key])); } catch (e) {}
   }
@@ -4424,7 +4425,11 @@
       this.janChase = this.level.janChase;
       this.chaseMs = this.level.chaseMs;
       this.iframeMax = this.level.iframe;
-      this.pack = (typeof heistBuildPack === "function") ? heistBuildPack(this.family, this.strand) : { claims: [] };
+      /* v5.20: the mode this level plays (a shooter's id, or "maze"); in the Geometry game each mode has its own questions */
+      var _pm = null;
+      try { _pm = (window.SolModes && SolModes.modeFor) ? SolModes.modeFor(this.night) : null; } catch (ePm) {}
+      this.poolMode = _pm && _pm.id ? _pm.id : "maze";
+      this.pack = (typeof heistBuildPack === "function") ? heistBuildPack(this.family, this.strand, this.poolMode) : { claims: [] };
       cfg.night = this.night;
       writeSavedNight(this.night);
     }
@@ -4591,7 +4596,7 @@
       this._hudClaimId = null;
       this.strikes = 0;
       this.round = 1;
-      this.usedClaims = loadUsedClaims(this.family, this.strand);
+      this.usedClaims = loadUsedClaims(this.family, this.strand, this.poolMode);
       this.adapt = loadAdapt(this.family);
       this.nightPacks = [];
       this.nightWrong = 0;
@@ -6965,7 +6970,7 @@
         for (i = 0; i < claims.length; i++) if (!claims[i].isPartB && unused(claims[i])) { pick = i; break; }
         if (pick < 0) {
           this.usedClaims = [];
-          saveUsedClaims(this.family, this.strand, this.usedClaims);
+          saveUsedClaims(this.family, this.strand, this.usedClaims, this.poolMode);
           for (i = 0; i < claims.length; i++) if (!claims[i].isPartB) { pick = i; break; }
         }
       }
@@ -6976,7 +6981,7 @@
         if (!pool.length) {
           /* Pool spent: start over, but keep the most recent 20 out so the same items never come straight back. */
           this.usedClaims = this.usedClaims.slice(-20);
-          saveUsedClaims(this.family, this.strand, this.usedClaims);
+          saveUsedClaims(this.family, this.strand, this.usedClaims, this.poolMode);
           for (i = 0; i < claims.length; i++) if (!claims[i].isPartB && unused(claims[i])) pool.push(i);
           if (!pool.length) for (i = 0; i < claims.length; i++) if (!claims[i].isPartB) pool.push(i);
         }
@@ -7022,7 +7027,7 @@
       this.claimWrong = 0;
       this._hudClaimId = null; /* force passage panel refresh */
       this.usedClaims.push(this.claim.id);
-      saveUsedClaims(this.family, this.strand, this.usedClaims);
+      saveUsedClaims(this.family, this.strand, this.usedClaims, this.poolMode);
       this.extracted = [];
       this.cornerBoostMs = 0; /* engage-1929 reset */
       this.cornerFlash = 0;
