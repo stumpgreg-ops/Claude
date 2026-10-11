@@ -178,12 +178,12 @@
           id: "range",
           sol: "G.TR.1",
           sub: "G.TR.1.2",
-          stem: "Another isosceles island will have two 9 m curbs. Which inequality gives all possible lengths x of its third curb, in meters?",
+          stem: "Another isosceles island will have two 9 m curbs. Which inequality gives all possible lengths c of its third curb, in meters?",
           choices: [
-            { letter: "A", text: "9 < x < 18" },
-            { letter: "B", text: "0 < x < 9" },
-            { letter: "C", text: "0 < x ≤ 18" },
-            { letter: "D", text: "0 < x < 18" }
+            { letter: "A", text: "9 < c < 18" },
+            { letter: "B", text: "0 < c < 9" },
+            { letter: "C", text: "0 < c ≤ 18" },
+            { letter: "D", text: "0 < c < 18" }
           ],
           correct: "D"
         }
@@ -542,7 +542,7 @@
           id: "angle-q",
           sol: "G.TR.1",
           sub: "G.TR.1.3",
-          stem: "The designer makes m∠H = 100°. Then m∠P ≈ 29°. What is m∠Q, to the nearest degree?",
+          stem: "Suppose the designer makes m∠H = 100°. Then m∠P ≈ 29°. What is m∠Q, to the nearest degree?",
           choices: [
             { letter: "A", text: "129°" },
             { letter: "B", text: "80°" },
@@ -744,7 +744,7 @@
       blurb: "Home plate, the mound and first base make a triangle.",
       level: 3,
       passage:
-        "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 170\" role=\"img\" aria-label=\"Baseball diamond: home plate H, first base F and the pitcher's mound M on the line from home to second base; HM is 60.5 feet, HF is 90 feet, angle MHF is 45 degrees; the baseline HF continues past F to R\"><path class=\"gr\" fill=\"none\" d=\"M150 156 L78.7 84.7 L150 13.4 L221.3 84.7\"/><line class=\"ln dash\" x1=\"150\" y1=\"156\" x2=\"150\" y2=\"88.2\"/><path class=\"gr\" fill=\"none\" d=\"M150 88.2 L150 13.4\"/><polygon class=\"ln\" points=\"150,156 150,88.2 221.3,84.7\"/><line class=\"ln dash\" x1=\"221.3\" y1=\"84.7\" x2=\"249.6\" y2=\"56.4\"/><path class=\"thin\" d=\"M215.6 90.4 L210 84.7 L215.6 79\"/><path class=\"thin\" d=\"M150 134 A22 22 0 0 1 165.6 140.4\"/><path class=\"thin\" d=\"M195.3 86 A26 26 0 0 0 202.9 103.1\"/><path class=\"ac\" d=\"M229.8 76.2 A12 12 0 0 0 209.3 85.3\"/><circle class=\"dt\" cx=\"150\" cy=\"156\" r=\"3\"/><circle class=\"dt\" cx=\"150\" cy=\"88.2\" r=\"3\"/><circle class=\"dt\" cx=\"221.3\" cy=\"84.7\" r=\"3\"/><circle class=\"dt\" cx=\"249.6\" cy=\"56.4\" r=\"3\"/><circle class=\"dt\" cx=\"150\" cy=\"13.4\" r=\"2.5\"/><circle class=\"dt\" cx=\"78.7\" cy=\"84.7\" r=\"2.5\"/><text x=\"136\" y=\"163\" text-anchor=\"middle\">H</text><text x=\"137\" y=\"87.2\" text-anchor=\"middle\">M</text><text x=\"227.3\" y=\"105.7\" text-anchor=\"middle\">F</text><text x=\"261.6\" y=\"61.4\" text-anchor=\"middle\">R</text><text x=\"116\" y=\"129.1\" text-anchor=\"middle\">60.5 ft</text><text x=\"199.8\" y=\"139.5\" text-anchor=\"middle\">90 ft</text><text class=\"sm\" x=\"163\" y=\"128.6\" text-anchor=\"middle\">45°</text><text class=\"sm\" x=\"170\" y=\"19.4\" text-anchor=\"middle\">2nd</text><text class=\"sm\" x=\"74.7\" y=\"77.7\" text-anchor=\"middle\">3rd</text></svg></figure><p class=\"geo-given\">On a baseball field, the pitcher's mound <strong>M</strong> is on the line from home plate <strong>H</strong> to second base, so m∠MHF = 45°. HM = 60.5 ft and HF = 90 ft, and m∠HFM ≈ 42°. The baseline HF continues straight past first base <strong>F</strong> to <strong>R</strong>.</p>",
+        "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 170\" role=\"img\" aria-label=\"Baseball diamond: home plate H, first base F and the pitcher's mound M on the line from home to second base; HM is 60.5 feet, HF is 90 feet, angle MHF is 45 degrees; the baseline HF continues past F to R\"><path class=\"gr\" fill=\"none\" d=\"M150 156 L78.7 84.7 L150 13.4 L221.3 84.7\"/><line class=\"ln dash\" x1=\"150\" y1=\"156\" x2=\"150\" y2=\"88.2\"/><path class=\"gr\" fill=\"none\" d=\"M150 88.2 L150 13.4\"/><polygon class=\"ln\" points=\"150,156 150,88.2 221.3,84.7\"/><line class=\"ln dash\" x1=\"221.3\" y1=\"84.7\" x2=\"249.6\" y2=\"56.4\"/><path class=\"thin\" d=\"M150 134 A22 22 0 0 1 165.6 140.4\"/><path class=\"thin\" d=\"M195.3 86 A26 26 0 0 0 202.9 103.1\"/><path class=\"ac\" d=\"M229.8 76.2 A12 12 0 0 0 209.3 85.3\"/><circle class=\"dt\" cx=\"150\" cy=\"156\" r=\"3\"/><circle class=\"dt\" cx=\"150\" cy=\"88.2\" r=\"3\"/><circle class=\"dt\" cx=\"221.3\" cy=\"84.7\" r=\"3\"/><circle class=\"dt\" cx=\"249.6\" cy=\"56.4\" r=\"3\"/><circle class=\"dt\" cx=\"150\" cy=\"13.4\" r=\"2.5\"/><circle class=\"dt\" cx=\"78.7\" cy=\"84.7\" r=\"2.5\"/><text x=\"136\" y=\"163\" text-anchor=\"middle\">H</text><text x=\"137\" y=\"87.2\" text-anchor=\"middle\">M</text><text x=\"227.3\" y=\"105.7\" text-anchor=\"middle\">F</text><text x=\"261.6\" y=\"61.4\" text-anchor=\"middle\">R</text><text x=\"116\" y=\"129.1\" text-anchor=\"middle\">60.5 ft</text><text x=\"199.8\" y=\"139.5\" text-anchor=\"middle\">90 ft</text><text class=\"sm\" x=\"163\" y=\"128.6\" text-anchor=\"middle\">45°</text><text class=\"sm\" x=\"170\" y=\"19.4\" text-anchor=\"middle\">2nd</text><text class=\"sm\" x=\"74.7\" y=\"77.7\" text-anchor=\"middle\">3rd</text></svg></figure><p class=\"geo-given\">On a baseball field, the pitcher's mound <strong>M</strong> is on the line from home plate <strong>H</strong> to second base, so m∠MHF = 45°. HM = 60.5 ft and HF = 90 ft, and m∠HFM ≈ 42°. The baseline HF continues straight past first base <strong>F</strong> to <strong>R</strong>.</p>",
       claims: [
         {
           id: "angle-m",
@@ -835,7 +835,7 @@
       blurb: "Four players on a court, two equal passes and a long one.",
       level: 3,
       passage:
-        "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 140\" role=\"img\" aria-label=\"Triangle ABC of basketball players with D on BC; tick marks show AB congruent to AD; angle ABD is 3x plus 20 degrees, angle ADB is 5x degrees and angle C is 22 degrees\"><path class=\"thin dash\" d=\"M6 120 H314\"/><polygon class=\"ln\" points=\"87.5,31.6 20,112 286.5,112\"/><line class=\"ln\" x1=\"87.5\" y1=\"31.6\" x2=\"155\" y2=\"112\"/><line class=\"thin\" x1=\"49.2\" y1=\"67.9\" x2=\"58.3\" y2=\"75.7\"/><line class=\"thin\" x1=\"116.7\" y1=\"75.7\" x2=\"125.8\" y2=\"67.9\"/><path class=\"thin\" d=\"M35 112 A15 15 0 0 0 29.6 100.5\"/><path class=\"thin\" d=\"M140 112 A15 15 0 0 1 145.4 100.5\"/><path class=\"thin\" d=\"M258.7 100.8 A30 30 0 0 0 256.5 112\"/><path class=\"ac\" d=\"M104.2 51.5 A26 26 0 0 0 111.6 41.3\"/><circle class=\"dt\" cx=\"87.5\" cy=\"31.6\" r=\"3\"/><circle class=\"dt\" cx=\"20\" cy=\"112\" r=\"3\"/><circle class=\"dt\" cx=\"155\" cy=\"112\" r=\"3\"/><circle class=\"dt\" cx=\"286.5\" cy=\"112\" r=\"3\"/><text x=\"87.5\" y=\"23.6\" text-anchor=\"middle\">A</text><text x=\"19\" y=\"135\" text-anchor=\"middle\">B</text><text x=\"155\" y=\"135\" text-anchor=\"middle\">D</text><text x=\"287.5\" y=\"135\" text-anchor=\"middle\">C</text><text class=\"sm\" x=\"72\" y=\"108\" text-anchor=\"middle\">(3x + 20)°</text><text class=\"sm\" x=\"123\" y=\"108\" text-anchor=\"middle\">5x°</text><text class=\"sm\" x=\"237.4\" y=\"106.5\" text-anchor=\"middle\">22°</text></svg></figure><p class=\"geo-given\">In a passing drill, players stand at <strong>A</strong>, <strong>B</strong>, <strong>C</strong> and <strong>D</strong>, with D on the baseline BC. The passes AB and AD are equal: AB ≅ AD. m∠ABD = (3x + 20)⁠°, m∠ADB = 5x° and m∠ACD = 22°.</p>",
+        "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 140\" role=\"img\" aria-label=\"Triangle ABC of basketball players with D on BC; tick marks show AB congruent to AD; angle ABD is 3x plus 20 degrees, angle ADB is 5x degrees and angle C is 22 degrees\"><path class=\"thin dash\" d=\"M6 112 H314\"/><polygon class=\"ln\" points=\"87.5,31.6 20,112 286.5,112\"/><line class=\"ln\" x1=\"87.5\" y1=\"31.6\" x2=\"155\" y2=\"112\"/><line class=\"thin\" x1=\"49.2\" y1=\"67.9\" x2=\"58.3\" y2=\"75.7\"/><line class=\"thin\" x1=\"116.7\" y1=\"75.7\" x2=\"125.8\" y2=\"67.9\"/><path class=\"thin\" d=\"M35 112 A15 15 0 0 0 29.6 100.5\"/><path class=\"thin\" d=\"M140 112 A15 15 0 0 1 145.4 100.5\"/><path class=\"thin\" d=\"M258.7 100.8 A30 30 0 0 0 256.5 112\"/><path class=\"ac\" d=\"M104.2 51.5 A26 26 0 0 0 111.6 41.3\"/><circle class=\"dt\" cx=\"87.5\" cy=\"31.6\" r=\"3\"/><circle class=\"dt\" cx=\"20\" cy=\"112\" r=\"3\"/><circle class=\"dt\" cx=\"155\" cy=\"112\" r=\"3\"/><circle class=\"dt\" cx=\"286.5\" cy=\"112\" r=\"3\"/><text x=\"87.5\" y=\"23.6\" text-anchor=\"middle\">A</text><text x=\"19\" y=\"135\" text-anchor=\"middle\">B</text><text x=\"155\" y=\"135\" text-anchor=\"middle\">D</text><text x=\"287.5\" y=\"135\" text-anchor=\"middle\">C</text><text class=\"sm\" x=\"72\" y=\"108\" text-anchor=\"middle\">(3x + 20)°</text><text class=\"sm\" x=\"123\" y=\"108\" text-anchor=\"middle\">5x°</text><text class=\"sm\" x=\"237.4\" y=\"106.5\" text-anchor=\"middle\">22°</text></svg></figure><p class=\"geo-given\">In a passing drill, players stand at <strong>A</strong>, <strong>B</strong>, <strong>C</strong> and <strong>D</strong>, with D on the baseline BC. The passes AB and AD are equal: AB ≅ AD. m∠ABD = (3x + 20)⁠°, m∠ADB = 5x° and m∠ACD = 22°.</p>",
       claims: [
         {
           id: "bad",
@@ -906,12 +906,12 @@
           id: "drill",
           sol: "G.TR.1",
           sub: "G.TR.1.2",
-          stem: "Another drill uses a triangle of passes 10 ft, (x + 3) ft and (2x − 2) ft long. Which inequality gives all possible values of x?",
+          stem: "Another drill uses a triangle of passes 10 ft, (n + 3) ft and (2n − 2) ft long. Which inequality gives all possible values of n?",
           choices: [
-            { letter: "A", text: "x < 15" },
-            { letter: "B", text: "3 < x < 15" },
-            { letter: "C", text: "x > 3" },
-            { letter: "D", text: "−5 < x < 15" }
+            { letter: "A", text: "n < 15" },
+            { letter: "B", text: "3 < n < 15" },
+            { letter: "C", text: "n > 3" },
+            { letter: "D", text: "−5 < n < 15" }
           ],
           correct: "B"
         }

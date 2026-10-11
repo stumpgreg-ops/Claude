@@ -101,12 +101,12 @@
           id: "tabletop",
           sol: "G.TR.3",
           sub: "G.TR.3.2",
-          stem: "A tabletop display has sides of 12 in., 10 in. and 14 in. Is it similar to △ABC?",
+          stem: "A tabletop display has sides of 12 in., 10 in. and 14 in. Is it similar to △ABC? Choose the answer with the correct reason.",
           choices: [
             { letter: "A", text: "Yes; 12/60 = 10/50 = 14/70" },
-            { letter: "B", text: "No; 12/14 ≠ 60/50" },
-            { letter: "C", text: "No; its sides are not 60, 50 and 70" },
-            { letter: "D", text: "No; 70 − 14 ≠ 60 − 12" }
+            { letter: "B", text: "No; 12/60 ≠ 14/70" },
+            { letter: "C", text: "No; 12/10 ≠ 60/50" },
+            { letter: "D", text: "No; similar triangles need equal sides" }
           ],
           correct: "A"
         }
@@ -293,12 +293,12 @@
           id: "kai",
           sol: "G.TR.3",
           sub: "G.TR.3.2",
-          stem: "Kai plans right △GHJ with the right angle at G, GH = 6 ft and GJ = 5 ft. Is it similar to △ABC?",
+          stem: "Kai plans right △GHJ with the right angle at G, GH = 6 ft and GJ = 5 ft. Is it similar to △ABC? Choose the answer with the correct reason.",
           choices: [
             { letter: "A", text: "No; 6/3 ≠ 5/2" },
-            { letter: "B", text: "Yes; each leg is 3 ft longer" },
-            { letter: "C", text: "Yes; both are right triangles" },
-            { letter: "D", text: "No; it is larger than △ABC" }
+            { letter: "B", text: "Yes; 6/3 = 5/2" },
+            { letter: "C", text: "Yes; any two right triangles are similar" },
+            { letter: "D", text: "No; GH would have to equal AB" }
           ],
           correct: "A"
         },
@@ -340,7 +340,7 @@
       level: 3,
       passage:
         "<figure class=\"geo-fig\">" +
-        "<svg viewBox=\"0 0 320 166\" role=\"img\" aria-label=\"Triangle ABC with D on AB and E on AC, and path DE; AD 6, DB 10, AE 8, EC 4 and BC 14 meters; DE is not parallel to BC\">" +
+        "<svg viewBox=\"0 0 320 166\" role=\"img\" aria-label=\"Triangle ABC with D on AB and E on AC, and path DE; AD 6, DB 10, AE 8, EC 4 and BC 14 meters\">" +
         "<polygon class=\"sh2\" points=\"72,140 248,140 142.1,28.2\"/><line class=\"ac\" x1=\"138\" y1=\"140\" x2=\"118.8\" y2=\"65.4\"/>" +
         "<path class=\"thin\" d=\"M90 140 A18 18 0 0 0 81.6 124.8\"/><circle class=\"dt\" cx=\"72\" cy=\"140\" r=\"3\"/><circle class=\"dt\" cx=\"248\" cy=\"140\" r=\"3\"/>" +
         "<circle class=\"dt\" cx=\"142.1\" cy=\"28.2\" r=\"3\"/><circle class=\"dt\" cx=\"138\" cy=\"140\" r=\"3\"/><circle class=\"dt\" cx=\"118.8\" cy=\"65.4\" r=\"3\"/>" +
@@ -381,12 +381,12 @@
           id: "tom",
           sol: "G.TR.3",
           sub: "G.TR.3.2",
-          stem: "Tom says the path DE is parallel to BC, because the triangles are similar. Is he right?",
+          stem: "Tom says the path DE is parallel to BC, because the triangles are similar. Is he right? Choose the answer with the correct reason.",
           choices: [
             { letter: "A", text: "No; AD/AB = 6/16, but AE/AC = 8/12" },
             { letter: "B", text: "Yes; similar triangles have parallel sides" },
             { letter: "C", text: "Yes; ∠ADE ≅ ∠ABC" },
-            { letter: "D", text: "No; DE is shorter than BC" }
+            { letter: "D", text: "No; ∠AED ≅ ∠ACB" }
           ],
           correct: "A"
         },
@@ -469,15 +469,15 @@
           correct: "A"
         },
         {
-          id: "true",
+          id: "similar",
           sol: "G.TR.3",
           sub: "G.TR.3.2",
-          stem: "Which statement about the two pennants is true?",
+          stem: "Are the two pennants similar? Choose the answer with the correct reason.",
           choices: [
-            { letter: "A", text: "Not similar, since m∠B ≠ m∠D" },
-            { letter: "B", text: "Similar, since AB/EF = 10/15" },
-            { letter: "C", text: "Not similar, since the sizes differ" },
-            { letter: "D", text: "Similar, since m∠C = 65° = m∠D" }
+            { letter: "A", text: "No; m∠C ≠ m∠D" },
+            { letter: "B", text: "Yes; AB = EF" },
+            { letter: "C", text: "No; m∠C = 75°" },
+            { letter: "D", text: "Yes; m∠C = 65° = m∠D" }
           ],
           correct: "D"
         },
@@ -511,7 +511,7 @@
           id: "coach",
           sol: "G.TR.3",
           sub: "G.TR.3.3",
-          stem: "The coach says the large pennant's perimeter is 1.5 times the small one's. Is the coach right?",
+          stem: "The coach says the large pennant's perimeter is 1.5 times the small one's. Is the coach right? Choose the answer with the correct reason.",
           choices: [
             { letter: "A", text: "No; it is 1.5² = 2.25 times as long" },
             { letter: "B", text: "No; it is 3 × 5 = 15 in. longer" },
@@ -524,7 +524,7 @@
           id: "df",
           sol: "G.TR.3",
           sub: "G.TR.3.3",
-          stem: "Which equation can be used to find DF?",
+          stem: "Which equation is true for these two pennants?",
           choices: [
             { letter: "A", text: "DF/BC = 15/10" },
             { letter: "B", text: "DF/AC = 15/10" },
@@ -613,12 +613,12 @@
           id: "new",
           sol: "G.TR.3",
           sub: "G.TR.3.2",
-          stem: "A new zone has sides of 70 m, 80 m and 100 m. Is it similar to △JKL?",
+          stem: "A new zone has sides of 70 m, 80 m and 100 m. Is it similar to △JKL? Choose the answer with the correct reason.",
           choices: [
-            { letter: "A", text: "Yes; each side is 20 m longer" },
+            { letter: "A", text: "Yes; 70/50 = 100/80" },
             { letter: "B", text: "No; 70/50 ≠ 100/80" },
-            { letter: "C", text: "Yes; both have a longest side opposite the largest angle" },
-            { letter: "D", text: "No; it is bigger than △JKL" }
+            { letter: "C", text: "Yes; 70/50 = 80/60" },
+            { letter: "D", text: "No; similar zones need equal sides" }
           ],
           correct: "B"
         },
@@ -716,11 +716,11 @@
           id: "child",
           sol: "G.TR.3",
           sub: "G.TR.3.2",
-          stem: "At the same moment, a parent says a 3-ft child nearby casts a 5.5-ft shadow. Can that be right?",
+          stem: "At the same moment, a parent says a 3-ft child nearby casts a 5.5-ft shadow. Can that be right? Choose the answer with the correct reason.",
           choices: [
             { letter: "A", text: "No; 3/5.5 ≠ 5.5/8" },
-            { letter: "B", text: "Yes; each shadow is 2.5 ft longer than the person" },
-            { letter: "C", text: "Yes; a shorter child has a shorter shadow" },
+            { letter: "B", text: "Yes; 3/5.5 = 5.5/8" },
+            { letter: "C", text: "Yes; shadows do not depend on height" },
             { letter: "D", text: "No; the child must stand where the tips meet" }
           ],
           correct: "A"
@@ -893,12 +893,12 @@
           id: "rampR",
           sol: "G.TR.3",
           sub: "G.TR.3.2",
-          stem: "Which statement about ramp R is true?",
+          stem: "Is ramp R similar to ramp P? Choose the answer with the correct reason.",
           choices: [
-            { letter: "A", text: "Similar to P, since each leg is 2 ft longer" },
-            { letter: "B", text: "Not similar to P, since 4/2 ≠ 7/5" },
-            { letter: "C", text: "Similar to P, since both have a right angle" },
-            { letter: "D", text: "Not similar to P, since it is taller" }
+            { letter: "A", text: "Yes; 4/2 = 7/5" },
+            { letter: "B", text: "No; 4/2 ≠ 7/5" },
+            { letter: "C", text: "Yes; all right triangles are similar" },
+            { letter: "D", text: "No; ramp R has no right angle" }
           ],
           correct: "B"
         },
@@ -996,7 +996,7 @@
           id: "ec",
           sol: "G.TR.3",
           sub: "G.TR.3.3",
-          stem: "How long is EC?",
+          stem: "How long is the lower part EC of brace AC?",
           choices: [
             { letter: "A", text: "40 in." },
             { letter: "B", text: "14.4 in." },
@@ -1022,12 +1022,12 @@
           id: "second",
           sol: "G.TR.3",
           sub: "G.TR.3.2",
-          stem: "On a second stand, AE = 20 in., EC = 32 in., BE = 15 in. and ED = 27 in. Is AB ∥ DC there?",
+          stem: "On a second stand, AE = 20 in., EC = 32 in., BE = 15 in. and ED = 27 in. Is AB ∥ DC there? Choose the answer with the correct reason.",
           choices: [
             { letter: "A", text: "Yes; the vertical angles at E give AA" },
-            { letter: "B", text: "Yes; each brace's long part is 12 in. longer" },
+            { letter: "B", text: "Yes; 20/32 = 15/27" },
             { letter: "C", text: "No; 20/32 ≠ 15/27" },
-            { letter: "D", text: "No; braces AC and BD differ in length" }
+            { letter: "D", text: "No; AE must equal BE" }
           ],
           correct: "C"
         },
@@ -1162,7 +1162,7 @@
         "<circle class=\"dt\" cx=\"289.1\" cy=\"145.8\" r=\"3\"/><circle class=\"dt\" cx=\"100.1\" cy=\"145.8\" r=\"3\"/><text x=\"13\" y=\"25\" text-anchor=\"middle\">A</text>" +
         "<text x=\"118\" y=\"17\" text-anchor=\"middle\">B</text><text x=\"299.1\" y=\"158.8\" text-anchor=\"middle\">C</text>" +
         "<text x=\"89.1\" y=\"157.8\" text-anchor=\"middle\">D</text><text x=\"66\" y=\"14\" text-anchor=\"middle\">400</text>" +
-        "<text x=\"48.4\" y=\"96.2\" text-anchor=\"middle\">700</text><text x=\"88.7\" y=\"77.8\" text-anchor=\"middle\">600</text>" +
+        "<text x=\"48.4\" y=\"96.2\" text-anchor=\"middle\">700</text><text x=\"85.7\" y=\"77.8\" text-anchor=\"middle\">600</text>" +
         "<text x=\"208.8\" y=\"73.1\" text-anchor=\"middle\">1050</text><text x=\"194.6\" y=\"163.8\" text-anchor=\"middle\">900</text>" +
         "<text class=\"sm\" x=\"53.6\" y=\"40.7\" text-anchor=\"middle\">59°</text></svg></figure>" +
         "<p class=\"geo-given\">Checkpoints <strong>A</strong>, <strong>B</strong>, <strong>C</strong> and <strong>D</strong> of an orienteering course are joined by straight trails: AB = 400 m, AD = 700 m, BD = 600 m, BC = 1050 m and CD = 900 m. m∠BAD ≈ 59°.</p>",
