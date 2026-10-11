@@ -953,14 +953,13 @@
         "<line class=\"ax\" x1=\"40\" y1=\"80\" x2=\"200\" y2=\"80\"/><line class=\"ax\" x1=\"104\" y1=\"112\" x2=\"104\" y2=\"16\"/><text class=\"sm\" x=\"40\" y=\"125\" text-anchor=\"middle\">−4</text>" +
         "<text class=\"sm\" x=\"72\" y=\"125\" text-anchor=\"middle\">−2</text><text class=\"sm\" x=\"104\" y=\"125\" text-anchor=\"middle\">0</text>" +
         "<text class=\"sm\" x=\"136\" y=\"125\" text-anchor=\"middle\">2</text><text class=\"sm\" x=\"168\" y=\"125\" text-anchor=\"middle\">4</text>" +
-        "<text class=\"sm\" x=\"200\" y=\"125\" text-anchor=\"middle\">6</text><text class=\"sm\" x=\"35\" y=\"116\" text-anchor=\"end\">−2</text>" +
-        "<text class=\"sm\" x=\"35\" y=\"84\" text-anchor=\"end\">0</text><text class=\"sm\" x=\"35\" y=\"52\" text-anchor=\"end\">2</text>" +
-        "<text class=\"sm\" x=\"35\" y=\"20\" text-anchor=\"end\">4</text><text class=\"sm\" x=\"209\" y=\"84\" text-anchor=\"middle\">x</text>" +
-        "<text class=\"sm\" x=\"112\" y=\"18\" text-anchor=\"middle\">y</text><polygon class=\"sh2\" points=\"56,96 184,96 152,32 88,32\"/><circle class=\"dt\" cx=\"56\" cy=\"96\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"184\" cy=\"96\" r=\"3\"/><circle class=\"dt\" cx=\"152\" cy=\"32\" r=\"3\"/><circle class=\"dt\" cx=\"88\" cy=\"32\" r=\"3\"/>" +
-        "<text x=\"45\" y=\"101\" text-anchor=\"middle\">A</text><text x=\"195\" y=\"101\" text-anchor=\"middle\">B</text><text x=\"162\" y=\"28\" text-anchor=\"middle\">C</text>" +
-        "<text x=\"78\" y=\"28\" text-anchor=\"middle\">D</text><text class=\"sm\" x=\"222\" y=\"60\" text-anchor=\"start\">harbor map</text>" +
-        "<text class=\"sm\" x=\"222\" y=\"78\" text-anchor=\"start\">1 unit = 5 m</text></svg></figure>" +
+        "<text class=\"sm\" x=\"200\" y=\"125\" text-anchor=\"middle\">6</text><text class=\"sm\" x=\"35\" y=\"84\" text-anchor=\"end\">0</text>" +
+        "<text class=\"sm\" x=\"35\" y=\"52\" text-anchor=\"end\">2</text><text class=\"sm\" x=\"35\" y=\"20\" text-anchor=\"end\">4</text>" +
+        "<text class=\"sm\" x=\"209\" y=\"84\" text-anchor=\"middle\">x</text><text class=\"sm\" x=\"112\" y=\"18\" text-anchor=\"middle\">y</text>" +
+        "<polygon class=\"sh2\" points=\"56,96 184,96 152,32 88,32\"/><circle class=\"dt\" cx=\"56\" cy=\"96\" r=\"3\"/><circle class=\"dt\" cx=\"184\" cy=\"96\" r=\"3\"/>" +
+        "<circle class=\"dt\" cx=\"152\" cy=\"32\" r=\"3\"/><circle class=\"dt\" cx=\"88\" cy=\"32\" r=\"3\"/><text x=\"45\" y=\"101\" text-anchor=\"middle\">A</text>" +
+        "<text x=\"195\" y=\"101\" text-anchor=\"middle\">B</text><text x=\"162\" y=\"28\" text-anchor=\"middle\">C</text><text x=\"78\" y=\"28\" text-anchor=\"middle\">D</text>" +
+        "<text class=\"sm\" x=\"222\" y=\"60\" text-anchor=\"start\">harbor map</text><text class=\"sm\" x=\"222\" y=\"78\" text-anchor=\"start\">1 unit = 5 m</text></svg></figure>" +
         "<p class=\"geo-given\">On a harbor map, the ferry landing dock is quadrilateral <strong>ABCD</strong> with corners <strong>A</strong>(−3, −1), <strong>B</strong>(5, −1), <strong>C</strong>(3, 3) and <strong>D</strong>(−1, 3). Each grid unit is 5 m. A walkway <strong>MN</strong> will join the midpoints of AD and BC.</p>",
       claims: [
         {
