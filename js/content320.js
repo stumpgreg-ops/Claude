@@ -257,23 +257,23 @@
           "id": "summer",
           "sol": "G.TR.4",
           "sub": "G.TR.4.3",
-          "stem": "In summer the 8-ft panel is tilted at 40° instead. To the nearest tenth of a foot, how tall must the post be?",
+          "stem": "In summer the 8-ft panel is tilted at 37° instead. To the nearest tenth of a foot, how tall must the post be?",
           "choices": [
             {
               "letter": "A",
-              "text": "6.1 ft"
+              "text": "6.4 ft"
             },
             {
               "letter": "B",
-              "text": "5.1 ft"
+              "text": "4.8 ft"
             },
             {
               "letter": "C",
-              "text": "6.7 ft"
+              "text": "6.0 ft"
             },
             {
               "letter": "D",
-              "text": "12.4 ft"
+              "text": "13.3 ft"
             }
           ],
           "correct": "B"
@@ -282,23 +282,23 @@
           "id": "small",
           "sol": "G.TR.4",
           "sub": "G.TR.4.3",
-          "stem": "A smaller panel is 5 ft long, and its top edge is 2 ft above the roof. To the nearest degree, at what angle is it tilted?",
+          "stem": "A smaller panel is 5 ft long, and its top edge is 2.2 ft above the roof. To the nearest degree, at what angle is it tilted?",
           "choices": [
             {
               "letter": "A",
-              "text": "22°"
+              "text": "24°"
             },
             {
               "letter": "B",
-              "text": "66°"
+              "text": "64°"
             },
             {
               "letter": "C",
-              "text": "68°"
+              "text": "66°"
             },
             {
               "letter": "D",
-              "text": "24°"
+              "text": "26°"
             }
           ],
           "correct": "D"
@@ -1765,23 +1765,23 @@
           "id": "map",
           "sol": "G.TR.4",
           "sub": "G.TR.4.1",
-          "stem": "On the airport map, the end of a runway is 800 ft east and 390 ft north of the control tower. How far is it from the tower in a straight line?",
+          "stem": "On the airport map, the end of a runway is 840 ft east and 130 ft north of the control tower. How far is it from the tower in a straight line?",
           "choices": [
             {
               "letter": "A",
-              "text": "1,190 ft"
+              "text": "970 ft"
             },
             {
               "letter": "B",
-              "text": "about 698 ft"
+              "text": "about 830 ft"
             },
             {
               "letter": "C",
-              "text": "410 ft"
+              "text": "710 ft"
             },
             {
               "letter": "D",
-              "text": "890 ft"
+              "text": "850 ft"
             }
           ],
           "correct": "D"
@@ -2076,7 +2076,7 @@
             },
             {
               "letter": "C",
-              "text": "about 26.9 m"
+              "text": "about 27 m"
             },
             {
               "letter": "D",
@@ -2444,7 +2444,7 @@
       "kind": "Triangles · G.TR.4",
       "blurb": "Angles of elevation from a ferry's deck to the light.",
       "level": 3,
-      "passage": "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 150\" role=\"img\" aria-label=\"A ferry's deck D is 8 meters above the sea; the light L of a lighthouse is 53 meters above the sea; M on the lighthouse is level with D, so LM is 45 meters; the angle of elevation from D to L is 12 degrees; right angle at M\"><rect class=\"sh2\" x=\"10\" y=\"134\" width=\"300\" height=\"14\"/><polygon class=\"sh2\" points=\"14,125 70,125 62,134 20,134\"/><rect class=\"sh2\" x=\"22\" y=\"116\" width=\"22\" height=\"9\"/><polygon class=\"sh2\" points=\"274.1,134 288.1,134 285.1,80.6 277.1,80.6\"/><rect class=\"sh\" x=\"276.1\" y=\"68.6\" width=\"10\" height=\"12\"/><line class=\"thin dash\" x1=\"44\" y1=\"125\" x2=\"281.1\" y2=\"125\"/><line class=\"ac\" x1=\"44\" y1=\"125\" x2=\"281.1\" y2=\"74.6\"/><path class=\"thin\" d=\"M274.1 125 L274.1 118 L281.1 118\"/><path class=\"thin\" d=\"M114 125 A70 70 0 0 0 112.5 110.5\"/><circle class=\"dt\" cx=\"44\" cy=\"125\" r=\"3\"/><circle class=\"dt\" cx=\"281.1\" cy=\"125\" r=\"3\"/><circle class=\"dt\" cx=\"281.1\" cy=\"74.6\" r=\"3\"/><text x=\"46\" y=\"112\" text-anchor=\"middle\">D</text><text x=\"294.1\" y=\"140\" text-anchor=\"middle\">M</text><text x=\"294.1\" y=\"73.6\" text-anchor=\"middle\">L</text><text x=\"139.5\" y=\"120\" text-anchor=\"middle\">12°</text><text class=\"sm\" x=\"245.1\" y=\"99.8\" text-anchor=\"middle\">45 m</text><text class=\"sm\" x=\"88\" y=\"146\" text-anchor=\"middle\">8 m</text><text class=\"sm\" x=\"253.1\" y=\"147\" text-anchor=\"middle\">sea</text></svg></figure><p class=\"geo-given\">A ferry's deck <strong>D</strong> is 8 m above the sea. The light <strong>L</strong> at the top of a lighthouse is 53 m above the sea. <strong>M</strong> is the point on the lighthouse level with D, so LM = 45 m. From D, the angle of elevation to L is 12°.</p>",
+      "passage": "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 150\" role=\"img\" aria-label=\"A ferry's deck D is 8 meters above the sea; the light L of a lighthouse is 50 meters above the sea; M on the lighthouse is level with D, so LM is 42 meters; the angle of elevation from D to L is 12 degrees; right angle at M\"><rect class=\"sh2\" x=\"10\" y=\"134\" width=\"300\" height=\"14\"/><polygon class=\"sh2\" points=\"14,125 70,125 62,134 20,134\"/><rect class=\"sh2\" x=\"22\" y=\"116\" width=\"22\" height=\"9\"/><polygon class=\"sh2\" points=\"258.3,134 272.3,134 269.3,84 261.3,84\"/><rect class=\"sh\" x=\"260.3\" y=\"72\" width=\"10\" height=\"12\"/><line class=\"thin dash\" x1=\"44\" y1=\"125\" x2=\"265.3\" y2=\"125\"/><line class=\"ac\" x1=\"44\" y1=\"125\" x2=\"265.3\" y2=\"78\"/><path class=\"thin\" d=\"M258.3 125 L258.3 118 L265.3 118\"/><path class=\"thin\" d=\"M114 125 A70 70 0 0 0 112.5 110.5\"/><circle class=\"dt\" cx=\"44\" cy=\"125\" r=\"3\"/><circle class=\"dt\" cx=\"265.3\" cy=\"125\" r=\"3\"/><circle class=\"dt\" cx=\"265.3\" cy=\"78\" r=\"3\"/><text x=\"46\" y=\"112\" text-anchor=\"middle\">D</text><text x=\"278.3\" y=\"140\" text-anchor=\"middle\">M</text><text x=\"278.3\" y=\"77\" text-anchor=\"middle\">L</text><text x=\"139.5\" y=\"120\" text-anchor=\"middle\">12°</text><text class=\"sm\" x=\"229.3\" y=\"101.5\" text-anchor=\"middle\">42 m</text><text class=\"sm\" x=\"88\" y=\"146\" text-anchor=\"middle\">8 m</text><text class=\"sm\" x=\"237.3\" y=\"147\" text-anchor=\"middle\">sea</text></svg></figure><p class=\"geo-given\">A ferry's deck <strong>D</strong> is 8 m above the sea. The light <strong>L</strong> at the top of a lighthouse is 50 m above the sea. <strong>M</strong> is the point on the lighthouse level with D, so LM = 42 m. From D, the angle of elevation to L is 12°.</p>",
       "claims": [
         {
           "id": "dm",
@@ -2454,19 +2454,19 @@
           "choices": [
             {
               "letter": "A",
-              "text": "249 m"
+              "text": "235 m"
             },
             {
               "letter": "B",
-              "text": "212 m"
+              "text": "198 m"
             },
             {
               "letter": "C",
-              "text": "10 m"
+              "text": "9 m"
             },
             {
               "letter": "D",
-              "text": "216 m"
+              "text": "202 m"
             }
           ],
           "correct": "B"
@@ -2479,19 +2479,19 @@
           "choices": [
             {
               "letter": "A",
-              "text": "88 m"
+              "text": "82 m"
             },
             {
               "letter": "B",
-              "text": "320 m"
+              "text": "299 m"
             },
             {
               "letter": "C",
-              "text": "124 m"
+              "text": "115 m"
             },
             {
               "letter": "D",
-              "text": "104 m"
+              "text": "98 m"
             }
           ],
           "correct": "A"
@@ -2504,19 +2504,19 @@
           "choices": [
             {
               "letter": "A",
-              "text": "212 m"
+              "text": "198 m"
             },
             {
               "letter": "B",
-              "text": "46 m"
+              "text": "43 m"
             },
             {
               "letter": "C",
-              "text": "257 m"
+              "text": "240 m"
             },
             {
               "letter": "D",
-              "text": "216 m"
+              "text": "202 m"
             }
           ],
           "correct": "D"
@@ -2529,19 +2529,19 @@
           "choices": [
             {
               "letter": "A",
-              "text": "15√3 m"
+              "text": "14√3 m"
             },
             {
               "letter": "B",
-              "text": "90 m"
+              "text": "84 m"
             },
             {
               "letter": "C",
-              "text": "45√3 m"
+              "text": "42√3 m"
             },
             {
               "letter": "D",
-              "text": "53√3 m"
+              "text": "50√3 m"
             }
           ],
           "correct": "C"
@@ -2579,15 +2579,15 @@
           "choices": [
             {
               "letter": "A",
-              "text": "18°"
+              "text": "17°"
             },
             {
               "letter": "B",
-              "text": "16°"
+              "text": "15°"
             },
             {
               "letter": "C",
-              "text": "74°"
+              "text": "75°"
             },
             {
               "letter": "D",

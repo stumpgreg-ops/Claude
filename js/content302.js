@@ -841,7 +841,7 @@
           id: "overlap",
           sol: "G.RLT.1",
           sub: "G.RLT.1.4",
-          stem: "In the Venn diagram, which number belongs in the region B ∩ T?",
+          stem: "In a Venn diagram of these results, which number belongs in the region B ∩ T?",
           choices: [
             { letter: "A", text: "25" },
             { letter: "B", text: "41" },
@@ -1108,7 +1108,7 @@
       blurb: "Two ramps, two rules and a slope to compute.",
       level: 3,
       passage:
-        "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 150\" role=\"img\" aria-label=\"Two ramps with handrails drawn as right triangles. Ramp A rises 2 ft over a run of 30 ft. Ramp B rises 2.5 ft over a run of 25 ft\"><line class=\"ln\" x1=\"8\" y1=\"128\" x2=\"312\" y2=\"128\"/><polygon class=\"sh2\" points=\"16,128 151,128 151,56\"/><line class=\"ln\" x1=\"16\" y1=\"128\" x2=\"151\" y2=\"56\"/><line class=\"ln\" x1=\"151\" y1=\"128\" x2=\"151\" y2=\"56\"/><path class=\"thin\" d=\"M143 128 V120 H151\"/><line class=\"thin\" x1=\"37.4\" y1=\"103\" x2=\"138.6\" y2=\"49\"/><line class=\"thin\" x1=\"43\" y1=\"113.6\" x2=\"37.4\" y2=\"103\"/><line class=\"thin\" x1=\"93.6\" y1=\"86.6\" x2=\"88\" y2=\"76\"/><line class=\"thin\" x1=\"144.3\" y1=\"59.6\" x2=\"138.6\" y2=\"49\"/><text class=\"sm\" x=\"83.5\" y=\"144\" text-anchor=\"middle\">run 30 ft</text><text class=\"sm\" x=\"139\" y=\"118\" text-anchor=\"end\">rise 2 ft</text><text class=\"acc\" x=\"42\" y=\"40\" text-anchor=\"middle\">Ramp A</text><polygon class=\"sh2\" points=\"176,128 288.5,128 288.5,38\"/><line class=\"ln\" x1=\"176\" y1=\"128\" x2=\"288.5\" y2=\"38\"/><line class=\"ln\" x1=\"288.5\" y1=\"128\" x2=\"288.5\" y2=\"38\"/><path class=\"thin\" d=\"M280.5 128 V120 H288.5\"/><line class=\"thin\" x1=\"191\" y1=\"100.6\" x2=\"275.4\" y2=\"33.1\"/><line class=\"thin\" x1=\"198.5\" y1=\"110\" x2=\"191\" y2=\"100.6\"/><line class=\"thin\" x1=\"240.7\" y1=\"76.3\" x2=\"233.2\" y2=\"66.9\"/><line class=\"thin\" x1=\"282.9\" y1=\"42.5\" x2=\"275.4\" y2=\"33.1\"/><text class=\"sm\" x=\"232.3\" y=\"144\" text-anchor=\"middle\">run 25 ft</text><text class=\"sm\" x=\"276.5\" y=\"118\" text-anchor=\"end\">rise 2.5 ft</text><text class=\"acc\" x=\"202\" y=\"40\" text-anchor=\"middle\">Ramp B</text></svg><figcaption>Not drawn to scale</figcaption></figure><p class=\"geo-given\">A train station has two ramps, <strong>A</strong> and <strong>B</strong>, and both have handrails. Two rules hold for every ramp at the station.</p><p class=\"geo-given\">Rule 1: A ramp is approved if and only if its slope is at most 1/12. Rule 2: If a ramp rises more than 6 inches, then it has handrails.</p>",
+        "<figure class=\"geo-fig\"><svg viewBox=\"0 62 320 88\" role=\"img\" aria-label=\"Two ramps with handrails drawn as right triangles. Ramp A rises 2 ft over a run of 30 ft. Ramp B rises 2.5 ft over a run of 25 ft\"><line class=\"ln\" x1=\"8\" y1=\"128\" x2=\"312\" y2=\"128\"/><polygon class=\"sh2\" points=\"16,128 151,128 151,101.0\"/><line class=\"ln\" x1=\"16\" y1=\"128\" x2=\"151\" y2=\"101.0\"/><line class=\"ln\" x1=\"151\" y1=\"128\" x2=\"151\" y2=\"101.0\"/><path class=\"thin\" d=\"M143 128 V120 H151\"/><line class=\"thin\" x1=\"36\" y1=\"112.0\" x2=\"140\" y2=\"91.2\"/><line class=\"thin\" x1=\"36.0\" y1=\"124.0\" x2=\"36.0\" y2=\"112.0\"/><line class=\"thin\" x1=\"88.0\" y1=\"113.6\" x2=\"88.0\" y2=\"101.6\"/><line class=\"thin\" x1=\"140.0\" y1=\"103.2\" x2=\"140.0\" y2=\"91.2\"/><text class=\"sm\" x=\"83.5\" y=\"144\" text-anchor=\"middle\">run 30 ft</text><text class=\"sm\" x=\"139\" y=\"124\" text-anchor=\"end\">rise 2 ft</text><text class=\"acc\" x=\"70\" y=\"82\" text-anchor=\"middle\">Ramp A</text><polygon class=\"sh2\" points=\"176,128 288.5,128 288.5,94.0\"/><line class=\"ln\" x1=\"176\" y1=\"128\" x2=\"288.5\" y2=\"94.0\"/><line class=\"ln\" x1=\"288.5\" y1=\"128\" x2=\"288.5\" y2=\"94.0\"/><path class=\"thin\" d=\"M280.5 128 V120 H288.5\"/><line class=\"thin\" x1=\"190\" y1=\"111.8\" x2=\"278\" y2=\"85.2\"/><line class=\"thin\" x1=\"190.0\" y1=\"123.8\" x2=\"190.0\" y2=\"111.8\"/><line class=\"thin\" x1=\"234.0\" y1=\"110.5\" x2=\"234.0\" y2=\"98.5\"/><line class=\"thin\" x1=\"278.0\" y1=\"97.2\" x2=\"278.0\" y2=\"85.2\"/><text class=\"sm\" x=\"232.2\" y=\"144\" text-anchor=\"middle\">run 25 ft</text><text class=\"sm\" x=\"276.5\" y=\"124\" text-anchor=\"end\">rise 2.5 ft</text><text class=\"acc\" x=\"225\" y=\"80\" text-anchor=\"middle\">Ramp B</text></svg><figcaption>Not drawn to scale</figcaption></figure><p class=\"geo-given\">A train station has two ramps, <strong>A</strong> and <strong>B</strong>, and both have handrails. Two rules hold for every ramp at the station.</p><p class=\"geo-given\">Rule 1: A ramp is approved if and only if its slope is at most 1/12. Rule 2: If a ramp rises more than 6 inches, then it has handrails.</p>",
       claims: [
         {
           id: "approved",
@@ -1236,7 +1236,7 @@
             { letter: "A", text: "The 7:40 train is late." },
             { letter: "B", text: "Commuters miss the 8:15 ferry." },
             { letter: "C", text: "Snow falls on the tracks." },
-            { letter: "D", text: "No other statement must be true." }
+            { letter: "D", text: "Nothing else can be concluded." }
           ],
           correct: "D"
         },

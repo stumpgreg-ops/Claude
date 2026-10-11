@@ -235,7 +235,7 @@
         "<text x=\"169.3\" y=\"112.7\" text-anchor=\"middle\">4</text><text class=\"sm\" x=\"95.2\" y=\"19.1\" text-anchor=\"end\">laser</text>" +
         "<text class=\"sm\" x=\"212\" y=\"90\" text-anchor=\"middle\">glass block</text><text class=\"sm\" x=\"274\" y=\"54\">top</text>" +
         "<text class=\"sm\" x=\"274\" y=\"126\">bottom</text></svg></figure>" +
-        "<p class=\"geo-given\">In a science lab, a laser beam passes through a glass block. The top and bottom faces of the block are parallel. Inside the block the beam runs straight from <strong>P</strong> to <strong>Q</strong>. m∠1 = (5x − 19)° and m∠2 = (3x + 15)°.</p>",
+        "<p class=\"geo-given\">In a science lab, a laser beam passes through a glass block. The top and bottom faces of the block are parallel. Inside the block the beam runs straight from <strong>P</strong> to <strong>Q</strong>. m∠1 = (5x − 19)⁠° and m∠2 = (3x + 15)⁠°.</p>",
       claims: [
         {
           id: "solve-x",
@@ -396,7 +396,7 @@
           id: "solve-x",
           sol: "G.RLT.2",
           sub: "G.RLT.2.3",
-          stem: "In a second sketch, the angle above c and left of f is (3x + 21)°, and c is parallel to b. What is x?",
+          stem: "In a second sketch, the angle above c and left of f is (3x + 21)⁠°, and c is parallel to b. What is x?",
           choices: [
             { letter: "A", text: "16" },
             { letter: "B", text: "28" },
@@ -442,7 +442,7 @@
         "<path class=\"thin\" d=\"M62 128 A22 22 0 0 0 44.6 106.5\"/><text class=\"sm\" x=\"78.9\" y=\"100.5\" text-anchor=\"middle\">(4x − 6)°</text>" +
         "<path class=\"thin\" d=\"M210.2 108.4 A20 20 0 0 0 186 128\"/><text class=\"sm\" x=\"178.3\" y=\"97.8\" text-anchor=\"middle\">(5x − 3)°</text>" +
         "<path class=\"ac\" d=\"M218 128 A12 12 0 0 0 208.5 116.3\"/></svg></figure>" +
-        "<p class=\"geo-given\">In a model of a calcite crystal, face <strong>ABCD</strong> is a parallelogram: AB ∥ DC and AD ∥ BC. Edge AB is extended past <strong>B</strong> to <strong>E</strong>. m∠DAB = (4x − 6)° and m∠ABC = (5x − 3)°.</p>",
+        "<p class=\"geo-given\">In a model of a calcite crystal, face <strong>ABCD</strong> is a parallelogram: AB ∥ DC and AD ∥ BC. Edge AB is extended past <strong>B</strong> to <strong>E</strong>. m∠DAB = (4x − 6)⁠° and m∠ABC = (5x − 3)⁠°.</p>",
       claims: [
         {
           id: "pair-a-b",
@@ -603,7 +603,7 @@
           id: "model",
           sol: "G.RLT.2",
           sub: "G.RLT.2.3",
-          stem: "In a class model, the ray makes a (2x + 3)° angle with the pole, and m∠SOA = (5x − 9)°. What is m∠SOA in the model?",
+          stem: "In a class model, the ray makes a (2x + 3)⁠° angle with the pole, and m∠SOA = (5x − 9)⁠°. What is m∠SOA in the model?",
           choices: [
             { letter: "A", text: "11°" },
             { letter: "B", text: "4°" },
@@ -707,7 +707,7 @@
           id: "angle-3",
           sol: "G.RLT.2",
           sub: "G.RLT.2.3",
-          stem: "Suppose m∠3 = (7x − 13)° and m∠4 = (3x + 3)°, and ℓ ∥ m. What is m∠3?",
+          stem: "Suppose m∠3 = (7x − 13)⁠° and m∠4 = (3x + 3)⁠°, and ℓ ∥ m. What is m∠3?",
           choices: [
             { letter: "A", text: "120°" },
             { letter: "B", text: "15°" },
@@ -960,7 +960,7 @@
         "<path class=\"thin\" d=\"M93 51.1 A18 18 0 0 0 101.1 36\"/><path class=\"thin\" d=\"M130.5 108.9 A18 18 0 0 0 122.3 124\"/>" +
         "<text class=\"sm\" x=\"272\" y=\"28\" text-anchor=\"middle\">top chord</text><text class=\"sm\" x=\"83\" y=\"139\" text-anchor=\"middle\">bottom chord</text></svg>" +
         "</figure>" +
-        "<p class=\"geo-given\">On a truss bridge, the top chord <strong>BD</strong> and the bottom chord <strong>AE</strong> are parallel. Straight beams zigzag between them. m∠DBC = (5x − 8)° and m∠BCA = (3x + 18)°.</p>",
+        "<p class=\"geo-given\">On a truss bridge, the top chord <strong>BD</strong> and the bottom chord <strong>AE</strong> are parallel. Straight beams zigzag between them. m∠DBC = (5x − 8)⁠° and m∠BCA = (3x + 18)⁠°.</p>",
       claims: [
         {
           id: "solve-x",
@@ -1056,13 +1056,13 @@
         "<line class=\"ln\" x1=\"14\" y1=\"126\" x2=\"300\" y2=\"126\"/><line class=\"ln\" x1=\"14\" y1=\"40\" x2=\"300\" y2=\"40\"/>" +
         "<line class=\"ac\" x1=\"38.7\" y1=\"140.9\" x2=\"224.1\" y2=\"25.1\"/><path class=\"thin\" d=\"M33 122 L40 126 L33 130\"/>" +
         "<path class=\"thin\" d=\"M33 36 L40 40 L33 44\"/><circle class=\"dt\" cx=\"60\" cy=\"126\" r=\"3\"/><circle class=\"dt\" cx=\"202.8\" cy=\"40\" r=\"3\"/>" +
-        "<text x=\"56\" y=\"144\" text-anchor=\"middle\">P</text><text x=\"178.8\" y=\"33\" text-anchor=\"middle\">Q</text>" +
-        "<text x=\"88.6\" y=\"122\" text-anchor=\"middle\">1</text><text x=\"55.5\" y=\"116.7\" text-anchor=\"middle\">5</text>" +
-        "<text x=\"174.2\" y=\"54\" text-anchor=\"middle\">2</text><text x=\"199.7\" y=\"27.3\" text-anchor=\"middle\">3</text>" +
+        "<text x=\"72\" y=\"143\" text-anchor=\"middle\">P</text><text x=\"178.8\" y=\"33\" text-anchor=\"middle\">Q</text>" +
+        "<text x=\"100.1\" y=\"118.4\" text-anchor=\"middle\">1</text><text x=\"55.5\" y=\"116.7\" text-anchor=\"middle\">5</text>" +
+        "<text x=\"162.8\" y=\"57.6\" text-anchor=\"middle\">2</text><text x=\"199.7\" y=\"27.3\" text-anchor=\"middle\">3</text>" +
         "<text x=\"207.3\" y=\"59.3\" text-anchor=\"middle\">4</text><text x=\"306\" y=\"131\">g</text><text x=\"306\" y=\"45\">h</text>" +
         "<text class=\"acc\" x=\"230.1\" y=\"29.1\">e</text><text class=\"sm\" x=\"250\" y=\"66\" text-anchor=\"middle\">upper floor</text>" +
         "<text class=\"sm\" x=\"250\" y=\"118\" text-anchor=\"middle\">lower floor</text></svg></figure>" +
-        "<p class=\"geo-given\">In a subway station, the lower floor <strong>g</strong> and the upper floor <strong>h</strong> are parallel. The handrail of an escalator runs along line <strong>e</strong> from <strong>P</strong> to <strong>Q</strong>. m∠1 = (4x − 1)° and m∠2 = (x + 26)°.</p>",
+        "<p class=\"geo-given\">In a subway station, the lower floor <strong>g</strong> and the upper floor <strong>h</strong> are parallel. The handrail of an escalator runs along line <strong>e</strong> from <strong>P</strong> to <strong>Q</strong>. m∠1 = (4x − 1)⁠° and m∠2 = (x + 26)⁠°.</p>",
       claims: [
         {
           id: "solve-x",
@@ -1162,7 +1162,7 @@
         "<text x=\"300\" y=\"121\" text-anchor=\"end\">g</text><text x=\"67.8\" y=\"122.4\" text-anchor=\"middle\">1</text>" +
         "<text x=\"37.9\" y=\"119.3\" text-anchor=\"middle\">2</text><text x=\"157.9\" y=\"119.3\" text-anchor=\"middle\">3</text>" +
         "<text x=\"187.8\" y=\"122.4\" text-anchor=\"middle\">4</text><text class=\"sm\" x=\"258\" y=\"141\" text-anchor=\"middle\">boardwalk</text></svg></figure>" +
-        "<p class=\"geo-given\">Two kites are tied at <strong>A</strong> and <strong>B</strong> on the straight edge of a boardwalk, <strong>g</strong>. Both strings are pulled straight. m∠1 = 48° and m∠3 = (4x + 8)°.</p>",
+        "<p class=\"geo-given\">Two kites are tied at <strong>A</strong> and <strong>B</strong> on the straight edge of a boardwalk, <strong>g</strong>. Both strings are pulled straight. m∠1 = 48° and m∠3 = (4x + 8)⁠°.</p>",
       claims: [
         {
           id: "pair-1-3",
@@ -1264,7 +1264,7 @@
         "<text x=\"94.4\" y=\"98.6\" text-anchor=\"middle\">5</text><text x=\"186\" y=\"55.5\" text-anchor=\"middle\">6</text>" +
         "<text x=\"163.4\" y=\"106.5\" text-anchor=\"middle\">7</text><text x=\"143.1\" y=\"130.9\" text-anchor=\"middle\">8</text>" +
         "<text class=\"sm\" x=\"66\" y=\"80\" text-anchor=\"end\">boardwalk</text><text class=\"sm\" x=\"262\" y=\"140\" text-anchor=\"middle\">water</text></svg></figure>" +
-        "<p class=\"geo-given\">At a marina, docks <strong>d</strong> and <strong>e</strong> stick out from a straight boardwalk, <strong>t</strong>. A rope, <strong>r</strong>, is stretched across both docks, with m∠6 = (x + 32)° and m∠7 = (3x + 8)°. Given: d ⊥ t and e ⊥ t. Prove: d ∥ e.</p>" +
+        "<p class=\"geo-given\">At a marina, docks <strong>d</strong> and <strong>e</strong> stick out from a straight boardwalk, <strong>t</strong>. A rope, <strong>r</strong>, is stretched across both docks, with m∠6 = (x + 32)⁠° and m∠7 = (3x + 8)⁠°. Given: d ⊥ t and e ⊥ t. Prove: d ∥ e.</p>" +
         "<table class=\"geo-proof\"><tr><th>Statement</th><th>Reason</th></tr><tr><td>1. d ⊥ t and e ⊥ t</td><td>Given</td></tr><tr>" +
         "<td>2. ∠1 and ∠5 are right angles.</td><td>____ (a)</td></tr><tr><td>3. ∠1 ≅ ∠5</td><td>____ (b)</td></tr><tr><td>4. d ∥ e</td><td>____ (c)</td></tr>" +
         "</table>",
@@ -1429,7 +1429,7 @@
           id: "solve-x",
           sol: "G.RLT.2",
           sub: "G.RLT.2.3",
-          stem: "On a second flight between the same highways, m∠BAC = (4x − 6)°, m∠BCA = (2x + 21)° and m∠ABC = (3x + 39)°. What is x?",
+          stem: "On a second flight between the same highways, m∠BAC = (4x − 6)⁠°, m∠BCA = (2x + 21)⁠° and m∠ABC = (3x + 39)⁠°. What is x?",
           choices: [
             { letter: "A", text: "34" },
             { letter: "B", text: "14" },
