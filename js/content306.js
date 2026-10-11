@@ -130,7 +130,7 @@
         "<circle class=\"dt\" cx=\"144\" cy=\"96\" r=\"3\"/><circle class=\"dt\" cx=\"128\" cy=\"118\" r=\"3\"/><text x=\"212.6\" y=\"24.5\" text-anchor=\"middle\">1</text>" +
         "<text x=\"153.2\" y=\"65.6\" text-anchor=\"middle\">2</text><text x=\"166.8\" y=\"92.4\" text-anchor=\"middle\">3</text>" +
         "<text x=\"150.8\" y=\"114.4\" text-anchor=\"middle\">4</text><text x=\"107.4\" y=\"133.5\" text-anchor=\"middle\">5</text>" +
-        "<text class=\"sm\" x=\"214.9\" y=\"20.2\" text-anchor=\"middle\">beam</text></svg></figure>" +
+        "<text class=\"sm\" x=\"216\" y=\"48\" text-anchor=\"middle\">beam</text></svg></figure>" +
         "<p class=\"geo-given\">The five lines of a music staff are parallel. From bottom to top they are named <strong>E</strong>, <strong>G</strong>, <strong>B</strong>, <strong>D</strong> and <strong>F</strong>. A composer draws a straight slanted beam across all five lines. m∠1 = 54°.</p>",
       claims: [
         {
@@ -223,17 +223,17 @@
       level: 2,
       passage:
         "<figure class=\"geo-fig\">" +
-        "<svg viewBox=\"0 0 320 160\" role=\"img\" aria-label=\"Two parallel vertical warp threads p (left) and q (right), with other threads dashed between and beside them, crossed by a slanted thread w that rises to the right. At thread p, angle 1 is left of p and above w, angle 2 right of p and above w, angle 3 left of p and below w, angle 4 right of p and below w. Angles 5 to 8 sit the same way at thread q\">" +
-        "<line class=\"thin dash\" x1=\"95\" y1=\"10\" x2=\"95\" y2=\"150\"/><line class=\"thin dash\" x1=\"160\" y1=\"10\" x2=\"160\" y2=\"150\"/>" +
-        "<line class=\"thin dash\" x1=\"230\" y1=\"10\" x2=\"230\" y2=\"150\"/><line class=\"ln\" x1=\"125\" y1=\"8\" x2=\"125\" y2=\"152\"/>" +
-        "<line class=\"ln\" x1=\"195\" y1=\"8\" x2=\"195\" y2=\"152\"/><line class=\"ac\" x1=\"106.1\" y1=\"148.3\" x2=\"216.4\" y2=\"12.1\"/>" +
-        "<path class=\"thin\" d=\"M121 29 L125 22 L129 29\"/><path class=\"thin\" d=\"M191 147 L195 140 L199 147\"/><circle class=\"dt\" cx=\"125\" cy=\"125\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"195\" cy=\"38.6\" r=\"3\"/><text x=\"137\" y=\"155\" text-anchor=\"middle\">p</text><text x=\"207\" y=\"155\" text-anchor=\"middle\">q</text>" +
-        "<text x=\"225.4\" y=\"18.1\" text-anchor=\"middle\">w</text><text class=\"sm\" x=\"262\" y=\"150\" text-anchor=\"middle\">warp</text>" +
-        "<text x=\"110.9\" y=\"125\" text-anchor=\"middle\">1</text><text x=\"133\" y=\"107.4\" text-anchor=\"middle\">2</text>" +
-        "<text x=\"117\" y=\"152.6\" text-anchor=\"middle\">3</text><text x=\"139.1\" y=\"135\" text-anchor=\"middle\">4</text>" +
-        "<text x=\"180.9\" y=\"38.6\" text-anchor=\"middle\">5</text><text x=\"203\" y=\"20.9\" text-anchor=\"middle\">6</text>" +
-        "<text x=\"187\" y=\"66.2\" text-anchor=\"middle\">7</text><text x=\"209.1\" y=\"48.6\" text-anchor=\"middle\">8</text></svg></figure>" +
+        "<svg viewBox=\"0 0 320 170\" role=\"img\" aria-label=\"Two parallel vertical warp threads p (left) and q (right), with other threads dashed between and beside them, crossed by a slanted thread w that rises to the right. At thread p, angle 1 is left of p and above w, angle 2 right of p and above w, angle 3 left of p and below w, angle 4 right of p and below w. Angles 5 to 8 sit the same way at thread q\">" +
+        "<line class=\"thin dash\" x1=\"95\" y1=\"10\" x2=\"95\" y2=\"160\"/><line class=\"thin dash\" x1=\"160\" y1=\"10\" x2=\"160\" y2=\"160\"/>" +
+        "<line class=\"thin dash\" x1=\"230\" y1=\"10\" x2=\"230\" y2=\"160\"/><line class=\"ln\" x1=\"125\" y1=\"8\" x2=\"125\" y2=\"162\"/>" +
+        "<line class=\"ln\" x1=\"195\" y1=\"8\" x2=\"195\" y2=\"162\"/><line class=\"ac\" x1=\"106.1\" y1=\"151.3\" x2=\"216.4\" y2=\"15.1\"/>" +
+        "<path class=\"thin\" d=\"M121 31 L125 24 L129 31\"/><path class=\"thin\" d=\"M191 157 L195 150 L199 157\"/><circle class=\"dt\" cx=\"125\" cy=\"128\" r=\"3\"/>" +
+        "<circle class=\"dt\" cx=\"195\" cy=\"41.6\" r=\"3\"/><text x=\"137\" y=\"164\" text-anchor=\"middle\">p</text><text x=\"207\" y=\"164\" text-anchor=\"middle\">q</text>" +
+        "<text x=\"225.4\" y=\"21.1\" text-anchor=\"middle\">w</text><text class=\"sm\" x=\"262\" y=\"160\" text-anchor=\"middle\">warp</text>" +
+        "<text x=\"110.9\" y=\"128\" text-anchor=\"middle\">1</text><text x=\"135\" y=\"104.7\" text-anchor=\"middle\">2</text>" +
+        "<text x=\"115\" y=\"161.3\" text-anchor=\"middle\">3</text><text x=\"139.1\" y=\"138\" text-anchor=\"middle\">4</text>" +
+        "<text x=\"180.9\" y=\"41.6\" text-anchor=\"middle\">5</text><text x=\"205\" y=\"18.3\" text-anchor=\"middle\">6</text>" +
+        "<text x=\"185\" y=\"74.8\" text-anchor=\"middle\">7</text><text x=\"209.1\" y=\"51.6\" text-anchor=\"middle\">8</text></svg></figure>" +
         "<p class=\"geo-given\">On a loom, warp threads <strong>p</strong> and <strong>q</strong> are parallel. A slanted thread of a twill pattern, <strong>w</strong>, crosses both. m∠1 = (7x − 20)⁠° and m∠8 = (5x + 26)⁠°.</p>",
       claims: [
         {
@@ -427,19 +427,18 @@
       level: 2,
       passage:
         "<figure class=\"geo-fig\">" +
-        "<svg viewBox=\"0 0 320 166\" role=\"img\" aria-label=\"A window frame with four lead strips: a and b rise to the right, c and d fall to the right, and they cross to make a diamond-shaped pane. Angle 1 is inside the pane at its top corner, angle 2 inside at its right corner, angle 3 inside at its bottom corner, angle 4 inside at its left corner, and angle 5 is above the right corner, between strips b and c outside the pane\">" +
-        "<polygon class=\"sh2\" points=\"160,25.3 194,83 160,140.7 126,83\"/><rect class=\"thin\" x=\"88\" y=\"4\" width=\"144\" height=\"158\"/>" +
-        "<line class=\"ln\" x1=\"113.8\" y1=\"103.7\" x2=\"172.2\" y2=\"4.6\"/><line class=\"ln\" x1=\"147.8\" y1=\"161.4\" x2=\"206.2\" y2=\"62.3\"/>" +
-        "<line class=\"ln\" x1=\"147.8\" y1=\"4.6\" x2=\"206.2\" y2=\"103.7\"/><line class=\"ln\" x1=\"113.8\" y1=\"62.3\" x2=\"172.2\" y2=\"161.4\"/>" +
-        "<path class=\"thin\" d=\"M162.1 13.8 L169.1 9.8 L169 17.8\"/><path class=\"thin\" d=\"M196.1 71.5 L203.1 67.5 L203 75.6\"/>" +
-        "<path class=\"thin\" d=\"M151 17.8 L150.9 9.8 L157.9 13.8\"/><path class=\"thin\" d=\"M154 23 L153.9 14.9 L160.9 18.9\"/>" +
-        "<path class=\"thin\" d=\"M117 75.6 L116.9 67.5 L123.9 71.5\"/><path class=\"thin\" d=\"M120 80.7 L119.9 72.7 L126.9 76.7\"/>" +
-        "<text x=\"180.2\" y=\"14.6\" text-anchor=\"middle\">a</text><text x=\"214.2\" y=\"72.3\" text-anchor=\"middle\">b</text>" +
-        "<text x=\"139.8\" y=\"14.6\" text-anchor=\"middle\">c</text><text x=\"105.8\" y=\"72.3\" text-anchor=\"middle\">d</text>" +
-        "<circle class=\"dt\" cx=\"160\" cy=\"25.3\" r=\"3\"/><circle class=\"dt\" cx=\"194\" cy=\"83\" r=\"3\"/><circle class=\"dt\" cx=\"160\" cy=\"140.7\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"126\" cy=\"83\" r=\"3\"/><text x=\"160\" y=\"52.3\" text-anchor=\"middle\">1</text><text x=\"179\" y=\"88\" text-anchor=\"middle\">2</text>" +
-        "<text x=\"160\" y=\"123.7\" text-anchor=\"middle\">3</text><text x=\"141\" y=\"88\" text-anchor=\"middle\">4</text>" +
-        "<text x=\"194\" y=\"66\" text-anchor=\"middle\">5</text></svg></figure>" +
+        "<svg viewBox=\"0 0 320 166\" role=\"img\" aria-label=\"Four lead strips in a window: a and b rise to the right, c and d fall to the right, and they cross to make a diamond-shaped pane. Angle 1 is inside the pane at its top corner, angle 2 inside at its right corner, angle 3 inside at its bottom corner, angle 4 inside at its left corner, and angle 5 is above the right corner, between strips b and c outside the pane\">" +
+        "<polygon class=\"sh2\" points=\"160,21.9 196,83 160,144.1 124,83\"/><line class=\"ln\" x1=\"114.9\" y1=\"98.5\" x2=\"169.1\" y2=\"6.4\"/>" +
+        "<line class=\"ln\" x1=\"150.9\" y1=\"159.6\" x2=\"205.1\" y2=\"67.5\"/><line class=\"ln\" x1=\"150.9\" y1=\"6.4\" x2=\"205.1\" y2=\"98.5\"/>" +
+        "<line class=\"ln\" x1=\"114.9\" y1=\"67.5\" x2=\"169.1\" y2=\"159.6\"/><path class=\"thin\" d=\"M137.3 52.5 L144.3 48.5 L144.2 56.6\"/>" +
+        "<path class=\"thin\" d=\"M173.3 113.7 L180.3 109.7 L180.2 117.7\"/><path class=\"thin\" d=\"M178.2 44.8 L178.3 52.9 L171.3 48.9\"/>" +
+        "<path class=\"thin\" d=\"M175.1 39.7 L175.2 47.7 L168.2 43.7\"/><path class=\"thin\" d=\"M142.2 106 L142.3 114 L135.3 110\"/>" +
+        "<path class=\"thin\" d=\"M139.1 100.8 L139.2 108.8 L132.2 104.8\"/><text x=\"106.9\" y=\"106.5\" text-anchor=\"middle\">a</text>" +
+        "<text x=\"213.1\" y=\"69.5\" text-anchor=\"middle\">b</text><text x=\"213.1\" y=\"106.5\" text-anchor=\"middle\">c</text>" +
+        "<text x=\"106.9\" y=\"69.5\" text-anchor=\"middle\">d</text><circle class=\"dt\" cx=\"160\" cy=\"21.9\" r=\"3\"/><circle class=\"dt\" cx=\"196\" cy=\"83\" r=\"3\"/>" +
+        "<circle class=\"dt\" cx=\"160\" cy=\"144.1\" r=\"3\"/><circle class=\"dt\" cx=\"124\" cy=\"83\" r=\"3\"/><text x=\"160\" y=\"48.9\" text-anchor=\"middle\">1</text>" +
+        "<text x=\"181\" y=\"88\" text-anchor=\"middle\">2</text><text x=\"160\" y=\"127.1\" text-anchor=\"middle\">3</text>" +
+        "<text x=\"139\" y=\"88\" text-anchor=\"middle\">4</text><text x=\"196\" y=\"66\" text-anchor=\"middle\">5</text></svg></figure>" +
         "<p class=\"geo-given\">In a diamond-pane window, lead strips <strong>a</strong> and <strong>b</strong> are parallel, and strips <strong>c</strong> and <strong>d</strong> are parallel. m∠1 = (3x − 17)⁠° and m∠2 = (5x − 11)⁠°.</p>",
       claims: [
         {
@@ -536,12 +535,12 @@
         "<line class=\"ln\" x1=\"24\" y1=\"156\" x2=\"300\" y2=\"156\"/><line class=\"ac\" x1=\"98.9\" y1=\"100\" x2=\"187.4\" y2=\"100\"/>" +
         "<line class=\"ln\" x1=\"93.1\" y1=\"156\" x2=\"150\" y2=\"22\"/><line class=\"ln\" x1=\"183.4\" y1=\"156\" x2=\"150\" y2=\"22\"/>" +
         "<line class=\"ln\" x1=\"150\" y1=\"22\" x2=\"153.9\" y2=\"12.8\"/><line class=\"ln\" x1=\"150\" y1=\"22\" x2=\"147.6\" y2=\"12.3\"/>" +
-        "<path class=\"thin\" d=\"M178.4 96 L185.4 100 L178.4 104\"/><path class=\"thin\" d=\"M263 152 L270 156 L263 160\"/>" +
+        "<path class=\"thin\" d=\"M140.2 96 L147.2 100 L140.2 104\"/><path class=\"thin\" d=\"M263 152 L270 156 L263 160\"/>" +
         "<rect class=\"sh2\" x=\"122.9\" y=\"48\" width=\"40.6\" height=\"44\"/><circle class=\"dt\" cx=\"150\" cy=\"22\" r=\"3\"/><circle class=\"dt\" cx=\"116.9\" cy=\"100\" r=\"3\"/>" +
         "<circle class=\"dt\" cx=\"169.4\" cy=\"100\" r=\"3\"/><circle class=\"dt\" cx=\"93.1\" cy=\"156\" r=\"3\"/><circle class=\"dt\" cx=\"183.4\" cy=\"156\" r=\"3\"/>" +
-        "<text x=\"150\" y=\"15\" text-anchor=\"middle\">P</text><text x=\"90.9\" y=\"105\" text-anchor=\"middle\">A</text>" +
-        "<text x=\"197.4\" y=\"105\" text-anchor=\"middle\">C</text><text x=\"89.1\" y=\"148\" text-anchor=\"middle\">B</text>" +
-        "<text x=\"189.4\" y=\"148\" text-anchor=\"middle\">D</text><text class=\"sm\" x=\"60\" y=\"150\" text-anchor=\"middle\">floor</text>" +
+        "<text x=\"136\" y=\"27\" text-anchor=\"middle\">P</text><text x=\"90.9\" y=\"105\" text-anchor=\"middle\">A</text>" +
+        "<text x=\"197.4\" y=\"105\" text-anchor=\"middle\">C</text><text x=\"80.1\" y=\"151\" text-anchor=\"middle\">B</text>" +
+        "<text x=\"196.4\" y=\"151\" text-anchor=\"middle\">D</text><text class=\"sm\" x=\"50\" y=\"150\" text-anchor=\"middle\">floor</text>" +
         "<text class=\"sm\" x=\"221.4\" y=\"104\" text-anchor=\"middle\">tray</text><text class=\"sm\" x=\"196\" y=\"72\" text-anchor=\"middle\">canvas</text></svg></figure>" +
         "<p class=\"geo-given\">The legs of an easel meet at <strong>P</strong>. The tray <strong>AC</strong> is parallel to the floor <strong>BD</strong>. m∠PBD = (3x + 10)⁠°, m∠PAC = (5x − 28)⁠° and m∠PDB = 76°.</p>",
       claims: [
@@ -740,13 +739,12 @@
       level: 1,
       passage:
         "<figure class=\"geo-fig\">" +
-        "<svg viewBox=\"0 0 320 160\" role=\"img\" aria-label=\"Two parallel crop rows a (left) and b (right) rising to the right, with more rows dashed beside them, crossed by a horizontal irrigation pipe p. At row a, angle 1 is above the pipe and left of a, angle 2 above and right of a, angle 3 below and right of a, and angle 4 below and left of a. Angles 5 to 8 sit the same way at row b\">" +
-        "<line class=\"thin dash\" x1=\"-66.8\" y1=\"150\" x2=\"81.2\" y2=\"12\"/><line class=\"thin dash\" x1=\"221.2\" y1=\"150\" x2=\"369.2\" y2=\"12\"/>" +
+        "<svg viewBox=\"0 0 320 160\" role=\"img\" aria-label=\"Two parallel crop rows a (left) and b (right) rising to the right, crossed by a horizontal irrigation pipe p. At row a, angle 1 is above the pipe and left of a, angle 2 above and right of a, angle 3 below and right of a, and angle 4 below and left of a. Angles 5 to 8 sit the same way at row b\">" +
         "<line class=\"ln\" x1=\"29.2\" y1=\"150\" x2=\"177.2\" y2=\"12\"/><text x=\"186.2\" y=\"16\" text-anchor=\"middle\">a</text>" +
         "<path class=\"thin\" d=\"M133.1 47.7 L141 45.8 L138.6 53.5\"/><line class=\"ln\" x1=\"125.2\" y1=\"150\" x2=\"273.2\" y2=\"12\"/>" +
         "<text x=\"282.2\" y=\"16\" text-anchor=\"middle\">b</text><path class=\"thin\" d=\"M229.1 47.7 L237 45.8 L234.6 53.5\"/>" +
         "<line class=\"ac\" x1=\"16\" y1=\"84\" x2=\"304\" y2=\"84\"/><text x=\"300\" y=\"76\" text-anchor=\"middle\">p</text><circle class=\"dt\" cx=\"100\" cy=\"84\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"196\" cy=\"84\" r=\"3\"/><text class=\"sm\" x=\"256\" y=\"148\" text-anchor=\"middle\">irrigation pipe</text>" +
+        "<circle class=\"dt\" cx=\"196\" cy=\"84\" r=\"3\"/><text class=\"sm\" x=\"262\" y=\"104\" text-anchor=\"middle\">irrigation pipe</text>" +
         "<text x=\"94.5\" y=\"75\" text-anchor=\"middle\">1</text><text x=\"123.3\" y=\"79.8\" text-anchor=\"middle\">2</text>" +
         "<text x=\"105.5\" y=\"103\" text-anchor=\"middle\">3</text><text x=\"76.7\" y=\"98.2\" text-anchor=\"middle\">4</text>" +
         "<text x=\"190.5\" y=\"75\" text-anchor=\"middle\">5</text><text x=\"219.3\" y=\"79.8\" text-anchor=\"middle\">6</text>" +
@@ -844,17 +842,17 @@
       passage:
         "<figure class=\"geo-fig\">" +
         "<svg viewBox=\"0 0 320 160\" role=\"img\" aria-label=\"Two parallel ski tracks: line AB on top and line CD below, both sloping gently down to the right. A deer trail, line EF, crosses AB at P and CD at Q; E is above AB to the upper left and F is below CD to the lower right. The angle APE is marked 38 degrees\">" +
-        "<polygon class=\"sh2\" points=\"30,29.3 292,85 292,132.8 30,77.1\"/><line class=\"ln\" x1=\"30\" y1=\"29.3\" x2=\"292\" y2=\"85\"/>" +
-        "<line class=\"ln\" x1=\"30\" y1=\"77.1\" x2=\"292\" y2=\"132.8\"/><line class=\"ac\" x1=\"238.3\" y1=\"145.3\" x2=\"138\" y2=\"25.8\"/>" +
-        "<path class=\"thin\" d=\"M249 71.8 L255 77.1 L247.3 79.6\"/><path class=\"thin\" d=\"M256.7 121.2 L262.8 126.6 L255.1 129.1\"/>" +
-        "<path class=\"thin\" d=\"M149.6 39.6 A24 24 0 0 0 141.5 53\"/><text x=\"132.4\" y=\"43.4\" text-anchor=\"middle\">38°</text>" +
-        "<circle class=\"dt\" cx=\"30\" cy=\"29.3\" r=\"3\"/><circle class=\"dt\" cx=\"292\" cy=\"85\" r=\"3\"/><circle class=\"dt\" cx=\"30\" cy=\"77.1\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"292\" cy=\"132.8\" r=\"3\"/><circle class=\"dt\" cx=\"138\" cy=\"25.8\" r=\"3\"/><circle class=\"dt\" cx=\"238.3\" cy=\"145.3\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"165\" cy=\"58\" r=\"3\"/><circle class=\"dt\" cx=\"213.9\" cy=\"116.2\" r=\"3\"/><text x=\"30\" y=\"20.3\" text-anchor=\"middle\">A</text>" +
-        "<text x=\"292\" y=\"76\" text-anchor=\"middle\">B</text><text x=\"30\" y=\"68.1\" text-anchor=\"middle\">C</text>" +
-        "<text x=\"292\" y=\"150.8\" text-anchor=\"middle\">D</text><text x=\"127\" y=\"27.8\" text-anchor=\"middle\">E</text>" +
-        "<text x=\"249.3\" y=\"149.3\" text-anchor=\"middle\">F</text><text x=\"178\" y=\"62\" text-anchor=\"middle\">P</text>" +
-        "<text x=\"200.9\" y=\"128.2\" text-anchor=\"middle\">Q</text><text class=\"sm\" x=\"92\" y=\"150\" text-anchor=\"middle\">deer trail</text></svg></figure>" +
+        "<line class=\"ln\" x1=\"30\" y1=\"29.3\" x2=\"292\" y2=\"85\"/><line class=\"ln\" x1=\"30\" y1=\"77.1\" x2=\"292\" y2=\"132.8\"/>" +
+        "<line class=\"ac\" x1=\"238.3\" y1=\"145.3\" x2=\"138\" y2=\"25.8\"/><path class=\"thin\" d=\"M249 71.8 L255 77.1 L247.3 79.6\"/>" +
+        "<path class=\"thin\" d=\"M256.7 121.2 L262.8 126.6 L255.1 129.1\"/><path class=\"thin\" d=\"M150.9 41.1 A22 22 0 0 0 143.5 53.4\"/>" +
+        "<text x=\"135\" y=\"45\" text-anchor=\"middle\">38°</text><circle class=\"dt\" cx=\"30\" cy=\"29.3\" r=\"3\"/><circle class=\"dt\" cx=\"292\" cy=\"85\" r=\"3\"/>" +
+        "<circle class=\"dt\" cx=\"30\" cy=\"77.1\" r=\"3\"/><circle class=\"dt\" cx=\"292\" cy=\"132.8\" r=\"3\"/><circle class=\"dt\" cx=\"138\" cy=\"25.8\" r=\"3\"/>" +
+        "<circle class=\"dt\" cx=\"238.3\" cy=\"145.3\" r=\"3\"/><circle class=\"dt\" cx=\"165\" cy=\"58\" r=\"3\"/><circle class=\"dt\" cx=\"213.9\" cy=\"116.2\" r=\"3\"/>" +
+        "<text x=\"30\" y=\"20.3\" text-anchor=\"middle\">A</text><text x=\"292\" y=\"76\" text-anchor=\"middle\">B</text>" +
+        "<text x=\"30\" y=\"68.1\" text-anchor=\"middle\">C</text><text x=\"292\" y=\"150.8\" text-anchor=\"middle\">D</text>" +
+        "<text x=\"138\" y=\"17.8\" text-anchor=\"middle\">E</text><text x=\"249.3\" y=\"149.3\" text-anchor=\"middle\">F</text>" +
+        "<text x=\"178\" y=\"62\" text-anchor=\"middle\">P</text><text x=\"200.9\" y=\"128.2\" text-anchor=\"middle\">Q</text>" +
+        "<text class=\"sm\" x=\"92\" y=\"150\" text-anchor=\"middle\">deer trail</text></svg></figure>" +
         "<p class=\"geo-given\">Two ski tracks in the snow, <strong>AB</strong> and <strong>CD</strong>, are parallel. A straight deer trail, <strong>EF</strong>, crosses AB at <strong>P</strong> and CD at <strong>Q</strong>. m∠APE = 38°.</p>",
       claims: [
         {
@@ -948,17 +946,17 @@
       passage:
         "<figure class=\"geo-fig\">" +
         "<svg viewBox=\"0 0 320 160\" role=\"img\" aria-label=\"Three parallel rows of trees, a on top, b in the middle and c at the bottom, sloping gently down to the right, crossed by a straight path t that is nearly vertical. Angle 1 is below row a and right of t. Angle 2 is below row b and right of t. Angle 3 is above row c and right of t. Angle 4 is below row c and left of t\">" +
-        "<line class=\"ln\" x1=\"24\" y1=\"11.8\" x2=\"296\" y2=\"59.7\"/><text x=\"308\" y=\"64.7\" text-anchor=\"middle\">a</text>" +
-        "<path class=\"thin\" d=\"M255.8 48.6 L262 53.7 L254.4 56.5\"/><circle class=\"sh\" cx=\"44\" cy=\"6.3\" r=\"6\"/><circle class=\"sh\" cx=\"84\" cy=\"13.4\" r=\"6\"/>" +
-        "<circle class=\"sh\" cx=\"124\" cy=\"20.4\" r=\"6\"/><circle class=\"sh\" cx=\"204\" cy=\"34.5\" r=\"6\"/><circle class=\"sh\" cx=\"244\" cy=\"41.6\" r=\"6\"/>" +
-        "<circle class=\"sh\" cx=\"284\" cy=\"48.6\" r=\"6\"/><line class=\"ln\" x1=\"24\" y1=\"59.8\" x2=\"296\" y2=\"107.7\"/>" +
-        "<text x=\"308\" y=\"112.7\" text-anchor=\"middle\">b</text><path class=\"thin\" d=\"M255.8 96.6 L262 101.7 L254.4 104.5\"/>" +
-        "<circle class=\"sh\" cx=\"44\" cy=\"54.3\" r=\"6\"/><circle class=\"sh\" cx=\"84\" cy=\"61.4\" r=\"6\"/><circle class=\"sh\" cx=\"124\" cy=\"68.4\" r=\"6\"/>" +
-        "<circle class=\"sh\" cx=\"204\" cy=\"82.5\" r=\"6\"/><circle class=\"sh\" cx=\"244\" cy=\"89.6\" r=\"6\"/><circle class=\"sh\" cx=\"284\" cy=\"96.6\" r=\"6\"/>" +
-        "<line class=\"ln\" x1=\"24\" y1=\"107.8\" x2=\"296\" y2=\"155.7\"/><text x=\"308\" y=\"160.7\" text-anchor=\"middle\">c</text>" +
-        "<path class=\"thin\" d=\"M255.8 144.6 L262 149.7 L254.4 152.5\"/><circle class=\"sh\" cx=\"44\" cy=\"102.3\" r=\"6\"/>" +
-        "<circle class=\"sh\" cx=\"84\" cy=\"109.4\" r=\"6\"/><circle class=\"sh\" cx=\"124\" cy=\"116.4\" r=\"6\"/><circle class=\"sh\" cx=\"204\" cy=\"130.5\" r=\"6\"/>" +
-        "<circle class=\"sh\" cx=\"244\" cy=\"137.6\" r=\"6\"/><circle class=\"sh\" cx=\"284\" cy=\"144.6\" r=\"6\"/>" +
+        "<line class=\"ln\" x1=\"24\" y1=\"11.8\" x2=\"296\" y2=\"59.7\"/><text x=\"306\" y=\"54.7\" text-anchor=\"middle\">a</text>" +
+        "<path class=\"thin\" d=\"M255.8 48.6 L262 53.7 L254.4 56.5\"/><circle class=\"sh\" cx=\"44\" cy=\"7.3\" r=\"5\"/><circle class=\"sh\" cx=\"84\" cy=\"14.4\" r=\"5\"/>" +
+        "<circle class=\"sh\" cx=\"124\" cy=\"21.4\" r=\"5\"/><circle class=\"sh\" cx=\"204\" cy=\"35.5\" r=\"5\"/><circle class=\"sh\" cx=\"244\" cy=\"42.6\" r=\"5\"/>" +
+        "<circle class=\"sh\" cx=\"284\" cy=\"49.6\" r=\"5\"/><line class=\"ln\" x1=\"24\" y1=\"59.8\" x2=\"296\" y2=\"107.7\"/>" +
+        "<text x=\"306\" y=\"102.7\" text-anchor=\"middle\">b</text><path class=\"thin\" d=\"M255.8 96.6 L262 101.7 L254.4 104.5\"/>" +
+        "<circle class=\"sh\" cx=\"44\" cy=\"55.3\" r=\"5\"/><circle class=\"sh\" cx=\"84\" cy=\"62.4\" r=\"5\"/><circle class=\"sh\" cx=\"124\" cy=\"69.4\" r=\"5\"/>" +
+        "<circle class=\"sh\" cx=\"204\" cy=\"83.5\" r=\"5\"/><circle class=\"sh\" cx=\"244\" cy=\"90.6\" r=\"5\"/><circle class=\"sh\" cx=\"284\" cy=\"97.6\" r=\"5\"/>" +
+        "<line class=\"ln\" x1=\"24\" y1=\"107.8\" x2=\"296\" y2=\"155.7\"/><text x=\"306\" y=\"150.7\" text-anchor=\"middle\">c</text>" +
+        "<path class=\"thin\" d=\"M255.8 144.6 L262 149.7 L254.4 152.5\"/><circle class=\"sh\" cx=\"44\" cy=\"103.3\" r=\"5\"/>" +
+        "<circle class=\"sh\" cx=\"84\" cy=\"110.4\" r=\"5\"/><circle class=\"sh\" cx=\"124\" cy=\"117.4\" r=\"5\"/><circle class=\"sh\" cx=\"204\" cy=\"131.5\" r=\"5\"/>" +
+        "<circle class=\"sh\" cx=\"244\" cy=\"138.6\" r=\"5\"/><circle class=\"sh\" cx=\"284\" cy=\"145.6\" r=\"5\"/>" +
         "<line class=\"ac\" x1=\"171.9\" y1=\"155.6\" x2=\"164.5\" y2=\"14.8\"/><text x=\"154.5\" y=\"22.8\" text-anchor=\"middle\">t</text>" +
         "<circle class=\"dt\" cx=\"165.6\" cy=\"36.8\" r=\"3\"/><circle class=\"dt\" cx=\"168.2\" cy=\"85.2\" r=\"3\"/><circle class=\"dt\" cx=\"170.7\" cy=\"133.7\" r=\"3\"/>" +
         "<text x=\"177.6\" y=\"55.2\" text-anchor=\"middle\">1</text><text x=\"180.1\" y=\"103.7\" text-anchor=\"middle\">2</text>" +
@@ -1055,17 +1053,15 @@
       level: 2,
       passage:
         "<figure class=\"geo-fig\">" +
-        "<svg viewBox=\"0 0 320 160\" role=\"img\" aria-label=\"A straight hillside h rising to the right. Two parallel rain streaks, r on the left and s on the right, slant down to the right and end on the hillside, with a few fainter streaks between and beside them. At streak r, angle 1 is above the hillside and left of r, and angle 2 is above the hillside and right of r. At streak s, angle 3 is left of s and angle 4 is right of s, both above the hillside\">" +
+        "<svg viewBox=\"0 0 320 160\" role=\"img\" aria-label=\"A straight hillside h rising to the right. Two parallel rain streaks, r on the left and s on the right, slant down to the right and end on the hillside. At streak r, angle 1 is above the hillside and left of r, and angle 2 is above the hillside and right of r. At streak s, angle 3 is left of s and angle 4 is right of s, both above the hillside\">" +
         "<polygon class=\"sh2\" points=\"18,150 302,73.9 302,158 18,158\"/><line class=\"ln\" x1=\"18\" y1=\"150\" x2=\"302\" y2=\"73.9\"/>" +
         "<line class=\"thin\" x1=\"4\" y1=\"150\" x2=\"18\" y2=\"150\"/><line class=\"ac\" x1=\"91.8\" y1=\"10\" x2=\"112\" y2=\"124.8\"/>" +
-        "<line class=\"ac\" x1=\"198.6\" y1=\"10\" x2=\"214\" y2=\"97.5\"/><line class=\"thin dash\" x1=\"38.7\" y1=\"18\" x2=\"56.9\" y2=\"121\"/>" +
-        "<line class=\"thin dash\" x1=\"143.4\" y1=\"18\" x2=\"156.9\" y2=\"94.2\"/><line class=\"thin dash\" x1=\"250.3\" y1=\"18\" x2=\"258.9\" y2=\"66.9\"/>" +
-        "<path class=\"thin\" d=\"M98.7 26.6 L96 34.2 L90.9 28\"/><path class=\"thin\" d=\"M200.7 -0.7 L198 6.9 L192.9 0.7\"/>" +
-        "<text x=\"101.8\" y=\"16\" text-anchor=\"middle\">r</text><text x=\"208.6\" y=\"16\" text-anchor=\"middle\">s</text>" +
-        "<text x=\"288\" y=\"95.7\" text-anchor=\"middle\">h</text><circle class=\"dt\" cx=\"112\" cy=\"124.8\" r=\"3\"/><circle class=\"dt\" cx=\"214\" cy=\"97.5\" r=\"3\"/>" +
-        "<text x=\"98.5\" y=\"121.2\" text-anchor=\"middle\">1</text><text x=\"120.6\" y=\"116.3\" text-anchor=\"middle\">2</text>" +
-        "<text x=\"200.5\" y=\"93.9\" text-anchor=\"middle\">3</text><text x=\"222.6\" y=\"89\" text-anchor=\"middle\">4</text>" +
-        "<text class=\"sm\" x=\"150\" y=\"152\" text-anchor=\"middle\">hillside</text></svg></figure>" +
+        "<line class=\"ac\" x1=\"198.6\" y1=\"10\" x2=\"214\" y2=\"97.5\"/><path class=\"thin\" d=\"M98.7 26.6 L96 34.2 L90.9 28\"/>" +
+        "<path class=\"thin\" d=\"M200.7 -0.7 L198 6.9 L192.9 0.7\"/><text x=\"101.8\" y=\"16\" text-anchor=\"middle\">r</text>" +
+        "<text x=\"208.6\" y=\"16\" text-anchor=\"middle\">s</text><text x=\"288\" y=\"95.7\" text-anchor=\"middle\">h</text><circle class=\"dt\" cx=\"112\" cy=\"124.8\" r=\"3\"/>" +
+        "<circle class=\"dt\" cx=\"214\" cy=\"97.5\" r=\"3\"/><text x=\"98.5\" y=\"121.2\" text-anchor=\"middle\">1</text>" +
+        "<text x=\"120.6\" y=\"116.3\" text-anchor=\"middle\">2</text><text x=\"200.5\" y=\"93.9\" text-anchor=\"middle\">3</text>" +
+        "<text x=\"222.6\" y=\"89\" text-anchor=\"middle\">4</text><text class=\"sm\" x=\"150\" y=\"152\" text-anchor=\"middle\">hillside</text></svg></figure>" +
         "<p class=\"geo-given\">Wind makes the rain fall in slanted, parallel streaks. Streaks <strong>r</strong> and <strong>s</strong> are parallel, and they hit the straight hillside <strong>h</strong>. m∠2 = (2x + 29)⁠° and m∠3 = (3x + 11)⁠°.</p>",
       claims: [
         {
@@ -1167,7 +1163,7 @@
         "<circle class=\"dt\" cx=\"80.2\" cy=\"112\" r=\"3\"/><circle class=\"dt\" cx=\"262\" cy=\"46\" r=\"3\"/><circle class=\"dt\" cx=\"174.4\" cy=\"112\" r=\"3\"/>" +
         "<text class=\"sm\" x=\"100\" y=\"84\" text-anchor=\"middle\">river</text><text x=\"151.2\" y=\"59.2\" text-anchor=\"middle\">1</text>" +
         "<text x=\"235.4\" y=\"59.9\" text-anchor=\"middle\">2</text><text x=\"75.8\" y=\"102.7\" text-anchor=\"middle\">3</text>" +
-        "<text x=\"147.9\" y=\"125.9\" text-anchor=\"middle\">4</text><text x=\"106.9\" y=\"108.8\" text-anchor=\"middle\">5</text></svg></figure>" +
+        "<text x=\"147.9\" y=\"125.9\" text-anchor=\"middle\">4</text><text x=\"108.8\" y=\"108.2\" text-anchor=\"middle\">5</text></svg></figure>" +
         "<p class=\"geo-given\">The banks of a river, <strong>n</strong> and <strong>s</strong>, are parallel. Two straight trails, <strong>t</strong> and <strong>u</strong>, cross the river at fords. m∠1 = 34°, m∠2 = 37° and m∠4 = (2x + 17)⁠°.</p>",
       claims: [
         {
@@ -1368,20 +1364,20 @@
       passage:
         "<figure class=\"geo-fig\">" +
         "<svg viewBox=\"0 0 320 170\" role=\"img\" aria-label=\"A hillside rising to the right at 27 degrees above a dashed level line. Two vertical fence posts, p on the left and q on the right, stand on the hill. Two rails, a above and b below, run parallel to the hillside and cross both posts. Angle 1 is above rail a and right of post p. Angle 2 is below rail b and right of post q. Angle 3 is below rail a and left of post q. Angle 4 is above rail b and left of post q\">" +
-        "<polygon class=\"sh2\" points=\"20,160 300,17.3 300,166 20,166\"/><line class=\"ln\" x1=\"20\" y1=\"160\" x2=\"300\" y2=\"17.3\"/>" +
-        "<line class=\"thin dash\" x1=\"20\" y1=\"160\" x2=\"300\" y2=\"160\"/><line class=\"ln\" x1=\"112\" y1=\"113.1\" x2=\"112\" y2=\"41.1\"/>" +
-        "<line class=\"ln\" x1=\"180\" y1=\"78.5\" x2=\"180\" y2=\"6.5\"/><line class=\"ln\" x1=\"85.3\" y1=\"68.7\" x2=\"203.2\" y2=\"8.7\"/>" +
-        "<line class=\"ln\" x1=\"85.3\" y1=\"110.7\" x2=\"203.2\" y2=\"50.7\"/><path class=\"thin\" d=\"M193.3 9.2 L201.4 9.6 L197 16.3\"/>" +
-        "<path class=\"thin\" d=\"M193.3 51.2 L201.4 51.6 L197 58.3\"/><path class=\"thin\" d=\"M188 53.9 L196 54.3 L191.6 61\"/>" +
-        "<path class=\"thin\" d=\"M87.9 62.9 L96 63.3 L91.5 70\"/><path class=\"thin\" d=\"M87.9 104.9 L96 105.3 L91.5 112\"/>" +
-        "<path class=\"thin\" d=\"M82.6 107.6 L90.6 108 L86.2 114.8\"/><path class=\"thin\" d=\"M50 160 A30 30 0 0 0 46.7 146.4\"/>" +
-        "<text x=\"62.8\" y=\"154.7\" text-anchor=\"middle\">27°</text><text x=\"102\" y=\"43.1\" text-anchor=\"middle\">p</text>" +
-        "<text x=\"170\" y=\"8.5\" text-anchor=\"middle\">q</text><text x=\"211.2\" y=\"12.7\" text-anchor=\"middle\">a</text>" +
-        "<text x=\"211.2\" y=\"54.7\" text-anchor=\"middle\">b</text><circle class=\"dt\" cx=\"112\" cy=\"55.1\" r=\"3\"/><circle class=\"dt\" cx=\"112\" cy=\"97.1\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"180\" cy=\"20.5\" r=\"3\"/><circle class=\"dt\" cx=\"180\" cy=\"62.5\" r=\"3\"/>" +
-        "<text class=\"sm\" x=\"262\" y=\"156\" text-anchor=\"middle\">level</text><text x=\"123\" y=\"42.2\" text-anchor=\"middle\">1</text>" +
-        "<text x=\"192.8\" y=\"75.3\" text-anchor=\"middle\">2</text><text x=\"169\" y=\"43.4\" text-anchor=\"middle\">3</text>" +
-        "<text x=\"167.2\" y=\"59.6\" text-anchor=\"middle\">4</text></svg></figure>" +
+        "<polygon class=\"sh2\" points=\"70,160 300,42.8 300,166 70,166\"/><line class=\"ln\" x1=\"70\" y1=\"160\" x2=\"300\" y2=\"42.8\"/>" +
+        "<line class=\"thin dash\" x1=\"16\" y1=\"160\" x2=\"300\" y2=\"160\"/><line class=\"ln\" x1=\"176\" y1=\"106\" x2=\"176\" y2=\"34\"/>" +
+        "<line class=\"ln\" x1=\"224\" y1=\"81.5\" x2=\"224\" y2=\"9.5\"/><line class=\"ln\" x1=\"149.3\" y1=\"59.6\" x2=\"247.2\" y2=\"9.7\"/>" +
+        "<line class=\"ln\" x1=\"149.3\" y1=\"105.6\" x2=\"247.2\" y2=\"55.7\"/><path class=\"thin\" d=\"M237.3 10.3 L245.4 10.6 L241 17.4\"/>" +
+        "<path class=\"thin\" d=\"M237.3 56.3 L245.4 56.6 L241 63.4\"/><path class=\"thin\" d=\"M232 59 L240 59.4 L235.6 66.1\"/>" +
+        "<path class=\"thin\" d=\"M151.9 53.8 L160 54.2 L155.5 60.9\"/><path class=\"thin\" d=\"M151.9 99.8 L160 100.2 L155.5 106.9\"/>" +
+        "<path class=\"thin\" d=\"M146.6 102.5 L154.6 102.9 L150.2 109.6\"/><path class=\"thin\" d=\"M100 160 A30 30 0 0 0 96.7 146.4\"/>" +
+        "<text x=\"112.8\" y=\"154.7\" text-anchor=\"middle\">27°</text><text x=\"166\" y=\"44\" text-anchor=\"middle\">p</text>" +
+        "<text x=\"214\" y=\"19.5\" text-anchor=\"middle\">q</text><text x=\"255.2\" y=\"13.7\" text-anchor=\"middle\">a</text>" +
+        "<text x=\"255.2\" y=\"59.7\" text-anchor=\"middle\">b</text><circle class=\"dt\" cx=\"176\" cy=\"46\" r=\"3\"/><circle class=\"dt\" cx=\"176\" cy=\"92\" r=\"3\"/>" +
+        "<circle class=\"dt\" cx=\"224\" cy=\"21.5\" r=\"3\"/><circle class=\"dt\" cx=\"224\" cy=\"67.5\" r=\"3\"/>" +
+        "<text class=\"sm\" x=\"36\" y=\"154\" text-anchor=\"middle\">level</text><text x=\"186.4\" y=\"33.9\" text-anchor=\"middle\">1</text>" +
+        "<text x=\"236.8\" y=\"80.4\" text-anchor=\"middle\">2</text><text x=\"214.6\" y=\"41.9\" text-anchor=\"middle\">3</text>" +
+        "<text x=\"211.2\" y=\"64.7\" text-anchor=\"middle\">4</text></svg></figure>" +
         "<p class=\"geo-given\">A hillside rises 27° from level. Fence posts <strong>p</strong> and <strong>q</strong> stand vertical, so each is perpendicular to level ground. Rails <strong>a</strong> and <strong>b</strong> are parallel to the hillside.</p>",
       claims: [
         {

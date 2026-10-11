@@ -345,9 +345,9 @@
           sub: "G.RLT.3.3",
           stem: "The tile directly above ABCDEF has its vertex A″ at (−5, 3). Which rule maps ABCDEF to that tile?",
           choices: [
-            { letter: "A", text: "(x, y) → (x + 0, y + 3)" },
-            { letter: "B", text: "(x, y) → (x + 0, y − 4)" },
-            { letter: "C", text: "(x, y) → (x + 0, y + 4)" },
+            { letter: "A", text: "(x, y) → (x, y + 3)" },
+            { letter: "B", text: "(x, y) → (x, y − 4)" },
+            { letter: "C", text: "(x, y) → (x, y + 4)" },
             { letter: "D", text: "(x, y) → (x − 5, y + 3)" }
           ],
           correct: "C"
@@ -386,7 +386,7 @@
           choices: [
             { letter: "A", text: "Its sides have the same lengths." },
             { letter: "B", text: "Its angles have the same measures." },
-            { letter: "C", text: "Its area is 8 square units." },
+            { letter: "C", text: "Its area is the same." },
             { letter: "D", text: "It points in a different direction." }
           ],
           correct: "D"
