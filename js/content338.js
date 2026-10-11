@@ -589,12 +589,12 @@
           id: "tall",
           sol: "G.DF.2",
           sub: "G.DF.2.1",
-          stem: "Rosa makes a second volcano twice as tall, 40 cm, with the same 15 cm base radius. To the nearest whole number of π, what is the area of its sloped side?",
+          stem: "Rosa makes a second volcano twice as tall, 40 cm, with the same 15 cm base radius. To the nearest square centimeter, what is the area of its sloped side?",
           choices: [
-            { letter: "A", text: "about 641π cm²" },
-            { letter: "B", text: "600π cm²" },
-            { letter: "C", text: "750π cm²" },
-            { letter: "D", text: "1,500π cm²" }
+            { letter: "A", text: "2,013 cm²" },
+            { letter: "B", text: "1,885 cm²" },
+            { letter: "C", text: "2,356 cm²" },
+            { letter: "D", text: "4,712 cm²" }
           ],
           correct: "A"
         },
@@ -696,7 +696,7 @@
           choices: [
             { letter: "A", text: "Yes: all kites are similar." },
             { letter: "B", text: "Yes: stretching one diagonal of a kite keeps it similar." },
-            { letter: "C", text: "No: the spar ratio is 48/48 = 1, but the spine ratio is 60/50 = 1.2." },
+            { letter: "C", text: "No: 48/48 = 1, but 60/50 = 1.2." },
             { letter: "D", text: "No: its spine is shorter than this kite's spine." }
           ],
           correct: "C"
@@ -954,7 +954,7 @@
             { letter: "A", text: "No: its volume is 4 times as much." },
             { letter: "B", text: "Yes: all rectangular prisms are similar." },
             { letter: "C", text: "Yes: every length of the long container is doubled." },
-            { letter: "D", text: "No: the length ratio is 40/20 = 2, but the width ratio is 8/8 = 1." }
+            { letter: "D", text: "No: 40/20 = 2, but 8/8 = 1." }
           ],
           correct: "D"
         },
