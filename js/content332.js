@@ -709,7 +709,7 @@
       level: 1,
       passage:
         "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 150\" role=\"img\" aria-label=\"Road map: Highway 1 runs across and Route 9 runs down; they meet at the town of Ash, A. A radio tower T stands below and to the right of Ash. A gold dashed circle around T shows the edge of its range.\">" +
-        "<line class=\"ln\" x1=\"11.4\" y1=\"40\" x2=\"177.5\" y2=\"40\"/><line class=\"ln\" x1=\"40\" y1=\"4.8\" x2=\"40\" y2=\"145.6\"/><text class=\"sm\" x=\"177.5\" y=\"34\" text-anchor=\"end\">Hwy 1</text><text class=\"sm\" x=\"46\" y=\"138\">Rt 9</text>" +
+        "<line class=\"ln\" x1=\"11.4\" y1=\"40\" x2=\"177.5\" y2=\"40\"/><line class=\"ln\" x1=\"40\" y1=\"4.8\" x2=\"40\" y2=\"145.6\"/><text class=\"sm\" x=\"177.5\" y=\"34\" text-anchor=\"end\">Hwy 1</text><text class=\"sm\" x=\"34\" y=\"147\" text-anchor=\"end\">Rt 9</text>" +
         "<circle class=\"ac dash\" cx=\"84\" cy=\"73\" r=\"66\"/><path class=\"ln\" d=\"M78 86 L84 73 L90 86\"/><circle class=\"dta\" cx=\"84\" cy=\"73\" r=\"3\"/><path class=\"thin\" d=\"M77 67 A9 9 0 0 1 91 67\"/><text x=\"94\" y=\"78\">T</text><circle class=\"dt\" cx=\"40\" cy=\"40\" r=\"3\"/>" +
         "<text x=\"46\" y=\"55\">A</text><text class=\"sm\" x=\"312\" y=\"100\" text-anchor=\"end\">road map</text><text class=\"sm\" x=\"312\" y=\"116\" text-anchor=\"end\">1 unit = 4 mi</text><text class=\"sm\" x=\"312\" y=\"132\" text-anchor=\"end\">A: Ash</text>" +
         "</svg></figure>" +

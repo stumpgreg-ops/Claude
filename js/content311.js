@@ -616,7 +616,7 @@
           stem: "The mirror is turned so that m∠SMD = 60°, and SM and MD stay equal. Which describes △SMD then?",
           choices: [
             { letter: "A", text: "Isosceles only: each base angle is 30°" },
-            { letter: "B", text: "Right: the base angles are 90° and 30°" },
+            { letter: "B", text: "Right: its angles are 60°, 90° and 30°" },
             { letter: "C", text: "Equilateral: each base angle is also 60°" },
             { letter: "D", text: "Isosceles only: each base angle is 120°" }
           ],
