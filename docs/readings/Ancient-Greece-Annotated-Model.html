@@ -37,33 +37,33 @@ body { padding: 16px 0 24px; font-family: Calibri, Carlito, "Segoe UI", "Helveti
   transform: scale(var(--s)); transform-origin: top left;
   background: var(--paper);
   box-shadow: 0 1px 2px rgba(0,0,0,.18), 0 4px 14px rgba(0,0,0,.10);
-  padding: 44px 96px 72px;
-  font-size: 15px; line-height: 1.75;
+  padding: 44px 110px 72px;
+  font-size: 15px; line-height: 1.65;   /* each sheet's size is raised by the script until the sheet is full */
 }
-.page.annotated { padding-left: 190px; padding-right: 180px; cursor: pointer; }
+.page.annotated { padding-left: 196px; padding-right: 188px; line-height: 1.95; cursor: pointer; }
 .page:focus-visible { outline: 3px solid #6b8fc7; outline-offset: 3px; }
 .runhead { font-size: 12.5px; color: #333; margin: 0 0 14px; }
 .runhead span { margin: 0 8px; color: #888; }
-.folio { position: absolute; left: 96px; bottom: 34px; font-size: 12.5px; color: #333; }
+.folio { position: absolute; left: 110px; bottom: 34px; font-size: 12.5px; color: #333; }
 .annotated .folio, .annotated .runhead { margin-left: 0; }
-.annotated .folio { left: 190px; }
+.annotated .folio { left: 196px; }
 
-h1 { font-size: 30px; font-weight: 400; line-height: 1.15; margin: 4px 0 18px; }
-h2 { font-size: 18.5px; line-height: 1.3; margin: 0 0 6px; }
-h2.sub { margin-top: 26px; color: #1d3557; }
-p { margin: 0 0 14px; }
-.annotated p { margin-bottom: 16px; }
-.byline { margin-bottom: 14px; }
+h1 { font-size: 2em; font-weight: 400; line-height: 1.15; margin: 4px 0 18px; }
+h2 { font-size: 1.25em; line-height: 1.3; margin: 0 0 .4em; }
+h2.sub { margin-top: 1.4em; color: #1d3557; }
+p { margin: 0 0 .9em; }
+.annotated p { margin-bottom: 1em; }
+.byline { margin-bottom: .9em; }
 .blank { display: inline-block; border-bottom: 1px solid #222; height: 1em; vertical-align: baseline; }
-.lines div { height: 34px; border-bottom: 1px solid #555; margin-right: 10px; }
-.choices p { margin: 0 0 10px 22px; }
-.q { margin-top: 18px; }
-.legend p { margin-bottom: 8px; }
-.vocab p { margin-bottom: 9px; font-size: 14.5px; line-height: 1.5; }
-.figure { margin: 18px 0 8px; }
+.lines div { height: 2.3em; border-bottom: 1px solid #555; margin-right: 10px; }
+.choices p { margin: 0 0 .65em 1.5em; }
+.q { margin-top: 1.2em; }
+.legend p { margin-bottom: .5em; }
+.vocab p { margin-bottom: .6em; font-size: .95em; line-height: 1.5; }
+.figure { margin: 1.2em 0 .5em; }
 .figure img { width: 288px; height: auto; display: block; }
-.credit { font-size: 13.5px; line-height: 1.5; }
-.gods p { margin-bottom: 12px; }
+.credit { font-size: .9em; line-height: 1.5; }
+.gods p { margin-bottom: .8em; }
 
 /* Highlighter strokes */
 mark { color: inherit; padding: 1px 2px; margin: 0 -1px;
@@ -83,19 +83,19 @@ mark.ex { background: var(--hl-explain); }
 
 /* Handwritten margin notes */
 .note {
-  position: absolute; width: 150px;
+  position: absolute; width: 160px;
   font-family: "Caveat", "Segoe Print", "Bradley Hand", "Comic Sans MS", cursive;
-  font-size: 20px; line-height: 1.02; font-weight: 500;
+  font-size: 23px; line-height: 1.02; font-weight: 500;
   color: var(--blue);
   opacity: 0; transform: rotate(var(--tilt, 0deg)) translateY(4px);
   transition: opacity .35s ease, transform .35s ease;
   pointer-events: none;
 }
 .note.red { color: var(--red); }
-.note.l { left: 22px; text-align: left; }
-.note.r { left: 650px; }
+.note.l { left: 20px; text-align: left; }
+.note.r { left: 646px; }
 .note b { font-weight: 700; }
-.note small { display: block; font-size: 17.5px; opacity: .85; margin-top: 3px; }
+.note small { display: block; font-size: 19px; opacity: .85; margin-top: 3px; }
 .note.on { opacity: 1; transform: rotate(var(--tilt, 0deg)); transition-delay: .3s; }
 
 svg.ink { position: absolute; left: 0; top: 0; width: 816px; height: 100%; pointer-events: none; overflow: visible; }
@@ -357,7 +357,7 @@ svg.ink path.on { opacity: .9; transition: stroke-dashoffset .5s ease .5s, opaci
   <p><b style="background:var(--hl-claim);padding:0 3px;border-radius:4px">Claim:</b> Greek mythology reflects cultural concerns about human behavior and natural forces, while the article interprets that mythology through its continuing influence on Western culture.</p>
   <p><b style="background:var(--hl-evidence);padding:0 3px;border-radius:4px">Evidence:</b> Paragraph 4 describes gods with human emotions; paragraph 7 connects thunder to Zeus’s anger. Paragraph 13 links Tantalus to the English word “tantalize.”</p>
   <p><b style="background:var(--hl-explain);padding:0 3px;border-radius:4px">Explanation:</b> Giving gods familiar emotions makes the divine world resemble human relationships, while Zeus’s anger supplies a religious explanation for weather. The Tantalus connection shows why the modern author includes this myth: it provides a concrete example of mythology persisting in English. Together, the examples reveal both the cultural world represented by the myths and the writer’s emphasis on a Western legacy.</p>
-  <h2 class="sub" style="font-size:16.5px">Interpretation check</h2>
+  <h2 class="sub" style="font-size:1.1em">Interpretation check</h2>
   <p>The article is a modern secondary overview, not an ancient Greek primary source. Its statements about individualism, morality, and divine roles should be read as the author’s account. Analysis should distinguish what the article states from what a reader infers about Greek society.</p>
   <div class="folio">Page 14</div>
 </section></div>
@@ -438,7 +438,7 @@ svg.ink path.on { opacity: .9; transition: stroke-dashoffset .5s ease .5s, opaci
     var pr = page.getBoundingClientRect();
     var text = page.querySelector("h2");
     var tl = (text.getBoundingClientRect().left - pr.left) / s;   // left edge of the text column
-    var tr = tl + page.clientWidth - 190 - 180;                    // right edge of the text column
+    var tr = tl + page.clientWidth - 196 - 188;                    // right edge of the text column
     var svg = page.querySelector("svg.ink");
     while (svg.firstChild) svg.removeChild(svg.firstChild);
     var floor = { l: 52, r: 52 };
@@ -510,9 +510,37 @@ svg.ink path.on { opacity: .9; transition: stroke-dashoffset .5s ease .5s, opaci
     return (right - pr.left) / s;
   }
 
+  // Like the printed handout, every section keeps its own sheet; the type on each sheet is set as large
+  // as will still fit above the page number, so short sections fill their page instead of leaving it half empty.
+  var LIMIT = 960, MAX_FS = 23, MIN_FS = 15;
+  function contentBottom(page) {
+    var b = 0;
+    [].forEach.call(page.children, function (el) {
+      if (el.classList.contains("folio") || el.classList.contains("tap") || el.tagName.toLowerCase() === "svg") return;
+      b = Math.max(b, el.offsetTop + el.offsetHeight);
+    });
+    return b;
+  }
+  function fit(page, s) {
+    var isAnn = page.classList.contains("annotated");
+    for (var fs = MAX_FS; fs >= MIN_FS; fs -= 0.5) {
+      page.style.fontSize = fs + "px";
+      page.style.minHeight = "";
+      [].forEach.call(page.querySelectorAll(".lines div"), function (d) { d.style.height = ""; });
+      if (isAnn) layoutPage(page, s);
+      if (contentBottom(page) <= LIMIT) break;
+    }
+    // A sheet that is mostly answer lines can still have room at the largest type: give it to the writing lines.
+    var lines = page.querySelectorAll(".lines div");
+    if (lines.length) {
+      var h = lines[0].offsetHeight, extra = (LIMIT - contentBottom(page)) / lines.length;
+      var nh = Math.min(fs * 3.6, h + Math.max(0, extra));
+      [].forEach.call(lines, function (d) { d.style.height = nh + "px"; });
+    }
+  }
   function layout() {
     var s = scale();
-    annotated.forEach(function (p) { layoutPage(p, s); });
+    pages.forEach(function (p) { fit(p, s); });
     pages.forEach(function (p) { p.parentNode.style.height = (p.offsetHeight * s) + "px"; });
   }
 
