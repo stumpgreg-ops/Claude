@@ -237,7 +237,7 @@
           id: "x",
           sol: "G.PC.1",
           sub: "G.PC.1.3",
-          stem: "What is the value of x?",
+          stem: "What value of x fits the antenna?",
           choices: [
             { letter: "A", text: "15" },
             { letter: "B", text: "3.4" },
@@ -263,7 +263,7 @@
           id: "bcd",
           sol: "G.PC.1",
           sub: "G.PC.1.3",
-          stem: "What is m∠BCD?",
+          stem: "What is the measure of ∠BCD, the angle at C?",
           choices: [
             { letter: "A", text: "150°" },
             { letter: "B", text: "50°" },
@@ -346,7 +346,7 @@
           id: "slope",
           sol: "G.PC.1",
           sub: "G.PC.1.2",
-          stem: "What is the slope of side AB?",
+          stem: "What is the slope of the line through stars A and B?",
           choices: [
             { letter: "A", text: "m = −5" },
             { letter: "B", text: "m = −1/5" },
@@ -362,7 +362,7 @@
           stem: "Which facts prove that ABCD is a parallelogram?",
           choices: [
             { letter: "A", text: "slope AB = −1/5 and slope BC = 2, so AB ⊥ BC" },
-            { letter: "B", text: "AB = DC = √26, with nothing else" },
+            { letter: "B", text: "AB = DC = √26 and nothing more" },
             { letter: "C", text: "AB ∥ DC and BC ∥ AD (slopes −1/5 and 2)" },
             { letter: "D", text: "AC = BD = √58, so the diagonals are congruent" }
           ],
@@ -385,7 +385,7 @@
           id: "ab",
           sol: "G.PC.1",
           sub: "G.PC.1.2",
-          stem: "How long is side AB?",
+          stem: "How far apart are stars A and B, in grid units?",
           choices: [
             { letter: "A", text: "√26 units" },
             { letter: "B", text: "6 units" },
@@ -433,12 +433,12 @@
       passage:
         "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 124\" role=\"img\" aria-label=\"Isosceles trapezoid ABCD with long base AB of 30 ft at the bottom and short base DC of 18 ft at the top; legs AD and BC have tick marks; a dashed height of 7 ft drops from D to AB; gold segment MN joins the midpoints of the legs\">" +
         "<polygon class=\"sh2\" points=\"40,98 280,98 232,42 88,42\"/><line class=\"ac\" x1=\"64\" y1=\"70\" x2=\"256\" y2=\"70\"/><line class=\"thin dash\" x1=\"88\" y1=\"42\" x2=\"88\" y2=\"98\"/>" +
-        "<path class=\"thin\" d=\"M88 91 L95 91 L95 98\"/><line class=\"thin\" x1=\"67.8\" y1=\"73.3\" x2=\"60.2\" y2=\"66.7\"/><line class=\"thin\" x1=\"259.8\" y1=\"66.7\" x2=\"252.2\" y2=\"73.3\"/>" +
+        "<path class=\"thin\" d=\"M88 91 L95 91 L95 98\"/><line class=\"thin\" x1=\"55.8\" y1=\"87.3\" x2=\"48.2\" y2=\"80.7\"/><line class=\"thin\" x1=\"271.8\" y1=\"80.7\" x2=\"264.2\" y2=\"87.3\"/>" +
         "<circle class=\"dt\" cx=\"40\" cy=\"98\" r=\"3\"/><circle class=\"dt\" cx=\"280\" cy=\"98\" r=\"3\"/><circle class=\"dt\" cx=\"232\" cy=\"42\" r=\"3\"/><circle class=\"dt\" cx=\"88\" cy=\"42\" r=\"3\"/>" +
         "<circle class=\"dt\" cx=\"64\" cy=\"70\" r=\"3\"/><circle class=\"dt\" cx=\"256\" cy=\"70\" r=\"3\"/><text x=\"31\" y=\"112\" text-anchor=\"middle\">A</text>" +
         "<text x=\"289\" y=\"112\" text-anchor=\"middle\">B</text><text x=\"240\" y=\"36\" text-anchor=\"middle\">C</text><text x=\"80\" y=\"36\" text-anchor=\"middle\">D</text>" +
         "<text x=\"52\" y=\"74\" text-anchor=\"middle\">M</text><text x=\"268\" y=\"74\" text-anchor=\"middle\">N</text><text x=\"160\" y=\"116\" text-anchor=\"middle\">30 ft</text>" +
-        "<text x=\"160\" y=\"35\" text-anchor=\"middle\">18 ft</text><text class=\"sm\" x=\"94\" y=\"91\" text-anchor=\"start\">7 ft</text></svg></figure>" +
+        "<text x=\"160\" y=\"35\" text-anchor=\"middle\">18 ft</text><text class=\"sm\" x=\"100\" y=\"91\" text-anchor=\"start\">7 ft</text></svg></figure>" +
         "<p class=\"geo-given\">A shutter on a telescope dome is isosceles trapezoid <strong>ABCD</strong> with AB ∥ DC, AB = 30 ft, DC = 18 ft and legs AD = BC. The shutter is 7 ft tall. A brace <strong>MN</strong> joins the midpoints of the legs.</p>",
       claims: [
         {
@@ -756,7 +756,7 @@
           id: "be",
           sol: "G.PC.1",
           sub: "G.PC.1.3",
-          stem: "How long is BE?",
+          stem: "How long is segment BE of the spar?",
           choices: [
             { letter: "A", text: "15 in" },
             { letter: "B", text: "30 in" },
@@ -769,7 +769,7 @@
           id: "ae",
           sol: "G.PC.1",
           sub: "G.PC.1.3",
-          stem: "How long is AE?",
+          stem: "How long is segment AE of spar AC?",
           choices: [
             { letter: "A", text: "32 in" },
             { letter: "B", text: "about 22.7 in" },
@@ -871,7 +871,7 @@
           id: "abc",
           sol: "G.PC.1",
           sub: "G.PC.1.1",
-          stem: "What is m∠ABC?",
+          stem: "What is m∠ABC, at the bottom corner B?",
           choices: [
             { letter: "A", text: "63°" },
             { letter: "B", text: "117°" },

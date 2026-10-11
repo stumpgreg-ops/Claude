@@ -27,7 +27,7 @@
         "<text x=\"149.4\" y=\"73.4\" text-anchor=\"middle\">3</text><text x=\"179.3\" y=\"68.7\" text-anchor=\"middle\">4</text>" +
         "<text x=\"119.3\" y=\"123\" text-anchor=\"middle\">5</text><text x=\"149.3\" y=\"118.3\" text-anchor=\"middle\">6</text>" +
         "<text x=\"108.1\" y=\"151.1\" text-anchor=\"middle\">7</text><text x=\"138\" y=\"146.4\" text-anchor=\"middle\">8</text>" +
-        "<text class=\"sm\" x=\"60\" y=\"158\" text-anchor=\"middle\">panel</text></svg></figure>" +
+        "<text class=\"sm\" x=\"240\" y=\"70\" text-anchor=\"middle\">solar panel</text></svg></figure>" +
         "<p class=\"geo-given\">On a satellite's solar array, panel edges <strong>p</strong> and <strong>q</strong> are parallel. A straight support strut, <strong>s</strong>, crosses both edges. m∠2 = 47°.</p>",
       claims: [
         {
@@ -121,16 +121,16 @@
       passage:
         "<figure class=\"geo-fig\">" +
         "<svg viewBox=\"0 0 320 150\" role=\"img\" aria-label=\"Parallel horizontal map lines AB (top) and CD (bottom). Storm track EF rises to the right and crosses AB at P and CD at Q, with E above AB and F below CD. The angle EPB, above AB and right of the track, is marked 52 degrees\">" +
-        "<line class=\"ln\" x1=\"30\" y1=\"45\" x2=\"292\" y2=\"45\"/><line class=\"ln\" x1=\"30\" y1=\"110\" x2=\"292\" y2=\"110\"/>" +
-        "<line class=\"ac\" x1=\"103.3\" y1=\"136.8\" x2=\"195.9\" y2=\"18.2\"/><path class=\"thin\" d=\"M243 41 L250 45 L243 49\"/>" +
-        "<path class=\"thin\" d=\"M243 106 L250 110 L243 114\"/><circle class=\"dt\" cx=\"30\" cy=\"45\" r=\"3\"/><circle class=\"dt\" cx=\"292\" cy=\"45\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"30\" cy=\"110\" r=\"3\"/><circle class=\"dt\" cx=\"292\" cy=\"110\" r=\"3\"/><circle class=\"dt\" cx=\"175\" cy=\"45\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"124.2\" cy=\"110\" r=\"3\"/><circle class=\"dt\" cx=\"195.9\" cy=\"18.2\" r=\"3\"/><circle class=\"dt\" cx=\"103.3\" cy=\"136.8\" r=\"3\"/>" +
-        "<text x=\"30\" y=\"36\" text-anchor=\"middle\">A</text><text x=\"292\" y=\"36\" text-anchor=\"middle\">B</text><text x=\"30\" y=\"101\" text-anchor=\"middle\">C</text>" +
-        "<text x=\"292\" y=\"101\" text-anchor=\"middle\">D</text><text x=\"206.9\" y=\"22.2\" text-anchor=\"middle\">E</text>" +
-        "<text x=\"92.3\" y=\"142.8\" text-anchor=\"middle\">F</text><text x=\"163\" y=\"38\" text-anchor=\"middle\">P</text>" +
-        "<text x=\"137.2\" y=\"127\" text-anchor=\"middle\">Q</text><path class=\"thin\" d=\"M197 45 A22 22 0 0 0 188.5 27.7\"/>" +
-        "<text x=\"209.2\" y=\"33.3\" text-anchor=\"middle\">52°</text><text class=\"sm\" x=\"232\" y=\"140\" text-anchor=\"middle\">storm track</text></svg></figure>" +
+        "<line class=\"ln\" x1=\"30\" y1=\"58\" x2=\"292\" y2=\"58\"/><line class=\"ln\" x1=\"30\" y1=\"118\" x2=\"292\" y2=\"118\"/>" +
+        "<line class=\"ac\" x1=\"110.9\" y1=\"140.1\" x2=\"203.3\" y2=\"21.8\"/><path class=\"thin\" d=\"M243 54 L250 58 L243 62\"/>" +
+        "<path class=\"thin\" d=\"M243 114 L250 118 L243 122\"/><circle class=\"dt\" cx=\"30\" cy=\"58\" r=\"3\"/><circle class=\"dt\" cx=\"292\" cy=\"58\" r=\"3\"/>" +
+        "<circle class=\"dt\" cx=\"30\" cy=\"118\" r=\"3\"/><circle class=\"dt\" cx=\"292\" cy=\"118\" r=\"3\"/><circle class=\"dt\" cx=\"175\" cy=\"58\" r=\"3\"/>" +
+        "<circle class=\"dt\" cx=\"128.1\" cy=\"118\" r=\"3\"/><circle class=\"dt\" cx=\"203.3\" cy=\"21.8\" r=\"3\"/><circle class=\"dt\" cx=\"110.9\" cy=\"140.1\" r=\"3\"/>" +
+        "<text x=\"30\" y=\"49\" text-anchor=\"middle\">A</text><text x=\"292\" y=\"49\" text-anchor=\"middle\">B</text><text x=\"30\" y=\"109\" text-anchor=\"middle\">C</text>" +
+        "<text x=\"292\" y=\"109\" text-anchor=\"middle\">D</text><text x=\"191.3\" y=\"25.8\" text-anchor=\"middle\">E</text>" +
+        "<text x=\"98.9\" y=\"146.1\" text-anchor=\"middle\">F</text><text x=\"163\" y=\"51\" text-anchor=\"middle\">P</text>" +
+        "<text x=\"141.1\" y=\"135\" text-anchor=\"middle\">Q</text><path class=\"thin\" d=\"M197 58 A22 22 0 0 0 188.5 40.7\"/>" +
+        "<text x=\"212.7\" y=\"44.6\" text-anchor=\"middle\">52°</text><text class=\"sm\" x=\"100\" y=\"92\" text-anchor=\"middle\">storm track</text></svg></figure>" +
         "<p class=\"geo-given\">On a weather map, grid lines <strong>AB</strong> and <strong>CD</strong> are parallel. A storm moves along a straight track, <strong>EF</strong>, that crosses AB at <strong>P</strong> and CD at <strong>Q</strong>. m∠EPB = 52°.</p>",
       claims: [
         {
@@ -223,19 +223,19 @@
       level: 2,
       passage:
         "<figure class=\"geo-fig\">" +
-        "<svg viewBox=\"0 0 320 166\" role=\"img\" aria-label=\"A rectangular glass block with parallel top and bottom faces. A laser beam comes in from the upper left, enters the top face at P, runs straight inside the block down to Q on the bottom face, and leaves toward the lower right. Angle 1 is at P below the top face, right of PQ; angle 3 is at P left of PQ; angle 2 is at Q above the bottom face, left of PQ; angle 4 is at Q right of PQ\">" +
-        "<polygon class=\"sh2\" points=\"52,45 262,45 262,125 52,125\"/><line class=\"ln\" x1=\"40\" y1=\"45\" x2=\"276\" y2=\"45\"/>" +
-        "<line class=\"ln\" x1=\"40\" y1=\"125\" x2=\"276\" y2=\"125\"/><path class=\"thin\" d=\"M231 41 L238 45 L231 49\"/>" +
-        "<path class=\"thin\" d=\"M231 121 L238 125 L231 129\"/><line class=\"thin\" x1=\"96.3\" y1=\"3.8\" x2=\"128\" y2=\"45\"/>" +
-        "<line class=\"ac\" x1=\"128\" y1=\"45\" x2=\"163.6\" y2=\"125\"/><line class=\"thin\" x1=\"163.6\" y1=\"125\" x2=\"191.7\" y2=\"161.4\"/>" +
-        "<path class=\"thin\" d=\"M113.5 19.6 L114.6 27.6 L107.1 24.5\"/><path class=\"thin\" d=\"M182 142.4 L183.1 150.4 L175.7 147.2\"/>" +
-        "<circle class=\"dt\" cx=\"128\" cy=\"45\" r=\"3\"/><circle class=\"dt\" cx=\"163.6\" cy=\"125\" r=\"3\"/><text x=\"140\" y=\"38\" text-anchor=\"middle\">P</text>" +
-        "<text x=\"151.6\" y=\"142\" text-anchor=\"middle\">Q</text><text x=\"146.5\" y=\"62\" text-anchor=\"middle\">1</text>" +
-        "<text x=\"118.7\" y=\"64.3\" text-anchor=\"middle\">3</text><text x=\"145.2\" y=\"118\" text-anchor=\"middle\">2</text>" +
-        "<text x=\"172.9\" y=\"115.7\" text-anchor=\"middle\">4</text><text class=\"sm\" x=\"90.3\" y=\"7.8\" text-anchor=\"end\">laser</text>" +
-        "<text class=\"sm\" x=\"226\" y=\"92\" text-anchor=\"middle\">glass block</text><text class=\"sm\" x=\"300\" y=\"49\" text-anchor=\"end\">top</text>" +
-        "<text class=\"sm\" x=\"300\" y=\"129\" text-anchor=\"end\">bottom</text></svg></figure>" +
-        "<p class=\"geo-given\">In a science lab, a laser beam passes through a glass block. The top and bottom faces of the block are parallel. Inside the block the beam runs straight from <strong>P</strong> to <strong>Q</strong>. m∠1 = (5x − 19)° and m∠2 = (3x + 15)°.</p>",
+        "<svg viewBox=\"0 0 320 160\" role=\"img\" aria-label=\"A rectangular glass block with parallel top and bottom faces. A laser beam comes in from the upper left, enters the top face at P, runs straight inside the block down to Q on the bottom face, and leaves toward the lower right. Angle 1 is at P below the top face, right of PQ; angle 3 is at P left of PQ; angle 2 is at Q above the bottom face, left of PQ; angle 4 is at Q right of PQ\">" +
+        "<polygon class=\"sh2\" points=\"52,50 252,50 252,122 52,122\"/><line class=\"ln\" x1=\"36\" y1=\"50\" x2=\"268\" y2=\"50\"/>" +
+        "<line class=\"ln\" x1=\"36\" y1=\"122\" x2=\"268\" y2=\"122\"/><path class=\"thin\" d=\"M225 46 L232 50 L225 54\"/>" +
+        "<path class=\"thin\" d=\"M225 118 L232 122 L225 126\"/><line class=\"thin\" x1=\"101.2\" y1=\"15.1\" x2=\"128\" y2=\"50\"/>" +
+        "<line class=\"ac\" x1=\"128\" y1=\"50\" x2=\"160.1\" y2=\"122\"/><line class=\"thin\" x1=\"160.1\" y1=\"122\" x2=\"184.5\" y2=\"153.7\"/>" +
+        "<path class=\"thin\" d=\"M118.4 30.9 L119.5 38.9 L112 35.8\"/><path class=\"thin\" d=\"M178.5 139.4 L179.6 147.4 L172.1 144.2\"/>" +
+        "<circle class=\"dt\" cx=\"128\" cy=\"50\" r=\"3\"/><circle class=\"dt\" cx=\"160.1\" cy=\"122\" r=\"3\"/><text x=\"141\" y=\"43\" text-anchor=\"middle\">P</text>" +
+        "<text x=\"148.1\" y=\"139\" text-anchor=\"middle\">Q</text><text x=\"146.5\" y=\"67\" text-anchor=\"middle\">1</text>" +
+        "<text x=\"118.7\" y=\"69.3\" text-anchor=\"middle\">3</text><text x=\"141.6\" y=\"115\" text-anchor=\"middle\">2</text>" +
+        "<text x=\"169.3\" y=\"112.7\" text-anchor=\"middle\">4</text><text class=\"sm\" x=\"95.2\" y=\"19.1\" text-anchor=\"end\">laser</text>" +
+        "<text class=\"sm\" x=\"212\" y=\"90\" text-anchor=\"middle\">glass block</text><text class=\"sm\" x=\"274\" y=\"54\">top</text>" +
+        "<text class=\"sm\" x=\"274\" y=\"126\">bottom</text></svg></figure>" +
+        "<p class=\"geo-given\">In a science lab, a laser beam passes through a glass block. The top and bottom faces of the block are parallel. Inside the block the beam runs straight from <strong>P</strong> to <strong>Q</strong>. m∠1 = (5x − 19)° and m∠2 = (3x + 15)°.</p>",
       claims: [
         {
           id: "solve-x",
@@ -327,17 +327,17 @@
       level: 2,
       passage:
         "<figure class=\"geo-fig\">" +
-        "<svg viewBox=\"0 0 320 166\" role=\"img\" aria-label=\"Three rock-layer boundaries: a and b rise gently to the right and c is level. Fault line f rises steeply to the right and crosses all three. At a, the angle above a and left of f is marked 111 degrees. At b, the angle below b and right of f is marked 111 degrees. At c, the angle above c and left of f is marked 105 degrees\">" +
-        "<polygon class=\"sh2\" points=\"14,47.1 296,17.5 296,68.2 14,97.8\"/><line class=\"ln\" x1=\"14\" y1=\"47.1\" x2=\"296\" y2=\"17.5\"/>" +
-        "<line class=\"ln\" x1=\"14\" y1=\"97.8\" x2=\"296\" y2=\"68.2\"/><line class=\"ln\" x1=\"14\" y1=\"136.9\" x2=\"296\" y2=\"136.9\"/>" +
-        "<line class=\"ac\" x1=\"118\" y1=\"162\" x2=\"159.4\" y2=\"7.5\"/><text x=\"308\" y=\"22.5\" text-anchor=\"middle\">a</text>" +
-        "<text x=\"308\" y=\"73.2\" text-anchor=\"middle\">b</text><text x=\"308\" y=\"141.9\" text-anchor=\"middle\">c</text>" +
-        "<text class=\"acc\" x=\"168.4\" y=\"17.5\" text-anchor=\"middle\">f</text><circle class=\"dt\" cx=\"152.7\" cy=\"32.6\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"138.7\" cy=\"84.7\" r=\"3\"/><circle class=\"dt\" cx=\"124.7\" cy=\"136.9\" r=\"3\"/>" +
-        "<path class=\"thin\" d=\"M156 20 A13 13 0 0 0 139.8 33.9\"/><text x=\"133.2\" y=\"14.8\" text-anchor=\"middle\">111°</text>" +
-        "<path class=\"thin\" d=\"M135.3 97.3 A13 13 0 0 0 151.6 83.4\"/><text x=\"158.2\" y=\"112.5\" text-anchor=\"middle\">111°</text>" +
-        "<path class=\"thin\" d=\"M128.1 124.3 A13 13 0 0 0 111.7 136.9\"/><text x=\"106.5\" y=\"118.1\" text-anchor=\"middle\">105°</text>" +
-        "<text class=\"sm\" x=\"40\" y=\"160\" text-anchor=\"middle\">fault</text></svg></figure>" +
+        "<svg viewBox=\"0 0 320 170\" role=\"img\" aria-label=\"Three rock-layer boundaries: a and b rise gently to the right and c is level. Fault line f rises steeply to the right and crosses all three. At a, the angle above a and left of f is marked 111 degrees. At b, the angle below b and right of f is marked 111 degrees. At c, the angle above c and left of f is marked 105 degrees\">" +
+        "<polygon class=\"sh2\" points=\"14,54.1 296,24.4 296,73.2 14,102.9\"/><line class=\"ln\" x1=\"14\" y1=\"54.1\" x2=\"296\" y2=\"24.4\"/>" +
+        "<line class=\"ln\" x1=\"14\" y1=\"102.9\" x2=\"296\" y2=\"73.2\"/><line class=\"ln\" x1=\"14\" y1=\"144.7\" x2=\"296\" y2=\"144.7\"/>" +
+        "<line class=\"ac\" x1=\"110\" y1=\"166\" x2=\"151.4\" y2=\"11.5\"/><text x=\"308\" y=\"29.4\" text-anchor=\"middle\">a</text>" +
+        "<text x=\"308\" y=\"78.2\" text-anchor=\"middle\">b</text><text x=\"308\" y=\"149.7\" text-anchor=\"middle\">c</text>" +
+        "<text class=\"acc\" x=\"160.4\" y=\"21.5\" text-anchor=\"middle\">f</text><circle class=\"dt\" cx=\"143.6\" cy=\"40.4\" r=\"3\"/>" +
+        "<circle class=\"dt\" cx=\"130.2\" cy=\"90.7\" r=\"3\"/><circle class=\"dt\" cx=\"115.7\" cy=\"144.7\" r=\"3\"/>" +
+        "<path class=\"thin\" d=\"M147 27.9 A13 13 0 0 0 130.7 41.8\"/><text x=\"124.2\" y=\"22.6\" text-anchor=\"middle\">111°</text>" +
+        "<path class=\"thin\" d=\"M126.8 103.2 A13 13 0 0 0 143.1 89.3\"/><text x=\"149.7\" y=\"118.5\" text-anchor=\"middle\">111°</text>" +
+        "<path class=\"thin\" d=\"M119.1 132.2 A13 13 0 0 0 102.7 144.7\"/><text x=\"97.4\" y=\"125.9\" text-anchor=\"middle\">105°</text>" +
+        "<text class=\"sm\" x=\"120\" y=\"162\">fault</text></svg></figure>" +
         "<p class=\"geo-given\">A geologist sketches a canyon wall. The boundaries of three rock layers, <strong>a</strong>, <strong>b</strong> and <strong>c</strong>, are straight lines. A straight fault line, <strong>f</strong>, crosses all three. The figure shows the angle she measured at each boundary.</p>",
       claims: [
         {
@@ -396,7 +396,7 @@
           id: "solve-x",
           sol: "G.RLT.2",
           sub: "G.RLT.2.3",
-          stem: "In a second sketch, the angle above c and left of f is (3x + 21)°, and c is parallel to b. What is x?",
+          stem: "In a second sketch, the angle above c and left of f is (3x + 21)°, and c is parallel to b. What is x?",
           choices: [
             { letter: "A", text: "16" },
             { letter: "B", text: "28" },
@@ -431,18 +431,18 @@
       passage:
         "<figure class=\"geo-fig\">" +
         "<svg viewBox=\"0 0 320 150\" role=\"img\" aria-label=\"Parallelogram ABCD with A bottom left, B bottom right, C top right and D top left; AB is parallel to DC and AD is parallel to BC. Side AB is extended past B to E. Angle DAB is labeled (4x minus 6) degrees and angle ABC is labeled (5x minus 3) degrees; angle CBE is marked\">" +
-        "<polygon class=\"sh2\" points=\"58,126 200,126 220,32.1 78,32.1\"/><line class=\"ln\" x1=\"200\" y1=\"126\" x2=\"288\" y2=\"126\"/>" +
-        "<circle class=\"dt\" cx=\"58\" cy=\"126\" r=\"3\"/><circle class=\"dt\" cx=\"200\" cy=\"126\" r=\"3\"/><circle class=\"dt\" cx=\"220\" cy=\"32.1\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"78\" cy=\"32.1\" r=\"3\"/><circle class=\"dt\" cx=\"288\" cy=\"126\" r=\"3\"/><path class=\"thin\" d=\"M129 122 L136 126 L129 130\"/>" +
-        "<path class=\"thin\" d=\"M149 28.1 L156 32.1 L149 36.1\"/><path class=\"thin\" d=\"M63.9 79.2 L69.2 73.2 L71.7 80.9\"/>" +
-        "<path class=\"thin\" d=\"M62.6 85.1 L68 79 L70.4 86.7\"/><path class=\"thin\" d=\"M205.9 79.2 L211.2 73.2 L213.7 80.9\"/>" +
-        "<path class=\"thin\" d=\"M204.6 85.1 L210 79 L212.4 86.7\"/><text x=\"46\" y=\"131\" text-anchor=\"middle\">A</text>" +
-        "<text x=\"200\" y=\"144\" text-anchor=\"middle\">B</text><text x=\"232\" y=\"34.1\" text-anchor=\"middle\">C</text>" +
-        "<text x=\"66\" y=\"34.1\" text-anchor=\"middle\">D</text><text x=\"288\" y=\"144\" text-anchor=\"middle\">E</text>" +
-        "<path class=\"thin\" d=\"M74 126 A16 16 0 0 0 61.3 110.3\"/><text class=\"sm\" x=\"92.2\" y=\"102.3\" text-anchor=\"middle\">(4x − 6)°</text>" +
-        "<path class=\"thin\" d=\"M202.9 112.3 A14 14 0 0 0 186 126\"/><text class=\"sm\" x=\"173.6\" y=\"97.4\" text-anchor=\"middle\">(5x − 3)°</text>" +
-        "<path class=\"ac\" d=\"M212 126 A12 12 0 0 0 202.5 114.3\"/></svg></figure>" +
-        "<p class=\"geo-given\">In a model of a calcite crystal, face <strong>ABCD</strong> is a parallelogram: AB ∥ DC and AD ∥ BC. Edge AB is extended past <strong>B</strong> to <strong>E</strong>. m∠DAB = (4x − 6)° and m∠ABC = (5x − 3)°.</p>",
+        "<polygon class=\"sh2\" points=\"40,128 206,128 226.8,30.2 60.8,30.2\"/><line class=\"ln\" x1=\"206\" y1=\"128\" x2=\"292\" y2=\"128\"/>" +
+        "<circle class=\"dt\" cx=\"40\" cy=\"128\" r=\"3\"/><circle class=\"dt\" cx=\"206\" cy=\"128\" r=\"3\"/><circle class=\"dt\" cx=\"226.8\" cy=\"30.2\" r=\"3\"/>" +
+        "<circle class=\"dt\" cx=\"60.8\" cy=\"30.2\" r=\"3\"/><circle class=\"dt\" cx=\"292\" cy=\"128\" r=\"3\"/><path class=\"thin\" d=\"M111 124 L118 128 L111 132\"/>" +
+        "<path class=\"thin\" d=\"M131.8 26.2 L138.8 30.2 L131.8 34.2\"/><path class=\"thin\" d=\"M45.9 81.2 L51.2 75.2 L53.7 82.9\"/>" +
+        "<path class=\"thin\" d=\"M44.6 87.1 L50 81 L52.4 88.7\"/><path class=\"thin\" d=\"M211.9 81.2 L217.2 75.2 L219.7 82.9\"/>" +
+        "<path class=\"thin\" d=\"M210.6 87.1 L216 81 L218.4 88.7\"/><text x=\"28\" y=\"133\" text-anchor=\"middle\">A</text>" +
+        "<text x=\"206\" y=\"146\" text-anchor=\"middle\">B</text><text x=\"238.8\" y=\"32.2\" text-anchor=\"middle\">C</text>" +
+        "<text x=\"48.8\" y=\"32.2\" text-anchor=\"middle\">D</text><text x=\"292\" y=\"146\" text-anchor=\"middle\">E</text>" +
+        "<path class=\"thin\" d=\"M62 128 A22 22 0 0 0 44.6 106.5\"/><text class=\"sm\" x=\"78.9\" y=\"100.5\" text-anchor=\"middle\">(4x − 6)°</text>" +
+        "<path class=\"thin\" d=\"M210.2 108.4 A20 20 0 0 0 186 128\"/><text class=\"sm\" x=\"178.3\" y=\"97.8\" text-anchor=\"middle\">(5x − 3)°</text>" +
+        "<path class=\"ac\" d=\"M218 128 A12 12 0 0 0 208.5 116.3\"/></svg></figure>" +
+        "<p class=\"geo-given\">In a model of a calcite crystal, face <strong>ABCD</strong> is a parallelogram: AB ∥ DC and AD ∥ BC. Edge AB is extended past <strong>B</strong> to <strong>E</strong>. m∠DAB = (4x − 6)° and m∠ABC = (5x − 3)°.</p>",
       claims: [
         {
           id: "pair-a-b",
@@ -474,7 +474,7 @@
           id: "angle-abc",
           sol: "G.RLT.2",
           sub: "G.RLT.2.3",
-          stem: "What is m∠ABC?",
+          stem: "What is m∠ABC, inside the face at B?",
           choices: [
             { letter: "A", text: "78°" },
             { letter: "B", text: "102°" },
@@ -487,7 +487,7 @@
           id: "angle-cbe",
           sol: "G.RLT.2",
           sub: "G.RLT.2.3",
-          stem: "What is m∠CBE?",
+          stem: "What is m∠CBE, outside the face at B?",
           choices: [
             { letter: "A", text: "102°" },
             { letter: "B", text: "12°" },
@@ -535,16 +535,16 @@
       passage:
         "<figure class=\"geo-fig\">" +
         "<svg viewBox=\"0 0 320 166\" role=\"img\" aria-label=\"The top of a circle (Earth) with center O. A vertical sun ray comes down through S on the surface and on to O (dashed). A second, parallel ray comes down past P, the top of a pole AP that stands at A on the surface and points straight away from O. The angle between the pole and this ray at P is marked 7.2 degrees, and angle SOA at the center is marked\">" +
-        "<path class=\"ln\" d=\"M13.1 127.9 A104 104 0 0 1 212.9 134.8\"/><line class=\"ln\" x1=\"112\" y1=\"6\" x2=\"112\" y2=\"56\"/>" +
-        "<line class=\"thin dash\" x1=\"112\" y1=\"56\" x2=\"112\" y2=\"160\"/><line class=\"thin dash\" x1=\"112\" y1=\"160\" x2=\"171.7\" y2=\"74.8\"/>" +
-        "<line class=\"ln\" x1=\"171.7\" y1=\"74.8\" x2=\"198\" y2=\"37.1\"/><line class=\"ln\" x1=\"198\" y1=\"6\" x2=\"198\" y2=\"101.6\"/>" +
-        "<path class=\"thin\" d=\"M116 23 L112 30 L108 23\"/><path class=\"thin\" d=\"M202 23 L198 30 L194 23\"/><circle class=\"dt\" cx=\"112\" cy=\"56\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"112\" cy=\"160\" r=\"3\"/><circle class=\"dt\" cx=\"171.7\" cy=\"74.8\" r=\"3\"/><circle class=\"dt\" cx=\"198\" cy=\"37.1\" r=\"3\"/>" +
-        "<path class=\"ac\" d=\"M124.6 142 A22 22 0 0 0 112 138\"/><path class=\"ac\" d=\"M185.4 55.1 A22 22 0 0 0 198 59.1\"/>" +
-        "<text x=\"100\" y=\"52\" text-anchor=\"middle\">S</text><text x=\"99\" y=\"163\" text-anchor=\"middle\">O</text>" +
-        "<text x=\"164.7\" y=\"91.8\" text-anchor=\"middle\">A</text><text x=\"185\" y=\"35.1\" text-anchor=\"middle\">P</text>" +
-        "<text class=\"acc\" x=\"204\" y=\"65.1\">7.2°</text><text class=\"sm\" x=\"160\" y=\"12\" text-anchor=\"middle\">sunlight</text>" +
-        "<text class=\"sm\" x=\"60\" y=\"128\" text-anchor=\"middle\">Earth</text></svg><figcaption>Not drawn to scale</figcaption></figure>" +
+        "<path class=\"ln\" d=\"M11.8 133 A112 112 0 0 1 229.6 138.7\"/><line class=\"ln\" x1=\"120\" y1=\"6\" x2=\"120\" y2=\"50\"/>" +
+        "<line class=\"thin dash\" x1=\"120\" y1=\"50\" x2=\"120\" y2=\"162\"/><line class=\"thin dash\" x1=\"120\" y1=\"162\" x2=\"184.2\" y2=\"70.3\"/>" +
+        "<line class=\"ln\" x1=\"184.2\" y1=\"70.3\" x2=\"210.6\" y2=\"32.6\"/><line class=\"ln\" x1=\"210.6\" y1=\"6\" x2=\"210.6\" y2=\"96.2\"/>" +
+        "<path class=\"thin\" d=\"M124 23 L120 30 L116 23\"/><path class=\"thin\" d=\"M214.6 23 L210.6 30 L206.6 23\"/><circle class=\"dt\" cx=\"120\" cy=\"50\" r=\"3\"/>" +
+        "<circle class=\"dt\" cx=\"120\" cy=\"162\" r=\"3\"/><circle class=\"dt\" cx=\"184.2\" cy=\"70.3\" r=\"3\"/><circle class=\"dt\" cx=\"210.6\" cy=\"32.6\" r=\"3\"/>" +
+        "<path class=\"ac\" d=\"M132.6 144 A22 22 0 0 0 120 140\"/><path class=\"ac\" d=\"M198 50.6 A22 22 0 0 0 210.6 54.6\"/>" +
+        "<text x=\"108\" y=\"46\" text-anchor=\"middle\">S</text><text x=\"106\" y=\"160\" text-anchor=\"middle\">O</text>" +
+        "<text x=\"168.2\" y=\"76.3\" text-anchor=\"middle\">A</text><text x=\"197.6\" y=\"30.6\" text-anchor=\"middle\">P</text>" +
+        "<text class=\"acc\" x=\"216.6\" y=\"60.6\">7.2°</text><text class=\"sm\" x=\"166\" y=\"14\" text-anchor=\"middle\">sunlight</text>" +
+        "<text class=\"sm\" x=\"70\" y=\"132\" text-anchor=\"middle\">Earth</text></svg><figcaption>Not drawn to scale</figcaption></figure>" +
         "<p class=\"geo-given\">Sunlight reaches Earth in parallel rays. At noon in Syene, <strong>S</strong>, a ray shines straight down a well toward Earth's center, <strong>O</strong>. At the same moment in Alexandria, <strong>A</strong>, a pole <strong>AP</strong> points straight away from O, and a parallel ray makes a 7.2° angle with the pole at <strong>P</strong>.</p>",
       claims: [
         {
@@ -603,7 +603,7 @@
           id: "model",
           sol: "G.RLT.2",
           sub: "G.RLT.2.3",
-          stem: "In a class model, the ray makes a (2x + 3)° angle with the pole, and m∠SOA = (5x − 9)°. What is m∠SOA in the model?",
+          stem: "In a class model, the ray makes a (2x + 3)° angle with the pole, and m∠SOA = (5x − 9)°. What is m∠SOA in the model?",
           choices: [
             { letter: "A", text: "11°" },
             { letter: "B", text: "4°" },
@@ -707,7 +707,7 @@
           id: "angle-3",
           sol: "G.RLT.2",
           sub: "G.RLT.2.3",
-          stem: "Suppose m∠3 = (7x − 13)° and m∠4 = (3x + 3)°, and ℓ ∥ m. What is m∠3?",
+          stem: "Suppose m∠3 = (7x − 13)° and m∠4 = (3x + 3)°, and ℓ ∥ m. What is m∠3?",
           choices: [
             { letter: "A", text: "120°" },
             { letter: "B", text: "15°" },
@@ -744,13 +744,13 @@
         "<svg viewBox=\"0 0 320 150\" role=\"img\" aria-label=\"Parallel runways r and s, leaning to the right, crossed by taxiway t, which falls slightly to the right. At each crossing the angles are numbered clockwise from the top left: at r, angle 1 is above t and left of r, 2 above t and right of r, 3 below t and right of r, 4 below t and left of r; angles 5 to 8 sit the same way at s\">" +
         "<line class=\"ln\" x1=\"138.6\" y1=\"8\" x2=\"60.1\" y2=\"144\"/><line class=\"ln\" x1=\"271.4\" y1=\"8\" x2=\"192.9\" y2=\"144\"/>" +
         "<line class=\"ln\" x1=\"18.8\" y1=\"56\" x2=\"306\" y2=\"96.4\"/><path class=\"thin\" d=\"M120 32.2 L127 28.2 L127 36.2\"/>" +
-        "<path class=\"thin\" d=\"M242.8 49.5 L249.8 45.4 L249.8 53.5\"/><text x=\"136.6\" y=\"14\" text-anchor=\"end\">r</text>" +
-        "<text x=\"269.4\" y=\"14\" text-anchor=\"end\">s</text><text x=\"308\" y=\"88.4\" text-anchor=\"middle\">t</text><circle class=\"dt\" cx=\"104\" cy=\"68\" r=\"3\"/>" +
+        "<path class=\"thin\" d=\"M242.8 49.5 L249.8 45.4 L249.8 53.5\"/><text x=\"129.6\" y=\"19\" text-anchor=\"middle\">r</text>" +
+        "<text x=\"262.4\" y=\"19\" text-anchor=\"middle\">s</text><text x=\"308\" y=\"88.4\" text-anchor=\"middle\">t</text><circle class=\"dt\" cx=\"104\" cy=\"68\" r=\"3\"/>" +
         "<circle class=\"dt\" cx=\"226.8\" cy=\"85.3\" r=\"3\"/><text x=\"97.4\" y=\"59.5\" text-anchor=\"middle\">1</text>" +
         "<text x=\"120.9\" y=\"64.8\" text-anchor=\"middle\">2</text><text x=\"110.6\" y=\"86.5\" text-anchor=\"middle\">3</text>" +
         "<text x=\"87.1\" y=\"81.2\" text-anchor=\"middle\">4</text><text x=\"220.2\" y=\"76.8\" text-anchor=\"middle\">5</text>" +
         "<text x=\"243.7\" y=\"82\" text-anchor=\"middle\">6</text><text x=\"233.4\" y=\"103.7\" text-anchor=\"middle\">7</text>" +
-        "<text x=\"209.9\" y=\"98.5\" text-anchor=\"middle\">8</text><text class=\"sm\" x=\"46\" y=\"20\" text-anchor=\"middle\">runway</text>" +
+        "<text x=\"209.9\" y=\"98.5\" text-anchor=\"middle\">8</text><text class=\"sm\" x=\"54.1\" y=\"142\" text-anchor=\"end\">runway</text>" +
         "<text class=\"sm\" x=\"268\" y=\"140\" text-anchor=\"middle\">taxiway</text></svg></figure>" +
         "<p class=\"geo-given\">At an airport, runways <strong>r</strong> and <strong>s</strong> are parallel. A straight taxiway, <strong>t</strong>, crosses both runways. m∠5 = 112°.</p>",
       claims: [
@@ -845,15 +845,15 @@
       passage:
         "<figure class=\"geo-fig\">" +
         "<svg viewBox=\"0 0 320 150\" role=\"img\" aria-label=\"A canal between two parallel banks, AB on the left and CD on the right, both leaning slightly left. A ferry route from W rises to the right to E, crossing bank AB at P and bank CD at Q. A is up the left bank from P, B down it; C is up the right bank from Q, D down it. Angle APQ is marked 76 degrees\">" +
-        "<polygon class=\"sh2\" points=\"92.7,9.3 214.3,6.2 238.6,144 117,147.2\"/><line class=\"ln\" x1=\"92.7\" y1=\"9.3\" x2=\"117\" y2=\"147.2\"/>" +
-        "<line class=\"ln\" x1=\"214.3\" y1=\"6.2\" x2=\"238.6\" y2=\"144\"/><line class=\"ac\" x1=\"40.4\" y1=\"126.1\" x2=\"277.9\" y2=\"20.3\"/>" +
-        "<path class=\"thin\" d=\"M115.9 118 L113.2 125.5 L108.1 119.3\"/><path class=\"thin\" d=\"M235.5 103 L232.7 110.6 L227.6 104.4\"/>" +
-        "<circle class=\"dt\" cx=\"40.4\" cy=\"126.1\" r=\"3\"/><circle class=\"dt\" cx=\"277.9\" cy=\"20.3\" r=\"3\"/><circle class=\"dt\" cx=\"94.8\" cy=\"21.2\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"115.6\" cy=\"139.3\" r=\"3\"/><circle class=\"dt\" cx=\"216.1\" cy=\"16\" r=\"3\"/><circle class=\"dt\" cx=\"235.9\" cy=\"128.3\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"108\" cy=\"96\" r=\"3\"/><circle class=\"dt\" cx=\"221.3\" cy=\"45.6\" r=\"3\"/><text x=\"37.4\" y=\"143.1\" text-anchor=\"middle\">W</text>" +
-        "<text x=\"280.9\" y=\"12.3\" text-anchor=\"middle\">E</text><text x=\"81.8\" y=\"26.2\" text-anchor=\"middle\">A</text>" +
+        "<line class=\"ln\" x1=\"92.7\" y1=\"9.3\" x2=\"117\" y2=\"147.2\"/><line class=\"ln\" x1=\"214.3\" y1=\"6.2\" x2=\"238.6\" y2=\"144\"/>" +
+        "<line class=\"ac\" x1=\"40.4\" y1=\"126.1\" x2=\"277.9\" y2=\"20.3\"/><path class=\"thin\" d=\"M115.9 118 L113.2 125.5 L108.1 119.3\"/>" +
+        "<path class=\"thin\" d=\"M235.5 103 L232.7 110.6 L227.6 104.4\"/><circle class=\"dt\" cx=\"40.4\" cy=\"126.1\" r=\"3\"/>" +
+        "<circle class=\"dt\" cx=\"277.9\" cy=\"20.3\" r=\"3\"/><circle class=\"dt\" cx=\"94.8\" cy=\"21.2\" r=\"3\"/><circle class=\"dt\" cx=\"115.6\" cy=\"139.3\" r=\"3\"/>" +
+        "<circle class=\"dt\" cx=\"216.1\" cy=\"16\" r=\"3\"/><circle class=\"dt\" cx=\"235.9\" cy=\"128.3\" r=\"3\"/><circle class=\"dt\" cx=\"108\" cy=\"96\" r=\"3\"/>" +
+        "<circle class=\"dt\" cx=\"221.3\" cy=\"45.6\" r=\"3\"/><text x=\"37.4\" y=\"143.1\" text-anchor=\"middle\">W</text>" +
+        "<text x=\"281.9\" y=\"38.3\" text-anchor=\"middle\">E</text><text x=\"81.8\" y=\"26.2\" text-anchor=\"middle\">A</text>" +
         "<text x=\"102.6\" y=\"144.3\" text-anchor=\"middle\">B</text><text x=\"229.1\" y=\"21\" text-anchor=\"middle\">C</text>" +
-        "<text x=\"248.9\" y=\"133.3\" text-anchor=\"middle\">D</text><text x=\"95\" y=\"111\" text-anchor=\"middle\">P</text>" +
+        "<text x=\"248.9\" y=\"133.3\" text-anchor=\"middle\">D</text><text x=\"93\" y=\"93\" text-anchor=\"middle\">P</text>" +
         "<text x=\"235.3\" y=\"58.6\" text-anchor=\"middle\">Q</text><path class=\"thin\" d=\"M122.6 89.5 A16 16 0 0 0 105.2 80.2\"/>" +
         "<text x=\"122.1\" y=\"74.5\" text-anchor=\"middle\">76°</text><text class=\"sm\" x=\"165\" y=\"132\" text-anchor=\"middle\">canal</text></svg></figure>" +
         "<p class=\"geo-given\">On a map, the banks of a canal are parallel lines, <strong>AB</strong> and <strong>CD</strong>. A ferry's straight route from dock <strong>W</strong> to dock <strong>E</strong> crosses the banks at <strong>P</strong> and <strong>Q</strong>. m∠APQ = 76°.</p>",
@@ -949,18 +949,18 @@
       passage:
         "<figure class=\"geo-fig\">" +
         "<svg viewBox=\"0 0 320 150\" role=\"img\" aria-label=\"A truss bridge: top chord BD and bottom chord AE are parallel. Beams zigzag A to B to C to D to E, with A, C and E on the bottom chord and B and D on the top chord. Angle DBC, at B between the top chord and beam BC, and angle BCA, at C between beam BC and the bottom chord toward A, are marked\">" +
-        "<line class=\"ln\" x1=\"18\" y1=\"132\" x2=\"281.8\" y2=\"132\"/><line class=\"ln\" x1=\"54.4\" y1=\"42\" x2=\"241.3\" y2=\"42\"/>" +
-        "<line class=\"ln\" x1=\"26\" y1=\"132\" x2=\"84.4\" y2=\"42\"/><line class=\"ac\" x1=\"84.4\" y1=\"42\" x2=\"142.9\" y2=\"132\"/>" +
-        "<line class=\"ln\" x1=\"142.9\" y1=\"132\" x2=\"201.3\" y2=\"42\"/><line class=\"ln\" x1=\"201.3\" y1=\"42\" x2=\"259.8\" y2=\"132\"/>" +
-        "<path class=\"thin\" d=\"M224.3 38 L231.3 42 L224.3 46\"/><path class=\"thin\" d=\"M266.8 128 L273.8 132 L266.8 136\"/>" +
-        "<circle class=\"dt\" cx=\"26\" cy=\"132\" r=\"3\"/><circle class=\"dt\" cx=\"84.4\" cy=\"42\" r=\"3\"/><circle class=\"dt\" cx=\"142.9\" cy=\"132\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"201.3\" cy=\"42\" r=\"3\"/><circle class=\"dt\" cx=\"259.8\" cy=\"132\" r=\"3\"/><text x=\"26\" y=\"148\" text-anchor=\"middle\">A</text>" +
-        "<text x=\"142.9\" y=\"148\" text-anchor=\"middle\">C</text><text x=\"259.8\" y=\"148\" text-anchor=\"middle\">E</text>" +
-        "<text x=\"84.4\" y=\"34\" text-anchor=\"middle\">B</text><text x=\"201.3\" y=\"34\" text-anchor=\"middle\">D</text>" +
-        "<path class=\"thin\" d=\"M94.3 57.1 A18 18 0 0 0 102.4 42\"/><path class=\"thin\" d=\"M133.1 116.9 A18 18 0 0 0 124.9 132\"/>" +
-        "<text class=\"sm\" x=\"284\" y=\"57\" text-anchor=\"end\">top chord</text><text class=\"sm\" x=\"290\" y=\"124\" text-anchor=\"end\">bottom chord</text></svg>" +
+        "<line class=\"ln\" x1=\"18\" y1=\"124\" x2=\"276.6\" y2=\"124\"/><line class=\"ln\" x1=\"53.1\" y1=\"36\" x2=\"237.4\" y2=\"36\"/>" +
+        "<line class=\"ln\" x1=\"26\" y1=\"124\" x2=\"83.1\" y2=\"36\"/><line class=\"ac\" x1=\"83.1\" y1=\"36\" x2=\"140.3\" y2=\"124\"/>" +
+        "<line class=\"ln\" x1=\"140.3\" y1=\"124\" x2=\"197.4\" y2=\"36\"/><line class=\"ln\" x1=\"197.4\" y1=\"36\" x2=\"254.6\" y2=\"124\"/>" +
+        "<path class=\"thin\" d=\"M220.4 32 L227.4 36 L220.4 40\"/><path class=\"thin\" d=\"M261.6 120 L268.6 124 L261.6 128\"/>" +
+        "<circle class=\"dt\" cx=\"26\" cy=\"124\" r=\"3\"/><circle class=\"dt\" cx=\"83.1\" cy=\"36\" r=\"3\"/><circle class=\"dt\" cx=\"140.3\" cy=\"124\" r=\"3\"/>" +
+        "<circle class=\"dt\" cx=\"197.4\" cy=\"36\" r=\"3\"/><circle class=\"dt\" cx=\"254.6\" cy=\"124\" r=\"3\"/><text x=\"26\" y=\"140\" text-anchor=\"middle\">A</text>" +
+        "<text x=\"140.3\" y=\"140\" text-anchor=\"middle\">C</text><text x=\"254.6\" y=\"140\" text-anchor=\"middle\">E</text>" +
+        "<text x=\"83.1\" y=\"28\" text-anchor=\"middle\">B</text><text x=\"197.4\" y=\"28\" text-anchor=\"middle\">D</text>" +
+        "<path class=\"thin\" d=\"M93 51.1 A18 18 0 0 0 101.1 36\"/><path class=\"thin\" d=\"M130.5 108.9 A18 18 0 0 0 122.3 124\"/>" +
+        "<text class=\"sm\" x=\"272\" y=\"28\" text-anchor=\"middle\">top chord</text><text class=\"sm\" x=\"83\" y=\"139\" text-anchor=\"middle\">bottom chord</text></svg>" +
         "</figure>" +
-        "<p class=\"geo-given\">On a truss bridge, the top chord <strong>BD</strong> and the bottom chord <strong>AE</strong> are parallel. Straight beams zigzag between them. m∠DBC = (5x − 8)° and m∠BCA = (3x + 18)°.</p>",
+        "<p class=\"geo-given\">On a truss bridge, the top chord <strong>BD</strong> and the bottom chord <strong>AE</strong> are parallel. Straight beams zigzag between them. m∠DBC = (5x − 8)° and m∠BCA = (3x + 18)°.</p>",
       claims: [
         {
           id: "solve-x",
@@ -1053,16 +1053,16 @@
       passage:
         "<figure class=\"geo-fig\">" +
         "<svg viewBox=\"0 0 320 150\" role=\"img\" aria-label=\"Side view: parallel floor lines g (lower) and h (upper), with escalator line e rising to the right from P on g to Q on h. At P, angle 1 is above g and right of e, angle 5 above g and left of e. At Q, angle 2 is below h and left of e, angle 3 above h and left of e, angle 4 below h and right of e\">" +
-        "<polygon class=\"sh2\" points=\"197.1,46 300,46 300,56 197.1,56\"/><line class=\"ln\" x1=\"14\" y1=\"128\" x2=\"300\" y2=\"128\"/>" +
-        "<line class=\"ln\" x1=\"14\" y1=\"46\" x2=\"300\" y2=\"46\"/><line class=\"ac\" x1=\"58.7\" y1=\"142.9\" x2=\"218.4\" y2=\"31.1\"/>" +
-        "<path class=\"thin\" d=\"M33 124 L40 128 L33 132\"/><path class=\"thin\" d=\"M33 42 L40 46 L33 50\"/><circle class=\"dt\" cx=\"80\" cy=\"128\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"197.1\" cy=\"46\" r=\"3\"/><text x=\"76\" y=\"146\" text-anchor=\"middle\">P</text><text x=\"203.1\" y=\"38\" text-anchor=\"middle\">Q</text>" +
-        "<text x=\"108.6\" y=\"124\" text-anchor=\"middle\">1</text><text x=\"75.5\" y=\"118.7\" text-anchor=\"middle\">5</text>" +
-        "<text x=\"168.5\" y=\"60\" text-anchor=\"middle\">2</text><text x=\"192.6\" y=\"36.7\" text-anchor=\"middle\">3</text>" +
-        "<text x=\"201.6\" y=\"65.3\" text-anchor=\"middle\">4</text><text x=\"306\" y=\"133\">g</text><text x=\"306\" y=\"51\">h</text>" +
-        "<text class=\"acc\" x=\"224.4\" y=\"35.1\">e</text><text class=\"sm\" x=\"250\" y=\"72\" text-anchor=\"middle\">upper floor</text>" +
-        "<text class=\"sm\" x=\"250\" y=\"120\" text-anchor=\"middle\">lower floor</text></svg></figure>" +
-        "<p class=\"geo-given\">In a subway station, the lower floor <strong>g</strong> and the upper floor <strong>h</strong> are parallel. The handrail of an escalator runs along line <strong>e</strong> from <strong>P</strong> to <strong>Q</strong>. m∠1 = (4x − 1)° and m∠2 = (x + 26)°.</p>",
+        "<line class=\"ln\" x1=\"14\" y1=\"126\" x2=\"300\" y2=\"126\"/><line class=\"ln\" x1=\"14\" y1=\"40\" x2=\"300\" y2=\"40\"/>" +
+        "<line class=\"ac\" x1=\"38.7\" y1=\"140.9\" x2=\"224.1\" y2=\"25.1\"/><path class=\"thin\" d=\"M33 122 L40 126 L33 130\"/>" +
+        "<path class=\"thin\" d=\"M33 36 L40 40 L33 44\"/><circle class=\"dt\" cx=\"60\" cy=\"126\" r=\"3\"/><circle class=\"dt\" cx=\"202.8\" cy=\"40\" r=\"3\"/>" +
+        "<text x=\"56\" y=\"144\" text-anchor=\"middle\">P</text><text x=\"178.8\" y=\"33\" text-anchor=\"middle\">Q</text>" +
+        "<text x=\"88.6\" y=\"122\" text-anchor=\"middle\">1</text><text x=\"55.5\" y=\"116.7\" text-anchor=\"middle\">5</text>" +
+        "<text x=\"174.2\" y=\"54\" text-anchor=\"middle\">2</text><text x=\"199.7\" y=\"27.3\" text-anchor=\"middle\">3</text>" +
+        "<text x=\"207.3\" y=\"59.3\" text-anchor=\"middle\">4</text><text x=\"306\" y=\"131\">g</text><text x=\"306\" y=\"45\">h</text>" +
+        "<text class=\"acc\" x=\"230.1\" y=\"29.1\">e</text><text class=\"sm\" x=\"250\" y=\"66\" text-anchor=\"middle\">upper floor</text>" +
+        "<text class=\"sm\" x=\"250\" y=\"118\" text-anchor=\"middle\">lower floor</text></svg></figure>" +
+        "<p class=\"geo-given\">In a subway station, the lower floor <strong>g</strong> and the upper floor <strong>h</strong> are parallel. The handrail of an escalator runs along line <strong>e</strong> from <strong>P</strong> to <strong>Q</strong>. m∠1 = (4x − 1)° and m∠2 = (x + 26)°.</p>",
       claims: [
         {
           id: "solve-x",
@@ -1154,15 +1154,15 @@
       level: 2,
       passage:
         "<figure class=\"geo-fig\">" +
-        "<svg viewBox=\"0 0 320 160\" role=\"img\" aria-label=\"A straight boardwalk edge g with points A (left) and B (right). A kite string rises to the upper right from each point. At A, angle 1 is above g and right of the string, angle 2 is left of it. At B, angle 3 is above g and left of the string, angle 4 is right of it\">" +
-        "<line class=\"ln\" x1=\"14\" y1=\"146\" x2=\"300\" y2=\"146\"/><line class=\"ln\" x1=\"58\" y1=\"146\" x2=\"159.7\" y2=\"33\"/>" +
-        "<line class=\"ln\" x1=\"176\" y1=\"146\" x2=\"277.7\" y2=\"33\"/><polygon class=\"sh\" points=\"159.7,33 161.8,18.8 179.8,10.7 173.7,29.5\"/>" +
-        "<polygon class=\"sh\" points=\"277.7,33 279.8,18.8 297.8,10.7 291.7,29.5\"/><circle class=\"dt\" cx=\"58\" cy=\"146\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"176\" cy=\"146\" r=\"3\"/><text x=\"58\" y=\"162\" text-anchor=\"middle\">A</text><text x=\"176\" y=\"162\" text-anchor=\"middle\">B</text>" +
-        "<text x=\"300\" y=\"139\" text-anchor=\"end\">g</text><text x=\"81.8\" y=\"140.4\" text-anchor=\"middle\">1</text>" +
-        "<text x=\"51.9\" y=\"137.3\" text-anchor=\"middle\">2</text><text x=\"169.9\" y=\"137.3\" text-anchor=\"middle\">3</text>" +
-        "<text x=\"199.8\" y=\"140.4\" text-anchor=\"middle\">4</text><text class=\"sm\" x=\"258\" y=\"159\" text-anchor=\"middle\">boardwalk</text></svg></figure>" +
-        "<p class=\"geo-given\">Two kites are tied at <strong>A</strong> and <strong>B</strong> on the straight edge of a boardwalk, <strong>g</strong>. Both strings are pulled straight. m∠1 = 48° and m∠3 = (4x + 8)°.</p>",
+        "<svg viewBox=\"0 0 320 150\" role=\"img\" aria-label=\"A straight boardwalk edge g with points A (left) and B (right). A kite string rises to the upper right from each point. At A, angle 1 is above g and right of the string, angle 2 is left of it. At B, angle 3 is above g and left of the string, angle 4 is right of it\">" +
+        "<line class=\"ln\" x1=\"14\" y1=\"128\" x2=\"300\" y2=\"128\"/><line class=\"ln\" x1=\"44\" y1=\"128\" x2=\"121.6\" y2=\"41.8\"/>" +
+        "<line class=\"ln\" x1=\"164\" y1=\"128\" x2=\"241.6\" y2=\"41.8\"/><polygon class=\"sh\" points=\"121.6,41.8 123.7,27.5 141.7,19.5 135.6,38.2\"/>" +
+        "<polygon class=\"sh\" points=\"241.6,41.8 243.7,27.5 261.7,19.5 255.6,38.2\"/><circle class=\"dt\" cx=\"44\" cy=\"128\" r=\"3\"/>" +
+        "<circle class=\"dt\" cx=\"164\" cy=\"128\" r=\"3\"/><text x=\"44\" y=\"144\" text-anchor=\"middle\">A</text><text x=\"164\" y=\"144\" text-anchor=\"middle\">B</text>" +
+        "<text x=\"300\" y=\"121\" text-anchor=\"end\">g</text><text x=\"67.8\" y=\"122.4\" text-anchor=\"middle\">1</text>" +
+        "<text x=\"37.9\" y=\"119.3\" text-anchor=\"middle\">2</text><text x=\"157.9\" y=\"119.3\" text-anchor=\"middle\">3</text>" +
+        "<text x=\"187.8\" y=\"122.4\" text-anchor=\"middle\">4</text><text class=\"sm\" x=\"258\" y=\"141\" text-anchor=\"middle\">boardwalk</text></svg></figure>" +
+        "<p class=\"geo-given\">Two kites are tied at <strong>A</strong> and <strong>B</strong> on the straight edge of a boardwalk, <strong>g</strong>. Both strings are pulled straight. m∠1 = 48° and m∠3 = (4x + 8)°.</p>",
       claims: [
         {
           id: "pair-1-3",
@@ -1263,8 +1263,8 @@
         "<text class=\"acc\" x=\"241.6\" y=\"23.2\">r</text><text x=\"94.4\" y=\"26.6\" text-anchor=\"middle\">1</text>" +
         "<text x=\"94.4\" y=\"98.6\" text-anchor=\"middle\">5</text><text x=\"186\" y=\"55.5\" text-anchor=\"middle\">6</text>" +
         "<text x=\"163.4\" y=\"106.5\" text-anchor=\"middle\">7</text><text x=\"143.1\" y=\"130.9\" text-anchor=\"middle\">8</text>" +
-        "<text class=\"sm\" x=\"66\" y=\"80\" text-anchor=\"end\">boardwalk</text><text class=\"sm\" x=\"150\" y=\"140\" text-anchor=\"middle\">water</text></svg></figure>" +
-        "<p class=\"geo-given\">At a marina, docks <strong>d</strong> and <strong>e</strong> stick out from a straight boardwalk, <strong>t</strong>. A rope, <strong>r</strong>, is stretched across both docks, with m∠6 = (x + 32)° and m∠7 = (3x + 8)°. Given: d ⊥ t and e ⊥ t. Prove: d ∥ e.</p>" +
+        "<text class=\"sm\" x=\"66\" y=\"80\" text-anchor=\"end\">boardwalk</text><text class=\"sm\" x=\"262\" y=\"140\" text-anchor=\"middle\">water</text></svg></figure>" +
+        "<p class=\"geo-given\">At a marina, docks <strong>d</strong> and <strong>e</strong> stick out from a straight boardwalk, <strong>t</strong>. A rope, <strong>r</strong>, is stretched across both docks, with m∠6 = (x + 32)° and m∠7 = (3x + 8)°. Given: d ⊥ t and e ⊥ t. Prove: d ∥ e.</p>" +
         "<table class=\"geo-proof\"><tr><th>Statement</th><th>Reason</th></tr><tr><td>1. d ⊥ t and e ⊥ t</td><td>Given</td></tr><tr>" +
         "<td>2. ∠1 and ∠5 are right angles.</td><td>____ (a)</td></tr><tr><td>3. ∠1 ≅ ∠5</td><td>____ (b)</td></tr><tr><td>4. d ∥ e</td><td>____ (c)</td></tr>" +
         "</table>",
@@ -1361,12 +1361,12 @@
         "<figure class=\"geo-fig\">" +
         "<svg viewBox=\"0 0 320 150\" role=\"img\" aria-label=\"Parallel highways j (top) and k (bottom). A drone path goes from A on j down to B on k, then up to C on j, to the right of A. P is on k left of B and Q is on k right of B. Angle BAC is marked 41 degrees and angle BCA is marked 68 degrees; angle ABC is marked\">" +
         "<line class=\"ln\" x1=\"14\" y1=\"34\" x2=\"300\" y2=\"34\"/><line class=\"ln\" x1=\"14\" y1=\"124\" x2=\"300\" y2=\"124\"/>" +
-        "<path class=\"thin\" d=\"M263 30 L270 34 L263 38\"/><path class=\"thin\" d=\"M263 120 L270 124 L263 128\"/>" +
+        "<path class=\"thin\" d=\"M285 30 L292 34 L285 38\"/><path class=\"thin\" d=\"M285 120 L292 124 L285 128\"/>" +
         "<line class=\"ac\" x1=\"40\" y1=\"34\" x2=\"143.5\" y2=\"124\"/><line class=\"ac\" x1=\"143.5\" y1=\"124\" x2=\"179.9\" y2=\"34\"/>" +
         "<circle class=\"dt\" cx=\"40\" cy=\"34\" r=\"3\"/><circle class=\"dt\" cx=\"143.5\" cy=\"124\" r=\"3\"/><circle class=\"dt\" cx=\"179.9\" cy=\"34\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"30\" cy=\"124\" r=\"3\"/><circle class=\"dt\" cx=\"290\" cy=\"124\" r=\"3\"/><text x=\"40\" y=\"25\" text-anchor=\"middle\">A</text>" +
+        "<circle class=\"dt\" cx=\"30\" cy=\"124\" r=\"3\"/><circle class=\"dt\" cx=\"252\" cy=\"124\" r=\"3\"/><text x=\"40\" y=\"25\" text-anchor=\"middle\">A</text>" +
         "<text x=\"179.9\" y=\"25\" text-anchor=\"middle\">C</text><text x=\"143.5\" y=\"141\" text-anchor=\"middle\">B</text>" +
-        "<text x=\"30\" y=\"141\" text-anchor=\"middle\">P</text><text x=\"290\" y=\"141\" text-anchor=\"middle\">Q</text><text x=\"306\" y=\"39\">j</text>" +
+        "<text x=\"30\" y=\"141\" text-anchor=\"middle\">P</text><text x=\"252\" y=\"141\" text-anchor=\"middle\">Q</text><text x=\"306\" y=\"39\">j</text>" +
         "<text x=\"306\" y=\"129\">k</text><path class=\"thin\" d=\"M56.6 48.4 A22 22 0 0 0 62 34\"/><text x=\"77.5\" y=\"53\" text-anchor=\"middle\">41°</text>" +
         "<path class=\"thin\" d=\"M163.9 34 A16 16 0 0 0 173.9 48.8\"/><text x=\"154.2\" y=\"56.3\" text-anchor=\"middle\">68°</text>" +
         "<path class=\"thin\" d=\"M148.8 111 A14 14 0 0 0 133 114.8\"/><text class=\"sm\" x=\"232\" y=\"56\" text-anchor=\"middle\">highway</text>" +
@@ -1429,7 +1429,7 @@
           id: "solve-x",
           sol: "G.RLT.2",
           sub: "G.RLT.2.3",
-          stem: "On a second flight between the same highways, m∠BAC = (4x − 6)°, m∠BCA = (2x + 21)° and m∠ABC = (3x + 39)°. What is x?",
+          stem: "On a second flight between the same highways, m∠BAC = (4x − 6)°, m∠BCA = (2x + 21)° and m∠ABC = (3x + 39)°. What is x?",
           choices: [
             { letter: "A", text: "34" },
             { letter: "B", text: "14" },

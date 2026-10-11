@@ -414,14 +414,14 @@
       level: 2,
       passage:
         "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 140\" role=\"img\" aria-label=\"Coordinate grid with a molecule model: atom J at (-4, 2) and atom K at (0, 2) are each bonded to the central atom M at (-2, 4)\">" +
-        "<line class=\"gr\" x1=\"90\" y1=\"10\" x2=\"90\" y2=\"130\"/><line class=\"gr\" x1=\"110\" y1=\"10\" x2=\"110\" y2=\"130\"/><line class=\"gr\" x1=\"130\" y1=\"10\" x2=\"130\" y2=\"130\"/><line class=\"gr\" x1=\"150\" y1=\"10\" x2=\"150\" y2=\"130\"/><line class=\"gr\" x1=\"170\" y1=\"10\" x2=\"170\" y2=\"130\"/><line class=\"gr\" x1=\"210\" y1=\"10\" x2=\"210\" y2=\"130\"/><line class=\"gr\" x1=\"230\" y1=\"10\" x2=\"230\" y2=\"130\"/>" +
-        "<line class=\"gr\" x1=\"90\" y1=\"130\" x2=\"230\" y2=\"130\"/><line class=\"gr\" x1=\"90\" y1=\"90\" x2=\"230\" y2=\"90\"/><line class=\"gr\" x1=\"90\" y1=\"70\" x2=\"230\" y2=\"70\"/><line class=\"gr\" x1=\"90\" y1=\"50\" x2=\"230\" y2=\"50\"/><line class=\"gr\" x1=\"90\" y1=\"30\" x2=\"230\" y2=\"30\"/><line class=\"gr\" x1=\"90\" y1=\"10\" x2=\"230\" y2=\"10\"/>" +
-        "<line class=\"ax\" x1=\"90\" y1=\"110\" x2=\"230\" y2=\"110\"/><line class=\"ax\" x1=\"190\" y1=\"130\" x2=\"190\" y2=\"10\"/>" +
-        "<text class=\"sm\" x=\"110\" y=\"123\" text-anchor=\"middle\">−4</text><text class=\"sm\" x=\"150\" y=\"123\" text-anchor=\"middle\">−2</text><text class=\"sm\" x=\"186\" y=\"74\" text-anchor=\"end\">2</text><text class=\"sm\" x=\"186\" y=\"34\" text-anchor=\"end\">4</text><text class=\"sm\" x=\"234\" y=\"114\">x</text><text class=\"sm\" x=\"195\" y=\"20\">y</text>" +
-        "<line class=\"ln\" x1=\"110\" y1=\"70\" x2=\"150\" y2=\"30\"/><line class=\"ln\" x1=\"150\" y1=\"30\" x2=\"190\" y2=\"70\"/>" +
-        "<circle class=\"sh2\" cx=\"110\" cy=\"70\" r=\"7\"/><circle class=\"sh2\" cx=\"150\" cy=\"30\" r=\"7\"/><circle class=\"sh2\" cx=\"190\" cy=\"70\" r=\"7\"/>" +
-        "<circle class=\"dt\" cx=\"110\" cy=\"70\" r=\"3\"/><circle class=\"dt\" cx=\"150\" cy=\"30\" r=\"3\"/><circle class=\"dt\" cx=\"190\" cy=\"70\" r=\"3\"/>" +
-        "<text x=\"105\" y=\"85\" text-anchor=\"end\">J</text><text x=\"150\" y=\"23\" text-anchor=\"middle\">M</text><text x=\"195\" y=\"85\">K</text>" +
+        "<line class=\"gr\" x1=\"80\" y1=\"10\" x2=\"80\" y2=\"130\"/><line class=\"gr\" x1=\"100\" y1=\"10\" x2=\"100\" y2=\"130\"/><line class=\"gr\" x1=\"120\" y1=\"10\" x2=\"120\" y2=\"130\"/><line class=\"gr\" x1=\"140\" y1=\"10\" x2=\"140\" y2=\"130\"/><line class=\"gr\" x1=\"160\" y1=\"10\" x2=\"160\" y2=\"130\"/><line class=\"gr\" x1=\"200\" y1=\"10\" x2=\"200\" y2=\"130\"/><line class=\"gr\" x1=\"220\" y1=\"10\" x2=\"220\" y2=\"130\"/><line class=\"gr\" x1=\"240\" y1=\"10\" x2=\"240\" y2=\"130\"/>" +
+        "<line class=\"gr\" x1=\"80\" y1=\"130\" x2=\"240\" y2=\"130\"/><line class=\"gr\" x1=\"80\" y1=\"90\" x2=\"240\" y2=\"90\"/><line class=\"gr\" x1=\"80\" y1=\"70\" x2=\"240\" y2=\"70\"/><line class=\"gr\" x1=\"80\" y1=\"50\" x2=\"240\" y2=\"50\"/><line class=\"gr\" x1=\"80\" y1=\"30\" x2=\"240\" y2=\"30\"/><line class=\"gr\" x1=\"80\" y1=\"10\" x2=\"240\" y2=\"10\"/>" +
+        "<line class=\"ax\" x1=\"80\" y1=\"110\" x2=\"240\" y2=\"110\"/><line class=\"ax\" x1=\"180\" y1=\"130\" x2=\"180\" y2=\"10\"/>" +
+        "<text class=\"sm\" x=\"100\" y=\"123\" text-anchor=\"middle\">−4</text><text class=\"sm\" x=\"140\" y=\"123\" text-anchor=\"middle\">−2</text><text class=\"sm\" x=\"220\" y=\"123\" text-anchor=\"middle\">2</text><text class=\"sm\" x=\"184\" y=\"34\">4</text><text class=\"sm\" x=\"244\" y=\"114\">x</text><text class=\"sm\" x=\"175\" y=\"20\" text-anchor=\"end\">y</text>" +
+        "<line class=\"ln\" x1=\"100\" y1=\"70\" x2=\"140\" y2=\"30\"/><line class=\"ln\" x1=\"140\" y1=\"30\" x2=\"180\" y2=\"70\"/>" +
+        "<circle class=\"sh2\" cx=\"100\" cy=\"70\" r=\"6\"/><circle class=\"sh2\" cx=\"140\" cy=\"30\" r=\"6\"/><circle class=\"sh2\" cx=\"180\" cy=\"70\" r=\"6\"/>" +
+        "<circle class=\"dt\" cx=\"100\" cy=\"70\" r=\"3\"/><circle class=\"dt\" cx=\"140\" cy=\"30\" r=\"3\"/><circle class=\"dt\" cx=\"180\" cy=\"70\" r=\"3\"/>" +
+        "<text x=\"92\" y=\"89\" text-anchor=\"end\">J</text><text x=\"140\" y=\"19\" text-anchor=\"middle\">M</text><text x=\"188\" y=\"89\">K</text>" +
         "</svg></figure>" +
         "<p class=\"geo-given\">A microscope image of a molecule model is placed on a grid. Atoms <strong>J</strong>(−4, 2) and <strong>K</strong>(0, 2) are each bonded to the central atom <strong>M</strong>(−2, 4). Each bond is 2√2 units long. Zooming in or out is a dilation centered at the origin.</p>",
       claims: [
@@ -618,7 +618,7 @@
         "<line class=\"gr\" x1=\"56\" y1=\"14\" x2=\"56\" y2=\"110\"/><line class=\"gr\" x1=\"72\" y1=\"14\" x2=\"72\" y2=\"110\"/><line class=\"gr\" x1=\"88\" y1=\"14\" x2=\"88\" y2=\"110\"/><line class=\"gr\" x1=\"104\" y1=\"14\" x2=\"104\" y2=\"110\"/><line class=\"gr\" x1=\"120\" y1=\"14\" x2=\"120\" y2=\"110\"/><line class=\"gr\" x1=\"136\" y1=\"14\" x2=\"136\" y2=\"110\"/><line class=\"gr\" x1=\"152\" y1=\"14\" x2=\"152\" y2=\"110\"/><line class=\"gr\" x1=\"168\" y1=\"14\" x2=\"168\" y2=\"110\"/><line class=\"gr\" x1=\"200\" y1=\"14\" x2=\"200\" y2=\"110\"/><line class=\"gr\" x1=\"216\" y1=\"14\" x2=\"216\" y2=\"110\"/><line class=\"gr\" x1=\"232\" y1=\"14\" x2=\"232\" y2=\"110\"/><line class=\"gr\" x1=\"248\" y1=\"14\" x2=\"248\" y2=\"110\"/><line class=\"gr\" x1=\"264\" y1=\"14\" x2=\"264\" y2=\"110\"/>" +
         "<line class=\"gr\" x1=\"56\" y1=\"110\" x2=\"264\" y2=\"110\"/><line class=\"gr\" x1=\"56\" y1=\"94\" x2=\"264\" y2=\"94\"/><line class=\"gr\" x1=\"56\" y1=\"62\" x2=\"264\" y2=\"62\"/><line class=\"gr\" x1=\"56\" y1=\"46\" x2=\"264\" y2=\"46\"/><line class=\"gr\" x1=\"56\" y1=\"30\" x2=\"264\" y2=\"30\"/><line class=\"gr\" x1=\"56\" y1=\"14\" x2=\"264\" y2=\"14\"/>" +
         "<line class=\"ax\" x1=\"56\" y1=\"78\" x2=\"264\" y2=\"78\"/><line class=\"ax\" x1=\"184\" y1=\"110\" x2=\"184\" y2=\"14\"/>" +
-        "<text class=\"sm\" x=\"88\" y=\"91\" text-anchor=\"middle\">−6</text><text class=\"sm\" x=\"120\" y=\"91\" text-anchor=\"middle\">−4</text><text class=\"sm\" x=\"152\" y=\"91\" text-anchor=\"middle\">−2</text><text class=\"sm\" x=\"216\" y=\"91\" text-anchor=\"middle\">2</text><text class=\"sm\" x=\"180\" y=\"50\" text-anchor=\"end\">2</text><text class=\"sm\" x=\"268\" y=\"82\">x</text><text class=\"sm\" x=\"189\" y=\"24\">y</text>" +
+        "<text class=\"sm\" x=\"216\" y=\"91\" text-anchor=\"middle\">2</text><text class=\"sm\" x=\"248\" y=\"91\" text-anchor=\"middle\">4</text><text class=\"sm\" x=\"188\" y=\"34\">3</text><text class=\"sm\" x=\"268\" y=\"82\">x</text><text class=\"sm\" x=\"179\" y=\"24\" text-anchor=\"end\">y</text>" +
         "<polygon class=\"sh\" points=\"200,62 248,62 232,46 200,30\"/>" +
         "<polygon class=\"sh2\" points=\"72,94 168,94 136,62 72,30\"/>" +
         "<circle class=\"dt\" cx=\"200\" cy=\"62\" r=\"3\"/><circle class=\"dt\" cx=\"248\" cy=\"62\" r=\"3\"/><circle class=\"dt\" cx=\"232\" cy=\"46\" r=\"3\"/><circle class=\"dt\" cx=\"200\" cy=\"30\" r=\"3\"/>" +
@@ -721,12 +721,12 @@
         "<line class=\"gr\" x1=\"100\" y1=\"10\" x2=\"100\" y2=\"130\"/><line class=\"gr\" x1=\"115\" y1=\"10\" x2=\"115\" y2=\"130\"/><line class=\"gr\" x1=\"130\" y1=\"10\" x2=\"130\" y2=\"130\"/><line class=\"gr\" x1=\"145\" y1=\"10\" x2=\"145\" y2=\"130\"/><line class=\"gr\" x1=\"175\" y1=\"10\" x2=\"175\" y2=\"130\"/><line class=\"gr\" x1=\"190\" y1=\"10\" x2=\"190\" y2=\"130\"/><line class=\"gr\" x1=\"205\" y1=\"10\" x2=\"205\" y2=\"130\"/><line class=\"gr\" x1=\"220\" y1=\"10\" x2=\"220\" y2=\"130\"/>" +
         "<line class=\"gr\" x1=\"100\" y1=\"130\" x2=\"220\" y2=\"130\"/><line class=\"gr\" x1=\"100\" y1=\"115\" x2=\"220\" y2=\"115\"/><line class=\"gr\" x1=\"100\" y1=\"100\" x2=\"220\" y2=\"100\"/><line class=\"gr\" x1=\"100\" y1=\"85\" x2=\"220\" y2=\"85\"/><line class=\"gr\" x1=\"100\" y1=\"55\" x2=\"220\" y2=\"55\"/><line class=\"gr\" x1=\"100\" y1=\"40\" x2=\"220\" y2=\"40\"/><line class=\"gr\" x1=\"100\" y1=\"25\" x2=\"220\" y2=\"25\"/><line class=\"gr\" x1=\"100\" y1=\"10\" x2=\"220\" y2=\"10\"/>" +
         "<line class=\"ax\" x1=\"100\" y1=\"70\" x2=\"220\" y2=\"70\"/><line class=\"ax\" x1=\"160\" y1=\"130\" x2=\"160\" y2=\"10\"/>" +
-        "<text class=\"sm\" x=\"130\" y=\"83\" text-anchor=\"middle\">−2</text><text class=\"sm\" x=\"190\" y=\"83\" text-anchor=\"middle\">2</text><text class=\"sm\" x=\"164\" y=\"104\">−2</text><text class=\"sm\" x=\"164\" y=\"44\">2</text><text class=\"sm\" x=\"224\" y=\"74\">x</text><text class=\"sm\" x=\"155\" y=\"20\" text-anchor=\"end\">y</text>" +
+        "<text class=\"sm\" x=\"130\" y=\"83\" text-anchor=\"middle\">−2</text><text class=\"sm\" x=\"164\" y=\"104\">−2</text><text class=\"sm\" x=\"164\" y=\"44\">2</text><text class=\"sm\" x=\"224\" y=\"74\">x</text><text class=\"sm\" x=\"155\" y=\"20\" text-anchor=\"end\">y</text>" +
         "<circle class=\"sh\" cx=\"160\" cy=\"70\" r=\"15\"/>" +
         "<path class=\"ac\" d=\"M160 55 Q115 55 115 85 M160 85 Q205 85 205 55\"/>" +
         "<circle class=\"dt\" cx=\"115\" cy=\"85\" r=\"3\"/><circle class=\"dt\" cx=\"205\" cy=\"55\" r=\"3\"/>" +
         "<text x=\"115\" y=\"102\" text-anchor=\"middle\">P</text><text x=\"205\" y=\"48\" text-anchor=\"middle\">U</text>" +
-        "<text x=\"166\" y=\"90\">O</text>" +
+        "<circle class=\"dt\" cx=\"160\" cy=\"70\" r=\"2.5\"/><text class=\"sm\" x=\"162\" y=\"67\">O</text>" +
         "</svg></figure>" +
         "<p class=\"geo-given\">A weather map marks a hurricane with the symbol shown, centered at the origin <strong>O</strong>. Each arm is the other arm turned 180° about O. The arm tips are <strong>P</strong>(−3, −1) and <strong>U</strong>(3, 1). Maps of the Southern Hemisphere use the mirror image of this symbol.</p>",
       claims: [
@@ -821,8 +821,8 @@
       passage:
         "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 142\" role=\"img\" aria-label=\"Sign 1, a crossbuck: two equal boards crossing at their centers to form an X, meeting at a 70 degree angle; Sign 2, a pennant, an isosceles triangle pointing right; Sign 3, a block letter N\">" +
         "<polygon class=\"sh\" points=\"15.03,88.94 96.94,31.59 104.97,43.06 23.06,100.41\"/><polygon class=\"sh\" points=\"23.06,31.59 104.97,88.94 96.94,100.41 15.03,43.06\"/>" +
-        "<path class=\"thin\" d=\"M78.02 78.62 A22 22 0 0 0 78.02 53.38\"/>" +
-        "<text class=\"sm\" x=\"86\" y=\"70\">70°</text>" +
+        "<path class=\"thin\" d=\"M74.74 76.32 A18 18 0 0 0 74.74 55.68\"/>" +
+        "<text class=\"sm\" x=\"88\" y=\"71\">70°</text>" +
         "<polygon class=\"sh2\" points=\"128,36 128,100 196,68\"/>" +
         "<polygon class=\"sh\" points=\"234,98 234,34 248,34 276,76 276,34 290,34 290,98 276,98 248,56 248,98\"/>" +
         "<text class=\"sm\" x=\"60\" y=\"134\" text-anchor=\"middle\">Sign 1</text><text class=\"sm\" x=\"160\" y=\"134\" text-anchor=\"middle\">Sign 2</text><text class=\"sm\" x=\"262\" y=\"134\" text-anchor=\"middle\">Sign 3</text>" +
