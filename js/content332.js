@@ -327,7 +327,7 @@
         "<line class=\"ln\" x1=\"155\" y1=\"80\" x2=\"155\" y2=\"26\"/><line class=\"ac\" x1=\"110\" y1=\"80\" x2=\"155\" y2=\"26\"/><path class=\"thin\" d=\"M147 80 V72 H155\"/><circle class=\"dta\" cx=\"110\" cy=\"80\" r=\"3\"/><circle class=\"dt\" cx=\"155\" cy=\"80\" r=\"3\"/>" +
         "<circle class=\"dt\" cx=\"155\" cy=\"26\" r=\"4\"/><text x=\"104\" y=\"74\" text-anchor=\"end\">C</text><text x=\"161\" y=\"96\">Q</text><text x=\"163\" y=\"28\">E</text><text class=\"sm\" x=\"200\" y=\"128\">eyepiece view</text><text class=\"sm\" x=\"200\" y=\"144\">on a star chart</text>" +
         "</svg></figure>" +
-        "<p class=\"geo-given\">A telescope's round field of view is drawn on a star chart grid. Its center is <strong>C</strong>(−2, 1). The star <strong>E</strong>(3, 7) is on the edge of the field. Point <strong>Q</strong>(3, 1) makes right triangle <strong>CQE</strong>.</p>",
+        "<p class=\"geo-given\">A telescope's round field of view is drawn on a star chart. Its center is <strong>C</strong>(−2, 1). The star <strong>E</strong>(3, 7) is on the edge of the field. Point <strong>Q</strong>(3, 1) makes right triangle <strong>CQE</strong>.</p>",
       claims: [
         {
           id: "leg",
@@ -1100,8 +1100,8 @@
       blurb: "How far a delivery drone can fly from its hub.",
       level: 2,
       passage:
-        "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 156\" role=\"img\" aria-label=\"City map with two streets and a river. A delivery hub H, drawn as a small square with a gold dot, is the center of a gold dashed circle that marks the edge of the delivery range.\">" +
-        "<path class=\"sh2\" d=\"M0 118 C 80 100, 150 150, 220 128 L 220 142 C 150 164, 80 114, 0 132 Z\"/><line class=\"thin\" x1=\"0\" y1=\"40\" x2=\"220\" y2=\"40\"/><line class=\"thin\" x1=\"150\" y1=\"0\" x2=\"150\" y2=\"156\"/><circle class=\"ac dash\" cx=\"100\" cy=\"78\" r=\"64\"/>" +
+        "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 156\" role=\"img\" aria-label=\"City map with a river. A delivery hub H, drawn as a small square with a gold dot, is the center of a gold dashed circle that marks the edge of the delivery range.\">" +
+        "<path class=\"sh2\" d=\"M0 118 C 80 100, 150 150, 220 128 L 220 142 C 150 164, 80 114, 0 132 Z\"/><circle class=\"ac dash\" cx=\"100\" cy=\"78\" r=\"64\"/>" +
         "<rect class=\"ln\" x=\"94\" y=\"72\" width=\"12\" height=\"12\"/><circle class=\"dta\" cx=\"100\" cy=\"78\" r=\"3\"/><text x=\"90\" y=\"83\" text-anchor=\"end\">H</text><text class=\"sm\" x=\"226\" y=\"140\">river</text><text class=\"sm\" x=\"312\" y=\"60\" text-anchor=\"end\">city map</text>" +
         "<text class=\"sm\" x=\"312\" y=\"76\" text-anchor=\"end\">1 unit = 1 km</text><text class=\"sm\" x=\"312\" y=\"100\" text-anchor=\"end\">dashed: edge of</text><text class=\"sm\" x=\"312\" y=\"116\" text-anchor=\"end\">delivery range</text>" +
         "</svg></figure>" +

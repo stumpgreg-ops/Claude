@@ -145,23 +145,23 @@
           "id": "calm",
           "sol": "G.TR.4",
           "sub": "G.TR.4.4",
-          "stem": "Later the wind eases, and the 29-m tether makes a 62° angle with level ground. To the nearest tenth of a meter, how high is the balloon?",
+          "stem": "Later the wind eases. A 35-m tether makes a 62° angle with level ground. To the nearest tenth of a meter, how high is the balloon?",
           "choices": [
             {
               "letter": "A",
-              "text": "13.6 m"
+              "text": "16.4 m"
             },
             {
               "letter": "B",
-              "text": "25.6 m"
+              "text": "30.9 m"
             },
             {
               "letter": "C",
-              "text": "54.5 m"
+              "text": "65.8 m"
             },
             {
               "letter": "D",
-              "text": "32.8 m"
+              "text": "39.6 m"
             }
           ],
           "correct": "B"
@@ -2039,7 +2039,7 @@
           "id": "fortyfive",
           "sol": "G.TR.4",
           "sub": "G.TR.4.2",
-          "stem": "Another drone, 50 m up, flies straight down to the ground along a path that makes a 45° angle with the ground. What is the exact length of its path?",
+          "stem": "Another drone, 50 m up, flies in a straight line down to the ground along a path that makes a 45° angle with the ground. What is the exact length of its path?",
           "choices": [
             {
               "letter": "A",

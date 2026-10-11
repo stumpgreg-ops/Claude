@@ -287,7 +287,7 @@
       kind: "Changing dimensions · G.DF.2",
       blurb: "A glass prism from the physics lab, resized.",
       level: 2,
-      passage: "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 152\" role=\"img\" aria-label=\"A glass prism lying on its side: its ends are equilateral triangles with 4 cm sides and it is 10 cm long; hidden edges are dashed\"><polygon class=\"sh2\" points=\"98,128 255.57,100.22 223.57,44.79 66,72.57\"/><polygon class=\"sh2\" points=\"34,128 98,128 66,72.57\"/><path class=\"ln dash\" d=\"M34 128 L191.57 100.22 L255.57 100.22 M191.57 100.22 L223.57 44.79\"/><path class=\"ln\" d=\"M255.57 100.22 L223.57 44.79\"/><path class=\"thin\" d=\"M66 124 L66 132 M78.54 102.29 L85.46 98.29 M53.46 102.29 L46.54 98.29\"/><text x=\"66\" y=\"146\" text-anchor=\"middle\">4 cm</text><text x=\"190.8\" y=\"136.1\" text-anchor=\"start\">10 cm</text></svg></figure><p class=\"geo-given\">A physics lab uses a glass prism to split white light into colors. The prism's two ends are equilateral triangles with 4 cm sides, and the prism is 10 cm long. Each end has an area of 4√3 cm², the prism's volume is 40√3 cm³, and its total surface area is 8√3 + 120 cm².</p>",
+      passage: "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 152\" role=\"img\" aria-label=\"A glass prism lying on its side: its ends are equilateral triangles with 4 cm sides and it is 10 cm long; hidden edges are dashed\"><polygon class=\"sh2\" points=\"98,128 255.57,100.22 223.57,44.79 66,72.57\"/><polygon class=\"sh2\" points=\"34,128 98,128 66,72.57\"/><path class=\"ln dash\" d=\"M34 128 L191.57 100.22 L255.57 100.22 M191.57 100.22 L223.57 44.79\"/><path class=\"ln\" d=\"M255.57 100.22 L223.57 44.79\"/><path class=\"thin\" d=\"M66 124 L66 132 M78.54 102.29 L85.46 98.29 M53.46 102.29 L46.54 98.29\"/><text x=\"66\" y=\"146\" text-anchor=\"middle\">4 cm</text><text x=\"190.8\" y=\"136.1\" text-anchor=\"start\">10 cm</text></svg></figure><p class=\"geo-given\">A physics lab uses a glass prism to split white light into colors. The prism's two ends are equilateral triangles with 4 cm sides, and the prism is 10 cm long. Each end has an area of 4√3 cm², the prism's volume is 40√3 cm³, and its total surface area is (8√3 + 120) cm².</p>",
       claims: [
         {
           id: "long",
@@ -308,10 +308,10 @@
           sub: "G.DF.2.1",
           stem: "Only the length of the prism is doubled, to 20 cm. What is its new total surface area?",
           choices: [
-            { letter: "A", text: "32√3 + 480 cm²" },
-            { letter: "B", text: "4√3 + 240 cm²" },
-            { letter: "C", text: "8√3 + 240 cm²" },
-            { letter: "D", text: "16√3 + 240 cm²" }
+            { letter: "A", text: "(32√3 + 480) cm²" },
+            { letter: "B", text: "(4√3 + 240) cm²" },
+            { letter: "C", text: "(8√3 + 240) cm²" },
+            { letter: "D", text: "(16√3 + 240) cm²" }
           ],
           correct: "C"
         },
@@ -1007,7 +1007,7 @@
       kind: "Changing dimensions · G.DF.2",
       blurb: "How much ground a survey drone sees from higher up.",
       level: 2,
-      passage: "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 162\" role=\"img\" aria-label=\"Left, side view: a drone 50 m above flat ground; lines from the camera reach the ground 80 m apart. Right, top view: the photo covers a rectangle of ground 80 m by 60 m\"><line class=\"ln\" x1=\"8\" y1=\"116\" x2=\"152\" y2=\"116\"/><line class=\"thin\" x1=\"80\" y1=\"36\" x2=\"16\" y2=\"116\"/><line class=\"thin\" x1=\"80\" y1=\"36\" x2=\"144\" y2=\"116\"/><line class=\"ac\" x1=\"16\" y1=\"116\" x2=\"144\" y2=\"116\"/><line class=\"thin dash\" x1=\"80\" y1=\"36\" x2=\"80\" y2=\"116\"/><path class=\"thin\" d=\"M80 109 H87 V116\"/><rect class=\"sh2\" x=\"72\" y=\"29\" width=\"16\" height=\"7\" rx=\"2\"/><path class=\"thin\" d=\"M72 31 H62 M88 31 H98\"/><ellipse class=\"thin\" cx=\"62\" cy=\"28\" rx=\"8\" ry=\"2.5\"/><ellipse class=\"thin\" cx=\"98\" cy=\"28\" rx=\"8\" ry=\"2.5\"/><text x=\"75\" y=\"100\" text-anchor=\"end\">50 m</text><text x=\"80\" y=\"134\" text-anchor=\"middle\">80 m</text><rect class=\"sh\" x=\"172\" y=\"20\" width=\"128\" height=\"96\"/><path class=\"gr\" d=\"M188 20 V116 M204 20 V116 M220 20 V116 M236 20 V116 M252 20 V116 M268 20 V116 M284 20 V116\"/><text x=\"236\" y=\"134\" text-anchor=\"middle\">80 m</text><text x=\"166\" y=\"73\" text-anchor=\"end\">60 m</text><text class=\"sm\" x=\"80\" y=\"156\" text-anchor=\"middle\">side view</text><text class=\"sm\" x=\"236\" y=\"156\" text-anchor=\"middle\">top view of the photo</text></svg></figure><p class=\"geo-given\">A survey drone hovers 50 m above flat ground and takes a photo straight down. The photo covers a rectangle of ground 80 m long and 60 m wide: an area of 4,800 m² and a perimeter of 280 m. When the drone flies higher, the covered rectangle stays similar, and its lengths grow in proportion to the height.</p>",
+      passage: "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 162\" role=\"img\" aria-label=\"Left, side view: a drone 50 m above flat ground; lines from the camera reach the ground 80 m apart. Right, top view: the photo covers a rectangle of ground 80 m by 60 m\"><line class=\"ln\" x1=\"8\" y1=\"116\" x2=\"152\" y2=\"116\"/><line class=\"thin\" x1=\"80\" y1=\"36\" x2=\"16\" y2=\"116\"/><line class=\"thin\" x1=\"80\" y1=\"36\" x2=\"144\" y2=\"116\"/><line class=\"ac\" x1=\"16\" y1=\"116\" x2=\"144\" y2=\"116\"/><line class=\"thin dash\" x1=\"80\" y1=\"36\" x2=\"80\" y2=\"116\"/><path class=\"thin\" d=\"M80 109 H87 V116\"/><rect class=\"sh2\" x=\"72\" y=\"29\" width=\"16\" height=\"7\" rx=\"2\"/><path class=\"thin\" d=\"M72 31 H62 M88 31 H98\"/><ellipse class=\"thin\" cx=\"62\" cy=\"28\" rx=\"8\" ry=\"2.5\"/><ellipse class=\"thin\" cx=\"98\" cy=\"28\" rx=\"8\" ry=\"2.5\"/><text x=\"75\" y=\"100\" text-anchor=\"end\">50 m</text><text x=\"80\" y=\"134\" text-anchor=\"middle\">80 m</text><rect class=\"sh\" x=\"172\" y=\"20\" width=\"128\" height=\"96\"/><path class=\"gr\" d=\"M188 20 V116 M204 20 V116 M220 20 V116 M236 20 V116 M252 20 V116 M268 20 V116 M284 20 V116\"/><text x=\"236\" y=\"134\" text-anchor=\"middle\">80 m</text><text x=\"312\" y=\"68\" text-anchor=\"middle\" transform=\"rotate(90 312 68)\">60 m</text><text class=\"sm\" x=\"80\" y=\"156\" text-anchor=\"middle\">side view</text><text class=\"sm\" x=\"236\" y=\"156\" text-anchor=\"middle\">top view of the photo</text></svg></figure><p class=\"geo-given\">A survey drone hovers 50 m above flat ground and takes a photo straight down. The photo covers a rectangle of ground 80 m long and 60 m wide: an area of 4,800 m² and a perimeter of 280 m. When the drone flies higher, the covered rectangle stays similar, and its lengths grow in proportion to the height.</p>",
       claims: [
         {
           id: "climb",
@@ -1187,7 +1187,7 @@
       kind: "Changing dimensions · G.DF.2",
       blurb: "A tunnel through a hill, a longer one and a model one.",
       level: 3,
-      passage: "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 168\" role=\"img\" aria-label=\"The opening of a railway tunnel in a hillside: a rectangle 8 m wide with 3 m walls, topped by a half-circle whose diameter is the 8 m width\"><polygon class=\"sh2\" points=\"10,140 160,16 310,140\"/><path class=\"sh\" d=\"M104 140 V98 A56 56 0 0 1 216 98 V140 Z\"/><line class=\"thin dash\" x1=\"104\" y1=\"98\" x2=\"216\" y2=\"98\"/><line class=\"ln\" x1=\"4\" y1=\"140\" x2=\"316\" y2=\"140\"/><path class=\"thin\" d=\"M104 148 H216 M104 144 V152 M216 144 V152\"/><path class=\"thin\" d=\"M126 140 L134 128 M194 140 L186 128 M131 132 H189\"/><text x=\"160\" y=\"164\" text-anchor=\"middle\">8 m</text><text x=\"98\" y=\"124\" text-anchor=\"end\">3 m</text></svg></figure><p class=\"geo-given\">A railway tunnel's opening is a rectangle 8 m wide with walls 3 m tall, topped by a half-circle with an 8 m diameter. The opening's area is 24 + 8π m². The tunnel is 200 m long, so 4,800 + 1,600π m³ of rock was removed.</p>",
+      passage: "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 168\" role=\"img\" aria-label=\"The opening of a railway tunnel in a hillside: a rectangle 8 m wide with 3 m walls, topped by a half-circle whose diameter is the 8 m width\"><polygon class=\"sh2\" points=\"10,140 160,16 310,140\"/><path class=\"sh\" d=\"M104 140 V98 A56 56 0 0 1 216 98 V140 Z\"/><line class=\"thin dash\" x1=\"104\" y1=\"98\" x2=\"216\" y2=\"98\"/><line class=\"ln\" x1=\"4\" y1=\"140\" x2=\"316\" y2=\"140\"/><path class=\"thin\" d=\"M104 148 H216 M104 144 V152 M216 144 V152\"/><path class=\"thin\" d=\"M126 140 L134 128 M194 140 L186 128 M131 132 H189\"/><text x=\"160\" y=\"164\" text-anchor=\"middle\">8 m</text><text x=\"98\" y=\"124\" text-anchor=\"end\">3 m</text></svg></figure><p class=\"geo-given\">A railway tunnel's opening is a rectangle 8 m wide with walls 3 m tall, topped by a half-circle with an 8 m diameter. The opening's area is (24 + 8π) m². The tunnel is 200 m long, so (4,800 + 1,600π) m³ of rock was removed.</p>",
       claims: [
         {
           id: "longer",
@@ -1195,10 +1195,10 @@
           sub: "G.DF.2.1",
           stem: "A new tunnel has the same opening but is 300 m long. How much rock is removed? Give the answer in terms of π.",
           choices: [
-            { letter: "A", text: "10,800 + 3,600π m³" },
-            { letter: "B", text: "16,200 + 5,400π m³" },
-            { letter: "C", text: "7,200 + 1,600π m³" },
-            { letter: "D", text: "7,200 + 2,400π m³" }
+            { letter: "A", text: "(10,800 + 3,600π) m³" },
+            { letter: "B", text: "(16,200 + 5,400π) m³" },
+            { letter: "C", text: "(7,200 + 1,600π) m³" },
+            { letter: "D", text: "(7,200 + 2,400π) m³" }
           ],
           correct: "D"
         },
