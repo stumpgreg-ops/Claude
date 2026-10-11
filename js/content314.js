@@ -21,7 +21,7 @@
           id: "crit",
           sol: "G.TR.2",
           sub: "G.TR.2.1",
-          stem: "Which shortcut do the marks support for △JKL ≅ △MNP?",
+          stem: "Which shortcut do the marks support directly for △JKL ≅ △MNP?",
           choices: [
             { letter: "A", text: "ASA" },
             { letter: "B", text: "SSA" },
@@ -164,7 +164,7 @@
           id: "twoSides",
           sol: "G.TR.2",
           sub: "G.TR.2.1",
-          stem: "Suppose you knew only that OA ≅ OC and AB ≅ CD. What could you conclude about △AOB and △COD?",
+          stem: "Suppose the orbit were not a circle, and you knew only that OA ≅ OC and AB ≅ CD. What could you conclude about △AOB and △COD?",
           choices: [
             { letter: "A", text: "Not enough to prove congruence" },
             { letter: "B", text: "They are congruent by SSS" },
@@ -658,7 +658,7 @@
           id: "crit",
           sol: "G.TR.2",
           sub: "G.TR.2.1",
-          stem: "Which shortcut proves △ABP ≅ △ACP?",
+          stem: "Using only the given facts and the shared side AP, which shortcut proves △ABP ≅ △ACP directly?",
           choices: [
             { letter: "A", text: "ASA" },
             { letter: "B", text: "AAS" },
@@ -1037,7 +1037,7 @@
           sub: "G.TR.2.1",
           stem: "Which set of facts is NOT enough to prove △PQR ≅ △YZX?",
           choices: [
-            { letter: "A", text: "PQ = YZ, QR = ZX and ∠P ≅ ∠Y" },
+            { letter: "A", text: "PQ = YZ, QR = ZX and ∠R ≅ ∠X" },
             { letter: "B", text: "PQ = YZ, QR = ZX and PR = YX" },
             { letter: "C", text: "PQ = YZ, ∠Q ≅ ∠Z and QR = ZX" },
             { letter: "D", text: "∠P ≅ ∠Y, PQ = YZ and ∠Q ≅ ∠Z" }
@@ -1091,7 +1091,7 @@
           choices: [
             { letter: "A", text: "Nothing; two pairs of sides are enough" },
             { letter: "B", text: "PR = YX, or ∠Q ≅ ∠Z" },
-            { letter: "C", text: "∠P ≅ ∠Y" },
+            { letter: "C", text: "∠R ≅ ∠X" },
             { letter: "D", text: "Equal areas for the two courses" }
           ],
           correct: "B"
