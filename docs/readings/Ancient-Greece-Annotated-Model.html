@@ -72,6 +72,13 @@ mark { color: inherit; padding: 1px 2px; margin: 0 -1px;
 mark.cl { background: var(--hl-claim); }
 mark.ev { background: var(--hl-evidence); }
 mark.ex { background: var(--hl-explain); }
+/* On the annotated pages each highlight is swept in by a click, like a marker stroke. */
+.annotated mark { background-color: transparent; background-repeat: no-repeat; background-size: 0% 100%;
+  transition: background-size .45s ease-out; }
+.annotated mark.cl { background-image: linear-gradient(var(--hl-claim), var(--hl-claim)); }
+.annotated mark.ev { background-image: linear-gradient(var(--hl-evidence), var(--hl-evidence)); }
+.annotated mark.ex { background-image: linear-gradient(var(--hl-explain), var(--hl-explain)); }
+.annotated mark.on { background-size: 100% 100%; }
 .legend b { padding: 0 3px; border-radius: 4px 7px 5px 8px / 7px 4px 8px 5px; }
 
 /* Handwritten margin notes */
@@ -89,24 +96,26 @@ mark.ex { background: var(--hl-explain); }
 .note.r { left: 650px; }
 .note b { font-weight: 700; }
 .note small { display: block; font-size: 17.5px; opacity: .85; margin-top: 3px; }
-.page.open .note { opacity: 1; transform: rotate(var(--tilt, 0deg)); transition-delay: var(--d, 0s); }
+.note.on { opacity: 1; transform: rotate(var(--tilt, 0deg)); transition-delay: .3s; }
 
 svg.ink { position: absolute; left: 0; top: 0; width: 816px; height: 100%; pointer-events: none; overflow: visible; }
 svg.ink path { fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; opacity: 0; }
-.page.open svg.ink path { opacity: .9; transition: stroke-dashoffset .55s ease var(--d, 0s), opacity .1s linear var(--d, 0s); stroke-dashoffset: 0 !important; }
+svg.ink path.on { opacity: .9; transition: stroke-dashoffset .5s ease .5s, opacity .1s linear .5s; stroke-dashoffset: 0 !important; }
 
 .tap {
-  position: absolute; top: 40px; right: 22px;
+  position: absolute; top: 10px; right: 22px;
   font-family: "Caveat", cursive; font-size: 19px; color: #8a8a8a;
   transition: opacity .25s;
 }
-.page.open .tap { opacity: 0; }
 
 @media print {
   body { background: #fff; padding: 0; }
   .sheet-wrap { width: auto; height: auto !important; margin: 0; }
   .page { transform: none; box-shadow: none; break-after: page; }
   .tap { display: none; }
+  .annotated mark { background-size: 100% 100%; }
+  .note { opacity: 1; }
+  svg.ink path { opacity: .9; stroke-dashoffset: 0 !important; }
 }
 </style>
 </head>
@@ -128,7 +137,7 @@ svg.ink path { fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-line
     <p><b style="background:var(--hl-evidence)">Evidence</b>: an example or detail that supports an idea</p>
     <p><b style="background:var(--hl-explain)">Explanation</b>: reasoning that connects a detail to an idea</p>
   </div>
-  <p>Click a page to see its margin notes; click again to hide them. Blue notes explain highlighted passages and pose questions. Red notes connect examples to earlier points. Arrows point to the relevant words. Earlier points from another page are quoted briefly beside the connection.</p>
+  <p>Click a page to reveal its highlights one at a time; each highlight brings its margin note. After the last one, a click clears the page (Shift-click goes back one). Blue notes explain highlighted passages and pose questions. Red notes connect examples to earlier points. Arrows point to the relevant words. Earlier points from another page are quoted briefly beside the connection.</p>
   <p>Annotations are added reader thinking. The article remains the original source text. The primary reading focus is 9.RI.1.A.</p>
   <div class="folio">Page 1</div>
 </section></div>
@@ -365,41 +374,58 @@ svg.ink path { fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-line
 
   annotated.forEach(function (page, pi) {
     var tap = document.createElement("div");
-    tap.className = "tap"; tap.textContent = "click to see notes ✎";
+    tap.className = "tap";
     page.appendChild(tap);
     var svg = document.createElementNS(NS, "svg");
     svg.setAttribute("class", "ink"); svg.setAttribute("aria-hidden", "true");
     page.appendChild(svg);
     page.setAttribute("tabindex", "0");
     page.setAttribute("role", "button");
-    page.setAttribute("aria-expanded", "false");
-    page.setAttribute("aria-label", "Page " + (pages.indexOf(page) + 1) + ". Click to show or hide the margin notes.");
     page.querySelectorAll(".note").forEach(function (n, i) {
       n.style.setProperty("--tilt", (jitter(pi * 31 + i) * 3).toFixed(2) + "deg");
-      n.style.setProperty("--d", (i * 0.12).toFixed(2) + "s");
       n.setAttribute("aria-hidden", "true");
     });
-    function toggle() {
-      var open = page.classList.toggle("open");
-      page.setAttribute("aria-expanded", open ? "true" : "false");
-      page.querySelectorAll(".note").forEach(function (n) { n.setAttribute("aria-hidden", open ? "false" : "true"); });
-      if (!open) resetInk(page);
+
+    // One step per highlight in reading order; a highlight without a note of its own joins the one before it.
+    var steps = [];
+    page.querySelectorAll("mark").forEach(function (m) {
+      if (m.id || !steps.length) steps.push({ marks: [], notes: [] });
+      var st = steps[steps.length - 1];
+      st.marks.push(m);
+      if (m.id) [].push.apply(st.notes, [].slice.call(page.querySelectorAll('.note[data-for="' + m.id + '"]')));
+    });
+    var shown = 0;
+
+    function show(n) {
+      shown = n;
+      steps.forEach(function (st, i) {
+        var on = i < shown;
+        st.marks.forEach(function (m) { m.classList.toggle("on", on); });
+        st.notes.forEach(function (note) {
+          note.classList.toggle("on", on);
+          note.setAttribute("aria-hidden", on ? "false" : "true");
+          var path = page.querySelector('svg.ink path[data-for="' + note.getAttribute("data-for") + '"]');
+          if (path) path.classList.toggle("on", on);
+        });
+      });
+      tap.textContent = shown === 0 ? "click to start ✎" : shown < steps.length ? "click for next  " + shown + "/" + steps.length : "click to clear";
+      page.setAttribute("aria-label", "Page " + (pages.indexOf(page) + 1) + ": " + shown + " of " + steps.length +
+        " highlights shown. Click or press Enter for the next one, Shift-click or Backspace to go back.");
     }
-    page.addEventListener("click", function () {
+    function next() { show(shown < steps.length ? shown + 1 : 0); }
+    function back() { show(Math.max(0, shown - 1)); }
+
+    page.addEventListener("click", function (e) {
       var sel = window.getSelection && window.getSelection();
       if (sel && String(sel).length) return;   // selecting text is not a click on the page
-      toggle();
+      if (e.shiftKey) back(); else next();
     });
     page.addEventListener("keydown", function (e) {
-      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); }
+      if (e.key === "Enter" || e.key === " " || e.key === "ArrowRight") { e.preventDefault(); next(); }
+      else if (e.key === "Backspace" || e.key === "ArrowLeft") { e.preventDefault(); back(); }
     });
+    show(0);
   });
-
-  function resetInk(page) {
-    page.querySelectorAll("svg.ink path").forEach(function (p) {
-      p.style.strokeDashoffset = p.getAttribute("data-len");
-    });
-  }
 
   // Fit the 8.5-inch sheet to the frame's width.
   function scale() {
@@ -415,7 +441,6 @@ svg.ink path { fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-line
     var tr = tl + page.clientWidth - 190 - 180;                    // right edge of the text column
     var svg = page.querySelector("svg.ink");
     while (svg.firstChild) svg.removeChild(svg.firstChild);
-    var open = page.classList.contains("open");
     var floor = { l: 52, r: 52 };
     var notes = [].slice.call(page.querySelectorAll(".note"));
 
@@ -463,12 +488,13 @@ svg.ink path { fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-line
       var path = document.createElementNS(NS, "path");
       path.setAttribute("d", d);
       path.setAttribute("stroke", getComputedStyle(it.n).color);
-      path.style.setProperty("--d", it.n.style.getPropertyValue("--d"));
+      path.setAttribute("data-for", it.n.getAttribute("data-for"));
+      if (it.n.classList.contains("on")) path.classList.add("on");
       svg.appendChild(path);
       var len = Math.ceil(path.getTotalLength());
       path.setAttribute("data-len", len);
       path.style.strokeDasharray = len;
-      if (!open) path.style.strokeDashoffset = len;
+      path.style.strokeDashoffset = len;
     });
     var need = Math.max(floor.l, floor.r) + 70;
     page.style.minHeight = Math.max(1056, need) + "px";
