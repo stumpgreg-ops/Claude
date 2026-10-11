@@ -398,7 +398,7 @@
           id: "hl",
           sol: "G.TR.2",
           sub: "G.TR.2.1",
-          stem: "Lin uses only the right angles at B and F, the shared crease AE and AB = AF. Which criterion is she using?",
+          stem: "Folding does not change angles, so ∠AFE is a right angle like ∠ABE. Lin uses only these right angles, the shared crease AE and AB = AF. Which criterion is she using?",
           choices: [
             { letter: "A", text: "SAS" },
             { letter: "B", text: "SSA" },
@@ -619,7 +619,7 @@
           id: "sas",
           sol: "G.TR.2",
           sub: "G.TR.2.1",
-          stem: "Suppose you knew AB ≅ CD and BC ≅ DE, along with the right angles at B and D. Which criterion proves △ABC ≅ △CDE?",
+          stem: "Which criterion uses only AB ≅ CD, BC ≅ DE and the right angles at B and D to prove △ABC ≅ △CDE?",
           choices: [
             { letter: "A", text: "SAS" },
             { letter: "B", text: "HL" },
@@ -658,7 +658,7 @@
           id: "crit",
           sol: "G.TR.2",
           sub: "G.TR.2.1",
-          stem: "Which criterion proves △PBS ≅ △TBQ?",
+          stem: "Using only the given distances and the right angles at B, which criterion proves △PBS ≅ △TBQ directly?",
           choices: [
             { letter: "A", text: "HL" },
             { letter: "B", text: "SAS" },
@@ -749,7 +749,7 @@
           id: "crit",
           sol: "G.TR.2",
           sub: "G.TR.2.1",
-          stem: "Which criterion do the marks support for △ABC ≅ △ADE?",
+          stem: "Which criterion do the marks directly support for △ABC ≅ △ADE?",
           choices: [
             { letter: "A", text: "ASA" },
             { letter: "B", text: "AAS" },
@@ -944,7 +944,7 @@
           id: "crit",
           sol: "G.TR.2",
           sub: "G.TR.2.1",
-          stem: "Which criterion proves △PAD ≅ △PBE?",
+          stem: "Using PA ≅ PB, ∠APD ≅ ∠BPE and ∠PAD ≅ ∠PBE directly, which criterion proves △PAD ≅ △PBE?",
           choices: [
             { letter: "A", text: "SAS" },
             { letter: "B", text: "ASA" },
@@ -1178,7 +1178,7 @@
           id: "indirect",
           sol: "G.TR.2",
           sub: "G.TR.2.2",
-          stem: "Another birdhouse front has the same shape, with ABCD a rectangle, but PD = 13 in. and PC = 14 in. Lou assumes PA ≅ PB. How should his indirect proof end?",
+          stem: "Another birdhouse front is also a rectangle ABCD with a roof peak P above AB, but PD = 13 in. and PC = 14 in. Lou assumes PA ≅ PB. How should his indirect proof end?",
           choices: [
             { letter: "A", text: "PD ≅ PC follows, so PA ≅ PB is proved" },
             { letter: "B", text: "PD ≅ PC follows, which is false; so PA ≇ PB" },
