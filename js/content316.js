@@ -751,17 +751,16 @@
       passage:
         "<figure class=\"geo-fig\">" +
         "<svg viewBox=\"0 0 320 170\" role=\"img\" aria-label=\"A coach's eye E 1.5 meters above the ground sights the top W of a climbing wall over the top T of a 2.5-meter pole; the pole is 2 meters from the coach and the wall is 10 meters beyond the pole; a level dashed line from E meets the pole at M and the wall at N\">" +
-        "<line class=\"thin\" x1=\"14\" y1=\"146\" x2=\"306\" y2=\"146\"/><rect class=\"sh2\" x=\"300\" y=\"26\" width=\"14\" height=\"120\"/>" +
-        "<line class=\"ln\" x1=\"36\" y1=\"146\" x2=\"36\" y2=\"122\"/><line class=\"ln\" x1=\"80\" y1=\"146\" x2=\"80\" y2=\"106\"/>" +
-        "<line class=\"ac dash\" x1=\"36\" y1=\"122\" x2=\"300\" y2=\"26\"/><line class=\"thin dash\" x1=\"36\" y1=\"122\" x2=\"300\" y2=\"122\"/>" +
-        "<path class=\"thin\" d=\"M73 122 L73 115 L80 115\"/><path class=\"thin\" d=\"M293 122 L293 115 L300 115\"/><circle class=\"dt\" cx=\"36\" cy=\"122\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"80\" cy=\"106\" r=\"3\"/><circle class=\"dt\" cx=\"80\" cy=\"122\" r=\"3\"/><circle class=\"dt\" cx=\"300\" cy=\"26\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"300\" cy=\"122\" r=\"3\"/><text x=\"25\" y=\"118\" text-anchor=\"middle\">E</text><text x=\"72\" y=\"99\" text-anchor=\"middle\">T</text>" +
-        "<text x=\"70\" y=\"138\" text-anchor=\"middle\">M</text><text x=\"289\" y=\"138\" text-anchor=\"middle\">N</text>" +
-        "<text x=\"288\" y=\"20\" text-anchor=\"middle\">W</text><text class=\"sm\" x=\"17\" y=\"138\" text-anchor=\"middle\">1.5 m</text>" +
-        "<text class=\"sm\" x=\"98\" y=\"138\" text-anchor=\"middle\">2.5 m</text><text x=\"58\" y=\"165\" text-anchor=\"middle\">2 m</text>" +
-        "<text x=\"190\" y=\"165\" text-anchor=\"middle\">10 m</text><text class=\"acc\" x=\"288\" y=\"83\" text-anchor=\"middle\">?</text></svg>" +
-        "<figcaption>Not drawn to scale</figcaption></figure>" +
+        "<line class=\"thin\" x1=\"14\" y1=\"146\" x2=\"314\" y2=\"146\"/><rect class=\"sh2\" x=\"300\" y=\"23.9\" width=\"14\" height=\"122.1\"/>" +
+        "<line class=\"ln\" x1=\"36\" y1=\"146\" x2=\"36\" y2=\"122\"/><line class=\"ln\" x1=\"106\" y1=\"146\" x2=\"106\" y2=\"96\"/>" +
+        "<line class=\"ac dash\" x1=\"36\" y1=\"122\" x2=\"300\" y2=\"23.9\"/><line class=\"thin dash\" x1=\"36\" y1=\"122\" x2=\"300\" y2=\"122\"/>" +
+        "<path class=\"thin\" d=\"M99 122 L99 115 L106 115\"/><path class=\"thin\" d=\"M293 122 L293 115 L300 115\"/><circle class=\"dt\" cx=\"36\" cy=\"122\" r=\"3\"/>" +
+        "<circle class=\"dt\" cx=\"106\" cy=\"96\" r=\"3\"/><circle class=\"dt\" cx=\"106\" cy=\"122\" r=\"3\"/><circle class=\"dt\" cx=\"300\" cy=\"23.9\" r=\"3\"/>" +
+        "<circle class=\"dt\" cx=\"300\" cy=\"122\" r=\"3\"/><text x=\"25\" y=\"118\" text-anchor=\"middle\">E</text><text x=\"98\" y=\"89\" text-anchor=\"middle\">T</text>" +
+        "<text x=\"96\" y=\"138\" text-anchor=\"middle\">M</text><text x=\"289\" y=\"138\" text-anchor=\"middle\">N</text>" +
+        "<text x=\"288\" y=\"17.9\" text-anchor=\"middle\">W</text><text class=\"sm\" x=\"17\" y=\"138\" text-anchor=\"middle\">1.5 m</text>" +
+        "<text x=\"71\" y=\"165\" text-anchor=\"middle\">2 m</text><text x=\"203\" y=\"165\" text-anchor=\"middle\">10 m</text>" +
+        "<text class=\"acc\" x=\"288\" y=\"83\" text-anchor=\"middle\">?</text></svg><figcaption>Not drawn to scale</figcaption></figure>" +
         "<p class=\"geo-given\">Coach Ruiz's eye <strong>E</strong> is 1.5 m above the ground. She sights the top <strong>W</strong> of the climbing wall over the top <strong>T</strong> of a 2.5-m pole. The pole is 2 m from her, and the wall is 10 m beyond the pole. The pole and the wall are vertical. The dashed level line from E meets the pole at <strong>M</strong> and the wall at <strong>N</strong>.</p>",
       claims: [
         {
@@ -854,14 +853,14 @@
       level: 2,
       passage:
         "<figure class=\"geo-fig\">" +
-        "<svg viewBox=\"0 0 320 160\" role=\"img\" aria-label=\"Side views of three right-triangle ramps: ramp P rises 2 feet over a run of 5 feet, ramp Q rises 3 feet over 7.5 feet, ramp R rises 4 feet over 7 feet\">" +
-        "<polygon class=\"sh2\" points=\"12,122 72,122 72,98\"/><path class=\"thin\" d=\"M65 122 L65 115 L72 115\"/><text x=\"42\" y=\"140\" text-anchor=\"middle\">5</text>" +
-        "<text x=\"80\" y=\"115\" text-anchor=\"middle\">2</text><text class=\"sm\" x=\"42\" y=\"157\" text-anchor=\"middle\">Ramp P</text>" +
-        "<polygon class=\"sh2\" points=\"100,122 190,122 190,86\"/><path class=\"thin\" d=\"M183 122 L183 115 L190 115\"/>" +
-        "<text x=\"145\" y=\"140\" text-anchor=\"middle\">7.5</text><text x=\"198\" y=\"109\" text-anchor=\"middle\">3</text>" +
-        "<text class=\"sm\" x=\"145\" y=\"157\" text-anchor=\"middle\">Ramp Q</text><polygon class=\"sh2\" points=\"216,122 300,122 300,74\"/>" +
-        "<path class=\"thin\" d=\"M293 122 L293 115 L300 115\"/><text x=\"258\" y=\"140\" text-anchor=\"middle\">7</text>" +
-        "<text x=\"308\" y=\"103\" text-anchor=\"middle\">4</text><text class=\"sm\" x=\"258\" y=\"157\" text-anchor=\"middle\">Ramp R</text></svg></figure>" +
+        "<svg viewBox=\"0 0 320 120\" role=\"img\" aria-label=\"Side views of three right-triangle ramps: ramp P rises 2 feet over a run of 5 feet, ramp Q rises 3 feet over 7.5 feet, ramp R rises 4 feet over 7 feet\">" +
+        "<polygon class=\"sh2\" points=\"10,72 75,72 75,46\"/><path class=\"thin\" d=\"M68 72 L68 65 L75 65\"/><text x=\"42.5\" y=\"90\" text-anchor=\"middle\">5</text>" +
+        "<text x=\"82\" y=\"64\" text-anchor=\"middle\">2</text><text class=\"sm\" x=\"42.5\" y=\"107\" text-anchor=\"middle\">Ramp P</text>" +
+        "<polygon class=\"sh2\" points=\"96,72 193.5,72 193.5,33\"/><path class=\"thin\" d=\"M186.5 72 L186.5 65 L193.5 65\"/>" +
+        "<text x=\"144.8\" y=\"90\" text-anchor=\"middle\">7.5</text><text x=\"200.5\" y=\"57.5\" text-anchor=\"middle\">3</text>" +
+        "<text class=\"sm\" x=\"144.8\" y=\"107\" text-anchor=\"middle\">Ramp Q</text><polygon class=\"sh2\" points=\"214,72 305,72 305,20\"/>" +
+        "<path class=\"thin\" d=\"M298 72 L298 65 L305 65\"/><text x=\"259.5\" y=\"90\" text-anchor=\"middle\">7</text>" +
+        "<text x=\"312\" y=\"51\" text-anchor=\"middle\">4</text><text class=\"sm\" x=\"259.5\" y=\"107\" text-anchor=\"middle\">Ramp R</text></svg></figure>" +
         "<p class=\"geo-given\">The side view of each skate-park ramp is a right triangle. Ramp <strong>P</strong>: rise 2 ft, run 5 ft. Ramp <strong>Q</strong>: rise 3 ft, run 7.5 ft. Ramp <strong>R</strong>: rise 4 ft, run 7 ft.</p>",
       claims: [
         {

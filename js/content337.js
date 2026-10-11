@@ -254,10 +254,10 @@
           id: "planter",
           sol: "G.DF.2",
           sub: "G.DF.2.3",
-          stem: "A planter near the entrance is a right triangle with legs of 10 m and 14 m. Is it similar to the island?",
+          stem: "A planter near the entrance is a right triangle with legs of 10 m and 14 m. Is it similar to the island? Choose the answer with the correct reason.",
           choices: [
             { letter: "A", text: "Yes: each leg is 2 m shorter." },
-            { letter: "B", text: "No: its longest side is not 20 m." },
+            { letter: "B", text: "No: its longest side would have to be 20 m." },
             { letter: "C", text: "No: 10/12 ≠ 14/16." },
             { letter: "D", text: "Yes: both are right triangles." }
           ],
@@ -357,7 +357,7 @@
           id: "offer",
           sol: "G.DF.2",
           sub: "G.DF.2.3",
-          stem: "A company offers a square-pyramid skylight with a 15 ft base edge and a 12 ft slant height. Is it similar to this skylight?",
+          stem: "A company offers a square-pyramid skylight with a 15 ft base edge and a 12 ft slant height. Is it similar to this skylight? Choose the answer with the correct reason.",
           choices: [
             { letter: "A", text: "No: its height would have to be 8 ft." },
             { letter: "B", text: "Yes: both are square pyramids." },
@@ -614,11 +614,11 @@
           id: "diving",
           sol: "G.DF.2",
           sub: "G.DF.2.3",
-          stem: "A diving pool is 20 m long, 8 m wide and 5 m deep. Is it similar to the swim-team pool?",
+          stem: "A diving pool is 20 m long, 8 m wide and 5 m deep. Is it similar to the swim-team pool? Choose the answer with the correct reason.",
           choices: [
             { letter: "A", text: "No: 20/25 = 8/10, but 5/2 is not 0.8." },
             { letter: "B", text: "Yes: both pools are rectangular prisms." },
-            { letter: "C", text: "No: it holds more water than the swim-team pool." },
+            { letter: "C", text: "No: a similar pool would have to hold 500 m³." },
             { letter: "D", text: "Yes: its length and width ratios are both 0.8." }
           ],
           correct: "A"
@@ -974,7 +974,7 @@
           id: "coaster",
           sol: "G.DF.2",
           sub: "G.DF.2.3",
-          stem: "A puck-shaped coaster is 4 in across and 1.5 in thick. Is it similar to the puck?",
+          stem: "A puck-shaped coaster is 4 in across and 1.5 in thick. Is it similar to the puck? Choose the answer with the correct reason.",
           choices: [
             { letter: "A", text: "Yes: both measures are larger." },
             { letter: "B", text: "No: it would have to be 1 in thick." },

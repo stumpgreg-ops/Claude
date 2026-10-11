@@ -622,7 +622,7 @@
       blurb: "A kite drawn on a video game's pixel grid.",
       level: 2,
       passage:
-        "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 164\" role=\"img\" aria-label=\"Coordinate grid from 0 to 7 on both axes with shaded kite ABCD: A(1, 6), B(2, 3), C(6, 1), D(4, 5), and its dashed diagonals AC and BD\">" +
+        "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 164\" role=\"img\" aria-label=\"Coordinate grid from 0 to 7 on both axes with shaded quadrilateral ABCD: A(1, 6), B(2, 3), C(6, 1), D(4, 5), and its dashed diagonals AC and BD\">" +
         "<line class=\"gr\" x1=\"96\" y1=\"146\" x2=\"96\" y2=\"20\"/><line class=\"gr\" x1=\"114\" y1=\"146\" x2=\"114\" y2=\"20\"/><line class=\"gr\" x1=\"132\" y1=\"146\" x2=\"132\" y2=\"20\"/>" +
         "<line class=\"gr\" x1=\"150\" y1=\"146\" x2=\"150\" y2=\"20\"/><line class=\"gr\" x1=\"168\" y1=\"146\" x2=\"168\" y2=\"20\"/><line class=\"gr\" x1=\"186\" y1=\"146\" x2=\"186\" y2=\"20\"/>" +
         "<line class=\"gr\" x1=\"204\" y1=\"146\" x2=\"204\" y2=\"20\"/><line class=\"gr\" x1=\"222\" y1=\"146\" x2=\"222\" y2=\"20\"/><line class=\"gr\" x1=\"96\" y1=\"146\" x2=\"222\" y2=\"146\"/>" +

@@ -8,7 +8,9 @@ var { chromium } = require("/opt/node22/lib/node_modules/playwright");
 var root = path.join(__dirname, ".."), out = path.join(__dirname, "shots", "geo");
 fs.mkdirSync(out, { recursive: true });
 var args = process.argv.slice(2), only = null, files = [];
-for (var i = 0; i < args.length; i++) { if (args[i] === "--id") only = args[++i]; else files.push(path.basename(args[i])); }
+/* --no-key: the questions without their answers marked (for a blind review), saved as <pack-id>.nokey.png */
+var noKey = false;
+for (var i = 0; i < args.length; i++) { if (args[i] === "--id") only = args[++i]; else if (args[i] === "--no-key") noKey = true; else files.push(path.basename(args[i])); }
 if (!files.length) files = fs.readdirSync(path.join(root, "js")).filter(function (f) { return /^content[23]\d\d\.js$/.test(f); });
 var sandbox = { window: {}, console: console }; sandbox.global = sandbox.window;
 vm.runInNewContext(fs.readFileSync(path.join(root, "js", "content.js"), "utf8"), sandbox);
@@ -30,7 +32,7 @@ var srv = http.createServer(function (req, res) {
       '#qs{width:420px;color:var(--ink);font:14px/1.35 system-ui}#qs li{margin:0 0 8px}#qs .k{color:var(--gold);font-weight:700}' +
       '</style></head><body><div class="col"><div class="lab">Side panel (340 px)</div><div id="side"><div id="eoc-passage" class="passage"></div></div></div>' +
       '<div class="col"><div class="lab">Reading pop-up</div><div id="pop"><div class="read-scroll"><div id="read-passage" class="passage"></div></div></div></div>' +
-      '<div class="col"><div class="lab">Questions (key in gold)</div><ol id="qs"></ol></div></body></html>');
+      '<div class="col"><div class="lab">Questions' + (noKey ? '' : ' (key in gold)') + '</div><ol id="qs"></ol></div></body></html>');
     return;
   }
   var f = path.join(root, decodeURIComponent(u));
@@ -46,14 +48,15 @@ var srv = http.createServer(function (req, res) {
   await page.goto("http://127.0.0.1:" + srv.address().port + "/__geo.html", { waitUntil: "load" });
   var bad = 0;
   for (var p of packs) {
-    var res = await page.evaluate(function (p) {
+    var res = await page.evaluate(function (arg) {
+      var p = arg.p, noKey = arg.noKey;
       document.getElementById("eoc-passage").innerHTML = p.passage;
       document.getElementById("read-passage").innerHTML = p.passage;
       var qs = document.getElementById("qs"); qs.innerHTML = "";
       p.claims.forEach(function (c) {
         var li = document.createElement("li"), keys = [].concat(c.correct);
         li.appendChild(document.createTextNode(c.stem + " [" + c.sub + "]"));
-        c.choices.forEach(function (ch) { var d = document.createElement("div"); d.textContent = ch.letter + ". " + ch.text; if (keys.indexOf(ch.letter) !== -1) d.className = "k"; li.appendChild(d); });
+        c.choices.forEach(function (ch) { var d = document.createElement("div"); d.textContent = ch.letter + ". " + ch.text; if (!noKey && keys.indexOf(ch.letter) !== -1) d.className = "k"; li.appendChild(d); });
         qs.appendChild(li);
       });
       /* labels that overlap or leave the figure, measured in the larger (pop-up) copy */
@@ -71,9 +74,9 @@ var srv = http.createServer(function (req, res) {
       });
       var side = document.querySelector("#eoc-passage svg"), sr = side && side.getBoundingClientRect();
       return { issues: issues, sideH: sr ? Math.round(sr.height) : 0 };
-    }, p);
+    }, { p: p, noKey: noKey });
     await page.waitForTimeout(50);
-    await page.screenshot({ path: path.join(out, p.id + ".png"), fullPage: true });
+    await page.screenshot({ path: path.join(out, p.id + (noKey ? ".nokey" : "") + ".png"), fullPage: true });
     var line = (res.issues.length ? "FAIL " : "ok   ") + p.id + (res.sideH ? "  (figure " + res.sideH + " px tall in the side panel)" : "  (no figure)");
     console.log(line); res.issues.forEach(function (s) { console.log("       " + s); });
     if (res.issues.length) bad++;
