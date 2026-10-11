@@ -210,15 +210,32 @@ var srv = http.createServer(function (req, res) {
     await page.waitForSelector("#build-overlay:not(.hidden)", { timeout: 5000 });
     if (tn === 5) { await page.waitForSelector(".build-theme"); await page.click(".build-theme:nth-child(1)"); await page.click("#build-overlay .btn.primary"); }
     await page.waitForSelector(".build-options .build-opt"); await page.click(".build-options .build-opt:nth-child(1)"); await page.click("#build-overlay .btn.primary");
-    await page.waitForSelector(".build-styles .build-opt"); await page.click(".build-styles .build-opt:nth-child(1)"); await page.click("#build-overlay .btn.primary");
+    /* a 3D town house has no coloured parts, so (like the castle's houses) it skips the style step */
+    await page.waitForSelector(".build-styles:not(.hidden) .build-opt, .build-note:not(.hidden)");
+    if (await page.isVisible(".build-styles:not(.hidden) .build-opt")) { await page.click(".build-styles .build-opt:nth-child(1)"); await page.click("#build-overlay .btn.primary"); }
     await page.waitForSelector(".build-note:not(.hidden)"); await page.click("#build-overlay .btn.primary"); await page.waitForSelector(".build-note:not(.hidden)");
     await page.click("#build-overlay .btn.primary"); await page.waitForFunction(function () { return window.__done === true; });
   }
   var townSt = await page.evaluate(function () { return SolBuild.state(); });
   check(townSt.theme === "village" && townSt.buildings === 3, "town theme still builds: " + JSON.stringify({ theme: townSt.theme, b: townSt.buildings }));
   await shot("09c-town");
-  /* v5.7.9: dragging a town piece holds the view still (the ground used to slide under a lone house), the piece
-     lands where it is let go, and Turn mirrors a town picture (two ways to face) */
+  /* Earth Science 1.0: the Town is built from the castle's 3D kit (tools/make-town-kit.js): every castle piece but the keep
+     is offered with the same id and model, and a town draws in 3D with every model it needs loaded */
+  var kitSame = await page.evaluate(function () {
+    return fetch("assets/build/pieces.json").then(function (r) { return r.json(); }).then(function (P) {
+      function sig(p) { return JSON.stringify({ parts: p.parts || null, auto: p.auto || null, grow: p.grow || null, cells: p.cells, price: p.price }); }
+      var c = {}, v = {}, diff = [];
+      P.pieces.forEach(function (p) { if (p.role === "core") return; (p.theme === "castle" ? c : p.theme === "village" ? v : {})[p.id] = sig(p); });
+      Object.keys(c).forEach(function (id) { if (v[id] !== c[id]) diff.push(id); });
+      Object.keys(v).forEach(function (id) { if (!(id in c)) diff.push(id); });
+      return { kit: !!P.themes.village.kit, castle: Object.keys(c).length, town: Object.keys(v).length, diff: diff,
+        cores: P.pieces.filter(function (p) { return p.theme === "village" && p.role === "core" && p.grow; }).length };
+    });
+  });
+  check(kitSame.kit && kitSame.town === kitSame.castle && kitSame.town > 150 && !kitSame.diff.length && kitSame.cores === 3,
+    "the Town offers exactly the castle's 3D pieces (and three growing houses): " + JSON.stringify(kitSame));
+  /* v5.7.9: dragging a town piece holds the view still (the ground used to slide under a lone house) and the piece
+     lands where it is let go */
   await page.evaluate(function () { SolBuild.showGallery(); });
   await page.waitForSelector("#build-overlay:not(.hidden)"); await page.waitForTimeout(600);
   var tA = await page.evaluate(function () { return { pk: SolBuild._pickScreen(0), g: SolBuild._probe(0, 0, 0) }; });
@@ -226,11 +243,25 @@ var srv = http.createServer(function (req, res) {
   for (var tk = 1; tk <= 8; tk++) { await page.mouse.move(tA.pk.x - tk * 22, tA.pk.y - 30 + tk * 11); await page.waitForTimeout(25); }
   var tMid = await page.evaluate(function () { return SolBuild._probe(0, 0, 0); });
   await page.mouse.up(); await page.waitForTimeout(150);
+  var town3d = await page.evaluate(function () { return { probe: SolBuild._probe(0, 0, 0), loads: SolBuild._loads3d() }; });
+  check(town3d.probe && town3d.probe.use3d && town3d.loads && town3d.loads.models === "ok" && town3d.loads.failed === 0 && town3d.loads.loaded === town3d.loads.total && town3d.loads.total > 2,
+    "the town draws in 3D and every model it needs loaded: " + JSON.stringify(town3d.loads));
+  await shot("09d-town-3d");
   var tB = await page.evaluate(function () { var o = { pk: SolBuild._pickScreen(0) }; SolBuild._select(0); o.r1 = SolBuild._turn(); o.note = document.querySelector(".build-note").textContent; o.r2 = SolBuild._turn(); return o; });
   var tMoved = tB.pk.cx !== tA.pk.cx || tB.pk.cy !== tA.pk.cy;
   check(Math.abs(tMid.x2 - tA.g.x2) < 1 && Math.abs(tMid.y2 - tA.g.y2) < 1, "town: the ground holds still while a piece is dragged");
   check(!tMoved || Math.hypot(tB.pk.x - (tA.pk.x - 176), tB.pk.y - (tA.pk.y + 88)) < 60, "town: a dragged piece lands where it is let go: " + JSON.stringify({ moved: tMoved, from: [Math.round(tA.pk.x), Math.round(tA.pk.y)], to: [Math.round(tB.pk.x), Math.round(tB.pk.y)] }));
-  check(tB.r1 === 1 && tB.r2 === 0 && /faces the other way/.test(tB.note), "town: Turn flips a town building to face the other way and back: " + JSON.stringify({ r1: tB.r1, r2: tB.r2 }));
+  check(tB.r1 === 1 && tB.r2 === 2 && /quarter turn/.test(tB.note), "town: Turn gives a 3D town building a quarter turn, like the castle's: " + JSON.stringify({ r1: tB.r1, r2: tB.r2 }));
+  /* the town's ring at its wall level (8 buildings) is a wooden fence with one gate, not the castle's curtain wall */
+  var ring = await page.evaluate(function () {
+    var ids = ["k-home-a", "k-market", "c-cottage", "k-blacksmith", "k-inn", "k-windmill", "k-church", "k-townhall"], i = 0;
+    while (!SolBuild.state().walls && i < ids.length) SolBuild._place(ids[i++]);
+    var s = JSON.parse(localStorage.getItem("afterHours.v1.build")), auto = {};
+    s.picks.forEach(function (p) { if (p.src === "auto") auto[p.piece] = (auto[p.piece] || 0) + 1; });
+    return { walls: SolBuild.state().walls, buildings: SolBuild.state().buildings, auto: auto, note: document.querySelector(".build-note").textContent };
+  });
+  check(ring.walls && ring.buildings >= 8 && ring.auto["c-fence"] > 4 && ring.auto["fence-gate"] === 1 && !ring.auto.wall && /fence went up around your town/.test(ring.note),
+    "town: at 8 buildings a wooden fence with a gate goes up around it: " + JSON.stringify(ring));
   await page.evaluate(function () { SolBuild.close(); });
   await page.evaluate(function () { SolBuild.importCode(localStorage.getItem("smoke.castleCode")); });
   await page.reload({ waitUntil: "load" }); await page.waitForTimeout(800);
