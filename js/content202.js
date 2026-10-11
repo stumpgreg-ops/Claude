@@ -939,7 +939,7 @@
           id: "criterion",
           sol: "G.TR.3",
           sub: "G.TR.3.1",
-          stem: "Which criterion shows that △ABC ∼ △DEF?",
+          stem: "Which criterion shows that the two triangles are similar?",
           choices: [
             { letter: "A", text: "SSS∼" },
             { letter: "B", text: "AA" },
@@ -965,7 +965,7 @@
           id: "scale",
           sol: "G.TR.3",
           sub: "G.TR.3.3",
-          stem: "What is the scale factor from △ABC to △DEF?",
+          stem: "What is the scale factor from the smaller triangle to the larger triangle?",
           choices: [
             { letter: "A", text: "2/3" },
             { letter: "B", text: "3" },
@@ -1044,7 +1044,7 @@
           id: "why",
           sol: "G.TR.3",
           sub: "G.TR.3.1",
-          stem: "Why is △FGH ∼ △PQR?",
+          stem: "Why is the flagpole's triangle similar to the student's triangle?",
           choices: [
             { letter: "A", text: "SSS∼: all three side lengths are known" },
             { letter: "B", text: "SAS∼: GH/QR = 18/4 with the right angles" },
@@ -1070,7 +1070,7 @@
           id: "scale",
           sol: "G.TR.3",
           sub: "G.TR.3.3",
-          stem: "What scale factor maps △PQR onto △FGH?",
+          stem: "What scale factor maps the student's triangle onto the flagpole's triangle?",
           choices: [
             { letter: "A", text: "2/9" },
             { letter: "B", text: "4.5" },
@@ -1248,7 +1248,7 @@
           id: "criterion",
           sol: "G.TR.3",
           sub: "G.TR.3.1",
-          stem: "Which criterion shows that △AEB ∼ △DEC?",
+          stem: "Which criterion shows that the two triangles that meet at E are similar?",
           choices: [
             { letter: "A", text: "SAS∼" },
             { letter: "B", text: "AA" },
@@ -1313,7 +1313,7 @@
           id: "parallel",
           sol: "G.TR.3",
           sub: "G.TR.3.3",
-          stem: "Because △AEB ∼ △DEC, ∠A ≅ ∠D. What else must be true?",
+          stem: "The two triangles that meet at E are similar. What else must be true?",
           choices: [
             { letter: "A", text: "AB ∥ DC" },
             { letter: "B", text: "AB ≅ DC" },

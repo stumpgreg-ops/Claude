@@ -194,7 +194,7 @@
           id: "scale",
           sol: "G.TR.3",
           sub: "G.TR.3.3",
-          stem: "What is the scale factor from △EBM to △TPM?",
+          stem: "What is the scale factor from Nia's triangle to the pole's triangle?",
           choices: [
             { letter: "A", text: "2/15" },
             { letter: "B", text: "7.5" },
@@ -207,7 +207,7 @@
           id: "notNeeded",
           sol: "G.TR.3",
           sub: "G.TR.3.2",
-          stem: "Which fact is NOT needed to prove △EBM ∼ △TPM?",
+          stem: "Which fact is NOT needed to prove that Nia's triangle is similar to the pole's triangle?",
           choices: [
             { letter: "A", text: "EB is perpendicular to the ground" },
             { letter: "B", text: "TP is perpendicular to the ground" },
@@ -729,7 +729,7 @@
           id: "scale",
           sol: "G.TR.3",
           sub: "G.TR.3.3",
-          stem: "What is the scale factor from △SGH to △SQP?",
+          stem: "What is the scale factor from the player's triangle to the pole's triangle?",
           choices: [
             { letter: "A", text: "3" },
             { letter: "B", text: "4" },
@@ -832,7 +832,7 @@
           id: "scale",
           sol: "G.TR.3",
           sub: "G.TR.3.3",
-          stem: "What is the scale factor from △EMT to △ENW?",
+          stem: "What is the scale factor from the pole's sight triangle to the wall's sight triangle?",
           choices: [
             { letter: "A", text: "5" },
             { letter: "B", text: "1/6" },

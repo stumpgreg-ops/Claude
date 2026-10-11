@@ -1018,7 +1018,7 @@
       blurb: "A hiker's turns around a six-sided trail.",
       level: 2,
       passage:
-        "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 170\" role=\"img\" aria-label=\"A hiking trail around a meadow: the convex hexagon ABCDEF. At each corner except F, a dashed line continues the leg just walked, and a gold arc marks the turn to the next leg: 50 degrees at A, 75 at B, 40 at C, 65 at D and 70 at E\"><polygon class=\"sh2\" points=\"112,136 182,136 192.4,97.4 167.9,45 111.9,45 88.9,108.4\"/><circle class=\"dt\" cx=\"112\" cy=\"136\" r=\"3\"/><line class=\"thin dash\" x1=\"112\" y1=\"136\" x2=\"128.7\" y2=\"155.9\"/><path class=\"ac\" d=\"M127 136 A15 15 0 0 1 121.6 147.5\"/><text class=\"sm\" x=\"140.1\" y=\"153.1\" text-anchor=\"middle\">50°</text><text x=\"101.3\" y=\"150\" text-anchor=\"middle\">A</text><circle class=\"dt\" cx=\"182\" cy=\"136\" r=\"3\"/><line class=\"thin dash\" x1=\"182\" y1=\"136\" x2=\"208\" y2=\"136\"/><path class=\"ac\" d=\"M185.9 121.5 A15 15 0 0 1 197 136\"/><text class=\"sm\" x=\"206.6\" y=\"121.1\" text-anchor=\"middle\">75°</text><text x=\"182\" y=\"155\" text-anchor=\"middle\">B</text><circle class=\"dt\" cx=\"192.4\" cy=\"97.4\" r=\"3\"/><line class=\"thin dash\" x1=\"192.4\" y1=\"97.4\" x2=\"199.1\" y2=\"72.2\"/><path class=\"ac\" d=\"M186 83.8 A15 15 0 0 1 196.2 82.9\"/><text class=\"sm\" x=\"189.7\" y=\"70.5\" text-anchor=\"middle\">40°</text><text x=\"205.9\" y=\"106\" text-anchor=\"middle\">C</text><circle class=\"dt\" cx=\"167.9\" cy=\"45\" r=\"3\"/><line class=\"thin dash\" x1=\"167.9\" y1=\"45\" x2=\"157\" y2=\"21.4\"/><path class=\"ac\" d=\"M152.9 45 A15 15 0 0 1 161.6 31.4\"/><text class=\"sm\" x=\"141.8\" y=\"32.4\" text-anchor=\"middle\">65°</text><text x=\"180.6\" y=\"44.1\" text-anchor=\"middle\">D</text><circle class=\"dt\" cx=\"111.9\" cy=\"45\" r=\"3\"/><line class=\"thin dash\" x1=\"111.9\" y1=\"45\" x2=\"85.9\" y2=\"45\"/><path class=\"ac\" d=\"M106.8 59.1 A15 15 0 0 1 96.9 45\"/><text class=\"sm\" x=\"86.5\" y=\"66.8\" text-anchor=\"middle\">70°</text><text x=\"111.9\" y=\"36\" text-anchor=\"middle\">E</text><circle class=\"dt\" cx=\"88.9\" cy=\"108.4\" r=\"3\"/><text x=\"75.7\" y=\"108.6\" text-anchor=\"middle\">F</text></svg></figure><p class=\"geo-given\">A trail around a meadow is the convex hexagon ABCDEF. A hiker walks it once, turning left at each corner. The gold arcs show her turns (exterior angles) at A, B, C, D and E. The turn at F is not shown.</p>",
+        "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 170\" role=\"img\" aria-label=\"A hiking trail around a meadow: the convex hexagon ABCDEF. At each corner except F, a dashed line continues the leg just walked, and a gold arc marks the turn to the next leg: 55 degrees at A, 75 at B, 50 at C, 60 at D and 65 at E\"><polygon class=\"sh2\" points=\"107,131 227,131 238.9,86.6 209.6,44.7 100,54.3 84.1,98.2\"/><circle class=\"dt\" cx=\"107\" cy=\"131\" r=\"3\"/><line class=\"thin dash\" x1=\"107\" y1=\"131\" x2=\"124.2\" y2=\"155.6\"/><path class=\"ac\" d=\"M121 131 A14 14 0 0 1 115 142.5\"/><text class=\"sm\" x=\"136.3\" y=\"150.2\" text-anchor=\"middle\">55°</text><text x=\"95.5\" y=\"144\" text-anchor=\"middle\">A</text><circle class=\"dt\" cx=\"227\" cy=\"131\" r=\"3\"/><line class=\"thin dash\" x1=\"227\" y1=\"131\" x2=\"257\" y2=\"131\"/><path class=\"ac\" d=\"M230.6 117.5 A14 14 0 0 1 241 131\"/><text class=\"sm\" x=\"248.2\" y=\"118.7\" text-anchor=\"middle\">75°</text><text x=\"227\" y=\"150\" text-anchor=\"middle\">B</text><circle class=\"dt\" cx=\"238.9\" cy=\"86.6\" r=\"3\"/><line class=\"thin dash\" x1=\"238.9\" y1=\"86.6\" x2=\"246.7\" y2=\"57.6\"/><path class=\"ac\" d=\"M230.9 75.1 A14 14 0 0 1 242.5 73\"/><text class=\"sm\" x=\"232.8\" y=\"55.7\" text-anchor=\"middle\">50°</text><text x=\"252.4\" y=\"95.2\" text-anchor=\"middle\">C</text><circle class=\"dt\" cx=\"209.6\" cy=\"44.7\" r=\"3\"/><line class=\"thin dash\" x1=\"209.6\" y1=\"44.7\" x2=\"192.4\" y2=\"20.2\"/><path class=\"ac\" d=\"M195.7 46 A14 14 0 0 1 201.6 33.3\"/><text class=\"sm\" x=\"181.5\" y=\"35.6\" text-anchor=\"middle\">60°</text><text x=\"221.1\" y=\"41.7\" text-anchor=\"middle\">D</text><circle class=\"dt\" cx=\"100\" cy=\"54.3\" r=\"3\"/><line class=\"thin dash\" x1=\"100\" y1=\"54.3\" x2=\"70.2\" y2=\"56.9\"/><path class=\"ac\" d=\"M95.2 67.5 A14 14 0 0 1 86.1 55.5\"/><text class=\"sm\" x=\"76.8\" y=\"76.2\" text-anchor=\"middle\">65°</text><text x=\"98.8\" y=\"45.4\" text-anchor=\"middle\">E</text><circle class=\"dt\" cx=\"84.1\" cy=\"98.2\" r=\"3\"/><text x=\"70.9\" y=\"98.4\" text-anchor=\"middle\">F</text></svg></figure><p class=\"geo-given\">A trail around a meadow is the convex hexagon ABCDEF. A hiker walks it once, turning left at each corner. The gold arcs show her turns (exterior angles) at A, B, C, D and E. The turn at F is not shown.</p>",
       claims: [
         {
           id: "F",
@@ -1026,10 +1026,10 @@
           sub: "G.PC.2.1",
           stem: "How many degrees does the hiker turn at F?",
           choices: [
-            { letter: "A", text: "60°" },
-            { letter: "B", text: "420°" },
-            { letter: "C", text: "240°" },
-            { letter: "D", text: "120°" }
+            { letter: "A", text: "55°" },
+            { letter: "B", text: "415°" },
+            { letter: "C", text: "235°" },
+            { letter: "D", text: "125°" }
           ],
           correct: "A"
         },
@@ -1039,10 +1039,10 @@
           sub: "G.PC.2.1",
           stem: "What is the angle inside the trail at corner C?",
           choices: [
-            { letter: "A", text: "40°" },
-            { letter: "B", text: "320°" },
-            { letter: "C", text: "140°" },
-            { letter: "D", text: "220°" }
+            { letter: "A", text: "50°" },
+            { letter: "B", text: "310°" },
+            { letter: "C", text: "130°" },
+            { letter: "D", text: "230°" }
           ],
           correct: "C"
         },

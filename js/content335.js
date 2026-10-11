@@ -986,7 +986,7 @@
           id: "loads",
           sol: "G.DF.1",
           sub: "G.DF.1.3",
-          stem: "A depot must deliver 100,000 L of fuel. How many full loads of this truck does it take?",
+          stem: "A depot must deliver 100,000 L of fuel. The truck carries at most one full tank per trip. How many trips does it take?",
           choices: [
             { letter: "A", text: "3" },
             { letter: "B", text: "2" },
@@ -1292,7 +1292,7 @@
       blurb: "A concrete pier with rounded ends stands in the river.",
       level: 3,
       passage:
-        "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 168\" role=\"img\" aria-label=\"A concrete bridge pier drawn as a solid standing 11 m tall. Its top is a 10 m long rectangle with a half circle on each end, 5 m across. Lines mark where the flat sides meet the rounded ends. The hidden back of the bottom edge is dashed.\"><path class=\"sh2\" d=\"M85 40.7 V136 A25 12.5 0 0 0 110 148.5 H210 A25 12.5 0 0 0 235 136 V40.7 Z\"/><path class=\"ln\" d=\"M110 28.2 H210 A25 12.5 0 0 1 210 53.2 H110 A25 12.5 0 0 1 110 28.2 Z\"/><path class=\"ln\" d=\"M85 40.7 V136 A25 12.5 0 0 0 110 148.5 H210 A25 12.5 0 0 0 235 136 V40.7\"/><path class=\"ln dash\" d=\"M85 136 A25 12.5 0 0 1 110 123.5 H210 A25 12.5 0 0 1 235 136\"/><path class=\"thin\" d=\"M110 53.2 V148.5 M210 53.2 V148.5\"/><line class=\"thin\" x1=\"210\" y1=\"28.2\" x2=\"210\" y2=\"53.2\"/><text x=\"242\" y=\"45.7\">5 m</text><path class=\"thin\" d=\"M73 40.7 V136 M68 40.7 H78 M68 136 H78\"/><text x=\"65\" y=\"93.4\" text-anchor=\"end\">11 m</text><text x=\"160\" y=\"165.5\" text-anchor=\"middle\">10 m</text></svg></figure><p class=\"geo-given\">A concrete bridge pier stands on a riverbed. Every level cross section of the pier is a 10 m by 5 m rectangle with a half circle on each 5 m end, and the pier is 11 m tall.</p>",
+        "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 170\" role=\"img\" aria-label=\"A concrete bridge pier drawn as a solid standing 11 m tall. Its top is a 10 m long rectangle with a half circle on each end, 5 m across. Lines mark where the flat sides meet the rounded ends. The hidden back of the bottom edge is dashed.\"><path class=\"sh2\" d=\"M85 40.7 V136 A25 12.5 0 0 0 110 148.5 H210 A25 12.5 0 0 0 235 136 V40.7 Z\"/><path class=\"ln\" d=\"M110 28.2 H210 A25 12.5 0 0 1 210 53.2 H110 A25 12.5 0 0 1 110 28.2 Z\"/><path class=\"ln\" d=\"M85 40.7 V136 A25 12.5 0 0 0 110 148.5 H210 A25 12.5 0 0 0 235 136 V40.7\"/><path class=\"ln dash\" d=\"M85 136 A25 12.5 0 0 1 110 123.5 H210 A25 12.5 0 0 1 235 136\"/><path class=\"thin\" d=\"M110 53.2 V148.5 M210 53.2 V148.5\"/><line class=\"thin\" x1=\"210\" y1=\"28.2\" x2=\"210\" y2=\"53.2\"/><text x=\"242\" y=\"45.7\">5 m</text><path class=\"thin\" d=\"M73 40.7 V136 M68 40.7 H78 M68 136 H78\"/><text x=\"65\" y=\"93.4\" text-anchor=\"end\">11 m</text><path class=\"thin\" d=\"M110 153 H210 M110 149.5 V156.5 M210 149.5 V156.5\"/><text x=\"160\" y=\"167\" text-anchor=\"middle\">10 m</text></svg></figure><p class=\"geo-given\">A concrete bridge pier stands on a riverbed. Every level cross section of the pier is a 10 m by 5 m rectangle with a half circle on each 5 m end, and the pier is 11 m tall.</p>",
       claims: [
         {
           id: "volume",
@@ -1324,7 +1324,7 @@
           id: "endcut",
           sol: "G.DF.1",
           sub: "G.DF.1.1",
-          stem: "A vertical plane parallel to the 5 m ends cuts through a rounded end, 1.8 m from the tip. What is the cross section?",
+          stem: "A vertical plane perpendicular to the pier's length cuts through a rounded end, 1.8 m from the tip. What is the cross section?",
           choices: [
             { letter: "A", text: "a rectangle 5 m by 11 m" },
             { letter: "B", text: "a rectangle 2.4 m by 11 m" },
