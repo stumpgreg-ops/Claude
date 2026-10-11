@@ -546,15 +546,15 @@
       passage:
         "<figure class=\"geo-fig\">" +
         "<svg viewBox=\"0 0 320 158\" role=\"img\" aria-label=\"Two triangles on a game map: triangle JKL with JK 50, KL 80 and JL 60 meters, and triangle PQR with PQ 90, QR 75 and PR 120 meters, drawn in a different position\">" +
-        "<polygon class=\"sh\" points=\"62.7,87.4 18,138 126,138\"/><polygon class=\"sh2\" points=\"152,138 273.5,138 278.6,36.9\"/>" +
-        "<circle class=\"dt\" cx=\"62.7\" cy=\"87.4\" r=\"3\"/><circle class=\"dt\" cx=\"18\" cy=\"138\" r=\"3\"/><circle class=\"dt\" cx=\"126\" cy=\"138\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"152\" cy=\"138\" r=\"3\"/><circle class=\"dt\" cx=\"273.5\" cy=\"138\" r=\"3\"/><circle class=\"dt\" cx=\"278.6\" cy=\"36.9\" r=\"3\"/>" +
-        "<text x=\"60.6\" y=\"80.6\" text-anchor=\"middle\">J</text><text x=\"6.6\" y=\"146.8\" text-anchor=\"middle\">K</text>" +
-        "<text x=\"137.5\" y=\"146.4\" text-anchor=\"middle\">L</text><text x=\"140.9\" y=\"147.5\" text-anchor=\"middle\">P</text>" +
-        "<text x=\"283.3\" y=\"151.5\" text-anchor=\"middle\">Q</text><text x=\"285.1\" y=\"31.8\" text-anchor=\"middle\">R</text>" +
-        "<text x=\"31.4\" y=\"109.8\" text-anchor=\"middle\">50</text><text x=\"72\" y=\"155\" text-anchor=\"middle\">80</text>" +
-        "<text x=\"101.8\" y=\"108.3\" text-anchor=\"middle\">60</text><text x=\"212.8\" y=\"155\" text-anchor=\"middle\">90</text>" +
-        "<text x=\"289\" y=\"93.1\" text-anchor=\"middle\">75</text><text x=\"206.5\" y=\"81.5\" text-anchor=\"middle\">120</text></svg></figure>" +
+        "<polygon class=\"sh\" points=\"58.7,87.4 14,138 122,138\"/><polygon class=\"sh2\" points=\"160,138 281.5,138 286.6,36.9\"/>" +
+        "<circle class=\"dt\" cx=\"58.7\" cy=\"87.4\" r=\"3\"/><circle class=\"dt\" cx=\"14\" cy=\"138\" r=\"3\"/><circle class=\"dt\" cx=\"122\" cy=\"138\" r=\"3\"/>" +
+        "<circle class=\"dt\" cx=\"160\" cy=\"138\" r=\"3\"/><circle class=\"dt\" cx=\"281.5\" cy=\"138\" r=\"3\"/><circle class=\"dt\" cx=\"286.6\" cy=\"36.9\" r=\"3\"/>" +
+        "<text x=\"56.6\" y=\"80.6\" text-anchor=\"middle\">J</text><text x=\"2.6\" y=\"146.8\" text-anchor=\"middle\">K</text>" +
+        "<text x=\"133.5\" y=\"146.4\" text-anchor=\"middle\">L</text><text x=\"148.9\" y=\"147.5\" text-anchor=\"middle\">P</text>" +
+        "<text x=\"291.3\" y=\"151.5\" text-anchor=\"middle\">Q</text><text x=\"293.1\" y=\"31.8\" text-anchor=\"middle\">R</text>" +
+        "<text x=\"27.4\" y=\"109.8\" text-anchor=\"middle\">50</text><text x=\"68\" y=\"155\" text-anchor=\"middle\">80</text>" +
+        "<text x=\"97.8\" y=\"108.3\" text-anchor=\"middle\">60</text><text x=\"220.8\" y=\"155\" text-anchor=\"middle\">90</text>" +
+        "<text x=\"297\" y=\"93.1\" text-anchor=\"middle\">75</text><text x=\"214.5\" y=\"81.5\" text-anchor=\"middle\">120</text></svg></figure>" +
         "<p class=\"geo-given\">A video game map has two triangular zones. In <strong>△JKL</strong>, JK = 50 m, KL = 80 m and JL = 60 m. In <strong>△PQR</strong>, PQ = 90 m, QR = 75 m and PR = 120 m.</p>",
       claims: [
         {
@@ -654,8 +654,8 @@
         "<path class=\"thin\" d=\"M190 137 L198 137 L198 145\"/><path class=\"thin\" d=\"M219.9 132.5 A22 22 0 0 0 216 145\"/>" +
         "<circle class=\"dt\" cx=\"46\" cy=\"13\" r=\"3\"/><circle class=\"dt\" cx=\"46\" cy=\"145\" r=\"3\"/><circle class=\"dt\" cx=\"190\" cy=\"145\" r=\"3\"/>" +
         "<circle class=\"dt\" cx=\"190\" cy=\"112\" r=\"3\"/><circle class=\"dt\" cx=\"238\" cy=\"145\" r=\"3\"/><text x=\"34\" y=\"20\" text-anchor=\"middle\">P</text>" +
-        "<text x=\"46\" y=\"166\" text-anchor=\"middle\">Q</text><text x=\"190\" y=\"166\" text-anchor=\"middle\">G</text>" +
-        "<text x=\"238\" y=\"166\" text-anchor=\"middle\">S</text><text x=\"201\" y=\"109\" text-anchor=\"middle\">H</text>" +
+        "<text x=\"46\" y=\"166\" text-anchor=\"middle\">Q</text><text x=\"182\" y=\"166\" text-anchor=\"middle\">G</text>" +
+        "<text x=\"247\" y=\"166\" text-anchor=\"middle\">S</text><text x=\"201\" y=\"109\" text-anchor=\"middle\">H</text>" +
         "<text x=\"118\" y=\"166\" text-anchor=\"middle\">24 ft</text><text x=\"214\" y=\"166\" text-anchor=\"middle\">8 ft</text>" +
         "<text class=\"sm\" x=\"168\" y=\"132\" text-anchor=\"middle\">5.5 ft</text><text class=\"acc\" x=\"32\" y=\"85\" text-anchor=\"middle\">h</text></svg></figure>" +
         "<p class=\"geo-given\">A tennis player <strong>GH</strong> stands 24 ft from the base <strong>Q</strong> of a light pole <strong>PQ</strong>. The tip of her shadow and the tip of the pole's shadow meet at <strong>S</strong>. She is 5.5 ft tall, and her shadow GS is 8 ft long. The pole and the player are vertical, on level ground.</p>",
@@ -751,17 +751,17 @@
       passage:
         "<figure class=\"geo-fig\">" +
         "<svg viewBox=\"0 0 320 170\" role=\"img\" aria-label=\"A coach's eye E 1.5 meters above the ground sights the top W of a climbing wall over the top T of a 2.5-meter pole; the pole is 2 meters from the coach and the wall is 10 meters beyond the pole; a level dashed line from E meets the pole at M and the wall at N\">" +
-        "<line class=\"thin\" x1=\"14\" y1=\"146\" x2=\"306\" y2=\"146\"/><rect class=\"sh2\" x=\"252\" y=\"11\" width=\"16\" height=\"135\"/>" +
-        "<line class=\"ln\" x1=\"36\" y1=\"146\" x2=\"36\" y2=\"119\"/><line class=\"ln\" x1=\"72\" y1=\"146\" x2=\"72\" y2=\"101\"/>" +
-        "<line class=\"ac dash\" x1=\"36\" y1=\"119\" x2=\"252\" y2=\"11\"/><line class=\"thin dash\" x1=\"36\" y1=\"119\" x2=\"252\" y2=\"119\"/>" +
-        "<path class=\"thin\" d=\"M65 119 L65 112 L72 112\"/><path class=\"thin\" d=\"M245 119 L245 112 L252 112\"/><circle class=\"dt\" cx=\"36\" cy=\"119\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"72\" cy=\"101\" r=\"3\"/><circle class=\"dt\" cx=\"72\" cy=\"119\" r=\"3\"/><circle class=\"dt\" cx=\"252\" cy=\"11\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"252\" cy=\"119\" r=\"3\"/><text x=\"25\" y=\"118\" text-anchor=\"middle\">E</text><text x=\"63\" y=\"97\" text-anchor=\"middle\">T</text>" +
-        "<text x=\"62\" y=\"135\" text-anchor=\"middle\">M</text><text x=\"241\" y=\"135\" text-anchor=\"middle\">N</text>" +
-        "<text x=\"240\" y=\"18\" text-anchor=\"middle\">W</text><text class=\"sm\" x=\"20\" y=\"139\" text-anchor=\"middle\">1.5 m</text>" +
-        "<text class=\"sm\" x=\"93\" y=\"138\" text-anchor=\"middle\">2.5 m</text><text x=\"54\" y=\"165\" text-anchor=\"middle\">2 m</text>" +
-        "<text x=\"162\" y=\"165\" text-anchor=\"middle\">10 m</text><text class=\"acc\" x=\"284\" y=\"91\" text-anchor=\"middle\">?</text>" +
-        "<text class=\"sm\" x=\"282\" y=\"114\" text-anchor=\"middle\">wall</text></svg></figure>" +
+        "<line class=\"thin\" x1=\"14\" y1=\"146\" x2=\"306\" y2=\"146\"/><rect class=\"sh2\" x=\"300\" y=\"26\" width=\"14\" height=\"120\"/>" +
+        "<line class=\"ln\" x1=\"36\" y1=\"146\" x2=\"36\" y2=\"122\"/><line class=\"ln\" x1=\"80\" y1=\"146\" x2=\"80\" y2=\"106\"/>" +
+        "<line class=\"ac dash\" x1=\"36\" y1=\"122\" x2=\"300\" y2=\"26\"/><line class=\"thin dash\" x1=\"36\" y1=\"122\" x2=\"300\" y2=\"122\"/>" +
+        "<path class=\"thin\" d=\"M73 122 L73 115 L80 115\"/><path class=\"thin\" d=\"M293 122 L293 115 L300 115\"/><circle class=\"dt\" cx=\"36\" cy=\"122\" r=\"3\"/>" +
+        "<circle class=\"dt\" cx=\"80\" cy=\"106\" r=\"3\"/><circle class=\"dt\" cx=\"80\" cy=\"122\" r=\"3\"/><circle class=\"dt\" cx=\"300\" cy=\"26\" r=\"3\"/>" +
+        "<circle class=\"dt\" cx=\"300\" cy=\"122\" r=\"3\"/><text x=\"25\" y=\"118\" text-anchor=\"middle\">E</text><text x=\"72\" y=\"99\" text-anchor=\"middle\">T</text>" +
+        "<text x=\"70\" y=\"138\" text-anchor=\"middle\">M</text><text x=\"289\" y=\"138\" text-anchor=\"middle\">N</text>" +
+        "<text x=\"288\" y=\"20\" text-anchor=\"middle\">W</text><text class=\"sm\" x=\"17\" y=\"138\" text-anchor=\"middle\">1.5 m</text>" +
+        "<text class=\"sm\" x=\"98\" y=\"138\" text-anchor=\"middle\">2.5 m</text><text x=\"58\" y=\"165\" text-anchor=\"middle\">2 m</text>" +
+        "<text x=\"190\" y=\"165\" text-anchor=\"middle\">10 m</text><text class=\"acc\" x=\"288\" y=\"83\" text-anchor=\"middle\">?</text></svg>" +
+        "<figcaption>Not drawn to scale</figcaption></figure>" +
         "<p class=\"geo-given\">Coach Ruiz's eye <strong>E</strong> is 1.5 m above the ground. She sights the top <strong>W</strong> of the climbing wall over the top <strong>T</strong> of a 2.5-m pole. The pole is 2 m from her, and the wall is 10 m beyond the pole. The pole and the wall are vertical. The dashed level line from E meets the pole at <strong>M</strong> and the wall at <strong>N</strong>.</p>",
       claims: [
         {
