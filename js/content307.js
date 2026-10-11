@@ -312,19 +312,19 @@
       blurb: "A drill move on the stadium grid, and the compositions that make it.",
       level: 3,
       passage:
-        "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 160\" role=\"img\" aria-label=\"Coordinate grid with quadrilateral FGHJ: F at (2, 1), G at (4, 2), H at (3, 4), J at (1, 3); and quadrilateral F'G'H'J': F' at (-1, -2), G' at (-2, -4), H' at (-4, -3), J' at (-3, -1)\">" +
+        "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 160\" role=\"img\" aria-label=\"Coordinate grid with quadrilateral FGHJ: F at (2, 1), G at (4, 2), H at (3, 4), J at (1, 4); and quadrilateral F'G'H'J': F' at (-1, -2), G' at (-2, -4), H' at (-4, -3), J' at (-4, -1)\">" +
         "<line class=\"gr\" x1=\"90\" y1=\"10\" x2=\"90\" y2=\"150\"/><line class=\"gr\" x1=\"104\" y1=\"10\" x2=\"104\" y2=\"150\"/><line class=\"gr\" x1=\"118\" y1=\"10\" x2=\"118\" y2=\"150\"/><line class=\"gr\" x1=\"132\" y1=\"10\" x2=\"132\" y2=\"150\"/><line class=\"gr\" x1=\"146\" y1=\"10\" x2=\"146\" y2=\"150\"/><line class=\"gr\" x1=\"174\" y1=\"10\" x2=\"174\" y2=\"150\"/><line class=\"gr\" x1=\"188\" y1=\"10\" x2=\"188\" y2=\"150\"/><line class=\"gr\" x1=\"202\" y1=\"10\" x2=\"202\" y2=\"150\"/><line class=\"gr\" x1=\"216\" y1=\"10\" x2=\"216\" y2=\"150\"/><line class=\"gr\" x1=\"230\" y1=\"10\" x2=\"230\" y2=\"150\"/>" +
         "<line class=\"gr\" x1=\"90\" y1=\"150\" x2=\"230\" y2=\"150\"/><line class=\"gr\" x1=\"90\" y1=\"136\" x2=\"230\" y2=\"136\"/><line class=\"gr\" x1=\"90\" y1=\"122\" x2=\"230\" y2=\"122\"/><line class=\"gr\" x1=\"90\" y1=\"108\" x2=\"230\" y2=\"108\"/><line class=\"gr\" x1=\"90\" y1=\"94\" x2=\"230\" y2=\"94\"/><line class=\"gr\" x1=\"90\" y1=\"66\" x2=\"230\" y2=\"66\"/><line class=\"gr\" x1=\"90\" y1=\"52\" x2=\"230\" y2=\"52\"/><line class=\"gr\" x1=\"90\" y1=\"38\" x2=\"230\" y2=\"38\"/><line class=\"gr\" x1=\"90\" y1=\"24\" x2=\"230\" y2=\"24\"/><line class=\"gr\" x1=\"90\" y1=\"10\" x2=\"230\" y2=\"10\"/>" +
         "<line class=\"ax\" x1=\"90\" y1=\"80\" x2=\"230\" y2=\"80\"/><line class=\"ax\" x1=\"160\" y1=\"150\" x2=\"160\" y2=\"10\"/>" +
         "<text class=\"sm\" x=\"188\" y=\"93\" text-anchor=\"middle\">2</text><text class=\"sm\" x=\"216\" y=\"93\" text-anchor=\"middle\">4</text><text class=\"sm\" x=\"164\" y=\"56\">2</text><text class=\"sm\" x=\"164\" y=\"140\">−4</text><text class=\"sm\" x=\"234\" y=\"84\">x</text><text class=\"sm\" x=\"155\" y=\"20\" text-anchor=\"end\">y</text>" +
-        "<polygon class=\"sh2\" points=\"188,66 216,52 202,24 174,38\"/>" +
-        "<polygon class=\"sh\" points=\"146,108 132,136 104,122 118,94\"/>" +
-        "<circle class=\"dt\" cx=\"188\" cy=\"66\" r=\"3\"/><circle class=\"dt\" cx=\"216\" cy=\"52\" r=\"3\"/><circle class=\"dt\" cx=\"202\" cy=\"24\" r=\"3\"/><circle class=\"dt\" cx=\"174\" cy=\"38\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"146\" cy=\"108\" r=\"3\"/><circle class=\"dt\" cx=\"132\" cy=\"136\" r=\"3\"/><circle class=\"dt\" cx=\"104\" cy=\"122\" r=\"3\"/><circle class=\"dt\" cx=\"118\" cy=\"94\" r=\"3\"/>" +
-        "<text x=\"196\" y=\"71\">F</text><text x=\"224\" y=\"57\">G</text><text x=\"202\" y=\"17\" text-anchor=\"middle\">H</text><text x=\"174\" y=\"31\" text-anchor=\"middle\">J</text>" +
-        "<text x=\"146\" y=\"101\" text-anchor=\"middle\">F′</text><text x=\"132\" y=\"153\" text-anchor=\"middle\">G′</text><text x=\"96\" y=\"127\" text-anchor=\"end\">H′</text><text x=\"110\" y=\"99\" text-anchor=\"end\">J′</text>" +
+        "<polygon class=\"sh2\" points=\"188,66 216,52 202,24 174,24\"/>" +
+        "<polygon class=\"sh\" points=\"146,108 132,136 104,122 104,94\"/>" +
+        "<circle class=\"dt\" cx=\"188\" cy=\"66\" r=\"3\"/><circle class=\"dt\" cx=\"216\" cy=\"52\" r=\"3\"/><circle class=\"dt\" cx=\"202\" cy=\"24\" r=\"3\"/><circle class=\"dt\" cx=\"174\" cy=\"24\" r=\"3\"/>" +
+        "<circle class=\"dt\" cx=\"146\" cy=\"108\" r=\"3\"/><circle class=\"dt\" cx=\"132\" cy=\"136\" r=\"3\"/><circle class=\"dt\" cx=\"104\" cy=\"122\" r=\"3\"/><circle class=\"dt\" cx=\"104\" cy=\"94\" r=\"3\"/>" +
+        "<text x=\"196\" y=\"71\">F</text><text x=\"224\" y=\"57\">G</text><text x=\"202\" y=\"17\" text-anchor=\"middle\">H</text><text x=\"174\" y=\"17\" text-anchor=\"middle\">J</text>" +
+        "<text x=\"146\" y=\"101\" text-anchor=\"middle\">F′</text><text x=\"132\" y=\"153\" text-anchor=\"middle\">G′</text><text x=\"96\" y=\"127\" text-anchor=\"end\">H′</text><text x=\"96\" y=\"99\" text-anchor=\"end\">J′</text>" +
         "</svg></figure>" +
-        "<p class=\"geo-given\">A grid is laid over the stadium field. The drum line stands in the shape of <strong>FGHJ</strong>: F(2, 1), G(4, 2), H(3, 4), J(1, 3). After a drill move it stands as <strong>F′G′H′J′</strong>: F′(−1, −2), G′(−2, −4), H′(−4, −3), J′(−3, −1).</p>",
+        "<p class=\"geo-given\">A grid is laid over the stadium field. The drum line stands in the shape of <strong>FGHJ</strong>: F(2, 1), G(4, 2), H(3, 4), J(1, 4). After a drill move it stands as <strong>F′G′H′J′</strong>: F′(−1, −2), G′(−2, −4), H′(−4, −3), J′(−4, −1).</p>",
       claims: [
         {
           id: "single",
@@ -384,10 +384,10 @@
           sub: "G.RLT.3.2",
           stem: "FGHJ is translated by (x, y) → (x + 2, y − 3) and then reflected over the y-axis. Where does J end up?",
           choices: [
-            { letter: "A", text: "(1, 0)" },
-            { letter: "B", text: "(−3, 0)" },
-            { letter: "C", text: "(3, 0)" },
-            { letter: "D", text: "(−3, 6)" }
+            { letter: "A", text: "(1, 1)" },
+            { letter: "B", text: "(−3, 1)" },
+            { letter: "C", text: "(3, 1)" },
+            { letter: "D", text: "(−3, 7)" }
           ],
           correct: "B"
         },
