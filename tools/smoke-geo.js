@@ -96,6 +96,25 @@ var srv = http.createServer(function (req, res) {
   var pool = await page.evaluate(function () { var p = SolScene.pack; return p.claims.map(function (c) { return c.sol; }).filter(function (s, i, a) { return a.indexOf(s) === i; }).sort(); });
   check(pool.length === 4 && pool.every(function (s) { return /^G\.TR\.[1-4]$/.test(s); }), "the Triangles strand serves only G.TR questions: " + JSON.stringify(pool));
 
+  /* v5.20: every mode has its own questions — a maze level asks only maze packs, and no two modes share a pack */
+  var mp = await page.evaluate(function () {
+    var byId = {}; (window.HEIST_PACKS || []).forEach(function (p) { if (p.family === "GEO") byId[p.id] = p; });
+    var out = { level: { mode: SolScene.poolMode, other: SolScene.pack.claims.filter(function (c) { return (byId[c.packId] || {}).mode !== "maze"; }).length }, modes: {}, unmoded: 0, shared: 0 };
+    Object.keys(byId).forEach(function (id) { if (!byId[id].mode) out.unmoded++; });
+    var seen = {};
+    ["maze", "raid", "rocks", "sky", "ring", "worms"].forEach(function (m) {
+      var b = heistBuildPack("GEO", "ALL", m), ids = {};
+      b.claims.forEach(function (c) { ids[c.packId] = 1; });
+      var stray = Object.keys(ids).filter(function (id) { return (byId[id] || {}).mode !== m; }).length;
+      Object.keys(ids).forEach(function (id) { if (seen[id] && seen[id] !== m) out.shared++; seen[id] = m; });
+      out.modes[m] = { packs: Object.keys(ids).length, questions: b.claims.length, stray: stray };
+    });
+    return out;
+  });
+  check(mp.level.mode === "maze" && mp.level.other === 0, "a Labyrinth level asks only Labyrinth questions: " + JSON.stringify(mp.level));
+  check(!mp.unmoded && !mp.shared && Object.keys(mp.modes).every(function (m) { var x = mp.modes[m]; return !x.stray && x.packs >= 90 && x.questions >= 540; }),
+    "each of the six modes has its own pool of about 96 packs (576 questions), with no pack shared: " + JSON.stringify(mp));
+
   /* answer right: carry the key's letters to the exit */
   var ans = await page.evaluate(function () {
     var s = SolScene, c = s.claim, before = SolProgress.record("GEO");

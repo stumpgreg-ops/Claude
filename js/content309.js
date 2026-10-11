@@ -219,7 +219,7 @@
         "<text class=\"sm\" x=\"108\" y=\"88\" text-anchor=\"middle\">−4</text><text class=\"sm\" x=\"134\" y=\"88\" text-anchor=\"middle\">−2</text><text class=\"sm\" x=\"164\" y=\"131\">−4</text><text class=\"sm\" x=\"229\" y=\"79\">x</text><text class=\"sm\" x=\"155\" y=\"20\" text-anchor=\"end\">y</text>" +
         "<polyline class=\"thin dash\" points=\"173,23 212,36 199,62 173,23\"/>" +
         "<circle class=\"dt\" cx=\"160\" cy=\"75\" r=\"3\"/>" +
-        "<text class=\"sm\" x=\"155\" y=\"88\" text-anchor=\"end\">O</text>" +
+        "<text class=\"sm\" x=\"153\" y=\"70\" text-anchor=\"end\">O</text>" +
         "<circle class=\"sh\" cx=\"173\" cy=\"23\" r=\"6\"/><circle class=\"sh\" cx=\"212\" cy=\"36\" r=\"6\"/><circle class=\"sh\" cx=\"199\" cy=\"62\" r=\"6\"/>" +
         "<circle class=\"dta\" cx=\"173\" cy=\"23\" r=\"3\"/><circle class=\"dta\" cx=\"212\" cy=\"36\" r=\"3\"/><circle class=\"dta\" cx=\"199\" cy=\"62\" r=\"3\"/>" +
         "<text x=\"178\" y=\"18\">P</text><text x=\"217\" y=\"31\">Q</text><text x=\"207\" y=\"67\">R</text>" +
