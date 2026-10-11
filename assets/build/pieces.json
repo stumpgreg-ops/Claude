@@ -242,47 +242,192 @@
  "themes": {
   "village": {
    "name": "Town",
-   "desc": "A cottage that grows into a whole town: wings, a bakery, mills and a market.",
-   "drawScale": 0.8,
-   "pitch": 150,
+   "desc": "A town hall that grows into a whole town: homes, an inn, a market, mills and a church, in the same 3D pieces as the castle.",
+   "kit": true,
+   "pieces": "castle",
+   "core": [
+    "k-townhall",
+    "c-manor",
+    "c-tavern"
+   ],
+   "cell": 151,
+   "cellH": 87.2,
+   "unitPx": 1,
+   "drawScale": 1,
    "wallLevel": 8,
+   "growAt": [
+    1,
+    4,
+    8,
+    13
+   ],
+   "autoWall": {
+    "wall": "c-fence",
+    "gate": "fence-gate"
+   },
+   "tabs": [
+    [
+     "core",
+     "Town hall"
+    ],
+    [
+     "house",
+     "Buildings"
+    ],
+    [
+     "village",
+     "Market & streets"
+    ],
+    [
+     "nature",
+     "Nature"
+    ],
+    [
+     "animal",
+     "Animals"
+    ],
+    [
+     "statue",
+     "Statues"
+    ],
+    [
+     "people",
+     "People"
+    ],
+    [
+     "flag",
+     "Flags"
+    ],
+    [
+     "wall",
+     "Walls & gates"
+    ],
+    [
+     "tower",
+     "Towers"
+    ]
+   ],
    "styles": [
     {
-     "id": "tile",
-     "name": "Red Tile",
-     "desc": "Stucco walls and a red tile roof.",
+     "id": "blue",
+     "name": "Royal Blue",
+     "desc": "Blue roofs, flags and bands.",
      "dir": "",
      "pairs": [
-      "thatch"
+      "gold"
      ]
     },
     {
-     "id": "slate",
-     "name": "Slate",
-     "desc": "White plaster and a blue slate roof.",
-     "dir": "styles/slate/",
+     "id": "red",
+     "name": "Crimson",
+     "desc": "Red roofs, flags and bands.",
+     "dir": "red/",
      "pairs": [
-      "tile"
+      "gold"
      ]
     },
     {
-     "id": "thatch",
-     "name": "Thatch",
-     "desc": "Warm timber walls and a golden straw roof.",
-     "dir": "styles/thatch/",
+     "id": "green",
+     "name": "Forest",
+     "desc": "Green roofs, flags and bands.",
+     "dir": "green/",
      "pairs": [
-      "slate"
+      "blue"
+     ]
+    },
+    {
+     "id": "gold",
+     "name": "Gold",
+     "desc": "Gold roofs, flags and bands.",
+     "dir": "gold/",
+     "pairs": [
+      "red"
      ]
     }
    ],
-   "ring": {
-    "seg": "fence",
-    "corner": null,
-    "gate": null,
-    "extent": 3.75
-   },
-   "cell": 40,
-   "unitPx": 30
+   "ranks": [
+    [
+     0,
+     "Hamlet"
+    ],
+    [
+     120,
+     "Village"
+    ],
+    [
+     300,
+     "Town"
+    ],
+    [
+     600,
+     "Market Town"
+    ],
+    [
+     1000,
+     "Borough"
+    ],
+    [
+     1600,
+     "City"
+    ],
+    [
+     2400,
+     "Capital"
+    ]
+   ],
+   "packs": [
+    {
+     "id": "garden",
+     "name": "Garden pack",
+     "desc": "Flowers, an oak, bushes and a hedge, 25% off.",
+     "items": [
+      "flowers-mixed",
+      "flowers-red",
+      "oak",
+      "bushes",
+      "hedge"
+     ],
+     "discount": 0.25
+    },
+    {
+     "id": "farm",
+     "name": "Farm pack",
+     "desc": "A stable, a rail fence, a cow, a horse and a chicken, 20% off.",
+     "items": [
+      "stable",
+      "rail-fence",
+      "cow",
+      "horse",
+      "chicken"
+     ],
+     "discount": 0.2
+    },
+    {
+     "id": "village",
+     "name": "Village pack",
+     "desc": "A cottage, a market stall, a cart, a lantern and a bench, 20% off.",
+     "items": [
+      "c-cottage",
+      "stall-red",
+      "cart",
+      "lantern",
+      "bench"
+     ],
+     "discount": 0.2
+    },
+    {
+     "id": "monuments",
+     "name": "Monument pack",
+     "desc": "A fountain, an obelisk, a column and a knight statue, 20% off.",
+     "items": [
+      "fountain",
+      "obelisk",
+      "column",
+      "knight-statue"
+     ],
+     "discount": 0.2
+    }
+   ]
   },
   "castle": {
    "name": "Castle",

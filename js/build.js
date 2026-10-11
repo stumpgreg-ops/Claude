@@ -15,6 +15,8 @@
  * piece). Walls, hedges and fences auto-tile from their neighbours; towers,
  * keeps and houses are sprite stacks; the keep grows a storey as the castle
  * grows (theme.growAt); a curtain wall rises by itself at the 8th building.
+ * v5.18.2: the town is a kit theme too (theme.pieces "castle": the castle kit's 3D models), with a town hall,
+ * manor or tavern for a core (theme.core) and a fence ring with a gate at the 8th building (theme.autoWall).
  * Town theme: the older Modular Village sprites on the same grid.
  *
  * Public API
@@ -110,7 +112,7 @@
   }
   function buildingPicks() { return save.picks.filter(function (p) { return !p.deco; }); }
   function grownCount() { return buildingPicks().filter(function (pk) { return pk.src !== "auto"; }).length; }
-  function hasCore() { return buildingPicks().some(function (p) { var pc = pieceById(p.piece); return pc && pc.role === "core"; }); }
+  function hasCore() { return buildingPicks().some(function (p) { var pc = pieceById(p.piece); return pc && roleOf(pc) === "core"; }); }
   function rewardsTaken() { return Object.keys(save.rewards).filter(function (k) { return !!save.rewards[k]; }).length; }
   function owned(id) { return !!(save.owned && save.owned[id]); }
   function unlock(id) { if (!save.owned) save.owned = {}; save.owned[id] = 1; }
@@ -172,10 +174,27 @@
       }
       save.kit = 2; changed = true;
     }
+    if (save.theme === "village" && isKit()) {                                  /* v5.18.2: an old 2D town becomes a kit town (3D) */
+      var TMAP = { cottage: "k-townhall", "stone-cottage": "c-manor", house: "c-tavern", stall: "stall-red", steps: "stone-stairs", "cottage-wing": "c-cottage",
+        "stone-wing": "stone-hall", "lamp-path": "lamp-post", "house-wing": "k-home-a", bakery: "k-workshop", dock: "wood-bridge", chapel: "c-chapel",
+        arch: "hedge-gate", tavern: "k-inn", windmill: "c-windmill", watermill: "k-watermill", square: "fountain", harbour: "k-shipyard", manor: "k-home-b",
+        "town-hall": "k-market", "bell-tower": "k-church", "grand-mill": "k-windmill", fence: "c-fence", well: "k-well", lamp: "lantern", barrels: "k-barrels",
+        crates: "k-crates", "hay-cart": "c-hay-cart", "barrel-cart": "cart", haystacks: "k-hay", cobbles: "stone-path", signpost: "well-sign" };
+      var TSTYLE = { tile: "red", slate: "blue", thatch: "gold" };
+      var oldTown = save.picks.some(function (p) { return !!TMAP[p.piece]; }) || Object.keys(save.rewards).some(function (k) { return !!TMAP[save.rewards[k]]; });
+      if (oldTown) {   /* its pieces are the old 2D town's: map each to the kit piece most like it, and lay them out afresh */
+        save.picks.forEach(function (p) {
+          if (TMAP[p.piece]) p.piece = TMAP[p.piece];
+          p.style = TSTYLE[p.style] || ""; delete p.cx; delete p.cy;
+        });
+        Object.keys(save.rewards).forEach(function (k) { if (TMAP[save.rewards[k]]) save.rewards[k] = TMAP[save.rewards[k]]; });
+        save.owned = {}; save.kit = 2; changed = true;
+      }
+    }
     var keep = [];
     save.picks.forEach(function (p) {
       var pc = pieceById(p.piece);
-      if (!pc || pc.theme !== save.theme) { changed = true; return; }
+      if (!pc || pc.theme !== pieceTheme(save.theme) || roleOf(pc) === "hidden") { changed = true; return; }
       if (!!p.deco !== (pc.role === "deco")) { p.deco = pc.role === "deco"; changed = true; }
       if (p.style && !styleDef(p.style)) { p.style = defaultStyle(); changed = true; }
       keep.push(p);
@@ -204,13 +223,25 @@
   function styleDef(id) { var s = stylesOf(), i; for (i = 0; i < s.length; i++) if (s[i].id === id) return s[i]; return null; }
   function styleName(id) { var s = styleDef(id); return s ? s.name : ""; }
   function defaultStyle() { var s = stylesOf(); return s.length ? s[0].id : ""; }
+  /* v5.18.2: a theme can build with another theme's pieces (theme.pieces): the town uses the castle kit, the same
+     3D models, with its own core buildings (theme.core: they play the keep's part; the castle's keeps are left out) */
+  function pieceTheme(th) { var t = themeDef(th); return (t && t.pieces) || th; }
+  function roleOf(p, th) {
+    if (!p) return null;
+    var t = themeDef(th || (save && save.theme)), c = t && t.core;
+    if (c) { if (c.indexOf(p.id) !== -1) return "core"; if (p.role === "core") return "hidden"; }
+    return p.role;
+  }
   function pieceById(id) {
-    var p = (data && data.pieces) || [], i, other = null, th = save && save.theme;
-    for (i = 0; i < p.length; i++) if (p[i].id === id) { if (!th || p[i].theme === th) return p[i]; if (!other) other = p[i]; }
+    var p = (data && data.pieces) || [], i, other = null, th = save && save.theme, pt = th && pieceTheme(th);
+    for (i = 0; i < p.length; i++) if (p[i].id === id) { if (!th || p[i].theme === pt) return p[i]; if (!other) other = p[i]; }
     return other;
   }
-  function piecesOf(theme, role) { return ((data && data.pieces) || []).filter(function (p) { return p.theme === theme && (!role || p.role === role); }); }
-  function catOf(p) { return p.cat || (p.role === "deco" ? "deco" : p.role === "core" ? "core" : "module"); }
+  function piecesOf(theme, role) {
+    var pt = pieceTheme(theme);
+    return ((data && data.pieces) || []).filter(function (p) { var r = roleOf(p, theme); return p.theme === pt && r !== "hidden" && (!role || r === role); });
+  }
+  function catOf(p) { var r = roleOf(p); return r === "core" ? "core" : p.cat || (r === "deco" ? "deco" : "module"); }
   function themeTabs() {
     var t = themeDef(save.theme);
     if (t && t.tabs) return t.tabs;
@@ -1399,7 +1430,7 @@
     });
     PERKS.forEach(function (pk) {
       if (ids[pk.id]) return;
-      var names = pk.pieces.map(function (id) { var pc = pieceById(id); return pc && pc.theme === save.theme ? pc.name : null; }).filter(Boolean);
+      var names = pk.pieces.map(function (id) { var pc = pieceById(id); return pc && pc.theme === pieceTheme(save.theme) ? pc.name : null; }).filter(Boolean);
       if (names.length) missing.push(pk.name + " (" + names[0] + ")");
     });
     if (missing.length) ui.perks.appendChild(el("span", "more", (act.length ? "More to earn: " : "Place one of these to earn a perk: ") + missing.slice(0, 5).join(", ") + (missing.length > 5 ? ", …" : ".")));
@@ -1526,16 +1557,17 @@
   /* Castle: at the wall level a curtain wall (real, movable wall picks with one gate) goes up one cell out from everything built so far. */
   function raiseCastleWalls() {
     if (!isKit() || grownCount() < wallLevel() || save.picks.some(function (pk) { return pk.src === "auto"; })) return false;
-    var b = bboxCells(), wall = pieceById("wall"), gate = pieceById("gate"), dom = dominantStyle(), u, v, n = 0;
+    var tw = (themeDef(save.theme) || {}).autoWall || {};   /* v5.18.2: the town's ring is a fence with a fence gate */
+    var b = bboxCells(), wall = pieceById(tw.wall || "wall"), gate = pieceById(tw.gate || "gate"), dom = dominantStyle(), u, v, n = 0;
     if (!b || !wall) return false;
     var u0 = b.u0 - 1, v0 = b.v0 - 1, u1 = b.u1, v1 = b.v1, gateAt = Math.floor((v0 + v1) / 2);
     function add(cx, cy, piece) {
       if (!spotFree(cx, cy, 1, null)) return;
-      save.picks.push({ night: cur ? cur.night : 1, piece: piece.id, style: dom, src: "auto", deco: false, ord: save.picks.length, cx: cx, cy: cy }); n++;
+      save.picks.push({ night: cur ? cur.night : 1, piece: piece.id, style: styleable(piece) ? dom : "", src: "auto", deco: roleOf(piece) === "deco", ord: save.picks.length, cx: cx, cy: cy }); n++;
     }
     for (u = u0; u <= u1; u++) { add(u, v0, wall); add(u, v1, wall); }
     for (v = v0 + 1; v < v1; v++) { add(u0, v, wall); add(u1, v, (gate && v === gateAt) ? gate : wall); }
-    if (n) { unlock("wall"); if (gate) unlock("gate"); }
+    if (n) { unlock(wall.id); if (gate) unlock(gate.id); }
     return n > 0;
   }
   function coinLabel() { return (save.coins || 0) + " coin" + (save.coins === 1 ? "" : "s"); }
@@ -1791,7 +1823,7 @@
   function grantTrophy(realmId) {
     if (!save) save = loadSave();
     if (loadState !== "ok" || !data || !isKit()) return null;
-    var p = ((data && data.pieces) || []).filter(function (q) { return q.boss === realmId && q.theme === save.theme; })[0];
+    var p = ((data && data.pieces) || []).filter(function (q) { return q.boss === realmId && q.theme === pieceTheme(save.theme); })[0];
     if (!p) return null;
     if (!owned(p.id)) {
       var pos = autoPlace(cellsOf(p), null, p) || autoPlace(1, null, null);
@@ -1802,7 +1834,7 @@
   }
   function trophies() {
     if (!save) save = loadSave();
-    return ((data && data.pieces) || []).filter(function (q) { return q.boss && q.theme === save.theme; }).map(function (q) { return { id: q.id, realm: q.boss, name: q.name, owned: owned(q.id) }; });
+    return ((data && data.pieces) || []).filter(function (q) { return q.boss && q.theme === pieceTheme(save.theme); }).map(function (q) { return { id: q.id, realm: q.boss, name: q.name, owned: owned(q.id) }; });
   }
   function state() {
     if (!save) save = loadSave();

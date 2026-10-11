@@ -29,6 +29,18 @@ A game uploaded to Canvas can't send anything anywhere, so progress is shown to 
 
 Tests: `node tools/smoke-progress.js` (after `node tools/build-games.js`, `node tools/build-appsscript.js VA|ODY` and `node tools/build-canvas.js VA|ODY`).
 
+## v5.18.2 (2026-10-11) — the Town is built in 3D with the castle's models
+
+- **The Town now uses the castle kit** (`assets/build/pieces.json` `themes.village`: `kit`, `pieces: "castle"`). It used to be the older 2D builder: 32 flat pictures that only turned two ways. It now has the same grid, the same 3D models and the same turning view as the castle, with every model loaded. Its own touches:
+  - **Core building:** a town hall, manor or tavern (`core`); the castle's keeps are not offered.
+  - **Tabs:** in town order (Town hall, Buildings, Market & streets, Nature, Animals, …).
+  - **Ranks:** Hamlet, Village, Town, Market Town, Borough, City, Capital.
+  - **Ring:** at the 8th building a fence ring with a gate goes up, instead of a stone curtain wall (`autoWall`).
+  - **Packs:** the garden, farm, village and monument packs.
+  - **Code:** `js/build.js` has `pieceTheme()` and `roleOf()`, so a theme can build with another theme's pieces.
+- **Old towns convert by themselves:** each 2D piece maps to the kit piece most like it. The cottage, stone cottage and house cores become the town hall, manor and tavern; the stall becomes a market stall and the tavern an inn. The tile, slate and thatch styles become Crimson, Royal Blue and Gold, and the pieces are laid out afresh. Coins, rewards and the number of pieces are kept.
+- Test: `node tools/smoke-town.js`; `tools/smoke.js` now expects a town building to turn a quarter at a time.
+
 ## v5.18.1 (2026-10-08) — every screen fits the 500 px Canvas frame, a "Main menu" way out, a one-window how-to
 
 - **The Odyssey question pool in Word:** `docs/questions/The-Odyssey-question-pool.docx`, 76 pages. It covers all 48 passages and 296 questions in the order the game asks them, episode by episode. Each passage is in full, followed by its questions, with the keyed answer in green with ✓ and the standard named. A summary is on the cover and an answer key at the end. Rebuild with `node tools/make-odyssey-questions-doc.js`.
