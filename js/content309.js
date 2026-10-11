@@ -112,16 +112,16 @@
       blurb: "A stitched crown slides, flips and turns on the pattern grid.",
       level: 1,
       passage:
-        "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 132\" role=\"img\" aria-label=\"Coordinate grid with a cross-stitch crown, polygon ABCDEFG: A at (-5, 1), B at (-1, 1), C at (-1, 4), D at (-2, 2), E at (-3, 4), F at (-4, 2) and G at (-5, 4)\">" +
-        "<line class=\"gr\" x1=\"70\" y1=\"12\" x2=\"70\" y2=\"120\"/><line class=\"gr\" x1=\"88\" y1=\"12\" x2=\"88\" y2=\"120\"/><line class=\"gr\" x1=\"106\" y1=\"12\" x2=\"106\" y2=\"120\"/><line class=\"gr\" x1=\"124\" y1=\"12\" x2=\"124\" y2=\"120\"/><line class=\"gr\" x1=\"142\" y1=\"12\" x2=\"142\" y2=\"120\"/><line class=\"gr\" x1=\"160\" y1=\"12\" x2=\"160\" y2=\"120\"/><line class=\"gr\" x1=\"196\" y1=\"12\" x2=\"196\" y2=\"120\"/><line class=\"gr\" x1=\"214\" y1=\"12\" x2=\"214\" y2=\"120\"/><line class=\"gr\" x1=\"232\" y1=\"12\" x2=\"232\" y2=\"120\"/><line class=\"gr\" x1=\"250\" y1=\"12\" x2=\"250\" y2=\"120\"/>" +
+        "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 132\" role=\"img\" aria-label=\"Coordinate grid with a cross-stitch crown, polygon ABCDEFG: A at (-6, 1), B at (-2, 1), C at (-2, 4), D at (-3, 2), E at (-4, 4), F at (-5, 2) and G at (-6, 4)\">" +
+        "<line class=\"gr\" x1=\"70\" y1=\"12\" x2=\"70\" y2=\"120\"/><line class=\"gr\" x1=\"88\" y1=\"12\" x2=\"88\" y2=\"120\"/><line class=\"gr\" x1=\"106\" y1=\"12\" x2=\"106\" y2=\"120\"/><line class=\"gr\" x1=\"124\" y1=\"12\" x2=\"124\" y2=\"120\"/><line class=\"gr\" x1=\"142\" y1=\"12\" x2=\"142\" y2=\"120\"/><line class=\"gr\" x1=\"160\" y1=\"12\" x2=\"160\" y2=\"120\"/><line class=\"gr\" x1=\"178\" y1=\"12\" x2=\"178\" y2=\"120\"/><line class=\"gr\" x1=\"214\" y1=\"12\" x2=\"214\" y2=\"120\"/><line class=\"gr\" x1=\"232\" y1=\"12\" x2=\"232\" y2=\"120\"/><line class=\"gr\" x1=\"250\" y1=\"12\" x2=\"250\" y2=\"120\"/>" +
         "<line class=\"gr\" x1=\"70\" y1=\"120\" x2=\"250\" y2=\"120\"/><line class=\"gr\" x1=\"70\" y1=\"84\" x2=\"250\" y2=\"84\"/><line class=\"gr\" x1=\"70\" y1=\"66\" x2=\"250\" y2=\"66\"/><line class=\"gr\" x1=\"70\" y1=\"48\" x2=\"250\" y2=\"48\"/><line class=\"gr\" x1=\"70\" y1=\"30\" x2=\"250\" y2=\"30\"/><line class=\"gr\" x1=\"70\" y1=\"12\" x2=\"250\" y2=\"12\"/>" +
-        "<line class=\"ax\" x1=\"70\" y1=\"102\" x2=\"250\" y2=\"102\"/><line class=\"ax\" x1=\"178\" y1=\"120\" x2=\"178\" y2=\"12\"/>" +
-        "<text class=\"sm\" x=\"106\" y=\"115\" text-anchor=\"middle\">−4</text><text class=\"sm\" x=\"142\" y=\"115\" text-anchor=\"middle\">−2</text><text class=\"sm\" x=\"214\" y=\"115\" text-anchor=\"middle\">2</text><text class=\"sm\" x=\"182\" y=\"70\">2</text><text class=\"sm\" x=\"182\" y=\"34\">4</text><text class=\"sm\" x=\"254\" y=\"106\">x</text><text class=\"sm\" x=\"173\" y=\"22\" text-anchor=\"end\">y</text>" +
+        "<line class=\"ax\" x1=\"70\" y1=\"102\" x2=\"250\" y2=\"102\"/><line class=\"ax\" x1=\"196\" y1=\"120\" x2=\"196\" y2=\"12\"/>" +
+        "<text class=\"sm\" x=\"88\" y=\"115\" text-anchor=\"middle\">−6</text><text class=\"sm\" x=\"232\" y=\"115\" text-anchor=\"middle\">2</text><text class=\"sm\" x=\"200\" y=\"70\">2</text><text class=\"sm\" x=\"200\" y=\"34\">4</text><text class=\"sm\" x=\"254\" y=\"106\">x</text><text class=\"sm\" x=\"191\" y=\"22\" text-anchor=\"end\">y</text>" +
         "<polygon class=\"sh\" points=\"88,84 160,84 160,30 142,66 124,30 106,66 88,30\"/>" +
         "<circle class=\"dt\" cx=\"88\" cy=\"84\" r=\"3\"/><circle class=\"dt\" cx=\"160\" cy=\"84\" r=\"3\"/><circle class=\"dt\" cx=\"160\" cy=\"30\" r=\"3\"/><circle class=\"dt\" cx=\"142\" cy=\"66\" r=\"3\"/><circle class=\"dt\" cx=\"124\" cy=\"30\" r=\"3\"/><circle class=\"dt\" cx=\"106\" cy=\"66\" r=\"3\"/><circle class=\"dt\" cx=\"88\" cy=\"30\" r=\"3\"/>" +
         "<text x=\"83\" y=\"99\" text-anchor=\"end\">A</text><text x=\"165\" y=\"99\">B</text><text x=\"165\" y=\"25\">C</text><text x=\"142\" y=\"83\" text-anchor=\"middle\">D</text><text x=\"124\" y=\"23\" text-anchor=\"middle\">E</text><text x=\"106\" y=\"83\" text-anchor=\"middle\">F</text><text x=\"83\" y=\"25\" text-anchor=\"end\">G</text>" +
         "</svg></figure>" +
-        "<p class=\"geo-given\">A cross-stitch pattern is sewn on a grid. A crown is polygon <strong>ABCDEFG</strong> with A(−5, 1), B(−1, 1), C(−1, 4), D(−2, 2), E(−3, 4), F(−4, 2) and G(−5, 4).</p>",
+        "<p class=\"geo-given\">A cross-stitch pattern is sewn on a grid. A crown is polygon <strong>ABCDEFG</strong> with A(−6, 1), B(−2, 1), C(−2, 4), D(−3, 2), E(−4, 4), F(−5, 2) and G(−6, 4).</p>",
       claims: [
         {
           id: "slide-c",
@@ -129,23 +129,23 @@
           sub: "G.RLT.3.2",
           stem: "The crown is stitched again using the rule (x, y) → (x + 6, y − 3). What is the image of C?",
           choices: [
-            { letter: "A", text: "(−7, 7)" },
-            { letter: "B", text: "(−4, 10)" },
-            { letter: "C", text: "(5, 4)" },
-            { letter: "D", text: "(5, 1)" }
+            { letter: "A", text: "(−8, 7)" },
+            { letter: "B", text: "(−5, 10)" },
+            { letter: "C", text: "(4, 4)" },
+            { letter: "D", text: "(4, 1)" }
           ],
           correct: "D"
         },
         {
-          id: "flip-e",
+          id: "flip-g",
           sol: "G.RLT.3",
           sub: "G.RLT.3.2",
-          stem: "What is the image of E after a reflection over the x-axis?",
+          stem: "What is the image of G after a reflection over the x-axis?",
           choices: [
-            { letter: "A", text: "(−3, −4)" },
-            { letter: "B", text: "(3, 4)" },
-            { letter: "C", text: "(3, −4)" },
-            { letter: "D", text: "(4, −3)" }
+            { letter: "A", text: "(−6, −4)" },
+            { letter: "B", text: "(6, 4)" },
+            { letter: "C", text: "(6, −4)" },
+            { letter: "D", text: "(4, −6)" }
           ],
           correct: "A"
         },
@@ -155,10 +155,10 @@
           sub: "G.RLT.3.2",
           stem: "What is the image of A after a rotation of 180° about the origin?",
           choices: [
-            { letter: "A", text: "(−5, −1)" },
-            { letter: "B", text: "(5, 1)" },
-            { letter: "C", text: "(−1, −5)" },
-            { letter: "D", text: "(5, −1)" }
+            { letter: "A", text: "(−6, −1)" },
+            { letter: "B", text: "(6, 1)" },
+            { letter: "C", text: "(−1, −6)" },
+            { letter: "D", text: "(6, −1)" }
           ],
           correct: "D"
         },
@@ -168,10 +168,10 @@
           sub: "G.RLT.3.2",
           stem: "What is the image of F after a reflection over the y-axis?",
           choices: [
-            { letter: "A", text: "(−4, −2)" },
-            { letter: "B", text: "(4, −2)" },
-            { letter: "C", text: "(4, 2)" },
-            { letter: "D", text: "(2, −4)" }
+            { letter: "A", text: "(−5, −2)" },
+            { letter: "B", text: "(5, −2)" },
+            { letter: "C", text: "(5, 2)" },
+            { letter: "D", text: "(2, −5)" }
           ],
           correct: "C"
         },
@@ -182,9 +182,9 @@
           stem: "Which line is a line of symmetry of the crown?",
           choices: [
             { letter: "A", text: "y = 2.5" },
-            { letter: "B", text: "x = −3" },
+            { letter: "B", text: "x = −4" },
             { letter: "C", text: "x = 0" },
-            { letter: "D", text: "x = −1" }
+            { letter: "D", text: "x = −2" }
           ],
           correct: "B"
         },
@@ -429,28 +429,28 @@
         "<p class=\"geo-given\">A fabric designer prints motif <strong>PQRS</strong> with P(2, 1), Q(5, 2), R(4, 4) and S(1, 3). She makes mirror copies by reflecting the motif over lines, like folding the fabric. One fold line is x = 6.</p>",
       claims: [
         {
-          id: "yx-q",
+          id: "yx-s",
           sol: "G.RLT.3",
           sub: "G.RLT.3.2",
-          stem: "What is the image of Q after a reflection over the line y = x?",
+          stem: "One fold runs along the line y = x. What is the image of S in that fold?",
           choices: [
-            { letter: "A", text: "(−2, −5)" },
-            { letter: "B", text: "(−5, 2)" },
-            { letter: "C", text: "(2, 5)" },
-            { letter: "D", text: "(2, −5)" }
+            { letter: "A", text: "(−3, −1)" },
+            { letter: "B", text: "(−1, 3)" },
+            { letter: "C", text: "(3, 1)" },
+            { letter: "D", text: "(3, −1)" }
           ],
           correct: "C"
         },
         {
-          id: "ynx-s",
+          id: "ynx-q",
           sol: "G.RLT.3",
           sub: "G.RLT.3.2",
-          stem: "What is the image of S after a reflection over the line y = −x?",
+          stem: "Another fold runs along the line y = −x. What is the image of Q in that fold?",
           choices: [
-            { letter: "A", text: "(3, 1)" },
-            { letter: "B", text: "(−3, −1)" },
-            { letter: "C", text: "(−1, −3)" },
-            { letter: "D", text: "(−3, 1)" }
+            { letter: "A", text: "(2, 5)" },
+            { letter: "B", text: "(−2, −5)" },
+            { letter: "C", text: "(−5, −2)" },
+            { letter: "D", text: "(−2, 5)" }
           ],
           correct: "B"
         },
@@ -463,7 +463,7 @@
             { letter: "A", text: "(6, 1)" },
             { letter: "B", text: "(4, 1)" },
             { letter: "C", text: "(8, 1)" },
-            { letter: "D", text: "(NaN, NaN)" }
+            { letter: "D", text: "(10, 1)" }
           ],
           correct: "D"
         },
@@ -573,10 +573,10 @@
           sub: "G.RLT.3.3",
           stem: "For a small sticker, a dilation centered at the origin maps C(6, 4) to (1.5, 1). What is its scale factor?",
           choices: [
-            { letter: "A", text: "4" },
-            { letter: "B", text: "4.5" },
-            { letter: "C", text: "1/4" },
-            { letter: "D", text: "3" }
+            { letter: "A", text: "k = 4" },
+            { letter: "B", text: "k = 4.5" },
+            { letter: "C", text: "k = 1/4" },
+            { letter: "D", text: "k = 3" }
           ],
           correct: "C"
         },
@@ -1181,10 +1181,10 @@
           sub: "G.RLT.3.3",
           stem: "A dilation centered at the origin maps E(−6, 3) to (−2, 1). What is its scale factor?",
           choices: [
-            { letter: "A", text: "3" },
-            { letter: "B", text: "1/3" },
-            { letter: "C", text: "4" },
-            { letter: "D", text: "2" }
+            { letter: "A", text: "k = 3" },
+            { letter: "B", text: "k = 1/3" },
+            { letter: "C", text: "k = 4" },
+            { letter: "D", text: "k = 2" }
           ],
           correct: "B"
         },
@@ -1267,7 +1267,7 @@
           id: "ccw270-c",
           sol: "G.RLT.3",
           sub: "G.RLT.3.2",
-          stem: "What is the image of C after a rotation of 270° counterclockwise about O?",
+          stem: "The wing turns 270° counterclockwise about O. What is the image of C?",
           choices: [
             { letter: "A", text: "(−1, 4)" },
             { letter: "B", text: "(−4, −1)" },
