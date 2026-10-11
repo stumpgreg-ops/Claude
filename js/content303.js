@@ -517,7 +517,7 @@
           id: "contra-2",
           sol: "G.RLT.1",
           sub: "G.RLT.1.2",
-          stem: "Which is the contrapositive of rule 2?",
+          stem: "Which sentence is the contrapositive of rule 2 for the set pieces?",
           choices: [
             { letter: "A", text: "If the stage manager signs off a piece, then it needs a brace." },
             { letter: "B", text: "If a piece does not need a brace, then the stage manager does not sign it off." },
@@ -1018,7 +1018,7 @@
       blurb: "A nature camp's checklist of 9 animals in three sets.",
       level: 2,
       passage:
-        "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 168\" role=\"img\" aria-label=\"Three overlapping ovals D, N and W. D only: deer, hare, duck. N only: owl, bat. D and N but not W: fox. All three: otter. D and W but not N: heron. Outside all circles: mink. No names are in W only or in N and W only\"><rect class=\"thin\" x=\"4\" y=\"4\" width=\"312\" height=\"160\"/><ellipse class=\"sh2\" cx=\"112\" cy=\"62\" rx=\"84\" ry=\"54\"/><ellipse class=\"sh2\" cx=\"208\" cy=\"62\" rx=\"84\" ry=\"54\"/><ellipse class=\"sh\" cx=\"160\" cy=\"118\" rx=\"92\" ry=\"46\"/><text class=\"sm\" x=\"66\" y=\"44\" text-anchor=\"middle\">deer</text><text class=\"sm\" x=\"66\" y=\"62\" text-anchor=\"middle\">hare</text><text class=\"sm\" x=\"66\" y=\"80\" text-anchor=\"middle\">duck</text><text class=\"sm\" x=\"254\" y=\"52\" text-anchor=\"middle\">owl</text><text class=\"sm\" x=\"254\" y=\"70\" text-anchor=\"middle\">bat</text><text class=\"sm\" x=\"160\" y=\"40\" text-anchor=\"middle\">fox</text><text class=\"sm\" x=\"160\" y=\"88\" text-anchor=\"middle\">otter</text><text class=\"sm\" x=\"110\" y=\"102\" text-anchor=\"middle\">heron</text><text class=\"sm\" x=\"292\" y=\"156\" text-anchor=\"middle\">mink</text><text x=\"30\" y=\"26\" text-anchor=\"middle\">D</text><text x=\"290\" y=\"26\" text-anchor=\"middle\">N</text><text x=\"266\" y=\"150\" text-anchor=\"middle\">W</text></svg></figure><p class=\"geo-given\">A nature camp's checklist has 9 animals. <strong>D</strong> is the set seen at the pond during the day, <strong>N</strong> the set seen there at night and <strong>W</strong> the set seen in the water. A region with no names holds no animals.</p>",
+        "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 168\" role=\"img\" aria-label=\"Three overlapping ovals D, N and W. D only: deer, hare, duck. N only: owl, bat. D and N but not W: fox. All three: otter. D and W but not N: heron. Outside all circles: mink. No names are in W only or in N and W only\"><rect class=\"thin\" x=\"4\" y=\"4\" width=\"312\" height=\"160\"/><ellipse class=\"sh2\" cx=\"112\" cy=\"62\" rx=\"84\" ry=\"54\"/><ellipse class=\"sh2\" cx=\"208\" cy=\"62\" rx=\"84\" ry=\"54\"/><ellipse class=\"sh\" cx=\"160\" cy=\"118\" rx=\"92\" ry=\"46\"/><text class=\"sm\" x=\"66\" y=\"44\" text-anchor=\"middle\">deer</text><text class=\"sm\" x=\"66\" y=\"62\" text-anchor=\"middle\">hare</text><text class=\"sm\" x=\"66\" y=\"80\" text-anchor=\"middle\">duck</text><text class=\"sm\" x=\"254\" y=\"52\" text-anchor=\"middle\">owl</text><text class=\"sm\" x=\"254\" y=\"70\" text-anchor=\"middle\">bat</text><text class=\"sm\" x=\"160\" y=\"40\" text-anchor=\"middle\">fox</text><text class=\"sm\" x=\"160\" y=\"88\" text-anchor=\"middle\">otter</text><text class=\"sm\" x=\"110\" y=\"102\" text-anchor=\"middle\">heron</text><text class=\"sm\" x=\"292\" y=\"156\" text-anchor=\"middle\">mink</text><text x=\"30\" y=\"26\" text-anchor=\"middle\">D</text><text x=\"290\" y=\"26\" text-anchor=\"middle\">N</text><text x=\"56\" y=\"150\" text-anchor=\"middle\">W</text></svg></figure><p class=\"geo-given\">A nature camp's checklist has 9 animals. <strong>D</strong> is the set seen at the pond during the day, <strong>N</strong> the set seen there at night and <strong>W</strong> the set seen in the water. A region with no names holds no animals.</p>",
       claims: [
         {
           id: "d-and-w",
@@ -1180,7 +1180,7 @@
           id: "contra-1",
           sol: "G.RLT.1",
           sub: "G.RLT.1.2",
-          stem: "Which is the contrapositive of rule 1?",
+          stem: "Which sentence is the contrapositive of rule 1 about the river?",
           choices: [
             { letter: "A", text: "If the low trail is closed, then the river is above 6 ft." },
             { letter: "B", text: "If the river is not above 6 ft, then the low trail is open." },
@@ -1206,7 +1206,7 @@
           id: "x",
           sol: "G.RLT.1",
           sub: "G.RLT.1.4",
-          stem: "What is the value of x?",
+          stem: "What is the value of x in the orchard diagram?",
           choices: [
             { letter: "A", text: "11" },
             { letter: "B", text: "10" },

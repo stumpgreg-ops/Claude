@@ -746,7 +746,7 @@
       blurb: "A rolling suitcase that just fits in the overhead bin.",
       level: 1,
       passage:
-        "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 160\" role=\"img\" aria-label=\"A carry-on suitcase drawn as a rectangular prism standing upright: 14 in wide, 22 in tall and 9 in deep, with a handle on top and a zipper line on the front. Hidden edges are dashed.\"><polygon class=\"sh2\" points=\"128,140 202.2,140 202.2,23.4 128,23.4\"/><path class=\"ln\" d=\"M128 140 L202.2 140 M202.2 140 L222.9 128.1 M222.9 11.5 L148.7 11.5 M202.2 23.4 L222.9 11.5 M128 23.4 L202.2 23.4 M128 23.4 L148.7 11.5 M202.2 140 L202.2 23.4 M128 140 L128 23.4 M222.9 128.1 L222.9 11.5\"/><path class=\"ln dash\" d=\"M222.9 128.1 L148.7 128.1 M128 140 L148.7 128.1 M148.7 128.1 L148.7 11.5\"/><path class=\"thin\" d=\"M164.8 17.4 V11.4 H186 V17.4\"/><line class=\"thin dash\" x1=\"136\" y1=\"129.4\" x2=\"136\" y2=\"34\"/><text x=\"165.1\" y=\"157\" text-anchor=\"middle\">14 in</text><text x=\"121\" y=\"86.7\" text-anchor=\"end\">22 in</text><text x=\"221.5\" y=\"147\">9 in</text></svg></figure><p class=\"geo-given\">A carry-on suitcase is a rectangular prism. Standing up, it is 14 in wide, 22 in tall and 9 in deep.</p>",
+        "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 160\" role=\"img\" aria-label=\"A carry-on suitcase drawn as a rectangular prism standing upright: 14 in wide, 22 in tall and 9 in deep, with a handle on top. Hidden edges are dashed.\"><polygon class=\"sh2\" points=\"128,140 202.2,140 202.2,23.4 128,23.4\"/><path class=\"ln\" d=\"M128 140 L202.2 140 M202.2 140 L222.9 128.1 M222.9 11.5 L148.7 11.5 M202.2 23.4 L222.9 11.5 M128 23.4 L202.2 23.4 M128 23.4 L148.7 11.5 M202.2 140 L202.2 23.4 M128 140 L128 23.4 M222.9 128.1 L222.9 11.5\"/><path class=\"ln dash\" d=\"M222.9 128.1 L148.7 128.1 M128 140 L148.7 128.1 M148.7 128.1 L148.7 11.5\"/><path class=\"thin\" d=\"M164.8 17.4 V11.4 H186 V17.4\"/><text x=\"165.1\" y=\"157\" text-anchor=\"middle\">14 in</text><text x=\"121\" y=\"86.7\" text-anchor=\"end\">22 in</text><text x=\"221.5\" y=\"147\">9 in</text></svg></figure><p class=\"geo-given\">A carry-on suitcase is a rectangular prism. Standing up, it is 14 in wide, 22 in tall and 9 in deep.</p>",
       claims: [
         {
           id: "volume",
@@ -837,7 +837,7 @@
       blurb: "A rubber wedge that keeps a parked plane from rolling.",
       level: 1,
       passage:
-        "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 140\" role=\"img\" aria-label=\"An airplane wheel chock drawn as a triangular prism. Each end is a right triangle with legs of 7 in (up) and 24 in (along the ground) and a 25 in sloped side; the chock is 10 in wide. Hidden edges are dashed.\"><polygon class=\"sh\" points=\"24,118 252,118 24,51.5\"/><path class=\"ln\" d=\"M252 118 L24 51.5 M24 118 L252 118 M24 118 L24 51.5 M293.1 94.3 L65.1 27.8 M252 118 L293.1 94.3 M24 51.5 L65.1 27.8\"/><path class=\"ln dash\" d=\"M65.1 94.3 L65.1 27.8 M65.1 94.3 L293.1 94.3 M24 118 L65.1 94.3\"/><path class=\"thin\" d=\"M32 118 V110 H24\"/><text x=\"138\" y=\"135\" text-anchor=\"middle\">24 in</text><text x=\"26\" y=\"44.5\" text-anchor=\"middle\">7 in</text><text x=\"144.2\" y=\"67.6\" text-anchor=\"middle\">25 in</text><text x=\"282.6\" y=\"120.1\">10 in</text></svg></figure><p class=\"geo-given\">At the airport, a rubber wheel chock keeps a parked plane from rolling. The chock is a triangular prism. Each end is a right triangle with legs of 7 in and 24 in and a sloped side of 25 in, and the chock is 10 in wide.</p>",
+        "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 140\" role=\"img\" aria-label=\"An airplane wheel chock drawn as a triangular prism. Each end is a right triangle with legs of 7 in (up) and 24 in (along the ground) and a 25 in sloped side; the chock is 10 in wide. Hidden edges are dashed.\"><polygon class=\"sh\" points=\"46,112 257.2,112 46,50.4\"/><path class=\"ln\" d=\"M257.2 112 L46 50.4 M46 112 L257.2 112 M46 112 L46 50.4 M295.3 90 L84.1 28.4 M257.2 112 L295.3 90 M46 50.4 L84.1 28.4\"/><path class=\"ln dash\" d=\"M84.1 90 L84.1 28.4 M84.1 90 L295.3 90 M46 112 L84.1 90\"/><path class=\"thin\" d=\"M54 112 V104 H46\"/><text x=\"151.6\" y=\"129\" text-anchor=\"middle\">24 in</text><text x=\"39\" y=\"86.2\" text-anchor=\"end\">7 in</text><text x=\"157.8\" y=\"64.1\" text-anchor=\"middle\">25 in</text><text x=\"280.3\" y=\"119\">10 in</text></svg></figure><p class=\"geo-given\">At the airport, a rubber wheel chock keeps a parked plane from rolling. The chock is a triangular prism. Each end is a right triangle with legs of 7 in and 24 in and a sloped side of 25 in, and the chock is 10 in wide.</p>",
       claims: [
         {
           id: "volume",
@@ -1005,6 +1005,461 @@
             { letter: "B", text: "5.5 m²" },
             { letter: "C", text: "0.9 m²" },
             { letter: "D", text: "2.8 m²" }
+          ],
+          correct: "D"
+        }
+      ]
+    },
+    {
+      id: "geo-df1-sky-hangar",
+      family: "GEO",
+      mode: "sky",
+      title: "The Airport Hangar",
+      kind: "3-D figures · G.DF.1",
+      blurb: "A half-cylinder hangar with a big door for small planes.",
+      level: 2,
+      passage:
+        "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 170\" role=\"img\" aria-label=\"An airport hangar drawn as half of a cylinder lying on its flat side. The front wall is a half circle with radius 25 m, marked along the floor from the center to the left corner, with a rectangular door; the hangar is 60 m long. Hidden edges are dashed.\"><path class=\"sh2\" d=\"M20 140 L185 140 A82.5 82.5 0 0 0 20 140 Z\"/><path class=\"ln\" d=\"M20 140 L185 140 L270.7 90.5 A82.5 82.5 0 0 0 147 19.1 M61.3 68.6 L147 19.1 M185 140 A82.5 82.5 0 0 0 20 140\"/><path class=\"ln dash\" d=\"M147 19.1 A82.5 82.5 0 0 0 105.7 90.5 L270.7 90.5 M20 140 L105.7 90.5\"/><rect class=\"thin\" x=\"62.9\" y=\"100.4\" width=\"79.2\" height=\"39.6\"/><text class=\"sm\" x=\"102.5\" y=\"124.4\" text-anchor=\"middle\">door</text><circle class=\"dt\" cx=\"102.5\" cy=\"140\" r=\"2.5\"/><path class=\"thin\" d=\"M20 148 H102.5 M20 143 V153 M102.5 143 V153\"/><text x=\"61.3\" y=\"163\" text-anchor=\"middle\">25 m</text><text x=\"239.9\" y=\"129.3\">60 m</text></svg></figure><p class=\"geo-given\">An airport hangar is half of a cylinder lying on its flat side. The curved roof has a radius of 25 m, and the hangar is 60 m long. The front wall is a half circle with a door opening 24 m wide and 12 m tall.</p>",
+      claims: [
+        {
+          id: "volume",
+          sol: "G.DF.1",
+          sub: "G.DF.1.2",
+          stem: "What is the volume of the hangar, in terms of π?",
+          choices: [
+            { letter: "A", text: "37,500π m³" },
+            { letter: "B", text: "18,750π m³" },
+            { letter: "C", text: "75,000π m³" },
+            { letter: "D", text: "750π m³" }
+          ],
+          correct: "B"
+        },
+        {
+          id: "roofexpr",
+          sol: "G.DF.1",
+          sub: "G.DF.1.2",
+          stem: "Which expression gives the area of the curved roof, in square meters?",
+          choices: [
+            { letter: "A", text: "2 · π · 25 · 60" },
+            { letter: "B", text: "π · 25 · 60 + π · 25²" },
+            { letter: "C", text: "π · 25 · 60" },
+            { letter: "D", text: "½ · π · 25² · 60" }
+          ],
+          correct: "C"
+        },
+        {
+          id: "longcut",
+          sol: "G.DF.1",
+          sub: "G.DF.1.1",
+          stem: "A vertical plane cuts the hangar from front to back through the top of the arch. What is the cross section?",
+          choices: [
+            { letter: "A", text: "a rectangle 50 m tall and 60 m long" },
+            { letter: "B", text: "a rectangle 12.5 m tall and 60 m long" },
+            { letter: "C", text: "a half circle with radius 25 m" },
+            { letter: "D", text: "a rectangle 25 m tall and 60 m long" }
+          ],
+          correct: "D"
+        },
+        {
+          id: "levelcut",
+          sol: "G.DF.1",
+          sub: "G.DF.1.1",
+          stem: "A level plane cuts the hangar 7 m above the floor. What is the cross section?",
+          choices: [
+            { letter: "A", text: "a rectangle 48 m by 60 m" },
+            { letter: "B", text: "a rectangle 24 m by 60 m" },
+            { letter: "C", text: "a rectangle 50 m by 60 m" },
+            { letter: "D", text: "a rectangle 36 m by 60 m" }
+          ],
+          correct: "A"
+        },
+        {
+          id: "metal",
+          sol: "G.DF.1",
+          sub: "G.DF.1.3",
+          stem: "Metal for the curved roof costs $26 per square meter. To the nearest dollar, what does the roof metal cost?",
+          choices: [
+            { letter: "A", text: "$245,044" },
+            { letter: "B", text: "$173,573" },
+            { letter: "C", text: "$122,522" },
+            { letter: "D", text: "$78,000" }
+          ],
+          correct: "C"
+        },
+        {
+          id: "wall",
+          sol: "G.DF.1",
+          sub: "G.DF.1.3",
+          stem: "To the nearest square meter, what is the area of the front wall, not counting the door opening?",
+          choices: [
+            { letter: "A", text: "982 m²" },
+            { letter: "B", text: "694 m²" },
+            { letter: "C", text: "1,270 m²" },
+            { letter: "D", text: "3,639 m²" }
+          ],
+          correct: "B"
+        }
+      ]
+    },
+    {
+      id: "geo-df1-sky-clock-tower",
+      family: "GEO",
+      mode: "sky",
+      title: "The Station Clock Tower",
+      kind: "3-D figures · G.DF.1",
+      blurb: "A tall square tower with a pointed roof over the train platform.",
+      level: 2,
+      passage:
+        "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 168\" role=\"img\" aria-label=\"A train station clock tower drawn as a square prism 5 m wide and 12 m tall, topped by a square pyramid roof. A dashed segment marked 6 m runs from the tip of the roof straight down to the center of the roof's base. A clock face is on the front wall. Hidden edges are dashed.\"><polygon class=\"sh2\" points=\"128,144 164,144 164,57.6 128,57.6\"/><polygon class=\"sh\" points=\"128,57.6 164,57.6 153.8,9.9\"/><path class=\"ln\" d=\"M128 144 L164 144 M164 144 L179.6 135 M128 57.6 L164 57.6 M164 144 L164 57.6 M128 144 L128 57.6 M164 57.6 L179.6 48.6 M179.6 135 L179.6 48.6 M164 57.6 L153.8 9.9 M128 57.6 L153.8 9.9 M179.6 48.6 L153.8 9.9\"/><path class=\"ln dash\" d=\"M179.6 135 L143.6 135 M128 144 L143.6 135 M179.6 48.6 L143.6 48.6 M143.6 135 L143.6 48.6 M128 57.6 L143.6 48.6 M143.6 48.6 L153.8 9.9\"/><line class=\"thin dash\" x1=\"153.8\" y1=\"9.9\" x2=\"153.8\" y2=\"53.1\"/><circle class=\"dt\" cx=\"153.8\" cy=\"53.1\" r=\"2\"/><circle class=\"thin\" cx=\"146\" cy=\"75.6\" r=\"10.8\"/><path class=\"thin\" d=\"M146 75.6 V68 M146 75.6 L151.4 76.6\"/><line class=\"thin\" x1=\"198.6\" y1=\"31.5\" x2=\"155.8\" y2=\"31.5\"/><text x=\"201.6\" y=\"36.5\">6 m</text><text x=\"146\" y=\"161\" text-anchor=\"middle\">5 m</text><text x=\"121\" y=\"105.8\" text-anchor=\"end\">12 m</text></svg></figure><p class=\"geo-given\">A train station's clock tower is a square prism 5 m wide and 12 m tall. Its roof is a square pyramid with the same 5 m by 5 m base and a height of 6 m. A round clock face 3 m across is on each of the four walls.</p>",
+      claims: [
+        {
+          id: "slant",
+          sol: "G.DF.1",
+          sub: "G.DF.1.2",
+          stem: "What is the slant height of the roof's triangular faces?",
+          choices: [
+            { letter: "A", text: "8.5 m" },
+            { letter: "B", text: "6.5 m" },
+            { letter: "C", text: "6 m" },
+            { letter: "D", text: "about 7.8 m" }
+          ],
+          correct: "B"
+        },
+        {
+          id: "roof",
+          sol: "G.DF.1",
+          sub: "G.DF.1.2",
+          stem: "The four sloped faces of the roof are covered with copper. What area is covered?",
+          choices: [
+            { letter: "A", text: "60 m²" },
+            { letter: "B", text: "130 m²" },
+            { letter: "C", text: "65 m²" },
+            { letter: "D", text: "16.25 m²" }
+          ],
+          correct: "C"
+        },
+        {
+          id: "volume",
+          sol: "G.DF.1",
+          sub: "G.DF.1.3",
+          stem: "What is the volume of the whole tower, roof included?",
+          choices: [
+            { letter: "A", text: "350 m³" },
+            { letter: "B", text: "450 m³" },
+            { letter: "C", text: "150 m³" },
+            { letter: "D", text: "375 m³" }
+          ],
+          correct: "A"
+        },
+        {
+          id: "vcut",
+          sol: "G.DF.1",
+          sub: "G.DF.1.1",
+          stem: "A vertical plane parallel to the front wall passes through the tip of the roof. What is the area of the cross section?",
+          choices: [
+            { letter: "A", text: "60 m²" },
+            { letter: "B", text: "90 m²" },
+            { letter: "C", text: "76.25 m²" },
+            { letter: "D", text: "75 m²" }
+          ],
+          correct: "D"
+        },
+        {
+          id: "levelcut",
+          sol: "G.DF.1",
+          sub: "G.DF.1.1",
+          stem: "A level plane cuts the roof 4.8 m above the bottom of the roof. What is the cross section?",
+          choices: [
+            { letter: "A", text: "a square with 1 m sides" },
+            { letter: "B", text: "a square with 4 m sides" },
+            { letter: "C", text: "a square with 5 m sides" },
+            { letter: "D", text: "a square with 0.2 m sides" }
+          ],
+          correct: "A"
+        },
+        {
+          id: "paint",
+          sol: "G.DF.1",
+          sub: "G.DF.1.3",
+          stem: "The four walls are painted, but not the clock faces. Each can of paint covers 25 m². How many cans must be bought?",
+          choices: [
+            { letter: "A", text: "10" },
+            { letter: "B", text: "9" },
+            { letter: "C", text: "8" },
+            { letter: "D", text: "6" }
+          ],
+          correct: "B"
+        }
+      ]
+    },
+    {
+      id: "geo-df1-sky-salt-shed",
+      family: "GEO",
+      mode: "sky",
+      title: "The Road Salt Shed",
+      kind: "3-D figures · G.DF.1",
+      blurb: "Winter road salt is stored under a cone-shaped roof.",
+      level: 2,
+      passage:
+        "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 170\" role=\"img\" aria-label=\"A road salt shed drawn as a short cylinder 30 m across with a wall 5 m tall, topped by a cone-shaped roof 8 m tall whose sloped edge is 17 m. Hidden edges are dashed.\"><path class=\"sh2\" d=\"M70 78.7 V108 A90 19.8 0 0 0 250 108 V78.7 A90 19.8 0 0 1 70 78.7 Z\"/><path class=\"sh\" d=\"M160 31.9 L241.6 70.4 A90 19.8 0 1 1 78.4 70.4 Z\"/><path class=\"ln\" d=\"M78.4 70.4 L160 31.9 L241.6 70.4 A90 19.8 0 1 1 78.4 70.4\"/><path class=\"ln dash\" d=\"M78.4 70.4 A90 19.8 0 0 1 241.6 70.4\"/><path class=\"ln\" d=\"M70 78.7 V108 M250 78.7 V108 M250 108 A90 19.8 0 0 1 70 108\"/><path class=\"ln dash\" d=\"M70 108 A90 19.8 0 0 1 250 108\"/><path class=\"thin\" d=\"M262 31.9 V78.7 M257 31.9 H267 M257 78.7 H267\"/><path class=\"thin dash\" d=\"M164 31.9 H258\"/><text x=\"270\" y=\"60.3\">8 m</text><path class=\"thin\" d=\"M58 78.7 V108 M53 78.7 H63 M53 108 H63\"/><text x=\"50\" y=\"98.4\" text-anchor=\"end\">5 m</text><text x=\"112.4\" y=\"40.7\" text-anchor=\"middle\">17 m</text><path class=\"thin\" d=\"M70 136.8 H250 M70 131.8 V141.8 M250 131.8 V141.8\"/><text x=\"246\" y=\"152.8\" text-anchor=\"end\">30 m</text></svg></figure><p class=\"geo-given\">The highway department stores road salt for icy roads in a round shed. Its wall is a cylinder 30 m across and 5 m tall. The roof is a cone with the same 30 m diameter, a height of 8 m and a slant height of 17 m.</p>",
+      claims: [
+        {
+          id: "volume",
+          sol: "G.DF.1",
+          sub: "G.DF.1.3",
+          stem: "How much space is inside the shed, wall part and roof part together, to the nearest cubic meter?",
+          choices: [
+            { letter: "A", text: "3,534 m³" },
+            { letter: "B", text: "9,189 m³" },
+            { letter: "C", text: "5,419 m³" },
+            { letter: "D", text: "7,540 m³" }
+          ],
+          correct: "C"
+        },
+        {
+          id: "roof",
+          sol: "G.DF.1",
+          sub: "G.DF.1.2",
+          stem: "The roof is covered with metal. What is the area of the roof, in terms of π?",
+          choices: [
+            { letter: "A", text: "120π m²" },
+            { letter: "B", text: "480π m²" },
+            { letter: "C", text: "510π m²" },
+            { letter: "D", text: "255π m²" }
+          ],
+          correct: "D"
+        },
+        {
+          id: "vcut",
+          sol: "G.DF.1",
+          sub: "G.DF.1.1",
+          stem: "A vertical plane cuts the shed through the tip of the roof and the center of the floor. What is the area of the cross section?",
+          choices: [
+            { letter: "A", text: "150 m²" },
+            { letter: "B", text: "270 m²" },
+            { letter: "C", text: "390 m²" },
+            { letter: "D", text: "405 m²" }
+          ],
+          correct: "B"
+        },
+        {
+          id: "paint",
+          sol: "G.DF.1",
+          sub: "G.DF.1.3",
+          stem: "The curved outside of the wall is painted. One can of paint covers 40 m². How many cans must be bought?",
+          choices: [
+            { letter: "A", text: "12" },
+            { letter: "B", text: "11" },
+            { letter: "C", text: "24" },
+            { letter: "D", text: "6" }
+          ],
+          correct: "A"
+        },
+        {
+          id: "net",
+          sol: "G.DF.1",
+          sub: "G.DF.1.1",
+          stem: "The floor, the wall and the roof are unfolded flat. Which shapes make up the net of the shed?",
+          choices: [
+            { letter: "A", text: "two circles, a rectangle and a sector" },
+            { letter: "B", text: "a circle, a rectangle and a triangle" },
+            { letter: "C", text: "a circle and two rectangles" },
+            { letter: "D", text: "a circle, a rectangle and a sector" }
+          ],
+          correct: "D"
+        },
+        {
+          id: "error",
+          sol: "G.DF.1",
+          sub: "G.DF.1.2",
+          stem: "Mia writes the volume of the roof as (1/3) · π · 15² · 17. What did she do wrong?",
+          choices: [
+            { letter: "A", text: "She should use the 30 m diameter in place of 15 m." },
+            { letter: "B", text: "She should leave out the 1/3 because the roof sits on a cylinder." },
+            { letter: "C", text: "She used the slant height; the 8 m height belongs there." },
+            { letter: "D", text: "Nothing; that expression gives the roof's volume." }
+          ],
+          correct: "C"
+        }
+      ]
+    },
+    {
+      id: "geo-df1-sky-bridge-pier",
+      family: "GEO",
+      mode: "sky",
+      title: "The Bridge Pier",
+      kind: "3-D figures · G.DF.1",
+      blurb: "A concrete pier with rounded ends stands in the river.",
+      level: 3,
+      passage:
+        "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 168\" role=\"img\" aria-label=\"A concrete bridge pier drawn as a solid standing 11 m tall. Its top is a 10 m long rectangle with a half circle on each end, 5 m across. Lines mark where the flat sides meet the rounded ends. The hidden back of the bottom edge is dashed.\"><path class=\"sh2\" d=\"M85 40.7 V136 A25 12.5 0 0 0 110 148.5 H210 A25 12.5 0 0 0 235 136 V40.7 Z\"/><path class=\"ln\" d=\"M110 28.2 H210 A25 12.5 0 0 1 210 53.2 H110 A25 12.5 0 0 1 110 28.2 Z\"/><path class=\"ln\" d=\"M85 40.7 V136 A25 12.5 0 0 0 110 148.5 H210 A25 12.5 0 0 0 235 136 V40.7\"/><path class=\"ln dash\" d=\"M85 136 A25 12.5 0 0 1 110 123.5 H210 A25 12.5 0 0 1 235 136\"/><path class=\"thin\" d=\"M110 53.2 V148.5 M210 53.2 V148.5\"/><line class=\"thin\" x1=\"210\" y1=\"28.2\" x2=\"210\" y2=\"53.2\"/><text x=\"242\" y=\"45.7\">5 m</text><path class=\"thin\" d=\"M73 40.7 V136 M68 40.7 H78 M68 136 H78\"/><text x=\"65\" y=\"93.4\" text-anchor=\"end\">11 m</text><text x=\"160\" y=\"165.5\" text-anchor=\"middle\">10 m</text></svg></figure><p class=\"geo-given\">A concrete bridge pier stands on a riverbed. Every level cross section of the pier is a 10 m by 5 m rectangle with a half circle on each 5 m end, and the pier is 11 m tall.</p>",
+      claims: [
+        {
+          id: "volume",
+          sol: "G.DF.1",
+          sub: "G.DF.1.3",
+          stem: "How much concrete is in the pier, to the nearest cubic meter?",
+          choices: [
+            { letter: "A", text: "766 m³" },
+            { letter: "B", text: "982 m³" },
+            { letter: "C", text: "825 m³" },
+            { letter: "D", text: "1,414 m³" }
+          ],
+          correct: "A"
+        },
+        {
+          id: "longcut",
+          sol: "G.DF.1",
+          sub: "G.DF.1.1",
+          stem: "A vertical plane cuts the pier along its whole length, through the centers of both rounded ends. What is the cross section?",
+          choices: [
+            { letter: "A", text: "a rectangle 10 m by 11 m" },
+            { letter: "B", text: "a rectangle 5 m by 11 m" },
+            { letter: "C", text: "a rectangle 15 m by 11 m" },
+            { letter: "D", text: "a rectangle 12.5 m by 11 m" }
+          ],
+          correct: "C"
+        },
+        {
+          id: "endcut",
+          sol: "G.DF.1",
+          sub: "G.DF.1.1",
+          stem: "A vertical plane parallel to the 5 m ends cuts through a rounded end, 1.8 m from the tip. What is the cross section?",
+          choices: [
+            { letter: "A", text: "a rectangle 5 m by 11 m" },
+            { letter: "B", text: "a rectangle 2.4 m by 11 m" },
+            { letter: "C", text: "a rectangle 3.6 m by 11 m" },
+            { letter: "D", text: "a rectangle 4.8 m by 11 m" }
+          ],
+          correct: "D"
+        },
+        {
+          id: "forms",
+          sol: "G.DF.1",
+          sub: "G.DF.1.2",
+          stem: "Before the pour, wooden forms covered the flat and curved sides of the pier, but not the top or bottom. To the nearest square meter, what area did the forms cover?",
+          choices: [
+            { letter: "A", text: "220 m²" },
+            { letter: "B", text: "393 m²" },
+            { letter: "C", text: "532 m²" },
+            { letter: "D", text: "283 m²" }
+          ],
+          correct: "B"
+        },
+        {
+          id: "trucks",
+          sol: "G.DF.1",
+          sub: "G.DF.1.3",
+          stem: "Each concrete truck carries 8 m³. How many truckloads were needed to pour the pier?",
+          choices: [
+            { letter: "A", text: "95" },
+            { letter: "B", text: "123" },
+            { letter: "C", text: "96" },
+            { letter: "D", text: "104" }
+          ],
+          correct: "C"
+        },
+        {
+          id: "water",
+          sol: "G.DF.1",
+          sub: "G.DF.1.3",
+          stem: "The river is 5 m deep at the pier. To the nearest cubic meter, what volume of the pier is under water?",
+          choices: [
+            { letter: "A", text: "348 m³" },
+            { letter: "B", text: "418 m³" },
+            { letter: "C", text: "446 m³" },
+            { letter: "D", text: "375 m³" }
+          ],
+          correct: "A"
+        }
+      ]
+    },
+    {
+      id: "geo-df1-sky-cargo-container",
+      family: "GEO",
+      mode: "sky",
+      title: "The Airplane Cargo Container",
+      kind: "3-D figures · G.DF.1",
+      blurb: "A baggage container with one corner cut off to fit the plane.",
+      level: 3,
+      passage:
+        "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 162\" role=\"img\" aria-label=\"An airplane cargo container drawn as a prism 5 ft deep. Each end is a five-sided shape: a 7 ft by 5 ft rectangle with its lower right corner cut off, so the floor is 5 ft wide and the right side is 3 ft tall above the cut. Hidden edges are dashed.\"><polygon class=\"sh2\" points=\"72,140 167,140 205,102 205,45 72,45\"/><path class=\"ln\" d=\"M205 45 L72 45 M205 102 L205 45 M167 140 L205 102 M72 140 L167 140 M72 140 L72 45 M208.1 116.3 L246.1 78.3 M246.1 78.3 L246.1 21.3 M246.1 21.3 L113.1 21.3 M167 140 L208.1 116.3 M205 102 L246.1 78.3 M205 45 L246.1 21.3 M72 45 L113.1 21.3\"/><path class=\"ln dash\" d=\"M113.1 116.3 L208.1 116.3 M113.1 116.3 L113.1 21.3 M72 140 L113.1 116.3\"/><text x=\"119.5\" y=\"157\" text-anchor=\"middle\">5 ft</text><text x=\"65\" y=\"97.5\" text-anchor=\"end\">5 ft</text><text x=\"144.5\" y=\"39\" text-anchor=\"middle\">7 ft</text><text x=\"213\" y=\"75.5\">3 ft</text><text x=\"84.6\" y=\"31.1\" text-anchor=\"end\">5 ft</text></svg></figure><p class=\"geo-given\">Bags ride in the plane's hold in a metal container shaped like a prism, 5 ft deep. Each end is a 7 ft by 5 ft rectangle with one lower corner cut off: the cut removes a right triangle with legs of 2 ft and 2 ft, so the floor is 5 ft wide.</p>",
+      claims: [
+        {
+          id: "endarea",
+          sol: "G.DF.1",
+          sub: "G.DF.1.2",
+          stem: "What is the area of one five-sided end of the container?",
+          choices: [
+            { letter: "A", text: "35 ft²" },
+            { letter: "B", text: "31 ft²" },
+            { letter: "C", text: "25 ft²" },
+            { letter: "D", text: "33 ft²" }
+          ],
+          correct: "D"
+        },
+        {
+          id: "levelcut",
+          sol: "G.DF.1",
+          sub: "G.DF.1.1",
+          stem: "A level plane cuts the container 1 ft above the floor. What is the cross section?",
+          choices: [
+            { letter: "A", text: "a rectangle 5 ft by 5 ft" },
+            { letter: "B", text: "a rectangle 6 ft by 5 ft" },
+            { letter: "C", text: "a rectangle 7 ft by 5 ft" },
+            { letter: "D", text: "a five-sided shape like the ends" }
+          ],
+          correct: "B"
+        },
+        {
+          id: "faces",
+          sol: "G.DF.1",
+          sub: "G.DF.1.1",
+          stem: "How many faces does the container have, and what are they?",
+          choices: [
+            { letter: "A", text: "7 faces: 2 pentagons and 5 rectangles" },
+            { letter: "B", text: "6 faces: 2 pentagons and 4 rectangles" },
+            { letter: "C", text: "7 faces: 2 pentagons, 4 rectangles and 1 triangle" },
+            { letter: "D", text: "8 faces: 2 pentagons and 6 rectangles" }
+          ],
+          correct: "A"
+        },
+        {
+          id: "skin",
+          sol: "G.DF.1",
+          sub: "G.DF.1.3",
+          stem: "The container's whole outside is aluminum. To the nearest square foot, how much aluminum is that?",
+          choices: [
+            { letter: "A", text: "114 ft²" },
+            { letter: "B", text: "176 ft²" },
+            { letter: "C", text: "180 ft²" },
+            { letter: "D", text: "190 ft²" }
+          ],
+          correct: "C"
+        },
+        {
+          id: "bags",
+          sol: "G.DF.1",
+          sub: "G.DF.1.3",
+          stem: "Each bag is a box 2.5 ft by 1.5 ft by 1 ft. Only 80% of the container's space can be filled with bags. How many bags can it hold?",
+          choices: [
+            { letter: "A", text: "44" },
+            { letter: "B", text: "35" },
+            { letter: "C", text: "36" },
+            { letter: "D", text: "37" }
+          ],
+          correct: "B"
+        },
+        {
+          id: "metric",
+          sol: "G.DF.1",
+          sub: "G.DF.1.3",
+          stem: "Airlines list space in cubic meters. To the nearest tenth, how many cubic meters does the container hold? Use 1 m³ ≈ 35.3 ft³.",
+          choices: [
+            { letter: "A", text: "5,824.5 m³" },
+            { letter: "B", text: "4.4 m³" },
+            { letter: "C", text: "0.9 m³" },
+            { letter: "D", text: "4.7 m³" }
           ],
           correct: "D"
         }
