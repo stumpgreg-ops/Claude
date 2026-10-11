@@ -220,7 +220,7 @@
             },
             {
               "letter": "C",
-              "text": "cos ∠NPM = 12/20"
+              "text": "cos ∠NPM = 12/16"
             },
             {
               "letter": "D",
@@ -619,11 +619,11 @@
             },
             {
               "letter": "C",
-              "text": "15/√709"
+              "text": "15/37"
             },
             {
               "letter": "D",
-              "text": "22/√709"
+              "text": "22/37"
             }
           ],
           "correct": "B"
@@ -744,7 +744,7 @@
           "id": "pitch12",
           "sol": "G.TR.4",
           "sub": "G.TR.4.4",
-          "stem": "Builders write a roof's pitch as its rise for every 12 units of run. A model roof 40 cm wide, like BC, has a pitch of 9 in 12. How tall is its gable, from the peak down to BC?",
+          "stem": "Builders write a roof's pitch as its rise for every 12 units of run, where the run of each side is half the roof's width. A model roof 40 cm wide, like BC, has a pitch of 9 in 12. How tall is its gable, from the peak down to BC?",
           "choices": [
             {
               "letter": "A",
@@ -987,7 +987,7 @@
       "kind": "Triangles · G.TR.4",
       "blurb": "Two sight lines from one balcony seat down to the stage.",
       "level": 3,
-      "passage": "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 160\" role=\"img\" aria-label=\"A viewer's eyes E in a theater balcony, 34 feet above point G on the level of the stage floor. Sight lines run from E down to F, the front edge of the stage, and to K, the foot of the back wall. A dashed horizontal line runs through E. The angle of depression from E to K, marked in gold, is 20 degrees, and the angle at F between FG and FE is 31 degrees\"><rect class=\"sh2\" x=\"6\" y=\"34\" width=\"50\" height=\"12\"/><rect class=\"sh2\" x=\"203.12\" y=\"118.4\" width=\"108.88\" height=\"20\"/><line class=\"ln\" x1=\"298.88\" y1=\"118.4\" x2=\"298.88\" y2=\"62.4\"/><line class=\"thin dash\" x1=\"56\" y1=\"118.4\" x2=\"203.12\" y2=\"118.4\"/><line class=\"thin dash\" x1=\"56\" y1=\"30\" x2=\"290\" y2=\"30\"/><line class=\"thin dash\" x1=\"56\" y1=\"30\" x2=\"56\" y2=\"118.4\"/><line class=\"ln\" x1=\"56\" y1=\"30\" x2=\"203.12\" y2=\"118.4\"/><line class=\"ac\" x1=\"56\" y1=\"30\" x2=\"298.88\" y2=\"118.4\"/><path class=\"thin\" d=\"M56 110.4 L64 110.4 L64 118.4\"/><path class=\"ac\" d=\"M99.23 45.73 A46 46 0 0 0 102 30\"/><path class=\"thin\" d=\"M184.26 107.07 A22 22 0 0 0 181.12 118.4\"/><circle class=\"dt\" cx=\"56\" cy=\"30\" r=\"3\"/><circle class=\"dt\" cx=\"56\" cy=\"118.4\" r=\"3\"/><circle class=\"dt\" cx=\"203.12\" cy=\"118.4\" r=\"3\"/><circle class=\"dt\" cx=\"298.88\" cy=\"118.4\" r=\"3\"/><text x=\"44\" y=\"26\" text-anchor=\"middle\">E</text><text x=\"44\" y=\"123.4\" text-anchor=\"middle\">G</text><text x=\"211.12\" y=\"110.4\" text-anchor=\"middle\">F</text><text x=\"308.88\" y=\"123.4\" text-anchor=\"middle\">K</text><text class=\"acc\" x=\"125.26\" y=\"44.39\" text-anchor=\"middle\">20°</text><text x=\"164.43\" y=\"113.78\" text-anchor=\"middle\">31°</text><text x=\"50\" y=\"80\" text-anchor=\"end\">34 ft</text><text class=\"sm\" x=\"250\" y=\"133.4\" text-anchor=\"middle\">stage</text><text class=\"sm\" x=\"30\" y=\"58\" text-anchor=\"middle\">balcony</text><text class=\"sm\" x=\"290.88\" y=\"78.4\" text-anchor=\"end\">back wall</text></svg></figure><p class=\"geo-given\">A viewer's eyes <strong>E</strong> in a theater balcony are 34 ft above the level of the stage floor. <strong>G</strong> is the point on that level directly below E. <strong>F</strong>, the front edge of the stage, and <strong>K</strong>, the foot of the back wall, are in line with G. From E, the angle of depression to K is 20°. From F, the angle of elevation to E is 31°.</p>",
+      "passage": "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 160\" role=\"img\" aria-label=\"A viewer's eyes E in a theater balcony, 34 feet above point G on the level of the stage floor. Sight lines run from E down to F, the front edge of the stage, and to K, the foot of the back wall. A dashed horizontal line runs through E. The angle of depression from E to K, marked in gold, is 20 degrees, and the angle at F between FG and FE is 31 degrees\"><rect class=\"sh2\" x=\"6\" y=\"34\" width=\"50\" height=\"12\"/><rect class=\"sh2\" x=\"203.12\" y=\"118.4\" width=\"95.76\" height=\"20\"/><line class=\"ln\" x1=\"298.88\" y1=\"118.4\" x2=\"298.88\" y2=\"62.4\"/><line class=\"thin dash\" x1=\"56\" y1=\"118.4\" x2=\"203.12\" y2=\"118.4\"/><line class=\"thin dash\" x1=\"56\" y1=\"30\" x2=\"290\" y2=\"30\"/><line class=\"thin dash\" x1=\"56\" y1=\"30\" x2=\"56\" y2=\"118.4\"/><line class=\"ln\" x1=\"56\" y1=\"30\" x2=\"203.12\" y2=\"118.4\"/><line class=\"ac\" x1=\"56\" y1=\"30\" x2=\"298.88\" y2=\"118.4\"/><path class=\"thin\" d=\"M56 110.4 L64 110.4 L64 118.4\"/><path class=\"ac\" d=\"M99.23 45.73 A46 46 0 0 0 102 30\"/><path class=\"thin\" d=\"M184.26 107.07 A22 22 0 0 0 181.12 118.4\"/><circle class=\"dt\" cx=\"56\" cy=\"30\" r=\"3\"/><circle class=\"dt\" cx=\"56\" cy=\"118.4\" r=\"3\"/><circle class=\"dt\" cx=\"203.12\" cy=\"118.4\" r=\"3\"/><circle class=\"dt\" cx=\"298.88\" cy=\"118.4\" r=\"3\"/><text x=\"44\" y=\"26\" text-anchor=\"middle\">E</text><text x=\"44\" y=\"123.4\" text-anchor=\"middle\">G</text><text x=\"211.12\" y=\"110.4\" text-anchor=\"middle\">F</text><text x=\"308.88\" y=\"123.4\" text-anchor=\"middle\">K</text><text class=\"acc\" x=\"125.26\" y=\"44.39\" text-anchor=\"middle\">20°</text><text x=\"164.43\" y=\"113.78\" text-anchor=\"middle\">31°</text><text x=\"50\" y=\"80\" text-anchor=\"end\">34 ft</text><text class=\"sm\" x=\"250\" y=\"133.4\" text-anchor=\"middle\">stage</text><text class=\"sm\" x=\"30\" y=\"58\" text-anchor=\"middle\">balcony</text><text class=\"sm\" x=\"290.88\" y=\"78.4\" text-anchor=\"end\">back wall</text></svg></figure><p class=\"geo-given\">A viewer's eyes <strong>E</strong> in a theater balcony are 34 ft above the level of the stage floor. <strong>G</strong> is the point on that level directly below E. <strong>F</strong>, the front edge of the stage, and <strong>K</strong>, the foot of the back wall, are in line with G. From E, the angle of depression to K is 20°. From F, the angle of elevation to E is 31°.</p>",
       "claims": [
         {
           "id": "gf",
@@ -1180,7 +1180,7 @@
           "id": "error",
           "sol": "G.TR.4",
           "sub": "G.TR.4.3",
-          "stem": "Jay finds PH this way: PH = 15·sin 38° ≈ 9.2 ft. Which statement about his work is correct?",
+          "stem": "Jay finds PH this way: PH = 15·sin 38°. Which statement about his work is correct?",
           "choices": [
             {
               "letter": "A",
@@ -1188,15 +1188,15 @@
             },
             {
               "letter": "B",
-              "text": "He should divide: PH = 15/sin 38° ≈ 24.4 ft."
+              "text": "He should divide: PH = 15/sin 38°."
             },
             {
               "letter": "C",
-              "text": "PH is adjacent to the 38° angle, so PH = 15·cos 38° ≈ 11.8 ft."
+              "text": "PH is adjacent to the 38° angle, so PH = 15·cos 38°."
             },
             {
               "letter": "D",
-              "text": "He should use tangent: PH = 15·tan 38° ≈ 11.7 ft."
+              "text": "He should use tangent: PH = 15·tan 38°."
             }
           ],
           "correct": "C"
@@ -2445,7 +2445,7 @@
       "kind": "Triangles · G.TR.4",
       "blurb": "A 9-foot rod at 40° and a line down to the bobber.",
       "level": 3,
-      "passage": "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 166\" role=\"img\" aria-label=\"An angler's 9-foot rod GT rises at 40 degrees above the horizontal from the grip G, 3.5 feet above the water. The line runs straight from the tip T down to the bobber B on the water at a 25 degree angle of depression. Dashed horizontal lines run through G and T\"><rect class=\"sh2\" x=\"8\" y=\"140\" width=\"304\" height=\"24\"/><rect class=\"sh2\" x=\"8\" y=\"126\" width=\"48\" height=\"14\"/><line class=\"thin dash\" x1=\"40\" y1=\"140\" x2=\"40\" y2=\"105.7\"/><line class=\"thin dash\" x1=\"40\" y1=\"105.7\" x2=\"130\" y2=\"105.7\"/><line class=\"thin dash\" x1=\"107.57\" y1=\"49.01\" x2=\"217.57\" y2=\"49.01\"/><line class=\"ln\" x1=\"40\" y1=\"105.7\" x2=\"107.57\" y2=\"49.01\"/><line class=\"ac\" x1=\"107.57\" y1=\"49.01\" x2=\"302.7\" y2=\"140\"/><path class=\"thin\" d=\"M70 105.7 A30 30 0 0 0 62.98 86.42\"/><path class=\"thin\" d=\"M158.32 72.67 A56 56 0 0 0 163.57 49.01\"/><circle class=\"dt\" cx=\"40\" cy=\"105.7\" r=\"3\"/><circle class=\"dt\" cx=\"107.57\" cy=\"49.01\" r=\"3\"/><circle class=\"dta\" cx=\"302.7\" cy=\"140\" r=\"4\"/><text x=\"28\" y=\"108.7\" text-anchor=\"middle\">G</text><text x=\"105.57\" y=\"40.01\" text-anchor=\"middle\">T</text><text x=\"300.7\" y=\"131\" text-anchor=\"middle\">B</text><text x=\"91.75\" y=\"95.49\" text-anchor=\"middle\">40°</text><text x=\"190.41\" y=\"68.2\" text-anchor=\"middle\">25°</text><text x=\"58\" y=\"72\" text-anchor=\"middle\">9 ft</text><text class=\"sm\" x=\"46\" y=\"121\" text-anchor=\"start\">3.5 ft</text><text class=\"sm\" x=\"200\" y=\"157\" text-anchor=\"middle\">water</text><text class=\"sm\" x=\"22\" y=\"136\" text-anchor=\"middle\">dock</text></svg></figure><p class=\"geo-given\">An angler on a dock holds a 9-ft fishing rod at its grip <strong>G</strong>, 3.5 ft above the water. The rod <strong>GT</strong> makes a 40° angle with the horizontal. The line runs straight from the tip <strong>T</strong> to the bobber <strong>B</strong> on the water, at a 25° angle of depression from T.</p>",
+      "passage": "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 166\" role=\"img\" aria-label=\"An angler's 9-foot rod GT rises at 40 degrees above the horizontal from the grip G, 3.5 feet above the water. The line runs straight from the tip T down to the bobber B on the water at a 25 degree angle of depression. Dashed horizontal lines run through G and T\"><rect class=\"sh2\" x=\"8\" y=\"140\" width=\"304\" height=\"24\"/><rect class=\"sh2\" x=\"8\" y=\"126\" width=\"48\" height=\"14\"/><line class=\"thin dash\" x1=\"40\" y1=\"140\" x2=\"40\" y2=\"105.7\"/><line class=\"thin dash\" x1=\"40\" y1=\"105.7\" x2=\"130\" y2=\"105.7\"/><line class=\"thin dash\" x1=\"107.57\" y1=\"49.01\" x2=\"217.57\" y2=\"49.01\"/><line class=\"ln\" x1=\"40\" y1=\"105.7\" x2=\"107.57\" y2=\"49.01\"/><line class=\"ac\" x1=\"107.57\" y1=\"49.01\" x2=\"302.7\" y2=\"140\"/><path class=\"thin\" d=\"M70 105.7 A30 30 0 0 0 62.98 86.42\"/><path class=\"thin\" d=\"M158.32 72.67 A56 56 0 0 0 163.57 49.01\"/><circle class=\"dt\" cx=\"40\" cy=\"105.7\" r=\"3\"/><circle class=\"dt\" cx=\"107.57\" cy=\"49.01\" r=\"3\"/><circle class=\"dta\" cx=\"302.7\" cy=\"140\" r=\"4\"/><text x=\"28\" y=\"108.7\" text-anchor=\"middle\">G</text><text x=\"105.57\" y=\"40.01\" text-anchor=\"middle\">T</text><text x=\"300.7\" y=\"131\" text-anchor=\"middle\">B</text><text x=\"91.75\" y=\"95.49\" text-anchor=\"middle\">40°</text><text x=\"190.41\" y=\"68.2\" text-anchor=\"middle\">25°</text><text x=\"58\" y=\"72\" text-anchor=\"middle\">9 ft</text><text class=\"sm\" x=\"46\" y=\"121\" text-anchor=\"start\">3.5 ft</text><text class=\"sm\" x=\"200\" y=\"157\" text-anchor=\"middle\">water</text><text class=\"sm\" x=\"23\" y=\"137.5\" text-anchor=\"middle\">dock</text></svg></figure><p class=\"geo-given\">An angler on a dock holds a 9-ft fishing rod at its grip <strong>G</strong>, 3.5 ft above the water. The rod <strong>GT</strong> makes a 40° angle with the horizontal. The line runs straight from the tip <strong>T</strong> to the bobber <strong>B</strong> on the water, at a 25° angle of depression from T.</p>",
       "claims": [
         {
           "id": "rise",
