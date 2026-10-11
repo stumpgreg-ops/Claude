@@ -235,7 +235,8 @@ var srv = http.createServer(function (req, res) {
     await page.waitForSelector("#build-overlay:not(.hidden)", { timeout: 5000 });
     if (tn === 5) { await page.waitForSelector(".build-theme"); await page.click(".build-theme:nth-child(1)"); await page.click("#build-overlay .btn.primary"); }
     await page.waitForSelector(".build-options .build-opt"); await page.click(".build-options .build-opt:nth-child(1)"); await page.click("#build-overlay .btn.primary");
-    await page.waitForSelector(".build-styles .build-opt"); await page.click(".build-styles .build-opt:nth-child(1)"); await page.click("#build-overlay .btn.primary");
+    await page.waitForSelector(".build-styles:not(.hidden) .build-opt, .build-note:not(.hidden)");   /* a kit piece with no styles skips the style step */
+    if (await page.isVisible(".build-styles:not(.hidden) .build-opt")) { await page.click(".build-styles .build-opt:nth-child(1)"); await page.click("#build-overlay .btn.primary"); }
     await page.waitForSelector(".build-note:not(.hidden)"); await page.click("#build-overlay .btn.primary"); await page.waitForSelector(".build-note:not(.hidden)");
     await page.click("#build-overlay .btn.primary"); await page.waitForFunction(function () { return window.__done === true; });
   }
