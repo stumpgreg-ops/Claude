@@ -599,7 +599,7 @@
         {
           id: "angle",
           sol: "G.TR.3",
-          sub: "G.TR.3.1",
+          sub: "G.TR.3.3",
           stem: "Which angle of △PQR is congruent to ∠K?",
           choices: [
             { letter: "A", text: "∠R" },
@@ -667,7 +667,7 @@
           stem: "Why is the player's triangle similar to the pole's triangle?",
           choices: [
             { letter: "A", text: "SAS∼: SG/SQ = 8/24 and the right angles" },
-            { letter: "B", text: "AA: ∠S is shared, and ∠G and ∠Q are right angles" },
+            { letter: "B", text: "AA: shared ∠S and two right angles" },
             { letter: "C", text: "SSS∼: three sides of each are known" },
             { letter: "D", text: "HL: both are right triangles" }
           ],
@@ -760,7 +760,7 @@
         "<text x=\"96\" y=\"138\" text-anchor=\"middle\">M</text><text x=\"289\" y=\"138\" text-anchor=\"middle\">N</text>" +
         "<text x=\"288\" y=\"17.9\" text-anchor=\"middle\">W</text><text class=\"sm\" x=\"17\" y=\"138\" text-anchor=\"middle\">1.5 m</text>" +
         "<text x=\"71\" y=\"165\" text-anchor=\"middle\">2 m</text><text x=\"203\" y=\"165\" text-anchor=\"middle\">10 m</text>" +
-        "<text class=\"acc\" x=\"288\" y=\"83\" text-anchor=\"middle\">?</text></svg><figcaption>Not drawn to scale</figcaption></figure>" +
+        "<text class=\"acc\" x=\"308\" y=\"88\" text-anchor=\"middle\">?</text><text class=\"sm\" x=\"111\" y=\"106\" text-anchor=\"start\">2.5 m</text></svg><figcaption>Not drawn to scale</figcaption></figure>" +
         "<p class=\"geo-given\">Coach Ruiz's eye <strong>E</strong> is 1.5 m above the ground. She sights the top <strong>W</strong> of the climbing wall over the top <strong>T</strong> of a 2.5-m pole. The pole is 2 m from her, and the wall is 10 m beyond the pole. The pole and the wall are vertical. The dashed level line from E meets the pole at <strong>M</strong> and the wall at <strong>N</strong>.</p>",
       claims: [
         {
@@ -772,7 +772,7 @@
             { letter: "A", text: "SAS∼: EM/EN = 2/10 and the right angles" },
             { letter: "B", text: "SSS∼: EM, MT and ET are known" },
             { letter: "C", text: "AA: ∠T ≅ ∠E and ∠M ≅ ∠N" },
-            { letter: "D", text: "AA: ∠E is shared, and ∠M and ∠N are right angles" }
+            { letter: "D", text: "AA: shared ∠E, right angles at M, N" }
           ],
           correct: "D"
         },
@@ -1235,7 +1235,7 @@
         {
           id: "angle",
           sol: "G.TR.3",
-          sub: "G.TR.3.1",
+          sub: "G.TR.3.3",
           stem: "Which angle of △BDC also measures about 59°?",
           choices: [
             { letter: "A", text: "∠BDC" },
