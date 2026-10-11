@@ -420,7 +420,7 @@
           id: "notx",
           sol: "G.TR.1",
           sub: "G.TR.1.2",
-          stem: "Suppose the base angles were not equal, so x could change. Which value of x would NOT give three side lengths that form a triangle?",
+          stem: "Another stand has sides of (3x − 4) in, (x + 12) in and (4x − 2) in, with no two angles equal. Which value of x would NOT give three side lengths that form a triangle?",
           choices: [
             { letter: "A", text: "x = 4" },
             { letter: "B", text: "x = 2" },
@@ -465,7 +465,7 @@
       kind: "Triangles · G.TR.1",
       blurb: "A woodshop brace, a strut and some algebra.",
       level: 3,
-      passage: "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 164\" role=\"img\" aria-label=\"A shelf bracket: the wall CW is vertical, the shelf CS is horizontal with a right angle at C, the brace WS joins them, and a strut joins C to P on the brace. Angle CWS is x plus 22 degrees, angle CSW is 2x plus 5 degrees, and angle WCP is 55 degrees\"><rect class=\"sh2\" x=\"18\" y=\"4\" width=\"26\" height=\"158\"/><rect class=\"sh\" x=\"44\" y=\"14\" width=\"155.2\" height=\"12\"/><line class=\"ln\" x1=\"44\" y1=\"26\" x2=\"44\" y2=\"156\"/><line class=\"ln\" x1=\"44\" y1=\"26\" x2=\"165.2\" y2=\"26\"/><line class=\"ln\" x1=\"44\" y1=\"156\" x2=\"165.2\" y2=\"26\"/><line class=\"ln\" x1=\"44\" y1=\"26\" x2=\"117.3\" y2=\"77.4\"/><path class=\"thin\" d=\"M44 35 L53 35 L53 26\"/><path class=\"thin\" d=\"M44 102 A54 54 0 0 1 80.8 116.5\"/><text class=\"sm\" x=\"74\" y=\"90.2\" text-anchor=\"middle\">(x + 22)⁠°</text><path class=\"thin\" d=\"M141.2 26 A24 24 0 0 0 148.9 43.6\"/><text class=\"sm\" x=\"111.2\" y=\"43.2\" text-anchor=\"middle\">(2x + 5)⁠°</text><path class=\"thin\" d=\"M44 42 A16 16 0 0 0 57.1 35.2\"/><text class=\"sm\" x=\"57.9\" y=\"56.8\" text-anchor=\"middle\">55°</text><circle class=\"dt\" cx=\"44\" cy=\"26\" r=\"3\"/><circle class=\"dt\" cx=\"44\" cy=\"156\" r=\"3\"/><circle class=\"dt\" cx=\"165.2\" cy=\"26\" r=\"3\"/><circle class=\"dt\" cx=\"117.3\" cy=\"77.4\" r=\"3\"/><text x=\"32\" y=\"16.3\" text-anchor=\"middle\">C</text><text x=\"57\" y=\"158.3\" text-anchor=\"middle\">W</text><text x=\"175.2\" y=\"44.3\" text-anchor=\"middle\">S</text><text x=\"127.3\" y=\"92.7\" text-anchor=\"middle\">P</text><text class=\"sm\" x=\"31\" y=\"124.2\" text-anchor=\"middle\">wall</text><text class=\"sm\" x=\"213.2\" y=\"43.2\" text-anchor=\"middle\">shelf</text></svg></figure><p class=\"geo-given\">A shelf bracket is the triangle <strong>WCS</strong>. The wall CW is perpendicular to the shelf CS, and the brace WS joins them. A strut joins C to the point <strong>P</strong> on the brace. m∠CWS = (x + 22)⁠°, m∠CSW = (2x + 5)⁠° and m∠WCP = 55°.</p>",
+      passage: "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 164\" role=\"img\" aria-label=\"A shelf bracket: the wall CW is vertical, the shelf CS is horizontal with a right angle at C, the brace WS joins them, and a strut joins C to P on the brace. Angle CWS is x plus 22 degrees, angle CSW is 2x plus 5 degrees, and angle WCP is 55 degrees\"><rect class=\"sh2\" x=\"18\" y=\"4\" width=\"26\" height=\"158\"/><rect class=\"sh\" x=\"44\" y=\"14\" width=\"155.2\" height=\"12\"/><line class=\"ln\" x1=\"44\" y1=\"26\" x2=\"44\" y2=\"156\"/><line class=\"ln\" x1=\"44\" y1=\"26\" x2=\"165.2\" y2=\"26\"/><line class=\"ln\" x1=\"44\" y1=\"156\" x2=\"165.2\" y2=\"26\"/><line class=\"ln\" x1=\"44\" y1=\"26\" x2=\"117.3\" y2=\"77.4\"/><path class=\"thin\" d=\"M44 35 L53 35 L53 26\"/><path class=\"thin\" d=\"M44 102 A54 54 0 0 1 80.8 116.5\"/><line class=\"thin\" x1=\"70\" y1=\"94\" x2=\"63.8\" y2=\"105.8\"/><text class=\"sm\" x=\"74\" y=\"90.2\" text-anchor=\"middle\">(x + 22)⁠°</text><path class=\"thin\" d=\"M141.2 26 A24 24 0 0 0 148.9 43.6\"/><text class=\"sm\" x=\"111.2\" y=\"43.2\" text-anchor=\"middle\">(2x + 5)⁠°</text><path class=\"thin\" d=\"M44 42 A16 16 0 0 0 57.1 35.2\"/><text class=\"sm\" x=\"57.9\" y=\"56.8\" text-anchor=\"middle\">55°</text><circle class=\"dt\" cx=\"44\" cy=\"26\" r=\"3\"/><circle class=\"dt\" cx=\"44\" cy=\"156\" r=\"3\"/><circle class=\"dt\" cx=\"165.2\" cy=\"26\" r=\"3\"/><circle class=\"dt\" cx=\"117.3\" cy=\"77.4\" r=\"3\"/><text x=\"32\" y=\"16.3\" text-anchor=\"middle\">C</text><text x=\"57\" y=\"158.3\" text-anchor=\"middle\">W</text><text x=\"175.2\" y=\"44.3\" text-anchor=\"middle\">S</text><text x=\"127.3\" y=\"92.7\" text-anchor=\"middle\">P</text><text class=\"sm\" x=\"31\" y=\"124.2\" text-anchor=\"middle\">wall</text><text class=\"sm\" x=\"213.2\" y=\"43.2\" text-anchor=\"middle\">shelf</text></svg></figure><p class=\"geo-given\">A shelf bracket is the triangle <strong>WCS</strong>. The wall CW is perpendicular to the shelf CS, and the brace WS joins them. A strut joins C to the point <strong>P</strong> on the brace. m∠CWS = (x + 22)⁠°, m∠CSW = (2x + 5)⁠° and m∠WCP = 55°.</p>",
       claims: [
         {
           id: "x",
@@ -1050,7 +1050,7 @@
           id: "x4",
           sol: "G.TR.1",
           sub: "G.TR.1.2",
-          stem: "Suppose x were 4. Could the three paths form a triangle then? Choose the answer with the correct reason.",
+          stem: "Three other paths would be (x + 14) m, (2x + 3) m and (3x − 8) m long, with x = 4. Could they form a triangle? Choose the answer with the correct reason.",
           choices: [
             { letter: "A", text: "Yes, because 18 + 11 is greater than 4." },
             { letter: "B", text: "Yes, because every path has a positive length." },
@@ -1063,7 +1063,7 @@
           id: "x8",
           sol: "G.TR.1",
           sub: "G.TR.1.1",
-          stem: "Suppose x were 8. Which angle of △FPL would be the largest then?",
+          stem: "Another meadow has three paths of (x + 14) m, (2x + 3) m and (3x − 8) m, labeled FP, PL and FL as in this figure, with x = 8. Which angle of that triangle would be the largest?",
           choices: [
             { letter: "A", text: "∠P" },
             { letter: "B", text: "∠F" },
