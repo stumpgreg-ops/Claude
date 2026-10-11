@@ -1056,8 +1056,8 @@
         "<svg viewBox=\"0 0 320 160\" role=\"img\" aria-label=\"A straight hillside h rising to the right. Two parallel rain streaks, r on the left and s on the right, slant down to the right and end on the hillside. At streak r, angle 1 is above the hillside and left of r, and angle 2 is above the hillside and right of r. At streak s, angle 3 is left of s and angle 4 is right of s, both above the hillside\">" +
         "<polygon class=\"sh2\" points=\"18,150 302,73.9 302,158 18,158\"/><line class=\"ln\" x1=\"18\" y1=\"150\" x2=\"302\" y2=\"73.9\"/>" +
         "<line class=\"thin\" x1=\"4\" y1=\"150\" x2=\"18\" y2=\"150\"/><line class=\"ac\" x1=\"91.8\" y1=\"10\" x2=\"112\" y2=\"124.8\"/>" +
-        "<line class=\"ac\" x1=\"198.6\" y1=\"10\" x2=\"214\" y2=\"97.5\"/><path class=\"thin\" d=\"M98.7 26.6 L96 34.2 L90.9 28\"/>" +
-        "<path class=\"thin\" d=\"M200.7 -0.7 L198 6.9 L192.9 0.7\"/><text x=\"101.8\" y=\"16\" text-anchor=\"middle\">r</text>" +
+        "<line class=\"ac\" x1=\"198.6\" y1=\"10\" x2=\"214\" y2=\"97.5\"/><path class=\"thin\" d=\"M100.5 36.4 L97.8 44 L92.6 37.8\"/>" +
+        "<path class=\"thin\" d=\"M207.3 36.4 L204.6 44 L199.4 37.8\"/><text x=\"101.8\" y=\"16\" text-anchor=\"middle\">r</text>" +
         "<text x=\"208.6\" y=\"16\" text-anchor=\"middle\">s</text><text x=\"288\" y=\"95.7\" text-anchor=\"middle\">h</text><circle class=\"dt\" cx=\"112\" cy=\"124.8\" r=\"3\"/>" +
         "<circle class=\"dt\" cx=\"214\" cy=\"97.5\" r=\"3\"/><text x=\"98.5\" y=\"121.2\" text-anchor=\"middle\">1</text>" +
         "<text x=\"120.6\" y=\"116.3\" text-anchor=\"middle\">2</text><text x=\"200.5\" y=\"93.9\" text-anchor=\"middle\">3</text>" +
