@@ -1,7 +1,8 @@
-/* v5.19: writes docs/questions/SOL-Labyrinth-Geometry-questions-and-answers.docx — every question in the Geometry
-   game (js/content201.js … content204.js), by strand and standard: each pack's figure (drawn from its SVG in print
-   colours, dark ink on white), its givens and proof table, then its six questions with the answer marked, the skill
-   (LOTS / HOTS) and a review line for the teacher. An answer key table and the standards and skills come at the end.
+/* v5.20: writes one Word file per game mode, docs/questions/SOL-Labyrinth-Geometry-<n>-<Mode>-questions.docx — every
+   question that mode asks (each mode has its own 96 packs: js/content201.js … content204.js for the Labyrinth, content301.js …
+   content339.js for the rest), by strand and standard: each pack's figure (drawn from its SVG in print colours, dark ink on
+   white), its givens and proof table, then its six questions with the answer marked, the skill (LOTS / HOTS) and a review
+   line for the teacher. An answer key table and the standards and skills come at the end.
    node tools/make-geo-doc.js   (uses the docx package and Playwright's Chromium, both preinstalled here) */
 var fs = require("fs"), vm = require("vm"), path = require("path");
 var { chromium } = require("/opt/node22/lib/node_modules/playwright");
