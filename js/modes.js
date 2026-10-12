@@ -166,11 +166,11 @@
   function modeInRealm(id, realm) { for (var k = 0; k < 4; k++) if (modeAt(realm, k) === id) return true; return false; }
   /* v5.10: the Odyssey build's Mixed rotation adds the strait on level 9 of every island (10 stays the boss) */
   /* v5.11: the Odyssey build mixes its own modes into each island's levels 2, 4, 6, 8 and 9
-     (js/mode-ram.js, mode-bow.js, mode-raft.js, mode-row.js register themselves with SolModes.extend).
+     (js/mode-ram.js, mode-bow.js, mode-raft.js, mode-row.js and, v5.18.3, mode-lotus.js register themselves with SolModes.extend).
      One row per island; a mode that is not loaded falls back to the maze. */
   var ODY_ROT = [
     ["raid", "rocks", "sky", "ring", "strait"],   /* 1 Troy's Shore */
-    ["row", "rocks", "sky", "ring", "bow"],       /* 2 the Lotus-Eaters */
+    ["lotus", "rocks", "sky", "ring", "bow"],     /* 2 the Lotus-Eaters (v5.18.3: js/mode-lotus.js) */
     ["ram", "rocks", "sky", "ring", "strait"],    /* 3 the Cyclopes */
     ["raid", "raft", "sky", "ring", "strait"],    /* 4 Aeolia */
     ["raid", "rocks", "bow", "ring", "strait"],   /* 5 the Laestrygonians */

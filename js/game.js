@@ -26984,6 +26984,8 @@
     { id: "raft", kind: "Ride the waves", name: "Calypso's Raft", meta: "Sail the raft from Ogygia, steer by the stars and ride Poseidon's waves to the right letter.", ody: true },
     { id: "row", kind: "Row to the song", name: "Row Past the Sirens", meta: "Row as each note of the Sirens' song lands on the ship while Odysseus, tied to the mast, strains toward them — row to the right letter.", ody: true }
   );
+  /* v5.18.3: Book 9's first episode (js/mode-lotus.js) */
+  GAME_MODE_DEFS.push({ id: "lotus", kind: "Leave the lotus shore", name: "The Lotus-Eaters", meta: "Find the dazed crewman holding the right letter among the lotus flowers and drag him back to the ships, before the friendly Lotus-Eaters make you forget home too.", ody: true });
   /* the cards this build offers: the Odyssey-only modes appear only in the Odyssey build, and the modes
      marked noOdy (v5.12: Root Worms) only in the others; a saved pick of a card not offered falls back to All */
   /* v5.18.3: the Odyssey's cards in story order, each labelled with the episode it plays */

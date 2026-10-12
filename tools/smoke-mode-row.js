@@ -93,7 +93,7 @@ var srv = http.createServer(function (req, res) {
     SolModes.only = keep;
     return o;
   });
-  check(rot.lv === "row,row,row,row" && rot.only === "row,row,row,row", "the Odyssey rotation plays it on levels 12, 59, 74 and 98; picked alone it plays every level: " + JSON.stringify(rot));
+  check(rot.lv === "lotus,row,row,row" && rot.only === "row,row,row,row", "the Odyssey rotation plays it on levels 59, 74 and 98 (v5.18.3: level 12 is the Lotus-Eaters' own mode now); picked alone it plays every level: " + JSON.stringify(rot));
   await page.click('#mode-packs .card[data-gamemode="row"]');
   await page.waitForSelector("#skill-screen:not(.hidden)");
   await page.click("#btn-skill-start"); await page.waitForTimeout(300);

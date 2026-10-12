@@ -29,6 +29,32 @@ A game uploaded to Canvas can't send anything anywhere, so progress is shown to 
 
 Tests: `node tools/smoke-progress.js` (after `node tools/build-games.js`, `node tools/build-appsscript.js VA|ODY` and `node tools/build-canvas.js VA|ODY`).
 
+## v5.18.3 (2026-10-12) — the Odyssey's game modes are its episodes; shorter passages, in story order
+
+- **Each Odyssey game mode is an episode of the story**, and a level in it asks only that episode's questions (`ODY_EPISODE` and `episodeFor(n)` in `js/modes.js`; game.js uses the episode as the level's question filter). The mode screen lists the modes in story order, each labelled with its book and episode:
+
+  | Episode | Game mode(s) |
+  |---|---|
+  | Book 9 · The Lotus-Eaters | The Lotus-Eaters (new) |
+  | Book 9 · The Cyclops | Under the Ram |
+  | Book 10 · Circe | Circe's Courtyard |
+  | Book 12 · The Sirens | Siren Swoop, Row Past the Sirens |
+  | Book 12 · Scylla and Charybdis | The Wandering Rocks, Scylla and Charybdis |
+  | Book 12 · The Cattle of the Sun | Chariot of Helios |
+  | Book 5 · Calypso | Calypso's Raft |
+  | Book 21 · The contest of the bow | Bend the Bow |
+
+  Picking an episode mode shows its episode instead of the episode picker. Mixed and Labyrinth still use the episode the student picks (or all of them).
+- **New mode, The Lotus-Eaters** (`js/mode-lotus.js`, test `tools/smoke-mode-lotus.js`). Dazed crewmen wander a lotus meadow, each holding up a letter. The student takes hold of the man with the right letter and leads him back to the ships:
+  - **Wrong letter:** a wrong man refuses ("I will stay here forever!"), which costs a life, and his letter is crossed out.
+  - **The Lotus-Eaters:** a touch from one makes Odysseus forget for a moment. That costs no life, but he walks slower and drifts.
+  - **Later islands:** petal drifts from level 21; from level 31 a Lotus-Eater can lure away the man being led; more crewmen from level 41; wind-blown drifts from level 81.
+  - It plays level 12 in the Mixed rotation; Row Past the Sirens now plays levels 59, 74 and 98.
+- **New questions:** six passages and 36 questions each for **the Sirens** (`js/content114.js`), **Scylla and Charybdis** (`js/content115.js`) and **the contest of the bow** (`js/content116.js`). They are original retellings in story order. The Odyssey bank is now 66 passages and 404 questions.
+- **Shorter passages:** every Odyssey passage is now 200 words or fewer (22 were longer, up to 677). Each passage tells only its own scene, so the story never goes back over what an earlier passage told: for example, "The Cave of Polyphemus" now starts where "Cheese and Lambs" ends. Every question on a changed passage was re-checked against the new text, and a few that asked about cut text were replaced (same standard).
+- **Questions in story order within a passage:** they come by the sentence or line they look at (`heistStoryPos` in `js/content.js`), with whole-passage questions (theme, central idea, structure) last. The question document lists them the same way.
+- **Accommodations:** the word lists cover the new and rewritten text (2,699 dictionary words, 1,038 definitions).
+
 ## v5.18.2 (2026-10-11) — the Town is built in 3D with the castle's models
 
 - **The Town now uses the castle kit** (`assets/build/pieces.json` `themes.village`: `kit`, `pieces: "castle"`). It used to be the older 2D builder: 32 flat pictures that only turned two ways. It now has the same grid, the same 3D models and the same turning view as the castle, with every model loaded. Its own touches:
