@@ -1564,10 +1564,13 @@
     "ody-cyclops-nobody", "ody-cyclops-ram", "ody-cyclops-name",
     "ody-circe-winds", "ody-circe-smoke", "ody-circe-lots", "ody-circe-feast-vocab", "ody-circe-eurylochus-verse",
     "ody-circe-moly", "ody-circe-oath", "ody-circe-year",
+    "ody-sirens-warning", "ody-sirens-calm", "ody-sirens-wax", "ody-sirens-song", "ody-sirens-tighter", "ody-sirens-past",
+    "ody-scylla-two-routes", "ody-scylla-cliff-and-whirlpool", "ody-scylla-stubborn", "ody-scylla-silence", "ody-scylla-whirlpool", "ody-scylla-six-men",
     "ody-helios-two-warnings", "ody-helios-one-against-many", "ody-helios-wrong-winds", "ody-helios-forbidden-herds",
     "ody-helios-sweet-sleep", "ody-helios-eurylochus-speech", "ody-helios-sun-complaint", "ody-helios-wrath-of-sun",
     "ody-calypso-shore", "ody-calypso-council-vocab", "ody-calypso-hermes-flight", "ody-calypso-cave",
     "ody-calypso-reply", "ody-calypso-dinner", "ody-calypso-raft", "ody-calypso-storm",
+    "ody-bow-storeroom", "ody-bow-telemachus", "ody-bow-suitors", "ody-bow-scar", "ody-bow-request", "ody-bow-string",
     "ody-voyage-two-temptations", "ody-voyage-eurylochus", "ody-voyage-setbacks-raft", "ody-voyage-tie-me-tighter"
   ];
 

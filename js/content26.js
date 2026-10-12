@@ -1,6 +1,6 @@
 /* SOL Labyrinth — The Odyssey: the Lotus-Eaters (English 9 Unit 2, family ODY)
  * Eight original retellings of Odyssey Book 9 (the storm after the Cicones raid, the land of
- * the Lotus-Eaters, the approach to the Cyclopes' land), from tiny to epic length.
+ * the Lotus-Eaters, the approach to the Cyclopes' land), in story order, each at most 200 words.
  * Original text only; the plot is public domain. Loaded after content.js; pushes into HEIST_PACKS. */
 (function (global) {
   var P = global.HEIST_PACKS;
@@ -179,7 +179,7 @@
       episode: "lotus",
       title: "Sweet Forgetting",
       kind: "Vocabulary · 9.RV",
-      blurb: "Six words for a kind people, a tempting fruit and a leader who will not bend.",
+      blurb: "Six words for a kind people, a tempting fruit and a leader who makes up his mind.",
       level: 2,
       passage:
         "<p>" +
@@ -187,9 +187,9 @@
         N(2) + "They offered Odysseus's three scouts the lotus, a <strong>beguiling</strong> fruit whose honey-sweet taste hid its power. " +
         N(3) + "After one bite the men grew <strong>languid</strong>; they stretched out in the warm grass and gave no thought to the ships waiting on the shore. " +
         N(4) + "Home, family and the long road to Ithaca sank into <strong>oblivion</strong>, as if the men had drunk from Lethe, the mythical river of forgetting. " +
-        N(5) + "When Odysseus found them, they begged to stay. " +
-        N(6) + "Yet he was <strong>resolute</strong>. " +
-        N(7) + "Although the men wept, he <strong>compelled</strong> them back to the ships, tied them under the rowing benches and ordered the rest of the crew aboard before anyone else could taste the fruit." +
+        N(5) + "Their captain waited by the ships, but the scouts did not return. " +
+        N(6) + "Yet when Odysseus guessed what had happened, he was <strong>resolute</strong>. " +
+        N(7) + "He would not lose a single man to that sweet meadow; if the scouts would not come willingly, he would <strong>compel</strong> them, by force if he had to." +
         "</p>",
       claims: [
         {
@@ -255,12 +255,12 @@
         {
           id: "resolute",
           sol: "9.RL.1.C",
-          stem: "Sentences 6 and 7 show that Odysseus responds to his men's pleading by —",
+          stem: "Sentences 6 and 7 show that Odysseus responds to his scouts' absence by —",
           choices: [
-            { letter: "A", text: "acting firmly to save them against their wishes" },
-            { letter: "B", text: "tasting the fruit to learn why they want to stay" },
-            { letter: "C", text: "leaving them behind so the others can sail on" },
-            { letter: "D", text: "asking the Lotus-Eaters to persuade the men" }
+            { letter: "A", text: "resolving to bring them back even if they resist" },
+            { letter: "B", text: "planning to taste the fruit to learn why they stay" },
+            { letter: "C", text: "deciding to leave them so the others can sail on" },
+            { letter: "D", text: "asking the Lotus-Eaters to send the men back" }
           ],
           correct: "A"
         }
@@ -367,61 +367,60 @@
       episode: "lotus",
       title: "The Honey-Sweet Shore",
       kind: "Epic poetry · 9.RL",
-      blurb: "Odysseus tells, in verse, how a gentle land nearly took his men.",
+      blurb: "Odysseus tells, in verse, of the night at sea after the lotus and the morning his men woke.",
       level: 2,
       passage:
         "<p class=\"poem\">" +
-        L(1) + "Nine days the north wind hounded us across the fish-filled sea;<br>" +
-        L(2) + "the tenth dawn showed a quiet shore where the Lotus-Eaters dwell.<br>" +
-        L(3) + "We drew fresh water from their springs and ate beside the ships,<br>" +
-        L(4) + "then I chose two good men to learn who lived upon that land<br>" +
-        L(5) + "and sent a third to go with them, a herald, to speak for all.<br>" +
-        L(6) + "No spear was raised against them there, no ambush lay in wait;<br>" +
-        L(7) + "the Lotus-Eaters smiled and gave them lotus fruit to taste.<br>" +
-        L(8) + "As a tired swimmer far from shore stops fighting the warm current<br>" +
-        L(9) + "and lets it carry him where it will, forgetting the beach he swam for,<br>" +
-        L(10) + "so my men, once they had tasted that honey-sweet fruit, let go of home.<br>" +
-        L(11) + "They wished no more to bring me word or turn their faces homeward,<br>" +
-        L(12) + "but only to remain there, eating lotus, all their days.<br>" +
-        L(13) + "They wept, but I dragged them to the ships and tied them under the benches,<br>" +
-        L(14) + "and shouted to my loyal crew, \"Aboard, and fast, before another tastes it<br>" +
-        L(15) + "and forgets his home!\" They sprang to the benches, row on row,<br>" +
-        L(16) + "and struck the grey sea with their oars, and we sailed on, sick at heart." +
+        L(1) + "So we rowed on, and grief hounded us across the fish-filled sea;<br>" +
+        L(2) + "behind us sank the quiet shore where the Lotus-Eaters dwell.<br>" +
+        L(3) + "No storm had struck us there, no spear, no ambush in the grass;<br>" +
+        L(4) + "a smiling people and a honey-sweet fruit had nearly cost me three.<br>" +
+        L(5) + "All night the bound men murmured underneath the rowing benches<br>" +
+        L(6) + "and begged the dark to take them back to the meadow and the lotus.<br>" +
+        L(7) + "But when rose-fingered Dawn came up, the spell began to loosen.<br>" +
+        L(8) + "As a tired swimmer far from shore, who stopped fighting the warm current<br>" +
+        L(9) + "and let it carry him where it would, forgetting the beach he swam for,<br>" +
+        L(10) + "wakes at last and sees the land far off, and strikes out for it, gasping,<br>" +
+        L(11) + "so my men woke from the lotus and remembered home again.<br>" +
+        L(12) + "I cut their ropes with my own knife and gave each man his oar;<br>" +
+        L(13) + "they bent their backs beside their friends and did not look behind.<br>" +
+        L(14) + "We sailed on, sick at heart, yet glad to count each face,<br>" +
+        L(15) + "and turned our prows toward Ithaca and the long road home." +
         "</p>",
       claims: [
         {
           id: "epicsimile",
           sol: "9.RL.2.A",
-          stem: "An epic simile is a long, detailed comparison using like or as. The epic simile in lines 8–10 compares the men to a tired swimmer to show that they —",
+          stem: "An epic simile is a long, detailed comparison using like or as. The epic simile in lines 8–11 compares the men to a tired swimmer to show that they —",
           choices: [
             { letter: "A", text: "were far too weak from the storm to row any farther" },
-            { letter: "B", text: "stopped resisting and drifted where pleasure led" },
-            { letter: "C", text: "tried to swim back to the ships after eating" },
-            { letter: "D", text: "had nearly drowned on the way to this land" }
+            { letter: "B", text: "had drifted from their goal and now turn back to it" },
+            { letter: "C", text: "tried to swim back to the Lotus shore in the night" },
+            { letter: "D", text: "had nearly drowned when they fell from the ships" }
           ],
           correct: "B"
         },
         {
           id: "setting",
           sol: "9.RL.3.B",
-          stem: "How does the setting described in lines 2 and 6–7 make the challenge on this shore especially dangerous?",
+          stem: "How does the description of the shore in lines 2–4 explain why its danger was so easy to miss?",
           choices: [
-            { letter: "A", text: "The land is so crowded that the scouts get lost." },
-            { letter: "B", text: "The weather turns stormy while the men are still ashore." },
-            { letter: "C", text: "Its peace gives the men no reason to stay on guard." },
-            { letter: "D", text: "The springs run dry, so the men must eat the fruit." }
+            { letter: "A", text: "The land was so crowded that the scouts got lost." },
+            { letter: "B", text: "A storm struck while the men were still ashore." },
+            { letter: "C", text: "Its peace gave the men no reason to stay on guard." },
+            { letter: "D", text: "Its people hid spears in the grass to trap visitors." }
           ],
           correct: "C"
         },
         {
           id: "response",
           sol: "9.RL.1.C",
-          stem: "Lines 13–15 show that Odysseus responds to the crisis by —",
+          stem: "Lines 12–13 show that, once the spell lifts, Odysseus responds by —",
           choices: [
-            { letter: "A", text: "putting the crew's homecoming ahead of the scouts' wishes" },
+            { letter: "A", text: "trusting the scouts and returning them to their places" },
             { letter: "B", text: "punishing the scouts for wasting the whole crew's time" },
-            { letter: "C", text: "asking the Lotus-Eaters to share the fruit with everyone" },
-            { letter: "D", text: "waiting patiently on the beach until the scouts chose to return" }
+            { letter: "C", text: "keeping the scouts tied up until the ships reach Ithaca" },
+            { letter: "D", text: "sending the scouts back to the meadow to fetch more fruit" }
           ],
           correct: "A"
         },
@@ -440,7 +439,7 @@
         {
           id: "narrator",
           sol: "9.RL.3.A",
-          stem: "Because Odysseus narrates the poem himself (\"I chose,\" \"my men\"), the reader —",
+          stem: "Because Odysseus narrates the poem himself (\"I cut,\" \"my men\"), the reader —",
           choices: [
             { letter: "A", text: "learns what the Lotus-Eaters secretly planned for the crew" },
             { letter: "B", text: "hears each scout's private thoughts as he eats the lotus" },
@@ -469,29 +468,28 @@
       episode: "lotus",
       title: "The Road Home",
       kind: "Paired texts · 9.DSR",
-      blurb: "A scene on the Lotus shore, paired with an article on nostos, the Greek idea of homecoming.",
+      blurb: "A tense moment at sea just after the Lotus shore, paired with an article on nostos, the Greek idea of homecoming.",
       level: 2,
       passage:
-        "<p><strong>Text 1 — Leaving the Lotus Shore</strong></p>" +
+        "<p><strong>Text 1 — At Sea</strong></p>" +
         "<p>" +
-        N(1) + "The crew waited by the black ships all afternoon, but the three scouts did not return. " +
-        N(2) + "At last Odysseus went inland himself, and when he came back, he was dragging the scouts by force. " +
-        N(3) + "They were not wounded, and no one had threatened them. " +
-        N(4) + "Yet they wept and pulled against his grip, begging to go back to the Lotus-Eaters. " +
-        N(5) + "One young sailor stared at the sweet fruit crushed in a scout's hand and took a slow step toward the meadow. " +
-        N(6) + "\"Aboard, all of you!\" Odysseus shouted, \"for whoever tastes the lotus forgets his home!\" " +
-        N(7) + "The sailor stopped, shook himself as though waking from a dream, and ran for his oar. " +
-        N(8) + "Within moments the scouts were tied beneath the rowing benches, and the ships slid out onto the grey sea." +
+        N(1) + "The ships were well out from the Lotus shore, and the crew rowed in silence. " +
+        N(2) + "Beneath the benches lay the three scouts, bound fast. " +
+        N(3) + "They were not wounded, and no one on that shore had threatened them. " +
+        N(4) + "Yet they wept and pulled against the ropes, begging to go back. " +
+        N(5) + "One scout held out a crushed lotus fruit to a young sailor, whose hand slowly opened to take it. " +
+        N(6) + "\"Row!\" Odysseus shouted from the stern, \"for whoever tastes the lotus forgets his home!\" " +
+        N(7) + "The sailor stopped, shook himself as though waking from a dream, and threw the fruit into the sea. " +
+        N(8) + "Then he bent to his oar." +
         "</p>" +
-        "<p><strong>Text 2 — Nostos: The Road Home</strong></p>" +
+        "<p><strong>Text 2 — Nostos</strong></p>" +
         "<p>" +
         N(9) + "Ancient Greek storytellers had a word for a hero's return home: nostos. " +
-        N(10) + "The Odyssey is built around nostos, and many of its episodes test whether Odysseus and his men will keep home in mind. " +
+        N(10) + "The Odyssey is built around nostos, and many episodes test whether Odysseus and his men will keep home in mind. " +
         N(11) + "Monsters such as the Cyclops threaten the men's lives. " +
-        N(12) + "The Lotus-Eaters, by contrast, threaten something harder to see: the men's desire to return. " +
+        N(12) + "The Lotus-Eaters threaten something harder to see: the men's desire to return. " +
         N(13) + "Nothing in their land is violent; the danger is that comfort can make people stop striving. " +
-        N(14) + "Though the episode is brief, it begins a pattern that returns later in the epic, when a year of feasting in Circe's hall and Calypso's offer of immortality also test whether the journey home will be delayed or given up. " +
-        N(15) + "Even today, English speakers call a person who drifts through life in lazy contentment, forgetting duties and goals, a \"lotus-eater.\"" +
+        N(14) + "Even today, a person who drifts lazily through life, forgetting duties, is called a \"lotus-eater.\"" +
         "</p>",
       claims: [
         {
@@ -511,8 +509,8 @@
           sol: "9.DSR.D",
           stem: "Select TWO details, one from each text, that best support the idea that the danger of the lotus was not physical violence.",
           choices: [
-            { letter: "A", text: "Sentence 1: The crew waited by the black ships all afternoon, but the three scouts did not return." },
-            { letter: "B", text: "Sentence 3: They were not wounded, and no one had threatened them." },
+            { letter: "A", text: "Sentence 1: The ships were well out from the Lotus shore, and the crew rowed in silence." },
+            { letter: "B", text: "Sentence 3: They were not wounded, and no one on that shore had threatened them." },
             { letter: "C", text: "Sentence 11: Monsters such as the Cyclops threaten the men's lives." },
             { letter: "D", text: "Sentence 13: Nothing in their land is violent; the danger is that comfort can make people stop striving." }
           ],
@@ -523,7 +521,7 @@
           sol: "9.RL.1.C",
           stem: "How does the young sailor respond to temptation in sentences 5–7 of Text 1?",
           choices: [
-            { letter: "A", text: "He refuses to look at the fruit and warns the scouts." },
+            { letter: "A", text: "He refuses to look at the fruit and warns the others." },
             { letter: "B", text: "He secretly eats the fruit and hides it from Odysseus." },
             { letter: "C", text: "He is drawn toward it but returns to duty when ordered." },
             { letter: "D", text: "He argues that the scouts should be allowed to stay behind." }
@@ -535,7 +533,7 @@
           sol: "9.RL.2.A",
           stem: "In sentence 7, the comparison \"as though waking from a dream\" suggests that even the sight of the lotus —",
           choices: [
-            { letter: "A", text: "had made the sailor fall asleep on the sand" },
+            { letter: "A", text: "had made the sailor fall asleep at his oar" },
             { letter: "B", text: "was frightening enough to give him nightmares later" },
             { letter: "C", text: "reminded him of happy dreams about Ithaca" },
             { letter: "D", text: "had pulled the sailor's mind away from his duty" }
@@ -562,86 +560,58 @@
             { letter: "A", text: "The Cyclops is the most dangerous enemy Odysseus faces." },
             { letter: "B", text: "The lotus episode shows that comfort can threaten nostos." },
             { letter: "C", text: "The word nostos was invented by modern English speakers." },
-            { letter: "D", text: "Circe and Calypso help Odysseus reach Ithaca more quickly." }
+            { letter: "D", text: "The Lotus-Eaters attack anyone who lands on their shore." }
           ],
           correct: "B"
         }
       ]
     },
 
-    /* ───────────── LONG (level 3) ───────────── */
+    /* ───────────── MEDIUM, continued ───────────── */
     {
       id: "ody-lotus-choice",
       family: "ODY",
       episode: "lotus",
-      title: "The Choice on the Shore",
+      title: "The Captain's Choice",
       kind: "The Odyssey · 9.RL",
-      blurb: "The scouts' sweet afternoon, and the hard choice it forces on their captain.",
-      level: 3,
+      blurb: "At sea, a freed scout asks Odysseus why he dragged his happy men away.",
+      level: 2,
       passage:
         "<p>" +
-        N(1) + "When the twelve ships had been beached and the men had eaten their meal beside the hulls, Odysseus, master of schemes, chose two of his companions to walk inland and learn what sort of people lived there. " +
-        N(2) + "With them he sent a third man as herald, so that a voice of peace would speak before any spear was raised. " +
-        N(3) + "The three climbed from the pebbled beach into a meadow where tall flowers nodded in a soft wind, and the air smelled of honey and warm earth." +
+        N(1) + "By noon the Lotus shore had sunk from sight, and the freed scouts rowed beside their friends. " +
+        N(2) + "Still, the herald came to the stern, where Odysseus, master of schemes, held the steering oar. " +
+        N(3) + "\"Why did you not leave us there?\" he asked. \"We were happy.\" " +
+        N(4) + "\"The fruit was offered so gently that refusing it seemed rude, and once we ate, a stillness came over us, as when the sea lies flat at noon and no breeze stirs the sails.\"" +
         "</p>" +
         "<p>" +
-        N(4) + "The Lotus-Eaters came out to meet them, smiling, with empty hands. " +
-        N(5) + "They made no threats; instead they held out the fruit of the lotus, the food they themselves lived on. " +
-        N(6) + "The herald remembered his duty and began to explain who the strangers were and where their ships lay. " +
-        N(7) + "But the fruit was offered again, and it seemed rude to refuse a gift so gently given. " +
-        N(8) + "The three men ate. " +
-        N(9) + "The taste was sweeter than any honey, and with it came a stillness, as when the sea lies flat at noon and no breeze stirs the sails. " +
-        N(10) + "The ships, the beach, the far-off island of Ithaca — all of it slipped away like a dream at waking. " +
-        N(11) + "They no longer wished to carry word back to their captain or to see home again. " +
-        N(12) + "They wanted only to stay in that meadow, eating lotus, for the rest of their days." +
+        N(5) + "Odysseus kept his eyes on the horizon. " +
+        N(6) + "\"That was a challenge no sword could answer,\" he said. " +
+        N(7) + "\"You were not my enemies; you were my companions, and you smiled at me. " +
+        N(8) + "I could have left you to your contentment, or I could have lingered to argue and tasted the fruit myself. " +
+        N(9) + "Either way, none of us would have seen Ithaca again.\"" +
         "</p>" +
         "<p>" +
-        N(13) + "On the shore the hours passed, and Odysseus watched the meadow with a frown. " +
-        N(14) + "Some of the crew grumbled that the scouts had found a feast and kept it to themselves; others whispered about an ambush. " +
-        N(15) + "Odysseus went himself to find out. " +
-        N(16) + "He found the three lying in the grass with the sweet fruit in their hands, and when he called them, they only smiled up at him. " +
-        N(17) + "\"Sit with us,\" one of them said. \"Taste it, and you will understand. There is no need to go anywhere ever again.\"" +
-        "</p>" +
-        "<p>" +
-        N(18) + "Here was a challenge that no sword could answer. " +
-        N(19) + "These men were not enemies; they were his own companions, and they were happy. " +
-        N(20) + "Odysseus could have left them to their contentment, or he could have lingered to argue and perhaps tasted the fruit himself. " +
-        N(21) + "He did neither. " +
-        N(22) + "He seized them and hauled them, weeping, back to the ships, and there he bound them fast beneath the rowing benches. " +
-        N(23) + "Then he turned to the rest of his crew. " +
-        N(24) + "\"Board the ships, all of you, and quickly!\" he ordered. \"Let no one else taste the lotus and forget the way home.\" " +
-        N(25) + "The men obeyed at once, for they had seen their friends' faces. " +
-        N(26) + "They took their places on the benches and struck the grey sea with their oars, and the land of the Lotus-Eaters, peaceful and sweet, fell away behind them." +
+        N(10) + "The herald was silent for a long time. " +
+        N(11) + "Then he looked at the rowers, at the grey sea, at the faint line of a new coast ahead, and he said, \"Then I am glad you did not ask what we wanted.\" " +
+        N(12) + "He went back to his bench and pulled his oar with the others." +
         "</p>",
       claims: [
         {
-          id: "setting",
-          sol: "9.RL.3.B",
-          stem: "How does the setting described in sentences 3 and 9 contribute to the scouts' downfall?",
+          id: "speech",
+          sol: "9.RL.1.D",
+          stem: "In sentence 3, the herald's words \"We were happy\" suggest that he —",
           choices: [
-            { letter: "A", text: "Its sweetness and calm lower their guard and make staying feel natural." },
-            { letter: "B", text: "Its steep cliffs and thick forests make the way back to the ships hard to find." },
-            { letter: "C", text: "Its harsh heat leaves them too weak and thirsty to walk to the ships." },
-            { letter: "D", text: "Its crowded villages hide soldiers waiting to capture the strangers." }
+            { letter: "A", text: "is secretly planning to row back to the Lotus-Eaters" },
+            { letter: "B", text: "blames Odysseus for leaving the scouts alone so long" },
+            { letter: "C", text: "still half believes that staying was the better choice" },
+            { letter: "D", text: "is reporting what he learned about the land, as ordered" }
           ],
-          correct: "A"
-        },
-        {
-          id: "stillness",
-          sol: "9.RL.2.A",
-          stem: "In sentence 9, the stillness brought by the lotus is compared to a sea at noon with no breeze. This comparison suggests that the lotus —",
-          choices: [
-            { letter: "A", text: "makes the men seasick and unable to stand" },
-            { letter: "B", text: "stops the men's purpose the way calm air stops a ship" },
-            { letter: "C", text: "gives the men enough strength to row for days without rest" },
-            { letter: "D", text: "reminds the men of the storm they had survived" }
-          ],
-          correct: "B"
+          correct: "C"
         },
         {
           id: "herald",
           sol: "9.RL.1.B",
-          stem: "Sentence 7 suggests that the herald ate the lotus partly because —",
+          stem: "Sentence 4 suggests that the herald ate the lotus partly because —",
           choices: [
             { letter: "A", text: "Odysseus had ordered him to taste the local food" },
             { letter: "B", text: "he was starving after the long walk from the ships" },
@@ -651,25 +621,25 @@
           correct: "C"
         },
         {
-          id: "speech",
-          sol: "9.RL.1.D",
-          stem: "What does the scout's speech in sentence 17 reveal about how the lotus has changed him?",
+          id: "stillness",
+          sol: "9.RL.2.A",
+          stem: "In sentence 4, the stillness brought by the lotus is compared to a sea at noon with no breeze. This comparison suggests that the lotus —",
           choices: [
-            { letter: "A", text: "He is secretly planning to escape from the Lotus-Eaters." },
-            { letter: "B", text: "He blames Odysseus for leaving the scouts alone so long." },
-            { letter: "C", text: "He sees staying as so plainly good that his captain should join." },
-            { letter: "D", text: "He is reporting what he learned about the land, just as he was ordered." }
+            { letter: "A", text: "makes the men seasick and unable to stand" },
+            { letter: "B", text: "stops the men's purpose the way calm air stops a ship" },
+            { letter: "C", text: "gives the men enough strength to row for days without rest" },
+            { letter: "D", text: "reminds the men of the storm they had survived" }
           ],
-          correct: "C"
+          correct: "B"
         },
         {
           id: "choice",
           sol: "9.RL.1.C",
-          stem: "Sentences 18–22 show that Odysseus meets this challenge by —",
+          stem: "Sentences 6–9 show that Odysseus met this challenge by —",
           choices: [
-            { letter: "A", text: "lingering to argue until the scouts agree to leave" },
-            { letter: "B", text: "tasting the fruit so that he can understand his men" },
-            { letter: "C", text: "leaving the scouts behind because they seem happy" },
+            { letter: "A", text: "lingering to argue until the scouts agreed to leave" },
+            { letter: "B", text: "tasting the fruit so that he could understand his men" },
+            { letter: "C", text: "leaving the scouts behind because they seemed happy" },
             { letter: "D", text: "putting his men's homecoming above their wishes" }
           ],
           correct: "D"
@@ -677,7 +647,7 @@
         {
           id: "lingered",
           sol: "9.RV.1.C",
-          stem: "In sentence 20, the word *lingered* most nearly means —",
+          stem: "In sentence 8, the word *lingered* most nearly means —",
           choices: [
             { letter: "A", text: "stayed on too long" },
             { letter: "B", text: "spoken angrily" },
@@ -689,14 +659,26 @@
         {
           id: "guesses",
           sol: "9.RL.3.A",
-          stem: "The author most likely includes the crew's guesses in sentence 14 to show that —",
+          stem: "The author most likely includes sentence 10, \"The herald was silent for a long time,\" to show that the herald —",
           choices: [
-            { letter: "A", text: "the scouts had been gone for several days" },
-            { letter: "B", text: "the crew expects a feast or a fight, not the real danger" },
-            { letter: "C", text: "the men no longer trust their captain's judgment about danger" },
-            { letter: "D", text: "the Lotus-Eaters had already visited the beach" }
+            { letter: "A", text: "is too tired from rowing to answer his captain" },
+            { letter: "B", text: "is weighing his captain's words seriously" },
+            { letter: "C", text: "has fallen back under the spell of the lotus" },
+            { letter: "D", text: "is angry and refuses to speak to Odysseus again" }
           ],
           correct: "B"
+        },
+        {
+          id: "setting",
+          sol: "9.RL.3.B",
+          stem: "In sentence 11, the herald looks at the rowers, the grey sea and a new coast ahead. How does this setting help him reach his conclusion?",
+          choices: [
+            { letter: "A", text: "It reminds him that he belongs to a voyage still going on." },
+            { letter: "B", text: "It makes him long to swim back to the meadow and the fruit." },
+            { letter: "C", text: "It frightens him into obeying a captain he does not trust." },
+            { letter: "D", text: "It shows him that the ships have already reached Ithaca." }
+          ],
+          correct: "A"
         },
         {
           id: "theme",
@@ -713,52 +695,34 @@
       ]
     },
 
-    /* ───────────── EPIC (level 3) ───────────── */
+    /* ───────────── WHOLE-EPISODE SUMMARY (last in story order) ───────────── */
     {
       id: "ody-lotus-epic-telling",
       family: "ODY",
       episode: "lotus",
       title: "From Ismarus to the Lotus Shore",
       kind: "The Odyssey · 9.RL",
-      blurb: "Odysseus tells the Phaeacians of the Cicones, the storm, the lotus and the shore beyond.",
-      level: 3,
+      blurb: "Odysseus sums up for the Phaeacians the Cicones, the storm and the lotus, and hints at the shore beyond.",
+      level: 2,
       passage:
         "<p>" +
-        N(1) + "Hear me now, Alcinous, and you lords of Phaeacia, for you have asked me to tell the story of my sorrows, and I will begin where the wind first took us from Troy. " +
-        N(2) + "From Ilium the wind carried us to Ismarus, the city of the Cicones. " +
-        N(3) + "We sacked the town and divided the plunder fairly, so that no man went without his share. " +
-        N(4) + "Then I urged my men to leave at once, on swift feet, but the fools would not listen. " +
-        N(5) + "They stayed on the beach, drinking wine and feasting on sheep and cattle beside the sea, while the Cicones who had escaped ran inland to call their neighbors. " +
-        N(6) + "Those neighbors came at dawn, as thick as the leaves that crowd the branches in spring, and they fought us beside our ships until the sun turned toward evening. " +
-        N(7) + "Six men from every ship died there, and the rest of us escaped by hard rowing, glad to be alive but grieving for our friends." +
+        N(1) + "Hear me, Alcinous, for you have asked the story of my sorrows. " +
+        N(2) + "At Ismarus we sacked the city of the Cicones. " +
+        N(3) + "I urged my men to leave at once, but the fools stayed on the beach, feasting and drinking wine. " +
+        N(4) + "At dawn the Cicones' neighbors came, as thick as leaves in spring, and six men from every ship died." +
         "</p>" +
         "<p>" +
-        N(8) + "Then Zeus, who gathers the clouds, sent the north wind howling against us. " +
-        N(9) + "Storm clouds hid the land and the sea alike, and night came rushing down from the sky. " +
-        N(10) + "The ships were driven headlong, and the wind's force ripped our sails to rags. " +
-        N(11) + "We lowered them and rowed hard for land, and there we lay for two days and two nights, worn out by toil and grief. " +
-        N(12) + "When Dawn with her rose-red fingers brought the third day, we raised the masts and set the white sails again. " +
-        N(13) + "I might have reached my own country unharmed, but as I rounded Cape Malea, the current and the north wind drove me off course, past the island of Cythera. " +
-        N(14) + "For nine days the deadly winds carried us over the fish-filled sea, and on the tenth day we landed on the shore of the Lotus-Eaters, who feed on a flowering fruit." +
+        N(5) + "Then Zeus, who gathers the clouds, sent the north wind howling against us. " +
+        N(6) + "Our ships were driven headlong, our sails ripped to rags. " +
+        N(7) + "Off Cape Malea the current caught us, and for nine days deadly winds carried us to the land of the Lotus-Eaters. " +
+        N(8) + "Three of my men tasted their honey-sweet fruit and forgot their homecoming. " +
+        N(9) + "I dragged them weeping to the ships and bound them beneath the benches. " +
+        N(10) + "When I ordered the rest aboard, they obeyed at once and struck the grey sea with their oars." +
         "</p>" +
         "<p>" +
-        N(15) + "We went ashore and drew fresh water, and my companions took their meal beside the swift ships. " +
-        N(16) + "When we had eaten and drunk our fill, I chose two of my men and sent a third as herald, to discover what kind of people lived in that land. " +
-        N(17) + "They set off at once and soon met the Lotus-Eaters. " +
-        N(18) + "Those people planned no harm for my companions; they only gave them the lotus to taste. " +
-        N(19) + "But whoever ate that honey-sweet fruit no longer wished to bring back word or to come home. " +
-        N(20) + "They wanted only to remain there among the Lotus-Eaters, feeding on lotus, with their homecoming forgotten." +
-        "</p>" +
-        "<p>" +
-        N(21) + "I brought them back to the ships by force, and they wept as I dragged them. " +
-        N(22) + "I tied them beneath the benches in the hollow ships, and then I commanded the rest of my loyal companions to board quickly, so that no one else might taste the lotus and lose all thought of home. " +
-        N(23) + "At once they climbed aboard and sat in rows, and, pulling together, they struck the grey sea white with their oars." +
-        "</p>" +
-        "<p>" +
-        N(24) + "From there we sailed on, sick at heart. " +
-        N(25) + "Like a man who has pulled his children from a burning house and counts their faces in the dark, I counted my ships and my crew, knowing that I had saved them this time but that the sea was wide and home was far. " +
-        N(26) + "And yet a darker shore was waiting, for next we came to the land of the Cyclopes, a proud and lawless people who neither plant nor plow but leave everything to the gods. " +
-        N(27) + "What happened there, my friends, I have never forgotten, though I have often wished I could." +
+        N(11) + "We sailed on, sick at heart, like a man who has pulled his children from a burning house and counts their faces in the dark. " +
+        N(12) + "Next we came to the land of the Cyclopes, a proud and lawless people. " +
+        N(13) + "What happened there I have never forgotten, though I have often wished I could." +
         "</p>",
       claims: [
         {
@@ -776,7 +740,7 @@
         {
           id: "crew",
           sol: "9.RL.1.C",
-          stem: "How does the crew's response to Odysseus's command in sentence 23 differ from their response in sentences 4–5?",
+          stem: "How does the crew's response to Odysseus's order in sentence 3 differ from their response in sentence 10?",
           choices: [
             { letter: "A", text: "At Ismarus they obeyed at once; on the Lotus shore they refuse to leave." },
             { letter: "B", text: "At Ismarus they ignored his order to leave; on the Lotus shore they obey at once." },
@@ -788,7 +752,7 @@
         {
           id: "leaves",
           sol: "9.RL.2.A",
-          stem: "In sentence 6, Odysseus compares the Cicones' neighbors to the leaves of spring mainly to emphasize —",
+          stem: "In sentence 4, Odysseus compares the Cicones' neighbors to the leaves of spring mainly to emphasize —",
           choices: [
             { letter: "A", text: "how quickly the battle ended" },
             { letter: "B", text: "how green and rich the land was" },
@@ -800,7 +764,7 @@
         {
           id: "zeus",
           sol: "9.RV.1.F",
-          stem: "In sentence 8, the storm is sent by \"Zeus, who gathers the clouds.\" This reference to the king of the gods suggests that —",
+          stem: "In sentence 5, the storm is sent by \"Zeus, who gathers the clouds.\" This reference to the king of the gods suggests that —",
           choices: [
             { letter: "A", text: "the crew has earned a reward of fair winds" },
             { letter: "B", text: "Odysseus can calm the storm with a single prayer" },
@@ -824,7 +788,7 @@
         {
           id: "headlong",
           sol: "9.RV.1.C",
-          stem: "In sentence 10, the word *headlong* most nearly means —",
+          stem: "In sentence 6, the word *headlong* most nearly means —",
           choices: [
             { letter: "A", text: "rushing forward out of control" },
             { letter: "B", text: "slowly and with great care" },
@@ -836,7 +800,7 @@
         {
           id: "mood",
           sol: "9.RL.2.C",
-          stem: "How does the mood change across sentences 24–27?",
+          stem: "How does the mood change across sentences 11–13?",
           choices: [
             { letter: "A", text: "from cheerful triumph to bored indifference" },
             { letter: "B", text: "from terror to complete and calm confidence" },
@@ -848,7 +812,7 @@
         {
           id: "ending",
           sol: "9.RL.3.A",
-          stem: "The final sentence (sentence 27) is effective mainly because Odysseus —",
+          stem: "The final sentence (sentence 13) is effective mainly because Odysseus —",
           choices: [
             { letter: "A", text: "admits that he has forgotten most of what happened in the land of the Cyclopes" },
             { letter: "B", text: "thanks the Phaeacians for the gifts and hospitality they have shown him" },

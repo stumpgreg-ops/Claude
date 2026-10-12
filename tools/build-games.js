@@ -29,7 +29,8 @@ var CONTENT = {
        "content18.js", "content19.js", "content20.js", "content21.js", "content22.js", "content23.js"],
   NJ: ["content12.js", "content13.js", "content14.js", "content15.js", "content16.js", "content17.js", "content24.js", "content25.js"],
   /* v5.9: the Odyssey game (English 9, Unit 2) — one file per episode plus the cross-episode paired texts */
-  ODY: ["content26.js", "content27.js", "content28.js", "content29.js", "content30.js", "content31.js"]
+  ODY: ["content26.js", "content27.js", "content28.js", "content29.js", "content30.js", "content31.js",
+        "content114.js", "content115.js", "content116.js"]   /* v5.18.3: the Sirens, Scylla and Charybdis, the contest of the bow */
 };
 /* v5.15: the question expansion (tools/expansion/PLAN.md). A new file joins the Virginia game once it is checked and
    listed in tools/expansion/accepted.json; until then it is left out of every build (and of index.html). */

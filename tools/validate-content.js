@@ -38,7 +38,7 @@ packs.forEach(function (p, pi) {
   if (ids[p.id]) errors.push(where + ": duplicate pack id"); ids[p.id] = true;
   if (!/^(G9|G10|G11|NJ5|ODY)$/.test(p.family)) errors.push(where + ": family must be G9/G10/G11/NJ5/ODY, got " + p.family);
   /* ODY: the Odyssey game (English 9, Unit 2). Every pack names its episode, which the skill screen filters on. */
-  if (p.family === "ODY" && !/^(lotus|cyclops|circe|helios|calypso|voyage)$/.test(p.episode || "")) errors.push(where + ": ODY packs need episode: lotus | cyclops | circe | helios | calypso | voyage");
+  if (p.family === "ODY" && !/^(lotus|cyclops|circe|helios|calypso|voyage|sirens|scylla|bow)$/.test(p.episode || "")) errors.push(where + ": ODY packs need episode: lotus | cyclops | circe | sirens | scylla | helios | calypso | bow | voyage");
   var isNJ = p.family === "NJ5";
   if (p.level != null && !(p.level === 1 || p.level === 2 || p.level === 3)) errors.push(where + ": level must be 1, 2 or 3");
   if (p.level == null) warnings.push(where + ": no level (1 easy, 2 medium, 3 hard) — it will be estimated from readability");

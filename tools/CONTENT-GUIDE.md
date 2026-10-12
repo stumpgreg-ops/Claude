@@ -98,7 +98,7 @@ whose stem starts with `Part B:` and asks which sentence/detail best supports th
 answer (its `sol` is usually `RL.CR.5.1` / `RI.CR.5.1`). The game asks Part B right after Part A.
 
 **The Odyssey (English 9, Unit 2 "Challenge Accepted!").** `family: "ODY"` and
-`episode: "lotus" | "cyclops" | "circe" | "helios" | "calypso" | "voyage"` on every pack (the game's
+`episode: "lotus" | "cyclops" | "circe" | "sirens" | "scylla" | "helios" | "calypso" | "bow" | "voyage"` on every pack (the game's
 skill screen picks an episode; `voyage` holds the cross-episode and paired texts). Codes are the
 Virginia 9.x codes. Passages are original retellings of Homer (the plot is public domain; never copy a
 modern translation). Files: `js/content26.js`–`js/content31.js`, one per episode in that order; they go

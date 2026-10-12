@@ -6,7 +6,7 @@ var fs = require("fs"), vm = require("vm"), path = require("path");
 var root = path.join(__dirname, "..");
 var ctx = { console: console }; ctx.window = ctx; ctx.self = ctx; ctx.globalThis = ctx;
 vm.createContext(ctx);
-["js/content.js", "js/content26.js", "js/content27.js", "js/content28.js", "js/content29.js", "js/content30.js", "js/content31.js"].forEach(function (f) {
+["js/content.js", "js/content26.js", "js/content27.js", "js/content28.js", "js/content29.js", "js/content30.js", "js/content31.js", "js/content114.js", "js/content115.js", "js/content116.js"].filter(function (f) { return fs.existsSync(path.join(root, f)); }).forEach(function (f) {
   vm.runInContext(fs.readFileSync(path.join(root, f), "utf8"), ctx, { filename: f });
 });
 var STORY = ctx.heistOdyStory || [];
@@ -22,8 +22,8 @@ var Document = D.Document, Packer = D.Packer, Paragraph = D.Paragraph, TextRun =
 /* the parts of the story (the frame and the paired texts are the "voyage" packs, first and last in story order) */
 var PARTS = [
   { key: "frame", name: "The frame: Odysseus at the Phaeacian court", test: function (p, i) { return p.episode === "voyage" && i < 10; } },
-  { key: "lotus", name: "Book 9: The Lotus-Eaters" }, { key: "cyclops", name: "Book 9: The Cyclops" }, { key: "circe", name: "Book 10: Circe" },
-  { key: "helios", name: "Book 12: The Cattle of the Sun" }, { key: "calypso", name: "Book 5: Calypso" },
+  { key: "lotus", name: "Book 9: The Lotus-Eaters" }, { key: "cyclops", name: "Book 9: The Cyclops" }, { key: "circe", name: "Book 10: Circe" }, { key: "sirens", name: "Book 12: The Sirens" }, { key: "scylla", name: "Book 12: Scylla and Charybdis" },
+  { key: "helios", name: "Book 12: The Cattle of the Sun" }, { key: "calypso", name: "Book 5: Calypso" }, { key: "bow", name: "Book 21: The contest of the bow" },
   { key: "paired", name: "Paired texts: the whole voyage", test: function (p, i) { return p.episode === "voyage" && i >= 10; } }
 ];
 function partOf(p, i) {
