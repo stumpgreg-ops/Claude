@@ -131,7 +131,7 @@
     var agg = el("agg");
     if (agg) {
       agg.textContent = list.length
-        ? (list.length + " nicknames · " + pct + "% past night 5 · median night " + median(nights))
+        ? (list.length + " nicknames · " + pct + "% past level 5 · median level " + median(nights))
         : "No nicknames yet. Students join After Hours with this class code + the nickname you assigned.";
     }
   }
