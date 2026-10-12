@@ -46,3 +46,6 @@ The Great castle, town hall, barracks, houses, mills, towers, soldiers, carts an
 - **Kenney Graveyard Kit** (CC0) — benches, lamp posts, urns, pillars and the great column. https://kenney.nl/assets/graveyard-kit
 - **Kenney Animal Pack Redux** (CC0) — the cow, horse, pig, goat, chicken, dog, rabbit, duck and owl stand-ups. https://kenney.nl/assets/animal-pack-redux
 All are cropped, re-anchored and scaled to the castle kit's cell by `tools/make-castle-kit.py`; the stone knight and king are desaturated Castle Kit figures.
+
+## Lesson materials (`docs/lessons/`)
+The annotated "Lotus Eaters" teacher copy uses **Caveat** (handwritten notes, drawn as outlines) and **Gelasio** (Georgia-width metrics for the passage), both from Google Fonts under the SIL Open Font License 1.1; the licence texts are in `docs/lessons/lotus-eaters/fonts/`. The passage is the class's student annotation copy of Homer's *Odyssey*, "The Lotus Eaters."
