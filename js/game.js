@@ -4382,6 +4382,8 @@
       this.janChase = this.level.janChase;
       this.chaseMs = this.level.chaseMs;
       this.iframeMax = this.level.iframe;
+      /* v5.18.3: an Odyssey mode is an episode of the story: its level asks that episode's questions */
+      try { var accEp = window.SolModes && SolModes.episodeFor ? SolModes.episodeFor(this.night) : null; if (accEp) this.strand = accEp; } catch (eEp) {}
       this.pack = (typeof heistBuildPack === "function") ? heistBuildPack(this.family, this.strand) : { claims: [] };
       cfg.night = this.night;
       writeSavedNight(this.night);
@@ -26936,6 +26938,12 @@
   function renderSkillCards(family) {
     var host = document.getElementById("skill-packs");
     if (!host) return;
+    var epName = family === "ODY" ? modeEpisodeName(cfg.gameMode) : null;
+    if (epName) {   /* v5.18.3: an episode mode plays its own episode */
+      host.innerHTML = '<div class="card selected" data-strand="' + modeEpisode(cfg.gameMode) + '"><span class="kind">' + epName.split(" · ")[0] + '</span><span class="name">' +
+        epName.split(" · ")[1] + '</span><span class="meta">' + gameModeName(cfg.gameMode) + " plays this episode: every question comes from its passages, in story order.</span></div>";
+      return;
+    }
     var defs = SKILL_DEFS[family] || SKILL_DEFS.G9;
     var want = String(cfg.strand || "ALL").toUpperCase();
     var hasWant = defs.some(function (x) { return x.strand === want; });
@@ -26978,10 +26986,17 @@
   );
   /* the cards this build offers: the Odyssey-only modes appear only in the Odyssey build, and the modes
      marked noOdy (v5.12: Root Worms) only in the others; a saved pick of a card not offered falls back to All */
+  /* v5.18.3: the Odyssey's cards in story order, each labelled with the episode it plays */
+  var ODY_MODE_ORDER = ["ALL", "maze", "lotus", "ram", "ring", "raid", "row", "rocks", "strait", "sky", "raft", "bow"];
   function gameModeDefs() {
     var ody = typeof window !== "undefined" && window.SOL_STATE === "ODY";
-    return GAME_MODE_DEFS.filter(function (d) { return ody ? !d.noOdy : !d.ody; });
+    var defs = GAME_MODE_DEFS.filter(function (d) { return ody ? !d.noOdy : !d.ody; });
+    if (ody) defs = defs.filter(function (d) { return !d.needsMode || (window.SolModes && SolModes.MODES[d.id]); })
+      .sort(function (a, b) { var i = ODY_MODE_ORDER.indexOf(a.id), j = ODY_MODE_ORDER.indexOf(b.id); return (i < 0 ? 99 : i) - (j < 0 ? 99 : j); });
+    return defs;
   }
+  function modeEpisode(id) { var S = window.SolModes; return S && S.ODY_EPISODE && window.SOL_STATE === "ODY" ? S.ODY_EPISODE[id] || null : null; }
+  function modeEpisodeName(id) { var e = modeEpisode(id); return e && window.SolModes.ODY_EPISODE_NAME[e] || null; }
   function readGameMode() {
     var m = "ALL";
     try { m = localStorage.getItem(LS_GAMEMODE) || "ALL"; } catch (e) {}
@@ -27016,7 +27031,7 @@
       btn.type = "button";
       btn.className = d.id === want ? "card selected" : "card";
       btn.setAttribute("data-gamemode", d.id);
-      btn.innerHTML = '<span class="kind">' + d.kind + '</span><span class="name">' + d.name + '</span><span class="meta">' + d.meta + '</span>';
+      btn.innerHTML = '<span class="kind">' + (modeEpisodeName(d.id) || d.kind) + '</span><span class="name">' + d.name + '</span><span class="meta">' + d.meta + '</span>';
       bindTap(btn, function () {
         host.querySelectorAll(".card").forEach(function (c) { c.classList.remove("selected"); });
         btn.classList.add("selected");
@@ -27051,8 +27066,9 @@
     var kicker = document.getElementById("skill-kicker");
     var ody = cfg.family === "ODY", skT = document.getElementById("skill-title"), skG = document.getElementById("skill-tag");
     if (kicker) kicker.textContent = gradeLabel(cfg.family) + " · " + gameModeName(cfg.gameMode) + (ody ? " · episode" : " · skill focus");
-    if (skT) skT.textContent = ody ? "Pick an episode" : "Pick a skill";
-    if (skG) skG.textContent = ody ? "Choose the episode your class is reading, or play them all mixed." : "Choose a skill focus for this level, or play with all skills mixed.";
+    var epMode = ody && modeEpisodeName(cfg.gameMode);
+    if (skT) skT.textContent = epMode ? "Your episode" : ody ? "Pick an episode" : "Pick a skill";
+    if (skG) skG.textContent = epMode ? "This game mode is an episode of the Odyssey." : ody ? "Choose the episode your class is reading, or play them all mixed." : "Choose a skill focus for this level, or play with all skills mixed.";
     renderSkillCards(cfg.family);
     refreshSkillSaveLine();
   }

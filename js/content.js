@@ -1550,7 +1550,7 @@
      (the Grade 10 card promises "Grade 9 and Grade 10 skills mixed"). */
   var FAMILY_POOL = { G9: ["G9"], G10: ["G9", "G10"], G11: ["G9", "G10", "G11"], NJ5: ["NJ5"], ODY: ["ODY"], ALL: ["G9"] };
   /* v5.9: the Odyssey game's skill screen picks an episode; every ODY pack names one. */
-  var EPISODES = ["LOTUS", "CYCLOPS", "CIRCE", "HELIOS", "CALYPSO", "VOYAGE"];
+  var EPISODES = ["LOTUS", "CYCLOPS", "CIRCE", "HELIOS", "CALYPSO", "VOYAGE", "SIRENS", "SCYLLA", "BOW"];   /* v5.18.3: + the Sirens, Scylla and Charybdis, the bow */
   /* v5.12.2: the Odyssey is read in story order, not by passage length. Within an episode the scenes come in the
      order they happen (a passage never tells an event before the one that sets it up — "Nobody is killing me!"
      comes after Odysseus names himself Nobody); passages that retell a whole episode come after its scenes.
@@ -1570,6 +1570,36 @@
     "ody-calypso-reply", "ody-calypso-dinner", "ody-calypso-raft", "ody-calypso-storm",
     "ody-voyage-two-temptations", "ody-voyage-eurylochus", "ody-voyage-setbacks-raft", "ody-voyage-tie-me-tighter"
   ];
+
+  /* v5.18.3: where in its passage a question looks, so a passage's questions follow the story (a teacher saw a question
+     about xenia before the one about the men first entering the cave). The sentence or line a stem names; else the
+     sentence that shares the most words with the stem and the keyed answer; questions about the whole passage (theme,
+     central idea, structure, the author's purpose across it) last. Returns 1-89 for a place in the text, 90+ for whole. */
+  var POS_WHOLE = /\b(theme|central idea|main idea|best summar|summary|organized|structure of the passage|passage as a whole|whole passage|throughout the passage|over the course of|across the passage|develops? the idea|mainly about)\b/i;
+  var POS_STOP = { which: 1, about: 1, their: 1, there: 1, these: 1, those: 1, would: 1, could: 1, should: 1, being: 1, other: 1, after: 1, before: 1, passage: 1,
+    sentence: 1, sentences: 1, reader: 1, readers: 1, author: 1, odysseus: 1, mainly: 1, most: 1, best: 1, because: 1, shows: 1, show: 1, where: 1, while: 1, words: 1,
+    that: 1, this: 1, with: 1, from: 1, what: 1, when: 1, then: 1, them: 1, they: 1, have: 1, does: 1, will: 1, into: 1, more: 1, than: 1, word: 1, line: 1, lines: 1,
+    nearly: 1, means: 1, reveal: 1, reveals: 1, suggests: 1, likely: 1, describe: 1, describes: 1, statement: 1, based: 1, infer: 1, respond: 1, responds: 1 };
+  function posSentences(html) {
+    var out = [], re = /<span class="n">\(?(\d+)\)?<\/span>([\s\S]*?)(?=<span class="n">|$)/g, m;
+    while ((m = re.exec(String(html)))) out.push({ n: +m[1], text: m[2].replace(/<[^>]+>/g, " ").toLowerCase() });
+    return out;
+  }
+  function posWords(s) { return (String(s).replace(/<[^>]+>/g, " ").toLowerCase().match(/[a-z][a-z'’-]{3,}/g) || []).filter(function (w) { return !POS_STOP[w]; }); }
+  function storyPos(p, c, idx) {
+    var stem = String(c.stem || ""), m = /\b(?:sentences?|lines?)\s+(\d+)/i.exec(stem);
+    if (m) return Math.min(89, +m[1]);
+    if (POS_WHOLE.test(stem)) return 90 + idx;
+    var sents = p._posSents || (p._posSents = posSentences(p.passage));
+    if (!sents.length) return 90 + idx;
+    var key = posWords(stem), corr = correctList(c), best = -1, bestN = 0, second = 0;
+    (c.choices || []).forEach(function (ch) { if (corr.indexOf(String(ch.letter).toUpperCase()) !== -1) key = key.concat(posWords(ch.text)); });
+    sents.forEach(function (sn) {
+      var hit = 0; key.forEach(function (w) { if (sn.text.indexOf(w.slice(0, Math.max(5, w.length - 2))) !== -1) hit++; });
+      if (hit > bestN) { second = bestN; bestN = hit; best = sn.n; } else if (hit > second) second = hit;
+    });
+    return bestN >= 2 && bestN > second ? Math.min(89, best) : 90 + idx;
+  }
 
   function wordCount(s) {
     return String(s).replace(/<[^>]+>/g, " ").trim().split(/\s+/).filter(Boolean).length;
@@ -1698,7 +1728,7 @@
           passage: p.passage,
           packTitle: p.title,
           episode: p.episode || null,
-          seq: p.family === "ODY" && ODY_STORY.indexOf(p.id) !== -1 ? ODY_STORY.indexOf(p.id) * 100 + p.claims.indexOf(c) : null,
+          seq: p.family === "ODY" && ODY_STORY.indexOf(p.id) !== -1 ? ODY_STORY.indexOf(p.id) * 10000 + storyPos(p, c, p.claims.indexOf(c)) * 100 + p.claims.indexOf(c) : null,
           family: p.family
         });
       });
@@ -1728,6 +1758,7 @@
   global.heistCorrectList = correctList;
   global.heistStrandOf = strandOf;
   global.heistOdyStory = ODY_STORY;
+  global.heistStoryPos = storyPos;
   global.heistPackLevel = packLevel;
   global.heistTargetWords = targetWords;
   global.heistStamina = STAMINA;

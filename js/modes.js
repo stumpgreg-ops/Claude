@@ -181,6 +181,16 @@
     ["raft", "ram", "bow", "row", "strait"]       /* 10 Poseidon's storm */
   ];
   var ODY_SLOT_IDX = { 2: 0, 4: 1, 6: 2, 8: 3, 9: 4 };
+  /* v5.18.3: each Odyssey mode is an episode of the story, and a level in it asks that episode's questions
+     (game.js uses episodeFor(n) as the level's question filter; an episode with no questions yet falls back to all) */
+  var ODY_EPISODE = { lotus: "LOTUS", ram: "CYCLOPS", ring: "CIRCE", raid: "SIRENS", row: "SIRENS", rocks: "SCYLLA", strait: "SCYLLA", sky: "HELIOS", raft: "CALYPSO", bow: "BOW" };
+  var ODY_EPISODE_NAME = { LOTUS: "Book 9 · The Lotus-Eaters", CYCLOPS: "Book 9 · The Cyclops", CIRCE: "Book 10 · Circe", SIRENS: "Book 12 · The Sirens",
+    SCYLLA: "Book 12 · Scylla and Charybdis", HELIOS: "Book 12 · The Cattle of the Sun", CALYPSO: "Book 5 · Calypso", BOW: "Book 21 · The contest of the bow" };
+  function episodeFor(n) {
+    if (!isOdy()) return null;
+    var m = modeFor(n);
+    return m && ODY_EPISODE[m.id] || null;
+  }
   /* v5.11: modes kept in their own files: SolModes.extend(id, def, methods) adds the MODES entry and,
      at install, copies the methods (setup_<id>, answers_<id>, tick_<id>, clear_<id>, resize_<id>, ...) onto ModeScene */
   var EXT = {};
@@ -3780,7 +3790,7 @@
 
   /* v5.7.9: the maze draws Sol riding this chariot while the CHARIOT power lasts */
   function ensureChariotArt(scene) { canvasTex(scene, "md-team-0", TEAM_W, TEAM_H, drawTeam(0)); canvasTex(scene, "md-team-1", TEAM_W, TEAM_H, drawTeam(1)); }
-  window.SolModes = { MODES: MODES, SLOTS: SLOTS, ODY_ROT: ODY_ROT, modeFor: modeFor, install: install, ensureChariotArt: ensureChariotArt, extend: extend,
+  window.SolModes = { MODES: MODES, SLOTS: SLOTS, ODY_ROT: ODY_ROT, ODY_EPISODE: ODY_EPISODE, ODY_EPISODE_NAME: ODY_EPISODE_NAME, episodeFor: episodeFor, modeFor: modeFor, install: install, ensureChariotArt: ensureChariotArt, extend: extend,
     /* v5.12: the five-shooter rotation (Virginia and New Jersey), the card's news, Eagle Swoop's birds */
     ORDER: ORDER, modeAt: modeAt, modeInRealm: modeInRealm, newsFor: newsFor, BIRDS: BIRDS, raidKindsFor: raidKindsFor,
     /* v5.11: the shared helpers, for the modes in their own files */
