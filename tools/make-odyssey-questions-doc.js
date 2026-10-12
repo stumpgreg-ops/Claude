@@ -97,7 +97,10 @@ packs.forEach(function (p, i) {
   children.push(new Paragraph({ spacing: { after: 120 }, keepNext: true, children: [new TextRun({ text: [p.kind, "reading level " + (p.level || "?"), words + " words", p.id].filter(Boolean).join("  ·  "), size: 18, color: GREY })] }));
   if (p.blurb) children.push(new Paragraph({ spacing: { after: 120 }, children: [new TextRun({ text: p.blurb, italics: true, size: 20 })] }));
   passage(p.passage).forEach(function (x) { children.push(x); });
-  p.claims.forEach(function (c, k) {
+  /* v5.18.3: the questions in the order the game asks them (heistStoryPos: by the sentence or line they look at) */
+  var ordered = p.claims.map(function (c, k) { return { c: c, k: k, pos: ctx.heistStoryPos ? ctx.heistStoryPos(p, c, k) : k }; })
+    .sort(function (a, b) { return a.pos - b.pos || a.k - b.k; }).map(function (x) { return x.c; });
+  ordered.forEach(function (c, k) {
     qn++; totals.q++; byPart[pt.name].q++;
     var key = keyOf(c), std = c.sol || "";
     byStd[std] = (byStd[std] || 0) + 1;
