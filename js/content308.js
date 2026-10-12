@@ -1609,7 +1609,7 @@
           sub: "G.RLT.3.3",
           stem: "Ana says, “A 90° turn about O maps the rose onto itself, so the rule (x, y) → (−y, x) leaves every point where it was.” What is her error?",
           choices: [
-            { letter: "A", text: "The outline lands on itself, but every point except O moves to a different point." },
+            { letter: "A", text: "It lands on itself, but every point except O moves." },
             { letter: "B", text: "There is no error; every point stays where it was." },
             { letter: "C", text: "A 90° turn does not map the rose onto itself." },
             { letter: "D", text: "The rule should be (x, y) → (y, x)." }

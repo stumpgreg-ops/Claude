@@ -337,7 +337,7 @@
         "<text x=\"44\" y=\"87\" text-anchor=\"middle\">M</text><text x=\"200\" y=\"73\" text-anchor=\"middle\">L</text>" +
         "<text x=\"284.4\" y=\"63\" text-anchor=\"middle\">C</text><text x=\"284.4\" y=\"115\" text-anchor=\"middle\">D</text>" +
         "<text x=\"304.4\" y=\"87\" text-anchor=\"middle\">N</text><text x=\"30\" y=\"104\" text-anchor=\"middle\">2.4 m</text>" +
-        "<text x=\"148\" y=\"139\" text-anchor=\"middle\">8 m</text><text class=\"sm\" x=\"237.2\" y=\"134\" text-anchor=\"middle\">50 mm</text>" +
+        "<text x=\"134\" y=\"76\" text-anchor=\"middle\">8 m</text><text class=\"sm\" x=\"237.2\" y=\"134\" text-anchor=\"middle\">50 mm</text>" +
         "<text class=\"sm\" x=\"82\" y=\"17\" text-anchor=\"middle\">statue</text><text class=\"sm\" x=\"230\" y=\"44\" text-anchor=\"middle\">camera</text></svg>" +
         "<figcaption>Not drawn to scale</figcaption></figure>" +
         "<p class=\"geo-given\">A statue <strong>AB</strong> is 2.4 m tall and 8 m from the camera's lens <strong>L</strong> (LM = 8 m). Light from A and B crosses at L and reaches the sensor at <strong>D</strong> and <strong>C</strong>. The sensor is 50 mm behind the lens (LN = 50 mm). AB ∥ CD, and the axis MN is perpendicular to both.</p>",
@@ -351,7 +351,7 @@
             { letter: "A", text: "SAS∼: LM/LN and the vertical angles at L" },
             { letter: "B", text: "AA: vertical angles at L, and ∠A ≅ ∠D" },
             { letter: "C", text: "SSS∼: all three sides of each are known" },
-            { letter: "D", text: "AA: vertical angles at L, and ∠A ≅ ∠C" }
+            { letter: "D", text: "AA: right angles at M and N, and vertical angles at L" }
           ],
           correct: "B"
         },
@@ -710,7 +710,7 @@
           stem: "Is the brace DE parallel to BC? Choose the answer with the correct reason.",
           choices: [
             { letter: "A", text: "Yes; 16/30 = 12/40" },
-            { letter: "B", text: "No; 16/40 ≠ 12/30" },
+            { letter: "B", text: "Yes; 16/28 = 12/14" },
             { letter: "C", text: "Yes; 16 + 14 = 12 + 28" },
             { letter: "D", text: "No; 16/30 ≠ 12/40" }
           ],
@@ -1123,12 +1123,12 @@
           id: "second",
           sol: "G.TR.3",
           sub: "G.TR.3.3",
-          stem: "A second stake, 1.2 m tall, will also touch the rope. How far from A should it stand?",
+          stem: "A second stake, 1.5 m tall, will also touch the rope. How far from A should it stand?",
           choices: [
-            { letter: "A", text: "0.9 m" },
-            { letter: "B", text: "1.4 m" },
-            { letter: "C", text: "1.6 m" },
-            { letter: "D", text: "0.96 m" }
+            { letter: "A", text: "1.125 m" },
+            { letter: "B", text: "2.3 m" },
+            { letter: "C", text: "2 m" },
+            { letter: "D", text: "1.2 m" }
           ],
           correct: "C"
         },
@@ -1229,12 +1229,12 @@
           id: "tb",
           sol: "G.TR.3",
           sub: "G.TR.3.3",
-          stem: "The ranger also measures BE = 12 m. How far is it from B to T?",
+          stem: "The ranger also measures BE = 14 m. How far is it from B to T?",
           choices: [
-            { letter: "A", text: "48 m" },
-            { letter: "B", text: "9 m" },
-            { letter: "C", text: "16 m" },
-            { letter: "D", text: "36 m" }
+            { letter: "A", text: "56 m" },
+            { letter: "B", text: "10.5 m" },
+            { letter: "C", text: "about 18.7 m" },
+            { letter: "D", text: "42 m" }
           ],
           correct: "D"
         },
