@@ -467,14 +467,14 @@
       passage:
         "<p>" + N(1) + "Swift as a gull skimming the wave tops, Lampetia of the long robes ran to her father, Helios, and told him that my men had slaughtered his cattle. " +
         N(2) + "The sun god's anger blazed up at once, and he cried out among the immortals: " +
-        N(3) + "\"Father Zeus, and all you blessed gods who live forever, punish the companions of Odysseus, son of Laertes! " +
-        N(4) + "In their pride they have killed my cattle, the cattle I loved to look upon each morning as I climbed the starry sky and each evening as I turned back toward earth. " +
+        N(3) + "\"Father Zeus, and all you blessed gods who live forever, punish the companions of Odysseus! " +
+        N(4) + "In their pride they have killed the cattle I loved to look upon as I climbed the starry sky each morning and turned back toward earth each evening. " +
         N(5) + "If they do not pay me a fitting price, I will go down into the house of Hades and shine among the dead.\"</p>" +
         "<p>" + N(6) + "Zeus, who gathers the clouds, answered him: " +
         N(7) + "\"Helios, keep shining for the gods and for mortal men upon the grain-giving earth. " +
-        N(8) + "As for those sailors, I will soon strike their swift ship with a white-hot thunderbolt and shatter it to pieces on the wine-dark sea.\"</p>" +
-        "<p>" + N(9) + "I learned all this later from Calypso, who said she had heard it from Hermes, the messenger of the gods. " +
-        N(10) + "But on that beach I knew nothing of their talk; I knew only the smell of roasting meat and the dread in my heart.</p>",
+        N(8) + "As for those sailors, I will strike their swift ship with a thunderbolt and shatter it on the wine-dark sea.\"</p>" +
+        "<p>" + N(9) + "I learned all this later from Calypso, who heard it from Hermes, the messenger god. " +
+        N(10) + "On the beach I knew nothing of their talk; I knew only the smell of roasting meat and the dread in my heart.</p>",
       claims: [
         {
           id: "helios",
@@ -559,37 +559,25 @@
       title: "One Against Many",
       kind: "The Odyssey · 9.RL",
       blurb: "Odysseus tells the Phaeacians how his exhausted crew outvoted him at Thrinacia.",
-      level: 3,
+      level: 2,
       passage:
-        "<p>" + N(1) + "Lords of Phaeacia, when we had slipped past the whirlpool Charybdis and the cliff of Scylla, who snatched six of my best men from the deck and devoured them, we rowed on with heavy hearts. " +
-        N(2) + "Soon a fair island rose before us out of the wine-dark sea. " +
-        N(3) + "Even before we could see the shore, we heard the lowing of cattle in their pens and the bleating of sheep, and the sound struck my heart like a cold wave. " +
-        N(4) + "For I remembered the words of blind Tiresias in the halls of the dead, and the words of Circe after him: both had told me to shun the island of Helios, the sun who brings joy to mortals, because our deadliest danger waited there.</p>" +
-        "<p>" + N(5) + "So I stood up among my weary men and spoke: " +
-        N(6) + "\"Friends, hear what the prophets told me. " +
-        N(7) + "Here lies the worst evil we will ever meet. " +
-        N(8) + "Bend your backs to the oars and drive our black ship past this island.\" " +
-        N(9) + "At my words their spirits broke, and Eurylochus answered me with a bitter speech: " +
-        N(10) + "\"You are a hard man, Odysseus. " +
-        N(11) + "Your strength never fails and your limbs never tire; you must be made of iron through and through. " +
-        N(12) + "Your comrades are worn out with rowing and lack of sleep, yet you will not let us set foot on land, where we could cook a decent supper. " +
-        N(13) + "Instead you want us to wander blindly through the swift night. " +
-        N(14) + "It is at night that fierce winds rise up and wreck ships, and who could escape sudden death if a gale struck us in the dark? " +
-        N(15) + "Let us give in to the night, cook our meal beside the ship, and sail on at dawn.\" " +
-        N(16) + "So he spoke, and all the rest of the crew shouted in agreement.</p>" +
-        "<p>" + N(17) + "Then I knew that some god was planning trouble for us. " +
-        N(18) + "\"Eurylochus,\" I said, \"you force my hand, for I am one against many. " +
-        N(19) + "But all of you, swear me a solemn oath: if we come upon a herd of cattle or a great flock of sheep, no man will kill a single animal in reckless folly. " +
-        N(20) + "Eat in peace the food that immortal Circe gave us.\" " +
-        N(21) + "They swore the oath as I commanded, and when they had finished, we brought the ship into a sheltered harbor near a spring of fresh water. " +
-        N(22) + "My men stepped ashore and prepared their supper. " +
-        N(23) + "When they had eaten and drunk their fill, they remembered the friends Scylla had taken and wept for them, until sleep came over them in the middle of their tears. " +
-        N(24) + "Yet even as they slept, Zeus the cloud-gatherer was gathering a storm above the island.</p>",
+        "<p>" + N(1) + "Lords of Phaeacia, after Scylla took six of my men, a fair island rose before us out of the wine-dark sea. " +
+        N(2) + "Before we saw the shore, we heard cattle lowing, and the sound struck my heart like a cold wave, for Tiresias and Circe had both warned me to shun this island of the sun.</p>" +
+        "<p>" + N(3) + "I told my weary men, \"Row past this island, for here lies the worst evil we will ever meet.\" " +
+        N(4) + "Eurylochus answered bitterly: \"You are a hard man, Odysseus, made of iron through and through. " +
+        N(5) + "Your comrades are worn out with rowing and lack of sleep, yet you will not let us land to cook a supper. " +
+        N(6) + "Fierce winds rise at night and wreck ships. " +
+        N(7) + "Let us rest tonight and sail on at dawn.\" " +
+        N(8) + "All the crew shouted in agreement.</p>" +
+        "<p>" + N(9) + "\"You force my hand,\" I said, \"for I am one against many. " +
+        N(10) + "But swear that no man will kill a single cow or sheep in reckless folly.\" " +
+        N(11) + "They swore, and we anchored in a sheltered harbor, where the men ate, wept for their lost friends, and slept. " +
+        N(12) + "Yet even as they slept, Zeus the cloud-gatherer was gathering a storm.</p>",
       claims: [
         {
           id: "eurylochus",
           sol: "9.RL.1.D",
-          stem: "Eurylochus's speech in sentences 10–15 reveals that he —",
+          stem: "Eurylochus's speech in sentences 4–7 reveals that he —",
           choices: [
             { letter: "A", text: "resents his captain's endurance and speaks for the worn-out crew" },
             { letter: "B", text: "secretly plans to steal the cattle as soon as the ship lands" },
@@ -601,7 +589,7 @@
         {
           id: "iron",
           sol: "9.RL.2.A",
-          stem: "In sentence 11, Eurylochus claims Odysseus \"must be made of iron.\" This metaphor suggests that Odysseus —",
+          stem: "In sentence 4, Eurylochus calls Odysseus \"made of iron through and through.\" This metaphor suggests that Odysseus —",
           choices: [
             { letter: "A", text: "wears heavy armor even while he rows" },
             { letter: "B", text: "was forged by the god of metalworking" },
@@ -613,7 +601,7 @@
         {
           id: "yields",
           sol: "9.RL.1.C",
-          stem: "How does Odysseus respond when the whole crew sides with Eurylochus (sentences 17–20)?",
+          stem: "How does Odysseus respond when the whole crew sides with Eurylochus (sentences 9 and 10)?",
           choices: [
             { letter: "A", text: "He punishes Eurylochus at once and forces the crew to keep rowing." },
             { letter: "B", text: "He agrees happily, since he is just as tired as they are." },
@@ -625,7 +613,7 @@
         {
           id: "para1",
           sol: "9.RL.3.A",
-          stem: "How does paragraph 1 prepare the reader for the argument that follows?",
+          stem: "How does paragraph 1 (sentences 1 and 2) prepare the reader for the argument that follows?",
           choices: [
             { letter: "A", text: "It describes the island's beauty so that the crew's wish to land seems natural." },
             { letter: "B", text: "It recalls the prophets' warnings, so readers know why landing is risky." },
@@ -637,7 +625,7 @@
         {
           id: "night",
           sol: "9.RL.3.B",
-          stem: "How does the setting described in sentence 14 shape the events of the passage?",
+          stem: "How does the setting described in sentence 6 shape the events of the passage?",
           choices: [
             { letter: "A", text: "The dangers of sailing at night give Eurylochus a strong argument for landing." },
             { letter: "B", text: "The calm night sea lets the crew row safely past the island without any trouble." },
@@ -649,7 +637,7 @@
         {
           id: "folly",
           sol: "9.RV.1.C",
-          stem: "In sentence 19 of \"One Against Many,\" the word folly most nearly means —",
+          stem: "In sentence 10 of \"One Against Many,\" the word folly most nearly means —",
           choices: [
             { letter: "A", text: "hunger" },
             { letter: "B", text: "secrecy" },
@@ -680,88 +668,36 @@
       episode: "helios",
       title: "The Wrath of the Sun",
       kind: "The Odyssey · 9.RL",
-      blurb: "The crew feasts on the forbidden cattle, and Zeus keeps his promise to the sun god.",
-      level: 3,
+      blurb: "The gods send dark signs, and Zeus keeps his promise to the sun god once the crew sets sail.",
+      level: 2,
       passage:
-        "<p>" + N(1) + "While I lay asleep inland, my men drove off the finest of the broad-browed cattle, for the herd was grazing not far from our dark-prowed ship. " +
-        N(2) + "They had no barley left to scatter on the offering, as custom demanded, so they stripped tender leaves from a tall oak and used those instead. " +
-        N(3) + "They had no wine to pour, so they poured water over the burning offering. " +
-        N(4) + "Then they prayed, slaughtered the cattle, and set the meat roasting on the spits.</p>" +
-        "<p>" + N(5) + "At that moment sleep fled from my eyes, and I hurried back toward the shore. " +
-        N(6) + "As I came near the ship, the smell of roasting meat drifted around me, and I groaned aloud and cried out to the deathless gods: " +
-        N(7) + "\"Father Zeus, and you other gods who live forever, you lulled me into a cruel sleep to ruin me, while my companions here dared this monstrous deed!\" " +
-        N(8) + "When I reached the ship I scolded each man in turn, but we could find no remedy, for the cattle were already dead. " +
-        N(9) + "Then the gods began to show us signs. " +
-        N(10) + "The hides crept along the ground, and the meat on the spits, both roasted and raw, lowed like living cattle.</p>" +
-        "<p>" + N(11) + "For six days my companions feasted on the best of the cattle of Helios. " +
-        N(12) + "But when Zeus brought the seventh day, the storm winds finally dropped, and we quickly raised the mast, spread the white sail, and put out to the open sea. " +
-        N(13) + "When the island had sunk behind us and nothing was in sight but sky and water, Zeus set a black cloud above our hollow ship, and the sea grew dark beneath it. " +
-        N(14) + "The ship had not run far when a screaming west wind leapt upon us. " +
-        N(15) + "The gust snapped the ropes that held the mast, and the mast toppled backward onto the stern, where it struck the helmsman, who fell from the deck like a diver and did not rise. " +
-        N(16) + "At the same moment Zeus thundered and hurled his lightning at the ship, which spun around and filled with the reek of sulfur. " +
-        N(17) + "My men were flung overboard, and like sea-crows they bobbed on the waves around the black ship, until a god took away their homecoming forever.</p>" +
-        "<p>" + N(18) + "I alone held on, pacing the deck until the waves tore the keel from the ship's sides. " +
-        N(19) + "Grabbing a leather strap still tied to the mast, I lashed the keel and mast together, and sitting on them I was carried along by the deadly winds. " +
-        N(20) + "Then a south wind came, bringing fresh grief, for it swept me all night back toward Charybdis. " +
-        N(21) + "At sunrise I reached the whirlpool just as she sucked the salt water down. " +
-        N(22) + "I sprang upward and caught the tall fig tree that grows above her, clinging to it like a bat, with no place to rest my feet. " +
-        N(23) + "I hung there and waited, for I knew she would spit my timbers out again. " +
-        N(24) + "At last, late in the day, at the hour when a judge who has settled many quarrels leaves the market place, tired and hungry for his supper, my timbers rose from the whirlpool, and I dropped onto them and paddled away with my hands.</p>" +
-        "<p>" + N(25) + "For nine days I drifted, and on the tenth night the gods brought me to Ogygia, the island of the goddess Calypso, who wished to keep me there forever. " +
-        N(26) + "But that, my Phaeacian friends, is a tale I told you yesterday, and I have no wish to tell it twice.</p>",
+        "<p>" + N(1) + "When I reached the ship, I scolded each man in turn, but we could find no remedy, for the cattle were already dead. " +
+        N(2) + "Then the gods sent signs: the hides crept along the ground, and the meat on the spits lowed like living cattle. " +
+        N(3) + "For six days my companions feasted. " +
+        N(4) + "On the seventh day the storm winds dropped, and we put out to sea.</p>" +
+        "<p>" + N(5) + "Once the island sank from sight, Zeus set a black cloud above our ship, and a screaming west wind snapped the mast. " +
+        N(6) + "Then he hurled his lightning, and my men were flung overboard, bobbing like sea-crows on the waves, until a god took away their homecoming forever.</p>" +
+        "<p>" + N(7) + "I alone held on, lashed the keel and mast together, and was swept all night back toward Charybdis. " +
+        N(8) + "As she sucked the sea down, I sprang up and caught the fig tree above her, clinging like a bat, with no place to rest my feet, until she spat my timbers out again. " +
+        N(9) + "For nine days I drifted, until the gods brought me to the island of Calypso. " +
+        N(10) + "But that, my Phaeacian friends, is a tale I told you yesterday.</p>",
       claims: [
         {
-          id: "ritual",
-          sol: "9.RL.1.B",
-          stem: "Based on sentences 2 and 3, readers can infer that the men —",
+          id: "cry",
+          sol: "9.RL.1.D",
+          stem: "Odysseus's actions in sentence 1 reveal that he —",
           choices: [
-            { letter: "A", text: "had secretly saved some barley and wine from Circe's island" },
-            { letter: "B", text: "kept up the forms of worship even while breaking their oath" },
-            { letter: "C", text: "wanted to trick Odysseus into thinking they had only prayed" },
-            { letter: "D", text: "knew a special recipe for roasting meat over oak leaves and water" }
+            { letter: "A", text: "secretly approves of the feast now that the men are fed" },
+            { letter: "B", text: "is angry with his men but knows the harm cannot be undone" },
+            { letter: "C", text: "blames only the gods and not his crew for what happened" },
+            { letter: "D", text: "plans to replace the cattle before Helios notices" }
           ],
           correct: "B"
         },
         {
-          id: "cry",
-          sol: "9.RL.1.D",
-          stem: "Odysseus's cry to Zeus in sentence 7 reveals that he —",
-          choices: [
-            { letter: "A", text: "secretly approves of the feast now that the men are fed" },
-            { letter: "B", text: "blames only himself and not the gods for what happened" },
-            { letter: "C", text: "believes Helios will forgive the crew if they pray to him" },
-            { letter: "D", text: "feels tricked by the gods and horrified by his men's act" }
-          ],
-          correct: "D"
-        },
-        {
-          id: "omens",
-          sol: "9.RL.2.C",
-          stem: "The details of the crawling hides and lowing meat in sentence 10 create a mood of —",
-          choices: [
-            { letter: "A", text: "eerie dread" },
-            { letter: "B", text: "quiet relief" },
-            { letter: "C", text: "joyful celebration" },
-            { letter: "D", text: "calm curiosity" }
-          ],
-          correct: "A"
-        },
-        {
-          id: "bat",
-          sol: "9.RL.2.A",
-          stem: "In sentence 22, Odysseus compares himself to a bat mainly to emphasize —",
-          choices: [
-            { letter: "A", text: "that he can see clearly in the dark mist above the whirlpool" },
-            { letter: "B", text: "how quickly he can fly away from the danger below" },
-            { letter: "C", text: "how desperately he clings, with nothing beneath his feet" },
-            { letter: "D", text: "that the gods have changed him into an animal" }
-          ],
-          correct: "C"
-        },
-        {
           id: "remedy",
           sol: "9.RV.1.C",
-          stem: "In sentence 8 of \"The Wrath of the Sun,\" the word remedy most nearly means —",
+          stem: "In sentence 1 of \"The Wrath of the Sun,\" the word remedy most nearly means —",
           choices: [
             { letter: "A", text: "a way to set things right" },
             { letter: "B", text: "a reason to celebrate" },
@@ -771,9 +707,33 @@
           correct: "A"
         },
         {
+          id: "omens",
+          sol: "9.RL.2.C",
+          stem: "The details of the crawling hides and lowing meat in sentence 2 create a mood of —",
+          choices: [
+            { letter: "A", text: "eerie dread" },
+            { letter: "B", text: "quiet relief" },
+            { letter: "C", text: "joyful celebration" },
+            { letter: "D", text: "calm curiosity" }
+          ],
+          correct: "A"
+        },
+        {
+          id: "ritual",
+          sol: "9.RL.1.B",
+          stem: "Based on sentences 4 and 5, readers can infer that the calm winds of the seventh day —",
+          choices: [
+            { letter: "A", text: "were a reward from Zeus for the crew's six days of prayer" },
+            { letter: "B", text: "came because Helios had decided to forgive the crew" },
+            { letter: "C", text: "let the gods punish the crew once they were out at sea" },
+            { letter: "D", text: "were sent by Calypso to carry the ship to her island" }
+          ],
+          correct: "C"
+        },
+        {
           id: "endure",
           sol: "9.RL.1.C",
-          stem: "Which trait does Odysseus show most clearly in sentences 18–24?",
+          stem: "Which trait does Odysseus show most clearly in sentences 7 and 8?",
           choices: [
             { letter: "A", text: "curiosity about the strange new creatures of the sea" },
             { letter: "B", text: "generosity toward the gods who have punished him" },
@@ -781,6 +741,30 @@
             { letter: "D", text: "stubborn endurance in the face of terrible danger" }
           ],
           correct: "D"
+        },
+        {
+          id: "bat",
+          sol: "9.RL.2.A",
+          stem: "In sentence 8, Odysseus compares himself to a bat mainly to emphasize —",
+          choices: [
+            { letter: "A", text: "that he can see clearly in the dark mist above the whirlpool" },
+            { letter: "B", text: "how quickly he can fly away from the danger below" },
+            { letter: "C", text: "how desperately he clings, with nothing beneath his feet" },
+            { letter: "D", text: "that the gods have changed him into an animal" }
+          ],
+          correct: "C"
+        },
+        {
+          id: "frame",
+          sol: "9.RL.3.A",
+          stem: "Sentence 10, addressed to \"my Phaeacian friends,\" reminds the reader that —",
+          choices: [
+            { letter: "A", text: "Calypso is the one who has been telling the whole tale" },
+            { letter: "B", text: "the shipwreck took place only one day before the story" },
+            { letter: "C", text: "Odysseus is narrating these past events to the Phaeacians" },
+            { letter: "D", text: "the tale of Calypso matters much less than the shipwreck does" }
+          ],
+          correct: "C"
         },
         {
           id: "theme",
@@ -793,18 +777,6 @@
             { letter: "D", text: "Quick thinking can always undo the harm of an earlier mistake." }
           ],
           correct: "B"
-        },
-        {
-          id: "frame",
-          sol: "9.RL.3.A",
-          stem: "Sentence 26, addressed to \"my Phaeacian friends,\" reminds the reader that —",
-          choices: [
-            { letter: "A", text: "Calypso is the one who has been telling the whole tale" },
-            { letter: "B", text: "the shipwreck took place only one day before the story" },
-            { letter: "C", text: "Odysseus is narrating these past events to the Phaeacians" },
-            { letter: "D", text: "the tale of Calypso matters much less than the shipwreck does" }
-          ],
-          correct: "C"
         }
       ]
     }
