@@ -370,16 +370,15 @@
         L(4) + "As a shepherd who has watched the wolves scatter all his flock<br>" +
         L(5) + "stumbles home at nightfall holding nothing but his staff,<br>" +
         L(6) + "so he stood among us, empty-handed, shaking.<br>" +
-        L(7) + "At last, when we had pressed him hard with questions, he spoke:<br>" +
-        L(8) + "\"We went up through the oak woods, great Odysseus, as you ordered,<br>" +
-        L(9) + "and found a house of stone, and a voice singing within.<br>" +
-        L(10) + "The men called out; she opened the bright doors and asked them in,<br>" +
-        L(11) + "and, trusting fools, they followed. I alone stayed back,<br>" +
-        L(12) + "for I smelled a trick. Not one came out. I watched and waited long.<br>" +
-        L(13) + "Do not lead me there, my lord. Let us run while we still can<br>" +
-        L(14) + "with all the men still left to us, and save ourselves at least.\"<br>" +
-        L(15) + "But I hung my bronze sword at my side and took my bow and said,<br>" +
-        L(16) + "\"Stay here by the ship, then, with food and wine. But I will go; I cannot leave them.\"" +
+        L(7) + "At last, when we pressed him hard with questions, he spoke:<br>" +
+        L(8) + "\"We found the stone house in the oak woods, great Odysseus,<br>" +
+        L(9) + "and a voice singing within. She opened the bright doors,<br>" +
+        L(10) + "and, trusting fools, they followed her. I alone stayed back,<br>" +
+        L(11) + "for I smelled a trick. Not one came out, though I waited long.<br>" +
+        L(12) + "Do not lead me there, my lord. Let us run while we still can<br>" +
+        L(13) + "with all the men still left to us, and save ourselves at least.\"<br>" +
+        L(14) + "But I hung my bronze sword at my side and took my bow and said,<br>" +
+        L(15) + "\"Stay here by the ship, then. But I will go; I cannot leave them.\"" +
         "</p>",
       claims: [
         {
@@ -397,7 +396,7 @@
         {
           id: "speech",
           sol: "9.RL.1.D",
-          stem: "Eurylochus's speech in lines 8–14 reveals that he —",
+          stem: "Eurylochus's speech in lines 8–13 reveals that he —",
           choices: [
             { letter: "A", text: "is fearful and wants to protect the men who remain" },
             { letter: "B", text: "is eager to go back and fight the goddess by himself" },
@@ -409,7 +408,7 @@
         {
           id: "unknown",
           sol: "9.RL.1.B",
-          stem: "Based on lines 11–12, readers can infer that Eurylochus —",
+          stem: "Based on lines 10–11, readers can infer that Eurylochus —",
           choices: [
             { letter: "A", text: "saw Circe turn his companions into pigs" },
             { letter: "B", text: "went into the house and escaped through a window" },
@@ -421,7 +420,7 @@
         {
           id: "fools",
           sol: "9.RV.1.E",
-          stem: "In line 11, Eurylochus calls the men trusting fools. The connotation of this phrase is —",
+          stem: "In line 10, Eurylochus calls the men trusting fools. The connotation of this phrase is —",
           choices: [
             { letter: "A", text: "admiring, because trust is a sign of courage" },
             { letter: "B", text: "neutral, because it only reports what happened inside" },
@@ -433,7 +432,7 @@
         {
           id: "respond",
           sol: "9.RL.1.C",
-          stem: "How does Odysseus respond to the challenge in lines 15–16?",
+          stem: "How does Odysseus respond to the challenge in lines 14–15?",
           choices: [
             { letter: "A", text: "He orders Eurylochus to lead him back to the house." },
             { letter: "B", text: "He takes the danger on himself rather than abandon his men." },
@@ -445,7 +444,7 @@
         {
           id: "eq",
           sol: "9.RL.1.A",
-          stem: "How do lines 13–16 connect to the unit question, \"How do the challenges of life affect a person?\"",
+          stem: "How do lines 12–15 connect to the unit question, \"How do the challenges of life affect a person?\"",
           choices: [
             { letter: "A", text: "They show that a crisis can reveal who acts from fear and who acts from duty." },
             { letter: "B", text: "They show that wise people always avoid danger whenever they can." },
@@ -467,18 +466,16 @@
       blurb: "On the path to Circe's house, a god steps out of the woods with a gift and a plan.",
       level: 2,
       passage:
-        "<p>" + N(1) + "I went up alone through the sacred woods, and I had nearly reached the house of Circe when Hermes of the golden wand met me on the path. " +
-        N(2) + "He had taken the shape of a young man, hardly more than a boy. " +
-        N(3) + "He grasped my hand and said, \"Where are you going, unlucky one, alone through these hills, knowing nothing of this country? " +
-        N(4) + "Your friends are penned in Circe's sties as swine, and if you go to free them, you will stay there with them. " +
-        N(5) + "But I will protect you. " +
-        N(6) + "Carry this herb into her house, and it will guard your mind against her poisons.\" " +
-        N(7) + "Then the messenger of the gods pulled the plant from the ground and showed me its nature. " +
-        N(8) + "Its root was black, but its flower was as white as milk; the gods call it moly, and mortal men can hardly dig it up, though nothing is too hard for the gods.</p>" +
-        "<p>" + N(9) + "\"When Circe strikes you with her long wand,\" he told me, \"draw the sharp sword from your hip and rush at her as if you mean to kill her. " +
-        N(10) + "Then make her swear the great oath of the gods that she will plot no more harm against you; otherwise she may leave you weak and helpless once you lay your weapon down.\" " +
-        N(11) + "With that, Hermes went away toward high Olympus over the wooded island. " +
-        N(12) + "I walked on to Circe's house, and my heart, as I went, was churning like a sea in a storm.</p>",
+        "<p>" + N(1) + "On the path to Circe's house, Hermes of the golden wand met me in the shape of a young man. " +
+        N(2) + "He grasped my hand and said, \"Where are you going alone, unlucky one? " +
+        N(3) + "Your friends are penned in Circe's sties as swine; go to free them, and you will stay there with them. " +
+        N(4) + "But carry this herb into her house, and it will guard your mind against her poisons.\" " +
+        N(5) + "Then the messenger of the gods pulled the plant from the ground and showed me its nature. " +
+        N(6) + "Its root was black, but its flower was as white as milk; the gods call it moly, and mortal men can hardly dig it up.</p>" +
+        "<p>" + N(7) + "\"When Circe strikes you with her long wand,\" he told me, \"draw your sword and rush at her as if you mean to kill her. " +
+        N(8) + "Then make her swear the great oath of the gods that she will plot no more harm against you.\" " +
+        N(9) + "With that, Hermes went away toward high Olympus. " +
+        N(10) + "I walked on to Circe's house, and my heart, as I went, was churning like a sea in a storm.</p>",
       claims: [
         {
           id: "hermes",
@@ -495,7 +492,7 @@
         {
           id: "moly",
           sol: "9.RL.2.B",
-          stem: "The description of moly in sentence 8 mainly creates the impression that the herb is —",
+          stem: "The description of moly in sentence 6 mainly creates the impression that the herb is —",
           choices: [
             { letter: "A", text: "common and easy to find in the woods" },
             { letter: "B", text: "dangerous to anyone who touches it" },
@@ -507,7 +504,7 @@
         {
           id: "instructions",
           sol: "9.RL.3.A",
-          stem: "Hermes's instructions in sentences 9 and 10 mainly serve to —",
+          stem: "Hermes's instructions in sentences 7 and 8 mainly serve to —",
           choices: [
             { letter: "A", text: "foreshadow the confrontation that is coming" },
             { letter: "B", text: "explain why Hermes must leave for Olympus" },
@@ -521,17 +518,17 @@
           sol: "9.RL.1.C",
           stem: "Which sentence best shows Odysseus's courage after he hears Hermes's warning?",
           choices: [
-            { letter: "A", text: "Sentence 3, in which Hermes calls him unlucky" },
-            { letter: "B", text: "Sentence 7, in which Hermes pulls up the plant" },
-            { letter: "C", text: "Sentence 11, in which Hermes leaves for Olympus" },
-            { letter: "D", text: "Sentence 12, in which he walks on to the house" }
+            { letter: "A", text: "Sentence 2, in which Hermes calls him unlucky" },
+            { letter: "B", text: "Sentence 5, in which Hermes pulls up the plant" },
+            { letter: "C", text: "Sentence 9, in which Hermes leaves for Olympus" },
+            { letter: "D", text: "Sentence 10, in which he walks on to the house" }
           ],
           correct: "D"
         },
         {
           id: "churning",
           sol: "9.RV.1.C",
-          stem: "In sentence 12, the word churning most nearly means —",
+          stem: "In sentence 10, the word churning most nearly means —",
           choices: [
             { letter: "A", text: "stirring wildly" },
             { letter: "B", text: "resting quietly" },
@@ -555,7 +552,7 @@
       ]
     },
 
-    /* ───────────── long · level 3 ───────────── */
+    /* ───────────── medium · level 2 ───────────── */
     {
       id: "ody-circe-oath",
       family: "ODY",
@@ -563,37 +560,26 @@
       title: "The Oath of the Gods",
       kind: "The Odyssey · 9.RL",
       blurb: "Odysseus drinks Circe's cup, draws his sword, and will not eat until his men are free.",
-      level: 3,
+      level: 2,
       passage:
-        "<p>" + N(1) + "I stood at the gates of Circe of the lovely braids, the dread goddess who speaks with a human voice, and I called out, and she heard me at once. " +
-        N(2) + "She came and opened the shining doors and invited me in, and I followed her, my heart heavy with dread. " +
-        N(3) + "She seated me on a fine chair studded with silver and mixed a drink for me in a golden cup. " +
-        N(4) + "Into it she stirred her drug, planning evil in her heart. " +
-        N(5) + "I drank it down, but it had no power over me, for the moly guarded my mind.</p>" +
-        "<p>" + N(6) + "Then she struck me with her wand and cried, \"Off to the sty now, and lie down with the rest of your friends!\" " +
-        N(7) + "But I drew my sharp sword from my hip and rushed at her as though I meant to take her life. " +
-        N(8) + "As a dove that sees the hawk's shadow sweep across the field can only cry out and cower in the grass, so Circe screamed and ducked beneath my blade and clasped my knees. " +
-        N(9) + "\"Who are you, and where is your home?\" she cried. " +
-        N(10) + "\"No man has ever drunk my potion and kept his own mind. " +
-        N(11) + "You must be Odysseus, the man of many turns, whose coming Hermes of the golden wand foretold to me, the man who would pass this way on his voyage home from Troy.\"</p>" +
-        "<p>" + N(12) + "I answered her, \"How can you ask me to trust you, Circe, when you have turned my friends into swine in your own house? " +
-        N(13) + "I will not lower my sword until you swear the great oath of the gods that you will plot no further harm against me.\" " +
-        N(14) + "She swore at once, just as I asked, and when she had finished the oath, my fear began to ease.</p>" +
-        "<p>" + N(15) + "Then her serving women, nymphs born of springs and woodland groves, spread the tables with bread and set out silver baskets and mixed sweet wine in a bowl. " +
-        N(16) + "But I sat silent, with my hands in my lap, and would not touch the food. " +
-        N(17) + "Circe saw me sitting there as still as a stone, and she asked why I would not eat or drink. " +
-        N(18) + "\"What man with any sense of what is right,\" I said, \"could bear to feast before he saw his friends set free? " +
-        N(19) + "If you truly wish me to eat, release them, and let me see my comrades with my own eyes.\"</p>" +
-        "<p>" + N(20) + "So Circe took her wand and went out through the hall and opened the doors of the sty. " +
-        N(21) + "Out she drove them, fat as full-grown hogs, and they stood in a row before her. " +
-        N(22) + "She went among them and rubbed each one with a different salve, and the bristles that her first drug had raised fell away from their limbs. " +
-        N(23) + "They became men again, younger than before, and taller, and far handsomer to look at. " +
-        N(24) + "They knew me at once, and each one clung to my hand, and they wept for joy so loudly that the whole house rang with it, and even the goddess was moved to pity.</p>",
+        "<p>" + N(1) + "Circe opened her shining doors, and I followed her in with dread. " +
+        N(2) + "She stirred her drug into a golden cup, planning evil. " +
+        N(3) + "I drank it, but the moly guarded my mind, and the drug had no power.</p>" +
+        "<p>" + N(4) + "She struck me with her wand: \"Off to the sty!\" " +
+        N(5) + "But I drew my sharp sword and rushed at her. " +
+        N(6) + "As a dove that sees the hawk's shadow can only cower in the grass, so Circe screamed and clasped my knees. " +
+        N(7) + "\"No man has ever drunk my potion and kept his mind,\" she cried. " +
+        N(8) + "\"You must be Odysseus, whose coming Hermes foretold to me long ago.\"</p>" +
+        "<p>" + N(9) + "I would not lower my sword until she swore the great oath of the gods to do me no harm, and she swore at once.</p>" +
+        "<p>" + N(10) + "Her nymphs set out a feast, but I sat silent and would not eat. " +
+        N(11) + "\"What decent man,\" I said, \"could feast before he saw his friends set free?\"</p>" +
+        "<p>" + N(12) + "So Circe rubbed each pig with a salve, and they became men again, younger than before. " +
+        N(13) + "They wept for joy, and even the goddess was moved to pity.</p>",
       claims: [
         {
           id: "dove",
           sol: "9.RL.2.A",
-          stem: "The epic simile in sentence 8 compares Circe to a dove mainly to show that —",
+          stem: "The epic simile in sentence 6 compares Circe to a dove mainly to show that —",
           choices: [
             { letter: "A", text: "Circe is gentle and harmless by nature" },
             { letter: "B", text: "power has suddenly passed to Odysseus" },
@@ -605,7 +591,7 @@
         {
           id: "cower",
           sol: "9.RV.1.C",
-          stem: "In sentence 8, the word cower most nearly means —",
+          stem: "In sentence 6, the word cower most nearly means —",
           choices: [
             { letter: "A", text: "shrink back in fear" },
             { letter: "B", text: "fight back fiercely" },
@@ -617,7 +603,7 @@
         {
           id: "oath",
           sol: "9.RV.1.F",
-          stem: "In Greek myth, the great oath of the gods was a promise that even immortals could not break. Odysseus demands this oath in sentence 13 because he —",
+          stem: "In Greek myth, the great oath of the gods was a promise that even immortals could not break. Odysseus demands this oath in sentence 9 because he —",
           choices: [
             { letter: "A", text: "wants Circe to admit that he is stronger" },
             { letter: "B", text: "hopes to learn the way home to Ithaca" },
@@ -629,7 +615,7 @@
         {
           id: "foretold",
           sol: "9.RL.1.B",
-          stem: "Based on sentences 10 and 11, readers can infer that —",
+          stem: "Based on sentences 7 and 8, readers can infer that —",
           choices: [
             { letter: "A", text: "Circe has never met any traveler before Odysseus" },
             { letter: "B", text: "the gods knew long ago that Odysseus would come" },
@@ -641,7 +627,7 @@
         {
           id: "refuse",
           sol: "9.RL.1.D",
-          stem: "Odysseus's words in sentences 18 and 19 reveal that he —",
+          stem: "Odysseus's words in sentence 11 reveal that he —",
           choices: [
             { letter: "A", text: "is too frightened of Circe to eat her food" },
             { letter: "B", text: "dislikes the taste of the food on the island" },
@@ -665,7 +651,7 @@
         {
           id: "s5",
           sol: "9.RL.3.A",
-          stem: "The narrator includes sentence 5 mainly to —",
+          stem: "The narrator includes sentence 3 mainly to —",
           choices: [
             { letter: "A", text: "show that Circe's drink was not very strong" },
             { letter: "B", text: "suggest that Odysseus was not truly thirsty" },
@@ -677,7 +663,7 @@
         {
           id: "mood-shift",
           sol: "9.RL.2.C",
-          stem: "How does the mood change from paragraph 1 to paragraph 5?",
+          stem: "How does the mood change from the first paragraph to the last?",
           choices: [
             { letter: "A", text: "from cheerful hope to gloom" },
             { letter: "B", text: "from curiosity to boredom" },
@@ -689,7 +675,7 @@
       ]
     },
 
-    /* ───────────── epic · level 3 ───────────── */
+    /* ───────────── medium · level 2 ───────────── */
     {
       id: "ody-circe-year",
       family: "ODY",
@@ -697,44 +683,25 @@
       title: "A Year on Aeaea",
       kind: "The Odyssey · 9.RL",
       blurb: "Feasts, a quarrel, a full year gone, and a journey no living man wants to make.",
-      level: 3,
+      level: 2,
       passage:
-        "<p>" + N(1) + "When I came back down to the shore, I found my friends huddled by the swift ship, weeping, sure that I was lost as well. " +
-        N(2) + "As children who have given up their father for dead run shouting to the doorway when they hear his step on the path, so my men crowded around me, laughing and crying at once. " +
-        N(3) + "I told them to drag the ship up onto the sand and stow our gear in the caves, and then to follow me to the house of Circe, where their comrades were already feasting.</p>" +
-        "<p>" + N(4) + "All of them agreed but one. " +
-        N(5) + "Eurylochus stood in their way and spoke with angry words: " +
-        N(6) + "\"Fools, where are you running? " +
-        N(7) + "Do you want to walk into that witch's house so she can turn you into pigs or wolves or lions to guard her gates forever? " +
-        N(8) + "Remember the Cyclops! " +
-        N(9) + "Our friends followed this same bold captain into that cave, and it was his recklessness that got them killed.\" " +
-        N(10) + "When I heard this, anger flooded through me, and my hand went to the hilt of my sword. " +
-        N(11) + "But my comrades held me back with gentle words: \"Let him stay here and guard the ship, if that is what he wants.\" " +
-        N(12) + "In the end Eurylochus did not stay behind; he followed us up from the shore, for he feared my sharp rebuke.</p>" +
-        "<p>" + N(13) + "Meanwhile Circe had bathed the men in her house, rubbed them with oil, and dressed them in warm cloaks. " +
-        N(14) + "When the two groups met face to face, they wept until the hall echoed. " +
-        N(15) + "Then the bright goddess came and stood beside me and said, \"Odysseus, master of schemes, stop your grieving now. " +
-        N(16) + "I know the pains you have suffered on the restless sea and the cruelty of hostile men on land. " +
-        N(17) + "Rest here, eat and drink, and let your courage grow back, for grief has worn you all down to shadows.\"</p>" +
-        "<p>" + N(18) + "So we stayed, and day after day for a full year we sat feasting on endless meat and sweet wine. " +
-        N(19) + "The seasons turned, the months waned, and the long days of summer came around again. " +
-        N(20) + "Then my faithful crew called me aside. " +
-        N(21) + "\"Captain,\" they said, \"have you forgotten? " +
-        N(22) + "Remember your own country, if the gods mean for you to be saved and to stand once more in your high-roofed house.\" " +
-        N(23) + "Their words stirred my proud heart, and I knew that they were right.</p>" +
-        "<p>" + N(24) + "That evening I knelt before the goddess and begged her to keep her promise and send us home. " +
-        N(25) + "\"Son of Laertes,\" she replied, \"you need not stay a moment longer in my house against your will. " +
-        N(26) + "But first you must make another journey, to the House of Hades, to consult the spirit of Tiresias, the blind prophet of Thebes. " +
-        N(27) + "Even in death his mind is whole, and he can tell you the way home.\" " +
-        N(28) + "When I heard this, my heart broke; I sat down and wept, and for a time I had no wish to go on living and see the light of the sun.</p>" +
-        "<p>" + N(29) + "When Dawn with her rose-red fingers appeared, I roused my men, but not all of us left the island. " +
-        N(30) + "Elpenor, the youngest of the crew, had slept on Circe's roof to find cool air; he woke at the noise, forgot the ladder, and fell to his death. " +
-        N(31) + "So, grieving once again, we went down to the ship and set our course toward the land of the dead.</p>",
+        "<p>" + N(1) + "When I returned to the ship, my men crowded around me as children run to the door when a father they mourned as dead comes home. " +
+        N(2) + "I told them to follow me to Circe's house.</p>" +
+        "<p>" + N(3) + "Only Eurylochus stood in their way: \"Fools, remember the Cyclops! " +
+        N(4) + "Our friends followed this reckless captain into that cave, and they died for it.\" " +
+        N(5) + "Anger flooded me, and my hand went to my sword, but my comrades calmed me with gentle words. " +
+        N(6) + "In the end Eurylochus followed us, for he feared my sharp rebuke.</p>" +
+        "<p>" + N(7) + "So for a full year we sat feasting in Circe's house on endless meat and sweet wine. " +
+        N(8) + "Then my crew called me aside: \"Captain, remember your own country.\"</p>" +
+        "<p>" + N(9) + "That evening I begged the goddess to send us home. " +
+        N(10) + "\"First you must journey to the House of Hades,\" she said, \"to consult the spirit of Tiresias, the blind prophet.\" " +
+        N(11) + "My heart broke, and I sat down and wept.</p>" +
+        "<p>" + N(12) + "At dawn we sailed, but Elpenor, the youngest, had slept on Circe's roof; he woke, forgot the ladder, and fell to his death.</p>",
       claims: [
         {
           id: "children",
           sol: "9.RL.2.A",
-          stem: "The epic simile in sentence 2 compares the crew to children mainly to show —",
+          stem: "The epic simile in sentence 1 compares the crew to children mainly to show —",
           choices: [
             { letter: "A", text: "how foolish and childish the crew has become" },
             { letter: "B", text: "that the men are much younger than Odysseus" },
@@ -746,7 +713,7 @@
         {
           id: "eury-speech",
           sol: "9.RL.1.D",
-          stem: "Eurylochus's speech in sentences 6–9 reveals that he —",
+          stem: "Eurylochus's speech in sentences 3 and 4 reveals that he —",
           choices: [
             { letter: "A", text: "trusts Circe more than he trusts Odysseus" },
             { letter: "B", text: "still blames Odysseus for the deaths of their friends" },
@@ -758,7 +725,7 @@
         {
           id: "anger",
           sol: "9.RL.1.C",
-          stem: "How does Odysseus respond to Eurylochus's challenge to his leadership in paragraph 2?",
+          stem: "How does Odysseus respond to Eurylochus's challenge to his leadership in sentence 5?",
           choices: [
             { letter: "A", text: "He grows angry but lets his men calm him down." },
             { letter: "B", text: "He leaves Eurylochus behind to guard the ship." },
@@ -770,7 +737,7 @@
         {
           id: "nostos",
           sol: "9.RL.1.A",
-          stem: "Nostos is the Greek word for homecoming. Which statement best expresses a theme about nostos developed in paragraph 4?",
+          stem: "Nostos is the Greek word for homecoming. Which statement best expresses a theme about nostos developed in sentences 7 and 8?",
           choices: [
             { letter: "A", text: "A good host should never allow guests to leave." },
             { letter: "B", text: "It is wiser to stay where one is safe than to travel." },
@@ -782,7 +749,7 @@
         {
           id: "elpenor",
           sol: "9.RL.3.A",
-          stem: "The narrator most likely includes the account of Elpenor in sentence 30 to —",
+          stem: "The narrator most likely includes the account of Elpenor in sentence 12 to —",
           choices: [
             { letter: "A", text: "show that the journey keeps costing lives" },
             { letter: "B", text: "explain why Circe's house had a ladder" },
@@ -794,7 +761,7 @@
         {
           id: "rebuke",
           sol: "9.RV.1.C",
-          stem: "In sentence 12, the word rebuke most nearly means —",
+          stem: "In sentence 6, the word rebuke most nearly means —",
           choices: [
             { letter: "A", text: "quiet praise" },
             { letter: "B", text: "sudden attack" },
@@ -806,7 +773,7 @@
         {
           id: "aeaea-setting",
           sol: "9.RL.3.B",
-          stem: "How does the setting of Circe's house affect the crew in paragraph 4?",
+          stem: "How does the setting of Circe's house affect the crew in sentence 7?",
           choices: [
             { letter: "A", text: "Its hidden dangers keep the men always on guard." },
             { letter: "B", text: "Its food and comfort tempt them to stay too long." },
@@ -818,7 +785,7 @@
         {
           id: "weeps",
           sol: "9.RL.1.B",
-          stem: "Based on paragraph 5, readers can infer that Odysseus weeps because —",
+          stem: "Based on sentences 10 and 11, readers can infer that Odysseus weeps because —",
           choices: [
             { letter: "A", text: "Circe refuses to let him and his men leave" },
             { letter: "B", text: "he does not want to say goodbye to Circe" },
