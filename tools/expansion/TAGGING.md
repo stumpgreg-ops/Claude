@@ -1,5 +1,11 @@
 # Tagging Virginia questions with their skill (v5.17)
 
+v5.21: the Odyssey's questions (family ODY, all Grade 9) are tagged the same way, and each also gets a short
+`why`: one or two plain sentences on why the answer is right, citing the passage's sentence or line numbers and
+never naming a letter (the game can shuffle the choices). Give it in the tags file as
+`{ "packId:claimId": { "sub": "9.RL.1.C.1", "why": "..." } }`. An epic is not a play: narration and point of
+view are `RL.2.C.1`, not `RL.1.D`. `node tools/make-all-questions-doc.js ODY` makes the annotated answer key.
+
 Every Virginia question (families G9, G10, G11) gets the 2024 standard it really assesses (`sol`) and the
 SKILL within that standard (`sub`). Skills come from `js/standards-va.js`: each official standard is split
 into one skill per action verb, each LOTS (lower-order: identify, recognize, describe, explain, interpret,

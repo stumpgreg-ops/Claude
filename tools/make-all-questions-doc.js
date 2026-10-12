@@ -4,6 +4,9 @@
    Grouped by grade (Grade 5 New Jersey, then Virginia Grades 9, 10 and 11); within a grade, passages run from
    shortest to longest, the order the game's levels reach them. Each question is listed once, under the grade
    it was written for (Grade 10 students also get the Grade 9 passages, Grade 11 students Grades 9 and 10).
+   v5.21: `node tools/make-all-questions-doc.js ODY` writes docs/questions/SOL-Labyrinth-Odyssey-questions-and-answers.docx,
+   the Odyssey game's annotated answer key: episode by episode in story order, every question with its 2024
+   Virginia standard and skill (LOTS / HOTS, js/standards-va.js) and a note on why its answer is right (claim.why).
    Needs the docx package:  npm install --no-save docx && node tools/make-all-questions-doc.js */
 var fs = require("fs"), vm = require("vm"), path = require("path");
 var root = path.join(__dirname, "..");
@@ -16,11 +19,16 @@ files.forEach(function (f) { vm.runInContext(fs.readFileSync(path.join(root, f),
 const D = require("docx");
 const { Document, Packer, Paragraph, TextRun, HeadingLevel, Table, TableRow, TableCell, WidthType, ShadingType, BorderStyle, Footer, PageNumber, AlignmentType } = D;
 
-/* node tools/make-all-questions-doc.js [VA|NJ] — one state only (default: both) */
+/* node tools/make-all-questions-doc.js [VA|NJ|ODY] — one game only (default: Virginia and New Jersey) */
 const ONLY = String(process.argv[2] || "").toUpperCase();
-const ORDER = ONLY === "VA" ? ["G9", "G10", "G11"] : ONLY === "NJ" ? ["NJ5"] : ["NJ5", "G9", "G10", "G11"];
-const LABEL = ONLY === "VA" ? "Virginia" : ONLY === "NJ" ? "New Jersey" : "";
-const NAME = { NJ5: "Grade 5 · New Jersey (NJSLA-ELA)", G9: "Grade 9 · Virginia (Selection 1)", G10: "Grade 10 · Virginia (Selection 2)", G11: "Grade 11 · Virginia (Selection 3)" };
+const ODY = ONLY === "ODY";
+const ORDER = ONLY === "VA" ? ["G9", "G10", "G11"] : ONLY === "NJ" ? ["NJ5"] : ODY ? ["ODY"] : ["NJ5", "G9", "G10", "G11"];
+const LABEL = ONLY === "VA" ? "Virginia" : ONLY === "NJ" ? "New Jersey" : ODY ? "Odyssey" : "";
+const SS = require(path.join(root, "js", "standards-va.js"));
+/* the Odyssey game's skill screen: one card per episode (js/game.js SKILL_DEFS.ODY), in that order */
+const EPISODE = [["lotus", "The Lotus-Eaters", "Book 9"], ["cyclops", "The Cyclops", "Book 9"], ["circe", "Circe", "Book 10"],
+  ["helios", "The Cattle of the Sun", "Book 12"], ["calypso", "Calypso", "Book 5"], ["voyage", "The Whole Voyage", "paired texts and the frame story"]];
+const NAME = { ODY: "The Odyssey · English 9", NJ5: "Grade 5 · New Jersey (NJSLA-ELA)", G9: "Grade 9 · Virginia (Selection 1)", G10: "Grade 10 · Virginia (Selection 2)", G11: "Grade 11 · Virginia (Selection 3)" };
 const NOTE = {
   NJ5: "New Jersey Grade 5 students get only these passages.",
   G9: "Virginia Grade 9 students get only these passages.",
@@ -67,9 +75,87 @@ const packs = ctx.HEIST_PACKS.filter(p => ORDER.indexOf(p.family) !== -1).map(p 
 const kids = [];
 let qTotal = 0;
 const counts = ORDER.map(f => { const ps = packs.filter(x => x.p.family === f); const n = ps.reduce((a, x) => a + x.p.claims.length, 0); qTotal += n; return [NAME[f], String(ps.length), String(n)]; });
+const TITLE = ODY ? "SOL Labyrinth — The Odyssey: annotated questions and answers" : "SOL Labyrinth — " + (LABEL ? LABEL + " questions and answers" : "every question and answer");
 
-kids.push(para(run("SOL Labyrinth — " + (LABEL ? LABEL + " questions and answers" : "every question and answer"), { size: 40, bold: true }), { heading: HeadingLevel.TITLE, spacing: { after: 120 } }));
+/* a question's annotation: its 2024 standard and skill (LOTS / HOTS), or the standard alone if it has no skill yet */
+function skillLine(c) {
+  const k = c.sub && SS.SKILL[c.sub];
+  if (k) return c.sub + " · " + k.text + " · " + k.level;
+  const strand = ctx.heistStrandOf(c);
+  return (c.sol || "") + (STRAND[strand] ? " · " + STRAND[strand] : "");
+}
+/* a stem or choice: a *word* marked with asterisks (the word a vocabulary question asks about) in italics */
+function md(text, o) { return strip(text).split(/\*([^*]+)\*/).map((t, i) => run(t, Object.assign({}, o, i % 2 ? { italics: true } : {}))); }
+/* one passage and its questions (qn: the running question number) */
+function passage(x, num, qn, showLevels) {
+  const p = x.p;
+  kids.push(para(run(num + ". " + strip(p.title), { size: 28, bold: true }), { heading: HeadingLevel.HEADING_2, spacing: { before: 280, after: 60 }, keepNext: true }));
+  kids.push(para(run([strip(p.kind || p.genre || ""), x.words + " words", "reading level " + x.level + " (" + RL[x.level] + ")", showLevels ? levels(x.words) : ""].filter(Boolean).join(" · "), { size: 18, color: "666666" }), { keepNext: true }));
+  paras(p.passage).forEach(b => {
+    if (b.poem) b.lines.forEach((l, li) => kids.push(para(run(l, { size: 20 }), { indent: { left: 360 }, spacing: { after: li === b.lines.length - 1 ? 100 : 0 } })));
+    else kids.push(para(run(b.lines.join(" "), { size: 20 }), { indent: { left: 360 }, spacing: { after: 100 } }));
+  });
+  const partBs = new Set(p.claims.map(c => c.partB).filter(Boolean));
+  p.claims.forEach(c => {
+    qn++;
+    const keys = correctList(c).map(k => letterOf(c, k)).filter(Boolean);
+    const tag = /^\s*Part [AB]\b/i.test(strip(c.stem)) ? "" : c.partB ? "Part A · " : partBs.has(c.id) ? "Part B · " : "";
+    kids.push(para([run("Q" + qn + ". ", { bold: true }), run(tag, { bold: true, color: "8A5A00" })].concat(md(c.stem, { bold: true })), { spacing: { before: 140, after: 40 }, keepNext: true }));
+    kids.push(para(run(skillLine(c) + (keys.length > 1 ? " · choose " + keys.length : ""), { size: 17, color: "777777" }), { keepNext: true, spacing: { after: 40 } }));
+    (c.choices || []).forEach(ch => {
+      const ok = keys.indexOf(ch.letter) !== -1;
+      kids.push(para([run(ch.letter + "   ", { bold: true })].concat(md(ch.text, { bold: ok, color: ok ? "1B6B2F" : undefined }), [ok ? run("   ✓", { bold: true, color: "1B6B2F" }) : run("")]), { indent: { left: 360 }, spacing: { after: 20 }, keepNext: !!c.why }));
+    });
+    kids.push(para(run("Answer: " + (keys.join(" and ") || "?"), { bold: true, size: 19, color: "1B6B2F" }), { indent: { left: 360 }, spacing: { after: c.why ? 20 : 100 }, keepNext: !!c.why }));
+    if (c.why) kids.push(para([run("Why: ", { bold: true, size: 19, color: "1F4E79" }), run(strip(c.why), { size: 19, color: "1F4E79" })], { indent: { left: 360 }, spacing: { after: 100 } }));
+  });
+  return qn;
+}
+
+kids.push(para(run(TITLE, { size: 40, bold: true }), { heading: HeadingLevel.TITLE, spacing: { after: 120 } }));
 kids.push(para(run("Version " + (html.match(/<p class="ver">v([0-9.]+)/) || [0, "?"])[1] + " · " + qTotal + " questions on " + packs.length + " passages", { color: "555555" })));
+if (ODY) odyssey(); else everyGrade();
+
+function odyssey() {
+  const ps = packs.filter(x => x.p.family === "ODY"), story = ctx.heistOdyStory || [];
+  const at = x => { const i = story.indexOf(x.p.id); return i === -1 ? 1e9 : i; };
+  const claims = [].concat.apply([], ps.map(x => x.p.claims));
+  const lv = { LOTS: 0, HOTS: 0 };
+  claims.forEach(c => { const k = SS.SKILL[c.sub]; if (k) lv[k.level]++; });
+  kids.push(para("Every passage and question in the Odyssey game (English 9, Unit 2), with the right answer marked ✓ and in bold, and two annotations on each question:"));
+  kids.push(para([run("The 2024 standard and skill it assesses. ", { bold: true }), run("Each question names the skill from the English Standards of Learning for Virginia Public Schools (2024), Reading strand, Grade 9, that it asks students to do, and whether that skill is LOTS (lower-order: identify, describe, explain, interpret) or HOTS (higher-order: analyze, compare, distinguish, evaluate). The skills split each official standard by its action verbs; the standards' full text is at the end. The teacher page reports the class's results by these skills.")], { indent: { left: 360 } }));
+  kids.push(para([run("Why the answer is right. ", { bold: true }), run("A short note pointing to the sentences or lines that prove it, for going over the questions with the class.")], { indent: { left: 360 } }));
+  kids.push(para("The episodes are in the order of the game's episode cards. Within an episode, passages are in story order, the order the game asks them. Sentence and line numbers are the ones students see, so \"sentence 4\" means the sentence marked (4). In the game the answer choices can come in a different order, so the notes never name a letter."));
+  kids.push(table([5400, 1700, 1900], [["Episode", "Passages", "Questions"]].concat(EPISODE.map(e => {
+    const eps = ps.filter(x => x.p.episode === e[0]);
+    return [e[1] + " (" + e[2] + ")", String(eps.length), String(eps.reduce((a, x) => a + x.p.claims.length, 0))];
+  })).concat([["All episodes", String(ps.length), String(claims.length)]])));
+  kids.push(para(run("Skills assessed", { size: 28, bold: true }), { heading: HeadingLevel.HEADING_2, spacing: { before: 280, after: 60 }, keepNext: true }));
+  kids.push(para(run(claims.length + " questions: " + lv.LOTS + " LOTS and " + lv.HOTS + " HOTS.", { italics: true, color: "555555" }), { keepNext: true }));
+  const by = {}; claims.forEach(c => { by[c.sub || c.sol] = (by[c.sub || c.sol] || 0) + 1; });
+  const used = Object.keys(SS.SKILL).filter(id => by[id]);
+  kids.push(table([1400, 5200, 900, 1300], [["Skill", "What students do", "Level", "Questions"]].concat(used.map(id => [id, SS.SKILL[id].text, SS.SKILL[id].level, String(by[id])]))
+    .concat(Object.keys(by).filter(id => !SS.SKILL[id]).map(id => [id, "(standard only, no skill yet)", "", String(by[id])]))));
+  let qn = 0;
+  EPISODE.forEach(e => {
+    const eps = ps.filter(x => x.p.episode === e[0]).sort((a, b) => at(a) - at(b) || a.words - b.words);
+    if (!eps.length) return;
+    kids.push(para(run(e[1], { size: 34, bold: true }), { heading: HeadingLevel.HEADING_1, pageBreakBefore: true, spacing: { after: 120 } }));
+    kids.push(para(run(e[2].charAt(0).toUpperCase() + e[2].slice(1) + ". " + eps.length + " passages, " + eps.reduce((a, x) => a + x.p.claims.length, 0) + " questions.", { italics: true, color: "555555" })));
+    eps.forEach((x, pi) => { qn = passage(x, pi + 1, qn, false); });
+  });
+  /* the official text of every standard the questions assess */
+  const codes = Object.keys(SS.STANDARDS).filter(code => claims.some(c => c.sol === code));
+  kids.push(para(run("The 2024 standards", { size: 34, bold: true }), { heading: HeadingLevel.HEADING_1, pageBreakBefore: true, spacing: { after: 120 } }));
+  kids.push(para(run("English Standards of Learning for Virginia Public Schools (2024), Grade 9 Reading: the official text of each standard these questions assess, and the skills it is split into.", { italics: true, color: "555555" })));
+  codes.forEach(code => {
+    const st = SS.STANDARDS[code];
+    kids.push(para([run(code + "  ", { bold: true }), run(st.text)], { spacing: { before: 160, after: 60 }, keepNext: true }));
+    st.skills.forEach(k => kids.push(para([run(k.id + "  ", { bold: true, size: 19 }), run(k.text + " (" + k.level + ")" + (by[k.id] ? " · " + by[k.id] + " question" + (by[k.id] === 1 ? "" : "s") : ""), { size: 19 })], { indent: { left: 360 }, spacing: { after: 20 } })));
+  });
+}
+
+function everyGrade() {
 kids.push(para("Every passage and question the game can ask, with the right answer marked ✓ and in bold. Grades are grouped as students see them. Within a grade, passages run from shortest to longest, the order the game's levels reach them; each passage says the levels where it usually appears (the game also adapts to each student's reading level, and a class session can add, hide or reword questions)."));
 kids.push(para("Sentence and line numbers in the passages are the ones students see, so a question that says \"sentence 4\" means the sentence marked (4). A \"Part A / Part B\" pair is always asked together, Part A first."));
 kids.push(table([5400, 1700, 1900], [["Grade", "Passages", "Questions"]].concat(counts)));
@@ -80,37 +166,16 @@ ORDER.forEach(fam => {
   kids.push(para(run(NAME[fam], { size: 34, bold: true }), { heading: HeadingLevel.HEADING_1, pageBreakBefore: true, spacing: { after: 120 } }));
   kids.push(para(run(NOTE[fam] + " " + ps.length + " passages, " + ps.reduce((a, x) => a + x.p.claims.length, 0) + " questions.", { italics: true, color: "555555" })));
   let qn = 0;
-  ps.forEach((x, pi) => {
-    const p = x.p;
-    kids.push(para(run((pi + 1) + ". " + strip(p.title), { size: 28, bold: true }), { heading: HeadingLevel.HEADING_2, spacing: { before: 280, after: 60 }, keepNext: true }));
-    kids.push(para(run([strip(p.kind || p.genre || ""), x.words + " words", "reading level " + x.level + " (" + RL[x.level] + ")", levels(x.words)].filter(Boolean).join(" · "), { size: 18, color: "666666" }), { keepNext: true }));
-    paras(p.passage).forEach(b => {
-      if (b.poem) b.lines.forEach((l, li) => kids.push(para(run(l, { size: 20 }), { indent: { left: 360 }, spacing: { after: li === b.lines.length - 1 ? 100 : 0 } })));
-      else kids.push(para(run(b.lines.join(" "), { size: 20 }), { indent: { left: 360 }, spacing: { after: 100 } }));
-    });
-    const partBs = new Set(p.claims.map(c => c.partB).filter(Boolean));
-    p.claims.forEach(c => {
-      qn++;
-      const keys = correctList(c).map(k => letterOf(c, k)).filter(Boolean);
-      const tag = /^\s*Part [AB]\b/i.test(strip(c.stem)) ? "" : c.partB ? "Part A · " : partBs.has(c.id) ? "Part B · " : "";
-      const strand = ctx.heistStrandOf(c);
-      kids.push(para([run("Q" + qn + ". ", { bold: true }), run(tag, { bold: true, color: "8A5A00" }), run(strip(c.stem), { bold: true })], { spacing: { before: 140, after: 40 }, keepNext: true }));
-      kids.push(para(run((c.sol || "") + (STRAND[strand] ? " · " + STRAND[strand] : "") + (keys.length > 1 ? " · choose " + keys.length : ""), { size: 17, color: "777777" }), { keepNext: true, spacing: { after: 40 } }));
-      (c.choices || []).forEach(ch => {
-        const ok = keys.indexOf(ch.letter) !== -1;
-        kids.push(para([run(ch.letter + "   ", { bold: true }), run(strip(ch.text), { bold: ok, color: ok ? "1B6B2F" : undefined }), ok ? run("   ✓", { bold: true, color: "1B6B2F" }) : run("")], { indent: { left: 360 }, spacing: { after: 20 } }));
-      });
-      kids.push(para(run("Answer: " + (keys.join(" and ") || "?"), { bold: true, size: 19, color: "1B6B2F" }), { indent: { left: 360 }, spacing: { after: 100 } }));
-    });
-  });
+  ps.forEach((x, pi) => { qn = passage(x, pi + 1, qn, true); });
 });
+}
 
 const doc = new Document({
-  creator: "SOL Labyrinth", title: "SOL Labyrinth — " + (LABEL ? LABEL + " questions and answers" : "every question and answer"),
+  creator: "SOL Labyrinth", title: TITLE,
   styles: { default: { document: { run: { font: FONT, size: 21 } } } },
   sections: [{ properties: { page: { size: { width: 12240, height: 15840 }, margin: { top: 1080, bottom: 1080, left: 1080, right: 1080 } } },
-    footers: { default: new Footer({ children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [run("SOL Labyrinth · " + (LABEL ? LABEL + " " : "all ") + "questions and answers · page ", { size: 16, color: "888888" }), new TextRun({ children: [PageNumber.CURRENT], size: 16, color: "888888", font: FONT })] })] }) },
+    footers: { default: new Footer({ children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [run("SOL Labyrinth · " + (ODY ? "The Odyssey: annotated " : LABEL ? LABEL + " " : "all ") + "questions and answers · page ", { size: 16, color: "888888" }), new TextRun({ children: [PageNumber.CURRENT], size: 16, color: "888888", font: FONT })] })] }) },
     children: kids }]
 });
-const out = path.join(root, "docs", "questions", LABEL ? "SOL-Labyrinth-" + ONLY + "-questions-and-answers.docx" : "SOL-Labyrinth-all-questions-and-answers.docx");
+const out = path.join(root, "docs", "questions", ODY ? "SOL-Labyrinth-Odyssey-questions-and-answers.docx" : LABEL ? "SOL-Labyrinth-" + ONLY + "-questions-and-answers.docx" : "SOL-Labyrinth-all-questions-and-answers.docx");
 Packer.toBuffer(doc).then(buf => { fs.writeFileSync(out, buf); console.log(out + " · " + qTotal + " questions · " + packs.length + " passages · " + (buf.length / 1048576).toFixed(1) + " MiB"); });

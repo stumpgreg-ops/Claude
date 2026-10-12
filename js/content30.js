@@ -30,6 +30,8 @@
         {
           id: "trait",
           sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "He weeps on the shore every day (sentence 4) and longs to see his wife and son (sentence 6), so homesick fits. Nothing shows him ruling, threatened, or wanting to explore.",
           stem: "Which word best describes Odysseus during his years on Ogygia?",
           choices: [
             { letter: "A", text: "proud, because he rules the island beside the goddess" },
@@ -41,7 +43,9 @@
         },
         {
           id: "infer",
-          sol: "9.RL.1.B",
+          sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "Calypso gives him everything he needs (sentence 3), yet he still weeps daily (sentence 4), so comfort matters less to him than his family.",
           stem: "Based on sentences 3 and 4, readers can infer that Odysseus —",
           choices: [
             { letter: "A", text: "cares more about his family than about comfort" },
@@ -53,7 +57,9 @@
         },
         {
           id: "vocab",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
+          why: "Sentence 6 says he longed to see his wife and son again after weeping toward home (sentences 4–5), so longed means wished deeply.",
           stem: "In sentence 6, the word *longed* most nearly means —",
           choices: [
             { letter: "A", text: "measured carefully" },
@@ -66,6 +72,8 @@
         {
           id: "theme",
           sol: "9.RL.1.A",
+          sub: "9.RL.1.A.1",
+          why: "The island is lovely and supplies everything (sentence 3), yet he weeps for his family (sentences 4–6): comfort cannot replace loved ones.",
           stem: "Which idea about home does this short passage suggest?",
           choices: [
             { letter: "A", text: "A goddess's island is the best reward a hero can win." },
@@ -78,6 +86,8 @@
         {
           id: "setting",
           sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
+          why: "Ogygia is a lonely island (sentence 1) facing an empty sea toward a distant home (sentence 5), so its isolation keeps him from getting back.",
           stem: "How does the setting create a challenge for Odysseus?",
           choices: [
             { letter: "A", text: "The island lies alone in the sea, far from his home." },
@@ -114,6 +124,8 @@
         {
           id: "simile",
           sol: "9.RL.2.A",
+          sub: "9.RL.2.A.1",
+          why: "Lines 7–8 say that as a tern skims low over the swells hunting fish, so Hermes rode the waves: the god crossing the sea is compared to a seabird.",
           stem: "An epic simile is a long comparison that uses like or as. In lines 7–8, the epic simile compares —",
           choices: [
             { letter: "A", text: "Zeus's anger to a storm stirring up the swells" },
@@ -126,6 +138,8 @@
         {
           id: "allusion",
           sol: "9.RV.1.F",
+          sub: "9.RV.1.F.1",
+          why: "In lines 1–4 Zeus sends Hermes to carry a message and he goes at once, so a courier that delivers urgent letters is the fitting allusion.",
           stem: "Based on the role Hermes plays in lines 1–4, which modern business would make the most fitting allusion by naming itself after him?",
           choices: [
             { letter: "A", text: "a courier service that delivers urgent letters" },
@@ -138,6 +152,8 @@
         {
           id: "respond",
           sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "Line 4 says he obeyed and bound on his sandals, then took his wand and set off (lines 5–6); he raises no argument or delay.",
           stem: "How does Hermes respond to Zeus's command in line 4?",
           choices: [
             { letter: "A", text: "He argues that the nymph will refuse to listen." },
@@ -149,7 +165,9 @@
         },
         {
           id: "imagery",
-          sol: "9.RL.2.B",
+          sol: "9.RL.2.A",
+          sub: "9.RL.2.A.2",
+          why: "Line 5 calls the sandals golden and swift as wind over water and land, an image of divine speed and power, not of wealth or a burden.",
           stem: "The description of the sandals in line 5 mainly creates an impression of —",
           choices: [
             { letter: "A", text: "the wealth that Hermes has gathered over time" },
@@ -161,7 +179,9 @@
         },
         {
           id: "infer",
-          sol: "9.RL.1.B",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
+          why: "Zeus calls Odysseus a man who has suffered long and says he must now go home (lines 2–3), implying he has been kept away a long time.",
           stem: "Based on lines 2–3, readers can infer that Odysseus —",
           choices: [
             { letter: "A", text: "has angered Zeus and is about to be punished" },
@@ -194,7 +214,9 @@
       claims: [
         {
           id: "imagery",
-          sol: "9.RL.2.B",
+          sol: "9.RL.2.A",
+          sub: "9.RL.2.A.2",
+          why: "Sweet cedar smoke, singing, nesting birds, grapes, springs, and violets (sentences 2–5) appeal to the senses and show a rich, living, pleasant island.",
           stem: "The details in sentences 2–5 appeal to the senses mainly to show that the island is —",
           choices: [
             { letter: "A", text: "a rich and pleasant place full of life" },
@@ -206,7 +228,9 @@
         },
         {
           id: "mood",
-          sol: "9.RL.2.C",
+          sol: "9.RL.2.B",
+          sub: "9.RL.2.B.1",
+          why: "Sweet smoke, a goddess singing at her loom, clear springs, and a god who stands and marvels (sentences 2–6) create a calm, lovely mood with no hint of tension.",
           stem: "Which words best describe the mood created in sentences 1–6?",
           choices: [
             { letter: "A", text: "tense and uneasy" },
@@ -218,7 +242,9 @@
         },
         {
           id: "vocab",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
+          why: "A fire on a hearth sending smoke over the island (sentence 2) is burning strongly, so blazed means burned brightly.",
           stem: "In sentence 2, the word *blazed* most nearly means —",
           choices: [
             { letter: "A", text: "cooled slowly" },
@@ -231,6 +257,8 @@
         {
           id: "respond",
           sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "Sentence 7 says Odysseus sat alone on the shore, as always, weeping for home, so he grieves rather than enjoying the island.",
           stem: "Sentence 7 shows that Odysseus responds to life on this beautiful island by —",
           choices: [
             { letter: "A", text: "exploring its woods and meadows each day" },
@@ -242,7 +270,9 @@
         },
         {
           id: "craft",
-          sol: "9.RL.3.A",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
+          why: "Six sentences of beauty that even a god admires (sentence 6) come before Odysseus weeping alone (sentence 7), so the setting sharpens our sense of his sorrow.",
           stem: "Why does the author describe the island in detail before mentioning Odysseus in sentence 7?",
           choices: [
             { letter: "A", text: "to explain how Hermes found his way to the cave" },
@@ -254,7 +284,9 @@
         },
         {
           id: "infer",
-          sol: "9.RL.1.B",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
+          why: "Sentence 6 says even a god would stop to gaze, and Hermes stood still and marveled, so the island is lovely enough for gods to admire.",
           stem: "Based on sentence 6, readers can infer that the island is —",
           choices: [
             { letter: "A", text: "so lovely that even gods admire it" },
@@ -287,7 +319,9 @@
       claims: [
         {
           id: "implored",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
+          why: "Athena pleads that Odysseus is a suffering captive who deserves help (sentences 3–5), so implored means begged earnestly, not ordered.",
           stem: "In sentence 2, the word *implored* most nearly means —",
           choices: [
             { letter: "A", text: "ordered sharply" },
@@ -299,7 +333,9 @@
         },
         {
           id: "captive",
-          sol: "9.RV.1.B",
+          sol: "9.RV.1.C",
+          sub: "9.RV.1.C.1",
+          why: "The root capere means to take or seize, and Odysseus has no ship to leave Calypso's island (sentences 3–4), so a captive is held against his will.",
           stem: "The word *captive* comes from the Latin *capere*, meaning \"to take or seize.\" Based on this root, a captive is someone who —",
           choices: [
             { letter: "A", text: "has taken charge of a group of people" },
@@ -311,7 +347,9 @@
         },
         {
           id: "steadfast",
-          sol: "9.RV.1.E",
+          sol: "9.RV.1.D",
+          sub: "9.RV.1.D.1",
+          why: "Both words mean holding firm, but Athena is praising him (sentence 5, never forgetting his wife and son); steadfast carries approval while stubborn suggests a fault.",
           stem: "Athena calls Odysseus *steadfast* rather than *stubborn* in sentence 5 because *steadfast* —",
           choices: [
             { letter: "A", text: "suggests that he is too weak to change his mind" },
@@ -323,7 +361,9 @@
         },
         {
           id: "laments",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
+          why: "Sentence 5 says every day he laments for his lost home, which describes grieving, so laments means expresses grief or sorrow.",
           stem: "Which bolded word from the passage means \"expresses grief or sorrow\"?",
           choices: [
             { letter: "A", text: "captive" },
@@ -336,6 +376,8 @@
         {
           id: "allusion",
           sol: "9.RV.1.F",
+          sub: "9.RV.1.F.1",
+          why: "Poseidon is far away when the gods help Odysseus (sentence 1); in the wider epic he is the god who is angry at Odysseus and keeps him from home.",
           stem: "Poseidon's absence from the council (sentence 1) matters because, elsewhere in the Odyssey, Poseidon —",
           choices: [
             { letter: "A", text: "is angry at Odysseus and keeps him from home" },
@@ -348,6 +390,8 @@
         {
           id: "athena",
           sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "Athena praises Odysseus as a gentle ruler and steadfast husband and asks Zeus to help him (sentences 2–5), showing she is his loyal defender.",
           stem: "Athena's words to Zeus in sentences 3–5 show that she is —",
           choices: [
             { letter: "A", text: "jealous of Calypso's beautiful island home" },
@@ -391,7 +435,9 @@
       claims: [
         {
           id: "speech",
-          sol: "9.RL.1.D",
+          sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "She stresses that she alone saved, fed, and cared for him (lines 6–11), showing she feels rescuing him gave her a right to keep him.",
           stem: "Calypso's protest in lines 3–11 reveals that she —",
           choices: [
             { letter: "A", text: "fears that Odysseus will forget her once he leaves" },
@@ -404,6 +450,8 @@
         {
           id: "respond",
           sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "She admits no god can cross Zeus, says let the man go (lines 12–14), and promises to advise him so he reaches home (line 16): unwilling acceptance plus help.",
           stem: "How does Calypso respond to Zeus's command by the end of her speech (lines 12–16)?",
           choices: [
             { letter: "A", text: "She refuses and dares Zeus to punish her." },
@@ -416,6 +464,8 @@
         {
           id: "allusion",
           sol: "9.RV.1.F",
+          sub: "9.RV.1.F.1",
+          why: "Lines 6–8 show Zeus hurling lightning and line 12 calls him the thunderer, recalling Greek myth's king of the gods who wields the thunderbolt.",
           stem: "The reference to Zeus's lightning in lines 6–8 reminds readers that, in Greek myth, Zeus —",
           choices: [
             { letter: "A", text: "rules the sea and shakes the earth with his trident" },
@@ -427,7 +477,9 @@
         },
         {
           id: "tone",
-          sol: "9.RL.2.C",
+          sol: "9.RL.2.B",
+          sub: "9.RL.2.B.1",
+          why: "Lines 3–5 bitterly accuse the gods of envy, while lines 13–16 say let the man go and offer advice: the tone moves from bitter protest to reluctant consent.",
           stem: "Which choice best describes how Calypso's tone shifts between lines 3–5 and lines 13–16?",
           choices: [
             { letter: "A", text: "from bitter protest to reluctant consent" },
@@ -439,7 +491,9 @@
         },
         {
           id: "vocab",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
+          why: "Calypso accuses the gods of being harsh and quick to envy (line 3), so they begrudge, or resent, a goddess who keeps a mortal (line 4).",
           stem: "In line 4, the word *begrudge* most nearly means —",
           choices: [
             { letter: "A", text: "honor" },
@@ -452,6 +506,8 @@
         {
           id: "theme",
           sol: "9.RL.1.A",
+          sub: "9.RL.1.A.1",
+          why: "Though she protests, Calypso says no god can cross Zeus's will, not even a goddess, and lets Odysseus go (lines 12–14).",
           stem: "Which theme about power does Calypso's speech develop?",
           choices: [
             { letter: "A", text: "Even a goddess must give way to a stronger will." },
@@ -490,7 +546,9 @@
       claims: [
         {
           id: "speech",
-          sol: "9.RL.1.D",
+          sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "He asks her not to be angry and grants that Penelope cannot match her beauty (sentences 9–10) before saying he longs for home (sentence 11), which is tactful.",
           stem: "Odysseus's reply in sentences 9–13 reveals that he is —",
           choices: [
             { letter: "A", text: "careless, since he insults the goddess's beauty" },
@@ -502,7 +560,9 @@
         },
         {
           id: "infer",
-          sol: "9.RL.1.B",
+          sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "He is answering a goddess who has just compared herself to his wife (sentence 7) and he chooses his words with care (sentence 8), so he softens his refusal to avoid her anger.",
           stem: "Why does Odysseus begin his answer with the words *do not be angry with me* (sentence 9)?",
           choices: [
             { letter: "A", text: "He knows angering a goddess could put him in danger." },
@@ -515,6 +575,8 @@
         {
           id: "theme",
           sol: "9.RL.1.A",
+          sub: "9.RL.1.A.2",
+          why: "Calypso offers immortality (sentence 6), but Odysseus still longs for his day of return and will endure more suffering for it (sentences 11–12), choosing home over deathless life.",
           stem: "The Greek word *nostos* means \"homecoming,\" one of the epic's great themes. How does this passage develop the idea of nostos?",
           choices: [
             { letter: "A", text: "It shows that Odysseus's homecoming will be quick and easy." },
@@ -527,6 +589,8 @@
         {
           id: "respond",
           sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "He says that if a god wrecks him he will endure it, since he has already suffered much on the waves and in war (sentences 12–13).",
           stem: "How does Odysseus respond to Calypso's warning about the suffering ahead?",
           choices: [
             { letter: "A", text: "He asks her to promise that no god will harm him." },
@@ -538,7 +602,9 @@
         },
         {
           id: "vocab",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
+          why: "Sentence 12 pairs endure with having a heart that can bear suffering, so endure means bear patiently, not escape.",
           stem: "In sentence 12, the word *endure* most nearly means —",
           choices: [
             { letter: "A", text: "escape quickly" },
@@ -550,7 +616,9 @@
         },
         {
           id: "craft",
-          sol: "9.RL.3.A",
+          sol: "9.RL.2.B",
+          sub: "9.RL.2.B.2",
+          why: "Sentence 2 sets mortal bread and wine beside the goddess's ambrosia and nectar, highlighting the mortal-immortal gap that his choice in sentences 10–11 turns on.",
           stem: "The author includes sentence 2 mainly to —",
           choices: [
             { letter: "A", text: "show that Calypso will not share her food with a guest" },
@@ -595,7 +663,9 @@
       claims: [
         {
           id: "oath",
-          sol: "9.RL.1.B",
+          sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "He calls her offer some trick and refuses to board unless she swears she plans no new harm (sentences 6–7), so he suspects her sudden kindness.",
           stem: "Why does Odysseus demand an oath from Calypso (sentences 6–7)?",
           choices: [
             { letter: "A", text: "He suspects that a goddess's sudden kindness may hide a trap." },
@@ -608,6 +678,8 @@
         {
           id: "styx",
           sol: "9.RV.1.F",
+          sub: "9.RV.1.F.1",
+          why: "Sentence 8 calls the Styx oath the most dreadful oath the gods can take; since even gods dare not break it, her promise is binding and Odysseus can trust her.",
           stem: "Calypso swears by the river Styx (sentence 8). In Greek myth, an oath by the Styx is one that even gods dare not break. This allusion shows that her promise —",
           choices: [
             { letter: "A", text: "is only a polite custom that she may ignore later" },
@@ -620,6 +692,8 @@
         {
           id: "theme",
           sol: "9.RL.1.A",
+          sub: "9.RL.1.A.1",
+          why: "Odysseus insists on an oath (sentence 7), builds the raft carefully over four days (sentences 11–14), and steers sleeplessly by the stars (sentence 17) until he nears land.",
           stem: "Which theme is developed across the whole passage, from the oath to the voyage?",
           choices: [
             { letter: "A", text: "Caution and steady effort help a person meet a hard challenge." },
@@ -632,6 +706,8 @@
         {
           id: "simile",
           sol: "9.RL.2.A",
+          sub: "9.RL.2.A.2",
+          why: "Shadowy mountains rising like a shield on the misty sea (sentence 18) help readers picture a dim, rounded shape on the water; nothing suggests warriors or calm seas.",
           stem: "In sentence 18, the land of the Phaeacians is compared to a shield lying on the misty sea. This simile mainly helps readers —",
           choices: [
             { letter: "A", text: "understand that the Phaeacians are fierce warriors" },
@@ -643,7 +719,9 @@
         },
         {
           id: "vocab",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
+          why: "In sentence 12 he uses drills to bore through the timbers and then fits them with pegs, so bored means drilled holes through, not grew tired of.",
           stem: "In sentence 12, the word *bored* most nearly means —",
           choices: [
             { letter: "A", text: "grew tired of" },
@@ -655,7 +733,9 @@
         },
         {
           id: "ending",
-          sol: "9.RL.3.A",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
+          why: "Sentence 19 says the earth-shaker, unknown to Odysseus, has already spotted his sail, foreshadowing trouble just as he nears land (sentence 18).",
           stem: "The author ends the passage with sentence 19 mainly to —",
           choices: [
             { letter: "A", text: "show that Odysseus has finally reached home safely" },
@@ -668,6 +748,8 @@
         {
           id: "two",
           sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "Giving him an axe and adze to build the raft (sentence 9) and sending a warm wind for the voyage (sentence 16) are actions that help him leave; weeping and smiling are not.",
           stem: "Calypso must obey Zeus's command. Select TWO sentences that show her keeping her promise to help Odysseus leave.",
           choices: [
             { letter: "A", text: "Sentence 1, in which she finds him weeping on the shore" },
@@ -722,7 +804,9 @@
       claims: [
         {
           id: "poseidon",
-          sol: "9.RL.1.D",
+          sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "Poseidon admits Odysseus is fated to escape near the Phaeacians (sentence 4) but vows to give him his fill of trouble first (sentence 5).",
           stem: "Poseidon's words in sentences 3–5 reveal that he —",
           choices: [
             { letter: "A", text: "has forgiven Odysseus and now wishes to guide him home" },
@@ -734,7 +818,9 @@
         },
         {
           id: "kleos",
-          sol: "9.RL.1.B",
+          sol: "9.RL.3.A",
+          sub: "9.RL.3.A.1",
+          why: "He says death at Troy would have brought a hero's funeral and glory spread far and wide (sentence 9), unlike dying lost and unremembered at sea (sentence 10).",
           stem: "*Kleos* is the glory a hero earns that lives on after death. Based on sentences 8–10, why does Odysseus wish he had died at Troy?",
           choices: [
             { letter: "A", text: "A death in battle would have won him lasting honor." },
@@ -747,6 +833,8 @@
         {
           id: "simile",
           sol: "9.RL.2.A",
+          sub: "9.RL.2.A.2",
+          why: "Sentence 13 compares the raft to thistledown driven across a field, as the winds drove it this way and that, stressing that it is tossed without control.",
           stem: "What does the epic simile in sentence 13 mainly emphasize?",
           choices: [
             { letter: "A", text: "how gently the raft drifts toward the shore" },
@@ -759,6 +847,8 @@
         {
           id: "ino",
           sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "He is wary and thinks it may be another trick, so he decides to stay on the raft while its timbers hold (sentences 20–21); he swims only once it breaks.",
           stem: "How does Odysseus respond to Ino's advice in sentences 20–21?",
           choices: [
             { letter: "A", text: "He obeys at once and dives into the stormy sea." },
@@ -771,6 +861,8 @@
         {
           id: "allusion",
           sol: "9.RV.1.F",
+          sub: "9.RV.1.F.1",
+          why: "The passage never gives the cause of Poseidon's fury (sentence 16 asks why); the epic's earlier adventure explains it: Odysseus blinded the Cyclops, Poseidon's son.",
           stem: "Poseidon's anger is an allusion to an earlier adventure in the epic. Poseidon rages at Odysseus because Odysseus had —",
           choices: [
             { letter: "A", text: "stolen the cattle of the sun god Helios" },
@@ -782,7 +874,9 @@
         },
         {
           id: "vocab",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
+          why: "Sentence 24 says he was buffeted by the swells for two days and many times expected to die, so buffeted means struck again and again.",
           stem: "In sentence 24, the word *buffeted* most nearly means —",
           choices: [
             { letter: "A", text: "carried gently" },
@@ -794,7 +888,9 @@
         },
         {
           id: "ending",
-          sol: "9.RL.3.A",
+          sol: "9.RL.2.A",
+          sub: "9.RL.2.A.2",
+          why: "After nearly dying and crawling ashore exhausted (sentences 24–27), he buries himself in leaves as a farmer buries an ember to keep a spark alive (sentence 29), so his weak life is preserved.",
           stem: "The author ends the passage by comparing Odysseus to an ember buried in ashes (sentence 29) mainly to suggest that —",
           choices: [
             { letter: "A", text: "his life, nearly put out, is safely kept alive" },
@@ -807,6 +903,8 @@
         {
           id: "theme",
           sol: "9.RL.1.A",
+          sub: "9.RL.1.A.1",
+          why: "Odysseus despairs (sentence 10) but clings to the raft, swims for two days, and crawls ashore (sentences 12, 23–27), so hardship tests and reveals his will to endure.",
           stem: "How does this passage answer the unit's essential question, \"How do the challenges of life affect a person?\"",
           choices: [
             { letter: "A", text: "Challenges prove that only the gods can survive great hardship." },

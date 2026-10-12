@@ -26,7 +26,9 @@
       claims: [
         {
           id: "open",
-          sol: "9.RL.3.A",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
+          why: "Opening with two separate warnings (sentence 1) sets up the conflict: a danger named twice by Tiresias and Circe (sentences 2-3) is one the reader knows to take seriously. The prophets agree, so they did not disagree.",
           stem: "The author begins with sentence 1, which says Odysseus was warned twice, mainly to —",
           choices: [
             { letter: "A", text: "explain why Odysseus chose to sail straight toward Thrinacia" },
@@ -39,6 +41,8 @@
         {
           id: "quality",
           sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "Both warnings hinge on leaving the cattle unharmed (sentences 4-5), so the men need self-control. No monsters, races, or tricks are mentioned in the passage.",
           stem: "According to the warnings, what quality will Odysseus and his crew most need on Thrinacia?",
           choices: [
             { letter: "A", text: "courage to fight the monsters that guard the island" },
@@ -50,7 +54,9 @@
         },
         {
           id: "hardship",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
+          why: "Sentence 4 says they might reach Ithaca only after much hardship, so the word means difficulty and suffering. The look-alike word ship is a trap; hardship has nothing to do with boats.",
           stem: "In sentence 4 of \"Two Warnings,\" the word hardship most nearly means —",
           choices: [
             { letter: "A", text: "difficulty and suffering" },
@@ -63,6 +69,8 @@
         {
           id: "theme",
           sol: "9.RL.1.A",
+          sub: "9.RL.1.A.1",
+          why: "Sentence 5 says hurting even one animal would destroy the ship and leave Odysseus late, alone, and miserable, so one careless act brings lasting suffering. The passage never says the gods forgive no one at all.",
           stem: "Which idea about choices is expressed by the two warnings in sentences 4 and 5?",
           choices: [
             { letter: "A", text: "The gods never forgive anyone who makes even one small mistake." },
@@ -74,7 +82,9 @@
         },
         {
           id: "infer",
-          sol: "9.RL.1.B",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
+          why: "Sentence 5 makes the outcome depend on whether the men hurt the cattle (also sentence 4), so his homecoming rests partly on the crew's choices, not only on his own strength.",
           stem: "Based on sentence 5, readers can infer that Odysseus's safe return home —",
           choices: [
             { letter: "A", text: "depends only on his own strength as a warrior" },
@@ -106,6 +116,8 @@
         {
           id: "respond",
           sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "In sentence 3 Odysseus washes, finds shelter, and begs the gods of Olympus to show him a way home, so he responds by seeking the gods' guidance.",
           stem: "Sentence 3 shows that Odysseus responds to the crisis on Thrinacia by —",
           choices: [
             { letter: "A", text: "asking the gods for guidance" },
@@ -117,7 +129,9 @@
         },
         {
           id: "contrary",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
+          why: "Contrary winds left the crew stuck and starving for a month (sentence 1), so the winds were blowing against their course, not helping them sail.",
           stem: "In sentence 1 of \"Sweet Sleep,\" the word contrary most nearly means —",
           choices: [
             { letter: "A", text: "gentle and warming" },
@@ -129,7 +143,9 @@
         },
         {
           id: "ending",
-          sol: "9.RL.3.A",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
+          why: "Sentence 5 ends with Eurylochus seeing his chance with the hungry men while Odysseus sleeps (sentence 4), leaving the reader to wonder what he will persuade them to do.",
           stem: "Why does the author end the passage with Eurylochus calling the men together in sentence 5?",
           choices: [
             { letter: "A", text: "to reveal that the crew has already caught enough fish to eat" },
@@ -141,7 +157,9 @@
         },
         {
           id: "timing",
-          sol: "9.RL.1.B",
+          sol: "9.RL.2.C",
+          sub: "9.RL.2.C.2",
+          why: "Odysseus prays for help (sentence 3), but the gods send sleep instead of an answer (sentence 4) just as Eurylochus seizes his chance (sentence 5). The irony implies it is the worst possible moment.",
           stem: "Based on the passage, readers can infer that the sleep described in sentence 4 —",
           choices: [
             { letter: "A", text: "cures the crew of their terrible hunger" },
@@ -154,6 +172,8 @@
         {
           id: "sweet",
           sol: "9.RL.2.B",
+          sub: "9.RL.2.B.2",
+          why: "Sleep is called sweet (sentence 4), but it lets Eurylochus gather the hungry men (sentence 5), so the pleasant word clashes with the trouble the sleep will bring.",
           stem: "The word sweet in sentence 4 creates a sharp contrast with —",
           choices: [
             { letter: "A", text: "the bitter trouble that the sleep will soon bring" },
@@ -186,6 +206,8 @@
         {
           id: "weather",
           sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
+          why: "A month of the same south and east winds (sentence 4) keeps the ship from leaving, so the food runs out (sentence 6). The ship stays in the cave; it is not blown out to sea.",
           stem: "How does the weather described in sentence 4 create the main problem in the passage?",
           choices: [
             { letter: "A", text: "It blows the ship far out to sea, away from the island's shore." },
@@ -198,6 +220,8 @@
         {
           id: "obey",
           sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "Sentence 5 says the men obeyed as long as Circe's bread and wine lasted, which implies their promise holds only while they are fed. Nothing says they never meant to keep it.",
           stem: "Sentence 5 suggests that the crew members —",
           choices: [
             { letter: "A", text: "never planned to keep their oath to Odysseus" },
@@ -210,6 +234,8 @@
         {
           id: "allusion",
           sol: "9.RV.1.F",
+          sub: "9.RV.1.F.1",
+          why: "Helios is the sun god (sentence 3), and the sun looks down on the whole earth, so it makes sense that nothing escapes him. The passage never says he is blind or relies on the cattle.",
           stem: "Odysseus warns that Helios \"sees and hears everything\" (sentence 3). This description fits the sun god because —",
           choices: [
             { letter: "A", text: "the sun god has lost his sight and must depend on his hearing" },
@@ -221,7 +247,9 @@
         },
         {
           id: "gnawed",
-          sol: "9.RL.2.B",
+          sol: "9.RL.2.A",
+          sub: "9.RL.2.A.2",
+          why: "Gnawed (sentence 6) pictures hunger chewing at the men from inside, a vivid image of pain that does not stop. No animals actually attack anyone.",
           stem: "The phrase hunger gnawed at their bellies in sentence 6 helps the reader —",
           choices: [
             { letter: "A", text: "feel how painful and constant the men's hunger was" },
@@ -233,7 +261,9 @@
         },
         {
           id: "stores",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
+          why: "Sentence 6 says the stores ran out and the men began hunting fish and birds, and sentence 5 names Circe's bread and wine, so stores means supplies of food, not shops.",
           stem: "In sentence 6 of \"The Month of Wrong Winds,\" the word stores most nearly means —",
           choices: [
             { letter: "A", text: "shops in a busy town" },
@@ -245,7 +275,9 @@
         },
         {
           id: "next",
-          sol: "9.RL.1.B",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
+          why: "The men obeyed only while the food lasted (sentence 5) and are now gnawed by hunger (sentence 6), so their hunger may soon push them to break the oath (sentence 3).",
           stem: "Based on sentences 5 and 6, readers can infer that —",
           choices: [
             { letter: "A", text: "Odysseus will soon sail away with a ship full of food" },
@@ -278,7 +310,9 @@
       claims: [
         {
           id: "mort",
-          sol: "9.RV.1.B",
+          sol: "9.RV.1.C",
+          sub: "9.RV.1.C.1",
+          why: "Mortality contains the root mort, death, so it shares the root of immortal (sentence 2). Motor and immovable only look similar; they come from a different root meaning move.",
           stem: "The word immortal (sentence 2) is built from the prefix im-, meaning \"not,\" and the Latin root mort, meaning \"death.\" Which word contains the same root?",
           choices: [
             { letter: "A", text: "motor" },
@@ -290,7 +324,9 @@
         },
         {
           id: "tended",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
+          why: "The nymphs tended the herds while guiding them across the meadows (sentence 3), so tended means watched over and cared for, not leaned in one direction.",
           stem: "In sentence 3 of \"The Forbidden Herds,\" the word tended most nearly means —",
           choices: [
             { letter: "A", text: "watched over and cared for" },
@@ -302,7 +338,9 @@
         },
         {
           id: "famished",
-          sol: "9.RV.1.E",
+          sol: "9.RV.1.D",
+          sub: "9.RV.1.D.2",
+          why: "Famished is a stronger word than hungry: after a month of storms (sentence 5) the men were close to starving. It does not come from famous, though the two look alike.",
           stem: "The author chooses famished in sentence 5 instead of hungry mainly to suggest that the men were —",
           choices: [
             { letter: "A", text: "only slightly hungry after a short wait for food" },
@@ -314,7 +352,9 @@
         },
         {
           id: "sacrilege",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
+          why: "Sentence 6 defines the word right after it, with the appositive an insult to a god. The other phrases name the act or the risk but do not explain the word.",
           stem: "Which phrase from sentence 6 best helps the reader understand the meaning of sacrilege?",
           choices: [
             { letter: "A", text: "To kill" },
@@ -326,7 +366,9 @@
         },
         {
           id: "retribution",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
+          why: "Sentence 7 says Helios, who sees all things, would learn of the killing and demand retribution, so in context it means punishment given in return for a wrong, not a reward.",
           stem: "In sentence 7 of \"The Forbidden Herds,\" the word retribution most nearly means —",
           choices: [
             { letter: "A", text: "punishment given in return for a wrong" },
@@ -339,6 +381,8 @@
         {
           id: "attitude",
           sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "The men swore to leave the herds while their provisions lasted (sentence 4), but once famished (sentence 5), hunger made the meat seem worth the risk (sentence 6). They keep the oath while fed and waver when starving.",
           stem: "Based on sentences 4–6, how does the crew's attitude toward their oath change?",
           choices: [
             { letter: "A", text: "They grow more respectful of it as the storms continue." },
@@ -382,7 +426,9 @@
       claims: [
         {
           id: "speech",
-          sol: "9.RL.1.D",
+          sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "Eurylochus argues step by step (lines 3-14): starving is the worst death, the cattle can be offered to the gods, and a temple will calm Helios. He builds a case for the forbidden act; he does not simply obey orders.",
           stem: "Eurylochus's speech in lines 3–14 shows that he is someone who —",
           choices: [
             { letter: "A", text: "obeys every single order his captain gives without question" },
@@ -395,6 +441,8 @@
         {
           id: "wolves",
           sol: "9.RL.2.A",
+          sub: "9.RL.2.A.2",
+          why: "Line 16 likens the men to starving wolves howling around the pack leader, which shows how hungry and desperate they are and how eagerly they follow Eurylochus. No real wolves are being hunted.",
           stem: "The epic simile in line 16 compares the shouting crew to wolves mainly to suggest that the men —",
           choices: [
             { letter: "A", text: "are desperate with hunger and eager to follow Eurylochus" },
@@ -406,7 +454,9 @@
         },
         {
           id: "ruin",
-          sol: "9.RL.3.A",
+          sol: "9.RL.2.A",
+          sub: "9.RL.2.A.1",
+          why: "Before the speech starts, line 2 says it led them all to ruin, a hint at how things will end, which is foreshadowing. It does not jump back to an earlier time, so it is not a flashback.",
           stem: "In line 2, the narrator says the speech \"led them all to ruin\" before Eurylochus even begins. This detail is an example of —",
           choices: [
             { letter: "A", text: "flashback, because it interrupts the story to show an earlier time" },
@@ -418,7 +468,9 @@
         },
         {
           id: "soothe",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
+          why: "In line 10 the temple's gifts are meant to soothe Helios's anger, and gifts meant to win him over would calm that anger, not increase it.",
           stem: "In line 10 of \"Eurylochus Speaks,\" the word soothe most nearly means —",
           choices: [
             { letter: "A", text: "increase" },
@@ -431,6 +483,8 @@
         {
           id: "risk",
           sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "Eurylochus promises a rich temple to Helios (lines 8-10). If the gods still wreck the ship, he would rather gulp the sea once and die than starve (lines 11-14). He admits Helios may rage, so he does not claim Helios won't notice.",
           stem: "How does Eurylochus plan to handle the danger of angering Helios (lines 8–14)?",
           choices: [
             { letter: "A", text: "He claims that Helios will never notice a few missing cattle." },
@@ -443,6 +497,8 @@
         {
           id: "theme",
           sol: "9.RL.1.A",
+          sub: "9.RL.1.A.1",
+          why: "Eurylochus uses the horror of slow starvation (lines 4-5, 14) to justify breaking the oath, so suffering leads people to excuse a broken promise. Hard times here bring out the worst, not the best.",
           stem: "Which answer to the unit question, How do the challenges of life affect a person?, does Eurylochus's speech best develop?",
           choices: [
             { letter: "A", text: "Hard times always bring out a person's best qualities." },
@@ -478,7 +534,9 @@
       claims: [
         {
           id: "helios",
-          sol: "9.RL.1.D",
+          sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "Helios calls them my cattle that he loved to look at (sentence 4) and demands that Zeus punish the companions (sentence 3), so he feels personally wronged and expects the gods to act. He blames the companions, not Odysseus alone.",
           stem: "Helios's speech in sentences 3–5 reveals that he —",
           choices: [
             { letter: "A", text: "feels personally wronged and expects the gods to act" },
@@ -491,6 +549,8 @@
         {
           id: "hades",
           sol: "9.RV.1.F",
+          sub: "9.RV.1.F.1",
+          why: "Zeus urges Helios to keep shining for the gods and for mortal men (sentence 7). If the sun went down to shine among the dead (sentence 5), the earth would be left without light.",
           stem: "In Greek myth, Hades is the dark world of the dead. Based on Zeus's reply in sentence 7, why is Helios's threat in sentence 5 so serious?",
           choices: [
             { letter: "A", text: "Hades has forbidden Helios ever to enter the Underworld." },
@@ -502,7 +562,9 @@
         },
         {
           id: "source",
-          sol: "9.RL.3.A",
+          sol: "9.RL.2.C",
+          sub: "9.RL.2.C.1",
+          why: "Odysseus, the first-person narrator, was on the beach and did not hear the gods (sentence 10), so sentence 9 explains he learned their talk later from Calypso, who heard it from Hermes.",
           stem: "Why does Odysseus, the narrator, include sentence 9 in his account?",
           choices: [
             { letter: "A", text: "to show that Calypso was the one who harmed the cattle" },
@@ -515,6 +577,8 @@
         {
           id: "hubris",
           sol: "9.RL.1.A",
+          sub: "9.RL.1.A.1",
+          why: "Helios says the men killed his cattle in their pride (sentence 4), and Zeus promises to shatter their ship (sentence 8). Putting their own wants above a god's command brings ruin.",
           stem: "In sentence 4, Helios says the men acted \"in their pride.\" The Greeks called this kind of reckless pride hubris. Which theme of the episode does this idea support?",
           choices: [
             { letter: "A", text: "Pride is a useful quality for sailors far from home." },
@@ -527,6 +591,8 @@
         {
           id: "dread",
           sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "Sentence 10 says he knew only the smell of roasting meat and the dread in his heart, so he fears what the slaughter will bring, even without knowing the gods' plans.",
           stem: "Sentence 10 shows that, at this moment, Odysseus feels —",
           choices: [
             { letter: "A", text: "proud that his men found a way to survive" },
@@ -539,6 +605,8 @@
         {
           id: "gull",
           sol: "9.RL.2.A",
+          sub: "9.RL.2.A.2",
+          why: "Comparing Lampetia to a gull skimming the waves (sentence 1) stresses her speed: she runs to tell Helios at once. She does not actually turn into a bird.",
           stem: "The simile in sentence 1, Swift as a gull skimming the wave tops, mainly emphasizes —",
           choices: [
             { letter: "A", text: "how quickly news of the crime reaches Helios" },
@@ -588,7 +656,9 @@
       claims: [
         {
           id: "eurylochus",
-          sol: "9.RL.1.D",
+          sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "Eurylochus calls Odysseus a hard man made of iron (sentences 10-11) and says your comrades are worn out (sentence 12), so he resents his captain's endurance and speaks for the tired crew.",
           stem: "Eurylochus's speech in sentences 10–15 reveals that he —",
           choices: [
             { letter: "A", text: "resents his captain's endurance and speaks for the worn-out crew" },
@@ -601,6 +671,8 @@
         {
           id: "iron",
           sol: "9.RL.2.A",
+          sub: "9.RL.2.A.2",
+          why: "Eurylochus says Odysseus's strength never fails and his limbs never tire (sentence 11), while the crew is worn out (sentence 12), so iron stands for a toughness the men cannot match. He is not literally made of metal or wearing armor.",
           stem: "In sentence 11, Eurylochus claims Odysseus \"must be made of iron.\" This metaphor suggests that Odysseus —",
           choices: [
             { letter: "A", text: "wears heavy armor even while he rows" },
@@ -613,6 +685,8 @@
         {
           id: "yields",
           sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "Odysseus says you force my hand, for I am one against many (sentence 18), so he gives in, but he makes the men swear not to kill any animal (sentences 19-20) to limit the danger.",
           stem: "How does Odysseus respond when the whole crew sides with Eurylochus (sentences 17–20)?",
           choices: [
             { letter: "A", text: "He punishes Eurylochus at once and forces the crew to keep rowing." },
@@ -624,7 +698,9 @@
         },
         {
           id: "para1",
-          sol: "9.RL.3.A",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
+          why: "Paragraph 1 recalls that Tiresias and Circe told Odysseus to shun the island because the deadliest danger waited there (sentence 4), so readers know why landing is risky before the crew argues for it.",
           stem: "How does paragraph 1 prepare the reader for the argument that follows?",
           choices: [
             { letter: "A", text: "It describes the island's beauty so that the crew's wish to land seems natural." },
@@ -637,6 +713,8 @@
         {
           id: "night",
           sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
+          why: "Sentence 14 says fierce winds rise at night and wreck ships, and Eurylochus uses that danger to argue for landing, which wins the crew (sentence 16). No gale actually strikes in this passage.",
           stem: "How does the setting described in sentence 14 shape the events of the passage?",
           choices: [
             { letter: "A", text: "The dangers of sailing at night give Eurylochus a strong argument for landing." },
@@ -648,7 +726,9 @@
         },
         {
           id: "folly",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
+          why: "In sentence 19 Odysseus warns against killing an animal in reckless folly, an act he sees as dangerous and foolish, so folly means foolishness.",
           stem: "In sentence 19 of \"One Against Many,\" the word folly most nearly means —",
           choices: [
             { letter: "A", text: "hunger" },
@@ -661,6 +741,8 @@
         {
           id: "themes",
           sol: "9.RL.1.A",
+          sub: "9.RL.1.A.1",
+          why: "Odysseus must give in because he is one against many (sentence 18), which shows the limits of a leader's authority. Exhausted men (sentence 12) reject his advice to row past the island, which shows how weariness weakens their willingness to follow good advice.",
           stem: "Select TWO statements that express themes developed in \"One Against Many.\"",
           choices: [
             { letter: "A", text: "Monsters are the most serious danger any sailor can face." },
@@ -712,7 +794,9 @@
       claims: [
         {
           id: "ritual",
-          sol: "9.RL.1.B",
+          sol: "9.RL.3.A",
+          sub: "9.RL.3.A.1",
+          why: "Sentences 2-3 show the men using oak leaves for barley and water for wine because custom demanded these offerings. They still go through the Greek sacrifice ritual while breaking their oath.",
           stem: "Based on sentences 2 and 3, readers can infer that the men —",
           choices: [
             { letter: "A", text: "had secretly saved some barley and wine from Circe's island" },
@@ -724,7 +808,9 @@
         },
         {
           id: "cry",
-          sol: "9.RL.1.D",
+          sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "In sentence 7 Odysseus accuses the gods of lulling him into a cruel sleep to ruin him and calls his men's act monstrous, so he feels tricked and horrified. He blames the gods, not only himself.",
           stem: "Odysseus's cry to Zeus in sentence 7 reveals that he —",
           choices: [
             { letter: "A", text: "secretly approves of the feast now that the men are fed" },
@@ -736,7 +822,9 @@
         },
         {
           id: "omens",
-          sol: "9.RL.2.C",
+          sol: "9.RL.2.A",
+          sub: "9.RL.2.A.2",
+          why: "Hides that crawl on the ground and meat that lows like living cattle (sentence 10) are unnatural signs from the gods (sentence 9), images that make the reader feel eerie dread, not relief.",
           stem: "The details of the crawling hides and lowing meat in sentence 10 create a mood of —",
           choices: [
             { letter: "A", text: "eerie dread" },
@@ -749,6 +837,8 @@
         {
           id: "bat",
           sol: "9.RL.2.A",
+          sub: "9.RL.2.A.2",
+          why: "Sentence 22 says he clung to the fig tree like a bat, with no place to rest his feet, which stresses how desperately he hangs on above the whirlpool. It is not about flying or seeing in the dark.",
           stem: "In sentence 22, Odysseus compares himself to a bat mainly to emphasize —",
           choices: [
             { letter: "A", text: "that he can see clearly in the dark mist above the whirlpool" },
@@ -760,7 +850,9 @@
         },
         {
           id: "remedy",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
+          why: "Sentence 8 says they could find no remedy because the cattle were already dead, so the word means a way to set things right, not a hiding place or a reason to celebrate.",
           stem: "In sentence 8 of \"The Wrath of the Sun,\" the word remedy most nearly means —",
           choices: [
             { letter: "A", text: "a way to set things right" },
@@ -773,6 +865,8 @@
         {
           id: "endure",
           sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "Alone, Odysseus lashes the keel and mast together, clings to the fig tree, and waits for his timbers (sentences 18-24), which shows stubborn endurance in terrible danger.",
           stem: "Which trait does Odysseus show most clearly in sentences 18–24?",
           choices: [
             { letter: "A", text: "curiosity about the strange new creatures of the sea" },
@@ -785,6 +879,8 @@
         {
           id: "theme",
           sol: "9.RL.1.A",
+          sub: "9.RL.1.A.1",
+          why: "After the men feast on the forbidden cattle (sentence 11), Zeus wrecks the ship and a god takes away their homecoming forever (sentences 16-17), so breaking a sacred oath has consequences that cannot be undone.",
           stem: "Which statement best expresses a theme that the wreck of Odysseus's ship develops?",
           choices: [
             { letter: "A", text: "Hunger gives people the right to take whatever they need to stay alive." },
@@ -796,7 +892,9 @@
         },
         {
           id: "frame",
-          sol: "9.RL.3.A",
+          sol: "9.RL.1.B",
+          sub: "9.RL.1.B.1",
+          why: "By addressing my Phaeacian friends and mentioning the tale he told them yesterday (sentence 26), Odysseus reminds the reader that the shipwreck is a story he is telling to the Phaeacians. That is the epic's frame story, and Odysseus, not Calypso, is the narrator.",
           stem: "Sentence 26, addressed to \"my Phaeacian friends,\" reminds the reader that —",
           choices: [
             { letter: "A", text: "Calypso is the one who has been telling the whole tale" },

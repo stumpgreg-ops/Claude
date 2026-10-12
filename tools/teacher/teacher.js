@@ -582,7 +582,7 @@
     var so = ["RL", "RI", "RV", "DSR"], sa = so.indexOf(strandOf(a)), sb = so.indexOf(strandOf(b));
     return sa !== sb ? sa - sb : a.localeCompare(b, undefined, { numeric: true });
   }
-  /* v5.17: Virginia's standards are split into SKILLS (js/standards-va.js, inlined in the Virginia page): one skill
+  /* v5.17: Virginia's standards are split into SKILLS (js/standards-va.js, inlined in the Virginia and, v5.21, Odyssey pages): one skill
      per action verb, each LOTS (lower-order: identify, explain ...) or HOTS (higher-order: analyze, evaluate ...).
      A question names its skill (9.RL.2.A.2) or, in older codes, only its standard (9.RL.2.A). The report shows each
      standard with its skills under it, and LOTS and HOTS in total, for the class and for each student. */

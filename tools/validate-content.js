@@ -25,7 +25,7 @@ files.forEach(function (f) {
 });
 var packs = sandbox.window.HEIST_PACKS || [];
 var ids = {}, stems = {}, passages = {};
-/* v5.17: the Virginia 2024 standards and their LOTS/HOTS skills: a Virginia question's sol must be one of them, and
+/* v5.17: the Virginia 2024 standards and their LOTS/HOTS skills: a Virginia (v5.21: or Odyssey) question's sol must be one of them, and
    its sub (the skill, "9.RL.2.A.2") must be one of that standard's skills */
 var SS = require(path.join(root, "js", "standards-va.js")), subs = { yes: 0, no: 0 };
 var strandOf = function (sol) { var m = /^\d+\.(RL|RI|RV|DSR)/.exec(sol || ""); return m ? m[1] : null; };
@@ -74,7 +74,10 @@ packs.forEach(function (p, pi) {
         if (!k) errors.push(w + ": sub " + c.sub + " is not a skill in js/standards-va.js");
         else if (k.code !== c.sol) errors.push(w + ": sub " + c.sub + " is a skill of " + k.code + ", not of its sol " + c.sol);
         subs.yes++;
-      } else if (p.family !== "ODY") { subs.no++; errors.push(w + ": no sub (the skill: node tools/expansion/tags.js skills " + parseInt(c.sol, 10) + ")"); }
+      } else { subs.no++; errors.push(w + ": no sub (the skill: node tools/expansion/tags.js skills " + parseInt(c.sol, 10) + ")"); }
+      /* v5.21: the Odyssey's answer key (node tools/make-all-questions-doc.js ODY) says why each answer is right */
+      if (c.why != null && (typeof c.why !== "string" || !c.why.trim() || /<[a-z]/i.test(c.why))) errors.push(w + ": why must be plain text");
+      else if (p.family === "ODY" && !c.why) warnings.push(w + ": no why (a sentence on why the answer is right, for the answer key)");
     }
     if (c.partB != null) {
       var pb = p.claims.filter(function (x) { return x.id === c.partB; })[0];
@@ -112,7 +115,7 @@ packs.forEach(function (p, pi) {
 console.log("Files: " + files.map(function (f) { return f + " (" + (perFile[f] || 0) + " packs)"; }).join(", "));
 console.log("Packs: " + packs.length + "  Questions: " + packs.reduce(function (a, p) { return a + (p.claims ? p.claims.length : 0); }, 0));
 Object.keys(stats).sort().forEach(function (k) { console.log("  " + k + ": " + stats[k]); });
-if (subs.yes + subs.no) console.log("Virginia questions tagged with a skill (sub): " + subs.yes + " of " + (subs.yes + subs.no));
+if (subs.yes + subs.no) console.log("Virginia and Odyssey questions tagged with a skill (sub): " + subs.yes + " of " + (subs.yes + subs.no));
 warnings.forEach(function (w) { console.log("WARN  " + w); });
 errors.forEach(function (e) { console.log("ERROR " + e); });
 console.log(errors.length ? errors.length + " error(s)" : "OK — no errors" + (warnings.length ? " (" + warnings.length + " warnings)" : ""));
