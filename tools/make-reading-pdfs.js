@@ -1,0 +1,26 @@
+// Prints an annotated-model page (docs/readings/*-Annotated-Model.html) to two letter-size PDFs:
+//   <name>-Annotated-Model.pdf  teacher copy: key page, every highlight, note and arrow shown
+//   <name>-Student-Copy.pdf     student copy: same sheets and line positions, no key, highlights or notes
+// Usage: node tools/make-reading-pdfs.js docs/readings/Odyssey-Circe-Annotated-Model.html
+const path = require("path");
+const { chromium } = require("playwright");
+
+(async () => {
+  const src = path.resolve(process.argv[2]);
+  const base = src.replace(/-Annotated-Model\.html$/, "");
+  const browser = await chromium.launch();
+  const page = await browser.newPage({ viewport: { width: 900, height: 1200 } });
+  await page.goto("file://" + src);
+  await page.evaluate(() => document.fonts.ready);
+  await page.waitForTimeout(500);
+  await page.emulateMedia({ media: "print" });
+  await page.pdf({ path: base + "-Annotated-Model.pdf", format: "Letter", printBackground: true, preferCSSPageSize: true });
+
+  await page.addStyleTag({ content: `
+    .sheet-wrap:has(.key) { display: none; }
+    .note, svg.ink, .tap, .fs-btn { display: none !important; }
+    .annotated mark, mark { background: none !important; }
+    .annotated { cursor: auto; }` });
+  await page.pdf({ path: base + "-Student-Copy.pdf", format: "Letter", printBackground: true, preferCSSPageSize: true });
+  await browser.close();
+})();

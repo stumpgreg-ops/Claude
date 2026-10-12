@@ -144,13 +144,10 @@ mark.vo { background: var(--hl-vocab); } mark.th { background: var(--hl-theme); 
 .sw { padding: 0 4px; border-radius: 4px 7px 5px 8px / 7px 4px 8px 5px; }
 .sw.vo { background: var(--hl-vocab); } .sw.th { background: var(--hl-theme); } .sw.el { background: var(--hl-elem); }
 .std { color: #666; font-size: .85em; margin-left: .4em; }
-.theme-list { margin: 1.2em 0 0 -1.2em; padding: .2em 0 0; color: var(--red);
-  font-family: "Caveat", "Segoe Print", "Bradley Hand", cursive; font-size: 1.35em; line-height: 1.15;
-  transform: rotate(-.6deg); opacity: 0; transition: opacity .4s ease .3s; }
-.theme-list.on { opacity: 1; }
-.theme-list b { font-size: 1.1em; text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
-.theme-list ol { margin: .2em 0 0; padding-left: 1.6em; }
-.theme-list li { margin-bottom: .1em; }
+.themes { border: 1.5px solid var(--rust); border-radius: 4px 12px 4px 12px; padding: .5em .9em .4em; margin: 0 0 1.1em; line-height: 1.35; }
+.themes h4 { margin: 0 0 .25em; color: var(--rust); font-variant: small-caps; letter-spacing: .03em; font-size: 1.1em; font-weight: 600; }
+.themes ol { margin: 0; padding-left: 1.4em; }
+.themes li { margin-bottom: .2em; }
 
 .title-block { position: relative; color: var(--rust); margin-bottom: 1.1em; }
 .title-block .from { font-style: italic; font-size: 1.9em; line-height: 1; opacity: .8; }
@@ -185,7 +182,6 @@ h3.section span { font-variant: normal; font-size: .85em; white-space: nowrap; }
   .page { transform: none; box-shadow: none; break-after: page; height: 1056px; min-height: 0 !important; overflow: hidden; }
   .sheet-wrap:last-child .page { break-after: auto; }
   .screen-only { display: none; }
-  .theme-list { opacity: 1; }
   .annotated mark.vo, .annotated mark.th, .annotated mark.el { background-size: 100% 100%; }
   .tap, .fs-btn { display: none; }
   .annotated mark { background-size: 100% 100%; }
@@ -210,12 +206,21 @@ h3.section span { font-variant: normal; font-size: .85em; white-space: nowrap; }
     <p><b class="sw el">Character · Setting · Plot</b> a detail that builds the theme <span class="std">9.RL.1.A · red notes</span></p>
   </div>
   <p><span class="screen-only">Click a page to reveal its highlights one at a time; each highlight brings its margin note. After the last one, a click clears the page (Shift-click goes back one). </span>Blue notes define words. Red notes connect a detail to a theme. Arrows point to the exact words.</p>
-  <p><b>Topic vs. theme.</b> A topic names a subject (<i>temptation</i>). A theme carries a message or lesson about it (<i>giving in to temptation can cost you what matters most</i>). Each theme note names a topic; its number shows which theme that topic develops. The numbered themes are listed at the end of page 745.</p>
+  <p><b>Topic vs. theme.</b> A topic names a subject (<i>temptation</i>). A theme carries a message or lesson about it (<i>giving in to temptation can cost you what matters most</i>). Each theme note names a topic; its number shows which theme that topic develops. The numbered themes are listed at the top of page 743.</p>
   <div class="foot r">Annotation key</div>
 </section></div>
 
 <!-- ───────────── Page 743 ───────────── -->
 <div class="sheet-wrap"><section class="page annotated">
+  <div class="themes">
+    <h4>Themes</h4>
+    <ol>
+      <li>Giving in to temptation can cost you what matters most.</li>
+      <li>Appearances can deceive: what looks lovely and welcoming can hide danger.</li>
+      <li>Caution can protect you, while trusting too easily can lead you into a trap.</li>
+      <li>Comfort and pleasure can make you forget your goals.</li>
+    </ol>
+  </div>
   <div class="title-block">
     <div class="from">from</div>
     <div class="the-odyssey">The Odyssey</div>
@@ -288,11 +293,11 @@ h3.section span { font-variant: normal; font-size: .85em; white-space: nowrap; }
   <div class="note l" data-for="b4"><b>Vocab:</b> fawned = acted like a pet</div>
   <div class="note l" data-for="b5"><b>Vocab:</b> beguiling = theme 2 in one word</div>
   <div class="note r" data-for="b6"><b>Vocab:</b> ambrosial = fit for the gods</div>
-  <div class="note r red" data-for="b7"><b>Character:</b> trusting Polites</div>
+  <div class="note r red" data-for="b7">3. <b>Character:</b> trusting Polites</div>
   <div class="note l" data-for="b8"><b>Vocab:</b> stealth = sneakiness</div>
-  <div class="note r red" data-for="b9"><b>Character:</b> cautious Eurylochus<small>(snare = trap)</small></div>
+  <div class="note r red" data-for="b9">3. <b>Character:</b> cautious Eurylochus<small>(snare = trap)</small></div>
   <div class="note l" data-for="b10"><b>Vocab:</b> vile = evil, disgusting</div>
-  <div class="note r red" data-for="b11">3. <b>Topic:</b> forgetting home</div>
+  <div class="note r red" data-for="b11">4. <b>Topic:</b> forgetting home</div>
   <div class="foot l"><b>744</b> UNIT 5 <span>FOLK LITERATURE</span></div>
 </section></div>
 
@@ -314,23 +319,15 @@ h3.section span { font-variant: normal; font-size: .85em; white-space: nowrap; }
   </div>
   <p class="intro after"><mark class="el" id="c6">Odysseus leaves the ship at once to confront Circe himself.</mark> Protected from her spells with help from Hermes, Odysseus convinces the goddess to restore his shipmates to their human form. Odysseus and his crew <mark class="vo" id="c7">dally</mark> <mark class="th" id="c8">on Circe’s island for a year</mark>. When Odysseus decides they must head home, Circe tells him he will not return safely unless he goes to the Land of the Dead to seek advice from the blind <mark class="vo" id="c9">seer</mark> Teiresias.</p>
   <div class="footnote"><p>1. <b>magic doomed his men.</b> Crew members enslaved by Circe’s tricks</p></div>
-  <div class="theme-list">
-    <b>Themes</b>
-    <ol>
-      <li>Giving in to temptation can cost you what matters most.</li>
-      <li>Appearances can deceive.</li>
-      <li>Comfort and pleasure can make you forget your goals.</li>
-    </ol>
-  </div>
 
   <div class="note r red" data-for="c1">1. <b>Topic:</b> losing yourself</div>
   <div class="note l" data-for="c2"><b>Vocab:</b> mast = acorns &amp; nuts</div>
   <div class="note r" data-for="c3"><b>Vocab:</b> fodder = animal feed</div>
-  <div class="note l red" data-for="c4"><b>Plot:</b> caution saved Eurylochus</div>
+  <div class="note l red" data-for="c4">3. <b>Plot:</b> caution saved Eurylochus</div>
   <div class="note r" data-for="c5"><b>Vocab:</b> foreboding = sense of coming doom</div>
   <div class="note l red" data-for="c6"><b>Character:</b> the leader acts</div>
   <div class="note r" data-for="c7"><b>Vocab:</b> dally = linger, waste time</div>
-  <div class="note l red" data-for="c8">3. <b>Topic:</b> forgetting home<small>(l. 32–33)</small></div>
+  <div class="note l red" data-for="c8">4. <b>Topic:</b> forgetting home<small>(l. 32–33)</small></div>
   <div class="note r" data-for="c9"><b>Vocab:</b> seer = one who sees the future</div>
   <div class="foot r">THE ODYSSEY, PART TWO <b>745</b></div>
 </section></div>
@@ -381,8 +378,6 @@ h3.section span { font-variant: normal; font-size: .85em; white-space: nowrap; }
           if (path) path.classList.toggle("on", on);
         });
       });
-      var themeList = page.querySelector(".theme-list");
-      if (themeList) themeList.classList.toggle("on", shown === steps.length);
       tap.textContent = shown === 0 ? "click to start ✎" : shown < steps.length ? "click for next  " + shown + "/" + steps.length : "click to clear";
       page.setAttribute("aria-label", "Page " + (pages.indexOf(page) + 1) + ": " + shown + " of " + steps.length +
         " highlights shown. Click or press Enter for the next one, Shift-click or Backspace to go back.");
