@@ -42,7 +42,8 @@ function build(st, version) {
   var code = fs.readFileSync(path.join(root, "js", "progress-code.js"), "utf8");
   var app = fs.readFileSync(path.join(__dirname, "teacher", "teacher.js"), "utf8");
   /* v5.17: Virginia's standards and their LOTS/HOTS skills (js/standards-va.js) for the standards report */
-  var stds = st === "VA" ? fs.readFileSync(path.join(root, "js", "standards-va.js"), "utf8") : "";
+  /* v5.21: the Odyssey's questions are tagged with the same Grade 9 skills */
+  var stds = st === "VA" || st === "ODY" ? fs.readFileSync(path.join(root, "js", "standards-va.js"), "utf8") : "";
   [code, app, stds].forEach(function (js) { if (/<\/script/i.test(js)) throw new Error("tools/build-teacher.js: a script holds </script"); });
   var esc = function (s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;"); };
   var vals = Object.assign({

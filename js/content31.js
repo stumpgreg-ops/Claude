@@ -30,6 +30,8 @@
         {
           id: "central",
           sol: "9.RI.1.A",
+          sub: "9.RI.1.A.1",
+          why: "Sentences 1-2 describe the great but flawed epic hero and sentences 3-5 explain epithets; the right answer covers both. Memorizing is only one detail (sentence 4).",
           stem: "Which statement best expresses the central idea of the passage?",
           choices: [
             { letter: "A", text: "Epic poems were too long for ancient singers to memorize." },
@@ -41,7 +43,9 @@
         },
         {
           id: "epithet-word",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
+          why: "Sentence 3 defines the word right after it: epithets are short descriptive phrases attached to a name, as in \"grey-eyed Athena.\"",
           stem: "As it is used in sentence 3, an epithet is —",
           choices: [
             { letter: "A", text: "a descriptive phrase attached to a character's name" },
@@ -53,7 +57,9 @@
         },
         {
           id: "singers",
-          sol: "9.RI.1.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.1",
+          why: "Sentence 4 says singers performed from memory, so repeated epithets helped them fill out a line. Nothing says names were skipped or replaced.",
           stem: "According to the passage, how did epithets help the singers who performed epics?",
           choices: [
             { letter: "A", text: "They let singers skip parts of the story listeners already knew." },
@@ -65,7 +71,9 @@
         },
         {
           id: "flaws",
-          sol: "9.RI.2.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
+          why: "Sentence 2 first calls the hero braver or stronger than ordinary humans, then adds he still has flaws: extraordinary yet human. It never says he is undeserving or that pride is the only flaw.",
           stem: "The author includes the words yet he still has flaws, such as pride in sentence 2 mainly to —",
           choices: [
             { letter: "A", text: "argue that Odysseus does not deserve to be called a hero" },
@@ -78,6 +86,8 @@
         {
           id: "organize",
           sol: "9.RI.2.A",
+          sub: "9.RI.2.A.1",
+          why: "Sentences 1-2 define the epic hero and sentences 3-5 define epithets and explain how they worked. There is no story order, comparison, or argument.",
           stem: "How is the passage mainly organized?",
           choices: [
             { letter: "A", text: "It tells the events of the epic in the order they happen." },
@@ -114,6 +124,8 @@
         {
           id: "proud",
           sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "He calls himself master of schemes and says men speak of his cunning and his fame climbs as high as heaven (lines 2-3): he boasts, so he is not modest.",
           stem: "Lines 2–3 show that Odysseus is —",
           choices: [
             { letter: "A", text: "modest and unwilling to talk about his deeds" },
@@ -125,7 +137,9 @@
         },
         {
           id: "cunning",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
+          why: "Line 3 pairs cunning with master of schemes in line 2, so it means skill at clever plans, not strength or cruelty.",
           stem: "In line 3, the word cunning most nearly means —",
           choices: [
             { letter: "A", text: "cruelty toward enemies" },
@@ -138,6 +152,8 @@
         {
           id: "home",
           sol: "9.RL.1.A",
+          sub: "9.RL.1.A.1",
+          why: "Lines 7-8 say no rich hall of gold in a stranger's country is dearer than his own rough shore and his father's face: home outweighs any foreign comfort.",
           stem: "Which idea do lines 6–8 express most clearly?",
           choices: [
             { letter: "A", text: "Home is worth more than any comfort a foreign land offers." },
@@ -149,7 +165,9 @@
         },
         {
           id: "kept",
-          sol: "9.RL.1.B",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
+          why: "Line 6 says two goddesses tried to keep him in their halls, so powerful beings wanted him to stay and held him back. He has left Ithaca and longs to go home.",
           stem: "Based on line 6, readers can infer that Odysseus —",
           choices: [
             { letter: "A", text: "has never left Ithaca before this voyage" },
@@ -161,7 +179,9 @@
         },
         {
           id: "ithaca",
-          sol: "9.RL.2.B",
+          sol: "9.RL.2.A",
+          sub: "9.RL.2.A.1",
+          why: "Line 5 calls Ithaca a rocky island, rough, but good at raising sturdy sons: harsh land praised for its people. The golden halls belong to foreign lands (line 7).",
           stem: "The description of Ithaca in lines 4–5 creates an image of a place that is —",
           choices: [
             { letter: "A", text: "wealthy and filled with golden halls" },
@@ -195,6 +215,8 @@
         {
           id: "central",
           sol: "9.RI.1.A",
+          sub: "9.RI.1.A.1",
+          why: "Sentence 1 says myths passed values between generations, and sentence 7 says listeners learned what their community honored. The values in sentences 2-6 support this.",
           stem: "Which statement best expresses the central idea of the article?",
           choices: [
             { letter: "A", text: "Greek heroes cared far more about winning glory than about getting home." },
@@ -206,7 +228,9 @@
         },
         {
           id: "excessive",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
+          why: "Sentence 5 says excessive pride leads people to challenge the gods or ignore human limits, so excessive means going beyond a reasonable limit.",
           stem: "In sentence 5, the word excessive most nearly means —",
           choices: [
             { letter: "A", text: "hidden from other people" },
@@ -218,7 +242,9 @@
         },
         {
           id: "zeus",
-          sol: "9.RI.1.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.1",
+          why: "Sentence 4 says Zeus was called the protector of guests, so breaking xenia was an offense against the gods. Fame in song (sentence 6) is about kleos, not xenia.",
           stem: "According to the passage, why was breaking xenia considered so serious?",
           choices: [
             { letter: "A", text: "Zeus was believed to protect guests, so it offended the gods." },
@@ -230,7 +256,9 @@
         },
         {
           id: "examples",
-          sol: "9.RI.2.B",
+          sol: "9.RI.1.A",
+          sub: "9.RI.1.A.2",
+          why: "Sentence 7 names a monster who ate his guests and a boastful hero who suffered, then says listeners learned what their community honored: stories taught values through consequences.",
           stem: "The author includes the examples in sentence 7 mainly to —",
           choices: [
             { letter: "A", text: "prove that monsters were the most popular characters in myths" },
@@ -243,6 +271,8 @@
         {
           id: "allusion",
           sol: "9.RV.1.F",
+          sub: "9.RV.1.F.1",
+          why: "Sentences 3-4 say a host owed a stranger food, shelter, and safe passage, and Zeus protected guests. Acting as if Zeus were watching means treating the guest generously.",
           stem: "A modern story describes a host who treats a traveler \"as if Zeus were watching.\" Based on the passage, this allusion suggests that the host —",
           choices: [
             { letter: "A", text: "is afraid the traveler is secretly a thief" },
@@ -255,6 +285,8 @@
         {
           id: "structure",
           sol: "9.RI.2.A",
+          sub: "9.RI.2.A.1",
+          why: "Sentences 2-6 name xenia, hubris, kleos, and nostos one after another and define each. No single myth is told and no modern comparison is made.",
           stem: "How does the author organize sentences 2–6?",
           choices: [
             { letter: "A", text: "by telling one myth from beginning to end" },
@@ -293,7 +325,9 @@
       claims: [
         {
           id: "gifts",
-          sol: "9.DSR.D",
+          sol: "9.DSR.C",
+          sub: "9.DSR.C.3",
+          why: "Sentence 3 names the lotus fruit the Lotus-Eaters share, and sentence 8 names Calypso's comfort and offer of immortality. Sentences 2 and 10 tell no gift.",
           stem: "Select TWO sentences, one from each text, that describe the gift that tempts a traveler to stay.",
           choices: [
             { letter: "A", text: "Sentence 2: He sent three men inland to learn who lived there." },
@@ -305,7 +339,9 @@
         },
         {
           id: "who-resists",
-          sol: "9.DSR.E",
+          sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
+          why: "In Text 1 Odysseus drags the men to the ships and ties them (sentence 5); in Text 2 he chooses suffering at sea over Calypso's gifts because he longs for home (sentences 9, 11).",
           stem: "How do the two texts differ in the way the temptation is resisted?",
           choices: [
             { letter: "A", text: "In Text 1 Odysseus forces his men to leave; in Text 2 he resists by choice." },
@@ -318,6 +354,8 @@
         {
           id: "leader",
           sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "He drags the men back and orders the crews to row hard before anyone else can taste the fruit (sentences 5-6): quick action to protect the voyage. Nothing shows anger or punishment.",
           stem: "In Text 1, Odysseus's actions in sentences 5–6 show that he is —",
           choices: [
             { letter: "A", text: "cruel to men who disobey his orders" },
@@ -329,7 +367,9 @@
         },
         {
           id: "shore",
-          sol: "9.RL.1.B",
+          sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "Sentence 9 says he sat staring across the sea and weeping for home each day, so he is miserable because he misses home. Nothing mentions a ship or raft.",
           stem: "Based on sentence 9, readers can infer that Odysseus —",
           choices: [
             { letter: "A", text: "is waiting for a ship that Calypso has promised him" },
@@ -341,7 +381,9 @@
         },
         {
           id: "immortal",
-          sol: "9.RV.1.B",
+          sol: "9.RV.1.C",
+          sub: "9.RV.1.C.1",
+          why: "The prefix im- means not, so immortal means not mortal; sentence 8 confirms it: free from old age and death forever.",
           stem: "The prefix im- in immortal (sentence 8) shows that Calypso offers Odysseus a life that is —",
           choices: [
             { letter: "A", text: "lived inside a palace" },
@@ -354,6 +396,8 @@
         {
           id: "shared-theme",
           sol: "9.RL.1.A",
+          sub: "9.RL.1.A.1",
+          why: "The lotus makes men forget home (sentence 4), and Calypso's comforts and immortality (sentence 8) would keep Odysseus from home: comfort threatens what people love.",
           stem: "Which theme do both texts develop?",
           choices: [
             { letter: "A", text: "Comfort can be dangerous when it makes people forget what they love." },
@@ -399,7 +443,9 @@
       claims: [
         {
           id: "plea",
-          sol: "9.RL.1.D",
+          sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "He returned too shaken to speak (sentence 1), clutches Odysseus's knees and begs (sentence 5), and says to sail away now (sentence 7): he is terrified and sees only flight.",
           stem: "Eurylochus's words in sentences 6–7 reveal that he is mainly —",
           choices: [
             { letter: "A", text: "angry that Odysseus did not lead the first group himself" },
@@ -412,6 +458,8 @@
         {
           id: "odysseus-goes",
           sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "Odysseus takes up his sword and bow (sentence 4) and says he will go alone (sentence 9) to reach the missing men instead of sailing away.",
           stem: "How does Odysseus respond to the challenge in Text 1?",
           choices: [
             { letter: "A", text: "He faces the danger himself rather than abandon the missing men." },
@@ -424,6 +472,8 @@
         {
           id: "hunger",
           sol: "9.RL.2.A",
+          sub: "9.RL.2.A.2",
+          why: "Hunger is pictured shouting louder than the oath they swore (sentence 17): their need for food overpowered their promise. Odysseus was asleep, so no real shouting is meant.",
           stem: "In sentence 17, the personification hunger shouted louder than their promise suggests that —",
           choices: [
             { letter: "A", text: "the men argued loudly about whether to keep their oath" },
@@ -435,7 +485,9 @@
         },
         {
           id: "necessity",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
+          why: "In sentence 9 hard necessity drives Odysseus to go alone to rescue his men (sentence 4), so it means a duty he cannot avoid, not a wish for fame.",
           stem: "In sentence 9, the word necessity most nearly means —",
           choices: [
             { letter: "A", text: "a duty that cannot be avoided" },
@@ -447,7 +499,9 @@
         },
         {
           id: "proposals",
-          sol: "9.DSR.D",
+          sol: "9.DSR.C",
+          sub: "9.DSR.C.3",
+          why: "Eurylochus proposes sailing away in sentence 7 and taking Helios' cattle in sentence 13. Sentence 4 is Odysseus's action, and sentence 12 states a feeling, not a plan.",
           stem: "Select TWO sentences in which Eurylochus proposes a specific action to escape hardship.",
           choices: [
             { letter: "A", text: "Sentence 4: I slung my bronze sword over my shoulder, took up my bow..." },
@@ -459,7 +513,9 @@
         },
         {
           id: "contrast",
-          sol: "9.DSR.E",
+          sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
+          why: "Odysseus goes into danger alone (sentence 9), while Eurylochus urges flight (sentence 7) and then eating the forbidden cattle rather than starve (sentences 13, 15).",
           stem: "Which statement best contrasts how Odysseus and Eurylochus face hardship across both texts?",
           choices: [
             { letter: "A", text: "Odysseus avoids risk, while Eurylochus rushes toward every danger." },
@@ -502,6 +558,8 @@
         {
           id: "central",
           sol: "9.RI.1.A",
+          sub: "9.RI.1.A.1",
+          why: "Sentence 1 says people who recover well use habits anyone can learn, and sentence 6 repeats that recovery is a set of skills, not a gift people are born with.",
           stem: "Which statement best expresses the central idea of Text 1?",
           choices: [
             { letter: "A", text: "Recovering from setbacks depends on habits people can learn." },
@@ -513,7 +571,9 @@
         },
         {
           id: "resilient",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
+          why: "Sentence 2 contrasts I always fail with a resilient person asking what to try next time, and Text 1 is about people who recover well (sentence 1).",
           stem: "In sentence 2, the word resilient most nearly means —",
           choices: [
             { letter: "A", text: "worried about making any mistakes" },
@@ -526,6 +586,8 @@
         {
           id: "thistles",
           sol: "9.RL.2.A",
+          sub: "9.RL.2.A.2",
+          why: "Sentence 9 compares the raft to dry thistles tossed by a wind: light, powerless objects pushed wherever the storm sends them. The late-summer detail belongs to the comparison, not the voyage.",
           stem: "The epic simile in sentence 9 mainly emphasizes —",
           choices: [
             { letter: "A", text: "how close the raft has come to the Phaeacian shore" },
@@ -538,6 +600,8 @@
         {
           id: "timbers",
           sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "He fears a trick (sentence 11) and decides to stay aboard while the timbers hold and swim only when forced (sentence 12); later he uses the veil (sentence 13), so he does not refuse help.",
           stem: "Odysseus's words in sentence 12 show that he responds to Ino's offer by —",
           choices: [
             { letter: "A", text: "weighing the risks before trusting help he is unsure of" },
@@ -550,6 +614,8 @@
         {
           id: "strategies",
           sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
+          why: "In sentence 13 he accepts Ino's veil and adapts when the raft breaks, using help (sentence 3); sentence 14 shows persistence (sentence 5). Sentences 7 and 8 show no action by him.",
           stem: "Select TWO sentences from Text 2 that show Odysseus using a strategy described in Text 1.",
           choices: [
             { letter: "A", text: "Sentence 7: Odysseus saw the shadowy mountains of the Phaeacians rise from the sea." },
@@ -561,7 +627,9 @@
         },
         {
           id: "complicates",
-          sol: "9.DSR.E",
+          sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
+          why: "Text 1 calls asking for help good judgment (sentence 3); Text 2 shows Odysseus fearing a trick before using Ino's veil (sentences 11-13), so accepting help means judging whom to trust.",
           stem: "How does Text 2 add to the advice about asking for help in Text 1?",
           choices: [
             { letter: "A", text: "It proves that help from others always makes a problem worse." },
@@ -608,7 +676,9 @@
       claims: [
         {
           id: "flashback",
-          sol: "9.RL.3.A",
+          sol: "9.RL.1.B",
+          sub: "9.RL.1.B.2",
+          why: "The outside narrator sets the court scene (sentences 1-4), then Odysseus tells earlier events himself, so past adventures come as a flashback inside the present scene, not from the crew.",
           stem: "Sentences 1–4 are told by an outside narrator, and sentences 5–21 are told by Odysseus. This structure mainly allows the passage to —",
           choices: [
             { letter: "A", text: "show the Phaeacians' history before Odysseus arrives" },
@@ -621,6 +691,8 @@
         {
           id: "leaves",
           sol: "9.RL.2.A",
+          sub: "9.RL.2.A.2",
+          why: "Spring leaves are countless, so as thick as leaves in spring stresses how many Cicones attacked (sentence 7), which is why six men from every ship died (sentence 8).",
           stem: "In sentence 7, the simile as thick as leaves in spring mainly emphasizes —",
           choices: [
             { letter: "A", text: "the time of year when the Greeks left Troy" },
@@ -632,7 +704,9 @@
         },
         {
           id: "lawless",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
+          why: "Sentence 11 explains the Cyclopes plant nothing and fear no god, and the giant devours guests (sentence 12): they live without rules or justice.",
           stem: "In sentence 11, the word lawless most nearly means —",
           choices: [
             { letter: "A", text: "living without rules or justice" },
@@ -645,6 +719,8 @@
         {
           id: "pride",
           sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "In sentence 14 he could not resist shouting his true name, and that boast leads the giant to pray to Poseidon against him. Calling himself Nobody (sentence 13) was a clever trick, not pride.",
           stem: "Which sentence best shows that Odysseus's own pride creates a new challenge for him?",
           choices: [
             { letter: "A", text: "Sentence 7, where he tells his men to run for the ships" },
@@ -657,6 +733,8 @@
         {
           id: "poseidon",
           sol: "9.RV.1.F",
+          sub: "9.RV.1.F.2",
+          why: "The giant asks Poseidon to make Odysseus come home late and alone (sentence 14); as god of the sea, Poseidon can make the sea voyage much harder.",
           stem: "In sentence 14, the giant prays to his father Poseidon. Because Poseidon is the god of the sea, readers can predict that —",
           choices: [
             { letter: "A", text: "Odysseus's sea voyage will become far more dangerous" },
@@ -668,7 +746,9 @@
         },
         {
           id: "remember",
-          sol: "9.RL.3.A",
+          sol: "9.RL.1.B",
+          sub: "9.RL.1.B.2",
+          why: "Odysseus tells listeners they will hear the warning again before his tale ends (sentence 17), hinting it will matter; sentence 18 shows the starving men did slaughter the cattle.",
           stem: "Odysseus says Remember that warning in sentence 17 mainly to —",
           choices: [
             { letter: "A", text: "prove that the prophet Tiresias was mistaken" },
@@ -681,6 +761,8 @@
         {
           id: "theme",
           sol: "9.RL.1.A",
+          sub: "9.RL.1.A.1",
+          why: "The men feast instead of fleeing (sentence 7), Odysseus's curiosity and boast cost him (sentences 12, 14), and the men eat the forbidden cattle (sentence 18); each lapse brings suffering.",
           stem: "Which theme is developed across Odysseus's whole tale?",
           choices: [
             { letter: "A", text: "Curiosity about new lands is always rewarded." },
@@ -692,7 +774,9 @@
         },
         {
           id: "weeps",
-          sol: "9.RL.1.B",
+          sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "He weeps at the song of Troy (sentence 2), and in sentence 21 he says every man who sailed home with him is gone: the song reminds him of lost companions.",
           stem: "Based on sentences 2 and 21 together, readers can infer that Odysseus weeps at the song of Troy because —",
           choices: [
             { letter: "A", text: "he is ashamed that the Greeks lost the war" },
@@ -751,6 +835,8 @@
         {
           id: "jiwoo-change",
           sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "At first she texts old friends late and is too tired to practice (sentences 4-5); she ends having earned a seat and no longer looking at old photos (sentences 16-17).",
           stem: "Which choice best describes how Ji-woo changes over the course of Text 1?",
           choices: [
             { letter: "A", text: "She moves from homesick and discouraged to determined and more settled." },
@@ -762,7 +848,9 @@
         },
         {
           id: "door",
-          sol: "9.RL.3.A",
+          sol: "9.RL.1.A",
+          sub: "9.RL.1.A.2",
+          why: "She made the plan while she still felt strong (sentence 6); in week five, when she weakens, Min-jun keeps the door shut as she asked (sentences 11-12), and she goes back to practicing (sentence 13).",
           stem: "The author includes the scene in sentences 11–12 mainly to —",
           choices: [
             { letter: "A", text: "show that Min-jun does not care about his sister's feelings" },
@@ -775,6 +863,8 @@
         {
           id: "honey",
           sol: "9.RL.2.A",
+          sub: "9.RL.2.A.2",
+          why: "Comparing the voices to dripping honey (sentence 25) makes the song seem sweet and irresistible, which explains why Odysseus strains to be freed (sentence 27). It is not about real food.",
           stem: "In sentence 25, the simile sweet as honey dripping from the comb mainly helps the reader understand —",
           choices: [
             { letter: "A", text: "that the Sirens' island is covered with beehives" },
@@ -786,7 +876,9 @@
         },
         {
           id: "fast",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
+          why: "In sentence 23 the men bound him hand and foot to the mast with the ropes made fast, so fast means firmly fixed in place, not speedy.",
           stem: "In sentence 23, the word fast in the phrase the ropes made fast most nearly means —",
           choices: [
             { letter: "A", text: "moving with great speed" },
@@ -798,7 +890,9 @@
         },
         {
           id: "siren-speech",
-          sol: "9.RL.1.D",
+          sol: "9.RL.2.B",
+          sub: "9.RL.2.B.2",
+          why: "The Sirens flatter him as famous Odysseus, pride of the Greeks, and promise new wisdom about Troy (sentence 26): an appeal to fame and knowledge, not a threat or a promise of home.",
           stem: "The Sirens' words in sentence 26 are designed to tempt Odysseus by —",
           choices: [
             { letter: "A", text: "appealing to his love of fame and his hunger for knowledge" },
@@ -810,7 +904,9 @@
         },
         {
           id: "in-advance",
-          sol: "9.DSR.D",
+          sol: "9.DSR.C",
+          sub: "9.DSR.C.3",
+          why: "In sentence 8 Ji-woo tells Min-jun not to return the phone even if she begs; in sentence 24 Odysseus tells his men to tie him tighter if he begs. Sentence 28 carries out an order and makes no arrangement.",
           stem: "Select TWO sentences, one from each text, in which a character arranges in advance for others to refuse a later request.",
           choices: [
             { letter: "A", text: "Sentence 9: She asked the section leader, a senior named Tavia, to show her the breathing exercises..." },
@@ -822,7 +918,9 @@
         },
         {
           id: "alike",
-          sol: "9.DSR.E",
+          sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
+          why: "Ji-woo has Min-jun refuse her later plea (sentence 8), and Odysseus has his men refuse to free him (sentence 24): both plan for a weak moment and rely on others.",
           stem: "How are Ji-woo and Odysseus most alike in the way they respond to their challenges?",
           choices: [
             { letter: "A", text: "Both refuse to tell anyone else about the danger they face." },
@@ -834,7 +932,9 @@
         },
         {
           id: "differ",
-          sol: "9.DSR.E",
+          sol: "9.DSR.D",
+          sub: "9.DSR.D.2",
+          why: "Odysseus resists a song that makes sailors forget home (sentence 18), while Ji-woo stops looking at old photos and settles into her new school (sentence 17). She had help, so she was not alone.",
           stem: "Which statement best explains a key difference between the two characters' journeys?",
           choices: [
             { letter: "A", text: "Ji-woo faces her challenge alone, while Odysseus has help." },

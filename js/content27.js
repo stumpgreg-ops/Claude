@@ -29,6 +29,8 @@
         {
           id: "setting",
           sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
+          why: "The giants hold no assemblies, make no laws, and care nothing for neighbors (sentences 2–4), so a visitor has no rules or community to protect him. Nothing mentions water, distance, or farming; they never plant (sentence 3).",
           stem: "Sentences 2–4 describe the land of the Cyclopes. How might this setting create a challenge for Odysseus?",
           choices: [
             { letter: "A", text: "Visitors there cannot count on any rules to protect them." },
@@ -40,7 +42,9 @@
         },
         {
           id: "assemblies",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
+          why: "Assemblies is paired with made no laws (sentence 2), so it means gatherings where a people decide things together, the way laws get made.",
           stem: "In sentence 2, the word assemblies most nearly means —",
           choices: [
             { letter: "A", text: "large stone buildings where farm tools are kept" },
@@ -53,6 +57,8 @@
         {
           id: "curious",
           sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "Sentence 6 says he was curious to learn what kind of people lived there and sailed off into unknown land to find out, which is a risk taken for knowledge. Nothing shows fear, fatigue, or anger.",
           stem: "Sentence 6 suggests that, on reaching the land of the Cyclopes, Odysseus is —",
           choices: [
             { letter: "A", text: "afraid of the giants and eager to hide from them" },
@@ -64,7 +70,9 @@
         },
         {
           id: "goat-island",
-          sol: "9.RL.3.A",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
+          why: "Sentence 5 says he left most of his ships at the goat island, and sentence 6 says he sailed on with only his own ship, so just part of the fleet faces the unknown.",
           stem: "The author includes sentence 5, about the island of wild goats, mainly to show that —",
           choices: [
             { letter: "A", text: "the Cyclopes raise goats on the island for their meals" },
@@ -97,6 +105,8 @@
         {
           id: "refuse",
           sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "Sentence 5 says he refused, and sentence 6 gives his reasons: he wanted to see the giant and hoped for guest-gifts.",
           stem: "How does Odysseus respond when his men beg him to leave the cave?",
           choices: [
             { letter: "A", text: "He agrees and orders them to load the lambs on the ship." },
@@ -108,7 +118,9 @@
         },
         {
           id: "men",
-          sol: "9.RL.1.B",
+          sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "The men beg to grab food and sail away at once (sentence 4), showing they sense danger and want to be gone before the owner returns. Begging to leave rules out resting or expecting a feast.",
           stem: "Based on sentence 4, readers can infer that Odysseus's men —",
           choices: [
             { letter: "A", text: "sense danger and want to leave before the owner returns" },
@@ -120,7 +132,9 @@
         },
         {
           id: "pens",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
+          why: "Pens are crowded with lambs and young goats (sentence 3), so here the word means enclosures for animals, not writing tools.",
           stem: "In sentence 3, the word pens most nearly means —",
           choices: [
             { letter: "A", text: "tools used for writing with ink" },
@@ -133,6 +147,8 @@
         {
           id: "theme",
           sol: "9.RL.1.A",
+          sub: "9.RL.1.A.1",
+          why: "His men beg him to leave (sentence 4), but he refuses because he wants to see the giant (sentences 5–6), so curiosity leads him to ignore good advice.",
           stem: "Which statement best expresses a theme that begins to develop in this scene in the giant's cave?",
           choices: [
             { letter: "A", text: "Hard work always brings people a fair reward." },
@@ -144,7 +160,9 @@
         },
         {
           id: "xenia",
-          sol: "9.RL.1.B",
+          sol: "9.RL.3.A",
+          sub: "9.RL.3.A.1",
+          why: "Hoping the giant would give him guest-gifts (sentence 6) shows he expects the host's duty of xenia. The wine from Maron is a gift he already has, not one he expects from this host.",
           stem: "The Greeks called the custom of welcoming travelers xenia, or guest-friendship. Which detail shows that Odysseus expects xenia from the owner of the cave?",
           choices: [
             { letter: "A", text: "he hoped the giant would give him guest-gifts" },
@@ -183,6 +201,8 @@
         {
           id: "trait",
           sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "He plies the giant with wine and gives the false name Nobody, backing it up with a story about his family (sentences 3–9). That is cunning, not truthful or reckless.",
           stem: "Which word best describes Odysseus as he deals with the giant in sentences 3–9?",
           choices: [
             { letter: "A", text: "reckless" },
@@ -194,7 +214,9 @@
         },
         {
           id: "why-wine",
-          sol: "9.RL.1.B",
+          sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "He keeps the bowls coming until the giant has drained three and topples over, heavy with wine, into sleep (sentences 6 and 12), so his real aim is to make him drunk. The pity he asks for (sentence 5) is cover.",
           stem: "Based on the passage, Odysseus most likely offers the giant wine because he —",
           choices: [
             { letter: "A", text: "wants to make the giant drunk and sleepy" },
@@ -206,7 +228,9 @@
         },
         {
           id: "speech",
-          sol: "9.RL.1.D",
+          sol: "9.RL.2.C",
+          sub: "9.RL.2.C.2",
+          why: "The giant promised a guest-gift (sentence 7), and the gift turns out to be eating Nobody last (sentence 11). He means it as a cruel joke that mocks the guest-gift custom, not as a kindness.",
           stem: "What does the giant's speech in sentence 11 reveal about him?",
           choices: [
             { letter: "A", text: "He respects Odysseus and plans to set him free." },
@@ -218,7 +242,9 @@
         },
         {
           id: "drained",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
+          why: "He drank it down and demanded more (sentence 6), so drained three bowls means he emptied them by drinking. Nothing is spilled or poured out.",
           stem: "In sentence 6, the word drained most nearly means —",
           choices: [
             { letter: "A", text: "spilled onto the floor" },
@@ -230,7 +256,9 @@
         },
         {
           id: "sentence9",
-          sol: "9.RL.3.A",
+          sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "Adding that his parents and friends all call him Nobody (sentence 9) makes the fake name sound like a real one, so the giant believes it. The name is a trick, not a real childhood name.",
           stem: "The author includes sentence 9, in which Odysseus says his whole family calls him Nobody, mainly to —",
           choices: [
             { letter: "A", text: "reveal that Odysseus misses his family back home" },
@@ -243,6 +271,8 @@
         {
           id: "theme",
           sol: "9.RL.1.A",
+          sub: "9.RL.1.A.1",
+          why: "Odysseus cannot overpower the giant, but the wine and the false name put him to sleep and set up the trick (sentences 3–12), so a quick mind becomes a weapon against strength. His lie rules out the honesty choice.",
           stem: "Which theme is developed through Odysseus's actions with the wine and the false name?",
           choices: [
             { letter: "A", text: "Strong people should always be feared and obeyed by others." },
@@ -281,7 +311,9 @@
       claims: [
         {
           id: "anguished",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
+          why: "The giant has just been blinded and his roar brings the neighbors running (sentences 1–2), so anguished means filled with severe pain.",
           stem: "In sentence 1, the word anguished most nearly means —",
           choices: [
             { letter: "A", text: "filled with severe pain" },
@@ -293,7 +325,9 @@
         },
         {
           id: "invoke",
-          sol: "9.RV.1.B",
+          sol: "9.RV.1.C",
+          sub: "9.RV.1.C.1",
+          why: "The root voc means call, and the neighbors are telling Polyphemus to turn to his father Poseidon and ask him for help (sentence 10), so invoke means to call on someone for help.",
           stem: "The word invoke (sentence 10) contains the Latin root voc, meaning \"call,\" as in vocal. Based on the root and the context, invoke means —",
           choices: [
             { letter: "A", text: "to blame someone for a loss" },
@@ -305,7 +339,9 @@
         },
         {
           id: "dispersed",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
+          why: "They dispersed, each one returning to his own cave (sentence 11), so the word means they went off in different directions. They had gathered as one group before this (sentence 2).",
           stem: "In sentence 11, the word dispersed most nearly means —",
           choices: [
             { letter: "A", text: "argued loudly with one another" },
@@ -317,7 +353,9 @@
         },
         {
           id: "guile",
-          sol: "9.RV.1.E",
+          sol: "9.RV.1.D",
+          sub: "9.RV.1.D.2",
+          why: "Guile refers to the ruse of the false name that fooled everyone (sentences 12–13), so it suggests sly cleverness used to deceive. Intelligence alone does not suggest trickery.",
           stem: "The narrator could have used the word intelligence instead of guile in sentence 13. The word guile suggests —",
           choices: [
             { letter: "A", text: "slow, careful study of a problem" },
@@ -330,6 +368,8 @@
         {
           id: "poseidon",
           sol: "9.RV.1.F",
+          sub: "9.RV.1.F.2",
+          why: "Poseidon rules the sea Odysseus must cross to get home, so the advice to call on him (sentence 10) hints that the sea god may turn against Odysseus and make his voyage harder.",
           stem: "The neighbors tell Polyphemus to pray to his father, Poseidon, the god of the sea (sentence 10). For Odysseus, a sailor, this reference most likely hints that —",
           choices: [
             { letter: "A", text: "his voyage home across the sea will grow more dangerous" },
@@ -342,6 +382,8 @@
         {
           id: "proud",
           sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "He laughs to himself because his ruse fooled them all, and he credits guile with saving them (sentences 12–13), which shows pride in his own cleverness. He feels no guilt or worry.",
           stem: "Sentences 12 and 13 reveal that Odysseus feels —",
           choices: [
             { letter: "A", text: "guilty for tricking the giant's neighbors" },
@@ -386,6 +428,8 @@
         {
           id: "simile",
           sol: "9.RL.2.A",
+          sub: "9.RL.2.A.2",
+          why: "The simile compares the eye to a red-hot axe that hisses and shrieks in cold water (lines 9–11), so readers hear the violence of the blow through a familiar sound. It is not a lesson on blacksmithing.",
           stem: "Lines 9–11 contain an epic simile, a long, detailed comparison. This simile mainly helps readers —",
           choices: [
             { letter: "A", text: "understand how blacksmiths in ancient Greece made tools" },
@@ -398,6 +442,8 @@
         {
           id: "leader",
           sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "Line 4 says he spoke bold words to his men so that none would lose heart and shrink away, which is encouragement. In lines 6–7 he works the stake himself.",
           stem: "Line 4 shows that Odysseus responds to this dangerous moment by —",
           choices: [
             { letter: "A", text: "encouraging his men so that they do not lose courage" },
@@ -409,7 +455,9 @@
         },
         {
           id: "temper",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
+          why: "The smith plunges a glowing axe into cold water to make the metal hard (lines 9–10), so temper means to strengthen by heating and cooling, not to show anger.",
           stem: "In line 10, the word temper most nearly means —",
           choices: [
             { letter: "A", text: "to show sudden anger toward" },
@@ -421,7 +469,9 @@
         },
         {
           id: "mood",
-          sol: "9.RL.2.C",
+          sol: "9.RL.2.B",
+          sub: "9.RL.2.B.1",
+          why: "A terrible cry, walls ringing, men scattering in terror, and the giant raging and hurling the stake (lines 11–14) create a violent, terrifying mood.",
           stem: "Which words best describe the mood of lines 11–14, just after the giant is blinded?",
           choices: [
             { letter: "A", text: "calm, gentle, and peaceful" },
@@ -434,6 +484,8 @@
         {
           id: "god",
           sol: "9.RL.3.A",
+          sub: "9.RL.3.A.1",
+          why: "Saying some god breathed courage into them (line 5) credits the men's bravery to divine help, as Greeks believed the gods shaped human action. Line 4 shows they had needed encouragement, so they were not fearless from the start.",
           stem: "The poet includes the words some god breathed great courage into us (line 5) most likely to —",
           choices: [
             { letter: "A", text: "suggest that the men's bravery came with help from the gods" },
@@ -445,7 +497,9 @@
         },
         {
           id: "hearing",
-          sol: "9.RL.2.B",
+          sol: "9.RL.2.A",
+          sub: "9.RL.2.A.1",
+          why: "The rock walls rang with it (line 12) describes a sound echoing through the cave. Glowing embers and lay sprawled are images you see, not hear.",
           stem: "Which phrase from the poem about the olive stake appeals most strongly to the sense of hearing?",
           choices: [
             { letter: "A", text: "the bed of glowing embers" },
@@ -487,6 +541,8 @@
         {
           id: "plan",
           sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "He weighed every plan and chose the best (sentence 3), then tied the rams in threes so his men could hang beneath them (sentences 4–6), a careful escape rather than a fight or a plea.",
           stem: "How does Odysseus respond to the challenge of the giant guarding the doorway?",
           choices: [
             { letter: "A", text: "He waits until the giant falls asleep again and sneaks past him." },
@@ -498,7 +554,9 @@
         },
         {
           id: "speech",
-          sol: "9.RL.1.D",
+          sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "He strokes the ram, speaks to it sadly, and calls it dear ram (sentences 10–11), which shows tenderness. He still wants to find Nobody (sentence 14) and has not guessed where he is.",
           stem: "What does Polyphemus's speech to the ram (sentences 11–14) reveal about him?",
           choices: [
             { letter: "A", text: "He can show tenderness toward the animals he cares for." },
@@ -510,7 +568,9 @@
         },
         {
           id: "suspense",
-          sol: "9.RL.3.A",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
+          why: "The giant strokes the ram and talks while Odysseus hangs beneath it (sentences 9–14), so he could be discovered at any moment. That builds suspense until the ram is let go (sentence 15).",
           stem: "The author places the giant's speech while Odysseus is still clinging beneath the ram mainly to —",
           choices: [
             { letter: "A", text: "explain exactly how the rams were tied together" },
@@ -522,7 +582,9 @@
         },
         {
           id: "shielded",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
+          why: "The middle ram carried a man and the two rams on either side shielded him (sentence 5), so they hid and protected him from the giant's hands.",
           stem: "In sentence 5, the word shielded most nearly means —",
           choices: [
             { letter: "A", text: "pushed forward roughly" },
@@ -534,7 +596,9 @@
         },
         {
           id: "backs",
-          sol: "9.RL.1.B",
+          sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "He feels the rams' backs but never beneath them (sentence 8), so he expects the men to ride on top. Sentence 1 says he wanted to catch men slipping out, so he is not just counting sheep.",
           stem: "Based on sentence 8, readers can infer that the blind giant —",
           choices: [
             { letter: "A", text: "expects the men to try riding out on top of the sheep" },
@@ -546,7 +610,9 @@
         },
         {
           id: "epithet",
-          sol: "9.RL.2.B",
+          sol: "9.RL.1.B",
+          sub: "9.RL.1.B.1",
+          why: "Dawn with her rose-red fingers (sentence 7) is a set epic epithet that marks the start of a new day in a grand, poetic way. It does not warn of danger or bring in a rescuer.",
           stem: "Dawn with her rose-red fingers (sentence 7) is an epithet, a descriptive phrase Homer repeats for a person or thing. Its main effect here is to —",
           choices: [
             { letter: "A", text: "explain why the giant cannot see the men in the dark" },
@@ -597,6 +663,8 @@
         {
           id: "theme",
           sol: "9.RL.1.A",
+          sub: "9.RL.1.A.1",
+          why: "Odysseus taunts the giant against his crew's pleas (sentences 11–16), and the boulders nearly sink them while his name gives Poseidon a curse (sentences 22–24). Pride puts his men in danger.",
           stem: "Which statement best expresses a theme developed in this account of Odysseus's escape from the Cyclops?",
           choices: [
             { letter: "A", text: "Pride can lead a hero to put the people he leads in danger." },
@@ -608,7 +676,9 @@
         },
         {
           id: "crew",
-          sol: "9.RL.1.D",
+          sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "The men say one more word will make the giant crush them and the ship (sentences 13–14), so they fear another taunt could get them killed. They plead with him, not admire him (sentence 11).",
           stem: "The crew's words in sentences 12–14 reveal that the men —",
           choices: [
             { letter: "A", text: "want Odysseus to go back and fight the giant on land" },
@@ -621,6 +691,8 @@
         {
           id: "change",
           sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "In sentence 3 he firmly orders the crew to load and row. By sentence 15 his proud heart will not listen to them, so pride now rules him.",
           stem: "Which choice best describes how Odysseus's behavior shifts between sentence 3 and sentence 15?",
           choices: [
             { letter: "A", text: "He goes from calmly commanding his crew to letting pride rule him." },
@@ -632,7 +704,9 @@
         },
         {
           id: "prayer",
-          sol: "9.RL.3.A",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
+          why: "The giant asks that Odysseus come home late, alone, on a stranger's ship, and find trouble at home (sentences 19–20), and the god hears him (sentence 21). This foreshadows the hardships ahead.",
           stem: "Polyphemus's prayer in sentences 19–20 mainly serves to —",
           choices: [
             { letter: "A", text: "explain how the Cyclopes first came to live on their island" },
@@ -644,7 +718,9 @@
         },
         {
           id: "provoke",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
+          why: "The crew fears another word will bring a boulder down on them (sentences 13–14), so provoke means to deliberately stir the giant to anger.",
           stem: "In sentence 12, the word provoke most nearly means —",
           choices: [
             { letter: "A", text: "praise in front of other people" },
@@ -657,6 +733,8 @@
         {
           id: "zeus",
           sol: "9.RV.1.F",
+          sub: "9.RV.1.F.1",
+          why: "Odysseus links the punishment to the giant eating a guest's men (sentence 7), and in Greek myth Zeus guards guests. Ruling the sea and shaking the earth belong to Poseidon.",
           stem: "In sentence 7, Odysseus claims that Zeus has punished the giant. This allusion fits the situation because, in Greek myth, Zeus —",
           choices: [
             { letter: "A", text: "rules the sea and causes the earth to shake" },
@@ -668,7 +746,9 @@
         },
         {
           id: "kleos",
-          sol: "9.RL.1.B",
+          sol: "9.RL.3.A",
+          sub: "9.RL.3.A.1",
+          why: "He calls out again although his men plead with him (sentence 11), putting his name ahead of their safety, and he boasts his full name and titles (sentence 16) to win glory, or kleos.",
           stem: "Select TWO quotations that best show that Odysseus cares more about kleos, or glory and fame, than about his crew's safety.",
           choices: [
             { letter: "A", text: "I frowned at them to stop their tears and ordered them to load the flock" },
@@ -726,7 +806,9 @@
       claims: [
         {
           id: "narrator",
-          sol: "9.RL.3.A",
+          sol: "9.RL.1.B",
+          sub: "9.RL.1.B.1",
+          why: "Odysseus addresses the Phaeacians and tells how I came to the cave (sentence 1), so he narrates past events to a later audience, a story within a story. The Phaeacians were not in the cave.",
           stem: "In sentence 1, Odysseus speaks to the Phaeacians. This way of opening the story tells readers that —",
           choices: [
             { letter: "A", text: "Odysseus is recalling these events later, as a flashback" },
@@ -739,6 +821,8 @@
         {
           id: "regret",
           sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "Looking back, he admits it would have been better to listen (sentence 8) after the giant devours his men (sentences 26 and 31). He sees that his wish to meet the giant (sentence 9) led them into disaster.",
           stem: "In sentence 8, Odysseus says it would have been far better if he had listened to his men. This comment suggests that Odysseus —",
           choices: [
             { letter: "A", text: "still believes his men were cowards for wanting to leave" },
@@ -751,6 +835,8 @@
         {
           id: "stone",
           sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
+          why: "He thinks of stabbing the sleeping giant, but if the giant died they could never move the stone and would die too (sentences 28–29). The doorway stone shapes his choice.",
           stem: "How does the stone in the doorway (sentence 12) shape what happens later in the passage?",
           choices: [
             { letter: "A", text: "It keeps the other Cyclopes from hearing the men's cries." },
@@ -762,7 +848,9 @@
         },
         {
           id: "scorn",
-          sol: "9.RL.1.D",
+          sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "He calls Odysseus a fool for telling him to fear the gods and says the Cyclopes care nothing for Zeus (sentences 20–21), right after Odysseus asks for the welcome owed to guests (sentences 18–19).",
           stem: "What do Polyphemus's words in sentences 20–22 reveal about him?",
           choices: [
             { letter: "A", text: "He is frightened that Zeus will punish him for his rudeness." },
@@ -774,7 +862,9 @@
         },
         {
           id: "suppliants",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
+          why: "They come to the giant's knees hoping for the welcome owed to strangers (sentence 18), so suppliants are people who humbly beg for help or mercy, not soldiers or merchants.",
           stem: "In sentence 18, the word suppliants most nearly means —",
           choices: [
             { letter: "A", text: "soldiers who demand payment from a ruler" },
@@ -786,7 +876,9 @@
         },
         {
           id: "lie",
-          sol: "9.RL.1.B",
+          sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "He saw through the giant's question (sentence 23) and claims his ship was smashed (sentence 24), since the rest of his crew is guarding it (sentence 3). He wants to keep them hidden from the giant.",
           stem: "Based on sentences 22–24, readers can infer that Odysseus lies about his ship because he —",
           choices: [
             { letter: "A", text: "suspects the giant would use it to harm the rest of his crew" },
@@ -799,6 +891,8 @@
         {
           id: "quiver",
           sol: "9.RL.2.A",
+          sub: "9.RL.2.A.2",
+          why: "Twenty-two wagons could not budge the stone (sentence 12), yet the giant sets it in place like fitting a lid on a quiver (sentence 31). The simile shows how easy it is for him.",
           stem: "Sentence 31 compares the giant setting the stone in place to a man fitting a lid on a quiver. This simile emphasizes —",
           choices: [
             { letter: "A", text: "how carefully the giant guards the arrows he keeps in the cave" },
@@ -811,6 +905,8 @@
         {
           id: "judgment",
           sol: "9.RL.1.A",
+          sub: "9.RL.1.A.2",
+          why: "First his curiosity wins over his men's advice to leave (sentences 7–9). Later, when he wants to stab the sleeping giant, a second thought holds him back (sentences 28–29), showing judgment being tested.",
           stem: "Which statement best describes how the passage develops the idea that challenges test a person's judgment?",
           choices: [
             { letter: "A", text: "Odysseus learns that the gods always rescue those who pray to them." },

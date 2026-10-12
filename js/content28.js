@@ -26,7 +26,9 @@
       claims: [
         {
           id: "why-open",
-          sol: "9.RL.1.B",
+          sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "Sentence 5 gives the crew's motive: they whispered that the bag held gold their captain would not share. Nothing says they wanted more wind or were told to open it.",
           stem: "Based on sentence 5, why did the crew open the bag?",
           choices: [
             { letter: "A", text: "They thought Odysseus was hiding treasure from them." },
@@ -39,6 +41,8 @@
         {
           id: "crew",
           sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "The men assume their captain is hiding gold (sentence 5) and untie the bag to get it (sentence 6), which shows suspicion and greed, not loyalty or patience.",
           stem: "Which words best describe the crew's behavior in sentences 5 and 6?",
           choices: [
             { letter: "A", text: "loyal and obedient" },
@@ -50,7 +54,9 @@
         },
         {
           id: "worn",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
+          why: "Odysseus is worn out from steering and then falls asleep (sentence 4), so the phrase means exhausted. Nothing suggests he was hurt, bored, or discouraged.",
           stem: "In sentence 4, the phrase worn out most nearly means —",
           choices: [
             { letter: "A", text: "discouraged" },
@@ -62,7 +68,9 @@
         },
         {
           id: "s3",
-          sol: "9.RL.3.A",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
+          why: "Sentence 3 says they could already see the fires of Ithaca, so the disaster in sentence 6 strikes just as home is within reach.",
           stem: "The author includes sentence 3 mainly to show that —",
           choices: [
             { letter: "A", text: "the voyage had been slow and dangerous" },
@@ -75,6 +83,8 @@
         {
           id: "lesson",
           sol: "9.RL.1.A",
+          sub: "9.RL.1.A.1",
+          why: "The crew's distrust and desire for gold (sentences 5-6) blow them away from Ithaca after they had come close enough to see it (sentence 3).",
           stem: "Which lesson about facing challenges does the story of the bag of winds best illustrate?",
           choices: [
             { letter: "A", text: "Greed and mistrust can ruin what was nearly won." },
@@ -106,6 +116,8 @@
         {
           id: "smoke",
           sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
+          why: "Smoke rising through the woods (sentence 3) signals a fire someone tends, so someone must live there. Nothing hints at a storm, a forest fire, or pursuers.",
           stem: "The smoke in sentence 3 most likely tells Odysseus that —",
           choices: [
             { letter: "A", text: "a storm is moving toward the island" },
@@ -118,6 +130,8 @@
         {
           id: "stag",
           sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "Odysseus kills a stag (sentence 4) and his hungry men feast and briefly forget their sorrow (sentence 5): he provides for his grieving crew.",
           stem: "Odysseus's actions in sentences 4 and 5 show that he is —",
           choices: [
             { letter: "A", text: "a careless hunter who wanders off alone" },
@@ -129,7 +143,9 @@
         },
         {
           id: "grieving",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
+          why: "The men are grieving for lost friends after the fleet is destroyed (sentence 1), and sentence 5 calls it sorrow, so grieving means mourning.",
           stem: "In sentence 1, the word grieving most nearly means —",
           choices: [
             { letter: "A", text: "mourning" },
@@ -142,6 +158,8 @@
         {
           id: "helios",
           sol: "9.RV.1.F",
+          sub: "9.RV.1.F.1",
+          why: "Being the daughter of Helios, the sun god (sentence 2), makes Circe a goddess with divine power beyond any mortal's. It says nothing about sunny weather or helping the men.",
           stem: "Sentence 2 says that Circe is the daughter of Helios, the sun god. This detail mainly suggests that Circe —",
           choices: [
             { letter: "A", text: "lives on the sunniest island in the sea" },
@@ -153,7 +171,9 @@
         },
         {
           id: "mood",
-          sol: "9.RL.2.C",
+          sol: "9.RL.2.B",
+          sub: "9.RL.2.B.1",
+          why: "Sentence 1 shows the men grieving their lost friends; in sentence 5 they feast and forget their sorrow only for a little while, so the comfort is brief.",
           stem: "How does the mood change from sentence 1 to sentence 5?",
           choices: [
             { letter: "A", text: "It moves from peaceful calm to sudden fear." },
@@ -188,6 +208,8 @@
         {
           id: "simile",
           sol: "9.RL.2.A",
+          sub: "9.RL.2.A.1",
+          why: "Sentence 6 says that as dogs crowd around their master home from a feast, so the wild beasts fawned around the men: it compares the beasts to pet dogs.",
           stem: "Sentence 6 contains an epic simile, a long comparison that uses like or as. What two things does it compare?",
           choices: [
             { letter: "A", text: "Circe's singing and the barking of a pack of hunting dogs" },
@@ -200,6 +222,8 @@
         {
           id: "lots",
           sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "Odysseus has the lots shaken in a helmet (sentence 2), letting chance pick which company goes rather than choosing himself, which is a fair way to assign the risk.",
           stem: "Odysseus's decision to draw lots in sentence 2 suggests that he —",
           choices: [
             { letter: "A", text: "lets chance decide fairly who must take the risk" },
@@ -211,7 +235,9 @@
         },
         {
           id: "weep",
-          sol: "9.RL.1.B",
+          sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "Both groups weep as the company leaves (sentence 3), showing they fear the parting may be final. Nothing mentions unfair lots, Ithaca, or a climb.",
           stem: "Why do the men weep in sentence 3?",
           choices: [
             { letter: "A", text: "They are angry that the lots were not fair." },
@@ -223,7 +249,9 @@
         },
         {
           id: "fawned",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
+          why: "The simile in sentence 6 likens the beasts to dogs crowding their master and wagging their tails, so fawned means showed eager affection. They did not attack (sentence 5).",
           stem: "In sentence 6, the word fawned most nearly means —",
           choices: [
             { letter: "A", text: "attacked them with fury" },
@@ -236,6 +264,8 @@
         {
           id: "setting",
           sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
+          why: "Wolves and lions that do not attack (sentence 5) because Circe tamed them with evil drugs (sentence 6) signal a strange, dangerous power at the house.",
           stem: "How does the setting described in sentences 4–6 create a sense of danger?",
           choices: [
             { letter: "A", text: "The house is so deep in the woods that the men become lost." },
@@ -247,7 +277,9 @@
         },
         {
           id: "ending",
-          sol: "9.RL.3.A",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
+          why: "After the terrifying beasts (sentence 7), sentence 8 offers a woman singing at her loom, a calm, homely image that makes the dangerous house seem inviting.",
           stem: "The author most likely ends the passage with sentence 8 to —",
           choices: [
             { letter: "A", text: "make Circe seem calm and inviting despite the danger" },
@@ -280,7 +312,9 @@
       claims: [
         {
           id: "lavish",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
+          why: "The meal is served on fine chairs and includes cheese, barley meal, golden honey, and wine (sentence 2), a rich and plentiful spread, not a plain one.",
           stem: "In sentence 2, the word lavish most nearly means —",
           choices: [
             { letter: "A", text: "plain and simple" },
@@ -292,7 +326,9 @@
         },
         {
           id: "oblivion",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
+          why: "Sentence 3 explains that the drug sinks their minds into oblivion so that they would forget their homeland entirely, so oblivion means total forgetting, not sleep.",
           stem: "Based on the context of sentence 3, oblivion most nearly means —",
           choices: [
             { letter: "A", text: "a state of deep sleep" },
@@ -304,7 +340,9 @@
         },
         {
           id: "malevolent",
-          sol: "9.RV.1.B",
+          sol: "9.RV.1.C",
+          sub: "9.RV.1.C.1",
+          why: "Mal- (bad) plus vol (wish) gives wishing harm, which fits a goddess who drugs her guests and turns them into pigs (sentences 3-5).",
           stem: "The prefix mal- means \"bad,\" and the Latin root vol means \"wish.\" Based on these word parts, a malevolent goddess (sentence 4) is one who —",
           choices: [
             { letter: "A", text: "wishes harm to others" },
@@ -316,7 +354,9 @@
         },
         {
           id: "forlorn",
-          sol: "9.RV.1.E",
+          sol: "9.RV.1.D",
+          sub: "9.RV.1.D.2",
+          why: "Forlorn carries a stronger sense than sad: abandoned and hopeless, which fits men changed into pigs and driven into sties (sentence 7).",
           stem: "The author describes the men as forlorn (sentence 7) rather than simply sad. Forlorn suggests that the men felt —",
           choices: [
             { letter: "A", text: "slightly bored with their new home" },
@@ -328,7 +368,9 @@
         },
         {
           id: "minds",
-          sol: "9.RL.1.B",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
+          why: "Sentence 6 says their minds stayed exactly as before and they knew what had happened, so they must live as pigs fully aware of the change.",
           stem: "Sentences 5 and 6 suggest that the men's punishment is especially cruel because —",
           choices: [
             { letter: "A", text: "the pigs are given nothing at all to eat" },
@@ -341,6 +383,8 @@
         {
           id: "eurylochus",
           sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "Eurylochus alone stays outside because he suspected a trap (sentence 1), which shows he is cautious and slow to trust.",
           stem: "Eurylochus's choice in sentence 1 shows that he is —",
           choices: [
             { letter: "A", text: "greedy for the goddess's food" },
@@ -385,6 +429,8 @@
         {
           id: "shepherd",
           sol: "9.RL.2.A",
+          sub: "9.RL.2.A.2",
+          why: "Like a shepherd who lost his flock to wolves and stumbles home with nothing (lines 4-5), Eurylochus stands empty-handed and shaking (line 6): shocked and helpless after a loss.",
           stem: "In lines 4–6, the epic simile compares Eurylochus to a shepherd in order to emphasize —",
           choices: [
             { letter: "A", text: "his skill at leading men through wild country" },
@@ -396,7 +442,9 @@
         },
         {
           id: "speech",
-          sol: "9.RL.1.D",
+          sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "He begs not to be led back and urges them to run with all the men still left to us (lines 13-14), which shows fear and a wish to save the survivors.",
           stem: "Eurylochus's speech in lines 8–14 reveals that he —",
           choices: [
             { letter: "A", text: "is fearful and wants to protect the men who remain" },
@@ -408,7 +456,9 @@
         },
         {
           id: "unknown",
-          sol: "9.RL.1.B",
+          sol: "9.RL.2.C",
+          sub: "9.RL.2.C.1",
+          why: "Eurylochus stayed back, and Not one came out while he watched (lines 11-12), so his account is limited: he never saw what happened inside the house.",
           stem: "Based on lines 11–12, readers can infer that Eurylochus —",
           choices: [
             { letter: "A", text: "saw Circe turn his companions into pigs" },
@@ -420,7 +470,9 @@
         },
         {
           id: "fools",
-          sol: "9.RV.1.E",
+          sol: "9.RV.1.D",
+          sub: "9.RV.1.D.2",
+          why: "Calling them trusting fools (line 11) is disapproving: he contrasts their trust with his own suspicion that it was a trick (line 12), so the connotation is critical.",
           stem: "In line 11, Eurylochus calls the men trusting fools. The connotation of this phrase is —",
           choices: [
             { letter: "A", text: "admiring, because trust is a sign of courage" },
@@ -433,6 +485,8 @@
         {
           id: "respond",
           sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "Odysseus arms himself and says he will go because he cannot leave them (lines 15-16), taking the risk himself while letting Eurylochus stay by the ship.",
           stem: "How does Odysseus respond to the challenge in lines 15–16?",
           choices: [
             { letter: "A", text: "He orders Eurylochus to lead him back to the house." },
@@ -445,6 +499,8 @@
         {
           id: "eq",
           sol: "9.RL.1.A",
+          sub: "9.RL.1.A.2",
+          why: "The same crisis makes Eurylochus plead to flee (lines 13-14) while Odysseus goes back for his men (lines 15-16), showing that challenges reveal fear in one and duty in the other.",
           stem: "How do lines 13–16 connect to the unit question, \"How do the challenges of life affect a person?\"",
           choices: [
             { letter: "A", text: "They show that a crisis can reveal who acts from fear and who acts from duty." },
@@ -483,6 +539,8 @@
         {
           id: "hermes",
           sol: "9.RV.1.F",
+          sub: "9.RV.1.F.2",
+          why: "A messenger of the gods meeting Odysseus signals divine help, and Hermes does promise to protect him and gives him the herb (sentences 5-6).",
           stem: "In Greek myth, Hermes is the messenger of the gods. His appearance in sentence 1 suggests that —",
           choices: [
             { letter: "A", text: "the gods want to punish Odysseus for his pride" },
@@ -495,6 +553,8 @@
         {
           id: "moly",
           sol: "9.RL.2.B",
+          sub: "9.RL.2.B.2",
+          why: "Sentence 8 says the gods have their own name for moly and mortals can hardly dig it up, though nothing is too hard for the gods: the herb is rare and divine.",
           stem: "The description of moly in sentence 8 mainly creates the impression that the herb is —",
           choices: [
             { letter: "A", text: "common and easy to find in the woods" },
@@ -506,7 +566,9 @@
         },
         {
           id: "instructions",
-          sol: "9.RL.3.A",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
+          why: "Hermes tells Odysseus exactly what will happen: Circe will strike with her wand and he must rush at her with his sword and demand an oath (sentences 9-10), hinting at the clash ahead.",
           stem: "Hermes's instructions in sentences 9 and 10 mainly serve to —",
           choices: [
             { letter: "A", text: "foreshadow the confrontation that is coming" },
@@ -519,6 +581,8 @@
         {
           id: "courage",
           sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "Odysseus has heard he may end up in the sties too (sentence 4), yet he walks on with his heart churning (sentence 12). The other sentences describe what Hermes does.",
           stem: "Which sentence best shows Odysseus's courage after he hears Hermes's warning?",
           choices: [
             { letter: "A", text: "Sentence 3, in which Hermes calls him unlucky" },
@@ -530,7 +594,9 @@
         },
         {
           id: "churning",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
+          why: "His heart is churning like a sea in a storm (sentence 12), so the word means stirring wildly, the opposite of resting quietly.",
           stem: "In sentence 12, the word churning most nearly means —",
           choices: [
             { letter: "A", text: "stirring wildly" },
@@ -543,6 +609,8 @@
         {
           id: "theme",
           sol: "9.RL.1.A",
+          sub: "9.RL.1.A.1",
+          why: "Odysseus is set on rescuing his men, but Hermes warns he would fail alone (sentence 4) and gives him the herb and a plan (sentences 6, 9-10), so courage is joined to wise advice.",
           stem: "Which theme is developed through Hermes's help in this passage?",
           choices: [
             { letter: "A", text: "Heroes should rely only on their own strength." },
@@ -593,6 +661,8 @@
         {
           id: "dove",
           sol: "9.RL.2.A",
+          sub: "9.RL.2.A.2",
+          why: "Circe, who just tried to send Odysseus to the sty (sentence 6), now cowers like a dove under a hawk and clasps his knees (sentence 8): power has shifted to him.",
           stem: "The epic simile in sentence 8 compares Circe to a dove mainly to show that —",
           choices: [
             { letter: "A", text: "Circe is gentle and harmless by nature" },
@@ -604,7 +674,9 @@
         },
         {
           id: "cower",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
+          why: "The dove can only cry out and cower in the grass, and Circe screams and ducks beneath the blade (sentence 8), so cower means shrink back in fear.",
           stem: "In sentence 8, the word cower most nearly means —",
           choices: [
             { letter: "A", text: "shrink back in fear" },
@@ -617,6 +689,8 @@
         {
           id: "oath",
           sol: "9.RV.1.F",
+          sub: "9.RV.1.F.1",
+          why: "Odysseus cannot trust Circe after she turned his friends to swine (sentence 12), so he needs an oath that even a goddess cannot break (sentence 13).",
           stem: "In Greek myth, the great oath of the gods was a promise that even immortals could not break. Odysseus demands this oath in sentence 13 because he —",
           choices: [
             { letter: "A", text: "wants Circe to admit that he is stronger" },
@@ -628,7 +702,9 @@
         },
         {
           id: "foretold",
-          sol: "9.RL.1.B",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
+          why: "Circe says Hermes foretold the coming of the man who would pass on his way home from Troy (sentence 11), so the gods knew in advance Odysseus would arrive.",
           stem: "Based on sentences 10 and 11, readers can infer that —",
           choices: [
             { letter: "A", text: "Circe has never met any traveler before Odysseus" },
@@ -640,7 +716,9 @@
         },
         {
           id: "refuse",
-          sol: "9.RL.1.D",
+          sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "He asks what decent man could feast before his friends are freed and makes their release his condition for eating (sentences 18-19): his men come first.",
           stem: "Odysseus's words in sentences 18 and 19 reveal that he —",
           choices: [
             { letter: "A", text: "is too frightened of Circe to eat her food" },
@@ -653,6 +731,8 @@
         {
           id: "circe-change",
           sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "Circe first drugs Odysseus while planning evil (sentence 4), then swears the oath (sentence 14), feeds him, and frees his men as he asked (sentences 15, 20-23).",
           stem: "How does Circe change over the course of the passage?",
           choices: [
             { letter: "A", text: "She begins as a scheming enemy and becomes a host who keeps her oath." },
@@ -664,7 +744,9 @@
         },
         {
           id: "s5",
-          sol: "9.RL.3.A",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
+          why: "Sentence 5 says the drink had no power over him because the moly guarded his mind, showing Hermes's gift working. It does not say the drink was weak.",
           stem: "The narrator includes sentence 5 mainly to —",
           choices: [
             { letter: "A", text: "show that Circe's drink was not very strong" },
@@ -676,7 +758,9 @@
         },
         {
           id: "mood-shift",
-          sol: "9.RL.2.C",
+          sol: "9.RL.2.B",
+          sub: "9.RL.2.B.1",
+          why: "Paragraph 1 shows Odysseus entering with his heart heavy with dread (sentence 2); paragraph 5 ends with the freed men weeping for joy (sentence 24).",
           stem: "How does the mood change from paragraph 1 to paragraph 5?",
           choices: [
             { letter: "A", text: "from cheerful hope to gloom" },
@@ -734,6 +818,8 @@
         {
           id: "children",
           sol: "9.RL.2.A",
+          sub: "9.RL.2.A.2",
+          why: "Like children who thought their father dead running to meet him (sentence 2), the men laugh and cry around Odysseus, who they were sure was lost (sentence 1): joy and relief.",
           stem: "The epic simile in sentence 2 compares the crew to children mainly to show —",
           choices: [
             { letter: "A", text: "how foolish and childish the crew has become" },
@@ -745,7 +831,9 @@
         },
         {
           id: "eury-speech",
-          sol: "9.RL.1.D",
+          sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "Eurylochus brings up the Cyclops and says Odysseus's recklessness got their friends killed (sentences 8-9), so he still blames his captain for those deaths.",
           stem: "Eurylochus's speech in sentences 6–9 reveals that he —",
           choices: [
             { letter: "A", text: "trusts Circe more than he trusts Odysseus" },
@@ -758,6 +846,8 @@
         {
           id: "anger",
           sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "Anger floods Odysseus and he reaches for his sword (sentence 10), but his comrades hold him back with gentle words (sentence 11). Eurylochus does not stay behind (sentence 12).",
           stem: "How does Odysseus respond to Eurylochus's challenge to his leadership in paragraph 2?",
           choices: [
             { letter: "A", text: "He grows angry but lets his men calm him down." },
@@ -770,6 +860,8 @@
         {
           id: "nostos",
           sol: "9.RL.1.A",
+          sub: "9.RL.1.A.1",
+          why: "In paragraph 4 the men feast for a full year (sentences 18-19) until the crew asks, have you forgotten? and urges him to remember his country (sentences 21-22): comfort made home slip from mind.",
           stem: "Nostos is the Greek word for homecoming. Which statement best expresses a theme about nostos developed in paragraph 4?",
           choices: [
             { letter: "A", text: "A good host should never allow guests to leave." },
@@ -781,7 +873,9 @@
         },
         {
           id: "elpenor",
-          sol: "9.RL.3.A",
+          sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
+          why: "Elpenor's fall (sentence 30) means not all of them leave (sentence 29) and they go grieving once again (sentence 31): yet another life lost on the way home.",
           stem: "The narrator most likely includes the account of Elpenor in sentence 30 to —",
           choices: [
             { letter: "A", text: "show that the journey keeps costing lives" },
@@ -793,7 +887,9 @@
         },
         {
           id: "rebuke",
-          sol: "9.RV.1.C",
+          sol: "9.RV.1.B",
+          sub: "9.RV.1.B.1",
+          why: "Eurylochus follows because he fears Odysseus's sharp rebuke (sentence 12) after angering him (sentence 10), so rebuke means a sharp scolding, not an attack.",
           stem: "In sentence 12, the word rebuke most nearly means —",
           choices: [
             { letter: "A", text: "quiet praise" },
@@ -806,6 +902,8 @@
         {
           id: "aeaea-setting",
           sol: "9.RL.3.B",
+          sub: "9.RL.3.B.1",
+          why: "The endless meat and sweet wine at Circe's house keep the men feasting for a full year (sentences 18-19) until the crew reminds Odysseus of home (sentences 21-22).",
           stem: "How does the setting of Circe's house affect the crew in paragraph 4?",
           choices: [
             { letter: "A", text: "Its hidden dangers keep the men always on guard." },
@@ -817,7 +915,9 @@
         },
         {
           id: "weeps",
-          sol: "9.RL.1.B",
+          sol: "9.RL.1.C",
+          sub: "9.RL.1.C.1",
+          why: "Circe will let him leave (sentence 25), but first he must journey to the House of Hades (sentence 26), and on hearing this his heart broke (sentence 28). Tiresias has told him nothing yet.",
           stem: "Based on paragraph 5, readers can infer that Odysseus weeps because —",
           choices: [
             { letter: "A", text: "Circe refuses to let him and his men leave" },
