@@ -111,14 +111,13 @@ svg.ink path.on { opacity: .9; transition: stroke-dashoffset .5s ease .5s, opaci
 
 .fs-btn {
   position: fixed; top: 8px; right: 8px; z-index: 10;
-  display: flex; align-items: center; gap: 6px;
-  font: 600 13px/1 Calibri, Carlito, "Segoe UI", Arial, sans-serif; color: #fff;
-  background: rgba(40, 40, 40, .82); border: 0; border-radius: 6px; padding: 7px 10px; cursor: pointer;
-  box-shadow: 0 1px 4px rgba(0,0,0,.25);
+  display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; padding: 0;
+  color: #fff; background: rgba(40, 40, 40, .55); border: 0; border-radius: 6px; cursor: pointer;
+  opacity: .45; transition: opacity .2s, background .2s;
 }
-.fs-btn:hover { background: rgba(20, 20, 20, .92); }
+.fs-btn:hover, .fs-btn:focus-visible { opacity: 1; background: rgba(20, 20, 20, .9); }
 .fs-btn:focus-visible { outline: 3px solid #6b8fc7; outline-offset: 2px; }
-.fs-btn svg { width: 14px; height: 14px; }
+.fs-btn svg { width: 16px; height: 16px; }
 
 @media print {
   body { background: #fff; padding: 0; }
@@ -562,7 +561,12 @@ svg.ink path.on { opacity: .9; transition: stroke-dashoffset .5s ease .5s, opaci
   var ICON_IN = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M1 6V1h5M10 1h5v5M15 10v5h-5M6 15H1v-5"/></svg>';
   var ICON_OUT = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 1v5H1M15 6h-5V1M10 15v-5h5M1 10h5v5"/></svg>';
   function fsElement() { return document.fullscreenElement || document.webkitFullscreenElement; }
-  function fsLabel() { fsBtn.innerHTML = fsElement() ? ICON_OUT + "Exit full screen" : ICON_IN + "Full screen"; }
+  function fsLabel() {
+    var on = !!fsElement();
+    fsBtn.innerHTML = on ? ICON_OUT : ICON_IN;
+    fsBtn.title = on ? "Exit full screen" : "Full screen";
+    fsBtn.setAttribute("aria-label", fsBtn.title);
+  }
   fsBtn.addEventListener("click", function () {
     var el = document.documentElement;
     if (fsElement()) { (document.exitFullscreen || document.webkitExitFullscreen).call(document); return; }
