@@ -4383,7 +4383,7 @@
       this.chaseMs = this.level.chaseMs;
       this.iframeMax = this.level.iframe;
       /* v5.18.3: an Odyssey mode is an episode of the story: its level asks that episode's questions */
-      try { var accEp = window.SolModes && SolModes.episodeFor ? SolModes.episodeFor(this.night) : null; if (accEp) this.strand = accEp; } catch (eEp) {}
+      try { var accEp = this.family === "ODY" && window.SolModes && SolModes.episodeFor ? SolModes.episodeFor(this.night) : null; if (accEp) this.strand = accEp; } catch (eEp) {}
       this.pack = (typeof heistBuildPack === "function") ? heistBuildPack(this.family, this.strand) : { claims: [] };
       cfg.night = this.night;
       writeSavedNight(this.night);
