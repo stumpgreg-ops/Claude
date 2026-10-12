@@ -1593,7 +1593,12 @@ var srv = http.createServer(function (req, res) {
       var r = s.straitRow([need[j]], S.ship.y - 60, [S.ship.x]);   /* (far enough ahead to be seen crossing at this speed) */
       var t0 = Date.now(); while (!r.done && !s._mopup && !s._between && Date.now() - t0 < 8000) await new Promise(function (q) { setTimeout(q, 40); });
     }
-    var t1 = s.time.now; while (s.time.now - t1 < 4000) await new Promise(function (q) { setTimeout(q, 50); });
+    /* (game time, capped in real time: a reading card for the next passage pauses the clock) */
+    var t1 = s.time.now, w1 = Date.now();
+    while (s.time.now - t1 < 4000 && Date.now() - w1 < 15000) {
+      var go2 = document.getElementById("read-go"); if (s.readOpen && go2 && go2.offsetParent) go2.click();
+      await new Promise(function (q) { setTimeout(q, 50); });
+    }
     s.iframeMs = 1e9;
     return { mop: !!s._mopup, left: s._mopup && s._mopup.left, mopRows: S.P.mopRows, banner: s._mopBanner ? s._mopBanner.t.text : "", ended: s.ended };
   });
