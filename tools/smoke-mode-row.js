@@ -389,7 +389,7 @@ var srv = http.createServer(function (req, res) {
       return { night: s.night, mode: s.mode && s.mode.id, saved: localStorage.getItem("afterHours.ody.gameMode"), ticking: !!s.rw && s.rw.clock > 1000, island: s.realm && s.realm.name };
     });
     await page.evaluate(function () { SolModes.only = null; });
-    await gotoLevel(12);
+    await gotoLevel(59);   /* v5.18.3: the Lotus-Eaters' island has its own mode now; rowing plays on Circe's island (59) */
     od.l12 = await page.evaluate(async function () {
       var T = window.__rowT, s = SolScene, R = s.rw;
       s.spareLives = 9; R.auto = true; R.dist = R.P.rowGap - 40;
@@ -400,7 +400,7 @@ var srv = http.createServer(function (req, res) {
     console.log("dist/ody", JSON.stringify(od));
     check(od.state === "ODY" && od.title && /Row Past the Sirens/.test(od.card) && od.l1.mode === "row" && od.l1.ticking && od.l1.saved === "row",
       "dist/ody: the mode screen offers Row Past the Sirens, and picked alone it plays from level 1: " + JSON.stringify(od.l1));
-    check(od.l12.mode === "row" && od.l12.night === 12 && od.l12.rows > 0 && od.l12.perfect > 2 && /Lotus/.test(od.l12.island || ""), "dist/ody: level 12 (the Lotus-Eaters' island) plays it in the Odyssey rotation: " + JSON.stringify({ mode: od.l12.mode, island: od.l12.island, rows: od.l12.rows }));
+    check(od.l12.mode === "row" && od.l12.night === 59 && od.l12.rows > 0 && od.l12.perfect > 2 && /Circe/.test(od.l12.island || ""), "dist/ody: level 59 (Circe's island) plays it in the Odyssey rotation: " + JSON.stringify({ mode: od.l12.mode, island: od.l12.island, rows: od.l12.rows }));
     console.log("errors (dist/ody):", errs2.length ? errs2 : "none");
     check(errs2.length === 0, "dist/ody: no page errors");
     /* dist/va: no card, and a saved pick of it falls back to All modes */

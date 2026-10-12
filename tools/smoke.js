@@ -62,7 +62,7 @@ var srv = http.createServer(function (req, res) {
   /* v5.9: the Odyssey packs — every episode has questions, an episode pick serves only that episode, and no other game sees them */
   var ody = await page.evaluate(function () {
     var out = { all: heistBuildPack("ODY", "ALL").claims.length, eps: {}, stray: 0 };
-    ["LOTUS", "CYCLOPS", "CIRCE", "HELIOS", "CALYPSO", "VOYAGE"].forEach(function (e) {
+    ["LOTUS", "CYCLOPS", "CIRCE", "SIRENS", "SCYLLA", "HELIOS", "CALYPSO", "BOW", "VOYAGE"].forEach(function (e) {
       var cl = heistBuildPack("ODY", e).claims;
       out.eps[e] = cl.length;
       cl.forEach(function (c) { if (String(c.episode).toUpperCase() !== e) out.stray++; });
@@ -78,7 +78,7 @@ var srv = http.createServer(function (req, res) {
   });
   console.log("odyssey story order", JSON.stringify(story.cyclops));
   check(story.cyclops.join(" > ") === "A Land Without Laws > Cheese and Lambs > The Cave of Polyphemus > The Wine of Maron > The Olive Stake > Nobody Is Killing Me > The Lead Ram > The Name Over the Water" &&
-    story.all.length === 48 && story.all[0] === "Epithets and Epic Heroes" && story.all.indexOf("The Wine of Maron") < story.all.indexOf("Nobody Is Killing Me"),
+    story.all.length === 66 && story.all[0] === "Epithets and Epic Heroes" && story.all.indexOf("The Wine of Maron") < story.all.indexOf("Nobody Is Killing Me"),
     "Odyssey: passages come in story order, each passage once, its questions together (Nobody named before \"Nobody is killing me\")");
   check(ody.all > 200 && Object.keys(ody.eps).every(function (e) { return ody.eps[e] >= 30; }) && ody.stray === 0, "Odyssey: every episode has its own questions, and they stay out of the other games");
 
