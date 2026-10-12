@@ -377,10 +377,7 @@
         L(10) + "to temper the metal and make it hard, and the water hisses and shrieks,<br>" +
         L(11) + "so the eye hissed around the olive stake. The Cyclops gave a terrible cry,<br>" +
         L(12) + "and the rock walls rang with it. We scattered back in terror to the corners.<br>" +
-        L(13) + "He wrenched the stake free and hurled it from him, raging and blind,<br>" +
-        L(14) + "and bellowed for the Cyclopes who lived in caves among the windy peaks.<br>" +
-        L(15) + "They heard his cry and came from every side and gathered at his door,<br>" +
-        L(16) + "and asked what trouble made him shout through the deathless night." +
+        L(13) + "He wrenched the stake free and hurled it from him, raging and blind." +
         "</p>",
       claims: [
         {
@@ -422,7 +419,7 @@
         {
           id: "mood",
           sol: "9.RL.2.C",
-          stem: "Which words best describe the mood of lines 11–14, just after the giant is blinded?",
+          stem: "Which words best describe the mood of lines 11–13, just after the giant is blinded?",
           choices: [
             { letter: "A", text: "calm, gentle, and peaceful" },
             { letter: "B", text: "playful and light" },
@@ -468,26 +465,24 @@
       blurb: "The blind giant guards the door, and Odysseus clings beneath a ram.",
       level: 2,
       passage:
-        "<p>" + N(1) + "Groaning in pain, the Cyclops groped his way to the doorway, rolled aside the great stone, and sat there with his arms spread wide, ready to catch any man who tried to slip out among the sheep. " +
-        N(2) + "He hoped, I suppose, that I would be foolish enough to try it. " +
-        N(3) + "I weighed every plan, as a man does when his life hangs in the balance, and this one seemed best. " +
-        N(4) + "In the flock were fine, thick-fleeced rams, and I bound them together silently in threes with willow branches from the giant's bed. " +
-        N(5) + "The middle ram of each three carried one of my men beneath it, while the two on either side shielded him. " +
-        N(6) + "For myself I chose the lead ram, the largest of the flock, and I clung beneath his belly, my fists twisted deep in his wool.</p>" +
-        "<p>" + N(7) + "When Dawn with her rose-red fingers appeared, the rams hurried out toward the pastures. " +
-        N(8) + "Their master ran his hands along their backs as they passed, but he never thought to feel beneath them. " +
-        N(9) + "Last of all came the great ram, slow for once, weighed down by his own wool and by me. " +
-        N(10) + "Polyphemus stroked him and spoke to him sadly. " +
-        N(11) + "\"Dear ram, why are you the last to leave today? " +
-        N(12) + "You always lead the flock to the fresh grass and the running streams. " +
-        N(13) + "Are you grieving for your master's eye, which that wretch Nobody put out? " +
-        N(14) + "If only you could speak and tell me where he hides!\" " +
-        N(15) + "Then he let the ram go past, and we were out under the open sky.</p>",
+        "<p>" + N(1) + "Groaning, the Cyclops groped to the doorway, rolled aside the stone, and sat with his arms spread wide to catch any man who slipped out among the sheep. " +
+        N(2) + "I weighed every plan, as a man does when his life hangs in the balance. " +
+        N(3) + "Then I silently bound the thick-fleeced rams together in threes with willow branches. " +
+        N(4) + "The middle ram of each three carried one of my men beneath it, while the two on either side shielded him. " +
+        N(5) + "For myself I chose the lead ram, the largest of the flock, and clung beneath his belly, my fists twisted in his wool.</p>" +
+        "<p>" + N(6) + "When Dawn with her rose-red fingers appeared, the rams hurried out toward the pastures. " +
+        N(7) + "Their master felt along their backs as they passed but never thought to feel beneath them. " +
+        N(8) + "Last came the great ram, slow for once, weighed down by his wool and by me. " +
+        N(9) + "Polyphemus stroked him sadly. " +
+        N(10) + "\"Dear ram, why are you the last to leave today? " +
+        N(11) + "Are you grieving for your master's eye, which that wretch Nobody put out? " +
+        N(12) + "If only you could speak and tell me where he hides!\" " +
+        N(13) + "Then he let the ram pass, and we were out under the open sky.</p>",
       claims: [
         {
           id: "plan",
           sol: "9.RL.1.C",
-          stem: "How does Odysseus respond to the challenge of the giant guarding the doorway?",
+          stem: "In sentences 1–5, how does Odysseus respond to the challenge of the giant guarding the doorway?",
           choices: [
             { letter: "A", text: "He waits until the giant falls asleep again and sneaks past him." },
             { letter: "B", text: "He thinks through his options and invents a careful escape." },
@@ -499,7 +494,7 @@
         {
           id: "speech",
           sol: "9.RL.1.D",
-          stem: "What does Polyphemus's speech to the ram (sentences 11–14) reveal about him?",
+          stem: "What does Polyphemus's speech to the ram (sentences 10–12) reveal about him?",
           choices: [
             { letter: "A", text: "He can show tenderness toward the animals he cares for." },
             { letter: "B", text: "He has already guessed that Odysseus is under the ram." },
@@ -511,7 +506,7 @@
         {
           id: "suspense",
           sol: "9.RL.3.A",
-          stem: "The author places the giant's speech while Odysseus is still clinging beneath the ram mainly to —",
+          stem: "The author places the giant's speech (sentences 10–12) while Odysseus is still clinging beneath the ram mainly to —",
           choices: [
             { letter: "A", text: "explain exactly how the rams were tied together" },
             { letter: "B", text: "show that the giant has forgiven his enemy at last" },
@@ -523,7 +518,7 @@
         {
           id: "shielded",
           sol: "9.RV.1.C",
-          stem: "In sentence 5, the word shielded most nearly means —",
+          stem: "In sentence 4, the word shielded most nearly means —",
           choices: [
             { letter: "A", text: "pushed forward roughly" },
             { letter: "B", text: "kept from moving" },
@@ -535,7 +530,7 @@
         {
           id: "backs",
           sol: "9.RL.1.B",
-          stem: "Based on sentence 8, readers can infer that the blind giant —",
+          stem: "Based on sentence 7, readers can infer that the blind giant —",
           choices: [
             { letter: "A", text: "expects the men to try riding out on top of the sheep" },
             { letter: "B", text: "knows exactly where each of the men is hiding" },
@@ -547,7 +542,7 @@
         {
           id: "epithet",
           sol: "9.RL.2.B",
-          stem: "Dawn with her rose-red fingers (sentence 7) is an epithet, a descriptive phrase Homer repeats for a person or thing. Its main effect here is to —",
+          stem: "Dawn with her rose-red fingers (sentence 6) is an epithet, a descriptive phrase Homer repeats for a person or thing. Its main effect here is to —",
           choices: [
             { letter: "A", text: "explain why the giant cannot see the men in the dark" },
             { letter: "B", text: "mark the start of a new day in a grand, poetic way" },
@@ -559,7 +554,7 @@
       ]
     },
 
-    /* ───────────── long · level 3 ───────────── */
+    /* ───────────── medium · level 2 ───────────── */
     {
       id: "ody-cyclops-name",
       family: "ODY",
@@ -567,32 +562,20 @@
       title: "The Name Over the Water",
       kind: "The Odyssey · 9.RL",
       blurb: "Safe on the sea, Odysseus cannot resist one last shout at the Cyclops.",
-      level: 3,
+      level: 2,
       passage:
-        "<p>" + N(1) + "We drove the giant's fat sheep down to our ship, glancing back at every step, and our friends on board greeted us with joy. " +
-        N(2) + "Yet their joy soon turned to weeping when they saw that six of our companions would never come home. " +
-        N(3) + "I frowned at them to stop their tears and ordered them to load the flock and row at once. " +
-        N(4) + "Swiftly they sat to the oars and struck the wine-dark sea with their blades.</p>" +
-        "<p>" + N(5) + "But when we were as far from shore as a man's shout can carry, I could not hold my tongue. " +
-        N(6) + "\"Cyclops!\" I called. " +
-        N(7) + "\"You ate the men of a guest in your own cave, and now Zeus and the other gods have paid you back!\" " +
-        N(8) + "At that the giant's rage boiled higher still. " +
-        N(9) + "He tore the top off a hill and hurled it, and it plunged into the sea just ahead of our dark prow. " +
-        N(10) + "The water rose in a great wave, and its backwash swept us toward the shore again, until I pushed us off with a long pole and signaled the crew to row for their lives.</p>" +
-        "<p>" + N(11) + "When we had covered twice the distance, I began to call out again, though my men pleaded with me from every bench. " +
-        N(12) + "\"Stubborn man, why provoke that savage?\" they said. " +
-        N(13) + "\"Just now his rock drove us back to land, and we thought we were finished. " +
-        N(14) + "If he hears one more word, he will crush us and our ship with a single jagged boulder.\" " +
-        N(15) + "But they could not persuade my proud heart. " +
-        N(16) + "\"Cyclops,\" I shouted, \"if anyone ever asks who blinded your eye, tell him it was Odysseus, raider of cities, son of Laertes, whose home is on Ithaca!\"</p>" +
-        "<p>" + N(17) + "Then the giant stretched his hands toward the starry sky and prayed to his father. " +
-        N(18) + "\"Hear me, Poseidon, shaker of the earth, if I am truly your son,\" he cried. " +
-        N(19) + "\"Grant that Odysseus, raider of cities, never reaches his home. " +
-        N(20) + "Or if he is fated to see his own country again, let him come late and broken, having lost all his companions, carried in a stranger's ship, and let him find trouble waiting in his house.\" " +
-        N(21) + "The dark-haired god heard his son's prayer. " +
-        N(22) + "Then the Cyclops lifted a rock far larger than the first, swung it round, and let it fly. " +
-        N(23) + "It struck the sea just behind our stern, and the surge it raised drove us forward to the goat island, where the rest of our ships lay waiting. " +
-        N(24) + "I had won glory by speaking my name, but I had also handed the god of the sea the very name he needed for his curse.</p>",
+        "<p>" + N(1) + "Back at the ship, I frowned at my men to stop their tears for our six lost companions and ordered them to load the flock and row. " +
+        N(2) + "When we were a shout's distance from shore, I called out, \"Cyclops, you ate your guests, and now Zeus has paid you back!\" " +
+        N(3) + "The giant hurled the top of a hill, and its wave nearly swept us back to shore.</p>" +
+        "<p>" + N(4) + "Farther out, I began to call again, though my men pleaded with me from every bench. " +
+        N(5) + "\"Stubborn man, why provoke that savage?\" they said. " +
+        N(6) + "\"One more word, and he will crush us with a jagged boulder.\" " +
+        N(7) + "But they could not persuade my proud heart. " +
+        N(8) + "\"Cyclops,\" I shouted, \"if anyone asks who blinded you, tell him it was Odysseus, raider of cities, son of Laertes, of Ithaca!\"</p>" +
+        "<p>" + N(9) + "Then the giant prayed: \"Hear me, Poseidon, shaker of the earth. " +
+        N(10) + "Let Odysseus never reach home, or if he must, let him come late and broken, without his companions, to find trouble in his house.\" " +
+        N(11) + "The dark-haired god heard his son's prayer. " +
+        N(12) + "I had won glory by speaking my name, but I had handed the sea god the very name he needed for his curse.</p>",
       claims: [
         {
           id: "theme",
@@ -609,7 +592,7 @@
         {
           id: "crew",
           sol: "9.RL.1.D",
-          stem: "The crew's words in sentences 12–14 reveal that the men —",
+          stem: "The crew's words in sentences 5–6 reveal that the men —",
           choices: [
             { letter: "A", text: "want Odysseus to go back and fight the giant on land" },
             { letter: "B", text: "admire Odysseus for answering the giant so boldly" },
@@ -621,7 +604,7 @@
         {
           id: "change",
           sol: "9.RL.1.C",
-          stem: "Which choice best describes how Odysseus's behavior shifts between sentence 3 and sentence 15?",
+          stem: "Which choice best describes how Odysseus's behavior shifts between sentence 1 and sentence 7?",
           choices: [
             { letter: "A", text: "He goes from calmly commanding his crew to letting pride rule him." },
             { letter: "B", text: "He goes from fearing the giant to feeling sorry for the giant." },
@@ -633,7 +616,7 @@
         {
           id: "prayer",
           sol: "9.RL.3.A",
-          stem: "Polyphemus's prayer in sentences 19–20 mainly serves to —",
+          stem: "Polyphemus's prayer in sentences 9–10 mainly serves to —",
           choices: [
             { letter: "A", text: "explain how the Cyclopes first came to live on their island" },
             { letter: "B", text: "foreshadow the hardships Odysseus will face on his way home" },
@@ -645,7 +628,7 @@
         {
           id: "provoke",
           sol: "9.RV.1.C",
-          stem: "In sentence 12, the word provoke most nearly means —",
+          stem: "In sentence 5, the word provoke most nearly means —",
           choices: [
             { letter: "A", text: "praise in front of other people" },
             { letter: "B", text: "slip quietly away from" },
@@ -657,7 +640,7 @@
         {
           id: "zeus",
           sol: "9.RV.1.F",
-          stem: "In sentence 7, Odysseus claims that Zeus has punished the giant. This allusion fits the situation because, in Greek myth, Zeus —",
+          stem: "In sentence 2, Odysseus claims that Zeus has punished the giant. This allusion fits the situation because, in Greek myth, Zeus —",
           choices: [
             { letter: "A", text: "rules the sea and causes the earth to shake" },
             { letter: "B", text: "carries messages from Mount Olympus to mortals" },
@@ -671,8 +654,8 @@
           sol: "9.RL.1.B",
           stem: "Select TWO quotations that best show that Odysseus cares more about kleos, or glory and fame, than about his crew's safety.",
           choices: [
-            { letter: "A", text: "I frowned at them to stop their tears and ordered them to load the flock" },
-            { letter: "B", text: "I began to call out again, though my men pleaded with me from every bench" },
+            { letter: "A", text: "ordered them to load the flock and row" },
+            { letter: "B", text: "I began to call again, though my men pleaded with me from every bench" },
             { letter: "C", text: "The dark-haired god heard his son's prayer." },
             { letter: "D", text: "tell him it was Odysseus, raider of cities, son of Laertes" }
           ],
@@ -681,48 +664,29 @@
       ]
     },
 
-    /* ───────────── epic · level 3 ───────────── */
+    /* ───────────── medium · level 2 ───────────── */
     {
       id: "ody-cyclops-cave",
       family: "ODY",
       episode: "cyclops",
       title: "The Cave of Polyphemus",
       kind: "The Odyssey · 9.RL",
-      blurb: "Odysseus tells the Phaeacians how a wish for guest-gifts trapped him in a giant's cave.",
-      level: 3,
+      blurb: "The giant comes home, and Odysseus's hope for guest-gifts meets a pitiless host.",
+      level: 2,
       passage:
-        "<p>" + N(1) + "Hear now, lords of the Phaeacians, how I came to the cave of the Cyclops, for no part of my wandering cost me more. " +
-        N(2) + "Near the shore we saw a high cave shaded with laurel, where flocks of sheep and goats were penned at night behind a great wall of stones. " +
-        N(3) + "I left the rest of my crew to guard the ship and chose twelve of my best men, and I carried a goatskin of dark, sweet wine that Maron, priest of Apollo, had given me. " +
-        N(4) + "Something in my heart warned me that we would meet a creature of enormous strength, a savage who knew nothing of justice or law.</p>" +
-        "<p>" + N(5) + "The giant was out at pasture, so we walked into his cave and stared. " +
-        N(6) + "Racks sagged under cheeses, pens were crowded with lambs and kids, each kind in its own place, and pails and bowls stood brimming with whey. " +
-        N(7) + "My men begged me to take the cheeses, drive the lambs down to the ship, and sail away over the wine-dark sea. " +
-        N(8) + "I would not listen, though it would have been far better if I had. " +
-        N(9) + "I wanted to see the giant himself and learn whether he would give me guest-gifts.</p>" +
-        "<p>" + N(10) + "So we lit a fire, made an offering, ate some of the cheese, and waited. " +
-        N(11) + "At evening he came, carrying a huge load of dry wood for his supper fire, and threw it down with a crash that sent us scurrying into the corners. " +
-        N(12) + "He drove his flocks inside and then lifted into the doorway a stone so massive that twenty-two strong wagons could not have budged it. " +
-        N(13) + "He sat and milked his ewes and bleating goats in order, and only when he had kindled his fire did he notice us.</p>" +
-        "<p>" + N(14) + "\"Strangers, who are you?\" he asked. " +
-        N(15) + "\"Are you traders, or pirates who roam the sea robbing others?\" " +
-        N(16) + "Our hearts shook at his deep voice and monstrous size, but I answered him. " +
-        N(17) + "\"We are Greeks, driven off course on our way home from Troy. " +
-        N(18) + "We come to your knees as suppliants, hoping for the welcome owed to strangers. " +
-        N(19) + "Respect the gods, mighty one, for Zeus himself protects guests and avenges any wrong done to them.\" " +
-        N(20) + "He answered from a pitiless heart: \"You are a fool, stranger, or you come from very far away, to tell me to fear the gods. " +
-        N(21) + "We Cyclopes care nothing for Zeus or any of the blessed gods, for we are far stronger than they are. " +
-        N(22) + "But tell me, where did you tie up your ship?\" " +
-        N(23) + "I saw through his question and answered with a lie. " +
-        N(24) + "\"Poseidon, shaker of the earth, smashed my ship against the rocks at the edge of your land.\"</p>" +
-        "<p>" + N(25) + "He made no reply. " +
-        N(26) + "Instead he sprang up, seized two of my men, and devoured them, and we wept and raised our hands to Zeus, helpless. " +
-        N(27) + "Then, full, he stretched out among his flocks and slept. " +
-        N(28) + "I thought of drawing my sharp sword and driving it into his chest, but a second thought held me back. " +
-        N(29) + "If he died, we would die too, for we could never move that enormous stone from the door. " +
-        N(30) + "So we waited, groaning, for Dawn with her rose-red fingers. " +
-        N(31) + "In the morning he devoured two more men, drove out his flocks, and set the stone back in place as easily as a man fits a lid on a quiver. " +
-        N(32) + "But in the cave lay the giant's great club of green olive wood, and from it a plan began to take shape in my mind.</p>",
+        "<p>" + N(1) + "Lords of the Phaeacians, it would have been far better if I had listened to my men. " +
+        N(2) + "At evening the giant came home and threw down his firewood with a crash that sent us scurrying into corners. " +
+        N(3) + "He drove in his flocks and set in the doorway a stone twenty-two wagons could not budge. " +
+        N(4) + "When he saw us, I told him we were Greeks from Troy who came to his knees as suppliants. " +
+        N(5) + "\"Respect the gods,\" I said, \"for Zeus protects guests.\"</p>" +
+        "<p>" + N(6) + "\"You are a fool, stranger,\" he answered from a pitiless heart. " +
+        N(7) + "\"We Cyclopes care nothing for Zeus, for we are stronger. " +
+        N(8) + "But where did you tie up your ship?\" " +
+        N(9) + "I saw through his question and lied: \"Poseidon smashed my ship on your rocks.\"</p>" +
+        "<p>" + N(10) + "He seized two of my men and devoured them. " +
+        N(11) + "As he slept, I nearly drew my sword, but if he died, we could never move that stone ourselves. " +
+        N(12) + "In the morning he ate two more, drove out his flocks, and set the stone back as easily as a man fits a lid on a quiver. " +
+        N(13) + "But in the cave lay his great club of green olive wood, and a plan took shape.</p>",
       claims: [
         {
           id: "narrator",
@@ -739,11 +703,11 @@
         {
           id: "regret",
           sol: "9.RL.1.C",
-          stem: "In sentence 8, Odysseus says it would have been far better if he had listened to his men. This comment suggests that Odysseus —",
+          stem: "In sentence 1, Odysseus says it would have been far better if he had listened to his men. This comment suggests that Odysseus —",
           choices: [
             { letter: "A", text: "still believes his men were cowards for wanting to leave" },
             { letter: "B", text: "regrets that he did not take more cheese from the cave" },
-            { letter: "C", text: "now sees that his curiosity led his men into disaster" },
+            { letter: "C", text: "now sees that staying in the cave led his men to disaster" },
             { letter: "D", text: "thinks the giant would have given gifts on another day" }
           ],
           correct: "C"
@@ -751,7 +715,7 @@
         {
           id: "stone",
           sol: "9.RL.3.B",
-          stem: "How does the stone in the doorway (sentence 12) shape what happens later in the passage?",
+          stem: "How does the stone in the doorway (sentence 3) shape what happens later in the passage?",
           choices: [
             { letter: "A", text: "It keeps the other Cyclopes from hearing the men's cries." },
             { letter: "B", text: "It stops Odysseus from killing the giant while he sleeps." },
@@ -763,7 +727,7 @@
         {
           id: "scorn",
           sol: "9.RL.1.D",
-          stem: "What do Polyphemus's words in sentences 20–22 reveal about him?",
+          stem: "What do Polyphemus's words in sentences 6–8 reveal about him?",
           choices: [
             { letter: "A", text: "He is frightened that Zeus will punish him for his rudeness." },
             { letter: "B", text: "He is curious about the war at Troy and the Greeks' journey." },
@@ -775,7 +739,7 @@
         {
           id: "suppliants",
           sol: "9.RV.1.C",
-          stem: "In sentence 18, the word suppliants most nearly means —",
+          stem: "In sentence 4, the word suppliants most nearly means —",
           choices: [
             { letter: "A", text: "soldiers who demand payment from a ruler" },
             { letter: "B", text: "people who humbly beg for help or mercy" },
@@ -787,7 +751,7 @@
         {
           id: "lie",
           sol: "9.RL.1.B",
-          stem: "Based on sentences 22–24, readers can infer that Odysseus lies about his ship because he —",
+          stem: "Based on sentences 8–9, readers can infer that Odysseus lies about his ship because he —",
           choices: [
             { letter: "A", text: "suspects the giant would use it to harm the rest of his crew" },
             { letter: "B", text: "is ashamed to admit that a storm at sea wrecked his ship" },
@@ -799,7 +763,7 @@
         {
           id: "quiver",
           sol: "9.RL.2.A",
-          stem: "Sentence 31 compares the giant setting the stone in place to a man fitting a lid on a quiver. This simile emphasizes —",
+          stem: "Sentence 12 compares the giant setting the stone in place to a man fitting a lid on a quiver. This simile emphasizes —",
           choices: [
             { letter: "A", text: "how carefully the giant guards the arrows he keeps in the cave" },
             { letter: "B", text: "how quietly the giant moves so that the men stay asleep" },
@@ -815,7 +779,7 @@
           choices: [
             { letter: "A", text: "Odysseus learns that the gods always rescue those who pray to them." },
             { letter: "B", text: "Odysseus proves that strength matters more than careful thought." },
-            { letter: "C", text: "Odysseus lets curiosity beat caution, then thinks before he strikes." },
+            { letter: "C", text: "Odysseus regrets an unwise choice, then thinks before he strikes." },
             { letter: "D", text: "Odysseus discovers that his men cannot be trusted to give advice." }
           ],
           correct: "C"
