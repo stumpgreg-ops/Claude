@@ -35,7 +35,7 @@
           sub: "G.PC.3.3",
           stem: "What is the area of the painted sector AOB, to the nearest tenth of a square centimeter?",
           choices: [
-            { letter: "A", text: "18.8 cm²" },
+            { letter: "A", text: "9.4 cm²" },
             { letter: "B", text: "141.4 cm²" },
             { letter: "C", text: "565.5 cm²" },
             { letter: "D", text: "706.9 cm²" }
@@ -140,7 +140,7 @@
           choices: [
             { letter: "A", text: "It is a right angle, because AB is a diameter." },
             { letter: "B", text: "It measures 64°, the same as arc AC." },
-            { letter: "C", text: "It measures 32°, half of arc AC." },
+            { letter: "C", text: "It is acute, because arc AC is less than 90°." },
             { letter: "D", text: "It is obtuse, because AB is the longest chord." }
           ],
           correct: "A"
@@ -194,18 +194,18 @@
       kind: "Circles · G.PC.3",
       blurb: "Two warp threads cross on a round loom.",
       level: 2,
-      passage: "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 168\" role=\"img\" aria-label=\"A round weaving loom drawn as a circle with small pegs around it. Thread AB and thread CD are chords that cross at E. AE is labeled 14, EB 12 and ED 6. The angle AEC is marked 92 degrees, and the gold arc BD is labeled 47 degrees\"><circle class=\"thin\" cx=\"170\" cy=\"84\" r=\"64\"/><circle class=\"ln\" cx=\"170\" cy=\"84\" r=\"58\"/><circle class=\"dt\" cx=\"233.5\" cy=\"75.6\" r=\"1.6\"/><circle class=\"dt\" cx=\"229.1\" cy=\"59.5\" r=\"1.6\"/><circle class=\"dt\" cx=\"220.8\" cy=\"45\" r=\"1.6\"/><circle class=\"dt\" cx=\"209\" cy=\"33.2\" r=\"1.6\"/><circle class=\"dt\" cx=\"194.5\" cy=\"24.9\" r=\"1.6\"/><circle class=\"dt\" cx=\"178.4\" cy=\"20.5\" r=\"1.6\"/><circle class=\"dt\" cx=\"161.6\" cy=\"20.5\" r=\"1.6\"/><circle class=\"dt\" cx=\"145.5\" cy=\"24.9\" r=\"1.6\"/><circle class=\"dt\" cx=\"131\" cy=\"33.2\" r=\"1.6\"/><circle class=\"dt\" cx=\"119.2\" cy=\"45\" r=\"1.6\"/><circle class=\"dt\" cx=\"110.9\" cy=\"59.5\" r=\"1.6\"/><circle class=\"dt\" cx=\"106.5\" cy=\"75.6\" r=\"1.6\"/><circle class=\"dt\" cx=\"106.5\" cy=\"92.4\" r=\"1.6\"/><circle class=\"dt\" cx=\"110.9\" cy=\"108.5\" r=\"1.6\"/><circle class=\"dt\" cx=\"119.2\" cy=\"123\" r=\"1.6\"/><circle class=\"dt\" cx=\"131\" cy=\"134.8\" r=\"1.6\"/><circle class=\"dt\" cx=\"145.5\" cy=\"143.1\" r=\"1.6\"/><circle class=\"dt\" cx=\"161.6\" cy=\"147.5\" r=\"1.6\"/><circle class=\"dt\" cx=\"178.4\" cy=\"147.5\" r=\"1.6\"/><circle class=\"dt\" cx=\"194.5\" cy=\"143.1\" r=\"1.6\"/><circle class=\"dt\" cx=\"209\" cy=\"134.8\" r=\"1.6\"/><circle class=\"dt\" cx=\"220.8\" cy=\"123\" r=\"1.6\"/><circle class=\"dt\" cx=\"229.1\" cy=\"108.5\" r=\"1.6\"/><circle class=\"dt\" cx=\"233.5\" cy=\"92.4\" r=\"1.6\"/><line class=\"ln\" x1=\"130.9\" y1=\"126.9\" x2=\"134\" y2=\"38.5\"/><line class=\"ln\" x1=\"227.8\" y1=\"79.3\" x2=\"112.2\" y2=\"79.3\"/><path class=\"ac\" d=\"M134 38.5 A58 58 0 0 0 112.2 79.3\"/><path class=\"thin\" d=\"M132.1 92.3 A13 13 0 0 0 145.6 79.3\"/><circle class=\"dt\" cx=\"130.9\" cy=\"126.9\" r=\"3\"/><circle class=\"dt\" cx=\"134\" cy=\"38.5\" r=\"3\"/><circle class=\"dt\" cx=\"227.8\" cy=\"79.3\" r=\"3\"/><circle class=\"dt\" cx=\"112.2\" cy=\"79.3\" r=\"3\"/><circle class=\"dt\" cx=\"132.6\" cy=\"79.3\" r=\"3\"/><text x=\"118.1\" y=\"145.9\" text-anchor=\"middle\">A</text><text x=\"122.2\" y=\"28.6\" text-anchor=\"middle\">B</text><text x=\"246.7\" y=\"82.7\" text-anchor=\"middle\">C</text><text x=\"93.3\" y=\"82.7\" text-anchor=\"middle\">D</text><text x=\"123.4\" y=\"75.1\" text-anchor=\"middle\">E</text><text class=\"sm\" x=\"150\" y=\"101.3\" text-anchor=\"middle\">92°</text><text class=\"sm\" x=\"122.8\" y=\"106.8\" text-anchor=\"middle\">14</text><text class=\"sm\" x=\"124.3\" y=\"62.6\" text-anchor=\"middle\">12</text><text class=\"sm\" x=\"122.4\" y=\"74.3\" text-anchor=\"middle\">6</text><text class=\"sm\" x=\"103.9\" y=\"52.6\" text-anchor=\"middle\">47°</text></svg></figure><p class=\"geo-given\">On a round loom, two straight threads cross at <strong>E</strong>: thread AB and thread CD. AE = 14 cm, EB = 12 cm and ED = 6 cm. m∠AEC = 92° and m(arc BD) = 47°. The loom's radius is about 17.1 cm.</p>",
+      passage: "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 168\" role=\"img\" aria-label=\"A round weaving loom drawn as a circle with small pegs around it. Thread AB and thread CD are chords that cross at E. AE and EB are each labeled 12, and CE is labeled 8. The angle AEC is marked 91 degrees, and the gold arc AC is labeled 68 degrees\"><circle class=\"thin\" cx=\"160\" cy=\"84\" r=\"64\"/><circle class=\"ln\" cx=\"160\" cy=\"84\" r=\"58\"/><circle class=\"dt\" cx=\"223.5\" cy=\"75.6\" r=\"1.6\"/><circle class=\"dt\" cx=\"219.1\" cy=\"59.5\" r=\"1.6\"/><circle class=\"dt\" cx=\"210.8\" cy=\"45\" r=\"1.6\"/><circle class=\"dt\" cx=\"199\" cy=\"33.2\" r=\"1.6\"/><circle class=\"dt\" cx=\"184.5\" cy=\"24.9\" r=\"1.6\"/><circle class=\"dt\" cx=\"168.4\" cy=\"20.5\" r=\"1.6\"/><circle class=\"dt\" cx=\"151.6\" cy=\"20.5\" r=\"1.6\"/><circle class=\"dt\" cx=\"135.5\" cy=\"24.9\" r=\"1.6\"/><circle class=\"dt\" cx=\"121\" cy=\"33.2\" r=\"1.6\"/><circle class=\"dt\" cx=\"109.2\" cy=\"45\" r=\"1.6\"/><circle class=\"dt\" cx=\"100.9\" cy=\"59.5\" r=\"1.6\"/><circle class=\"dt\" cx=\"96.5\" cy=\"75.6\" r=\"1.6\"/><circle class=\"dt\" cx=\"96.5\" cy=\"92.4\" r=\"1.6\"/><circle class=\"dt\" cx=\"100.9\" cy=\"108.5\" r=\"1.6\"/><circle class=\"dt\" cx=\"109.2\" cy=\"123\" r=\"1.6\"/><circle class=\"dt\" cx=\"121\" cy=\"134.8\" r=\"1.6\"/><circle class=\"dt\" cx=\"135.5\" cy=\"143.1\" r=\"1.6\"/><circle class=\"dt\" cx=\"151.6\" cy=\"147.5\" r=\"1.6\"/><circle class=\"dt\" cx=\"168.4\" cy=\"147.5\" r=\"1.6\"/><circle class=\"dt\" cx=\"184.5\" cy=\"143.1\" r=\"1.6\"/><circle class=\"dt\" cx=\"199\" cy=\"134.8\" r=\"1.6\"/><circle class=\"dt\" cx=\"210.8\" cy=\"123\" r=\"1.6\"/><circle class=\"dt\" cx=\"219.1\" cy=\"108.5\" r=\"1.6\"/><circle class=\"dt\" cx=\"223.5\" cy=\"92.4\" r=\"1.6\"/><line class=\"ln\" x1=\"103.1\" y1=\"95.4\" x2=\"191.9\" y2=\"35.6\"/><line class=\"ln\" x1=\"128.1\" y1=\"35.6\" x2=\"191.3\" y2=\"132.9\"/><path class=\"ac\" d=\"M128.1 35.6 A58 58 0 0 0 103.1 95.4\"/><path class=\"thin\" d=\"M141 55.4 A12 12 0 0 0 137.6 72.2\"/><circle class=\"dt\" cx=\"103.1\" cy=\"95.4\" r=\"3\"/><circle class=\"dt\" cx=\"191.9\" cy=\"35.6\" r=\"3\"/><circle class=\"dt\" cx=\"128.1\" cy=\"35.6\" r=\"3\"/><circle class=\"dt\" cx=\"191.3\" cy=\"132.9\" r=\"3\"/><circle class=\"dt\" cx=\"147.5\" cy=\"65.5\" r=\"3\"/><text x=\"84.5\" y=\"104.2\" text-anchor=\"middle\">A</text><text x=\"202.4\" y=\"24.7\" text-anchor=\"middle\">B</text><text x=\"117.6\" y=\"24.7\" text-anchor=\"middle\">C</text><text x=\"201.5\" y=\"153.9\" text-anchor=\"middle\">D</text><text x=\"160.1\" y=\"73.9\" text-anchor=\"middle\">E</text><text class=\"sm\" x=\"126\" y=\"65.1\" text-anchor=\"middle\">91°</text><text class=\"sm\" x=\"130.4\" y=\"91.9\" text-anchor=\"middle\">12</text><text class=\"sm\" x=\"174.7\" y=\"62\" text-anchor=\"middle\">12</text><text class=\"sm\" x=\"145.4\" y=\"49.6\" text-anchor=\"middle\">8</text><text class=\"sm\" x=\"89.8\" y=\"58.8\" text-anchor=\"middle\">68°</text></svg></figure><p class=\"geo-given\">On a round loom with radius 13 cm, two straight threads cross at <strong>E</strong>: thread AB and thread CD. AE = 12 cm, EB = 12 cm and CE = 8 cm. m∠AEC = 91° and m(arc AC) = 68°.</p>",
       claims: [
         {
-          id: "CE",
+          id: "ED",
           sol: "G.PC.3",
           sub: "G.PC.3.2",
-          stem: "How long is CE, the other piece of thread CD?",
+          stem: "How long is ED, the other piece of thread CD?",
           choices: [
-            { letter: "A", text: "7 cm" },
-            { letter: "B", text: "20 cm" },
-            { letter: "C", text: "28 cm" },
-            { letter: "D", text: "168 cm" }
+            { letter: "A", text: "8 cm" },
+            { letter: "B", text: "16 cm" },
+            { letter: "C", text: "18 cm" },
+            { letter: "D", text: "144 cm" }
           ],
           correct: "C"
         },
@@ -215,23 +215,23 @@
           sub: "G.PC.3.2",
           stem: "Which equation is true for the pieces of the two threads?",
           choices: [
-            { letter: "A", text: "14 · 6 = CE · 12" },
-            { letter: "B", text: "14 + 12 = CE + 6" },
-            { letter: "C", text: "14 · CE = 12 · 6" },
-            { letter: "D", text: "14 · 12 = CE · 6" }
+            { letter: "A", text: "12 · 8 = 12 · ED" },
+            { letter: "B", text: "12 + 12 = 8 + ED" },
+            { letter: "C", text: "12 / 12 = 8 / ED" },
+            { letter: "D", text: "12 · 12 = 8 · ED" }
           ],
           correct: "D"
         },
         {
-          id: "arcAC",
+          id: "arcBD",
           sol: "G.PC.3",
           sub: "G.PC.3.1",
-          stem: "What is m(arc AC), the arc cut off by ∠AEC?",
+          stem: "What is m(arc BD), the arc cut off by the angle vertical to ∠AEC?",
           choices: [
-            { letter: "A", text: "45°" },
-            { letter: "B", text: "92°" },
-            { letter: "C", text: "137°" },
-            { letter: "D", text: "231°" }
+            { letter: "A", text: "23°" },
+            { letter: "B", text: "91°" },
+            { letter: "C", text: "114°" },
+            { letter: "D", text: "250°" }
           ],
           correct: "C"
         },
@@ -241,23 +241,23 @@
           sub: "G.PC.3.1",
           stem: "What is m(arc AD) + m(arc CB)?",
           choices: [
-            { letter: "A", text: "88°" },
-            { letter: "B", text: "176°" },
-            { letter: "C", text: "184°" },
-            { letter: "D", text: "268°" }
+            { letter: "A", text: "89°" },
+            { letter: "B", text: "178°" },
+            { letter: "C", text: "182°" },
+            { letter: "D", text: "269°" }
           ],
           correct: "B"
         },
         {
-          id: "arcBD",
+          id: "arcAC",
           sol: "G.PC.3",
           sub: "G.PC.3.3",
-          stem: "Use the loom's radius, 17.1 cm. How long is arc BD along the loom? Round to the nearest tenth of a centimeter.",
+          stem: "How long is the gold arc AC along the loom? Round to the nearest tenth of a centimeter.",
           choices: [
-            { letter: "A", text: "14.0 cm" },
-            { letter: "B", text: "7.0 cm" },
-            { letter: "C", text: "28.1 cm" },
-            { letter: "D", text: "40.9 cm" }
+            { letter: "A", text: "15.4 cm" },
+            { letter: "B", text: "7.7 cm" },
+            { letter: "C", text: "30.9 cm" },
+            { letter: "D", text: "20.6 cm" }
           ],
           correct: "A"
         },
@@ -374,7 +374,7 @@
       kind: "Circles · G.PC.3",
       blurb: "A chain hangs in a V around a round pendant.",
       level: 2,
-      passage: "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 166\" role=\"img\" aria-label=\"A round pendant with center O hangs below a clasp P. The two straight sides of the chain, PA and PB, touch the pendant at A and B, and the angle at P is labeled 52 degrees. The gold arc AB is the top of the pendant, between A and B. Chord AB is drawn, and a bead C on the lower edge is joined to A and B\"><circle class=\"sh2\" cx=\"160\" cy=\"109.8\" r=\"42\"/><circle class=\"ln\" cx=\"160\" cy=\"109.8\" r=\"42\"/><circle class=\"thin\" cx=\"160\" cy=\"109.8\" r=\"33\"/><path class=\"ac\" d=\"M197.7 91.4 A42 42 0 0 0 122.3 91.4\"/><line class=\"ln\" x1=\"160\" y1=\"14\" x2=\"122.3\" y2=\"91.4\"/><line class=\"ln\" x1=\"160\" y1=\"14\" x2=\"197.7\" y2=\"91.4\"/><line class=\"thin\" x1=\"122.3\" y1=\"91.4\" x2=\"197.7\" y2=\"91.4\"/><line class=\"thin\" x1=\"145.6\" y1=\"149.3\" x2=\"122.3\" y2=\"91.4\"/><line class=\"thin\" x1=\"145.6\" y1=\"149.3\" x2=\"197.7\" y2=\"91.4\"/><circle class=\"thin\" cx=\"160\" cy=\"13\" r=\"5\"/><path class=\"thin\" d=\"M153.4 27.5 A15 15 0 0 0 166.6 27.5\"/><circle class=\"dt\" cx=\"160\" cy=\"14\" r=\"3\"/><circle class=\"dt\" cx=\"160\" cy=\"109.8\" r=\"3\"/><circle class=\"dt\" cx=\"122.3\" cy=\"91.4\" r=\"3\"/><circle class=\"dt\" cx=\"197.7\" cy=\"91.4\" r=\"3\"/><circle class=\"dt\" cx=\"145.6\" cy=\"149.3\" r=\"3\"/><text x=\"176\" y=\"21\" text-anchor=\"middle\">P</text><text x=\"111.5\" y=\"91.1\" text-anchor=\"middle\">A</text><text x=\"208.5\" y=\"91.1\" text-anchor=\"middle\">B</text><text x=\"141.2\" y=\"166.5\" text-anchor=\"middle\">C</text><text x=\"148\" y=\"117.8\" text-anchor=\"middle\">O</text><text class=\"sm\" x=\"160\" y=\"47\" text-anchor=\"middle\">52°</text><text class=\"sm\" x=\"255\" y=\"154\" text-anchor=\"middle\">radius 1.4 cm</text></svg></figure><p class=\"geo-given\">A round pendant with center <strong>O</strong> and radius 1.4 cm hangs from a clasp <strong>P</strong>. The straight sides of the chain, PA and PB, are tangent to the pendant at <strong>A</strong> and <strong>B</strong>, and m∠APB = 52°. A bead <strong>C</strong> is on the pendant's lower edge.</p>",
+      passage: "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 166\" role=\"img\" aria-label=\"A round pendant with center O hangs below a clasp P. The two straight sides of the chain, PA and PB, touch the pendant at A and B, and the angle at P is labeled 52 degrees. The gold arc AB is the top of the pendant, between A and B. Chord AB is drawn, and a bead C on the lower edge is joined to A and B\"><circle class=\"sh2\" cx=\"160\" cy=\"105.2\" r=\"40\"/><circle class=\"ln\" cx=\"160\" cy=\"105.2\" r=\"40\"/><circle class=\"thin\" cx=\"160\" cy=\"105.2\" r=\"31\"/><path class=\"ac\" d=\"M196 87.7 A40 40 0 0 0 124 87.7\"/><line class=\"ln\" x1=\"160\" y1=\"14\" x2=\"124\" y2=\"87.7\"/><line class=\"ln\" x1=\"160\" y1=\"14\" x2=\"196\" y2=\"87.7\"/><line class=\"thin\" x1=\"124\" y1=\"87.7\" x2=\"196\" y2=\"87.7\"/><line class=\"thin\" x1=\"146.3\" y1=\"142.8\" x2=\"124\" y2=\"87.7\"/><line class=\"thin\" x1=\"146.3\" y1=\"142.8\" x2=\"196\" y2=\"87.7\"/><circle class=\"thin\" cx=\"160\" cy=\"13\" r=\"5\"/><path class=\"thin\" d=\"M153.4 27.5 A15 15 0 0 0 166.6 27.5\"/><circle class=\"dt\" cx=\"160\" cy=\"14\" r=\"3\"/><circle class=\"dt\" cx=\"160\" cy=\"105.2\" r=\"3\"/><circle class=\"dt\" cx=\"124\" cy=\"87.7\" r=\"3\"/><circle class=\"dt\" cx=\"196\" cy=\"87.7\" r=\"3\"/><circle class=\"dt\" cx=\"146.3\" cy=\"142.8\" r=\"3\"/><text x=\"176\" y=\"21\" text-anchor=\"middle\">P</text><text x=\"113.3\" y=\"87.5\" text-anchor=\"middle\">A</text><text x=\"206.7\" y=\"87.5\" text-anchor=\"middle\">B</text><text x=\"142.2\" y=\"159.1\" text-anchor=\"middle\">C</text><text x=\"148\" y=\"113.2\" text-anchor=\"middle\">O</text><text class=\"sm\" x=\"160\" y=\"47\" text-anchor=\"middle\">52°</text><text class=\"sm\" x=\"255\" y=\"154\" text-anchor=\"middle\">radius 1.4 cm</text></svg></figure><p class=\"geo-given\">A round pendant with center <strong>O</strong> and radius 1.4 cm hangs from a clasp <strong>P</strong>. The straight sides of the chain, PA and PB, are tangent to the pendant at <strong>A</strong> and <strong>B</strong>, and m∠APB = 52°. A bead <strong>C</strong> is on the pendant's lower edge.</p>",
       claims: [
         {
           id: "arc",
@@ -464,7 +464,7 @@
       kind: "Circles · G.PC.3",
       blurb: "Strings stretched between nails on a round hoop.",
       level: 2,
-      passage: "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 164\" role=\"img\" aria-label=\"A round hoop with center O and 20 nails equally spaced around it. Four nails are labeled A, B, C and D. Gold strings AC and BD cross at E. Strings AB and BC are also drawn, and dashed radii join O to B and to C\"><circle class=\"thin\" cx=\"160\" cy=\"82\" r=\"62\"/><circle class=\"ln\" cx=\"160\" cy=\"82\" r=\"58\"/><circle class=\"dt\" cx=\"113.1\" cy=\"116.1\" r=\"2\"/><circle class=\"dt\" cx=\"125.9\" cy=\"128.9\" r=\"2\"/><circle class=\"dt\" cx=\"160\" cy=\"140\" r=\"2\"/><circle class=\"dt\" cx=\"177.9\" cy=\"137.2\" r=\"2\"/><circle class=\"dt\" cx=\"194.1\" cy=\"128.9\" r=\"2\"/><circle class=\"dt\" cx=\"206.9\" cy=\"116.1\" r=\"2\"/><circle class=\"dt\" cx=\"215.2\" cy=\"99.9\" r=\"2\"/><circle class=\"dt\" cx=\"215.2\" cy=\"64.1\" r=\"2\"/><circle class=\"dt\" cx=\"206.9\" cy=\"47.9\" r=\"2\"/><circle class=\"dt\" cx=\"194.1\" cy=\"35.1\" r=\"2\"/><circle class=\"dt\" cx=\"160\" cy=\"24\" r=\"2\"/><circle class=\"dt\" cx=\"142.1\" cy=\"26.8\" r=\"2\"/><circle class=\"dt\" cx=\"125.9\" cy=\"35.1\" r=\"2\"/><circle class=\"dt\" cx=\"113.1\" cy=\"47.9\" r=\"2\"/><circle class=\"dt\" cx=\"104.8\" cy=\"64.1\" r=\"2\"/><circle class=\"dt\" cx=\"102\" cy=\"82\" r=\"2\"/><line class=\"thin dash\" x1=\"160\" y1=\"82\" x2=\"142.1\" y2=\"137.2\"/><line class=\"thin dash\" x1=\"160\" y1=\"82\" x2=\"218\" y2=\"82\"/><line class=\"ac\" x1=\"104.8\" y1=\"99.9\" x2=\"218\" y2=\"82\"/><line class=\"ac\" x1=\"142.1\" y1=\"137.2\" x2=\"177.9\" y2=\"26.8\"/><line class=\"ln\" x1=\"104.8\" y1=\"99.9\" x2=\"142.1\" y2=\"137.2\"/><line class=\"ln\" x1=\"142.1\" y1=\"137.2\" x2=\"218\" y2=\"82\"/><circle class=\"dt\" cx=\"160\" cy=\"82\" r=\"3\"/><circle class=\"dt\" cx=\"104.8\" cy=\"99.9\" r=\"3\"/><circle class=\"dt\" cx=\"142.1\" cy=\"137.2\" r=\"3\"/><circle class=\"dt\" cx=\"218\" cy=\"82\" r=\"3\"/><circle class=\"dt\" cx=\"177.9\" cy=\"26.8\" r=\"3\"/><circle class=\"dt\" cx=\"156.9\" cy=\"91.7\" r=\"3\"/><text x=\"90.6\" y=\"109.6\" text-anchor=\"middle\">A</text><text x=\"137.4\" y=\"156.4\" text-anchor=\"middle\">B</text><text x=\"233\" y=\"87\" text-anchor=\"middle\">C</text><text x=\"182.6\" y=\"17.6\" text-anchor=\"middle\">D</text><text x=\"165.3\" y=\"105.2\" text-anchor=\"middle\">E</text><text x=\"149.6\" y=\"81\" text-anchor=\"middle\">O</text><text class=\"sm\" x=\"268\" y=\"154\" text-anchor=\"middle\">20 nails</text></svg></figure><p class=\"geo-given\">A hoop with center <strong>O</strong> and radius 25 cm has 20 nails equally spaced around it. Going around the hoop, there are 3 gaps from nail <strong>A</strong> to nail <strong>B</strong>, 6 from B to <strong>C</strong>, 4 from C to <strong>D</strong> and 7 from D back to A. Gold strings AC and BD cross at <strong>E</strong>.</p>",
+      passage: "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 164\" role=\"img\" aria-label=\"A round hoop with center O and 20 nails equally spaced around it. Four nails are labeled A, B, C and D. Gold strings AC and BD cross at E. Strings AB and BC are also drawn, and dashed radii join O to B and to C\"><circle class=\"thin\" cx=\"160\" cy=\"82\" r=\"62\"/><circle class=\"ln\" cx=\"160\" cy=\"82\" r=\"58\"/><circle class=\"dt\" cx=\"113.1\" cy=\"116.1\" r=\"2\"/><circle class=\"dt\" cx=\"125.9\" cy=\"128.9\" r=\"2\"/><circle class=\"dt\" cx=\"160\" cy=\"140\" r=\"2\"/><circle class=\"dt\" cx=\"177.9\" cy=\"137.2\" r=\"2\"/><circle class=\"dt\" cx=\"194.1\" cy=\"128.9\" r=\"2\"/><circle class=\"dt\" cx=\"206.9\" cy=\"116.1\" r=\"2\"/><circle class=\"dt\" cx=\"218\" cy=\"82\" r=\"2\"/><circle class=\"dt\" cx=\"215.2\" cy=\"64.1\" r=\"2\"/><circle class=\"dt\" cx=\"206.9\" cy=\"47.9\" r=\"2\"/><circle class=\"dt\" cx=\"177.9\" cy=\"26.8\" r=\"2\"/><circle class=\"dt\" cx=\"160\" cy=\"24\" r=\"2\"/><circle class=\"dt\" cx=\"142.1\" cy=\"26.8\" r=\"2\"/><circle class=\"dt\" cx=\"125.9\" cy=\"35.1\" r=\"2\"/><circle class=\"dt\" cx=\"113.1\" cy=\"47.9\" r=\"2\"/><circle class=\"dt\" cx=\"104.8\" cy=\"64.1\" r=\"2\"/><circle class=\"dt\" cx=\"102\" cy=\"82\" r=\"2\"/><line class=\"thin dash\" x1=\"160\" y1=\"82\" x2=\"142.1\" y2=\"137.2\"/><line class=\"thin dash\" x1=\"160\" y1=\"82\" x2=\"215.2\" y2=\"99.9\"/><line class=\"ac\" x1=\"104.8\" y1=\"99.9\" x2=\"215.2\" y2=\"99.9\"/><line class=\"ac\" x1=\"142.1\" y1=\"137.2\" x2=\"194.1\" y2=\"35.1\"/><line class=\"ln\" x1=\"104.8\" y1=\"99.9\" x2=\"142.1\" y2=\"137.2\"/><line class=\"ln\" x1=\"142.1\" y1=\"137.2\" x2=\"215.2\" y2=\"99.9\"/><circle class=\"dt\" cx=\"160\" cy=\"82\" r=\"3\"/><circle class=\"dt\" cx=\"104.8\" cy=\"99.9\" r=\"3\"/><circle class=\"dt\" cx=\"142.1\" cy=\"137.2\" r=\"3\"/><circle class=\"dt\" cx=\"215.2\" cy=\"99.9\" r=\"3\"/><circle class=\"dt\" cx=\"194.1\" cy=\"35.1\" r=\"3\"/><circle class=\"dt\" cx=\"161.1\" cy=\"99.9\" r=\"3\"/><text x=\"90.6\" y=\"109.6\" text-anchor=\"middle\">A</text><text x=\"137.4\" y=\"156.4\" text-anchor=\"middle\">B</text><text x=\"229.4\" y=\"109.6\" text-anchor=\"middle\">C</text><text x=\"202.9\" y=\"27.9\" text-anchor=\"middle\">D</text><text x=\"167.1\" y=\"115.3\" text-anchor=\"middle\">E</text><text x=\"151.5\" y=\"78.5\" text-anchor=\"middle\">O</text><text class=\"sm\" x=\"268\" y=\"154\" text-anchor=\"middle\">20 nails</text></svg></figure><p class=\"geo-given\">A hoop with center <strong>O</strong> and radius 25 cm has 20 nails equally spaced around it. Going around the hoop, there are 3 gaps from nail <strong>A</strong> to nail <strong>B</strong>, 5 from B to <strong>C</strong>, 4 from C to <strong>D</strong> and 8 from D back to A. Gold strings AC and BD cross at <strong>E</strong>.</p>",
       claims: [
         {
           id: "BOC",
@@ -472,10 +472,10 @@
           sub: "G.PC.3.1",
           stem: "What is m∠BOC, the central angle from nail B to nail C?",
           choices: [
-            { letter: "A", text: "54°" },
-            { letter: "B", text: "120°" },
-            { letter: "C", text: "216°" },
-            { letter: "D", text: "108°" }
+            { letter: "A", text: "45°" },
+            { letter: "B", text: "100°" },
+            { letter: "C", text: "180°" },
+            { letter: "D", text: "90°" }
           ],
           correct: "D"
         },
@@ -498,10 +498,10 @@
           sub: "G.PC.3.1",
           stem: "What is m∠ABC, the angle at nail B between strings BA and BC?",
           choices: [
-            { letter: "A", text: "81°" },
-            { letter: "B", text: "99°" },
-            { letter: "C", text: "198°" },
-            { letter: "D", text: "108°" }
+            { letter: "A", text: "72°" },
+            { letter: "B", text: "108°" },
+            { letter: "C", text: "216°" },
+            { letter: "D", text: "90°" }
           ],
           correct: "B"
         },
@@ -509,12 +509,12 @@
           id: "error",
           sol: "G.PC.3",
           sub: "G.PC.3.1",
-          stem: "Jada writes m∠BEC = ½(126° − 108°) = 9°. What is her mistake?",
+          stem: "Jada writes m∠BEC = ½(144° − 90°) = 27°. What is her mistake?",
           choices: [
-            { letter: "A", text: "She should add the arcs: ½(126° + 108°)." },
-            { letter: "B", text: "She should not halve: 126° − 108° = 18°." },
-            { letter: "C", text: "She should use arcs AB and CD: ½(54° + 72°)." },
-            { letter: "D", text: "She should double: 2(126° − 108°) = 36°." }
+            { letter: "A", text: "She should add the arcs: ½(144° + 90°)." },
+            { letter: "B", text: "She should not halve: 144° − 90° = 54°." },
+            { letter: "C", text: "She should use only arc BC: ½(90°) = 45°." },
+            { letter: "D", text: "She should double: 2(144° − 90°) = 108°." }
           ],
           correct: "A"
         },
@@ -532,10 +532,10 @@
           correct: "C"
         },
         {
-          id: "AC",
+          id: "BD",
           sol: "G.PC.3",
           sub: "G.PC.3.4",
-          stem: "Arc ABC measures 162°. Use isosceles triangle AOC to find the length of string AC, to the nearest tenth of a centimeter.",
+          stem: "Arc BCD measures 162°. Use isosceles triangle BOD to find the length of string BD, to the nearest tenth of a centimeter.",
           choices: [
             { letter: "A", text: "70.7 cm" },
             { letter: "B", text: "7.8 cm" },
@@ -602,8 +602,8 @@
           stem: "The area of △AOB is about 1.40 m². What is the area of the gold piece of glass, to the nearest hundredth of a square meter?",
           choices: [
             { letter: "A", text: "1.40 m²" },
-            { letter: "B", text: "1.70 m²" },
-            { letter: "C", text: "3.10 m²" },
+            { letter: "B", text: "1.17 m²" },
+            { letter: "C", text: "8.78 m²" },
             { letter: "D", text: "0.29 m²" }
           ],
           correct: "D"
@@ -644,7 +644,7 @@
       kind: "Circles · G.PC.3",
       blurb: "Three guide lines from one point outside a mandala.",
       level: 3,
-      passage: "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 168\" role=\"img\" aria-label=\"A circular mandala with center O and petal shapes inside. From point P outside the circle, one line crosses the circle at A and B, a second crosses it at C and D, and a third touches it only at T. PA is labeled 6, AB 18 and PC 8. The near gold arc AC is labeled 36 degrees and the far gold arc BD is labeled 136 degrees\"><circle class=\"ln\" cx=\"143.1\" cy=\"84\" r=\"66.1\"/><circle class=\"thin\" cx=\"143.1\" cy=\"84\" r=\"11.9\"/><circle class=\"thin gr\" cx=\"168.8\" cy=\"73.4\" r=\"15.9\"/><circle class=\"thin gr\" cx=\"153.8\" cy=\"58.4\" r=\"15.9\"/><circle class=\"thin gr\" cx=\"132.5\" cy=\"58.4\" r=\"15.9\"/><circle class=\"thin gr\" cx=\"117.5\" cy=\"73.4\" r=\"15.9\"/><circle class=\"thin gr\" cx=\"117.5\" cy=\"94.6\" r=\"15.9\"/><circle class=\"thin gr\" cx=\"132.5\" cy=\"109.6\" r=\"15.9\"/><circle class=\"thin gr\" cx=\"153.8\" cy=\"109.6\" r=\"15.9\"/><circle class=\"thin gr\" cx=\"168.8\" cy=\"94.6\" r=\"15.9\"/><line class=\"ln\" x1=\"40\" y1=\"84\" x2=\"192\" y2=\"128.4\"/><line class=\"ln\" x1=\"40\" y1=\"84\" x2=\"138.8\" y2=\"18.1\"/><line class=\"ln\" x1=\"40\" y1=\"84\" x2=\"116\" y2=\"147.4\"/><path class=\"ac\" d=\"M83.9 54.7 A66.1 66.1 0 0 0 78 95.1\"/><path class=\"ac\" d=\"M192 128.4 A66.1 66.1 0 0 0 138.8 18.1\"/><circle class=\"dt\" cx=\"40\" cy=\"84\" r=\"3\"/><circle class=\"dt\" cx=\"78\" cy=\"95.1\" r=\"3\"/><circle class=\"dt\" cx=\"192\" cy=\"128.4\" r=\"3\"/><circle class=\"dt\" cx=\"83.9\" cy=\"54.7\" r=\"3\"/><circle class=\"dt\" cx=\"138.8\" cy=\"18.1\" r=\"3\"/><circle class=\"dt\" cx=\"100.8\" cy=\"134.7\" r=\"3\"/><circle class=\"dt\" cx=\"143.1\" cy=\"84\" r=\"3\"/><text x=\"28\" y=\"90\" text-anchor=\"middle\">P</text><text x=\"87.2\" y=\"90.9\" text-anchor=\"middle\">A</text><text x=\"201.7\" y=\"142.2\" text-anchor=\"middle\">B</text><text x=\"74.7\" y=\"50.5\" text-anchor=\"middle\">C</text><text x=\"138\" y=\"10.1\" text-anchor=\"middle\">D</text><text x=\"91.6\" y=\"148.9\" text-anchor=\"middle\">T</text><text x=\"154.1\" y=\"93\" text-anchor=\"middle\">O</text><text class=\"sm\" x=\"56.5\" y=\"102.2\" text-anchor=\"middle\">6</text><text class=\"sm\" x=\"146.2\" y=\"128.4\" text-anchor=\"middle\">18</text><text class=\"sm\" x=\"57\" y=\"65.9\" text-anchor=\"middle\">8</text><text class=\"sm\" x=\"90.6\" y=\"80.3\" text-anchor=\"middle\">36°</text><text class=\"sm\" x=\"215.3\" y=\"53.2\" text-anchor=\"middle\">136°</text></svg></figure><p class=\"geo-given\">An artist draws a mandala on a circle with center <strong>O</strong> and radius 10 cm. From point <strong>P</strong> outside the circle she rules three guide lines. One crosses the circle at <strong>A</strong> and <strong>B</strong>, one crosses it at <strong>C</strong> and <strong>D</strong>, and one touches it only at <strong>T</strong>. PA = 6 cm, AB = 18 cm and PC = 8 cm. m(arc AC) = 36° and m(arc BD) = 136°.</p>",
+      passage: "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 170\" role=\"img\" aria-label=\"A circular mandala with center O and petal shapes inside. From point P outside the circle, one line crosses the circle at A and B, a second crosses it at C and D, and a third touches it only at T. AB is labeled 18. The near gold arc AC is labeled 36 degrees and the far gold arc BD is labeled 136 degrees\"><circle class=\"ln\" cx=\"152.9\" cy=\"88\" r=\"62.1\"/><circle class=\"thin\" cx=\"152.9\" cy=\"88\" r=\"11.2\"/><circle class=\"thin gr\" cx=\"177\" cy=\"78\" r=\"14.9\"/><circle class=\"thin gr\" cx=\"162.9\" cy=\"63.9\" r=\"14.9\"/><circle class=\"thin gr\" cx=\"142.9\" cy=\"63.9\" r=\"14.9\"/><circle class=\"thin gr\" cx=\"128.8\" cy=\"78\" r=\"14.9\"/><circle class=\"thin gr\" cx=\"128.8\" cy=\"98\" r=\"14.9\"/><circle class=\"thin gr\" cx=\"142.9\" cy=\"112.1\" r=\"14.9\"/><circle class=\"thin gr\" cx=\"162.9\" cy=\"112.1\" r=\"14.9\"/><circle class=\"thin gr\" cx=\"177\" cy=\"98\" r=\"14.9\"/><line class=\"ln\" x1=\"56\" y1=\"88\" x2=\"198.8\" y2=\"129.7\"/><line class=\"ln\" x1=\"56\" y1=\"88\" x2=\"148.8\" y2=\"26.1\"/><line class=\"ln\" x1=\"56\" y1=\"88\" x2=\"127.4\" y2=\"147.6\"/><path class=\"ac\" d=\"M97.3 60.5 A62.1 62.1 0 0 0 91.7 98.4\"/><path class=\"ac\" d=\"M198.8 129.7 A62.1 62.1 0 0 0 148.8 26.1\"/><circle class=\"dt\" cx=\"56\" cy=\"88\" r=\"3\"/><circle class=\"dt\" cx=\"91.7\" cy=\"98.4\" r=\"3\"/><circle class=\"dt\" cx=\"198.8\" cy=\"129.7\" r=\"3\"/><circle class=\"dt\" cx=\"97.3\" cy=\"60.5\" r=\"3\"/><circle class=\"dt\" cx=\"148.8\" cy=\"26.1\" r=\"3\"/><circle class=\"dt\" cx=\"113.1\" cy=\"135.7\" r=\"3\"/><circle class=\"dt\" cx=\"152.9\" cy=\"88\" r=\"3\"/><text x=\"44\" y=\"94\" text-anchor=\"middle\">P</text><text x=\"105\" y=\"107.8\" text-anchor=\"middle\">A</text><text x=\"208.4\" y=\"143.5\" text-anchor=\"middle\">B</text><text x=\"88.3\" y=\"56.1\" text-anchor=\"middle\">C</text><text x=\"148\" y=\"18.1\" text-anchor=\"middle\">D</text><text x=\"103.9\" y=\"149.9\" text-anchor=\"middle\">T</text><text x=\"167.9\" y=\"105\" text-anchor=\"middle\">O</text><text class=\"sm\" x=\"155.6\" y=\"130.5\" text-anchor=\"middle\">18</text><text class=\"sm\" x=\"78.6\" y=\"81.1\" text-anchor=\"middle\">36°</text><text class=\"sm\" x=\"221.4\" y=\"59\" text-anchor=\"middle\">136°</text></svg></figure><p class=\"geo-given\">An artist draws a mandala on a circle with center <strong>O</strong> and radius 10 cm. From point <strong>P</strong> outside the circle she rules three guide lines. One crosses the circle at <strong>A</strong> and <strong>B</strong>, one crosses it at <strong>C</strong> and <strong>D</strong>, and one touches it only at <strong>T</strong>. PA = 6 cm, AB = 18 cm and PC = 8 cm. m(arc AC) = 36° and m(arc BD) = 136°.</p>",
       claims: [
         {
           id: "CD",
@@ -715,12 +715,12 @@
           id: "PO",
           sol: "G.PC.3",
           sub: "G.PC.3.4",
-          stem: "She rules one more line from P to the center O. Use PT = 12 cm. To the nearest tenth of a centimeter, how long is PO?",
+          stem: "She rules one more line from P to the center O. To the nearest tenth of a centimeter, how long is PO?",
           choices: [
             { letter: "A", text: "22 cm" },
             { letter: "B", text: "6.6 cm" },
             { letter: "C", text: "15.6 cm" },
-            { letter: "D", text: "16 cm" }
+            { letter: "D", text: "26.0 cm" }
           ],
           correct: "C"
         }
@@ -734,7 +734,7 @@
       kind: "Circles · G.PC.3",
       blurb: "Three straight paths split a round garden into beds.",
       level: 1,
-      passage: "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 160\" role=\"img\" aria-label=\"A circular garden with center O. Straight paths run from O to points A, B and C on the edge. Sector AOB is shaded, with its gold edge arc AB, and its angle is labeled 140 degrees. Angle BOC is labeled 100 degrees. A lantern at D on the edge is joined to A and B by thin lines\"><path class=\"sh\" d=\"M160 80 L108 50 A60 60 0 0 0 180.5 136.4 Z\"/><circle class=\"ln\" cx=\"160\" cy=\"80\" r=\"60\"/><path class=\"ac\" d=\"M108 50 A60 60 0 0 0 180.5 136.4\"/><line class=\"ln\" x1=\"160\" y1=\"80\" x2=\"108\" y2=\"50\"/><line class=\"ln\" x1=\"160\" y1=\"80\" x2=\"180.5\" y2=\"136.4\"/><line class=\"ln\" x1=\"160\" y1=\"80\" x2=\"212\" y2=\"50\"/><line class=\"thin\" x1=\"196.9\" y1=\"32.7\" x2=\"108\" y2=\"50\"/><line class=\"thin\" x1=\"196.9\" y1=\"32.7\" x2=\"180.5\" y2=\"136.4\"/><circle class=\"dt\" cx=\"160\" cy=\"80\" r=\"3\"/><circle class=\"dt\" cx=\"108\" cy=\"50\" r=\"3\"/><circle class=\"dt\" cx=\"180.5\" cy=\"136.4\" r=\"3\"/><circle class=\"dt\" cx=\"212\" cy=\"50\" r=\"3\"/><circle class=\"dt\" cx=\"196.9\" cy=\"32.7\" r=\"3\"/><text x=\"96.8\" y=\"48.5\" text-anchor=\"middle\">A</text><text x=\"185\" y=\"153.6\" text-anchor=\"middle\">B</text><text x=\"223.2\" y=\"48.5\" text-anchor=\"middle\">C</text><text x=\"204.9\" y=\"27.5\" text-anchor=\"middle\">D</text><text x=\"147\" y=\"94\" text-anchor=\"middle\">O</text><text class=\"sm\" x=\"137\" y=\"103.3\" text-anchor=\"middle\">140°</text><text class=\"sm\" x=\"190.1\" y=\"94.9\" text-anchor=\"middle\">100°</text><text class=\"sm\" x=\"268\" y=\"154\" text-anchor=\"middle\">radius 4.5 m</text></svg></figure><p class=\"geo-given\">A circular garden has center <strong>O</strong> and radius 4.5 m. Straight paths run from O to <strong>A</strong>, <strong>B</strong> and <strong>C</strong> on the edge, making three beds. m∠AOB = 140° and m∠BOC = 100°. A lantern stands at <strong>D</strong> on the edge, between C and A.</p>",
+      passage: "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 160\" role=\"img\" aria-label=\"A circular garden with center O. Straight paths run from O to points A, B and C on the edge. Sector AOB is shaded, with its gold edge arc AB, and its angle is labeled 140 degrees. Angle BOC is labeled 100 degrees. A lantern at D on the edge is joined to A and B by thin lines\"><path class=\"sh\" d=\"M160 80 L108 50 A60 60 0 0 0 180.5 136.4 Z\"/><circle class=\"ln\" cx=\"160\" cy=\"80\" r=\"60\"/><path class=\"ac\" d=\"M108 50 A60 60 0 0 0 180.5 136.4\"/><line class=\"ln\" x1=\"160\" y1=\"80\" x2=\"108\" y2=\"50\"/><line class=\"ln\" x1=\"160\" y1=\"80\" x2=\"180.5\" y2=\"136.4\"/><line class=\"ln\" x1=\"160\" y1=\"80\" x2=\"212\" y2=\"50\"/><line class=\"thin\" x1=\"124.7\" y1=\"31.5\" x2=\"108\" y2=\"50\"/><line class=\"thin\" x1=\"124.7\" y1=\"31.5\" x2=\"180.5\" y2=\"136.4\"/><circle class=\"dt\" cx=\"160\" cy=\"80\" r=\"3\"/><circle class=\"dt\" cx=\"108\" cy=\"50\" r=\"3\"/><circle class=\"dt\" cx=\"180.5\" cy=\"136.4\" r=\"3\"/><circle class=\"dt\" cx=\"212\" cy=\"50\" r=\"3\"/><circle class=\"dt\" cx=\"124.7\" cy=\"31.5\" r=\"3\"/><text x=\"96.8\" y=\"48.5\" text-anchor=\"middle\">A</text><text x=\"185\" y=\"153.6\" text-anchor=\"middle\">B</text><text x=\"223.2\" y=\"48.5\" text-anchor=\"middle\">C</text><text x=\"117.1\" y=\"25.9\" text-anchor=\"middle\">D</text><text x=\"160\" y=\"72\" text-anchor=\"middle\">O</text><text class=\"sm\" x=\"133.1\" y=\"110.9\" text-anchor=\"middle\">140°</text><text class=\"sm\" x=\"190.1\" y=\"94.9\" text-anchor=\"middle\">100°</text><text class=\"sm\" x=\"268\" y=\"154\" text-anchor=\"middle\">radius 4.5 m</text></svg></figure><p class=\"geo-given\">A circular garden has center <strong>O</strong> and radius 4.5 m. Straight paths run from O to <strong>A</strong>, <strong>B</strong> and <strong>C</strong> on the edge, making three beds. m∠AOB = 140° and m∠BOC = 100°. A lantern stands at <strong>D</strong> on the edge, between C and A.</p>",
       claims: [
         {
           id: "COA",
@@ -914,7 +914,7 @@
       kind: "Circles · G.PC.3",
       blurb: "A bench line touches a ring of stones; a path runs through the fire.",
       level: 2,
-      passage: "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 162\" role=\"img\" aria-label=\"A circular campfire ring of stones with center O and a flame drawn in the middle. A gold bench line from point P touches the ring only at T. A straight path from P passes through A, the center O and B. PA is labeled 0.6 meters\"><path class=\"sh\" d=\"M131 86 Q128 70 141 56 Q154 70 151 86 Z\"/><circle class=\"ln\" cx=\"141\" cy=\"92\" r=\"63\"/><circle class=\"thin\" cx=\"204.7\" cy=\"65.6\" r=\"2.6\"/><circle class=\"thin\" cx=\"195.7\" cy=\"50\" r=\"2.6\"/><circle class=\"thin\" cx=\"183\" cy=\"37.3\" r=\"2.6\"/><circle class=\"thin\" cx=\"167.4\" cy=\"28.3\" r=\"2.6\"/><circle class=\"thin\" cx=\"150\" cy=\"23.6\" r=\"2.6\"/><circle class=\"thin\" cx=\"132\" cy=\"23.6\" r=\"2.6\"/><circle class=\"thin\" cx=\"77.3\" cy=\"65.6\" r=\"2.6\"/><circle class=\"thin\" cx=\"77.3\" cy=\"118.4\" r=\"2.6\"/><circle class=\"thin\" cx=\"86.3\" cy=\"134\" r=\"2.6\"/><circle class=\"thin\" cx=\"99\" cy=\"146.7\" r=\"2.6\"/><circle class=\"thin\" cx=\"114.6\" cy=\"155.7\" r=\"2.6\"/><circle class=\"thin\" cx=\"132\" cy=\"160.4\" r=\"2.6\"/><circle class=\"thin\" cx=\"150\" cy=\"160.4\" r=\"2.6\"/><circle class=\"thin\" cx=\"167.4\" cy=\"155.7\" r=\"2.6\"/><circle class=\"thin\" cx=\"183\" cy=\"146.7\" r=\"2.6\"/><circle class=\"thin\" cx=\"195.7\" cy=\"134\" r=\"2.6\"/><circle class=\"thin\" cx=\"204.7\" cy=\"118.4\" r=\"2.6\"/><line class=\"ln\" x1=\"36\" y1=\"92\" x2=\"204\" y2=\"92\"/><line class=\"ac\" x1=\"36\" y1=\"92\" x2=\"133.4\" y2=\"18.9\"/><circle class=\"dt\" cx=\"36\" cy=\"92\" r=\"3\"/><circle class=\"dt\" cx=\"78\" cy=\"92\" r=\"3\"/><circle class=\"dt\" cx=\"204\" cy=\"92\" r=\"3\"/><circle class=\"dt\" cx=\"103.2\" cy=\"41.6\" r=\"3\"/><circle class=\"dt\" cx=\"141\" cy=\"92\" r=\"3\"/><text x=\"35\" y=\"113\" text-anchor=\"middle\">P</text><text x=\"87\" y=\"112\" text-anchor=\"middle\">A</text><text x=\"222\" y=\"98\" text-anchor=\"middle\">B</text><text x=\"91.2\" y=\"37.6\" text-anchor=\"middle\">T</text><text x=\"141\" y=\"112\" text-anchor=\"middle\">O</text><text class=\"sm\" x=\"57\" y=\"87\" text-anchor=\"middle\">0.6 m</text><text class=\"sm\" x=\"270\" y=\"154\" text-anchor=\"middle\">radius 0.9 m</text><text class=\"sm\" x=\"137.4\" y=\"12.9\" text-anchor=\"middle\">bench</text></svg></figure><p class=\"geo-given\">A campfire ring is a circle with center <strong>O</strong> and radius 0.9 m. A log bench lies along line PT, which touches the ring only at <strong>T</strong>. A straight path from <strong>P</strong> passes through O; it meets the ring at <strong>A</strong> and <strong>B</strong>. PA = 0.6 m.</p>",
+      passage: "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 162\" role=\"img\" aria-label=\"A circular campfire ring of stones with center O and a flame drawn in the middle. A gold bench line from point P touches the ring only at T. A straight path from P passes through A, the center O and B. PA is labeled 0.6 meters\"><path class=\"sh\" d=\"M131 86 Q128 70 141 56 Q154 70 151 86 Z\"/><circle class=\"ln\" cx=\"141\" cy=\"92\" r=\"63\"/><circle class=\"thin\" cx=\"204.7\" cy=\"65.6\" r=\"2.6\"/><circle class=\"thin\" cx=\"195.7\" cy=\"50\" r=\"2.6\"/><circle class=\"thin\" cx=\"183\" cy=\"37.3\" r=\"2.6\"/><circle class=\"thin\" cx=\"167.4\" cy=\"28.3\" r=\"2.6\"/><circle class=\"thin\" cx=\"150\" cy=\"23.6\" r=\"2.6\"/><circle class=\"thin\" cx=\"132\" cy=\"23.6\" r=\"2.6\"/><circle class=\"thin\" cx=\"77.3\" cy=\"65.6\" r=\"2.6\"/><circle class=\"thin\" cx=\"77.3\" cy=\"118.4\" r=\"2.6\"/><circle class=\"thin\" cx=\"86.3\" cy=\"134\" r=\"2.6\"/><circle class=\"thin\" cx=\"99\" cy=\"146.7\" r=\"2.6\"/><circle class=\"thin\" cx=\"114.6\" cy=\"155.7\" r=\"2.6\"/><circle class=\"thin\" cx=\"132\" cy=\"160.4\" r=\"2.6\"/><circle class=\"thin\" cx=\"150\" cy=\"160.4\" r=\"2.6\"/><circle class=\"thin\" cx=\"167.4\" cy=\"155.7\" r=\"2.6\"/><circle class=\"thin\" cx=\"183\" cy=\"146.7\" r=\"2.6\"/><circle class=\"thin\" cx=\"195.7\" cy=\"134\" r=\"2.6\"/><circle class=\"thin\" cx=\"204.7\" cy=\"118.4\" r=\"2.6\"/><line class=\"ln\" x1=\"36\" y1=\"92\" x2=\"204\" y2=\"92\"/><line class=\"ac\" x1=\"36\" y1=\"92\" x2=\"133.4\" y2=\"18.9\"/><circle class=\"dt\" cx=\"36\" cy=\"92\" r=\"3\"/><circle class=\"dt\" cx=\"78\" cy=\"92\" r=\"3\"/><circle class=\"dt\" cx=\"204\" cy=\"92\" r=\"3\"/><circle class=\"dt\" cx=\"103.2\" cy=\"41.6\" r=\"3\"/><circle class=\"dt\" cx=\"141\" cy=\"92\" r=\"3\"/><text x=\"24\" y=\"98\" text-anchor=\"middle\">P</text><text x=\"87\" y=\"112\" text-anchor=\"middle\">A</text><text x=\"222\" y=\"98\" text-anchor=\"middle\">B</text><text x=\"91.2\" y=\"37.6\" text-anchor=\"middle\">T</text><text x=\"141\" y=\"112\" text-anchor=\"middle\">O</text><text class=\"sm\" x=\"57\" y=\"109\" text-anchor=\"middle\">0.6 m</text><text class=\"sm\" x=\"270\" y=\"154\" text-anchor=\"middle\">radius 0.9 m</text><text class=\"sm\" x=\"137.4\" y=\"12.9\" text-anchor=\"middle\">bench</text></svg></figure><p class=\"geo-given\">A campfire ring is a circle with center <strong>O</strong> and radius 0.9 m. A log bench lies along line PT, which touches the ring only at <strong>T</strong>. A straight path from <strong>P</strong> passes through O; it meets the ring at <strong>A</strong> and <strong>B</strong>. PA = 0.6 m.</p>",
       claims: [
         {
           id: "PT",
@@ -946,12 +946,12 @@
           id: "check",
           sol: "G.PC.3",
           sub: "G.PC.3.4",
-          stem: "Which equation checks PT = 1.2 m with right triangle OTP?",
+          stem: "Which equation is true for triangle OTP?",
           choices: [
-            { letter: "A", text: "0.9² + 1.5² = 1.2²" },
-            { letter: "B", text: "0.9² + 1.2² = 1.5²" },
-            { letter: "C", text: "0.9 + 1.2 = 1.5" },
-            { letter: "D", text: "0.6² + 1.2² = 1.5²" }
+            { letter: "A", text: "OT² + PO² = PT²" },
+            { letter: "B", text: "OT² + PT² = PO²" },
+            { letter: "C", text: "OT + PT = PO" },
+            { letter: "D", text: "PA² + PT² = PO²" }
           ],
           correct: "B"
         },
@@ -1004,7 +1004,7 @@
       kind: "Circles · G.PC.3",
       blurb: "A straight thread in a round web, 8 cm from the hub.",
       level: 2,
-      passage: "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 162\" role=\"img\" aria-label=\"A round spider web with its hub at the center O and faint threads. Gold chord AB is labeled 30 centimeters. A dashed line through O meets AB at M with a right angle and meets the frame at D on top and C at the bottom; OM is labeled 8 centimeters. Point F on the upper left of the frame is joined to A and B\"><line class=\"thin gr\" x1=\"160\" y1=\"76\" x2=\"221.8\" y2=\"59.4\"/><line class=\"thin gr\" x1=\"160\" y1=\"76\" x2=\"205.3\" y2=\"30.7\"/><line class=\"thin gr\" x1=\"160\" y1=\"76\" x2=\"176.6\" y2=\"14.2\"/><line class=\"thin gr\" x1=\"160\" y1=\"76\" x2=\"143.4\" y2=\"14.2\"/><line class=\"thin gr\" x1=\"160\" y1=\"76\" x2=\"114.7\" y2=\"30.7\"/><line class=\"thin gr\" x1=\"160\" y1=\"76\" x2=\"98.2\" y2=\"59.4\"/><line class=\"thin gr\" x1=\"160\" y1=\"76\" x2=\"98.2\" y2=\"92.6\"/><line class=\"thin gr\" x1=\"160\" y1=\"76\" x2=\"114.7\" y2=\"121.3\"/><line class=\"thin gr\" x1=\"160\" y1=\"76\" x2=\"143.4\" y2=\"137.8\"/><line class=\"thin gr\" x1=\"160\" y1=\"76\" x2=\"176.6\" y2=\"137.8\"/><line class=\"thin gr\" x1=\"160\" y1=\"76\" x2=\"205.3\" y2=\"121.3\"/><line class=\"thin gr\" x1=\"160\" y1=\"76\" x2=\"221.8\" y2=\"92.6\"/><circle class=\"thin gr\" cx=\"160\" cy=\"76\" r=\"18\"/><circle class=\"thin gr\" cx=\"160\" cy=\"76\" r=\"34\"/><circle class=\"thin gr\" cx=\"160\" cy=\"76\" r=\"50\"/><circle class=\"ln\" cx=\"160\" cy=\"76\" r=\"64\"/><line class=\"thin dash\" x1=\"160\" y1=\"12\" x2=\"160\" y2=\"140\"/><line class=\"ac\" x1=\"103.5\" y1=\"106.1\" x2=\"216.5\" y2=\"106.1\"/><line class=\"thin\" x1=\"120.6\" y1=\"25.6\" x2=\"103.5\" y2=\"106.1\"/><line class=\"thin\" x1=\"120.6\" y1=\"25.6\" x2=\"216.5\" y2=\"106.1\"/><path class=\"thin\" d=\"M160 99.1 L167 99.1 L167 106.1\"/><circle class=\"dt\" cx=\"160\" cy=\"76\" r=\"3\"/><circle class=\"dt\" cx=\"103.5\" cy=\"106.1\" r=\"3\"/><circle class=\"dt\" cx=\"216.5\" cy=\"106.1\" r=\"3\"/><circle class=\"dt\" cx=\"160\" cy=\"140\" r=\"3\"/><circle class=\"dt\" cx=\"160\" cy=\"12\" r=\"3\"/><circle class=\"dt\" cx=\"160\" cy=\"106.1\" r=\"3\"/><circle class=\"dt\" cx=\"120.6\" cy=\"25.6\" r=\"3\"/><text x=\"92.5\" y=\"116.1\" text-anchor=\"middle\">A</text><text x=\"227.5\" y=\"116.1\" text-anchor=\"middle\">B</text><text x=\"171\" y=\"153\" text-anchor=\"middle\">C</text><text x=\"171\" y=\"14\" text-anchor=\"middle\">D</text><text x=\"112.6\" y=\"20.3\" text-anchor=\"middle\">F</text><text x=\"149\" y=\"124.1\" text-anchor=\"middle\">M</text><text x=\"148\" y=\"81\" text-anchor=\"middle\">O</text><text class=\"sm\" x=\"176\" y=\"99.1\" text-anchor=\"middle\">8 cm</text><text class=\"sm\" x=\"116\" y=\"123.1\" text-anchor=\"middle\">30 cm</text></svg></figure><p class=\"geo-given\">A spider's web fills a round frame with center <strong>O</strong>, the hub. A straight thread <strong>AB</strong> of the frame is 30 cm long. The hub is 8 cm from it: OM = 8 cm, with OM ⊥ AB at <strong>M</strong>. Line OM meets the frame at <strong>C</strong> and <strong>D</strong>. A fly is caught at <strong>F</strong> on the frame.</p>",
+      passage: "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 162\" role=\"img\" aria-label=\"A round spider web with its hub at the center O and faint threads. Gold chord AB is labeled 30 centimeters. A dashed line through O meets AB at M with a right angle and meets the frame at D on top and C at the bottom; OM is labeled 8 centimeters. Point F on the upper left of the frame is joined to A and B\"><line class=\"thin gr\" x1=\"160\" y1=\"76\" x2=\"221.8\" y2=\"59.4\"/><line class=\"thin gr\" x1=\"160\" y1=\"76\" x2=\"205.3\" y2=\"30.7\"/><line class=\"thin gr\" x1=\"160\" y1=\"76\" x2=\"176.6\" y2=\"14.2\"/><line class=\"thin gr\" x1=\"160\" y1=\"76\" x2=\"143.4\" y2=\"14.2\"/><line class=\"thin gr\" x1=\"160\" y1=\"76\" x2=\"114.7\" y2=\"30.7\"/><line class=\"thin gr\" x1=\"160\" y1=\"76\" x2=\"98.2\" y2=\"59.4\"/><line class=\"thin gr\" x1=\"160\" y1=\"76\" x2=\"98.2\" y2=\"92.6\"/><line class=\"thin gr\" x1=\"160\" y1=\"76\" x2=\"114.7\" y2=\"121.3\"/><line class=\"thin gr\" x1=\"160\" y1=\"76\" x2=\"143.4\" y2=\"137.8\"/><line class=\"thin gr\" x1=\"160\" y1=\"76\" x2=\"176.6\" y2=\"137.8\"/><line class=\"thin gr\" x1=\"160\" y1=\"76\" x2=\"205.3\" y2=\"121.3\"/><line class=\"thin gr\" x1=\"160\" y1=\"76\" x2=\"221.8\" y2=\"92.6\"/><circle class=\"thin gr\" cx=\"160\" cy=\"76\" r=\"18\"/><circle class=\"thin gr\" cx=\"160\" cy=\"76\" r=\"34\"/><circle class=\"thin gr\" cx=\"160\" cy=\"76\" r=\"50\"/><circle class=\"ln\" cx=\"160\" cy=\"76\" r=\"64\"/><line class=\"thin dash\" x1=\"160\" y1=\"12\" x2=\"160\" y2=\"140\"/><line class=\"ac\" x1=\"103.5\" y1=\"106.1\" x2=\"216.5\" y2=\"106.1\"/><line class=\"thin\" x1=\"120.6\" y1=\"25.6\" x2=\"103.5\" y2=\"106.1\"/><line class=\"thin\" x1=\"120.6\" y1=\"25.6\" x2=\"216.5\" y2=\"106.1\"/><path class=\"thin\" d=\"M160 99.1 L167 99.1 L167 106.1\"/><circle class=\"dt\" cx=\"160\" cy=\"76\" r=\"3\"/><circle class=\"dt\" cx=\"103.5\" cy=\"106.1\" r=\"3\"/><circle class=\"dt\" cx=\"216.5\" cy=\"106.1\" r=\"3\"/><circle class=\"dt\" cx=\"160\" cy=\"140\" r=\"3\"/><circle class=\"dt\" cx=\"160\" cy=\"12\" r=\"3\"/><circle class=\"dt\" cx=\"160\" cy=\"106.1\" r=\"3\"/><circle class=\"dt\" cx=\"120.6\" cy=\"25.6\" r=\"3\"/><text x=\"92.5\" y=\"116.1\" text-anchor=\"middle\">A</text><text x=\"227.5\" y=\"116.1\" text-anchor=\"middle\">B</text><text x=\"171\" y=\"153\" text-anchor=\"middle\">C</text><text x=\"171\" y=\"14\" text-anchor=\"middle\">D</text><text x=\"112.6\" y=\"20.3\" text-anchor=\"middle\">F</text><text x=\"149\" y=\"124.1\" text-anchor=\"middle\">M</text><text x=\"148\" y=\"81\" text-anchor=\"middle\">O</text><text class=\"sm\" x=\"144\" y=\"97.1\" text-anchor=\"middle\">8 cm</text><text class=\"sm\" x=\"185\" y=\"123.1\" text-anchor=\"middle\">30 cm</text></svg></figure><p class=\"geo-given\">A spider's web fills a round frame with center <strong>O</strong>, the hub. A straight thread <strong>AB</strong> of the frame is 30 cm long. The hub is 8 cm from it: OM = 8 cm, with OM ⊥ AB at <strong>M</strong>. Line OM meets the frame at <strong>C</strong> and <strong>D</strong>. A fly is caught at <strong>F</strong> on the frame.</p>",
       claims: [
         {
           id: "mid",
@@ -1033,15 +1033,15 @@
           correct: "B"
         },
         {
-          id: "MD",
+          id: "eq",
           sol: "G.PC.3",
           sub: "G.PC.3.2",
-          stem: "Chords AB and CD cross at M, and CM = 9 cm. How long is MD?",
+          stem: "Chords AB and CD cross at M. Which equation is true?",
           choices: [
-            { letter: "A", text: "21 cm" },
-            { letter: "B", text: "25 cm" },
-            { letter: "C", text: "9 cm" },
-            { letter: "D", text: "15 cm" }
+            { letter: "A", text: "15 · 15 = OM · MD" },
+            { letter: "B", text: "15 · 15 = CM · MD" },
+            { letter: "C", text: "15 + 15 = CM + MD" },
+            { letter: "D", text: "30 · 15 = CM · MD" }
           ],
           correct: "B"
         },
@@ -1062,12 +1062,12 @@
           id: "arc",
           sol: "G.PC.3",
           sub: "G.PC.3.3",
-          stem: "Use m∠AOB ≈ 124°. To the nearest centimeter, how long is minor arc AB of the frame?",
+          stem: "Another web's round frame has radius 20 cm. One straight thread cuts off an 81° arc of it. To the nearest tenth of a centimeter, how long is that arc?",
           choices: [
-            { letter: "A", text: "70 cm" },
-            { letter: "B", text: "18 cm" },
-            { letter: "C", text: "74 cm" },
-            { letter: "D", text: "37 cm" }
+            { letter: "A", text: "14.1 cm" },
+            { letter: "B", text: "56.5 cm" },
+            { letter: "C", text: "282.7 cm" },
+            { letter: "D", text: "28.3 cm" }
           ],
           correct: "D"
         },
@@ -1075,12 +1075,12 @@
           id: "fly",
           sol: "G.PC.3",
           sub: "G.PC.3.1",
-          stem: "Use m∠AOB ≈ 124°. What is m∠AFB, the angle at the fly between the lines to A and B?",
+          stem: "Which statement about ∠AFB, the angle at the fly between the lines to A and B, is true?",
           choices: [
-            { letter: "A", text: "124°" },
-            { letter: "B", text: "118°" },
-            { letter: "C", text: "62°" },
-            { letter: "D", text: "31°" }
+            { letter: "A", text: "m∠AFB = m∠AOB" },
+            { letter: "B", text: "m∠AFB = 2 · m∠AOB" },
+            { letter: "C", text: "m∠AFB = ½ · m∠AOB" },
+            { letter: "D", text: "m∠AFB + m∠AOB = 90°" }
           ],
           correct: "C"
         }
@@ -1245,7 +1245,7 @@
           stem: "Use isosceles triangle TOA, with m∠TOA = 140°. How long is the boat route TA, to the nearest tenth of a kilometer?",
           choices: [
             { letter: "A", text: "1.0 km" },
-            { letter: "B", text: "3.7 km" },
+            { letter: "B", text: "3.0 km" },
             { letter: "C", text: "2.8 km" },
             { letter: "D", text: "1.4 km" }
           ],
@@ -1274,7 +1274,7 @@
       kind: "Circles · G.PC.3",
       blurb: "A round pond touches three straight paths.",
       level: 3,
-      passage: "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 166\" role=\"img\" aria-label=\"A right triangle ABC of straight paths with the right angle at C. A round pond with center O sits inside and touches AB at D, BC at E and CA at F. AD is labeled 24 meters, BD 10 meters, and the dashed radius OD is labeled 6 meters\"><polygon class=\"ln\" points=\"276,140 48,18.4 48,140\"/><circle class=\"sh2\" cx=\"93.6\" cy=\"94.4\" r=\"45.6\"/><circle class=\"ln\" cx=\"93.6\" cy=\"94.4\" r=\"45.6\"/><path class=\"thin\" d=\"M57 140 L57 131 L48 131\"/><line class=\"thin dash\" x1=\"93.6\" y1=\"94.4\" x2=\"115.1\" y2=\"54.2\"/><circle class=\"dt\" cx=\"276\" cy=\"140\" r=\"3\"/><circle class=\"dt\" cx=\"48\" cy=\"18.4\" r=\"3\"/><circle class=\"dt\" cx=\"48\" cy=\"140\" r=\"3\"/><circle class=\"dt\" cx=\"115.1\" cy=\"54.2\" r=\"3\"/><circle class=\"dt\" cx=\"48\" cy=\"94.4\" r=\"3\"/><circle class=\"dt\" cx=\"93.6\" cy=\"140\" r=\"3\"/><circle class=\"dt\" cx=\"93.6\" cy=\"94.4\" r=\"3\"/><text x=\"280\" y=\"160\" text-anchor=\"middle\">A</text><text x=\"37\" y=\"25.4\" text-anchor=\"middle\">B</text><text x=\"37\" y=\"154\" text-anchor=\"middle\">C</text><text x=\"124.1\" y=\"49.2\" text-anchor=\"middle\">D</text><text x=\"37\" y=\"100.4\" text-anchor=\"middle\">E</text><text x=\"93.6\" y=\"160\" text-anchor=\"middle\">F</text><text x=\"89.6\" y=\"114.4\" text-anchor=\"middle\">O</text><text class=\"sm\" x=\"200.7\" y=\"91.4\" text-anchor=\"middle\">24 m</text><text class=\"sm\" x=\"86.7\" y=\"30.6\" text-anchor=\"middle\">10 m</text><text class=\"sm\" x=\"96.4\" y=\"74\" text-anchor=\"middle\">6 m</text></svg></figure><p class=\"geo-given\">Three straight paths form right triangle <strong>ABC</strong>, with m∠C = 90°. A round pond with center <strong>O</strong> and radius 6 m touches each path at one point: <strong>D</strong> on AB, <strong>E</strong> on BC and <strong>F</strong> on CA. AD = 24 m and BD = 10 m.</p>",
+      passage: "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 166\" role=\"img\" aria-label=\"A right triangle ABC of straight paths with the right angle at C. A round pond with center O sits inside and touches AB at D, BC at E and CA at F. AD is labeled 24 meters, BD 10 meters, and the dashed radius OD is labeled 6 meters\"><polygon class=\"ln\" points=\"276,140 48,18.4 48,140\"/><circle class=\"sh2\" cx=\"93.6\" cy=\"94.4\" r=\"45.6\"/><circle class=\"ln\" cx=\"93.6\" cy=\"94.4\" r=\"45.6\"/><path class=\"thin\" d=\"M57 140 L57 131 L48 131\"/><line class=\"thin dash\" x1=\"93.6\" y1=\"94.4\" x2=\"115.1\" y2=\"54.2\"/><circle class=\"dt\" cx=\"276\" cy=\"140\" r=\"3\"/><circle class=\"dt\" cx=\"48\" cy=\"18.4\" r=\"3\"/><circle class=\"dt\" cx=\"48\" cy=\"140\" r=\"3\"/><circle class=\"dt\" cx=\"115.1\" cy=\"54.2\" r=\"3\"/><circle class=\"dt\" cx=\"48\" cy=\"94.4\" r=\"3\"/><circle class=\"dt\" cx=\"93.6\" cy=\"140\" r=\"3\"/><circle class=\"dt\" cx=\"93.6\" cy=\"94.4\" r=\"3\"/><text x=\"280\" y=\"160\" text-anchor=\"middle\">A</text><text x=\"37\" y=\"25.4\" text-anchor=\"middle\">B</text><text x=\"37\" y=\"154\" text-anchor=\"middle\">C</text><text x=\"124.1\" y=\"49.2\" text-anchor=\"middle\">D</text><text x=\"37\" y=\"100.4\" text-anchor=\"middle\">E</text><text x=\"93.6\" y=\"160\" text-anchor=\"middle\">F</text><text x=\"89.6\" y=\"114.4\" text-anchor=\"middle\">O</text><text class=\"sm\" x=\"200.7\" y=\"91.4\" text-anchor=\"middle\">24 m</text><text class=\"sm\" x=\"86.7\" y=\"30.6\" text-anchor=\"middle\">10 m</text><text class=\"sm\" x=\"92.9\" y=\"72.2\" text-anchor=\"middle\">6 m</text></svg></figure><p class=\"geo-given\">Three straight paths form right triangle <strong>ABC</strong>, with m∠C = 90°. A round pond with center <strong>O</strong> and radius 6 m touches each path at one point: <strong>D</strong> on AB, <strong>E</strong> on BC and <strong>F</strong> on CA. AD = 24 m and BD = 10 m.</p>",
       claims: [
         {
           id: "AF",
@@ -1319,11 +1319,11 @@
           id: "why",
           sol: "G.PC.3",
           sub: "G.PC.3.4",
-          stem: "Why is CE equal to the radius, 6 m?",
+          stem: "Why is CE equal to the pond's radius?",
           choices: [
             { letter: "A", text: "C is the center of the pond, so CE is a radius." },
             { letter: "B", text: "CE = BE, because tangent segments are congruent." },
-            { letter: "C", text: "△OEC is equilateral, so all its sides are 6 m." },
+            { letter: "C", text: "△OEC is equilateral, so all of its sides are equal." },
             { letter: "D", text: "OECF has four right angles and OE = OF, so it is a square." }
           ],
           correct: "D"
@@ -1364,7 +1364,7 @@
       kind: "Circles · G.PC.3",
       blurb: "Two rings of mushrooms overlap on a lawn.",
       level: 3,
-      passage: "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 164\" role=\"img\" aria-label=\"Two overlapping circles of mushrooms on a lawn: ring 1 with center P and ring 2 with center Q. They cross at A and B, and gold chord AB meets the dashed line PQ at M. The dashed line also meets ring 2 at E and F. Segments join P and Q to A and to B; PA is labeled 20 meters and QA 15 meters\"><circle class=\"ln\" cx=\"96\" cy=\"82\" r=\"72\"/><circle class=\"ln\" cx=\"186\" cy=\"82\" r=\"54\"/><circle class=\"thin\" cx=\"151.2\" cy=\"35.7\" r=\"2.6\"/><circle class=\"thin\" cx=\"114.6\" cy=\"12.5\" r=\"2.6\"/><circle class=\"thin\" cx=\"71.4\" cy=\"14.3\" r=\"2.6\"/><circle class=\"thin\" cx=\"37\" cy=\"40.7\" r=\"2.6\"/><circle class=\"thin\" cx=\"24\" cy=\"82\" r=\"2.6\"/><circle class=\"thin\" cx=\"37\" cy=\"123.3\" r=\"2.6\"/><circle class=\"thin\" cx=\"71.4\" cy=\"149.7\" r=\"2.6\"/><circle class=\"thin\" cx=\"114.6\" cy=\"151.5\" r=\"2.6\"/><circle class=\"thin\" cx=\"151.2\" cy=\"128.3\" r=\"2.6\"/><circle class=\"thin\" cx=\"240\" cy=\"82\" r=\"2.6\"/><circle class=\"thin\" cx=\"232.8\" cy=\"55\" r=\"2.6\"/><circle class=\"thin\" cx=\"213\" cy=\"35.2\" r=\"2.6\"/><circle class=\"thin\" cx=\"213\" cy=\"128.8\" r=\"2.6\"/><circle class=\"thin\" cx=\"232.8\" cy=\"109\" r=\"2.6\"/><line class=\"thin dash\" x1=\"86\" y1=\"82\" x2=\"252\" y2=\"82\"/><line class=\"ac\" x1=\"153.6\" y1=\"38.8\" x2=\"153.6\" y2=\"125.2\"/><line class=\"thin\" x1=\"96\" y1=\"82\" x2=\"153.6\" y2=\"38.8\"/><line class=\"thin\" x1=\"186\" y1=\"82\" x2=\"153.6\" y2=\"38.8\"/><line class=\"thin\" x1=\"96\" y1=\"82\" x2=\"153.6\" y2=\"125.2\"/><line class=\"thin\" x1=\"186\" y1=\"82\" x2=\"153.6\" y2=\"125.2\"/><circle class=\"dt\" cx=\"96\" cy=\"82\" r=\"3\"/><circle class=\"dt\" cx=\"186\" cy=\"82\" r=\"3\"/><circle class=\"dt\" cx=\"153.6\" cy=\"38.8\" r=\"3\"/><circle class=\"dt\" cx=\"153.6\" cy=\"125.2\" r=\"3\"/><circle class=\"dt\" cx=\"153.6\" cy=\"82\" r=\"3\"/><circle class=\"dt\" cx=\"132\" cy=\"82\" r=\"3\"/><circle class=\"dt\" cx=\"240\" cy=\"82\" r=\"3\"/><text x=\"92\" y=\"103\" text-anchor=\"middle\">P</text><text x=\"191\" y=\"103\" text-anchor=\"middle\">Q</text><text x=\"155.6\" y=\"31.8\" text-anchor=\"middle\">A</text><text x=\"155.6\" y=\"145.2\" text-anchor=\"middle\">B</text><text x=\"163.6\" y=\"101\" text-anchor=\"middle\">M</text><text x=\"123\" y=\"101\" text-anchor=\"middle\">E</text><text x=\"250\" y=\"77\" text-anchor=\"middle\">F</text><text class=\"sm\" x=\"113\" y=\"60.7\" text-anchor=\"middle\">20 m</text><text class=\"sm\" x=\"181\" y=\"62.7\" text-anchor=\"middle\">15 m</text><text class=\"sm\" x=\"40\" y=\"22\" text-anchor=\"middle\">ring 1</text><text class=\"sm\" x=\"272\" y=\"34\" text-anchor=\"middle\">ring 2</text></svg></figure><p class=\"geo-given\">Mushrooms grow in two circular fairy rings. Ring 1 has center <strong>P</strong> and radius 20 m. Ring 2 has center <strong>Q</strong> and radius 15 m. PQ = 25 m. The rings cross at <strong>A</strong> and <strong>B</strong>, and AB crosses line PQ at <strong>M</strong>. Line PQ meets ring 2 at <strong>E</strong> and <strong>F</strong>.</p>",
+      passage: "<figure class=\"geo-fig\"><svg viewBox=\"0 0 320 164\" role=\"img\" aria-label=\"Two overlapping circles of mushrooms on a lawn: ring 1 with center P and ring 2 with center Q. They cross at A and B, and gold chord AB meets the dashed line PQ at M. The dashed line also meets ring 2 at E and F. Segments join P and Q to A and to B; PA is labeled 20 meters and QA 15 meters\"><circle class=\"ln\" cx=\"96\" cy=\"82\" r=\"72\"/><circle class=\"ln\" cx=\"186\" cy=\"82\" r=\"54\"/><circle class=\"thin\" cx=\"151.2\" cy=\"35.7\" r=\"2.6\"/><circle class=\"thin\" cx=\"114.6\" cy=\"12.5\" r=\"2.6\"/><circle class=\"thin\" cx=\"71.4\" cy=\"14.3\" r=\"2.6\"/><circle class=\"thin\" cx=\"37\" cy=\"40.7\" r=\"2.6\"/><circle class=\"thin\" cx=\"24\" cy=\"82\" r=\"2.6\"/><circle class=\"thin\" cx=\"37\" cy=\"123.3\" r=\"2.6\"/><circle class=\"thin\" cx=\"71.4\" cy=\"149.7\" r=\"2.6\"/><circle class=\"thin\" cx=\"114.6\" cy=\"151.5\" r=\"2.6\"/><circle class=\"thin\" cx=\"151.2\" cy=\"128.3\" r=\"2.6\"/><circle class=\"thin\" cx=\"240\" cy=\"82\" r=\"2.6\"/><circle class=\"thin\" cx=\"232.8\" cy=\"55\" r=\"2.6\"/><circle class=\"thin\" cx=\"213\" cy=\"35.2\" r=\"2.6\"/><circle class=\"thin\" cx=\"213\" cy=\"128.8\" r=\"2.6\"/><circle class=\"thin\" cx=\"232.8\" cy=\"109\" r=\"2.6\"/><line class=\"thin dash\" x1=\"86\" y1=\"82\" x2=\"252\" y2=\"82\"/><line class=\"ac\" x1=\"153.6\" y1=\"38.8\" x2=\"153.6\" y2=\"125.2\"/><line class=\"thin\" x1=\"96\" y1=\"82\" x2=\"153.6\" y2=\"38.8\"/><line class=\"thin\" x1=\"186\" y1=\"82\" x2=\"153.6\" y2=\"38.8\"/><line class=\"thin\" x1=\"96\" y1=\"82\" x2=\"153.6\" y2=\"125.2\"/><line class=\"thin\" x1=\"186\" y1=\"82\" x2=\"153.6\" y2=\"125.2\"/><circle class=\"dt\" cx=\"96\" cy=\"82\" r=\"3\"/><circle class=\"dt\" cx=\"186\" cy=\"82\" r=\"3\"/><circle class=\"dt\" cx=\"153.6\" cy=\"38.8\" r=\"3\"/><circle class=\"dt\" cx=\"153.6\" cy=\"125.2\" r=\"3\"/><circle class=\"dt\" cx=\"153.6\" cy=\"82\" r=\"3\"/><circle class=\"dt\" cx=\"132\" cy=\"82\" r=\"3\"/><circle class=\"dt\" cx=\"240\" cy=\"82\" r=\"3\"/><text x=\"92\" y=\"103\" text-anchor=\"middle\">P</text><text x=\"191\" y=\"103\" text-anchor=\"middle\">Q</text><text x=\"155.6\" y=\"31.8\" text-anchor=\"middle\">A</text><text x=\"155.6\" y=\"145.2\" text-anchor=\"middle\">B</text><text x=\"166.6\" y=\"101\" text-anchor=\"middle\">M</text><text x=\"127\" y=\"101\" text-anchor=\"middle\">E</text><text x=\"250\" y=\"77\" text-anchor=\"middle\">F</text><text class=\"sm\" x=\"115.9\" y=\"58.6\" text-anchor=\"middle\">20 m</text><text class=\"sm\" x=\"184.3\" y=\"67\" text-anchor=\"middle\">15 m</text><text class=\"sm\" x=\"40\" y=\"22\" text-anchor=\"middle\">ring 1</text><text class=\"sm\" x=\"272\" y=\"34\" text-anchor=\"middle\">ring 2</text></svg></figure><p class=\"geo-given\">Mushrooms grow in two circular fairy rings. Ring 1 has center <strong>P</strong> and radius 20 m. Ring 2 has center <strong>Q</strong> and radius 15 m. PQ = 25 m. The rings cross at <strong>A</strong> and <strong>B</strong>, and AB crosses line PQ at <strong>M</strong>. Line PQ meets ring 2 at <strong>E</strong> and <strong>F</strong>.</p>",
       claims: [
         {
           id: "tan",
@@ -1383,64 +1383,64 @@
           id: "AB",
           sol: "G.PC.3",
           sub: "G.PC.3.2",
-          stem: "Line PQ is ⊥ to AB at M, and PM = 16 m. How long is the common chord AB?",
+          stem: "In ring 2, diameter EF is ⊥ to chord AB at M, so AM = MB. EM = 6 m and MF = 24 m. How long is AB?",
           choices: [
             { letter: "A", text: "12 m" },
-            { letter: "B", text: "8 m" },
-            { letter: "C", text: "about 51 m" },
+            { letter: "B", text: "30 m" },
+            { letter: "C", text: "144 m" },
             { letter: "D", text: "24 m" }
           ],
           correct: "D"
         },
         {
-          id: "MF",
+          id: "APB",
           sol: "G.PC.3",
-          sub: "G.PC.3.2",
-          stem: "In ring 2, chords AB and EF cross at M. AM = MB = 12 m and EM = 6 m. How long is MF?",
+          sub: "G.PC.3.4",
+          stem: "PM = 16 m, and PM ⊥ AB. Use right triangle PMA to find m∠APB, to the nearest tenth of a degree.",
           choices: [
-            { letter: "A", text: "18 m" },
-            { letter: "B", text: "6 m" },
-            { letter: "C", text: "24 m" },
-            { letter: "D", text: "12 m" }
+            { letter: "A", text: "36.9°" },
+            { letter: "B", text: "106.3°" },
+            { letter: "C", text: "73.7°" },
+            { letter: "D", text: "77.3°" }
           ],
           correct: "C"
         },
         {
-          id: "AQB",
+          id: "third",
           sol: "G.PC.3",
-          sub: "G.PC.3.1",
-          stem: "∠PAQ and ∠PBQ are right angles, and m∠APB ≈ 73.7°. What is m∠AQB, the central angle of ring 2 for arc AB?",
+          sub: "G.PC.3.3",
+          stem: "A third fairy ring has radius 12 m. Its mushrooms grow only along a 150° arc of it. How long is that arc? Give the answer in terms of π.",
           choices: [
-            { letter: "A", text: "73.7°" },
-            { letter: "B", text: "106.3°" },
-            { letter: "C", text: "286.3°" },
-            { letter: "D", text: "36.9°" }
+            { letter: "A", text: "5π m" },
+            { letter: "B", text: "10π m" },
+            { letter: "C", text: "20π m" },
+            { letter: "D", text: "60π m" }
           ],
           correct: "B"
         },
         {
-          id: "arc",
+          id: "mow",
           sol: "G.PC.3",
           sub: "G.PC.3.3",
-          stem: "Use m∠AQB ≈ 106.3°. How long is the minor arc AB of ring 2? Round to the nearest tenth of a meter.",
+          stem: "The grass inside ring 2 is mowed. To the nearest square meter, what area is mowed?",
           choices: [
-            { letter: "A", text: "13.9 m" },
-            { letter: "B", text: "19.3 m" },
-            { letter: "C", text: "37.1 m" },
-            { letter: "D", text: "27.8 m" }
+            { letter: "A", text: "94 m²" },
+            { letter: "B", text: "2,827 m²" },
+            { letter: "C", text: "1,257 m²" },
+            { letter: "D", text: "707 m²" }
           ],
           correct: "D"
         },
         {
-          id: "sector",
+          id: "AFB",
           sol: "G.PC.3",
-          sub: "G.PC.3.3",
-          stem: "Use m∠APB ≈ 73.7°. To the nearest square meter, what is the area of sector APB of ring 1?",
+          sub: "G.PC.3.1",
+          stem: "Which statement about ∠AFB, at point F on ring 2, is true?",
           choices: [
-            { letter: "A", text: "26 m²" },
-            { letter: "B", text: "257 m²" },
-            { letter: "C", text: "1,029 m²" },
-            { letter: "D", text: "1,257 m²" }
+            { letter: "A", text: "m∠AFB = m∠AQB" },
+            { letter: "B", text: "m∠AFB = ½ · m∠AQB" },
+            { letter: "C", text: "m∠AFB = 2 · m∠AQB" },
+            { letter: "D", text: "m∠AFB + m∠AQB = 180°" }
           ],
           correct: "B"
         }

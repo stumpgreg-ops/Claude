@@ -18,16 +18,16 @@
       passage:
         "<figure class=\"geo-fig\">" +
         "<svg viewBox=\"0 0 320 166\" role=\"img\" aria-label=\"A pantograph: rod OB through A from the fixed pivot O, rod AP to the stylus P and rod BQ to the pen Q, with AP parallel to BQ; O, P and Q lie on one dashed line; OA 10 cm, AB 15 cm, AP 8 cm\">" +
-        "<line class=\"thin dash\" x1=\"36\" y1=\"140\" x2=\"246\" y2=\"140\"/><line class=\"ln\" x1=\"36\" y1=\"140\" x2=\"167.3\" y2=\"24.2\"/>" +
-        "<line class=\"ln\" x1=\"88.5\" y1=\"93.7\" x2=\"120\" y2=\"140\"/><line class=\"ac\" x1=\"167.3\" y1=\"24.2\" x2=\"246\" y2=\"140\"/>" +
-        "<path class=\"thin\" d=\"M99.1 116.5 L105.8 119.2 L105.8 112\"/><path class=\"thin\" d=\"M203.9 85.2 L210.6 87.9 L210.5 80.7\"/>" +
-        "<circle class=\"dt\" cx=\"36\" cy=\"140\" r=\"3\"/><circle class=\"dt\" cx=\"88.5\" cy=\"93.7\" r=\"3\"/><circle class=\"dt\" cx=\"167.3\" cy=\"24.2\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"120\" cy=\"140\" r=\"3\"/><circle class=\"dt\" cx=\"246\" cy=\"140\" r=\"3\"/><text x=\"34\" y=\"159\" text-anchor=\"middle\">O</text>" +
-        "<text x=\"77.5\" y=\"91.7\" text-anchor=\"middle\">A</text><text x=\"165.3\" y=\"17.2\" text-anchor=\"middle\">B</text>" +
-        "<text x=\"120\" y=\"159\" text-anchor=\"middle\">P</text><text x=\"248\" y=\"159\" text-anchor=\"middle\">Q</text>" +
-        "<text x=\"53\" y=\"111.3\" text-anchor=\"middle\">10 cm</text><text x=\"118.6\" y=\"53.5\" text-anchor=\"middle\">15 cm</text>" +
-        "<text x=\"115\" y=\"114.5\" text-anchor=\"middle\">8 cm</text><text class=\"sm\" x=\"150\" y=\"158\" text-anchor=\"middle\">stylus</text>" +
-        "<text class=\"sm\" x=\"284\" y=\"136\" text-anchor=\"middle\">pen</text><text class=\"sm\" x=\"40\" y=\"92\" text-anchor=\"middle\">pivot</text></svg></figure>" +
+        "<line class=\"thin dash\" x1=\"58\" y1=\"138\" x2=\"268\" y2=\"138\"/><line class=\"ln\" x1=\"58\" y1=\"138\" x2=\"189.3\" y2=\"22.2\"/>" +
+        "<line class=\"ln\" x1=\"110.5\" y1=\"91.7\" x2=\"142\" y2=\"138\"/><line class=\"ac\" x1=\"189.3\" y1=\"22.2\" x2=\"268\" y2=\"138\"/>" +
+        "<path class=\"thin\" d=\"M121.1 114.5 L127.8 117.2 L127.8 110\"/><path class=\"thin\" d=\"M225.9 83.2 L232.6 85.9 L232.5 78.7\"/>" +
+        "<circle class=\"dt\" cx=\"58\" cy=\"138\" r=\"3\"/><circle class=\"dt\" cx=\"110.5\" cy=\"91.7\" r=\"3\"/><circle class=\"dt\" cx=\"189.3\" cy=\"22.2\" r=\"3\"/>" +
+        "<circle class=\"dt\" cx=\"142\" cy=\"138\" r=\"3\"/><circle class=\"dt\" cx=\"268\" cy=\"138\" r=\"3\"/><text x=\"56\" y=\"157\" text-anchor=\"middle\">O</text>" +
+        "<text x=\"99.5\" y=\"89.7\" text-anchor=\"middle\">A</text><text x=\"187.3\" y=\"15.2\" text-anchor=\"middle\">B</text>" +
+        "<text x=\"142\" y=\"157\" text-anchor=\"middle\">P</text><text x=\"270\" y=\"157\" text-anchor=\"middle\">Q</text>" +
+        "<text x=\"71\" y=\"104.8\" text-anchor=\"middle\">10 cm</text><text x=\"136.6\" y=\"47\" text-anchor=\"middle\">15 cm</text>" +
+        "<text x=\"144.4\" y=\"107.5\" text-anchor=\"middle\">8 cm</text><text class=\"sm\" x=\"172\" y=\"156\" text-anchor=\"middle\">stylus</text>" +
+        "<text class=\"sm\" x=\"294\" y=\"143\" text-anchor=\"middle\">pen</text><text class=\"sm\" x=\"28\" y=\"143\" text-anchor=\"middle\">pivot</text></svg></figure>" +
         "<p class=\"geo-given\">A pantograph copies a drawing. The pivot <strong>O</strong> is fixed, the stylus <strong>P</strong> traces the drawing and the pen <strong>Q</strong> draws the copy. O, A and B lie on one rod, O, P and Q stay in one line, and rod <strong>AP</strong> stays parallel to rod <strong>BQ</strong>. OA = 10 cm, AB = 15 cm and AP = 8 cm.</p>",
       claims: [
         {
@@ -101,9 +101,9 @@
           sub: "G.TR.3.2",
           stem: "Kai builds his own pantograph with OA = 9 cm, OB = 27 cm, OP = 11 cm and OQ = 33 cm, with ∠O shared. Is △OAP ∼ △OBQ? Choose the answer with the correct reason.",
           choices: [
-            { letter: "A", text: "Yes; 27 − 9 = 33 − 11" },
-            { letter: "B", text: "No; 9/11 ≠ 27/33" },
-            { letter: "C", text: "No; 27/9 ≠ 33/11" },
+            { letter: "A", text: "Yes; 27 − 9 = 33 − 11 and ∠O is shared" },
+            { letter: "B", text: "No; 9/11 ≠ 27/33, so the sides differ" },
+            { letter: "C", text: "No; 27/9 ≠ 33/11, so the sides differ" },
             { letter: "D", text: "Yes; 27/9 = 33/11 and ∠O is shared" }
           ],
           correct: "D"
@@ -121,16 +121,16 @@
       passage:
         "<figure class=\"geo-fig\">" +
         "<svg viewBox=\"0 0 320 160\" role=\"img\" aria-label=\"Two triangles: a small model ABC with sides AB 7 in., BC 12 in. and AC 15 in., and a large sculpture XYZ with sides XZ 42 in., XY 72 in. and YZ 90 in.\">" +
-        "<polygon class=\"ln\" points=\"28,90.8 36,132 108,132\"/><polygon class=\"ln\" points=\"178.7,67.7 303.5,132 128,132\"/>" +
-        "<circle class=\"dt\" cx=\"28\" cy=\"90.8\" r=\"3\"/><circle class=\"dt\" cx=\"36\" cy=\"132\" r=\"3\"/><circle class=\"dt\" cx=\"108\" cy=\"132\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"178.7\" cy=\"67.7\" r=\"3\"/><circle class=\"dt\" cx=\"303.5\" cy=\"132\" r=\"3\"/><circle class=\"dt\" cx=\"128\" cy=\"132\" r=\"3\"/>" +
-        "<text x=\"19.2\" y=\"87.6\" text-anchor=\"middle\">A</text><text x=\"25.1\" y=\"144\" text-anchor=\"middle\">B</text>" +
-        "<text x=\"120.5\" y=\"140.4\" text-anchor=\"middle\">C</text><text x=\"172.7\" y=\"62.3\" text-anchor=\"middle\">X</text>" +
-        "<text x=\"316.2\" y=\"139.7\" text-anchor=\"middle\">Y</text><text x=\"115.5\" y=\"140.6\" text-anchor=\"middle\">Z</text>" +
-        "<text x=\"12.4\" y=\"120.2\" text-anchor=\"middle\">7 in.</text><text x=\"72\" y=\"149\" text-anchor=\"middle\">12 in.</text>" +
-        "<text x=\"74.4\" y=\"103.9\" text-anchor=\"middle\">15 in.</text><text x=\"136.1\" y=\"91.2\" text-anchor=\"middle\">42 in.</text>" +
-        "<text x=\"251.2\" y=\"85.3\" text-anchor=\"middle\">72 in.</text><text x=\"215.8\" y=\"149\" text-anchor=\"middle\">90 in.</text>" +
-        "<text class=\"sm\" x=\"80\" y=\"154\" text-anchor=\"middle\">model</text><text class=\"sm\" x=\"216\" y=\"154\" text-anchor=\"middle\">sculpture</text></svg>" +
+        "<polygon class=\"ln\" points=\"30.9,65.3 40,112 121.6,112\"/><polygon class=\"ln\" points=\"215.9,66.5 304.2,112 180,112\"/>" +
+        "<circle class=\"dt\" cx=\"30.9\" cy=\"65.3\" r=\"3\"/><circle class=\"dt\" cx=\"40\" cy=\"112\" r=\"3\"/><circle class=\"dt\" cx=\"121.6\" cy=\"112\" r=\"3\"/>" +
+        "<circle class=\"dt\" cx=\"215.9\" cy=\"66.5\" r=\"3\"/><circle class=\"dt\" cx=\"304.2\" cy=\"112\" r=\"3\"/><circle class=\"dt\" cx=\"180\" cy=\"112\" r=\"3\"/>" +
+        "<text x=\"22.2\" y=\"62.1\" text-anchor=\"middle\">A</text><text x=\"29.1\" y=\"124\" text-anchor=\"middle\">B</text>" +
+        "<text x=\"134.1\" y=\"120.4\" text-anchor=\"middle\">C</text><text x=\"209.9\" y=\"61.1\" text-anchor=\"middle\">X</text>" +
+        "<text x=\"316.9\" y=\"119.7\" text-anchor=\"middle\">Y</text><text x=\"167.5\" y=\"120.6\" text-anchor=\"middle\">Z</text>" +
+        "<text x=\"15.8\" y=\"97.4\" text-anchor=\"middle\">7 in.</text><text x=\"80.8\" y=\"129\" text-anchor=\"middle\">12 in.</text>" +
+        "<text x=\"82.7\" y=\"81.2\" text-anchor=\"middle\">15 in.</text><text x=\"180.7\" y=\"80.6\" text-anchor=\"middle\">42 in.</text>" +
+        "<text x=\"270.1\" y=\"74.7\" text-anchor=\"middle\">72 in.</text><text x=\"242.1\" y=\"129\" text-anchor=\"middle\">90 in.</text>" +
+        "<text class=\"sm\" x=\"82\" y=\"150\" text-anchor=\"middle\">model</text><text class=\"sm\" x=\"242\" y=\"150\" text-anchor=\"middle\">sculpture</text></svg>" +
         "<figcaption>Not drawn to scale</figcaption></figure>" +
         "<p class=\"geo-given\">An artist builds a model <strong>△ABC</strong> of a steel sculpture <strong>△XYZ</strong>. Model: AB = 7 in., BC = 12 in. and AC = 15 in. Sculpture: XZ = 42 in., XY = 72 in. and YZ = 90 in.</p>",
       claims: [
@@ -151,7 +151,7 @@
           id: "statement",
           sol: "G.TR.3",
           sub: "G.TR.3.1",
-          stem: "Which similarity statement is correct?",
+          stem: "Which similarity statement matches the model to the sculpture?",
           choices: [
             { letter: "A", text: "△ABC ∼ △XYZ" },
             { letter: "B", text: "△ABC ∼ △ZYX" },
@@ -224,15 +224,15 @@
       level: 2,
       passage:
         "<figure class=\"geo-fig\">" +
-        "<svg viewBox=\"0 0 320 170\" role=\"img\" aria-label=\"Right triangle ABC, a quilt patch, with the right angle at A, AB up the left and AC along the bottom; a seam DE joins D on AB to E on AC; AD 9 in., DB 6 in., AE 12 in., EC 8 in. and BC 25 in.; triangle ADE is shaded\">" +
-        "<polygon class=\"sh\" points=\"88,150 88,92.4 164.8,150\"/><polygon class=\"ln\" points=\"88,150 88,54 216,150\"/>" +
-        "<line class=\"ac\" x1=\"88\" y1=\"92.4\" x2=\"164.8\" y2=\"150\"/><path class=\"thin\" d=\"M88 141 L97 141 L97 150\"/><circle class=\"dt\" cx=\"88\" cy=\"150\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"88\" cy=\"54\" r=\"3\"/><circle class=\"dt\" cx=\"216\" cy=\"150\" r=\"3\"/><circle class=\"dt\" cx=\"88\" cy=\"92.4\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"164.8\" cy=\"150\" r=\"3\"/><text x=\"76\" y=\"163\" text-anchor=\"middle\">A</text><text x=\"76\" y=\"57\" text-anchor=\"middle\">B</text>" +
-        "<text x=\"227\" y=\"159\" text-anchor=\"middle\">C</text><text x=\"76\" y=\"97.4\" text-anchor=\"middle\">D</text>" +
-        "<text x=\"164.8\" y=\"169\" text-anchor=\"middle\">E</text><text x=\"58\" y=\"126.2\" text-anchor=\"middle\">9 in.</text>" +
-        "<text x=\"58\" y=\"78.2\" text-anchor=\"middle\">6 in.</text><text x=\"126.4\" y=\"169\" text-anchor=\"middle\">12 in.</text>" +
-        "<text x=\"190.4\" y=\"169\" text-anchor=\"middle\">8 in.</text><text x=\"161.6\" y=\"94.2\" text-anchor=\"middle\">25 in.</text>" +
+        "<svg viewBox=\"0 0 320 166\" role=\"img\" aria-label=\"Right triangle ABC, a quilt patch, with the right angle at A, AB up the left and AC along the bottom; a seam DE joins D on AB to E on AC; AD 9 in., DB 6 in., AE 12 in., EC 8 in. and BC 25 in.; triangle ADE is shaded\">" +
+        "<polygon class=\"sh\" points=\"92,140 92,84.2 166.4,140\"/><polygon class=\"ln\" points=\"92,140 92,47 216,140\"/>" +
+        "<line class=\"ac\" x1=\"92\" y1=\"84.2\" x2=\"166.4\" y2=\"140\"/><path class=\"thin\" d=\"M92 131 L101 131 L101 140\"/><circle class=\"dt\" cx=\"92\" cy=\"140\" r=\"3\"/>" +
+        "<circle class=\"dt\" cx=\"92\" cy=\"47\" r=\"3\"/><circle class=\"dt\" cx=\"216\" cy=\"140\" r=\"3\"/><circle class=\"dt\" cx=\"92\" cy=\"84.2\" r=\"3\"/>" +
+        "<circle class=\"dt\" cx=\"166.4\" cy=\"140\" r=\"3\"/><text x=\"80\" y=\"153\" text-anchor=\"middle\">A</text><text x=\"80\" y=\"50\" text-anchor=\"middle\">B</text>" +
+        "<text x=\"227\" y=\"149\" text-anchor=\"middle\">C</text><text x=\"80\" y=\"89.2\" text-anchor=\"middle\">D</text>" +
+        "<text x=\"168.4\" y=\"134\" text-anchor=\"middle\">E</text><text x=\"62\" y=\"117.1\" text-anchor=\"middle\">9 in.</text>" +
+        "<text x=\"62\" y=\"70.6\" text-anchor=\"middle\">6 in.</text><text x=\"129.2\" y=\"159\" text-anchor=\"middle\">12 in.</text>" +
+        "<text x=\"191.2\" y=\"159\" text-anchor=\"middle\">8 in.</text><text x=\"163.6\" y=\"85.7\" text-anchor=\"middle\">25 in.</text>" +
         "<text class=\"sm\" x=\"268\" y=\"44\" text-anchor=\"middle\">quilt patch</text></svg></figure>" +
         "<p class=\"geo-given\">A quilt patch is the right triangle <strong>ABC</strong>, with the right angle at A. A straight seam <strong>DE</strong> joins D on AB to E on AC. AD = 9 in., DB = 6 in., AE = 12 in., EC = 8 in. and BC = 25 in.</p>",
       claims: [
@@ -305,7 +305,7 @@
           id: "not",
           sol: "G.TR.3",
           sub: "G.TR.3.3",
-          stem: "Which statement is NOT true?",
+          stem: "Which statement about the patch is NOT true?",
           choices: [
             { letter: "A", text: "AD/AB = DE/BC" },
             { letter: "B", text: "∠ADE ≅ ∠ABC" },
@@ -327,18 +327,18 @@
       passage:
         "<figure class=\"geo-fig\">" +
         "<svg viewBox=\"0 0 320 160\" role=\"img\" aria-label=\"A statue AB stands on the left; rays from A and B cross at the lens L and reach D and C on the camera sensor at the right; the dashed axis through L meets the statue at M and the sensor at N at right angles\">" +
-        "<rect class=\"sh2\" x=\"192\" y=\"52\" width=\"98\" height=\"62\"/><rect class=\"sh\" x=\"256.4\" y=\"46\" width=\"5\" height=\"76\"/>" +
-        "<ellipse class=\"thin\" cx=\"196\" cy=\"82\" rx=\"4\" ry=\"20\"/><line class=\"thin dash\" x1=\"40\" y1=\"82\" x2=\"268.4\" y2=\"82\"/>" +
-        "<line class=\"ln\" x1=\"40\" y1=\"17\" x2=\"40\" y2=\"137\"/><line class=\"thin\" x1=\"40\" y1=\"17\" x2=\"258.4\" y2=\"108\"/>" +
-        "<line class=\"thin\" x1=\"40\" y1=\"137\" x2=\"258.4\" y2=\"60\"/><line class=\"ac\" x1=\"258.4\" y1=\"60\" x2=\"258.4\" y2=\"108\"/>" +
-        "<path class=\"thin\" d=\"M40 75 L47 75 L47 82\"/><path class=\"thin\" d=\"M252.4 82 L252.4 88 L258.4 88\"/><circle class=\"dt\" cx=\"40\" cy=\"17\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"40\" cy=\"137\" r=\"3\"/><circle class=\"dt\" cx=\"196\" cy=\"82\" r=\"3\"/><circle class=\"dt\" cx=\"258.4\" cy=\"60\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"258.4\" cy=\"108\" r=\"3\"/><text x=\"28\" y=\"22\" text-anchor=\"middle\">A</text><text x=\"28\" y=\"142\" text-anchor=\"middle\">B</text>" +
-        "<text x=\"28\" y=\"87\" text-anchor=\"middle\">M</text><text x=\"192\" y=\"57\" text-anchor=\"middle\">L</text>" +
-        "<text x=\"272.4\" y=\"61\" text-anchor=\"middle\">C</text><text x=\"272.4\" y=\"117\" text-anchor=\"middle\">D</text>" +
-        "<text x=\"276.4\" y=\"87\" text-anchor=\"middle\">N</text><text x=\"64\" y=\"108\" text-anchor=\"middle\">2.4 m</text>" +
-        "<text x=\"132\" y=\"137\" text-anchor=\"middle\">8 m</text><text x=\"226\" y=\"133\" text-anchor=\"middle\">50 mm</text>" +
-        "<text class=\"sm\" x=\"66\" y=\"17\" text-anchor=\"middle\">statue</text><text class=\"sm\" x=\"244\" y=\"48\" text-anchor=\"middle\">camera</text></svg>" +
+        "<rect class=\"sh2\" x=\"208\" y=\"50\" width=\"84.4\" height=\"64\"/><rect class=\"sh\" x=\"272.4\" y=\"56\" width=\"4\" height=\"56\"/>" +
+        "<ellipse class=\"thin\" cx=\"212\" cy=\"82\" rx=\"4\" ry=\"20\"/><line class=\"thin dash\" x1=\"56\" y1=\"82\" x2=\"284.4\" y2=\"82\"/>" +
+        "<line class=\"ln\" x1=\"56\" y1=\"17\" x2=\"56\" y2=\"137\"/><line class=\"thin\" x1=\"56\" y1=\"17\" x2=\"274.4\" y2=\"108\"/>" +
+        "<line class=\"thin\" x1=\"56\" y1=\"137\" x2=\"274.4\" y2=\"60\"/><line class=\"ac\" x1=\"274.4\" y1=\"60\" x2=\"274.4\" y2=\"108\"/>" +
+        "<path class=\"thin\" d=\"M56 75 L63 75 L63 82\"/><path class=\"thin\" d=\"M268.4 82 L268.4 88 L274.4 88\"/><circle class=\"dt\" cx=\"56\" cy=\"17\" r=\"3\"/>" +
+        "<circle class=\"dt\" cx=\"56\" cy=\"137\" r=\"3\"/><circle class=\"dt\" cx=\"212\" cy=\"82\" r=\"3\"/><circle class=\"dt\" cx=\"274.4\" cy=\"60\" r=\"3\"/>" +
+        "<circle class=\"dt\" cx=\"274.4\" cy=\"108\" r=\"3\"/><text x=\"44\" y=\"22\" text-anchor=\"middle\">A</text><text x=\"44\" y=\"142\" text-anchor=\"middle\">B</text>" +
+        "<text x=\"44\" y=\"87\" text-anchor=\"middle\">M</text><text x=\"200\" y=\"73\" text-anchor=\"middle\">L</text>" +
+        "<text x=\"284.4\" y=\"63\" text-anchor=\"middle\">C</text><text x=\"284.4\" y=\"115\" text-anchor=\"middle\">D</text>" +
+        "<text x=\"304.4\" y=\"87\" text-anchor=\"middle\">N</text><text x=\"30\" y=\"104\" text-anchor=\"middle\">2.4 m</text>" +
+        "<text x=\"148\" y=\"139\" text-anchor=\"middle\">8 m</text><text class=\"sm\" x=\"237.2\" y=\"134\" text-anchor=\"middle\">50 mm</text>" +
+        "<text class=\"sm\" x=\"82\" y=\"17\" text-anchor=\"middle\">statue</text><text class=\"sm\" x=\"230\" y=\"44\" text-anchor=\"middle\">camera</text></svg>" +
         "<figcaption>Not drawn to scale</figcaption></figure>" +
         "<p class=\"geo-given\">A statue <strong>AB</strong> is 2.4 m tall and 8 m from the camera's lens <strong>L</strong> (LM = 8 m). Light from A and B crosses at L and reaches the sensor at <strong>D</strong> and <strong>C</strong>. The sensor is 50 mm behind the lens (LN = 50 mm). AB ∥ CD, and the axis MN is perpendicular to both.</p>",
       claims: [
@@ -433,20 +433,20 @@
       passage:
         "<figure class=\"geo-fig\">" +
         "<svg viewBox=\"0 0 320 166\" role=\"img\" aria-label=\"A backdrop in perspective: a level floor line from H through G and F to the vanishing point V, and a line from V up to M; three vertical posts HM, GK and FJ stand between the lines; HG 45 cm, GF 30 cm, FV 45 cm and HM 96 cm\">" +
-        "<rect class=\"sh2\" x=\"12\" y=\"8\" width=\"296\" height=\"132\"/><line class=\"ln\" x1=\"20\" y1=\"140\" x2=\"306\" y2=\"140\"/>" +
-        "<line class=\"thin\" x1=\"292\" y1=\"140\" x2=\"282.4\" y2=\"140\"/><line class=\"thin\" x1=\"292\" y1=\"140\" x2=\"37.6\" y2=\"26\"/>" +
-        "<line class=\"ln\" x1=\"52\" y1=\"140\" x2=\"52\" y2=\"32.5\"/><line class=\"ac\" x1=\"142\" y1=\"140\" x2=\"142\" y2=\"72.8\"/>" +
-        "<line class=\"ln\" x1=\"202\" y1=\"140\" x2=\"202\" y2=\"99.7\"/><path class=\"thin\" d=\"M52 133 L59 133 L59 140\"/>" +
-        "<path class=\"thin\" d=\"M142 133 L149 133 L149 140\"/><path class=\"thin\" d=\"M202 133 L209 133 L209 140\"/><circle class=\"dt\" cx=\"292\" cy=\"140\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"52\" cy=\"140\" r=\"3\"/><circle class=\"dt\" cx=\"142\" cy=\"140\" r=\"3\"/><circle class=\"dt\" cx=\"202\" cy=\"140\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"52\" cy=\"32.5\" r=\"3\"/><circle class=\"dt\" cx=\"142\" cy=\"72.8\" r=\"3\"/><circle class=\"dt\" cx=\"202\" cy=\"99.7\" r=\"3\"/>" +
-        "<text x=\"52\" y=\"159\" text-anchor=\"middle\">H</text><text x=\"142\" y=\"159\" text-anchor=\"middle\">G</text>" +
-        "<text x=\"202\" y=\"159\" text-anchor=\"middle\">F</text><text x=\"292\" y=\"159\" text-anchor=\"middle\">V</text>" +
-        "<text x=\"52\" y=\"25.5\" text-anchor=\"middle\">M</text><text x=\"142\" y=\"65.8\" text-anchor=\"middle\">K</text>" +
-        "<text x=\"202\" y=\"92.7\" text-anchor=\"middle\">J</text><text class=\"sm\" x=\"97\" y=\"162\" text-anchor=\"middle\">45 cm</text>" +
-        "<text class=\"sm\" x=\"172\" y=\"162\" text-anchor=\"middle\">30 cm</text><text class=\"sm\" x=\"247\" y=\"162\" text-anchor=\"middle\">45 cm</text>" +
-        "<text x=\"28\" y=\"91.2\" text-anchor=\"middle\">96 cm</text><text class=\"sm\" x=\"254\" y=\"96\" text-anchor=\"middle\">vanishing</text>" +
-        "<text class=\"sm\" x=\"254\" y=\"110\" text-anchor=\"middle\">point</text></svg><figcaption>Not drawn to scale</figcaption></figure>" +
+        "<line class=\"ln\" x1=\"20\" y1=\"128\" x2=\"306\" y2=\"128\"/><line class=\"thin\" x1=\"292\" y1=\"128\" x2=\"282.4\" y2=\"128\"/>" +
+        "<line class=\"thin\" x1=\"292\" y1=\"128\" x2=\"37.6\" y2=\"26.2\"/><line class=\"ln\" x1=\"52\" y1=\"128\" x2=\"52\" y2=\"32\"/>" +
+        "<line class=\"ac\" x1=\"142\" y1=\"128\" x2=\"142\" y2=\"68\"/><line class=\"ln\" x1=\"202\" y1=\"128\" x2=\"202\" y2=\"92\"/>" +
+        "<path class=\"thin\" d=\"M52 121 L59 121 L59 128\"/><path class=\"thin\" d=\"M142 121 L149 121 L149 128\"/>" +
+        "<path class=\"thin\" d=\"M202 121 L209 121 L209 128\"/><circle class=\"dt\" cx=\"292\" cy=\"128\" r=\"3\"/><circle class=\"dt\" cx=\"52\" cy=\"128\" r=\"3\"/>" +
+        "<circle class=\"dt\" cx=\"142\" cy=\"128\" r=\"3\"/><circle class=\"dt\" cx=\"202\" cy=\"128\" r=\"3\"/><circle class=\"dt\" cx=\"52\" cy=\"32\" r=\"3\"/>" +
+        "<circle class=\"dt\" cx=\"142\" cy=\"68\" r=\"3\"/><circle class=\"dt\" cx=\"202\" cy=\"92\" r=\"3\"/><text x=\"52\" y=\"147\" text-anchor=\"middle\">H</text>" +
+        "<text x=\"142\" y=\"147\" text-anchor=\"middle\">G</text><text x=\"202\" y=\"147\" text-anchor=\"middle\">F</text>" +
+        "<text x=\"292\" y=\"147\" text-anchor=\"middle\">V</text><text x=\"52\" y=\"25\" text-anchor=\"middle\">M</text>" +
+        "<text x=\"142\" y=\"61\" text-anchor=\"middle\">K</text><text x=\"202\" y=\"85\" text-anchor=\"middle\">J</text>" +
+        "<text class=\"sm\" x=\"97\" y=\"160\" text-anchor=\"middle\">45 cm</text><text class=\"sm\" x=\"172\" y=\"160\" text-anchor=\"middle\">30 cm</text>" +
+        "<text class=\"sm\" x=\"247\" y=\"160\" text-anchor=\"middle\">45 cm</text><text x=\"28\" y=\"85\" text-anchor=\"middle\">96 cm</text>" +
+        "<text class=\"sm\" x=\"288\" y=\"98\" text-anchor=\"middle\">vanishing</text><text class=\"sm\" x=\"296\" y=\"112\" text-anchor=\"middle\">point</text></svg>" +
+        "<figcaption>Not drawn to scale</figcaption></figure>" +
         "<p class=\"geo-given\">A backdrop for a play shows lamp posts in perspective. Their bases <strong>H</strong>, <strong>G</strong> and <strong>F</strong> lie on the level floor line through the vanishing point <strong>V</strong>, and their tops <strong>M</strong>, <strong>K</strong> and <strong>J</strong> lie on line VM. The posts are vertical. HG = 45 cm, GF = 30 cm, FV = 45 cm and post HM is 96 cm tall.</p>",
       claims: [
         {
@@ -594,10 +594,10 @@
           sub: "G.TR.3.3",
           stem: "What is the perimeter of the large logo, to the nearest tenth of a unit?",
           choices: [
-            { letter: "A", text: "about 32.3 units" },
-            { letter: "B", text: "about 16.1 units" },
-            { letter: "C", text: "about 8.1 units" },
-            { letter: "D", text: "20 units" }
+            { letter: "A", text: "32.3 units" },
+            { letter: "B", text: "16.1 units" },
+            { letter: "C", text: "8.1 units" },
+            { letter: "D", text: "20.0 units" }
           ],
           correct: "B"
         },
@@ -631,12 +631,12 @@
           id: "print",
           sol: "G.TR.3",
           sub: "G.TR.3.3",
-          stem: "The small logo is printed so that AB is 4.5 cm long. How long is AC on the print, to the nearest tenth of a centimeter?",
+          stem: "The small logo is printed so that AB is 6 cm long. How long is AC on the print, to the nearest tenth of a centimeter?",
           choices: [
-            { letter: "A", text: "about 3.4 cm" },
-            { letter: "B", text: "about 2.2 cm" },
-            { letter: "C", text: "about 3 cm" },
-            { letter: "D", text: "about 4.2 cm" }
+            { letter: "A", text: "4.5 cm" },
+            { letter: "B", text: "2.2 cm" },
+            { letter: "C", text: "4.0 cm" },
+            { letter: "D", text: "5.7 cm" }
           ],
           correct: "A"
         }
@@ -659,8 +659,8 @@
         "<circle class=\"dt\" cx=\"159.4\" cy=\"66.7\" r=\"3\"/><text x=\"127.3\" y=\"25.7\" text-anchor=\"middle\">A</text>" +
         "<text x=\"88\" y=\"163\" text-anchor=\"middle\">B</text><text x=\"244.5\" y=\"163\" text-anchor=\"middle\">C</text>" +
         "<text x=\"98.7\" y=\"98.1\" text-anchor=\"middle\">D</text><text x=\"172.4\" y=\"69.7\" text-anchor=\"middle\">E</text>" +
-        "<text x=\"98.1\" y=\"62.4\" text-anchor=\"middle\">16 in.</text><text x=\"83.5\" y=\"119.1\" text-anchor=\"middle\">14 in.</text>" +
-        "<text x=\"159.3\" y=\"39.6\" text-anchor=\"middle\">12 in.</text><text x=\"212.9\" y=\"96.2\" text-anchor=\"middle\">28 in.</text>" +
+        "<text x=\"92.3\" y=\"60.9\" text-anchor=\"middle\">16 in.</text><text x=\"77.7\" y=\"117.6\" text-anchor=\"middle\">14 in.</text>" +
+        "<text x=\"162.2\" y=\"36.8\" text-anchor=\"middle\">12 in.</text><text x=\"215.8\" y=\"93.5\" text-anchor=\"middle\">28 in.</text>" +
         "<text x=\"166.3\" y=\"163\" text-anchor=\"middle\">35 in.</text></svg></figure>" +
         "<p class=\"geo-given\">The side of a folding easel is <strong>△ABC</strong>: legs AB and AC meet at the top <strong>A</strong>, and a floor bar joins their feet B and C. A brace <strong>DE</strong> joins D on AB to E on AC. AD = 16 in., DB = 14 in., AE = 12 in., EC = 28 in. and BC = 35 in.</p>",
       claims: [
@@ -681,7 +681,7 @@
           id: "statement",
           sol: "G.TR.3",
           sub: "G.TR.3.1",
-          stem: "Which similarity statement is correct?",
+          stem: "Which similarity statement matches the vertices of the two easel triangles?",
           choices: [
             { letter: "A", text: "△ADE ∼ △ABC" },
             { letter: "B", text: "△AED ∼ △ACB" },
@@ -711,7 +711,7 @@
           choices: [
             { letter: "A", text: "Yes; 16/30 = 12/40" },
             { letter: "B", text: "No; 16/40 ≠ 12/30" },
-            { letter: "C", text: "Yes; 16 + 14 = 12 + 18" },
+            { letter: "C", text: "Yes; 16 + 14 = 12 + 28" },
             { letter: "D", text: "No; 16/30 ≠ 12/40" }
           ],
           correct: "D"
@@ -720,20 +720,20 @@
           id: "move",
           sol: "G.TR.3",
           sub: "G.TR.3.3",
-          stem: "The painter keeps D where it is and slides E along AC so that the brace becomes parallel to BC. How far from A is E then?",
+          stem: "The painter keeps D where it is and slides E along AC so that the brace becomes parallel to BC. How far from A is E then, to the nearest tenth of an inch?",
           choices: [
-            { letter: "A", text: "16 in." },
-            { letter: "B", text: "about 21.3 in." },
-            { letter: "C", text: "12 in." },
-            { letter: "D", text: "24 in." }
+            { letter: "A", text: "21.3 in." },
+            { letter: "B", text: "16.0 in." },
+            { letter: "C", text: "12.0 in." },
+            { letter: "D", text: "24.0 in." }
           ],
-          correct: "B"
+          correct: "A"
         },
         {
           id: "perimeter",
           sol: "G.TR.3",
           sub: "G.TR.3.3",
-          stem: "What is the perimeter of the small triangle ADE?",
+          stem: "What is the perimeter of the triangle ADE at the top of the easel?",
           choices: [
             { letter: "A", text: "105 in." },
             { letter: "B", text: "16.8 in." },
@@ -754,14 +754,16 @@
       level: 3,
       passage:
         "<figure class=\"geo-fig\">" +
-        "<svg viewBox=\"0 0 320 160\" role=\"img\" aria-label=\"Triangle ABC, a mosaic tile, with a cut AD from A to D on BC; angle BAD and angle C are marked congruent with single arcs; AB 12 cm, AC 15 cm and BC 18 cm\">" +
-        "<polygon class=\"sh2\" points=\"136.8,50.7 76,140 238,140\"/><polygon class=\"ln\" points=\"136.8,50.7 76,140 238,140\"/>" +
-        "<line class=\"ac\" x1=\"136.8\" y1=\"50.7\" x2=\"148\" y2=\"140\"/><path class=\"thin\" d=\"M126.6 65.6 A18 18 0 0 0 139 68.6\"/>" +
-        "<path class=\"thin\" d=\"M221.5 125.4 A22 22 0 0 0 216 140\"/><circle class=\"dt\" cx=\"136.8\" cy=\"50.7\" r=\"3\"/><circle class=\"dt\" cx=\"76\" cy=\"140\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"238\" cy=\"140\" r=\"3\"/><circle class=\"dt\" cx=\"148\" cy=\"140\" r=\"3\"/><text x=\"136.8\" y=\"43.7\" text-anchor=\"middle\">A</text>" +
-        "<text x=\"65\" y=\"154\" text-anchor=\"middle\">B</text><text x=\"249\" y=\"154\" text-anchor=\"middle\">C</text>" +
-        "<text x=\"148\" y=\"160\" text-anchor=\"middle\">D</text><text x=\"88.2\" y=\"88\" text-anchor=\"middle\">12 cm</text>" +
-        "<text x=\"200.6\" y=\"85.4\" text-anchor=\"middle\">15 cm</text><text x=\"197\" y=\"159\" text-anchor=\"middle\">18 cm</text></svg></figure>" +
+        "<svg viewBox=\"0 0 320 166\" role=\"img\" aria-label=\"Triangle ABC, a mosaic tile, with a cut AD from A to D on BC; angle BAD and angle C are marked congruent with single arcs; AB 12 cm, AC 15 cm and BC 18 cm\">" +
+        "<polygon class=\"sh2\" points=\"136.8,38.7 76,128 238,128\"/><polygon class=\"ln\" points=\"136.8,38.7 76,128 238,128\"/>" +
+        "<line class=\"ac\" x1=\"136.8\" y1=\"38.7\" x2=\"148\" y2=\"128\"/><path class=\"thin\" d=\"M126.6 53.6 A18 18 0 0 0 139 56.6\"/>" +
+        "<path class=\"thin\" d=\"M221.5 113.4 A22 22 0 0 0 216 128\"/><circle class=\"dt\" cx=\"136.8\" cy=\"38.7\" r=\"3\"/><circle class=\"dt\" cx=\"76\" cy=\"128\" r=\"3\"/>" +
+        "<circle class=\"dt\" cx=\"238\" cy=\"128\" r=\"3\"/><circle class=\"dt\" cx=\"148\" cy=\"128\" r=\"3\"/><text x=\"136.8\" y=\"31.7\" text-anchor=\"middle\">A</text>" +
+        "<text x=\"65\" y=\"142\" text-anchor=\"middle\">B</text><text x=\"249\" y=\"142\" text-anchor=\"middle\">C</text>" +
+        "<text x=\"148\" y=\"145\" text-anchor=\"middle\">D</text><text x=\"88.2\" y=\"76\" text-anchor=\"middle\">12 cm</text>" +
+        "<text x=\"200.6\" y=\"73.4\" text-anchor=\"middle\">15 cm</text><text x=\"191\" y=\"159\" text-anchor=\"middle\">18 cm</text>" +
+        "<line class=\"thin\" x1=\"76\" y1=\"140\" x2=\"140\" y2=\"140\"/><line class=\"thin\" x1=\"156\" y1=\"140\" x2=\"238\" y2=\"140\"/>" +
+        "<line class=\"thin\" x1=\"76\" y1=\"136\" x2=\"76\" y2=\"144\"/><line class=\"thin\" x1=\"238\" y1=\"136\" x2=\"238\" y2=\"144\"/></svg></figure>" +
         "<p class=\"geo-given\">A mosaic artist cuts a triangular tile <strong>ABC</strong> along <strong>AD</strong>, from A to D on BC, so that ∠BAD ≅ ∠C. AB = 12 cm, AC = 15 cm and BC = 18 cm.</p>",
       claims: [
         {
@@ -781,7 +783,7 @@
           id: "statement",
           sol: "G.TR.3",
           sub: "G.TR.3.1",
-          stem: "Which similarity statement is correct?",
+          stem: "Which similarity statement pairs the piece ABD with the whole tile?",
           choices: [
             { letter: "A", text: "△BAD ∼ △BCA" },
             { letter: "B", text: "△BAD ∼ △BAC" },
@@ -822,10 +824,10 @@
           sub: "G.TR.3.2",
           stem: "Is the other piece, ADC, similar to the whole tile? Choose the answer with the correct reason.",
           choices: [
-            { letter: "A", text: "Yes; DC/BC = AC/AB" },
-            { letter: "B", text: "No; ∠ADC is a right angle" },
+            { letter: "A", text: "Yes; DC/BC = AC/AB, so the sides match" },
+            { letter: "B", text: "No; ∠ADC is a right angle, but ∠B is not" },
             { letter: "C", text: "No; AD = DC, but the tile has no equal sides" },
-            { letter: "D", text: "Yes; AD/AB = DC/AC" }
+            { letter: "D", text: "Yes; AD/AB = DC/AC, and ∠C is shared" }
           ],
           correct: "C"
         },
@@ -855,18 +857,18 @@
       passage:
         "<figure class=\"geo-fig\">" +
         "<svg viewBox=\"0 0 320 170\" role=\"img\" aria-label=\"Level ground with Mira's eye E above her feet S on the left, a mirror M on the ground, and an oak TB on the right; the sight line goes from E down to M and up to the top T; angles EMS and TMB are marked equal; SM 2 m, MB 16 m, ES 1.5 m\">" +
-        "<line class=\"thin\" x1=\"10\" y1=\"150\" x2=\"310\" y2=\"150\"/><rect class=\"sh\" x=\"68\" y=\"147\" width=\"12\" height=\"3\"/>" +
-        "<line class=\"ln\" x1=\"46\" y1=\"150\" x2=\"46\" y2=\"133.5\"/><line class=\"ln\" x1=\"298\" y1=\"150\" x2=\"298\" y2=\"18\"/>" +
-        "<line class=\"thin dash\" x1=\"46\" y1=\"133.5\" x2=\"74\" y2=\"150\"/><line class=\"thin dash\" x1=\"74\" y1=\"150\" x2=\"298\" y2=\"18\"/>" +
-        "<path class=\"thin\" d=\"M46 144 L52 144 L52 150\"/><path class=\"thin\" d=\"M298 143 L291 143 L291 150\"/>" +
-        "<path class=\"thin\" d=\"M62 150 A12 12 0 0 1 63.7 143.9\"/><path class=\"thin\" d=\"M86 150 A12 12 0 0 0 84.3 143.9\"/>" +
-        "<circle class=\"dt\" cx=\"46\" cy=\"133.5\" r=\"3\"/><circle class=\"dt\" cx=\"46\" cy=\"150\" r=\"3\"/><circle class=\"dt\" cx=\"74\" cy=\"150\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"298\" cy=\"150\" r=\"3\"/><circle class=\"dt\" cx=\"298\" cy=\"18\" r=\"3\"/><text x=\"42\" y=\"125.5\" text-anchor=\"middle\">E</text>" +
-        "<text x=\"46\" y=\"168\" text-anchor=\"middle\">S</text><text x=\"74\" y=\"168\" text-anchor=\"middle\">M</text>" +
-        "<text x=\"298\" y=\"168\" text-anchor=\"middle\">B</text><text x=\"286\" y=\"21\" text-anchor=\"middle\">T</text>" +
-        "<text x=\"20\" y=\"147\" text-anchor=\"middle\">1.5 m</text><text class=\"sm\" x=\"64\" y=\"168\" text-anchor=\"middle\">2 m</text>" +
-        "<text x=\"186\" y=\"169\" text-anchor=\"middle\">16 m</text><text class=\"sm\" x=\"274\" y=\"66\" text-anchor=\"middle\">oak</text>" +
-        "<text class=\"sm\" x=\"76\" y=\"136\" text-anchor=\"middle\">mirror</text></svg><figcaption>Not drawn to scale</figcaption></figure>" +
+        "<line class=\"thin\" x1=\"10\" y1=\"134\" x2=\"310\" y2=\"134\"/><rect class=\"sh\" x=\"103\" y=\"131\" width=\"14\" height=\"3\"/>" +
+        "<line class=\"ln\" x1=\"44\" y1=\"134\" x2=\"44\" y2=\"93.5\"/><line class=\"ln\" x1=\"286\" y1=\"134\" x2=\"286\" y2=\"26\"/>" +
+        "<line class=\"thin dash\" x1=\"44\" y1=\"93.5\" x2=\"110\" y2=\"134\"/><line class=\"thin dash\" x1=\"110\" y1=\"134\" x2=\"286\" y2=\"26\"/>" +
+        "<path class=\"thin\" d=\"M44 128 L50 128 L50 134\"/><path class=\"thin\" d=\"M286 127 L279 127 L279 134\"/>" +
+        "<path class=\"thin\" d=\"M90 134 A20 20 0 0 1 93 123.5\"/><path class=\"thin\" d=\"M130 134 A20 20 0 0 0 127 123.5\"/>" +
+        "<circle class=\"dt\" cx=\"44\" cy=\"93.5\" r=\"3\"/><circle class=\"dt\" cx=\"44\" cy=\"134\" r=\"3\"/><circle class=\"dt\" cx=\"110\" cy=\"134\" r=\"3\"/>" +
+        "<circle class=\"dt\" cx=\"286\" cy=\"134\" r=\"3\"/><circle class=\"dt\" cx=\"286\" cy=\"26\" r=\"3\"/><text x=\"32\" y=\"96.5\" text-anchor=\"middle\">E</text>" +
+        "<text x=\"44\" y=\"152\" text-anchor=\"middle\">S</text><text x=\"110\" y=\"152\" text-anchor=\"middle\">M</text>" +
+        "<text x=\"286\" y=\"152\" text-anchor=\"middle\">B</text><text x=\"274\" y=\"29\" text-anchor=\"middle\">T</text>" +
+        "<text x=\"20\" y=\"120.8\" text-anchor=\"middle\">1.5 m</text><text x=\"77\" y=\"152\" text-anchor=\"middle\">2 m</text>" +
+        "<text x=\"198\" y=\"152\" text-anchor=\"middle\">16 m</text><text class=\"sm\" x=\"304\" y=\"74\" text-anchor=\"middle\">oak</text>" +
+        "<text class=\"sm\" x=\"110\" y=\"166\" text-anchor=\"middle\">mirror</text></svg><figcaption>Not drawn to scale</figcaption></figure>" +
         "<p class=\"geo-given\">Mira lays a mirror <strong>M</strong> flat on level ground, 16 m from the base <strong>B</strong> of an oak. She stands at <strong>S</strong>, 2 m from the mirror, and sees the top <strong>T</strong> of the oak in it. Her eyes <strong>E</strong> are 1.5 m above the ground. ES and TB are vertical, and the mirror makes ∠EMS ≅ ∠TMB.</p>",
       claims: [
         {
@@ -960,18 +962,18 @@
       passage:
         "<figure class=\"geo-fig\">" +
         "<svg viewBox=\"0 0 320 166\" role=\"img\" aria-label=\"Level ground with a tree TB and its shadow BS on the left and a hiker HG and her shadow GK on the right; the sun's rays TS and HK are parallel dashed lines; BS 22 m, HG 1.8 m and GK 2.4 m\">" +
-        "<line class=\"thin\" x1=\"14\" y1=\"146\" x2=\"306\" y2=\"146\"/><line class=\"ln\" x1=\"36\" y1=\"146\" x2=\"36\" y2=\"56.9\"/>" +
-        "<line class=\"ac\" x1=\"36\" y1=\"146\" x2=\"154.8\" y2=\"146\"/><line class=\"thin dash\" x1=\"36\" y1=\"56.9\" x2=\"154.8\" y2=\"146\"/>" +
-        "<line class=\"ln\" x1=\"206\" y1=\"146\" x2=\"206\" y2=\"108.2\"/><line class=\"ac\" x1=\"206\" y1=\"146\" x2=\"256.4\" y2=\"146\"/>" +
-        "<line class=\"thin dash\" x1=\"206\" y1=\"108.2\" x2=\"256.4\" y2=\"146\"/><path class=\"thin\" d=\"M36 139 L43 139 L43 146\"/>" +
-        "<path class=\"thin\" d=\"M206 140 L212 140 L212 146\"/><circle class=\"dt\" cx=\"36\" cy=\"56.9\" r=\"3\"/><circle class=\"dt\" cx=\"36\" cy=\"146\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"154.8\" cy=\"146\" r=\"3\"/><circle class=\"dt\" cx=\"206\" cy=\"108.2\" r=\"3\"/><circle class=\"dt\" cx=\"206\" cy=\"146\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"256.4\" cy=\"146\" r=\"3\"/><text x=\"24\" y=\"61.9\" text-anchor=\"middle\">T</text><text x=\"36\" y=\"165\" text-anchor=\"middle\">B</text>" +
-        "<text x=\"154.8\" y=\"165\" text-anchor=\"middle\">S</text><text x=\"194\" y=\"113.2\" text-anchor=\"middle\">H</text>" +
-        "<text x=\"206\" y=\"165\" text-anchor=\"middle\">G</text><text x=\"256.4\" y=\"165\" text-anchor=\"middle\">K</text>" +
-        "<text x=\"95.4\" y=\"165\" text-anchor=\"middle\">22 m</text><text x=\"182\" y=\"132.1\" text-anchor=\"middle\">1.8 m</text>" +
-        "<text x=\"231.2\" y=\"165\" text-anchor=\"middle\">2.4 m</text><text class=\"sm\" x=\"58\" y=\"66.9\" text-anchor=\"middle\">tree</text>" +
-        "<text class=\"sm\" x=\"210\" y=\"98.2\" text-anchor=\"middle\">hiker</text><text class=\"sm\" x=\"282\" y=\"28\" text-anchor=\"middle\">sun rays</text></svg>" +
+        "<line class=\"thin\" x1=\"10\" y1=\"136\" x2=\"310\" y2=\"136\"/><line class=\"ln\" x1=\"24\" y1=\"136\" x2=\"24\" y2=\"27.1\"/>" +
+        "<line class=\"ac\" x1=\"24\" y1=\"136\" x2=\"169.2\" y2=\"136\"/><line class=\"thin dash\" x1=\"24\" y1=\"27.1\" x2=\"169.2\" y2=\"136\"/>" +
+        "<line class=\"ln\" x1=\"214\" y1=\"136\" x2=\"214\" y2=\"85.6\"/><line class=\"ac\" x1=\"214\" y1=\"136\" x2=\"281.2\" y2=\"136\"/>" +
+        "<line class=\"thin dash\" x1=\"214\" y1=\"85.6\" x2=\"281.2\" y2=\"136\"/><path class=\"thin\" d=\"M24 129 L31 129 L31 136\"/>" +
+        "<path class=\"thin\" d=\"M214 130 L220 130 L220 136\"/><circle class=\"dt\" cx=\"24\" cy=\"27.1\" r=\"3\"/><circle class=\"dt\" cx=\"24\" cy=\"136\" r=\"3\"/>" +
+        "<circle class=\"dt\" cx=\"169.2\" cy=\"136\" r=\"3\"/><circle class=\"dt\" cx=\"214\" cy=\"85.6\" r=\"3\"/><circle class=\"dt\" cx=\"214\" cy=\"136\" r=\"3\"/>" +
+        "<circle class=\"dt\" cx=\"281.2\" cy=\"136\" r=\"3\"/><text x=\"12\" y=\"32.1\" text-anchor=\"middle\">T</text><text x=\"24\" y=\"155\" text-anchor=\"middle\">B</text>" +
+        "<text x=\"169.2\" y=\"155\" text-anchor=\"middle\">S</text><text x=\"202\" y=\"90.6\" text-anchor=\"middle\">H</text>" +
+        "<text x=\"214\" y=\"155\" text-anchor=\"middle\">G</text><text x=\"281.2\" y=\"155\" text-anchor=\"middle\">K</text>" +
+        "<text x=\"96.6\" y=\"155\" text-anchor=\"middle\">22 m</text><text x=\"190\" y=\"115.8\" text-anchor=\"middle\">1.8 m</text>" +
+        "<text x=\"247.6\" y=\"155\" text-anchor=\"middle\">2.4 m</text><text class=\"sm\" x=\"46\" y=\"37.1\" text-anchor=\"middle\">tree</text>" +
+        "<text class=\"sm\" x=\"238\" y=\"81.6\" text-anchor=\"middle\">hiker</text><text class=\"sm\" x=\"150\" y=\"44\" text-anchor=\"middle\">sun rays</text></svg>" +
         "<figcaption>Not drawn to scale</figcaption></figure>" +
         "<p class=\"geo-given\">At the same moment, a hiker <strong>HG</strong>, 1.8 m tall, casts a shadow <strong>GK</strong> 2.4 m long, and a tree <strong>TB</strong> casts a shadow <strong>BS</strong> 22 m long. Both stand straight up on level ground, and the sun's rays HK and TS are parallel.</p>",
       claims: [
@@ -1018,7 +1020,7 @@
           id: "statement",
           sol: "G.TR.3",
           sub: "G.TR.3.1",
-          stem: "Which similarity statement is correct?",
+          stem: "Which similarity statement pairs the hiker's triangle with the tree's?",
           choices: [
             { letter: "A", text: "△HGK ∼ △BTS" },
             { letter: "B", text: "△GHK ∼ △TBS" },
@@ -1066,16 +1068,16 @@
       passage:
         "<figure class=\"geo-fig\">" +
         "<svg viewBox=\"0 0 320 170\" role=\"img\" aria-label=\"Level ground with a rope AT from the anchor A to the top T of a sapling TB; a stake SP stands under the rope and its top P touches the rope; AS 0.8 m, SB 1.6 m, SP 0.6 m and AP 1.0 m\">" +
-        "<line class=\"thin\" x1=\"30\" y1=\"150\" x2=\"300\" y2=\"150\"/><line class=\"ln\" x1=\"232\" y1=\"150\" x2=\"232\" y2=\"24\"/>" +
-        "<line class=\"ln\" x1=\"120\" y1=\"150\" x2=\"120\" y2=\"108\"/><line class=\"ac\" x1=\"64\" y1=\"150\" x2=\"232\" y2=\"24\"/>" +
-        "<path class=\"thin\" d=\"M120 144 L114 144 L114 150\"/><path class=\"thin\" d=\"M232 143 L225 143 L225 150\"/><circle class=\"dt\" cx=\"64\" cy=\"150\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"120\" cy=\"150\" r=\"3\"/><circle class=\"dt\" cx=\"120\" cy=\"108\" r=\"3\"/><circle class=\"dt\" cx=\"232\" cy=\"150\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"232\" cy=\"24\" r=\"3\"/><text x=\"54\" y=\"167\" text-anchor=\"middle\">A</text><text x=\"120\" y=\"169\" text-anchor=\"middle\">S</text>" +
-        "<text x=\"118\" y=\"100\" text-anchor=\"middle\">P</text><text x=\"232\" y=\"169\" text-anchor=\"middle\">B</text>" +
-        "<text x=\"244\" y=\"29\" text-anchor=\"middle\">T</text><text x=\"92\" y=\"169\" text-anchor=\"middle\">0.8 m</text>" +
-        "<text x=\"176\" y=\"169\" text-anchor=\"middle\">1.6 m</text><text x=\"144\" y=\"138\" text-anchor=\"middle\">0.6 m</text>" +
-        "<text x=\"80\" y=\"122\" text-anchor=\"middle\">1.0 m</text><text class=\"sm\" x=\"262\" y=\"94\" text-anchor=\"middle\">sapling</text>" +
-        "<text class=\"sm\" x=\"140\" y=\"142\" text-anchor=\"middle\">stake</text></svg></figure>" +
+        "<line class=\"thin\" x1=\"20\" y1=\"144\" x2=\"300\" y2=\"144\"/><line class=\"ln\" x1=\"230\" y1=\"144\" x2=\"230\" y2=\"9\"/>" +
+        "<line class=\"ln\" x1=\"110\" y1=\"144\" x2=\"110\" y2=\"99\"/><line class=\"ac\" x1=\"50\" y1=\"144\" x2=\"230\" y2=\"9\"/>" +
+        "<path class=\"thin\" d=\"M110 138 L104 138 L104 144\"/><path class=\"thin\" d=\"M230 137 L223 137 L223 144\"/><circle class=\"dt\" cx=\"50\" cy=\"144\" r=\"3\"/>" +
+        "<circle class=\"dt\" cx=\"110\" cy=\"144\" r=\"3\"/><circle class=\"dt\" cx=\"110\" cy=\"99\" r=\"3\"/><circle class=\"dt\" cx=\"230\" cy=\"144\" r=\"3\"/>" +
+        "<circle class=\"dt\" cx=\"230\" cy=\"9\" r=\"3\"/><text x=\"40\" y=\"161\" text-anchor=\"middle\">A</text><text x=\"110\" y=\"163\" text-anchor=\"middle\">S</text>" +
+        "<text x=\"108\" y=\"91\" text-anchor=\"middle\">P</text><text x=\"230\" y=\"163\" text-anchor=\"middle\">B</text>" +
+        "<text x=\"242\" y=\"14\" text-anchor=\"middle\">T</text><text x=\"80\" y=\"163\" text-anchor=\"middle\">0.8 m</text>" +
+        "<text x=\"170\" y=\"163\" text-anchor=\"middle\">1.6 m</text><text x=\"134\" y=\"120.5\" text-anchor=\"middle\">0.6 m</text>" +
+        "<text x=\"68\" y=\"114.5\" text-anchor=\"middle\">1.0 m</text><text class=\"sm\" x=\"260\" y=\"84\" text-anchor=\"middle\">sapling</text>" +
+        "<text class=\"sm\" x=\"132\" y=\"138\" text-anchor=\"middle\">stake</text></svg></figure>" +
         "<p class=\"geo-given\">A rope runs straight from the top <strong>T</strong> of a sapling to an anchor <strong>A</strong> on level ground. It rests on the top <strong>P</strong> of a stake <strong>SP</strong>. The sapling TB and the stake are vertical. AS = 0.8 m, SB = 1.6 m, SP = 0.6 m and AP = 1.0 m.</p>",
       claims: [
         {
@@ -1134,7 +1136,7 @@
           id: "not",
           sol: "G.TR.3",
           sub: "G.TR.3.2",
-          stem: "Which statement is NOT true?",
+          stem: "Which statement about the rope and the stake is NOT true?",
           choices: [
             { letter: "A", text: "△ASP ∼ △ABT" },
             { letter: "B", text: "AS/AB = SP/BT" },
@@ -1168,20 +1170,20 @@
       level: 2,
       passage:
         "<figure class=\"geo-fig\">" +
-        "<svg viewBox=\"0 0 320 166\" role=\"img\" aria-label=\"A canyon seen from above: point T on the far rim; A and B on the near rim; lines from T through A and B reach D and E farther back; AB is parallel to DE; AB 36 m, DE 48 m, AD 15 m; TA is x\">" +
-        "<rect class=\"sh2\" x=\"6\" y=\"7.9\" width=\"308\" height=\"100.1\"/><line class=\"thin\" x1=\"6\" y1=\"108\" x2=\"314\" y2=\"108\"/>" +
-        "<line class=\"thin\" x1=\"6\" y1=\"7.9\" x2=\"314\" y2=\"7.9\"/><line class=\"ln\" x1=\"230.2\" y1=\"7.9\" x2=\"123.3\" y2=\"141.4\"/>" +
-        "<line class=\"ln\" x1=\"230.2\" y1=\"7.9\" x2=\"260.1\" y2=\"141.4\"/><line class=\"ln\" x1=\"150\" y1=\"108\" x2=\"252.6\" y2=\"108\"/>" +
-        "<line class=\"ln\" x1=\"123.3\" y1=\"141.4\" x2=\"260.1\" y2=\"141.4\"/><path class=\"thin\" d=\"M205.6 112 L211.6 108 L205.6 104\"/>" +
-        "<path class=\"thin\" d=\"M199.4 145.4 L205.4 141.4 L199.4 137.4\"/><circle class=\"dt\" cx=\"230.2\" cy=\"7.9\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"150\" cy=\"108\" r=\"3\"/><circle class=\"dt\" cx=\"252.6\" cy=\"108\" r=\"3\"/><circle class=\"dt\" cx=\"123.3\" cy=\"141.4\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"260.1\" cy=\"141.4\" r=\"3\"/><text x=\"230.2\" y=\"1.9\" text-anchor=\"middle\">T</text>" +
-        "<text x=\"137\" y=\"106\" text-anchor=\"middle\">A</text><text x=\"265.6\" y=\"106\" text-anchor=\"middle\">B</text>" +
-        "<text x=\"111.3\" y=\"150.4\" text-anchor=\"middle\">D</text><text x=\"272.1\" y=\"150.4\" text-anchor=\"middle\">E</text>" +
-        "<text x=\"189.3\" y=\"126\" text-anchor=\"middle\">36 m</text><text x=\"191.7\" y=\"161.4\" text-anchor=\"middle\">48 m</text>" +
-        "<text x=\"124.2\" y=\"119.7\" text-anchor=\"middle\">15 m</text><text class=\"acc\" x=\"178.1\" y=\"62.9\" text-anchor=\"middle\">x</text>" +
-        "<text class=\"sm\" x=\"262\" y=\"54\" text-anchor=\"middle\">canyon</text><text class=\"sm\" x=\"262\" y=\"36\" text-anchor=\"middle\">far rim</text>" +
-        "<text class=\"sm\" x=\"268\" y=\"124\" text-anchor=\"middle\">near rim</text></svg></figure>" +
+        "<svg viewBox=\"0 0 320 170\" role=\"img\" aria-label=\"A canyon seen from above: point T on the far rim; A and B on the near rim; lines from T through A and B reach D and E farther back; AB is parallel to DE; AB 36 m, DE 48 m, AD 15 m; TA is x\">" +
+        "<rect class=\"sh2\" x=\"0\" y=\"24.7\" width=\"320\" height=\"91.3\"/><line class=\"thin\" x1=\"0\" y1=\"116\" x2=\"320\" y2=\"116\"/>" +
+        "<line class=\"thin\" x1=\"0\" y1=\"24.7\" x2=\"320\" y2=\"24.7\"/><line class=\"ln\" x1=\"223.1\" y1=\"24.7\" x2=\"125.6\" y2=\"146.4\"/>" +
+        "<line class=\"ln\" x1=\"223.1\" y1=\"24.7\" x2=\"250.4\" y2=\"146.4\"/><line class=\"ln\" x1=\"150\" y1=\"116\" x2=\"243.6\" y2=\"116\"/>" +
+        "<line class=\"ln\" x1=\"125.6\" y1=\"146.4\" x2=\"250.4\" y2=\"146.4\"/><path class=\"thin\" d=\"M200.2 120 L206.2 116 L200.2 112\"/>" +
+        "<path class=\"thin\" d=\"M194.5 150.4 L200.5 146.4 L194.5 142.4\"/><circle class=\"dt\" cx=\"223.1\" cy=\"24.7\" r=\"3\"/>" +
+        "<circle class=\"dt\" cx=\"150\" cy=\"116\" r=\"3\"/><circle class=\"dt\" cx=\"243.6\" cy=\"116\" r=\"3\"/><circle class=\"dt\" cx=\"125.6\" cy=\"146.4\" r=\"3\"/>" +
+        "<circle class=\"dt\" cx=\"250.4\" cy=\"146.4\" r=\"3\"/><text x=\"223.1\" y=\"18.7\" text-anchor=\"middle\">T</text>" +
+        "<text x=\"163\" y=\"112\" text-anchor=\"middle\">A</text><text x=\"230.6\" y=\"112\" text-anchor=\"middle\">B</text>" +
+        "<text x=\"113.6\" y=\"155.4\" text-anchor=\"middle\">D</text><text x=\"262.4\" y=\"155.4\" text-anchor=\"middle\">E</text>" +
+        "<text x=\"184.8\" y=\"134\" text-anchor=\"middle\">36 m</text><text x=\"188\" y=\"166.4\" text-anchor=\"middle\">48 m</text>" +
+        "<text x=\"115.8\" y=\"132.2\" text-anchor=\"middle\">15 m</text><text class=\"acc\" x=\"174.6\" y=\"75.3\" text-anchor=\"middle\">x</text>" +
+        "<text class=\"sm\" x=\"272\" y=\"74.3\" text-anchor=\"middle\">canyon</text><text class=\"sm\" x=\"272\" y=\"18.7\" text-anchor=\"middle\">far rim</text>" +
+        "<text class=\"sm\" x=\"282\" y=\"132\" text-anchor=\"middle\">near rim</text></svg></figure>" +
         "<p class=\"geo-given\">A ranger picks a rock <strong>T</strong> on the far rim of a canyon. She stakes <strong>A</strong> and <strong>B</strong> on the near rim, then <strong>D</strong> and <strong>E</strong> farther back so that T, A, D and T, B, E are on straight lines and AB ∥ DE. AB = 36 m, DE = 48 m and AD = 15 m. Let x = TA.</p>",
       claims: [
         {
@@ -1275,23 +1277,25 @@
       passage:
         "<figure class=\"geo-fig\">" +
         "<svg viewBox=\"0 0 320 166\" role=\"img\" aria-label=\"Three fern fronds drawn as triangles: ABC with AB 3 cm, AC 8 cm and a 60 degree angle at A; DEF with DF 7.5 cm, DE 20 cm and a 60 degree angle at D; GHJ with GH 6 cm, GJ 16 cm and a 50 degree angle at G\">" +
-        "<polygon class=\"sh2\" points=\"56,150 85.9,124.9 37.9,47.6\"/><polygon class=\"ln\" points=\"56,150 85.9,124.9 37.9,47.6\"/>" +
-        "<polygon class=\"sh2\" points=\"160,150 182.9,20 122.1,118.2\"/><polygon class=\"ln\" points=\"160,150 182.9,20 122.1,118.2\"/>" +
-        "<polygon class=\"sh2\" points=\"262,150 296.8,115.2 250.6,19.3\"/><polygon class=\"ln\" points=\"262,150 296.8,115.2 250.6,19.3\"/>" +
-        "<line class=\"thin\" x1=\"56\" y1=\"150\" x2=\"56\" y2=\"162\"/><line class=\"thin\" x1=\"160\" y1=\"150\" x2=\"160\" y2=\"162\"/>" +
-        "<line class=\"thin\" x1=\"262\" y1=\"150\" x2=\"262\" y2=\"162\"/><circle class=\"dt\" cx=\"56\" cy=\"150\" r=\"3\"/><circle class=\"dt\" cx=\"85.9\" cy=\"124.9\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"37.9\" cy=\"47.6\" r=\"3\"/><circle class=\"dt\" cx=\"160\" cy=\"150\" r=\"3\"/><circle class=\"dt\" cx=\"182.9\" cy=\"20\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"122.1\" cy=\"118.2\" r=\"3\"/><circle class=\"dt\" cx=\"262\" cy=\"150\" r=\"3\"/><circle class=\"dt\" cx=\"296.8\" cy=\"115.2\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"250.6\" cy=\"19.3\" r=\"3\"/><text x=\"45\" y=\"159\" text-anchor=\"middle\">A</text>" +
-        "<text x=\"95.8\" y=\"136.6\" text-anchor=\"middle\">B</text><text x=\"33.8\" y=\"41.3\" text-anchor=\"middle\">C</text>" +
-        "<text x=\"171\" y=\"159\" text-anchor=\"middle\">D</text><text x=\"187.1\" y=\"13.7\" text-anchor=\"middle\">E</text>" +
-        "<text x=\"112.1\" y=\"129.9\" text-anchor=\"middle\">F</text><text x=\"251\" y=\"159\" text-anchor=\"middle\">G</text>" +
-        "<text x=\"306.4\" y=\"127.4\" text-anchor=\"middle\">H</text><text x=\"247.6\" y=\"12.7\" text-anchor=\"middle\">J</text>" +
-        "<text x=\"83.8\" y=\"157.8\" text-anchor=\"middle\">3 cm</text><text x=\"27.3\" y=\"107.3\" text-anchor=\"middle\">8 cm</text>" +
-        "<text class=\"sm\" x=\"64.6\" y=\"130.5\" text-anchor=\"middle\">60°</text><text x=\"126.9\" y=\"155.9\" text-anchor=\"middle\">7.5 cm</text>" +
-        "<text x=\"193.1\" y=\"93.8\" text-anchor=\"middle\">20 cm</text><text class=\"sm\" x=\"151.1\" y=\"129.6\" text-anchor=\"middle\">60°</text>" +
-        "<text x=\"292.1\" y=\"150.3\" text-anchor=\"middle\">6 cm</text><text x=\"236.4\" y=\"91.4\" text-anchor=\"middle\">16 cm</text>" +
-        "<text class=\"sm\" x=\"271.6\" y=\"127.7\" text-anchor=\"middle\">50°</text></svg><figcaption>Not drawn to scale</figcaption></figure>" +
+        "<polygon class=\"sh2\" points=\"58,146 87.9,120.9 39.9,43.6\"/><polygon class=\"ln\" points=\"58,146 87.9,120.9 39.9,43.6\"/>" +
+        "<polygon class=\"sh2\" points=\"176,146 197.5,23.9 140.4,116.1\"/><polygon class=\"ln\" points=\"176,146 197.5,23.9 140.4,116.1\"/>" +
+        "<polygon class=\"sh2\" points=\"270,146 238.6,114.6 280.3,28.1\"/><polygon class=\"ln\" points=\"270,146 238.6,114.6 280.3,28.1\"/>" +
+        "<line class=\"thin\" x1=\"58\" y1=\"146\" x2=\"58\" y2=\"162\"/><line class=\"thin\" x1=\"176\" y1=\"146\" x2=\"176\" y2=\"162\"/>" +
+        "<line class=\"thin\" x1=\"270\" y1=\"146\" x2=\"270\" y2=\"162\"/><path class=\"thin\" d=\"M68.7 137 A14 14 0 0 0 55.6 132.2\"/>" +
+        "<path class=\"thin\" d=\"M178.4 132.2 A14 14 0 0 0 165.3 137\"/><path class=\"thin\" d=\"M260.1 136.1 A14 14 0 0 1 271.2 132.1\"/>" +
+        "<circle class=\"dt\" cx=\"58\" cy=\"146\" r=\"3\"/><circle class=\"dt\" cx=\"87.9\" cy=\"120.9\" r=\"3\"/><circle class=\"dt\" cx=\"39.9\" cy=\"43.6\" r=\"3\"/>" +
+        "<circle class=\"dt\" cx=\"176\" cy=\"146\" r=\"3\"/><circle class=\"dt\" cx=\"197.5\" cy=\"23.9\" r=\"3\"/><circle class=\"dt\" cx=\"140.4\" cy=\"116.1\" r=\"3\"/>" +
+        "<circle class=\"dt\" cx=\"270\" cy=\"146\" r=\"3\"/><circle class=\"dt\" cx=\"238.6\" cy=\"114.6\" r=\"3\"/><circle class=\"dt\" cx=\"280.3\" cy=\"28.1\" r=\"3\"/>" +
+        "<text x=\"47\" y=\"155\" text-anchor=\"middle\">A</text><text x=\"97.8\" y=\"132.6\" text-anchor=\"middle\">B</text>" +
+        "<text x=\"35.8\" y=\"37.3\" text-anchor=\"middle\">C</text><text x=\"187\" y=\"155\" text-anchor=\"middle\">D</text>" +
+        "<text x=\"201.7\" y=\"17.6\" text-anchor=\"middle\">E</text><text x=\"130.4\" y=\"127.8\" text-anchor=\"middle\">F</text>" +
+        "<text x=\"281\" y=\"155\" text-anchor=\"middle\">G</text><text x=\"229\" y=\"126.8\" text-anchor=\"middle\">H</text>" +
+        "<text x=\"283.3\" y=\"21.4\" text-anchor=\"middle\">J</text><text x=\"84.5\" y=\"152.3\" text-anchor=\"middle\">3 cm</text>" +
+        "<text x=\"29.3\" y=\"103.3\" text-anchor=\"middle\">8 cm</text><text class=\"sm\" x=\"67.2\" y=\"124.6\" text-anchor=\"middle\">60°</text>" +
+        "<text x=\"144\" y=\"152.9\" text-anchor=\"middle\">7.5 cm</text><text x=\"208.4\" y=\"93.8\" text-anchor=\"middle\">20 cm</text>" +
+        "<text class=\"sm\" x=\"167.1\" y=\"125.6\" text-anchor=\"middle\">60°</text><text x=\"241.6\" y=\"148\" text-anchor=\"middle\">6 cm</text>" +
+        "<text x=\"297.1\" y=\"93.9\" text-anchor=\"middle\">16 cm</text><text class=\"sm\" x=\"260.1\" y=\"122.7\" text-anchor=\"middle\">50°</text></svg>" +
+        "<figcaption>Not drawn to scale</figcaption></figure>" +
         "<p class=\"geo-given\">A botanist traces three fern fronds as triangles. Frond 1, <strong>△ABC</strong>: AB = 3 cm, AC = 8 cm, m∠A = 60° and BC = 7 cm. Frond 2, <strong>△DEF</strong>: DF = 7.5 cm, DE = 20 cm and m∠D = 60°. Frond 3, <strong>△GHJ</strong>: GH = 6 cm, GJ = 16 cm and m∠G = 50°.</p>",
       claims: [
         {
@@ -1350,7 +1354,7 @@
           id: "statement",
           sol: "G.TR.3",
           sub: "G.TR.3.1",
-          stem: "Which similarity statement is correct?",
+          stem: "Which similarity statement is correct for fronds 1 and 2?",
           choices: [
             { letter: "A", text: "△ABC ∼ △DFE" },
             { letter: "B", text: "△ABC ∼ △DEF" },
@@ -1385,18 +1389,18 @@
       passage:
         "<figure class=\"geo-fig\">" +
         "<svg viewBox=\"0 0 320 170\" role=\"img\" aria-label=\"A straight hillside sloping down to the right; a hoodoo HK stands up from K with its shadow KL down the slope; farther down, a fence post PQ stands up from Q with its shadow QR; the sun's rays HL and PR are parallel dashed lines; PQ 1.2 m, QR 2 m and KL 15 m\">" +
-        "<polygon class=\"sh2\" points=\"6,77.4 314,165.2 314,170 6,170\"/><line class=\"thin\" x1=\"6\" y1=\"77.1\" x2=\"314\" y2=\"165.2\"/>" +
-        "<line class=\"ln\" x1=\"30\" y1=\"84\" x2=\"30\" y2=\"3\"/><line class=\"ln\" x1=\"181.4\" y1=\"127.3\" x2=\"181.4\" y2=\"100.3\"/>" +
-        "<line class=\"ac\" x1=\"30\" y1=\"84\" x2=\"159.8\" y2=\"121.1\"/><line class=\"ac\" x1=\"181.4\" y1=\"127.3\" x2=\"224.7\" y2=\"139.7\"/>" +
-        "<line class=\"thin dash\" x1=\"30\" y1=\"3\" x2=\"159.8\" y2=\"121.1\"/><line class=\"thin dash\" x1=\"181.4\" y1=\"100.3\" x2=\"224.7\" y2=\"139.7\"/>" +
-        "<circle class=\"dt\" cx=\"30\" cy=\"3\" r=\"3\"/><circle class=\"dt\" cx=\"30\" cy=\"84\" r=\"3\"/><circle class=\"dt\" cx=\"159.8\" cy=\"121.1\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"181.4\" cy=\"100.3\" r=\"3\"/><circle class=\"dt\" cx=\"181.4\" cy=\"127.3\" r=\"3\"/><circle class=\"dt\" cx=\"224.7\" cy=\"139.7\" r=\"3\"/>" +
-        "<text x=\"18\" y=\"10\" text-anchor=\"middle\">H</text><text x=\"24\" y=\"104\" text-anchor=\"middle\">K</text>" +
-        "<text x=\"159.8\" y=\"142.1\" text-anchor=\"middle\">L</text><text x=\"170.4\" y=\"101.3\" text-anchor=\"middle\">P</text>" +
-        "<text x=\"177.4\" y=\"148.3\" text-anchor=\"middle\">Q</text><text x=\"228.7\" y=\"160.7\" text-anchor=\"middle\">R</text>" +
-        "<text x=\"100.9\" y=\"124.6\" text-anchor=\"middle\">15 m</text><text x=\"155.4\" y=\"120.8\" text-anchor=\"middle\">1.2 m</text>" +
-        "<text x=\"209.1\" y=\"168.5\" text-anchor=\"middle\">2 m</text><text class=\"sm\" x=\"60\" y=\"15\" text-anchor=\"middle\">hoodoo</text>" +
-        "<text class=\"sm\" x=\"187.4\" y=\"88.3\" text-anchor=\"middle\">post</text><text class=\"sm\" x=\"250\" y=\"24\" text-anchor=\"middle\">sun rays</text></svg>" +
+        "<polygon class=\"sh2\" points=\"0,70.3 320,161.8 320,170 0,170\"/><line class=\"thin\" x1=\"0\" y1=\"70.3\" x2=\"320\" y2=\"161.8\"/>" +
+        "<line class=\"ln\" x1=\"34\" y1=\"80\" x2=\"34\" y2=\"12.5\"/><line class=\"ln\" x1=\"207.1\" y1=\"129.5\" x2=\"207.1\" y2=\"98\"/>" +
+        "<line class=\"ac\" x1=\"34\" y1=\"80\" x2=\"142.2\" y2=\"110.9\"/><line class=\"ac\" x1=\"207.1\" y1=\"129.5\" x2=\"257.5\" y2=\"143.9\"/>" +
+        "<line class=\"thin dash\" x1=\"34\" y1=\"12.5\" x2=\"142.2\" y2=\"110.9\"/><line class=\"thin dash\" x1=\"207.1\" y1=\"98\" x2=\"257.5\" y2=\"143.9\"/>" +
+        "<circle class=\"dt\" cx=\"34\" cy=\"12.5\" r=\"3\"/><circle class=\"dt\" cx=\"34\" cy=\"80\" r=\"3\"/><circle class=\"dt\" cx=\"142.2\" cy=\"110.9\" r=\"3\"/>" +
+        "<circle class=\"dt\" cx=\"207.1\" cy=\"98\" r=\"3\"/><circle class=\"dt\" cx=\"207.1\" cy=\"129.5\" r=\"3\"/><circle class=\"dt\" cx=\"257.5\" cy=\"143.9\" r=\"3\"/>" +
+        "<text x=\"22\" y=\"19.5\" text-anchor=\"middle\">H</text><text x=\"30.4\" y=\"97.5\" text-anchor=\"middle\">K</text>" +
+        "<text x=\"138.6\" y=\"128.4\" text-anchor=\"middle\">L</text><text x=\"196.1\" y=\"99\" text-anchor=\"middle\">P</text>" +
+        "<text x=\"203.5\" y=\"147\" text-anchor=\"middle\">Q</text><text x=\"254\" y=\"161.4\" text-anchor=\"middle\">R</text>" +
+        "<text x=\"84.2\" y=\"113.9\" text-anchor=\"middle\">15 m</text><text x=\"183.1\" y=\"119\" text-anchor=\"middle\">1.2 m</text>" +
+        "<text x=\"228.4\" y=\"155.2\" text-anchor=\"middle\">2 m</text><text class=\"sm\" x=\"58\" y=\"68\" text-anchor=\"middle\">hoodoo</text>" +
+        "<text class=\"sm\" x=\"229.1\" y=\"96\" text-anchor=\"middle\">post</text><text class=\"sm\" x=\"250\" y=\"28\" text-anchor=\"middle\">sun rays</text></svg>" +
         "<figcaption>Not drawn to scale</figcaption></figure>" +
         "<p class=\"geo-given\">A fence post <strong>PQ</strong> and a rock spire (a hoodoo) <strong>HK</strong> stand straight up on a straight, sloping hillside. At the same moment, their shadows <strong>QR</strong> and <strong>KL</strong> lie down the slope. The sun's rays PR and HL are parallel. PQ = 1.2 m, QR = 2 m and KL = 15 m.</p>",
       claims: [
@@ -1456,14 +1460,14 @@
           id: "statement",
           sol: "G.TR.3",
           sub: "G.TR.3.1",
-          stem: "Which similarity statement is correct?",
+          stem: "Which similarity statement pairs the post's triangle with the hoodoo's?",
           choices: [
             { letter: "A", text: "△PQR ∼ △KHL" },
             { letter: "B", text: "△QPR ∼ △HKL" },
-            { letter: "C", text: "△PRQ ∼ △HKL" },
-            { letter: "D", text: "△PQR ∼ △HKL" }
+            { letter: "C", text: "△PQR ∼ △HKL" },
+            { letter: "D", text: "△PRQ ∼ △HKL" }
           ],
-          correct: "D"
+          correct: "C"
         },
         {
           id: "ray",
@@ -1490,17 +1494,17 @@
       level: 3,
       passage:
         "<figure class=\"geo-fig\">" +
-        "<svg viewBox=\"0 0 320 166\" role=\"img\" aria-label=\"A waterfall TB on the right falls into a pool at B; Jo's eye E is on a rock ledge across the pool, level with M on the falls; sight lines ET and EB meet at a right angle at E; EM is perpendicular to TB; EM 6 m and MB 3 m\">" +
-        "<rect class=\"sh2\" x=\"54\" y=\"155\" width=\"186\" height=\"10\"/><rect class=\"sh\" x=\"120\" y=\"132\" width=\"40\" height=\"23\"/>" +
-        "<rect class=\"sh2\" x=\"214\" y=\"16\" width=\"12\" height=\"139\"/><line class=\"ln\" x1=\"214\" y1=\"20\" x2=\"214\" y2=\"155\"/>" +
-        "<line class=\"thin\" x1=\"160\" y1=\"128\" x2=\"214\" y2=\"20\"/><line class=\"thin\" x1=\"160\" y1=\"128\" x2=\"214\" y2=\"155\"/>" +
-        "<line class=\"ac\" x1=\"160\" y1=\"128\" x2=\"214\" y2=\"128\"/><path class=\"thin\" d=\"M164 120 L172.1 124 L168 132\"/>" +
-        "<path class=\"thin\" d=\"M207 128 L207 121 L214 121\"/><circle class=\"dt\" cx=\"160\" cy=\"128\" r=\"3\"/><circle class=\"dt\" cx=\"214\" cy=\"20\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"214\" cy=\"128\" r=\"3\"/><circle class=\"dt\" cx=\"214\" cy=\"155\" r=\"3\"/><text x=\"149\" y=\"129\" text-anchor=\"middle\">E</text>" +
-        "<text x=\"202\" y=\"27\" text-anchor=\"middle\">T</text><text x=\"226\" y=\"135\" text-anchor=\"middle\">M</text>" +
-        "<text x=\"226\" y=\"156\" text-anchor=\"middle\">B</text><text x=\"187\" y=\"126\" text-anchor=\"middle\">6 m</text>" +
-        "<text class=\"sm\" x=\"196\" y=\"148.5\" text-anchor=\"middle\">3 m</text><text class=\"sm\" x=\"260\" y=\"64\" text-anchor=\"middle\">waterfall</text>" +
-        "<text class=\"sm\" x=\"94\" y=\"160\" text-anchor=\"middle\">pool</text></svg></figure>" +
+        "<svg viewBox=\"0 0 320 170\" role=\"img\" aria-label=\"A waterfall TB on the right falls into a pool at B; Jo's eye E is on a rock ledge across the pool, level with M on the falls; sight lines ET and EB meet at a right angle at E; EM is perpendicular to TB; EM 6 m and MB 3 m\">" +
+        "<rect class=\"sh2\" x=\"40\" y=\"162\" width=\"172\" height=\"8\"/><rect class=\"sh\" x=\"96\" y=\"136\" width=\"44\" height=\"26\"/>" +
+        "<rect class=\"sh2\" x=\"200\" y=\"12\" width=\"12\" height=\"150\"/><line class=\"ln\" x1=\"200\" y1=\"12\" x2=\"200\" y2=\"162\"/>" +
+        "<line class=\"thin\" x1=\"140\" y1=\"132\" x2=\"200\" y2=\"12\"/><line class=\"thin\" x1=\"140\" y1=\"132\" x2=\"200\" y2=\"162\"/>" +
+        "<line class=\"ac\" x1=\"140\" y1=\"132\" x2=\"200\" y2=\"132\"/><path class=\"thin\" d=\"M144 124 L152.1 128 L148 136\"/>" +
+        "<path class=\"thin\" d=\"M193 132 L193 125 L200 125\"/><circle class=\"dt\" cx=\"140\" cy=\"132\" r=\"3\"/><circle class=\"dt\" cx=\"200\" cy=\"12\" r=\"3\"/>" +
+        "<circle class=\"dt\" cx=\"200\" cy=\"132\" r=\"3\"/><circle class=\"dt\" cx=\"200\" cy=\"162\" r=\"3\"/><text x=\"129\" y=\"133\" text-anchor=\"middle\">E</text>" +
+        "<text x=\"188\" y=\"21\" text-anchor=\"middle\">T</text><text x=\"224\" y=\"139\" text-anchor=\"middle\">M</text>" +
+        "<text x=\"224\" y=\"163\" text-anchor=\"middle\">B</text><text x=\"170\" y=\"128\" text-anchor=\"middle\">6 m</text>" +
+        "<text class=\"sm\" x=\"250\" y=\"151\" text-anchor=\"middle\">3 m</text><line class=\"thin\" x1=\"236\" y1=\"132\" x2=\"236\" y2=\"162\"/>" +
+        "<text class=\"sm\" x=\"248\" y=\"66\" text-anchor=\"middle\">waterfall</text><text class=\"sm\" x=\"70\" y=\"158\" text-anchor=\"middle\">pool</text></svg></figure>" +
         "<p class=\"geo-given\">Jo stands on a rock ledge across a pool from a waterfall <strong>TB</strong>. She holds a carpenter's square at her eye <strong>E</strong>: one edge points to the top <strong>T</strong> and the other to the bottom <strong>B</strong>, so ∠TEB = 90°. Her eye is level with <strong>M</strong> on the falls, and EM ⊥ TB. EM = 6 m and MB = 3 m.</p>",
       claims: [
         {
@@ -1520,7 +1524,7 @@
           id: "statement",
           sol: "G.TR.3",
           sub: "G.TR.3.1",
-          stem: "Which similarity statement is correct?",
+          stem: "Which similarity statement is correct for the upper and lower right triangles?",
           choices: [
             { letter: "A", text: "△TME ∼ △BME" },
             { letter: "B", text: "△TEM ∼ △EMB" },
@@ -1574,10 +1578,10 @@
           sub: "G.TR.3.2",
           stem: "At another waterfall, Jo's eye is 8 m from the falls and 4 m above the pool, with the same right angle at her eye. A guide says the falls are 20 m tall. Could that be right? Choose the answer with the correct reason.",
           choices: [
-            { letter: "A", text: "No; 8/4 ≠ 16/8" },
-            { letter: "B", text: "Yes; 16/8 = 8/4, and 16 + 4 = 20" },
-            { letter: "C", text: "Yes; 8 · 4 = 20 − 4" },
-            { letter: "D", text: "No; 20 − 4 ≠ 8 · 2" }
+            { letter: "A", text: "No; 8/4 ≠ 16/8, so the angle is not 90°" },
+            { letter: "B", text: "Yes; 16/8 = 8/4 and 16 + 4 = 20" },
+            { letter: "C", text: "Yes; 8 · 4 = 20 − 4, so the parts fit" },
+            { letter: "D", text: "No; 20 − 4 ≠ 8 · 2, so TM is too long" }
           ],
           correct: "B"
         }
@@ -1594,20 +1598,19 @@
       passage:
         "<figure class=\"geo-fig\">" +
         "<svg viewBox=\"0 0 320 168\" role=\"img\" aria-label=\"A hiker's eye E on the left; a ruler held upright at R, 0.6 m from E; a cliff across the gorge at C, 45 m from E, on the dashed level line; sight lines from E pass through U on the ruler to the nest N and through V to the river at W at the foot of the cliff\">" +
-        "<rect class=\"sh\" x=\"0\" y=\"70\" width=\"40\" height=\"98\"/><rect class=\"sh\" x=\"290\" y=\"4\" width=\"26\" height=\"160\"/>" +
-        "<rect class=\"sh2\" x=\"150\" y=\"159.3\" width=\"140\" height=\"8.8\"/><line class=\"ln\" x1=\"290\" y1=\"4\" x2=\"290\" y2=\"159.3\"/>" +
-        "<line class=\"ln\" x1=\"100\" y1=\"36\" x2=\"100\" y2=\"96\"/><line class=\"thin dash\" x1=\"20\" y1=\"58\" x2=\"290\" y2=\"58\"/>" +
+        "<rect class=\"sh2\" x=\"0\" y=\"74\" width=\"40\" height=\"94\"/><rect class=\"sh2\" x=\"290\" y=\"4\" width=\"30\" height=\"164\"/>" +
+        "<rect class=\"sh2\" x=\"150\" y=\"159.3\" width=\"140\" height=\"8.8\"/><rect class=\"sh\" x=\"97\" y=\"30\" width=\"6\" height=\"70\"/>" +
+        "<line class=\"ln\" x1=\"290\" y1=\"4\" x2=\"290\" y2=\"159.3\"/><line class=\"thin dash\" x1=\"20\" y1=\"58\" x2=\"290\" y2=\"58\"/>" +
         "<line class=\"thin\" x1=\"20\" y1=\"58\" x2=\"290\" y2=\"17.5\"/><line class=\"thin\" x1=\"20\" y1=\"58\" x2=\"290\" y2=\"159.3\"/>" +
-        "<path class=\"thin\" d=\"M94 58 L94 52 L100 52\"/><path class=\"thin\" d=\"M283 58 L283 51 L290 51\"/><circle class=\"dt\" cx=\"20\" cy=\"58\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"100\" cy=\"58\" r=\"3\"/><circle class=\"dt\" cx=\"100\" cy=\"46\" r=\"3\"/><circle class=\"dt\" cx=\"100\" cy=\"88\" r=\"3\"/>" +
-        "<circle class=\"dt\" cx=\"290\" cy=\"58\" r=\"3\"/><circle class=\"dt\" cx=\"290\" cy=\"17.5\" r=\"3\"/><circle class=\"dt\" cx=\"290\" cy=\"159.3\" r=\"3\"/>" +
-        "<text x=\"16\" y=\"51\" text-anchor=\"middle\">E</text><text x=\"90\" y=\"76\" text-anchor=\"middle\">R</text><text x=\"90\" y=\"43\" text-anchor=\"middle\">U</text>" +
-        "<text x=\"89\" y=\"102\" text-anchor=\"middle\">V</text><text x=\"279\" y=\"76\" text-anchor=\"middle\">C</text>" +
-        "<text x=\"278\" y=\"20.5\" text-anchor=\"middle\">N</text><text x=\"278\" y=\"158.3\" text-anchor=\"middle\">W</text>" +
-        "<text class=\"sm\" x=\"120\" y=\"57\" text-anchor=\"middle\">4 cm</text><text class=\"sm\" x=\"124\" y=\"86\" text-anchor=\"middle\">10 cm</text>" +
-        "<text class=\"sm\" x=\"186\" y=\"56\" text-anchor=\"middle\">45 m</text><text class=\"sm\" x=\"256\" y=\"33.5\" text-anchor=\"middle\">nest</text>" +
-        "<text class=\"sm\" x=\"70\" y=\"36\" text-anchor=\"middle\">ruler</text><text class=\"sm\" x=\"206\" y=\"164\" text-anchor=\"middle\">river</text></svg>" +
-        "<figcaption>Not drawn to scale</figcaption></figure>" +
+        "<path class=\"thin\" d=\"M283 58 L283 51 L290 51\"/><circle class=\"dt\" cx=\"20\" cy=\"58\" r=\"3\"/><circle class=\"dt\" cx=\"100\" cy=\"58\" r=\"3\"/>" +
+        "<circle class=\"dt\" cx=\"100\" cy=\"46\" r=\"3\"/><circle class=\"dt\" cx=\"100\" cy=\"88\" r=\"3\"/><circle class=\"dt\" cx=\"290\" cy=\"58\" r=\"3\"/>" +
+        "<circle class=\"dt\" cx=\"290\" cy=\"17.5\" r=\"3\"/><circle class=\"dt\" cx=\"290\" cy=\"159.3\" r=\"3\"/><text x=\"16\" y=\"51\" text-anchor=\"middle\">E</text>" +
+        "<text x=\"89\" y=\"74\" text-anchor=\"middle\">R</text><text x=\"89\" y=\"43\" text-anchor=\"middle\">U</text><text x=\"89\" y=\"102\" text-anchor=\"middle\">V</text>" +
+        "<text x=\"304\" y=\"63\" text-anchor=\"middle\">C</text><text x=\"304\" y=\"22.5\" text-anchor=\"middle\">N</text>" +
+        "<text x=\"304\" y=\"160.3\" text-anchor=\"middle\">W</text><text class=\"sm\" x=\"134\" y=\"56\" text-anchor=\"middle\">4 cm</text>" +
+        "<text class=\"sm\" x=\"126\" y=\"80\" text-anchor=\"middle\">10 cm</text><text class=\"sm\" x=\"196\" y=\"74\" text-anchor=\"middle\">45 m</text>" +
+        "<text class=\"sm\" x=\"258\" y=\"37.5\" text-anchor=\"middle\">nest</text><text class=\"sm\" x=\"100\" y=\"24\" text-anchor=\"middle\">ruler</text>" +
+        "<text class=\"sm\" x=\"236\" y=\"154\" text-anchor=\"middle\">river</text></svg><figcaption>Not drawn to scale</figcaption></figure>" +
         "<p class=\"geo-given\">A hiker holds a ruler upright 0.6 m from her eye <strong>E</strong> (ER = 0.6 m). A cliff across the gorge is 45 m from her eye (EC = 45 m). R and C are level with E, and the ruler and cliff are vertical. A bird's nest <strong>N</strong> lines up with <strong>U</strong>, 4 cm above R. The river <strong>W</strong> at the cliff's foot lines up with <strong>V</strong>, 10 cm below R.</p>",
       claims: [
         {
@@ -1653,7 +1656,7 @@
           id: "not",
           sol: "G.TR.3",
           sub: "G.TR.3.2",
-          stem: "Which statement is NOT true?",
+          stem: "Which statement about the ruler and the cliff is NOT true?",
           choices: [
             { letter: "A", text: "RU ∥ CN" },
             { letter: "B", text: "RU/RV = CW/CN" },
@@ -1681,12 +1684,12 @@
           sub: "G.TR.3.3",
           stem: "What is the scale factor from the ruler's small triangle ERU to the cliff's triangle ECN?",
           choices: [
-            { letter: "A", text: "1/75" },
-            { letter: "B", text: "75" },
+            { letter: "A", text: "75" },
+            { letter: "B", text: "1/75" },
             { letter: "C", text: "750" },
             { letter: "D", text: "44.4" }
           ],
-          correct: "B"
+          correct: "A"
         }
       ]
     }
