@@ -475,17 +475,17 @@
       level: 2,
       passage:
         "<p>" + N(1) + "That evening Calypso and Odysseus sat down to dinner in her cave. " +
-        N(2) + "She set before him the bread and wine that mortals eat, while her maids brought the goddess ambrosia and nectar, the food and drink of the immortals. " +
+        N(2) + "She set before him the bread and wine that mortals eat, while her maids brought her ambrosia and nectar, the food of the immortals. " +
         N(3) + "When they had eaten, Calypso spoke. " +
-        N(4) + "\"Son of Laertes, Odysseus of many schemes, do you truly want to go home to your own country now? " +
-        N(5) + "Then go, and may good fortune go with you. " +
-        N(6) + "But if you knew how much suffering waits for you before you reach your shore, you would stay here with me and be immortal, however much you long to see your wife. " +
-        N(7) + "Surely I am not less beautiful than she is; how could a mortal woman compare with a goddess?\"</p>" +
+        N(4) + "\"Son of Laertes, Odysseus of many schemes, do you truly want to go home now? " +
+        N(5) + "Then go, and good fortune go with you. " +
+        N(6) + "But if you knew the suffering that waits for you, you would stay here with me and be immortal. " +
+        N(7) + "Surely a mortal woman cannot compare with a goddess?\"</p>" +
         "<p>" + N(8) + "Odysseus, master of schemes, chose his words with care. " +
         N(9) + "\"Great goddess, do not be angry with me. " +
-        N(10) + "I know that wise Penelope cannot match you in beauty, for she is mortal, and you will never grow old or die. " +
-        N(11) + "Even so, every day I long to go home and see the day of my return. " +
-        N(12) + "And if some god wrecks me again on the wine-dark sea, I will endure it, for I have a heart that can bear suffering. " +
+        N(10) + "I know that wise Penelope cannot match your beauty, for she is mortal, and you will never grow old or die. " +
+        N(11) + "Even so, every day I long to go home. " +
+        N(12) + "And if some god wrecks me on the wine-dark sea, I will endure it, for I have a heart that can bear suffering. " +
         N(13) + "I have already suffered much, on the waves and in war; let this trouble be added to the rest.\"</p>",
       claims: [
         {
@@ -570,45 +570,35 @@
       episode: "calypso",
       title: "Twenty Trees and the Stars",
       kind: "The Odyssey · 9.RL",
-      blurb: "An oath, an axe, four days of work, and seventeen nights under the stars.",
-      level: 3,
+      blurb: "An axe, four days of work, and seventeen nights under the stars.",
+      level: 2,
       passage:
-        "<p>" + N(1) + "Calypso, shining among goddesses, went down to the shore and found Odysseus where he always sat, his eyes never dry, wearing away his days in longing for home. " +
-        N(2) + "\"Poor man, weep no more,\" she said. " +
-        N(3) + "\"Do not waste your life in grief, for now I am willing to send you on your way. " +
-        N(4) + "Cut tall timbers with the bronze axe and build a broad raft, and I will give you food, water, and a wind to carry you.\" " +
-        N(5) + "But Odysseus, who had suffered much, shuddered at her words. " +
-        N(6) + "\"Goddess, this is some trick,\" he said. \"Even swift ships with fair winds fear that wide sea, and you would send me over it on a raft? " +
-        N(7) + "I will not set foot on it unless you swear a great oath that you are planning no new harm against me.\" " +
-        N(8) + "Calypso smiled at his caution and called him clever, and she swore by the earth, by the wide sky above, and by the dark river Styx, the most dreadful oath the gods can take.</p>" +
-        "<p>" + N(9) + "As soon as young Dawn appeared with her rose-red fingers, the goddess gave Odysseus a great bronze axe, sharp on both edges and fitted with a handle of olive wood, along with a polished adze. " +
-        N(10) + "She led him to the far end of the island where tall trees grew, alder and poplar and fir, long dead and dry, that would float lightly on the sea. " +
-        N(11) + "There he felled twenty trees, trimmed them with the bronze, and smoothed them straight and true. " +
-        N(12) + "Then, with drills that Calypso brought him, he bored through the timbers and fitted them together with pegs, as a careful builder joins the beams of a farmhouse roof so that no storm can pull them apart. " +
-        N(13) + "He raised a mast, added decking and a rudder to steer by, and wove wicker sides of willow to keep out the waves, while Calypso brought cloth for a sail. " +
-        N(14) + "In four days, the work was done.</p>" +
-        "<p>" + N(15) + "On the fifth day, Calypso saw that he was bathed and dressed in fragrant clothing, and she loaded the raft with a skin of dark wine, a larger one of water, and a sack of food. " +
-        N(16) + "Then she sent a warm and gentle wind, and Odysseus, glad at heart, spread his sail. " +
-        N(17) + "He sat at the rudder and steered with skill, and sleep never closed his eyes, for he kept them on the Pleiades, on the slow-setting Plowman, and on the Great Bear, which Calypso had told him to keep on his left as he crossed the sea. " +
-        N(18) + "For seventeen days he sailed, and on the eighteenth the shadowy mountains of the Phaeacians' land rose before him, like a shield lying on the misty sea. " +
-        N(19) + "He did not know that, far off on a mountaintop, the earth-shaker, coming home from the Ethiopians, had already caught sight of his little sail.</p>",
+        "<p>" + N(1) + "Odysseus, wary of a goddess's sudden kindness, had made Calypso swear by the dark river Styx, the gods' most dreadful oath, that she planned him no harm. " +
+        N(2) + "When rose-fingered Dawn appeared, she gave him a bronze axe and led him to where tall trees stood long dead and dry. " +
+        N(3) + "There he felled twenty trees and smoothed them straight and true. " +
+        N(4) + "Then he bored through the timbers and fitted them together with pegs, as a careful builder joins the beams of a farmhouse roof. " +
+        N(5) + "He added a mast and rudder and wove willow sides against the waves, and in four days the work was done.</p>" +
+        "<p>" + N(6) + "On the fifth day, Calypso loaded the raft with wine, water, and food and sent a warm and gentle wind. " +
+        N(7) + "Glad at heart, Odysseus sailed and steered without sleeping, his eyes on the Pleiades and the Great Bear, as Calypso had told him. " +
+        N(8) + "For seventeen days he sailed, and on the eighteenth the shadowy mountains of the Phaeacians' land rose before him, like a shield lying on the misty sea. " +
+        N(9) + "He did not know that, far off on a mountaintop, the earth-shaker had already caught sight of his little sail.</p>",
       claims: [
         {
           id: "oath",
           sol: "9.RL.1.B",
-          stem: "Why does Odysseus demand an oath from Calypso (sentences 6–7)?",
+          stem: "Based on sentence 1, why had Odysseus made Calypso swear an oath before he would build the raft?",
           choices: [
-            { letter: "A", text: "He suspects that a goddess's sudden kindness may hide a trap." },
-            { letter: "B", text: "He wants Calypso to promise to come with him to Ithaca." },
-            { letter: "C", text: "He believes the raft will be stronger if a goddess blesses it." },
-            { letter: "D", text: "He hopes the oath will make Zeus send him a real ship." }
+            { letter: "A", text: "He feared that her offer to free him might hide a trap." },
+            { letter: "B", text: "He wanted Calypso to promise to come with him to Ithaca." },
+            { letter: "C", text: "He believed the raft would be stronger if a goddess blesses it." },
+            { letter: "D", text: "He hoped the oath would make Zeus send him a real ship." }
           ],
           correct: "A"
         },
         {
           id: "styx",
           sol: "9.RV.1.F",
-          stem: "Calypso swears by the river Styx (sentence 8). In Greek myth, an oath by the Styx is one that even gods dare not break. This allusion shows that her promise —",
+          stem: "Calypso swore by the river Styx (sentence 1). In Greek myth, an oath by the Styx is one that even gods dare not break. This allusion shows that her promise —",
           choices: [
             { letter: "A", text: "is only a polite custom that she may ignore later" },
             { letter: "B", text: "comes from Zeus rather than from Calypso herself" },
@@ -620,7 +610,7 @@
         {
           id: "theme",
           sol: "9.RL.1.A",
-          stem: "Which theme is developed across the whole passage, from the oath to the voyage?",
+          stem: "Which theme is developed across the whole passage, from the building of the raft to the voyage?",
           choices: [
             { letter: "A", text: "Caution and steady effort help a person meet a hard challenge." },
             { letter: "B", text: "Gods always keep their word, so mortals never need to doubt them." },
@@ -632,7 +622,7 @@
         {
           id: "simile",
           sol: "9.RL.2.A",
-          stem: "In sentence 18, the land of the Phaeacians is compared to a shield lying on the misty sea. This simile mainly helps readers —",
+          stem: "In sentence 8, the land of the Phaeacians is compared to a shield lying on the misty sea. This simile mainly helps readers —",
           choices: [
             { letter: "A", text: "understand that the Phaeacians are fierce warriors" },
             { letter: "B", text: "picture a dim, rounded land rising from the water" },
@@ -644,7 +634,7 @@
         {
           id: "vocab",
           sol: "9.RV.1.C",
-          stem: "In sentence 12, the word *bored* most nearly means —",
+          stem: "In sentence 4, the word *bored* most nearly means —",
           choices: [
             { letter: "A", text: "grew tired of" },
             { letter: "B", text: "carved designs into" },
@@ -656,7 +646,7 @@
         {
           id: "ending",
           sol: "9.RL.3.A",
-          stem: "The author ends the passage with sentence 19 mainly to —",
+          stem: "The author ends the passage with sentence 9 mainly to —",
           choices: [
             { letter: "A", text: "show that Odysseus has finally reached home safely" },
             { letter: "B", text: "explain why Calypso told him to watch the stars" },
@@ -670,10 +660,10 @@
           sol: "9.RL.1.C",
           stem: "Calypso must obey Zeus's command. Select TWO sentences that show her keeping her promise to help Odysseus leave.",
           choices: [
-            { letter: "A", text: "Sentence 1, in which she finds him weeping on the shore" },
-            { letter: "B", text: "Sentence 9, in which she gives him an axe and an adze" },
-            { letter: "C", text: "Sentence 8, in which she smiles at his caution" },
-            { letter: "D", text: "Sentence 16, in which she sends a warm and gentle wind" }
+            { letter: "A", text: "Sentence 3, in which he fells twenty trees" },
+            { letter: "B", text: "Sentence 2, in which she gives him a bronze axe" },
+            { letter: "C", text: "Sentence 8, in which the land rises before him" },
+            { letter: "D", text: "Sentence 6, in which she sends a warm and gentle wind" }
           ],
           correct: ["B", "D"]
         }
@@ -688,42 +678,26 @@
       title: "Poseidon's Storm",
       kind: "The Odyssey · 9.RL",
       blurb: "The earth-shaker smashes the raft, and a sea-goddess offers a veil.",
-      level: 3,
+      level: 2,
       passage:
-        "<p>" + N(1) + "But Poseidon, the earth-shaker, was coming home from the Ethiopians, and from a far mountaintop he caught sight of Odysseus sailing over the sea. " +
-        N(2) + "His anger boiled up, and he shook his head and spoke to his own heart. " +
-        N(3) + "\"So the gods changed their minds about Odysseus while I was away! " +
-        N(4) + "Now he is close to the land of the Phaeacians, where he is fated to escape his long ordeal. " +
-        N(5) + "Still, I can give him his fill of trouble before he gets there.\" " +
-        N(6) + "He gathered the clouds, seized his trident, and stirred the sea, and he let loose every wind at once until night rushed down from the sky and hid both land and water.</p>" +
-        "<p>" + N(7) + "Then Odysseus's knees went weak, and he cried out to his own great heart. " +
-        N(8) + "\"Lucky, many times lucky, were the Greeks who died at Troy! " +
-        N(9) + "I wish I had fallen there when the Trojans hurled their bronze spears at me, for then I would have had a hero's funeral, and the Greeks would have spread my glory far and wide. " +
-        N(10) + "Now I am doomed to a miserable death, lost at sea and unremembered.\" " +
-        N(11) + "As he spoke, a towering wave crashed down and spun the raft around; he was flung far from it, the rudder torn from his hands, and the mast snapped in the middle. " +
-        N(12) + "The clothes Calypso had given him dragged him down, but at last he came up, spitting bitter salt water, and even then he did not forget his raft: he lunged after it, caught hold, and crouched in the middle of it. " +
-        N(13) + "As the north wind at the end of summer drives dry thistledown across a field, and the tufts cling together as they tumble, so the winds drove the raft this way and that across the sea.</p>" +
-        "<p>" + N(14) + "Then Ino, who had once been a mortal woman and was now Leucothea, a goddess of the sea, saw him and took pity on him. " +
-        N(15) + "She rose from the water like a diving seabird, settled on the raft, and spoke. " +
-        N(16) + "\"Poor man, why is the earth-shaker so furious with you? " +
-        N(17) + "Take off these clothes, leave the raft to the winds, and swim for the land of the Phaeacians. " +
-        N(18) + "Wrap this immortal veil around your chest, and you need not fear death; but when you reach land, throw it back into the sea.\" " +
-        N(19) + "She gave him the veil and dived back into the waves. " +
-        N(20) + "But Odysseus, who had endured so much, was wary. " +
-        N(21) + "\"This may be another trick of the gods,\" he said to himself, \"so I will stay on the raft while its timbers hold, and only when the sea breaks it apart will I swim.\" " +
-        N(22) + "Even as he thought this, Poseidon sent a wave so huge that it scattered the long timbers like a heap of dry straw in the wind. " +
-        N(23) + "Odysseus climbed onto a single beam, stripped off his heavy clothes, wrapped the veil around his chest, and plunged headfirst into the sea.</p>" +
-        "<p>" + N(24) + "For two days and two nights he was buffeted by the swells, and many times he expected to die. " +
-        N(25) + "But when Dawn with her rose-red fingers brought the third day, the wind fell still, and he saw land close at hand. " +
-        N(26) + "The coast was a wall of jagged rocks and pounding surf, so he swam along it until he found the mouth of a river, and he prayed to the river's god for mercy. " +
-        N(27) + "The river calmed its current, and Odysseus crawled ashore on Scheria, his arms and legs trembling, too exhausted even to speak. " +
-        N(28) + "When his breath returned, he gave the veil back to the water and climbed to a nearby wood. " +
-        N(29) + "There he heaped up a bed of fallen leaves and buried himself in it, the way a farmer far from any neighbor buries a glowing ember in black ashes to keep a spark alive until morning, and he fell into a deep sleep.</p>",
+        "<p>" + N(1) + "Poseidon's anger boiled up, and he spoke to his own heart. " +
+        N(2) + "\"So the gods changed their minds about Odysseus while I was away! " +
+        N(3) + "He is fated to escape, but I can still give him his fill of trouble.\" " +
+        N(4) + "He seized his trident and let loose every wind at once.</p>" +
+        "<p>" + N(5) + "Odysseus's knees went weak. " +
+        N(6) + "\"Lucky were the Greeks who died at Troy and won lasting glory, while I will drown unremembered!\" " +
+        N(7) + "A towering wave snapped the mast, and as the north wind drives thistledown across a field, the winds drove the raft this way and that.</p>" +
+        "<p>" + N(8) + "Then the sea-goddess Ino pitied him and gave him an immortal veil, telling him to leave the raft and swim. " +
+        N(9) + "But Odysseus, who had endured so much, feared another trick and stayed on the raft while it held. " +
+        N(10) + "When Poseidon's next wave scattered the timbers like straw, he tied on the veil and plunged in. " +
+        N(11) + "For two days and two nights he was buffeted by the swells. " +
+        N(12) + "On the third day he crawled ashore on Scheria, too exhausted to speak. " +
+        N(13) + "There he buried himself in fallen leaves, as a farmer buries a glowing ember in ashes to keep a spark alive, and slept.</p>",
       claims: [
         {
           id: "poseidon",
           sol: "9.RL.1.D",
-          stem: "Poseidon's words in sentences 3–5 reveal that he —",
+          stem: "Poseidon's words in sentences 2–3 reveal that he —",
           choices: [
             { letter: "A", text: "has forgiven Odysseus and now wishes to guide him home" },
             { letter: "B", text: "accepts that Odysseus will escape but wants him to suffer" },
@@ -735,7 +709,7 @@
         {
           id: "kleos",
           sol: "9.RL.1.B",
-          stem: "*Kleos* is the glory a hero earns that lives on after death. Based on sentences 8–10, why does Odysseus wish he had died at Troy?",
+          stem: "*Kleos* is the glory a hero earns that lives on after death. Based on sentence 6, why does Odysseus wish he had died at Troy?",
           choices: [
             { letter: "A", text: "A death in battle would have won him lasting honor." },
             { letter: "B", text: "He would never have had to meet the goddess Calypso." },
@@ -747,7 +721,7 @@
         {
           id: "simile",
           sol: "9.RL.2.A",
-          stem: "What does the epic simile in sentence 13 mainly emphasize?",
+          stem: "What does the epic simile in sentence 7 mainly emphasize?",
           choices: [
             { letter: "A", text: "how gently the raft drifts toward the shore" },
             { letter: "B", text: "how quickly summer is turning into winter" },
@@ -759,7 +733,7 @@
         {
           id: "ino",
           sol: "9.RL.1.C",
-          stem: "How does Odysseus respond to Ino's advice in sentences 20–21?",
+          stem: "How does Odysseus respond to Ino's advice in sentence 9?",
           choices: [
             { letter: "A", text: "He obeys at once and dives into the stormy sea." },
             { letter: "B", text: "He throws away the veil, trusting only his own strength." },
@@ -783,7 +757,7 @@
         {
           id: "vocab",
           sol: "9.RV.1.C",
-          stem: "In sentence 24, the word *buffeted* most nearly means —",
+          stem: "In sentence 11, the word *buffeted* most nearly means —",
           choices: [
             { letter: "A", text: "carried gently" },
             { letter: "B", text: "fed and rested" },
@@ -795,7 +769,7 @@
         {
           id: "ending",
           sol: "9.RL.3.A",
-          stem: "The author ends the passage by comparing Odysseus to an ember buried in ashes (sentence 29) mainly to suggest that —",
+          stem: "The author ends the passage by comparing Odysseus to an ember buried in ashes (sentence 13) mainly to suggest that —",
           choices: [
             { letter: "A", text: "his life, nearly put out, is safely kept alive" },
             { letter: "B", text: "his anger at Poseidon still burns fiercely" },
