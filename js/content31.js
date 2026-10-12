@@ -377,30 +377,27 @@
       level: 2,
       passage:
         "<p><strong>Text 1 — At Circe's House</strong></p>" +
-        "<p>" + N(1) + "Eurylochus came running back to the ship alone, so shaken that at first he could not speak a word. " +
-        N(2) + "At last he told us he had led half our crew to a stone house where tame wolves and lions prowled. " +
-        N(3) + "A goddess invited the men inside, but Eurylochus hung back, sensing a trap, and not one man came out again. " +
-        N(4) + "I slung my bronze sword over my shoulder, took up my bow, and told him to lead me back by the same path. " +
-        N(5) + "He clutched my knees and begged. " +
-        N(6) + "\"Do not force me there, son of Laertes, for you will never return, nor bring back a single friend. " +
-        N(7) + "Let us sail away now with the men who are left, while we can still escape this day of ruin.\" " +
-        N(8) + "\"Stay here by the ship, then, eating and drinking,\" I told him. " +
-        N(9) + "\"I will go alone, for hard necessity drives me.\"</p>" +
+        "<p>" + N(1) + "Eurylochus ran back to the ship alone, too shaken to speak. " +
+        N(2) + "He had led half our crew to a goddess's house, but he hung back, sensing a trap, and no one came out. " +
+        N(3) + "I took my sword and bow and told him to lead me back. " +
+        N(4) + "He clutched my knees and begged. " +
+        N(5) + "\"Do not force me there, son of Laertes. " +
+        N(6) + "Let us sail away now, while we can still escape.\" " +
+        N(7) + "\"Stay by the ship, then,\" I told him. " +
+        N(8) + "\"I will go alone, for hard necessity drives me.\"</p>" +
         "<p><strong>Text 2 — On the Island of the Sun</strong></p>" +
-        "<p>" + N(10) + "A month later, pinned on Thrinacia by contrary winds, we had eaten the last of our grain. " +
-        N(11) + "I went inland to pray, and sleep closed my eyes, and while I slept, Eurylochus spoke to the hungry crew. " +
-        N(12) + "\"Friends, every death is hateful to us mortals, but to starve is the most miserable of all. " +
-        N(13) + "Come, let us drive off the best of Helios' cattle and sacrifice them to the gods. " +
-        N(14) + "If we ever reach Ithaca, we will build the Sun a rich temple. " +
-        N(15) + "And if he sinks our ship in anger, I would rather swallow the sea in one gulp than waste away slowly on a lonely island.\" " +
-        N(16) + "The men cheered him. " +
-        N(17) + "They had all sworn an oath to me to spare the herds, but hunger shouted louder than their promise. " +
-        N(18) + "When I woke and smelled roasting meat, I groaned aloud to Zeus.</p>",
+        "<p>" + N(9) + "Later, pinned on Thrinacia by contrary winds, we ran out of grain. " +
+        N(10) + "While I slept inland, Eurylochus spoke to the hungry crew. " +
+        N(11) + "\"Friends, every death is hateful, but to starve is the most miserable of all. " +
+        N(12) + "Come, let us drive off the best of Helios' cattle and sacrifice them to the gods. " +
+        N(13) + "I would rather swallow the sea in one gulp than waste away on a lonely island.\" " +
+        N(14) + "The men had sworn to spare the herds, but hunger shouted louder than their promise. " +
+        N(15) + "When I woke and smelled roasting meat, I groaned aloud to Zeus.</p>",
       claims: [
         {
           id: "plea",
           sol: "9.RL.1.D",
-          stem: "Eurylochus's words in sentences 6–7 reveal that he is mainly —",
+          stem: "Eurylochus's words in sentences 5–6 reveal that he is mainly —",
           choices: [
             { letter: "A", text: "angry that Odysseus did not lead the first group himself" },
             { letter: "B", text: "eager to rescue his friends without any help" },
@@ -424,7 +421,7 @@
         {
           id: "hunger",
           sol: "9.RL.2.A",
-          stem: "In sentence 17, the personification hunger shouted louder than their promise suggests that —",
+          stem: "In sentence 14, the personification hunger shouted louder than their promise suggests that —",
           choices: [
             { letter: "A", text: "the men argued loudly about whether to keep their oath" },
             { letter: "B", text: "Odysseus heard the men shouting from where he slept" },
@@ -436,7 +433,7 @@
         {
           id: "necessity",
           sol: "9.RV.1.C",
-          stem: "In sentence 9, the word necessity most nearly means —",
+          stem: "In sentence 8, the word necessity most nearly means —",
           choices: [
             { letter: "A", text: "a duty that cannot be avoided" },
             { letter: "B", text: "a wish for fame and glory" },
@@ -450,10 +447,10 @@
           sol: "9.DSR.D",
           stem: "Select TWO sentences in which Eurylochus proposes a specific action to escape hardship.",
           choices: [
-            { letter: "A", text: "Sentence 4: I slung my bronze sword over my shoulder, took up my bow..." },
-            { letter: "B", text: "Sentence 7: Let us sail away now with the men who are left..." },
-            { letter: "C", text: "Sentence 12: Friends, every death is hateful to us mortals..." },
-            { letter: "D", text: "Sentence 13: Come, let us drive off the best of Helios' cattle..." }
+            { letter: "A", text: "Sentence 3: I took my sword and bow and told him to lead me back." },
+            { letter: "B", text: "Sentence 6: Let us sail away now, while we can still escape." },
+            { letter: "C", text: "Sentence 11: Friends, every death is hateful..." },
+            { letter: "D", text: "Sentence 12: Come, let us drive off the best of Helios' cattle..." }
           ],
           correct: ["B", "D"]
         },
@@ -483,21 +480,21 @@
       level: 2,
       passage:
         "<p><strong>Text 1 — Four Habits for Hard Times</strong></p>" +
-        "<p>" + N(1) + "Everyone faces setbacks, from a failed test to a lost game, but people who recover well tend to use a few habits that anyone can learn. " +
-        N(2) + "The first is reframing: instead of thinking \"I always fail,\" a resilient person asks, \"What can I try differently next time?\" " +
-        N(3) + "The second is asking for help, which is a sign of good judgment, not weakness, because another person may see a way out that you cannot. " +
-        N(4) + "The third is breaking a large problem into small steps, since a single step feels possible even when the whole climb does not. " +
-        N(5) + "The fourth is persistence, the willingness to keep going after the first, second, or third try falls short. " +
-        N(6) + "Recovering from setbacks, then, is not a gift people are simply born with; it is a set of skills that grows stronger each time it is used.</p>" +
+        "<p>" + N(1) + "People who recover well from setbacks use habits anyone can learn. " +
+        N(2) + "The first is reframing: instead of thinking \"I always fail,\" a resilient person asks, \"What can I try differently?\" " +
+        N(3) + "The second is asking for help, a sign of good judgment, not weakness. " +
+        N(4) + "The third is breaking a large problem into small steps. " +
+        N(5) + "The fourth is persistence, the willingness to keep going after a try falls short. " +
+        N(6) + "Bouncing back is a skill, not a gift.</p>" +
         "<p><strong>Text 2 — The Raft</strong></p>" +
-        "<p>" + N(7) + "On the eighteenth day after leaving Calypso's island, Odysseus saw the shadowy mountains of the Phaeacians rise from the sea. " +
-        N(8) + "But Poseidon, the Earth-Shaker, saw him and gathered all the winds into one storm. " +
+        "<p>" + N(7) + "Eighteen days after leaving Calypso, Odysseus saw the Phaeacians' mountains rise from the sea. " +
+        N(8) + "But Poseidon, the Earth-Shaker, gathered all the winds into one storm. " +
         N(9) + "As a late-summer wind tosses dry thistles across a field, so the gale tossed the little raft across the sea. " +
-        N(10) + "Then the sea-goddess Ino rose beside him like a diving gull and offered him her veil, telling him to leave the raft and swim. " +
+        N(10) + "The goddess Ino offered him her veil and told him to swim. " +
         N(11) + "Odysseus, master of schemes, feared another trick of the gods. " +
-        N(12) + "\"I will stay aboard while the timbers hold,\" he said, \"and swim only when the sea gives me no choice.\" " +
-        N(13) + "When a great wave scattered the planks, he straddled one beam like a rider on horseback, tied the veil beneath his chest, and dove into the swells. " +
-        N(14) + "For two nights and two days he swam, until at last he saw land.</p>",
+        N(12) + "\"I will stay aboard while the timbers hold,\" he said, \"and swim only when I must.\" " +
+        N(13) + "When a wave scattered the planks, he tied on the veil and dove into the swells. " +
+        N(14) + "For two days and nights he swam until he saw land.</p>",
       claims: [
         {
           id: "central",
@@ -552,10 +549,10 @@
           sol: "9.DSR.D",
           stem: "Select TWO sentences from Text 2 that show Odysseus using a strategy described in Text 1.",
           choices: [
-            { letter: "A", text: "Sentence 7: Odysseus saw the shadowy mountains of the Phaeacians rise from the sea." },
-            { letter: "B", text: "Sentence 13: He straddled one beam... tied the veil beneath his chest, and dove into the swells." },
-            { letter: "C", text: "Sentence 8: Poseidon, the Earth-Shaker, saw him and gathered all the winds into one storm." },
-            { letter: "D", text: "Sentence 14: For two nights and two days he swam, until at last he saw land." }
+            { letter: "A", text: "Sentence 7: Odysseus saw the Phaeacians' mountains rise from the sea." },
+            { letter: "B", text: "Sentence 13: When a wave scattered the planks, he tied on the veil and dove into the swells." },
+            { letter: "C", text: "Sentence 8: Poseidon, the Earth-Shaker, gathered all the winds into one storm." },
+            { letter: "D", text: "Sentence 14: For two days and nights he swam until he saw land." }
           ],
           correct: ["B", "D"]
         },
@@ -581,35 +578,25 @@
       episode: "voyage",
       title: "The Tale Begins at Alcinous' Court",
       kind: "The Odyssey · 9.RL",
-      blurb: "A weeping stranger names himself and looks back on every wreck of his voyage.",
-      level: 3,
+      blurb: "A weeping stranger names himself at the Phaeacian court and begins the story of his voyage.",
+      level: 2,
       passage:
-        "<p>" + N(1) + "In the high-roofed hall of Alcinous, king of the Phaeacians, the blind singer Demodocus struck his lyre and sang of the wooden horse and the fall of Troy. " +
-        N(2) + "The stranger seated at the king's side drew his purple cloak over his face and wept in silence. " +
-        N(3) + "Only Alcinous noticed, and when the song ended he asked his guest at last to tell his name, his country, and his wanderings. " +
+        "<p>" + N(1) + "In the hall of Alcinous, king of the Phaeacians, the blind singer Demodocus sang of the wooden horse and the fall of Troy. " +
+        N(2) + "The stranger at the king's side drew his purple cloak over his face and wept in silence. " +
+        N(3) + "Only Alcinous noticed, and when the song ended he asked his guest's name, country, and wanderings. " +
         N(4) + "Then Odysseus, master of schemes, wiped his eyes and began.</p>" +
         "<p>" + N(5) + "\"I am Odysseus, son of Laertes, and I will tell you of the grief Zeus loaded onto my homeward road. " +
-        N(6) + "When we sailed from Troy, the wind carried us to Ismarus, city of the Cicones, and we sacked it. " +
-        N(7) + "I told my men to run for the ships, but the fools stayed to feast on the beach, and at dawn the Cicones came against us as thick as leaves in spring. " +
-        N(8) + "Six men from every ship died there, and that was only the first time my crew ignored my warning.</p>" +
-        "<p>" + N(9) + "\"A storm drove us nine days across the sea to the land of the Lotus-Eaters. " +
-        N(10) + "The men I sent ahead ate the honey-sweet lotus, and they forgot home so completely that I had to drag them weeping to the ships. " +
-        N(11) + "Next we reached the island of the Cyclopes, lawless giants who plant nothing and fear no god. " +
-        N(12) + "I wanted to see whether the cave-dweller there would honor us as guests, and that curiosity cost me six men, seized and devoured by Polyphemus. " +
-        N(13) + "I escaped by giving him wine, calling myself Nobody, and blinding him with a sharpened stake while he slept. " +
-        N(14) + "But as we rowed away, I could not resist shouting my true name across the water, and the giant prayed to his father Poseidon that I would come home late, alone, and on a stranger's ship.</p>" +
-        "<p>" + N(15) + "\"After that, the goddess Circe turned half my crew into swine, and only Hermes' gift of a magic herb let me free them. " +
-        N(16) + "Circe sent me down to the land of the dead, where the prophet Tiresias warned me: whatever happens, do not harm the cattle of the Sun. " +
-        N(17) + "Remember that warning, my friends, for you will hear it again before my tale is finished.</p>" +
-        "<p>" + N(18) + "\"I will tell it all in order: the singing Sirens, six-headed Scylla, and the island where my starving men slaughtered the forbidden cattle while I slept. " +
-        N(19) + "Zeus struck our ship with a thunderbolt, and the sea took every one of my companions. " +
-        N(20) + "I alone clung to the wreckage and drifted to Calypso's island, and from there, after seven long years, to your shore. " +
-        N(21) + "That is why I weep, King Alcinous, when your singer sings of Troy: every man who sailed home with me is gone, and only I am left to remember them.\"</p>",
+        N(6) + "From Troy the wind carried us to Ismarus, city of the Cicones, and we sacked it. " +
+        N(7) + "I told my men to run for the ships, but the fools stayed to feast, and at dawn the Cicones came against us as thick as leaves in spring. " +
+        N(8) + "Six men from every ship died there, the first time my crew ignored my warning.</p>" +
+        "<p>" + N(9) + "\"Lawless giants, a goddess's spells, and the land of the dead wait later in my story. " +
+        N(10) + "But know this: every man who sailed with me is gone, and only I remain to remember them. " +
+        N(11) + "That is why I weep, King Alcinous, when your singer sings of Troy.\"</p>",
       claims: [
         {
           id: "flashback",
           sol: "9.RL.3.A",
-          stem: "Sentences 1–4 are told by an outside narrator, and sentences 5–21 are told by Odysseus. This structure mainly allows the passage to —",
+          stem: "Sentences 1–4 are told by an outside narrator, and sentences 5–11 are told by Odysseus. This structure mainly allows the passage to —",
           choices: [
             { letter: "A", text: "show the Phaeacians' history before Odysseus arrives" },
             { letter: "B", text: "present earlier adventures as a flashback within the court scene" },
@@ -633,7 +620,7 @@
         {
           id: "lawless",
           sol: "9.RV.1.C",
-          stem: "In sentence 11, the word lawless most nearly means —",
+          stem: "In sentence 9, the word lawless most nearly means —",
           choices: [
             { letter: "A", text: "living without rules or justice" },
             { letter: "B", text: "unable to speak any language" },
@@ -645,43 +632,43 @@
         {
           id: "pride",
           sol: "9.RL.1.C",
-          stem: "Which sentence best shows that Odysseus's own pride creates a new challenge for him?",
+          stem: "Odysseus's words in sentences 7–8 suggest that he sees himself as —",
           choices: [
-            { letter: "A", text: "Sentence 7, where he tells his men to run for the ships" },
-            { letter: "B", text: "Sentence 13, where he calls himself Nobody" },
-            { letter: "C", text: "Sentence 16, where Tiresias gives him a warning" },
-            { letter: "D", text: "Sentence 14, where he shouts his true name" }
+            { letter: "A", text: "a leader who should have stayed to feast with his men" },
+            { letter: "B", text: "a warrior who won the battle at Ismarus by himself" },
+            { letter: "C", text: "a stranger who no longer remembers his own country" },
+            { letter: "D", text: "a leader whose sound warning his crew ignored" }
           ],
           correct: "D"
         },
         {
           id: "poseidon",
           sol: "9.RV.1.F",
-          stem: "In sentence 14, the giant prays to his father Poseidon. Because Poseidon is the god of the sea, readers can predict that —",
+          stem: "In sentence 1, Demodocus sings of the wooden horse and the fall of Troy. This allusion to the Trojan War mainly suggests that —",
           choices: [
-            { letter: "A", text: "Odysseus's sea voyage will become far more dangerous" },
-            { letter: "B", text: "the giant will follow Odysseus's ship across the water" },
-            { letter: "C", text: "Poseidon will forgive Odysseus once he reaches Ithaca" },
-            { letter: "D", text: "the crew will return to the island to make peace" }
+            { letter: "A", text: "the stranger listening has a personal tie to the events of the song" },
+            { letter: "B", text: "the Phaeacians fought on the side of Troy in the war" },
+            { letter: "C", text: "Demodocus is planning to trick the king's new guest" },
+            { letter: "D", text: "the war against Troy happened long before anyone at court was born" }
           ],
           correct: "A"
         },
         {
           id: "remember",
           sol: "9.RL.3.A",
-          stem: "Odysseus says Remember that warning in sentence 17 mainly to —",
+          stem: "Odysseus mentions lawless giants, a goddess's spells, and the land of the dead in sentence 9 mainly to —",
           choices: [
-            { letter: "A", text: "prove that the prophet Tiresias was mistaken" },
-            { letter: "B", text: "build suspense by hinting the warning will matter later" },
-            { letter: "C", text: "explain why the Phaeacians keep their own herds" },
-            { letter: "D", text: "change the subject from the Cyclops to the singing Sirens" }
+            { letter: "A", text: "prove that the Phaeacians have heard his story before" },
+            { letter: "B", text: "build suspense by previewing adventures he will tell later" },
+            { letter: "C", text: "explain why he refuses to tell the king his real name" },
+            { letter: "D", text: "show that the battle at Ismarus was the worst danger he faced" }
           ],
           correct: "B"
         },
         {
           id: "theme",
           sol: "9.RL.1.A",
-          stem: "Which theme is developed across Odysseus's whole tale?",
+          stem: "Which theme does Odysseus's account in the passage develop?",
           choices: [
             { letter: "A", text: "Curiosity about new lands is always rewarded." },
             { letter: "B", text: "A good leader never has to depend on his crew." },
@@ -693,7 +680,7 @@
         {
           id: "weeps",
           sol: "9.RL.1.B",
-          stem: "Based on sentences 2 and 21 together, readers can infer that Odysseus weeps at the song of Troy because —",
+          stem: "Based on sentences 2 and 10–11 together, readers can infer that Odysseus weeps at the song of Troy because —",
           choices: [
             { letter: "A", text: "he is ashamed that the Greeks lost the war" },
             { letter: "B", text: "Demodocus has told the story incorrectly" },
@@ -713,40 +700,24 @@
       title: "Tie Me Tighter",
       kind: "Paired texts · 9.DSR",
       blurb: "A new student facing a long audition and Odysseus passing the Sirens both plan for their own weak moment.",
-      level: 3,
+      level: 2,
       passage:
         "<p><strong>Text 1 — Eight Weeks</strong></p>" +
-        "<p>" + N(1) + "When her family moved three states away in January, Ji-woo Park lost two things at once: her friends and her seat in the band. " +
-        N(2) + "At her new high school, the jazz band had been rehearsing for months, and auditions for the spring concert were only eight weeks off. " +
-        N(3) + "The first time she played for the director, her high notes squeaked like a rusty hinge, and a drummer laughed before he could stop himself.</p>" +
-        "<p>" + N(4) + "That night she lay awake texting old friends until after one o'clock, scrolling through photos of a cafeteria table where someone else now sat in her chair. " +
-        N(5) + "In the morning she was too tired to practice, and she knew exactly how the next eight weeks would go if nothing changed.</p>" +
-        "<p>" + N(6) + "So she made a plan, and she made it while she still felt strong. " +
-        N(7) + "Every night at nine, she handed her phone to her older brother, Min-jun. " +
-        N(8) + "\"Even if I beg,\" she told him, \"don't give it back.\" " +
-        N(9) + "She asked the section leader, a senior named Tavia, to show her the breathing exercises that had once fixed Tavia's own squeaks. " +
-        N(10) + "She divided the hardest solo into eight short phrases and learned one each week.</p>" +
-        "<p>" + N(11) + "In week five, after a terrible rehearsal, she knocked on Min-jun's door at ten-thirty and demanded her phone. " +
-        N(12) + "\"You told me you'd say this,\" he answered through the door, and he did not open it. " +
-        N(13) + "She was furious for twenty minutes; then she took out her mouthpiece and buzzed scales quietly into a pillow.</p>" +
-        "<p>" + N(14) + "On audition day her third note cracked, and for one long second she wanted to set the trumpet down and walk out. " +
-        N(15) + "Instead she breathed the way Tavia had taught her and played the rest of the solo straight through. " +
-        N(16) + "She earned the last seat in the trumpet section. " +
-        N(17) + "Walking home, she realized she had not looked at the old cafeteria photos in weeks, and that surprised her more than the seat did.</p>" +
+        "<p>" + N(1) + "When her family moved in January, Ji-woo Park lost her friends and her band seat. " +
+        N(2) + "At her new school's tryout, her high notes squeaked like a rusty hinge. " +
+        N(3) + "That night she stayed up scrolling through photos of her old cafeteria table. " +
+        N(4) + "So, while she still felt strong, she made a plan for auditions. " +
+        N(5) + "Every night at nine, she handed her phone to her brother. " +
+        N(6) + "\"Even if I beg,\" she told him, \"don't give it back.\" " +
+        N(7) + "In week five, after a bad rehearsal, she demanded it; he kept his door shut. " +
+        N(8) + "She earned the last trumpet seat and realized she had stopped looking at the old photos.</p>" +
         "<p><strong>Text 2 — The Sirens</strong></p>" +
-        "<p>" + N(18) + "Before we left her island, Circe warned me of the Sirens, whose song makes sailors forget home and children and steer onto the rocks. " +
-        N(19) + "She told me that if I wished to hear that song and live, I must be bound to the mast while my men rowed past with their ears sealed. " +
-        N(20) + "As our ship drew near the Sirens' island, the wind died, a breathless calm lay over the water, and my men took down the sail and bent to their oars. " +
-        N(21) + "I told them all that Circe had said, for I would not let them face that danger blind. " +
-        N(22) + "Then I cut a wheel of beeswax with my bronze sword, kneaded it soft in the hot sun, and sealed each man's ears. " +
-        N(23) + "They bound me hand and foot to the mast, upright, with the ropes made fast. " +
-        N(24) + "\"If I beg you to release me,\" I told them, \"tie me tighter still.\" " +
-        N(25) + "Soon the Sirens' voices drifted across the water, sweet as honey dripping from the comb. " +
-        N(26) + "\"Come closer, famous Odysseus, pride of the Greeks,\" they sang. \"We know every sorrow the Greeks and Trojans suffered at Troy, and no sailor who hears us ever leaves without new wisdom.\" " +
-        N(27) + "My heart ached to hear more; I strained against the ropes and frowned and nodded at my men to set me free. " +
-        N(28) + "But they leaned harder into their oars, and Perimedes and Eurylochus rose and bound me with still more rope. " +
-        N(29) + "Not until the song had faded behind us did my faithful crew take the wax from their ears and untie me. " +
-        N(30) + "Yet I could not rejoice for long, for already I saw spray and smoke ahead, where Scylla and Charybdis waited.</p>",
+        "<p>" + N(9) + "Circe warned me that the Sirens' song makes sailors forget home. " +
+        N(10) + "I sealed my men's ears with wax, and they bound me to the mast, the ropes made fast. " +
+        N(11) + "\"If I beg you to release me,\" I told them, \"tie me tighter still.\" " +
+        N(12) + "Soon their voices drifted across the water, sweet as honey dripping from the comb. " +
+        N(13) + "\"Come closer, famous Odysseus,\" they sang, \"and leave with new wisdom.\" " +
+        N(14) + "I strained and begged, but my men only bound me tighter and rowed on.</p>",
       claims: [
         {
           id: "jiwoo-change",
@@ -763,7 +734,7 @@
         {
           id: "door",
           sol: "9.RL.3.A",
-          stem: "The author includes the scene in sentences 11–12 mainly to —",
+          stem: "The author includes sentence 7 mainly to —",
           choices: [
             { letter: "A", text: "show that Min-jun does not care about his sister's feelings" },
             { letter: "B", text: "suggest that Ji-woo's whole plan has completely fallen apart by week five" },
@@ -775,7 +746,7 @@
         {
           id: "honey",
           sol: "9.RL.2.A",
-          stem: "In sentence 25, the simile sweet as honey dripping from the comb mainly helps the reader understand —",
+          stem: "In sentence 12, the simile sweet as honey dripping from the comb mainly helps the reader understand —",
           choices: [
             { letter: "A", text: "that the Sirens' island is covered with beehives" },
             { letter: "B", text: "why the crew is hungry as they row past the island" },
@@ -787,7 +758,7 @@
         {
           id: "fast",
           sol: "9.RV.1.C",
-          stem: "In sentence 23, the word fast in the phrase the ropes made fast most nearly means —",
+          stem: "In sentence 10, the word fast in the phrase the ropes made fast most nearly means —",
           choices: [
             { letter: "A", text: "moving with great speed" },
             { letter: "B", text: "firmly fixed in place" },
@@ -799,7 +770,7 @@
         {
           id: "siren-speech",
           sol: "9.RL.1.D",
-          stem: "The Sirens' words in sentence 26 are designed to tempt Odysseus by —",
+          stem: "The Sirens' words in sentence 13 are designed to tempt Odysseus by —",
           choices: [
             { letter: "A", text: "appealing to his love of fame and his hunger for knowledge" },
             { letter: "B", text: "threatening to sink his ship if he refuses to stop" },
@@ -813,10 +784,10 @@
           sol: "9.DSR.D",
           stem: "Select TWO sentences, one from each text, in which a character arranges in advance for others to refuse a later request.",
           choices: [
-            { letter: "A", text: "Sentence 9: She asked the section leader, a senior named Tavia, to show her the breathing exercises..." },
-            { letter: "B", text: "Sentence 8: \"Even if I beg,\" she told him, \"don't give it back.\"" },
-            { letter: "C", text: "Sentence 28: Perimedes and Eurylochus rose and bound me with still more rope." },
-            { letter: "D", text: "Sentence 24: \"If I beg you to release me,\" I told them, \"tie me tighter still.\"" }
+            { letter: "A", text: "Sentence 3: That night she stayed up scrolling through photos of her old cafeteria table." },
+            { letter: "B", text: "Sentence 6: \"Even if I beg,\" she told him, \"don't give it back.\"" },
+            { letter: "C", text: "Sentence 14: I strained and begged, but my men only bound me tighter and rowed on." },
+            { letter: "D", text: "Sentence 11: \"If I beg you to release me,\" I told them, \"tie me tighter still.\"" }
           ],
           correct: ["B", "D"]
         },
