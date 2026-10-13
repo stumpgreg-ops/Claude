@@ -48,4 +48,4 @@ The Great castle, town hall, barracks, houses, mills, towers, soldiers, carts an
 All are cropped, re-anchored and scaled to the castle kit's cell by `tools/make-castle-kit.py`; the stone knight and king are desaturated Castle Kit figures.
 
 ## Lesson materials (`docs/lessons/`)
-The annotated "Lotus Eaters" teacher copy uses **Caveat** (handwritten notes, drawn as outlines) and **Gelasio** (Georgia-width metrics for the passage), both from Google Fonts under the SIL Open Font License 1.1; the licence texts are in `docs/lessons/lotus-eaters/fonts/`. The passage is the class's student annotation copy of Homer's *Odyssey*, "The Lotus Eaters."
+The annotated "Lotus Eaters" model follows the format of the class's Circe annotated model and embeds the same fonts: **Caveat** (Impallari Type, handwritten notes) and **EB Garamond** (Georg Duffner, Octavio Pardo, the passage), both under the SIL Open Font License 1.1. The passage is from Homer's *Odyssey*, translated by Robert Fitzgerald.
