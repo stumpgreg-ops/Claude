@@ -177,6 +177,10 @@ h3.section span { font-variant: normal; font-size: .85em; white-space: nowrap; }
 .footnote p { margin: 0; }
 
 .tn p { margin-bottom: .6em; }
+/* The lesson's own student codes, drawn on top of the colour highlights */
+.lg-hero { border-bottom: 3px solid #e0418f; padding-bottom: 1px; }
+.lg-circ { border: 1.6px solid var(--red); border-radius: 50%; padding: 0 8px; }
+.lg-star { color: var(--red); }
 .tn h2.sub { margin-top: 1em; }
 
 @page { size: letter; margin: 0; }
@@ -209,10 +213,13 @@ h3.section span { font-variant: normal; font-size: .85em; white-space: nowrap; }
     <p><b class="sw th">Theme</b> a line that raises a topic that develops a theme <span class="std">9.RL.1.A · red notes</span></p>
     <p><b class="sw el">Character · Setting · Plot</b> a detail that builds the theme <span class="std">9.RL.1.A · red notes</span></p>
     <p><b class="sw vo">Vocabulary</b> a word to define <span class="std">9.RV.1.A · blue notes</span></p>
+    <p><b class="lg-hero">Hero / leader</b> pink underline: Odysseus acts as a hero or leader <span class="std">lesson code</span></p>
+    <p><b class="lg-circ">Major event</b> circled in red <span class="std">lesson code</span></p>
+    <p><b class="lg-star">★</b> <b>Clarify</b> a star where the note clarifies or explains <span class="std">lesson code</span></p>
   </div>
   <p><span class="screen-only">Click a page to reveal its highlights one at a time; each highlight brings its margin note. After the last one, a click clears the page (Shift-click goes back one). </span>Blue notes define words. Red notes connect a detail to a theme: the numbered top line names the topic, character, setting, or plot detail, and the line under it explains how that detail builds the theme. Arrows point to the exact words.</p>
   <p><b>Topic vs. theme.</b> A topic names a subject (<i>temptation</i>). A theme carries a message or lesson about it (<i>giving in to temptation can cost you what matters most</i>). Each theme note names a topic; its number shows which theme that topic develops. The numbered themes are listed at the top of the first passage page.</p>
-  <p><b>The lesson’s student codes.</b> Students highlight in pink where Odysseus acts as a hero or leader, circle major events, and star what they clarify. In this model the theme-4 <i>Character</i> notes are the hero/leader moments and the <i>Plot</i> notes are the major events.</p>
+  <p><b>The lesson’s student codes.</b> The model also uses the codes students use on their copies: a pink mark where Odysseus acts as a hero or leader, a circle around each major event, and a star where something is clarified or explained. Here the pink is an underline, so the theme, character and vocabulary colours underneath still show.</p>
   <div class="foot r">Annotation key</div>
 </section></div>
 
@@ -240,12 +247,12 @@ h3.section span { font-variant: normal; font-size: .85em; white-space: nowrap; }
   <div class="poem">
     <span class="ln" data-n="1">“<span class="initial">I</span> might have made it <mark class="th" id="a1">safely home</mark>, that</span>
     <span class="ln">time, but as I came round Malea<sup>1</sup> <mark class="el" id="a2">the current</mark></span>
-    <span class="ln"><mark class="el">took me out to sea,</mark> and from the north a fresh</span>
-    <span class="ln"><mark class="vo" id="a3">gale</mark> drove me on, past Cythera.<sup>2</sup> <mark class="el" id="a4">Nine days I</mark></span>
+    <span class="ln"><mark class="el"><span class="ev" data-for="a2">took me out to sea,</span></mark> and from the north a fresh</span>
+    <span class="ln"><mark class="vo" id="a3">gale</mark> drove me on, past Cythera.<sup>2</sup> <mark class="el" id="a4" data-star="1">Nine days I</mark></span>
     <span class="ln" data-n="5"><mark class="el">drifted</mark> on the <mark class="vo" id="a5">teeming</mark> sea before dangerous</span>
     <span class="ln">high winds. Upon the tenth we came to the</span>
-    <span class="ln"><mark class="el" id="a6">coastline of the Lotus Eaters, who live upon</mark></span>
-    <span class="ln"><mark class="el">that flower.</mark> <mark class="el" id="a7">We landed there to take on water.</mark></span>
+    <span class="ln"><mark class="el" id="a6"><span class="ev" data-for="a6">coastline of the Lotus Eaters,</span> who live upon</mark></span>
+    <span class="ln"><mark class="el">that flower.</mark> <mark class="el" id="a7"><span class="hero" data-for="a7">We landed there to take on water.</span></mark></span>
   </div>
   <div class="footnote"><p>1. <b>Malea</b> a cape at the southern tip of Greece.</p><p>2. <b>Cythera</b> an island off that cape.</p></div>
 
@@ -263,24 +270,24 @@ h3.section span { font-variant: normal; font-size: .85em; white-space: nowrap; }
 <div class="sheet-wrap"><section class="page annotated">
   <div class="poem">
     <span class="ln">All ships’ companies mustered alongside for</span>
-    <span class="ln" data-n="10">the mid-day meal. <mark class="el" id="a8">Then I sent out two</mark></span>
-    <span class="ln"><mark class="el">picked men and a runner to learn what race of</mark></span>
-    <span class="ln"><mark class="el">men that land sustained.</mark> They fell in, soon</span>
-    <span class="ln">enough, with Lotus Eaters, <mark class="th" id="b1">who showed no</mark></span>
+    <span class="ln" data-n="10">the mid-day meal. <mark class="el" id="a8"><span class="hero" data-for="a8">Then I sent out two</span></mark></span>
+    <span class="ln"><mark class="el"><span class="hero" data-for="a8">picked men and a runner to learn what race of</span></mark></span>
+    <span class="ln"><mark class="el"><span class="hero" data-for="a8">men that land sustained.</span></mark> They fell in, soon</span>
+    <span class="ln">enough, with Lotus Eaters, <mark class="th" id="b1" data-star="1">who showed no</mark></span>
     <span class="ln"><mark class="th">will to do us harm,</mark> <mark class="th" id="b2">only offering the sweet</mark></span>
     <span class="ln" data-n="15"><mark class="th">Lotus to our friends</mark>— <mark class="el" id="b3">but those who ate</mark></span>
     <span class="ln"><mark class="el">this honeyed plant, the Lotus, never cared to</mark></span>
-    <span class="ln"><mark class="el">report, not to return:</mark></span>
+    <span class="ln"><mark class="el"><span class="ev" data-for="b3">report, not to return:</span></mark></span>
     <span class="ln"><mark class="th" id="b4">they longed to stay forever,</mark> browsing on that</span>
-    <span class="ln">native bloom, <mark class="th">forgetful of their homeland.</mark> <mark class="el" id="b5">I</mark></span>
-    <span class="ln" data-n="20"><mark class="el">drove them, all three wailing, to the ships,</mark></span>
-    <span class="ln"><mark class="el">tied them down under their rowing benches,</mark></span>
-    <span class="ln"><mark class="el" id="b6">and called the rest: ‘All hands aboard; come,</mark></span>
-    <span class="ln"><mark class="el">clear the beach</mark> <mark class="th" id="b7">and no one taste the Lotus, or</mark></span>
+    <span class="ln">native bloom, <mark class="th">forgetful of their homeland.</mark> <mark class="el" id="b5"><span class="hero" data-for="b5">I</span></mark></span>
+    <span class="ln" data-n="20"><mark class="el"><span class="hero" data-for="b5">drove them, all three wailing, to the ships,</span></mark></span>
+    <span class="ln"><mark class="el"><span class="hero" data-for="b5"><span class="ev" data-for="b5">tied them down under their rowing benches,</span></span></mark></span>
+    <span class="ln"><mark class="el" id="b6"><span class="hero" data-for="b6">and called the rest: ‘All hands aboard; come,</span></mark></span>
+    <span class="ln"><mark class="el"><span class="hero" data-for="b6">clear the beach</span></mark> <mark class="th" id="b7" data-star="1">and no one taste the Lotus, or</mark></span>
     <span class="ln"><mark class="th">you lose your hope of home.’</mark> Filing in to their</span>
     <span class="ln" data-n="25">places by the <mark class="vo" id="b8">rowlocks</mark> my oarsmen</span>
     <span class="ln">dipped their long oars in the surf, and we</span>
-    <span class="ln"><mark class="el" id="b9">moved out again on our sea faring.</mark>”</span>
+    <span class="ln"><mark class="el" id="b9"><span class="ev" data-for="b9">moved out again on our sea faring.</span></mark>”</span>
   </div>
 
   <div class="note l red" data-for="a8">4. <b>Character:</b> a careful leader<small class="why">He sends scouts before risking everyone. 72 men died at the Cicones.</small></div>
@@ -359,8 +366,9 @@ h3.section span { font-variant: normal; font-size: .85em; white-space: nowrap; }
         st.notes.forEach(function (note) {
           note.classList.toggle("on", on);
           note.setAttribute("aria-hidden", on ? "false" : "true");
-          var path = page.querySelector('svg.ink path[data-for="' + note.getAttribute("data-for") + '"]');
-          if (path) path.classList.toggle("on", on);
+          page.querySelectorAll('svg.ink path[data-for="' + note.getAttribute("data-for") + '"]').forEach(function (path) {
+            path.classList.toggle("on", on);   // the note's arrow, and any circle, star or underline that goes with it
+          });
         });
       });
       tap.textContent = shown === 0 ? "click to start ✎" : shown < steps.length ? "click for next  " + shown + "/" + steps.length : "click to clear";
@@ -457,8 +465,67 @@ h3.section span { font-variant: normal; font-size: .85em; white-space: nowrap; }
       path.style.strokeDasharray = len;
       path.style.strokeDashoffset = len;
     });
+    drawCodes(page, pr, s, svg);
     var need = Math.max(floor.l, floor.r) + 70;
     page.style.minHeight = Math.max(1056, need) + "px";
+  }
+
+  // The lesson's student codes: a red circle around a major event (.ev), a pink underline where Odysseus acts as a
+  // hero or leader (.hero), and a star in the margin beside a line the note clarifies (mark[data-star]).
+  function drawCodes(page, pr, s, svg) {
+    function rectsOf(el) {
+      return [].slice.call(el.getClientRects()).filter(function (r) { return r.width > 0; }).map(function (r) {
+        return { left: (r.left - pr.left) / s, right: (r.right - pr.left) / s, top: (r.top - pr.top) / s, bottom: (r.bottom - pr.top) / s };
+      });
+    }
+    function add(d, id, color, width) {
+      var path = document.createElementNS(NS, "path");
+      path.setAttribute("d", d);
+      path.setAttribute("stroke", color);
+      path.style.strokeWidth = width;
+      path.setAttribute("data-for", id);
+      if (page.querySelector('.note.on[data-for="' + id + '"]')) path.classList.add("on");
+      svg.appendChild(path);
+      var len = Math.ceil(path.getTotalLength());
+      path.style.strokeDasharray = len;
+      path.style.strokeDashoffset = len;
+    }
+    var red = getComputedStyle(page).getPropertyValue("--red").trim() || "#b2302e";
+    page.querySelectorAll(".hero").forEach(function (el, i) {
+      rectsOf(el).forEach(function (r, k) {
+        var y = r.bottom - 1.5, d = "M" + (r.left + 1).toFixed(1) + " " + y.toFixed(1), n = Math.max(2, Math.round((r.right - r.left) / 14));
+        for (var j = 1; j <= n; j++) {
+          var x = r.left + 1 + (r.right - r.left - 2) * j / n;
+          d += " L" + x.toFixed(1) + " " + (y + jitter(i * 7 + k * 3 + j) * 1.6).toFixed(1);
+        }
+        add(d, el.getAttribute("data-for"), "#e0418f", 3.2);
+      });
+    });
+    page.querySelectorAll(".ev").forEach(function (el, i) {
+      var rs = rectsOf(el);
+      if (!rs.length) return;
+      var l = Math.min.apply(null, rs.map(function (r) { return r.left; })), rt = Math.max.apply(null, rs.map(function (r) { return r.right; }));
+      var t = Math.min.apply(null, rs.map(function (r) { return r.top; })), b = Math.max.apply(null, rs.map(function (r) { return r.bottom; }));
+      var cx = (l + rt) / 2, cy = (t + b) / 2, rx = (rt - l) / 2 + 9, ry = (b - t) / 2 + 2;
+      var a0 = 3.6 + jitter(i + 40) * 0.4, d = "";
+      for (var k = 0; k <= 40; k++) {
+        var a = a0 + (2 * Math.PI + 0.45) * k / 40, w = 1 + 0.03 * Math.sin(3 * a + i) + 0.05 * k / 40;
+        d += (k ? " L" : "M") + (cx + rx * w * Math.cos(a)).toFixed(1) + " " + (cy + ry * w * Math.sin(a)).toFixed(1);
+      }
+      add(d, el.getAttribute("data-for"), red, 1.7);
+    });
+    page.querySelectorAll("mark[data-star]").forEach(function (m, i) {
+      var r = rectsOf(m)[0], ln = m.closest(".ln");
+      if (!r || !ln) return;
+      var lx = (ln.getBoundingClientRect().left - pr.left) / s;
+      var fs = parseFloat(getComputedStyle(ln).fontSize);
+      var cx = lx - fs * 1.35, cy = (r.top + r.bottom) / 2, R = fs * 0.42, d = "";
+      for (var k = 0; k <= 5; k++) {
+        var a = -Math.PI / 2 + k * 4 * Math.PI / 5 + jitter(i * 5 + k) * 0.12;
+        d += (k ? " L" : "M") + (cx + R * Math.cos(a)).toFixed(1) + " " + (cy + R * Math.sin(a)).toFixed(1);
+      }
+      add(d, m.id, red, 1.6);
+    });
   }
 
   function lineExtent(ln, r, pr, s) {
