@@ -1,6 +1,6 @@
 // Prints an annotated-model page (docs/readings/*-Annotated-Model.html) to two letter-size PDFs:
 //   <name>-Annotated-Model.pdf  teacher copy: key page, every highlight, note and arrow shown
-//   <name>-Student-Copy.pdf     student copy: same sheets and line positions, no key, highlights or notes
+//   <name>-Student-Copy.pdf     student copy: same sheets and line breaks, no key, highlights or notes
 // Usage: node tools/make-reading-pdfs.js docs/readings/Odyssey-Circe-Annotated-Model.html
 const path = require("path");
 const { chromium } = require("playwright");
@@ -21,6 +21,9 @@ const { chromium } = require("playwright");
     .note, svg.ink, .tap, .fs-btn { display: none !important; }
     .annotated mark, mark { background: none !important; }
     .annotated { cursor: auto; }` });
+  // Without the notes the text needs less room: lay the sheets out again so the student type is as large as fits.
+  await page.evaluate(() => window.dispatchEvent(new Event("resize")));
+  await page.waitForTimeout(400);
   await page.pdf({ path: base + "-Student-Copy.pdf", format: "Letter", printBackground: true, preferCSSPageSize: true });
   await browser.close();
 })();
