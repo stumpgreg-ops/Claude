@@ -190,6 +190,12 @@ mark.wc { background: var(--hl-wc); }
 .note.wc { color: var(--purple); }
 .note.wc small.lit { color: #4b2266; }
 .write .q p { margin: 0 0 .2em; }
+/* passage sheets: slightly smaller handwriting and double-spaced lines, so the notes sit beside their lines and the text fills the sheet */
+.dense .note { font-size: 20px; width: 168px; }
+.dense .note.r { left: 640px; }
+.dense .poem { line-height: 2.1; }
+.dense .note small { font-size: 16px; }
+.dense .note small.why, .dense .note small.lit { font-size: 15.5px; }
 @media print { .annotated mark.wc { background-size: 100% 100%; } }
 /* SOL strand code at the foot of each margin note */
 .note .sol { display: inline-block; vertical-align: 2px; white-space: nowrap; padding: 0 5px; border: 1px solid currentColor; border-radius: 7px;
@@ -243,7 +249,7 @@ mark.wc { background: var(--hl-wc); }
 </section></div>
 
 <!-- ───────────── Passage, lines 1–8 ───────────── -->
-<div class="sheet-wrap"><section class="page annotated">
+<div class="sheet-wrap"><section class="page annotated dense">
   <div class="themes">
     <h4>Themes</h4>
     <ol>
@@ -285,8 +291,8 @@ mark.wc { background: var(--hl-wc); }
   <div class="foot r">THE ODYSSEY · THE LOTUS EATERS <b>721</b></div>
 </section></div>
 
-<!-- ───────────── Passage, lines 9–17 ───────────── -->
-<div class="sheet-wrap"><section class="page annotated">
+<!-- ───────────── Passage, lines 9–27 ───────────── -->
+<div class="sheet-wrap"><section class="page annotated dense">
   <div class="poem">
     <span class="ln">All ships’ companies <mark class="vo" id="v1">mustered</mark> alongside for</span>
     <span class="ln" data-n="10">the mid-day meal. <mark class="el" id="a8"><span class="hero" data-for="a8">Then I sent out two</span></mark></span>
@@ -297,22 +303,7 @@ mark.wc { background: var(--hl-wc); }
     <span class="ln" data-n="15"><mark class="th" data-step="b2">Lotus to our friends</mark>— <mark class="el" id="b3">but those who ate</mark></span>
     <span class="ln"><mark class="wc" data-step="w1">this honeyed plant,</mark> <mark class="el" data-step="b3">the Lotus, never cared to</mark></span>
     <span class="ln"><mark class="el" data-step="b3"><span class="ev" data-for="b3">report, not to return:</span></mark></span>
-  </div>
-
-  <div class="note r" data-for="v1"><b>Vocab:</b> mustered = gathered<small class="lit">clue: “all ships’ companies … alongside” <span class="sol">9.RV.1.B</span></small></div>
-  <div class="note l red" data-for="a8">4. <b>Character:</b> a careful leader<small class="why">He sends scouts before risking everyone. 72 men died at the Cicones. <span class="sol">9.RL.1.A</span></small></div>
-  <div class="note r" data-for="v2"><b>Vocab:</b> sustained = fed, kept alive<small class="lit">clue: they “live upon that flower” (lines 7–8) <span class="sol">9.RV.1.B</span></small></div>
-  <div class="note r red" data-for="b1">3. <b>Topic:</b> hidden danger<small class="why">No weapons, no attack. The threat is temptation, which is harder to see. <span class="sol">9.RL.1.A</span></small></div>
-  <div class="note l red" data-for="b2">1. <b>Topic:</b> temptation<small class="why">Today: like drugs. Offered in a friendly way, they feel good at first, then you stop caring about your goals. <span class="sol">9.RL.1.A</span></small></div>
-  <div class="note r wc" data-for="w1"><b>Word choice:</b> “sweet,” “honeyed”<small class="lit">pleasant words make the trap feel safe <span class="sol">9.RL.2.B</span></small></div>
-  <div class="note r red" data-for="b3">1. <b>Plot:</b> the scouts eat the Lotus<small class="why">The island’s plant changes the men: they never report back. <span class="sol">9.RL.3.B</span></small></div>
-  <div class="foot l"><b>721</b> THE LOTUS EATERS, CONTINUED</div>
-</section></div>
-
-<!-- ───────────── Passage, lines 18–27 ───────────── -->
-<div class="sheet-wrap"><section class="page annotated">
-  <div class="poem">
-    <span class="ln"><mark class="th" id="b4">they longed to stay forever,</mark> <mark class="vo" id="v3">browsing</mark> on that</span>
+      <span class="ln"><mark class="th" id="b4">they longed to stay forever,</mark> <mark class="vo" id="v3">browsing</mark> on that</span>
     <span class="ln">native bloom, <mark class="th" data-step="b4">forgetful of their homeland.</mark> <mark class="el" id="b5"><span class="hero" data-for="b5">I</span></mark></span>
     <span class="ln" data-n="20"><mark class="el" data-step="b5"><span class="hero" data-for="b5">drove them,</span></mark> <mark class="wc" id="w2">all three wailing,</mark> <mark class="el" data-step="b5"><span class="hero" data-for="b5">to the ships,</span></mark></span>
     <span class="ln"><mark class="el" data-step="b5"><span class="hero" data-for="b5"><span class="ev" data-for="b5">tied them down under their rowing benches,</span></span></mark></span>
@@ -322,17 +313,24 @@ mark.wc { background: var(--hl-wc); }
     <span class="ln" data-n="25">places by the <mark class="vo" id="b8">rowlocks</mark> my oarsmen</span>
     <span class="ln">dipped their long oars in the surf, and we</span>
     <span class="ln"><mark class="el" id="b9"><span class="ev" data-for="b9">moved out again on our sea faring.</span></mark>”</span>
-  </div>
+</div>
 
+  <div class="note r" data-for="v1"><b>Vocab:</b> mustered = gathered<small class="lit">clue: “all ships’ companies … alongside” <span class="sol">9.RV.1.B</span></small></div>
+  <div class="note l red" data-for="a8">4. <b>Character:</b> a careful leader<small class="why">He sends scouts before risking everyone. 72 men died at the Cicones. <span class="sol">9.RL.1.A</span></small></div>
+  <div class="note l" data-for="v2"><b>Vocab:</b> sustained = fed, kept alive<small class="lit">clue: they “live upon that flower” (lines 7–8) <span class="sol">9.RV.1.B</span></small></div>
+  <div class="note r red" data-for="b1">3. <b>Topic:</b> hidden danger<small class="why">No weapons, no attack. The threat is temptation, which is harder to see. <span class="sol">9.RL.1.A</span></small></div>
+  <div class="note l red" data-for="b2">1. <b>Topic:</b> temptation<small class="why">Today: like drugs. Offered in a friendly way, they feel good at first, then you stop caring about your goals. <span class="sol">9.RL.1.A</span></small></div>
+  <div class="note r wc" data-for="w1"><b>Word choice:</b> “sweet,” “honeyed”<small class="lit">pleasant words make the trap feel safe <span class="sol">9.RL.2.B</span></small></div>
+  <div class="note r red" data-for="b3">1. <b>Plot:</b> the scouts eat the Lotus<small class="why">The island’s plant changes the men: they never report back. <span class="sol">9.RL.3.B</span></small></div>
   <div class="note l red" data-for="b4">2. <b>Topic:</b> forgetting home<small class="why">Pleasure makes them want to stay forever. Their goal is gone. <span class="sol">9.RL.1.A</span></small></div>
   <div class="note r" data-for="v3"><b>Vocab:</b> browsing = grazing, like cattle<small class="lit">clue: “on that native bloom” <span class="sol">9.RV.1.B</span></small></div>
   <div class="note r red" data-for="b5">4. <b>Character:</b> a decisive leader<small class="why">He drags the men back and ties them down: unpopular, but it saves them. <span class="sol">9.RL.1.A</span></small></div>
   <div class="note l wc" data-for="w2"><b>Word choice:</b> “wailing”<small class="lit">grown men crying like children: the Lotus has changed them <span class="sol">9.RL.2.B</span></small></div>
   <div class="note l red" data-for="b6">4. <b>Character:</b> he protects the crew<small class="why">Everyone off the beach before anyone else is tempted. <span class="sol">9.RL.1.A</span></small></div>
   <div class="note r red" data-for="b7">1. <b>Topic:</b> the cost of temptation<small class="why">He says the theme out loud: give in and you lose your hope of home. <span class="sol">9.RL.1.A</span></small></div>
-  <div class="note r" data-for="b8"><b>Vocab:</b> rowlocks = oar holders<small class="lit">clue: “oarsmen dipped their long oars” <span class="sol">9.RV.1.B</span></small></div>
+  <div class="note l" data-for="b8"><b>Vocab:</b> rowlocks = oar holders<small class="lit">clue: “oarsmen dipped their long oars” <span class="sol">9.RV.1.B</span></small></div>
   <div class="note l red" data-for="b9">4. <b>Plot:</b> back on course<small class="why">The leader gets them moving again. Challenge passed, for now. <span class="sol">9.RL.1.A</span></small></div>
-  <div class="foot r">THE ODYSSEY · THE LOTUS EATERS <b>721</b></div>
+  <div class="foot l"><b>721</b> THE LOTUS EATERS, CONTINUED</div>
 </section></div>
 
 <!-- ───────────── Teacher notes ───────────── -->
