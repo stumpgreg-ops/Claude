@@ -6,6 +6,8 @@ Grade 9 · Unit 2 · Lesson 3 (Challenge Accepted!) · *The Odyssey*, textbook p
 |---|---|
 | `Odyssey-LotusEaters-Annotated-Model.html` | One self-contained page (fonts built in) for Canvas or a browser. |
 | `Odyssey-LotusEaters-Annotated-Model.pdf` | The same four sheets printed with every annotation showing. |
+| `Odyssey-LotusEaters-Student-Copy.pdf` | Student annotation copy to print: the same lines, line numbers, page breaks and double spacing as the model, with blank margins, a name line and the lesson's annotation directions (pink = hero/leader, circle = major event, star = clarify). Nothing is filled in. |
+| `Odyssey-LotusEaters-Student-Copy.html` | The same student copy as a page for Canvas (upload and embed like the model). |
 
 This is a modeling text only, so it has no student writing sheet.
 
