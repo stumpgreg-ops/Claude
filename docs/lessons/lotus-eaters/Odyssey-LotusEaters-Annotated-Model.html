@@ -181,6 +181,16 @@ h3.section span { font-variant: normal; font-size: .85em; white-space: nowrap; }
 .lg-hero { border-bottom: 3px solid #e0418f; padding-bottom: 1px; }
 .lg-circ { border: 1.6px solid var(--red); border-radius: 50%; padding: 0 8px; }
 .lg-star { color: var(--red); }
+/* Word choice, tone and voice (9.RL.2.B), as in the Cyclops model */
+:root { --hl-wc: rgba(255, 168, 92, .58); --purple: #6a2c91; }
+mark.wc { background: var(--hl-wc); }
+.annotated mark.wc { background: none; background-image: linear-gradient(var(--hl-wc), var(--hl-wc)); background-repeat: no-repeat; background-size: 0% 100%; }
+.annotated mark.wc.on { background-size: 100% 100%; }
+.sw.wc { background: var(--hl-wc); }
+.note.wc { color: var(--purple); }
+.note.wc small.lit { color: #4b2266; }
+.write .q p { margin: 0 0 .2em; }
+@media print { .annotated mark.wc { background-size: 100% 100%; } }
 /* SOL strand code at the foot of each margin note */
 .note .sol { display: inline-block; vertical-align: 2px; white-space: nowrap; padding: 0 5px; border: 1px solid currentColor; border-radius: 7px;
   font: 600 11px/1.45 Calibri, Carlito, "Segoe UI", Arial, sans-serif; letter-spacing: .03em; opacity: .85; }
@@ -206,30 +216,30 @@ h3.section span { font-variant: normal; font-size: .85em; white-space: nowrap; }
 <button type="button" class="fs-btn" hidden></button>
 <!-- ───────────── Key ───────────── -->
 <div class="sheet-wrap"><section class="page key">
-  <h1>The Odyssey<br><span class="sub">Annotated model · “The Lotus Eaters” (from Book 9)</span></h1>
-  <p class="byline">Homer, translated by Robert Fitzgerald · textbook page 721 · Grade 9, Unit 2, Lesson 3: Challenge Accepted!</p>
+  <h1>The Odyssey<br><span class="sub">Annotated model · “The Lotus Eaters” (from Book 9) · Unit 2, Lesson 3</span></h1>
+  <p class="byline">Homer, translated by Robert Fitzgerald · textbook page 721 · Challenge Accepted!</p>
   <h2 class="sub">Learning targets</h2>
+  <p><b>9.DSR</b> I can read a challenging text closely, use strategies when my understanding breaks down, and give the line number where my evidence is.</p>
+  <p><b>9.RV.1.B</b> I can use context clues and sentence structure to figure out the literal and figurative meanings of words and phrases.</p>
   <p><b>9.RL.1.A</b> I can explain a theme of the text and how its characters, setting, and plot develop that theme.</p>
-  <p><b>Lesson target</b> I will annotate for character traits and major events, and show how character traits and setting drive the plot.</p>
+  <p><b>9.RL.3.B</b> I can explain how the setting shapes the plot and the characters.</p>
+  <p><b>9.RL.2.B</b> I can explain how word choice, tone, and the narrator’s voice shape the meaning of the text.</p>
+  <p><b>9.W.1.C</b> I can write a short summary and reflection about what I read.</p>
   <p><b>EQ</b> How do the challenges of life affect a person?</p>
   <h2 class="sub">Reading the annotations</h2>
   <div class="legend">
+    <p><b class="sw vo">Vocabulary &amp; figurative language</b> a word to figure out from context <span class="std">9.RV.1.B · blue notes</span></p>
     <p><b class="sw th">Theme</b> a line that raises a topic that develops a theme <span class="std">9.RL.1.A · red notes</span></p>
-    <p><b class="sw el">Character · Setting · Plot</b> a detail that builds the theme <span class="std">9.RL.1.A; setting notes also 9.RL.3.B · red notes</span></p>
-    <p><b class="sw vo">Vocabulary</b> a word to define <span class="std">9.RV.1.A · blue notes</span></p>
+    <p><b class="sw el">Character · Setting · Plot</b> a detail that builds a theme, or a setting that drives the plot <span class="std">9.RL.1.A or 9.RL.3.B · red notes</span></p>
+    <p><b class="sw wc">Word choice · Tone · Voice</b> how Homer’s words shape meaning <span class="std">9.RL.2.B · purple notes</span></p>
     <p><b class="lg-hero">Hero / leader</b> pink underline: Odysseus acts as a hero or leader <span class="std">lesson code</span></p>
     <p><b class="lg-circ">Major event</b> circled in red <span class="std">lesson code</span></p>
     <p><b class="lg-star">★</b> <b>Clarify</b> a star where the note clarifies or explains <span class="std">lesson code</span></p>
   </div>
-  <h2 class="sub">SOL strands on the notes</h2>
-  <div class="legend">
-    <p><b class="sol-k">9.RL.1.A</b> Explain stated or implied themes, analyzing their development over the course of texts, and the relationship of characters, setting, and plot to those themes.</p>
-    <p><b class="sol-k">9.RL.3.B</b> Explain the relationships between and among particular literary elements of a story or play, including how the setting shapes the plot and characters.</p>
-    <p><b class="sol-k">9.RV.1.A</b> Develop and accurately use general academic and content-specific vocabulary through reading, discussing, and writing about grade-level texts and topics.</p>
-  </div>
-  <p><span class="screen-only">Click a page to reveal its highlights one at a time; each highlight brings its margin note. After the last one, a click clears the page (Shift-click goes back one). </span>Blue notes define words. Red notes connect a detail to a theme: the numbered top line names the topic, character, setting, or plot detail, and the line under it explains how that detail builds the theme. Arrows point to the exact words.</p>
-  <p><b>Topic vs. theme.</b> A topic names a subject (<i>temptation</i>). A theme carries a message or lesson about it (<i>giving in to temptation can cost you what matters most</i>). Each theme note names a topic; its number shows which theme that topic develops. The numbered themes are listed at the top of the first passage page.</p>
-  <p><b>The lesson’s student codes.</b> The model also uses the codes students use on their copies: a pink mark where Odysseus acts as a hero or leader, a circle around each major event, and a star where something is clarified or explained. Here the pink is an underline, so the theme, character and vocabulary colours underneath still show.</p>
+  <p><span class="screen-only">Click a page to reveal its highlights one at a time; each highlight brings its margin note. After the last one, a click clears the page (Shift-click goes back one). </span>Blue notes define words and give the context clue. Red notes connect a detail to a theme; the number tells you which theme. Setting notes tagged 9.RL.3.B show the setting driving the plot or shaping a character; those tagged 9.RL.1.A show it building a theme. Purple notes explain an author’s choice. Arrows point to the exact words, and each note ends with its SOL code.</p>
+  <p><b>Topic vs. theme.</b> A topic names a subject (<i>temptation</i>). A theme carries a message about it (<i>giving in to temptation can cost you what matters most</i>). The numbered themes are listed at the top of page 1.</p>
+  <p><b>Citing evidence.</b> Lines are numbered in fives. When you quote or paraphrase, give the line: (l. 19) or (lines 18–19).</p>
+  <p><b>The lesson’s student codes.</b> The model also uses the codes students use on their copies: a pink mark where Odysseus acts as a hero or leader, a circle around each major event, and a star where something is clarified or explained. Here the pink is an underline, so the colours underneath still show.</p>
   <div class="foot r">Annotation key</div>
 </section></div>
 
@@ -255,62 +265,87 @@ h3.section span { font-variant: normal; font-size: .85em; white-space: nowrap; }
   <h3 class="section">The Lotus Eaters <span>(from Book 9)</span></h3>
   <p class="intro">Odysseus is telling King Alcinous the story of his journey home from Troy. After the raid on the Cicones, where 72 of his men died, his ships set sail again for Ithaca.</p>
   <div class="poem">
-    <span class="ln" data-n="1">“<span class="initial">I</span> might have made it <mark class="th" id="a1">safely home</mark>, that</span>
+    <span class="ln" data-n="1">“<mark class="wc" id="w0"><span class="initial">I</span> might have made it</mark> <mark class="th" id="a1">safely home</mark>, that</span>
     <span class="ln">time, but as I came round Malea<sup>1</sup> <mark class="el" id="a2">the current</mark></span>
-    <span class="ln"><mark class="el"><span class="ev" data-for="a2">took me out to sea,</span></mark> and from the north a fresh</span>
+    <span class="ln"><mark class="el" data-step="a2"><span class="ev" data-for="a2">took me out to sea,</span></mark> and from the north a fresh</span>
     <span class="ln"><mark class="vo" id="a3">gale</mark> drove me on, past Cythera.<sup>2</sup> <mark class="el" id="a4" data-star="1">Nine days I</mark></span>
-    <span class="ln" data-n="5"><mark class="el">drifted</mark> on the <mark class="vo" id="a5">teeming</mark> sea before dangerous</span>
+    <span class="ln" data-n="5"><mark class="el" data-step="a4">drifted</mark> on the teeming sea before dangerous</span>
     <span class="ln">high winds. Upon the tenth we came to the</span>
     <span class="ln"><mark class="el" id="a6"><span class="ev" data-for="a6">coastline of the Lotus Eaters,</span> who live upon</mark></span>
-    <span class="ln"><mark class="el">that flower.</mark> <mark class="el" id="a7"><span class="hero" data-for="a7">We landed there to take on water.</span></mark></span>
+    <span class="ln"><mark class="el" data-step="a6">that flower.</mark> <mark class="el" id="a7"><span class="hero" data-for="a7">We landed there to take on water.</span></mark></span>
   </div>
   <div class="footnote"><p>1. <b>Malea</b> a cape at the southern tip of Greece.</p><p>2. <b>Cythera</b> an island off that cape.</p></div>
 
-  <div class="note r red" data-for="a1">2. <b>Topic:</b> the goal of home<small class="why">He is almost home. Watch what pulls the men away from it. <span class="sol">9.RL.1.A</span></small></div>
-  <div class="note l red" data-for="a2">4. <b>Setting:</b> a storm at sea<small class="why">Plot: wind and current push them off course. Nature is the first challenge. <span class="sol">9.RL.3.B · 9.RL.1.A</span></small></div>
-  <div class="note r" data-for="a3"><b>Vocab:</b> gale = a very strong wind <span class="sol">9.RV.1.A</span></div>
-  <div class="note r red" data-for="a4">4. <b>Character:</b> a patient leader<small class="why">Nine days adrift: wise to ride it out, or should he fight for home? <span class="sol">9.RL.1.A · 9.RL.3.B</span></small></div>
-  <div class="note l" data-for="a5"><b>Vocab:</b> teeming = swarming, full of life <span class="sol">9.RV.1.A</span></div>
-  <div class="note l red" data-for="a6">3. <b>Setting:</b> a calm island<small class="why">After the storm it feels safe: the calm before the conflict. <span class="sol">9.RL.3.B · 9.RL.1.A</span></small></div>
-  <div class="note r red" data-for="a7">4. <b>Character:</b> a caring leader<small class="why">He stops for water and a meal so the crew can recover. <span class="sol">9.RL.1.A</span></small></div>
+  <div class="note l wc" data-for="w0"><b>Voice:</b> first person “I”<small class="lit">Odysseus tells his own story, so he is its hero <span class="sol">9.RL.2.B</span></small></div>
+  <div class="note r red" data-for="a1">2. <b>Topic:</b> the goal of home<small class="why">He is almost home. Watch what pulls them away. <span class="sol">9.RL.1.A</span></small></div>
+  <div class="note l red" data-for="a2">4. <b>Setting:</b> a storm at sea<small class="why">The setting drives the plot: wind and current push them off course. <span class="sol">9.RL.3.B</span></small></div>
+  <div class="note r" data-for="a3"><b>Vocab:</b> gale = a very strong wind<small class="lit">clue: “high winds” (l. 6) <span class="sol">9.RV.1.B</span></small></div>
+  <div class="note r red" data-for="a4">4. <b>Character:</b> a patient leader<small class="why">The sea is in control. Ride it out, or fight for home? <span class="sol">9.RL.3.B</span></small></div>
+  <div class="note l red" data-for="a6">3. <b>Setting:</b> a calm island<small class="why">Peaceful after the storm, but danger does not always look dangerous. <span class="sol">9.RL.1.A</span></small></div>
+  <div class="note r red" data-for="a7">4. <b>Character:</b> a caring leader<small class="why">Water and a meal so the crew can recover. <span class="sol">9.RL.1.A</span></small></div>
   <div class="foot r">THE ODYSSEY · THE LOTUS EATERS <b>721</b></div>
 </section></div>
 
-<!-- ───────────── Passage, lines 9–27 ───────────── -->
+<!-- ───────────── Passage, lines 9–17 ───────────── -->
 <div class="sheet-wrap"><section class="page annotated">
   <div class="poem">
-    <span class="ln">All ships’ companies mustered alongside for</span>
+    <span class="ln">All ships’ companies <mark class="vo" id="v1">mustered</mark> alongside for</span>
     <span class="ln" data-n="10">the mid-day meal. <mark class="el" id="a8"><span class="hero" data-for="a8">Then I sent out two</span></mark></span>
-    <span class="ln"><mark class="el"><span class="hero" data-for="a8">picked men and a runner to learn what race of</span></mark></span>
-    <span class="ln"><mark class="el"><span class="hero" data-for="a8">men that land sustained.</span></mark> They fell in, soon</span>
+    <span class="ln"><mark class="el" data-step="a8"><span class="hero" data-for="a8">picked men and a runner to learn what race of</span></mark></span>
+    <span class="ln"><mark class="el" data-step="a8"><span class="hero" data-for="a8">men that land</span></mark> <mark class="vo" id="v2">sustained.</mark> They fell in, soon</span>
     <span class="ln">enough, with Lotus Eaters, <mark class="th" id="b1" data-star="1">who showed no</mark></span>
-    <span class="ln"><mark class="th">will to do us harm,</mark> <mark class="th" id="b2">only offering the sweet</mark></span>
-    <span class="ln" data-n="15"><mark class="th">Lotus to our friends</mark>— <mark class="el" id="b3">but those who ate</mark></span>
-    <span class="ln"><mark class="el">this honeyed plant, the Lotus, never cared to</mark></span>
-    <span class="ln"><mark class="el"><span class="ev" data-for="b3">report, not to return:</span></mark></span>
-    <span class="ln"><mark class="th" id="b4">they longed to stay forever,</mark> browsing on that</span>
-    <span class="ln">native bloom, <mark class="th">forgetful of their homeland.</mark> <mark class="el" id="b5"><span class="hero" data-for="b5">I</span></mark></span>
-    <span class="ln" data-n="20"><mark class="el"><span class="hero" data-for="b5">drove them, all three wailing, to the ships,</span></mark></span>
-    <span class="ln"><mark class="el"><span class="hero" data-for="b5"><span class="ev" data-for="b5">tied them down under their rowing benches,</span></span></mark></span>
+    <span class="ln"><mark class="th" data-step="b1">will to do us harm,</mark> <mark class="th" id="b2">only offering the</mark> <mark class="wc" id="w1">sweet</mark></span>
+    <span class="ln" data-n="15"><mark class="th" data-step="b2">Lotus to our friends</mark>— <mark class="el" id="b3">but those who ate</mark></span>
+    <span class="ln"><mark class="wc" data-step="w1">this honeyed plant,</mark> <mark class="el" data-step="b3">the Lotus, never cared to</mark></span>
+    <span class="ln"><mark class="el" data-step="b3"><span class="ev" data-for="b3">report, not to return:</span></mark></span>
+  </div>
+
+  <div class="note r" data-for="v1"><b>Vocab:</b> mustered = gathered<small class="lit">clue: “all ships’ companies … alongside” <span class="sol">9.RV.1.B</span></small></div>
+  <div class="note l red" data-for="a8">4. <b>Character:</b> a careful leader<small class="why">He sends scouts before risking everyone. 72 men died at the Cicones. <span class="sol">9.RL.1.A</span></small></div>
+  <div class="note r" data-for="v2"><b>Vocab:</b> sustained = fed, kept alive<small class="lit">clue: they “live upon that flower” (lines 7–8) <span class="sol">9.RV.1.B</span></small></div>
+  <div class="note r red" data-for="b1">3. <b>Topic:</b> hidden danger<small class="why">No weapons, no attack. The threat is temptation, which is harder to see. <span class="sol">9.RL.1.A</span></small></div>
+  <div class="note l red" data-for="b2">1. <b>Topic:</b> temptation<small class="why">Today: like drugs. Offered in a friendly way, they feel good at first, then you stop caring about your goals. <span class="sol">9.RL.1.A</span></small></div>
+  <div class="note r wc" data-for="w1"><b>Word choice:</b> “sweet,” “honeyed”<small class="lit">pleasant words make the trap feel safe <span class="sol">9.RL.2.B</span></small></div>
+  <div class="note r red" data-for="b3">1. <b>Plot:</b> the scouts eat the Lotus<small class="why">The island’s plant changes the men: they never report back. <span class="sol">9.RL.3.B</span></small></div>
+  <div class="foot l"><b>721</b> THE LOTUS EATERS, CONTINUED</div>
+</section></div>
+
+<!-- ───────────── Passage, lines 18–27 ───────────── -->
+<div class="sheet-wrap"><section class="page annotated">
+  <div class="poem">
+    <span class="ln"><mark class="th" id="b4">they longed to stay forever,</mark> <mark class="vo" id="v3">browsing</mark> on that</span>
+    <span class="ln">native bloom, <mark class="th" data-step="b4">forgetful of their homeland.</mark> <mark class="el" id="b5"><span class="hero" data-for="b5">I</span></mark></span>
+    <span class="ln" data-n="20"><mark class="el" data-step="b5"><span class="hero" data-for="b5">drove them,</span></mark> <mark class="wc" id="w2">all three wailing,</mark> <mark class="el" data-step="b5"><span class="hero" data-for="b5">to the ships,</span></mark></span>
+    <span class="ln"><mark class="el" data-step="b5"><span class="hero" data-for="b5"><span class="ev" data-for="b5">tied them down under their rowing benches,</span></span></mark></span>
     <span class="ln"><mark class="el" id="b6"><span class="hero" data-for="b6">and called the rest: ‘All hands aboard; come,</span></mark></span>
-    <span class="ln"><mark class="el"><span class="hero" data-for="b6">clear the beach</span></mark> <mark class="th" id="b7" data-star="1">and no one taste the Lotus, or</mark></span>
-    <span class="ln"><mark class="th">you lose your hope of home.’</mark> Filing in to their</span>
+    <span class="ln"><mark class="el" data-step="b6"><span class="hero" data-for="b6">clear the beach</span></mark> <mark class="th" id="b7" data-star="1">and no one taste the Lotus, or</mark></span>
+    <span class="ln"><mark class="th" data-step="b7">you lose your hope of home.’</mark> Filing in to their</span>
     <span class="ln" data-n="25">places by the <mark class="vo" id="b8">rowlocks</mark> my oarsmen</span>
     <span class="ln">dipped their long oars in the surf, and we</span>
     <span class="ln"><mark class="el" id="b9"><span class="ev" data-for="b9">moved out again on our sea faring.</span></mark>”</span>
   </div>
 
-  <div class="note l red" data-for="a8">4. <b>Character:</b> a careful leader<small class="why">He sends scouts before risking everyone. 72 men died at the Cicones. <span class="sol">9.RL.1.A</span></small></div>
-  <div class="note r red" data-for="b1">3. <b>Topic:</b> hidden danger<small class="why">No weapons, no attack. The threat is temptation, which is harder to see. <span class="sol">9.RL.1.A</span></small></div>
-  <div class="note l red" data-for="b2">1. <b>Topic:</b> temptation<small class="why">Today: like drugs. Offered in a friendly way, they feel “sweet” at first, then you stop caring about your goals. <span class="sol">9.RL.1.A</span></small></div>
-  <div class="note r red" data-for="b3">1. <b>Plot:</b> the scouts eat the Lotus<small class="why">They never report back. Giving in costs them their mission. <span class="sol">9.RL.1.A · 9.RL.3.B</span></small></div>
   <div class="note l red" data-for="b4">2. <b>Topic:</b> forgetting home<small class="why">Pleasure makes them want to stay forever. Their goal is gone. <span class="sol">9.RL.1.A</span></small></div>
-  <div class="note r red" data-for="b5">4. <b>Character:</b> a decisive leader<small class="why">He drags the wailing men back and ties them down: unpopular, but it saves them. <span class="sol">9.RL.1.A</span></small></div>
+  <div class="note r" data-for="v3"><b>Vocab:</b> browsing = grazing, like cattle<small class="lit">clue: “on that native bloom” <span class="sol">9.RV.1.B</span></small></div>
+  <div class="note r red" data-for="b5">4. <b>Character:</b> a decisive leader<small class="why">He drags the men back and ties them down: unpopular, but it saves them. <span class="sol">9.RL.1.A</span></small></div>
+  <div class="note l wc" data-for="w2"><b>Word choice:</b> “wailing”<small class="lit">grown men crying like children: the Lotus has changed them <span class="sol">9.RL.2.B</span></small></div>
   <div class="note l red" data-for="b6">4. <b>Character:</b> he protects the crew<small class="why">Everyone off the beach before anyone else is tempted. <span class="sol">9.RL.1.A</span></small></div>
   <div class="note r red" data-for="b7">1. <b>Topic:</b> the cost of temptation<small class="why">He says the theme out loud: give in and you lose your hope of home. <span class="sol">9.RL.1.A</span></small></div>
-  <div class="note r" data-for="b8"><b>Vocab:</b> rowlocks = holders for the oars <span class="sol">9.RV.1.A</span></div>
+  <div class="note r" data-for="b8"><b>Vocab:</b> rowlocks = oar holders<small class="lit">clue: “oarsmen dipped their long oars” <span class="sol">9.RV.1.B</span></small></div>
   <div class="note l red" data-for="b9">4. <b>Plot:</b> back on course<small class="why">The leader gets them moving again. Challenge passed, for now. <span class="sol">9.RL.1.A</span></small></div>
-  <div class="foot l"><b>721</b> THE LOTUS EATERS, CONTINUED</div>
+  <div class="foot r">THE ODYSSEY · THE LOTUS EATERS <b>721</b></div>
+</section></div>
+
+<!-- ───────────── Write About It ───────────── -->
+<div class="sheet-wrap"><section class="page key write">
+  <h1>Write About It<br><span class="sub">Summary and reflection · 9.W.1.C</span></h1>
+  <div class="q"><p><b>1. Summarize.</b> In three to four sentences, summarize what happens on the island of the Lotus Eaters (lines 1–27). Include who, where, the problem, and how Odysseus solves it.</p></div>
+  <div class="lines"><div></div><div></div><div></div><div></div></div>
+  <div class="q"><p><b>2. Theme.</b> Choose one numbered theme. Explain how one character’s choice or the setting develops it, and cite the line: (l. __).</p></div>
+  <div class="lines"><div></div><div></div><div></div><div></div></div>
+  <div class="q"><p><b>3. Exit ticket.</b> How did the setting of the Lotus Eaters drive the plot? Use textual evidence. Then connect it to today: what “Lotus” could pull someone away from their goals?</p></div>
+  <div class="lines"><div></div><div></div><div></div><div></div><div></div></div>
+  <div class="foot r">THE ODYSSEY</div>
 </section></div>
 
 <!-- ───────────── Teacher notes ───────────── -->
@@ -359,10 +394,15 @@ h3.section span { font-variant: normal; font-size: .85em; white-space: nowrap; }
     });
 
     // One step per highlight in reading order; a highlight without a note of its own joins the one before it.
-    var steps = [];
+    var steps = [], byId = {};
     page.querySelectorAll("mark").forEach(function (m) {
-      if (m.id || !steps.length) steps.push({ marks: [], notes: [] });
-      var st = steps[steps.length - 1];
+      // data-step="id": a later piece of an earlier highlight, when another highlight comes in between
+      var st = m.getAttribute("data-step") && byId[m.getAttribute("data-step")];
+      if (!st) {
+        if (m.id || !steps.length) steps.push({ marks: [], notes: [] });
+        st = steps[steps.length - 1];
+      }
+      if (m.id) byId[m.id] = st;
       st.marks.push(m);
       if (m.id) [].push.apply(st.notes, [].slice.call(page.querySelectorAll('.note[data-for="' + m.id + '"]')));
     });
