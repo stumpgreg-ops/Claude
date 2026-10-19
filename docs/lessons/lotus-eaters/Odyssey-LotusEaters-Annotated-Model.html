@@ -181,6 +181,10 @@ h3.section span { font-variant: normal; font-size: .85em; white-space: nowrap; }
 .lg-hero { border-bottom: 3px solid #e0418f; padding-bottom: 1px; }
 .lg-circ { border: 1.6px solid var(--red); border-radius: 50%; padding: 0 8px; }
 .lg-star { color: var(--red); }
+/* SOL strand code at the foot of each margin note */
+.note .sol { display: inline-block; vertical-align: 2px; white-space: nowrap; padding: 0 5px; border: 1px solid currentColor; border-radius: 7px;
+  font: 600 11px/1.45 Calibri, Carlito, "Segoe UI", Arial, sans-serif; letter-spacing: .03em; opacity: .85; }
+.sol-k { font: 600 .8em/1.4 Calibri, Carlito, "Segoe UI", Arial, sans-serif; border: 1px solid #666; border-radius: 7px; padding: 0 5px; margin-right: 4px; }
 .tn h2.sub { margin-top: 1em; }
 
 @page { size: letter; margin: 0; }
@@ -211,11 +215,17 @@ h3.section span { font-variant: normal; font-size: .85em; white-space: nowrap; }
   <h2 class="sub">Reading the annotations</h2>
   <div class="legend">
     <p><b class="sw th">Theme</b> a line that raises a topic that develops a theme <span class="std">9.RL.1.A · red notes</span></p>
-    <p><b class="sw el">Character · Setting · Plot</b> a detail that builds the theme <span class="std">9.RL.1.A · red notes</span></p>
+    <p><b class="sw el">Character · Setting · Plot</b> a detail that builds the theme <span class="std">9.RL.1.A; setting notes also 9.RL.3.B · red notes</span></p>
     <p><b class="sw vo">Vocabulary</b> a word to define <span class="std">9.RV.1.A · blue notes</span></p>
     <p><b class="lg-hero">Hero / leader</b> pink underline: Odysseus acts as a hero or leader <span class="std">lesson code</span></p>
     <p><b class="lg-circ">Major event</b> circled in red <span class="std">lesson code</span></p>
     <p><b class="lg-star">★</b> <b>Clarify</b> a star where the note clarifies or explains <span class="std">lesson code</span></p>
+  </div>
+  <h2 class="sub">SOL strands on the notes</h2>
+  <div class="legend">
+    <p><b class="sol-k">9.RL.1.A</b> Explain stated or implied themes, analyzing their development over the course of texts, and the relationship of characters, setting, and plot to those themes.</p>
+    <p><b class="sol-k">9.RL.3.B</b> Explain the relationships between and among particular literary elements of a story or play, including how the setting shapes the plot and characters.</p>
+    <p><b class="sol-k">9.RV.1.A</b> Develop and accurately use general academic and content-specific vocabulary through reading, discussing, and writing about grade-level texts and topics.</p>
   </div>
   <p><span class="screen-only">Click a page to reveal its highlights one at a time; each highlight brings its margin note. After the last one, a click clears the page (Shift-click goes back one). </span>Blue notes define words. Red notes connect a detail to a theme: the numbered top line names the topic, character, setting, or plot detail, and the line under it explains how that detail builds the theme. Arrows point to the exact words.</p>
   <p><b>Topic vs. theme.</b> A topic names a subject (<i>temptation</i>). A theme carries a message or lesson about it (<i>giving in to temptation can cost you what matters most</i>). Each theme note names a topic; its number shows which theme that topic develops. The numbered themes are listed at the top of the first passage page.</p>
@@ -256,13 +266,13 @@ h3.section span { font-variant: normal; font-size: .85em; white-space: nowrap; }
   </div>
   <div class="footnote"><p>1. <b>Malea</b> a cape at the southern tip of Greece.</p><p>2. <b>Cythera</b> an island off that cape.</p></div>
 
-  <div class="note r red" data-for="a1">2. <b>Topic:</b> the goal of home<small class="why">He is almost home. Watch what pulls the men away from it.</small></div>
-  <div class="note l red" data-for="a2">4. <b>Setting:</b> a storm at sea<small class="why">Plot: wind and current push them off course. Nature is the first challenge.</small></div>
-  <div class="note r" data-for="a3"><b>Vocab:</b> gale = a very strong wind</div>
-  <div class="note r red" data-for="a4">4. <b>Character:</b> a patient leader<small class="why">Nine days adrift: wise to ride it out, or should he fight for home?</small></div>
-  <div class="note l" data-for="a5"><b>Vocab:</b> teeming = swarming, full of life</div>
-  <div class="note l red" data-for="a6">3. <b>Setting:</b> a calm island<small class="why">After the storm it feels safe: the calm before the conflict.</small></div>
-  <div class="note r red" data-for="a7">4. <b>Character:</b> a caring leader<small class="why">He stops for water and a meal so the crew can recover.</small></div>
+  <div class="note r red" data-for="a1">2. <b>Topic:</b> the goal of home<small class="why">He is almost home. Watch what pulls the men away from it. <span class="sol">9.RL.1.A</span></small></div>
+  <div class="note l red" data-for="a2">4. <b>Setting:</b> a storm at sea<small class="why">Plot: wind and current push them off course. Nature is the first challenge. <span class="sol">9.RL.3.B · 9.RL.1.A</span></small></div>
+  <div class="note r" data-for="a3"><b>Vocab:</b> gale = a very strong wind <span class="sol">9.RV.1.A</span></div>
+  <div class="note r red" data-for="a4">4. <b>Character:</b> a patient leader<small class="why">Nine days adrift: wise to ride it out, or should he fight for home? <span class="sol">9.RL.1.A · 9.RL.3.B</span></small></div>
+  <div class="note l" data-for="a5"><b>Vocab:</b> teeming = swarming, full of life <span class="sol">9.RV.1.A</span></div>
+  <div class="note l red" data-for="a6">3. <b>Setting:</b> a calm island<small class="why">After the storm it feels safe: the calm before the conflict. <span class="sol">9.RL.3.B · 9.RL.1.A</span></small></div>
+  <div class="note r red" data-for="a7">4. <b>Character:</b> a caring leader<small class="why">He stops for water and a meal so the crew can recover. <span class="sol">9.RL.1.A</span></small></div>
   <div class="foot r">THE ODYSSEY · THE LOTUS EATERS <b>721</b></div>
 </section></div>
 
@@ -290,16 +300,16 @@ h3.section span { font-variant: normal; font-size: .85em; white-space: nowrap; }
     <span class="ln"><mark class="el" id="b9"><span class="ev" data-for="b9">moved out again on our sea faring.</span></mark>”</span>
   </div>
 
-  <div class="note l red" data-for="a8">4. <b>Character:</b> a careful leader<small class="why">He sends scouts before risking everyone. 72 men died at the Cicones.</small></div>
-  <div class="note r red" data-for="b1">3. <b>Topic:</b> hidden danger<small class="why">No weapons, no attack. The threat is temptation, which is harder to see.</small></div>
-  <div class="note l red" data-for="b2">1. <b>Topic:</b> temptation<small class="why">Today: like drugs. Offered in a friendly way, they feel “sweet” at first, then you stop caring about your goals.</small></div>
-  <div class="note r red" data-for="b3">1. <b>Plot:</b> the scouts eat the Lotus<small class="why">They never report back. Giving in costs them their mission.</small></div>
-  <div class="note l red" data-for="b4">2. <b>Topic:</b> forgetting home<small class="why">Pleasure makes them want to stay forever. Their goal is gone.</small></div>
-  <div class="note r red" data-for="b5">4. <b>Character:</b> a decisive leader<small class="why">He drags the wailing men back and ties them down: unpopular, but it saves them.</small></div>
-  <div class="note l red" data-for="b6">4. <b>Character:</b> he protects the crew<small class="why">Everyone off the beach before anyone else is tempted.</small></div>
-  <div class="note r red" data-for="b7">1. <b>Topic:</b> the cost of temptation<small class="why">He says the theme out loud: give in and you lose your hope of home.</small></div>
-  <div class="note r" data-for="b8"><b>Vocab:</b> rowlocks = holders for the oars</div>
-  <div class="note l red" data-for="b9">4. <b>Plot:</b> back on course<small class="why">The leader gets them moving again. Challenge passed, for now.</small></div>
+  <div class="note l red" data-for="a8">4. <b>Character:</b> a careful leader<small class="why">He sends scouts before risking everyone. 72 men died at the Cicones. <span class="sol">9.RL.1.A</span></small></div>
+  <div class="note r red" data-for="b1">3. <b>Topic:</b> hidden danger<small class="why">No weapons, no attack. The threat is temptation, which is harder to see. <span class="sol">9.RL.1.A</span></small></div>
+  <div class="note l red" data-for="b2">1. <b>Topic:</b> temptation<small class="why">Today: like drugs. Offered in a friendly way, they feel “sweet” at first, then you stop caring about your goals. <span class="sol">9.RL.1.A</span></small></div>
+  <div class="note r red" data-for="b3">1. <b>Plot:</b> the scouts eat the Lotus<small class="why">They never report back. Giving in costs them their mission. <span class="sol">9.RL.1.A · 9.RL.3.B</span></small></div>
+  <div class="note l red" data-for="b4">2. <b>Topic:</b> forgetting home<small class="why">Pleasure makes them want to stay forever. Their goal is gone. <span class="sol">9.RL.1.A</span></small></div>
+  <div class="note r red" data-for="b5">4. <b>Character:</b> a decisive leader<small class="why">He drags the wailing men back and ties them down: unpopular, but it saves them. <span class="sol">9.RL.1.A</span></small></div>
+  <div class="note l red" data-for="b6">4. <b>Character:</b> he protects the crew<small class="why">Everyone off the beach before anyone else is tempted. <span class="sol">9.RL.1.A</span></small></div>
+  <div class="note r red" data-for="b7">1. <b>Topic:</b> the cost of temptation<small class="why">He says the theme out loud: give in and you lose your hope of home. <span class="sol">9.RL.1.A</span></small></div>
+  <div class="note r" data-for="b8"><b>Vocab:</b> rowlocks = holders for the oars <span class="sol">9.RV.1.A</span></div>
+  <div class="note l red" data-for="b9">4. <b>Plot:</b> back on course<small class="why">The leader gets them moving again. Challenge passed, for now. <span class="sol">9.RL.1.A</span></small></div>
   <div class="foot l"><b>721</b> THE LOTUS EATERS, CONTINUED</div>
 </section></div>
 
@@ -316,11 +326,11 @@ h3.section span { font-variant: normal; font-size: .85em; white-space: nowrap; }
   <p><b>Slide 21, We Do (lines 6–10).</b> Reaching the island is a major event; stopping for water and food lets the crew recover.</p>
   <p><b>Slide 21, We Do (lines 10–17).</b> The scouts eat the Lotus and never report back. Some will say this shows the men didn’t respect him.</p>
   <p><b>Slide 22, partners (lines 18–27, 7 min).</b> He ties the crying men under the benches, forbids the Lotus, and gets the ships moving; still, some men no longer wanted to go home.</p>
-  <p><b>Slide 23, exit discussion.</b> The storm keeps him from home and brings him to the island; the island’s Lotus makes men stop wanting to leave, which forces Odysseus to act.</p>
+  <p><b>Slide 23, exit discussion.</b> The storm keeps him from home and brings him to the island; the island’s Lotus makes men stop wanting to leave, which forces Odysseus to act. <span class="std">9.RL.3.B</span></p>
   <h2 class="sub">Model response</h2>
   <p>In “The Lotus Eaters,” Homer develops the theme that giving in to temptation can cost you what matters most. The setting drives the plot: a storm pushes the ships off course to an island where the people offer the <i>“sweet”</i> Lotus. Because the Lotus Eaters show <i>“no will to do us harm,”</i> the danger is easy to miss. The scouts who eat it become <i>“forgetful of their homeland,”</i> showing how pleasure can erase a goal. Odysseus’s response completes the theme: he drags the men <i>“all three wailing”</i> to the ships and warns that anyone who tastes the Lotus will <i>“lose your hope of home.”</i></p>
   <h2 class="sub">Watch for</h2>
-  <p><b>Topic, not theme:</b> push “temptation” to a full statement. <b>“The Lotus Eaters are villains”:</b> they are not hostile; the danger is inside the men. <b>Modern connection (line 14):</b> the Lotus is offered kindly and tastes “sweet,” like drugs passed around by friends; ask what the men lose (their goal, their way home) and what students could lose. <b>Who is telling this?</b> Odysseus narrates to King Alcinous, so he may make himself look like a better leader than he was.</p>
+  <p><b>Topic, not theme:</b> push “temptation” to a full statement. <b>“The Lotus Eaters are villains”:</b> they are not hostile; the danger is inside the men. <b>Modern connection (line 14):</b> the Lotus is offered kindly and tastes “sweet,” like drugs passed around by friends; ask what the men lose (their goal, their way home) and what students could lose. <b>Who is telling this?</b> Odysseus narrates to King Alcinous, so he may make himself look like a better leader than he was. <span class="std">9.RL.2.C</span></p>
   <div class="foot r">Teacher notes</div>
 </section></div>
 

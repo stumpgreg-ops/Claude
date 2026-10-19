@@ -9,7 +9,7 @@ Grade 9 · Unit 2 · Lesson 3 (Challenge Accepted!) · *The Odyssey*, textbook p
 
 **Sheets.** 1: annotation key (learning targets, EQ, colour legend, topic vs. theme, how the lesson's pink/circle/star codes map onto the notes). 2–3: the passage, lines 1–8 and 9–27, with the four numbered themes at the top. 4: teacher notes (how the themes develop, the slide-note discussion key, a model response, things to watch for).
 
-**Colours.** Yellow = theme (red notes), green = character, setting or plot detail that builds a theme (red notes), purple = vocabulary (blue notes). Each red note's number is the theme it develops. On top of the colours are the lesson's student codes: a pink underline where Odysseus acts as a hero or leader, a red circle around each major event, and a star in the margin beside a line the note clarifies.
+**Colours.** Yellow = theme (red notes), green = character, setting or plot detail that builds a theme (red notes), purple = vocabulary (blue notes). Each red note's number is the theme it develops. On top of the colours are the lesson's student codes: a pink underline where Odysseus acts as a hero or leader, a red circle around each major event, and a star in the margin beside a line the note clarifies. Each note ends with its Virginia 2024 SOL code: 9.RL.1.A (theme), 9.RL.3.B (setting shapes plot and characters), 9.RV.1.A (vocabulary); the key sheet gives their full text.
 
 **On screen.** Click a passage sheet to reveal its highlights one at a time; each brings its handwritten note and arrow. After the last one a click clears the sheet; Shift-click, Backspace or ← goes back one. Printing shows everything.
 
