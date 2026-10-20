@@ -61,10 +61,21 @@ var LIT = require(path.join(repo, "js", "lit.js"));
       o.genres[g.id] = all.claims.length;
       all.claims.forEach(function (c) { if (c.genre !== g.id) o.stray++; });
     });
-    ["G9", "G10", "G11", "NJ5", "ODY"].forEach(function (f) { heistBuildPack(f, "ALL").claims.forEach(function (c) { if (c.family === "LIT") o.leak++; }); });
     o.lit = heistBuildPack("LIT", "ALL").claims.length;
     return o;
   }).catch(function (e) { return { err: String(e) }; });
+  /* the other games' pools never hold a Lit and Film question (checked outside the page: the LIT build prunes the other
+     games' packs at start-up, so there a Virginia pool falls back to whatever is left) */
+  pools.leak = (function () {
+    var vm = require("vm"), sb = { console: console }; sb.window = sb; sb.global = sb;
+    fs.readdirSync(path.join(repo, "js")).filter(function (f) { return /^content\d*\.js$/.test(f); })
+      .sort(function (a, b) { return (parseInt(a.slice(7), 10) || 0) - (parseInt(b.slice(7), 10) || 0); })
+      .forEach(function (f) { vm.runInNewContext(fs.readFileSync(path.join(repo, "js", f), "utf8"), sb, { filename: f }); });
+    vm.runInNewContext(fs.readFileSync(path.join(repo, "js", "lit.js"), "utf8"), sb);
+    var n = 0;
+    ["G9", "G10", "G11", "NJ5", "ODY"].forEach(function (f) { sb.heistBuildPack(f, "ALL").claims.forEach(function (c) { if (c.family === "LIT") n++; }); });
+    return n;
+  })();
   var thin = Object.keys(pools.eps || {}).filter(function (e) { return !(pools.eps[e] >= 20); });
   check(pools.lit > 0 && !thin.length && pools.stray === 0 && pools.leak === 0,
     "every movie and basics episode has at least 20 questions of its own, a genre's All serves only its genre, and no other game sees them: " + JSON.stringify(pools));
