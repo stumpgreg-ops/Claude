@@ -2,7 +2,7 @@
    code) and by the teacher page (tools/build-teacher.js inlines this file and reads codes with it), so the two can't
    drift. It runs in a browser (window.SolProgressCode) and in Node (module.exports).
 
-   A code looks like  SOL1-VA-0F4K-1A2B-...  : "SOL" + the format number, the game (VA, NJ or ODY), then the payload
+   A code looks like  SOL1-VA-0F4K-1A2B-...  : "SOL" + the format number, the game (VA, NJ, ODY or LIT), then the payload
    in Crockford base32 (0-9 A-Z without I L O U; typed I and L read as 1, O as 0, any case), in blocks of 4.
    The payload is a string of bits. Each number is written in groups of 5 bits (4 bits of the number, lowest first,
    and a "more follows" bit), so small numbers take one character. In order:
@@ -164,7 +164,16 @@
       skills: [["RL", "Literature"], ["RI", "Informational"], ["RV", "Vocabulary"], ["DSR", "Paired texts"]] },
     ODY: { id: 3, tag: "ODY", name: "The Odyssey: Labyrinth of the Wine-Dark Sea", short: "The Odyssey", assignment: "Odyssey game progress",
       skillWord: "Episode", secret: "ody.9Kd4-dolphin-e17a-saffron",
-      skills: [["LOTUS", "Lotus-Eaters"], ["CYCLOPS", "Cyclops"], ["CIRCE", "Circe"], ["HELIOS", "Cattle of the Sun"], ["CALYPSO", "Calypso"], ["VOYAGE", "Whole voyage"]] }
+      skills: [["LOTUS", "Lotus-Eaters"], ["CYCLOPS", "Cyclops"], ["CIRCE", "Circe"], ["HELIOS", "Cattle of the Sun"], ["CALYPSO", "Calypso"], ["VOYAGE", "Whole voyage"]] },
+    /* v5.21: the Lit and Film game: a "skill" is a movie, or a genre's basics (js/lit.js); APPEND ONLY */
+    LIT: { id: 4, tag: "LIT", name: "Lit and Film: Labyrinth of the Silver Screen", short: "Lit and Film", assignment: "Lit and Film game progress",
+      skillWord: "Movie", secret: "lit.5Wp2-projector-c84e-silver",
+      skills: [["TRAIN", "Arrival of a Train"], ["MOON", "A Trip to the Moon"], ["CIRCUS", "The Circus"], ["JAZZ", "The Jazz Singer"], ["HISTORY", "Film history"],
+        ["LANGUAGE", "Film language"], ["PLAN9", "Plan 9 from Outer Space"], ["IRONMAN", "Iron Man"], ["BADGOOD", "Bad vs. good film"],
+        ["DETOUR", "Detour"], ["SCARLET", "Scarlet Street"], ["INDEMNITY", "Double Indemnity"], ["CASABLANCA", "Casablanca"], ["NOIR", "Film noir"],
+        ["HIGHNOON", "High Noon"], ["TRUEGRIT", "True Grit"], ["YUMA", "3:10 to Yuma"], ["WESTERN", "Westerns"],
+        ["NEWHOPE", "A New Hope"], ["EMPIRE", "The Empire Strikes Back"], ["JEDI", "Return of the Jedi"], ["SCIFI", "Science fiction"],
+        ["RING", "The Ring"], ["HORROR", "Horror and suspense"]] }
   };
   function buildById(id) { for (var k in BUILDS) if (BUILDS[k].id === id) return k; return null; }
 
@@ -393,7 +402,7 @@
      also has .format 2 and .save (see readSave) */
   function decode(text) {
     var t = String(text || "").toUpperCase().replace(/[\s-]+/g, "");
-    var m = /^SOL(\d+)(VA|NJ|ODY)([0-9A-Z]*)$/.exec(t);
+    var m = /^SOL(\d+)(VA|NJ|ODY|LIT)([0-9A-Z]*)$/.exec(t);
     if (!m) return { ok: false, build: null, why: "This is not a progress code." };
     var build = m[2], B = BUILDS[build];
     var fmt = +m[1];
@@ -447,7 +456,7 @@
   }
   /* the canonical way to write a code (blocks of 4) */
   function format(t) {
-    var m = /^SOL(\d+)(VA|NJ|ODY)([0-9A-Z]*)$/.exec(String(t).toUpperCase().replace(/[\s-]+/g, ""));
+    var m = /^SOL(\d+)(VA|NJ|ODY|LIT)([0-9A-Z]*)$/.exec(String(t).toUpperCase().replace(/[\s-]+/g, ""));
     return m ? "SOL" + m[1] + "-" + m[2] + "-" + (m[3].match(/.{1,4}/g) || []).join("-") : String(t);
   }
 
@@ -455,7 +464,7 @@
      word typed after it (on the same line) breaks it, the last space-separated pieces are dropped one at a time until
      it checks out. `before` is the text on the line before the code (a "Name: CODE" line gives the name). */
   function findCodes(text) {
-    var out = [], re = /SOL[ \t]*(\d+)[ \t]*-?[ \t]*(VA|NJ|ODY)([0-9A-Za-z \t-]*)/gi, m;
+    var out = [], re = /SOL[ \t]*(\d+)[ \t]*-?[ \t]*(VA|NJ|ODY|LIT)([0-9A-Za-z \t-]*)/gi, m;
     text = String(text || "");
     while ((m = re.exec(text))) {
       var lineStart = text.lastIndexOf("\n", m.index) + 1;

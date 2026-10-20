@@ -29,8 +29,12 @@ var CONTENT = {
        "content18.js", "content19.js", "content20.js", "content21.js", "content22.js", "content23.js"],
   NJ: ["content12.js", "content13.js", "content14.js", "content15.js", "content16.js", "content17.js", "content24.js", "content25.js"],
   /* v5.9: the Odyssey game (English 9, Unit 2) — one file per episode plus the cross-episode paired texts */
-  ODY: ["content26.js", "content27.js", "content28.js", "content29.js", "content30.js", "content31.js"]
+  ODY: ["content26.js", "content27.js", "content28.js", "content29.js", "content30.js", "content31.js"],
+  /* v5.21: the Lit and Film game (grades 11-12 elective) — one file per genre, in js/lit.js's order */
+  LIT: ["content115.js"]
 };
+/* v5.21: js/lit.js and the Lit and Film games (one js/mode-<id>.js per movie) go only into the Lit and Film build */
+var LIT_JS = ["lit.js"].concat(require("../js/lit.js").GENRES.reduce(function (a, g) { return a.concat(g.movies.map(function (m) { return "mode-" + m.mode + ".js"; })); }, []));
 /* v5.15: the question expansion (tools/expansion/PLAN.md). A new file joins the Virginia game once it is checked and
    listed in tools/expansion/accepted.json; until then it is left out of every build (and of index.html). */
 var EXP_DIR = path.join(root, "tools", "expansion");
@@ -45,7 +49,9 @@ var STATES = {
   /* its own saves (afterHours.ody.*), so it never shares a level, town or used-question list
      with the Virginia game when both are opened from the same site */
   ODY: { name: "The Odyssey", families: ["ODY"], def: "ODY", zip: "SOLLabyrinth-Odyssey", savePrefix: "afterHours.ody.",
-         title: "The Odyssey: Labyrinth of the Wine-Dark Sea", logo: "assets/logo/odyssey-labyrinth-512.png", theme: "./ody-theme" }
+         title: "The Odyssey: Labyrinth of the Wine-Dark Sea", logo: "assets/logo/odyssey-labyrinth-512.png", theme: "./ody-theme" },
+  /* v5.21: its own saves too (afterHours.lit.*) */
+  LIT: { name: "Lit and Film", families: ["LIT"], def: "LIT", zip: "SOLLabyrinth-LitFilm", savePrefix: "afterHours.lit.", title: "Lit and Film: Labyrinth of the Silver Screen" }
 };
 /* every other state's content files are left out of a build */
 function dropFor(st) {
@@ -56,7 +62,7 @@ function dropFor(st) {
 
 /* every content file must be claimed by exactly one list, so a new file is never silently dropped */
 var allContent = fs.readdirSync(path.join(root, "js")).filter(function (f) { return /^content\d*\.js$/.test(f); });
-var claimed = CONTENT.shared.concat(CONTENT.VA, CONTENT.NJ, CONTENT.ODY);
+var claimed = CONTENT.shared.concat(CONTENT.VA, CONTENT.NJ, CONTENT.ODY, CONTENT.LIT);
 allContent.forEach(function (f) { if (claimed.indexOf(f) === -1 && PENDING.indexOf(f) === -1) throw new Error("tools/build-games.js: js/" + f + " is not assigned to a state"); });
 claimed.forEach(function (f) { if (allContent.indexOf(f) === -1) throw new Error("tools/build-games.js: js/" + f + " is listed but missing"); });
 
@@ -108,6 +114,18 @@ function rewriteIndex(html, st) {
     /* v5.18: the Odyssey's word lists for the accommodations (definitions, the word-to-word dictionary) */
     must(/(\n(\s*)<script src="js\/accommodations\.js\?v=[0-9.]+"><\/script>)/, '\n$2<script src="js/acc-ody.js?v=' + version + '"></script>$1', "accommodations.js script tag");
   }
+  if (st === "LIT") {
+    must(/Tap Grade 9, 10, or 11 — then choose a skill \(or All\)/, "Tap Lit and Film — then choose a genre and a movie", "how-to grade line");
+    must(/Tap a grade to pick your skill focus\./, "Tap Lit and Film to pick a genre and a movie.", "title tag line");
+    must(/(\n(\s*)<script src="js\/game\.js\?v=[0-9.]+"><\/script>)/, '$1\n$2<script>document.title = ' + JSON.stringify(def.title) + ';</script>', "game.js script tag");
+  } else {
+    /* every other build leaves out js/lit.js and the Lit and Film games */
+    LIT_JS.forEach(function (f) {
+      var re = new RegExp('\\s*<script src="js/' + f.replace(/\./g, "\\.") + '\\?v=[0-9.]+"><\\/script>');
+      if (!re.test(out)) throw new Error("tools/build-games.js: index.html does not load js/" + f);
+      out = out.replace(re, "");
+    });
+  }
   /* v5.19: Virginia's word lists for the accommodations (tools/acc-words.js writes js/acc-va.js) */
   if (st === "VA" && fs.existsSync(path.join(root, "js", "acc-va.js"))) must(/(\n(\s*)<script src="js\/accommodations\.js\?v=[0-9.]+"><\/script>)/, '\n$2<script src="js/acc-va.js?v=' + version + '"></script>$1', "accommodations.js script tag");
   /* no "change state" button */
@@ -136,6 +154,7 @@ Object.keys(STATES).forEach(function (st) {
     if (st !== "ODY" && /^(js\/odyssey\.js|css\/odyssey\.css|assets\/logo\/odyssey-)/.test(rel.split(path.sep).join("/"))) return true;
     /* each game's own word lists for the accommodations (v5.19) */
     if (rel === path.join("js", "acc-ody.js") && st !== "ODY") return true;
+    if (st !== "LIT" && path.dirname(rel) === "js" && LIT_JS.indexOf(name) !== -1) return true;
     if (rel === path.join("js", "acc-va.js") && st !== "VA") return true;
     return false;
   });
