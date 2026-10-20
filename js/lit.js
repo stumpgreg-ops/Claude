@@ -62,7 +62,7 @@
       basicsCard: { kind: "Elements of the Western", name: "The Frontier Code", meta: "The setting, the hero, the showdown and the symbols of the genre." },
       movies: [
         { ep: "highnoon", mode: "noon", title: "High Noon", year: 1952, by: "Fred Zinnemann",
-          meta: "A marshal alone as the clock ticks toward noon. With \"The Tin Star\" by John M. Cunningham.", game: "Showdown at Noon" },
+          meta: "A marshal alone as the clock ticks toward noon. With \"The Tin Star\" by John W. Cunningham.", game: "Showdown at Noon" },
         { ep: "truegrit", mode: "charge", title: "True Grit", year: 2010, by: "Joel and Ethan Coen",
           meta: "Mattie Ross, Rooster Cogburn and an unforgiving world. From Charles Portis's novel.", game: "Reins in His Teeth" },
         { ep: "yuma", mode: "yuma", title: "3:10 to Yuma", year: 1957, by: "Delmer Daves",

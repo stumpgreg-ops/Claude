@@ -31,7 +31,7 @@ var CONTENT = {
   /* v5.9: the Odyssey game (English 9, Unit 2) — one file per episode plus the cross-episode paired texts */
   ODY: ["content26.js", "content27.js", "content28.js", "content29.js", "content30.js", "content31.js"],
   /* v5.21: the Lit and Film game (grades 11-12 elective) — one file per genre, in js/lit.js's order */
-  LIT: ["content115.js", "content116.js", "content120.js"]
+  LIT: ["content115.js", "content116.js", "content118.js", "content120.js"]
 };
 /* v5.21: js/lit.js and the Lit and Film games (one js/mode-<id>.js per movie) go only into the Lit and Film build */
 var LIT_JS = ["lit.js"].concat(require("../js/lit.js").GENRES.reduce(function (a, g) { return a.concat(g.movies.map(function (m) { return "mode-" + m.mode + ".js"; })); }, []));

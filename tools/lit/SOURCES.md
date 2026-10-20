@@ -157,7 +157,7 @@ Canvas modules (screenshot):
 NOIR ORDER (course): Detour (10/1) → Scarlet Street (Week 6 Day 2) → Double Indemnity (10/14–16) → Casablanca (10/18–22, Noir or No?)
 
 ## GENRE: Westerns — Canvas module (screenshots)
-- Day One: Learning Target; Westerns Intro (100 pts); "The Tin Star" by John M. Cunningham (page) + The Tin Star Audio
+- Day One: Learning Target; Westerns Intro (100 pts); "The Tin Star" by John W. Cunningham (page) + The Tin Star Audio
 - Day Two: Elements of Western Films; SYMBOLS and MOTIFS (TIME in HIGH NOON); High Noon Response (100 pts); Three Reasons (40 pts)
 - True Grit — Learning Target (11/18–11/20); "The World is Unforgiving"; Questions for True Grit (100 pts); Your favorite Western (discussion)
 - 3:10 to Yuma — Learning Target; "3:10 to YUMA Criterion" (likely the Criterion Collection essay → 1957 Delmer Daves film, Glenn Ford/Van Heflin, from Elmore Leonard's 1953 story)
