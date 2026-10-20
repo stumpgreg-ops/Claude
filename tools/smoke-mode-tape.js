@@ -247,7 +247,8 @@ var srv = http.createServer(function (req, res) {
     return o;
   });
   console.log("days", JSON.stringify(days));
-  check(days.seen.join() === "0,1,2,3,4,5,6" && days.grow && days.strikes === 1 && /SEVENTH DAY/.test(days.label || "") && days.day === 0 && days.vcr === "7 DAYS",
+  /* the poll can see the restart's day 0 too before it stops: the seven days are the first seven seen */
+  check(days.seen.slice(0, 7).join() === "0,1,2,3,4,5,6" && days.grow && days.strikes === 1 && /SEVENTH DAY/.test(days.label || "") && days.day === 0 && days.vcr === "7 DAYS",
     "the VCR counts seven days and she crawls closer (and bigger) each day; when the seventh ends she reaches you: a life, and the days start again: " + JSON.stringify({ seen: days.seen, strikes: days.strikes, label: days.label, vcr: days.vcr }));
 
   /* answering before the seventh day (the real Space key) costs nothing and brings seven more days */
@@ -391,7 +392,8 @@ var srv = http.createServer(function (req, res) {
     var s = SolScene, B = s.tp; __quiet(); s.iframeMs = 1e9;
     B.dayT = B.P.dayMs * 5 + 5; await __until(function () { return B.day === 5 && B.lurch === 0; }, 30000);
     s.tapeDialTo(B.tapes[0].ch); await __until(function () { return B.ringT > B.P.ringMs * 0.6; }, 30000);
-    return { N: B.N, dots: B.P.dots, drift: B.P.drift, ring: +(B.ringT / B.P.ringMs).toFixed(2) };
+    /* the level's own drift (__quiet stills it for the checks) */
+    return { N: B.N, dots: B.P.dots, drift: SolModes.MODES.tape.params(50).drift, ring: +(B.ringT / B.P.ringMs).toFixed(2) };
   });
   await shot("tape-03-level50");
   await page.evaluate(function () { __quiet(); SolScene.tapeDialTo(__static()); });
