@@ -51,7 +51,7 @@
     NJ: { name: "New Jersey", kicker: "NJSLA-ELA · Grade 5 reading practice · 100 levels", families: ["NJ5"], def: "NJ5", hud: "NJSLS" },
     /* v5.9: the Odyssey game (English 9, Unit 2 "Challenge Accepted!") — its own build, tools/build-games.js ODY */
     ODY: { name: "The Odyssey", kicker: "English 9 · Unit 2: Challenge Accepted! · The Odyssey · 100 levels", families: ["ODY"], def: "ODY", hud: "Teacher" },
-    /* v5.21: the Lit and Film game (grades 11-12 elective) — its own build, tools/build-games.js LIT; js/lit.js lists its genres and movies */
+    /* v5.22: the Lit and Film game (grades 11-12 elective) — its own build, tools/build-games.js LIT; js/lit.js lists its genres and movies */
     LIT: { name: "Lit and Film", kicker: "Literature and Film · Grades 11–12 · a game for every movie · 100 levels", families: ["LIT"], def: "LIT", hud: "Teacher" }
   };
   /* v5.2: the New Jersey and Virginia games are separate builds. tools/build-games.js writes
@@ -3381,7 +3381,7 @@
   function tutorialCards(scene) {
     var need = (scene && scene.needExtracts) || 5;
     var strikes = (scene && scene.needStrikes) || 3;
-    /* v5.21: in the Lit and Film game every level is a movie's own game, so the first level explains that game */
+    /* v5.22: in the Lit and Film game every level is a movie's own game, so the first level explains that game */
     var lm = typeof window !== "undefined" && window.SOL_STATE === "LIT" && window.SolModes ? SolModes.modeFor(cfg.night || 1) : null;
     if (lm) return [{
       title: "How to play: " + lm.name,
@@ -26950,7 +26950,7 @@
     cont.classList.toggle("hidden", n <= 1 && !hasSavedNight());
   }
 
-  /* v5.21: the Lit and Film game's movie screen: the picked genre's movies (each plays its own game on every
+  /* v5.22: the Lit and Film game's movie screen: the picked genre's movies (each plays its own game on every
      level and asks only its own questions), the genre's basics and All (both play the genre's games in turn) */
   function litGenre() { return (window.SolLit && (SolLit.genreOf(cfg.gameMode) || SolLit.genre(cfg.litGenre) || SolLit.GENRES[0])) || null; }
   function litMovieDefs(g) {
@@ -27030,7 +27030,7 @@
     { id: "raft", kind: "Ride the waves", name: "Calypso's Raft", meta: "Sail the raft from Ogygia, steer by the stars and ride Poseidon's waves to the right letter.", ody: true },
     { id: "row", kind: "Row to the song", name: "Row Past the Sirens", meta: "Row as each note of the Sirens' song lands on the ship while Odysseus, tied to the mast, strains toward them — row to the right letter.", ody: true }
   );
-  /* v5.21: the Lit and Film game: a mode for every movie (its own game) and a mix for every genre (the genre's games
+  /* v5.22: the Lit and Film game: a mode for every movie (its own game) and a mix for every genre (the genre's games
      in turn). They are the only modes that build offers, and only that build offers them. */
   if (typeof window !== "undefined" && window.SolLit) SolLit.GENRES.forEach(function (g) {
     g.movies.forEach(function (m) { GAME_MODE_DEFS.push({ id: m.mode, kind: g.name, name: m.game + " · " + m.title, meta: m.meta, lit: true }); });
@@ -27093,7 +27093,7 @@
       host.appendChild(btn);
     });
   }
-  /* v5.21: the Lit and Film game's genre cards; a genre opens its movie screen */
+  /* v5.22: the Lit and Film game's genre cards; a genre opens its movie screen */
   function renderLitGenres(host) {
     var cur = litGenre();
     host.innerHTML = "";

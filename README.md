@@ -1,5 +1,5 @@
 # SOL Labyrinth
-Solo Chromebook maze-chase extract. 100 nights. Virginia 2024 EOC Reading SOL (grades 9–11), New Jersey NJSLA-ELA (grade 5), and The Odyssey (English 9, Unit 2).
+Solo Chromebook maze-chase extract. 100 nights. Virginia 2024 EOC Reading SOL (grades 9–11), New Jersey NJSLA-ELA (grade 5), The Odyssey (English 9, Unit 2), and Lit and Film (the grades 11–12 Literature and Film elective).
 
 **Theme (Norse × SOL):** You are **Sol**, the Norse sun goddess, collecting letter slips in a Pac-like school labyrinth. Ravenous wolves — **Hati** — patrol the corridors. Grab the **correct** letter to summon Sol's **CHARIOT** and smash Hati by contact (they return from the Wolf Pen). Wrong letter alarms. Fruit = bonus points only. Ice = brief escape freeze. **Only one power/effect active at a time.**
 
@@ -28,6 +28,39 @@ A game uploaded to Canvas can't send anything anywhere, so progress is shown to 
 **Limits:** progress lives on each Chromebook (and each browser profile): a student who plays on two devices has two codes, and the teacher page keeps only the newest one. Clearing site data resets it. A code is everything up to the moment it was made, so ask for new codes each time you grade. The secret ships inside the game, so the tag stops typos and casual tampering, not a determined student who reads the source.
 
 Tests: `node tools/smoke-progress.js` (after `node tools/build-games.js`, `node tools/build-appsscript.js VA|ODY` and `node tools/build-canvas.js VA|ODY`).
+
+## v5.22.0 (2026-10-20) — Lit and Film: a fourth game, with a game for every movie
+
+A game for the grades 11–12 Literature and Film elective, built from the course's slides, readings, videos and Canvas modules (`tools/lit/SOURCES.md`). Its own build: `node tools/build-games.js` writes `dist/lit/` (`SOLLabyrinth-LitFilm-v<version>.zip`), with its own saves (`afterHours.lit.*`); `node tools/build-appsscript.js LIT` then `node tools/build-canvas.js LIT` make the Canvas version, and its teacher page is `SOLLabyrinth-LitFilm-Teacher.html`. The dev page's gateway has a **Lit and Film** card.
+
+- **Pick a genre, then a movie.** The game mode screen lists the genres and the skill screen the genre's movies (`js/lit.js` holds the list). A movie card plays **that movie's own game on every level** and asks only that movie's questions; a genre's basics card and its All card play the genre's games in turn (the mix modes `lit-<genre>`). Every movie and every mix keeps its own level.
+- **Eighteen games, one per movie, each in its genre's style** (`js/mode-<id>.js`, each registered with `SolModes.extend`, each with its own `tools/smoke-mode-<id>.js`):
+
+| Genre | Movie | Game |
+|---|---|---|
+| Film History | Arrival of a Train (1895) | **Hand-Crank Camera** (`crank`): crank the Cinematograph at a steady 16 frames a second and film the letter plate as the trains pull in |
+| | A Trip to the Moon (1902) | **Shoot the Moon** (`moonshot`): aim Méliès's cannon at the crater with the right letter on the Moon's face |
+| | The Circus (1928) | **The Tightrope** (`tightrope`): a silent-film tramp balances on the high wire to the right intertitle card, swatting monkeys |
+| | The Jazz Singer (1927) | **Keep It in Sync** (`sync`): keep the Vitaphone disc in sync, catch the needle, cue the right reel |
+| Film Language | shots, angles, moves, transitions | **Call the Shot** (`director`): pan, tilt and zoom to frame the right actor at the called shot size; every move, shot size and transition is named |
+| Bad Film vs. Good Film | Plan 9 from Outer Space | **Saucers on Strings** (`strings`): snip the string of the right saucer on a cardboard set full of goofs |
+| | Iron Man (2008) | **Suit Up** (`suit`): fly an armored suit and blast the right drone without overheating or icing up |
+| Film Noir | Detour (1945) | **Night Highway** (`highway`): pick up the right hitchhiker on a desert road lit only by the headlights |
+| | Scarlet Street (1945) | **The Gallery** (`gallery`): stay in the shadows and sign the right painting in scarlet |
+| | Double Indemnity (1944) | **The Last Car** (`lastcar`): jump from the train at the right trackside board, out of the conductor's light |
+| | Casablanca (1942) | **Rick's Roulette** (`roulette`): land the ball in the right letter's pockets before the raid |
+| Westerns | High Noon (1952) | **Showdown at Noon** (`noon`): wait for the clock's bell, then draw on the right outlaw |
+| | True Grit (2010) | **Reins in His Teeth** (`charge`): charge across the meadow at the right rider |
+| | 3:10 to Yuma (1957) | **Make the 3:10** (`yuma`): lead the outlaw from cover to cover to the right car before the train leaves |
+| Science Fiction | A New Hope (1977) | **Trench Run** (`trench`): fire into the right exhaust port |
+| | The Empire Strikes Back (1980) | **Tow Cable** (`towcable`): harpoon the right walker and wrap its legs |
+| | Return of the Jedi (1983) | **Forest Chase** (`speeder`): bump the right scout into a tree |
+| Horror and Suspense | The Ring (2002) | **Seven Days** (`tape`): tune the old TV to the right channel before the seventh day |
+
+  Every game draws its own procedural art (no logos, likenesses or copied designs), has one difficulty curve over levels 1–100 (each level harder than the one before, with a "new this time" line every ten levels), works with the keys, the mouse, touch and the on-screen pad, and fits the 500-pixel Canvas frame. A wrong letter and each game's hazards cost a life; Select TWO needs both right letters. On level 1 the how-to card explains the movie's game, and the ten realms are renamed as reels of a night at the movies (The Nickelodeon … Awards Night).
+- **The questions:** 150 original passages and 899 questions (`js/content114.js`–`js/content120.js`, `family: "LIT"`, each with its `genre` and `episode`), every question tagged with a grade 11 Virginia standard and skill, so the teacher page's standards report covers them. Film history, film language (the course's 30-term vocabulary list), Plan 9 vs. Iron Man through four lenses (writing, editing, acting, moviemaking), the noir elements, the Western, sci-fi and the Hero's Journey, and horror vs. suspense, plus each movie's story, craft and symbols. Copyrighted films are summarized and analyzed, never quoted; public-domain films are retold scene by scene. Writing rules: `tools/lit/CONTENT-BRIEF.md`; the games' brief: `tools/lit/MODE-BRIEF.md`.
+- **Progress codes** know the game (`SOL3-LIT-…`, game id 4; its skills are the movies and the genres' basics).
+- **Tests:** `node tools/smoke-lit.js` (the genre and movie screens, the pools, each movie's level, the build) and one `tools/smoke-mode-<id>.js` per game.
 
 ## v5.20.0 (2026-10-11) — the Town is built from the same 3D models as the Castle
 

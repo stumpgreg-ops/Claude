@@ -30,10 +30,10 @@ var CONTENT = {
   NJ: ["content12.js", "content13.js", "content14.js", "content15.js", "content16.js", "content17.js", "content24.js", "content25.js"],
   /* v5.9: the Odyssey game (English 9, Unit 2) — one file per episode plus the cross-episode paired texts */
   ODY: ["content26.js", "content27.js", "content28.js", "content29.js", "content30.js", "content31.js"],
-  /* v5.21: the Lit and Film game (grades 11-12 elective) — one file per genre, in js/lit.js's order */
+  /* v5.22: the Lit and Film game (grades 11-12 elective) — one file per genre, in js/lit.js's order */
   LIT: ["content114.js", "content115.js", "content116.js", "content117.js", "content118.js", "content119.js", "content120.js"]
 };
-/* v5.21: js/lit.js and the Lit and Film games (one js/mode-<id>.js per movie) go only into the Lit and Film build */
+/* v5.22: js/lit.js and the Lit and Film games (one js/mode-<id>.js per movie) go only into the Lit and Film build */
 var LIT_JS = ["lit.js"].concat(require("../js/lit.js").GENRES.reduce(function (a, g) { return a.concat(g.movies.map(function (m) { return "mode-" + m.mode + ".js"; })); }, []));
 /* v5.15: the question expansion (tools/expansion/PLAN.md). A new file joins the Virginia game once it is checked and
    listed in tools/expansion/accepted.json; until then it is left out of every build (and of index.html). */
@@ -50,7 +50,7 @@ var STATES = {
      with the Virginia game when both are opened from the same site */
   ODY: { name: "The Odyssey", families: ["ODY"], def: "ODY", zip: "SOLLabyrinth-Odyssey", savePrefix: "afterHours.ody.",
          title: "The Odyssey: Labyrinth of the Wine-Dark Sea", logo: "assets/logo/odyssey-labyrinth-512.png", theme: "./ody-theme" },
-  /* v5.21: its own saves too (afterHours.lit.*) */
+  /* v5.22: its own saves too (afterHours.lit.*) */
   LIT: { name: "Lit and Film", families: ["LIT"], def: "LIT", zip: "SOLLabyrinth-LitFilm", savePrefix: "afterHours.lit.", title: "Lit and Film: Labyrinth of the Silver Screen" }
 };
 /* every other state's content files are left out of a build */

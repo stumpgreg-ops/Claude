@@ -1,4 +1,4 @@
-/* SOL Labyrinth v5.21 — the Lit and Film mode "towcable": Tow Cable (The Empire Strikes Back, 1980; genre SCIFI).
+/* SOL Labyrinth v5.22 — the Lit and Film mode "towcable": Tow Cable (The Empire Strikes Back, 1980; genre SCIFI).
  *
  * The battle on the ice plain, seen low over the snow in cold blue-white light. Giant four-legged armored walkers
  * (a generic design: a long plated hull, a slit-visored cab on a ribbed neck, twin chin guns) march from the right

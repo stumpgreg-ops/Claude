@@ -1,4 +1,4 @@
-/* SOL Labyrinth v5.21 — the Lit and Film mode "moonshot": Shoot the Moon (A Trip to the Moon, Georges Méliès, 1902).
+/* SOL Labyrinth v5.22 — the Lit and Film mode "moonshot": Shoot the Moon (A Trip to the Moon, Georges Méliès, 1902).
  *
  * Méliès's painted theater, as if projected from a worn print: a black-and-white painted stage (curtains, a
  * scalloped valance, footlights, painted Paris rooftops and the foundry's smokestacks), with the hand-tinted

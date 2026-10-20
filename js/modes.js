@@ -202,7 +202,7 @@
     if (n < 1 || n > 100) return null;
     var only = window.SolModes && window.SolModes.only;
     if (only === "maze") return null;
-    /* v5.21: the Lit and Film game: a movie plays its own game on every level; a genre's mix plays the genre's games in
+    /* v5.22: the Lit and Film game: a movie plays its own game on every level; a genre's mix plays the genre's games in
        turn, one a level (js/lit.js). A game whose file is not loaded falls back to the maze. */
     if (isLit() && window.SolLit) {
       var lg = only ? SolLit.genreOf(only) : null, ids;

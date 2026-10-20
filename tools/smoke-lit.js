@@ -157,7 +157,8 @@ var LIT = require(path.join(repo, "js", "lit.js"));
   await page.click("#btn-skill-start");
   await page.waitForTimeout(400);
   if (await page.isVisible("#btn-char-confirm")) await page.click("#btn-char-confirm");
-  for (var ti = 0; ti < 20; ti++) { if (await page.isVisible("#tut-skip")) { await page.click("#tut-skip"); break; } await page.waitForTimeout(250); }
+  /* the tutorial's Play button animates in: press it from the page rather than waiting for it to hold still */
+  for (var ti = 0; ti < 20; ti++) { if (await page.isVisible("#tut-skip")) { await page.evaluate(function () { document.getElementById("tut-skip").click(); }); break; } await page.waitForTimeout(250); }
   await page.waitForFunction(function () { return window.SolScene && SolScene.claim; }, null, { timeout: 20000 }).catch(function () {});
   var play = await page.evaluate(function () { var s = window.SolScene; return s && s.claim ? { fam: s.family, strand: s.strand, ep: s.claim.episode, mode: s.mode ? s.mode.id : "maze" } : null; });
   check(play && play.fam === "LIT" && play.strand === "HIGHNOON" && play.ep === "highnoon", "Start plays High Noon's questions: " + JSON.stringify(play));

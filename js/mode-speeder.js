@@ -1,4 +1,4 @@
-/* SOL Labyrinth v5.21 — the Lit and Film mode "speeder": Forest Chase (Return of the Jedi, 1983; genre SCIFI, strand JEDI).
+/* SOL Labyrinth v5.22 — the Lit and Film mode "speeder": Forest Chase (Return of the Jedi, 1983; genre SCIFI, strand JEDI).
  *
  * A hover-bike chase at full speed through a forest of giant redwood-like trees, in pseudo-3D from behind the rider
  * (a road-racer projection: x across the forest, z ahead, y up; the camera rides CAM_BACK behind the bike at CAM_H).

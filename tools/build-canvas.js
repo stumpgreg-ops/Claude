@@ -31,7 +31,7 @@ var page = fs.readFileSync(path.join(src, "loader.html"), "utf8");
 var m = page.match(/<script>([\s\S]*)<\/script>/);
 if (!m) throw new Error("tools/build-canvas.js: no loader script in loader.html");
 var loaderJs = m[1];
-var base = st === "ODY" ? "SOLLabyrinth-Odyssey" : st === "LIT" ? "SOLLabyrinth-LitFilm" : "SOLLabyrinth-" + st;   /* v5.9: the Odyssey game has its own file names (v5.21: and Lit and Film) */
+var base = st === "ODY" ? "SOLLabyrinth-Odyssey" : st === "LIT" ? "SOLLabyrinth-LitFilm" : "SOLLabyrinth-" + st;   /* v5.9: the Odyssey game has its own file names (v5.22: and Lit and Film) */
 /* v5.13.1: the zips' own names. VA's are "SOL Lab VA Eng.zip" and "SOL Lab VA Eng update.zip"; the files inside keep
    their SOLLabyrinth-VA-* names, so an update still replaces the files already in Canvas. */
 var zipFull = st === "VA" ? "SOL Lab VA Eng.zip" : base + "-Canvas.zip";

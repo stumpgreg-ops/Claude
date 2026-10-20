@@ -1,4 +1,4 @@
-/* SOL Labyrinth v5.21 — the Lit and Film mode "director": Call the Shot (Film Language: Lights, Camera, Action).
+/* SOL Labyrinth v5.22 — the Lit and Film mode "director": Call the Shot (Film Language: Lights, Camera, Action).
  *
  * The player is the camera operator on a soundstage and the whole canvas is the camera's viewfinder: corner
  * marks, a REC light and timecode, the framing box in the middle, a zoom rocker (W wide / T tight) and, along the

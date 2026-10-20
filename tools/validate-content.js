@@ -39,7 +39,7 @@ packs.forEach(function (p, pi) {
   if (!/^(G9|G10|G11|NJ5|ODY|LIT)$/.test(p.family)) errors.push(where + ": family must be G9/G10/G11/NJ5/ODY/LIT, got " + p.family);
   /* ODY: the Odyssey game (English 9, Unit 2). Every pack names its episode, which the skill screen filters on. */
   if (p.family === "ODY" && !/^(lotus|cyclops|circe|helios|calypso|voyage)$/.test(p.episode || "")) errors.push(where + ": ODY packs need episode: lotus | cyclops | circe | helios | calypso | voyage");
-  /* v5.21: LIT, the Lit and Film game (grades 11-12 elective). Every pack names its genre and its episode (a movie, or the
+  /* v5.22: LIT, the Lit and Film game (grades 11-12 elective). Every pack names its genre and its episode (a movie, or the
      genre's basics), which the genre and movie screens filter on; js/lit.js holds the list. */
   if (p.family === "LIT") {
     var LG = require(path.join(root, "js", "lit.js")), gdef = LG.GENRES.filter(function (g) { return g.id === p.genre; })[0];

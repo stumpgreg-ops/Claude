@@ -1,4 +1,4 @@
-/* SOL Labyrinth v5.21 — the Lit and Film mode "charge": Reins in His Teeth (Westerns: True Grit, 2010).
+/* SOL Labyrinth v5.22 — the Lit and Film mode "charge": Reins in His Teeth (Westerns: True Grit, 2010).
  *
  * The famous charge. A wide meadow of golden autumn grass under the mountains, late in the day. The one-eyed
  * marshal gallops in from the left, his horse's reins in his teeth and a revolver in each hand; four outlaws

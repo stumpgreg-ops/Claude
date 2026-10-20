@@ -1,4 +1,4 @@
-/* SOL Labyrinth v5.21 — the Lit and Film game (grades 11-12 elective): its genres, its movies and their games.
+/* SOL Labyrinth v5.22 — the Lit and Film game (grades 11-12 elective): its genres, its movies and their games.
  *
  * The Lit and Film build (window.SOL_STATE === "LIT", tools/build-games.js LIT) has no grades and no skills.
  * The game mode screen lists the GENRES; picking one opens the movie screen (the skill screen), which lists the

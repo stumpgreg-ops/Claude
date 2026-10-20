@@ -1,4 +1,4 @@
-/* SOL Labyrinth v5.21 — the Lit and Film mode "sync": Keep It in Sync (The Jazz Singer, 1927; Film History).
+/* SOL Labyrinth v5.22 — the Lit and Film mode "sync": Keep It in Sync (The Jazz Singer, 1927; Film History).
  *
  * The projection booth of a 1927 picture palace on the night the talkies arrive. Through the booth's front window:
  * the art-deco auditorium, warm sepia and gold, the gilded proscenium and its velvet curtains, the screen with the

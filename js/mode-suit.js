@@ -1,4 +1,4 @@
-/* SOL Labyrinth v5.21 — the Lit and Film mode "suit": Suit Up (genre BADGOOD, Iron Man, 2008).
+/* SOL Labyrinth v5.22 — the Lit and Film mode "suit": Suit Up (genre BADGOOD, Iron Man, 2008).
  *
  * The good-film half of Bad Film vs. Good Film: where Plan 9's saucers hang on strings over a cardboard
  * graveyard, this game is sleek, weighty and believable. A city skyline at dusk, drawn in layers with lit

@@ -1,4 +1,4 @@
-/* SOL Labyrinth v5.21 — the Lit and Film mode "gallery": The Gallery (Scarlet Street, Fritz Lang, 1945), a stealth level.
+/* SOL Labyrinth v5.22 — the Lit and Film mode "gallery": The Gallery (Scarlet Street, Fritz Lang, 1945), a stealth level.
  *
  * A night gallery in Greenwich Village, drawn like a 1940s noir print: black, white and grey, rain running down the
  * windows, film grain and a vignette, and one touch of scarlet: the umbrella by the door, the painter's brush, the

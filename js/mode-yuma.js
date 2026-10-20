@@ -1,4 +1,4 @@
-/* SOL Labyrinth v5.21 — the Lit and Film mode "yuma": Make the 3:10 (3:10 to Yuma, 1957, Delmer Daves; from Elmore
+/* SOL Labyrinth v5.22 — the Lit and Film mode "yuma": Make the 3:10 (3:10 to Yuma, 1957, Delmer Daves; from Elmore
  * Leonard's story). Genre: the Western.
  *
  * The main street of Contention, Arizona Territory, seen from across the street in sepia: the false fronts of the

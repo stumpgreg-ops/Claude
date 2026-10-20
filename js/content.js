@@ -1614,7 +1614,7 @@
     strand = String(strand || "ALL").toUpperCase();
     if (!strand || strand === "ALL" || strand === "NULL") return true;
     if (EPISODES.indexOf(strand) !== -1) return String((pack && pack.episode) || "").toUpperCase() === strand;
-    /* v5.21: the Lit and Film game: a movie's episode, a genre's basics, or G:<GENRE> for all of a genre (js/lit.js) */
+    /* v5.22: the Lit and Film game: a movie's episode, a genre's basics, or G:<GENRE> for all of a genre (js/lit.js) */
     if (pack && pack.family === "LIT" && global.SolLit && global.SolLit.isLitStrand(strand)) return global.SolLit.strandMatchesPack(strand, pack);
     if (!/^(RL|RI|RV|DSR)$/.test(strand)) return true;
     return strandOf(claim) === strand;

@@ -1,4 +1,4 @@
-/* SOL Labyrinth v5.21 — the Lit and Film mode "highway": Night Highway (Detour, 1945; genre NOIR, strand DETOUR).
+/* SOL Labyrinth v5.22 — the Lit and Film mode "highway": Night Highway (Detour, 1945; genre NOIR, strand DETOUR).
  *
  * Film noir on a desert two-lane at night, in black and white. The view is from behind a 1940s convertible,
  * a pseudo-3D road running to a dark horizon of mesas, telephone poles and a moon behind the clouds. The only

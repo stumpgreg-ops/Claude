@@ -1,4 +1,4 @@
-/* SOL Labyrinth v5.21 — the Lit and Film mode "tightrope": The Tightrope (Film History: The Circus, 1928).
+/* SOL Labyrinth v5.22 — the Lit and Film mode "tightrope": The Tightrope (Film History: The Circus, 1928).
  *
  * A silent picture: black and white, film grain, flicker, scratches, a vignette, sprocket holes down both edges,
  * iris-in and iris-out between the acts, intertitle cards for every message and a honky-tonk piano playing along

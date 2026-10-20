@@ -1,4 +1,4 @@
-/* SOL Labyrinth v5.21 — the Lit and Film mode "roulette": Rick's Roulette (Casablanca, 1942; genre NOIR).
+/* SOL Labyrinth v5.22 — the Lit and Film mode "roulette": Rick's Roulette (Casablanca, 1942; genre NOIR).
  *
  * Rick's Café Américain after dark, in black and white: Moorish arched windows with their venetian blinds shut,
  * two ceiling fans turning slowly over the haze, the piano at the left, the croupier behind the wheel, and the

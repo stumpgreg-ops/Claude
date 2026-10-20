@@ -1,4 +1,4 @@
-/* SOL Labyrinth v5.21 — the Lit and Film mode "lastcar": The Last Car (Double Indemnity, 1944, Billy Wilder).
+/* SOL Labyrinth v5.22 — the Lit and Film mode "lastcar": The Last Car (Double Indemnity, 1944, Billy Wilder).
  *
  * Film noir, in black and white. Night, the observation platform at the back of a moving train, seen from the
  * side: the last car fills the right of the screen (lit windows striped by their blinds throw venetian-blind light

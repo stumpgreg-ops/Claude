@@ -43,7 +43,7 @@ function build(st, version) {
   var code = fs.readFileSync(path.join(root, "js", "progress-code.js"), "utf8");
   var app = fs.readFileSync(path.join(__dirname, "teacher", "teacher.js"), "utf8");
   /* v5.17: Virginia's standards and their LOTS/HOTS skills (js/standards-va.js) for the standards report */
-  var stds = st === "VA" || st === "LIT" ? fs.readFileSync(path.join(root, "js", "standards-va.js"), "utf8") : "";   /* v5.21: Lit and Film asks grade 11 Virginia standards too */
+  var stds = st === "VA" || st === "LIT" ? fs.readFileSync(path.join(root, "js", "standards-va.js"), "utf8") : "";   /* v5.22: Lit and Film asks grade 11 Virginia standards too */
   [code, app, stds].forEach(function (js) { if (/<\/script/i.test(js)) throw new Error("tools/build-teacher.js: a script holds </script"); });
   var esc = function (s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;"); };
   var vals = Object.assign({

@@ -1,4 +1,4 @@
-/* SOL Labyrinth v5.21 — the Lit and Film mode "noon": Showdown at Noon (High Noon, 1952), a quick-draw level.
+/* SOL Labyrinth v5.22 — the Lit and Film mode "noon": Showdown at Noon (High Noon, 1952), a quick-draw level.
  *
  * Hadleyville's main street at midday, in sepia with film grain: false-front storefronts down both sides, dust,
  * and at the end of the street the courthouse with its clock tower. The clock is the game's timer, as it is the

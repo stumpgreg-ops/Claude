@@ -1,4 +1,4 @@
-/* SOL Labyrinth v5.21 — the Lit and Film mode "crank": Hand-Crank Camera (Film History · Arrival of a Train, 1895).
+/* SOL Labyrinth v5.22 — the Lit and Film mode "crank": Hand-Crank Camera (Film History · Arrival of a Train, 1895).
  *
  * La Ciotat station, summer 1895, in black and white. The camera stands on the platform beside the track and looks
  * down the line the way the Lumières' camera did, so every train comes in from the vanishing point, grows, and sweeps

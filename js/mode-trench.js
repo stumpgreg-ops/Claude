@@ -1,4 +1,4 @@
-/* SOL Labyrinth v5.21 — the Lit and Film mode "trench": Trench Run (A New Hope, 1977; genre SCIFI, episode NEWHOPE).
+/* SOL Labyrinth v5.22 — the Lit and Film mode "trench": Trench Run (A New Hope, 1977; genre SCIFI, episode NEWHOPE).
  *
  * A pseudo-3D chase view down a metal trench on the surface of a battle station. A generic twin-engine
  * starfighter (a flat swept wing, fins at the tips: not any film's ship) flies away from the camera; the trench

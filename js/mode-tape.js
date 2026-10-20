@@ -1,4 +1,4 @@
-/* SOL Labyrinth v5.21 — the Lit and Film mode "tape": Seven Days (HORROR · The Ring, 2002).
+/* SOL Labyrinth v5.22 — the Lit and Film mode "tape": Seven Days (HORROR · The Ring, 2002).
  *
  * A dark room in the film's cold teal-green: rain runs down the window, a bare bulb hangs from the ceiling and
  * flickers, an old CRT with rabbit ears sits on a low cabinet with a VCR whose display counts the days. Through the

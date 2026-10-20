@@ -165,7 +165,7 @@
     ODY: { id: 3, tag: "ODY", name: "The Odyssey: Labyrinth of the Wine-Dark Sea", short: "The Odyssey", assignment: "Odyssey game progress",
       skillWord: "Episode", secret: "ody.9Kd4-dolphin-e17a-saffron",
       skills: [["LOTUS", "Lotus-Eaters"], ["CYCLOPS", "Cyclops"], ["CIRCE", "Circe"], ["HELIOS", "Cattle of the Sun"], ["CALYPSO", "Calypso"], ["VOYAGE", "Whole voyage"]] },
-    /* v5.21: the Lit and Film game: a "skill" is a movie, or a genre's basics (js/lit.js); APPEND ONLY */
+    /* v5.22: the Lit and Film game: a "skill" is a movie, or a genre's basics (js/lit.js); APPEND ONLY */
     LIT: { id: 4, tag: "LIT", name: "Lit and Film: Labyrinth of the Silver Screen", short: "Lit and Film", assignment: "Lit and Film game progress",
       skillWord: "Movie", secret: "lit.5Wp2-projector-c84e-silver",
       skills: [["TRAIN", "Arrival of a Train"], ["MOON", "A Trip to the Moon"], ["CIRCUS", "The Circus"], ["JAZZ", "The Jazz Singer"], ["HISTORY", "Film history"],

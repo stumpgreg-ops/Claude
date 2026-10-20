@@ -1,4 +1,4 @@
-/* SOL Labyrinth v5.21 — the Lit and Film mode "strings": Saucers on Strings (Plan 9 from Outer Space, Ed Wood, 1957).
+/* SOL Labyrinth v5.22 — the Lit and Film mode "strings": Saucers on Strings (Plan 9 from Outer Space, Ed Wood, 1957).
  *
  * Bad Film vs. Good Film: the worst movie ever made, played for its goofs. A black-and-white B-movie set seen
  * through a scratchy, flickering print: a painted backdrop (its seams show, and the moon hangs on a wire), a

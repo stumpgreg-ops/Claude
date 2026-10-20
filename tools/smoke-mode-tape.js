@@ -142,7 +142,7 @@ var srv = http.createServer(function (req, res) {
     var stn = B.stations[0];
     s.tapeDialTo(stn.ch); await __gwait(200);
     o.clear = { c: +s.tapeClarity(stn).toFixed(2), letter: B.letter.text, alpha: +B.letter.alpha.toFixed(2), want: stn.letter, osd: B.osd.text };
-    s.tapeDialTo(stn.ch + 0.6); await __gwait(150);
+    s.tapeDialTo(stn.ch + (stn.ch >= B.N - 1 ? -0.6 : 0.6)); await __gwait(150);   /* off the station, inward from the dial's last channel */
     o.offClear = +s.tapeClarity(stn).toFixed(2);
     /* static picks nothing, however long TUNE is held */
     var sc = __static(); s.tapeDialTo(sc); await __gwait(150);
