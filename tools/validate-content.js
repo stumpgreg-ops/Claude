@@ -36,9 +36,16 @@ packs.forEach(function (p, pi) {
   var where = (p.id || ("pack#" + pi));
   if (!p.id || typeof p.id !== "string") errors.push(where + ": missing id");
   if (ids[p.id]) errors.push(where + ": duplicate pack id"); ids[p.id] = true;
-  if (!/^(G9|G10|G11|NJ5|ODY)$/.test(p.family)) errors.push(where + ": family must be G9/G10/G11/NJ5/ODY, got " + p.family);
+  if (!/^(G9|G10|G11|NJ5|ODY|LIT)$/.test(p.family)) errors.push(where + ": family must be G9/G10/G11/NJ5/ODY/LIT, got " + p.family);
   /* ODY: the Odyssey game (English 9, Unit 2). Every pack names its episode, which the skill screen filters on. */
   if (p.family === "ODY" && !/^(lotus|cyclops|circe|helios|calypso|voyage)$/.test(p.episode || "")) errors.push(where + ": ODY packs need episode: lotus | cyclops | circe | helios | calypso | voyage");
+  /* v5.22: LIT, the Lit and Film game (grades 11-12 elective). Every pack names its genre and its episode (a movie, or the
+     genre's basics), which the genre and movie screens filter on; js/lit.js holds the list. */
+  if (p.family === "LIT") {
+    var LG = require(path.join(root, "js", "lit.js")), gdef = LG.GENRES.filter(function (g) { return g.id === p.genre; })[0];
+    if (!gdef) errors.push(where + ": LIT packs need genre: " + LG.GENRES.map(function (g) { return g.id; }).join(" | "));
+    else if (!gdef.movies.some(function (m) { return m.ep === p.episode; }) && p.episode !== gdef.basics) errors.push(where + ": episode " + p.episode + " is not a movie of " + p.genre + " (" + gdef.movies.map(function (m) { return m.ep; }).concat(gdef.basics ? [gdef.basics] : []).join(" | ") + ")");
+  }
   var isNJ = p.family === "NJ5";
   if (p.level != null && !(p.level === 1 || p.level === 2 || p.level === 3)) errors.push(where + ": level must be 1, 2 or 3");
   if (p.level == null) warnings.push(where + ": no level (1 easy, 2 medium, 3 hard) — it will be estimated from readability");
@@ -65,7 +72,7 @@ packs.forEach(function (p, pi) {
       else stats[p.family + "." + c.strand] = (stats[p.family + "." + c.strand] || 0) + 1;
     } else if (!c.sol || !strandOf(c.sol)) errors.push(w + ": bad sol code " + c.sol);
     else {
-      var g = parseInt(c.sol, 10), fam = p.family === "ODY" ? 9 : parseInt(p.family.slice(1), 10);
+      var g = parseInt(c.sol, 10), fam = p.family === "ODY" ? 9 : p.family === "LIT" ? 11 : parseInt(p.family.slice(1), 10);
       if (g > fam) errors.push(w + ": sol grade " + g + " above family " + p.family);
       var s = strandOf(c.sol); stats[p.family + "." + s] = (stats[p.family + "." + s] || 0) + 1;
       if (!SS.STANDARDS[c.sol]) errors.push(w + ": " + c.sol + " is not a 2024 Virginia standard (js/standards-va.js)");

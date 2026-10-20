@@ -191,6 +191,7 @@
     return def;
   }
   function isOdy() { return typeof window !== "undefined" && window.SOL_STATE === "ODY"; }
+  function isLit() { return typeof window !== "undefined" && window.SOL_STATE === "LIT"; }
   var BEAM_KEY = "afterHours.v1.beamLearned";   /* set once a student has pulled a rock in */
   var WING = 40, CAPT_UP = 54;   /* Eagle Swoop: the second Sol stands WING px to the right; a caught Sol hangs CAPT_UP px over his eagle */
 
@@ -201,6 +202,14 @@
     if (n < 1 || n > 100) return null;
     var only = window.SolModes && window.SolModes.only;
     if (only === "maze") return null;
+    /* v5.22: the Lit and Film game: a movie plays its own game on every level; a genre's mix plays the genre's games in
+       turn, one a level (js/lit.js). A game whose file is not loaded falls back to the maze. */
+    if (isLit() && window.SolLit) {
+      var lg = only ? SolLit.genreOf(only) : null, ids;
+      if (only && SolLit.movieByMode(only)) return MODES[only] || null;
+      ids = lg ? SolLit.mixModes(lg.id, MODES) : [].concat.apply([], SolLit.GENRES.map(function (g) { return SolLit.mixModes(g.id, MODES); }));
+      return ids.length ? MODES[ids[(n - 1) % ids.length]] : null;
+    }
     if (only && MODES[only] && !(MODES[only].noOdy && isOdy())) return MODES[only];   /* v5.12: Root Worms is never played in the Odyssey */
     var slot = ((n - 1) % 10) + 1, id;
     if (isOdy()) {
@@ -3785,6 +3794,6 @@
     ORDER: ORDER, modeAt: modeAt, modeInRealm: modeInRealm, newsFor: newsFor, BIRDS: BIRDS, raidKindsFor: raidKindsFor,
     /* v5.11: the shared helpers, for the modes in their own files */
     lib: { clamp: clamp, rnd: rnd, dist: dist, shuffle: shuffle, hex: hex, mix: mix, angDiff: angDiff, kill: kill, snd: snd, canvasTex: canvasTex,
-      isOdy: isOdy, ST: ST, drawGalley: drawGalley, drawArrow: drawArrow, drawSplat: drawSplat, drawStraitWater: drawStraitWater, SHIP_W: SHIP_W, SHIP_H: SHIP_H, STACK: STACK },
+      isOdy: isOdy, isLit: isLit, ST: ST, drawGalley: drawGalley, drawArrow: drawArrow, drawSplat: drawSplat, drawStraitWater: drawStraitWater, SHIP_W: SHIP_W, SHIP_H: SHIP_H, STACK: STACK },
     TEAM: { w: TEAM_W, h: TEAM_H, car: TEAM_CAR } };
 })();

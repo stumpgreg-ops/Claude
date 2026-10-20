@@ -50,7 +50,9 @@
     VA: { name: "Virginia", kicker: "NNPS · VA 2024 EOC Reading practice skills · 100 levels", families: ["G9", "G10", "G11"], def: "G9", hud: "Teacher" },
     NJ: { name: "New Jersey", kicker: "NJSLA-ELA · Grade 5 reading practice · 100 levels", families: ["NJ5"], def: "NJ5", hud: "NJSLS" },
     /* v5.9: the Odyssey game (English 9, Unit 2 "Challenge Accepted!") — its own build, tools/build-games.js ODY */
-    ODY: { name: "The Odyssey", kicker: "English 9 · Unit 2: Challenge Accepted! · The Odyssey · 100 levels", families: ["ODY"], def: "ODY", hud: "Teacher" }
+    ODY: { name: "The Odyssey", kicker: "English 9 · Unit 2: Challenge Accepted! · The Odyssey · 100 levels", families: ["ODY"], def: "ODY", hud: "Teacher" },
+    /* v5.22: the Lit and Film game (grades 11-12 elective) — its own build, tools/build-games.js LIT; js/lit.js lists its genres and movies */
+    LIT: { name: "Lit and Film", kicker: "Literature and Film · Grades 11–12 · a game for every movie · 100 levels", families: ["LIT"], def: "LIT", hud: "Teacher" }
   };
   /* v5.2: the New Jersey and Virginia games are separate builds. tools/build-games.js writes
      window.SOL_STATE into each build's index.html; that build never shows the gateway, never
@@ -3379,6 +3381,18 @@
   function tutorialCards(scene) {
     var need = (scene && scene.needExtracts) || 5;
     var strikes = (scene && scene.needStrikes) || 3;
+    /* v5.22: in the Lit and Film game every level is a movie's own game, so the first level explains that game */
+    var lm = typeof window !== "undefined" && window.SOL_STATE === "LIT" && window.SolModes ? SolModes.modeFor(cfg.night || 1) : null;
+    if (lm) return [{
+      title: "How to play: " + lm.name,
+      html: "<ul>" +
+        "<li><b>Read</b> the passage and the question in the panel on the left.</li>" +
+        "<li>" + lm.how + "</li>" +
+        "<li>" + lm.rules + " " + strikes + " strikes end the level.</li>" +
+        "<li><b>Controls:</b> " + lm.keys + "</li>" +
+        "<li>Press <b>TAB</b> any time for the field guide (the game pauses).</li>" +
+        "</ul>"
+    }];
     return [
       {
         title: "How to play",
@@ -26862,6 +26876,7 @@
 
   function gradeLabel(family) {
     if (family === "ODY") return "The Odyssey · English 9";
+    if (family === "LIT") return "Lit and Film · Grades 11–12";
     if (family === "NJ5") return "New Jersey · Grade 5";
     if (family === "G10") return "Selection 2 · Grade 10";
     if (family === "G11") return "Selection 3 · Grade 11";
@@ -26869,7 +26884,7 @@
   }
 
   /* v5.8: a class session (Apps Script ?class=CODE, js/classes.js) plays one grade */
-  function classGrade() { var C = window.SOL_CLASS; return C && /^(G9|G10|G11|NJ5|ODY)$/.test(C.grade || "") ? C.grade : null; }
+  function classGrade() { var C = window.SOL_CLASS; return C && /^(G9|G10|G11|NJ5|ODY|LIT)$/.test(C.grade || "") ? C.grade : null; }
   function selectedFamily() {
     if (classGrade()) return classGrade();
     var el = document.querySelector("#title-screen .card.selected[data-family]:not(.hidden)");
@@ -26935,9 +26950,22 @@
     cont.classList.toggle("hidden", n <= 1 && !hasSavedNight());
   }
 
+  /* v5.22: the Lit and Film game's movie screen: the picked genre's movies (each plays its own game on every
+     level and asks only its own questions), the genre's basics and All (both play the genre's games in turn) */
+  function litGenre() { return (window.SolLit && (SolLit.genreOf(cfg.gameMode) || SolLit.genre(cfg.litGenre) || SolLit.GENRES[0])) || null; }
+  function litMovieDefs(g) {
+    if (!g) return [];
+    var out = g.movies.map(function (m) {
+      return { strand: m.ep.toUpperCase(), mode: m.mode, kind: (m.year ? m.year + " · " : "") + (m.by || "") + " · game: " + m.game, name: m.title, meta: m.meta };
+    });
+    if (g.basics && g.basicsCard) out.push({ strand: g.basics.toUpperCase(), mode: SolLit.mixId(g.id), kind: g.basicsCard.kind + " · every game", name: g.basicsCard.name, meta: g.basicsCard.meta });
+    if (g.movies.length > 1 || g.basics) out.push({ strand: "G:" + g.id, mode: SolLit.mixId(g.id), kind: "All of " + g.name, name: "All", meta: "Every movie's questions, and the genre's games in turn." });
+    return out;
+  }
   function renderSkillCards(family) {
     var host = document.getElementById("skill-packs");
     if (!host) return;
+    if (family === "LIT") return renderLitMovies(host);
     var defs = SKILL_DEFS[family] || SKILL_DEFS.G9;
     var want = String(cfg.strand || "ALL").toUpperCase();
     var hasWant = defs.some(function (x) { return x.strand === want; });
@@ -26956,6 +26984,30 @@
       });
       host.appendChild(btn);
     });
+  }
+
+  function renderLitMovies(host) {
+    var g = litGenre(), defs = litMovieDefs(g), want = String(cfg.strand || "").toUpperCase(), mode = cfg.gameMode;
+    var pick = defs.filter(function (d) { return d.strand === want && d.mode === mode; })[0] || defs.filter(function (d) { return d.mode === mode; })[0] || defs[0];
+    host.innerHTML = "";
+    defs.forEach(function (d) {
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = d === pick ? "card selected" : "card";
+      btn.setAttribute("data-strand", d.strand);
+      btn.setAttribute("data-gamemode", d.mode);
+      btn.innerHTML = '<span class="kind">' + d.kind + '</span><span class="name">' + d.name + '</span><span class="meta">' + d.meta + '</span>';
+      bindTap(btn, function () {
+        host.querySelectorAll(".card").forEach(function (c) { c.classList.remove("selected"); });
+        btn.classList.add("selected");
+        cfg.strand = d.strand;
+        try { localStorage.setItem(LS_GAMEMODE, d.mode); localStorage.setItem(LS_STRAND, d.strand); } catch (e) {}
+        applyGameMode(d.mode);
+        refreshSkillSaveLine();
+      });
+      host.appendChild(btn);
+    });
+    if (pick) { cfg.strand = pick.strand; applyGameMode(pick.mode); }
   }
 
   /* ── v5.8.3: the game mode screen, between the grade and the skill ── */
@@ -26978,11 +27030,19 @@
     { id: "raft", kind: "Ride the waves", name: "Calypso's Raft", meta: "Sail the raft from Ogygia, steer by the stars and ride Poseidon's waves to the right letter.", ody: true },
     { id: "row", kind: "Row to the song", name: "Row Past the Sirens", meta: "Row as each note of the Sirens' song lands on the ship while Odysseus, tied to the mast, strains toward them — row to the right letter.", ody: true }
   );
+  /* v5.22: the Lit and Film game: a mode for every movie (its own game) and a mix for every genre (the genre's games
+     in turn). They are the only modes that build offers, and only that build offers them. */
+  if (typeof window !== "undefined" && window.SolLit) SolLit.GENRES.forEach(function (g) {
+    g.movies.forEach(function (m) { GAME_MODE_DEFS.push({ id: m.mode, kind: g.name, name: m.game + " · " + m.title, meta: m.meta, lit: true }); });
+    GAME_MODE_DEFS.push({ id: SolLit.mixId(g.id), kind: g.kind, name: g.name, meta: g.meta, lit: true, litGenre: g.id });
+  });
+  function isLitBuild() { return typeof window !== "undefined" && window.SOL_STATE === "LIT"; }
   /* the cards this build offers: the Odyssey-only modes appear only in the Odyssey build, and the modes
      marked noOdy (v5.12: Root Worms) only in the others; a saved pick of a card not offered falls back to All */
   function gameModeDefs() {
     var ody = typeof window !== "undefined" && window.SOL_STATE === "ODY";
-    return GAME_MODE_DEFS.filter(function (d) { return ody ? !d.noOdy : !d.ody; });
+    if (isLitBuild()) return GAME_MODE_DEFS.filter(function (d) { return d.lit; });
+    return GAME_MODE_DEFS.filter(function (d) { return !d.lit && (ody ? !d.noOdy : !d.ody); });
   }
   function readGameMode() {
     var m = "ALL";
@@ -27007,10 +27067,14 @@
     if (title) title.classList.add("hidden");
     if (skill) skill.classList.add("hidden");
     if (scr) scr.classList.remove("hidden");
-    var kicker = document.getElementById("mode-kicker");
-    if (kicker) kicker.textContent = gradeLabel(cfg.family) + " · game mode";
+    var kicker = document.getElementById("mode-kicker"), lit = cfg.family === "LIT" && window.SolLit;
+    if (kicker) kicker.textContent = gradeLabel(cfg.family) + (lit ? " · genre" : " · game mode");
+    var mT = document.getElementById("mode-title"), mG = document.getElementById("mode-tag");
+    if (mT) mT.textContent = lit ? "Pick a genre" : "Pick a game mode";
+    if (mG) mG.textContent = lit ? "Every movie has its own game. Pick a genre, then a movie." : "Play every mode in turn, or pick one mode to play on every level.";
     var host = document.getElementById("mode-packs");
     if (!host) return;
+    if (lit) return renderLitGenres(host);
     var want = readGameMode();
     host.innerHTML = "";
     gameModeDefs().forEach(function (d) {
@@ -27024,6 +27088,27 @@
         btn.classList.add("selected");
         try { localStorage.setItem(LS_GAMEMODE, d.id); } catch (e) {}
         applyGameMode(d.id);
+        showSkillScreen(1);
+      });
+      host.appendChild(btn);
+    });
+  }
+  /* v5.22: the Lit and Film game's genre cards; a genre opens its movie screen */
+  function renderLitGenres(host) {
+    var cur = litGenre();
+    host.innerHTML = "";
+    SolLit.GENRES.forEach(function (g) {
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = cur && cur.id === g.id ? "card selected" : "card";
+      btn.setAttribute("data-genre", g.id);
+      btn.setAttribute("data-gamemode", SolLit.mixId(g.id));
+      btn.innerHTML = '<span class="kind">' + g.kind + '</span><span class="name">' + g.name + '</span><span class="meta">' + g.meta + '</span>';
+      bindTap(btn, function () {
+        host.querySelectorAll(".card").forEach(function (c) { c.classList.remove("selected"); });
+        btn.classList.add("selected");
+        cfg.litGenre = g.id;
+        if (!(SolLit.genreOf(cfg.gameMode) === g)) { cfg.strand = ""; applyGameMode(SolLit.mixId(g.id)); }
         showSkillScreen(1);
       });
       host.appendChild(btn);
@@ -27051,10 +27136,10 @@
     if (modeScr) modeScr.classList.add("hidden");
     if (skill) skill.classList.remove("hidden");
     var kicker = document.getElementById("skill-kicker");
-    var ody = cfg.family === "ODY", skT = document.getElementById("skill-title"), skG = document.getElementById("skill-tag");
-    if (kicker) kicker.textContent = gradeLabel(cfg.family) + " · " + gameModeName(cfg.gameMode) + (ody ? " · episode" : " · skill focus");
-    if (skT) skT.textContent = ody ? "Pick an episode" : "Pick a skill";
-    if (skG) skG.textContent = ody ? "Choose the episode your class is reading, or play them all mixed." : "Choose a skill focus for this level, or play with all skills mixed.";
+    var ody = cfg.family === "ODY", lit = cfg.family === "LIT", skT = document.getElementById("skill-title"), skG = document.getElementById("skill-tag");
+    if (kicker) kicker.textContent = lit ? gradeLabel(cfg.family) + " · " + ((litGenre() || {}).name || "") + " · movie" : gradeLabel(cfg.family) + " · " + gameModeName(cfg.gameMode) + (ody ? " · episode" : " · skill focus");
+    if (skT) skT.textContent = ody ? "Pick an episode" : lit ? "Pick a movie" : "Pick a skill";
+    if (skG) skG.textContent = ody ? "Choose the episode your class is reading, or play them all mixed." : lit ? "Each movie has its own game and its own questions. Each keeps its own level." : "Choose a skill focus for this level, or play with all skills mixed.";
     renderSkillCards(cfg.family);
     refreshSkillSaveLine();
   }
@@ -27469,11 +27554,11 @@
     var cont = document.getElementById("btn-continue");
     if (!line) return;
     if (!hasSavedNight()) {
-      line.textContent = "No level saved on this Chromebook yet. " + (window.SOL_STATE === "ODY" ? "Tap The Odyssey" : "Tap a grade") + " to start Level 1. Each game mode keeps its own level.";
+      line.textContent = "No level saved on this Chromebook yet. " + (window.SOL_STATE === "ODY" ? "Tap The Odyssey" : window.SOL_STATE === "LIT" ? "Tap Lit and Film" : "Tap a grade") + " to start Level 1. Each game mode keeps its own level.";
       if (cont) cont.classList.add("hidden");
       return;
     }
-    line.textContent = "Level " + n + " saved in " + modeLabel(cfg.gameMode) + " on this Chromebook. " + (window.SOL_STATE === "ODY" ? "Tap The Odyssey" : "Tap a grade") + ", then pick a game mode: each mode keeps its own level.";
+    line.textContent = "Level " + n + " saved in " + modeLabel(cfg.gameMode) + " on this Chromebook. " + (window.SOL_STATE === "ODY" ? "Tap The Odyssey" : window.SOL_STATE === "LIT" ? "Tap Lit and Film" : "Tap a grade") + ", then pick a game mode: each mode keeps its own level.";
     if (cont) {
       cont.textContent = n > 1 ? ("Continue Level " + n) : "Continue";
       cont.classList.toggle("hidden", n <= 1 && !hasSavedNight());
@@ -27735,7 +27820,7 @@
     if (strand) cfg.strand = strand;
     /* v4.9.1: the gateway is always the first screen; the last choice is only pre-highlighted. */
     var savedState = localStorage.getItem(LS_STATE);
-    if (!(savedState && STATE_DEFS[savedState])) savedState = fam === "NJ5" ? "NJ" : fam === "ODY" ? "ODY" : (fam ? "VA" : null);
+    if (!(savedState && STATE_DEFS[savedState])) savedState = fam === "NJ5" ? "NJ" : fam === "ODY" ? "ODY" : fam === "LIT" ? "LIT" : (fam ? "VA" : null);
     if (LOCKED_STATE) savedState = null;
     if (savedState) {
       applyState(savedState, true);

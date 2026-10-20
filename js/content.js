@@ -1544,11 +1544,12 @@
     { id: "G11", label: "Selection 3 · Grade 11", meta: "All skills 9–11. Heavier analysis, tone, organization, and Select TWO." },
     { id: "ALL", label: "All skills", meta: "Legacy Grade 9 mix — same pool as Selection 1." },
     { id: "NJ5", label: "New Jersey · Grade 5", meta: "NJSLA-ELA grade 5: literature, informational, vocabulary and paired texts, with Part A / Part B evidence pairs." },
-    { id: "ODY", label: "The Odyssey · English 9", meta: "Unit 2: the Lotus-Eaters, the Cyclops, Circe, the cattle of Helios and Calypso." }
+    { id: "ODY", label: "The Odyssey · English 9", meta: "Unit 2: the Lotus-Eaters, the Cyclops, Circe, the cattle of Helios and Calypso." },
+    { id: "LIT", label: "Lit and Film · Grades 11–12", meta: "Film history, film language and the genres: a game and a question set for every movie." }
   ];
   /* Which pack families feed each selection. Virginia selections are cumulative
      (the Grade 10 card promises "Grade 9 and Grade 10 skills mixed"). */
-  var FAMILY_POOL = { G9: ["G9"], G10: ["G9", "G10"], G11: ["G9", "G10", "G11"], NJ5: ["NJ5"], ODY: ["ODY"], ALL: ["G9"] };
+  var FAMILY_POOL = { G9: ["G9"], G10: ["G9", "G10"], G11: ["G9", "G10", "G11"], NJ5: ["NJ5"], ODY: ["ODY"], LIT: ["LIT"], ALL: ["G9"] };
   /* v5.9: the Odyssey game's skill screen picks an episode; every ODY pack names one. */
   var EPISODES = ["LOTUS", "CYCLOPS", "CIRCE", "HELIOS", "CALYPSO", "VOYAGE"];
   /* v5.12.2: the Odyssey is read in story order, not by passage length. Within an episode the scenes come in the
@@ -1613,6 +1614,8 @@
     strand = String(strand || "ALL").toUpperCase();
     if (!strand || strand === "ALL" || strand === "NULL") return true;
     if (EPISODES.indexOf(strand) !== -1) return String((pack && pack.episode) || "").toUpperCase() === strand;
+    /* v5.22: the Lit and Film game: a movie's episode, a genre's basics, or G:<GENRE> for all of a genre (js/lit.js) */
+    if (pack && pack.family === "LIT" && global.SolLit && global.SolLit.isLitStrand(strand)) return global.SolLit.strandMatchesPack(strand, pack);
     if (!/^(RL|RI|RV|DSR)$/.test(strand)) return true;
     return strandOf(claim) === strand;
   }
@@ -1698,6 +1701,7 @@
           passage: p.passage,
           packTitle: p.title,
           episode: p.episode || null,
+          genre: p.genre || null,
           seq: p.family === "ODY" && ODY_STORY.indexOf(p.id) !== -1 ? ODY_STORY.indexOf(p.id) * 100 + p.claims.indexOf(c) : null,
           family: p.family
         });
