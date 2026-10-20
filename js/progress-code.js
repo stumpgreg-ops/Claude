@@ -434,7 +434,7 @@
       d.answered = r.num(); d.right = r.num(); d.wrong = r.num();
       d.modes = r.num();
       var ns = r.num();
-      if (ns > 20) throw new Error("skills");
+      if (ns > 40) throw new Error("skills");   /* v5.22: Lit and Film has 24 (its movies and genres) */
       d.skills = [];
       for (var s = 0; s < ns; s++) {
         var def = B.skills[s] || ["S" + (s + 1), B.skillWord + " " + (s + 1)];
