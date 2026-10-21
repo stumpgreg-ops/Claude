@@ -596,6 +596,24 @@ function makeZip(files) {
   var skc = await skPage.evaluate(function () { return Array.prototype.map.call(document.querySelectorAll("#std table.std thead th"), function (t) { return t.textContent; }); });
   check(skc[1] === "LOTS" && skc[2] === "HOTS" && skc.indexOf("9.RL.2.A.1LOTS") !== -1 && skc.indexOf("9.RL.2.A.2HOTS") !== -1, "Student by student: LOTS and HOTS columns, then each skill: " + skc.join(", "));
   check(/\nAll LOTS skills,,LOTS,/.test(sk.csv) && /\n9\.RL\.2\.A,9\.RL\.2\.A\.2,HOTS,Literary,Analyze how poetic devices/.test(sk.csv) && /LOTS answered/.test(sk.csv), "the standards CSV lists LOTS/HOTS totals and each skill with its level");
+  /* v5.21: the Excel file with bar charts: one sheet, the class's chart first, then the tables and each student's chart */
+  var xb = Buffer.from(await skPage.evaluate(function () { return Array.from(TeacherPage.stdXlsx()); })), xf = {};
+  for (var xo = xb.readUInt32LE(xb.length - 6), xi = 0; xi < xb.readUInt16LE(xb.length - 12); xi++) {
+    var xn = xb.readUInt16LE(xo + 28), xl = xb.readUInt32LE(xo + 42), xs = xb.readUInt32LE(xo + 20), xname = xb.toString("utf8", xo + 46, xo + 46 + xn);
+    var xd = xl + 30 + xb.readUInt16LE(xl + 26) + xb.readUInt16LE(xl + 28), xt = xb.toString("utf8", xd, xd + xs);
+    check(xb.readUInt32LE(xo + 16) === require("zlib").crc32(xb.subarray(xd, xd + xs)), "the Excel file's " + xname + " has the right CRC");
+    xf[xname] = xt; xo += 46 + xn;
+  }
+  var xsheet = xf["xl/worksheets/sheet1.xml"] || "", xc1 = xf["xl/charts/chart1.xml"] || "";
+  check(xf["[Content_Types].xml"] && /<sheet name="Standards"/.test(xf["xl/workbook.xml"]) && !xf["xl/worksheets/sheet2.xml"] && xf["xl/charts/chart3.xml"] && !xf["xl/charts/chart4.xml"],
+    "the Excel file has one sheet and three bar charts (the class, then each of the two students): " + Object.keys(xf).join(", "));
+  check(/<c:barDir val="bar"\/>/.test(xc1) && /The class: % right on the first try/.test(xc1) && /<c:v>9\.RL\.2\.A\.2 \(HOTS\)<\/c:v>/.test(xc1) && /<c:v>45<\/c:v>/.test(xc1) && /C4553F/.test(xc1),
+    "the class's chart has a bar for each skill (9.RL.2.A.2 HOTS at 45%, in red)");
+  check(/All HOTS skills/.test(xsheet) && /Student by student/.test(xsheet) && /Ann Smith/.test(xsheet) && !/Analyze how poetic devices/.test(xsheet) && /<drawing r:id="rId1"\/>/.test(xsheet),
+    "under the chart: the class table and student by student, with codes and levels but not the standards' full text");
+  var xr = /<c:f>'Standards'!\$C\$(\d+):/.exec(xc1), xrow = xr && new RegExp('<row r="' + xr[1] + '"[^>]*><c r="A' + xr[1] + '"[^>]*><is><t xml:space="preserve">All LOTS skills<').test(xsheet);
+  check(xrow, "the class's chart reads its bars from the class table's rows");
+  check(await skPage.evaluate(function () { var a = document.getElementById("std-xlsx"); return /^blob:/.test(a.href) && /standards-charts-.*\.xlsx$/.test(a.download); }), "the Download the bar charts (Excel) button is ready");
   await skPage.click('#std .tab[data-sp="class"]');
   await skPage.screenshot({ path: path.join(shots, "pg-12b-skills.png"), fullPage: true });
   await skPage.close();

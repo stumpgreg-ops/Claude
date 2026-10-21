@@ -732,6 +732,209 @@
     return csvText(out, ",");
   }
 
+  /* ── v5.21: the standards report as an Excel workbook with bar charts ──
+     One sheet, the class's bar chart first (a bar for each standard and skill: the class's % right on the first try,
+     green/yellow/red), then the class table, the student-by-student table (% right on each skill, coloured) and a
+     small bar chart for each student. Codes and levels only, not the standards' full text (that is on the page and in
+     the CSV). Built here with no library: an .xlsx is a zip of XML files, and this zip stores them uncompressed. */
+  var CRC = (function () { var t = [], c, n, k; for (n = 0; n < 256; n++) { c = n; for (k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; } return t; })();
+  function crc32(b) { var c = -1; for (var i = 0; i < b.length; i++) c = CRC[(c ^ b[i]) & 255] ^ (c >>> 8); return (c ^ -1) >>> 0; }
+  function toUtf8(s) { return new TextEncoder().encode(s); }
+  /* files: [[name, text]] -> the zip's bytes (every file "stored") */
+  function zipStore(files) {
+    var d = new Date(), time = d.getHours() << 11 | d.getMinutes() << 5 | d.getSeconds() >> 1, date = (d.getFullYear() - 1980) << 9 | (d.getMonth() + 1) << 5 | d.getDate();
+    var parts = [], central = [], off = 0;
+    function head(sig, n) { var h = new DataView(new ArrayBuffer(n)); h.setUint32(0, sig, true); return h; }
+    files.forEach(function (f) {
+      var name = toUtf8(f[0]), data = toUtf8(f[1]), crc = crc32(data), l = head(0x04034b50, 30), c = head(0x02014b50, 46);
+      l.setUint16(4, 20, true); l.setUint16(10, time, true); l.setUint16(12, date, true);
+      l.setUint32(14, crc, true); l.setUint32(18, data.length, true); l.setUint32(22, data.length, true); l.setUint16(26, name.length, true);
+      c.setUint16(4, 20, true); c.setUint16(6, 20, true); c.setUint16(12, time, true); c.setUint16(14, date, true);
+      c.setUint32(16, crc, true); c.setUint32(20, data.length, true); c.setUint32(24, data.length, true); c.setUint16(28, name.length, true); c.setUint32(42, off, true);
+      parts.push(new Uint8Array(l.buffer), name, data);
+      central.push(new Uint8Array(c.buffer), name);
+      off += 30 + name.length + data.length;
+    });
+    var size = central.reduce(function (m, p) { return m + p.length; }, 0), e = head(0x06054b50, 22);
+    e.setUint16(8, files.length, true); e.setUint16(10, files.length, true); e.setUint32(12, size, true); e.setUint32(16, off, true);
+    var out = new Uint8Array(off + size + 22), p = 0;
+    parts.concat(central, [new Uint8Array(e.buffer)]).forEach(function (a) { out.set(a, p); p += a.length; });
+    return out;
+  }
+  function xe(s) { return String(s).replace(/[\x00-\x08\x0b\x0c\x0e-\x1f]/g, "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
+  function colName(i) { var s = ""; for (i++; i; i = Math.floor((i - 1) / 26)) s = String.fromCharCode(65 + (i - 1) % 26) + s; return s; }
+  var XML = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n', NS = "http://schemas.openxmlformats.org/", NS_S = NS + "spreadsheetml/2006/main",
+    NS_R = NS + "officeDocument/2006/relationships", NS_A = NS + "drawingml/2006/main", NS_C = NS + "drawingml/2006/chart", NS_P = NS + "package/2006/relationships";
+  /* the cell styles (index = s="…" in a cell): 1 title, 2 note, 3 section heading, 4 table heading, 5 skill (indented),
+     6 standard / class total (bold, grey), 7 text, 8 number, 9-11 % right green / yellow / red, 12 "–" (not answered) */
+  var XS = { title: 1, note: 2, sect: 3, head: 4, skill: 5, std: 6, text: 7, num: 8, hi: 9, mid: 10, lo: 11, none: 12 };
+  function stylesXml() {
+    var b = ' borderId="1" applyBorder="1"', mid = '<alignment horizontal="center" vertical="center"/>';
+    return XML + '<styleSheet xmlns="' + NS_S + '"><numFmts count="1"><numFmt numFmtId="164" formatCode="0&quot;%&quot;"/></numFmts>' +
+      '<fonts count="8"><font><sz val="11"/><name val="Calibri"/></font><font><b/><sz val="11"/><name val="Calibri"/></font>' +
+      '<font><b/><sz val="16"/><color rgb="FF1F3864"/><name val="Calibri"/></font><font><i/><sz val="10"/><color rgb="FF595959"/><name val="Calibri"/></font>' +
+      '<font><b/><sz val="11"/><color rgb="FF006100"/><name val="Calibri"/></font><font><b/><sz val="11"/><color rgb="FF9C5700"/><name val="Calibri"/></font>' +
+      '<font><b/><sz val="11"/><color rgb="FF9C0006"/><name val="Calibri"/></font><font><b/><sz val="13"/><color rgb="FF1F3864"/><name val="Calibri"/></font></fonts>' +
+      '<fills count="7"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill>' +
+      ["D9E1F2", "C6EFCE", "FFEB9C", "FFC7CE", "F2F2F2"].map(function (c) { return '<fill><patternFill patternType="solid"><fgColor rgb="FF' + c + '"/><bgColor indexed="64"/></patternFill></fill>'; }).join("") + "</fills>" +
+      '<borders count="2"><border><left/><right/><top/><bottom/><diagonal/></border><border>' +
+      ["left", "right", "top", "bottom"].map(function (k) { return "<" + k + ' style="thin"><color rgb="FFBFBFBF"/></' + k + ">"; }).join("") + "<diagonal/></border></borders>" +
+      '<cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs><cellXfs count="13">' +
+      '<xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/>' +
+      '<xf numFmtId="0" fontId="2" fillId="0" borderId="0" xfId="0" applyFont="1"/>' +
+      '<xf numFmtId="0" fontId="3" fillId="0" borderId="0" xfId="0" applyFont="1"/>' +
+      '<xf numFmtId="0" fontId="7" fillId="0" borderId="0" xfId="0" applyFont="1"/>' +
+      '<xf numFmtId="0" fontId="1" fillId="2" xfId="0" applyFont="1" applyFill="1" applyAlignment="1"' + b + '><alignment horizontal="center" vertical="center" wrapText="1"/></xf>' +
+      '<xf numFmtId="0" fontId="0" fillId="0" xfId="0" applyAlignment="1"' + b + '><alignment indent="2" vertical="center"/></xf>' +
+      '<xf numFmtId="0" fontId="1" fillId="6" xfId="0" applyFont="1" applyFill="1"' + b + "/>" +
+      '<xf numFmtId="0" fontId="0" fillId="0" xfId="0"' + b + "/>" +
+      '<xf numFmtId="0" fontId="0" fillId="0" xfId="0" applyAlignment="1"' + b + ">" + mid + "</xf>" +
+      [[4, 3], [5, 4], [6, 5]].map(function (x) { return '<xf numFmtId="164" fontId="' + x[0] + '" fillId="' + x[1] + '" xfId="0" applyNumberFormat="1" applyFont="1" applyFill="1" applyAlignment="1"' + b + ">" + mid + "</xf>"; }).join("") +
+      '<xf numFmtId="0" fontId="3" fillId="0" xfId="0" applyFont="1" applyAlignment="1"' + b + ">" + mid + "</xf>" +
+      '</cellXfs><cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles></styleSheet>';
+  }
+  var BAR = { "c-hi": "3FA864", "c-mid": "C9A227", "c-lo": "C4553F" };
+  /* a horizontal bar chart: o.title, o.cat / o.val (the cells' column letters), o.r0 (first row, 1-based), o.labels, o.vals (null = no bar) */
+  function chartXml(o) {
+    var n = o.labels.length, cats = "", nums = "", pts = "";
+    function rng(col) { return "'Standards'!$" + col + "$" + o.r0 + ":$" + col + "$" + (o.r0 + n - 1); }
+    function fill(c) { return '<c:spPr><a:solidFill><a:srgbClr val="' + c + '"/></a:solidFill></c:spPr>'; }
+    function txt(sz) { return '<c:txPr><a:bodyPr/><a:lstStyle/><a:p><a:pPr><a:defRPr sz="' + sz + '"/></a:pPr><a:endParaRPr lang="en-US"/></a:p></c:txPr>'; }
+    o.labels.forEach(function (l, i) { cats += '<c:pt idx="' + i + '"><c:v>' + xe(l) + "</c:v></c:pt>"; });
+    o.vals.forEach(function (v, i) {
+      if (v == null) return;
+      nums += '<c:pt idx="' + i + '"><c:v>' + v + "</c:v></c:pt>";
+      pts += '<c:dPt><c:idx val="' + i + '"/><c:invertIfNegative val="0"/><c:bubble3D val="0"/>' + fill(BAR[cellCls(v)]) + "</c:dPt>";
+    });
+    return XML + '<c:chartSpace xmlns:c="' + NS_C + '" xmlns:a="' + NS_A + '" xmlns:r="' + NS_R + '"><c:roundedCorners val="0"/><c:chart>' +
+      '<c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:pPr><a:defRPr sz="1300" b="1"/></a:pPr><a:r><a:rPr lang="en-US" sz="1300" b="1"/><a:t>' + xe(o.title) + '</a:t></a:r></a:p></c:rich></c:tx><c:overlay val="0"/></c:title>' +
+      '<c:autoTitleDeleted val="0"/><c:plotArea><c:layout/><c:barChart><c:barDir val="bar"/><c:grouping val="clustered"/><c:varyColors val="0"/>' +
+      '<c:ser><c:idx val="0"/><c:order val="0"/><c:tx><c:v>% right on the first try</c:v></c:tx>' + fill("3FA864") + '<c:invertIfNegative val="0"/>' + pts +
+      '<c:dLbls><c:numFmt formatCode="0&quot;%&quot;" sourceLinked="0"/><c:spPr><a:noFill/><a:ln><a:noFill/></a:ln></c:spPr>' + txt(900) +
+      '<c:dLblPos val="outEnd"/><c:showLegendKey val="0"/><c:showVal val="1"/><c:showCatName val="0"/><c:showSerName val="0"/><c:showPercent val="0"/><c:showBubbleSize val="0"/></c:dLbls>' +
+      "<c:cat><c:strRef><c:f>" + rng(o.cat) + '</c:f><c:strCache><c:ptCount val="' + n + '"/>' + cats + "</c:strCache></c:strRef></c:cat>" +
+      "<c:val><c:numRef><c:f>" + rng(o.val) + '</c:f><c:numCache><c:formatCode>General</c:formatCode><c:ptCount val="' + n + '"/>' + nums + "</c:numCache></c:numRef></c:val></c:ser>" +
+      '<c:gapWidth val="40"/><c:axId val="5001"/><c:axId val="5002"/></c:barChart>' +
+      '<c:catAx><c:axId val="5001"/><c:scaling><c:orientation val="maxMin"/></c:scaling><c:delete val="0"/><c:axPos val="l"/><c:numFmt formatCode="General" sourceLinked="0"/>' +
+      '<c:majorTickMark val="none"/><c:minorTickMark val="none"/><c:tickLblPos val="nextTo"/>' + txt(900) + '<c:crossAx val="5002"/><c:crosses val="autoZero"/><c:auto val="1"/><c:lblAlgn val="ctr"/><c:lblOffset val="100"/><c:noMultiLvlLbl val="0"/></c:catAx>' +
+      '<c:valAx><c:axId val="5002"/><c:scaling><c:orientation val="minMax"/><c:max val="100"/><c:min val="0"/></c:scaling><c:delete val="0"/><c:axPos val="b"/>' +
+      '<c:majorGridlines><c:spPr><a:ln w="6350"><a:solidFill><a:srgbClr val="D9D9D9"/></a:solidFill></a:ln></c:spPr></c:majorGridlines>' +
+      '<c:numFmt formatCode="0&quot;%&quot;" sourceLinked="0"/><c:majorTickMark val="out"/><c:minorTickMark val="none"/><c:tickLblPos val="nextTo"/>' + txt(900) +
+      '<c:crossAx val="5001"/><c:crosses val="max"/><c:crossBetween val="between"/><c:majorUnit val="20"/></c:valAx>' +
+      '</c:plotArea><c:plotVisOnly val="1"/><c:dispBlanksAs val="gap"/></c:chart></c:chartSpace>';
+  }
+  function stdXlsx() {
+    var s = stdData();
+    if (!s.codes.length) return null;
+    var grid = {}, hts = {}, charts = [], W = [30, 16];
+    function put(r, c, v, st) { (grid[r] || (grid[r] = []))[c] = { v: v, s: st }; if (st === XS.title) hts[r] = 24; if (st === XS.sect) hts[r] = 20; }
+    function pc(v) { return v == null ? XS.none : { "c-hi": XS.hi, "c-mid": XS.mid, "c-lo": XS.lo }[cellCls(v)]; }
+    function label(c) {
+      if (c === "LOTS" || c === "HOTS") return "All " + c + " skills";
+      var i = info(c);
+      return /\*$/.test(c) ? leafCode(c) + " (whole standard)" : c + (i.skill && i.level ? " (" + i.level + ")" : "");
+    }
+    var cols = ["LOTS", "HOTS"].filter(function (k) { return s.tot[k]; }).concat(s.leaves), n = s.per.length;
+    for (var w = 2; w < Math.max(12, 4 + cols.length, 1 + n); w++) W[w] = 13;
+    var colPx = W.map(function (x) { return Math.round(x * 7); });
+    /* a chart from cell (c, r) w x h pixels (every row is 15 pt = 20 px but the headings, all set here, so a chart lands
+       in the same place in Excel and LibreOffice; the rows a chart covers are left empty) */
+    function chartAt(c, r, wPx, hPx, o) {
+      var tc = c, x = wPx;
+      while (x >= (colPx[tc] || 64)) { x -= colPx[tc] || 64; tc++; }
+      charts.push({ from: [c, r], to: [tc, x, r + Math.floor(hPx / 20), hPx % 20], xml: chartXml(o) });
+      return Math.ceil(hPx / 20);
+    }
+    var made = isoTime(Date.now()).slice(0, 10), r = 0;
+    put(0, 0, B.short + " · standards report", XS.title);
+    put(1, 0, "Each bar is the class's % right on the first try (every student's answers added together). Green 80% and up, yellow 60–79%, red below 60%.", XS.note);
+    put(2, 0, "Made " + made + " from " + n + " student" + (n === 1 ? "" : "s") + "' codes." + (s.tot.LOTS || s.tot.HOTS ? " LOTS = lower-order skill (identify, explain). HOTS = higher-order skill (analyze, evaluate)." : "") +
+      (s.old ? " " + s.old + " older code" + (s.old === 1 ? " doesn't" : "s don't") + " record standards and " + (s.old === 1 ? "isn't" : "aren't") + " included." : ""), XS.note);
+    /* 1. the class's chart, then its table */
+    var list = ["LOTS", "HOTS"].filter(function (k) { return s.tot[k]; });
+    s.codes.forEach(function (c) { list.push(c); list = list.concat(s.kids[c]); });
+    var hCls = 90 + 22 * list.length;
+    r = 4 + Math.ceil(hCls / 20) + 1;
+    put(r, 0, "The class, standard by standard", XS.sect);
+    r++;
+    ["Standard / skill", "Skill area", "Class % right", "Questions", "Right first try", "Students"].forEach(function (h, i) { put(r, i, h, XS.head); });
+    hts[r] = 30;
+    chartAt(0, 4, 780, hCls, { title: "The class: % right on the first try", cat: "A", val: "C", r0: r + 2, labels: list.map(label), vals: list.map(function (c) { return pct(s.tot[c].r, s.tot[c].a); }) });
+    list.forEach(function (c) {
+      var t = s.tot[c], p = pct(t.r, t.a), skill = c !== "LOTS" && c !== "HOTS" && s.codes.indexOf(c) === -1, area = STRAND[strandOf(leafCode(c))] || "";
+      r++;
+      put(r, 0, label(c), skill ? XS.skill : XS.std);
+      put(r, 1, c === "LOTS" ? "Lower-order" : c === "HOTS" ? "Higher-order" : area, skill ? XS.text : XS.std);
+      put(r, 2, p, pc(p)); put(r, 3, t.a, XS.num); put(r, 4, t.r, XS.num); put(r, 5, t.n, XS.num);
+    });
+    /* 2. student by student: % right on each skill, coloured */
+    r += 3;
+    put(r, 0, "Student by student: % right on the first try", XS.sect);
+    r++;
+    ["Student", "Nickname"].concat(cols.map(label)).concat(["All questions", "% right, all"]).forEach(function (h, i) { put(r, i, h, XS.head); });
+    hts[r] = 45;
+    function stuRow(name, nick, m, bold) {
+      r++;
+      put(r, 0, name, bold ? XS.std : XS.text); put(r, 1, nick, bold ? XS.std : XS.text);
+      cols.forEach(function (c, i) { var x = m[c], p = x && x.a ? pct(x.r, x.a) : null; put(r, 2 + i, p == null ? "–" : p, pc(p)); });
+      var all = s.codes.reduce(function (t, c) { if (m[c]) { t.a += m[c].a; t.r += m[c].r; } return t; }, { a: 0, r: 0 }), ap = pct(all.r, all.a);
+      put(r, 2 + cols.length, all.a, XS.num); put(r, 3 + cols.length, ap == null ? "–" : ap, pc(ap));
+    }
+    stuRow("Class total", "", s.tot, true);
+    s.per.forEach(function (x) { stuRow(fullName(x.r), x.r.data.nick || "", x.m, false); });
+    /* 3. each student's chart, two to a row (its numbers are in a small table under the charts: the chart reads them;
+       an empty cell, not "–", so a skill not answered yet has no bar rather than a 0% bar) */
+    r += 3;
+    put(r, 0, "Each student's bar chart", XS.sect);
+    var hCh = 80 + 18 * cols.length, second = 0, x2 = 0;
+    while (x2 < 520) x2 += colPx[second++] || 64;
+    var top = r + 1, tbl = top + Math.ceil(n / 2) * (Math.ceil(hCh / 20) + 1) + 2;
+    put(tbl - 1, 0, "The numbers behind each student's chart", XS.sect);
+    ["Standard / skill"].concat(s.per.map(function (x) { return fullName(x.r); })).forEach(function (h, i) { put(tbl, i, h, XS.head); });
+    hts[tbl] = 30;
+    cols.forEach(function (c, j) { put(tbl + 1 + j, 0, label(c), XS.text); });
+    s.per.forEach(function (x, i) {
+      var vals = cols.map(function (c) { var m = x.m[c]; return m && m.a ? pct(m.r, m.a) : null; }), col = colName(1 + i);
+      vals.forEach(function (v, j) { put(tbl + 1 + j, 1 + i, v == null ? "" : v, pc(v)); });
+      chartAt(i % 2 ? second : 0, top + Math.floor(i / 2) * (Math.ceil(hCh / 20) + 1), 500, hCh, { title: fullName(x.r), cat: "A", val: col, r0: tbl + 2, labels: cols.map(label), vals: vals });
+    });
+
+    var rows = Object.keys(grid).map(Number).sort(function (a, b) { return a - b; });
+    var sheet = XML + '<worksheet xmlns="' + NS_S + '" xmlns:r="' + NS_R + '"><sheetPr><pageSetUpPr fitToPage="1"/></sheetPr><sheetViews><sheetView workbookViewId="0"/></sheetViews><sheetFormatPr defaultRowHeight="15" customHeight="1"/><cols>' +
+      W.map(function (x, i) { return '<col min="' + (i + 1) + '" max="' + (i + 1) + '" width="' + x + '" customWidth="1"/>'; }).join("") + "</cols><sheetData>" +
+      rows.map(function (ri) {
+        return '<row r="' + (ri + 1) + '"' + (hts[ri] ? ' ht="' + hts[ri] + '" customHeight="1"' : "") + ">" + grid[ri].map(function (cl, ci) {
+          var ref = colName(ci) + (ri + 1), st = cl.s ? ' s="' + cl.s + '"' : "";
+          if (cl.v === "" || cl.v == null) return '<c r="' + ref + '"' + st + "/>";
+          return typeof cl.v === "number" ? '<c r="' + ref + '"' + st + "><v>" + cl.v + "</v></c>" : '<c r="' + ref + '"' + st + ' t="inlineStr"><is><t xml:space="preserve">' + xe(cl.v) + "</t></is></c>";
+        }).join("") + "</row>";
+      }).join("") + '</sheetData><pageMargins left="0.5" right="0.5" top="0.6" bottom="0.6" header="0.3" footer="0.3"/>' +
+      '<pageSetup orientation="landscape" fitToWidth="1" fitToHeight="0"/><drawing r:id="rId1"/></worksheet>';
+    var EMU = 9525, rel = function (list) { return XML + '<Relationships xmlns="' + NS_P + '">' + list.map(function (x, i) { return '<Relationship Id="rId' + (i + 1) + '" Type="' + NS_R + "/" + x[0] + '" Target="' + x[1] + '"/>'; }).join("") + "</Relationships>"; };
+    var drawing = XML + '<xdr:wsDr xmlns:xdr="' + NS + 'drawingml/2006/spreadsheetDrawing" xmlns:a="' + NS_A + '" xmlns:r="' + NS_R + '">' + charts.map(function (ch, i) {
+      return '<xdr:twoCellAnchor editAs="oneCell"><xdr:from><xdr:col>' + ch.from[0] + "</xdr:col><xdr:colOff>0</xdr:colOff><xdr:row>" + ch.from[1] + "</xdr:row><xdr:rowOff>0</xdr:rowOff></xdr:from>" +
+        "<xdr:to><xdr:col>" + ch.to[0] + "</xdr:col><xdr:colOff>" + ch.to[1] * EMU + "</xdr:colOff><xdr:row>" + ch.to[2] + "</xdr:row><xdr:rowOff>" + ch.to[3] * EMU + "</xdr:rowOff></xdr:to>" +
+        '<xdr:graphicFrame macro=""><xdr:nvGraphicFramePr><xdr:cNvPr id="' + (i + 2) + '" name="Chart ' + (i + 1) + '"/><xdr:cNvGraphicFramePr/></xdr:nvGraphicFramePr>' +
+        '<xdr:xfrm><a:off x="0" y="0"/><a:ext cx="0" cy="0"/></xdr:xfrm><a:graphic><a:graphicData uri="' + NS_C + '"><c:chart xmlns:c="' + NS_C + '" r:id="rId' + (i + 1) + '"/></a:graphicData></a:graphic></xdr:graphicFrame><xdr:clientData/></xdr:twoCellAnchor>';
+    }).join("") + "</xdr:wsDr>";
+    var ct = "application/vnd.openxmlformats-officedocument.";
+    var files = [
+      ["[Content_Types].xml", XML + '<Types xmlns="' + NS + 'package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/>' +
+        '<Override PartName="/xl/workbook.xml" ContentType="' + ct + 'spreadsheetml.sheet.main+xml"/><Override PartName="/xl/worksheets/sheet1.xml" ContentType="' + ct + 'spreadsheetml.worksheet+xml"/>' +
+        '<Override PartName="/xl/styles.xml" ContentType="' + ct + 'spreadsheetml.styles+xml"/><Override PartName="/xl/drawings/drawing1.xml" ContentType="' + ct + 'drawing+xml"/>' +
+        charts.map(function (ch, i) { return '<Override PartName="/xl/charts/chart' + (i + 1) + '.xml" ContentType="' + ct + 'drawingml.chart+xml"/>'; }).join("") + "</Types>"],
+      ["_rels/.rels", rel([["officeDocument", "xl/workbook.xml"]])],
+      ["xl/workbook.xml", XML + '<workbook xmlns="' + NS_S + '" xmlns:r="' + NS_R + '"><bookViews><workbookView/></bookViews><sheets><sheet name="Standards" sheetId="1" r:id="rId1"/></sheets></workbook>'],
+      ["xl/_rels/workbook.xml.rels", rel([["worksheet", "worksheets/sheet1.xml"], ["styles", "styles.xml"]])],
+      ["xl/styles.xml", stylesXml()],
+      ["xl/worksheets/sheet1.xml", sheet],
+      ["xl/worksheets/_rels/sheet1.xml.rels", rel([["drawing", "../drawings/drawing1.xml"]])],
+      ["xl/drawings/drawing1.xml", drawing],
+      ["xl/drawings/_rels/drawing1.xml.rels", rel(charts.map(function (ch, i) { return ["chart", "../charts/chart" + (i + 1) + ".xml"]; }))]
+    ].concat(charts.map(function (ch, i) { return ["xl/charts/chart" + (i + 1) + ".xml", ch.xml]; }));
+    return zipStore(files);
+  }
+
   /* ── files out ── */
   function csvText(out, sep) {
     return out.map(function (l) {
@@ -776,7 +979,8 @@
   function link(a, text, name) {
     try {
       if (a._url) URL.revokeObjectURL(a._url);
-      a._url = text == null ? null : URL.createObjectURL(new Blob(["﻿" + text], { type: "text/csv" }));
+      a._url = text == null ? null : URL.createObjectURL(typeof text === "string" ? new Blob(["﻿" + text], { type: "text/csv" }) :
+        new Blob([text], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" }));
       a.href = a._url || "#";
       a.download = name;
     } catch (e) { a.href = "#"; }
@@ -786,6 +990,7 @@
   function paintFiles() {
     link($("csv"), rows.length ? table(",") : null, fileStem() + "progress-" + isoTime(Date.now()).slice(0, 10) + ".csv");
     link($("std-csv"), rows.some(mine) ? stdCsv() : null, fileStem() + "standards-" + isoTime(Date.now()).slice(0, 10) + ".csv");
+    link($("std-xlsx"), rows.some(mine) ? stdXlsx() : null, fileStem() + "standards-charts-" + isoTime(Date.now()).slice(0, 10) + ".xlsx");
     var imp = importCsv(), hint = $("import-hint"), cols = assignCols();
     link($("import"), imp, fileStem() + "canvas-gradebook-import-" + isoTime(Date.now()).slice(0, 10) + ".csv");
     if (!roster) hint.textContent = "The Canvas gradebook import file needs your class list: drop your gradebook export in box 2.";
@@ -859,6 +1064,10 @@
       showCopy(text, "If the download didn't start (Canvas can block downloads), copy this text instead: press Ctrl+C, paste it into a spreadsheet and save it as .csv.");
     });
   });
+  $("std-xlsx").addEventListener("click", function (e) {
+    if (!rows.length || !stdXlsx()) { e.preventDefault(); msg(rows.length ? "These codes have no standards detail yet: ask for new codes." : "Add some codes first.", true); return; }
+    msg("If the Excel file didn't download (Canvas can block downloads), open the teacher page file from the Canvas zip on your computer and download it there.");
+  });
   $("copy").addEventListener("click", function () {
     if (!rows.length) { msg("Add some codes first.", true); return; }
     var text = table("\t");
@@ -916,6 +1125,6 @@
   paintRounds();
   setView(view);
   window.TeacherPage = { addText: addText, readFiles: readFiles, rows: function () { return rows; }, table: table, grade: grade, readZip: readZip, nameFromFile: nameFromFile,
-    importCsv: importCsv, stdCsv: stdCsv, roster: function () { return roster; }, setView: setView, readRoster: readRoster, fileInfo: fileInfo,
+    importCsv: importCsv, stdCsv: stdCsv, stdXlsx: stdXlsx, roster: function () { return roster; }, setView: setView, readRoster: readRoster, fileInfo: fileInfo,
     finishRound: finishRound, undoRound: undoRound, rounds: function () { return rounds; } };
 })();
