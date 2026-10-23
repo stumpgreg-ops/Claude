@@ -173,7 +173,9 @@
   /* m: a game mode ("ALL", "maze", a shooter's id) or nothing for the one being played */
   function isMixed(m) {
     if (m == null) m = (typeof window !== "undefined" && window.SolModes && window.SolModes.only) || "ALL";
-    return m === "ALL";
+    if (m === "ALL") return true;
+    /* a pick this game can't play (Root Worms in the Odyssey) plays the Mixed rotation, as modeFor does */
+    return m !== "maze" && !(MODES[m] && !(MODES[m].noOdy && isOdy()));
   }
   function perRealm(m) { return isMixed(m) ? MIX_PER : 10; }
   function maxLevel(m) { return perRealm(m) * 10; }
