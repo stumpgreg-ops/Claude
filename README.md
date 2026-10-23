@@ -29,6 +29,17 @@ A game uploaded to Canvas can't send anything anywhere, so progress is shown to 
 
 Tests: `node tools/smoke-progress.js` (after `node tools/build-games.js`, `node tools/build-appsscript.js VA|ODY` and `node tools/build-canvas.js VA|ODY`).
 
+## v5.22.0 (2026-10-23) — a teacher preview of the Virginia game, questions skipped
+
+**SOL Lab VA Eng teacher preview.zip** (`dist/canvas/`) is a copy of the Virginia game for a teacher to try every level, every game mode and the castle/town builder without reading questions. It is not for students. Unzip it and double-click `SOLLabyrinth-VA-TeacherPreview.html` (the READ ME in the zip says how, and how to put it in Canvas unpublished).
+- **No questions.** The pop-up shows only at the start of a level (the realm or game-mode card), with a note in place of the passage. The side panel shows the same note, and no pop-up comes between questions.
+- **Any letter is right.** The first letter grabbed in the maze, or shot or beamed in a shooter level, becomes the answer, so a level plays exactly as it does for a student who answers right. Blasting a Rune Rocks letter costs no life.
+- **Jump to any level.** The skill screen has a *Level 1–100 · Play this level* box for the chosen game mode.
+- **Coins for the builder.** *Give me 10,000 coins* on the title screen.
+- **Kept apart from students.** The preview has a red *TEACHER PREVIEW* banner. It has no class code, *Submit my progress* or *Restore*. Its saves are its own (`afterHours.preview.*`).
+
+The preview is `js/preview.js`, which only this build loads. `tools/build-games.js` makes `dist/vap/` (the `VAP` entry: Virginia's questions, `window.SOL_STATE = "VA"` plus `window.SOL_PREVIEW = true`). Then `node tools/build-appsscript.js VAP` and `node tools/build-canvas.js VAP` make the zip. Test: `node tools/smoke-preview.js`.
+
 ## v5.21.0 (2026-10-21) — the standards report as bar charts in Excel
 
 On the teacher page's **Standards** tab, **Download the bar charts (Excel)** saves one Excel sheet that opens on a bar chart: a bar for each standard and skill (and All LOTS / All HOTS) showing the class's % right on the first try, green 80% and up, yellow 60–79%, red below 60%. Under the chart are the class table (standard or skill, skill area, class % right, questions, right first try, students), *Student by student* (one row per student, a coloured % for each skill, then all questions and % right overall), and a small bar chart for each student, two to a row. The sheet shows codes and LOTS/HOTS, not the standards' full text (that is still on the page and in the CSV). The CSV download is unchanged. The file is built in the page itself (`stdXlsx` in `tools/teacher/teacher.js`, an .xlsx written without any library), so it works offline and in Canvas; it opens in Excel, Google Sheets, Numbers and LibreOffice.

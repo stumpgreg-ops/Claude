@@ -14,7 +14,10 @@
    The Odyssey build (ODY) is also reskinned: its own title and logo, css/odyssey.css and js/odyssey.js
    (the look, and the realm and mode tables retold at runtime), and tools/ody-theme.js rewrites the words
    players read in its copies of the scripts, index.html and the castle trophies (review:
-   dist/ody-theme-review.txt). Those two files and the Odyssey logo stay out of the other builds. */
+   dist/ody-theme-review.txt). Those two files and the Odyssey logo stay out of the other builds.
+   v5.22: dist/vap/ is the TEACHER PREVIEW of the Virginia game ("of": "VA": Virginia's questions, SOL_STATE "VA"):
+   window.SOL_PREVIEW = true and js/preview.js (questions skipped, any letter right, jump to any level, coins for the
+   builder; no other build loads it), with its own saves (afterHours.preview.*). Not for students. */
 var fs = require("fs"), path = require("path"), cp = require("child_process");
 var root = path.join(__dirname, ".."), dist = path.join(root, "dist");
 var version = process.argv[2] || (function () {
@@ -45,12 +48,17 @@ var STATES = {
   /* its own saves (afterHours.ody.*), so it never shares a level, town or used-question list
      with the Virginia game when both are opened from the same site */
   ODY: { name: "The Odyssey", families: ["ODY"], def: "ODY", zip: "SOLLabyrinth-Odyssey", savePrefix: "afterHours.ody.",
-         title: "The Odyssey: Labyrinth of the Wine-Dark Sea", logo: "assets/logo/odyssey-labyrinth-512.png", theme: "./ody-theme" }
+         title: "The Odyssey: Labyrinth of the Wine-Dark Sea", logo: "assets/logo/odyssey-labyrinth-512.png", theme: "./ody-theme" },
+  /* v5.22: the teacher preview of the Virginia game (js/preview.js); its own saves, so it never touches a student's */
+  VAP: { of: "VA", name: "Virginia", families: ["G9", "G10", "G11"], def: "G9", zip: "SOLLabyrinth-VA-TeacherPreview", savePrefix: "afterHours.preview.",
+         preview: true, title: "SOL Labyrinth · Virginia · Teacher preview" }
 };
+/* the state whose questions a build carries (a variant like VAP names it with "of") */
+function own(st) { return STATES[st].of || st; }
 /* every other state's content files are left out of a build */
 function dropFor(st) {
   var out = [];
-  Object.keys(STATES).forEach(function (o) { if (o !== st) out = out.concat(CONTENT[o]); });
+  Object.keys(CONTENT).forEach(function (o) { if (o !== "shared" && o !== own(st)) out = out.concat(CONTENT[o]); });
   return out;
 }
 
@@ -81,7 +89,7 @@ function rewriteIndex(html, st) {
   out = out.replace(/\?v=[0-9.]+/g, "?v=" + version);
   out = out.replace(/(<p class="ver">)v[0-9.]+/g, "$1v" + version);   /* the version label on the title screen */
   /* the state is set before any script runs */
-  must(/<\/head>/, '  <script>window.SOL_STATE = "' + st + '";</script>\n</head>', "</head>");
+  must(/<\/head>/, '  <script>window.SOL_STATE = "' + own(st) + '";' + (def.preview ? " window.SOL_PREVIEW = true;" : "") + '</script>\n</head>', "</head>");
   /* the gateway starts hidden, the title screen visible (also right with JavaScript off) */
   must(/<section id="state-screen" class="screen">/, '<section id="state-screen" class="screen hidden">', "gateway section");
   must(/<section id="title-screen" class="screen hidden">/, '<section id="title-screen" class="screen">', "title section");
@@ -109,7 +117,9 @@ function rewriteIndex(html, st) {
     must(/(\n(\s*)<script src="js\/accommodations\.js\?v=[0-9.]+"><\/script>)/, '\n$2<script src="js/acc-ody.js?v=' + version + '"></script>$1', "accommodations.js script tag");
   }
   /* v5.19: Virginia's word lists for the accommodations (tools/acc-words.js writes js/acc-va.js) */
-  if (st === "VA" && fs.existsSync(path.join(root, "js", "acc-va.js"))) must(/(\n(\s*)<script src="js\/accommodations\.js\?v=[0-9.]+"><\/script>)/, '\n$2<script src="js/acc-va.js?v=' + version + '"></script>$1', "accommodations.js script tag");
+  if (own(st) === "VA" && fs.existsSync(path.join(root, "js", "acc-va.js"))) must(/(\n(\s*)<script src="js\/accommodations\.js\?v=[0-9.]+"><\/script>)/, '\n$2<script src="js/acc-va.js?v=' + version + '"></script>$1', "accommodations.js script tag");
+  /* v5.22: the teacher preview's own script, just before game.js (it hooks the scenes as game.js installs them) */
+  if (def.preview) must(/(\n(\s*)<script src="js\/game\.js\?v=[0-9.]+"><\/script>)/, '\n$2<script src="js/preview.js?v=' + version + '"></script>$1', "game.js script tag");
   /* no "change state" button */
   must(/\s*<button type="button" class="btn" id="btn-state"[^>]*>[^<]*<\/button>/, "", "btn-state");
   /* only this state's content files */
@@ -124,7 +134,7 @@ function rewriteIndex(html, st) {
 var teacherPage = require("./build-teacher");
 /* the dev page (index.html in the repository) opens teacher/VA.html, NJ.html or ODY.html too (not committed) */
 fs.mkdirSync(path.join(root, "teacher"), { recursive: true });
-Object.keys(STATES).forEach(function (st) { fs.writeFileSync(path.join(root, "teacher", st + ".html"), teacherPage.build(st, version)); });
+Object.keys(STATES).forEach(function (st) { if (!STATES[st].of) fs.writeFileSync(path.join(root, "teacher", st + ".html"), teacherPage.build(st, version)); });
 fs.rmSync(dist, { recursive: true, force: true });
 Object.keys(STATES).forEach(function (st) {
   var def = STATES[st], out = path.join(dist, st.toLowerCase()), drop = dropFor(st);
@@ -136,13 +146,14 @@ Object.keys(STATES).forEach(function (st) {
     if (st !== "ODY" && /^(js\/odyssey\.js|css\/odyssey\.css|assets\/logo\/odyssey-)/.test(rel.split(path.sep).join("/"))) return true;
     /* each game's own word lists for the accommodations (v5.19) */
     if (rel === path.join("js", "acc-ody.js") && st !== "ODY") return true;
-    if (rel === path.join("js", "acc-va.js") && st !== "VA") return true;
+    if (rel === path.join("js", "acc-va.js") && own(st) !== "VA") return true;
+    if (rel === path.join("js", "preview.js") && !def.preview) return true;   /* v5.22: the teacher preview only */
     return false;
   });
   fs.writeFileSync(path.join(out, "index.html"), rewriteIndex(fs.readFileSync(path.join(root, "index.html"), "utf8"), st));
   /* v5.15: the game's Teacher screen (js/teacher-screen.js) opens teacher/<STATE>.html */
   fs.mkdirSync(path.join(out, "teacher"), { recursive: true });
-  fs.writeFileSync(path.join(out, "teacher", st + ".html"), teacherPage.build(st, version));
+  fs.writeFileSync(path.join(out, "teacher", own(st) + ".html"), teacherPage.build(own(st), version));
   if (def.theme) {
     if (def.logo && !fs.existsSync(path.join(out, def.logo))) console.warn("tools/build-games.js: warning: " + def.logo + " is missing — the title screen of " + def.name + " will show no logo");
     var th = require(def.theme).apply(out);

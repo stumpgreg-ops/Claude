@@ -1,4 +1,4 @@
-/* Build the Canvas (LMS) version of a state's game: node tools/build-canvas.js [VA|NJ|ODY]
+/* Build the Canvas (LMS) version of a state's game: node tools/build-canvas.js [VA|NJ|ODY|VAP]
    (run tools/build-games.js and tools/build-appsscript.js first; tools/publish-pages.sh runs all three).
 
    Files a teacher uploads to one folder in Canvas Files and embeds in a Canvas page: nothing is hosted on GitHub
@@ -31,7 +31,7 @@ var page = fs.readFileSync(path.join(src, "loader.html"), "utf8");
 var m = page.match(/<script>([\s\S]*)<\/script>/);
 if (!m) throw new Error("tools/build-canvas.js: no loader script in loader.html");
 var loaderJs = m[1];
-var base = st === "ODY" ? "SOLLabyrinth-Odyssey" : "SOLLabyrinth-" + st;   /* v5.9: the Odyssey game has its own file names */
+var base = st === "ODY" ? "SOLLabyrinth-Odyssey" : st === "VAP" ? "SOLLabyrinth-VA-TeacherPreview" : "SOLLabyrinth-" + st;   /* v5.9: the Odyssey game has its own file names */
 /* v5.13.1: the zips' own names. VA's are "SOL Lab VA Eng.zip" and "SOL Lab VA Eng update.zip"; the files inside keep
    their SOLLabyrinth-VA-* names, so an update still replaces the files already in Canvas. */
 var zipFull = st === "VA" ? "SOL Lab VA Eng.zip" : base + "-Canvas.zip";
@@ -75,6 +75,51 @@ fs.writeFileSync(path.join(out, base + ".html"), starter);
 fs.readdirSync(out).forEach(function (f) { if (f !== base + ".html" && f !== game && files.indexOf(f) < 0) fs.unlinkSync(path.join(out, f)); });
 var old = path.join(outAll, base + "-Canvas.html");
 if (fs.existsSync(old)) fs.unlinkSync(old);
+
+/* v5.22: the teacher preview (VAP) is one zip with a short READ ME: no grading, no update zip, no teacher page */
+if (st === "VAP") {
+  var pvZip = path.join(outAll, "SOL Lab VA Eng teacher preview.zip"), pvDir = fs.mkdtempSync(path.join(outAll, ".readme-"));
+  var pvRm = path.join(pvDir, "READ ME FIRST - teacher preview.txt");
+  fs.writeFileSync(pvRm, [
+    "Sol's Labyrinth (Virginia) - TEACHER PREVIEW - version " + man.version,
+    "================================================================================",
+    "",
+    "This copy of the game is for YOU, the teacher. Do not give it to students.",
+    "",
+    "What is different from the students' game",
+    "-----------------------------------------",
+    "- The questions are skipped. No passage, no question: any letter you grab (in the maze) or shoot (in the",
+    "  other game modes) counts as the right answer, so every level plays the way it does for a student who",
+    "  answers right.",
+    "- You can jump to any level from 1 to 100: pick a grade, pick a game mode, then type a level number and",
+    "  click \"Play this level\".",
+    "- \"Give me 10,000 coins\" on the first screen lets you try the castle/town builder (click My Town).",
+    "  You also get the builder's reward screen when you win level 5, 10, 15 and so on.",
+    "- Its saves are its own: nothing you do here changes a student's game, level or town, and it sends no",
+    "  progress codes.",
+    "",
+    "Play it on your computer (easiest)",
+    "----------------------------------",
+    "1. Unzip this file. Windows: right-click it and choose \"Extract All\", then click Extract.",
+    "   Mac: double-click it.",
+    "2. Open the folder that appears.",
+    "3. Double-click " + base + ".html. It opens in your web browser (Chrome works best).",
+    "   The first time it takes a few seconds to load.",
+    "4. Keep all the files in the same folder: the .html page needs the .js files next to it.",
+    "",
+    "Want it in Canvas instead?",
+    "--------------------------",
+    "Follow the same steps as the students' game (the READ ME in SOL Lab VA Eng.zip), but put these files in a",
+    "NEW folder and keep the folder and the page UNPUBLISHED, so students never see it.",
+    "",
+    "Files: " + base + ".html, " + game + ", " + files[0] + " ... " + files[files.length - 1]
+  ].join("\r\n") + "\r\n");
+  if (fs.existsSync(pvZip)) fs.unlinkSync(pvZip);
+  cp.execFileSync("zip", ["-q", "-X", "-j", pvZip, pvRm].concat([base + ".html", game].concat(files).map(function (f) { return path.join(out, f); })));
+  fs.rmSync(pvDir, { recursive: true, force: true });
+  console.log("Canvas " + st + " v" + man.version + " (teacher preview): " + path.relative(root, out) + "/ and " + path.relative(root, pvZip) + " (" + (fs.statSync(pvZip).size / 1048576).toFixed(1) + " MiB)");
+  return;
+}
 
 /* v5.12.1: each zip carries a plain-text READ ME with the steps and the Canvas embed code, so a teacher never has
    to ask for them. It sits next to the game files in the zip (not in out/, which holds only what goes to Canvas). */
