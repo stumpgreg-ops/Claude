@@ -1276,7 +1276,7 @@
     mopupY_ram: function () { return this.H - Math.max(26, this.ram.T / 2 + 2); },
     mopupText_ram: function (two, n) {
       if (two) return "Rams left in the cave: " + n;
-      return "All questions answered — now take Polyphemus's last rams to your ship! " + n + " ram" + (n === 1 ? "" : "s") + " left in the cave. Cling under each one and ride it out the door; on foot, his hands still catch you.";
+      return "Right answer — now take Polyphemus's last rams to your ship! " + n + " ram" + (n === 1 ? "" : "s") + " left in the cave. Cling under each one and ride it out the door; on foot, his hands still catch you.";
     }
   });
 })();

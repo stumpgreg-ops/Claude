@@ -1122,7 +1122,7 @@
     mopupY_bow: function () { return Math.max(74, this.bw.top * 0.8); },
     mopupText_bow: function (two, n) {
       if (two) return "Rows of axes left: " + n;
-      return "All questions answered — now shoot through every row of axes! " + n + " row" + (n === 1 ? "" : "s") + " of axes left. Only an arrow through all twelve rings takes a row down; the suitors still throw.";
+      return "Right answer — now shoot through every row of axes! " + n + " row" + (n === 1 ? "" : "s") + " of axes left. Only an arrow through all twelve rings takes a row down; the suitors still throw.";
     }
   });
 })();

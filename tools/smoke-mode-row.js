@@ -36,9 +36,10 @@ var srv = http.createServer(function (req, res) {
   var fails = [];
   function check(cond, msg) { if (!cond) fails.push(msg); console.log((cond ? "ok   " : "FAIL ") + msg); }
   async function shot(name) { await page.screenshot({ path: path.join(shots, "row-" + name + ".png") }); }
-  async function gotoLevel(n) {
-    await page.evaluate(function (n) { var b = document.getElementById("btn-next"); b.dataset.goto = String(n); b.click(); }, n);
-    await page.waitForFunction(function (n) { var s = window.SolScene; return s && s.night === n && s.claim && s.readOpen; }, n, { timeout: 20000 }).catch(function () {});
+  /* v5.23: Row Past the Sirens picked on its own (level n is the mode's level n, difficulty n), or the Mixed rotation */
+  async function gotoLevel(n, mixed) {
+    await page.evaluate(function (a) { SolModes.only = a.mixed ? null : "row"; var b = document.getElementById("btn-next"); b.dataset.goto = String(a.n); b.click(); }, { n: n, mixed: !!mixed });
+    await page.waitForFunction(function (n) { var s = window.SolScene; return s && (s.lvl || s.night) === n && s.claim && s.readOpen; }, n, { timeout: 20000 }).catch(function () {});
     if (await page.isVisible("#read-go")) await page.click("#read-go");
     await page.waitForFunction(function () { var s = window.SolScene; return s && !s.readOpen; }, null, { timeout: 8000 }).catch(function () {});
     await page.waitForTimeout(200);
@@ -90,12 +91,12 @@ var srv = http.createServer(function (req, res) {
   var rot = await page.evaluate(function () {
     var keep = SolModes.only, o = {};
     SolModes.only = null;
-    o.lv = [12, 59, 74, 98].map(function (n) { var m = SolModes.modeFor(n); return m ? m.id : "-"; }).join(",");
+    o.lv = [15, 19, 67, 93, 97].map(function (n) { var m = SolModes.modeFor(n); return m ? m.id : "-"; }).join(",");
     SolModes.only = "row"; o.only = [1, 2, 10, 55].map(function (n) { return SolModes.modeFor(n).id; }).join(",");
     SolModes.only = keep;
     return o;
   });
-  check(rot.lv === "row,row,row,row" && rot.only === "row,row,row,row", "the Odyssey rotation plays it on levels 12, 59, 74 and 98; picked alone it plays every level: " + JSON.stringify(rot));
+  check(rot.lv === "row,row,row,row,row" && rot.only === "row,row,row,row", "the Odyssey rotation (v5.23: 13 levels an island) plays it on levels 15-19, 67-71 and 93-97; picked alone it plays every level: " + JSON.stringify(rot));
   await page.click('#mode-packs .card[data-gamemode="row"]');
   await page.waitForSelector("#skill-screen:not(.hidden)");
   await page.click("#btn-skill-start"); await page.waitForTimeout(300);
@@ -106,7 +107,7 @@ var srv = http.createServer(function (req, res) {
 
   /* ── 2. level 12 ── */
   await page.evaluate(function () { var s = window.SolScene; if (s) s.tutLockUntil = 0; });
-  await page.evaluate(function (n) { var b = document.getElementById("btn-next"); b.dataset.goto = String(n); b.click(); }, 12);
+  await page.evaluate(function (n) { SolModes.only = "row"; var b = document.getElementById("btn-next"); b.dataset.goto = String(n); b.click(); }, 12);
   await page.waitForFunction(function () { var s = window.SolScene; return s && s.night === 12 && s.claim && s.readOpen; }, null, { timeout: 20000 }).catch(function () {});
   var intro = await page.evaluate(function () {
     var s = SolScene, c = document.getElementById("mode-card");
@@ -435,8 +436,7 @@ var srv = http.createServer(function (req, res) {
       await T.until(function () { return s.rw && !s.readOpen && s.rw.stats.miss + s.rw.stats.perfect > 0; }, 60000);
       return { night: s.night, mode: s.mode && s.mode.id, saved: localStorage.getItem("afterHours.ody.gameMode"), ticking: !!s.rw && s.rw.clock > 1000, island: s.realm && s.realm.name };
     });
-    await page.evaluate(function () { SolModes.only = null; });
-    await gotoLevel(12);
+    await gotoLevel(15, true);   /* v5.23: the Mixed rotation's first Row Past the Sirens (island 2, difficulty 12) */
     od.l12 = await page.evaluate(async function () {
       var T = window.__rowT, s = SolScene, R = s.rw;
       s.spareLives = 9; R.auto = true; R.dist = R.P.rowGap - 40;
@@ -447,7 +447,7 @@ var srv = http.createServer(function (req, res) {
     console.log("dist/ody", JSON.stringify(od));
     check(od.state === "ODY" && od.title && /Row Past the Sirens/.test(od.card) && od.l1.mode === "row" && od.l1.ticking && od.l1.saved === "row",
       "dist/ody: the mode screen offers Row Past the Sirens, and picked alone it plays from level 1: " + JSON.stringify(od.l1));
-    check(od.l12.mode === "row" && od.l12.night === 12 && od.l12.rows > 0 && od.l12.perfect > 2 && /Lotus/.test(od.l12.island || ""), "dist/ody: level 12 (the Lotus-Eaters' island) plays it in the Odyssey rotation: " + JSON.stringify({ mode: od.l12.mode, island: od.l12.island, rows: od.l12.rows }));
+    check(od.l12.mode === "row" && od.l12.night === 12 && od.l12.rows > 0 && od.l12.perfect > 2 && /Lotus/.test(od.l12.island || ""), "dist/ody: Mixed level 15 (the Lotus-Eaters' island, difficulty 12) plays it in the Odyssey rotation: " + JSON.stringify({ mode: od.l12.mode, island: od.l12.island, rows: od.l12.rows }));
     console.log("errors (dist/ody):", errs2.length ? errs2 : "none");
     check(errs2.length === 0, "dist/ody: no page errors");
     /* dist/va: no card, and a saved pick of it falls back to All modes */

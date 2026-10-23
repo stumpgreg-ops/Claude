@@ -67,10 +67,10 @@ var srv = http.createServer(function (req, res) {
   var rot = await page.evaluate(function () {
     var o = {}, only = SolModes.only, keep = window.SOL_STATE, n, a = [];
     SolModes.only = null;
-    for (n = 1; n <= 100; n++) if ((SolModes.modeFor(n) || {}).id === "raft") a.push(n);
+    for (n = 1; n <= 130; n++) if ((SolModes.modeFor(n) || {}).id === "raft") a.push(n);
     o.ody = a.join(",");
     delete window.SOL_STATE; a = [];
-    for (n = 1; n <= 100; n++) if ((SolModes.modeFor(n) || {}).id === "raft") a.push(n);
+    for (n = 1; n <= 130; n++) if ((SolModes.modeFor(n) || {}).id === "raft") a.push(n);
     o.other = a.join(",");
     window.SOL_STATE = keep;
     SolModes.only = "raft"; a = [];
@@ -79,7 +79,7 @@ var srv = http.createServer(function (req, res) {
     SolModes.only = only;
     return o;
   });
-  check(rot.ody === "34,82,92" && rot.other === "" && rot.onlyMisses === 0, "the Mixed rotation plays it on levels 34, 82 and 92 of the Odyssey and never in the other builds; picked alone it plays every level: " + JSON.stringify(rot));
+  check(rot.ody === "41,42,43,44,45,119,120,121,122,123" && rot.other === "" && rot.onlyMisses === 0, "the Mixed rotation (v5.23: 13 levels an island) plays it on levels 41-45 and 119-123 of the Odyssey and never in the other builds; picked alone it plays every level: " + JSON.stringify(rot));
   await page.click('#mode-packs .card[data-gamemode="raft"]');
   await page.waitForSelector("#skill-screen:not(.hidden)");
   check(await page.evaluate(function () { return SolModes.only; }) === "raft", "picking the card plays only Calypso's Raft");
@@ -87,8 +87,9 @@ var srv = http.createServer(function (req, res) {
   await page.waitForTimeout(1000);
   for (var i = 0; i < 12; i++) { if (await page.isVisible("#tut-skip")) { await page.click("#tut-skip"); break; } await page.waitForTimeout(300); }
 
+  /* v5.23: Calypso's Raft picked on its own, so level n is the mode's level n (difficulty n) */
   async function gotoLevel(n, cardShot) {
-    await page.evaluate(function (n) { var b = document.getElementById("btn-next"); b.dataset.goto = String(n); b.click(); }, n);
+    await page.evaluate(function (n) { SolModes.only = "raft"; var b = document.getElementById("btn-next"); b.dataset.goto = String(n); b.click(); }, n);
     await page.waitForTimeout(1500);
     await page.waitForFunction(function (n) { var s = window.SolScene; return s && s.night === n && s.claim && s.readOpen; }, n, { timeout: 15000 }).catch(function () {});
     if (cardShot) await shot(cardShot);

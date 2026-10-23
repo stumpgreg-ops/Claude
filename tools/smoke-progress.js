@@ -200,7 +200,7 @@ function makeZip(files) {
   var after2 = await page.evaluate(function () { return SolProgress.record("VA"); });
   check(after2.levels.started === 2 && after2.levels.won === 2 && after2.q.answered === after1.rec.q.answered + l2need && after2.q.wrong === 2 && after2.modes[l2.mode] && after2.modes[l2.mode].won === 1 && after2.modes.maze.won === 1,
     "level 2 won: answers, the wrong pick and the mode are counted (" + l2need + " questions, modes " + Object.keys(after2.modes).join(",") + ")");
-  /* level 3: the maze, lost on wrong letters */
+  /* level 3, lost on wrong letters (v5.23: in Mixed, levels 2-6 are all Eagle Swoop, one question each) */
   for (var w3 = 0; w3 < 20 && !(await page.isVisible("#btn-next")); w3++) {
     if (await page.isVisible("#build-overlay")) { try { await page.click("#build-overlay .build-opt >> nth=0", { timeout: 1000 }); await page.click("#build-overlay .btn.primary", { timeout: 1000 }); } catch (e) {} }
     await page.waitForTimeout(300);
@@ -208,7 +208,11 @@ function makeZip(files) {
   await page.click("#btn-next");
   await page.waitForTimeout(2500);
   await closeReading(page);
-  await page.evaluate(function () { var s = SolScene; s.spareLives = 0; s.perks = {}; for (var i = 0; i < 6 && !s.ended; i++) { s.iframeMs = 0; s.stunMs = 0; s.flagWrongAlarm({ x: s.player.x, y: s.player.y }); } });
+  await page.evaluate(function () {
+    var s = SolScene, bad = ["A", "B", "C", "D", "E", "F"].filter(function (L) { return (s.need || []).indexOf(L) === -1; })[0];
+    s.spareLives = 0; s.perks = {};
+    for (var i = 0; i < 6 && !s.ended && !s._finishing; i++) { s.iframeMs = 0; s.stunMs = 0; if (s.answerWrong) s.answerWrong(bad, "WRONG LETTER (" + bad + ")", 100, 100); else s.flagWrongAlarm({ x: s.player.x, y: s.player.y }); }
+  });
   await page.waitForTimeout(1200);
   var after3 = await page.evaluate(function () { return { rec: SolProgress.record("VA"), title: document.getElementById("win-title").textContent }; });
   console.log("after level 3", JSON.stringify(after3.rec).slice(0, 600));

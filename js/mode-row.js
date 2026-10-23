@@ -881,7 +881,7 @@
     },
     mopupY_row: function () { return Math.max(96, 100 * this.rw.k); },   /* high up, under the page's buttons and above where the notes fly */
     mopupText_row: function (two, n) {
-      var a = two ? "Finish the Sirens' song!" : "All questions answered — now row to the end of the Sirens' song!", b = n + " note" + (n === 1 ? "" : "s") + " left";
+      var a = two ? "Finish the Sirens' song!" : "Right answer — now row to the end of the Sirens' song!", b = n + " note" + (n === 1 ? "" : "s") + " left";
       return two ? a + "\n" + b : a + " " + b + ". Row each time a note lands on the ship — a hit still costs a life.";
     },
 

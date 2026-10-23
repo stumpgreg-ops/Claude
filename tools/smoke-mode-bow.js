@@ -60,26 +60,29 @@ var srv = http.createServer(function (req, res) {
   await page.waitForSelector("#skill-screen:not(.hidden)");
   var picked = await page.evaluate(function () {
     var o = { only: SolModes.only, def: !!SolModes.MODES.bow, l1: SolModes.modeFor(1).id, l10: SolModes.modeFor(10).id, l55: SolModes.modeFor(55).id };
-    /* the Mixed rotation: island 2 level 9, island 5 level 6, island 7 level 8, island 10 level 6 — and never outside the Odyssey build */
+    /* v5.23: the Mixed rotation (13 levels an island): islands 2, 5 and 7, five levels each — and never outside the Odyssey build */
     SolModes.only = null;
-    o.mixed = [19, 46, 68, 96].map(function (n) { var m = SolModes.modeFor(n); return m ? m.id : "-"; }).join(",");
+    o.mixed = [21, 54, 86, 90].map(function (n) { var m = SolModes.modeFor(n); return m ? m.id : "-"; }).join(",");
+    var all = 0; for (var n0 = 1; n0 <= 130; n0++) { var m0 = SolModes.modeFor(n0); if (m0 && m0.id === "bow") all++; }
+    o.count = all;
     delete window.SOL_STATE;
-    var other = []; for (var n = 1; n <= 100; n++) { var m = SolModes.modeFor(n); if (m && m.id === "bow") other.push(n); }
+    var other = []; for (var n = 1; n <= 130; n++) { var m = SolModes.modeFor(n); if (m && m.id === "bow") other.push(n); }
     o.other = other.length;
     window.SOL_STATE = "ODY";
     SolModes.only = "bow";
     return o;
   });
   check(picked.only === "bow" && picked.def && picked.l1 === "bow" && picked.l10 === "bow" && picked.l55 === "bow", "picking Bend the Bow plays it on every level: " + JSON.stringify(picked));
-  check(picked.mixed === "bow,bow,bow,bow" && picked.other === 0, "the Odyssey's Mixed rotation plays it on levels 19, 46, 68 and 96, and no other build ever does: " + JSON.stringify(picked));
+  check(picked.mixed === "bow,bow,bow,bow" && picked.count === 15 && picked.other === 0, "the Odyssey's Mixed rotation plays it on levels 21-25, 54-58 and 86-90, and no other build ever does: " + JSON.stringify(picked));
   await page.click("#btn-skill-start");
   await page.waitForTimeout(400);
   if (await page.isVisible("#btn-char-confirm")) await page.click("#btn-char-confirm");
   await page.waitForFunction(function () { return window.SolScene && SolScene.claim; }, null, { timeout: 20000 }).catch(function () {});
   for (var i = 0; i < 12; i++) { if (await page.isVisible("#tut-skip")) { await page.click("#tut-skip"); break; } await page.waitForTimeout(250); }
 
+  /* v5.23: Bend the Bow picked on its own, so level n is the mode's level n (difficulty n) */
   async function gotoLevel(n) {
-    await page.evaluate(function (n) { SolScene.scene.restart({ family: "ODY", strand: "ALL", night: n }); }, n);
+    await page.evaluate(function (n) { SolModes.only = "bow"; SolScene.scene.restart({ family: "ODY", strand: "ALL", night: n }); }, n);
     await page.waitForFunction(function (n) { var s = window.SolScene; return s && s.night === n && s.bw && s.claim && s.readOpen; }, n, { timeout: 20000 }).catch(function () {});
     var info = await page.evaluate(function () {
       var s = SolScene;
@@ -434,7 +437,7 @@ var srv = http.createServer(function (req, res) {
     if (await dpage.isVisible("#btn-char-confirm")) await dpage.click("#btn-char-confirm");
     await dpage.waitForFunction(function () { return window.SolScene && SolScene.claim; }, null, { timeout: 20000 }).catch(function () {});
     for (var j = 0; j < 12; j++) { if (await dpage.isVisible("#tut-skip")) { await dpage.click("#tut-skip"); break; } await dpage.waitForTimeout(250); }
-    await dpage.evaluate(function () { SolScene.scene.restart({ family: "ODY", strand: "ALL", night: 19 }); });
+    await dpage.evaluate(function () { SolModes.only = "bow"; SolScene.scene.restart({ family: "ODY", strand: "ALL", night: 19 }); });
     await dpage.waitForFunction(function () { var s = window.SolScene; return s && s.night === 19 && s.bw && s.claim && s.readOpen; }, null, { timeout: 20000 }).catch(function () {});
     if (await dpage.isVisible("#read-go")) await dpage.click("#read-go");
     await dpage.waitForTimeout(500);
@@ -459,7 +462,7 @@ var srv = http.createServer(function (req, res) {
     await vpage.reload({ waitUntil: "load" }); await vpage.waitForTimeout(900);
     await vpage.click('#title-screen .card[data-family="G9"]'); await vpage.waitForTimeout(300);
     var vcards = await vpage.evaluate(function () {
-      var rot = []; for (var n = 1; n <= 100; n++) { var m = SolModes.modeFor(n); if (m && m.id === "bow") rot.push(n); }
+      var rot = []; for (var n = 1; n <= 130; n++) { var m = SolModes.modeFor(n); if (m && m.id === "bow") rot.push(n); }
       return { cards: Array.prototype.map.call(document.querySelectorAll("#mode-packs .card"), function (c) { return c.getAttribute("data-gamemode"); }), only: SolModes.only, rot: rot.length, state: window.SOL_STATE };
     });
     check(vcards.cards.length > 0 && vcards.cards.indexOf("bow") === -1 && vcards.only === null && vcards.rot === 0, "dist/va: the mode screen does not offer Bend the Bow, a saved pick of it falls back to All modes, and no level plays it: " + JSON.stringify(vcards));

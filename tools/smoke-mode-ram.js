@@ -31,8 +31,9 @@ var srv = http.createServer(function (req, res) {
   var fails = [];
   function check(cond, msg) { if (!cond) fails.push(msg); console.log((cond ? "ok   " : "FAIL ") + msg); }
   async function shot(name) { await page.screenshot({ path: path.join(shots, name + ".png") }); }
+  /* v5.23: Under the Ram picked on its own, so level n is the mode's level n (difficulty n) */
   async function gotoLevel(n) {
-    await page.evaluate(function (n) { var b = document.getElementById("btn-next"); b.dataset.goto = String(n); b.click(); }, n);
+    await page.evaluate(function (n) { SolModes.only = "ram"; var b = document.getElementById("btn-next"); b.dataset.goto = String(n); b.click(); }, n);
     await page.waitForTimeout(1200);
     await page.waitForFunction(function (n) { var s = window.SolScene; return s && s.night === n && s.claim && s.readOpen; }, n, { timeout: 15000 }).catch(function () {});
     var card = await page.evaluate(function () { var c = document.getElementById("mode-card"); return c && !c.classList.contains("hidden") ? c.textContent : ""; });
@@ -74,13 +75,13 @@ var srv = http.createServer(function (req, res) {
   if (await page.isVisible("#read-go")) await page.click("#read-go");
   await page.waitForTimeout(500);
 
-  /* the first time the Mixed rotation brings it: level 22 (island 3, the Cyclopes) */
+  /* v5.23: the Mixed rotation (13 levels an island) brings it on levels 28-32 (island 3, the Cyclopes) and 80-84 (island 7) */
   var rot = await page.evaluate(function () {
     var only = SolModes.only; SolModes.only = null;
-    var o = [22, 62, 94].map(function (n) { var m = SolModes.modeFor(n); return m ? m.id : "-"; }).join(",");
+    var o = [28, 32, 80, 84].map(function (n) { var m = SolModes.modeFor(n); return m ? m.id : "-"; }).join(",");
     SolModes.only = only; return o;
   });
-  check(rot === "ram,ram,ram", "the Odyssey's Mixed rotation plays it on levels 22, 62 and 94: " + rot);
+  check(rot === "ram,ram,ram,ram", "the Odyssey's Mixed rotation plays it on levels 28-32 and 80-84: " + rot);
 
   var card22 = await gotoLevel(22);
   check(/New this time/.test(card22) && /bigger flock/i.test(card22), "level 22's card says what is new this time: " + card22.slice(-140));

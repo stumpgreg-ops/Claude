@@ -692,7 +692,7 @@
     },
     mopupY_raft: function () { return this.H * 0.24; },   /* up in the sky: the sea, the raft and the waves stay in sight */
     mopupText_raft: function (two, n) {
-      var a = "All questions answered — now ride out Poseidon's last waves!", b = n + " wave" + (n === 1 ? "" : "s") + " left";
+      var a = "Right answer — now ride out Poseidon's last waves!", b = n + " wave" + (n === 1 ? "" : "s") + " left";
       return two ? a + "\n" + b : a + " " + b + ". Hold ▲ as each one reaches you — a hit still costs a life.";
     },
 
