@@ -27528,12 +27528,31 @@
     }
     syncFsButton();
   }
+  /* v5.24: once the game has been full screen, leaving it (Esc) shows a "Full screen" button over every screen:
+     the title and menus, a level, the reading pop-up, the shop and the builder, the badges, progress and teacher
+     screens (it sits above all of them), until the game is full screen again. Not shown where the page may not go
+     full screen (an embed without allowfullscreen). */
+  var fsWasOn = false;
+  function fsBackButton() {
+    var b = document.getElementById("btn-fs-back");
+    if (b) return b;
+    b = document.createElement("button");
+    b.type = "button"; b.id = "btn-fs-back"; b.className = "btn hidden";
+    b.textContent = "⛶ Full screen"; b.title = "Go back to full screen";
+    document.body.appendChild(b);
+    bindTap(b, function () { enterFullscreen(); try { b.blur(); } catch (e) {} });
+    return b;
+  }
   function syncFsButton() {
-    var btn = document.getElementById("btn-fs");
-    if (!btn) return;
     var on = isFullscreen();
-    btn.textContent = on ? "Exit full screen" : "Full screen";
-    btn.classList.toggle("hidden", !on);
+    if (on) fsWasOn = true;
+    var btn = document.getElementById("btn-fs");
+    if (btn) {
+      btn.textContent = on ? "Exit full screen" : "Full screen";
+      btn.classList.toggle("hidden", !on);
+    }
+    var can = !!(document.fullscreenEnabled || document.webkitFullscreenEnabled);
+    fsBackButton().classList.toggle("hidden", on || !fsWasOn || !can);
   }
 
   function hideCharOverlay() {

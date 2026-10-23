@@ -29,6 +29,10 @@ A game uploaded to Canvas can't send anything anywhere, so progress is shown to 
 
 Tests: `node tools/smoke-progress.js` (after `node tools/build-games.js`, `node tools/build-appsscript.js VA|ODY` and `node tools/build-canvas.js VA|ODY`).
 
+## v5.24.0 (2026-10-23) — a "Full screen" button after Esc, on every screen
+
+Once the game has been full screen (starting a level makes it full screen), leaving full screen (Esc, or a browser dialog such as Menu's "Leave this level?") shows a **⛶ Full screen** button at the top middle of the screen. It shows on every screen: the title and menus, a level and its reading pop-up, the shop, the builder, the badges, the progress window and the teacher screen. It sits above all of them, and one click puts the game back in full screen. It isn't shown before the game has been full screen, while it is, or where the page can't go full screen (an embed without `allowfullscreen`). The code is `syncFsButton` / `fsBackButton` in `js/game.js` and `#btn-fs-back` in `css/after-hours.css`. Test: `node tools/smoke-fullscreen.js`.
+
 ## v5.23.0 (2026-10-23) — one question a shooter level, then clear the field; Mixed is 130 levels
 
 This applies to every non-maze game mode, in the students' games and in the teacher preview.
