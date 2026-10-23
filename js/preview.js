@@ -6,7 +6,7 @@
      the passage, and the side panel shows the same note.
    - Any letter is right: the first letter Sol grabs in the maze (or shoots or beams in a shooter level) becomes the
      answer, so the level plays exactly as it does for a student who answers right.
-   - Jump to any level (1–100) on the skill screen, and a coins button for trying the builder.
+   - Jump to any level (1–130 in Mixed, 1–100 in one game mode; v5.22) on the skill screen, and a coins button for trying the builder.
    - Its own saves (afterHours.preview.*; the build moves every save key), no class code, no progress code. */
 (function () {
   "use strict";
@@ -143,7 +143,7 @@
     if (title) {
       var box = el("div", { class: "pv-box", id: "pv-title-box" });
       box.appendChild(el("p", null, "This is the TEACHER PREVIEW of the game. The questions are skipped: any letter you grab or shoot counts as " +
-        "the right answer. Pick a grade, then a game mode; on the next screen you can jump to any level (1 to 100). " +
+        "the right answer. Pick a grade, then a game mode; on the next screen you can jump to any level. " +
         "Saves here are separate from the students' game."));
       var row = el("div", { class: "row" });
       var coins = el("button", { type: "button", class: "btn", id: "pv-coins" }, "Give me 10,000 coins (to try the builder)");
@@ -162,16 +162,16 @@
     var skill = document.getElementById("skill-screen"), cont = document.getElementById("btn-skill-continue");
     if (skill && cont) {
       var jb = el("div", { class: "pv-box", id: "pv-jump" });
-      jb.appendChild(el("p", null, "Teacher preview: play any level. Type a level from 1 to 100 and click Play this level."));
+      jb.appendChild(el("p", null, "Teacher preview: play any level. Type a level (1 to 130 in Mixed, 1 to 100 in one game mode) and click Play this level."));
       var jr = el("div", { class: "row" });
       var lab = el("label", null, "Level ");
-      var inp = el("input", { type: "number", id: "pv-level", min: "1", max: "100", value: "1", inputmode: "numeric" });
+      var inp = el("input", { type: "number", id: "pv-level", min: "1", max: "130", value: "1", inputmode: "numeric" });
       lab.appendChild(inp);
       var go = el("button", { type: "button", class: "btn primary", id: "pv-play" }, "Play this level");
       var msg = el("span", { id: "pv-jump-said" });
       go.addEventListener("click", function () {
-        var n = parseInt(inp.value, 10);
-        if (!(n >= 1 && n <= 100)) { msg.textContent = "Type a number from 1 to 100."; return; }
+        var n = parseInt(inp.value, 10), max = window.SolModes && SolModes.maxLevel ? SolModes.maxLevel(savedMode()) : 100;
+        if (!(n >= 1 && n <= max)) { msg.textContent = "Type a number from 1 to " + max + "."; return; }
         msg.textContent = "";
         try { localStorage.setItem(LS_NIGHT + "." + savedMode(), String(n)); localStorage.setItem(LS_NIGHT, String(n)); } catch (e) {}
         cont.click();   /* Continue starts the saved level of this game mode */

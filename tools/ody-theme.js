@@ -44,8 +44,8 @@ var EXACT = {
     ["Hati smashed!", "Wolf smashed!"],
     ["SKULL! Hati poisoned — stunned!", "SKULL! Wolf poisoned — stunned!"],
     /* the game-mode screen (GAME_MODE_DEFS): the sheet's mode names */
-    ["The full campaign: the maze on odd levels and Fenrir's boss levels, a shooter level on the even ones.",
-     "The full voyage: the maze, Polyphemus's boss levels, and a shooter or sailing level in between."],
+    ["The full campaign, 130 levels. Each realm: a maze level, five levels of one shooter, a maze level, five levels of another shooter, then Fenrir's boss maze. A shooter level is one question; then you clear the field.",
+     "The full voyage, 130 levels. Each island: a maze level, five levels of one shooter or sailing level, a maze level, five levels of another, then Polyphemus's boss maze. A shooter or sailing level is one question; then you clear the way."],
     ["Sneak past Hati, grab the right letter and get out through EXIT · SAFE. Every level is the maze.",
      "Sneak past Circe's wolves, grab the right letter and get out through EXIT · SAFE. Every level is the maze."],
     ["Eagle Swoop", "Siren Swoop"],

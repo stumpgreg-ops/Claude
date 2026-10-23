@@ -1,24 +1,18 @@
-/* SOL Labyrinth v5.8.5 — shooter levels.
+/* SOL Labyrinth v5.8.5 — shooter levels (v5.22: one question a level, then the field is cleared).
  *
- * Every other level of each realm (levels 2, 4, 6 and 8) swaps the maze for a
- * shooter, in rotation:
- *   2  Eagle Swoop   galaga style: eagles carry the letters above a raven guard and dive; shoot the right eagle
- *   4  Rune Rocks    asteroids style: beam in the rock with the right letter, blast the rest
- *   6  Sun Chariot   side-scrolling flyer: shoot the letter orb with the right answer
- *   8  Wolf Ring     arena: Hati attack; runestones rise one or two at a time; shoot the right one while it is up
- * Odd levels stay in the maze and every tenth level is still Fenrir's boss maze.
- * v5.12 (from the Chemistry build), Virginia and New Jersey: a fifth shooter, Root Worms (centipede
- * style: shoot the glowing worm segment with the right letter), shares those four slots. The order
- * raid, rocks, sky, ring, worms turns one place every realm, so each shooter plays in four realms
- * out of five; the first realm keeps 2 raid, 4 rocks, 6 sky, 8 ring (modeAt). Eagle Swoop's rows are
- * new birds realm by realm (BIRDS, raidKindsFor) and never refill. And the teacher's rule: in Eagle
- * Swoop and Root Worms the last answer doesn't end the level — the student shoots down what is
- * left first (mopup_<id>, mopupLeft, mopupDone).
- * v5.10, the Odyssey build only (window.SOL_STATE === "ODY"): level 9 of every island is
- *   9  Scylla and Charybdis  steering level: sail through the gate with the right letter while
- *                            Charybdis's whirlpool pulls and Scylla's heads strike (v5.12.4: reefs of sea
- *                            stacks between the gates, and after the last answer the run to the end of the
- *                            strait, mopup_strait)
+ * The shooters:
+ *   Eagle Swoop   galaga style: eagles carry the letters above a raven guard and dive; shoot the right eagle
+ *   Rune Rocks    asteroids style: beam in the rock with the right letter, blast the rest
+ *   Sun Chariot   side-scrolling flyer: shoot the letter orb with the right answer
+ *   Wolf Ring     arena: Hati attack; runestones rise one or two at a time; shoot the right one while it is up
+ *   Root Worms    centipede style: shoot the glowing worm segment with the right letter (v5.12; not in the Odyssey)
+ * v5.10, the Odyssey build only (window.SOL_STATE === "ODY"): Scylla and Charybdis, a steering level: sail through
+ *   the gate with the right letter while Charybdis's whirlpool pulls and Scylla's heads strike; and (v5.11) its own
+ *   modes in js/mode-ram.js, mode-bow.js, mode-raft.js and mode-row.js.
+ * v5.22, the teacher's rule: every shooter level is ONE question. After the right answer the letters go and the
+ * student clears the field (mopup_<id>, mopupLeft, mopupDone); a cleared field wins the level. Mixed plays each
+ * shooter five levels in a row: a realm is 13 levels (1 maze, 2-6 one shooter, 7 maze, 8-12 a second shooter,
+ * 13 Fenrir's boss maze), 130 in all (MIX_PER, modeFor). A mode picked on its own keeps 100 levels.
  *
  * The questions, the reading pop-up, lives, coins, the adaptive reading level,
  * the castle perks and the end-of-level screens are the maze's own: ModeScene
@@ -34,8 +28,8 @@
   var MODES = {
     raid: {
       id: "raid", name: "Eagle Swoop", kind: "galaga-style level",
-      how: "Great eagles fly in and take the top of the sky, each carrying a letter in its talons, with two guard ravens under each eagle and rows of birds below. Once the flock has formed, shoot the eagle that carries the right answer — it takes two arrows. Birds are always swooping down at Sol, and an eagle can stop and shine a beam down to catch him and carry him off. Hit that eagle with an arrow to free him: then two Sols stand side by side and shoot two arrows at a time. A bird you shoot out of the rows stays down, so the rows thin out as you clear them, and from the second realm on the rows bring new birds with tricks of their own (listed below). When the last question is answered, shoot down every bird left in the sky to clear the level.",
-      rules: "A wrong letter costs a life. So does bird poo landing on you or a bird crashing into you. If an eagle carries Sol off, free him before the question is answered, or it costs a life. With two Sols, a hit or a beam takes one Sol away instead of a life. You can't shoot until the flock has flown into formation. While you clear the sky after the last answer, a hit still costs a life.",
+      how: "Great eagles fly in and take the top of the sky, each carrying a letter in its talons, with two guard ravens under each eagle and rows of birds below. Once the flock has formed, shoot the eagle that carries the right answer — it takes two arrows. Birds are always swooping down at Sol, and an eagle can stop and shine a beam down to catch him and carry him off. Hit that eagle with an arrow to free him: then two Sols stand side by side and shoot two arrows at a time. A bird you shoot out of the rows stays down, so the rows thin out as you clear them, and from the second realm on the rows bring new birds with tricks of their own (listed below). When you shoot the right eagle, the letters are gone: shoot down every bird left in the sky to win the level.",
+      rules: "A wrong letter costs a life. So does bird poo landing on you or a bird crashing into you. If an eagle carries Sol off, free him before the question is answered, or it costs a life. With two Sols, a hit or a beam takes one Sol away instead of a life. You can't shoot until the flock has flown into formation. While you clear the sky after the right answer, a hit still costs a life.",
       keys: "◀ ▶ or A / D move · Space, FIRE or a mouse button shoots (clicking does not move Sol).",
       tip: "EAGLE SWOOP — shoot the eagle with the right letter. If an eagle carries Sol off, hit it to get him back: two Sols!",
       hint1: "Shoot the eagle carrying the right letter — it takes two arrows. The passage stays in the side panel.",
@@ -55,10 +49,11 @@
     },
     rocks: {
       id: "rocks", name: "Rune Rocks", kind: "asteroids level",
-      how: "Rocks drift through space and a few carry letters. Hold your beam on the rock with the right answer to pull it in. Blast the wrong letters and the plain rocks before they hit you. Every level brings more and faster rocks, every new question sends in another wave, and dark-elf saucers fly across and shoot at you — shoot them for a bonus.",
+      how: "Rocks drift through space and a few carry letters. Hold your beam on the rock with the right answer to pull it in. Blast the wrong letters and the plain rocks before they hit you. Every level brings more and faster rocks, and dark-elf saucers fly across and shoot at you — shoot them for a bonus. When you pull in the right letter, the other letter rocks go and no new rocks come: clear every rock left (one shot each now) to win the level.",
       rules: "Pulling in a wrong letter costs a life. So does blasting the right answer, a saucer's shot, or a rock hitting your ship — including a rock you let go of before it reached you.",
       keys: "◀ ▶ turn · ▲ thrust · Space, FIRE or the left mouse button shoots · ▼, Shift, PULL or the right mouse button holds the beam. The mouse never steers the ship.",
       tip: "RUNE ROCKS — beam in the right letter, blast the rest. Don't get hit.",
+      clear: { what: "rocks", one: "rock", many: "rocks" },
       hint1: "Pull in the rock with the right letter (▼, Shift or PULL). Blast the others. The passage stays in the side panel.",
       hint2: "This question has two right letters. Pull in both rocks that carry them.",
       news: ["",
@@ -74,10 +69,11 @@
     },
     sky: {
       id: "sky", name: "Sun Chariot", kind: "flying shooter level",
-      how: "Sol drives the sun's chariot across the sky. Letter orbs float past among ravens and will-o'-wisps, each inside a turning golden shield with one gap in it. A sunbolt only gets through when the gap faces you, so time your shot. Shoot the orb with the right answer; orbs you miss come round again. Ravens throw feathers at you (they glow orange first), and in later realms wisps throw sparks and a raven guards some orbs — shoot the guard out of the way.",
+      how: "Sol drives the sun's chariot across the sky. Letter orbs float past among ravens and will-o'-wisps, each inside a turning golden shield with one gap in it. A sunbolt only gets through when the gap faces you, so time your shot. Shoot the orb with the right answer; orbs you miss come round again. Ravens throw feathers at you (they glow orange first), and in later realms wisps throw sparks and a raven guards some orbs — shoot the guard out of the way. When you hit the right orb, the orbs go and one last flight of ravens and wisps comes in: shoot down every one to win the level (one that flies past comes round again).",
       rules: "Shooting a wrong orb costs a life. So does a feather, a spark, or flying into a raven or a wisp.",
       keys: "Arrow keys, WASD or the on-screen pad fly · Space, FIRE or a mouse button shoots (clicking does not move the chariot).",
       tip: "SUN CHARIOT — shoot the right orb through the gap in its shield. Dodge the ravens, wisps and feathers.",
+      clear: { what: "sky", one: "raven or wisp", many: "ravens and wisps" },
       hint1: "Shoot the orb with the right letter through the gap in its turning shield. The passage stays in the side panel.",
       hint2: "This question has two right letters. Shoot both orbs that carry them, through the gaps in their shields.",
       news: ["",
@@ -93,10 +89,11 @@
     },
     ring: {
       id: "ring", name: "Wolf Ring", kind: "arena level",
-      how: "Sol stands in a stone ring while the Hati attack, often in packs. The letter runestones are sunk in the ground: after the wolves come, they rise one or two at a time, in any order and anywhere round the ring, and sink again a few seconds later. Shoot the runestone with the right answer while it is up. An arrow sends a wolf running. Every level the wolves come faster and in bigger numbers, and the stones stay up for less time.",
+      how: "Sol stands in a stone ring while the Hati attack, often in packs. The letter runestones are sunk in the ground: after the wolves come, they rise one or two at a time, in any order and anywhere round the ring, and sink again a few seconds later. Shoot the runestone with the right answer while it is up. An arrow sends a wolf running. Every level the wolves come faster and in bigger numbers, and the stones stay up for less time. When you hit the right runestone, the stones sink for good and one last pack comes: chase off every wolf to win the level.",
       rules: "Shooting a wrong stone costs a life. So does letting a wolf reach you.",
       keys: "Arrow keys or WASD move and aim · Space or FIRE shoots · or click or tap to aim and shoot (Sol does not move).",
       tip: "WOLF RING — watch for the right runestone to rise, and shoot it. Keep the wolves off.",
+      clear: { what: "ring", one: "wolf", many: "wolves" },
       hint1: "The runestones rise after the wolves come. Shoot the one with the right letter while it is up. The passage stays in the side panel.",
       hint2: "This question has two right letters. Shoot both runestones that carry them.",
       news: ["",
@@ -113,8 +110,8 @@
     /* v5.12 (from the Chemistry build): Virginia and New Jersey only — the Odyssey build never offers it (noOdy) */
     worms: {
       id: "worms", name: "Root Worms", kind: "centipede-style level", noOdy: true,
-      how: "Nidhogg's worms wind down from the top of the mushroom field, row by row, turning at every mushroom they meet. Some segments glow with a letter. Shoot the segment that glows with the right answer. Shooting any other segment breaks the worm in two and leaves a mushroom where it was, and your arrows chip away mushrooms too (three hits each). Sol moves in the clearing at the bottom. When the last question is answered, shoot every worm segment that is left to clear the level.",
-      rules: "Shooting a wrong letter costs a life. So does a worm reaching Sol, or a wolf or a falling raven running into you. One arrow in the air at a time. While you clear the field after the last answer, a hit still costs a life.",
+      how: "Nidhogg's worms wind down from the top of the mushroom field, row by row, turning at every mushroom they meet. Some segments glow with a letter. Shoot the segment that glows with the right answer. Shooting any other segment breaks the worm in two and leaves a mushroom where it was, and your arrows chip away mushrooms too (three hits each). Sol moves in the clearing at the bottom. When you shoot the right segment, the letters go out: shoot every worm segment that is left to win the level.",
+      rules: "Shooting a wrong letter costs a life. So does a worm reaching Sol, or a wolf or a falling raven running into you. One arrow in the air at a time. While you clear the field after the right answer, a hit still costs a life.",
       keys: "◀ ▶ ▲ ▼ or WASD move Sol in the clearing · Space, FIRE or a mouse button shoots (clicking does not move Sol).",
       tip: "ROOT WORMS — shoot the glowing segment with the right letter. Keep the worms off you.",
       hint1: "Shoot the worm segment that glows with the right letter. The passage stays in the side panel.",
@@ -135,8 +132,8 @@
        v5.12.4: the rocks are sea stacks, reefs come between the gates, and the level runs to the end of the strait */
     strait: {
       id: "strait", name: "Scylla and Charybdis", kind: "steering level", level: "steering level", act: "ROW",
-      how: "Odysseus's ship has to sail the whole narrow strait. Sea rocks come down the water toward you. Most rows are reefs, rocks right across the strait: steer through a gap between them. Some rows are gates, two sea rocks with a letter stone on top of each: steer between the two rocks marked with the right answer. You can sail past the other gates in the open water beside them, and gates you miss come round again. When the last question is answered the strait isn't over: get the ship through the rows of rocks that are left (a count shows how many) to win the level. On the right, Charybdis's whirlpool tugs at the ship all the time; when her water turns dark and spins faster, she is about to surge and drag your ship toward her. On the left, Scylla waits on her cliff: a dark shadow on the water shows where one of her heads will strike next. Get out from under it.",
-      rules: "Sailing through a wrong gate costs a life. So does hitting a rock, touching the dark centre of Charybdis, or being under one of Scylla's heads when it strikes — she snatches a crewman, as she took six men from Odysseus. On the run to the end of the strait after the last answer, a hit still costs a life.",
+      how: "Odysseus's ship has to sail the whole narrow strait. Sea rocks come down the water toward you. Most rows are reefs, rocks right across the strait: steer through a gap between them. Some rows are gates, two sea rocks with a letter stone on top of each: steer between the two rocks marked with the right answer. You can sail past the other gates in the open water beside them, and gates you miss come round again. When you sail through the right gate the strait isn't over: get the ship through the rows of rocks that are left (a count shows how many) to win the level. On the right, Charybdis's whirlpool tugs at the ship all the time; when her water turns dark and spins faster, she is about to surge and drag your ship toward her. On the left, Scylla waits on her cliff: a dark shadow on the water shows where one of her heads will strike next. Get out from under it.",
+      rules: "Sailing through a wrong gate costs a life. So does hitting a rock, touching the dark centre of Charybdis, or being under one of Scylla's heads when it strikes — she snatches a crewman, as she took six men from Odysseus. On the run to the end of the strait after the right answer, a hit still costs a life.",
       keys: "Arrow keys, WASD or the on-screen pad steer · Space, ROW or a mouse button: the crew pulls hard for a moment (a burst of speed). The mouse does not steer.",
       tip: "SCYLLA AND CHARYBDIS — steer through the gate with the right letter and through the gaps in the rocks, all the way to the end of the strait. Keep away from the whirlpool and from Scylla's shadows.",
       hint1: "Steer between the two rocks marked with the right letter. The passage stays in the side panel.",
@@ -155,32 +152,38 @@
         "Ithaca is close: the strait runs faster, on top of everything else."]
     }
   };
-  var SLOTS = { 2: "raid", 4: "rocks", 6: "sky", 8: "ring" };
-  /* v5.12 (from the Chemistry build): in Virginia and New Jersey five shooters share the four shooter slots of a
-     realm (levels 2, 4, 6 and 8). The order turns one place every realm, so each shooter comes round in four realms
-     out of five, and the first realm keeps the old order (SLOTS): raid, rocks, sky, ring. realm is 0-based here
-     (levels 1-10 are realm 0). The Odyssey build keeps its own table (ODY_ROT) and never plays worms. */
+  /* v5.12 (from the Chemistry build): Virginia and New Jersey turn through five shooters (mixAt below); the Odyssey
+     build has its own (ODY_PAIRS, with its own modes: js/mode-ram.js, mode-bow.js, mode-raft.js, mode-row.js register
+     themselves with SolModes.extend) and never plays worms. A mode that is not loaded falls back to the maze. */
   var ORDER = ["raid", "rocks", "sky", "ring", "worms"];
-  var SLOT_K = { 2: 0, 4: 1, 6: 2, 8: 3 };
-  function modeAt(realm, k) { return ORDER[(k + realm) % ORDER.length]; }
-  function modeInRealm(id, realm) { for (var k = 0; k < 4; k++) if (modeAt(realm, k) === id) return true; return false; }
-  /* v5.10: the Odyssey build's Mixed rotation adds the strait on level 9 of every island (10 stays the boss) */
-  /* v5.11: the Odyssey build mixes its own modes into each island's levels 2, 4, 6, 8 and 9
-     (js/mode-ram.js, mode-bow.js, mode-raft.js, mode-row.js register themselves with SolModes.extend).
-     One row per island; a mode that is not loaded falls back to the maze. */
-  var ODY_ROT = [
-    ["raid", "rocks", "sky", "ring", "strait"],   /* 1 Troy's Shore */
-    ["row", "rocks", "sky", "ring", "bow"],       /* 2 the Lotus-Eaters */
-    ["ram", "rocks", "sky", "ring", "strait"],    /* 3 the Cyclopes */
-    ["raid", "raft", "sky", "ring", "strait"],    /* 4 Aeolia */
-    ["raid", "rocks", "bow", "ring", "strait"],   /* 5 the Laestrygonians */
-    ["raid", "rocks", "sky", "ring", "row"],      /* 6 Circe's island */
-    ["ram", "rocks", "sky", "bow", "strait"],     /* 7 the House of Hades */
-    ["raid", "row", "sky", "ring", "strait"],     /* 8 the Sirens' isle */
-    ["raft", "rocks", "sky", "ring", "strait"],   /* 9 Scylla and Charybdis */
-    ["raft", "ram", "bow", "row", "strait"]       /* 10 Poseidon's storm */
-  ];
-  var ODY_SLOT_IDX = { 2: 0, 4: 1, 6: 2, 8: 3, 9: 4 };
+  function modeInRealm(id, realm) { return mixAt(realm, 0) === id || mixAt(realm, 1) === id; }
+
+  /* v5.22, the teacher's rule: a shooter level is ONE question, and then the field is cleared. Mixed (every mode
+     in turn) plays each shooter for five levels in a row, so a realm is 13 levels: 1 maze, 2-6 one shooter,
+     7 maze, 8-12 a second shooter, 13 Fenrir's boss maze (130 levels). A game mode picked on its own keeps
+     10 levels a realm (100 levels). A level is still built from its difficulty, 1-100 (diffNight): the
+     maze's traps and Hati, the shooters' params and the passage length ramp as before over a realm.
+     MIX_DIFF: the difficulty of each of the 13 places in a realm (the boss is 10, as before). */
+  var MIX_PER = 13, MIX_DIFF = [0, 1, 2, 3, 3, 4, 5, 6, 7, 7, 8, 8, 9, 10];
+  /* the two shooters of each realm in Mixed: Virginia and New Jersey turn through ORDER (each comes round in
+     four realms); the Odyssey picks two of each island's own modes */
+  function mixAt(realm, k) { return ORDER[(realm * 2 + k) % ORDER.length]; }
+  var ODY_PAIRS = [["raid", "rocks"], ["row", "bow"], ["ram", "ring"], ["raft", "sky"], ["bow", "raid"],
+    ["row", "rocks"], ["ram", "bow"], ["row", "sky"], ["strait", "ring"], ["raft", "strait"]];
+  /* m: a game mode ("ALL", "maze", a shooter's id) or nothing for the one being played */
+  function isMixed(m) {
+    if (m == null) m = (typeof window !== "undefined" && window.SolModes && window.SolModes.only) || "ALL";
+    return m === "ALL";
+  }
+  function perRealm(m) { return isMixed(m) ? MIX_PER : 10; }
+  function maxLevel(m) { return perRealm(m) * 10; }
+  function diffNight(lvl, m) {
+    lvl = clamp(Math.floor(Number(lvl) || 1), 1, maxLevel(m));
+    if (!isMixed(m)) return lvl;
+    return Math.floor((lvl - 1) / MIX_PER) * 10 + MIX_DIFF[((lvl - 1) % MIX_PER) + 1];
+  }
+  function realmOfLevel(lvl, m) { return clamp(Math.floor((Math.max(1, Math.floor(Number(lvl) || 1)) - 1) / perRealm(m)), 0, 9); }
+  function placeInRealm(lvl, m) { return ((Math.max(1, Math.floor(Number(lvl) || 1)) - 1) % perRealm(m)) + 1; }
   /* v5.11: modes kept in their own files: SolModes.extend(id, def, methods) adds the MODES entry and,
      at install, copies the methods (setup_<id>, answers_<id>, tick_<id>, clear_<id>, resize_<id>, ...) onto ModeScene */
   var EXT = {};
@@ -195,18 +198,16 @@
   var WING = 40, CAPT_UP = 54;   /* Eagle Swoop: the second Sol stands WING px to the right; a caught Sol hangs CAPT_UP px over his eagle */
 
   /* v5.8.3: the game mode the student picked (game.js sets SolModes.only): null plays every mode in turn,
-     "maze" only the maze, a mode's id only that mode, on every level (boss levels too) */
+     "maze" only the maze, a mode's id only that mode, on every level (boss levels too). n is the student's level
+     (v5.22: 1-130 in Mixed, see MIX_PER) */
   function modeFor(n) {
     n = Math.floor(Number(n) || 0);
-    if (n < 1 || n > 100) return null;
+    if (n < 1 || n > maxLevel()) return null;
     var only = window.SolModes && window.SolModes.only;
     if (only === "maze") return null;
     if (only && MODES[only] && !(MODES[only].noOdy && isOdy())) return MODES[only];   /* v5.12: Root Worms is never played in the Odyssey */
-    var slot = ((n - 1) % 10) + 1, id;
-    if (isOdy()) {
-      var row = ODY_ROT[Math.min(9, Math.floor((n - 1) / 10))];
-      id = ODY_SLOT_IDX[slot] != null ? row[ODY_SLOT_IDX[slot]] : null;
-    } else id = SLOT_K[slot] != null ? modeAt(Math.floor((n - 1) / 10), SLOT_K[slot]) : null;
+    var realm = realmOfLevel(n), p = placeInRealm(n), k = p >= 2 && p <= 6 ? 0 : p >= 8 && p <= 12 ? 1 : -1, id = null;
+    if (k >= 0) id = isOdy() ? ODY_PAIRS[realm][k] : mixAt(realm, k);
     return id && MODES[id] ? MODES[id] : null;
   }
   /* v5.12 (from the Chemistry build): what the reading card lists as "New this time". A shooter skips one realm in
@@ -936,7 +937,8 @@
 
       init(data) {
         super.init(data);   /* family, strand, level, question pack, realm and perks (realms.js wraps init) */
-        this.mode = modeFor(this.night) || MODES.raid;
+        this.mode = modeFor(this.lvl) || MODES.raid;   /* this.lvl: the student's level; this.night: its difficulty (diffNight) */
+        this.needExtracts = 1;   /* v5.22: one question a level, then the field is cleared */
         /* v5.7.9: each mode comes round once a realm; every time it comes round it adds something (MODES[id].news) */
         this.tier = clamp(Math.floor(((this.night || 1) - 1) / 10), 0, 9);
       }
@@ -957,7 +959,7 @@
         try { K.hideReading(); } catch (eR) {}
 
         this.ended = false; this._finishing = false; this._between = false;
-        this._mopup = null; this._mopBanner = null;   /* v5.12: the clearing after the last answer (raid, worms) */
+        this._mopup = null; this._mopBanner = null;   /* v5.12: the clearing after the last answer (v5.22: every shooter, after its one question) */
         this._nightStarted = false; this._readPending = false; this.readOpen = false;
         this.tutDone = true; this.tutOpen = false; this.codexOpen = false; this.trapOpen = false;
         this.score = 0; this.scoreJuice = 0; this.scoreToastMs = 0; this.scoreToastMsg = "";
@@ -1206,7 +1208,7 @@
         if (!M) return "";
         var own = this["mopupText_" + this.mode.id];
         if (own) return own.call(this, two, Math.max(0, M.left));
-        var n = Math.max(0, M.left), a = "All questions answered — now clear the " + M.what + "!", b = n + " " + (n === 1 ? M.one : M.many) + " left";
+        var n = Math.max(0, M.left), a = "Right answer — now clear the " + M.what + "!", b = n + " " + (n === 1 ? M.one : M.many) + " left";
         return two ? a + "\n" + b : a + " " + b + ". Any hit takes one down.";
       }
       /* the banner: a dark box with the count, drawn under the flying things so it never hides one */
@@ -1336,7 +1338,7 @@
         if (card) {
           if (reason === "start") {
             var news = newsFor(m, this.tier);
-            card.innerHTML = '<p class="rk">Level ' + this.night + " · " + (m.level || "shooter level") + " · " + (this.realm ? this.realm.name : "") + "</p>" +
+            card.innerHTML = '<p class="rk">Level ' + this.lvl + " · " + (m.level || "shooter level") + " · " + (this.realm ? this.realm.name : "") + "</p>" +
               "<h3>" + m.name + " <span>· " + m.kind + "</span></h3>" +
               "<p>" + m.how + "</p><p class=\"foe\"><b>Lives:</b> " + m.rules + "</p>" +
               "<p class=\"perks\"><b>Controls:</b> " + m.keys + "</p>" +
@@ -1362,8 +1364,8 @@
           var t = document.getElementById("win-title"), msg = document.getElementById("win-msg"), m = this.mode;
           if (win) {
             if (t && t.textContent === "Level cleared") t.textContent = m.name + " cleared";
-            var nx = modeFor(this.night + 1);
-            if (msg && this.night < 100) msg.textContent += " Next: " + (nx ? nx.name + " (" + nx.kind + ")." : ((this.night + 1) % 10 === 0 ? "Fenrir's boss maze." : "back to the maze."));
+            var nx = modeFor(this.lvl + 1);
+            if (msg && this.lvl < maxLevel()) msg.textContent += " Next: " + (nx ? nx.name + (nx === m ? "" : " (" + nx.kind + ")") + "." : (placeInRealm(this.lvl + 1) === perRealm() ? "Fenrir's boss maze." : "back to the maze."));
           } else if (msg) {
             msg.textContent = this.lossReason() + "In " + m.name + ", wrong letters and hits both cost a life. Retry this level — the campaign stays here.";
           }
@@ -2090,7 +2092,7 @@
         }
         if (!noCredit && o.hp > 1) { o.hp -= 1; o.spr.setTint(0xd8e0ec); this.burst(o.x, o.y, 0xc8d4e8, 8); snd("rock"); return; }   /* iron */
         this.burst(o.x, o.y, 0x9a9488, o.size * 6); snd("rock");
-        if (o.size > 1) {
+        if (o.size > 1 && !this._mopup) {   /* v5.22: while the rocks are cleared a rock no longer breaks in two */
           var a = Math.atan2(o.vy, o.vx), sp = Math.sqrt(o.vx * o.vx + o.vy * o.vy) * 1.3 + 20, k;
           for (k = -1; k <= 1; k += 2) this.rockMake(o.size - 1, null, o.x, o.y, Math.cos(a + k * 0.7) * sp, Math.sin(a + k * 0.7) * sp);
         }
@@ -2224,6 +2226,7 @@
         if (this._finishing) return;
         this.rockSaucers(s, ms);
         if (this._finishing) return;
+        if (this._mopup) { this.mopupLeft(this.rocksLeft()); return; }   /* v5.22: nothing new drifts in */
         /* keep the field busy: fuller and faster to refill every level and every wave */
         var P = this.rkParams(this.night, R.wave);
         var blanks = R.rocks.filter(function (o) { return !o.letter; }).reduce(function (a, o) { return a + o.size; }, 0);
@@ -2331,7 +2334,7 @@
         }
         if (this.tier >= 8) {
           R.showerCd -= ms;
-          if (R.showerCd <= 0) { R.showerCd = rnd(14000, 18000); R.warns.push({ kind: "shower", side: Math.random() < 0.5 ? 0 : 1, t: 0 }); }
+          if (R.showerCd <= 0 && !this._mopup) { R.showerCd = rnd(14000, 18000); R.warns.push({ kind: "shower", side: Math.random() < 0.5 ? 0 : 1, t: 0 }); }
         }
         if (this.tier >= 7) {
           if (!R.valk) {
@@ -2367,6 +2370,17 @@
         R.gen += 1;
         R.rocks.filter(function (o) { return o.letter; }).forEach(function (o) { self.burst(o.x, o.y, 0xffd84a, 10); self.rockRemove(o); });
       }
+      /* v5.22, the teacher's rule: after the right answer the letter rocks go and every rock left has to be cleared.
+         No new rocks drift in and no shower comes (comets still streak across, and the saucers and the valkyrie keep
+         at it); a rock no longer breaks in two, so one shot or the beam clears it. tick_rocks counts what is left. */
+      mopup_rocks() {
+        var R = this.rk;
+        this.clear_rocks();
+        R.warns = R.warns.filter(function (w) { return w.kind === "comet"; });
+        R.rocks.forEach(function (o) { o.hp = 1; });
+        return this.rocksLeft();
+      }
+      rocksLeft() { return this.rk.rocks.filter(function (o) { return !o.comet; }).length; }   /* a comet is gone in a moment */
 
       /* ═══ 3. SUN CHARIOT — side-scrolling flyer ═══════════════════════════
          v5.7.5: harder from the start and climbing faster. The first Sun Chariot
@@ -2519,7 +2533,8 @@
         });
         /* ravens and wisps */
         K2.spawnCd -= ms;
-        if (K2.spawnCd <= 0 && !this._between) {
+        if (K2.spawnCd <= 0 && !this._between && (!this._mopup || K2.mopDue > 0)) {
+          if (this._mopup) K2.mopDue -= 1;
           var wisp = Math.random() < P.wispShare, y0 = rnd(60, H - 60);
           var foe = wisp
             ? { kind: "wisp", x: W + 40, y: y0, by: y0, r: 20, sp: P.wispSp, spr: this.add.image(W + 40, y0, "rf-wisp").setScale(0.7).setDepth(15) }
@@ -2556,7 +2571,12 @@
             if (this._finishing) return;
             continue;
           }
-          if (e.x < -60 && e.kind !== "guard") { kill(e); K2.foes.splice(i, 1); }
+          if (e.x < -60 && e.kind !== "guard") {
+            if (this._mopup) {   /* v5.22: while the sky is cleared, one that flies past comes round again */
+              e.x = W + 60; e.by = e.y = rnd(60, H - 60); e.thrown = false; e.wind = 0;
+              if (e.throwX != null) e.throwX = rnd(K2.x + 220, W - 60);
+            } else { kill(e); K2.foes.splice(i, 1); }
+          }
         }
         /* feathers and sparks */
         for (i = K2.shots.length - 1; i >= 0; i--) {
@@ -2571,6 +2591,7 @@
           }
           if (gone) { sh.spr.destroy(); K2.shots.splice(i, 1); }
         }
+        if (this._mopup) this.mopupLeft(K2.mopDue + K2.foes.length);
       }
       clear_sky() {
         var K2 = this.sky, self = this;
@@ -2579,6 +2600,17 @@
         K2.shots.forEach(kill); K2.shots = [];
         K2.spawnCd = 1800;
         try { this.fxG.clear(); } catch (e) {}
+      }
+      /* v5.22, the teacher's rule: after the right answer the orbs and their guards go, one last flight of ravens and
+         wisps comes in (mopDue), and every one has to be shot down: one that flies past comes round again, and one
+         that hits the chariot is gone too (for a life). tick_sky counts what is left. */
+      mopup_sky() {
+        var K2 = this.sky, self = this;
+        K2.orbs.forEach(function (o) { self.burst(o.x, o.y, 0xbfe8ff, 8); kill(o); }); K2.orbs = [];
+        K2.foes = K2.foes.filter(function (f) { if (f.kind === "guard") { kill(f); return false; } return true; });
+        K2.mopDue = 4 + Math.min(6, this.tier);
+        K2.spawnCd = Math.min(K2.spawnCd, 600);
+        return K2.mopDue + K2.foes.length;
       }
 
       /* ═══ 4. WOLF RING — arena ════════════════════════════════════════════
@@ -2774,15 +2806,16 @@
         var running = rg.wolves.filter(function (w) { return w.state === "run"; }).length;
         rg.spawnCd -= ms;
         var GP = this.ringParams(this.night), cap = GP.cap;
-        if (rg.spawnCd <= 0 && !this._between && running < cap) {
+        if (rg.spawnCd <= 0 && !this._between && running < cap && (!this._mopup || rg.mopDue > 0)) {
           var sa2 = rnd(0, Math.PI * 2), pk;
           this.ringWolf(sa2, false);
+          if (this._mopup) rg.mopDue -= 1;   /* v5.22: the last pack, one wolf at a time */
           /* packs: one or two more from the same side */
-          for (pk = 1; pk < GP.packMax && running + pk < cap + 1; pk++) { if (Math.random() < GP.packP) this.ringWolf(sa2 + pk * 0.2, false); else break; }
+          else for (pk = 1; pk < GP.packMax && running + pk < cap + 1; pk++) { if (Math.random() < GP.packP) this.ringWolf(sa2 + pk * 0.2, false); else break; }
           if (Math.random() < 0.25) snd("howl");
           rg.spawnCd = GP.spawnMs * rnd(0.75, 1.25) * (this.tier >= 9 ? 0.75 : 1);
         }
-        if (GP.alpha && !this._between) {
+        if (GP.alpha && !this._between && !this._mopup) {
           rg.alphaCd -= ms;
           var alphas = rg.wolves.filter(function (w) { return w.alpha && w.state === "run"; }).length;
           if (rg.alphaCd <= 0 && alphas < GP.maxAlphas) { this.ringWolf(rnd(0, Math.PI * 2), true); snd("howl"); rg.alphaCd = GP.alphaMs * rnd(0.8, 1.2); }
@@ -2815,6 +2848,7 @@
             if (this._finishing) return;
           }
         }
+        if (this._mopup) this.mopupLeft(rg.mopDue + this.ringRunning());
       }
       ringWolf(ang, alpha) {
         var rg = this.rg, wx = rg.cx + Math.cos(ang) * (rg.R + 70), wy = rg.cy + Math.sin(ang) * (rg.R + 70);
@@ -2867,6 +2901,17 @@
         rg.stones = [];
         rg.spawnCd = 2400;
       }
+      /* v5.22, the teacher's rule: after the right answer the runestones sink for good and one last pack comes, a wolf
+         at a time (mopDue; no alpha joins it). Every wolf still running at Sol has to be chased off with an arrow; one
+         that catches him runs off too, with the wolves near him (for a life). tick_ring counts what is left. */
+      mopup_ring() {
+        var rg = this.rg, self = this;
+        rg.stones.forEach(function (o) { self.burst(o.x, o.y, 0xffe07a, 8); kill(o); }); rg.stones = [];
+        rg.mopDue = 3 + Math.min(5, this.tier);
+        rg.spawnCd = Math.min(rg.spawnCd, 900);
+        return rg.mopDue + this.ringRunning();
+      }
+      ringRunning() { return this.rg.wolves.filter(function (w) { return w.state === "run"; }).length; }
 
       /* ═══ 5. ROOT WORMS — centipede (v5.12, from the Chemistry build) ═════
          Nidhogg's worms wind down a mushroom field one row at a time, turning
@@ -3767,7 +3812,7 @@
       }
       mopupY_strait() { return this.H - 38; }   /* low down, over the water the ship has already passed: the rocks ahead stay in sight */
       mopupText_strait(two, n) {
-        var a = "All questions answered — now get through the strait!", b = n + " row" + (n === 1 ? "" : "s") + " of rocks left";
+        var a = "Right answer — now get through the strait!", b = n + " row" + (n === 1 ? "" : "s") + " of rocks left";
         return two ? a + "\n" + b : a + " " + b + ". Steer through the gaps — a hit still costs a life.";
       }
     }
@@ -3780,9 +3825,12 @@
 
   /* v5.7.9: the maze draws Sol riding this chariot while the CHARIOT power lasts */
   function ensureChariotArt(scene) { canvasTex(scene, "md-team-0", TEAM_W, TEAM_H, drawTeam(0)); canvasTex(scene, "md-team-1", TEAM_W, TEAM_H, drawTeam(1)); }
-  window.SolModes = { MODES: MODES, SLOTS: SLOTS, ODY_ROT: ODY_ROT, modeFor: modeFor, install: install, ensureChariotArt: ensureChariotArt, extend: extend,
+  window.SolModes = { MODES: MODES, modeFor: modeFor, install: install, ensureChariotArt: ensureChariotArt, extend: extend,
     /* v5.12: the five-shooter rotation (Virginia and New Jersey), the card's news, Eagle Swoop's birds */
-    ORDER: ORDER, modeAt: modeAt, modeInRealm: modeInRealm, newsFor: newsFor, BIRDS: BIRDS, raidKindsFor: raidKindsFor,
+    ORDER: ORDER, modeInRealm: modeInRealm, newsFor: newsFor, BIRDS: BIRDS, raidKindsFor: raidKindsFor,
+    /* v5.22: levels: Mixed is 13 a realm (130), one mode 10 a realm (100); a level's difficulty is 1-100 */
+    mixAt: mixAt, ODY_PAIRS: ODY_PAIRS, isMixed: isMixed, perRealm: perRealm, maxLevel: maxLevel, diffNight: diffNight,
+    realmOfLevel: realmOfLevel, placeInRealm: placeInRealm,
     /* v5.11: the shared helpers, for the modes in their own files */
     lib: { clamp: clamp, rnd: rnd, dist: dist, shuffle: shuffle, hex: hex, mix: mix, angDiff: angDiff, kill: kill, snd: snd, canvasTex: canvasTex,
       isOdy: isOdy, ST: ST, drawGalley: drawGalley, drawArrow: drawArrow, drawSplat: drawSplat, drawStraitWater: drawStraitWater, SHIP_W: SHIP_W, SHIP_H: SHIP_H, STACK: STACK },

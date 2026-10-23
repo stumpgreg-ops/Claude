@@ -41,6 +41,8 @@
   var pendingMs = 0, lastTick = Date.now(), lastFlush = Date.now(), lastInput = Date.now();
 
   function num(v) { v = Math.floor(Number(v)); return isFinite(v) && v > 0 ? v : 0; }
+  /* v5.22: the highest level a code or a record keeps (Mixed has 130) */
+  function maxLv() { return (C && C.MAX_LEVEL) || 100; }
   function today() {
     var d = new Date();
     return d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2);
@@ -66,14 +68,14 @@
       var s = x.std[k]; if (s && /^[0-9A-Za-z.]{3,24}$/.test(k)) r.std[k] = { a: num(s.a), r: Math.min(num(s.a), num(s.r)) };
     });
     if (x.camp && typeof x.camp === "object") Object.keys(x.camp).forEach(function (k) {
-      var c = x.camp[k]; if (c && /^[A-Za-z]{1,12}$/.test(k)) { var hr = Math.min(100, num(c.hiReached)); r.camp[k] = { hiReached: hr, hiWon: Math.min(hr, num(c.hiWon)) }; }
+      var c = x.camp[k]; if (c && /^[A-Za-z]{1,12}$/.test(k)) { var hr = Math.min(maxLv(), num(c.hiReached)); r.camp[k] = { hiReached: hr, hiWon: Math.min(hr, num(c.hiWon)) }; }
     });
     r.streak = num(x.streak); r.bestStreak = Math.max(num(x.bestStreak), r.streak);
     r.perfect = num(x.perfect); r.comebacks = num(x.comebacks);
     r.lostAt = Array.isArray(x.lostAt) ? x.lostAt.filter(function (k) { return typeof k === "string"; }).slice(-60) : [];
     r.badges = Array.isArray(x.badges) ? x.badges.filter(function (k) { return typeof k === "string"; }) : [];
     if (x.levels) { r.levels.started = num(x.levels.started); r.levels.won = num(x.levels.won); r.levels.lost = num(x.levels.lost); }
-    r.hiReached = Math.min(100, num(x.hiReached)); r.hiWon = Math.min(r.hiReached, num(x.hiWon));
+    r.hiReached = Math.min(maxLv(), num(x.hiReached)); r.hiWon = Math.min(r.hiReached, num(x.hiWon));
     if (x.q) { r.q.answered = num(x.q.answered); r.q.right = Math.min(r.q.answered, num(x.q.right)); r.q.wrong = num(x.q.wrong); }
     if (x.skills && typeof x.skills === "object") Object.keys(x.skills).forEach(function (k) {
       var s = x.skills[k]; if (s && /^[A-Z]{1,10}$/.test(k)) r.skills[k] = { a: num(s.a), r: Math.min(num(s.a), num(s.r)) };
@@ -163,7 +165,7 @@
         cur.ended = true;
       }
       var st = stateOfFamily(info && info.family) || stateNow();
-      var night = Math.max(1, Math.min(100, num(info && info.night) || 1));
+      var night = Math.max(1, Math.min(maxLv(), num(info && info.night) || 1));
       var mode = String((info && info.mode) || "maze").toLowerCase().replace(/[^a-z]/g, "").slice(0, 12) || "maze";
       var campaign = String((info && info.campaign) || "ALL").replace(/[^A-Za-z]/g, "").slice(0, 12) || "ALL";
       var rec = load(st);
@@ -276,10 +278,10 @@
   }
   function saveNow() {
     var sv = { night: 1, fangs: [], build: null }, ids = realmIds();
-    try { var n = parseInt(localStorage.getItem(NIGHT_KEY) || "1", 10); if (n >= 1 && n <= 100) sv.night = n; } catch (e) {}
+    try { var n = parseInt(localStorage.getItem(NIGHT_KEY) || "1", 10); if (n >= 1 && n <= maxLv()) sv.night = n; } catch (e) {}
     sv.nights = {};
     (C && C.MODE_IDS || []).forEach(function (m) {
-      try { var v = parseInt(localStorage.getItem(NIGHT_KEY + "." + m) || "", 10); if (v >= 1 && v <= 100) sv.nights[m] = v; } catch (e1) {}
+      try { var v = parseInt(localStorage.getItem(NIGHT_KEY + "." + m) || "", 10); if (v >= 1 && v <= maxLv()) sv.nights[m] = v; } catch (e1) {}
     });
     try {
       var f = JSON.parse(localStorage.getItem(FANG_KEY) || "[]");
@@ -315,7 +317,7 @@
   }
   function nightFrom(d) {
     if (d.save) return d.save.night;
-    return Math.max(1, Math.min(100, d.hiReached > d.hiWon ? d.hiReached : d.hiWon + 1));
+    return Math.max(1, Math.min(maxLv(), d.hiReached > d.hiWon ? d.hiReached : d.hiWon + 1));
   }
   function applyRestore(chk) {
     var d = chk.d, st = chk.st, rec = blank(), ids = realmIds();

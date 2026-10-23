@@ -105,6 +105,7 @@
   /* format 3: the badges, by number. APPEND ONLY. "m-<mode>-<level>" = win that level in that game mode. */
   var MODE_IDS = ["ALL", "maze", "raid", "rocks", "sky", "ring", "worms", "strait", "ram", "bow", "raft", "row"];
   var MODE_TIERS = [10, 25, 50, 75, 100];
+  var MAX_LEVEL = 130;   /* v5.22: Mixed has 130 levels (13 a realm); a mode on its own 100 */
   var BADGES = ["first-win", "q25", "q100", "q250", "q500", "q1000", "q2500", "streak5", "streak10", "streak20", "streak40",
     "perfect1", "perfect10", "perfect25", "perfect50", "rl25", "rl100", "ri25", "ri100", "rv25", "rv100", "dsr25", "dsr100",
     "std10", "std20", "days3", "days7", "days15", "days30", "min30", "min120", "min300", "min600", "fang1", "fang5", "fang10",
@@ -251,7 +252,7 @@
     keys.forEach(function (k) { w.std(k); w.num(std[k].a); w.num(Math.min(std[k].a, std[k].r || 0)); });
     var camp = s.camp || {}, ck = Object.keys(camp).filter(function (k) { return camp[k] && camp[k].hiReached > 0; }).slice(0, 30);
     w.num(ck.length);
-    ck.forEach(function (k) { w.word(k); w.num(Math.min(100, camp[k].hiReached)); w.num(Math.min(camp[k].hiReached, camp[k].hiWon || 0)); });
+    ck.forEach(function (k) { w.word(k); w.num(Math.min(MAX_LEVEL, camp[k].hiReached)); w.num(Math.min(camp[k].hiReached, camp[k].hiWon || 0)); });
     w.num(s.bestStreak); w.num(s.perfect);
     var have = {}, last = -1;
     (s.badges || []).forEach(function (id) { var i = BADGES.indexOf(id); if (i !== -1) { have[i] = 1; if (i > last) last = i; } });
@@ -265,7 +266,7 @@
     for (i = 0; i < n; i++) { var code = r.std(), a = r.num(), rr = r.num(); if (rr > a) throw new Error("std"); d.std.push({ code: code, a: a, r: rr }); }
     n = r.num(); if (n > 30) throw new Error("camp");
     d.camp = {};
-    for (i = 0; i < n; i++) { var m = r.word(), hr = r.num(), hw = r.num(); if (hr > 100 || hw > hr) throw new Error("camp"); d.camp[m] = { hiReached: hr, hiWon: hw }; }
+    for (i = 0; i < n; i++) { var m = r.word(), hr = r.num(), hw = r.num(); if (hr > MAX_LEVEL || hw > hr) throw new Error("camp"); d.camp[m] = { hiReached: hr, hiWon: hw }; }
     d.bestStreak = r.num(); d.perfect = r.num();
     n = r.num(); if (n > 1000) throw new Error("badges");
     d.badges = [];
@@ -276,9 +277,9 @@
      owned: [ids], rewards: { "5": id, ... }, picks: [{ piece, style, src, deco, rot, cx, cy }] } } */
   function writeSave(w, sv, fmt) {
     sv = sv || {};
-    w.num(Math.max(1, Math.min(100, Math.floor(Number(sv.night) || 1))));
+    w.num(Math.max(1, Math.min(MAX_LEVEL, Math.floor(Number(sv.night) || 1))));
     if (fmt >= 3) {
-      var nights = sv.nights || {}, nk = Object.keys(nights).filter(function (k) { return nights[k] >= 1 && nights[k] <= 100; }).slice(0, 30);
+      var nights = sv.nights || {}, nk = Object.keys(nights).filter(function (k) { return nights[k] >= 1 && nights[k] <= MAX_LEVEL; }).slice(0, 30);
       w.num(nk.length);
       nk.forEach(function (k) { w.word(k); w.num(Math.floor(nights[k])); });
     }
@@ -309,10 +310,10 @@
   }
   function readSave(r, fmt) {
     var sv = { night: r.num(), nights: {}, fangs: [], build: null }, mask, i, n;
-    if (sv.night < 1 || sv.night > 100) throw new Error("night");
+    if (sv.night < 1 || sv.night > MAX_LEVEL) throw new Error("night");
     if (fmt >= 3) {
       n = r.num(); if (n > 30) throw new Error("nights");
-      for (i = 0; i < n; i++) { var mk = r.word(), nv = r.num(); if (nv < 1 || nv > 100) throw new Error("nights"); sv.nights[mk] = nv; }
+      for (i = 0; i < n; i++) { var mk = r.word(), nv = r.num(); if (nv < 1 || nv > MAX_LEVEL) throw new Error("nights"); sv.nights[mk] = nv; }
     }
     mask = r.num();
     for (i = 0; i < 16; i++) if (mask & (1 << i)) sv.fangs.push(i);
@@ -439,7 +440,7 @@
       var rest = bits.slice(r.i);
       if (rest.length >= 5 || rest.some(function (x) { return x; })) throw new Error("extra");
       if (tag !== tagOf(B.secret, payload)) throw new Error("tag");
-      if (d.right > d.answered || d.won + d.lost > d.started || d.hiWon > d.hiReached || d.hiReached > 100) throw new Error("numbers");
+      if (d.right > d.answered || d.won + d.lost > d.started || d.hiWon > d.hiReached || d.hiReached > MAX_LEVEL) throw new Error("numbers");
     } catch (e) {
       return { ok: false, build: build, why: "Does not check out: a typo, a missing part, or a changed code." };
     }
@@ -473,7 +474,7 @@
     return out;
   }
 
-  var api = { FORMAT: FORMAT, BUILDS: BUILDS, WORDS: WORDS, STDS: STDS, BADGES: BADGES, MODE_IDS: MODE_IDS, MODE_TIERS: MODE_TIERS, badgeInfo: badgeInfo, buildById: buildById, encode: encode, decode: decode, format: format,
+  var api = { FORMAT: FORMAT, BUILDS: BUILDS, WORDS: WORDS, STDS: STDS, BADGES: BADGES, MODE_IDS: MODE_IDS, MODE_TIERS: MODE_TIERS, MAX_LEVEL: MAX_LEVEL, badgeInfo: badgeInfo, buildById: buildById, encode: encode, decode: decode, format: format,
     findCodes: findCodes, dayNum: dayNum, dayStr: dayStr, cleanNick: cleanNick, parseVersion: parseVersion, _tag: tagOf };
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   if (root) root.SolProgressCode = api;

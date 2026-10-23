@@ -29,6 +29,24 @@ A game uploaded to Canvas can't send anything anywhere, so progress is shown to 
 
 Tests: `node tools/smoke-progress.js` (after `node tools/build-games.js`, `node tools/build-appsscript.js VA|ODY` and `node tools/build-canvas.js VA|ODY`).
 
+## v5.23.0 (2026-10-23) — one question a shooter level, then clear the field; Mixed is 130 levels
+
+This applies to every non-maze game mode, in the students' games and in the teacher preview.
+- **One question a level.** A shooter level asks one question. After the right answer no new question pops up: the letters leave and the game goes to *clear the field*. A banner counts what is left, and clearing it wins the level and moves on to the next one. As before, a hit still costs a life while you clear, and a clear with no hit pays a bonus.
+  - *Eagle Swoop:* shoot down every bird left.
+  - *Rune Rocks:* clear every rock left. No new rocks drift in, and a rock no longer breaks in two, so one shot or the beam clears it.
+  - *Sun Chariot:* the orbs go and one last flight of ravens and wisps comes in. Shoot them all down; one that flies past comes round again.
+  - *Wolf Ring:* the runestones sink and one last pack comes. Chase off every wolf.
+  - *Root Worms:* shoot every segment left.
+  - *Scylla and Charybdis:* run the rest of the strait.
+  - *The Odyssey's own modes:* see below.
+- **Mixed is 13 levels a realm, 130 in all.** Each shooter plays five levels in a row: level 1 a maze, 2–6 one shooter, 7 a maze, 8–12 a second shooter, 13 Fenrir's boss maze.
+  - Virginia and New Jersey turn through the five shooters, two a realm, so each comes round four times.
+  - The Odyssey picks two of each island's own modes (`ODY_PAIRS` in `js/modes.js`).
+  - A game mode picked on its own keeps 100 levels (10 a realm), with one question a shooter level.
+- **The level and its difficulty.** The level a student sees and saves runs 1–130 in Mixed (`scene.lvl`). Each level is still built from a difficulty of 1–100 (`scene.night`, `SolModes.diffNight`), so the maze's traps and Hati, the shooters' params and the passage lengths ramp over a realm as before. The builder's rewards still come every 5 difficulty steps: in Mixed, after the first shooter's fifth level and after the boss.
+- **Progress codes, Restore and badges** accept levels up to 130 (`MAX_LEVEL` in `js/progress-code.js`). The HUD reads *Level N / 130*, the title screens say 130 levels, and the teacher preview's *Play this level* box takes 1–130 in Mixed.
+
 ## v5.22.0 (2026-10-23) — a teacher preview of the Virginia game, questions skipped
 
 **SOL Lab VA Eng teacher preview.zip** (`dist/canvas/`) is a copy of the Virginia game for a teacher to try every level, every game mode and the castle/town builder without reading questions. It is not for students. Unzip it and double-click `SOLLabyrinth-VA-TeacherPreview.html` (the READ ME in the zip says how, and how to put it in Canvas unpublished).

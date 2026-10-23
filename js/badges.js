@@ -48,7 +48,7 @@
     /* each mode's levels: the record, or (for a save from before v5.15) the level saved for that mode */
     modesHere().forEach(function (m) {
       var c = (rec.camp || {})[m] || { hiReached: 0, hiWon: 0 }, hr = num(c.hiReached), hw = num(c.hiWon);
-      try { var v = parseInt(localStorage.getItem(NIGHT_KEY + "." + m) || "", 10); if (v >= 1 && v <= 100) { hr = Math.max(hr, v); hw = Math.max(hw, v - 1); } } catch (e) {}
+      try { var v = parseInt(localStorage.getItem(NIGHT_KEY + "." + m) || "", 10); if (v >= 1 && v <= (C.MAX_LEVEL || 100)) { hr = Math.max(hr, v); hw = Math.max(hw, v - 1); } } catch (e) {}
       f.camp[m] = { hiReached: hr, hiWon: hw };
     });
     try { var fa = JSON.parse(localStorage.getItem(FANG_KEY) || "[]"); f.fangs = Array.isArray(fa) ? fa.length : 0; } catch (e) {}

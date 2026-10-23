@@ -1316,7 +1316,8 @@
       var r = orig.apply(this, args);
       try {
         var rf = document.getElementById("round-flag"), rm = this.realm || realmOf(this.night);
-        if (rf) rf.textContent = "Level " + this.night + " / 100 · " + rm.name + (this.isBossLevel ? " · Boss" : "");
+        var M = window.SolModes, max = M && M.maxLevel ? M.maxLevel() : 100;   /* v5.22: Mixed has 130 levels */
+        if (rf) rf.textContent = "Level " + (this.lvl || this.night) + " / " + max + " · " + rm.name + (this.isBossLevel ? " · Boss" : "");
       } catch (e) {}
       return r;
     });
@@ -1332,7 +1333,9 @@
         if (reason === "start" && this._realmCardPending) {
           this._realmCardPending = false;
           var rm = this.realm || realmOf(this.night), html = "";
-          html += '<p class="rk">Realm ' + (this.realmIdx + 1) + " of 10 · Level " + this.realmLevel + " of 10</p>";
+          /* v5.22: the student's own count (13 levels a realm in Mixed); this.realmLevel is the difficulty's place */
+          var Mo = window.SolModes, per = Mo && Mo.perRealm ? Mo.perRealm() : 10, inR = Mo && Mo.placeInRealm ? Mo.placeInRealm(this.lvl || this.night) : this.realmLevel;
+          html += '<p class="rk">Realm ' + (this.realmIdx + 1) + " of 10 · Level " + inR + " of " + per + "</p>";
           html += "<h3>" + rm.name + ' <span>· ' + rm.title + "</span></h3>";
           html += "<p>" + rm.blurb + "</p>";
           if (rm.foe) html += '<p class="foe"><b>' + (rm.foe.kind === "mix" ? "Creatures" : "New creature") + ": " + rm.foe.name + ".</b> " + rm.foe.desc + "</p>";

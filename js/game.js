@@ -47,10 +47,10 @@
   var LS_ADAPT = "afterHours.v1.adapt.";
   /* v4.9: the gateway screen picks a state; each state has its own grade cards. */
   var STATE_DEFS = {
-    VA: { name: "Virginia", kicker: "NNPS · VA 2024 EOC Reading practice skills · 100 levels", families: ["G9", "G10", "G11"], def: "G9", hud: "Teacher" },
-    NJ: { name: "New Jersey", kicker: "NJSLA-ELA · Grade 5 reading practice · 100 levels", families: ["NJ5"], def: "NJ5", hud: "NJSLS" },
+    VA: { name: "Virginia", kicker: "NNPS · VA 2024 EOC Reading practice skills · 130 levels", families: ["G9", "G10", "G11"], def: "G9", hud: "Teacher" },
+    NJ: { name: "New Jersey", kicker: "NJSLA-ELA · Grade 5 reading practice · 130 levels", families: ["NJ5"], def: "NJ5", hud: "NJSLS" },
     /* v5.9: the Odyssey game (English 9, Unit 2 "Challenge Accepted!") — its own build, tools/build-games.js ODY */
-    ODY: { name: "The Odyssey", kicker: "English 9 · Unit 2: Challenge Accepted! · The Odyssey · 100 levels", families: ["ODY"], def: "ODY", hud: "Teacher" }
+    ODY: { name: "The Odyssey", kicker: "English 9 · Unit 2: Challenge Accepted! · The Odyssey · 130 levels", families: ["ODY"], def: "ODY", hud: "Teacher" }
   };
   /* v5.2: the New Jersey and Virginia games are separate builds. tools/build-games.js writes
      window.SOL_STATE into each build's index.html; that build never shows the gateway, never
@@ -3890,6 +3890,11 @@
      student can be on level 40 in Eagle Swoop and level 12 in the Labyrinth. LS_NIGHT still holds the level last
      played (in any mode). An older save had one level for every mode: it moves to the mode last picked. */
   function nightKey(m) { return LS_NIGHT + "." + (m || (cfg && cfg.gameMode) || "ALL"); }
+  /* v5.22: how many levels a game mode has (Mixed 130, 13 a realm; a mode on its own 100) and the difficulty a level
+     is built from (1-100: the maze's traps and Hati, the shooters' params, the passage length). js/modes.js knows the
+     rotation; without it every level is its own difficulty, 100 levels. */
+  function maxLevel(m) { try { if (window.SolModes && SolModes.maxLevel) return SolModes.maxLevel(m); } catch (e) {} return 100; }
+  function diffNight(lvl) { try { if (window.SolModes && SolModes.diffNight) return SolModes.diffNight(lvl); } catch (e) {} return clamp(parseInt(lvl, 10) || 1, 1, 100); }
   function migrateNight() {
     try {
       if (localStorage.getItem(LS_NIGHT + ".migrated")) return;
@@ -3906,11 +3911,11 @@
     migrateNight();
     var v = 1;
     try { v = parseInt(localStorage.getItem(nightKey(m)) || "1", 10); } catch (e) {}
-    if (!(v >= 1 && v <= 100)) v = 1;
+    if (!(v >= 1 && v <= maxLevel(m))) v = 1;
     return v;
   }
   function writeSavedNight(n, m) {
-    n = clamp(n, 1, 100);
+    n = clamp(n, 1, maxLevel(m));
     migrateNight();
     try { localStorage.setItem(nightKey(m), String(n)); localStorage.setItem(LS_NIGHT, String(n)); } catch (e) {}
   }
@@ -4366,7 +4371,9 @@
       window.SolScene = this;   /* v4.9.1: the live night scene, for the headless smoke test and console debugging */
       this.family = (data && data.family) || cfg.family || "ALL";
       this.strand = (data && data.strand) || cfg.strand || "ALL";
-      this.night = clamp((data && data.night) || cfg.night || 1, 1, 100);
+      /* v5.22: this.lvl is the student's level (1-130 in Mixed); this.night is the difficulty it is built from (1-100) */
+      this.lvl = clamp((data && data.night) || cfg.night || 1, 1, maxLevel());
+      this.night = diffNight(this.lvl);
       this.level = nightConfig(this.night);
       /* v4.8: suspense track for the night (music.js picks by night and wing) */
       if (window.SolMusic && SolMusic.play) { try { SolMusic.setChase(false); SolMusic.play(SolMusic.calmFor(this.night)); } catch (eMu) {} }
@@ -4383,8 +4390,8 @@
       this.chaseMs = this.level.chaseMs;
       this.iframeMax = this.level.iframe;
       this.pack = (typeof heistBuildPack === "function") ? heistBuildPack(this.family, this.strand) : { claims: [] };
-      cfg.night = this.night;
-      writeSavedNight(this.night);
+      cfg.night = this.lvl;
+      writeSavedNight(this.lvl);
     }
 
     /* Null out any own property (or array element) that points at a Phaser
@@ -7329,10 +7336,10 @@
       if (!c) return;
       var claimChanged = this._hudClaimId !== c.id;
       this._hudClaimId = c.id;
-      var tok = makeToken(this.night, this.score, this.strikes);
+      var tok = makeToken(this.lvl || this.night, this.score, this.strikes);
       var hudLabel = (STATE_DEFS[cfg.state] && STATE_DEFS[cfg.state].hud) || "Teacher";
       document.getElementById("job-sol").textContent = hudLabel + " · " + (c.sol || "") + " · Reading level " + adaptLevelLabel(this.adapt) + (c.isPartB ? " · Part B" : c.partB ? " · Part A" : "");
-      document.getElementById("round-flag").textContent = "Level " + this.night + " / 100 · " + nightTheme(this.night).name;
+      document.getElementById("round-flag").textContent = "Level " + this.lvl + " / " + maxLevel() + " · " + nightTheme(this.night).name;
       var juice = this.scoreJuice || 0;
       document.getElementById("score-pip").textContent = "Extracts " + this.score + " / " + this.needExtracts;
       var strikeTxt = "Strikes " + this.strikes + " / " + this.needStrikes;
@@ -17386,16 +17393,16 @@
       againBtn.classList.remove("hidden");
       if (win) {
         pingTeacher(this, "cleared");
-        if (this.night >= 100) {
-          document.getElementById("win-title").textContent = "All 100 levels";
+        if (this.lvl >= maxLevel()) {
+          document.getElementById("win-title").textContent = "All " + maxLevel() + " levels";
           document.getElementById("win-msg").textContent = "Campaign complete on this Chromebook. Itch login does not store progress.";
           nextBtn.textContent = "Play again from Level 1";
           nextBtn.classList.remove("hidden");
           nextBtn.dataset.goto = "1";
         } else {
-          writeSavedNight(this.night + 1);
+          writeSavedNight(this.lvl + 1);
           document.getElementById("win-title").textContent = "Level cleared";
-          document.getElementById("win-msg").textContent = "Level " + this.night + " is done. Same skill pack. Next level is waiting on this Chromebook.";
+          document.getElementById("win-msg").textContent = "Level " + this.lvl + " is done. Same skill pack. Next level is waiting on this Chromebook.";
         }
         /* v4.9: perfect night = every question banked with no wrong tile grabbed */
         var winMsgEl = document.getElementById("win-msg");
@@ -17404,13 +17411,13 @@
           winMsgEl.textContent += " Perfect level — no wrong letters: +" + perfect + " bonus coins!";
         }
         winMsgEl.textContent += " You earned " + (this.nightCoins || 0) + " coins this level.";
-        if (this.night < 100) {
+        if (this.lvl < maxLevel()) {
           nextBtn.textContent = "Next level";
           nextBtn.classList.remove("hidden");
-          nextBtn.dataset.goto = String(this.night + 1);
+          nextBtn.dataset.goto = String(this.lvl + 1);
         }
       } else {
-        writeSavedNight(this.night);
+        writeSavedNight(this.lvl);
         document.getElementById("win-title").textContent = "Run over";
         document.getElementById("win-msg").textContent = (this.lastStrikeReason === "wrong" ? "That wrong letter used your last life. " + this.wrongLetterNote() : "Caught in the cone. ") +
           "Wrong letters and catches both cost a life. Retry this level — the campaign stays here.";
@@ -25873,7 +25880,7 @@
         var ol = document.getElementById("read-choices");
         var hint = document.getElementById("read-hint");
         var scroll = document.getElementById("read-scroll");
-        if (kick) kick.textContent = (reason === "start" ? "Read first · Level " : "Next question · Level ") + this.night + " · " + (c.sol || "") + (c.isPartB ? " · Part B (evidence)" : c.partB ? " · Part A" : "") + (c.words ? " · " + c.words + " words" : "");
+        if (kick) kick.textContent = (reason === "start" ? "Read first · Level " : "Next question · Level ") + this.lvl + " · " + (c.sol || "") + (c.isPartB ? " · Part B (evidence)" : c.partB ? " · Part A" : "") + (c.words ? " · " + c.words + " words" : "");
         if (title) title.textContent = c.packTitle || "Passage";
         if (pass) pass.innerHTML = c.passage || "";
         if (stem) stem.textContent = c.stem || c.doThis || "";
@@ -26738,7 +26745,7 @@
   function progressLevelStart(sc) {
     if (!window.SolProgress || !sc) return;
     try {
-      SolProgress.levelStart({ family: sc.family, night: sc.night, campaign: cfg.gameMode || "ALL",
+      SolProgress.levelStart({ family: sc.family, night: sc.lvl || sc.night, campaign: cfg.gameMode || "ALL",
         mode: sc.mode && sc.mode.id ? sc.mode.id : (sc.isBossLevel ? "boss" : "maze") });
     } catch (eP) {}
   }
@@ -26771,11 +26778,11 @@
   function pingTeacher(scene, status) {
     if (window.SolClass && SolClass.report) { try { SolClass.report(scene, status, adaptLevelLabel(scene.adapt)); } catch (eC) {} }
     var tokenEl = document.getElementById("token-pip");
-    var tok = makeToken(scene.night, scene.score, scene.strikes);
+    var tok = makeToken(scene.lvl || scene.night, scene.score, scene.strikes);
     if (tokenEl) tokenEl.textContent = "Token " + tok;
     if (joinNet && joinNet.send) {
       joinNet.send({
-        night: scene.night,
+        night: scene.lvl || scene.night,
         extracts: scene.score,
         strikes: scene.strikes,
         level: adaptLevelLabel(scene.adapt),
@@ -26960,7 +26967,7 @@
 
   /* ── v5.8.3: the game mode screen, between the grade and the skill ── */
   var GAME_MODE_DEFS = [
-    { id: "ALL", kind: "All modes", name: "Mixed", meta: "The full campaign: the maze on odd levels and Fenrir's boss levels, a shooter level on the even ones." },
+    { id: "ALL", kind: "All modes", name: "Mixed", meta: "The full campaign, 130 levels. Each realm: a maze level, five levels of one shooter, a maze level, five levels of another shooter, then Fenrir's boss maze. A shooter level is one question; then you clear the field." },
     { id: "maze", kind: "Maze", name: "Labyrinth", meta: "Sneak past Hati, grab the right letter and get out through EXIT · SAFE. Every level is the maze." },
     { id: "raid", kind: "Galaga style", name: "Eagle Swoop", meta: "Shoot the eagle carrying the right letter while the flock dives at you." },
     { id: "rocks", kind: "Asteroids style", name: "Rune Rocks", meta: "Pull the rock with the right letter in with your beam and blast the rest." },
@@ -27090,7 +27097,7 @@
   }
 
   function restartNight(n) {
-    cfg.night = clamp(n, 1, 100);
+    cfg.night = clamp(n, 1, maxLevel());
     wantNight1Tut = isNight1(cfg.night) && !tutClosed;
     writeSavedNight(cfg.night);
     document.getElementById("overlay").classList.add("hidden");
