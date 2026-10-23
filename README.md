@@ -39,12 +39,16 @@ This applies to every non-maze game mode, in the students' games and in the teac
   - *Wolf Ring:* the runestones sink and one last pack comes. Chase off every wolf.
   - *Root Worms:* shoot every segment left.
   - *Scylla and Charybdis:* run the rest of the strait.
-  - *The Odyssey's own modes:* see below.
+  - *Under the Ram:* ride the last few rams out of the cave.
+  - *Bend the Bow:* shoot through every row of axes left.
+  - *Calypso's Raft:* ride out Poseidon's last waves.
+  - *Row Past the Sirens:* row to the end of the song.
 - **Mixed is 13 levels a realm, 130 in all.** Each shooter plays five levels in a row: level 1 a maze, 2–6 one shooter, 7 a maze, 8–12 a second shooter, 13 Fenrir's boss maze.
   - Virginia and New Jersey turn through the five shooters, two a realm, so each comes round four times.
   - The Odyssey picks two of each island's own modes (`ODY_PAIRS` in `js/modes.js`).
   - A game mode picked on its own keeps 100 levels (10 a realm), with one question a shooter level.
 - **The level and its difficulty.** The level a student sees and saves runs 1–130 in Mixed (`scene.lvl`). Each level is still built from a difficulty of 1–100 (`scene.night`, `SolModes.diffNight`), so the maze's traps and Hati, the shooters' params and the passage lengths ramp over a realm as before. The builder's rewards still come every 5 difficulty steps: in Mixed, after the first shooter's fifth level and after the boss.
+- **Tests.** `tools/smoke.js` and the four `tools/smoke-mode-*.js` follow the new rules (a check about "level n of the 100-level game" picks its mode on its own).
 - **Progress codes, Restore and badges** accept levels up to 130 (`MAX_LEVEL` in `js/progress-code.js`). The HUD reads *Level N / 130*, the title screens say 130 levels, and the teacher preview's *Play this level* box takes 1–130 in Mixed.
 
 ## v5.22.0 (2026-10-23) — a teacher preview of the Virginia game, questions skipped

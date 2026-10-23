@@ -434,11 +434,13 @@ var srv = http.createServer(function (req, res) {
     await p3.waitForSelector("#mode-screen:not(.hidden)");
     var va = await p3.evaluate(function () {
       return { state: window.SOL_STATE, cards: Array.prototype.map.call(document.querySelectorAll("#mode-packs .card"), function (c) { return c.getAttribute("data-gamemode"); }), only: window.SolModes ? SolModes.only : "?",
-        rot: [2, 22, 62].map(function (n) { var m = SolModes.modeFor(n); return m ? m.id : "-"; }).join(",") };
+        rot: [2, 22, 62].map(function (n) { var m = SolModes.modeFor(n); return m ? m.id : "-"; }).join(","),
+        /* v5.23: no level of the 130 in Virginia's Mixed rotation is Under the Ram */
+        rams: (function () { var k = 0; for (var n = 1; n <= 130; n++) { var m = SolModes.modeFor(n); if (m && m.id === "ram") k++; } return k; })() };
     });
     console.log("dist/va", JSON.stringify(va));
     /* v5.12: Virginia's Mixed rotation turns its five shooters one place every realm: 2 raid, 22 sky, 62 rocks */
-    check(va.state === "VA" && va.cards.length > 0 && va.cards.indexOf("ram") === -1 && va.only === null && va.rot === "raid,sky,rocks","dist/va: the mode screen does not offer Under the Ram, a saved pick of it falls back to All modes, and the rotation never plays it: " + JSON.stringify(va));
+    check(va.state === "VA" && va.cards.length > 0 && va.cards.indexOf("ram") === -1 && va.only === null && va.rot === "raid,ring,worms" && va.rams === 0,"dist/va: the mode screen does not offer Under the Ram, a saved pick of it falls back to All modes, and the rotation never plays it: " + JSON.stringify(va));
     await p3.close();
   }
   root = repo;
