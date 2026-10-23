@@ -593,7 +593,8 @@ var srv = http.createServer(function (req, res) {
   for (var rw = 0; rw < 10; rw++) { if (await page.isVisible("#read-go")) { await page.click("#read-go"); break; } await page.waitForTimeout(150); }
   var ride = await page.evaluate(async function () {
     var s = SolScene; s.activateLockerPower();
-    await new Promise(function (r) { setTimeout(r, 200); });
+    /* wait on the game, not the clock: the chariot appears on the next frames, which a loaded machine draws slowly */
+    for (var w0 = 0; w0 < 20 && !(s.chariotRide && s.chariotRide.visible); w0++) await new Promise(function (r) { setTimeout(r, 150); });
     var c = s.chariotRide, o = { on: !!(c && c.visible), near: c ? Math.hypot(c.x - s.player.x, c.y - s.player.y) : -1 };
     s.lockerPowerMs = 1;
     for (var w = 0; w < 10 && s.chariotRide && s.chariotRide.visible; w++) await new Promise(function (r) { setTimeout(r, 150); });
