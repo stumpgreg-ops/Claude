@@ -3,7 +3,9 @@
    script), picks Bend the Bow on the game mode screen and drives the mode through the scene's own
    methods: the right row scores, a wrong row costs a life and is crossed out, a thrown footstool or cup
    costs a life (and stepping back dodges it), an empty quiver costs a life, Select TWO needs both rows,
-   the keys, the mouse and the DRAW button work, and the difficulty climbs every level 2-100.
+   the keys, the mouse and the DRAW button work, and the difficulty climbs every level 2-100. The teacher's rule:
+   with one question a level (needExtracts 1), the right row starts the clearing (the letters come off, every row
+   left has to be shot through, each one counts down, the last one wins the level).
    Then, when the builds exist (node tools/build-games.js), dist/ody plays the mode and dist/va does not
    offer it. Screenshots go to tools/shots/. Prints ALL OK or the number FAILED. */
 var path = require("path"), fs = require("fs"), http = require("http"), url = require("url");
@@ -100,6 +102,7 @@ var srv = http.createServer(function (req, res) {
     var s = SolScene, B = s.bw, o = {};
     function wait(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
     async function until(f, ms) { var t0 = Date.now(); while (!f() && Date.now() - t0 < (ms || 30000)) await wait(30); return f(); }
+    s.needExtracts = 99;   /* these checks run over several questions; one question and the clearing are checked at the end */
     function quiet() {
       B.P.drain = 0; B.pat = 1; s.bowEndVolley(); B.P.sway = 0; B.P.wind = 0;
       B.arrows.slice().forEach(function (a) { s.bowFree(a); });
@@ -361,6 +364,59 @@ var srv = http.createServer(function (req, res) {
     return { ended: s.ended, title: document.getElementById("win-title").textContent, msg: document.getElementById("win-msg").textContent, retry: !document.getElementById("btn-retry").classList.contains("hidden") };
   });
   check(lose.ended && lose.retry && /Bend the Bow/.test(lose.msg), "the last life ends the level and offers Retry: " + JSON.stringify(lose).slice(0, 200));
+
+  /* the teacher's rule: one question a level (needExtracts 1; js/modes.js sets it for every shooter level), then the
+     hall is cleared. Through the right row: the letters come off the plaques, the answered row comes down and every
+     row left has to be shot through, all twelve rings; each one counts down, and the last one wins the level */
+  await gotoLevel(19);
+  var mop = await page.evaluate(async function () {
+    var s = SolScene, B = s.bw, o = {};
+    function wait(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+    async function until(f, ms) { var t0 = Date.now(); while (!f() && Date.now() - t0 < (ms || 30000)) await wait(30); return f(); }
+    async function shoot(i, da) {
+      var a = s.bowShoot(s.bowRowAim(i) + (da || 0), 1);
+      await until(function () { return a.state !== "fly"; }, 6000);
+      await wait(80);
+      return a;
+    }
+    function idx(L) { for (var i = 0; i < B.rows.length; i++) if (B.rows[i].letter === L) return i; return -1; }
+    var wins = [], endRun = s.endRun;
+    s.endRun = function (win) { wins.push(win); return endRun.apply(this, arguments); };
+    B.P.drain = 0; B.pat = 1; s.bowEndVolley(); B.P.sway = 0; B.P.wind = 0; B.windA = 0;
+    s.strikes = 0; s.iframeMs = 0; s.spareLives = 0; s.perks = {}; s.tutLockUntil = 0;
+    s.needExtracts = 1; s.score = 0; s.extracted = [];
+    var need = s.need.slice(), before = B.rows.length;
+    for (var j = 0; j < need.length; j++) await shoot(idx(need[j]));
+    B.quiver = 2;   /* (a fresh quiver comes with the clearing) */
+    await wait(120);
+    o.start = { mopup: !!s._mopup, left: s._mopup ? s._mopup.left : -1, rows: B.rows.length, want: before - need.length, score: s.score,
+      labels: B.rows.map(function (r) { return r.label.text; }).join(""), plain: B.rows.every(function (r) { return r.state === "live" && r.letter == null; }),
+      ended: s.ended || s._finishing, banner: s._mopBanner ? s._mopBanner.t.text : "" };
+    B.quiver = B.P.quiver;
+    /* an arrow that misses the rows takes nothing down */
+    var w0 = B.wastedQ;
+    await shoot(0, 3 * Math.PI / 180);
+    o.miss = { wasted: B.wastedQ - w0, rows: B.rows.length, left: s._mopup ? s._mopup.left : -1 };
+    /* through all twelve rings of each row left: the count goes down one by one, and the last one wins the level */
+    o.counts = [];
+    while (B.rows.length && !s._finishing && o.counts.length < 8) {
+      B.quiver = B.P.quiver;
+      await shoot(0);
+      await until(function () { return (s._mopup && s._mopup.left === B.rows.length) || s._finishing; }, 5000);
+      o.counts.push(s._mopup ? s._mopup.left : -1);
+    }
+    await until(function () { return s.ended; }, 10000);
+    o.wins = wins; o.strikes = s.strikes; o.ended = s.ended;
+    return o;
+  });
+  console.log("clear the rows", JSON.stringify(mop));
+  var mw = mop.start.want;
+  check(mop.start.mopup && mop.start.score === 1 && !mop.start.ended && mw >= 1 && mop.start.rows === mw && mop.start.left === mw && mop.start.labels === "" && mop.start.plain && /of axes left/i.test(mop.start.banner),
+    "one question a level: the right row starts the clearing: it comes down, the letters come off the other plaques, and the rows left are counted: " + JSON.stringify(mop.start));
+  check(mop.miss.wasted === 1 && mop.miss.rows === mw && mop.miss.left === mw, "an arrow that misses the rows takes nothing down: " + JSON.stringify(mop.miss));
+  check(mop.counts.join(",") === Array.apply(null, Array(mw)).map(function (x, i) { return mw - 1 - i; }).join(","),
+    "an arrow through all twelve rings takes a row down: the count goes down one by one to 0: " + JSON.stringify(mop.counts));
+  check(mop.ended && mop.wins.length === 1 && mop.wins[0] === true && mop.strikes === 0, "clearing the rows wins the level (endRun(true)): " + JSON.stringify({ wins: mop.wins, strikes: mop.strikes }));
   await ctx.close();
 
   /* ── the standalone builds ── */

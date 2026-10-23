@@ -45,7 +45,8 @@
       scroll: 118 + n * 0.9,                                              /* top speed up the channel, px/s */
       rowGap: Math.max(360, 680 - n * 3.2),                               /* water between lines of marker posts, px */
       chanFrac: (1 - n * 0.0026) * (n >= 31 ? 0.94 : 1),                  /* how much of the sea the channel keeps */
-      sway: n >= 61 ? Math.min(0.3, 0.1 + (n - 61) * 0.005) : 0           /* inner posts drifting, × a passage's width */
+      sway: n >= 61 ? Math.min(0.3, 0.1 + (n - 61) * 0.005) : 0,          /* inner posts drifting, × a passage's width */
+      mopNotes: 24 + Math.floor(n / 5)                                    /* notes of the song left after the last answer: 26 at 12, 43 at 99 */
     };
   }
 
@@ -420,8 +421,8 @@
 
   M.extend("row", {
     name: "Row Past the Sirens", kind: "rhythm level", level: "rhythm level", act: "ROW",
-    how: "Odysseus's ship rows past the Sirens' island. The crew's ears are stopped with beeswax, and Odysseus is tied to the mast: he hears the song but cannot go to it. You can hear the song, and see it: each note flies from the Sirens' meadow to the ship. Row each time a note lands on the gold ring round the mast. The song has long notes, quick ones and rests, so follow the notes, not a steady count. Good strokes give the ship speed and full steering. A missed or mistimed stroke slows it, and the Sirens' song pulls it toward their rocks. Between verses, a line of marker posts crosses the channel with one passage for each letter: steer through the passage with the right answer.",
-    rules: "Steering through a wrong letter's passage costs a life. So does running onto the Sirens' rocks. Each miss in a row snaps one of the ropes that hold Odysseus (top left); when the last rope snaps he breaks free, and that costs a life too. A good stroke ties the ropes again.",
+    how: "Odysseus's ship rows past the Sirens' island. The crew's ears are stopped with beeswax, and Odysseus is tied to the mast: he hears the song but cannot go to it. You can hear the song, and see it: each note flies from the Sirens' meadow to the ship. Row each time a note lands on the gold ring round the mast. The song has long notes, quick ones and rests, so follow the notes, not a steady count. Good strokes give the ship speed and full steering. A missed or mistimed stroke slows it, and the Sirens' song pulls it toward their rocks. Between verses, a line of marker posts crosses the channel with one passage for each letter: steer through the passage with the right answer. When you answer the question, the marker posts stop: keep rowing on the notes to the end of the Sirens' song (a count shows how many notes are left) to win the level.",
+    rules: "Steering through a wrong letter's passage costs a life. So does running onto the Sirens' rocks. Each miss in a row snaps one of the ropes that hold Odysseus (top left); when the last rope snaps he breaks free, and that costs a life too. A good stroke ties the ropes again. While you row to the end of the song after the answer, a hit still costs a life.",
     keys: "Space, the ROW button, or a click or tap: row (when a note lands on the ship) · ◀ ▶, A / D or the on-screen pad: steer.",
     tip: "ROW PAST THE SIRENS — row (Space or ROW) each time a note of the song lands on the ship, and steer ◀ ▶ through the passage with the right letter.",
     hint1: "Row on the beat and steer through the passage marked with the right letter. The passage stays in the side panel.",
@@ -436,6 +437,9 @@
       "Busy runs: some bars of the song are full of quick notes. Row on each one, and only when a note lands. The marker posts drift, too.",
       "The Sirens' song swells more often, and pulls harder.",
       "Ithaca is close: the song is faster, on top of everything else."],
+    /* the teacher's rule: after the answer, the rest of the song has to be rowed (mopup_row) */
+    clear: { what: "song", one: "note", many: "notes", tag: "CORRECT! NOW FINISH THE SONG!", done: "PAST THE SIRENS!",
+      sweep: "Clean rowing: not one hit to the end of the Sirens' song" },
     params: rowParams
   }, {
     rowParams: function (n) { return rowParams(n); },
@@ -662,6 +666,7 @@
     rowJudge: function (g, why, nt, pressed) {
       var R = this.rw, P = R.P, i;
       R.stats[g] += 1;
+      if (R.mop && nt) R.mop.left = Math.max(0, R.mop.left - 1);   /* the end of the song: one note fewer to go */
       if (g === "miss") {
         R.mom = Math.max(0, R.mom - 0.18);
         R.missRun += 1; R.hitRun = 0; R.perfRun = 0;
@@ -860,6 +865,25 @@
       R.rows = [];
       this.rowStop();
     },
+    /* the teacher's rule: the level's last answer doesn't end it yet (the shell calls this instead of clear_row).
+       The marker posts go and no more come; the song plays on for P.mopNotes more notes, and every note that comes
+       to the ship, rowed or missed, counts one down (rowJudge). The song's pull, its swells and the rocks keep at
+       it, a broken rope still sets Odysseus free, and a count-in after a life starts the song again, so the
+       count always runs down. tick_row reports it (mopupLeft). */
+    mopup_row: function () {
+      var R = this.rw, self = this;
+      R.rows.forEach(function (r) { r.gates.forEach(function (g) { self.burst(g.x, r.y, 0xe8b04a, 6); }); self.rowKillRow(r); });
+      R.rows = [];
+      R.mop = { left: R.P.mopNotes };
+      if (!(R.genT < Infinity)) this.rowRestart(R.bd);   /* (the song never stops on the last answer; just in case) */
+      this.toast("Keep rowing on the notes to the end of the Sirens' song. The count shows how many notes are left.", 4400);
+      return R.mop.left;
+    },
+    mopupY_row: function () { return Math.max(96, 100 * this.rw.k); },   /* high up, under the page's buttons and above where the notes fly */
+    mopupText_row: function (two, n) {
+      var a = two ? "Finish the Sirens' song!" : "All questions answered — now row to the end of the Sirens' song!", b = n + " note" + (n === 1 ? "" : "s") + " left";
+      return two ? a + "\n" + b : a + " " + b + ". Row each time a note lands on the ship — a hit still costs a life.";
+    },
 
     tick_row: function (s, inp, ms) {
       var R = this.rw, P = R.P, W = this.W, H = this.H, sh = R.ship, self = this, i, j, lg = R.lowG;
@@ -871,6 +895,8 @@
       if (this._finishing) return;
       this.rowBeats();
       if (this._finishing) return;
+      /* rowing to the end of the song after the last answer: won when its last note has come to the ship */
+      if (R.mop && this._mopup) { this.mopupLeft(R.mop.left); if (this._finishing) return; }
       R.mom = Math.max(0, R.mom - 0.05 * s);
       /* 2. up the channel: speed from the stroke */
       var v = P.scroll * (0.45 + 0.55 * R.mom) * R.k, dy = v * s;
@@ -932,7 +958,7 @@
       this.rowSirens(ms);
       /* 6. the marker posts come down the channel */
       R.dist += dy;
-      if (!this._between && R.dist >= P.rowGap) { R.dist = 0; this.rowSpawnRow(); }
+      if (!this._between && !R.mop && R.dist >= P.rowGap) { R.dist = 0; this.rowSpawnRow(); }
       var rows = R.rows.slice();
       for (i = 0; i < rows.length; i++) {
         var row = rows[i];

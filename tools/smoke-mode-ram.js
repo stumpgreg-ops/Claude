@@ -3,7 +3,9 @@
    script), picks the mode on the mode screen and drives it deterministically through the scene's methods:
    the right letter scores, a wrong letter costs a life and is crossed out, Polyphemus's hand costs a life,
    the flock leaving without Odysseus costs a life, Select TWO needs both letters, and the difficulty climbs
-   at every level. Then, if the builds exist (node tools/build-games.js), the mode runs in dist/ody and is
+   at every level. The teacher's rule: with one question a level (needExtracts 1), the right ride starts the
+   clearing of the cave (plain rams left, none goes out on its own, each one ridden out counts down, the last one
+   wins the level). Then, if the builds exist (node tools/build-games.js), the mode runs in dist/ody and is
    not offered in dist/va. Screenshots go to tools/shots/ram-*.png. Prints ALL OK or N FAILED. */
 var path = require("path"), fs = require("fs"), http = require("http"), url = require("url");
 var { chromium } = require("/opt/node22/lib/node_modules/playwright");
@@ -95,6 +97,7 @@ var srv = http.createServer(function (req, res) {
       s.keys.SPACE.isDown = false; await until(function () { return !R.prevFire; });
     }
     s.spareLives = 0; s.perks = {}; s.tutLockUntil = 0;
+    s.needExtracts = 99;   /* these checks run over several questions; one question and the clearing are checked at the end */
     /* no releases, gropes, under-checks or roars of their own while the scripted checks run */
     function quiet() {
       R.hold = true; R.roar.state = "calm"; R.roar.t = 0;
@@ -148,7 +151,12 @@ var srv = http.createServer(function (req, res) {
     await until(function () { return R.ody.state === "foot"; });
     quiet();
     var cr = inCave(wrongL)[0];
-    if (cr) { cr.pause = 1e9; R.ody.x = cr.x - 28; R.ody.y = cr.y; s.ramTryCling(); o.wrong.refused = R.ody.state === "foot"; }
+    if (cr) {
+      /* in a corner of its own: an unmarked ram within reach would be grabbed instead (ramTouching prefers it) */
+      cr.pause = 1e9; cr.x = R.fx0 + 70; cr.y = R.fy0 + 60; R.ody.x = cr.x - 28; R.ody.y = cr.y;
+      R.rams.forEach(function (r) { if (r !== cr && r.state !== "gone" && dist2(r, cr) < 140) r.x += 220; });
+      s.ramTryCling(); o.wrong.refused = R.ody.state === "foot";
+    }
     /* Polyphemus's groping hand: a shadow first, then a life if Odysseus is on foot under it; thrown back into the cave */
     quiet(); R.ody.x = R.wallX0 - Math.min(R.reachR * 0.8, 170); R.ody.y = R.doorY + 10; R.ody.spr.setVisible(true);
     R.rams.forEach(function (r) { if (r.state !== "gone" && Math.abs(r.x - R.ody.x) < 70 && Math.abs(r.y - R.ody.y) < 70) r.x -= 150; });
@@ -296,6 +304,86 @@ var srv = http.createServer(function (req, res) {
   check(late.tier === 9 && late.gropers === 2 && late.rams >= 11, "level 99 runs with a bigger flock and both hands groping: " + JSON.stringify(late));
   await shot("ram-99-late");
   await page.evaluate(function () { SolScene.iframeMs = 0; });
+
+  /* the teacher's rule: one question a level (needExtracts 1; js/modes.js sets it for every shooter level), then the
+     cave is cleared. Riding out on the right letter takes the lettered flock away and leaves a few plain rams; none
+     goes out on its own, a ram heads for the door only with Odysseus under it, each one ridden out counts one down,
+     and the last one wins the level (endRun(true)) */
+  await gotoLevel(22);
+  var mop = await page.evaluate(async function () {
+    var s = SolScene, R = s.ram, o = {};
+    function wait(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+    async function until(f, ms) { var t0 = Date.now(); while (!f() && Date.now() - t0 < (ms || 20000)) await wait(30); return f(); }
+    async function gwait(ms) { var t0 = R.t; await until(function () { return R.t - t0 >= ms / 1000 || s._finishing; }, 30000); }
+    async function press() {
+      var f0 = R.lastFrame;
+      s.keys.SPACE.isDown = true; await until(function () { return R.prevFire && R.lastFrame > f0; });
+      s.keys.SPACE.isDown = false; await until(function () { return !R.prevFire; });
+    }
+    async function grab(r) {
+      for (var k = 0; k < 8 && !(R.ody.state === "cling" && R.ody.ram === r); k++) {
+        r.held = 1e9; r.a = 1; R.ody.state = "foot"; R.ody.x = r.x - 22; R.ody.y = r.y;
+        await press();
+      }
+      r.held = 0;
+      return R.ody.state === "cling" && R.ody.ram === r;
+    }
+    function inCave() { return R.rams.filter(function (r) { return r.state !== "gone" && !r.crossed; }); }
+    /* Odysseus grabs ram r in the middle of the cave; then it is put in the doorway and goes out */
+    async function rideOut(r) {
+      r.state = "graze"; r.pause = 1e9; r.scat = 0; r.x = R.fx0 + R.caveW * 0.5; r.y = R.doorY; r.vx = r.vy = 0;
+      var clung = await grab(r), went = r.state;
+      r.state = "exit"; r.x = R.thrX - 26; r.y = R.doorY; r.lane = 0;
+      await until(function () { return r.crossed || s._finishing || s.ended; });
+      return { clung: clung, went: went };
+    }
+    var wins = [], endRun = s.endRun;
+    s.endRun = function (win) { wins.push(win); return endRun.apply(this, arguments); };
+    s.needExtracts = 1; s.score = 0; s.extracted = []; s.strikes = 0; s.spareLives = 0; s.perks = {}; s.tutLockUntil = 0; s.iframeMs = 0;
+    R.hold = true; R.roar.state = "calm"; R.roar.t = 0; R.hands.forEach(function (h) { s.ramHandReset(h); });
+    var need = s.need.slice();
+    for (var j = 0; j < need.length; j++) {
+      await until(function () { return R.ody.state === "foot"; });
+      await rideOut(inCave().filter(function (r) { return r.letter === need[j] && !r.mark; })[0]);
+    }
+    await gwait(120);
+    o.start = { mopup: !!s._mopup, left: s._mopup ? s._mopup.left : -1, want: R.P.mopRams, rams: inCave().length,
+      letters: R.rams.filter(function (r) { return r.letter || r.txt.text; }).length, ended: s.ended || s._finishing, score: s.score,
+      banner: s._mopBanner ? s._mopBanner.t.text : "", ody: R.ody.state };
+    /* no ram goes out on its own (a release would be due at once) */
+    R.hold = false; R.gropeCd = 1e9; R.underCd = 1e9; R.roar.cd = 1e12; R.relCd = 0;
+    await gwait(500);
+    o.noRelease = inCave().every(function (r) { return r.state === "graze"; }) && inCave().length === o.start.rams;
+    R.hold = true;
+    /* under a ram, it heads for the door; let go, and it goes back to grazing */
+    await until(function () { return R.ody.state === "foot"; });
+    var r1 = inCave()[0]; r1.x = R.fx0 + R.caveW * 0.45; r1.y = R.doorY + 40; r1.pause = 1e9;
+    await grab(r1);
+    o.letGo = { went: r1.state, hud: R.hud.text };
+    await press(); await gwait(100);
+    o.letGo.back = r1.state; o.letGo.left = s._mopup ? s._mopup.left : -1;
+    /* ride every ram out: the count goes down one by one, and the last one wins the level */
+    o.rides = []; o.counts = [];
+    while (inCave().length && !s._finishing && o.rides.length < 8) {
+      await until(function () { return R.ody.state === "foot"; });
+      o.rides.push(await rideOut(inCave()[0]));
+      await until(function () { return (s._mopup && s._mopup.left === inCave().length) || s._finishing; }, 5000);
+      o.counts.push(s._mopup ? s._mopup.left : -1);
+    }
+    o.free = R.ody.state;
+    await until(function () { return s.ended; }, 10000);
+    o.wins = wins; o.strikes = s.strikes; o.ended = s.ended;
+    return o;
+  });
+  console.log("clear the cave", JSON.stringify(mop));
+  var mw = mop.start.want;
+  check(mop.start.mopup && mop.start.score === 1 && !mop.start.ended && mop.start.rams === mw && mop.start.left === mw && mop.start.letters === 0 && /left in the cave/.test(mop.start.banner),
+    "one question a level: the right ride starts the clearing of the cave: the lettered flock goes and " + mw + " plain rams are left (no letters), with a count: " + JSON.stringify(mop.start));
+  check(mop.noRelease && mop.letGo.went === "go" && mop.letGo.back === "graze" && mop.letGo.left === mw && /Under a ram/.test(mop.letGo.hud),
+    "while the cave is cleared no ram goes out on its own; one heads for the door with Odysseus under it, and goes back to grazing if he lets go: " + JSON.stringify({ noRelease: mop.noRelease, letGo: mop.letGo }));
+  check(mop.rides.length === mw && mop.rides.every(function (r) { return r.clung && r.went === "go"; }) && mop.counts.join(",") === Array.apply(null, Array(mw)).map(function (x, i) { return mw - 1 - i; }).join(",") && mop.free === "free",
+    "each ram ridden out counts one down to 0, and Odysseus runs free with the last: " + JSON.stringify({ rides: mop.rides, counts: mop.counts, free: mop.free }));
+  check(mop.ended && mop.wins.length === 1 && mop.wins[0] === true && mop.strikes === 0, "clearing the cave wins the level (endRun(true)): " + JSON.stringify({ wins: mop.wins, strikes: mop.strikes }));
 
   /* the builds (node tools/build-games.js): the mode runs in the Odyssey game and is not offered in Virginia's */
   var distRoot = path.join(repo, "dist");

@@ -64,7 +64,8 @@
       scatterSp: 140 + n,                                        /* how fast the rams scatter at a roar */
       again: n >= 51,                                            /* a grope that finds nothing gropes again at once */
       doubleUnder: n >= 71,                                      /* after feeling under one ram he may feel the next one */
-      loudRoar: n >= 81                                          /* louder roars: further scatter, and the hands sweep faster for a moment */
+      loudRoar: n >= 81,                                         /* louder roars: further scatter, and the hands sweep faster for a moment */
+      mopRams: Math.min(5, 3 + Math.floor(n / 40))               /* rams left to ride out after the last answer: 3, 4 from 40, 5 from 80 */
     };
   }
 
@@ -74,9 +75,11 @@
       "sweeping his huge hands across it to feel the backs of his rams as they go out to pasture. Every ram carries a letter on its fleece. " +
       "Walk up to a ram with the right answer, grab on under its belly, and ride it out through the door: he feels only their backs, so he won't find you there. " +
       "The rams wander, then drift to the door in a loose line, and the flock won't wait for you. Watch his hands: a dark shadow on the floor shows where one will grope next. " +
-      "Sometimes he roars, and the frightened rams scatter.",
+      "Sometimes he roars, and the frightened rams scatter. " +
+      "When you answer the question, the lettered rams go out and a few plain rams are left in the cave: ride out under each of them, one at a time, to take them to your ship and win the level.",
     rules: "Riding out under a wrong letter costs a life, and that letter is crossed out on the other rams. " +
-      "A touch from Polyphemus's hand while you are not under a ram costs a life too (he throws you back into the cave), and so does letting the whole flock go out without you (then a new flock comes in).",
+      "A touch from Polyphemus's hand while you are not under a ram costs a life too (he throws you back into the cave), and so does letting the whole flock go out without you (then a new flock comes in). " +
+      "While you take the last rams out after the answer, his hands still cost a life.",
     keys: "Arrow keys, WASD or the on-screen pad move Odysseus · Space, CLING or a mouse button: grab on under the ram you are touching; press again to let go. You can't walk out on foot.",
     tip: "UNDER THE RAM — cling under the ram with the right letter and ride it out past Polyphemus's hands.",
     hint1: "Cling under a ram with the right letter and ride it out through the door. The passage stays in the side panel.",
@@ -91,6 +94,9 @@
       "After feeling under one ram, he may feel under the ram next to it straight away.",
       "Louder roars: the rams scatter further, and his hands sweep faster for a moment.",
       "Ithaca is close: the flock, the hands and the roars are all faster, on top of everything else."],
+    /* the teacher's rule: after the answer, the cave is cleared (mopup_ram) */
+    clear: { what: "cave", one: "ram", many: "rams", done: "THE CAVE IS EMPTY!",
+      sweep: "Clean escape: not one hit while you took the rams out" },
     params: ramParams
   };
 
@@ -625,7 +631,7 @@
       var r = { letter: L, x: x, y: y, vx: 0, vy: 0, h: rnd(-Math.PI, Math.PI), state: "graze", tx: x, ty: y, pause: rnd(200, 1800), held: 0, scat: 0, svx: 0, svy: 0,
         a: 1, walk: rnd(0, 20), frame: 0, ph: rnd(0, 6), lane: rnd(-1, 1), crossed: false, mark: "", big: false, sc: RAM_SC, copy: 0, patted: false };
       r.spr = this.add.image(x, y, "md-ram-ram-0").setOrigin(RAM_CX / RAM_W, RAM_CY / RAM_H).setDepth(10).setScale(RAM_SC);
-      r.txt = this.add.text(x, y, L, { fontFamily: SERIF, fontSize: 21, color: C.glaze, fontStyle: "bold" }).setOrigin(0.5).setDepth(20);   /* above the hands: a letter is never hidden */
+      r.txt = this.add.text(x, y, L || "", { fontFamily: SERIF, fontSize: 21, color: C.glaze, fontStyle: "bold" }).setOrigin(0.5).setDepth(20);   /* above the hands: a letter is never hidden */
       if (R.dead.indexOf(L) !== -1) this.ramPaint(r, "wrong");
       else if (this.extracted.indexOf(L) !== -1) this.ramPaint(r, "right");
       this.ramGrazeTarget(r);
@@ -716,6 +722,11 @@
       var rams = R.rams;
       this.ramTickRams(s, ms);
       if (this._finishing) return;
+      /* clearing the cave after the last answer: won when no ram is left in it */
+      if (R.mop && this._mopup) {
+        this.mopupLeft(R.rams.filter(function (r) { return r.state !== "gone" && !r.crossed; }).length);
+        if (this._finishing) return;
+      }
       this.ramTickOdy(s, ms, inp, edge && R.rams === rams);
       this.ramTickRoar(s, ms);
       this.ramTickHands(s, ms);
@@ -725,8 +736,8 @@
 
     /* ── the flock ── */
     ramTickRams: function (s, ms) {
-      var R = this.ram, P = R.P, rams = R.rams, n = rams.length, i, j;
-      if (!R.hold && !this._between) {
+      var R = this.ram, P = R.P, rams = R.rams, n = rams.length, o = R.ody, i, j;
+      if (!R.hold && !this._between && !R.mop) {
         R.relCd -= ms;
         if (R.relCd <= 0) {
           while (R.order.length && R.order[0].state !== "graze") R.order.shift();
@@ -740,6 +751,8 @@
         var r = rams[i];
         if (r.state === "gone") continue;
         if (r.a < 1) r.a = Math.min(1, r.a + s * 1.5);
+        /* while the cave is cleared a ram only heads out with Odysseus under it: let go, and it goes back to grazing */
+        if (R.mop && r.state === "go" && !(o.state === "cling" && o.ram === r)) { r.state = "graze"; r.pause = rnd(300, 900); this.ramGrazeTarget(r); }
         var dvx = 0, dvy = 0, sp, dx, dy, d;
         if (r.held > 0) r.held -= ms;
         else if (r.scat > 0) { r.scat -= ms; dvx = r.svx; dvy = r.svy; }
@@ -801,6 +814,7 @@
     /* a ram has passed out through the door */
     ramCrossed: function (r) {
       var R = this.ram, o = R.ody, rode = o.state === "cling" && o.ram === r;
+      if (R.mop) { if (rode) this.ramMopOut(r); return; }   /* clearing the cave: no letters, and no new flock */
       if (rode) this.ramExit(r);
       if (this._finishing || this.ended || this._between) return;
       var left = R.rams.filter(function (q) { return q.state !== "gone" && !q.crossed; }).length;
@@ -823,6 +837,21 @@
       this.ramSlip(r.x, r.y);
       this.ramActLabel();
     },
+    /* clearing the cave: Odysseus rode one of the last rams out; he slips back in for the next, or, with the last, is free */
+    ramMopOut: function (r) {
+      var R = this.ram, o = R.ody, left = R.rams.filter(function (q) { return q.state !== "gone" && !q.crossed; }).length;
+      o.state = "foot"; o.ram = null; o.under.setVisible(false);
+      this.burst(r.x, r.y - 20, 0x9aefc0, 12);
+      this.ramBleat();
+      if (left > 0) {
+        this.ramSlip(r.x, r.y);
+        this.ramTell("mopOut", "That ram is out and on its way to your ship! Slip back in for the next one.", 3200);
+      } else {
+        o.state = "free"; o.t = 0; o.x = Math.max(o.x, R.wallX1 + 8); o.y = R.doorY;
+        o.spr.setVisible(true).setAlpha(1).setScale(1).setRotation(0);
+      }
+      this.ramActLabel();
+    },
 
     /* ── Odysseus ── */
     /* the ram Odysseus is touching (one he can ride, if any) */
@@ -842,6 +871,7 @@
       o.state = "cling"; o.ram = r; o.x = r.x; o.y = r.y;
       o.spr.setVisible(false);
       o.under.setPosition(r.x, r.y).setRotation(r.h).setScale(r.sc).setVisible(true);
+      if (R.mop && r.state === "graze") { r.state = "go"; r.pause = 0; }   /* clearing the cave: the ram he is under heads for the door */
       rsnd("cling");
       this.ramTell("cling", "You're under the ram, holding on to its fleece. Ride it out through the door: Polyphemus feels only their backs!", 4200);
       this.ramActLabel();
@@ -1180,7 +1210,7 @@
       }
       if (R.youMs > 0 && o.state === "foot") { R.youMs -= ms; R.you.setPosition(o.x, o.y - 18).setAlpha(clamp(R.youMs / 600, 0, 1)).setVisible(true); }
       else R.you.setVisible(false);
-      var line2 = o.state === "cling" && o.ram ? "Under ram " + o.ram.letter + ": ride it out the door"
+      var line2 = o.state === "cling" && o.ram ? (o.ram.letter ? "Under ram " + o.ram.letter : "Under a ram") + ": ride it out the door"
         : o.state === "foot" ? "On foot: touch a ram, press Space / CLING"
         : o.state === "thrown" ? "Thrown back into the cave!" : o.state === "free" ? "Out in the daylight!" : "";
       var txt = "Rams still in the cave: " + R.inCave + "\n" + line2;
@@ -1223,6 +1253,30 @@
       this.burst(o.x, o.y, 0xe8b04a, 14);
       try { R.lowG.clear(); R.topG.clear(); } catch (e) {}
       this.ramActLabel();
+    },
+    /* the teacher's rule: the level's last answer doesn't end it yet (the shell calls this instead of clear_ram).
+       The lettered flock goes out and P.mopRams plain rams are left in the cave; Odysseus slips back in for them.
+       A ram he clings under heads for the door (and goes back to grazing if he lets go); none goes out on its own,
+       so no new flock comes. The hands and the roars keep at it. tick_ram counts the rams still in the cave. */
+    mopup_ram: function () {
+      var R = this.ram, P = R.P, o = R.ody, self = this, i;
+      R.rams.forEach(function (r) { if (r.state !== "gone") self.burst(r.x, r.y, 0xefe6d2, 4); self.ramKill(r); });
+      R.rams = []; R.order = []; R.dead = []; R.mop = true;
+      for (i = 0; i < P.mopRams; i++) {
+        var spot = this.ramSpawnSpot(), r = this.ramMake(null, spot.x, spot.y);
+        r.a = 0; R.rams.push(r); this.ramPlace(r);
+      }
+      R.inCave = R.rams.length;
+      if (o.state === "cling" || o.state === "foot") { o.state = "foot"; o.ram = null; o.under.setVisible(false); this.ramSlip(o.x, o.y); }
+      this.ramActLabel();
+      this.toast("Now take Polyphemus's last rams to your ship: cling under each one and ride it out the door.", 4400);
+      return R.rams.length;
+    },
+    /* one line on the rock under the cave floor (the page's buttons cover the top): the rams stay in sight */
+    mopupY_ram: function () { return this.H - Math.max(26, this.ram.T / 2 + 2); },
+    mopupText_ram: function (two, n) {
+      if (two) return "Rams left in the cave: " + n;
+      return "All questions answered — now take Polyphemus's last rams to your ship! " + n + " ram" + (n === 1 ? "" : "s") + " left in the cave. Cling under each one and ride it out the door; on foot, his hands still catch you.";
     }
   });
 })();

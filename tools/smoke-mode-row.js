@@ -4,7 +4,9 @@
    the mode screen; the right letter's passage scores; a wrong letter's passage costs a life and is crossed out;
    the hazards (the Sirens' rocks, and Odysseus breaking free when the rhythm collapses) cost a life; Select TWO
    needs both; the strokes are judged PERFECT / GOOD / MISS and Space, a click and the ROW button all row; the
-   difficulty ramp (levels 2-100 never easier, harder overall); no page errors. Then it builds the games
+   difficulty ramp (levels 2-100 never easier, harder overall); the teacher's rule: with one question a level
+   (needExtracts 1), the right passage starts the end of the song (no more marker posts, every note that comes to
+   the ship counts down, rowed or missed, and the last one wins the level); no page errors. Then it builds the games
    (node tools/build-games.js; NO_BUILD=1 skips it) and checks the mode runs in dist/ody and is not offered in
    dist/va. Screenshots go to tools/shots/row-*.png. Prints ALL OK or N FAILED. */
 var path = require("path"), fs = require("fs"), http = require("http"), url = require("url"), cp = require("child_process");
@@ -119,6 +121,7 @@ var srv = http.createServer(function (req, res) {
   /* the count-in, then the song: its notes fly to the ring on the ship (v5.17.2: no drum band at the bottom) */
   var beat = await page.evaluate(async function () {
     var T = window.__rowT, s = SolScene, R = s.rw, o = {};
+    s.needExtracts = 99;   /* these checks run over several questions; one question and the end of the song are checked at the end */
     s.spareLives = 9; R.auto = true;
     o.countIn = R.countIn.length; o.liveFromAhead = R.liveFrom > R.clock;
     await T.until(function () { return R.stats.perfect >= 3; }, 90000);
@@ -350,6 +353,50 @@ var srv = http.createServer(function (req, res) {
   await shot("05-play-98");
   check(late.mode === "row" && late.tier === 9 && /New this time/.test(late.card) && /Ithaca/.test(late.card) && late.breakAt === 3 && /^ROPES [●○]{3}$/.test(late.ropes) && late.kinds.off > 0 && late.quick > 0 && late.sync > 0 && late.busy > 0 && late.drift && late.reef > 150,
     "level 98: three ropes, quick notes, syncopation and busy runs in the song, drifting posts, a reef narrowing the channel, and the card says what's new: " + JSON.stringify({ mode: late.mode, tier: late.tier, ropes: late.ropes, card: late.card.slice(-120), breakAt: late.breakAt, kinds: late.kinds, quick: late.quick, sync: late.sync, busy: late.busy, perBar: +late.perBar.toFixed(2), drift: late.drift, reef: Math.round(late.reef) }));
+
+  /* the teacher's rule: one question a level (needExtracts 1; js/modes.js sets it for every shooter level), then the
+     end of the song. The right passage takes the marker posts away and no more come; the song plays on for
+     P.mopNotes notes, every note that comes to the ship counts one down (a missed one too), and the last one wins
+     the level */
+  await gotoLevel(12);
+  var mop = await page.evaluate(async function () {
+    var T = window.__rowT, s = SolScene, R = s.rw, o = {};
+    var wins = [], endRun = s.endRun;
+    s.endRun = function (win) { wins.push(win); return endRun.apply(this, arguments); };
+    T.quiet(); s.needExtracts = 1; s.score = 0; s.extracted = []; s.spareLives = 0;
+    R.auto = true; s.rowRestart(0);   /* the song plays on through the answer */
+    var letters = s.choiceLetters(), need = s.need.slice();
+    for (var j = 0; j < need.length; j++) await T.sail(letters, need[j]);
+    await T.wait(100);
+    o.start = { mopup: !!s._mopup, left: s._mopup ? s._mopup.left : -1, want: R.P.mopNotes, rows: R.rows.length, song: R.genT < Infinity, score: s.score,
+      ended: s.ended || s._finishing, banner: s._mopBanner ? s._mopBanner.t.text : "" };
+    /* no marker posts come any more (a line would be due at once) */
+    R.dist = R.P.rowGap;
+    await T.until(function () { return R.clock > R.liveFrom + 1500; }, 30000);
+    o.noRows = R.rows.length === 0;
+    /* a note let pass counts too */
+    R.auto = false;
+    var j0 = R.stats.perfect + R.stats.good + R.stats.miss, l0 = s._mopup ? s._mopup.left : -1, m0 = R.stats.miss;
+    await T.until(function () { return R.stats.miss >= m0 + 2; }, 30000);
+    R.auto = true;
+    await T.wait(60);
+    var judged = R.stats.perfect + R.stats.good + R.stats.miss - j0;
+    o.missed = { misses: R.stats.miss - m0, judged: judged, down: l0 - (s._mopup ? s._mopup.left : -1) };
+    /* rowing on: the count runs down to 0 and wins the level (the rest of the song shortened, for time) */
+    if (s._mopup && !s._finishing) R.mop.left = Math.min(R.mop.left, 6);
+    o.counts = [];
+    await T.until(function () { var l = s._mopup ? s._mopup.left : -1; if (o.counts[o.counts.length - 1] !== l) o.counts.push(l); return s.ended; }, 90000);
+    o.wins = wins; o.strikes = s.strikes; o.ended = s.ended; o.rowsAfter = R.rows.length;
+    return o;
+  });
+  console.log("end of the song", JSON.stringify(mop));
+  check(mop.start.mopup && mop.start.score === 1 && !mop.start.ended && mop.start.left === mop.start.want && mop.start.rows === 0 && mop.start.song && /notes? left/.test(mop.start.banner),
+    "one question a level: the right passage takes the marker posts away and starts the end of the song, with a count of its notes: " + JSON.stringify(mop.start));
+  check(mop.noRows && mop.rowsAfter === 0, "no more marker posts come while the song ends");
+  check(mop.missed.misses >= 2 && mop.missed.down === mop.missed.judged && mop.missed.judged >= 2, "every note that comes to the ship counts one down, a missed one too: " + JSON.stringify(mop.missed));
+  var mc = mop.counts.slice(1);
+  check(mc.length >= 2 && mc[mc.length - 1] === 0 && mc.every(function (c, i) { return i === 0 || c < mc[i - 1]; }), "the count runs down to 0: " + JSON.stringify(mop.counts));
+  check(mop.ended && mop.wins.length === 1 && mop.wins[0] === true && mop.strikes === 0, "rowing to the end of the song wins the level (endRun(true)): " + JSON.stringify({ wins: mop.wins, strikes: mop.strikes }));
 
   console.log("errors (dev page):", errors.length ? errors : "none");
   check(errors.length === 0, "no page errors on the dev page acting as the Odyssey build");

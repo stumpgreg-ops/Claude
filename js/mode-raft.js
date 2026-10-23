@@ -66,7 +66,8 @@
       gust: n >= 71 ? Math.min(0.75, 0.3 + (n - 71) * 0.012) : 0,     /* the four winds */
       gustEvery: n >= 71 ? Math.max(5000, 11000 - (n - 71) * 160) : 1e9,
       veilMs: 22000 + n * 220,                                  /* ms between Ino's veils */
-      conflict: Math.max(0, 0.9 - n * 0.009)                    /* s kept clear between a wave's arrival and a letter's */
+      conflict: Math.max(0, 0.9 - n * 0.009),                   /* s kept clear between a wave's arrival and a letter's */
+      mopWaves: Math.round(4 + n * 0.04)                        /* Poseidon's last waves after the last answer: 4 at 1, 6 at 50, 8 at 99 */
     };
   }
 
@@ -381,8 +382,8 @@
 
   var DEF = {
     name: "Calypso's Raft", kind: "wave-riding level", level: "wave-riding level", act: "LIFT",
-    how: "Odysseus sails home from Calypso's island on the raft he built himself, steering by the stars as she told him: the Pleiades and the Great Bear. Big waves roll toward him and the raft rides them by itself. The letters ride the sea too: glowing stars hang in the air over the crests, marker buoys float in the troughs, and from the second island on some buoys are sunk just under the water. Touch the letter with the right answer: hop up (▲) to a star, let the waves carry you into a buoy, or dive (▼) to a sunken one. Keep clear of the wrong ones: don't hop at a wrong star, and hold ▲ to sail over a wrong buoy (press ▲ again in the air to lift once more). Letters you pass come round again. Poseidon is still angry: when the sea on the right turns dark and rumbles, one of his great waves is rising. Hold ▲ as it reaches you to ride up on top of it. Sometimes Ino's white veil floats by: sail into it, and it saves you from one hit, as the sea goddess's veil saved Odysseus.",
-    rules: "Touching a wrong letter costs a life, and that letter is crossed out from then on. So does being swamped by one of Poseidon's waves (anywhere but on top of it) or crashing into a rock. Ino's veil takes one wave or rock for you.",
+    how: "Odysseus sails home from Calypso's island on the raft he built himself, steering by the stars as she told him: the Pleiades and the Great Bear. Big waves roll toward him and the raft rides them by itself. The letters ride the sea too: glowing stars hang in the air over the crests, marker buoys float in the troughs, and from the second island on some buoys are sunk just under the water. Touch the letter with the right answer: hop up (▲) to a star, let the waves carry you into a buoy, or dive (▼) to a sunken one. Keep clear of the wrong ones: don't hop at a wrong star, and hold ▲ to sail over a wrong buoy (press ▲ again in the air to lift once more). Letters you pass come round again. Poseidon is still angry: when the sea on the right turns dark and rumbles, one of his great waves is rising. Hold ▲ as it reaches you to ride up on top of it. Sometimes Ino's white veil floats by: sail into it, and it saves you from one hit, as the sea goddess's veil saved Odysseus. When you answer the question, the letters go and Poseidon sends his last waves: ride out every one of them (a count shows how many are left) to win the level.",
+    rules: "Touching a wrong letter costs a life, and that letter is crossed out from then on. So does being swamped by one of Poseidon's waves (anywhere but on top of it) or crashing into a rock. Ino's veil takes one wave or rock for you. While you ride out Poseidon's last waves after the answer, a hit still costs a life.",
     keys: "▲, W, Space, LIFT, the pad's ▲ or a click or tap: hop the raft up (hold it to glide; press it again in the air for one more lift) · ▼, S or the pad's ▼: dive low in the water.",
     tip: "CALYPSO'S RAFT — touch the right letter (▲ hop, ▼ dive) and jump the wrong ones. Hold ▲ as Poseidon's wave hits.",
     hint1: "Touch the right letter with the raft: hop (▲) up to a star, ride into a buoy, dive (▼) to a sunken buoy. Hold ▲ to sail over the wrong buoys. The passage stays in the side panel.",
@@ -397,6 +398,9 @@
       "The four winds: the South Wind lifts the raft and the North Wind presses it down. Watch for the wind streaks.",
       "Darker, longer squalls with less lightning, and Poseidon's waves give less warning.",
       "Poseidon's storm: the sea runs faster, on top of everything else."],
+    /* the teacher's rule: after the answer, Poseidon's last waves have to be ridden out (mopup_raft) */
+    clear: { what: "sea", one: "wave", many: "waves", tag: "CORRECT! NOW RIDE OUT THE STORM!", done: "THROUGH THE STORM!",
+      sweep: "Clean ride: not one hit in Poseidon's last waves" },
     params: raftParams
   };
 
@@ -538,7 +542,7 @@
         S.lastObsU = u + (pair ? 30 : 0);
         return;
       }
-      if (u >= due && u - S.lastObsU >= sp) {
+      if (u >= due && u - S.lastObsU >= sp && !S.mop) {   /* no letters while the last waves are ridden out */
         if (crest && Math.random() < STAR_SHARE) { S.plans.push({ u: u, kind: "star" }); S.lastLetU = u; return; }
         if (!crest) { S.plans.push({ u: u, kind: Math.random() < P.deep ? "deep" : "buoy" }); S.lastLetU = u; return; }
         return;
@@ -561,7 +565,7 @@
         S.veil = { u: p.u, ph: rnd(0, 6), spr: this.add.image(0, 0, "md-raft-veil").setDepth(12).setScale(S.vs) };
         return;
       }
-      if (this._between || this._finishing || !this.claim) return;
+      if (this._between || this._finishing || !this.claim || S.mop) return;
       var L = this.raftNextLetter();
       if (L) this.raftAddLetter(L, p.kind, p.u);
     },
@@ -670,6 +674,27 @@
       S.breakers.forEach(function (b) { b.checked = true; });
       S.breakCd = Math.max(S.breakCd, 3000);
     },
+    /* the teacher's rule: the level's last answer doesn't end it yet (the shell calls this instead of clear_raft).
+       The letters go and no more come; Poseidon sends P.mopWaves last waves (counting the ones already rising or
+       rolling in), one every few seconds, and the rocks, squalls and winds keep at it. tick_raft counts the waves
+       that have not reached the raft yet (mopupLeft); each one counts once it reaches the raft, ridden or not. */
+    mopup_raft: function () {
+      var S = this.rf, P = S.P, self = this;
+      S.letters.forEach(function (o) { self.burst(o.spr.x, o.spr.y, 0xe8b04a, 6); self.raftFree(o); }); S.letters = [];
+      S.plans = S.plans.filter(function (p) { return p.kind === "rock" || p.kind === "veil"; });
+      var ahead = S.breakers.filter(function (b) { return !b.checked; });
+      ahead.forEach(function (b) { b.mop = true; });
+      S.mop = { spawn: Math.max(0, P.mopWaves - ahead.length), wait: 0 };
+      S.breakCd = Math.min(S.breakCd, 700);   /* the first of them rises at once */
+      S.tq = []; S.tqCd = 0;
+      this.raftTell("mop", "Poseidon sends his last waves! Hold ▲ as each one reaches you to ride on top of it.");
+      return S.mop.spawn + ahead.length;
+    },
+    mopupY_raft: function () { return this.H * 0.24; },   /* up in the sky: the sea, the raft and the waves stay in sight */
+    mopupText_raft: function (two, n) {
+      var a = "All questions answered — now ride out Poseidon's last waves!", b = n + " wave" + (n === 1 ? "" : "s") + " left";
+      return two ? a + "\n" + b : a + " " + b + ". Hold ▲ as each one reaches you — a hit still costs a life.";
+    },
 
     /* ── hits ── */
     raftHurt: function (label) {
@@ -694,6 +719,7 @@
       var S = this.rf, P = S.P, A = P.breakH * rnd(0.94, 1.06);
       var b = { A: 0, Amax: A, fw: 64 + A * 0.25, x: this.W + 60, state: wait ? "wait" : "warn", t: 0, wait: wait || 0, warn: wait ? Math.min(700, P.breakWarn) : P.breakWarn,
         checked: false, curl: this.add.image(0, 0, "md-raft-curl").setOrigin(0.82, 0.2).setDepth(41).setAlpha(0) };
+      if (S.mop) { b.mop = true; S.mop.spawn = Math.max(0, S.mop.spawn - 1); S.mop.wait = 0; }   /* one of Poseidon's last waves */
       S.breakers.push(b);
       return b;
     },
@@ -773,12 +799,13 @@
 
       /* Poseidon's waves: a dark swell and a rumble on the right, then the wave rolls in */
       if (!this._between) S.breakCd -= ms;
-      if (S.breakCd <= 0) {
-        if (this.raftBreakerSoon()) S.breakCd = 260;
+      if (S.breakCd <= 0 && (!S.mop || S.mop.spawn > 0)) {
+        /* (Poseidon's last waves wait for a rock for at most 2.6 s, so the count always runs down) */
+        if (this.raftBreakerSoon() && !(S.mop && S.mop.wait >= 2600)) { S.breakCd = 260; if (S.mop) S.mop.wait += 260; }
         else {
           this.raftBreaker(0);
-          if (Math.random() < P.double) this.raftBreaker(rnd(1100, 1500));
-          S.breakCd = P.breakEvery * rnd(0.85, 1.15);
+          if (Math.random() < P.double && (!S.mop || S.mop.spawn > 0)) this.raftBreaker(rnd(1100, 1500));
+          S.breakCd = (S.mop ? Math.min(P.breakEvery, 5000) : P.breakEvery) * rnd(0.85, 1.15);
         }
       }
       var vb = v * P.breakSp, warnOn = false;
@@ -950,6 +977,11 @@
             if (hurt) { R.tumble = 650; R.air = false; }
           }
         }
+      }
+      /* riding out Poseidon's last waves after the last answer: the count goes down as each one reaches the raft */
+      if (S.mop && this._mopup) {
+        this.mopupLeft(S.mop.spawn + S.breakers.filter(function (b) { return b.mop && !b.checked; }).length);
+        if (this._finishing) return;
       }
       this.raftDraw(s, warnOn, lift);
     },

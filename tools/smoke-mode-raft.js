@@ -9,7 +9,9 @@
    sunken buoys a dive; Poseidon's wave is telegraphed, swamps a raft that is not on top of it (a life)
    and is ridden by a raft that is; rocks cost a life and can be jumped; Ino's veil takes a hit;
    Select TWO needs both letters; raftParams never gets easier from level 2 to 100 and is much harder
-   at 99; no page errors. Then, when dist/ exists (node tools/build-games.js), the mode runs in
+   at 99; the teacher's rule: with one question a level (needExtracts 1), the right letter starts Poseidon's last
+   waves (no more letters, each wave that reaches the raft counts down, the last one wins the level); no page
+   errors. Then, when dist/ exists (node tools/build-games.js), the mode runs in
    dist/ody and is not offered in dist/va. Screenshots go to tools/shots/raft-*.png. */
 var path = require("path"), fs = require("fs"), http = require("http"), url = require("url");
 var { chromium } = require("/opt/node22/lib/node_modules/playwright");
@@ -329,10 +331,70 @@ var srv = http.createServer(function (req, res) {
   check(run.two.first === 0 && run.two.found.length === 1 && run.two.mark === "right" && run.two.later === "right" && run.two.strikes === 0 && run.two.laterStrikes === 0 && run.two.second === 1 && run.two.coins,
     "Select TWO needs both: the first right letter is marked found (on later buoys too), the second answers and pays coins: " + JSON.stringify(run.two));
 
+  /* the teacher's rule: one question a level (needExtracts 1; js/modes.js sets it for every shooter level), then
+     Poseidon's last waves. The right letter takes the letters off the sea and no more come (the sea is planned on
+     here); P.mopWaves waves come, each one that reaches the raft counts down, and the last one wins the level.
+     ▲ is held the whole way, so every wave is ridden on top (no life lost) */
+  var mop = await page.evaluate(async function () {
+    var s = SolScene, S = s.rf, R = S.raft, o = {};
+    function wait(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+    async function until(f, ms) { var t0 = Date.now(); while (!f() && Date.now() - t0 < (ms || 20000)) await wait(25); return f(); }
+    var ctl = null, ri = s.readInput;
+    s.readInput = function () { if (ctl) ctl(); return ri.apply(this, arguments); };
+    var wins = [], endRun = s.endRun;
+    s.endRun = function (win) { wins.push(win); return endRun.apply(this, arguments); };
+    /* a flat sea, no rocks, squalls, winds or veils; the sea ahead is planned as usual (letters would be due) */
+    s.keys.UP.isDown = false; s.keys.DOWN.isDown = false;
+    S.breakCd = 1e9; S.breakers.forEach(function (b) { b.curl.destroy(); }); S.breakers = [];
+    S.letters.forEach(function (x) { s.raftFree(x); }); S.letters = [];
+    S.rocks.forEach(function (k) { k.spr.destroy(); }); S.rocks = [];
+    if (S.veil) { S.veil.spr.destroy(); S.veil = null; }
+    S.hasVeil = false; S.veilDue = false; S.veilCd = 1e9; S.P.rockP = 0;
+    S.sq.on = false; S.sq.lvl = 0; S.sq.next = 1e9; S.gu.state = "calm"; S.gu.next = 1e9;
+    S.segs.forEach(function (g) { g.h = 0; }); S.P.waveMin = 0; S.P.waveMax = 0;
+    s.strikes = 0; s.iframeMs = 0; s.spareLives = 0; s.perks = {}; s.tutLockUntil = 0;
+    s.needExtracts = 1; s.score = 0; s.extracted = [];
+    var need = s.need.slice();
+    S.plans = []; S.planU = S.cam + s.W + 70; S.lastLetU = S.planU + 900;   /* no letter of its own before the right one */
+    for (var j = 0; j < need.length; j++) {
+      var b = s.raftAddLetter(need[j], "buoy", S.cam + S.rx + 260);
+      await until(function () { return b.touched || s._mopup; });
+    }
+    S.lastLetU = S.cam - S.P.gap;   /* from now on a letter would be due at every trough */
+    var planU0 = S.planU;
+    await wait(100);
+    o.start = { mopup: !!s._mopup, left: s._mopup ? s._mopup.left : -1, want: S.P.mopWaves, letters: S.letters.length, score: s.score,
+      ended: s.ended || s._finishing, banner: s._mopBanner ? s._mopBanner.t.text : "" };
+    o.counts = []; o.maxLetters = 0; o.letterPlans = 0; o.maxWaves = 0;
+    var rides0 = S.rides;
+    ctl = function () {
+      s.keys.UP.isDown = true;
+      if (S.breakCd > 1200) S.breakCd = 1200;   /* the waves a little closer together than in play */
+      o.maxLetters = Math.max(o.maxLetters, S.letters.length);
+      o.maxWaves = Math.max(o.maxWaves, S.breakers.filter(function (x) { return x.mop; }).length);
+      if (S.plans.some(function (p) { return p.kind !== "rock" && p.kind !== "veil"; })) o.letterPlans++;
+      var l = s._mopup ? s._mopup.left : -1;
+      if (o.counts[o.counts.length - 1] !== l) o.counts.push(l);
+    };
+    await until(function () { return s.ended; }, 120000);
+    ctl = null; s.keys.UP.isDown = false; s.readInput = ri;
+    o.planned = S.planU > planU0;
+    o.rides = S.rides - rides0; o.wins = wins; o.strikes = s.strikes; o.ended = s.ended;
+    return o;
+  });
+  console.log("last waves", JSON.stringify(mop));
+  var mw = mop.start.want;
+  check(mop.start.mopup && mop.start.score === 1 && !mop.start.ended && mop.start.left === mw && mw >= 4 && mop.start.letters === 0 && /waves? left/.test(mop.start.banner),
+    "one question a level: the right letter takes the letters off the sea and starts Poseidon's last waves, with a count: " + JSON.stringify(mop.start));
+  check(mop.maxLetters === 0 && mop.letterPlans === 0 && mop.planned, "while the last waves come, no letter comes on the sea (the sea ahead is still planned): " + JSON.stringify({ letters: mop.maxLetters, plans: mop.letterPlans }));
+  check(mop.counts.join(",") === Array.apply(null, Array(mw + 1)).map(function (x, i) { return mw - i; }).join(",") && mop.rides === mw && mop.maxWaves >= 1,
+    "each of Poseidon's last waves counts down as it reaches the raft (ridden on top here): " + JSON.stringify({ counts: mop.counts, rides: mop.rides }));
+  check(mop.ended && mop.wins.length === 1 && mop.wins[0] === true && mop.strikes === 0, "riding out the last waves wins the level (endRun(true)): " + JSON.stringify({ wins: mop.wins, strikes: mop.strikes }));
+
   /* the difficulty: one curve, every level 2-100 at least as hard as the one before, much harder at 99 */
   var ramp = await page.evaluate(function () {
     var f = SolModes.MODES.raft.params, s = SolScene, out = { same: typeof f === "function" && JSON.stringify(f(57)) === JSON.stringify(s.raftParams(57)) };
-    var up = ["scroll", "waveMin", "waveMax", "steep", "deep", "clear", "breakSp", "breakH", "double", "rockP", "rockH", "rockPair", "dark", "squallMs", "lightMs", "gust", "veilMs"];
+    var up = ["scroll", "waveMin", "waveMax", "steep", "deep", "clear", "breakSp", "breakH", "double", "rockP", "rockH", "rockPair", "dark", "squallMs", "lightMs", "gust", "veilMs", "mopWaves"];
     var down = ["lenMin", "lenMax", "gap", "breakEvery", "breakWarn", "calmMs", "seeR", "gustEvery", "conflict"];
     var easier = [], flat = [], n, keys = Object.keys(f(50));
     out.covered = keys.filter(function (k) { return up.indexOf(k) === -1 && down.indexOf(k) === -1; });

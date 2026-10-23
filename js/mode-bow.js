@@ -342,8 +342,8 @@
 
   M.extend("bow", {
     name: "Bend the Bow", kind: "archery level", level: "archery level", act: "DRAW",
-    how: "Penelope's contest: string Odysseus's great bow and shoot an arrow through the rings of twelve axe heads. None of the suitors could even string it; now Odysseus, still in his beggar's rags, has it. Each letter has its own row of twelve axes, ending at a plaque. Aim along the right row (its axes light up when you are lined up), hold to draw, and let go while the meter is in the gold band: too soon and the arrow drops, too late and your arms shake and the arrow flies wild. The arrow must fly through all twelve rings. The suitors lose patience while you wait or miss; then one throws a footstool or a cup along a dotted arc, so step back into the doorway.",
-    rules: "Shooting through a wrong row costs a life. So does a thrown footstool or cup (Antinous threw a footstool at the beggar in Book 17), or using up your quiver (the swineherd Eumaeus brings a fresh one). An arrow that hits an axe costs no life, but it angers the suitors.",
+    how: "Penelope's contest: string Odysseus's great bow and shoot an arrow through the rings of twelve axe heads. None of the suitors could even string it; now Odysseus, still in his beggar's rags, has it. Each letter has its own row of twelve axes, ending at a plaque. Aim along the right row (its axes light up when you are lined up), hold to draw, and let go while the meter is in the gold band: too soon and the arrow drops, too late and your arms shake and the arrow flies wild. The arrow must fly through all twelve rings. The suitors lose patience while you wait or miss; then one throws a footstool or a cup along a dotted arc, so step back into the doorway. When you answer the question, the letters come off the plaques: shoot through every row of axes that is left (each row you thread is taken down) to win the level.",
+    rules: "Shooting through a wrong row costs a life. So does a thrown footstool or cup (Antinous threw a footstool at the beggar in Book 17), or using up your quiver (the swineherd Eumaeus brings a fresh one). An arrow that hits an axe costs no life, but it angers the suitors. While you clear the rows after the answer, a hit still costs a life.",
     keys: "▲ ▼, W / S or the on-screen pad aim (or point with the mouse or a finger) · hold Space, DRAW or a mouse button to draw the bow, let go to shoot · hold ◀ or A to step back into the doorway.",
     tip: "BEND THE BOW — shoot through all twelve rings of the row with the right letter. Hold ◀ to step back when a suitor throws.",
     hint1: "Shoot an arrow through all twelve axe rings in the row with the right letter. The passage stays in the side panel.",
@@ -358,6 +358,9 @@
       "The axes no longer light up when you are lined up, and the dotted line is shorter.",
       "Stronger drafts, faster swaying, and only six arrows.",
       "Ithaca at last: three suitors throw at once and the quiver holds five arrows, on top of everything else."],
+    /* the teacher's rule: after the answer, the rows of axes left have to be shot through (mopup_bow) */
+    clear: { what: "hall", one: "row of axes", many: "rows of axes", done: "EVERY ROW IS DOWN!",
+      sweep: "Clean sweep: not one hit while you cleared the rows" },
     params: bowParams
   }, {
     bowParams: function (n) { return bowParams(n); },
@@ -655,6 +658,8 @@
         if (B.pat <= 0) this.bowVolley();
       }
       if (B.volley) { this.bowThrows(s, ms); if (this._finishing) return; }
+      /* clearing the rows after the last answer: won when no row is left */
+      if (B.mop && this._mopup) { this.mopupLeft(B.rows.length); if (this._finishing) return; }
       B.suitors.forEach(function (su, j) {
         var bob = !su.up && B.pat < 0.35 ? -Math.abs(Math.sin(B.t * 7 + j * 1.7)) * 3 * k : 0;
         su.spr.setPosition(su.x, su.y + bob);
@@ -812,6 +817,7 @@
       a.state = "stuck"; a.t = 0; a.x = x; a.y = y; a.rot = Math.atan2(a.vy, a.vx); a.row = row; a.dy = y - this.bowRingY(row, x);
       a.spr.setPosition(x, y).setRotation(a.rot);
       this.bowThunk();
+      if (B.mop) return this.bowMopRow(a, row, r, cy);
       if (row.state !== "live") {
         this.toast(row.state === "dead" ? "That row is crossed out. Try another letter." : "You already found that letter. Shoot the other right one.", 2600);
         return this.bowWasted("plaque");
@@ -1071,6 +1077,52 @@
         B.lastRow.axes.forEach(function (a, j) { B.lastRow.flash[j] = 900; if (j % 3 === 0) self.burst(a.x, a.y, 0x9aefc0, 4); });
       }
       try { B.fxG.clear(); } catch (e) {}
+    },
+    /* take a row off the hall (its arrows with it); the arrows in the air forget which rings they went through */
+    bowDropRow: function (row) {
+      var B = this.bw, self = this, i = B.rows.indexOf(row);
+      if (i === -1) return;
+      row.axes.forEach(function (a, j) { if (j % 3 === 0) self.burst(a.x, a.y, 0x9aefc0, 4); });
+      this.bowKillRow(row);
+      B.rows.splice(i, 1);
+      B.arrows.slice().forEach(function (a) { if (a.row === row) self.bowFree(a); else if (a.state === "fly") { a.rr = -1; a.rk = 0; } });
+      if (B.lastRow === row) B.lastRow = null;
+      this.bowAimLimits();
+    },
+    /* clearing the rows: an arrow through all twelve rings of a row takes that row down; anything else is a wasted arrow */
+    bowMopRow: function (a, row, r, cy) {
+      var B = this.bw;
+      if (a.rr !== r || a.rk !== 12) {
+        if (!B.toldTwelve) { B.toldTwelve = true; this.toast("It only counts if the arrow flies through all twelve rings.", 2600); }
+        return this.bowWasted("plaque");
+      }
+      this.burst(B.px, cy, 0x9aefc0, 18);
+      snd("chime");
+      this.bowDropRow(row);
+      return "row";
+    },
+    /* the teacher's rule: the level's last answer doesn't end it yet (the shell calls this instead of clear_bow).
+       The answered row (and a found one) comes down; the letters come off the others, crossed-out rows too, and
+       every row left has to be shot through, all twelve rings, to take it down. No new rows come; the suitors'
+       patience and their throws go on, and Eumaeus brings a fresh quiver. tick_bow counts the rows left. */
+    mopup_bow: function () {
+      var B = this.bw, self = this;
+      B.mop = true;
+      B.drawing = false; B.hold = 0;
+      B.rows.slice().forEach(function (r) { if (r === B.lastRow || r.state === "found") self.bowDropRow(r); });
+      B.rows.forEach(function (r) {
+        r.state = "live"; r.letter = null;
+        r.plaque.clearTint(); r.label.setText("").setColor(C.glaze);
+      });
+      B.quiver = B.P.quiver; B.wastedQ = 0;
+      if (B.rows.length) this.toast("Now shoot through every row of axes that is left: an arrow through all twelve rings takes a row down.", 4400);
+      return B.rows.length;
+    },
+    /* one short line high in the hall, under the page's buttons and clear of the rows' arrow paths */
+    mopupY_bow: function () { return Math.max(74, this.bw.top * 0.8); },
+    mopupText_bow: function (two, n) {
+      if (two) return "Rows of axes left: " + n;
+      return "All questions answered — now shoot through every row of axes! " + n + " row" + (n === 1 ? "" : "s") + " of axes left. Only an arrow through all twelve rings takes a row down; the suitors still throw.";
     }
   });
 })();
