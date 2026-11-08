@@ -29,6 +29,10 @@ A game uploaded to Canvas can't send anything anywhere, so progress is shown to 
 
 Tests: `node tools/smoke-progress.js` (after `node tools/build-games.js`, `node tools/build-appsscript.js VA|ODY` and `node tools/build-canvas.js VA|ODY`).
 
+## Canvas check (2026-11-08) — can the game report by itself from Canvas?
+
+`tools/canvas-check.html` is a page a teacher uploads to Canvas Files on its own and opens through the same `/preview` embed as the game. It runs once at school and once at home. Besides the v5.8.1 checks (scripts run, saving, unpacking, 3D), it now checks read-aloud voices, whether the page shares Canvas's address (only then could a page touch the assignment around it), whether it can **send** to Google (a no-cors POST to script.google.com) and **read** from Google (a CORS GET from googleapis.com), and, optionally, a full round trip through the teacher's own Apps Script (`tools/canvas-check-Code.gs`, deployed as a web app). A Canvas security rule is named in the result. **Copy results** gives one line to send back. It sends no student information, only a random test number. The README's "a game uploaded to Canvas can't send anything anywhere" was never tested; this page tests it.
+
 ## v5.24.0 (2026-10-23) — a "Full screen" button after Esc, on every screen
 
 Once the game has been full screen (starting a level makes it full screen), leaving full screen (Esc, or a browser dialog such as Menu's "Leave this level?") shows a **⛶ Full screen** button at the top middle of the screen. It shows on every screen: the title and menus, a level and its reading pop-up, the shop, the builder, the badges, the progress window and the teacher screen. It sits above all of them, and one click puts the game back in full screen. It isn't shown before the game has been full screen, while it is, or where the page can't go full screen (an embed without `allowfullscreen`). The code is `syncFsButton` / `fsBackButton` in `js/game.js` and `#btn-fs-back` in `css/after-hours.css`. Test: `node tools/smoke-fullscreen.js`.
