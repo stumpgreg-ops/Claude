@@ -60,7 +60,7 @@
   <p>Loading…</p>
 </main>
 <script>
-/* TKM game · Google reporting test (v0.1). A small page to try Option B before it goes into the real game.
+/* TKM game · Google reporting test (v0.2). A small page to try Option B before it goes into the real game.
    It asks Google which chapters are unlocked, shows only those practice passages, and sends each answer to
    the teacher's Google Sheet (tools/google-report/Code.gs). Answers wait on this device until the Sheet
    confirms them, so nothing is lost when the connection drops. The passages are original practice text,
@@ -68,7 +68,9 @@
 (function () {
   "use strict";
 
-  /* ▼ Put your web app link between the quotes (it ends in /exec), then upload this file to Canvas. */
+  /* ▼ Put your web app link between the quotes (it ends in /exec), then upload this file to Canvas.
+       (In the Canvas zip the link goes in TKM-GoogleTest-link.js instead; tools/build-google-test.js swaps
+       this line for that file's window.TKM_SHEET_URL.) */
   var SCRIPT_URL = "";
   /* ▲ */
 
@@ -231,7 +233,7 @@
     app.innerHTML = '<h1>Google reporting test</h1>' +
       '<div class="card"><h2>Teacher: connect your Sheet</h2>' +
       '<p>This copy has no Sheet link yet. Paste your web app link (it ends in <code>/exec</code>) to try it on this computer. ' +
-      'For students, put the link in the file itself before uploading (see the READ ME).</p>' +
+      'For students, put the link in before uploading (see the READ ME).</p>' +
       '<div class="row"><input type="text" id="url" aria-label="Web app link" placeholder="https://script.google.com/macros/s/…/exec" />' +
       '<button class="main" id="go">Connect</button></div><p class="msg bad" id="err" hidden></p></div>';
     document.getElementById("go").onclick = function () {

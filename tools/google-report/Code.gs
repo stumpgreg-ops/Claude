@@ -1,11 +1,11 @@
-/* TKM game · Google reporting (experiment, v0.1)
+/* TKM game · Google reporting (experiment, v0.2)
 
-   This script lives inside a Google Sheet in YOUR school Google account. The test game (test-game.html, in
-   Canvas) sends each answer here, and this script writes it into the Sheet. The game also asks here which
+   This script lives inside a Google Sheet in YOUR school Google account. The test page in Canvas
+   (TKM-GoogleTest.html) sends each answer here, and this script writes it into the Sheet. The game also asks here which
    chapters are unlocked. Nothing goes anywhere else.
 
-   SET IT UP (about 10 minutes, once). The full steps with pictures-in-words are in
-   "READ ME - Google reporting test.txt". In short:
+   SET IT UP (about 10 minutes, once). The full steps are in SECTION 2 of "READ ME FIRST - Canvas setup.txt".
+   In short:
    1. Make a new Google Sheet (sheets.new). Name it, for example, "TKM game results".
    2. Extensions > Apps Script. Delete what is in Code.gs, paste this whole file, click Save.
    3. Back in the Sheet, reload the page. A "TKM game" menu appears. Click TKM game > 1. Set up this Sheet
@@ -14,7 +14,7 @@
    5. In Apps Script: Deploy > New deployment > gear > Web app.
         Execute as: Me      Who has access: Anyone
       Click Deploy and copy the Web app link (it ends in /exec).
-   6. Put that link in test-game.html (see the READ ME) and upload it to Canvas.
+   6. Put that link in TKM-GoogleTest-link.js (SECTION 3 of the READ ME) and upload the test to Canvas.
 
    What the tabs do:
    - Settings: "Unlocked through chapter" (change it any time; the game picks it up the next time it opens)
@@ -23,7 +23,7 @@
    - Answers: one row per answered question. Don't edit it while students are playing.
    - Summary: live tables by student, chapter and skill, and the most-missed items. */
 
-var VERSION = "0.1";
+var VERSION = "0.2";
 var TAB = { settings: "Settings", students: "Students", answers: "Answers", summary: "Summary" };
 var ANSWER_HEADERS = ["Received", "Join code", "Student", "Answered at", "Item", "Chapter", "Skill",
                       "Right first try (1 = yes)", "Picked", "Seconds"];

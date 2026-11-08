@@ -5,13 +5,16 @@
    Checks: Sheet setup and join codes; connect and join (wrong code, right code); answers reach the Answers tab
    with the student's name; an answer made offline waits and is sent later; a batch whose reply was lost is
    written once; a teacher's unlock change shows the next passage; pausing keeps answers until reporting is
-   back on; text from a device is never stored as a formula; state survives a reload. */
+   back on; text from a device is never stored as a formula; state survives a reload. Then builds the Canvas zip
+   (tools/build-google-test.js) and checks its page: the link comes from TKM-GoogleTest-link.js, an answer
+   reaches the Sheet, and a missing link file is named. */
 "use strict";
 var fs = require("fs"), path = require("path"), http = require("http"), vm = require("vm");
 var chromium = require("playwright").chromium;
 
 var dir = path.join(__dirname, "google-report");
 var fails = 0;
+require("child_process").execFileSync(process.execPath, [path.join(__dirname, "build-google-test.js")], { stdio: "inherit" });
 function check(ok, what) { console.log((ok ? "  ok   " : "  FAIL ") + what); if (!ok) fails++; }
 
 /* ── a stand-in for the Apps Script services Code.gs uses ── */
@@ -80,7 +83,7 @@ function answers() { return tabs.Answers.getLastRow() - 1; }
 function setSetting(row, v) { tabs.Settings.getRange(row, 2).setValues([[v]]); }
 
 /* ── serve it like Apps Script: /exec answers with a 302 to another address, which answers with CORS ── */
-var outputs = {}, nextId = 1, PORTS = { exec: 8301, echo: 8302, file: 8303, course: 8304 };
+var outputs = {}, nextId = 1, PORTS = { exec: 8301, echo: 8302, file: 8303, course: 8304, built: 8305 };
 function servers() {
   var exec = http.createServer(function (req, res) {
     var u = new URL(req.url, "http://x"), body = "";
@@ -201,6 +204,42 @@ function servers() {
     var last = tabs.Answers.getRange(answers() + 1, 1, 1, 10).getValues()[0];
     check(r.ok && last[4].charAt(0) === "'" && last[6].charAt(0) === "'" && last[8].charAt(0) === "'", "item, skill and pick text starting with = + @ are stored as plain text");
     check(JSON.parse(ctx.doPost({ postData: { contents: "not json" } }).text).error === "server", "a broken request gets an error reply, not a crash");
+
+    /* the Canvas zip's files (tools/build-google-test.js): the link comes from TKM-GoogleTest-link.js */
+    var built = path.join(__dirname, "..", "dist", "canvas", "google-test"), linkJs = null;
+    var bsrv = http.createServer(function (req, res) {
+      var name = decodeURIComponent(new URL(req.url, "http://x").pathname.slice(1));
+      if (name === "TKM-GoogleTest-link.js") {
+        if (linkJs === null) { res.writeHead(404); return res.end(); }
+        res.writeHead(200, { "Content-Type": "text/javascript" }); return res.end(linkJs);
+      }
+      if (!/^[\w.-]+$/.test(name) || !fs.existsSync(path.join(built, name))) { res.writeHead(404); return res.end(); }
+      res.writeHead(200, { "Content-Type": /\.js$/.test(name) ? "text/javascript" : "text/html" });
+      res.end(fs.readFileSync(path.join(built, name)));
+    }).listen(PORTS.built);
+    srv.push(bsrv);
+    var shipped = fs.readFileSync(path.join(built, "TKM-GoogleTest-link.js"), "utf8");
+    check(/window\.TKM_SHEET_URL = "";/.test(shipped), "the zip's link file ships empty, ready for the teacher's link");
+    linkJs = shipped.replace('window.TKM_SHEET_URL = "";', 'window.TKM_SHEET_URL = "http://localhost:' + PORTS.exec + '/exec";');
+    var p2 = await bctx.newPage();
+    p2.on("pageerror", function (e) { errors.push("built: " + e.message); });
+    await p2.setContent('<iframe id="f" src="http://127.0.0.1:' + PORTS.built + '/TKM-GoogleTest.html" width="100%" height="650"></iframe>');
+    var bf = function () { return p2.frames().find(function (x) { return x.url().indexOf(":" + PORTS.built) > 0; }); };
+    await bf().locator("#code").waitFor();
+    check(await bf().locator("#sol-boot").count() === 0, "built page: the loading screen goes away and the join screen shows (no link box)");
+    await bf().locator("#code").fill(codes[1]); await bf().locator("#go").click();
+    await bf().locator("#bar").waitFor();
+    var before = answers();
+    await bf().locator('.q[data-q="P1-Q1"] .choice[data-i="2"]').click();
+    for (var k = 0; k < 80 && answers() === before; k++) await p2.waitForTimeout(100);
+    check(answers() === before + 1 && tabs.Answers.getRange(answers() + 1, 3).getValues()[0][0] === "Ben Ortiz", "built page: Ben's answer reaches the Sheet");
+    linkJs = null;
+    var p3 = await bctx.newPage();
+    await p3.setContent('<iframe id="f" src="http://127.0.0.1:' + PORTS.built + '/TKM-GoogleTest.html" width="100%" height="650"></iframe>');
+    var cf = function () { return p3.frames().find(function (x) { return x.url().indexOf(":" + PORTS.built) > 0; }); };
+    var miss = false;
+    for (var k2 = 0; k2 < 50 && !miss; k2++) { await p3.waitForTimeout(100); miss = /Can't find TKM-GoogleTest-link\.js/.test(await cf().locator("body").innerText()); }
+    check(miss, "built page without the link file says which file to upload");
 
     check(errors.length === 0, "no page errors" + (errors.length ? ": " + errors.join("; ") : ""));
   } finally {
