@@ -1,8 +1,8 @@
-/* TKM game · Google reporting (experiment, v0.2)
+/* TKM game - Google reporting (experiment, v0.2)
 
-   This script lives inside a Google Sheet in YOUR school Google account. The test page in Canvas
-   (TKM-GoogleTest.html) sends each answer here, and this script writes it into the Sheet. The game also asks here which
-   chapters are unlocked. Nothing goes anywhere else.
+   This script lives inside a Google Sheet in YOUR school Google account. The test page in
+   Canvas (TKM-GoogleTest.html) sends each answer here, and this script writes it into the
+   Sheet. The game also asks here which chapters are unlocked. Nothing goes anywhere else.
 
    SET IT UP (about 10 minutes, once). The full steps are in SECTION 2 of "READ ME FIRST - Canvas setup.txt".
    In short:
@@ -30,7 +30,7 @@ var ANSWER_HEADERS = ["Received", "Join code", "Student", "Answered at", "Item",
 var CODE_ALPHABET = "23456789ABCDEFGHJKMNPQRSTVWXYZ"; /* no 0/O, 1/I/L or U, so codes are easy to type */
 var MAX_BATCH = 100;
 
-/* ── the menu ── */
+/* -- the menu -- */
 function onOpen() {
   SpreadsheetApp.getUi().createMenu("TKM game")
     .addItem("1. Set up this Sheet", "setup")
@@ -62,16 +62,27 @@ function setup() {
   }
   var sum = tab_(ss, TAB.summary);
   if (sum.getLastRow() === 0) {
-    var src = "Answers!A2:J";
-    sum.getRange(1, 1, 1, 13).setValues([["By student", "", "", "", "By chapter", "", "", "", "By skill", "", "", "", "Most-missed items (3+ answers)"]]);
-    sum.getRange("A2").setFormula('=IFERROR(QUERY(' + src + ',"select C, count(E), avg(H) where C is not null group by C order by C label C \'Student\', count(E) \'Questions\', avg(H) \'% right first try\'",0),"No answers yet")');
-    sum.getRange("E2").setFormula('=IFERROR(QUERY(' + src + ',"select F, count(E), avg(H) where F is not null group by F order by F label F \'Chapter\', count(E) \'Questions\', avg(H) \'% right first try\'",0),"No answers yet")');
-    sum.getRange("I2").setFormula('=IFERROR(QUERY(' + src + ',"select G, count(E), avg(H) where G is not null group by G order by G label G \'Skill\', count(E) \'Questions\', avg(H) \'% right first try\'",0),"No answers yet")');
-    sum.getRange("M2").setFormula('=IFERROR(QUERY(QUERY(' + src + ',"select E, count(E), avg(H) where E is not null group by E label E \'Item\', count(E) \'Answers\', avg(H) \'% right first try\'",0),"select * where Col2 >= 3 order by Col3 asc limit 15",1),"Not enough answers yet")');
+    /* Kept to short lines on purpose: a copy and paste can break a very long line in two. */
+    sum.getRange(1, 1, 1, 13).setValues([["By student", "", "", "", "By chapter", "", "", "",
+      "By skill", "", "", "", "Most-missed items (3+ answers)"]]);
+    var pct = ", count(E) 'Questions', avg(H) '% right first try'";
+    var table = function (col, name) {
+      var sel = "select " + col + ", count(E), avg(H) where " + col + " is not null" +
+        " group by " + col + " order by " + col + " label " + col + " '" + name + "'" + pct;
+      return '=IFERROR(QUERY(Answers!A2:J,"' + sel + '",0),"No answers yet")';
+    };
+    sum.getRange("A2").setFormula(table("C", "Student"));
+    sum.getRange("E2").setFormula(table("F", "Chapter"));
+    sum.getRange("I2").setFormula(table("G", "Skill"));
+    var items = "select E, count(E), avg(H) where E is not null group by E" +
+      " label E 'Item', count(E) 'Answers', avg(H) '% right first try'";
+    sum.getRange("M2").setFormula('=IFERROR(QUERY(QUERY(Answers!A2:J,"' + items + '",0),' +
+      '"select * where Col2 >= 3 order by Col3 asc limit 15",1),"Not enough answers yet")');
     ["C:C", "G:G", "K:K", "O:O"].forEach(function (c) { sum.getRange(c).setNumberFormat("0%"); });
     sum.setFrozenRows(1);
   }
-  toast_("Set up. Next: type student names in the Students tab (column B), then TKM game > 2. Make join codes.");
+  toast_("Set up. Next: type student names in the Students tab (column B), " +
+    "then TKM game > 2. Make join codes.");
 }
 
 function makeJoinCodes() {
@@ -89,10 +100,11 @@ function makeJoinCodes() {
   });
   sh.getRange(2, 1, rows.length, 3).setValues(rows);
   CacheService.getScriptCache().remove("students");
-  toast_(made ? "Made " + made + " join code" + (made === 1 ? "" : "s") + "." : "Every student already has a code.");
+  toast_(made ? "Made " + made + " join code" + (made === 1 ? "" : "s") + "."
+              : "Every student already has a code.");
 }
 
-/* ── the web app: the game talks to these two ── */
+/* -- the web app: the game talks to these two -- */
 function doGet(e) {
   var p = (e && e.parameter) || {};
   try {
@@ -148,7 +160,7 @@ function receive_(body) {
   }
 }
 
-/* ── helpers ── */
+/* -- helpers -- */
 function ss_() {
   var id = PropertiesService.getScriptProperties().getProperty("sheetId");
   return id ? SpreadsheetApp.openById(id) : SpreadsheetApp.getActiveSpreadsheet();
@@ -181,11 +193,16 @@ function newCode_() {
   return s.slice(0, 3) + "-" + s.slice(3);
 }
 /* text from a student's device: short, and never read as a formula */
-function text_(v, max) { var s = String(v == null ? "" : v).slice(0, max); return /^[=+\-@]/.test(s) ? "'" + s : s; }
+function text_(v, max) {
+  var s = String(v == null ? "" : v).slice(0, max);
+  return /^[=+\-@]/.test(s) ? "'" + s : s;
+}
 function num_(v) { var n = Number(v); return isFinite(n) ? Math.round(n * 10) / 10 : ""; }
 function when_(ms, now) {
   var n = Number(ms);
   return isFinite(n) && Math.abs(n - now.getTime()) < 14 * 86400000 ? new Date(n) : now;
 }
-function json_(o) { return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON); }
+function json_(o) {
+  return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON);
+}
 function toast_(msg) { try { SpreadsheetApp.getActiveSpreadsheet().toast(msg, "TKM game", 8); } catch (e) {} }
