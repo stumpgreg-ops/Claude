@@ -1,36 +1,29 @@
-/* TKM game - Google reporting (experiment, v0.2)
-
-   This script lives inside a Google Sheet in YOUR school Google account. The test page in
-   Canvas (TKM-GoogleTest.html) sends each answer here, and this script writes it into the
-   Sheet. The game also asks here which chapters are unlocked. Nothing goes anywhere else.
-
-   SET IT UP (about 10 minutes, once). The full steps are in SECTION 2 of "READ ME FIRST - Canvas setup.txt".
-   In short:
-   1. Make a new Google Sheet (sheets.new). Name it, for example, "TKM game results".
-   2. Extensions > Apps Script. Delete what is in Code.gs, paste this whole file, click Save.
-   3. Back in the Sheet, reload the page. A "TKM game" menu appears. Click TKM game > 1. Set up this Sheet
-      (allow access when Google asks).
-   4. In the Students tab, type student names in column B. Then TKM game > 2. Make join codes.
-   5. In Apps Script: Deploy > New deployment > gear > Web app.
-        Execute as: Me      Who has access: Anyone
-      Click Deploy and copy the Web app link (it ends in /exec).
-   6. Put that link in TKM-GoogleTest-link.js (SECTION 3 of the READ ME) and upload the test to Canvas.
-
-   What the tabs do:
-   - Settings: "Unlocked through chapter" (change it any time; the game picks it up the next time it opens)
-     and "Accept answers" (FALSE pauses reporting; the game keeps answers and sends them later).
-   - Students: join code, name, Path. Only codes listed here are accepted.
-   - Answers: one row per answered question. Don't edit it while students are playing.
-   - Summary: live tables by student, chapter and skill, and the most-missed items. */
+// TKM game - Google reporting (experiment, v0.2)
+//
+// This script lives inside a Google Sheet in YOUR school Google account. The test page in
+// Canvas sends each answer here, and this script writes it into the Sheet. The game also
+// asks here which chapters are unlocked. Nothing goes anywhere else.
+//
+// Setup steps: SECTION 2 of "READ ME FIRST - Canvas setup.txt".
+//
+// The tabs:
+// - Settings: "Unlocked through chapter" (the game picks up a change the next time it opens)
+//   and "Accept answers" (FALSE pauses reporting; the game keeps answers and sends them later).
+// - Students: join code, name, Path. Only codes listed here are accepted.
+// - Answers: one row per answered question. Don't edit it while students are playing.
+// - Summary: live tables by student, chapter and skill, and the most-missed items.
+//
+// Every comment in this file starts with // on each line, and every line is short, so a
+// copy and paste can't break it.
 
 var VERSION = "0.2";
 var TAB = { settings: "Settings", students: "Students", answers: "Answers", summary: "Summary" };
 var ANSWER_HEADERS = ["Received", "Join code", "Student", "Answered at", "Item", "Chapter", "Skill",
                       "Right first try (1 = yes)", "Picked", "Seconds"];
-var CODE_ALPHABET = "23456789ABCDEFGHJKMNPQRSTVWXYZ"; /* no 0/O, 1/I/L or U, so codes are easy to type */
+var CODE_ALPHABET = "23456789ABCDEFGHJKMNPQRSTVWXYZ"; // no 0/O, 1/I/L or U, so codes are easy to type
 var MAX_BATCH = 100;
 
-/* -- the menu -- */
+// -- the menu --
 function onOpen() {
   SpreadsheetApp.getUi().createMenu("TKM game")
     .addItem("1. Set up this Sheet", "setup")
@@ -62,7 +55,7 @@ function setup() {
   }
   var sum = tab_(ss, TAB.summary);
   if (sum.getLastRow() === 0) {
-    /* Kept to short lines on purpose: a copy and paste can break a very long line in two. */
+    // Kept to short lines on purpose: a copy and paste can break a very long line in two.
     sum.getRange(1, 1, 1, 13).setValues([["By student", "", "", "", "By chapter", "", "", "",
       "By skill", "", "", "", "Most-missed items (3+ answers)"]]);
     var pct = ", count(E) 'Questions', avg(H) '% right first try'";
@@ -104,7 +97,7 @@ function makeJoinCodes() {
               : "Every student already has a code.");
 }
 
-/* -- the web app: the game talks to these two -- */
+// -- the web app: the game talks to these two --
 function doGet(e) {
   var p = (e && e.parameter) || {};
   try {
@@ -143,7 +136,7 @@ function receive_(body) {
   var cache = CacheService.getScriptCache(), lock = LockService.getScriptLock();
   lock.waitLock(20000);
   try {
-    /* a batch the game sends twice (its first answer got lost on the way back) is written once */
+    // a batch the game sends twice (its first answer got lost on the way back) is written once
     if (cache.get("b:" + batch)) return { ok: true, saved: 0, duplicate: true };
     var now = new Date();
     var rows = list.map(function (a) {
@@ -160,7 +153,7 @@ function receive_(body) {
   }
 }
 
-/* -- helpers -- */
+// -- helpers --
 function ss_() {
   var id = PropertiesService.getScriptProperties().getProperty("sheetId");
   return id ? SpreadsheetApp.openById(id) : SpreadsheetApp.getActiveSpreadsheet();
@@ -182,7 +175,7 @@ function findStudent_(code) {
       var c = cleanCode_(r[0]);
       if (c && String(r[1]).trim()) map[c] = { name: String(r[1]).trim(), path: Number(r[2]) === 2 ? 2 : 1 };
     });
-    cache.put("students", JSON.stringify(map), 60); /* a code you add by hand works within a minute */
+    cache.put("students", JSON.stringify(map), 60); // a code you add by hand works within a minute
   }
   return map[code] || null;
 }
@@ -192,7 +185,7 @@ function newCode_() {
   for (var i = 0; i < 6; i++) s += CODE_ALPHABET.charAt(Math.floor(Math.random() * CODE_ALPHABET.length));
   return s.slice(0, 3) + "-" + s.slice(3);
 }
-/* text from a student's device: short, and never read as a formula */
+// text from a student's device: short, and never read as a formula
 function text_(v, max) {
   var s = String(v == null ? "" : v).slice(0, max);
   return /^[=+\-@]/.test(s) ? "'" + s : s;
