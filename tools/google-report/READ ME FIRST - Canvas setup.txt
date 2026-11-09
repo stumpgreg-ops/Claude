@@ -59,9 +59,22 @@ Step 2 - Set up the tabs
 
 Step 3 - Add students and make join codes
 -----------------------------------------
-1. In the Students tab, type names in column B, starting in row 2. For a first test, use yourself and one or
-   two test students (for example "Test Student").
-2. Click TKM game > 2. Make join codes for new students. Each name gets a code like K7Q-2MF in column A.
+For a first test, a few names are enough: type them in the Students tab, column B, starting in row 2 (for
+example your own name and "Test Student"). Then do step 4 below.
+
+For a whole class, copy the names from Canvas instead of typing them:
+1. In Canvas, open the course's Grades, click Export, then Export Entire Gradebook. Canvas saves a .csv file.
+2. In your Google Sheet: File > Import > Upload, and choose that .csv file.
+   Import location: "Insert new sheet(s)". Click Import data. A new tab opens with the gradebook.
+3. In that new tab, column A ("Student") has the names, as "Last, First". Click the first real student's name
+   (skip the rows at the top that say "Points Possible" or "Manual Posting"), then press Ctrl+Shift+Down Arrow
+   to select the rest of the column. Press Ctrl+C.
+4. Go to the Students tab, click cell B2, and press Ctrl+Shift+V (paste values only).
+   Delete any row that isn't a real student, such as "Student, Test".
+5. Click TKM game > 2. Make join codes for new students. Each name gets a code like K7Q-2MF in column A.
+   The game greets each student by first name ("Rivera, Ana" is greeted as Ana).
+6. You can delete the gradebook tab now. Students who join later: add their names under the others and click
+   TKM game > 2. Make join codes again. Codes students already have never change.
 
 Step 4 - Make the web link
 --------------------------

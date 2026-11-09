@@ -120,7 +120,7 @@ function doPost(e) {
 function settings_(code) {
   var s = readSettings_(), stu = code ? findStudent_(code) : null;
   return {
-    ok: true, known: !!stu, firstName: stu ? String(stu.name).trim().split(/\s+/)[0] : "",
+    ok: true, known: !!stu, firstName: stu ? firstName_(stu.name) : "",
     path: stu ? stu.path : 1, unlockedThrough: s.unlocked, accepting: s.accepting
   };
 }
@@ -178,6 +178,12 @@ function findStudent_(code) {
     cache.put("students", JSON.stringify(map), 60); // a code you add by hand works within a minute
   }
   return map[code] || null;
+}
+// "Ana Rivera" or Canvas's "Rivera, Ana" -> "Ana"
+function firstName_(name) {
+  var n = String(name || "").trim(), comma = n.indexOf(",");
+  if (comma >= 0) n = n.slice(comma + 1).trim();
+  return n.split(/\s+/)[0] || "";
 }
 function cleanCode_(c) { return String(c || "").toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 12); }
 function newCode_() {

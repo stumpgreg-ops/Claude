@@ -72,13 +72,15 @@ vm.runInContext(fs.readFileSync(path.join(dir, "Code.gs"), "utf8"), ctx, { filen
 ctx.setup();
 check(tabs.Settings && tabs.Students && tabs.Answers && tabs.Summary, "setup makes the four tabs");
 check(Object.keys(tabs.Summary.formulas).length === 4, "Summary gets its four live tables");
-tabs.Students.getRange(2, 2, 3, 1).setValues([["Ana Rivera"], ["Ben Ortiz"], ["Cy Lee"]]);
+tabs.Students.getRange(2, 2, 3, 1).setValues([["Ana Rivera"], ["Ben Ortiz"], ["Lee, Cy"]]);
 ctx.makeJoinCodes();
 var codes = tabs.Students.getRange(2, 1, 3, 1).getValues().map(function (r) { return r[0]; });
 check(codes.every(function (c) { return /^[2-9A-HJKMNP-TV-Z]{3}-[2-9A-HJKMNP-TV-Z]{3}$/.test(c); }) && new Set(codes).size === 3, "three different, easy-to-type join codes: " + codes.join(" "));
 ctx.makeJoinCodes();
 check(/already has a code/.test(toasts[toasts.length - 1]), "making codes again keeps the codes students have");
 var ANA = codes[0];
+var cy = JSON.parse(ctx.doGet({ parameter: { op: "settings", code: codes[2] } }).text);
+check(cy.known && cy.firstName === "Cy", "a name pasted from Canvas as \"Lee, Cy\" greets the student as Cy");
 function answers() { return tabs.Answers.getLastRow() - 1; }
 function setSetting(row, v) { tabs.Settings.getRange(row, 2).setValues([[v]]); }
 
