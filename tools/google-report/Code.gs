@@ -1,4 +1,4 @@
-// TKM game - Google reporting (experiment, v0.3)
+// TKM game - Google reporting (experiment, v0.4)
 //
 // This script lives inside a Google Sheet in YOUR school Google account. The test page in
 // Canvas sends each answer here, and this script writes it into the Sheet. The game also
@@ -7,7 +7,9 @@
 // Setup steps: SECTION 2 of "READ ME FIRST - Canvas setup.txt".
 //
 // The tabs:
-// - Analysis: a chart of each skill, % right and % wrong on the first try, and the numbers.
+// - Analysis: the whole class. A chart of each skill, % right and % wrong on the first try.
+// - By student: pick a student for the same chart, and a grid of every student by skill,
+//   coloured green (80% and up), yellow (60-79%) and orange (below 60%).
 // - Settings: "Unlocked through chapter" (the game picks up a change the next time it opens)
 //   and "Accept answers" (FALSE pauses reporting; the game keeps answers and sends them later).
 // - Students: join code, name, Path. Only codes listed here are accepted.
@@ -21,9 +23,9 @@
 // Every comment in this file starts with // on each line, and every line is short, so a
 // copy and paste can't break it.
 
-var VERSION = "0.3";
-var TAB = { analysis: "Analysis", settings: "Settings", students: "Students", summary: "Summary",
-            data: "Answer data" };
+var VERSION = "0.4";
+var TAB = { analysis: "Analysis", byStudent: "By student", settings: "Settings", students: "Students",
+            summary: "Summary", data: "Answer data" };
 var OLD_DATA_TAB = "Answers"; // the name before v0.3; setup renames it
 var DATA_REF = "'" + TAB.data + "'!"; // Sheets renames this in every formula if the tab is renamed
 
@@ -41,6 +43,7 @@ var SKILLS = [
 ];
 var COLOR_RIGHT = "#1b9e77"; // green and orange: easy to tell apart, also for colorblind readers
 var COLOR_WRONG = "#d95f02";
+var BAND = { high: "#b7e1cd", mid: "#fce8b2", low: "#f9cb9c" }; // 80%+, 60-79%, below 60%
 var ANSWER_HEADERS = ["Received", "Join code", "Student", "Answered at", "Item", "Chapter", "Skill",
                       "Right first try (1 = yes)", "Picked", "Seconds"];
 var CODE_ALPHABET = "23456789ABCDEFGHJKMNPQRSTVWXYZ"; // no 0/O, 1/I/L or U, so codes are easy to type
@@ -101,46 +104,137 @@ function setup() {
     ["C:C", "G:G", "K:K", "O:O"].forEach(function (c) { sum.getRange(c).setNumberFormat("0%"); });
     sum.setFrozenRows(1);
   }
-  var an = analysis_(ss);
-  // tab order: Analysis first, Answer data last
+  var an = analysis_(ss), by = byStudent_(ss);
+  // tab order: Analysis, By student, ... , Answer data last
   ss.setActiveSheet(ans); ss.moveActiveSheet(ss.getNumSheets());
+  ss.setActiveSheet(by); ss.moveActiveSheet(1);
   ss.setActiveSheet(an); ss.moveActiveSheet(1);
   toast_("Set up. Next: type student names in the Students tab (column B), " +
     "then TKM game > 2. Make join codes.");
 }
 
-// The Analysis tab: a 100% stacked bar for each skill (right / wrong on the first try) and,
-// under it, the numbers it is drawn from. Setup draws it again each time, so it stays current.
+// The Analysis tab: the whole class. A 100% stacked bar for each skill (right / wrong on the
+// first try) and, under it, the numbers it is drawn from. Setup draws it again each time.
 function analysis_(ss) {
-  var an = ss.getSheetByName(TAB.analysis) || ss.insertSheet(TAB.analysis);
-  an.getCharts().forEach(function (c) { an.removeChart(c); });
-  an.clear();
-  var n = SKILLS.length, height = 110 + 46 * n;
-  var top = Math.ceil(height / 21) + 2; // the table starts under the chart (rows are 21 px)
+  var an = freshTab_(ss, TAB.analysis);
+  var top = chartRows_() + 2;
   an.getRange(top, 1).setValue("The numbers behind the chart (they update by themselves)")
     .setFontWeight("bold");
-  an.getRange(top + 1, 1, 1, 6).setValues([["Skill", "Right first try", "Wrong first try",
-    "Questions answered", "Code", "What the standard says"]]).setFontWeight("bold");
-  var col = DATA_REF + "$G$2:$G", right = DATA_REF + "$H$2:$H";
-  SKILLS.forEach(function (sk, i) {
-    var r = top + 2 + i;
-    an.getRange(r, 1).setValue(sk[1] + " (" + sk[0] + ")");
-    an.getRange(r, 5).setValue(sk[0]);
-    an.getRange(r, 6).setValue(sk[2]);
-    an.getRange(r, 4).setFormula("=COUNTIF(" + col + ",$E" + r + ")");
-    an.getRange(r, 2).setFormula('=IF($D' + r + '=0,"",AVERAGEIF(' + col + ",$E" + r + "," +
+  skillTable_(an, top + 1, "");
+  skillChart_(an, top + 1, 1, "Whole class: % right and wrong on the first try, by skill");
+  return an;
+}
+
+// The By student tab: a drop-down to pick a student and the same chart for that student, then
+// a grid of every student (rows) by skill (columns). Setup and "Make join codes" draw it again.
+function byStudent_(ss) {
+  var old = ss.getSheetByName(TAB.byStudent);
+  var picked = old ? String(old.getRange(1, 2).getValues()[0][0] || "") : "";
+  var by = freshTab_(ss, TAB.byStudent);
+  var stu = ss.getSheetByName(TAB.students), names = [];
+  if (stu && stu.getLastRow() >= 2) {
+    names = stu.getRange(2, 2, stu.getLastRow() - 1, 1).getValues()
+      .map(function (r) { return String(r[0]).trim(); }).filter(String);
+  }
+  if (names.indexOf(picked) < 0) picked = names[0] || "";
+
+  // 1. one student: drop-down in B1, chart from row 3, its numbers under it
+  by.getRange(1, 1).setValue("Student:").setFontWeight("bold");
+  var pick = by.getRange(1, 2);
+  pick.setDataValidation(SpreadsheetApp.newDataValidation()
+    .requireValueInRange(ss.getSheetByName(TAB.students).getRange("B2:B"), true)
+    .setAllowInvalid(false).build());
+  pick.setValue(picked).setFontWeight("bold").setBackground("#fff2cc");
+  by.getRange(1, 3).setValue("<- pick a student from the list");
+  var top = 3 + chartRows_() + 1;
+  by.getRange(top, 1).setValue("The numbers behind the chart for the student in B1").setFontWeight("bold");
+  skillTable_(by, top + 1, "$B$1");
+  skillChart_(by, top + 1, 3, "One student (picked in B1): % right and wrong on the first try");
+
+  // 2. every student: one row each, a column per skill
+  var g = top + 3 + SKILLS.length;
+  by.getRange(g, 1).setValue("Every student at a glance: % right on the first try " +
+    "(green 80% and up, yellow 60-79%, orange below 60%)").setFontWeight("bold");
+  var head = ["Student", "Questions answered", "All skills"].concat(SKILLS.map(function (sk) {
+    return sk[1] + " (" + sk[0] + ")";
+  }));
+  by.getRange(g + 1, 1, 1, head.length).setValues([head]).setFontWeight("bold");
+  var who = DATA_REF + "$C$2:$C", skill = DATA_REF + "$G$2:$G", right = DATA_REF + "$H$2:$H";
+  var rows = Math.max(40, names.length + 20); // room for students added later
+  for (var i = 0; i < rows; i++) {
+    var r = g + 2 + i, a = "$A" + r;
+    by.getRange(r, 1).setFormula("=IF(TRIM(" + TAB.students + "!$B" + (i + 2) + ")=\"\",\"\"," +
+      "TRIM(" + TAB.students + "!$B" + (i + 2) + "))");
+    by.getRange(r, 2).setFormula("=IF(" + a + "=\"\",\"\",COUNTIF(" + who + "," + a + "))");
+    by.getRange(r, 3).setFormula("=IF(N($B" + r + ")=0,\"\",AVERAGEIF(" + who + "," + a + "," +
       right + "))");
-    an.getRange(r, 3).setFormula('=IF($D' + r + '=0,"",1-$B' + r + ")");
+    SKILLS.forEach(function (sk, j) {
+      var code = "\"" + sk[0] + "\"";
+      by.getRange(r, 4 + j).setFormula("=IF(" + a + "=\"\",\"\",IF(COUNTIFS(" + who + "," + a + "," +
+        skill + "," + code + ")=0,\"\",AVERAGEIFS(" + right + "," + who + "," + a + "," + skill + "," +
+        code + ")))");
+    });
+  }
+  var pct = by.getRange(g + 2, 3, rows, 1 + SKILLS.length);
+  pct.setNumberFormat("0%");
+  by.setConditionalFormatRules([
+    SpreadsheetApp.newConditionalFormatRule().whenNumberGreaterThanOrEqualTo(0.8)
+      .setBackground(BAND.high).setRanges([pct]).build(),
+    SpreadsheetApp.newConditionalFormatRule().whenNumberBetween(0.6, 0.8)
+      .setBackground(BAND.mid).setRanges([pct]).build(),
+    SpreadsheetApp.newConditionalFormatRule().whenNumberLessThan(0.6)
+      .setBackground(BAND.low).setRanges([pct]).build()
+  ]);
+  by.setColumnWidth(1, 250); by.setColumnWidth(2, 130);
+  for (var c = 3; c <= head.length; c++) by.setColumnWidth(c, 150);
+  return by;
+}
+
+// -- chart helpers shared by Analysis and By student --
+function chartRows_() { return Math.ceil((110 + 46 * SKILLS.length) / 21); } // rows are 21 px
+function freshTab_(ss, name) {
+  var t = ss.getSheetByName(name) || ss.insertSheet(name);
+  t.getCharts().forEach(function (c) { t.removeChart(c); });
+  t.clear();
+  t.setConditionalFormatRules([]);
+  return t;
+}
+// A table at row `head`: Skill | Right first try | Wrong first try | Questions answered | Code |
+// What the standard says. `who` is a cell with a student's name, or "" for the whole class.
+function skillTable_(t, head, who) {
+  var n = SKILLS.length, col = DATA_REF + "$G$2:$G", right = DATA_REF + "$H$2:$H";
+  var whoCol = DATA_REF + "$C$2:$C";
+  t.getRange(head, 1, 1, 6).setValues([["Skill", "Right first try", "Wrong first try",
+    "Questions answered", "Code", "What the standard says"]]).setFontWeight("bold");
+  SKILLS.forEach(function (sk, i) {
+    var r = head + 1 + i;
+    t.getRange(r, 1).setValue(sk[1] + " (" + sk[0] + ")");
+    t.getRange(r, 5).setValue(sk[0]);
+    t.getRange(r, 6).setValue(sk[2]);
+    if (who) {
+      t.getRange(r, 4).setFormula("=COUNTIFS(" + col + ",$E" + r + "," + whoCol + "," + who + ")");
+      t.getRange(r, 2).setFormula('=IF($D' + r + '=0,"",AVERAGEIFS(' + right + "," + col + ",$E" + r +
+        "," + whoCol + "," + who + "))");
+    } else {
+      t.getRange(r, 4).setFormula("=COUNTIF(" + col + ",$E" + r + ")");
+      t.getRange(r, 2).setFormula('=IF($D' + r + '=0,"",AVERAGEIF(' + col + ",$E" + r + "," +
+        right + "))");
+    }
+    t.getRange(r, 3).setFormula('=IF($D' + r + '=0,"",1-$B' + r + ")");
   });
-  an.getRange(top + 2, 2, n, 2).setNumberFormat("0%");
-  an.setColumnWidth(1, 250); an.setColumnWidth(6, 520);
-  [2, 3, 4, 5].forEach(function (c) { an.setColumnWidth(c, 110); });
-  var chart = an.newChart().asBarChart()
-    .addRange(an.getRange(top + 1, 1, n + 1, 3))
+  t.getRange(head + 1, 2, n, 2).setNumberFormat("0%");
+  t.setColumnWidth(1, 250); t.setColumnWidth(6, 520);
+  [2, 3, 4, 5].forEach(function (c) { t.setColumnWidth(c, 110); });
+}
+// A 100% stacked bar chart of a skill table (green right, orange wrong), placed at `atRow`.
+function skillChart_(t, head, atRow, title) {
+  var n = SKILLS.length;
+  t.insertChart(t.newChart().asBarChart()
+    .addRange(t.getRange(head, 1, n + 1, 3))
     .setNumHeaders(1)
     .setStacked()
     .setRange(0, 1)
-    .setTitle("Skills: % right and wrong on the first try")
+    .setTitle(title)
     .setLegendPosition(Charts.Position.TOP)
     .setOption("hAxis.format", "0%")
     .setOption("series", {
@@ -148,11 +242,9 @@ function analysis_(ss) {
       1: { color: COLOR_WRONG, dataLabel: "value" }
     })
     .setOption("width", 800)
-    .setOption("height", height)
-    .setPosition(1, 1, 0, 0)
-    .build();
-  an.insertChart(chart);
-  return an;
+    .setOption("height", 110 + 46 * n)
+    .setPosition(atRow, 1, 0, 0)
+    .build());
 }
 
 function makeJoinCodes() {
@@ -170,6 +262,7 @@ function makeJoinCodes() {
   });
   sh.getRange(2, 1, rows.length, 3).setValues(rows);
   CacheService.getScriptCache().remove("students");
+  try { byStudent_(ss_()); } catch (e) {} // the grid gets a row for each new student
   toast_(made ? "Made " + made + " join code" + (made === 1 ? "" : "s") + "."
               : "Every student already has a code.");
 }

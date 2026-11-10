@@ -21,7 +21,7 @@ function check(ok, what) { console.log((ok ? "  ok   " : "  FAIL ") + what); if 
 function colNum(s) { var n = 0; for (var i = 0; i < s.length; i++) n = n * 26 + s.charCodeAt(i) - 64; return n; }
 var nextSheetId = 100;
 function makeSheet(name) {
-  var data = [], formulas = {}, charts = [];
+  var data = [], formulas = {}, charts = [], validations = {}, cf = [];
   var range = function (r, c, nr, nc) {
     nr = nr || 1; nc = nc || 1;
     var rg = {
@@ -38,19 +38,27 @@ function makeSheet(name) {
       },
       setFormula: function (f) { formulas[colName(c) + r] = f; return rg; },
       setNumberFormat: function () { return rg; },
-      setFontWeight: function () { return rg; }
+      setFontWeight: function () { return rg; },
+      setBackground: function () { return rg; },
+      setDataValidation: function (v) { validations[colName(c) + r] = v; return rg; }
     };
     return rg;
   };
   var sh = {
-    name: name, data: data, formulas: formulas, charts: charts, id: nextSheetId++,
+    name: name, data: data, formulas: formulas, charts: charts, validations: validations, id: nextSheetId++,
+    cf: function () { return cf; },
+    setConditionalFormatRules: function (rules) { cf = rules; },
     getName: function () { return sh.name; },
     getSheetId: function () { return sh.id; },
     setName: function (n) { delete tabs[sh.name]; sh.name = n; tabs[n] = sh; return sh; },
     getLastRow: function () { var n = data.length; while (n && data[n - 1].every(function (v) { return v === "" || v == null; })) n--; return n; },
     setFrozenRows: function () {},
     setColumnWidth: function () {},
-    clear: function () { data.length = 0; Object.keys(formulas).forEach(function (k) { delete formulas[k]; }); return sh; },
+    clear: function () {
+      data.length = 0;
+      [formulas, validations].forEach(function (o) { Object.keys(o).forEach(function (k) { delete o[k]; }); });
+      return sh;
+    },
     getCharts: function () { return charts.slice(); },
     removeChart: function (ch) { charts.splice(charts.indexOf(ch), 1); },
     insertChart: function (ch) { charts.push(ch); },
@@ -91,6 +99,22 @@ var ctx = {
   console: console, JSON: JSON, Math: Math, Date: Date, String: String, Number: Number, Array: Array, isFinite: isFinite,
   SpreadsheetApp: {
     getActiveSpreadsheet: function () { return ss; }, openById: function () { return ss; },
+    newDataValidation: function () {
+      var v = {}, b = {
+        requireValueInRange: function (rg, dd) { v.range = rg; v.dropdown = dd; return b; },
+        setAllowInvalid: function (x) { v.allowInvalid = x; return b; },
+        build: function () { return v; }
+      };
+      return b;
+    },
+    newConditionalFormatRule: function () {
+      var v = {}, b = {};
+      ["whenNumberGreaterThanOrEqualTo", "whenNumberBetween", "whenNumberLessThan", "setBackground", "setRanges"].forEach(function (m) {
+        b[m] = function () { v[m] = Array.prototype.slice.call(arguments); return b; };
+      });
+      b.build = function () { return v; };
+      return b;
+    },
     getUi: function () { var m = { addItem: function () { return m; }, addToUi: function () {} }; return { createMenu: function () { return m; } }; }
   },
   Charts: { Position: { TOP: "top" } },
@@ -110,11 +134,12 @@ var DATA = "Answer data";
 check(!tabs.Answers && tabs[DATA] && tabs[DATA].getRange(2, 3).getValues()[0][0] === "Old Row", "an old Answers tab is renamed Answer data, and its rows are kept");
 tabs[DATA].getRange(2, 1, 1, 3).setValues([["", "", ""]]);
 ctx.setup();
-check(JSON.stringify(tabNames()) === JSON.stringify(["Analysis", "Settings", "Students", "Summary", DATA]), "tabs in order: " + tabNames().join(", "));
+check(JSON.stringify(tabNames()) === JSON.stringify(["Analysis", "By student", "Settings", "Students", "Summary", DATA]), "tabs in order: " + tabNames().join(", "));
 check(Object.keys(tabs.Summary.formulas).length === 4 && Object.keys(tabs.Summary.formulas).every(function (k) { return tabs.Summary.formulas[k].indexOf("'Answer data'!A2:J") > 0; }), "Summary's four live tables read 'Answer data'");
 var an = tabs.Analysis, chart = an.charts[0];
 var nSkills = vm.runInContext("SKILLS.length", ctx);
 check(an.charts.length === 1, "Analysis has one chart (setup run twice doesn't add a second)");
+check(chart && /^Whole class/.test(chart.calls.setTitle[0]), "the Analysis chart says it is the whole class");
 check(chart && chart.calls.asBarChart && chart.calls.setStacked && JSON.stringify(chart.calls.setRange) === "[0,1]", "the chart is a stacked bar from 0 to 100%");
 var cr = chart && chart.ranges[0];
 check(cr && cr.cols === 3 && cr.rows === nSkills + 1 && chart.calls.setNumHeaders[0] === 1, "the chart reads the skill names and the right/wrong columns, one bar per skill (" + nSkills + ")");
@@ -133,6 +158,34 @@ check(codes.every(function (c) { return /^[2-9A-HJKMNP-TV-Z]{3}-[2-9A-HJKMNP-TV-
 ctx.makeJoinCodes();
 check(/already has a code/.test(toasts[toasts.length - 1]), "making codes again keeps the codes students have");
 var ANA = codes[0];
+
+/* the By student tab */
+var by = tabs["By student"], bv = by.validations.B1;
+check(bv && bv.dropdown && bv.range.row === 2 && bv.range.col === 2 && bv.allowInvalid === false, "By student: B1 is a drop-down of the names in Students");
+check(by.getRange(1, 2).getValues()[0][0] === "Ana Rivera", "after Make join codes, the drop-down shows the first student");
+var bc = by.charts[0], bhead = bc.ranges[0].row, br0 = bhead + 1;
+check(by.charts.length === 1 && /^One student/.test(bc.calls.setTitle[0]) && bc.calls.setPosition[0] === 3 && bc.ranges[0].rows === nSkills + 1,
+  "a chart for the picked student, one bar per skill, under the drop-down");
+check(by.formulas["D" + br0] === "=COUNTIFS('Answer data'!$G$2:$G,$E" + br0 + ",'Answer data'!$C$2:$C,$B$1)" &&
+  by.formulas["B" + br0] === '=IF($D' + br0 + '=0,"",AVERAGEIFS(\'Answer data\'!$H$2:$H,\'Answer data\'!$G$2:$G,$E' + br0 + ",'Answer data'!$C$2:$C,$B$1))",
+  "the student's numbers count only that student's answers: " + by.formulas["B" + br0]);
+check(bhead * 21 > 3 * 21 + 110 + 46 * nSkills, "the student's table starts below the chart");
+var gh = Object.keys(by.data).map(Number).filter(function (i) { return by.data[i] && by.data[i][0] === "Student"; })[0] + 1;
+var ghead = by.getRange(gh, 1, 1, 3 + nSkills).getValues()[0];
+check(ghead[0] === "Student" && ghead[2] === "All skills" && ghead[3] === "Evidence (9.DSR.C.1)" && gh > bhead + nSkills, "the grid under it: " + ghead.slice(0, 4).join(" | ") + " ...");
+var g1 = gh + 1, gRows = Object.keys(by.formulas).filter(function (k) { return /^A\d+$/.test(k) && +k.slice(1) >= g1; }).length;
+check(gRows >= 40, "the grid has a row for every student and room for more (" + gRows + " rows)");
+check(by.formulas["A" + g1] === '=IF(TRIM(Students!$B2)="","",TRIM(Students!$B2))', "grid row 1 is the first name in Students: " + by.formulas["A" + g1]);
+check(by.formulas["D" + g1] === '=IF($A' + g1 + '="","",IF(COUNTIFS(\'Answer data\'!$C$2:$C,$A' + g1 + ",'Answer data'!$G$2:$G,\"9.DSR.C.1\")=0,\"\",AVERAGEIFS('Answer data'!$H$2:$H,'Answer data'!$C$2:$C,$A" + g1 + ",'Answer data'!$G$2:$G,\"9.DSR.C.1\")))",
+  "each grid cell is that student's % right on that skill: " + by.formulas["D" + g1]);
+var rules = by.cf();
+check(rules.length === 3 && rules[0].whenNumberGreaterThanOrEqualTo[0] === 0.8 && JSON.stringify(rules[1].whenNumberBetween) === "[0.6,0.8]" && rules[2].whenNumberLessThan[0] === 0.6 &&
+  rules[0].setRanges[0][0].row === g1 && rules[0].setRanges[0][0].col === 3 && rules[0].setRanges[0][0].cols === 1 + nSkills,
+  "grid colours: green 80% and up, yellow 60-79%, orange below 60%, on the % columns");
+by.getRange(1, 2).setValues([["Ben Ortiz"]]);
+tabs.Students.getRange(5, 2).setValues([["Dee Park"]]); ctx.makeJoinCodes(); ctx.setup();
+check(tabs["By student"].getRange(1, 2).getValues()[0][0] === "Ben Ortiz", "the picked student stays picked when the tab is redrawn");
+check(tabs.Students.getRange(5, 1).getValues()[0][0] && tabs["By student"].charts.length === 1, "a student added later gets a code; the tab still has one chart");
 var cy = JSON.parse(ctx.doGet({ parameter: { op: "settings", code: codes[2] } }).text);
 check(cy.known && cy.firstName === "Cy", "a name pasted from Canvas as \"Lee, Cy\" greets the student as Cy");
 function answers() { return tabs[DATA].getLastRow() - 1; }
