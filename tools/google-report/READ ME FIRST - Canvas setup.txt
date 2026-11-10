@@ -1,4 +1,4 @@
-TKM practice - Google reporting TEST - version 0.5 - FIRST-TIME SETUP
+TKM practice - Google reporting TEST - version 0.6 - FIRST-TIME SETUP
 ================================================================================
 
 This zip sets up a small TEST of Option B: the game sends each answer to a Google Sheet in YOUR school
@@ -55,8 +55,8 @@ Step 2 - Set up the tabs
    Google asks you to allow access: click Continue, pick your account, click Allow. If it says "Google hasn't
    verified this app", click Advanced, then "Go to ... (unsafe)". (It is your own script; Google says this
    about every script a teacher writes.)
-3. Click TKM game > 1. Set up this Sheet once more. Six tabs appear: Analysis (the whole class), By student,
-   Settings, Students, Summary and Answer data.
+3. Click TKM game > 1. Set up this Sheet once more. Seven tabs appear: Analysis (the whole class),
+   By student, Grades, Settings, Students, Summary and Answer data.
 
 Step 3 - Add students and make join codes
 -----------------------------------------
@@ -159,6 +159,18 @@ SECTION 6  TRY IT
    - The colour bands: in the Settings tab, "Green from" (row 5, starts at 80) and "Yellow from" (row 6,
      starts at 60). Below "Yellow from" is red. Type a new percent (for example 85) and the grid's colours
      and heading change at once. Running Set up again keeps your numbers.
+   - Grades tab: your grading criteria in the yellow cells, and a grade for every student under them.
+     For each goal, set "Full credit at" and how much it counts (0 = not counted):
+        Minutes answering questions   60    counts 1
+        Questions answered            50    counts 1
+        Days played                    3    counts 0
+        % right on the first try      70    counts 0
+     Points possible: 100. A student's grade is the points times the share of each counted goal they
+     reached (each goal tops out at full credit). Example: 30 minutes and 50 questions = 75 of 100.
+     "Count work from" and "Count work through" set the dates that count, for example one week. Leave
+     them empty to count everything. Grades are coloured with the same bands as By student.
+     To grade a week: set the two dates, then read the Grade column. Running Set up again keeps your
+     criteria.
    - Summary tab: % right by student, by chapter and by skill, and the most-missed items (once an item has 3
      or more answers). It updates by itself.
    - Answer data tab (the last tab): one row for each answer: the student's name, item, chapter, skill,
@@ -184,7 +196,8 @@ SECTION 7  WHAT TO TELL ME
 - Did the unlock change show up?
 - Does the Analysis chart show coloured bars, and do the Summary tables show numbers (not an error)?
 - Anything confusing for students (the join code, the messages)?
-- What you want to see in the Analysis, By student or Summary tab that isn't there.
+- What you want to see in the Analysis, By student, Grades or Summary tab that isn't there.
+- Do the grades match what you expect for your test student?
 
 If something didn't work, open "For the teacher: what this page knows" at the bottom of the practice page
 and copy what it says. The last line is the Sheet's last reply.
@@ -200,7 +213,8 @@ If I send a new Code.gs:
 1. Paste it into Apps Script as in SECTION 2 (Ctrl+A, Ctrl+V, Ctrl+S).
 2. Reload the Sheet and click TKM game > 1. Set up this Sheet. Your settings, students and answers stay.
    (Version 0.3 added the Analysis tab and renamed the old Answers tab to Answer data. Version 0.4 adds
-   the By student tab. Version 0.5 adds the colour bands in Settings, rows 5 and 6.)
+   the By student tab. Version 0.5 adds the colour bands in Settings, rows 5 and 6. Version 0.6 adds
+   the Grades tab.)
 3. In Apps Script: Deploy > Manage deployments > pencil icon > Version: New version > Deploy. This step
    matters: until you do it, the web link keeps running the old script. It keeps the same /exec link.
    (A NEW deployment makes a new link.)

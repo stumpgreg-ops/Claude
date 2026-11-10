@@ -40,6 +40,7 @@ function makeSheet(name) {
       setNumberFormat: function () { return rg; },
       setFontWeight: function () { return rg; },
       setBackground: function () { return rg; },
+      setFontSize: function () { return rg; },
       setDataValidation: function (v) { validations[colName(c) + r] = v; return rg; }
     };
     return rg;
@@ -54,6 +55,8 @@ function makeSheet(name) {
     getLastRow: function () { var n = data.length; while (n && data[n - 1].every(function (v) { return v === "" || v == null; })) n--; return n; },
     setFrozenRows: function () {},
     setColumnWidth: function () {},
+    hidden: [],
+    hideColumns: function (c) { sh.hidden.push(c); },
     clear: function () {
       data.length = 0;
       [formulas, validations].forEach(function (o) { Object.keys(o).forEach(function (k) { delete o[k]; }); });
@@ -102,6 +105,8 @@ var ctx = {
     newDataValidation: function () {
       var v = {}, b = {
         requireValueInRange: function (rg, dd) { v.range = rg; v.dropdown = dd; return b; },
+        requireDate: function () { v.date = true; return b; },
+        setHelpText: function (t) { v.help = t; return b; },
         setAllowInvalid: function (x) { v.allowInvalid = x; return b; },
         build: function () { return v; }
       };
@@ -134,7 +139,7 @@ var DATA = "Answer data";
 check(!tabs.Answers && tabs[DATA] && tabs[DATA].getRange(2, 3).getValues()[0][0] === "Old Row", "an old Answers tab is renamed Answer data, and its rows are kept");
 tabs[DATA].getRange(2, 1, 1, 3).setValues([["", "", ""]]);
 ctx.setup();
-check(JSON.stringify(tabNames()) === JSON.stringify(["Analysis", "By student", "Settings", "Students", "Summary", DATA]), "tabs in order: " + tabNames().join(", "));
+check(JSON.stringify(tabNames()) === JSON.stringify(["Analysis", "By student", "Grades", "Settings", "Students", "Summary", DATA]), "tabs in order: " + tabNames().join(", "));
 check(Object.keys(tabs.Summary.formulas).length === 4 && Object.keys(tabs.Summary.formulas).every(function (k) { return tabs.Summary.formulas[k].indexOf("'Answer data'!A2:J") > 0; }), "Summary's four live tables read 'Answer data'");
 var an = tabs.Analysis, chart = an.charts[0];
 var nSkills = vm.runInContext("SKILLS.length", ctx);
@@ -198,6 +203,35 @@ check(bandOf(80) === 0.8 && bandOf(0.8) === 0.8 && bandOf(75) === 0.75 && bandOf
 tabs.Settings.getRange(5, 2).setValues([[90]]); tabs.Settings.getRange(6, 2).setValues([[70]]);
 ctx.setup();
 check(setRow(5)[1] === 90 && setRow(6)[1] === 70, "running setup again keeps the teacher's bands (90 and 70)");
+by = tabs["By student"];
+/* the Grades tab */
+var gt = tabs.Grades, gv = function (r, c, n) { return gt.getRange(r, c, 1, n || 1).getValues()[0]; };
+check(JSON.stringify(gt.getRange(4, 1, 4, 3).getValues()) === JSON.stringify([["Minutes answering questions", 60, 1], ["Questions answered", 50, 1], ["Days played", 3, 0], ["% right on the first try", 70, 0]]) &&
+  gv(9, 1, 2)[1] === 100, "Grades starts with the teacher screen's goals: 60 minutes, 50 questions (counted), 3 days, 70% (not counted), out of 100");
+check(gt.validations.B10 && gt.validations.B10.date && gt.validations.B10.allowInvalid === false, "Count work from / through take dates only");
+check(/^=IF\(ISNUMBER\(\$B\$10\),INT\(\$B\$10\),DATE\(2000,1,1\)\)$/.test(gt.formulas.H10) && /\+1,DATE\(2100,1,1\)\)$/.test(gt.formulas.H11) && gt.hidden.indexOf(8) >= 0,
+  "empty dates mean from the start / up to now (hidden helpers in column H)");
+var gr1 = 15, gf = gt.formulas;
+console.log("        row 15 formulas:\n" + ["A", "B", "C", "D", "E", "F"].map(function (c) { return "          " + c + ": " + gf[c + gr1]; }).join("\n"));
+check(/COUNTIFS\('Answer data'!\$C\$2:\$C,\$A15,'Answer data'!\$D\$2:\$D,">="&\$H\$10,'Answer data'!\$D\$2:\$D,"<"&\$H\$11\)/.test(gf.C15), "questions count only answers between the dates");
+check(/SUMIFS\('Answer data'!\$J\$2:\$J/.test(gf.B15) && /UNIQUE\(FILTER\(INT\('Answer data'!\$D\$2:\$D\)/.test(gf.D15), "minutes add up the seconds; days count different dates");
+check(gf.F15.indexOf("N($C$4)*IF(N($B$4)<=0,1,MIN(1,N($B15)/N($B$4)))") > 0 && gf.F15.indexOf("N($C$7)*IF(IF(N($B$7)>1,N($B$7)/100,N($B$7))<=0,1,MIN(1,N($E15)/IF(N($B$7)>1") > 0 && gf.F15.indexOf("/SUM($C$4:$C$7),1)") > 0,
+  "grade = points x each goal's weighted share of its target (capped at full credit) / total weight");
+/* the grade, worked out the same way in JavaScript for a student with 30 minutes, 50 questions, 2 days, 80% */
+function gradeOf(v, goals, pts) {
+  var sw = 0, got = 0;
+  goals.forEach(function (g, i) { var t = i === 3 && g[0] > 1 ? g[0] / 100 : g[0]; sw += g[1]; got += g[1] * (t <= 0 ? 1 : Math.min(1, v[i] / t)); });
+  return sw <= 0 ? "" : Math.round(10 * pts * got / sw) / 10;
+}
+check(gradeOf([30, 50, 2, 0.8], [[60, 1], [50, 1], [3, 0], [70, 0]], 100) === 75 && gradeOf([30, 50, 2, 0.8], [[60, 1], [50, 1], [3, 1], [70, 1]], 100) === 79.2,
+  "a worked example: 30 minutes and 50 questions = 75/100; counting days and % right too = 79.2/100");
+var grules = gt.cf();
+check(grules.length === 3 && grules[0].whenFormulaSatisfied[0].indexOf("F15/$B$9>=") > 0 && grules[0].setRanges[0][0].col === 6, "grades are coloured by the Settings bands, as a share of the points");
+gt.getRange(4, 2, 1, 2).setValues([[45, 2]]); gt.getRange(9, 2).setValues([[20]]); gt.getRange(10, 2).setValues([[new Date(2026, 10, 9)]]);
+ctx.setup();
+gt = tabs.Grades;
+check(gt.getRange(4, 2, 1, 2).getValues()[0].join() === "45,2" && gt.getRange(9, 2).getValues()[0][0] === 20 && gt.getRange(10, 2).getValues()[0][0] instanceof Date,
+  "the teacher's criteria (45 minutes, weight 2, out of 20, from 11/9) are kept when the tab is redrawn");
 by = tabs["By student"];
 by.getRange(1, 2).setValues([["Ben Ortiz"]]);
 tabs.Students.getRange(5, 2).setValues([["Dee Park"]]); ctx.makeJoinCodes(); ctx.setup();

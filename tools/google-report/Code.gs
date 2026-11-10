@@ -1,4 +1,4 @@
-// TKM game - Google reporting (experiment, v0.5)
+// TKM game - Google reporting (experiment, v0.6)
 //
 // This script lives inside a Google Sheet in YOUR school Google account. The test page in
 // Canvas sends each answer here, and this script writes it into the Sheet. The game also
@@ -10,6 +10,8 @@
 // - Analysis: the whole class. A chart of each skill, % right and % wrong on the first try.
 // - By student: pick a student for the same chart, and a grid of every student by skill,
 //   coloured green, yellow and red. The bands are set in Settings (rows 5 and 6).
+// - Grades: your grading criteria (yellow cells) and each student's grade, worked out from
+//   the answers between the dates you set. It updates by itself.
 // - Settings: "Unlocked through chapter" (the game picks up a change the next time it opens),
 //   "Accept answers" (FALSE pauses reporting; the game keeps answers and sends them later),
 //   and the colour bands for By student: "Green from" and "Yellow from" (below that is red).
@@ -24,9 +26,9 @@
 // Every comment in this file starts with // on each line, and every line is short, so a
 // copy and paste can't break it.
 
-var VERSION = "0.5";
-var TAB = { analysis: "Analysis", byStudent: "By student", settings: "Settings", students: "Students",
-            summary: "Summary", data: "Answer data" };
+var VERSION = "0.6";
+var TAB = { analysis: "Analysis", byStudent: "By student", grades: "Grades", settings: "Settings",
+            students: "Students", summary: "Summary", data: "Answer data" };
 var OLD_DATA_TAB = "Answers"; // the name before v0.3; setup renames it
 var DATA_REF = "'" + TAB.data + "'!"; // Sheets renames this in every formula if the tab is renamed
 
@@ -48,6 +50,17 @@ var BAND = { high: "#b7e1cd", mid: "#fce8b2", low: "#f4c7c3" }; // green, yellow
 // The bands live in Settings, column B: a percent such as 80 (80% or 0.8 work too).
 var BAND_ROW = { green: 5, yellow: 6 };
 var BAND_DEFAULT = { green: 80, yellow: 60 };
+var EDIT = "#fff2cc"; // yellow: a cell that is the teacher's to change
+
+// Grading goals, as in the SOL Labyrinth teacher screen: full credit at a target, and a weight
+// (0 = not counted). Grade = points x the weighted share of each target reached (capped at 1).
+var GOALS = [
+  ["Minutes answering questions", 60, 1],
+  ["Questions answered", 50, 1],
+  ["Days played", 3, 0],
+  ["% right on the first try", 70, 0]
+];
+var G = { goalRow: 4, points: 9, from: 10, through: 11, head: 14 }; // rows on the Grades tab
 var ANSWER_HEADERS = ["Received", "Join code", "Student", "Answered at", "Item", "Chapter", "Skill",
                       "Right first try (1 = yes)", "Picked", "Seconds"];
 var CODE_ALPHABET = "23456789ABCDEFGHJKMNPQRSTVWXYZ"; // no 0/O, 1/I/L or U, so codes are easy to type
@@ -117,9 +130,10 @@ function setup() {
     ["C:C", "G:G", "K:K", "O:O"].forEach(function (c) { sum.getRange(c).setNumberFormat("0%"); });
     sum.setFrozenRows(1);
   }
-  var an = analysis_(ss), by = byStudent_(ss);
-  // tab order: Analysis, By student, ... , Answer data last
+  var an = analysis_(ss), by = byStudent_(ss), gr = grades_(ss);
+  // tab order: Analysis, By student, Grades, ... , Answer data last
   ss.setActiveSheet(ans); ss.moveActiveSheet(ss.getNumSheets());
+  ss.setActiveSheet(gr); ss.moveActiveSheet(1);
   ss.setActiveSheet(by); ss.moveActiveSheet(1);
   ss.setActiveSheet(an); ss.moveActiveSheet(1);
   toast_("Set up. Next: type student names in the Students tab (column B), " +
@@ -214,6 +228,95 @@ function byStudent_(ss) {
   return by;
 }
 
+// The Grades tab: the criteria at the top (kept when the tab is redrawn) and a grade for each
+// student from the answers between "Count work from" and "Count work through".
+function grades_(ss) {
+  var old = ss.getSheetByName(TAB.grades), keep = null;
+  if (old && String(old.getRange(G.goalRow - 1, 1).getValues()[0][0]) === "Goal") {
+    keep = old.getRange(G.goalRow, 2, G.through - G.goalRow + 1, 2).getValues();
+  }
+  var gr = freshTab_(ss, TAB.grades);
+  var stu = ss.getSheetByName(TAB.students);
+  var count = stu && stu.getLastRow() >= 2 ? stu.getLastRow() - 1 : 0;
+
+  gr.getRange(1, 1).setValue("Grades").setFontWeight("bold").setFontSize(14);
+  gr.getRange(2, 1).setValue("Change the yellow cells. Every grade below updates by itself.");
+  gr.getRange(G.goalRow - 1, 1, 1, 3).setValues([["Goal", "Full credit at",
+    "Counts (weight; 0 = not counted)"]]).setFontWeight("bold");
+  GOALS.forEach(function (goal, i) {
+    gr.getRange(G.goalRow + i, 1, 1, 3).setValues([goal]);
+  });
+  gr.getRange(G.points, 1, 1, 2).setValues([["Points possible", 100]]);
+  gr.getRange(G.from, 1).setValue("Count work from (a date; empty = from the start)");
+  gr.getRange(G.through, 1).setValue("Count work through (a date; empty = up to now)");
+  if (keep) gr.getRange(G.goalRow, 2, keep.length, 2).setValues(keep);
+  gr.getRange(G.goalRow, 2, GOALS.length, 2).setBackground(EDIT);
+  gr.getRange(G.points, 2, 3, 1).setBackground(EDIT);
+  gr.getRange(G.from, 2, 2, 1).setNumberFormat("m/d/yyyy").setDataValidation(
+    SpreadsheetApp.newDataValidation().requireDate().setAllowInvalid(false)
+      .setHelpText("Type a date like 11/16/2026, or leave it empty.").build());
+
+  // hidden helpers (column H): the first day counted and the day after the last one
+  gr.getRange(G.from, 8).setFormula("=IF(ISNUMBER($B$" + G.from + "),INT($B$" + G.from +
+    "),DATE(2000,1,1))");
+  gr.getRange(G.through, 8).setFormula("=IF(ISNUMBER($B$" + G.through + "),INT($B$" + G.through +
+    ")+1,DATE(2100,1,1))");
+  gr.hideColumns(8);
+
+  var h = G.head;
+  gr.getRange(h - 1, 1).setValue("Each student's grade for the dates above").setFontWeight("bold");
+  gr.getRange(h, 1, 1, 5).setValues([["Student", "Minutes answering questions", "Questions answered",
+    "Days played", "% right on the first try"]]).setFontWeight("bold");
+  gr.getRange(h, 6).setFormula('="Grade (of "&$B$' + G.points + '&")"').setFontWeight("bold");
+
+  var who = DATA_REF + "$C$2:$C", when = DATA_REF + "$D$2:$D";
+  var secs = DATA_REF + "$J$2:$J", right = DATA_REF + "$H$2:$H";
+  var span = "," + when + ',">="&$H$' + G.from + "," + when + ',"<"&$H$' + G.through;
+  var credit = function (goalRow, value) { // one goal's weighted credit, 0 to its weight
+    var t = "$B$" + goalRow, w = "N($C$" + goalRow + ")";
+    if (goalRow === G.goalRow + 3) t = "IF(N(" + t + ")>1,N(" + t + ")/100,N(" + t + "))"; // a percent
+    else t = "N(" + t + ")";
+    return w + "*IF(" + t + "<=0,1,MIN(1,N(" + value + ")/" + t + "))";
+  };
+  var weights = "SUM($C$" + G.goalRow + ":$C$" + (G.goalRow + GOALS.length - 1) + ")";
+  var rows = Math.max(40, count + 20);
+  for (var i = 0; i < rows; i++) {
+    var r = h + 1 + i, a = "$A" + r, blank = "=IF(" + a + '="","",';
+    gr.getRange(r, 1).setFormula("=IF(TRIM(" + TAB.students + "!$B" + (i + 2) + ")=\"\",\"\"," +
+      "TRIM(" + TAB.students + "!$B" + (i + 2) + "))");
+    gr.getRange(r, 2).setFormula(blank + "ROUND(SUMIFS(" + secs + "," + who + "," + a + span +
+      ")/60,1))");
+    gr.getRange(r, 3).setFormula(blank + "COUNTIFS(" + who + "," + a + span + "))");
+    gr.getRange(r, 4).setFormula(blank + "IFERROR(ROWS(UNIQUE(FILTER(INT(" + when + ")," +
+      who + "=" + a + "," + when + ">=$H$" + G.from + "," + when + "<$H$" + G.through + "))),0))");
+    gr.getRange(r, 5).setFormula("=IF(N($C" + r + ')=0,"",AVERAGEIFS(' + right + "," + who + "," +
+      a + span + "))");
+    gr.getRange(r, 6).setFormula(blank + "IF(" + weights + '<=0,"",ROUND($B$' + G.points + "*(" +
+      [credit(G.goalRow, "$B" + r), credit(G.goalRow + 1, "$C" + r),
+       credit(G.goalRow + 2, "$D" + r), credit(G.goalRow + 3, "$E" + r)].join("+") +
+      ")/" + weights + ",1)))");
+  }
+  gr.getRange(h + 1, 5, rows, 1).setNumberFormat("0%");
+  // grade colours: the same bands as By student (Settings rows 5 and 6), as a share of the points
+  var g1 = "F" + (h + 1), share = g1 + "/$B$" + G.points;
+  var hiCf = band_('INDIRECT("' + TAB.settings + "!B" + BAND_ROW.green + '")');
+  var loCf = band_('INDIRECT("' + TAB.settings + "!B" + BAND_ROW.yellow + '")');
+  var col = gr.getRange(h + 1, 6, rows, 1);
+  var rule = function (f, colour) {
+    return SpreadsheetApp.newConditionalFormatRule().whenFormulaSatisfied(f)
+      .setBackground(colour).setRanges([col]).build();
+  };
+  gr.setConditionalFormatRules([
+    rule("=AND(ISNUMBER(" + g1 + ")," + share + ">=" + hiCf + ")", BAND.high),
+    rule("=AND(ISNUMBER(" + g1 + ")," + share + ">=" + loCf + ")", BAND.mid),
+    rule("=ISNUMBER(" + g1 + ")", BAND.low)
+  ]);
+  gr.setColumnWidth(1, 330);
+  for (var c = 2; c <= 6; c++) gr.setColumnWidth(c, 150);
+  gr.setFrozenRows(0);
+  return gr;
+}
+
 // A band from Settings as a fraction: 80, 80% and 0.8 all mean 0.8.
 function band_(ref) { return "IF(N(" + ref + ")>1,N(" + ref + ")/100,N(" + ref + "))"; }
 
@@ -289,7 +392,7 @@ function makeJoinCodes() {
   });
   sh.getRange(2, 1, rows.length, 3).setValues(rows);
   CacheService.getScriptCache().remove("students");
-  try { byStudent_(ss_()); } catch (e) {} // the grid gets a row for each new student
+  try { byStudent_(ss_()); grades_(ss_()); } catch (e) {} // new students get a row
   toast_(made ? "Made " + made + " join code" + (made === 1 ? "" : "s") + "."
               : "Every student already has a code.");
 }
