@@ -1,4 +1,4 @@
-// TKM game - Google reporting (experiment, v0.4)
+// TKM game - Google reporting (experiment, v0.5)
 //
 // This script lives inside a Google Sheet in YOUR school Google account. The test page in
 // Canvas sends each answer here, and this script writes it into the Sheet. The game also
@@ -9,9 +9,10 @@
 // The tabs:
 // - Analysis: the whole class. A chart of each skill, % right and % wrong on the first try.
 // - By student: pick a student for the same chart, and a grid of every student by skill,
-//   coloured green (80% and up), yellow (60-79%) and orange (below 60%).
-// - Settings: "Unlocked through chapter" (the game picks up a change the next time it opens)
-//   and "Accept answers" (FALSE pauses reporting; the game keeps answers and sends them later).
+//   coloured green, yellow and red. The bands are set in Settings (rows 5 and 6).
+// - Settings: "Unlocked through chapter" (the game picks up a change the next time it opens),
+//   "Accept answers" (FALSE pauses reporting; the game keeps answers and sends them later),
+//   and the colour bands for By student: "Green from" and "Yellow from" (below that is red).
 // - Students: join code, name, Path. Only codes listed here are accepted.
 // - Summary: live tables by student, chapter and skill, and the most-missed items.
 // - Answer data: one row per answered question. Don't edit it while students are playing.
@@ -23,7 +24,7 @@
 // Every comment in this file starts with // on each line, and every line is short, so a
 // copy and paste can't break it.
 
-var VERSION = "0.4";
+var VERSION = "0.5";
 var TAB = { analysis: "Analysis", byStudent: "By student", settings: "Settings", students: "Students",
             summary: "Summary", data: "Answer data" };
 var OLD_DATA_TAB = "Answers"; // the name before v0.3; setup renames it
@@ -43,7 +44,10 @@ var SKILLS = [
 ];
 var COLOR_RIGHT = "#1b9e77"; // green and orange: easy to tell apart, also for colorblind readers
 var COLOR_WRONG = "#d95f02";
-var BAND = { high: "#b7e1cd", mid: "#fce8b2", low: "#f9cb9c" }; // 80%+, 60-79%, below 60%
+var BAND = { high: "#b7e1cd", mid: "#fce8b2", low: "#f4c7c3" }; // green, yellow, red
+// The bands live in Settings, column B: a percent such as 80 (80% or 0.8 work too).
+var BAND_ROW = { green: 5, yellow: 6 };
+var BAND_DEFAULT = { green: 80, yellow: 60 };
 var ANSWER_HEADERS = ["Received", "Join code", "Student", "Answered at", "Item", "Chapter", "Skill",
                       "Right first try (1 = yes)", "Picked", "Seconds"];
 var CODE_ALPHABET = "23456789ABCDEFGHJKMNPQRSTVWXYZ"; // no 0/O, 1/I/L or U, so codes are easy to type
@@ -69,6 +73,15 @@ function setup() {
     ]);
   }
   st.getRange(4, 1, 1, 2).setValues([["Script version", VERSION]]);
+  // the colour bands: added if missing, never overwritten (they are the teacher's to change)
+  [["green", "Green from (percent right, for example 80)"],
+   ["yellow", "Yellow from (percent right; below this is red)"]].forEach(function (b) {
+    var row = BAND_ROW[b[0]];
+    st.getRange(row, 1).setValue(b[1]);
+    if (String(st.getRange(row, 2).getValues()[0][0]).trim() === "") {
+      st.getRange(row, 2).setValue(BAND_DEFAULT[b[0]]);
+    }
+  });
   var stu = tab_(ss, TAB.students);
   if (stu.getLastRow() === 0) {
     stu.getRange(1, 1, 1, 4).setValues([["Join code", "Student name", "Path (1 or 2)", "Notes"]]);
@@ -153,8 +166,13 @@ function byStudent_(ss) {
 
   // 2. every student: one row each, a column per skill
   var g = top + 3 + SKILLS.length;
-  by.getRange(g, 1).setValue("Every student at a glance: % right on the first try " +
-    "(green 80% and up, yellow 60-79%, orange below 60%)").setFontWeight("bold");
+  // the heading names the bands from Settings, so it changes when they do
+  var hi = band_(TAB.settings + "!$B$" + BAND_ROW.green);
+  var lo = band_(TAB.settings + "!$B$" + BAND_ROW.yellow);
+  by.getRange(g, 1).setFormula('="Every student at a glance: % right on the first try. Green "&' +
+    'TEXT(' + hi + ',"0%")&" and up, yellow "&TEXT(' + lo + ',"0%")&" up to "&TEXT(' + hi +
+    ',"0%")&", red below "&TEXT(' + lo + ',"0%")&". Change the bands in Settings, rows 5 and 6."')
+    .setFontWeight("bold");
   var head = ["Student", "Questions answered", "All skills"].concat(SKILLS.map(function (sk) {
     return sk[1] + " (" + sk[0] + ")";
   }));
@@ -177,18 +195,27 @@ function byStudent_(ss) {
   }
   var pct = by.getRange(g + 2, 3, rows, 1 + SKILLS.length);
   pct.setNumberFormat("0%");
+  // Colour rules read the bands from Settings. A colour rule can only reach another tab through
+  // INDIRECT. The first rule that matches a cell wins, so green is checked first.
+  var cell = "C" + (g + 2); // the top-left % cell; the rules move with each cell
+  var hiCf = band_('INDIRECT("' + TAB.settings + "!B" + BAND_ROW.green + '")');
+  var loCf = band_('INDIRECT("' + TAB.settings + "!B" + BAND_ROW.yellow + '")');
+  var rule = function (f, colour) {
+    return SpreadsheetApp.newConditionalFormatRule().whenFormulaSatisfied(f)
+      .setBackground(colour).setRanges([pct]).build();
+  };
   by.setConditionalFormatRules([
-    SpreadsheetApp.newConditionalFormatRule().whenNumberGreaterThanOrEqualTo(0.8)
-      .setBackground(BAND.high).setRanges([pct]).build(),
-    SpreadsheetApp.newConditionalFormatRule().whenNumberBetween(0.6, 0.8)
-      .setBackground(BAND.mid).setRanges([pct]).build(),
-    SpreadsheetApp.newConditionalFormatRule().whenNumberLessThan(0.6)
-      .setBackground(BAND.low).setRanges([pct]).build()
+    rule("=AND(ISNUMBER(" + cell + ")," + cell + ">=" + hiCf + ")", BAND.high),
+    rule("=AND(ISNUMBER(" + cell + ")," + cell + ">=" + loCf + ")", BAND.mid),
+    rule("=ISNUMBER(" + cell + ")", BAND.low)
   ]);
   by.setColumnWidth(1, 250); by.setColumnWidth(2, 130);
   for (var c = 3; c <= head.length; c++) by.setColumnWidth(c, 150);
   return by;
 }
+
+// A band from Settings as a fraction: 80, 80% and 0.8 all mean 0.8.
+function band_(ref) { return "IF(N(" + ref + ")>1,N(" + ref + ")/100,N(" + ref + "))"; }
 
 // -- chart helpers shared by Analysis and By student --
 function chartRows_() { return Math.ceil((110 + 46 * SKILLS.length) / 21); } // rows are 21 px

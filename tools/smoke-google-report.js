@@ -109,7 +109,7 @@ var ctx = {
     },
     newConditionalFormatRule: function () {
       var v = {}, b = {};
-      ["whenNumberGreaterThanOrEqualTo", "whenNumberBetween", "whenNumberLessThan", "setBackground", "setRanges"].forEach(function (m) {
+      ["whenFormulaSatisfied", "setBackground", "setRanges"].forEach(function (m) {
         b[m] = function () { v[m] = Array.prototype.slice.call(arguments); return b; };
       });
       b.build = function () { return v; };
@@ -178,10 +178,27 @@ check(gRows >= 40, "the grid has a row for every student and room for more (" + 
 check(by.formulas["A" + g1] === '=IF(TRIM(Students!$B2)="","",TRIM(Students!$B2))', "grid row 1 is the first name in Students: " + by.formulas["A" + g1]);
 check(by.formulas["D" + g1] === '=IF($A' + g1 + '="","",IF(COUNTIFS(\'Answer data\'!$C$2:$C,$A' + g1 + ",'Answer data'!$G$2:$G,\"9.DSR.C.1\")=0,\"\",AVERAGEIFS('Answer data'!$H$2:$H,'Answer data'!$C$2:$C,$A" + g1 + ",'Answer data'!$G$2:$G,\"9.DSR.C.1\")))",
   "each grid cell is that student's % right on that skill: " + by.formulas["D" + g1]);
-var rules = by.cf();
-check(rules.length === 3 && rules[0].whenNumberGreaterThanOrEqualTo[0] === 0.8 && JSON.stringify(rules[1].whenNumberBetween) === "[0.6,0.8]" && rules[2].whenNumberLessThan[0] === 0.6 &&
+var rules = by.cf(), c1 = "C" + g1;
+var HI = 'IF(N(INDIRECT("Settings!B5"))>1,N(INDIRECT("Settings!B5"))/100,N(INDIRECT("Settings!B5")))';
+var LO = 'IF(N(INDIRECT("Settings!B6"))>1,N(INDIRECT("Settings!B6"))/100,N(INDIRECT("Settings!B6")))';
+check(rules.length === 3 &&
+  rules[0].whenFormulaSatisfied[0] === "=AND(ISNUMBER(" + c1 + ")," + c1 + ">=" + HI + ")" &&
+  rules[1].whenFormulaSatisfied[0] === "=AND(ISNUMBER(" + c1 + ")," + c1 + ">=" + LO + ")" &&
+  rules[2].whenFormulaSatisfied[0] === "=ISNUMBER(" + c1 + ")" &&
   rules[0].setRanges[0][0].row === g1 && rules[0].setRanges[0][0].col === 3 && rules[0].setRanges[0][0].cols === 1 + nSkills,
-  "grid colours: green 80% and up, yellow 60-79%, orange below 60%, on the % columns");
+  "grid colours read the bands from Settings B5 (green) and B6 (yellow); below yellow is red");
+check(JSON.stringify(rules.map(function (r) { return r.setBackground[0]; })) === JSON.stringify(["#b7e1cd", "#fce8b2", "#f4c7c3"]), "the colours are green, yellow, red");
+var setRow = function (r) { return tabs.Settings.getRange(r, 1, 1, 2).getValues()[0]; };
+check(setRow(5)[1] === 80 && setRow(6)[1] === 60 && /^Green from/.test(setRow(5)[0]) && /^Yellow from/.test(setRow(6)[0]), "Settings starts with Green from 80 and Yellow from 60");
+var hd = by.formulas["A" + (gh - 1)];
+check(/Settings!\$B\$5/.test(hd) && /Settings!\$B\$6/.test(hd) && /red below/.test(hd), "the grid heading names the bands from Settings");
+/* the same band rule, worked out the way Sheets does: 80, 80% (0.8) and 0.8 all mean 0.8 */
+function bandOf(x) { var n = typeof x === "number" ? x : 0; return n > 1 ? n / 100 : n; }
+check(bandOf(80) === 0.8 && bandOf(0.8) === 0.8 && bandOf(75) === 0.75 && bandOf("") === 0, "a band typed as 80, 80% or 0.8 means 80%");
+tabs.Settings.getRange(5, 2).setValues([[90]]); tabs.Settings.getRange(6, 2).setValues([[70]]);
+ctx.setup();
+check(setRow(5)[1] === 90 && setRow(6)[1] === 70, "running setup again keeps the teacher's bands (90 and 70)");
+by = tabs["By student"];
 by.getRange(1, 2).setValues([["Ben Ortiz"]]);
 tabs.Students.getRange(5, 2).setValues([["Dee Park"]]); ctx.makeJoinCodes(); ctx.setup();
 check(tabs["By student"].getRange(1, 2).getValues()[0][0] === "Ben Ortiz", "the picked student stays picked when the tab is redrawn");

@@ -1,4 +1,4 @@
-TKM practice - Google reporting TEST - version 0.4 - FIRST-TIME SETUP
+TKM practice - Google reporting TEST - version 0.5 - FIRST-TIME SETUP
 ================================================================================
 
 This zip sets up a small TEST of Option B: the game sends each answer to a Google Sheet in YOUR school
@@ -154,8 +154,11 @@ SECTION 6  TRY IT
      try, orange the share answered wrong, with the percentages on the bars. Under the chart are the numbers
      it is drawn from. It updates by itself. A skill with no answers yet has an empty bar.
    - By student tab: pick a student in the yellow box (B1) and the chart under it shows that student's
-     skills the same way. Below that, a grid has every student (rows) by skill (columns): green 80% and up,
-     yellow 60-79%, orange below 60%, and empty where the student hasn't answered that skill yet.
+     skills the same way. Below that, a grid has every student (rows) by skill (columns), coloured green,
+     yellow or red, and empty where the student hasn't answered that skill yet.
+   - The colour bands: in the Settings tab, "Green from" (row 5, starts at 80) and "Yellow from" (row 6,
+     starts at 60). Below "Yellow from" is red. Type a new percent (for example 85) and the grid's colours
+     and heading change at once. Running Set up again keeps your numbers.
    - Summary tab: % right by student, by chapter and by skill, and the most-missed items (once an item has 3
      or more answers). It updates by itself.
    - Answer data tab (the last tab): one row for each answer: the student's name, item, chapter, skill,
@@ -197,7 +200,7 @@ If I send a new Code.gs:
 1. Paste it into Apps Script as in SECTION 2 (Ctrl+A, Ctrl+V, Ctrl+S).
 2. Reload the Sheet and click TKM game > 1. Set up this Sheet. Your settings, students and answers stay.
    (Version 0.3 added the Analysis tab and renamed the old Answers tab to Answer data. Version 0.4 adds
-   the By student tab.)
+   the By student tab. Version 0.5 adds the colour bands in Settings, rows 5 and 6.)
 3. In Apps Script: Deploy > Manage deployments > pencil icon > Version: New version > Deploy. This step
    matters: until you do it, the web link keeps running the old script. It keeps the same /exec link.
    (A NEW deployment makes a new link.)
