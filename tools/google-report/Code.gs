@@ -1,4 +1,4 @@
-// TKM game - Google reporting (experiment, v0.2)
+// TKM game - Google reporting (experiment, v0.3)
 //
 // This script lives inside a Google Sheet in YOUR school Google account. The test page in
 // Canvas sends each answer here, and this script writes it into the Sheet. The game also
@@ -7,17 +7,40 @@
 // Setup steps: SECTION 2 of "READ ME FIRST - Canvas setup.txt".
 //
 // The tabs:
+// - Analysis: a chart of each skill, % right and % wrong on the first try, and the numbers.
 // - Settings: "Unlocked through chapter" (the game picks up a change the next time it opens)
 //   and "Accept answers" (FALSE pauses reporting; the game keeps answers and sends them later).
 // - Students: join code, name, Path. Only codes listed here are accepted.
-// - Answers: one row per answered question. Don't edit it while students are playing.
 // - Summary: live tables by student, chapter and skill, and the most-missed items.
+// - Answer data: one row per answered question. Don't edit it while students are playing.
+//
+// Updating from an earlier version: paste this file over the old one, reload the Sheet, click
+// TKM game > 1. Set up this Sheet, then Deploy > Manage deployments > pencil > Version:
+// New version > Deploy (the /exec link stays the same).
 //
 // Every comment in this file starts with // on each line, and every line is short, so a
 // copy and paste can't break it.
 
-var VERSION = "0.2";
-var TAB = { settings: "Settings", students: "Students", answers: "Answers", summary: "Summary" };
+var VERSION = "0.3";
+var TAB = { analysis: "Analysis", settings: "Settings", students: "Students", summary: "Summary",
+            data: "Answer data" };
+var OLD_DATA_TAB = "Answers"; // the name before v0.3; setup renames it
+var DATA_REF = "'" + TAB.data + "'!"; // Sheets renames this in every formula if the tab is renamed
+
+// The skills the game asks about: code, a short name for the chart, and the standard.
+var SKILLS = [
+  ["9.DSR.C.1", "Evidence", "Draw several pieces of evidence from a text to support claims, " +
+    "conclusions, and inferences"],
+  ["9.RL.1.A.1", "Theme", "Explain stated or implied themes"],
+  ["9.RL.1.A.2", "Theme development", "Analyze the development of themes over a text and the " +
+    "relationship of characters, setting, and plot to them"],
+  ["9.RL.2.B.2", "Word choice and tone", "Explain how word choice, syntax, tone, and voice " +
+    "shape the meaning of a text"],
+  ["9.RL.3.B.1", "Setting, plot, character", "Explain the relationships among literary " +
+    "elements, including how the setting shapes the plot and characters"]
+];
+var COLOR_RIGHT = "#1b9e77"; // green and orange: easy to tell apart, also for colorblind readers
+var COLOR_WRONG = "#d95f02";
 var ANSWER_HEADERS = ["Received", "Join code", "Student", "Answered at", "Item", "Chapter", "Skill",
                       "Right first try (1 = yes)", "Picked", "Seconds"];
 var CODE_ALPHABET = "23456789ABCDEFGHJKMNPQRSTVWXYZ"; // no 0/O, 1/I/L or U, so codes are easy to type
@@ -36,23 +59,27 @@ function setup() {
   PropertiesService.getScriptProperties().setProperty("sheetId", ss.getId());
   var st = tab_(ss, TAB.settings);
   if (st.getLastRow() === 0) {
-    st.getRange(1, 1, 4, 2).setValues([
+    st.getRange(1, 1, 3, 2).setValues([
       ["Unlocked through chapter", 3],
       ["Accept answers (TRUE or FALSE)", true],
-      ["Class name", "English 9"],
-      ["Script version", VERSION]
+      ["Class name", "English 9"]
     ]);
   }
+  st.getRange(4, 1, 1, 2).setValues([["Script version", VERSION]]);
   var stu = tab_(ss, TAB.students);
   if (stu.getLastRow() === 0) {
     stu.getRange(1, 1, 1, 4).setValues([["Join code", "Student name", "Path (1 or 2)", "Notes"]]);
     stu.setFrozenRows(1);
   }
-  var ans = tab_(ss, TAB.answers);
+  // the answers: kept (and renamed) from an earlier version, or a new tab
+  var ans = ss.getSheetByName(TAB.data);
+  if (!ans && ss.getSheetByName(OLD_DATA_TAB)) ans = ss.getSheetByName(OLD_DATA_TAB).setName(TAB.data);
+  if (!ans) ans = ss.insertSheet(TAB.data);
   if (ans.getLastRow() === 0) {
     ans.getRange(1, 1, 1, ANSWER_HEADERS.length).setValues([ANSWER_HEADERS]);
     ans.setFrozenRows(1);
   }
+  PropertiesService.getScriptProperties().setProperty("dataTabId", String(ans.getSheetId()));
   var sum = tab_(ss, TAB.summary);
   if (sum.getLastRow() === 0) {
     // Kept to short lines on purpose: a copy and paste can break a very long line in two.
@@ -62,20 +89,70 @@ function setup() {
     var table = function (col, name) {
       var sel = "select " + col + ", count(E), avg(H) where " + col + " is not null" +
         " group by " + col + " order by " + col + " label " + col + " '" + name + "'" + pct;
-      return '=IFERROR(QUERY(Answers!A2:J,"' + sel + '",0),"No answers yet")';
+      return '=IFERROR(QUERY(' + DATA_REF + 'A2:J,"' + sel + '",0),"No answers yet")';
     };
     sum.getRange("A2").setFormula(table("C", "Student"));
     sum.getRange("E2").setFormula(table("F", "Chapter"));
     sum.getRange("I2").setFormula(table("G", "Skill"));
     var items = "select E, count(E), avg(H) where E is not null group by E" +
       " label E 'Item', count(E) 'Answers', avg(H) '% right first try'";
-    sum.getRange("M2").setFormula('=IFERROR(QUERY(QUERY(Answers!A2:J,"' + items + '",0),' +
+    sum.getRange("M2").setFormula('=IFERROR(QUERY(QUERY(' + DATA_REF + 'A2:J,"' + items + '",0),' +
       '"select * where Col2 >= 3 order by Col3 asc limit 15",1),"Not enough answers yet")');
     ["C:C", "G:G", "K:K", "O:O"].forEach(function (c) { sum.getRange(c).setNumberFormat("0%"); });
     sum.setFrozenRows(1);
   }
+  var an = analysis_(ss);
+  // tab order: Analysis first, Answer data last
+  ss.setActiveSheet(ans); ss.moveActiveSheet(ss.getNumSheets());
+  ss.setActiveSheet(an); ss.moveActiveSheet(1);
   toast_("Set up. Next: type student names in the Students tab (column B), " +
     "then TKM game > 2. Make join codes.");
+}
+
+// The Analysis tab: a 100% stacked bar for each skill (right / wrong on the first try) and,
+// under it, the numbers it is drawn from. Setup draws it again each time, so it stays current.
+function analysis_(ss) {
+  var an = ss.getSheetByName(TAB.analysis) || ss.insertSheet(TAB.analysis);
+  an.getCharts().forEach(function (c) { an.removeChart(c); });
+  an.clear();
+  var n = SKILLS.length, height = 110 + 46 * n;
+  var top = Math.ceil(height / 21) + 2; // the table starts under the chart (rows are 21 px)
+  an.getRange(top, 1).setValue("The numbers behind the chart (they update by themselves)")
+    .setFontWeight("bold");
+  an.getRange(top + 1, 1, 1, 6).setValues([["Skill", "Right first try", "Wrong first try",
+    "Questions answered", "Code", "What the standard says"]]).setFontWeight("bold");
+  var col = DATA_REF + "$G$2:$G", right = DATA_REF + "$H$2:$H";
+  SKILLS.forEach(function (sk, i) {
+    var r = top + 2 + i;
+    an.getRange(r, 1).setValue(sk[1] + " (" + sk[0] + ")");
+    an.getRange(r, 5).setValue(sk[0]);
+    an.getRange(r, 6).setValue(sk[2]);
+    an.getRange(r, 4).setFormula("=COUNTIF(" + col + ",$E" + r + ")");
+    an.getRange(r, 2).setFormula('=IF($D' + r + '=0,"",AVERAGEIF(' + col + ",$E" + r + "," +
+      right + "))");
+    an.getRange(r, 3).setFormula('=IF($D' + r + '=0,"",1-$B' + r + ")");
+  });
+  an.getRange(top + 2, 2, n, 2).setNumberFormat("0%");
+  an.setColumnWidth(1, 250); an.setColumnWidth(6, 520);
+  [2, 3, 4, 5].forEach(function (c) { an.setColumnWidth(c, 110); });
+  var chart = an.newChart().asBarChart()
+    .addRange(an.getRange(top + 1, 1, n + 1, 3))
+    .setNumHeaders(1)
+    .setStacked()
+    .setRange(0, 1)
+    .setTitle("Skills: % right and wrong on the first try")
+    .setLegendPosition(Charts.Position.TOP)
+    .setOption("hAxis.format", "0%")
+    .setOption("series", {
+      0: { color: COLOR_RIGHT, dataLabel: "value" },
+      1: { color: COLOR_WRONG, dataLabel: "value" }
+    })
+    .setOption("width", 800)
+    .setOption("height", height)
+    .setPosition(1, 1, 0, 0)
+    .build();
+  an.insertChart(chart);
+  return an;
 }
 
 function makeJoinCodes() {
@@ -144,7 +221,7 @@ function receive_(body) {
       return [now, code, stu.name, when_(a.at, now), text_(a.item, 40), num_(a.chapter), text_(a.skill, 20),
               a.right ? 1 : 0, text_(a.pick, 10), num_(a.secs)];
     });
-    var sh = ss_().getSheetByName(TAB.answers);
+    var sh = dataTab_();
     sh.getRange(sh.getLastRow() + 1, 1, rows.length, ANSWER_HEADERS.length).setValues(rows);
     cache.put("b:" + batch, "1", 21600);
     return { ok: true, saved: rows.length };
@@ -159,6 +236,13 @@ function ss_() {
   return id ? SpreadsheetApp.openById(id) : SpreadsheetApp.getActiveSpreadsheet();
 }
 function tab_(ss, name) { return ss.getSheetByName(name) || ss.insertSheet(name); }
+// the answers tab, found by its id, so it still works if someone renames it
+function dataTab_() {
+  var ss = ss_(), id = PropertiesService.getScriptProperties().getProperty("dataTabId");
+  var tabs = ss.getSheets();
+  for (var i = 0; id && i < tabs.length; i++) if (String(tabs[i].getSheetId()) === id) return tabs[i];
+  return ss.getSheetByName(TAB.data) || ss.getSheetByName(OLD_DATA_TAB);
+}
 function readSettings_() {
   var v = ss_().getSheetByName(TAB.settings).getRange(1, 2, 2, 1).getValues();
   var unlocked = Math.max(0, Math.min(31, Math.floor(Number(v[0][0]) || 0)));

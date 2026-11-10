@@ -2,7 +2,7 @@
    Runs tools/google-report/Code.gs in Node with a small stand-in for Google's Sheets, cache, lock and web-app
    services, serves it the way Apps Script does (a 302 to another address that answers with CORS), and drives
    tools/google-report/test-game.html inside a "course page" frame on a different address, as in Canvas.
-   Checks: Sheet setup and join codes; connect and join (wrong code, right code); answers reach the Answers tab
+   Checks: Sheet setup and join codes; connect and join (wrong code, right code); answers reach the Answer data tab
    with the student's name; an answer made offline waits and is sent later; a batch whose reply was lost is
    written once; a teacher's unlock change shows the next passage; pausing keeps answers until reporting is
    back on; text from a device is never stored as a formula; state survives a reload. Then builds the Canvas zip
@@ -19,39 +19,72 @@ function check(ok, what) { console.log((ok ? "  ok   " : "  FAIL ") + what); if 
 
 /* ── a stand-in for the Apps Script services Code.gs uses ── */
 function colNum(s) { var n = 0; for (var i = 0; i < s.length; i++) n = n * 26 + s.charCodeAt(i) - 64; return n; }
+var nextSheetId = 100;
 function makeSheet(name) {
-  var data = [], formulas = {};
+  var data = [], formulas = {}, charts = [];
+  var range = function (r, c, nr, nc) {
+    nr = nr || 1; nc = nc || 1;
+    var rg = {
+      row: r, col: c, rows: nr, cols: nc,
+      setValues: function (v) {
+        for (var i = 0; i < nr; i++) { while (data.length < r + i) data.push([]); for (var j = 0; j < nc; j++) data[r - 1 + i][c - 1 + j] = v[i][j]; }
+        return rg;
+      },
+      setValue: function (v) { return rg.setValues([[v]]); },
+      getValues: function () {
+        var out = [];
+        for (var i = 0; i < nr; i++) { var row = []; for (var j = 0; j < nc; j++) { var x = (data[r - 1 + i] || [])[c - 1 + j]; row.push(x == null ? "" : x); } out.push(row); }
+        return out;
+      },
+      setFormula: function (f) { formulas[colName(c) + r] = f; return rg; },
+      setNumberFormat: function () { return rg; },
+      setFontWeight: function () { return rg; }
+    };
+    return rg;
+  };
   var sh = {
-    name: name, data: data, formulas: formulas,
+    name: name, data: data, formulas: formulas, charts: charts, id: nextSheetId++,
+    getName: function () { return sh.name; },
+    getSheetId: function () { return sh.id; },
+    setName: function (n) { delete tabs[sh.name]; sh.name = n; tabs[n] = sh; return sh; },
     getLastRow: function () { var n = data.length; while (n && data[n - 1].every(function (v) { return v === "" || v == null; })) n--; return n; },
     setFrozenRows: function () {},
+    setColumnWidth: function () {},
+    clear: function () { data.length = 0; Object.keys(formulas).forEach(function (k) { delete formulas[k]; }); return sh; },
+    getCharts: function () { return charts.slice(); },
+    removeChart: function (ch) { charts.splice(charts.indexOf(ch), 1); },
+    insertChart: function (ch) { charts.push(ch); },
+    newChart: function () {
+      var spec = { calls: {}, options: {}, ranges: [] }, b = {};
+      ["asBarChart", "setNumHeaders", "setStacked", "setRange", "setTitle", "setLegendPosition", "setPosition"].forEach(function (m) {
+        b[m] = function () { spec.calls[m] = Array.prototype.slice.call(arguments); return b; };
+      });
+      b.addRange = function (rg) { spec.ranges.push(rg); return b; };
+      b.setOption = function (k, v) { spec.options[k] = v; return b; };
+      b.build = function () { return spec; };
+      return b;
+    },
     getRange: function (r, c, nr, nc) {
       if (typeof r === "string") {
         var m = /^([A-Z]+)(\d*)(?::([A-Z]+))?$/.exec(r);
-        r = m[2] ? +m[2] : 1; c = colNum(m[1]); nr = 1; nc = 1;
+        return range(m[2] ? +m[2] : 1, colNum(m[1]), 1, 1);
       }
-      nr = nr || 1; nc = nc || 1;
-      return {
-        setValues: function (v) {
-          for (var i = 0; i < nr; i++) { while (data.length < r + i) data.push([]); for (var j = 0; j < nc; j++) data[r - 1 + i][c - 1 + j] = v[i][j]; }
-        },
-        getValues: function () {
-          var out = [];
-          for (var i = 0; i < nr; i++) { var row = []; for (var j = 0; j < nc; j++) { var x = (data[r - 1 + i] || [])[c - 1 + j]; row.push(x == null ? "" : x); } out.push(row); }
-          return out;
-        },
-        setFormula: function (f) { formulas[String.fromCharCode(64 + c) + r] = f; },
-        setNumberFormat: function () {}
-      };
+      return range(r, c, nr, nc);
     }
   };
   return sh;
 }
-var tabs = {}, props = {}, cache = {}, toasts = [];
+function colName(c) { var s = ""; while (c > 0) { var m = (c - 1) % 26; s = String.fromCharCode(65 + m) + s; c = Math.floor((c - 1) / 26); } return s; }
+var tabs = {}, order = [], props = {}, cache = {}, toasts = [], active = null;
+function tabNames() { return order.map(function (t) { return t.name; }); }
 var ss = {
   getId: function () { return "sheet-1"; },
   getSheetByName: function (n) { return tabs[n] || null; },
-  insertSheet: function (n) { return (tabs[n] = makeSheet(n)); },
+  getSheets: function () { return order.slice(); },
+  getNumSheets: function () { return order.length; },
+  insertSheet: function (n) { var t = makeSheet(n); tabs[n] = t; order.push(t); return t; },
+  setActiveSheet: function (t) { active = t; return t; },
+  moveActiveSheet: function (pos) { order.splice(order.indexOf(active), 1); order.splice(pos - 1, 0, active); },
   toast: function (m) { toasts.push(m); }
 };
 var ctx = {
@@ -60,6 +93,7 @@ var ctx = {
     getActiveSpreadsheet: function () { return ss; }, openById: function () { return ss; },
     getUi: function () { var m = { addItem: function () { return m; }, addToUi: function () {} }; return { createMenu: function () { return m; } }; }
   },
+  Charts: { Position: { TOP: "top" } },
   PropertiesService: { getScriptProperties: function () { return { getProperty: function (k) { return props[k] || null; }, setProperty: function (k, v) { props[k] = v; } }; } },
   CacheService: { getScriptCache: function () { return { get: function (k) { return cache[k] || null; }, put: function (k, v) { cache[k] = v; }, remove: function (k) { delete cache[k]; } }; } },
   LockService: { getScriptLock: function () { return { waitLock: function () {}, releaseLock: function () {} }; } },
@@ -69,9 +103,29 @@ vm.createContext(ctx);
 vm.runInContext(fs.readFileSync(path.join(dir, "Code.gs"), "utf8"), ctx, { filename: "Code.gs" });
 
 /* ── the Sheet, set up the way the READ ME says ── */
+/* a Sheet set up with v0.2 had an "Answers" tab; setup renames it and keeps its rows */
+ss.insertSheet("Answers").getRange(1, 1, 2, 3).setValues([["Received", "Join code", "Student"], ["old", "ABC-DEF", "Old Row"]]);
 ctx.setup();
-check(tabs.Settings && tabs.Students && tabs.Answers && tabs.Summary, "setup makes the four tabs");
-check(Object.keys(tabs.Summary.formulas).length === 4, "Summary gets its four live tables");
+var DATA = "Answer data";
+check(!tabs.Answers && tabs[DATA] && tabs[DATA].getRange(2, 3).getValues()[0][0] === "Old Row", "an old Answers tab is renamed Answer data, and its rows are kept");
+tabs[DATA].getRange(2, 1, 1, 3).setValues([["", "", ""]]);
+ctx.setup();
+check(JSON.stringify(tabNames()) === JSON.stringify(["Analysis", "Settings", "Students", "Summary", DATA]), "tabs in order: " + tabNames().join(", "));
+check(Object.keys(tabs.Summary.formulas).length === 4 && Object.keys(tabs.Summary.formulas).every(function (k) { return tabs.Summary.formulas[k].indexOf("'Answer data'!A2:J") > 0; }), "Summary's four live tables read 'Answer data'");
+var an = tabs.Analysis, chart = an.charts[0];
+var nSkills = vm.runInContext("SKILLS.length", ctx);
+check(an.charts.length === 1, "Analysis has one chart (setup run twice doesn't add a second)");
+check(chart && chart.calls.asBarChart && chart.calls.setStacked && JSON.stringify(chart.calls.setRange) === "[0,1]", "the chart is a stacked bar from 0 to 100%");
+var cr = chart && chart.ranges[0];
+check(cr && cr.cols === 3 && cr.rows === nSkills + 1 && chart.calls.setNumHeaders[0] === 1, "the chart reads the skill names and the right/wrong columns, one bar per skill (" + nSkills + ")");
+check(chart && chart.options.series[0].color !== chart.options.series[1].color && chart.options.series[0].dataLabel === "value", "right and wrong have their own colours and show their percentages");
+var hdr = an.getRange(cr.row, 1, 1, 6).getValues()[0];
+check(hdr[1] === "Right first try" && hdr[2] === "Wrong first try", "the table under the chart: " + hdr.join(" | "));
+var r0 = cr.row + 1, f = an.formulas;
+check(/^=COUNTIF\('Answer data'!\$G\$2:\$G,\$E\d+\)$/.test(f["D" + r0]) && /AVERAGEIF\('Answer data'!\$G\$2:\$G,\$E\d+,'Answer data'!\$H\$2:\$H\)/.test(f["B" + r0]) && f["C" + r0] === '=IF($D' + r0 + '=0,"",1-$B' + r0 + ')',
+  "each skill row counts its answers and works out % right and % wrong from Answer data");
+check(an.getRange(r0, 1).getValues()[0][0] === "Evidence (9.DSR.C.1)", "skills are listed by name and code: " + an.getRange(r0, 1).getValues()[0][0]);
+check(cr.row * 21 > 110 + 46 * nSkills, "the table starts below the chart");
 tabs.Students.getRange(2, 2, 3, 1).setValues([["Ana Rivera"], ["Ben Ortiz"], ["Lee, Cy"]]);
 ctx.makeJoinCodes();
 var codes = tabs.Students.getRange(2, 1, 3, 1).getValues().map(function (r) { return r[0]; });
@@ -81,7 +135,7 @@ check(/already has a code/.test(toasts[toasts.length - 1]), "making codes again 
 var ANA = codes[0];
 var cy = JSON.parse(ctx.doGet({ parameter: { op: "settings", code: codes[2] } }).text);
 check(cy.known && cy.firstName === "Cy", "a name pasted from Canvas as \"Lee, Cy\" greets the student as Cy");
-function answers() { return tabs.Answers.getLastRow() - 1; }
+function answers() { return tabs[DATA].getLastRow() - 1; }
 function setSetting(row, v) { tabs.Settings.getRange(row, 2).setValues([[v]]); }
 
 /* ── serve it like Apps Script: /exec answers with a 302 to another address, which answers with CORS ── */
@@ -149,8 +203,8 @@ function servers() {
     /* answers reach the Sheet */
     await pick("P1-Q1", 2); await pick("P1-Q2", 1);
     await waitFor(async function () { return /All answers sent/.test(await bar()); }, "first answers sent");
-    var rows = tabs.Answers.getRange(2, 1, answers(), 10).getValues();
-    check(answers() === 2, "two answers, two rows in Answers");
+    var rows = tabs[DATA].getRange(2, 1, answers(), 10).getValues();
+    check(answers() === 2, "two answers, two rows in Answer data");
     check(rows[0][2] === "Ana Rivera" && rows[0][4] === "P1-Q1" && rows[0][5] === 1 && rows[0][6] === "9.DSR.C.1" && rows[0][7] === 1, "row 1: Ana, P1-Q1, chapter 1, skill 9.DSR.C.1, right first try");
     check(rows[1][7] === 0 && rows[1][8] === "B", "row 2: wrong first try, picked B");
 
@@ -203,7 +257,7 @@ function servers() {
 
     /* text from a device is never a formula */
     var r = JSON.parse(ctx.doPost({ postData: { contents: JSON.stringify({ code: ANA, batch: "x1", answers: [{ item: "=HYPERLINK(\"http://x\")", chapter: 1, skill: "+1", right: true, pick: "@A" }] }) } }).text);
-    var last = tabs.Answers.getRange(answers() + 1, 1, 1, 10).getValues()[0];
+    var last = tabs[DATA].getRange(answers() + 1, 1, 1, 10).getValues()[0];
     check(r.ok && last[4].charAt(0) === "'" && last[6].charAt(0) === "'" && last[8].charAt(0) === "'", "item, skill and pick text starting with = + @ are stored as plain text");
     check(JSON.parse(ctx.doPost({ postData: { contents: "not json" } }).text).error === "server", "a broken request gets an error reply, not a crash");
 
@@ -234,7 +288,7 @@ function servers() {
     var before = answers();
     await bf().locator('.q[data-q="P1-Q1"] .choice[data-i="2"]').click();
     for (var k = 0; k < 80 && answers() === before; k++) await p2.waitForTimeout(100);
-    check(answers() === before + 1 && tabs.Answers.getRange(answers() + 1, 3).getValues()[0][0] === "Ben Ortiz", "built page: Ben's answer reaches the Sheet");
+    check(answers() === before + 1 && tabs[DATA].getRange(answers() + 1, 3).getValues()[0][0] === "Ben Ortiz", "built page: Ben's answer reaches the Sheet");
     linkJs = null;
     var p3 = await bctx.newPage();
     await p3.setContent('<iframe id="f" src="http://127.0.0.1:' + PORTS.built + '/TKM-GoogleTest.html" width="100%" height="650"></iframe>');
@@ -242,6 +296,12 @@ function servers() {
     var miss = false;
     for (var k2 = 0; k2 < 50 && !miss; k2++) { await p3.waitForTimeout(100); miss = /Can't find TKM-GoogleTest-link\.js/.test(await cf().locator("body").innerText()); }
     check(miss, "built page without the link file says which file to upload");
+
+    /* the teacher renames the data tab: answers still reach it (found by its id) */
+    tabs[DATA].setName("My answers"); DATA = "My answers";
+    var before2 = answers();
+    var rr = JSON.parse(ctx.doPost({ postData: { contents: JSON.stringify({ code: ANA, batch: "rename-1", answers: [{ item: "P1-Q1", chapter: 1, skill: "9.DSR.C.1", right: true, pick: "C" }] }) } }).text);
+    check(rr.ok && answers() === before2 + 1, "after the teacher renames the data tab, answers still reach it");
 
     check(errors.length === 0, "no page errors" + (errors.length ? ": " + errors.join("; ") : ""));
   } finally {

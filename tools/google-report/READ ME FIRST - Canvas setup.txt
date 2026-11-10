@@ -1,4 +1,4 @@
-TKM practice - Google reporting TEST - version 0.2 - FIRST-TIME SETUP
+TKM practice - Google reporting TEST - version 0.3 - FIRST-TIME SETUP
 ================================================================================
 
 This zip sets up a small TEST of Option B: the game sends each answer to a Google Sheet in YOUR school
@@ -55,7 +55,8 @@ Step 2 - Set up the tabs
    Google asks you to allow access: click Continue, pick your account, click Allow. If it says "Google hasn't
    verified this app", click Advanced, then "Go to ... (unsafe)". (It is your own script; Google says this
    about every script a teacher writes.)
-3. Click TKM game > 1. Set up this Sheet once more. Four tabs appear: Settings, Students, Answers, Summary.
+3. Click TKM game > 1. Set up this Sheet once more. Five tabs appear: Analysis (a chart), Settings,
+   Students, Summary and Answer data.
 
 Step 3 - Add students and make join codes
 -----------------------------------------
@@ -149,10 +150,13 @@ SECTION 6  TRY IT
    first name and shows chapters 1 to 3.
 2. Answer a few questions. The bar at the top says "Sending..." and then "All answers sent".
 3. Look at your Sheet:
-   - Answers tab: one row for each answer: the student's name, item, chapter, skill, whether it was right on
-     the first try (1 = yes), the letter picked and the seconds it took.
+   - Analysis tab: a bar for each skill. Green is the share answered right on the first try, orange the
+     share answered wrong, with the percentages on the bars. Under the chart are the numbers it is drawn
+     from. It updates by itself. A skill with no answers yet has an empty bar.
    - Summary tab: % right by student, by chapter and by skill, and the most-missed items (once an item has 3
      or more answers). It updates by itself.
+   - Answer data tab (the last tab): one row for each answer: the student's name, item, chapter, skill,
+     whether it was right on the first try (1 = yes), the letter picked and the seconds it took.
 4. Unlock a chapter: in the Settings tab, change "Unlocked through chapter" from 3 to 4. On the practice page
    click "Check for newly opened chapters" (or reload). The fourth passage appears. In the real game this
    replaces the unlock codes.
@@ -172,9 +176,9 @@ SECTION 7  WHAT TO TELL ME
 - Did answers reach the Sheet from school? From home?
 - Did "Anyone" exist in the deployment settings, or only "Anyone within [district]"?
 - Did the unlock change show up?
-- Do the Summary tables show numbers (not an error)?
+- Does the Analysis chart show coloured bars, and do the Summary tables show numbers (not an error)?
 - Anything confusing for students (the join code, the messages)?
-- What you want to see in the Summary tab that isn't there.
+- What you want to see in the Analysis or Summary tab that isn't there.
 
 If something didn't work, open "For the teacher: what this page knows" at the bottom of the practice page
 and copy what it says. The last line is the Sheet's last reply.
@@ -186,8 +190,13 @@ SECTION 8  UPDATING TO A NEW VERSION
 When I send a new version, upload only the new TKM-GoogleTest-game.js to the same folder and choose Replace.
 Do not replace or delete TKM-GoogleTest.html (your embed code stays with it) or TKM-GoogleTest-link.js (it
 holds your link).
-If I send a new Code.gs: paste it into Apps Script as in SECTION 2, then Deploy > Manage deployments > pencil
-icon > Version: New version > Deploy. That keeps the same /exec link. (A NEW deployment makes a new link.)
+If I send a new Code.gs:
+1. Paste it into Apps Script as in SECTION 2 (Ctrl+A, Ctrl+V, Ctrl+S).
+2. Reload the Sheet and click TKM game > 1. Set up this Sheet. Your settings, students and answers stay.
+   (From version 0.3 this adds the Analysis tab and renames the old Answers tab to Answer data.)
+3. In Apps Script: Deploy > Manage deployments > pencil icon > Version: New version > Deploy. This step
+   matters: until you do it, the web link keeps running the old script. It keeps the same /exec link.
+   (A NEW deployment makes a new link.)
 
 ================================================================================
 SECTION 9  TROUBLESHOOTING
@@ -206,7 +215,9 @@ SECTION 9  TROUBLESHOOTING
   by hand works within a minute.
 - No "TKM game" menu in the Sheet: reload the Sheet. If it still isn't there, open Extensions > Apps Script
   and check that Code.gs was saved.
-- Don't sort or edit the Answers tab while students are playing. Copy it to another tab to work on it.
+- Don't sort or edit the Answer data tab while students are playing. Copy it to another tab to work on it.
+- The Analysis chart looks wrong or is missing: click TKM game > 1. Set up this Sheet. It draws the chart
+  again (your answers stay).
 
 ================================================================================
 SECTION 10 PRIVACY AND CLEANING UP
