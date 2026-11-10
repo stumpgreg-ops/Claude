@@ -1,4 +1,4 @@
-// TKM game - Google reporting (experiment, v0.6)
+// TKM game - Google reporting (experiment, v0.7)
 //
 // This script lives inside a Google Sheet in YOUR school Google account. The test page in
 // Canvas sends each answer here, and this script writes it into the Sheet. The game also
@@ -7,14 +7,14 @@
 // Setup steps: SECTION 2 of "READ ME FIRST - Canvas setup.txt".
 //
 // The tabs:
-// - Analysis: the whole class. A chart of each skill, % right and % wrong on the first try.
-// - By student: pick a student for the same chart, and a grid of every student by skill,
-//   coloured green, yellow and red. The bands are set in Settings (rows 5 and 6).
+// - Analysis: the big yellow drop-down at the top picks the whole class (the default) or one
+//   student. The chart shows each skill, % right and % wrong on the first try. Under it, a grid
+//   of every student by skill, coloured green, yellow and red (bands set in Settings).
 // - Grades: your grading criteria (yellow cells) and each student's grade, worked out from
 //   the answers between the dates you set. It updates by itself.
 // - Settings: "Unlocked through chapter" (the game picks up a change the next time it opens),
 //   "Accept answers" (FALSE pauses reporting; the game keeps answers and sends them later),
-//   and the colour bands for By student: "Green from" and "Yellow from" (below that is red).
+//   and the colour bands: "Green from" and "Yellow from" (below that is red).
 // - Students: join code, name, Path. Only codes listed here are accepted.
 // - Summary: live tables by student, chapter and skill, and the most-missed items.
 // - Answer data: one row per answered question. Don't edit it while students are playing.
@@ -26,9 +26,11 @@
 // Every comment in this file starts with // on each line, and every line is short, so a
 // copy and paste can't break it.
 
-var VERSION = "0.6";
-var TAB = { analysis: "Analysis", byStudent: "By student", grades: "Grades", settings: "Settings",
+var VERSION = "0.7";
+var TAB = { analysis: "Analysis", grades: "Grades", settings: "Settings",
             students: "Students", summary: "Summary", data: "Answer data" };
+var OLD_BY_STUDENT_TAB = "By student"; // v0.4-v0.6 had it; it is part of Analysis now
+var WHOLE_CLASS = "Whole class";
 var OLD_DATA_TAB = "Answers"; // the name before v0.3; setup renames it
 var DATA_REF = "'" + TAB.data + "'!"; // Sheets renames this in every formula if the tab is renamed
 
@@ -130,84 +132,100 @@ function setup() {
     ["C:C", "G:G", "K:K", "O:O"].forEach(function (c) { sum.getRange(c).setNumberFormat("0%"); });
     sum.setFrozenRows(1);
   }
-  var an = analysis_(ss), by = byStudent_(ss), gr = grades_(ss);
-  // tab order: Analysis, By student, Grades, ... , Answer data last
+  var an = analysis_(ss), gr = grades_(ss);
+  var oldBy = ss.getSheetByName(OLD_BY_STUDENT_TAB);
+  if (oldBy) ss.deleteSheet(oldBy);
+  // tab order: Analysis, Grades, ... , Answer data last
   ss.setActiveSheet(ans); ss.moveActiveSheet(ss.getNumSheets());
   ss.setActiveSheet(gr); ss.moveActiveSheet(1);
-  ss.setActiveSheet(by); ss.moveActiveSheet(1);
   ss.setActiveSheet(an); ss.moveActiveSheet(1);
   toast_("Set up. Next: type student names in the Students tab (column B), " +
     "then TKM game > 2. Make join codes.");
 }
 
-// The Analysis tab: the whole class. A 100% stacked bar for each skill (right / wrong on the
-// first try) and, under it, the numbers it is drawn from. Setup draws it again each time.
+// The Analysis tab. Row 1: a big drop-down, "Whole class" (the default) or one student; it
+// stays on screen (frozen). Then a heading and chart for that choice, the numbers behind the
+// chart, and a grid of every student by skill. Setup and "Make join codes" draw it again and
+// keep the choice.
 function analysis_(ss) {
+  var old = ss.getSheetByName(TAB.analysis);
+  var picked = old ? String(old.getRange(1, 2).getValues()[0][0] || "").trim() : "";
   var an = freshTab_(ss, TAB.analysis);
-  var top = chartRows_() + 2;
-  an.getRange(top, 1).setValue("The numbers behind the chart (they update by themselves)")
-    .setFontWeight("bold");
-  skillTable_(an, top + 1, "");
-  skillChart_(an, top + 1, 1, "Whole class: % right and wrong on the first try, by skill");
-  return an;
-}
-
-// The By student tab: a drop-down to pick a student and the same chart for that student, then
-// a grid of every student (rows) by skill (columns). Setup and "Make join codes" draw it again.
-function byStudent_(ss) {
-  var old = ss.getSheetByName(TAB.byStudent);
-  var picked = old ? String(old.getRange(1, 2).getValues()[0][0] || "") : "";
-  var by = freshTab_(ss, TAB.byStudent);
   var stu = ss.getSheetByName(TAB.students), names = [];
   if (stu && stu.getLastRow() >= 2) {
     names = stu.getRange(2, 2, stu.getLastRow() - 1, 1).getValues()
       .map(function (r) { return String(r[0]).trim(); }).filter(String);
   }
-  if (names.indexOf(picked) < 0) picked = names[0] || "";
+  if (names.indexOf(picked) < 0) picked = WHOLE_CLASS;
 
-  // 1. one student: drop-down in B1, chart from row 3, its numbers under it
-  by.getRange(1, 1).setValue("Student:").setFontWeight("bold");
-  var pick = by.getRange(1, 2);
+  // the list for the drop-down (hidden column Z): "Whole class", then every name in Students.
+  // It is a formula, so a name added to Students shows up in the list by itself.
+  var sb = TAB.students + "!B2:B";
+  an.getRange(1, 26).setFormula('={"' + WHOLE_CLASS + '";IFERROR(FILTER(TRIM(' + sb + "),TRIM(" + sb +
+    ')<>""))}');
+  an.hideColumns(26);
+
+  // 1. the drop-down: big, yellow, outlined, frozen at the top
+  an.setRowHeight(1, 48);
+  an.getRange(1, 1).setValue("SHOW:").setFontSize(16).setFontWeight("bold")
+    .setHorizontalAlignment("right").setVerticalAlignment("middle");
+  var pickArea = an.getRange(1, 2, 1, 3);
+  pickArea.breakApart(); pickArea.merge();
+  pickArea.setFontSize(18).setFontWeight("bold").setBackground("#ffd966")
+    .setHorizontalAlignment("center").setVerticalAlignment("middle")
+    .setBorder(true, true, true, true, false, false, "#7f6000", SpreadsheetApp.BorderStyle.SOLID_THICK);
+  var pick = an.getRange(1, 2);
   pick.setDataValidation(SpreadsheetApp.newDataValidation()
-    .requireValueInRange(ss.getSheetByName(TAB.students).getRange("B2:B"), true)
-    .setAllowInvalid(false).build());
-  pick.setValue(picked).setFontWeight("bold").setBackground("#fff2cc");
-  by.getRange(1, 3).setValue("<- pick a student from the list");
-  var top = 3 + chartRows_() + 1;
-  by.getRange(top, 1).setValue("The numbers behind the chart for the student in B1").setFontWeight("bold");
-  skillTable_(by, top + 1, "$B$1");
-  skillChart_(by, top + 1, 3, "One student (picked in B1): % right and wrong on the first try");
+    .requireValueInRange(an.getRange("Z1:Z"), true).setAllowInvalid(false)
+    .setHelpText("Pick Whole class or a student.").build());
+  pick.setValue(picked);
+  var hint = an.getRange(1, 5, 1, 2);
+  hint.breakApart(); hint.merge();
+  hint.setValue("<- Click the yellow box: Whole class, or pick a student").setFontSize(12)
+    .setFontStyle("italic").setVerticalAlignment("middle");
+  an.setFrozenRows(1);
 
-  // 2. every student: one row each, a column per skill
+  // 2. the chart for the choice, with a heading that names it
+  var isClass = 'OR($B$1="",$B$1="' + WHOLE_CLASS + '")';
+  var crit = "IF(" + isClass + ',"*",$B$1)'; // "*" matches every student
+  an.getRange(2, 1).setFormula('="Skills for: "&IF(' + isClass + ',"the whole class",$B$1)')
+    .setFontSize(14).setFontWeight("bold");
+  var top = 3 + chartRows_() + 1;
+  an.getRange(top, 1).setFormula('="The numbers behind the chart for "&IF(' + isClass +
+    ',"the whole class",$B$1)&" (they update by themselves)"').setFontWeight("bold");
+  skillTable_(an, top + 1, crit);
+  skillChart_(an, top + 1, 3, "% right (green) and wrong (orange) on the first try, by skill");
+
+  // 3. every student: one row each, a column per skill
   var g = top + 3 + SKILLS.length;
   // the heading names the bands from Settings, so it changes when they do
   var hi = band_(TAB.settings + "!$B$" + BAND_ROW.green);
   var lo = band_(TAB.settings + "!$B$" + BAND_ROW.yellow);
-  by.getRange(g, 1).setFormula('="Every student at a glance: % right on the first try. Green "&' +
+  an.getRange(g, 1).setFormula('="Every student at a glance: % right on the first try. Green "&' +
     'TEXT(' + hi + ',"0%")&" and up, yellow "&TEXT(' + lo + ',"0%")&" up to "&TEXT(' + hi +
     ',"0%")&", red below "&TEXT(' + lo + ',"0%")&". Change the bands in Settings, rows 5 and 6."')
     .setFontWeight("bold");
   var head = ["Student", "Questions answered", "All skills"].concat(SKILLS.map(function (sk) {
     return sk[1] + " (" + sk[0] + ")";
   }));
-  by.getRange(g + 1, 1, 1, head.length).setValues([head]).setFontWeight("bold");
+  an.getRange(g + 1, 1, 1, head.length).setValues([head]).setFontWeight("bold");
   var who = DATA_REF + "$C$2:$C", skill = DATA_REF + "$G$2:$G", right = DATA_REF + "$H$2:$H";
   var rows = Math.max(40, names.length + 20); // room for students added later
   for (var i = 0; i < rows; i++) {
     var r = g + 2 + i, a = "$A" + r;
-    by.getRange(r, 1).setFormula("=IF(TRIM(" + TAB.students + "!$B" + (i + 2) + ")=\"\",\"\"," +
+    an.getRange(r, 1).setFormula("=IF(TRIM(" + TAB.students + "!$B" + (i + 2) + ")=\"\",\"\"," +
       "TRIM(" + TAB.students + "!$B" + (i + 2) + "))");
-    by.getRange(r, 2).setFormula("=IF(" + a + "=\"\",\"\",COUNTIF(" + who + "," + a + "))");
-    by.getRange(r, 3).setFormula("=IF(N($B" + r + ")=0,\"\",AVERAGEIF(" + who + "," + a + "," +
+    an.getRange(r, 2).setFormula("=IF(" + a + "=\"\",\"\",COUNTIF(" + who + "," + a + "))");
+    an.getRange(r, 3).setFormula("=IF(N($B" + r + ")=0,\"\",AVERAGEIF(" + who + "," + a + "," +
       right + "))");
     SKILLS.forEach(function (sk, j) {
       var code = "\"" + sk[0] + "\"";
-      by.getRange(r, 4 + j).setFormula("=IF(" + a + "=\"\",\"\",IF(COUNTIFS(" + who + "," + a + "," +
+      an.getRange(r, 4 + j).setFormula("=IF(" + a + "=\"\",\"\",IF(COUNTIFS(" + who + "," + a + "," +
         skill + "," + code + ")=0,\"\",AVERAGEIFS(" + right + "," + who + "," + a + "," + skill + "," +
         code + ")))");
     });
   }
-  var pct = by.getRange(g + 2, 3, rows, 1 + SKILLS.length);
+  var pct = an.getRange(g + 2, 3, rows, 1 + SKILLS.length);
   pct.setNumberFormat("0%");
   // Colour rules read the bands from Settings. A colour rule can only reach another tab through
   // INDIRECT. The first rule that matches a cell wins, so green is checked first.
@@ -218,14 +236,14 @@ function byStudent_(ss) {
     return SpreadsheetApp.newConditionalFormatRule().whenFormulaSatisfied(f)
       .setBackground(colour).setRanges([pct]).build();
   };
-  by.setConditionalFormatRules([
+  an.setConditionalFormatRules([
     rule("=AND(ISNUMBER(" + cell + ")," + cell + ">=" + hiCf + ")", BAND.high),
     rule("=AND(ISNUMBER(" + cell + ")," + cell + ">=" + loCf + ")", BAND.mid),
     rule("=ISNUMBER(" + cell + ")", BAND.low)
   ]);
-  by.setColumnWidth(1, 250); by.setColumnWidth(2, 130);
-  for (var c = 3; c <= head.length; c++) by.setColumnWidth(c, 150);
-  return by;
+  an.setColumnWidth(1, 250); an.setColumnWidth(2, 130);
+  for (var c = 3; c <= head.length; c++) an.setColumnWidth(c, 150);
+  return an;
 }
 
 // The Grades tab: the criteria at the top (kept when the tab is redrawn) and a grade for each
@@ -297,7 +315,7 @@ function grades_(ss) {
       ")/" + weights + ",1)))");
   }
   gr.getRange(h + 1, 5, rows, 1).setNumberFormat("0%");
-  // grade colours: the same bands as By student (Settings rows 5 and 6), as a share of the points
+  // grade colours: the same bands as Analysis (Settings rows 5 and 6), as a share of the points
   var g1 = "F" + (h + 1), share = g1 + "/$B$" + G.points;
   var hiCf = band_('INDIRECT("' + TAB.settings + "!B" + BAND_ROW.green + '")');
   var loCf = band_('INDIRECT("' + TAB.settings + "!B" + BAND_ROW.yellow + '")');
@@ -320,7 +338,7 @@ function grades_(ss) {
 // A band from Settings as a fraction: 80, 80% and 0.8 all mean 0.8.
 function band_(ref) { return "IF(N(" + ref + ")>1,N(" + ref + ")/100,N(" + ref + "))"; }
 
-// -- chart helpers shared by Analysis and By student --
+// -- chart helpers --
 function chartRows_() { return Math.ceil((110 + 46 * SKILLS.length) / 21); } // rows are 21 px
 function freshTab_(ss, name) {
   var t = ss.getSheetByName(name) || ss.insertSheet(name);
@@ -330,7 +348,7 @@ function freshTab_(ss, name) {
   return t;
 }
 // A table at row `head`: Skill | Right first try | Wrong first try | Questions answered | Code |
-// What the standard says. `who` is a cell with a student's name, or "" for the whole class.
+// What the standard says. `who` is a formula for the student column: a name, or "*" for all.
 function skillTable_(t, head, who) {
   var n = SKILLS.length, col = DATA_REF + "$G$2:$G", right = DATA_REF + "$H$2:$H";
   var whoCol = DATA_REF + "$C$2:$C";
@@ -341,15 +359,9 @@ function skillTable_(t, head, who) {
     t.getRange(r, 1).setValue(sk[1] + " (" + sk[0] + ")");
     t.getRange(r, 5).setValue(sk[0]);
     t.getRange(r, 6).setValue(sk[2]);
-    if (who) {
-      t.getRange(r, 4).setFormula("=COUNTIFS(" + col + ",$E" + r + "," + whoCol + "," + who + ")");
-      t.getRange(r, 2).setFormula('=IF($D' + r + '=0,"",AVERAGEIFS(' + right + "," + col + ",$E" + r +
-        "," + whoCol + "," + who + "))");
-    } else {
-      t.getRange(r, 4).setFormula("=COUNTIF(" + col + ",$E" + r + ")");
-      t.getRange(r, 2).setFormula('=IF($D' + r + '=0,"",AVERAGEIF(' + col + ",$E" + r + "," +
-        right + "))");
-    }
+    t.getRange(r, 4).setFormula("=COUNTIFS(" + col + ",$E" + r + "," + whoCol + "," + who + ")");
+    t.getRange(r, 2).setFormula('=IF($D' + r + '=0,"",AVERAGEIFS(' + right + "," + col + ",$E" + r +
+      "," + whoCol + "," + who + "))");
     t.getRange(r, 3).setFormula('=IF($D' + r + '=0,"",1-$B' + r + ")");
   });
   t.getRange(head + 1, 2, n, 2).setNumberFormat("0%");
@@ -392,7 +404,7 @@ function makeJoinCodes() {
   });
   sh.getRange(2, 1, rows.length, 3).setValues(rows);
   CacheService.getScriptCache().remove("students");
-  try { byStudent_(ss_()); grades_(ss_()); } catch (e) {} // new students get a row
+  try { analysis_(ss_()); grades_(ss_()); } catch (e) {} // new students get a row
   toast_(made ? "Made " + made + " join code" + (made === 1 ? "" : "s") + "."
               : "Every student already has a code.");
 }

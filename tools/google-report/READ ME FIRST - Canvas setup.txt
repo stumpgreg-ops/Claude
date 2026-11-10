@@ -1,4 +1,4 @@
-TKM practice - Google reporting TEST - version 0.6 - FIRST-TIME SETUP
+TKM practice - Google reporting TEST - version 0.7 - FIRST-TIME SETUP
 ================================================================================
 
 This zip sets up a small TEST of Option B: the game sends each answer to a Google Sheet in YOUR school
@@ -55,8 +55,8 @@ Step 2 - Set up the tabs
    Google asks you to allow access: click Continue, pick your account, click Allow. If it says "Google hasn't
    verified this app", click Advanced, then "Go to ... (unsafe)". (It is your own script; Google says this
    about every script a teacher writes.)
-3. Click TKM game > 1. Set up this Sheet once more. Seven tabs appear: Analysis (the whole class),
-   By student, Grades, Settings, Students, Summary and Answer data.
+3. Click TKM game > 1. Set up this Sheet once more. Six tabs appear: Analysis, Grades, Settings, Students,
+   Summary and Answer data.
 
 Step 3 - Add students and make join codes
 -----------------------------------------
@@ -150,12 +150,13 @@ SECTION 6  TRY IT
    first name and shows chapters 1 to 3.
 2. Answer a few questions. The bar at the top says "Sending..." and then "All answers sent".
 3. Look at your Sheet:
-   - Analysis tab (the whole class): a bar for each skill. Green is the share answered right on the first
-     try, orange the share answered wrong, with the percentages on the bars. Under the chart are the numbers
-     it is drawn from. It updates by itself. A skill with no answers yet has an empty bar.
-   - By student tab: pick a student in the yellow box (B1) and the chart under it shows that student's
-     skills the same way. Below that, a grid has every student (rows) by skill (columns), coloured green,
-     yellow or red, and empty where the student hasn't answered that skill yet.
+   - Analysis tab: at the top is a big yellow box that says "Whole class". Click it to pick the whole
+     class or one student (the list has every name in your Students tab). The chart under it shows a bar
+     for each skill: green is the share answered right on the first try, orange the share answered wrong,
+     with the percentages on the bars. The numbers it is drawn from are under the chart. A skill with no
+     answers yet has an empty bar. The yellow box stays at the top while you scroll.
+     Further down, a grid has every student (rows) by skill (columns), coloured green, yellow or red, and
+     empty where the student hasn't answered that skill yet.
    - The colour bands: in the Settings tab, "Green from" (row 5, starts at 80) and "Yellow from" (row 6,
      starts at 60). Below "Yellow from" is red. Type a new percent (for example 85) and the grid's colours
      and heading change at once. Running Set up again keeps your numbers.
@@ -168,7 +169,7 @@ SECTION 6  TRY IT
      Points possible: 100. A student's grade is the points times the share of each counted goal they
      reached (each goal tops out at full credit). Example: 30 minutes and 50 questions = 75 of 100.
      "Count work from" and "Count work through" set the dates that count, for example one week. Leave
-     them empty to count everything. Grades are coloured with the same bands as By student.
+     them empty to count everything. Grades are coloured with the same bands as the Analysis grid.
      To grade a week: set the two dates, then read the Grade column. Running Set up again keeps your
      criteria.
    - Summary tab: % right by student, by chapter and by skill, and the most-missed items (once an item has 3
@@ -196,7 +197,7 @@ SECTION 7  WHAT TO TELL ME
 - Did the unlock change show up?
 - Does the Analysis chart show coloured bars, and do the Summary tables show numbers (not an error)?
 - Anything confusing for students (the join code, the messages)?
-- What you want to see in the Analysis, By student, Grades or Summary tab that isn't there.
+- What you want to see in the Analysis, Grades or Summary tab that isn't there.
 - Do the grades match what you expect for your test student?
 
 If something didn't work, open "For the teacher: what this page knows" at the bottom of the practice page
@@ -212,9 +213,10 @@ holds your link).
 If I send a new Code.gs:
 1. Paste it into Apps Script as in SECTION 2 (Ctrl+A, Ctrl+V, Ctrl+S).
 2. Reload the Sheet and click TKM game > 1. Set up this Sheet. Your settings, students and answers stay.
-   (Version 0.3 added the Analysis tab and renamed the old Answers tab to Answer data. Version 0.4 adds
-   the By student tab. Version 0.5 adds the colour bands in Settings, rows 5 and 6. Version 0.6 adds
-   the Grades tab.)
+   (Version 0.3 added the Analysis tab and renamed the old Answers tab to Answer data. Version 0.5 added
+   the colour bands in Settings, rows 5 and 6. Version 0.6 added the Grades tab. Version 0.7 puts the
+   whole class and each student on the Analysis tab, with the big drop-down, and removes the By student
+   tab.)
 3. In Apps Script: Deploy > Manage deployments > pencil icon > Version: New version > Deploy. This step
    matters: until you do it, the web link keeps running the old script. It keeps the same /exec link.
    (A NEW deployment makes a new link.)
@@ -237,10 +239,11 @@ SECTION 9  TROUBLESHOOTING
 - No "TKM game" menu in the Sheet: reload the Sheet. If it still isn't there, open Extensions > Apps Script
   and check that Code.gs was saved.
 - Don't sort or edit the Answer data tab while students are playing. Copy it to another tab to work on it.
-- A chart looks wrong or is missing: click TKM game > 1. Set up this Sheet. It draws the Analysis and By
-  student tabs again (your answers stay).
-- A new student isn't in the By student grid or the drop-down: add the name in the Students tab and click
-  TKM game > 2. Make join codes. That also redraws the By student tab.
+- A chart looks wrong or is missing: click TKM game > 1. Set up this Sheet. It draws the Analysis and
+  Grades tabs again (your answers, choices and criteria stay).
+- A new student isn't in the Analysis grid or the Grades list: add the name in the Students tab and click
+  TKM game > 2. Make join codes. That also redraws those tabs. (The drop-down list picks up new names by
+  itself.)
 
 ================================================================================
 SECTION 10 PRIVACY AND CLEANING UP

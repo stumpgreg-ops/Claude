@@ -21,7 +21,7 @@ function check(ok, what) { console.log((ok ? "  ok   " : "  FAIL ") + what); if 
 function colNum(s) { var n = 0; for (var i = 0; i < s.length; i++) n = n * 26 + s.charCodeAt(i) - 64; return n; }
 var nextSheetId = 100;
 function makeSheet(name) {
-  var data = [], formulas = {}, charts = [], validations = {}, cf = [];
+  var data = [], formulas = {}, charts = [], validations = {}, cf = [], merges = {}, borders = {};
   var range = function (r, c, nr, nc) {
     nr = nr || 1; nc = nc || 1;
     var rg = {
@@ -41,19 +41,26 @@ function makeSheet(name) {
       setFontWeight: function () { return rg; },
       setBackground: function () { return rg; },
       setFontSize: function () { return rg; },
+      setFontStyle: function () { return rg; },
+      setHorizontalAlignment: function () { return rg; },
+      setVerticalAlignment: function () { return rg; },
+      setBorder: function () { rg.border = Array.prototype.slice.call(arguments); borders[colName(c) + r] = rg.border; return rg; },
+      breakApart: function () { delete merges[colName(c) + r]; return rg; },
+      merge: function () { merges[colName(c) + r] = { rows: nr, cols: nc }; return rg; },
       setDataValidation: function (v) { validations[colName(c) + r] = v; return rg; }
     };
     return rg;
   };
   var sh = {
     name: name, data: data, formulas: formulas, charts: charts, validations: validations, id: nextSheetId++,
-    cf: function () { return cf; },
+    cf: function () { return cf; }, merges: merges, borders: borders, frozen: 0, rowHeights: {},
+    setRowHeight: function (r, h) { sh.rowHeights[r] = h; },
     setConditionalFormatRules: function (rules) { cf = rules; },
     getName: function () { return sh.name; },
     getSheetId: function () { return sh.id; },
     setName: function (n) { delete tabs[sh.name]; sh.name = n; tabs[n] = sh; return sh; },
     getLastRow: function () { var n = data.length; while (n && data[n - 1].every(function (v) { return v === "" || v == null; })) n--; return n; },
-    setFrozenRows: function () {},
+    setFrozenRows: function (n) { sh.frozen = n; },
     setColumnWidth: function () {},
     hidden: [],
     hideColumns: function (c) { sh.hidden.push(c); },
@@ -96,12 +103,14 @@ var ss = {
   insertSheet: function (n) { var t = makeSheet(n); tabs[n] = t; order.push(t); return t; },
   setActiveSheet: function (t) { active = t; return t; },
   moveActiveSheet: function (pos) { order.splice(order.indexOf(active), 1); order.splice(pos - 1, 0, active); },
+  deleteSheet: function (t) { delete tabs[t.name]; order.splice(order.indexOf(t), 1); },
   toast: function (m) { toasts.push(m); }
 };
 var ctx = {
   console: console, JSON: JSON, Math: Math, Date: Date, String: String, Number: Number, Array: Array, isFinite: isFinite,
   SpreadsheetApp: {
     getActiveSpreadsheet: function () { return ss; }, openById: function () { return ss; },
+    BorderStyle: { SOLID_THICK: "thick" },
     newDataValidation: function () {
       var v = {}, b = {
         requireValueInRange: function (rg, dd) { v.range = rg; v.dropdown = dd; return b; },
@@ -134,17 +143,20 @@ vm.runInContext(fs.readFileSync(path.join(dir, "Code.gs"), "utf8"), ctx, { filen
 /* ── the Sheet, set up the way the READ ME says ── */
 /* a Sheet set up with v0.2 had an "Answers" tab; setup renames it and keeps its rows */
 ss.insertSheet("Answers").getRange(1, 1, 2, 3).setValues([["Received", "Join code", "Student"], ["old", "ABC-DEF", "Old Row"]]);
+ss.insertSheet("By student").getRange(1, 1, 1, 2).setValues([["Student:", "Old Pick"]]); // as v0.4-v0.6 made it
 ctx.setup();
 var DATA = "Answer data";
 check(!tabs.Answers && tabs[DATA] && tabs[DATA].getRange(2, 3).getValues()[0][0] === "Old Row", "an old Answers tab is renamed Answer data, and its rows are kept");
 tabs[DATA].getRange(2, 1, 1, 3).setValues([["", "", ""]]);
 ctx.setup();
-check(JSON.stringify(tabNames()) === JSON.stringify(["Analysis", "By student", "Grades", "Settings", "Students", "Summary", DATA]), "tabs in order: " + tabNames().join(", "));
+check(!tabs["By student"], "the old By student tab is gone (it is part of Analysis now)");
+check(JSON.stringify(tabNames()) === JSON.stringify(["Analysis", "Grades", "Settings", "Students", "Summary", DATA]), "tabs in order: " + tabNames().join(", "));
 check(Object.keys(tabs.Summary.formulas).length === 4 && Object.keys(tabs.Summary.formulas).every(function (k) { return tabs.Summary.formulas[k].indexOf("'Answer data'!A2:J") > 0; }), "Summary's four live tables read 'Answer data'");
 var an = tabs.Analysis, chart = an.charts[0];
 var nSkills = vm.runInContext("SKILLS.length", ctx);
 check(an.charts.length === 1, "Analysis has one chart (setup run twice doesn't add a second)");
-check(chart && /^Whole class/.test(chart.calls.setTitle[0]), "the Analysis chart says it is the whole class");
+check(an.getRange(1, 2).getValues()[0][0] === "Whole class", "Analysis starts on Whole class");
+check(an.formulas.A2 === '="Skills for: "&IF(OR($B$1="",$B$1="Whole class"),"the whole class",$B$1)', "the heading over the chart names the choice: " + an.formulas.A2);
 check(chart && chart.calls.asBarChart && chart.calls.setStacked && JSON.stringify(chart.calls.setRange) === "[0,1]", "the chart is a stacked bar from 0 to 100%");
 var cr = chart && chart.ranges[0];
 check(cr && cr.cols === 3 && cr.rows === nSkills + 1 && chart.calls.setNumHeaders[0] === 1, "the chart reads the skill names and the right/wrong columns, one bar per skill (" + nSkills + ")");
@@ -152,10 +164,13 @@ check(chart && chart.options.series[0].color !== chart.options.series[1].color &
 var hdr = an.getRange(cr.row, 1, 1, 6).getValues()[0];
 check(hdr[1] === "Right first try" && hdr[2] === "Wrong first try", "the table under the chart: " + hdr.join(" | "));
 var r0 = cr.row + 1, f = an.formulas;
-check(/^=COUNTIF\('Answer data'!\$G\$2:\$G,\$E\d+\)$/.test(f["D" + r0]) && /AVERAGEIF\('Answer data'!\$G\$2:\$G,\$E\d+,'Answer data'!\$H\$2:\$H\)/.test(f["B" + r0]) && f["C" + r0] === '=IF($D' + r0 + '=0,"",1-$B' + r0 + ')',
-  "each skill row counts its answers and works out % right and % wrong from Answer data");
+var CRIT = 'IF(OR($B$1="",$B$1="Whole class"),"*",$B$1)';
+check(f["D" + r0] === "=COUNTIFS('Answer data'!$G$2:$G,$E" + r0 + ",'Answer data'!$C$2:$C," + CRIT + ")" &&
+  f["B" + r0] === '=IF($D' + r0 + '=0,"",AVERAGEIFS(\'Answer data\'!$H$2:$H,\'Answer data\'!$G$2:$G,$E' + r0 + ",'Answer data'!$C$2:$C," + CRIT + "))" &&
+  f["C" + r0] === '=IF($D' + r0 + '=0,"",1-$B' + r0 + ')',
+  "each skill row counts the chosen student's answers, or everyone's (\"*\") for Whole class, and works out % right and wrong");
 check(an.getRange(r0, 1).getValues()[0][0] === "Evidence (9.DSR.C.1)", "skills are listed by name and code: " + an.getRange(r0, 1).getValues()[0][0]);
-check(cr.row * 21 > 110 + 46 * nSkills, "the table starts below the chart");
+check(cr.row * 21 > 3 * 21 + 110 + 46 * nSkills && chart.calls.setPosition[0] === 3, "the chart sits under the heading and the table below the chart");
 tabs.Students.getRange(2, 2, 3, 1).setValues([["Ana Rivera"], ["Ben Ortiz"], ["Lee, Cy"]]);
 ctx.makeJoinCodes();
 var codes = tabs.Students.getRange(2, 1, 3, 1).getValues().map(function (r) { return r[0]; });
@@ -164,17 +179,16 @@ ctx.makeJoinCodes();
 check(/already has a code/.test(toasts[toasts.length - 1]), "making codes again keeps the codes students have");
 var ANA = codes[0];
 
-/* the By student tab */
-var by = tabs["By student"], bv = by.validations.B1;
-check(bv && bv.dropdown && bv.range.row === 2 && bv.range.col === 2 && bv.allowInvalid === false, "By student: B1 is a drop-down of the names in Students");
-check(by.getRange(1, 2).getValues()[0][0] === "Ana Rivera", "after Make join codes, the drop-down shows the first student");
+/* the drop-down at the top of Analysis */
+var by = tabs.Analysis, bv = by.validations.B1;
+check(bv && bv.dropdown && bv.range.row === 1 && bv.range.col === 26 && bv.allowInvalid === false, "B1 is a drop-down of the list in hidden column Z");
+check(by.formulas.Z1 === '={"Whole class";IFERROR(FILTER(TRIM(Students!B2:B),TRIM(Students!B2:B)<>""))}' && by.hidden.indexOf(26) >= 0,
+  "the list is Whole class, then every name in Students, read live: " + by.formulas.Z1);
+check(by.merges.B1 && by.merges.B1.cols === 3 && by.borders.B1 && by.borders.B1[7] === "thick" && by.frozen === 1 && by.rowHeights[1] >= 40,
+  "the drop-down is big: B1:D1 merged, thick outline, a tall row, frozen at the top");
+check(by.getRange(1, 2).getValues()[0][0] === "Whole class", "after Make join codes, the drop-down still shows Whole class");
 var bc = by.charts[0], bhead = bc.ranges[0].row, br0 = bhead + 1;
-check(by.charts.length === 1 && /^One student/.test(bc.calls.setTitle[0]) && bc.calls.setPosition[0] === 3 && bc.ranges[0].rows === nSkills + 1,
-  "a chart for the picked student, one bar per skill, under the drop-down");
-check(by.formulas["D" + br0] === "=COUNTIFS('Answer data'!$G$2:$G,$E" + br0 + ",'Answer data'!$C$2:$C,$B$1)" &&
-  by.formulas["B" + br0] === '=IF($D' + br0 + '=0,"",AVERAGEIFS(\'Answer data\'!$H$2:$H,\'Answer data\'!$G$2:$G,$E' + br0 + ",'Answer data'!$C$2:$C,$B$1))",
-  "the student's numbers count only that student's answers: " + by.formulas["B" + br0]);
-check(bhead * 21 > 3 * 21 + 110 + 46 * nSkills, "the student's table starts below the chart");
+check(by.charts.length === 1 && bc.ranges[0].rows === nSkills + 1, "one chart for the choice, one bar per skill");
 var gh = Object.keys(by.data).map(Number).filter(function (i) { return by.data[i] && by.data[i][0] === "Student"; })[0] + 1;
 var ghead = by.getRange(gh, 1, 1, 3 + nSkills).getValues()[0];
 check(ghead[0] === "Student" && ghead[2] === "All skills" && ghead[3] === "Evidence (9.DSR.C.1)" && gh > bhead + nSkills, "the grid under it: " + ghead.slice(0, 4).join(" | ") + " ...");
@@ -203,7 +217,7 @@ check(bandOf(80) === 0.8 && bandOf(0.8) === 0.8 && bandOf(75) === 0.75 && bandOf
 tabs.Settings.getRange(5, 2).setValues([[90]]); tabs.Settings.getRange(6, 2).setValues([[70]]);
 ctx.setup();
 check(setRow(5)[1] === 90 && setRow(6)[1] === 70, "running setup again keeps the teacher's bands (90 and 70)");
-by = tabs["By student"];
+by = tabs.Analysis;
 /* the Grades tab */
 var gt = tabs.Grades, gv = function (r, c, n) { return gt.getRange(r, c, 1, n || 1).getValues()[0]; };
 check(JSON.stringify(gt.getRange(4, 1, 4, 3).getValues()) === JSON.stringify([["Minutes answering questions", 60, 1], ["Questions answered", 50, 1], ["Days played", 3, 0], ["% right on the first try", 70, 0]]) &&
@@ -232,11 +246,13 @@ ctx.setup();
 gt = tabs.Grades;
 check(gt.getRange(4, 2, 1, 2).getValues()[0].join() === "45,2" && gt.getRange(9, 2).getValues()[0][0] === 20 && gt.getRange(10, 2).getValues()[0][0] instanceof Date,
   "the teacher's criteria (45 minutes, weight 2, out of 20, from 11/9) are kept when the tab is redrawn");
-by = tabs["By student"];
+by = tabs.Analysis;
 by.getRange(1, 2).setValues([["Ben Ortiz"]]);
 tabs.Students.getRange(5, 2).setValues([["Dee Park"]]); ctx.makeJoinCodes(); ctx.setup();
-check(tabs["By student"].getRange(1, 2).getValues()[0][0] === "Ben Ortiz", "the picked student stays picked when the tab is redrawn");
-check(tabs.Students.getRange(5, 1).getValues()[0][0] && tabs["By student"].charts.length === 1, "a student added later gets a code; the tab still has one chart");
+check(tabs.Analysis.getRange(1, 2).getValues()[0][0] === "Ben Ortiz", "a picked student stays picked when the tab is redrawn");
+check(tabs.Students.getRange(5, 1).getValues()[0][0] && tabs.Analysis.charts.length === 1, "a student added later gets a code; Analysis still has one chart");
+tabs.Analysis.getRange(1, 2).setValues([["Nobody Here"]]); ctx.setup();
+check(tabs.Analysis.getRange(1, 2).getValues()[0][0] === "Whole class", "a choice that is no longer a student goes back to Whole class");
 var cy = JSON.parse(ctx.doGet({ parameter: { op: "settings", code: codes[2] } }).text);
 check(cy.known && cy.firstName === "Cy", "a name pasted from Canvas as \"Lee, Cy\" greets the student as Cy");
 function answers() { return tabs[DATA].getLastRow() - 1; }
