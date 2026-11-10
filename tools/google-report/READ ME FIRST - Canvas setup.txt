@@ -1,0 +1,264 @@
+TKM practice - Google reporting TEST - version 0.7 - FIRST-TIME SETUP
+================================================================================
+
+This zip sets up a small TEST of Option B: the game sends each answer to a Google Sheet in YOUR school
+Google account by itself, so students never copy or paste a progress code. It is not the real game. It has
+4 short ORIGINAL practice passages (not from the novel), each with a pretend chapter number (1 to 4), so you
+can watch chapters unlock when you change one cell in your Sheet.
+Jump to a section with Ctrl+F (Cmd+F on a Mac) and its name, like SECTION 4.
+
+CONTENTS
+  SECTION 1  What's in this zip
+  SECTION 2  Make your Google Sheet (first time)
+  SECTION 3  Put your Sheet's link in the link file
+  SECTION 4  Set up the test in Canvas
+  SECTION 5  The embed code (copy and paste)
+  SECTION 6  Try it
+  SECTION 7  What to tell me
+  SECTION 8  Updating to a new version
+  SECTION 9  Troubleshooting
+  SECTION 10 Privacy and cleaning up
+
+================================================================================
+SECTION 1  WHAT'S IN THIS ZIP
+================================================================================
+
+- 3 test files. They all go in the SAME Canvas folder:
+    TKM-GoogleTest.html        the page the embed code points at
+    TKM-GoogleTest-link.js     one line: your Sheet's link (the only file you edit, SECTION 3)
+    TKM-GoogleTest-game.js     the practice page itself
+- Canvas-Check.html: optional. The Canvas check page (if you ever want to run it again). You may upload it
+  to the same folder.
+- Code.gs - paste into Google Apps Script.txt: the script for your Google Sheet (SECTION 2). You don't
+  upload it to Canvas.
+- This READ ME. You don't upload it.
+
+Time: about 20 minutes the first time.
+
+================================================================================
+SECTION 2  MAKE YOUR GOOGLE SHEET (FIRST TIME)
+================================================================================
+
+Use your SCHOOL Google account.
+
+Step 1 - Make the Sheet and paste the script
+--------------------------------------------
+1. Type  sheets.new  in the address bar. Name the new Sheet, for example "TKM game results".
+2. Click Extensions > Apps Script. A new tab opens with a file called Code.gs.
+3. Delete everything in Code.gs. Open "Code.gs - paste into Google Apps Script.txt" from this zip (it opens in
+   Notepad, or TextEdit on a Mac), copy ALL of it, and paste it in. Click the Save icon.
+
+Step 2 - Set up the tabs
+------------------------
+1. Go back to the Sheet's tab and RELOAD the page. After a few seconds a "TKM game" menu appears at the top.
+2. Click TKM game > 1. Set up this Sheet.
+   Google asks you to allow access: click Continue, pick your account, click Allow. If it says "Google hasn't
+   verified this app", click Advanced, then "Go to ... (unsafe)". (It is your own script; Google says this
+   about every script a teacher writes.)
+3. Click TKM game > 1. Set up this Sheet once more. Six tabs appear: Analysis, Grades, Settings, Students,
+   Summary and Answer data.
+
+Step 3 - Add students and make join codes
+-----------------------------------------
+For a first test, a few names are enough: type them in the Students tab, column B, starting in row 2 (for
+example your own name and "Test Student"). Then do step 4 below.
+
+For a whole class, copy the names from Canvas instead of typing them:
+1. In Canvas, open the course's Grades, click Export, then Export Entire Gradebook. Canvas saves a .csv file.
+2. In your Google Sheet: File > Import > Upload, and choose that .csv file.
+   Import location: "Insert new sheet(s)". Click Import data. A new tab opens with the gradebook.
+3. In that new tab, column A ("Student") has the names, as "Last, First". Click the first real student's name
+   (skip the rows at the top that say "Points Possible" or "Manual Posting"), then press Ctrl+Shift+Down Arrow
+   to select the rest of the column. Press Ctrl+C.
+4. Go to the Students tab, click cell B2, and press Ctrl+Shift+V (paste values only).
+   Delete any row that isn't a real student, such as "Student, Test".
+5. Click TKM game > 2. Make join codes for new students. Each name gets a code like K7Q-2MF in column A.
+   The game greets each student by first name ("Rivera, Ana" is greeted as Ana).
+6. You can delete the gradebook tab now. Students who join later: add their names under the others and click
+   TKM game > 2. Make join codes again. Codes students already have never change.
+
+Step 4 - Make the web link
+--------------------------
+1. In the Apps Script tab: Deploy > New deployment > click the gear next to "Select type" > Web app.
+      Description:     TKM test
+      Execute as:      Me
+      Who has access:  Anyone
+2. Click Deploy. Copy the "Web app" link (it ends in /exec). You need it in SECTION 3.
+
+If "Anyone" isn't in the list and you only see "Anyone within [your district]": pick that for now and tell
+me. It probably means students can't send answers from home, and that is an important result.
+
+================================================================================
+SECTION 3  PUT YOUR SHEET'S LINK IN THE LINK FILE
+================================================================================
+
+The easiest way: send me the /exec link and I'll send back TKM-GoogleTest-link.js with the link inside.
+
+To do it yourself on Windows:
+1. Unzip this file: right-click it and choose "Extract All", then click Extract.
+2. Right-click TKM-GoogleTest-link.js > Open with > Notepad.
+3. Find the last line:      window.TKM_SHEET_URL = "";
+   Paste your link between the two quotation marks, so it looks like:
+      window.TKM_SHEET_URL = "https://script.google.com/macros/s/AKfy.../exec";
+4. File > Save. Close Notepad.
+
+================================================================================
+SECTION 4  SET UP THE TEST IN CANVAS
+================================================================================
+
+Step 1 - Upload the files
+-------------------------
+1. In Canvas, open your course, then Files.
+2. Click + Folder and make a new folder (for example: TKM Google test). Use a different folder from the
+   real game.
+3. Open that folder, click Upload, and select the 3 test files (TKM-GoogleTest.html, TKM-GoogleTest-link.js
+   and TKM-GoogleTest-game.js). If Canvas asks, choose Replace.
+
+Step 2 - Find your numbers
+--------------------------
+1. In that folder, click TKM-GoogleTest.html once to open its preview.
+2. Look at the address bar. It looks like this:
+      https://yourschool.instructure.com/courses/152432/files/60512345?...
+   COURSE is the number after /courses/   (in the example: 152432)
+   NUMBER is the number after /files/     (in the example: 60512345)
+
+Step 3 - Put the test on a Page
+-------------------------------
+1. Pages > + Page. Name it "TKM Google test". Leave it UNPUBLISHED while you try it (Student View works).
+2. Click the </> button (HTML Editor), paste the embed code (SECTION 5) and replace COURSE and NUMBER.
+3. Click Save.
+(An assignment works too, the same way. Students don't turn anything in: answers go to your Sheet.)
+
+================================================================================
+SECTION 5  THE EMBED CODE (COPY AND PASTE)
+================================================================================
+
+NUMBER is the number of TKM-GoogleTest.html:
+
+   <iframe src="/courses/COURSE/files/NUMBER/preview" width="100%" height="650" allowfullscreen="allowfullscreen"></iframe>
+
+   With the example numbers it would be:
+   <iframe src="/courses/152432/files/60512345/preview" width="100%" height="650" allowfullscreen="allowfullscreen"></iframe>
+
+The page scrolls inside the frame. Change height="650" if you want it taller or shorter.
+
+================================================================================
+SECTION 6  TRY IT
+================================================================================
+
+1. Open the Page. Type a join code from your Students tab and click Start. The page greets that student by
+   first name and shows chapters 1 to 3.
+2. Answer a few questions. The bar at the top says "Sending..." and then "All answers sent".
+3. Look at your Sheet:
+   - Analysis tab: at the top is a big yellow box that says "Whole class". Click it to pick the whole
+     class or one student (the list has every name in your Students tab). The chart under it shows a bar
+     for each skill: green is the share answered right on the first try, orange the share answered wrong,
+     with the percentages on the bars. The numbers it is drawn from are under the chart. A skill with no
+     answers yet has an empty bar. The yellow box stays at the top while you scroll.
+     Further down, a grid has every student (rows) by skill (columns), coloured green, yellow or red, and
+     empty where the student hasn't answered that skill yet.
+   - The colour bands: in the Settings tab, "Green from" (row 5, starts at 80) and "Yellow from" (row 6,
+     starts at 60). Below "Yellow from" is red. Type a new percent (for example 85) and the grid's colours
+     and heading change at once. Running Set up again keeps your numbers.
+   - Grades tab: your grading criteria in the yellow cells, and a grade for every student under them.
+     For each goal, set "Full credit at" and how much it counts (0 = not counted):
+        Minutes answering questions   60    counts 1
+        Questions answered            50    counts 1
+        Days played                    3    counts 0
+        % right on the first try      70    counts 0
+     Points possible: 100. A student's grade is the points times the share of each counted goal they
+     reached (each goal tops out at full credit). Example: 30 minutes and 50 questions = 75 of 100.
+     "Count work from" and "Count work through" set the dates that count, for example one week. Leave
+     them empty to count everything. Grades are coloured with the same bands as the Analysis grid.
+     To grade a week: set the two dates, then read the Grade column. Running Set up again keeps your
+     criteria.
+   - Summary tab: % right by student, by chapter and by skill, and the most-missed items (once an item has 3
+     or more answers). It updates by itself.
+   - Answer data tab (the last tab): one row for each answer: the student's name, item, chapter, skill,
+     whether it was right on the first try (1 = yes), the letter picked and the seconds it took.
+4. Unlock a chapter: in the Settings tab, change "Unlocked through chapter" from 3 to 4. On the practice page
+   click "Check for newly opened chapters" (or reload). The fourth passage appears. In the real game this
+   replaces the unlock codes.
+5. No internet: turn off the Chromebook's Wi-Fi, answer a question, and see "Waiting to send: 1". Turn Wi-Fi
+   back on. Within a minute (or when you click "Send now" under "For the teacher") it is sent.
+6. Pause: in Settings, set "Accept answers" to FALSE. Answers wait on the Chromebook until you set it back to
+   TRUE.
+7. FROM HOME: open the same Page on a Chromebook at home and answer one question. This is the most important
+   test, because home and school networks can behave differently.
+
+"Not you? Change the join code" at the bottom lets one Chromebook switch students while you test.
+
+================================================================================
+SECTION 7  WHAT TO TELL ME
+================================================================================
+
+- Did answers reach the Sheet from school? From home?
+- Did "Anyone" exist in the deployment settings, or only "Anyone within [district]"?
+- Did the unlock change show up?
+- Does the Analysis chart show coloured bars, and do the Summary tables show numbers (not an error)?
+- Anything confusing for students (the join code, the messages)?
+- What you want to see in the Analysis, Grades or Summary tab that isn't there.
+- Do the grades match what you expect for your test student?
+
+If something didn't work, open "For the teacher: what this page knows" at the bottom of the practice page
+and copy what it says. The last line is the Sheet's last reply.
+
+================================================================================
+SECTION 8  UPDATING TO A NEW VERSION
+================================================================================
+
+When I send a new version, upload only the new TKM-GoogleTest-game.js to the same folder and choose Replace.
+Do not replace or delete TKM-GoogleTest.html (your embed code stays with it) or TKM-GoogleTest-link.js (it
+holds your link).
+If I send a new Code.gs:
+1. Paste it into Apps Script as in SECTION 2 (Ctrl+A, Ctrl+V, Ctrl+S).
+2. Reload the Sheet and click TKM game > 1. Set up this Sheet. Your settings, students and answers stay.
+   (Version 0.3 added the Analysis tab and renamed the old Answers tab to Answer data. Version 0.5 added
+   the colour bands in Settings, rows 5 and 6. Version 0.6 added the Grades tab. Version 0.7 puts the
+   whole class and each student on the Analysis tab, with the big drop-down, and removes the By student
+   tab.)
+3. In Apps Script: Deploy > Manage deployments > pencil icon > Version: New version > Deploy. This step
+   matters: until you do it, the web link keeps running the old script. It keeps the same /exec link.
+   (A NEW deployment makes a new link.)
+
+================================================================================
+SECTION 9  TROUBLESHOOTING
+================================================================================
+
+- "Can't find TKM-GoogleTest-....js": that file is missing from the folder. Upload it with exactly the same
+  name.
+- The page asks "Teacher: connect your Sheet": the link file is still empty. Do SECTION 3 and upload
+  TKM-GoogleTest-link.js again (Replace).
+- "Google sent a sign-in page instead of the Sheet": in Apps Script, Deploy > Manage deployments > pencil
+  icon > Who has access: Anyone > Deploy.
+- "Can't reach your teacher's Sheet right now": Canvas or a web filter is blocking Google. Upload
+  Canvas-Check.html to the same folder, put it on a Page with the same embed code (its own NUMBER, height
+  800), and send me its results.
+- "That code isn't on your teacher's list": check the code in the Students tab (column A). A code you type
+  by hand works within a minute.
+- No "TKM game" menu in the Sheet: reload the Sheet. If it still isn't there, open Extensions > Apps Script
+  and check that Code.gs was saved.
+- Don't sort or edit the Answer data tab while students are playing. Copy it to another tab to work on it.
+- A chart looks wrong or is missing: click TKM game > 1. Set up this Sheet. It draws the Analysis and
+  Grades tabs again (your answers, choices and criteria stay).
+- A new student isn't in the Analysis grid or the Grades list: add the name in the Students tab and click
+  TKM game > 2. Make join codes. That also redraws those tabs. (The drop-down list picks up new names by
+  itself.)
+
+================================================================================
+SECTION 10 PRIVACY AND CLEANING UP
+================================================================================
+
+- Answers go only to your Sheet in your school Google account. Nothing goes to me or anyone else.
+- The practice page sends the join code, not the student's name. Names are only in your Students tab.
+- The Students tab has real names: share the Sheet only with staff.
+- Before using this with a whole class, check with your tech coordinator that a Google Sheet in your school
+  account is a fine place for practice results.
+- To stop: in Apps Script, Deploy > Manage deployments > Archive. To delete everything, delete the Sheet and
+  the Canvas folder.
+- On a Chromebook, "Forget everything on this Chromebook" (under "For the teacher") clears the practice
+  page's saved code and answers.
+
+================================================================================
+Files in the test: TKM-GoogleTest.html, TKM-GoogleTest-link.js, TKM-GoogleTest-game.js
+Optional: Canvas-Check.html.  Not uploaded: Code.gs - paste into Google Apps Script.txt, this READ ME.

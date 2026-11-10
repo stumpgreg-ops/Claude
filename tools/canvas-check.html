@@ -5,19 +5,38 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Canvas check · can a game run here?</title>
 <style>
-  html, body { margin: 0; background: #12111f; color: #ece6fb; font: 18px/1.5 system-ui, sans-serif; }
-  main { max-width: 640px; margin: 0 auto; padding: 24px 16px; text-align: center; }
-  .big { font-size: 28px; font-weight: 700; margin: 12px 0; }
+  html, body { margin: 0; background: #12111f; color: #ece6fb; font: 17px/1.45 system-ui, sans-serif; }
+  main { max-width: 680px; margin: 0 auto; padding: 16px; }
+  h1 { font-size: 22px; margin: 4px 0 10px; text-align: center; }
+  .big { font-size: 24px; font-weight: 700; margin: 10px 0; text-align: center; }
   .no { color: #ff9a8a; }
   .yes { color: #9aefc0; }
-  ul { text-align: left; display: inline-block; margin: 8px 0 0; padding-left: 20px; }
-  small { color: #a7a0c4; }
+  .wait { color: #f3d27a; }
+  .skip { color: #a7a0c4; }
+  ul { margin: 6px 0 10px; padding-left: 4px; list-style: none; }
+  li { margin: 3px 0; }
+  li small { display: block; margin-left: 24px; }
+  small, .muted { color: #a7a0c4; }
+  .box { background: #1d1b31; border: 1px solid #343052; border-radius: 10px; padding: 10px 12px; margin: 10px 0; }
+  .box h2 { font-size: 17px; margin: 0 0 6px; }
+  .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 6px 0; }
+  button { font: inherit; font-size: 16px; padding: 7px 14px; border-radius: 8px; border: 0; background: #7c5cff; color: #fff; cursor: pointer; }
+  button.alt { background: #343052; }
+  button[aria-pressed="true"] { background: #37d6c4; color: #10101c; font-weight: 700; }
+  input[type=text] { flex: 1 1 260px; font: inherit; font-size: 15px; padding: 7px 9px; border-radius: 8px; border: 1px solid #4a4570; background: #12111f; color: #ece6fb; }
+  textarea { width: 100%; box-sizing: border-box; height: 92px; font: 13px/1.35 ui-monospace, monospace; background: #12111f; color: #ece6fb; border: 1px solid #4a4570; border-radius: 8px; padding: 6px; }
+  #copied { min-height: 1.4em; }
 </style>
 </head>
 <body>
 <main>
-  <!-- v5.8.1 (tools/canvas-check.html): a tiny page that tells a teacher whether this place in Canvas lets a page run
-       its code. Without scripts only the first line shows; with scripts it is replaced by the checks below. -->
+  <!-- tools/canvas-check.html: a small page that tells a teacher what a game can do from this spot in Canvas.
+       v5.8.1: can the page run its code, save, unpack the game and draw 3D?
+       v5.24.1: can it also send to Google and read back from Google, the two things automatic progress reporting
+       and teacher-set chapter unlocks need? Optionally, a full round trip through the teacher's own Apps Script
+       (tools/canvas-check-Code.gs). Without scripts only the first line below shows. The page sends no student data:
+       only a random test number. -->
+  <h1>Canvas check</h1>
   <div id="out">
     <div class="big no">✗ Games can't run here</div>
     <p>This spot shows the page as a picture only: its code is switched off. Try the next way in the instructions.</p>
@@ -25,19 +44,223 @@
 </main>
 <script>
 (function () {
-  var rows = [];
-  function row(ok, text) { rows.push('<li class="' + (ok ? "yes" : "no") + '">' + (ok ? "✓ " : "✗ ") + text + "</li>"); }
-  var saves = false;
-  try { localStorage.setItem("canvasCheck", "1"); saves = localStorage.getItem("canvasCheck") === "1"; localStorage.removeItem("canvasCheck"); } catch (e) {}
-  row(true, "The page's code runs");
-  row(saves, saves ? "Progress can be saved" : "Progress can't be saved here (students would start over each time)");
-  row(typeof DecompressionStream !== "undefined", "This Chrome can unpack the game");
-  var gl = false;
-  try { var c = document.createElement("canvas"); gl = !!(c.getContext("webgl2") || c.getContext("webgl")); } catch (e) {}
-  row(gl, "3D graphics work");
-  document.getElementById("out").innerHTML =
-    '<div class="big ' + (saves ? "yes" : "no") + '">' + (saves ? "✓ The game can run here" : "Almost: the game runs but can't save") + "</div>" +
-    "<ul>" + rows.join("") + "</ul><p><small>" + location.origin + "</small></p>";
+  "use strict";
+  /* Optional: paste the web app link of your copy of tools/canvas-check-Code.gs between the quotes before you
+     upload this file (it looks like https://script.google.com/macros/s/AKfy.../exec). You can also paste it in
+     the box on the page instead. */
+  var APPS_SCRIPT_URL = "";
+
+  var VERSION = "2";
+  var TIMEOUT_MS = 9000;
+  var SEND_URL = "https://script.google.com/macros/s/canvas-check/exec";
+  var READ_URL = "https://www.googleapis.com/discovery/v1/apis?name=sheets&preferred=true&fields=kind";
+
+  var out = document.getElementById("out");
+  var blocked = [];
+  document.addEventListener("securitypolicyviolation", function (e) {
+    var d = (e.effectiveDirective || e.violatedDirective || "?") + " " + String(e.blockedURI || "").replace(/^(https?:\/\/[^\/]+).*$/, "$1");
+    if (blocked.indexOf(d) < 0) blocked.push(d);
+  });
+
+  function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) {} return null; }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function nonce() { var a = new Uint32Array(2); try { crypto.getRandomValues(a); } catch (e) { a[0] = Date.now(); a[1] = Math.random() * 1e9; } return a[0].toString(36) + a[1].toString(36); }
+  function timed(url, opts) {
+    var ctl = typeof AbortController !== "undefined" ? new AbortController() : null, t;
+    if (ctl) { opts.signal = ctl.signal; t = setTimeout(function () { ctl.abort(); }, TIMEOUT_MS); }
+    /* on a failure, wait a moment: Chrome reports a security-rule block just after the request fails, and why()
+       needs that report to say so */
+    return fetch(url, opts).then(function (r) { clearTimeout(t); return r; }, function (err) {
+      clearTimeout(t);
+      return new Promise(function (ok, fail) { setTimeout(function () { fail(err); }, 150); });
+    });
+  }
+  function why(err) {
+    if (err && err.name === "AbortError") return "no answer within " + (TIMEOUT_MS / 1000) + " seconds (a slow or filtered connection)";
+    var csp = blocked.filter(function (b) { return /^(connect-src|default-src)/.test(b); });
+    if (csp.length) return "Canvas's security rules block it (" + csp.join(", ") + ")";
+    return "the request was stopped (a web filter, no internet, or Canvas)";
+  }
+
+  /* ── state ── */
+  var where = store("canvasCheck.where") || "";
+  var gasUrl = APPS_SCRIPT_URL || store("canvasCheck.gas") || "";
+  var R = {};
+
+  /* ── the checks that need no network ── */
+  function localChecks() {
+    R.runs = { ok: true, text: "The page's code runs" };
+    var saves = false;
+    try { localStorage.setItem("canvasCheck", "1"); saves = localStorage.getItem("canvasCheck") === "1"; localStorage.removeItem("canvasCheck"); } catch (e) {}
+    R.save = { ok: saves, text: saves ? "Progress can be saved" : "Progress can't be saved here (students would start over each time)" };
+    R.unpack = { ok: typeof DecompressionStream !== "undefined", text: "This Chrome can unpack the game" };
+    var gl = false;
+    try { var c = document.createElement("canvas"); gl = !!(c.getContext("webgl2") || c.getContext("webgl")); } catch (e) {}
+    R.gl = { ok: gl, text: "3D graphics work", note: gl ? "" : "Only needed for the 3D castle; a 2D game doesn't need it." };
+    R.speech = { ok: null, text: "Read-aloud voices: checking…" };
+    /* Can the game reach the assignment page around it? Only a page on Canvas's own address could (then it
+       could, in principle, submit for the student). Canvas normally serves uploaded files from a separate
+       address on purpose, so this is expected to be "no". */
+    var inFrame = false, same = false;
+    try { inFrame = window.top !== window; } catch (e) { inFrame = true; }
+    try { same = inFrame && window.top.location.host === location.host; } catch (e) { same = false; }
+    R.same = same
+      ? { info: true, text: "This page shares Canvas's address: it can reach the assignment page around it" }
+      : { info: true, text: inFrame ? "This page is kept apart from the Canvas page around it, so it can't fill in or submit the assignment"
+                                    : "This page isn't inside a Canvas page (open it from the Page or assignment, not on its own)" };
+    R.same.yes = same; R.inFrame = inFrame;
+  }
+  function speechCheck() {
+    return new Promise(function (done) {
+      if (!("speechSynthesis" in window)) { R.speech = { ok: false, text: "Read-aloud isn't available in this browser" }; return done(); }
+      var tries = 0;
+      (function look() {
+        var n = 0; try { n = speechSynthesis.getVoices().length; } catch (e) {}
+        if (n || tries++ > 15) {
+          R.speech = { ok: n > 0, text: n ? "Read-aloud works (" + n + " voices)" : "Read-aloud has no voices on this device", n: n };
+          return done();
+        }
+        setTimeout(look, 100);
+      })();
+    });
+  }
+
+  /* ── the network checks ── */
+  function sendCheck() {
+    R.send = { ok: null, text: "Send to Google: checking…" };
+    /* a no-cors POST: the page can't see Google's answer, but the promise only resolves if the request left the
+       page and came back from Google. A Canvas security rule or a web filter makes it fail. */
+    return timed(SEND_URL, { method: "POST", mode: "no-cors", body: "canvas-check " + nonce(), cache: "no-store", credentials: "omit" })
+      .then(function () { R.send = { ok: true, text: "The page can send to Google (script.google.com)" }; },
+            function (err) { R.send = { ok: false, text: "The page can't send to Google", note: why(err) }; });
+  }
+  function readCheck() {
+    R.read = { ok: null, text: "Read from Google: checking…" };
+    return timed(READ_URL, { method: "GET", mode: "cors", cache: "no-store", credentials: "omit" })
+      .then(function (r) {
+        R.read = r.ok ? { ok: true, text: "The page can read from Google (googleapis.com)" }
+                      : { ok: false, text: "Google answered, but with an error (" + r.status + ")", note: "Try Run again." };
+      }, function (err) { R.read = { ok: false, text: "The page can't read from Google", note: why(err) }; });
+  }
+  function gasCheck() {
+    if (!gasUrl) { R.gas = { ok: null, skip: true, text: "Your Apps Script: not tested (optional, see below)" }; return Promise.resolve(); }
+    if (!/^https:\/\/script\.google\.com\/(a\/[^\/]+\/)?macros\/s\/[^\/]+\/exec$/.test(gasUrl)) {
+      R.gas = { ok: false, text: "Your Apps Script: that link doesn't look like a web app link", note: "It should end in /exec." };
+      return Promise.resolve();
+    }
+    R.gas = { ok: null, text: "Your Apps Script: checking…" };
+    var n = nonce();
+    /* text/plain keeps this a "simple" request, so no CORS preflight (Apps Script can't answer one). */
+    return timed(gasUrl, { method: "POST", mode: "cors", headers: { "Content-Type": "text/plain;charset=utf-8" },
+                           body: JSON.stringify({ check: "canvas-check", nonce: n }), cache: "no-store", credentials: "omit", redirect: "follow" })
+      .then(function (r) { return r.text(); })
+      .then(function (t) {
+        var j = JSON.parse(t);
+        if (!j || !j.saved) throw new Error("not saved");
+        return timed(gasUrl + "?nonce=" + encodeURIComponent(n), { method: "GET", mode: "cors", cache: "no-store", credentials: "omit", redirect: "follow" });
+      })
+      .then(function (r) { return r.text(); })
+      .then(function (t) {
+        var j = JSON.parse(t);
+        R.gas = j && j.got === "received"
+          ? { ok: true, text: "Your Apps Script: sent and read back (a full round trip)" }
+          : { ok: false, text: "Your Apps Script answered, but the test number didn't come back", note: "Check that you deployed the newest version of the script." };
+      })
+      .catch(function (err) {
+        var note = why(err);
+        var signIn = err instanceof SyntaxError || (err && err.message === "not saved") ||
+          (err && err.name === "TypeError" && R.send.ok === true && !blocked.some(function (b) { return /^(connect-src|default-src)/.test(b); }));
+        if (signIn)
+          note = "Google answered with a sign-in page, not the script. In the deployment, set \"Who has access\" to \"Anyone\". If your district only offers \"Anyone in [district]\", that is the answer: the game couldn't report from here.";
+        R.gas = { ok: false, text: "Your Apps Script: no round trip", note: note };
+      });
+  }
+
+  /* ── what it means ── */
+  function verdict() {
+    var runs = R.save.ok && R.unpack.ok;
+    var net = R.send.ok === true && R.read.ok === true && R.gas.ok !== false;
+    var pending = R.send.ok === null || R.read.ok === null || (R.gas.ok === null && !R.gas.skip);
+    var lines = [];
+    lines.push(runs ? '<div class="big yes">✓ The game can run here</div>'
+                    : '<div class="big no">' + (R.save.ok ? "✗ This Chrome is too old to unpack the game" : "Almost: the game runs but can't save") + "</div>");
+    if (pending) lines.push('<div class="big wait">… Checking automatic reporting</div>');
+    else if (net) lines.push('<div class="big yes">✓ Automatic reporting looks possible' + (R.gas.ok ? "" : " (test your Apps Script to be sure)") + "</div>");
+    else lines.push('<div class="big no">✗ Automatic reporting won\'t work from here: progress codes are needed</div>');
+    return lines.join("");
+  }
+  function li(r) {
+    var cls = r.info || r.skip ? "skip" : r.ok === null ? "wait" : r.ok ? "yes" : "no";
+    var mark = r.info ? "ℹ " : r.skip ? "– " : r.ok === null ? "… " : r.ok ? "✓ " : "✗ ";
+    return '<li class="' + cls + '">' + mark + esc(r.text) + (r.note ? "<small>" + esc(r.note) + "</small>" : "") + "</li>";
+  }
+  function summary() {
+    function v(r) { return r.skip ? "skipped" : r.ok === null ? "pending" : r.ok ? "yes" : "no"; }
+    var ref = ""; try { ref = document.referrer ? new URL(document.referrer).origin : ""; } catch (e) {}
+    return "Canvas check v" + VERSION + " | " + new Date().toLocaleString() +
+      " | where: " + (where || "not chosen") +
+      " | runs: yes | save: " + v(R.save) + " | unpack: " + v(R.unpack) + " | 3D: " + v(R.gl) +
+      " | read-aloud: " + v(R.speech) + (R.speech.n ? " (" + R.speech.n + " voices)" : "") +
+      " | send to Google: " + v(R.send) + " | read from Google: " + v(R.read) + " | Apps Script: " + v(R.gas) +
+      (R.send.note || R.read.note || R.gas.note ? " | why: " + [R.send.note, R.read.note, R.gas.note].filter(Boolean).join(" / ") : "") +
+      " | blocked by rules: " + (blocked.length ? blocked.join(", ") : "none") +
+      " | same address as Canvas: " + (R.same.yes ? "yes" : "no") +
+      " | page: " + location.origin + (R.inFrame ? " (in a frame" + (ref ? " on " + ref : "") + ")" : " (not in a frame)") +
+      " | browser: " + navigator.userAgent;
+  }
+  function render() {
+    /* keep what the teacher is typing in the link box: a check can finish (and redraw the page) mid-typing */
+    var box = document.getElementById("gas"), draft = box ? box.value : gasUrl, typing = box && document.activeElement === box;
+    var whereBtns = ["at school", "at home"].map(function (w) {
+      return '<button class="alt" data-where="' + w + '" aria-pressed="' + (where === w) + '">I\'m ' + w + "</button>";
+    }).join("");
+    out.innerHTML = verdict() +
+      '<ul>' + [R.runs, R.save, R.unpack, R.gl, R.speech, R.same, R.send, R.read, R.gas].map(li).join("") + "</ul>" +
+      '<div class="box"><h2>1. Where are you?</h2><div class="row">' + whereBtns + '<button id="again">Run again</button></div>' +
+        '<small>Run this once at school and once at home: school and home networks can give different answers.</small></div>' +
+      '<div class="box"><h2>2. Send me the results</h2>' +
+        '<div class="row"><button id="copy">Copy results</button><span id="copied" class="muted"></span></div>' +
+        '<textarea id="sum" readonly aria-label="Results to copy">' + esc(summary()) + "</textarea></div>" +
+      '<div class="box"><h2>3. Optional: test your own Apps Script</h2>' +
+        '<small>For a full round trip, deploy tools/canvas-check-Code.gs as a web app (its top comment says how), paste its link here, then Run again.</small>' +
+        '<div class="row"><input type="text" id="gas" placeholder="https://script.google.com/macros/s/…/exec" value="' + esc(draft) + '" />' +
+        '<button id="gasgo">Test it</button></div></div>' +
+      '<p><small>This page sends no student information: only a random test number. Page address: ' + esc(location.origin) + "</small></p>";
+    Array.prototype.forEach.call(out.querySelectorAll("[data-where]"), function (b) {
+      b.onclick = function () { where = b.getAttribute("data-where"); store("canvasCheck.where", where); render(); };
+    });
+    if (typing) { box = document.getElementById("gas"); box.focus(); box.setSelectionRange(box.value.length, box.value.length); }
+    document.getElementById("again").onclick = run;
+    document.getElementById("gasgo").onclick = function () {
+      gasUrl = document.getElementById("gas").value.trim(); store("canvasCheck.gas", gasUrl); run();
+    };
+    document.getElementById("copy").onclick = function () {
+      var ta = document.getElementById("sum"), msg = document.getElementById("copied");
+      function fallback() { ta.focus(); ta.select(); var ok = false; try { ok = document.execCommand("copy"); } catch (e) {}
+        msg.textContent = ok ? "Copied." : "Press Ctrl+C to copy (the text is selected)."; }
+      if (navigator.clipboard && navigator.clipboard.writeText)
+        navigator.clipboard.writeText(ta.value).then(function () { msg.textContent = "Copied."; }, fallback);
+      else fallback();
+    };
+  }
+
+  var running = false, again = false;
+  function run() {
+    if (running) { again = true; return; }
+    running = true; blocked = [];
+    localChecks();
+    R.send = { ok: null, text: "Send to Google: checking…" };
+    R.read = { ok: null, text: "Read from Google: checking…" };
+    R.gas = gasUrl ? { ok: null, text: "Your Apps Script: checking…" } : { ok: null, skip: true, text: "Your Apps Script: not tested (optional, see below)" };
+    render();
+    /* the Apps Script check runs after the send check, so a failure can be told apart: Google reachable but the
+       script asks for a sign-in, versus nothing reachable at all */
+    var jobs = [speechCheck(), sendCheck().then(render).then(gasCheck).then(render), readCheck().then(render)];
+    if (typeof fetch === "undefined") { R.send = { ok: false, text: "This browser can't send anything (no fetch)" }; R.read = { ok: false, text: "This browser can't read anything (no fetch)" }; }
+    function finish() { running = false; render(); if (again) { again = false; run(); } }
+    Promise.all(jobs).then(finish, finish);
+  }
+  run();
 })();
 </script>
 </body>

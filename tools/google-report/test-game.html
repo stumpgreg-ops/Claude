@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>TKM game · Google reporting test</title>
+<style>
+  :root {
+    --bg: #f2f5f7; --surface: #ffffff; --ink: #16212b; --muted: #56646f; --line: #d3dbe1;
+    --accent: #1f4fbf; --accent-ink: #ffffff; --good: #1b7a45; --good-soft: #e1f3e8; --bad: #b3261e; --bad-soft: #fbe7e5;
+    --warn-soft: #fbeedd; --hl: #fff1a8;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #11171c; --surface: #1a232b; --ink: #e6edf2; --muted: #9aa9b5; --line: #2e3b46; --accent: #7aa2ff; --accent-ink: #0d1520;
+      --good: #5ccf8e; --good-soft: #16321f; --bad: #ff8a80; --bad-soft: #3a1c1a; --warn-soft: #3a2a1a; --hl: #5a4d12; color-scheme: dark; }
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.5 system-ui, "Segoe UI", sans-serif; }
+  main { max-width: 760px; margin: 0 auto; padding: 14px 16px 40px; display: grid; gap: 14px; }
+  h1 { font-size: 20px; margin: 0; }
+  h2 { font-size: 17px; margin: 0; }
+  p { margin: 0; }
+  .muted, small { color: var(--muted); }
+  .bar { position: sticky; top: 0; z-index: 2; display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; justify-content: space-between;
+    padding: 8px 12px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; font-size: 14px; }
+  .chip { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; }
+  .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--muted); }
+  .chip.ok .dot { background: var(--good); }
+  .chip.wait .dot { background: #d08a1e; }
+  .chip.bad .dot { background: var(--bad); }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; display: grid; gap: 10px; }
+  .passage { line-height: 1.7; }
+  .n { font: 12px ui-monospace, monospace; color: var(--muted); }
+  .tagline { font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+  .q { display: grid; gap: 8px; padding-top: 10px; border-top: 1px solid var(--line); }
+  .q-stem { font-weight: 600; }
+  .choices { display: grid; gap: 6px; }
+  .choice { text-align: left; font: inherit; padding: 8px 10px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; }
+  .choice:hover:not([disabled]) { border-color: var(--accent); }
+  .choice[disabled] { cursor: default; }
+  .choice.right { background: var(--good-soft); border-color: var(--good); }
+  .choice.wrong { background: var(--bad-soft); border-color: var(--bad); }
+  .fb { padding: 8px 10px; border-radius: 8px; background: var(--bg); font-size: 15px; }
+  .fb b.ok { color: var(--good); } .fb b.no { color: var(--bad); }
+  button.main { font: 600 15px system-ui, sans-serif; padding: 9px 14px; border-radius: 8px; border: 0; background: var(--accent); color: var(--accent-ink); cursor: pointer; justify-self: start; }
+  button.link { font: inherit; font-size: 14px; background: none; border: 0; padding: 0; color: var(--accent); cursor: pointer; text-decoration: underline; }
+  button:focus-visible, input:focus-visible, .choice:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  input[type=text] { font: inherit; padding: 8px 10px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); width: min(100%, 360px); }
+  .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .msg { padding: 8px 10px; border-radius: 8px; font-size: 15px; }
+  .msg.bad { background: var(--bad-soft); } .msg.warn { background: var(--warn-soft); } .msg.ok { background: var(--good-soft); }
+  details { font-size: 14px; }
+  details summary { cursor: pointer; color: var(--muted); }
+  pre { white-space: pre-wrap; overflow-wrap: anywhere; font: 12px/1.4 ui-monospace, monospace; background: var(--bg); padding: 8px; border-radius: 8px; margin: 6px 0 0; }
+</style>
+</head>
+<body>
+<main id="app">
+  <p>Loading…</p>
+</main>
+<script>
+/* TKM game · Google reporting test (v0.2). A small page to try Option B before it goes into the real game.
+   It asks Google which chapters are unlocked, shows only those practice passages, and sends each answer to
+   the teacher's Google Sheet (tools/google-report/Code.gs). Answers wait on this device until the Sheet
+   confirms them, so nothing is lost when the connection drops. The passages are original practice text,
+   not the novel; the chapter numbers on them are pretend, to show unlocking. */
+(function () {
+  "use strict";
+
+  /* ▼ Put your web app link between the quotes (it ends in /exec), then upload this file to Canvas.
+       (In the Canvas zip the link goes in TKM-GoogleTest-link.js instead; tools/build-google-test.js swaps
+       this line for that file's window.TKM_SHEET_URL.) */
+  var SCRIPT_URL = "";
+  /* ▲ */
+
+  var KEY = "tkmReportTest:";              /* Canvas serves every uploaded file from one shared address */
+  var RETRY_MS = 60000, TIMEOUT_MS = 15000, MAX_SEND = 50;
+
+  /* ── practice items (original text) ── */
+  var PASSAGES = [
+    { id: "P1", chapter: 1, title: "The porch",
+      s: ["Every afternoon, Mr. Hollis sat on his porch and watched the road as if he were waiting for someone.",
+          "The children on Pecan Street decided he was a spy.",
+          "Lena was not so sure.",
+          "She had seen him leave a jar of plums on the widow's step next door, then hurry inside before anyone could thank him.",
+          "\"Maybe he's just lonely,\" she told her brother, who only rolled his eyes."],
+      qs: [
+        { id: "P1-Q1", skill: "9.DSR.C.1", stem: "Which sentence best supports the claim that Mr. Hollis is kinder than the children think?",
+          c: ["Sentence 1", "Sentence 2", "Sentence 4", "Sentence 5"], k: 2,
+          why: "Sentence 4 shows him giving a gift in secret. The others show what he does all day, what the children believe, or Lena's guess." },
+        { id: "P1-Q2", skill: "9.RL.2.B.2", stem: "In sentence 4, the words \"hurry inside before anyone could thank him\" suggest that Mr. Hollis",
+          c: ["does not want credit for his kindness", "is afraid of the widow next door", "forgot something inside the house", "is rushing to meet a visitor"], k: 0,
+          why: "He leaves before anyone can thank him, so he is avoiding credit, not the widow." }
+      ] },
+    { id: "P2", chapter: 2, title: "The first day",
+      s: ["On the first day of school, Miss Dale asked each student to read one line aloud.",
+          "When June read hers without a single stumble, Miss Dale frowned.",
+          "\"Who taught you to read like that?\" she asked, as if it were a crime.",
+          "June stared at her desk.",
+          "She had thought reading well would make her teacher proud."],
+      qs: [
+        { id: "P2-Q1", skill: "9.RL.3.B.1", stem: "What does sentence 5 reveal about June?",
+          c: ["She expected praise and is confused by the reaction", "She dislikes school and wants to leave", "She wants to embarrass Miss Dale in class", "She learned to read from Miss Dale"], k: 0,
+          why: "June \"thought reading well would make her teacher proud,\" so she expected praise and got a frown instead." },
+        { id: "P2-Q2", skill: "9.RL.3.B.1", stem: "Which type of conflict does this passage show most clearly?",
+          c: ["Character vs. character: Miss Dale treats June's skill as a problem", "Character vs. self: June cannot read the line", "Character vs. society: the town forbids reading", "Character vs. nature: the classroom is too hot"], k: 0,
+          why: "The conflict is between June and Miss Dale. June reads well (sentence 2), so she is not struggling to read." }
+      ] },
+    { id: "P3", chapter: 3, title: "Supper",
+      s: ["The rain had not come for six weeks, and the cotton stood brown in the fields.",
+          "Papa counted the coins on the kitchen table twice, then a third time.",
+          "\"We'll manage,\" he said, but he did not look up.",
+          "Mama set an extra plate anyway, for the neighbor boy who always seemed to arrive at supper time."],
+      qs: [
+        { id: "P3-Q1", skill: "9.RL.3.B.1", stem: "How does the setting shape the family's situation?",
+          c: ["The dry weather has ruined the crop, so money is tight", "Heavy rain has flooded the fields and the house", "The family lives in a crowded, noisy city", "The family has just moved to a new farm"], k: 0,
+          why: "Sentence 1 shows the drought and the brown cotton; sentence 2 shows Papa counting coins again and again." },
+        { id: "P3-Q2", skill: "9.RL.1.A.2", stem: "In sentence 3, \"he did not look up\" suggests that Papa",
+          c: ["is less sure than his words sound", "is reading a letter at the table", "is angry with Mama about supper", "has more money than he needs"], k: 0,
+          why: "He says \"We'll manage\" but avoids looking at anyone, so his words and his actions don't match." }
+      ] },
+    { id: "P4", chapter: 4, title: "The broken gate",
+      s: ["Ben had always crossed the street to avoid the house with the broken gate.",
+          "Today a ball rolled through that gate, and his little sister ran after it.",
+          "Ben's heart pounded, but he followed her up the walk.",
+          "An old woman on the porch held out the ball and smiled."],
+      qs: [
+        { id: "P4-Q1", skill: "9.RL.1.A.1", stem: "Which statement best expresses a theme of this passage?",
+          c: ["Fear of the unknown can fade when we face it for someone we love", "Fear", "Ben's little sister chases a ball through a gate", "Everyone in every town is always kind"], k: 0,
+          why: "A theme is a full statement. \"Fear\" is only a topic, the third choice is a plot fact, and the last is too broad." },
+        { id: "P4-Q2", skill: "9.DSR.C.1", stem: "Which sentence best shows Ben acting with courage?",
+          c: ["Sentence 1", "Sentence 2", "Sentence 3", "Sentence 4"], k: 2,
+          why: "In sentence 3 Ben is afraid (\"his heart pounded\") but goes anyway. That is courage." }
+      ] }
+  ];
+
+  /* ── saved state on this device ── */
+  function load(k, d) { try { var v = localStorage.getItem(KEY + k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } }
+  function save(k, v) { try { localStorage.setItem(KEY + k, JSON.stringify(v)); } catch (e) {} }
+  var S = {
+    url: SCRIPT_URL || load("url", ""),
+    code: load("code", ""), firstName: load("firstName", ""),
+    unlocked: load("unlocked", 0), accepting: true,
+    queue: load("queue", []), pending: load("pending", null),
+    sent: load("sent", 0), lastSent: load("lastSent", ""),
+    answered: load("answered", {}),
+    status: "idle", problem: "", lastReply: ""
+  };
+  var app = document.getElementById("app"), lastMark = Date.now(), sending = false, timer = null;
+
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function id() { var a = new Uint32Array(3); try { crypto.getRandomValues(a); } catch (e) { a[0] = Date.now(); a[1] = Math.random() * 4e9; a[2] = Math.random() * 4e9; } return a[0].toString(36) + "-" + a[1].toString(36) + a[2].toString(36); }
+  function waiting() { return S.queue.length + (S.pending ? S.pending.answers.length : 0); }
+  function timeNow() { return new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }); }
+
+  /* ── talking to the Sheet ── */
+  function call(method, params, body) {
+    var ctl = typeof AbortController !== "undefined" ? new AbortController() : null, t;
+    var url = S.url + (params ? (S.url.indexOf("?") < 0 ? "?" : "&") + params : "");
+    var opts = { method: method, cache: "no-store", credentials: "omit", redirect: "follow" };
+    /* text/plain keeps it a "simple" request: Apps Script can't answer a CORS preflight */
+    if (body) { opts.headers = { "Content-Type": "text/plain;charset=utf-8" }; opts.body = JSON.stringify(body); }
+    if (ctl) { opts.signal = ctl.signal; t = setTimeout(function () { ctl.abort(); }, TIMEOUT_MS); }
+    return fetch(url, opts).then(function (r) { return r.text(); }).then(function (txt) {
+      clearTimeout(t); S.lastReply = txt.slice(0, 400);
+      try { return JSON.parse(txt); } catch (e) { throw new Error("not-json"); }
+    }, function (err) { clearTimeout(t); throw err; });
+  }
+  function problemText(err, code) {
+    if (code === "unknown-code") return "Your join code isn't on your teacher's list. Check it with your teacher.";
+    if (code === "paused") return "Your teacher has paused reporting. Your answers are saved here and will be sent later.";
+    if (code === "server") return "The Sheet had a problem. Your answers are saved here and will be sent later.";
+    if (err && err.message === "not-json") return "Google sent a sign-in page instead of the Sheet. Your teacher needs to set the web app to \"Anyone\".";
+    return "Can't reach your teacher's Sheet right now. Your answers are saved here and will be sent automatically.";
+  }
+
+  function fetchSettings() {
+    if (!S.url || !S.code) return Promise.resolve();
+    return call("GET", "op=settings&code=" + encodeURIComponent(S.code)).then(function (j) {
+      if (!j || !j.ok) throw new Error((j && j.error) || "bad");
+      if (!j.known) { S.problem = problemText(null, "unknown-code"); S.status = "bad"; return; }
+      S.unlocked = j.unlockedThrough; S.firstName = j.firstName; S.accepting = j.accepting !== false;
+      save("unlocked", S.unlocked); save("firstName", S.firstName);
+    }).catch(function (err) {
+      S.problem = "Can't reach your teacher's Sheet to check which chapters are open. Showing chapters 1 to " + S.unlocked + " from last time.";
+      S.status = "wait";
+    });
+  }
+
+  function flush() {
+    if (sending || !S.url || !S.code) return;
+    if (!S.pending) {
+      if (!S.queue.length) return;
+      S.pending = { batch: id(), answers: S.queue.slice(0, MAX_SEND) };
+      S.queue = S.queue.slice(MAX_SEND);
+      save("pending", S.pending); save("queue", S.queue);
+    }
+    sending = true; S.status = "sending"; drawBar();
+    call("POST", "", { code: S.code, batch: S.pending.batch, answers: S.pending.answers }).then(function (j) {
+      sending = false;
+      if (j && j.ok) {
+        S.sent += S.pending.answers.length; S.pending = null; S.lastSent = timeNow(); S.problem = ""; S.status = "ok";
+        save("sent", S.sent); save("pending", null); save("lastSent", S.lastSent);
+        if (S.queue.length) return flush();
+      } else {
+        S.status = j && j.error === "unknown-code" ? "bad" : "wait"; S.problem = problemText(null, j && j.error);
+      }
+      drawBar(); schedule();
+    }, function (err) {
+      sending = false; S.status = "wait"; S.problem = problemText(err); drawBar(); schedule();
+    });
+  }
+  function schedule() { clearTimeout(timer); if (waiting()) timer = setTimeout(flush, RETRY_MS); }
+  window.addEventListener("online", flush);
+  document.addEventListener("visibilitychange", function () { if (document.visibilityState === "visible") flush(); });
+
+  /* ── screens ── */
+  function drawBar() {
+    var bar = document.getElementById("bar"); if (!bar) return;
+    var w = waiting(), cls = S.status === "bad" ? "bad" : w || S.status === "wait" ? "wait" : S.sent ? "ok" : "";
+    var label = S.status === "sending" ? "Sending…" : w ? "Waiting to send: " + w : S.sent ? "All answers sent" : "Nothing to send yet";
+    bar.innerHTML = '<span class="chip ' + cls + '"><span class="dot" aria-hidden="true"></span>' + label + "</span>" +
+      '<span class="muted">Sent to your teacher: <b>' + S.sent + "</b>" + (S.lastSent ? " · last at " + esc(S.lastSent) : "") + "</span>";
+    var m = document.getElementById("problem");
+    if (m) { m.hidden = !S.problem; m.textContent = S.problem; m.className = "msg " + (S.status === "bad" ? "bad" : "warn"); }
+    var dbg = document.getElementById("dbg");
+    if (dbg) dbg.textContent = "Sheet link: " + (S.url || "(none)") + "\nJoin code: " + (S.code || "(none)") + "\nUnlocked through chapter: " + S.unlocked +
+      "\nWaiting: " + w + (S.pending ? " (batch " + S.pending.batch + " being sent)" : "") + "\nLast reply from the Sheet: " + (S.lastReply || "(none yet)");
+  }
+
+  function drawSetup() {
+    app.innerHTML = '<h1>Google reporting test</h1>' +
+      '<div class="card"><h2>Teacher: connect your Sheet</h2>' +
+      '<p>This copy has no Sheet link yet. Paste your web app link (it ends in <code>/exec</code>) to try it on this computer. ' +
+      'For students, put the link in before uploading (see the READ ME).</p>' +
+      '<div class="row"><input type="text" id="url" aria-label="Web app link" placeholder="https://script.google.com/macros/s/…/exec" />' +
+      '<button class="main" id="go">Connect</button></div><p class="msg bad" id="err" hidden></p></div>';
+    document.getElementById("go").onclick = function () {
+      var u = document.getElementById("url").value.trim(), e = document.getElementById("err");
+      if (!/^https?:\/\/\S+$/.test(u)) { e.hidden = false; e.textContent = "That doesn't look like a link. Copy the Web app link from Deploy > Manage deployments."; return; }
+      S.url = u; save("url", u);
+      call("GET", "").then(function (j) {
+        if (j && j.app === "tkm-report") draw();
+        else { e.hidden = false; e.textContent = "That link answered, but it isn't the TKM game script."; }
+      }, function (err) { e.hidden = false; e.textContent = problemText(err); });
+    };
+  }
+
+  function drawJoin(msg) {
+    app.innerHTML = '<h1>TKM practice</h1>' +
+      '<div class="card"><h2>Type your join code</h2><p>Your teacher gives you a code like <b>K7Q-2MF</b>. You only type it once on this Chromebook.</p>' +
+      '<div class="row"><input type="text" id="code" aria-label="Join code" autocomplete="off" maxlength="12" placeholder="K7Q-2MF" />' +
+      '<button class="main" id="go">Start</button></div>' + (msg ? '<p class="msg bad">' + esc(msg) + "</p>" : "") + "</div>";
+    var input = document.getElementById("code");
+    input.focus();
+    function go() {
+      var c = input.value.toUpperCase().replace(/[^A-Z0-9]/g, "");
+      if (c.length < 4) return drawJoin("Type the whole code, letters and numbers.");
+      document.getElementById("go").disabled = true;
+      call("GET", "op=settings&code=" + encodeURIComponent(c)).then(function (j) {
+        if (!j || !j.ok) throw new Error("bad");
+        if (!j.known) return drawJoin("That code isn't on your teacher's list. Check each letter and try again.");
+        S.code = c; S.firstName = j.firstName; S.unlocked = j.unlockedThrough; S.accepting = j.accepting !== false;
+        save("code", c); save("firstName", S.firstName); save("unlocked", S.unlocked);
+        draw();
+      }).catch(function (err) { drawJoin(problemText(err)); });
+    }
+    document.getElementById("go").onclick = go;
+    input.onkeydown = function (e) { if (e.key === "Enter") go(); };
+  }
+
+  function drawGame() {
+    var dEl = app.querySelector("details"), dbgOpen = !!(dEl && dEl.open);
+    var open = PASSAGES.filter(function (p) { return p.chapter <= S.unlocked; });
+    var locked = PASSAGES.length - open.length;
+    var html = '<div class="bar" id="bar"></div>' +
+      '<div><h1>TKM practice' + (S.firstName ? ", " + esc(S.firstName) : "") + "</h1>" +
+      '<p class="muted">Chapters 1 to ' + S.unlocked + ' are open (set in your teacher\'s Sheet). Practice passages, not the novel.</p></div>' +
+      '<p class="msg warn" id="problem" hidden></p>';
+    if (!open.length) html += '<div class="card"><p>No chapters are open yet. Check back after class.</p></div>';
+    open.forEach(function (p) {
+      html += '<section class="card" aria-label="' + esc(p.title) + '"><span class="tagline">Pretend chapter ' + p.chapter + " · " + esc(p.title) + "</span>" +
+        '<p class="passage">' + p.s.map(function (t, i) { return '<span class="n">(' + (i + 1) + ")</span> " + esc(t); }).join(" ") + "</p>";
+      p.qs.forEach(function (q) {
+        var a = S.answered[q.id];
+        html += '<div class="q" data-q="' + q.id + '"><p class="q-stem">' + esc(q.stem) + '</p><div class="choices">' +
+          q.c.map(function (c, i) {
+            var cls = a ? (i === q.k ? " right" : i === a.pick ? " wrong" : "") : "";
+            return '<button class="choice' + cls + '" data-i="' + i + '"' + (a ? " disabled" : "") + ">" + "ABCD"[i] + ". " + esc(c) + "</button>";
+          }).join("") + "</div>" +
+          (a ? '<p class="fb"><b class="' + (a.right ? "ok" : "no") + '">' + (a.right ? "Correct." : "Not quite.") + "</b> " + esc(q.why) + "</p>" : "") + "</div>";
+      });
+      html += "</section>";
+    });
+    if (locked) html += '<p class="muted">' + locked + " more practice passage" + (locked === 1 ? "" : "s") + " open" + (locked === 1 ? "s" : "") + " when your teacher unlocks later chapters.</p>";
+    html += '<div class="row"><button class="link" id="refresh">Check for newly opened chapters</button>' +
+      '<button class="link" id="again">Answer the questions again</button><button class="link" id="who">Not you? Change the join code</button></div>' +
+      '<details><summary>For the teacher: what this page knows</summary><pre id="dbg"></pre>' +
+      '<div class="row" style="margin-top:6px"><button class="link" id="sendnow">Send now</button><button class="link" id="forget">Forget everything on this Chromebook</button></div></details>';
+    app.innerHTML = html;
+    if (dbgOpen) app.querySelector("details").open = true;
+
+    Array.prototype.forEach.call(app.querySelectorAll(".q"), function (qEl) {
+      var q = find(qEl.getAttribute("data-q"));
+      Array.prototype.forEach.call(qEl.querySelectorAll(".choice"), function (b) {
+        b.onclick = function () { answer(q.p, q.q, +b.getAttribute("data-i")); };
+      });
+    });
+    document.getElementById("refresh").onclick = function () { fetchSettings().then(draw); };
+    document.getElementById("again").onclick = function () { S.answered = {}; save("answered", {}); lastMark = Date.now(); draw(); };
+    document.getElementById("who").onclick = function () {
+      if (waiting()) { S.problem = "Wait until your answers are sent before changing the code."; drawBar(); return; }
+      S.code = ""; S.firstName = ""; save("code", ""); save("firstName", ""); draw();
+    };
+    document.getElementById("sendnow").onclick = flush;
+    document.getElementById("forget").onclick = function () {
+      ["code", "firstName", "unlocked", "queue", "pending", "sent", "lastSent", "answered"].forEach(function (k) { try { localStorage.removeItem(KEY + k); } catch (e) {} });
+      if (!SCRIPT_URL) try { localStorage.removeItem(KEY + "url"); } catch (e) {}
+      location.reload();
+    };
+    drawBar();
+  }
+
+  function find(qid) {
+    for (var i = 0; i < PASSAGES.length; i++) for (var j = 0; j < PASSAGES[i].qs.length; j++)
+      if (PASSAGES[i].qs[j].id === qid) return { p: PASSAGES[i], q: PASSAGES[i].qs[j] };
+    return null;
+  }
+
+  function answer(p, q, pick) {
+    if (S.answered[q.id]) return;
+    var right = pick === q.k, now = Date.now();
+    S.answered[q.id] = { pick: pick, right: right }; save("answered", S.answered);
+    S.queue.push({ item: q.id, chapter: p.chapter, skill: q.skill, right: right, pick: "ABCD"[pick], secs: Math.min(600, Math.round((now - lastMark) / 1000)), at: now });
+    save("queue", S.queue); lastMark = now;
+    var y = window.scrollY; draw(); window.scrollTo(0, y);
+    flush();
+  }
+
+  function draw() {
+    if (!S.url) return drawSetup();
+    if (!S.code) return drawJoin();
+    drawGame();
+  }
+
+  draw();
+  if (S.url && S.code) fetchSettings().then(function () { draw(); flush(); });
+})();
+</script>
+</body>
+</html>
